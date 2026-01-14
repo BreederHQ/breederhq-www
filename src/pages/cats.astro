@@ -1,10 +1,45 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/#for-breeders' },
+  { name: 'Cat Breeding', url: '/cats' }
+];
+
+const faqs = [
+  {
+    question: 'Does it handle induced ovulation timing?',
+    answer: 'Yes. The system is built with cat-specific reproductive biology in mind.'
+  },
+  {
+    question: 'Can I track HCM screening dates?',
+    answer: 'Yes. Health testing with dates, results, and renewal reminders.'
+  },
+  {
+    question: 'What about blood type compatibility?',
+    answer: 'Yes. Blood types can be tracked and noted for breeding planning.'
+  },
+  {
+    question: 'Does it work with TICA and CFA?',
+    answer: 'BreederHQ tracks registration information. You will still use registry systems for official submissions.'
+  },
+  {
+    question: 'Can buyers see kitten photos?',
+    answer: 'Yes. The buyer portal lets you share photos, updates, and documents without sending individual messages.'
+  },
+  {
+    question: 'Can I try it first?',
+    answer: 'Yes. 14-day free trial, full access, no credit card required.'
+  }
+];
 ---
 
 <BaseLayout
   title="Cat Breeding Software | BreederHQ"
   description="Cat breeding software designed for catteries. Induced ovulation tracking, pedigrees, health testing, buyer portals. Built for how cat breeders work."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

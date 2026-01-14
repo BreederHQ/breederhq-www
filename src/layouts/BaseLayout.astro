@@ -5,9 +5,89 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description: string;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
-const { title, description } = Astro.props;
+const { title, description, breadcrumbs, faqs } = Astro.props;
+const currentUrl = Astro.url.pathname;
+
+// Schema.org SoftwareApplication for all pages
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "29",
+    "highPrice": "99",
+    "priceSpecification": [
+      {
+        "@type": "UnitPriceSpecification",
+        "price": "29",
+        "priceCurrency": "USD",
+        "name": "Starter Plan",
+        "billingDuration": "P1M"
+      },
+      {
+        "@type": "UnitPriceSpecification",
+        "price": "59",
+        "priceCurrency": "USD",
+        "name": "Breeder Plan",
+        "billingDuration": "P1M"
+      },
+      {
+        "@type": "UnitPriceSpecification",
+        "price": "99",
+        "priceCurrency": "USD",
+        "name": "Professional Plan",
+        "billingDuration": "P1M"
+      }
+    ]
+  },
+  "description": "Professional breeding management software for dog, cat, horse, goat, rabbit, and sheep breeders. Track breeding cycles, manage pedigrees, organize health testing, and communicate with buyers.",
+  "url": "https://breederhq.com",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "1200"
+  }
+};
+
+// BreadcrumbList schema if breadcrumbs provided
+let breadcrumbSchema;
+if (breadcrumbs && breadcrumbs.length > 0) {
+  breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": crumb.name,
+      "item": `https://breederhq.com${crumb.url}`
+    }))
+  };
+}
+
+// FAQPage schema if FAQs provided
+let faqSchema;
+if (faqs && faqs.length > 0) {
+  faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+}
 ---
 
 <!DOCTYPE html>
@@ -18,6 +98,15 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+    {breadcrumbSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    )}
+    {faqSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    )}
   </head>
   <body>
     <Header />
