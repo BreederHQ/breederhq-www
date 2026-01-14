@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Coming Soon', url: '/coming-soon' }
+];
+---
+
+<BaseLayout
+  title="Coming Soon - BreederHQ"
+  description="BreederHQ is launching soon! Join our early adopter program and be among the first to experience professional breeding management software."
+  breadcrumbs={breadcrumbs}
+  noindex={true}
+>
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <img src="/logo.png" alt="BreederHQ" class="h-32 w-auto mx-auto mb-8" />
+
+          <div class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            🚀 Launching Soon
+          </div>
+
+          <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-6">
+            We're Almost Ready!
+          </h1>
+
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            BreederHQ is putting the finishing touches on the most comprehensive breeding management platform ever created. Be among the first to experience it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Early Adopter Benefits -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Early Adopter Benefits</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div class="text-center">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-3xl">🎯</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Exclusive Access</h3>
+            <p class="text-gray-600 text-sm">
+              Be the first to access all features before our public launch
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-3xl">💰</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Special Pricing</h3>
+            <p class="text-gray-600 text-sm">
+              Lock in founding member rates with lifetime discounts
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-3xl">🎤</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Shape the Future</h3>
+            <p class="text-gray-600 text-sm">
+              Your feedback will directly influence our product roadmap
+            </p>
+          </div>
+        </div>
+
+        <!-- Interest Form -->
+        <div class="bg-gray-50 rounded-2xl p-8 md:p-12">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold mb-4">Get Early Access</h2>
+            <p class="text-gray-600">
+              Join our early adopter program and we'll reach out with exclusive launch details
+            </p>
+          </div>
+
+          <div class="max-w-xl mx-auto">
+            <ContactForm
+              formId="coming-soon-form"
+              submitText="Request Early Access"
+              source="coming_soon"
+              includePhone={true}
+              includeCompany={false}
+              includeMessage={true}
+            />
+
+            <p class="text-xs text-gray-500 text-center mt-6">
+              By submitting, you agree to receive updates about BreederHQ. We respect your privacy and you can unsubscribe anytime.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We're Building -->
+    <section class="py-16 bg-gradient-to-b from-white to-gray-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">What We're Building</h2>
+
+        <div class="space-y-6">
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="font-semibold text-lg mb-2">🐕 Complete Breeding Management</h3>
+            <p class="text-gray-600 text-sm">
+              Track breeding cycles, heat cycles, pregnancy, whelping, and puppy/kitten development all in one place
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="font-semibold text-lg mb-2">📋 Smart Waitlist System</h3>
+            <p class="text-gray-600 text-sm">
+              Automatically match buyers with available animals based on their preferences and your criteria
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="font-semibold text-lg mb-2">🧬 Genetics & Pedigrees</h3>
+            <p class="text-gray-600 text-sm">
+              Build beautiful pedigrees, track health testing, and make data-driven breeding decisions
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="font-semibold text-lg mb-2">👥 Client Portal</h3>
+            <p class="text-gray-600 text-sm">
+              Give buyers a professional portal to track their animal's journey and stay updated
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <h3 class="font-semibold text-lg mb-2">📱 Mobile First</h3>
+            <p class="text-gray-600 text-sm">
+              Access everything from your phone, tablet, or computer - whenever and wherever you need it
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary text-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold mb-6">
+          Ready to Stop Using Spreadsheets?
+        </h2>
+        <p class="text-xl mb-8 opacity-90">
+          Join hundreds of professional breeders who are already on our waitlist
+        </p>
+        <a
+          href="#coming-soon-form"
+          class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block"
+        >
+          Request Early Access
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -10,9 +10,10 @@ interface Props {
   description: string;
   breadcrumbs?: Array<{ name: string; url: string }>;
   faqs?: Array<{ question: string; answer: string }>;
+  noindex?: boolean;
 }
 
-const { title, description, breadcrumbs, faqs } = Astro.props;
+const { title, description, breadcrumbs, faqs, noindex } = Astro.props;
 const currentUrl = Astro.url.pathname;
 const fullUrl = `https://breederhq.com${currentUrl}`;
 const ogImage = 'https://breederhq.com/og-image.jpg'; // Default OG image
@@ -102,6 +103,7 @@ if (faqs && faqs.length > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={fullUrl} />
 
