@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' }
+];
+
+const workflows = [
+  {
+    title: 'Breeding Cycles',
+    description: 'Track heat cycles, breeding dates, pregnancy, and whelping/birthing for all your animals.',
+    icon: '🔄',
+    url: '/workflows/breeding-cycles'
+  },
+  {
+    title: 'Heat Tracking',
+    description: 'Monitor heat cycles, predict breeding windows, and never miss an optimal breeding date.',
+    icon: '📅',
+    url: '/workflows/heat-tracking'
+  },
+  {
+    title: 'Breeding Plans',
+    description: 'Plan pairings, evaluate genetic compatibility, and document breeding decisions.',
+    icon: '📋',
+    url: '/workflows/breeding-plans'
+  },
+  {
+    title: 'Whelping',
+    description: 'Manage pregnancy monitoring, whelping preparation, and newborn tracking.',
+    icon: '🐾',
+    url: '/workflows/whelping'
+  },
+  {
+    title: 'Pedigrees',
+    description: 'Build multi-generation pedigrees, track lineage, and calculate coefficients of inbreeding.',
+    icon: '🌳',
+    url: '/workflows/pedigrees'
+  },
+  {
+    title: 'Genetics & Health Testing',
+    description: 'Organize health test results, track genetic markers, and make informed breeding decisions.',
+    icon: '🧬',
+    url: '/workflows/genetics-and-health-testing'
+  },
+  {
+    title: 'Waitlists & Placement',
+    description: 'Manage buyer applications, match families with animals, and automate placement workflows.',
+    icon: '📝',
+    url: '/workflows/waitlists-and-placement'
+  },
+  {
+    title: 'Client Management',
+    description: 'Communicate with buyers, share updates, collect deposits, and provide buyer portals.',
+    icon: '👥',
+    url: '/workflows/client-management'
+  }
+];
+---
+
+<BaseLayout
+  title="Breeding Workflows | BreederHQ"
+  description="Explore how professional breeders manage breeding cycles, health testing, pedigrees, waitlists, and client relationships with BreederHQ."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-5xl font-bold mb-6">Breeding Workflows</h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            BreederHQ streamlines every aspect of professional breeding management. Explore how each workflow helps you breed smarter and run your program more professionally.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          {workflows.map(workflow => (
+            <a
+              href={workflow.url}
+              class="block bg-white border border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-md transition-all"
+            >
+              <div class="flex items-start">
+                <div class="text-4xl mr-4 flex-shrink-0">
+                  {workflow.icon}
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-xl font-bold mb-2 text-gray-900">
+                    {workflow.title}
+                  </h2>
+                  <p class="text-gray-600 text-sm">
+                    {workflow.description}
+                  </p>
+                  <div class="mt-3 text-primary font-medium text-sm">
+                    Learn more →
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
