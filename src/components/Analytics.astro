@@ -13,6 +13,7 @@ const {
   PUBLIC_LINKEDIN_PARTNER_ID,
   PUBLIC_TWITTER_PIXEL_ID,
   PUBLIC_SENTRY_DSN,
+  LEADFEEDER_TRACKER_ID,
 } = import.meta.env;
 
 // Only load in production (not in dev mode)
@@ -137,12 +138,24 @@ const isProduction = import.meta.env.PROD;
       </script>
     )}
 
-    <!-- Albacross (Visitor Intelligence) -->
-    <script is:inline type="text/javascript">
-      (function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;
-      r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);
-      })(document,"script","serve.albacross.com/track.js","89249235");
-    </script>
+    <!-- Leadfeeder (Visitor Intelligence) -->
+    {LEADFEEDER_TRACKER_ID && (
+      <script is:inline type="text/javascript" define:vars={{ trackerId: LEADFEEDER_TRACKER_ID }}>
+        (function(ss,ex){
+          window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));};
+          (function(d,s){
+            fs=d.getElementsByTagName(s)[0];
+            function ce(src){
+              var cs=d.createElement(s);
+              cs.src=src;
+              cs.async=1;
+              fs.parentNode.insertBefore(cs,fs);
+            };
+            ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js');
+          })(document,'script');
+        })(trackerId);
+      </script>
+    )}
   </>
 )}
 
