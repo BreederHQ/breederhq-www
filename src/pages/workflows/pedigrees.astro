@@ -380,46 +380,69 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 9: FAQ -->
-  <section class="py-20 px-4">
+  <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it calculate coefficient of inbreeding?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. When planning a breeding, the system calculates COI based on pedigree data.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does it calculate coefficient of inbreeding?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. When planning a breeding, the system calculates COI based on pedigree data.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I import pedigrees from other databases?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            You'll need to enter pedigree data. Some breeders enter as they go, others batch-enter lineage for their foundation animals.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I import pedigrees from other databases?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>You'll need to enter pedigree data. Some breeders enter as they go, others batch-enter lineage for their foundation animals.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">How many generations can I track?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            As many as you enter. The system doesn't limit generation depth.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How many generations can I track?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>As many as you enter. The system doesn't limit generation depth.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can buyers see pedigrees?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Pedigrees can be shared through the buyer portal or exported as professional charts.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can buyers see pedigrees?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Pedigrees can be shared through the buyer portal or exported as professional charts.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it show common ancestors in a planned breeding?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. The system identifies and highlights common ancestors when evaluating a potential pairing.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does it show common ancestors in a planned breeding?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The system identifies and highlights common ancestors when evaluating a potential pairing.</p>
         </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -466,6 +489,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
     }
   </style>
 </BaseLayout>

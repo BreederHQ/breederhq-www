@@ -374,46 +374,69 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 9: FAQ -->
-  <section class="py-20 px-4">
+  <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Questions sheep breeders ask</h2>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can it track breeding groups?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Multiple ewes with one ram, tracked as a group with individual records.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can it track breeding groups?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Multiple ewes with one ram, tracked as a group with individual records.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it handle twins and triplets?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Each lamb tracked individually with dam and sire linked.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does it handle twins and triplets?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Each lamb tracked individually with dam and sire linked.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">What about NSIP data?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Performance data can be tracked for NSIP submission.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What about NSIP data?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Performance data can be tracked for NSIP submission.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I track fleece records?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Fiber breeds can track shearing dates, weights, and quality.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I track fleece records?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Fiber breeds can track shearing dates, weights, and quality.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I try it before paying?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. 14-day free trial with full access. No credit card required to start.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I try it before paying?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. 14-day free trial with full access. No credit card required to start.</p>
         </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -460,6 +483,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
     }
   </style>
 </BaseLayout>

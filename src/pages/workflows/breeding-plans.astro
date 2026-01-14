@@ -373,46 +373,69 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 9: FAQ -->
-  <section class="py-20 px-4">
+  <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I track potential studs before deciding?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Track multiple studs per female with notes on why each is being considered.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I track potential studs before deciding?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Track multiple studs per female with notes on why each is being considered.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it help with genetic compatibility?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. If you've entered genetic test results for both, compatibility is visible.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does it help with genetic compatibility?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. If you've entered genetic test results for both, compatibility is visible.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I document breeding goals?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Goals can be documented per female and referenced when planning breedings.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I document breeding goals?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Goals can be documented per female and referenced when planning breedings.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it remind me about expired clearances?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Health clearances are tracked and you're alerted before expiration.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does it remind me about expired clearances?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Health clearances are tracked and you're alerted before expiration.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I see all planned breedings on a calendar?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. The breeding calendar shows expected heats, planned breedings, and whelping dates together.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I see all planned breedings on a calendar?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The breeding calendar shows expected heats, planned breedings, and whelping dates together.</p>
         </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -459,6 +482,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
     }
   </style>
 </BaseLayout>
