@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Buyer Education', url: '/buyers' },
+  { name: 'Red Flags', url: '/buyers/red-flags' }
+];
+
+const faqs = [
+  {
+    question: 'What if a breeder has one red flag but everything else seems good?',
+    answer: 'Depends on the red flag. Some are dealbreakers (no health testing, won\'t let you visit). Others deserve conversation. Ask about the concern directly and evaluate the answer.'
+  },
+  {
+    question: 'Are all breeders who advertise online problematic?',
+    answer: 'No. Many responsible breeders advertise online. But how and where they advertise matters. Breed club websites and specialized platforms are more trustworthy than general classified sites like Craigslist.'
+  },
+  {
+    question: 'What if I can\'t afford a dog from a responsible breeder?',
+    answer: 'Consider adoption from rescue organizations or breed-specific rescues. Many wonderful animals need homes. What you shouldn\'t do is buy from problematic breeders—the long-term costs in health issues often exceed the initial savings.'
+  },
+  {
+    question: 'Is it okay to report suspected puppy mills?',
+    answer: 'Yes. If you see animal welfare concerns, reporting to appropriate authorities helps protect animals and prevents others from unknowingly supporting those operations.'
+  },
+  {
+    question: 'What if the breeder seems offended by my questions?',
+    answer: 'Good breeders welcome thorough questions—it shows you\'re serious. If a breeder is offended by standard questions about health testing, visits, or practices, that\'s itself a red flag.'
+  }
+];
 ---
 
 <BaseLayout
   title="Breeder Red Flags to Watch For | BreederHQ"
   description="Learn to identify warning signs of problematic breeders, puppy mills, and backyard breeders. Protect yourself and make informed decisions when choosing where to get your puppy or kitten."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

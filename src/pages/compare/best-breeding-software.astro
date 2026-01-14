@@ -1,10 +1,49 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'Best Breeding Software', url: '/compare/best-breeding-software' }
+];
+
+const faqs = [
+  {
+    question: 'What should I look for in breeding software?',
+    answer: 'Look for species-appropriate design, connected records (animal, breeding, client, and financial), actual breeding tools (cycle tracking, date calculations), client management, buyer-facing tools, mobile access, and active development with responsive support.'
+  },
+  {
+    question: 'What are red flags when choosing breeding software?',
+    answer: 'Avoid software that claims to "do everything for everyone," has ancient interfaces, offers no trial period, is desktop-only, provides lifetime licenses with no updates, or lists features without depth.'
+  },
+  {
+    question: 'Should breeding software be species-specific?',
+    answer: 'Yes. Software built for dogs shouldn\'t be used for horses or cats. The system needs to understand breeding biology—cycles, gestation, litter management—specific to your species. Generic "one size fits all" software rarely works well for breeding.'
+  },
+  {
+    question: 'Why is a free trial important?',
+    answer: 'A free trial lets you test with your actual data and workflows before committing. Any confident software company offers this. If they won\'t let you try before buying, that\'s a red flag.'
+  },
+  {
+    question: 'Does BreederHQ work for multiple species?',
+    answer: 'Yes. BreederHQ is built specifically for breeders with species-appropriate logic for dogs, cats, horses, goats, rabbits, sheep, and more. Each species has its own breeding biology and requirements built into the system.'
+  },
+  {
+    question: 'How important is mobile access?',
+    answer: 'Very important. You\'re not always at your desk—you need access in the barn, at shows, or meeting buyers. The software should work on your phone when you need it.'
+  },
+  {
+    question: 'What happens to my data if I stop using the software?',
+    answer: 'You should be able to export your data. If it\'s trapped in their system, you don\'t really own it. BreederHQ allows you to export your data at any time.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Choose Breeding Software | BreederHQ"
   description="What to look for in breeding software. Species-appropriate design, connected records, and features that actually matter."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

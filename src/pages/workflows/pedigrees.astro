@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Pedigrees', url: '/workflows/pedigrees' }
+];
+
+const faqs = [
+  {
+    question: 'Does it calculate coefficient of inbreeding?',
+    answer: 'Yes. When planning a breeding, the system calculates COI based on pedigree data.'
+  },
+  {
+    question: 'Can I import pedigrees from other databases?',
+    answer: 'You\'ll need to enter pedigree data. Some breeders enter as they go, others batch-enter lineage for their foundation animals.'
+  },
+  {
+    question: 'How many generations can I track?',
+    answer: 'As many as you enter. The system doesn\'t limit generation depth.'
+  },
+  {
+    question: 'Can buyers see pedigrees?',
+    answer: 'Yes. Pedigrees can be shared through the buyer portal or exported as professional charts.'
+  },
+  {
+    question: 'Does it show common ancestors in a planned breeding?',
+    answer: 'Yes. The system identifies and highlights common ancestors when evaluating a potential pairing.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Track Pedigrees | BreederHQ"
   description="Professional pedigree management for breeding programs. Lineage tracking, coefficient of inbreeding, and ancestry visualization."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

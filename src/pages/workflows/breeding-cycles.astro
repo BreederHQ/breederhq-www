@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Breeding Cycles', url: '/workflows/breeding-cycles' }
+];
+
+const faqs = [
+  {
+    question: 'What if my female has irregular cycles?',
+    answer: 'The system tracks her actual pattern, not a generic average. Irregular cycles are recorded and factored into predictions.'
+  },
+  {
+    question: 'Can I track split heats?',
+    answer: 'Yes. Unusual cycles can be noted and recorded.'
+  },
+  {
+    question: 'Does it work for induced ovulators (cats/rabbits)?',
+    answer: 'Yes. Different species have different cycle logic built in. Cats and rabbits aren\'t treated like dogs.'
+  },
+  {
+    question: 'Can I track progesterone testing?',
+    answer: 'Yes. Test dates and results can be logged, helping you see patterns over time.'
+  },
+  {
+    question: 'What if I use a reproductive vet?',
+    answer: 'Many breeders do. BreederHQ tracks the data they give you, keeping it organized with the rest of the animal\'s record.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Track Breeding Cycles | BreederHQ"
   description="Learn how professional breeders track breeding cycles. Cycle prediction, calendar management, and avoiding missed breeding windows."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

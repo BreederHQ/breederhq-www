@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Waitlists and Placement', url: '/workflows/waitlists-and-placement' }
+];
+
+const faqs = [
+  {
+    question: 'Can people join my waitlist online?',
+    answer: 'BreederHQ manages your waitlist. How people inquire (website form, email, phone) is up to you. You add them to the system.'
+  },
+  {
+    question: 'Can I track deposits?',
+    answer: 'Yes. Deposit amount, date, payment method, and what it covers.'
+  },
+  {
+    question: 'What if someone\'s preferences change?',
+    answer: 'Update their record. History is preserved.'
+  },
+  {
+    question: 'Can buyers see their waitlist position?',
+    answer: 'The buyer portal can show relevant information. You control what\'s visible.'
+  },
+  {
+    question: 'What about refunds?',
+    answer: 'Track your refund policy and any exceptions per client.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Manage Breeding Waitlists | BreederHQ"
   description="Professional waitlist management for breeders. Position tracking, deposit management, and buyer communication without the chaos."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

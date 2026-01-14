@@ -1,10 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/service-providers' }
+];
+
+const faqs = [
+  {
+    question: 'How much does a service listing cost?',
+    answer: '$49/month per listing. No commissions, no hidden fees. 30-day free trial included.'
+  },
+  {
+    question: 'What types of services can I list?',
+    answer: 'Veterinary (especially reproductive), training, photography, transport, grooming, boarding, and other breeder-specific services. General pet owner services typically do not see good ROI.'
+  },
+  {
+    question: 'How do I get verified?',
+    answer: 'Upload your license, insurance, or relevant credentials. Verification is optional but recommended—verified listings receive more inquiries.'
+  },
+  {
+    question: 'Can I pause my listing if I am at capacity?',
+    answer: 'Yes. You can pause and resume your listing anytime from your dashboard.'
+  },
+  {
+    question: 'What kind of ROI can I expect?',
+    answer: 'One new breeder client typically generates $500-$3000 in annual revenue depending on your service type. If you acquire one client in 6 months, the $49/month listing pays for itself.'
+  }
+];
 ---
 
 <BaseLayout
   title="Breeder Marketplace for Service Providers | BreederHQ"
   description="Reach professional breeders actively searching for veterinary, training, photography, transport services. $49/month per listing. No commissions."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg">Skip to content</a>
 

@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Buyer Education', url: '/buyers' },
+  { name: 'Evaluate Breeders', url: '/buyers/evaluate-breeders' }
+];
+
+const faqs = [
+  {
+    question: 'How do I verify health test results?',
+    answer: 'Most legitimate health tests are registered with public databases like OFA.org. Ask for the registration names of both parents and look them up yourself. Results should match what the breeder told you.'
+  },
+  {
+    question: 'What if the breeder seems great but doesn\'t do some recommended tests?',
+    answer: 'Ask why. Sometimes there are legitimate reasons (test not necessary for that line, newer test not yet widely adopted, etc.). But core breed-specific tests should be non-negotiable.'
+  },
+  {
+    question: 'Should I visit multiple breeders?',
+    answer: 'Yes, if possible. Seeing different operations helps you recognize what good looks like. But practice good biosecurity—don\'t visit multiple breeding facilities on the same day.'
+  },
+  {
+    question: 'What if I\'ve already put down a deposit and now have concerns?',
+    answer: 'Most deposits are non-refundable, but if you\'ve discovered serious red flags (no health testing, poor conditions, dishonesty), it may be worth walking away. Better to lose a deposit than commit to years with an unhealthy animal.'
+  },
+  {
+    question: 'Do all responsible breeders show their animals?',
+    answer: 'No. Showing is one way to prove breeding quality, but not the only way. Working titles, performance events, and proven breeding records are equally valid. What matters is that the breeder has objective measures of quality, not just their opinion.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Evaluate a Breeder | BreederHQ"
   description="Learn how to identify responsible breeders. Questions to ask, what to look for, and how to spot the difference between good and problematic breeding practices."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

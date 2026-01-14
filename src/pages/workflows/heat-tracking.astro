@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Heat Tracking', url: '/workflows/heat-tracking' }
+];
+
+const faqs = [
+  {
+    question: 'What if my female has irregular cycles?',
+    answer: 'The system tracks her actual pattern, irregular or not. Predictions improve as more data is recorded.'
+  },
+  {
+    question: 'Can I track split heats or silent heats?',
+    answer: 'Yes. Unusual cycles can be noted and recorded as exceptions.'
+  },
+  {
+    question: 'Does it work for species other than dogs?',
+    answer: 'Yes. Cycle tracking adapts to the species. Cats, rabbits, and other animals with different reproductive patterns are handled appropriately.'
+  },
+  {
+    question: 'Can I record progesterone test results?',
+    answer: 'Yes. Test dates and results can be logged with each heat cycle.'
+  },
+  {
+    question: 'What if I work with a reproductive vet?',
+    answer: 'Many breeders do. BreederHQ tracks the data they provide, keeping it organized with the rest of your records.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Track Heat Cycles | BreederHQ"
   description="Professional heat cycle tracking for breeding programs. Individual pattern recognition, timing prediction, and automated reminders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
