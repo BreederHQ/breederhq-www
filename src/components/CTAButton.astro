@@ -1,0 +1,74 @@
+---
+/**
+ * Smart CTA Button Component
+ * Automatically tracks clicks and provides consistent styling
+ */
+
+interface Props {
+  href: string;
+  text: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  location: string; // Where on the page is this CTA?
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  text,
+  variant = 'primary',
+  size = 'md',
+  location,
+  external = false,
+  class: className = '',
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg',
+};
+
+const variantClasses = {
+  primary: 'bg-blue-600 hover:bg-blue-700 text-white',
+  secondary: 'bg-gray-600 hover:bg-gray-700 text-white',
+  outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50',
+};
+---
+
+<a
+  href={href}
+  class={`cta-button inline-block font-semibold rounded-lg transition-all duration-200 ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+  data-cta-name={text}
+  data-cta-location={location}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  {text}
+</a>
+
+<script>
+  import { trackCTAClick, trackOutboundLink } from '../lib/tracking';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const ctaButtons = document.querySelectorAll('.cta-button');
+
+    ctaButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const ctaName = target.dataset.ctaName || 'Unknown CTA';
+        const ctaLocation = target.dataset.ctaLocation || 'Unknown Location';
+        const href = target.getAttribute('href') || '';
+
+        // Track CTA click
+        trackCTAClick(ctaName, ctaLocation);
+
+        // Track outbound link if external
+        if (target.getAttribute('target') === '_blank') {
+          trackOutboundLink(href, ctaName);
+        }
+      });
+    });
+  });
+</script>

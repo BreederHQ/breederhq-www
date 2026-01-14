@@ -357,46 +357,69 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 9: FAQ -->
-  <section class="py-20 px-4">
+  <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can people join my waitlist online?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            BreederHQ manages your waitlist. How people inquire (website form, email, phone) is up to you. You add them to the system.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can people join my waitlist online?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ manages your waitlist. How people inquire (website form, email, phone) is up to you. You add them to the system.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can I track deposits?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Yes. Deposit amount, date, payment method, and what it covers.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I track deposits?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Deposit amount, date, payment method, and what it covers.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">What if someone's preferences change?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Update their record. History is preserved.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What if someone's preferences change?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Update their record. History is preserved.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can buyers see their waitlist position?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            The buyer portal can show relevant information. You control what's visible.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can buyers see their waitlist position?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>The buyer portal can show relevant information. You control what's visible.</p>
         </div>
+      </details>
 
-        <div>
-          <h3 class="text-xl font-bold mb-3">What about refunds?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Track your refund policy and any exceptions per client.
-          </p>
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What about refunds?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Track your refund policy and any exceptions per client.</p>
         </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -443,6 +466,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
     }
   </style>
 </BaseLayout>
