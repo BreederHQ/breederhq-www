@@ -6,7 +6,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   title="BreederHQ vs. Spreadsheets | BreederHQ"
   description="When to switch from spreadsheets to breeding software. Honest comparison of what works, what doesn't, and when it matters."
 >
-  <main>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
   <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
       <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
@@ -306,7 +310,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="/signup" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center">
+        <a href="/signup" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Start free trial
         </a>
       </div>
@@ -336,5 +340,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/signup" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Start Free Trial
+    </a>
+  </div>
   </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
 </BaseLayout>
