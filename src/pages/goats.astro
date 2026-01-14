@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/#for-breeders' },
+  { name: 'Goat Breeding', url: '/goats' }
+];
+
+const faqs = [
+  {
+    question: 'Does it track CAE and CL testing?',
+    answer: 'Yes. Disease testing with dates, results, and lab information.'
+  },
+  {
+    question: 'Can it handle multiple kids per kidding?',
+    answer: 'Yes. Each kid tracked individually with dam and sire linked.'
+  },
+  {
+    question: 'What about milk production records?',
+    answer: 'Production data can be tracked for dairy operations.'
+  },
+  {
+    question: 'Does it work with ADGA?',
+    answer: 'BreederHQ maintains records for registration. Official submission goes through ADGA systems.'
+  },
+  {
+    question: 'Can I try it before paying?',
+    answer: 'Yes. 14-day free trial with full access. No credit card required to start.'
+  }
+];
 ---
 
 <BaseLayout
   title="Goat Breeding Software | BreederHQ"
   description="Goat breeding software for dairy and meat operations. Seasonal breeding, kidding records, disease testing tracking. ADGA-compatible records."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Client Management', url: '/workflows/client-management' }
+];
+
+const faqs = [
+  {
+    question: 'Can I track communication history?',
+    answer: 'Yes. Notes from conversations can be recorded with dates so you have a complete history.'
+  },
+  {
+    question: 'Can I store contracts and documents?',
+    answer: 'Yes. Attach signed contracts, registration papers, and other documents to the client record.'
+  },
+  {
+    question: 'Does it track payments?',
+    answer: 'Yes. Deposits and final payments can be recorded with dates and payment methods.'
+  },
+  {
+    question: 'Can buyers access their animal\'s information?',
+    answer: 'Yes. The buyer portal gives clients access to pedigrees, health records, photos, and other information you choose to share.'
+  },
+  {
+    question: 'Does it remind me to follow up with buyers?',
+    answer: 'Yes. You can set follow-up reminders or use automated milestones to maintain relationships.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Manage Clients | BreederHQ"
   description="Professional client management for breeders. Communication history, contract tracking, payment records, and buyer portal access."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

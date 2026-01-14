@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Genetics and Health Testing', url: '/workflows/genetics-and-health-testing' }
+];
+
+const faqs = [
+  {
+    question: 'Can I store actual documents (PDFs, images)?',
+    answer: 'Yes. Attach certificates, lab reports, and exam results directly to the animal\'s record.'
+  },
+  {
+    question: 'Does it remind me when tests expire?',
+    answer: 'Yes. Tests with renewal requirements are tracked and flagged.'
+  },
+  {
+    question: 'Can buyers see health testing?',
+    answer: 'Yes. The buyer portal shows what you choose to share. You control visibility.'
+  },
+  {
+    question: 'Does it track genetics?',
+    answer: 'Yes. Color genetics, health markers, carrier status.'
+  },
+  {
+    question: 'What about OFA integration?',
+    answer: 'You enter OFA results manually. BreederHQ doesn\'t pull from OFA automatically, but your records can link to OFA for verification.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Track Genetics and Health Testing | BreederHQ"
   description="Organize health testing for breeding programs. Document storage, renewal reminders, and genetics tracking in one place."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

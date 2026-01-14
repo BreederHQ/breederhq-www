@@ -1,10 +1,53 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'Best Dog Breeding Software', url: '/compare/best-dog-breeding-software' }
+];
+
+const faqs = [
+  {
+    question: 'What makes dog breeding software different from general pet software?',
+    answer: 'Dog breeding software needs to understand canine reproduction: heat cycles, progesterone timing, 63-day gestation, OFA/PennHIP tracking, COI calculation, and litter management. Generic pet software doesn\'t have these breeding-specific features.'
+  },
+  {
+    question: 'Can dog breeding software calculate COI (Coefficient of Inbreeding)?',
+    answer: 'Good dog breeding software should calculate COI from pedigree data and help you evaluate breeding decisions before you make them. BreederHQ calculates COI automatically from your pedigree records.'
+  },
+  {
+    question: 'How does progesterone test tracking work?',
+    answer: 'Dog breeding software should let you enter multiple progesterone tests per cycle, calculate optimal breeding timing, and predict ovulation based on the data. This is essential for timing breedings correctly.'
+  },
+  {
+    question: 'Can I track OFA and health testing results?',
+    answer: 'Yes. Dog breeding software should track OFA numbers, PennHIP scores, genetic test results, and clearances. These should link to individual dogs and display on pedigrees so you can see health testing at a glance.'
+  },
+  {
+    question: 'Does it work for multiple dog breeds?',
+    answer: 'Yes. BreederHQ works for one breed or multiple breeds. Different breeds have different health testing requirements and characteristics, and the software accommodates breed-specific needs.'
+  },
+  {
+    question: 'How does litter management work in dog breeding software?',
+    answer: 'Each puppy should be an individual record (not just a count) where you can track weights, colors, markings, and link each puppy to a buyer. Good software treats litters as collections of individual puppies.'
+  },
+  {
+    question: 'Can buyers access their puppy information?',
+    answer: 'Yes. BreederHQ includes buyer portals where clients can see their puppy\'s information, pedigree, photos, and documents. This saves you countless hours answering repetitive questions.'
+  },
+  {
+    question: 'Does it handle AI (artificial insemination) breedings?',
+    answer: 'Yes. Dog breeding software should handle documentation and timing for frozen semen, fresh chilled, and surgical AI—all common methods in dog breeding.'
+  }
+];
 ---
 
 <BaseLayout
   title="Best Dog Breeding Software | BreederHQ"
   description="What to look for in dog breeding software. OFA tracking, COI calculation, progesterone timing, and features that matter for responsible dog breeders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

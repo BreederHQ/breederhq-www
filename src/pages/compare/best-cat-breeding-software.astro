@@ -1,10 +1,53 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'Best Cat Breeding Software', url: '/compare/best-cat-breeding-software' }
+];
+
+const faqs = [
+  {
+    question: 'What makes cat breeding software different from dog breeding software?',
+    answer: 'Cats are induced ovulators—ovulation happens after mating, not on a cycle. Cat breeding software must understand this fundamental difference, plus blood type compatibility (to prevent neonatal isoerythrolysis), and feline-specific health concerns like HCM, PKD, and PRA.'
+  },
+  {
+    question: 'Why is blood type tracking critical in cat breeding software?',
+    answer: 'Neonatal isoerythrolysis kills kittens when blood types are incompatible. Cat breeding software should track blood types for all breeding cats and warn you about incompatible pairings before you breed. This is life-or-death for kittens.'
+  },
+  {
+    question: 'How does induced ovulation tracking work?',
+    answer: 'Cat breeding software must calculate due dates differently than dog software because ovulation happens after breeding, not before. The software needs to account for this when calculating gestation and due dates.'
+  },
+  {
+    question: 'Can I track HCM, PKD, and PRA screening?',
+    answer: 'Yes. Cat breeding software should track heart disease (HCM), kidney disease (PKD), and progressive retinal atrophy (PRA) test results. These should link to individual cats and display on pedigrees.'
+  },
+  {
+    question: 'Does it handle color genetics for cats?',
+    answer: 'Yes. Cat color genetics are complex (silver, smoke, points, dilutes). Good cat breeding software tracks genetic markers and helps predict color outcomes for breeding planning.'
+  },
+  {
+    question: 'Can it track multiple matings?',
+    answer: 'Yes. Cat breeders often breed queens multiple times over 2-3 days to ensure pregnancy. The software should track each mating separately and calculate dates from the first successful breeding.'
+  },
+  {
+    question: 'Does it work with TICA and CFA registries?',
+    answer: 'Yes. BreederHQ tracks registration numbers, titles, and show records for TICA, CFA, and other registries. It generates the information you need for litter registrations.'
+  },
+  {
+    question: 'Will dog breeding software work for cats?',
+    answer: 'No. Dog breeding software that assumes spontaneous ovulation (like dogs) will calculate dates incorrectly for cats. You need software specifically built to understand feline reproduction.'
+  }
+];
 ---
 
 <BaseLayout
   title="Best Cat Breeding Software | BreederHQ"
   description="What to look for in cat breeding software. Induced ovulation tracking, HCM/PKD/PRA screening, blood type compatibility, and features that matter for responsible cat breeders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

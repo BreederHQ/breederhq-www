@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Whelping', url: '/workflows/whelping' }
+];
+
+const faqs = [
+  {
+    question: 'Can I enter weights from my phone at the whelping box?',
+    answer: 'Yes. Mobile access means you can enter weights immediately after weighing.'
+  },
+  {
+    question: 'Does it track multiple litters at once?',
+    answer: 'Yes. Each litter has its own record with individual puppy tracking.'
+  },
+  {
+    question: 'Can I attach photos to each puppy?',
+    answer: 'Yes. Photos help with identification and can be shared with buyers.'
+  },
+  {
+    question: 'Does it remind me about deworming and vaccinations?',
+    answer: 'Yes. Milestones are tracked and reminders are automatic.'
+  },
+  {
+    question: 'Can buyers access their puppy\'s early records?',
+    answer: 'Yes. When you place the puppy with a buyer, they can access whelping and growth history through their portal.'
+  }
+];
 ---
 
 <BaseLayout
   title="How to Manage Whelping | BreederHQ"
   description="Whelping management for professional breeders. Due date tracking, puppy records, weight monitoring, and milestone management."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

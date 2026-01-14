@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Buyer Education', url: '/buyers' },
+  { name: 'Health Tests', url: '/buyers/health-tests' }
+];
+
+const faqs = [
+  {
+    question: 'How much does health testing cost?',
+    answer: 'Comprehensive health testing typically costs $500-2000+ per breeding animal depending on breed requirements. This is one reason responsibly bred puppies and kittens cost more—the testing expense is built into the price.'
+  },
+  {
+    question: 'Does health testing guarantee a healthy puppy?',
+    answer: 'No. Health testing reduces risk but can\'t eliminate it entirely. However, tested parents produce significantly healthier offspring on average than untested parents.'
+  },
+  {
+    question: 'What if a test comes back with less-than-perfect results?',
+    answer: 'Good breeders make informed decisions. A "fair" hip rating might be acceptable paired with an "excellent" partner. A carrier for a recessive condition can be bred to a clear animal safely. What matters is transparency and thoughtful breeding decisions.'
+  },
+  {
+    question: 'Should I get my puppy or kitten tested?',
+    answer: 'For genetic conditions with clear by parentage documentation, usually not necessary. For later-onset conditions or if you plan to breed, testing may be appropriate. Ask your veterinarian and breeder for recommendations.'
+  },
+  {
+    question: 'Where can I learn which tests my breed needs?',
+    answer: 'Start with your breed\'s parent club or national breed organization. They publish recommended health testing guidelines. The OFA website also lists recommended tests by breed.'
+  }
+];
 ---
 
 <BaseLayout
   title="Understanding Health Tests | BreederHQ"
   description="Learn what health testing means for puppies and kittens. Understand OFA, PennHIP, genetic panels, and how to verify test results when choosing a breeder."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

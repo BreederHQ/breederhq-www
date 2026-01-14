@@ -1,10 +1,45 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'BreederHQ vs Spreadsheets', url: '/compare/breederhq-vs-spreadsheets' }
+];
+
+const faqs = [
+  {
+    question: 'At what point should I switch from spreadsheets to breeding software?',
+    answer: 'Most breeders hit the breaking point between 5-15 animals, or when they have overlapping litters and growing waitlists. If you\'re spending 5+ hours per month on breeding administration or have forgotten something important more than once, it\'s time to consider software.'
+  },
+  {
+    question: 'Can I keep using spreadsheets if they\'re working for me?',
+    answer: 'Absolutely. If a spreadsheet is working for you, keep using it. Software isn\'t always the answer. The best system is the one you\'ll actually use.'
+  },
+  {
+    question: 'What features does BreederHQ have that spreadsheets don\'t?',
+    answer: 'BreederHQ connects all your records automatically, provides predictive cycle tracking, calculates dates automatically, includes integrated client communication and buyer portals, and sends automatic reminders. Spreadsheets require manual entry and updates for everything.'
+  },
+  {
+    question: 'How much time can breeding software save me?',
+    answer: 'If you spend 5+ hours per month on breeding administration, BreederHQ typically saves 2-4 hours per month by automating calculations, connecting records, and reducing duplicate data entry. The time saved increases as your operation grows.'
+  },
+  {
+    question: 'What\'s the risk of making mistakes with spreadsheets?',
+    answer: 'Common mistakes include missed breeding windows, forgotten health test renewals, buyers receiving wrong information, and unrecorded deposits. These happen when you\'re the single point of failure managing everything manually.'
+  },
+  {
+    question: 'Can I import my spreadsheet data into BreederHQ?',
+    answer: 'Yes. You can enter your existing data into BreederHQ. While there isn\'t automatic spreadsheet import, the structured entry process helps you organize your data properly from the start.'
+  }
+];
 ---
 
 <BaseLayout
   title="BreederHQ vs. Spreadsheets | BreederHQ"
   description="When to switch from spreadsheets to breeding software. Honest comparison of what works, what doesn't, and when it matters."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
