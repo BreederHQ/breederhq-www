@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' }
+];
+
+const comparisons = [
+  {
+    title: 'BreederHQ vs Spreadsheets',
+    description: 'Why professional breeders are moving from spreadsheets to purpose-built breeding software.',
+    url: '/compare/breederhq-vs-spreadsheets'
+  },
+  {
+    title: 'Best Breeding Software',
+    description: 'Comprehensive comparison of breeding management software options across all species.',
+    url: '/compare/best-breeding-software'
+  },
+  {
+    title: 'Best Dog Breeding Software',
+    description: 'The top breeding management platforms for professional dog breeders.',
+    url: '/compare/best-dog-breeding-software'
+  },
+  {
+    title: 'Best Cat Breeding Software',
+    description: 'Compare breeding management tools designed specifically for cat breeders.',
+    url: '/compare/best-cat-breeding-software'
+  }
+];
+---
+
+<BaseLayout
+  title="Compare Breeding Software | BreederHQ"
+  description="Compare BreederHQ with other breeding management solutions. See why professional breeders choose purpose-built software over spreadsheets."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Compare Breeding Software</h1>
+        <p class="text-xl text-gray-600 mb-12">
+          Choosing the right breeding management software is an important decision. Compare BreederHQ with other solutions to find the best fit for your breeding program.
+        </p>
+
+        <div class="space-y-6">
+          {comparisons.map(comparison => (
+            <a
+              href={comparison.url}
+              class="block bg-white border border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-md transition-all"
+            >
+              <h2 class="text-2xl font-bold mb-2 text-gray-900">
+                {comparison.title}
+              </h2>
+              <p class="text-gray-600">
+                {comparison.description}
+              </p>
+              <div class="mt-4 text-primary font-medium">
+                Read comparison →
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

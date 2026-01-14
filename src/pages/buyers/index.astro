@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' }
+];
+
+const guides = [
+  {
+    title: 'How to Evaluate Breeders',
+    description: 'Essential questions to ask, red flags to watch for, and what separates responsible breeders from backyard operations.',
+    icon: '✓',
+    url: '/buyers/evaluate-breeders'
+  },
+  {
+    title: 'Understanding Health Testing',
+    description: 'Why health testing matters, which tests are important for different breeds, and how to interpret results.',
+    icon: '🏥',
+    url: '/buyers/health-tests'
+  },
+  {
+    title: 'Red Flags to Avoid',
+    description: 'Warning signs of irresponsible breeding practices and how to protect yourself from puppy mills and scams.',
+    icon: '🚩',
+    url: '/buyers/red-flags'
+  }
+];
+---
+
+<BaseLayout
+  title="Breeder Resources for Buyers | BreederHQ"
+  description="Essential guides for finding responsible breeders. Learn how to evaluate breeding programs, understand health testing, and avoid red flags."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Resources for Buyers</h1>
+        <p class="text-xl text-gray-600 mb-8">
+          Finding a responsible breeder is one of the most important decisions you'll make when adding an animal to your family. These guides will help you make an informed choice.
+        </p>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-12">
+          <h2 class="text-xl font-bold mb-2 text-blue-900">Why These Guides Matter</h2>
+          <p class="text-blue-800">
+            BreederHQ is used by professional breeders who prioritize health testing, ethical practices, and transparency. We've created these buyer guides to help you identify breeders who share these values—whether they use our software or not.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          {guides.map(guide => (
+            <a
+              href={guide.url}
+              class="block bg-white border border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-md transition-all"
+            >
+              <div class="flex items-start">
+                <div class="text-3xl mr-4 flex-shrink-0">
+                  {guide.icon}
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-2xl font-bold mb-2 text-gray-900">
+                    {guide.title}
+                  </h2>
+                  <p class="text-gray-600">
+                    {guide.description}
+                  </p>
+                  <div class="mt-4 text-primary font-medium">
+                    Read guide →
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="mt-12 bg-gray-50 rounded-lg p-8 text-center">
+          <h2 class="text-2xl font-bold mb-4">Looking for a Breeder?</h2>
+          <p class="text-gray-600 mb-6">
+            While BreederHQ doesn't maintain a breeder directory, these resources will help you find and evaluate responsible breeders through breed clubs, registries, and local recommendations.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
