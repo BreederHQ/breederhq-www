@@ -1,10 +1,53 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/#for-breeders' },
+  { name: 'Dog Breeding', url: '/dogs' }
+];
+
+const faqs = [
+  {
+    question: 'Can I import my existing pedigrees?',
+    answer: 'Yes. You can enter historical data and connect generations. There is no limit on pedigree depth. If you have records going back 20 generations, you can enter all of it.'
+  },
+  {
+    question: 'Does it handle co-owned dogs?',
+    answer: 'Yes. Ownership can be shared and tracked. Co-owners can have appropriate access levels.'
+  },
+  {
+    question: 'Can buyers see health testing results?',
+    answer: 'Yes. The buyer portal shows what you choose to share. You control visibility.'
+  },
+  {
+    question: 'What if I breed multiple breeds?',
+    answer: 'No problem. Animals are organized however you want. Many breeders work with multiple breeds.'
+  },
+  {
+    question: 'Does it integrate with AKC or UKC?',
+    answer: 'BreederHQ tracks registration numbers and information. It does not submit to registries directly—you will still use their systems for official registration.'
+  },
+  {
+    question: 'Can I track progesterone testing?',
+    answer: 'Yes. Results can be logged with dates and values, helping you see patterns over time.'
+  },
+  {
+    question: 'What about stud services?',
+    answer: 'Whether you are using outside studs or standing your own males at stud, the system tracks it.'
+  },
+  {
+    question: 'Can I try it before paying?',
+    answer: 'Yes. 14-day free trial with full access. No credit card required to start.'
+  }
+];
 ---
 
 <BaseLayout
   title="Dog Breeding Software | BreederHQ"
   description="Dog breeding software built for serious breeders. Track cycles, manage pedigrees, organize health testing, communicate with buyers. 14-day free trial."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

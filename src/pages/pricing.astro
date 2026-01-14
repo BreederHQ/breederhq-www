@@ -1,10 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    question: 'What counts as an "animal"?',
+    answer: 'Active breeding animals count toward your limit. Offspring under 2 years don\'t count. Retired animals don\'t count. Only breeding-age animals in your program count.'
+  },
+  {
+    question: 'What if I exceed my animal limit?',
+    answer: 'We will notify you and give you 30 days to upgrade. No surprise charges.'
+  },
+  {
+    question: 'Can I change plans anytime?',
+    answer: 'Yes. Upgrade immediately. Downgrade at next billing cycle. Prorated refunds for annual.'
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'Credit card (Visa, MC, Amex, Discover) via Stripe. Purchase orders for annual plans.'
+  },
+  {
+    question: 'Is there a contract?',
+    answer: 'No. Month-to-month. Cancel anytime. Export your data first.'
+  },
+  {
+    question: 'Do you offer discounts?',
+    answer: 'Annual billing saves 17%. Non-profit/rescue discounts available (contact us). No "early bird" gimmicks.'
+  },
+  {
+    question: 'What if I only breed seasonally?',
+    answer: 'No seasonal billing. You would need to export data and cancel between seasons. Most find year-round access worth it for heat cycle predictions and client management.'
+  },
+  {
+    question: 'What happens to my data if I cancel?',
+    answer: 'Export everything (CSV) before canceling. We keep it 90 days, then delete. No data hostage situations.'
+  },
+  {
+    question: 'Can I get a refund?',
+    answer: '14-day free trial = try before you buy. After that, no refunds on monthly. Annual plans prorated if you cancel early.'
+  }
+];
 ---
 
 <BaseLayout
   title="Pricing | BreederHQ"
   description="Clear, predictable pricing for professional breeders. No hidden fees. Cancel anytime. 14-day free trial, no credit card required."
+  faqs={faqs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg">Skip to content</a>
 
@@ -203,14 +243,99 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- ROI Calculator Section -->
     <section class="py-20 px-4">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-bold mb-8 text-center">Is BreederHQ Worth It? Do The Math.</h2>
+        <h2 class="text-4xl font-bold mb-8 text-center">Is BreederHQ Worth It? Calculate Your ROI.</h2>
 
-        <div class="space-y-12">
+        <!-- Interactive Calculator -->
+        <div class="bg-gradient-to-br from-[hsl(24,95%,97%)] to-white border-2 border-[hsl(24,95%,53%)] p-8 rounded-lg mb-12">
+          <h3 class="text-2xl font-bold mb-6">Your Custom ROI Calculator</h3>
+
+          <div class="space-y-6">
+            <div>
+              <label for="animals" class="block text-lg font-semibold mb-2">
+                Number of breeding animals:
+              </label>
+              <input
+                type="number"
+                id="animals"
+                min="1"
+                max="50"
+                value="5"
+                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:border-[hsl(24,95%,53%)] focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label for="litters" class="block text-lg font-semibold mb-2">
+                Litters per year:
+              </label>
+              <input
+                type="number"
+                id="litters"
+                min="0"
+                max="20"
+                value="3"
+                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:border-[hsl(24,95%,53%)] focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label for="hourlyValue" class="block text-lg font-semibold mb-2">
+                Your time value ($/hour):
+              </label>
+              <input
+                type="number"
+                id="hourlyValue"
+                min="10"
+                max="500"
+                value="50"
+                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:border-[hsl(24,95%,53%)] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200">
+            <h4 class="text-xl font-bold mb-4">Your Results:</h4>
+
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700">Recommended Plan:</span>
+                <span class="font-bold text-lg" id="recommendedPlan">Starter</span>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700">Annual Cost:</span>
+                <span class="font-bold text-lg" id="annualCost">$348</span>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700">Time Saved Per Week:</span>
+                <span class="font-bold text-lg" id="timeSaved">4 hours</span>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700">Time Value Per Year:</span>
+                <span class="font-bold text-lg" id="timeValue">$10,400</span>
+              </div>
+
+              <div class="mt-4 pt-4 border-t-2 border-gray-200">
+                <div class="flex justify-between items-center">
+                  <span class="text-xl font-bold">Return on Investment:</span>
+                  <span class="text-2xl font-bold text-[hsl(24,95%,53%)]" id="roi">30:1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Scenarios -->
+        <div class="space-y-8">
+          <h3 class="text-2xl font-bold text-center">Real Scenarios:</h3>
+
           <div class="bg-gray-50 p-8 rounded-lg">
-            <h3 class="text-2xl font-bold mb-4">Scenario: Small breeder with 3 breeding females, 2 litters/year</h3>
+            <h4 class="text-xl font-bold mb-4">Small breeder with 3 breeding females, 2 litters/year</h4>
 
             <div class="mb-6">
-              <p class="text-lg font-semibold mb-2">Cost of missed deadline:</p>
+              <p class="text-lg font-semibold mb-2">Cost of one missed deadline:</p>
               <ul class="space-y-2 text-gray-700">
                 <li>• OFA hip X-ray outside window: $500 re-test + 6-month delay</li>
                 <li>• Missed heat cycle = $1,500 lost litter + 6-month wait</li>
@@ -225,7 +350,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div class="bg-gray-50 p-8 rounded-lg">
-            <h3 class="text-2xl font-bold mb-4">Scenario: Medium breeder with 8 breeding females, 6 litters/year</h3>
+            <h4 class="text-xl font-bold mb-4">Medium breeder with 8 breeding females, 6 litters/year</h4>
 
             <div class="mb-6">
               <p class="text-lg font-semibold mb-2">Time saved per week:</p>
@@ -250,6 +375,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
     </section>
+
+    <script>
+      function calculateROI() {
+        const animals = parseInt(document.getElementById('animals').value) || 5;
+        const litters = parseInt(document.getElementById('litters').value) || 3;
+        const hourlyValue = parseInt(document.getElementById('hourlyValue').value) || 50;
+
+        // Determine plan based on animals
+        let plan = 'Starter';
+        let monthlyCost = 29;
+        if (animals > 15) {
+          plan = 'Professional';
+          monthlyCost = 99;
+        } else if (animals > 5) {
+          plan = 'Breeder';
+          monthlyCost = 59;
+        }
+
+        const annualCost = monthlyCost * 12;
+
+        // Calculate time saved (increases with animals and litters)
+        const baseTimeSaved = 3; // base hours per week
+        const animalMultiplier = Math.floor(animals / 3) * 0.5;
+        const litterMultiplier = Math.floor(litters / 2) * 0.5;
+        const timeSaved = Math.round(baseTimeSaved + animalMultiplier + litterMultiplier);
+
+        // Calculate annual time value
+        const timeValue = timeSaved * hourlyValue * 52;
+
+        // Calculate ROI
+        const roi = Math.round(timeValue / annualCost);
+
+        // Update DOM
+        document.getElementById('recommendedPlan').textContent = plan;
+        document.getElementById('annualCost').textContent = `$${annualCost.toLocaleString()}`;
+        document.getElementById('timeSaved').textContent = `${timeSaved} hours`;
+        document.getElementById('timeValue').textContent = `$${timeValue.toLocaleString()}`;
+        document.getElementById('roi').textContent = `${roi}:1`;
+      }
+
+      // Add event listeners
+      document.getElementById('animals').addEventListener('input', calculateROI);
+      document.getElementById('litters').addEventListener('input', calculateROI);
+      document.getElementById('hourlyValue').addEventListener('input', calculateROI);
+
+      // Initial calculation
+      calculateROI();
+    </script>
 
     <!-- FAQ Section -->
     <section class="py-20 px-4 bg-gray-50 faq-section">
