@@ -1,16 +1,173 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="BreederHQ - Professional Breeding Management Software"
+  description="Modern, all-in-one software for professional animal breeders. Manage breeding cycles, waitlists, genetics, health testing, and client relationships."
+>
+  <Header />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            Stop using spreadsheets.<br />
+            <span class="text-primary">Start breeding smarter.</span>
+          </h1>
+          <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+            BreederHQ is the all-in-one platform that gives professional breeders
+            the tools they need to manage breeding cycles, waitlists, genetics,
+            health testing, and client relationships—all in one place.
+          </p>
+          <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="https://app.breederhq.com/signup"
+              class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90"
+            >
+              Start Free Trial
+            </a>
+            <a
+              href="/pricing"
+              class="text-gray-700 px-8 py-4 text-lg font-semibold hover:text-primary"
+            >
+              View Pricing →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          Breeding is complex. Your tools shouldn't be.
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold mb-3">Scattered Data</h3>
+            <p class="text-gray-600">
+              Breeding records in spreadsheets, client info in email, health
+              records in filing cabinets—it's time to centralize everything.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold mb-3">Manual Processes</h3>
+            <p class="text-gray-600">
+              Manually tracking breeding cycles, sending updates, matching
+              puppies to families—tasks that should be automated.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold mb-3">Poor Client Experience</h3>
+            <p class="text-gray-600">
+              Clients expect professionalism. Give them real-time updates,
+              online applications, and transparent communication.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Species Bar -->
+    <section class="bg-primary py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-white text-lg mb-6">
+          Built for breeders of
+        </p>
+        <div class="flex justify-center gap-8 flex-wrap">
+          <a href="/dogs" class="text-white hover:underline text-lg font-medium">Dogs</a>
+          <a href="/cats" class="text-white hover:underline text-lg font-medium">Cats</a>
+          <a href="/horses" class="text-white hover:underline text-lg font-medium">Horses</a>
+          <a href="/goats" class="text-white hover:underline text-lg font-medium">Goats</a>
+          <a href="/rabbits" class="text-white hover:underline text-lg font-medium">Rabbits</a>
+          <a href="/sheep" class="text-white hover:underline text-lg font-medium">Sheep</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Overview -->
+    <section class="py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          Everything you need, nothing you don't
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Animal Profiles</h3>
+            <p class="text-gray-600 mb-3">
+              Complete records for every animal—health, genetics, pedigree,
+              photos, and breeding history.
+            </p>
+            <a href="/workflows/breeding-cycles" class="text-primary font-medium">Learn more →</a>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Breeding Cycles</h3>
+            <p class="text-gray-600 mb-3">
+              Track heat cycles, breedings, pregnancies, and whelping dates
+              with automated reminders.
+            </p>
+            <a href="/workflows/breeding-cycles" class="text-primary font-medium">Learn more →</a>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Waitlists & Placement</h3>
+            <p class="text-gray-600 mb-3">
+              Manage client applications, match families to animals, and
+              communicate through every step.
+            </p>
+            <a href="/workflows/waitlists-and-placement" class="text-primary font-medium">Learn more →</a>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Genetics & Health</h3>
+            <p class="text-gray-600 mb-3">
+              Store test results, track genetic lines, and make data-driven
+              breeding decisions.
+            </p>
+            <a href="/workflows/genetics-and-health-testing" class="text-primary font-medium">Learn more →</a>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Client Portal</h3>
+            <p class="text-gray-600 mb-3">
+              Give clients 24/7 access to updates, photos, documents, and
+              their animal's information.
+            </p>
+            <a href="/workflows/breeding-cycles" class="text-primary font-medium">Learn more →</a>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Business Tools</h3>
+            <p class="text-gray-600 mb-3">
+              Contracts, deposits, communication templates, and reporting—all
+              the professional tools you need.
+            </p>
+            <a href="/workflows/breeding-cycles" class="text-primary font-medium">Learn more →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gray-50 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-6">
+          Ready to modernize your breeding program?
+        </h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          Join professional breeders who have already made the switch to BreederHQ.
+        </p>
+        <a
+          href="https://app.breederhq.com/signup"
+          class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block"
+        >
+          Start Your Free Trial
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
