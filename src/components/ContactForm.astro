@@ -1,0 +1,247 @@
+---
+/**
+ * ContactForm Component
+ * Reusable contact form with validation, tracking, and submission to API
+ */
+
+interface Props {
+  formId?: string;
+  submitText?: string;
+  source?: string;
+  includePhone?: boolean;
+  includeCompany?: boolean;
+  includeMessage?: boolean;
+}
+
+const {
+  formId = 'contact-form',
+  submitText = 'Submit',
+  source = 'contact_form',
+  includePhone = true,
+  includeCompany = true,
+  includeMessage = true,
+} = Astro.props;
+---
+
+<div class="contact-form-container">
+  <form id={formId} class="space-y-4" data-source={source}>
+    <!-- Name Field -->
+    <div>
+      <label for={`${formId}-name`} class="block text-sm font-medium text-gray-700 mb-1">
+        Name *
+      </label>
+      <input
+        type="text"
+        id={`${formId}-name`}
+        name="name"
+        required
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+        placeholder="John Doe"
+      />
+    </div>
+
+    <!-- Email Field -->
+    <div>
+      <label for={`${formId}-email`} class="block text-sm font-medium text-gray-700 mb-1">
+        Email *
+      </label>
+      <input
+        type="email"
+        id={`${formId}-email`}
+        name="email"
+        required
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+        placeholder="john@example.com"
+      />
+    </div>
+
+    <!-- Phone Field (optional) -->
+    {includePhone && (
+      <div>
+        <label for={`${formId}-phone`} class="block text-sm font-medium text-gray-700 mb-1">
+          Phone
+        </label>
+        <input
+          type="tel"
+          id={`${formId}-phone`}
+          name="phone"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="(555) 123-4567"
+        />
+      </div>
+    )}
+
+    <!-- Company Field (optional) -->
+    {includeCompany && (
+      <div>
+        <label for={`${formId}-company`} class="block text-sm font-medium text-gray-700 mb-1">
+          Company / Breeding Program
+        </label>
+        <input
+          type="text"
+          id={`${formId}-company`}
+          name="company"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="Acme Kennels"
+        />
+      </div>
+    )}
+
+    <!-- Message Field (optional) -->
+    {includeMessage && (
+      <div>
+        <label for={`${formId}-message`} class="block text-sm font-medium text-gray-700 mb-1">
+          Message
+        </label>
+        <textarea
+          id={`${formId}-message`}
+          name="message"
+          rows="4"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="Tell us about your breeding program..."
+        ></textarea>
+      </div>
+    )}
+
+    <!-- Submit Button -->
+    <div>
+      <button
+        type="submit"
+        class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {submitText}
+      </button>
+    </div>
+
+    <!-- Status Messages -->
+    <div id={`${formId}-status`} class="hidden mt-4">
+      <div class="success-message hidden p-4 bg-green-50 border border-green-200 rounded-lg">
+        <p class="text-green-800">
+          ✅ Thank you! We'll be in touch soon.
+        </p>
+      </div>
+      <div class="error-message hidden p-4 bg-red-50 border border-red-200 rounded-lg">
+        <p class="text-red-800">
+          ❌ Something went wrong. Please try again.
+        </p>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  import { trackFormStart, trackFormSubmit, getUTMParams } from '../lib/tracking';
+
+  // Handle all contact forms on the page
+  document.querySelectorAll('form[id$="-form"]').forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const formId = form.id;
+    const source = form.dataset.source || 'contact_form';
+    let formStarted = false;
+
+    // Track form start on first interaction
+    form.addEventListener('input', () => {
+      if (!formStarted) {
+        formStarted = true;
+        trackFormStart(formId);
+      }
+    }, { once: true });
+
+    // Handle form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const statusContainer = document.getElementById(`${formId}-status`);
+      const successMessage = statusContainer?.querySelector('.success-message');
+      const errorMessage = statusContainer?.querySelector('.error-message');
+
+      // Disable submit button
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+
+      // Hide previous messages
+      successMessage?.classList.add('hidden');
+      errorMessage?.classList.add('hidden');
+      statusContainer?.classList.add('hidden');
+
+      // Get form data
+      const formData = new FormData(form);
+      const data: any = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        company: formData.get('company'),
+        message: formData.get('message'),
+        source,
+      };
+
+      // Add UTM parameters
+      const utmParams = getUTMParams();
+      if (utmParams.source) data.utm_source = utmParams.source;
+      if (utmParams.medium) data.utm_medium = utmParams.medium;
+      if (utmParams.campaign) data.utm_campaign = utmParams.campaign;
+      if (utmParams.term) data.utm_term = utmParams.term;
+      if (utmParams.content) data.utm_content = utmParams.content;
+
+      try {
+        // Submit to API
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Track successful submission
+          trackFormSubmit(formId);
+
+          // Show success message
+          if (statusContainer && successMessage) {
+            statusContainer.classList.remove('hidden');
+            successMessage.classList.remove('hidden');
+          }
+
+          // Reset form
+          form.reset();
+        } else {
+          throw new Error(result.error || 'Submission failed');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+
+        // Show error message
+        if (statusContainer && errorMessage) {
+          statusContainer.classList.remove('hidden');
+          errorMessage.classList.remove('hidden');
+        }
+      } finally {
+        // Re-enable submit button
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = submitButton.getAttribute('data-original-text') || 'Submit';
+        }
+      }
+    });
+
+    // Store original button text
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.setAttribute('data-original-text', submitButton.textContent || 'Submit');
+    }
+  });
+</script>
+
+<style>
+  .contact-form-container {
+    width: 100%;
+    max-width: 100%;
+  }
+</style>

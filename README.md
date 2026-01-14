@@ -1,43 +1,133 @@
-# Astro Starter Kit: Minimal
+# BreederHQ Marketing Website
 
-```sh
-npm create astro@latest -- --template minimal
+Modern, high-performance marketing website for BreederHQ with enterprise-level visitor intelligence and analytics.
+
+Built with Astro 5 + Tailwind CSS 4.
+
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📚 Documentation
 
-## 🚀 Project Structure
+**All documentation is in the `.docs` folder** (excluded from git/deployment):
 
-Inside of your Astro project, you'll see the following folders and files:
+- **[Quick Start Guide](.docs/QUICK-START.md)** - Get up and running in 15 minutes
+- **[Strategic Advantages](.docs/STRATEGIC-ADVANTAGES.md)** - All features & capabilities
+- **[Implementation Summary](.docs/IMPLEMENTATION-SUMMARY.md)** - What was built & why
+- **[Architecture](.docs/ARCHITECTURE.md)** - Technical details & data flow
 
-```text
-/
-├── public/
+## 🎯 What's Built In
+
+✅ **Visitor Intelligence** - See which companies visit your site
+✅ **Lead Enrichment** - Auto-enrich contacts with company data
+✅ **Multi-Channel Distribution** - Slack, HubSpot, Zapier, your CRM
+✅ **Session Recordings** - Watch user sessions (Microsoft Clarity)
+✅ **Conversion Tracking** - GA4, Meta, LinkedIn, Twitter pixels
+✅ **Performance Monitoring** - Core Web Vitals tracking
+✅ **SEO Optimization** - Comprehensive meta tags & structured data
+
+## 🛠️ Tech Stack
+
+- **Framework**: Astro 5.x
+- **Styling**: Tailwind CSS 4.x
+- **Hosting**: Vercel
+- **Analytics**: GA4, Microsoft Clarity
+- **Language**: TypeScript
+
+## 📦 Project Structure
+
+```
+breederhq-www/
+├── .docs/              # Documentation (gitignored)
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/     # Reusable components
+│   │   ├── Analytics.astro
+│   │   ├── SEOHead.astro
+│   │   ├── ContactForm.astro
+│   │   └── CTAButton.astro
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # Routes & API endpoints
+│   │   ├── api/
+│   │   │   ├── contact.ts
+│   │   │   └── track-visitor.ts
+│   │   └── *.astro
+│   ├── lib/            # Utilities
+│   │   ├── tracking.ts
+│   │   ├── performance.ts
+│   │   └── server/
+│   ├── config/         # Configuration
+│   └── styles/         # Global styles
+├── public/             # Static assets
+├── .env.example        # Environment template
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🔧 Configuration
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. Copy environment template:
+   ```bash
+   cp .env.example .env
+   ```
 
-Any static assets, like images, can be placed in the `public/` directory.
+2. Add your API keys (see [Quick Start](.docs/QUICK-START.md))
 
-## 🧞 Commands
+3. Deploy to Vercel:
+   ```bash
+   vercel
+   vercel env add PUBLIC_GA4_MEASUREMENT_ID
+   vercel --prod
+   ```
 
-All commands are run from the root of the project, from a terminal:
+## 📊 Features
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Analytics & Tracking
+- Google Analytics 4 with custom events
+- Microsoft Clarity (FREE session recordings)
+- Multi-platform conversion tracking
+- Core Web Vitals monitoring
 
-## 👀 Want to learn more?
+### Lead Capture
+- Smart contact forms with validation
+- Automatic lead enrichment (Clearbit)
+- Real-time Slack notifications
+- CRM integration (HubSpot, Zapier)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Visitor Intelligence
+- Company identification
+- High-value visitor alerts
+- Behavioral tracking
+- UTM attribution
+
+## 💰 Cost
+
+**Free Tier** (everything you need to start):
+- Google Analytics 4
+- Microsoft Clarity
+- Slack webhooks
+- Social media pixels
+- Vercel hosting
+
+**Paid Tier** (when ready to scale):
+- Clearbit Reveal: $99/month (see which companies visit)
+- HubSpot Starter: $45/month (CRM)
+
+## 📝 License
+
+Proprietary - BreederHQ, Inc.
+
+---
+
+**For detailed setup instructions, see [.docs/QUICK-START.md](.docs/QUICK-START.md)**

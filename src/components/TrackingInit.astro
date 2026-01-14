@@ -1,0 +1,62 @@
+---
+/**
+ * TrackingInit Component
+ * Initializes client-side tracking after page load
+ * Sets up scroll tracking, time on page, UTM capture, and visitor intelligence
+ */
+
+const isProduction = import.meta.env.PROD;
+---
+
+{isProduction && (
+  <script>
+    import { initTracking, trackPageView } from '../lib/tracking';
+
+    // High-value pages that trigger visitor intelligence
+    const HIGH_VALUE_PAGES = ['/pricing', '/contact', '/demo'];
+
+    // Initialize tracking on page load
+    function initialize() {
+      initTracking();
+      trackPageView();
+
+      // Track high-value page visits
+      const currentPath = window.location.pathname;
+      if (HIGH_VALUE_PAGES.some(page => currentPath.startsWith(page))) {
+        trackHighValueVisit(currentPath);
+      }
+    }
+
+    // Track high-value page visits (visitor intelligence)
+    async function trackHighValueVisit(page: string) {
+      try {
+        // This will use client IP from the request
+        await fetch('/api/track-visitor', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            page,
+            timestamp: new Date().toISOString(),
+          }),
+        });
+      } catch (error) {
+        // Silently fail - don't break the page
+        console.debug('Visitor tracking failed:', error);
+      }
+    }
+
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+      initialize();
+    }
+
+    // Track page views on navigation
+    window.addEventListener('popstate', () => {
+      trackPageView();
+    });
+  </script>
+)}
