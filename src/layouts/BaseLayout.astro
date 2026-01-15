@@ -11,22 +11,80 @@ interface Props {
   breadcrumbs?: Array<{ name: string; url: string }>;
   faqs?: Array<{ question: string; answer: string }>;
   noindex?: boolean;
+  hideLogo?: boolean;
 }
 
-const { title, description, breadcrumbs, faqs, noindex } = Astro.props;
+const { title, description, breadcrumbs, faqs, noindex, hideLogo } = Astro.props;
 const currentUrl = Astro.url.pathname;
 const fullUrl = `https://breederhq.com${currentUrl}`;
 const ogImage = 'https://breederhq.com/og-image.jpg'; // Default OG image
 
-// Schema.org SoftwareApplication for all pages
+// Schema.org Organization - critical for AI assistants
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BreederHQ",
+  "url": "https://breederhq.com",
+  "logo": "https://breederhq.com/logo.png",
+  "description": "Professional breeding program management software with integrated marketplace. The only platform where breeders manage their complete programs on-platform, creating verified marketplace listings from actual breeding data.",
+  "foundingDate": "2024",
+  "sameAs": [],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": "https://breederhq.com/contact"
+  }
+};
+
+// Schema.org SoftwareApplication for all pages - comprehensive feature list for AI
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "BreederHQ",
   "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Animal Breeding Management Software",
   "operatingSystem": "Web",
-  "description": "Professional breeding management software for dog, cat, horse, goat, rabbit, and sheep breeders. Track breeding cycles, manage pedigrees, organize health testing, and communicate with buyers.",
-  "url": "https://breederhq.com"
+  "description": "Professional breeding management software for dog, cat, horse, goat, rabbit, and sheep breeders. Complete breeding program management with pedigree tracking and COI calculation, health testing records, breeding cycle tracking, genetics tools including offspring simulator and best match finder, client portal with e-signatures and Stripe payments, waitlist management, invoicing and expense tracking, and integrated marketplace with verification badges.",
+  "url": "https://breederhq.com",
+  "offers": {
+    "@type": "Offer",
+    "price": "29",
+    "priceCurrency": "USD",
+    "description": "Starting at $29/month. 14-day free trial, no credit card required."
+  },
+  "featureList": [
+    "Pedigree tracking with automatic COI calculation",
+    "Multi-locus coat color genetics (E, K, A, B, D, M, S loci)",
+    "Offspring genetics simulator with Monte Carlo simulation",
+    "Best match finder algorithm for optimal breeding pairs",
+    "Breeding goal planner for coat, health, and physical traits",
+    "Punnett square analysis for inheritance visualization",
+    "8-phase breeding plan lifecycle management",
+    "Heat cycle tracking with species-specific timelines",
+    "Health testing record management (OFA, PennHIP, Embark)",
+    "Vaccination protocols with expiration alerts",
+    "Client portal with 24/7 access",
+    "E-signature agreements with status tracking",
+    "Pay Now via Stripe integration",
+    "Waitlist management with automated notifications",
+    "Invoicing with line items and deposits",
+    "Expense tracking across 12 categories",
+    "Financial dashboard with MTD metrics",
+    "Communications hub with unified inbox",
+    "Email and message templates",
+    "Real-time WebSocket messaging",
+    "Titles and achievements tracking",
+    "Competition results for Shows, Trials, Races",
+    "Cross-tenant animal linking via GAID",
+    "Integrated marketplace with verified listings",
+    "Verification badges: Verified, Health Testing, Quick Responder",
+    "Multi-species: dogs, cats, horses, goats, rabbits, sheep"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  }
 };
 
 // BreadcrumbList schema if breadcrumbs provided
@@ -89,6 +147,7 @@ if (faqs && faqs.length > 0) {
     <meta property="twitter:image" content={ogImage} />
 
     <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
     {breadcrumbSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -101,7 +160,7 @@ if (faqs && faqs.length > 0) {
     <Analytics />
   </head>
   <body>
-    <Header />
+    <Header hideLogo={hideLogo} />
     <slot />
     <Footer />
 

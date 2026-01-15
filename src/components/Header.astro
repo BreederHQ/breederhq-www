@@ -1,16 +1,19 @@
 ---
 // Header navigation component
+const { hideLogo = false } = Astro.props;
 ---
 
 <header class="border-b border-gray-200 bg-white">
   <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <!-- Logo -->
-      <div class="flex items-center">
-        <a href="/" class="flex items-center">
-          <img src="/logo.png" alt="BreederHQ" class="h-16 w-auto" />
-        </a>
-      </div>
+      {!hideLogo && (
+        <div class="flex items-center">
+          <a href="/" class="flex items-center">
+            <img src="/logo.png" alt="BreederHQ" class="h-16 w-auto" />
+          </a>
+        </div>
+      )}
 
       <!-- Navigation Links -->
       <div class="hidden md:flex md:items-center md:space-x-8">
@@ -36,6 +39,7 @@
           <div class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div class="py-1">
               <a href="/workflows/breeding-cycles" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Breeding Cycles</a>
+              <a href="/workflows/breeding-intelligence" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Breeding Intelligence</a>
               <a href="/workflows/heat-tracking" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Heat Tracking</a>
               <a href="/workflows/breeding-plans" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Breeding Plans</a>
               <a href="/workflows/whelping" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Whelping</a>
