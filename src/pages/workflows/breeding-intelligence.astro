@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Breeding Intelligence', url: '/workflows/breeding-intelligence' }
+];
+
+const faqs = [
+  {
+    question: 'Do I need to be a genetics expert to use these tools?',
+    answer: 'No. The tools are designed to do the complex math for you. You enter basic information (genotypes from test results), and BreederHQ handles the calculations and predictions.'
+  },
+  {
+    question: 'How accurate are the offspring predictions?',
+    answer: 'The predictions use standard Punnett square mathematics—the same approach used by geneticists. They show probabilities, not guarantees. A 25% chance of a merle puppy means you might get zero merles or all merles in a small litter, but across many litters, the statistics hold.'
+  },
+  {
+    question: 'Can I use this if I only have partial genetic data?',
+    answer: 'Yes. The tools work with whatever information you have. What\'s Missing Analysis will show you where you have gaps, and predictions will be labeled as "incomplete" if key data is missing.'
+  },
+  {
+    question: 'What if my breed isn\'t pre-configured?',
+    answer: 'You can still track genetics manually for any breed. Breed profiles simply pre-load the common loci and health tests for breeds like Australian Shepherds, Labradors, etc. If your breed isn\'t listed, you add the relevant genes yourself.'
+  },
+  {
+    question: 'Do the Standard plans include any genetics tools?',
+    answer: 'Yes. Standard plans include Punnett squares, basic trait predictions, lethal gene warnings, and multi-locus tracking. Advanced simulation features (Offspring Simulator, Best Match Finder) require a Pro plan.'
+  },
+  {
+    question: 'Can I share predictions with co-breeders or buyers?',
+    answer: 'Yes. You can export charts and summaries to share with others. This is especially helpful when explaining color genetics to buyers or discussing pairings with a co-breeder.'
+  }
+];
+---
+
+<BaseLayout
+  title="Breeding Intelligence Tools | BreederHQ"
+  description="AI-powered breeding intelligence. Predict offspring outcomes, calculate COI, detect health risks, and get pairing recommendations before you breed."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Breeding Intelligence</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Know What You'll Get Before You Breed</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Genetics is complex. Manual calculations are tedious and error-prone. BreederHQ's breeding intelligence tools do the work for you: Best Match Finder ranks potential pairings by genetic compatibility, COI, and health risk. Offspring Simulator predicts litter outcomes using Monte Carlo simulation. Punnett Square Calculator visualizes single-gene inheritance. Breeding Goal Planner tracks progress toward your breeding objectives. Lethal gene warnings prevent dangerous pairings.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        BreederHQ's breeding intelligence tools analyze genetics, health markers, and your goals to predict outcomes and recommend optimal pairings—so you can breed with confidence, not guesswork.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Stop second-guessing your breeding decisions. See exactly what a pairing could produce—coat colors, health risks, and genetic compatibility—before you commit.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Problem with "Gut Feel" Breeding</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Every breeder has made a pairing that didn't turn out as expected. Maybe the litter was all one color when you needed variety. Maybe a health issue surfaced that you didn't anticipate. Maybe the COI was higher than you realized.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The problem isn't your knowledge—it's that genetics is complex, and doing the calculations manually is tedious, error-prone, and time-consuming. So most breeders rely on intuition, past experience, and hope.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6 font-semibold">
+        That works until it doesn't.
+      </p>
+
+      <div class="bg-white border-l-4 border-red-500 p-6 rounded mb-6">
+        <h3 class="text-xl font-bold mb-4">What's at stake:</h3>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>A carrier-to-carrier breeding can produce affected puppies</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>High COI pairings increase health risks across the litter</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Lethal gene combinations (Double Merle, Lethal White Overo) can be fatal</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Missed color genetics means surprised buyers and returns</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Poor planning means repeating the same problems litter after litter</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        Professional breeders don't guess. They use data.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Best Match Finder -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Best Match Finder</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        You have a female ready to breed. You have multiple stud options. Which one is best?
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Best Match Finder analyzes every potential pairing and scores them based on:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Genetic compatibility</strong> — How well do their genetics complement each other?</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>COI impact</strong> — What's the inbreeding coefficient for offspring?</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Health risk assessment</strong> — Are there carrier combinations that could produce affected puppies?</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Lethal gene detection</strong> — Will this pairing risk fatal combinations?</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Your breeding goals</strong> — Does this pairing move you toward the traits you want?</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Instead of manually comparing three studs across dozens of factors, you get a ranked list with explanations for why each pairing scores the way it does.
+      </p>
+
+      <div class="bg-gray-50 p-6 rounded">
+        <h3 class="text-xl font-bold mb-4">Key Features:</h3>
+        <ul class="space-y-2 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Side-by-side comparison of up to 3 candidates</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>COI calculation for each potential pairing</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Health risk scoring (excellent, good, caution, high-risk)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Lethal combination warnings (Double Merle, Lethal White, etc.)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Filter by breed, minimum score, maximum COI</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Offspring Simulator -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Offspring Simulator</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        What will the puppies actually look like? What health statuses will they carry?
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Offspring Simulator runs thousands of genetic scenarios to show you the statistical distribution of outcomes for any pairing.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">For coat genetics:</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Probability of each color appearing in the litter</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Pattern predictions (solid, parti, merle, etc.)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Coat type outcomes (furnishings, curl, length)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">For health genetics:</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Clear/carrier/affected distribution</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Risk percentages for each tested condition</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Identification of which markers need attention</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        This isn't a guess. It's the same Punnett square math that geneticists use—automated and visualized so you can understand it at a glance.
+      </p>
+
+      <div class="bg-white p-6 rounded border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-4">Key Features:</h3>
+        <ul class="space-y-2 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Monte Carlo simulation for realistic litter predictions</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Phenotype breakdown with percentages</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Health status distribution across offspring</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Visual charts you can share with co-breeders or mentors</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Additional Tools -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">More Breeding Intelligence Tools</h2>
+
+      <div class="space-y-12">
+        <!-- Punnett Square -->
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Punnett Square Calculator</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Sometimes you want to see the underlying genetics, not just the summary. The Punnett Square Calculator shows you exactly how traits are inherited for any single locus.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            Select parents, select the gene, and see all possible offspring genotypes with probability percentages. This is especially useful when explaining genetics to puppy buyers or working through complex decisions with mentors.
+          </p>
+        </div>
+
+        <!-- Breeding Goal Planner -->
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Breeding Goal Planner</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            What are you breeding toward? Better structure? Specific coat colors? Clearing a health condition from your line?
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Breeding Goal Planner lets you define objectives and track progress across generations. Set goals by category (coat color, coat type, health, physical traits), prioritize each goal (must have, nice to have, must avoid), and see how each potential breeding advances your program.
+          </p>
+        </div>
+
+        <!-- Multi-Locus Genetics -->
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Multi-Locus Genetics Tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            BreederHQ tracks the full genetic picture for each animal—not just one or two traits.
+          </p>
+          <ul class="space-y-2 text-gray-700 mb-4">
+            <li><strong>Dogs:</strong> E, K, A, B, D, M, S, H, I, Em loci plus coat type genetics</li>
+            <li><strong>Cats:</strong> A, B, C, D, O, W, Fd loci</li>
+            <li><strong>Horses:</strong> E, A, Cr, D, G, LP, TO, O, Rn loci</li>
+          </ul>
+          <p class="text-gray-700 leading-relaxed">
+            Every genetic test result you enter becomes part of the animal's profile and automatically factors into breeding predictions.
+          </p>
+        </div>
+
+        <!-- What's Missing Analysis -->
+        <div>
+          <h3 class="text-2xl font-bold mb-4">What's Missing Analysis</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Don't know what you don't know? What's Missing Analysis compares your breeding pair and identifies gaps in testing.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            Before you finalize a breeding, you'll know exactly which tests you have, which you're missing, and whether it matters based on breed standards and test priority levels.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Who This Is For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Who This Is For</h2>
+          <p class="text-lg mb-4">Breeding Intelligence matters if you:</p>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Make breeding decisions based on genetics, not just "who's available"</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Track carrier status and want to breed responsibly</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Care about COI and genetic diversity in your lines</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Work with breeds that have color genetics complexity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Have had surprise outcomes and want to prevent them</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Mentor other breeders and need to explain genetics clearly</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Who This Is NOT For</h2>
+          <p class="text-lg mb-4">This might be more than you need if:</p>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You breed one litter occasionally and don't track genetics</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You rely entirely on a mentor to make breeding decisions</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Your breed has minimal color genetics complexity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You don't do genetic health testing</span>
+            </li>
+          </ul>
+          <p class="text-sm text-gray-600 mt-4 italic">
+            Even then, the lethal gene warnings alone could prevent a costly mistake.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Breed Smarter, Not Harder</h2>
+      <p class="text-xl mb-8 opacity-90">
+        Stop guessing. Start using data to make confident breeding decisions.
+      </p>
+      <a href="/coming-soon" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+        Get Early Access
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-8">
+        {faqs.map(faq => (
+          <div class="border-b border-gray-200 pb-8 last:border-0">
+            <h3 class="faq-question">{faq.question}</h3>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .skip-link:focus {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 50;
+      padding: 1rem;
+      background: white;
+      color: black;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      border-radius: 0.5rem;
+    }
+
+    .faq-question {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.75rem;
+    }
+
+    .faq-answer {
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
