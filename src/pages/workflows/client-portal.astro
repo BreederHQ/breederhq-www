@@ -1,0 +1,564 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Client Portal', url: '/workflows/client-portal' }
+];
+
+const faqs = [
+  {
+    question: 'What can clients see in the portal?',
+    answer: 'You control what\'s visible. Clients can access pedigrees, health records, photos, contracts, payment history, and messages—based on permissions you set.'
+  },
+  {
+    question: 'Can clients make payments through the portal?',
+    answer: 'Yes. Clients can view their payment history, outstanding balances, and make payments directly through the portal using secure payment processing.'
+  },
+  {
+    question: 'Do clients need to download an app?',
+    answer: 'No. The portal is web-based and works on any device with a browser. Clients receive a secure link to access their portal.'
+  },
+  {
+    question: 'Can I message clients through the portal?',
+    answer: 'Yes. Built-in messaging keeps all communication in one place. Clients receive notifications when you send updates.'
+  },
+  {
+    question: 'Is client data secure?',
+    answer: 'Yes. Each client has their own secure login and can only see information about their own animals and transactions. All data is encrypted.'
+  }
+];
+---
+
+<BaseLayout
+  title="Client Portal | BreederHQ"
+  description="Give clients 24/7 access to updates, payments, contracts, and messaging. Reduce repetitive questions and provide professional service with a secure buyer portal."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Client Portal</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Give Your Clients 24/7 Access to Their Information</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          A client portal gives buyers secure access to updates, documents, payments, and messaging—without you having to respond to every request. Professional breeders provide self-service access. It reduces your workload while improving client experience.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Every time a client asks "Can you send me the pedigree again?" or "What's my balance?" you stop what you're doing to answer. A client portal lets them find answers themselves—anytime, from any device.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Breeders Search for This -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why client portals matter</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Without a portal, you become the bottleneck:
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>"Can you send the health records again?" — you dig through files</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>"What's my remaining balance?" — you check your records</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>"Do you have photos from last week?" — you search your phone</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>"Where's my contract?" — you hunt through email</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>"Any updates on my puppy/kitten?" — you type out the same status</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Clients wait for you to respond before they can access anything</span>
+        </li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        These interruptions add up. A client portal eliminates most of them.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: How Breeders Usually Handle It -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How breeders share information without a portal</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Email attachments</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You send documents, photos, and updates via email. Clients lose them and ask again. You re-send. Repeat.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Text messages</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Quick updates go through text. Photos get buried in the conversation. Finding that specific photo from three weeks ago? Scrolling forever.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Social media groups</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Some breeders create Facebook groups for litter updates. Works for photos, terrible for contracts, payments, or private information.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Dropbox/Google Drive folders</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Shared folders for documents. Better than email, but no messaging, no payments, no structure. Clients see files but can't interact.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Manual responses to every request</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Most common approach: you personally respond to every question. It works until it doesn't scale.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Where That Breaks Down -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why these approaches fail</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">You're always on call</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Client needs something at 9pm? They message you. You feel obligated to respond because they're waiting. There's no self-service option.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Information gets lost</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You sent the pedigree three times. Client still can't find it. Not because they're careless—because email and text aren't designed for document access.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Payment tracking is awkward</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            "What's my balance?" shouldn't require a conversation. But without a portal, you're manually calculating and communicating payment status.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No centralized communication</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Some clients text, some email, some message on Facebook. You're checking multiple platforms constantly. Important messages slip through.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Doesn't feel professional</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Clients paying thousands of dollars expect a professional experience. Hunting through text threads for documents doesn't match that expectation.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">More clients means more chaos</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Five clients? Manageable. Fifteen? You're drowning in messages. Your program grows, but your communication methods don't scale.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What a Correct System Looks Like -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What a client portal should provide</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Document access</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Contracts viewable and downloadable anytime</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Health records, vaccination certificates, registration papers</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Pedigree documents</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Any document you choose to share</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Photo and update access</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Photos organized by date, not buried in messages</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Growth updates, weight tracking, milestone photos</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Clients can view anytime without asking</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Notifications when new content is added</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Payment visibility</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Payment history visible to client</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Outstanding balance clearly displayed</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Option to make payments through portal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Payment receipts automatically available</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Centralized messaging</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>All communication in one thread</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Message history preserved</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Notifications for both parties</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>No more hunting across email/text/social</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Secure, individual access</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Each client has their own login</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Only sees their animals and information</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You control what's visible per client</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Professional, branded experience</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: How BreederHQ Supports This -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">BreederHQ gives every client their own portal</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        When you add a client, they get secure access to their own portal. Pedigrees, health records, contracts, photos, payment history—all accessible 24/7. Built-in messaging keeps communication organized. You upload once, they access anytime.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Stop being the bottleneck. Let clients help themselves while you focus on your animals.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/client-management" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See client management →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">A client portal helps breeders who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Field repetitive requests for documents and updates</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Want to provide professional, always-available service</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Track payments and need clients to see their balance</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Share photos and updates without endless texting</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Value their time and want to reduce interruptions</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Manage more than a few clients at a time</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">You might not need this if:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You only have a few clients per year</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You prefer personal, one-on-one communication for everything</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Your clients don't ask for documents or updates</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Email and text work fine for your volume</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        For very small operations, personal communication may be sufficient. But as you grow, a portal becomes essential for maintaining service quality.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What can clients see in the portal?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>You control what's visible. Clients can access pedigrees, health records, photos, contracts, payment history, and messages—based on permissions you set.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can clients make payments through the portal?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Clients can view their payment history, outstanding balances, and make payments directly through the portal using secure payment processing.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Do clients need to download an app?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No. The portal is web-based and works on any device with a browser. Clients receive a secure link to access their portal.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I message clients through the portal?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Built-in messaging keeps all communication in one place. Clients receive notifications when you send updates.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Is client data secure?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Each client has their own secure login and can only see information about their own animals and transactions. All data is encrypted.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Section 10: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/client-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Management for Breeders
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Waitlist and Placement Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">
+            → BreederHQ Marketplace
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
