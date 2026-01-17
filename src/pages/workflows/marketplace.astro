@@ -1,0 +1,564 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Marketplace', url: '/workflows/marketplace' }
+];
+
+const faqs = [
+  {
+    question: 'How is this different from other breeder listings?',
+    answer: 'BreederHQ Marketplace is connected to actual breeding program data. Verification badges are earned through documented health testing, not self-reported claims. Buyers see real data, not marketing.'
+  },
+  {
+    question: 'What are verification badges?',
+    answer: 'Badges indicate verified achievements like "Health Tested Program," "Pedigree Documented," or "Established Breeder." They\'re earned automatically when your records meet the criteria—no manual application needed.'
+  },
+  {
+    question: 'Do I have to list all my animals?',
+    answer: 'No. You control exactly which animals are visible on the marketplace. Keep your program private or make it public—it\'s your choice per animal.'
+  },
+  {
+    question: 'How do inquiries work?',
+    answer: 'Buyer inquiries come directly to your BreederHQ dashboard. You can respond, qualify leads, and manage all communications in one place alongside your other client management.'
+  },
+  {
+    question: 'What does it cost to list?',
+    answer: 'Marketplace listings are included with your BreederHQ subscription. No additional listing fees, no commissions on sales.'
+  }
+];
+---
+
+<BaseLayout
+  title="Breeder Marketplace | BreederHQ"
+  description="Get discovered by serious buyers. List animals, earn verification badges based on real health testing data, and manage inquiries—all in one place."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Marketplace</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Get Discovered by Serious Buyers</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          The BreederHQ Marketplace connects responsible breeders with educated buyers. Verification badges are earned through documented health testing—not self-reported claims. Buyers trust what they see because it's backed by real data. Your reputation is visible, verifiable, and valuable.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Quality breeders struggle to stand out online. Puppy mills dominate search results. Backyard breeders undercut prices. Serious buyers can't tell the difference. The BreederHQ Marketplace changes that.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Breeders Search for This -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why finding the right buyers is hard</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Good breeders face constant challenges:
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Generic listing sites treat responsible breeders the same as puppy mills</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Your health testing investment doesn't translate to visibility</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Buyers can't verify claims, so they don't trust anyone</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Price shoppers waste your time with inquiries they'll never follow through</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Your website doesn't rank against sites with bigger marketing budgets</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Word of mouth is slow and unpredictable</span>
+        </li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Doing the right thing should give you a competitive advantage. Usually it doesn't.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: How Breeders Usually Handle It -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How breeders try to get discovered</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Personal websites</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You build a website, write about your program, post photos. But SEO is competitive. Your site ranks page 10 while questionable breeders dominate page 1.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Generic listing sites</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Sites like PuppyFind, NextDayPets, or Craigslist. Anyone can list. No verification. Your quality program sits next to puppy mill ads.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Social media</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Facebook groups, Instagram. Good for community, but algorithms limit reach. Building an audience takes years of consistent content.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Breed club referrals</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Registry referral lists. Trusted but limited reach. Most buyers don't know to look there.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Word of mouth</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Happy clients refer friends. The best leads, but you can't control the volume or timing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Where That Breaks Down -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why these approaches struggle</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No way to prove quality</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Everyone claims "health tested." Everyone says "raised with love." Buyers have no way to verify. So they don't believe anyone—including you.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Good breeders look the same as bad ones</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            On generic listing sites, a responsible breeder's ad looks identical to a puppy mill's. Maybe worse, because mills invest in professional photos and copywriting.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Price becomes the differentiator</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            When buyers can't evaluate quality, they shop on price. Your $2,500 puppy with full health testing loses to the $800 "no papers" option.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Wrong buyers waste your time</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Inquiries from people who want a puppy tomorrow, don't want to fill out an application, can't afford your price. You spend hours responding to leads that go nowhere.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Reputation isn't portable</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Your Facebook reviews don't show up on your website. Your OFA results aren't visible on listing sites. Your reputation is scattered and unverifiable.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Marketing takes time you don't have</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You're busy with actual breeding work. Social media management, SEO optimization, content creation—these are full-time jobs you can't afford.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What a Correct System Looks Like -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What a breeder marketplace should do</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Verify claims with real data</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Health testing badges backed by actual test records</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Pedigree verification from documented lineage</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Program history visible (years breeding, litters produced)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Buyers see proof, not promises</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Surface quality programs</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeders with verified health testing rank higher</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Documented programs get more visibility</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Investment in quality translates to marketplace advantage</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>No pay-to-play advertising that lets anyone buy the top spot</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Attract educated buyers</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Buyers who understand why health testing matters</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>People willing to wait for the right match</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Families who value transparency and documentation</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Fewer tire-kickers, more serious inquiries</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Integrated inquiry management</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Inquiries flow directly into your management system</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Qualify, respond, and track leads in one place</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>No separate inbox to check</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Communication history preserved</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Control over visibility</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Choose which animals to list</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Set your program's public profile</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Hide or show based on availability</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Your data, your decisions</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: How BreederHQ Supports This -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">BreederHQ Marketplace rewards responsible breeding</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Your health testing records become verification badges. Your documented pedigrees prove lineage. Your program history shows experience. Buyers see real data, not marketing claims. Quality breeders finally get the visibility they deserve.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Inquiries arrive in your dashboard alongside your other client management. One system for breeding records, client relationships, and marketplace presence.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/waitlists-and-placement" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See waitlist management →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The marketplace works for breeders who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Invest in health testing and want it to matter</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Document their breeding program properly</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Want to reach buyers who value quality over price</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Are tired of competing with puppy mills on generic sites</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Don't have time for aggressive marketing</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Want their reputation to be visible and verifiable</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This probably isn't for you if:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You don't do health testing</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You prefer to keep your program completely private</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Your waitlist is already full through word of mouth</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You want to avoid verification of your claims</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        The marketplace is designed for breeders who have nothing to hide. If you're doing things right, verification helps you. If you're not, it doesn't.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How is this different from other breeder listings?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ Marketplace is connected to actual breeding program data. Verification badges are earned through documented health testing, not self-reported claims. Buyers see real data, not marketing.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What are verification badges?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Badges indicate verified achievements like "Health Tested Program," "Pedigree Documented," or "Established Breeder." They're earned automatically when your records meet the criteria—no manual application needed.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Do I have to list all my animals?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No. You control exactly which animals are visible on the marketplace. Keep your program private or make it public—it's your choice per animal.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How do inquiries work?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Buyer inquiries come directly to your BreederHQ dashboard. You can respond, qualify leads, and manage all communications in one place alongside your other client management.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What does it cost to list?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Marketplace listings are included with your BreederHQ subscription. No additional listing fees, no commissions on sales.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Section 10: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Waitlist and Placement Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Portal Features
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Genetics and Health Testing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
