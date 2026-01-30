@@ -41,6 +41,24 @@ const faqs = [
     answer: 'Yes. 14-day free trial with full access. No credit card required to start.'
   }
 ];
+
+const featureCards = [
+  { id: 'animal-management', icon: '🐕', title: 'Animal Records', desc: 'Pedigrees, health testing, titles, photos' },
+  { id: 'breeding-operations', icon: '📅', title: 'Breeding Cycles', desc: 'Heat tracking, progesterone, due dates' },
+  { id: 'genetics', icon: '🧬', title: 'Genetics', desc: 'Color prediction, health markers, COI' },
+  { id: 'client-management', icon: '👥', title: 'Client Management', desc: 'Waitlists, communication, contracts' },
+  { id: 'business-ops', icon: '💰', title: 'Business', desc: 'Invoicing, deposits, expense tracking' },
+  { id: 'buyer-portal', icon: '🏠', title: 'Buyer Portal', desc: 'Puppy updates, health docs, photos' },
+];
+
+const navItems = [
+  { id: 'animal-management', label: 'Animals' },
+  { id: 'breeding-operations', label: 'Breeding' },
+  { id: 'genetics', label: 'Genetics' },
+  { id: 'client-management', label: 'Clients' },
+  { id: 'business-ops', label: 'Business' },
+  { id: 'faq', label: 'FAQ' },
+];
 ---
 
 <BaseLayout
@@ -53,599 +71,452 @@ const faqs = [
     Skip to content
   </a>
 
-  <main id="main-content">
-  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
-    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
-      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
-      <li class="text-gray-400">›</li>
-      <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
-      <li class="text-gray-400">›</li>
-      <li aria-current="page" class="text-gray-600">Dog Breeding</li>
-    </ol>
+  <!-- Sticky Section Nav -->
+  <nav id="section-nav" class="section-nav hidden">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex gap-2 md:gap-4 overflow-x-auto">
+      {navItems.map(item => (
+        <a href={`#${item.id}`} class="nav-link" data-section={item.id}>
+          {item.label}
+        </a>
+      ))}
+    </div>
   </nav>
 
-  <!-- Section 1: What This Page Is About -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">Dog Breeding Software for Serious Breeders</h1>
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Dog Breeding</li>
+      </ol>
+    </nav>
 
-      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
-        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
-        <p class="text-gray-700 leading-relaxed">
-          BreederHQ is dog breeding software for operations with 5+ dogs that need to track cycles, manage pedigrees, organize health testing, and communicate professionally with buyers. Spreadsheets work until they don't—usually around the time you have overlapping litters or a growing waitlist.
+    <!-- Section 1: Hero -->
+    <section id="hero" class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Dog Breeding Software for Serious Breeders</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            BreederHQ is dog breeding software for operations with 5+ dogs that need to track cycles, manage pedigrees, organize health testing, and communicate professionally with buyers. Spreadsheets work until they don't—usually around the time you have overlapping litters or a growing waitlist.
+          </p>
+        </aside>
+
+        <!-- Feature Overview Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
+          {featureCards.map(card => (
+            <a href={`#${card.id}`} class="feature-card group">
+              <div class="text-3xl mb-2">{card.icon}</div>
+              <h3 class="font-bold text-lg group-hover:text-[hsl(24,95%,53%)] transition-colors">{card.title}</h3>
+              <p class="text-sm text-gray-600">{card.desc}</p>
+            </a>
+          ))}
+        </div>
+
+        <p class="text-xl text-gray-700 leading-relaxed mt-12 mb-4">
+          Managing a dog breeding program means tracking cycles, planning breedings, managing genetics, communicating with buyers, and running a business—all while caring for animals that depend on you for everything.
         </p>
-      </aside>
-      <p class="text-xl text-gray-700 leading-relaxed mb-4">
-        Managing a dog breeding program means tracking cycles, planning breedings, managing genetics, communicating with buyers, and running a business—all while caring for animals that depend on you for everything.
-      </p>
-      <p class="text-xl text-gray-700 leading-relaxed">
-        This page explains when software helps and when it doesn't.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 2: Why Breeders Search for This -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The moment when hobby becomes chaos</h2>
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Most breeders hit a wall somewhere between 5 and 15 dogs. The signs are predictable:
-      </p>
-      <ul class="space-y-3 text-lg text-gray-700 mb-6">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Multiple breeding females with overlapping cycles</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>A waitlist longer than you can hold in your head</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Health testing records scattered across emails and files</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Buyers asking questions you've already answered three times</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Invoices disconnected from the animals they're for</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>That creeping feeling you're forgetting something important</span>
-        </li>
-      </ul>
-      <p class="text-lg text-gray-700 leading-relaxed">
-        If this sounds familiar, you're not alone. And you're not failing—you've just outgrown your current system.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 3: How Breeders Usually Handle It -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The tools breeders start with</h2>
-
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Spreadsheets (Google Sheets, Excel)</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            One for animals, one for litters, one for contacts. Formulas that break when you add a row. No connection between sheets. Hours spent on data entry that should be automatic.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Notebooks and wall calendars</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Heat dates circled in red. Notes that only you can decipher. Lost when you need them most. No backup if the notebook gets wet or the dog eats it.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Memory and hope</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            "I think she was in heat around Thanksgiving." "I'm pretty sure I told them about the deposit." "I know I wrote that down somewhere."
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Facebook groups and text messages</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Buyer communication scattered across platforms. No record of what you promised. Scrolling through months of messages to find one detail.
-          </p>
-        </div>
-
-        <p class="text-lg text-gray-700 leading-relaxed font-semibold mt-8">
-          These tools work. Until they don't.
+        <p class="text-xl text-gray-700 leading-relaxed">
+          BreederHQ handles the administrative complexity so you can focus on the dogs.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 4: Where That Breaks Down -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Why spreadsheets fail for dog breeders</h2>
+    <!-- Accordion Feature Sections -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Everything You Need for Dog Breeding</h2>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Dog-specific biology creates complexity that generic tools can't handle:</h3>
+        <div class="accordion-container space-y-4">
 
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Reproductive cycles</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Estrus cycles every 6-7 months (varies by individual and breed)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>63-day gestation with critical developmental windows</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Progesterone testing timing determines breeding success</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Split heats, silent heats, and irregular cycles happen</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Puppy socialization windows (3-12 weeks) are non-negotiable</span>
-              </li>
-            </ul>
-          </div>
+          <!-- Animal Management -->
+          <details id="animal-management" class="accordion-item" open>
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">🐕</span>
+                <div>
+                  <h3 class="text-xl font-bold">Animal Management</h3>
+                  <p class="text-sm text-gray-600">Pedigrees • Health testing • Titles • Photos • Co-ownership</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Complete Dog Records</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Every dog with complete records in one place</li>
+                    <li>• Pedigree visible to any depth needed</li>
+                    <li>• Photos organized and connected</li>
+                    <li>• Registration numbers (AKC, UKC, etc.)</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Health Testing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• OFA hips and elbows tracking</li>
+                    <li>• PennHIP evaluations</li>
+                    <li>• Breed-specific genetic panels</li>
+                    <li>• Eye certifications with renewal reminders</li>
+                    <li>• Cardiac clearances</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Titles & Competition</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Show and performance titles tracked</li>
+                    <li>• Competition history</li>
+                    <li>• Points and legs toward championships</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Ownership</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Co-ownership properly recorded</li>
+                    <li>• Ownership transfers tracked</li>
+                    <li>• Access levels per co-owner</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
 
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Health testing requirements</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>OFA hips and elbows (timing requirements by breed)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>PennHIP evaluations</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Breed-specific genetic panels (different for every breed)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Eye certifications (annual renewal required)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Cardiac clearances</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>DNA profiles</span>
-              </li>
-            </ul>
-          </div>
+          <!-- Breeding Operations -->
+          <details id="breeding-operations" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">📅</span>
+                <div>
+                  <h3 class="text-xl font-bold">Breeding Operations</h3>
+                  <p class="text-sm text-gray-600">Cycle tracking • Progesterone • Due dates • Litter management</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Dog-specific cycle calculations that account for individual variation. 63-day gestation tracking. Progesterone testing logs. Whelping countdown.
+              </p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Cycle Tracking</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Heat cycle history per female</li>
+                    <li>• Pattern recognition for timing</li>
+                    <li>• Predicted next heat dates</li>
+                    <li>• Split heat and irregular cycle handling</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Progesterone Testing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Test results with dates and values</li>
+                    <li>• Pattern visualization over time</li>
+                    <li>• Optimal breeding window calculation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Breeding Calendar</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• All females visible at once</li>
+                    <li>• Collision detection for overlapping litters</li>
+                    <li>• Expected whelp dates calculated automatically</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Stud Services</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Outside stud tracking</li>
+                    <li>• Standing your own studs</li>
+                    <li>• AI and natural breeding documentation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
 
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">What spreadsheets can't do:</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Calculate next expected heat from historical data</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Remind you when progesterone testing should start</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Connect a breeding to its resulting litter automatically</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Show you which females will have overlapping litters</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Let buyers see their puppy's progress</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Generate an invoice linked to a specific puppy</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Warn you when a health certification is expiring</span>
-              </li>
-            </ul>
-          </div>
+          <!-- Genetics -->
+          <details id="genetics" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">🧬</span>
+                <div>
+                  <h3 class="text-xl font-bold">Genetics & Health Markers</h3>
+                  <p class="text-sm text-gray-600">Color prediction • Health markers • COI calculation</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Color Genetics</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Coat color prediction</li>
+                    <li>• Pattern inheritance tracking</li>
+                    <li>• Breed-specific color genes</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Health Markers</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Genetic disease carrier status</li>
+                    <li>• Breeding pair risk assessment</li>
+                    <li>• Breed-specific panel tracking</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Inbreeding Coefficient</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• COI calculation from pedigree</li>
+                    <li>• Multiple generation analysis</li>
+                    <li>• Risk level indicators</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Breeding Decisions</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Pair compatibility checking</li>
+                    <li>• Outcome simulation</li>
+                    <li>• Data-driven match suggestions</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
 
-          <p class="text-lg text-gray-700 leading-relaxed mt-6">
-            A spreadsheet can store data. It cannot think for you. And when you're managing multiple litters, juggling waitlists, and trying to give every dog the attention they deserve, you need a system that thinks.
-          </p>
+          <!-- Client Management -->
+          <details id="client-management" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">👥</span>
+                <div>
+                  <h3 class="text-xl font-bold">Client Management</h3>
+                  <p class="text-sm text-gray-600">Waitlists • Communication history • Contracts • Notes</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Waitlist Management</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Position, preferences, and deposits</li>
+                    <li>• Color/sex/temperament preferences</li>
+                    <li>• Automatic position tracking</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Communication</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Complete history in one place</li>
+                    <li>• No more scattered messages</li>
+                    <li>• Notes that don't get lost</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Contracts</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Contracts stored and accessible</li>
+                    <li>• Agreement tracking</li>
+                    <li>• Digital signatures</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Contact Records</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Every contact and their history</li>
+                    <li>• Linked to puppies they purchased</li>
+                    <li>• Follow-up reminders</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- Business Operations -->
+          <details id="business-ops" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">💰</span>
+                <div>
+                  <h3 class="text-xl font-bold">Business Operations</h3>
+                  <p class="text-sm text-gray-600">Invoicing • Deposits • Payment tracking • Expenses</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Invoicing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Invoices connected to specific puppies</li>
+                    <li>• Payment tracking built-in</li>
+                    <li>• Professional invoice generation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Deposits</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Deposit management without spreadsheets</li>
+                    <li>• Status tracking per buyer</li>
+                    <li>• Refund and transfer handling</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Expense Tracking</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Expense tracking for tax time</li>
+                    <li>• Categorized spending</li>
+                    <li>• Per-litter cost analysis</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Buyer Portal</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Buyers see their puppy's progress</li>
+                    <li>• Health testing documentation access</li>
+                    <li>• Professional presentation that builds trust</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 5: What a Correct System Looks Like -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The system serious dog breeders need</h2>
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">BreederHQ was built for this</h2>
 
-      <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        This isn't about BreederHQ specifically. This is what any proper breeding management system must do:
-      </p>
+        <p class="text-xl leading-relaxed mb-8">
+          Dog-specific cycle calculations that account for individual variation. Pedigree tracking with genetic health markers. A breeding calendar that shows you what's coming before it arrives. Waitlist management that doesn't require a separate spreadsheet. Buyer portals so you stop answering the same questions. Invoicing that connects to the actual puppy.
+        </p>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Animal Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Every dog with complete records in one place</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Pedigree visible to any depth needed</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Health testing results attached to the animal (not in a separate file)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Titles and competition history tracked</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Photos that stay organized and connected</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Ownership and co-ownership properly recorded</span>
-            </li>
-          </ul>
-        </div>
+        <p class="text-xl leading-relaxed mb-8">
+          All of it connected. None of it requiring you to become a database administrator.
+        </p>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Breeding Operations</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Cycle history per female with pattern recognition</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Breeding calendar showing all females at once</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Automatic date calculations (expected heat, whelping, weaning, placement)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Genetics tracking for coat color and health markers</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Collision detection when litters will overlap</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Stud service tracking for outside breedings</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Client Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Every contact and their history in one place</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Communication log (not scattered across platforms)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Waitlist with position, preferences, and deposits</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Contracts and agreements stored and accessible</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Notes that don't get lost</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Business Operations</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Invoicing connected to specific puppies</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Payment tracking without separate accounting software</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Deposit management that doesn't require a spreadsheet</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Expense tracking for tax time</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Buyer Experience</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>A way for buyers to see their puppy's progress</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Access to health testing documentation</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Communication that doesn't require you to repeat yourself</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Professional presentation that builds trust</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: How BreederHQ Supports This -->
-  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ was built for this</h2>
-
-      <p class="text-xl leading-relaxed mb-8">
-        Dog-specific cycle calculations that account for individual variation. Pedigree tracking with genetic health markers. A breeding calendar that shows you what's coming before it arrives. Waitlist management that doesn't require a separate spreadsheet. Buyer portals so you stop answering the same questions. Invoicing that connects to the actual puppy.
-      </p>
-
-      <p class="text-xl leading-relaxed mb-8">
-        All of it connected. None of it requiring you to become a database administrator.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
-          Get Early Access
-        </a>
-        <a href="/workflows/breeding-cycles" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
-          See breeding workflows →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 7: Who This Is For -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ is built for dog breeders who:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have 5+ dogs (or plan to get there)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Produce regular litters (not one-time accidents)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Do health testing and want to track it properly</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have a waitlist they're tired of managing manually</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Want buyers to see them as professional</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Are spending more time on admin than they want to</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Value their time at more than $0/hour</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Section 8: Who This Is Not For -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ is probably not for you if:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700 mb-8">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You have 1-2 dogs and no plans to grow</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You had one accidental litter and won't have more</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You prefer paper records and that's working for you</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You're not doing health testing</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You don't have a waitlist to manage</span>
-        </li>
-      </ul>
-
-      <p class="text-lg text-gray-700 leading-relaxed">
-        There's no shame in any of these. Software isn't always the answer. If a notebook works, use the notebook. If a spreadsheet handles everything you need, keep the spreadsheet.
-      </p>
-      <p class="text-lg text-gray-700 leading-relaxed mt-4 font-semibold">
-        BreederHQ exists for the moment when those tools stop working.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 9: FAQ -->
-  <section class="py-20 px-4 faq-section">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12">Questions dog breeders ask</h2>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I import my existing pedigrees?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. You can enter historical data and connect generations. There's no limit on pedigree depth. If you have records going back 20 generations, you can enter all of it.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it handle co-owned dogs?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Ownership can be shared and tracked. Co-owners can have appropriate access levels.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can buyers see health testing results?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. The buyer portal shows what you choose to share. You control visibility.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>What if I breed multiple breeds?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>No problem. Animals are organized however you want. Many breeders work with multiple breeds.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it integrate with AKC or UKC?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>BreederHQ tracks registration numbers and information. It doesn't submit to registries directly—you'll still use their systems for official registration.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I track progesterone testing?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Results can be logged with dates and values, helping you see patterns over time.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>What about stud services?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Whether you're using outside studs or standing your own males at stud, the system tracks it.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I try it before paying?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. 14-day free trial with full access. No credit card required to start.</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- Section 10: Related Resources -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
-      <div class="space-y-3 text-lg">
-        <div>
-          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
-            → How to Track Breeding Cycles
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+            Get Early Access
           </a>
-        </div>
-        <div>
-          <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
-            → Genetics and Health Testing Workflows
-          </a>
-        </div>
-        <div>
-          <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
-            → BreederHQ vs. Spreadsheets
+          <a href="/workflows/breeding-cycles" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+            See breeding workflows →
           </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Sticky Mobile CTA -->
-  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
-    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
-      Get Early Access
-    </a>
-  </div>
+    <!-- Who This Is For -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">BreederHQ is built for dog breeders who:</h2>
+
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start"><span class="mr-3">•</span><span>Have 5+ dogs (or plan to get there)</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Produce regular litters (not one-time accidents)</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Do health testing and want to track it properly</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Have a waitlist they're tired of managing manually</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Want buyers to see them as professional</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Are spending more time on admin than they want to</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Value their time at more than $0/hour</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Who This Is Not For -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">BreederHQ is probably not for you if:</h2>
+
+        <ul class="space-y-3 text-lg text-gray-700 mb-8">
+          <li class="flex items-start"><span class="mr-3">•</span><span>You have 1-2 dogs and no plans to grow</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You had one accidental litter and won't have more</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You prefer paper records and that's working for you</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You're not doing health testing</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You don't have a waitlist to manage</span></li>
+        </ul>
+
+        <p class="text-lg text-gray-700 leading-relaxed">
+          There's no shame in any of these. Software isn't always the answer. If a notebook works, use the notebook. If a spreadsheet handles everything you need, keep the spreadsheet.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mt-4 font-semibold">
+          BreederHQ exists for the moment when those tools stop working.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 px-4 faq-section">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-12">Questions dog breeders ask</h2>
+
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Resources -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
+              → How to Track Breeding Cycles
+            </a>
+          </div>
+          <div>
+            <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Genetics and Health Testing Workflows
+            </a>
+          </div>
+          <div>
+            <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
+              → BreederHQ vs. Spreadsheets
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-40">
+      <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Get Early Access
+      </a>
+    </div>
   </main>
 
   <style>
@@ -659,6 +530,96 @@ const faqs = [
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border-width: 0;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .feature-card:hover {
+      border-color: hsl(24, 95%, 53%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #6b7280;
+      white-space: nowrap;
+      border-radius: 0.375rem;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: hsl(24, 95%, 53%);
+      background: #f3f4f6;
+    }
+
+    .nav-link.active {
+      color: hsl(24, 95%, 53%);
+      background: hsl(24, 95%, 53%, 0.1);
+    }
+
+    .accordion-item {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      list-style: none;
+      transition: background 0.15s ease;
+    }
+
+    .accordion-header::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-header:hover {
+      background: #f9fafb;
+    }
+
+    .accordion-icon {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: #9ca3af;
+    }
+
+    details[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    details[open] .accordion-header {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .accordion-content {
+      padding: 1.5rem;
     }
 
     .faq-item {
@@ -699,5 +660,106 @@ const faqs = [
     .faq-answer p {
       font-size: 1.125rem;
     }
+
+    @media (max-width: 768px) {
+      .accordion-header {
+        padding: 1rem;
+      }
+
+      .accordion-content {
+        padding: 1rem;
+      }
+
+      .feature-card {
+        padding: 0.75rem;
+      }
+
+      .feature-card h3 {
+        font-size: 0.875rem;
+      }
+
+      .feature-card p {
+        font-size: 0.75rem;
+      }
+
+      .feature-card .text-3xl {
+        font-size: 1.5rem;
+      }
+    }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.getElementById('hero');
+      const nav = document.getElementById('section-nav');
+
+      if (!hero || !nav) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          nav.classList.toggle('hidden', entry.isIntersecting);
+        },
+        { threshold: 0, rootMargin: '-100px 0px 0px 0px' }
+      );
+
+      observer.observe(hero);
+
+      const sections = document.querySelectorAll('.accordion-item, #faq');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      const updateActiveLink = () => {
+        let current = '';
+
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            current = section.id;
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-section') === current) {
+            link.classList.add('active');
+          }
+        });
+      };
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href')?.slice(1);
+          const target = document.getElementById(targetId || '');
+
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = card.getAttribute('href');
+          const targetId = href?.slice(1);
+          const target = document.getElementById(targetId || '');
+
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
 </BaseLayout>
