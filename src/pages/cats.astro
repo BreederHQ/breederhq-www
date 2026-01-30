@@ -33,6 +33,24 @@ const faqs = [
     answer: 'Yes. 14-day free trial, full access, no credit card required.'
   }
 ];
+
+const featureCards = [
+  { id: 'cat-records', icon: '🐱', title: 'Cat Records', desc: 'Pedigrees, registrations, photos' },
+  { id: 'breeding-management', icon: '📅', title: 'Breeding', desc: 'Induced ovulation, queen cycles' },
+  { id: 'health-testing', icon: '🩺', title: 'Health Testing', desc: 'HCM, PKD, PRA, blood types' },
+  { id: 'client-management', icon: '👥', title: 'Clients', desc: 'Waitlists, communication, contracts' },
+  { id: 'business-ops', icon: '💰', title: 'Business', desc: 'Invoicing, deposits, expenses' },
+  { id: 'buyer-portal', icon: '🏠', title: 'Buyer Portal', desc: 'Kitten updates, health docs' },
+];
+
+const navItems = [
+  { id: 'cat-records', label: 'Records' },
+  { id: 'breeding-management', label: 'Breeding' },
+  { id: 'health-testing', label: 'Health' },
+  { id: 'client-management', label: 'Clients' },
+  { id: 'business-ops', label: 'Business' },
+  { id: 'faq', label: 'FAQ' },
+];
 ---
 
 <BaseLayout
@@ -45,523 +63,429 @@ const faqs = [
     Skip to content
   </a>
 
-  <main id="main-content">
-  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
-    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
-      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
-      <li class="text-gray-400">›</li>
-      <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
-      <li class="text-gray-400">›</li>
-      <li aria-current="page" class="text-gray-600">Cat Breeding</li>
-    </ol>
+  <!-- Sticky Section Nav -->
+  <nav id="section-nav" class="section-nav hidden">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex gap-2 md:gap-4 overflow-x-auto">
+      {navItems.map(item => (
+        <a href={`#${item.id}`} class="nav-link" data-section={item.id}>
+          {item.label}
+        </a>
+      ))}
+    </div>
   </nav>
 
-  <!-- Section 1: What This Page Is About -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">Cat Breeding Software Built for Catteries</h1>
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Cat Breeding</li>
+      </ol>
+    </nav>
 
-      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
-        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
-        <p class="text-gray-700 leading-relaxed">
-          Cat breeding software designed for catteries with 5+ cats. Induced ovulation tracking, breed-specific genetic testing (HCM, PKD, PRA), TICA/CFA registration support, and kitten placement management. Cats aren't small dogs—the software should reflect that.
+    <!-- Section 1: Hero -->
+    <section id="hero" class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Cat Breeding Software Built for Catteries</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Cat breeding software designed for catteries with 5+ cats. Induced ovulation tracking, breed-specific genetic testing (HCM, PKD, PRA), TICA/CFA registration support, and kitten placement management. Cats aren't small dogs—the software should reflect that.
+          </p>
+        </aside>
+
+        <!-- Feature Overview Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
+          {featureCards.map(card => (
+            <a href={`#${card.id}`} class="feature-card group">
+              <div class="text-3xl mb-2">{card.icon}</div>
+              <h3 class="font-bold text-lg group-hover:text-[hsl(24,95%,53%)] transition-colors">{card.title}</h3>
+              <p class="text-sm text-gray-600">{card.desc}</p>
+            </a>
+          ))}
+        </div>
+
+        <p class="text-xl text-gray-700 leading-relaxed mt-12 mb-4">
+          Cat breeding has unique challenges that dog-focused software misses entirely. Induced ovulation changes everything about timing. Queens can cycle repeatedly when not bred. Multiple breeds have specific genetic concerns that require careful tracking.
         </p>
-      </aside>
-      <p class="text-xl text-gray-700 leading-relaxed mb-4">
-        Cat breeding has unique challenges that dog-focused software misses entirely. Induced ovulation changes everything about timing. Queens can cycle repeatedly when not bred. Multiple breeds have specific genetic concerns that require careful tracking.
-      </p>
-      <p class="text-xl text-gray-700 leading-relaxed">
-        This page is for cat breeders specifically.
-      </p>
-    </div>
-  </section>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          This page is for cat breeders specifically.
+        </p>
+      </div>
+    </section>
 
-  <!-- Section 2: Why Breeders Search for This -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">When cattery management gets complicated</h2>
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Most catteries hit a complexity wall around 5-10 cats. The signs:
-      </p>
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Multiple queens cycling simultaneously</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Genetic tracking for breed-specific concerns (HCM, PKD, PRA)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Kitten placements overlapping with new litters</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>TICA or CFA registration requirements</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Buyers expecting health guarantees with documentation</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Stud management and outside breeding coordination</span>
-        </li>
-      </ul>
-      <p class="text-lg text-gray-700 leading-relaxed mt-6">
-        Sound familiar? You're not disorganized. You've just outgrown basic tools.
-      </p>
-    </div>
-  </section>
+    <!-- Accordion Feature Sections -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Everything You Need for Cat Breeding</h2>
 
-  <!-- Section 3: How Breeders Usually Handle It -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The tools catteries start with</h2>
+        <div class="accordion-container space-y-4">
 
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Spreadsheets with color codes</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            One sheet for queens, one for studs, one for litters, one for contacts. Color-coded cells that only make sense to you. Formulas that break mysteriously.
-          </p>
-        </div>
+          <!-- Cat Records -->
+          <details id="cat-records" class="accordion-item" open>
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">🐱</span>
+                <div>
+                  <h3 class="text-xl font-bold">Cat Records</h3>
+                  <p class="text-sm text-gray-600">Pedigrees • Registration • Genetic markers • Photos</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Complete Cat Profiles</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Every cat with complete information in one place</li>
+                    <li>• Pedigrees with genetic marker tracking</li>
+                    <li>• Photos organized by cat and date</li>
+                    <li>• Show records and titles</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Registration</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• TICA and CFA registration tracking</li>
+                    <li>• Registration numbers and status</li>
+                    <li>• Multiple registry support</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Paper files and photo folders</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Registration papers in one drawer. Health records in another. Photos scattered across phone, computer, and cloud storage. Nothing connected.
-          </p>
-        </div>
+          <!-- Breeding Management -->
+          <details id="breeding-management" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">📅</span>
+                <div>
+                  <h3 class="text-xl font-bold">Breeding Management</h3>
+                  <p class="text-sm text-gray-600">Induced ovulation • Queen cycles • Expected due dates • Kitten tracking</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Cats only ovulate when bred. This fundamentally changes timing calculations compared to dogs. Queens that aren't bred can cycle repeatedly—every 2-3 weeks during breeding season. BreederHQ is built with induced ovulation in mind.
+              </p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Queen Cycle Tracking</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Induced ovulation timing logic</li>
+                    <li>• Repeated cycling pattern tracking</li>
+                    <li>• Breeding dates with due date calculation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Pregnancy & Kittens</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• 63-65 day gestation tracking</li>
+                    <li>• Kitten count and development</li>
+                    <li>• Placement timing (12-16 weeks)</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Blood Type Compatibility</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Blood type tracking (A, B, AB)</li>
+                    <li>• Compatibility warnings for breeding</li>
+                    <li>• Neonatal isoerythrolysis risk alerts</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Stud Coordination</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Your own studs</li>
+                    <li>• Outside stud breedings</li>
+                    <li>• Stud service agreements</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Memory</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            "I think she was bred around the 15th." "I'm pretty sure that kitten is reserved." "I know I sent them the contract."
-          </p>
-        </div>
+          <!-- Health Testing -->
+          <details id="health-testing" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">🩺</span>
+                <div>
+                  <h3 class="text-xl font-bold">Health Testing</h3>
+                  <p class="text-sm text-gray-600">HCM • PKD • PRA • FeLV/FIV • Blood types</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">HCM Screening</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Echocardiogram dates and results</li>
+                    <li>• Annual renewal reminders</li>
+                    <li>• Cardiologist information</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Genetic Testing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• PKD DNA testing (Persians)</li>
+                    <li>• PRA and breed-specific panels</li>
+                    <li>• Carrier status tracking</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Disease Status</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• FeLV/FIV status</li>
+                    <li>• Test dates and lab results</li>
+                    <li>• Vaccination records</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Blood Typing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Blood type records (A, B, AB)</li>
+                    <li>• Breeding compatibility checking</li>
+                    <li>• NI risk assessment</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Text messages everywhere</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Buyer conversations in iMessage, Facebook Messenger, Instagram DMs, email, and occasionally actual phone calls. Good luck finding anything.
-          </p>
+          <!-- Client Management -->
+          <details id="client-management" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">👥</span>
+                <div>
+                  <h3 class="text-xl font-bold">Client Management</h3>
+                  <p class="text-sm text-gray-600">Waitlists • Communication • Contracts • Deposits</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Waitlist Management</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Preferences (color, sex, personality)</li>
+                    <li>• "I want a blue point female" handling</li>
+                    <li>• Position and deposit tracking</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Communication</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Complete history searchable</li>
+                    <li>• No more scattered messages</li>
+                    <li>• Notes that don't get lost</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Contracts</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Contracts stored and accessible</li>
+                    <li>• Digital signatures</li>
+                    <li>• Spay/neuter agreements</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Deposits</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Deposit tracking</li>
+                    <li>• Payment status</li>
+                    <li>• Refund handling</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- Business Operations -->
+          <details id="business-ops" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">💰</span>
+                <div>
+                  <h3 class="text-xl font-bold">Business Operations</h3>
+                  <p class="text-sm text-gray-600">Invoicing • Payments • Expenses • Buyer portal</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Invoicing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Invoices tied to specific kittens</li>
+                    <li>• Payment status clear at a glance</li>
+                    <li>• Professional invoice generation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Expense Tracking</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Track expenses for tax purposes</li>
+                    <li>• Categorized spending</li>
+                    <li>• Per-litter cost analysis</li>
+                  </ul>
+                </div>
+                <div id="buyer-portal" class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Buyer Portal</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Buyers see kitten development</li>
+                    <li>• Share photos without individual messages</li>
+                    <li>• Health documentation access</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Professional Presentation</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Builds trust with buyers</li>
+                    <li>• Organized documentation</li>
+                    <li>• Easy access for buyers</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 4: Where That Breaks Down -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Why cat breeding requires different tools</h2>
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">BreederHQ understands cats</h2>
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Cat-specific biology:</h3>
+        <p class="text-xl leading-relaxed mb-8">
+          Built with induced ovulation in mind. Tracking that accounts for how cats actually cycle. Genetic marker tracking for breed-specific concerns. Waitlist management that handles "I want a blue point female" requests. Buyer portals so you're not sending the same kitten photos individually to 15 people.
+        </p>
 
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Induced ovulation</h4>
-            <p class="text-lg text-gray-700 leading-relaxed mb-3">
-              Cats only ovulate when bred. This fundamentally changes timing calculations compared to dogs. Queens that aren't bred can cycle repeatedly—every 2-3 weeks during breeding season. This creates both opportunities and management challenges.
-            </p>
-          </div>
+        <p class="text-xl leading-relaxed mb-8">
+          A system that works the way catteries work.
+        </p>
 
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Gestation and development</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>63-65 day gestation</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Kittens ready for placement at 12-16 weeks (varies by breed and cattery policy)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Socialization windows that affect lifetime temperament</span>
-              </li>
-            </ul>
-          </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+            Get Early Access
+          </a>
+          <a href="/workflows/breeding-cycles" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+            See breeding workflows →
+          </a>
+        </div>
+      </div>
+    </section>
 
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Health testing complexity</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>HCM screening (echocardiogram, often annual)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>PKD DNA testing (especially Persians and related breeds)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>PRA and other breed-specific genetic panels</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>FeLV/FIV status</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Blood type for breeding compatibility</span>
-              </li>
-            </ul>
-          </div>
+    <!-- Who This Is For -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">BreederHQ is built for catteries that:</h2>
 
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start"><span class="mr-3">•</span><span>Have 5+ cats (or plan to)</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Produce regular litters</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Do health testing (HCM, genetic panels)</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Register with TICA, CFA, or other registries</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Have a waitlist to manage</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Want buyers to see professionalism</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>Are tired of scattered systems</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Who This Is Not For -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">BreederHQ probably isn't for you if:</h2>
+
+        <ul class="space-y-3 text-lg text-gray-700 mb-8">
+          <li class="flex items-start"><span class="mr-3">•</span><span>You have 1-2 cats and no breeding plans</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You had one litter and won't have more</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You're happy with your current paper system</span></li>
+          <li class="flex items-start"><span class="mr-3">•</span><span>You're not doing health testing</span></li>
+        </ul>
+
+        <p class="text-lg text-gray-700 leading-relaxed">
+          No judgment. Not everyone needs software. If your current system works, keep using it.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 px-4 faq-section">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-12">Questions catteries ask</h2>
+
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Resources -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+        <div class="space-y-3 text-lg">
           <div>
-            <h4 class="text-xl font-bold mb-3">What generic tools miss:</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Induced ovulation timing calculations</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Repeated cycling patterns when not bred</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Breed-specific genetic concern tracking</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Blood type compatibility checking</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>TICA/CFA registration workflows</span>
-              </li>
-            </ul>
+            <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
+              → How to Track Breeding Cycles
+            </a>
+          </div>
+          <div>
+            <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Genetics and Health Testing
+            </a>
+          </div>
+          <div>
+            <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
+              → BreederHQ vs. Spreadsheets
+            </a>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-40">
+      <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Get Early Access
+      </a>
     </div>
-  </section>
-
-  <!-- Section 5: What a Correct System Looks Like -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The system serious catteries need</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Cat Records</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Every cat with complete information in one place</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Pedigrees with genetic marker tracking</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Health testing results attached and dated</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Registration numbers and show records</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Photos organized by cat and date</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Breeding Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Queen cycle tracking with induced ovulation logic</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Breeding dates with expected due date calculation</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Kitten count and development tracking</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Blood type compatibility awareness</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Stud coordination (your own and outside studs)</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Client Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Waitlist with preferences (color, sex, personality type)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Communication history searchable and complete</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Contracts stored and accessible</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Deposit tracking</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Business Operations</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Invoicing tied to specific kittens</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Payment status clear at a glance</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Expense tracking for tax purposes</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Buyer Experience</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Portal for buyers to see kitten development</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Health documentation access</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Professional presentation</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: How BreederHQ Supports This -->
-  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ understands cats</h2>
-
-      <p class="text-xl leading-relaxed mb-8">
-        Built with induced ovulation in mind. Tracking that accounts for how cats actually cycle. Genetic marker tracking for breed-specific concerns. Waitlist management that handles "I want a blue point female" requests. Buyer portals so you're not sending the same kitten photos individually to 15 people.
-      </p>
-
-      <p class="text-xl leading-relaxed mb-8">
-        A system that works the way catteries work.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
-          Get Early Access
-        </a>
-        <a href="/workflows/breeding-cycles" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
-          See breeding workflows →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 7: Who This Is For -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ is built for catteries that:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have 5+ cats (or plan to)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Produce regular litters</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Do health testing (HCM, genetic panels)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Register with TICA, CFA, or other registries</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have a waitlist to manage</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Want buyers to see professionalism</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Are tired of scattered systems</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Section 8: Who This Is Not For -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ probably isn't for you if:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700 mb-8">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You have 1-2 cats and no breeding plans</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You had one litter and won't have more</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You're happy with your current paper system</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You're not doing health testing</span>
-        </li>
-      </ul>
-
-      <p class="text-lg text-gray-700 leading-relaxed">
-        No judgment. Not everyone needs software. If your current system works, keep using it.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 9: FAQ -->
-  <section class="py-20 px-4 faq-section">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12">Questions catteries ask</h2>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it handle induced ovulation timing?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. The system is built with cat-specific reproductive biology in mind.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I track HCM screening dates?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Health testing with dates, results, and renewal reminders.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>What about blood type compatibility?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Blood types can be tracked and noted for breeding planning.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it work with TICA and CFA?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>BreederHQ tracks registration information. You'll still use registry systems for official submissions.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can buyers see kitten photos?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. The buyer portal lets you share photos, updates, and documents without sending individual messages.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I try it first?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. 14-day free trial, full access, no credit card required.</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- Section 10: Related Resources -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
-      <div class="space-y-3 text-lg">
-        <div>
-          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
-            → How to Track Breeding Cycles
-          </a>
-        </div>
-        <div>
-          <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
-            → Genetics and Health Testing
-          </a>
-        </div>
-        <div>
-          <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
-            → BreederHQ vs. Spreadsheets
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sticky Mobile CTA -->
-  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
-    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
-      Get Early Access
-    </a>
-  </div>
   </main>
 
   <style>
@@ -575,6 +499,96 @@ const faqs = [
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border-width: 0;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .feature-card:hover {
+      border-color: hsl(24, 95%, 53%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #6b7280;
+      white-space: nowrap;
+      border-radius: 0.375rem;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: hsl(24, 95%, 53%);
+      background: #f3f4f6;
+    }
+
+    .nav-link.active {
+      color: hsl(24, 95%, 53%);
+      background: hsl(24, 95%, 53%, 0.1);
+    }
+
+    .accordion-item {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      list-style: none;
+      transition: background 0.15s ease;
+    }
+
+    .accordion-header::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-header:hover {
+      background: #f9fafb;
+    }
+
+    .accordion-icon {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: #9ca3af;
+    }
+
+    details[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    details[open] .accordion-header {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .accordion-content {
+      padding: 1.5rem;
     }
 
     .faq-item {
@@ -615,5 +629,106 @@ const faqs = [
     .faq-answer p {
       font-size: 1.125rem;
     }
+
+    @media (max-width: 768px) {
+      .accordion-header {
+        padding: 1rem;
+      }
+
+      .accordion-content {
+        padding: 1rem;
+      }
+
+      .feature-card {
+        padding: 0.75rem;
+      }
+
+      .feature-card h3 {
+        font-size: 0.875rem;
+      }
+
+      .feature-card p {
+        font-size: 0.75rem;
+      }
+
+      .feature-card .text-3xl {
+        font-size: 1.5rem;
+      }
+    }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.getElementById('hero');
+      const nav = document.getElementById('section-nav');
+
+      if (!hero || !nav) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          nav.classList.toggle('hidden', entry.isIntersecting);
+        },
+        { threshold: 0, rootMargin: '-100px 0px 0px 0px' }
+      );
+
+      observer.observe(hero);
+
+      const sections = document.querySelectorAll('.accordion-item, #faq');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      const updateActiveLink = () => {
+        let current = '';
+
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            current = section.id;
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-section') === current) {
+            link.classList.add('active');
+          }
+        });
+      };
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href')?.slice(1);
+          const target = document.getElementById(targetId || '');
+
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = card.getAttribute('href');
+          const targetId = href?.slice(1);
+          const target = document.getElementById(targetId || '');
+
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
 </BaseLayout>

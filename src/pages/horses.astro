@@ -49,6 +49,10 @@ const faqs = [
     answer: 'Yes. Revenue dashboard shows total income per stallion, breeding counts, and average fees. Manage seasonal breeding slots, track payments and outstanding balances, and monitor success rates per stallion.'
   },
   {
+    question: 'Does it track frozen semen inventory?',
+    answer: 'Yes. BreederHQ tracks semen inventory at the dose level with complete chain of custody. Log collections with quality metrics (concentration, motility, morphology), track storage locations (tank, rack, facility), get automatic expiration alerts for batches expiring within 30 days, and maintain a complete audit trail for every dose—whether used for breeding, shipped to mare owners, or transferred between facilities.'
+  },
+  {
     question: 'Can I try it before paying?',
     answer: 'Yes. 14-day free trial with full access. No credit card required to start.'
   }
@@ -59,10 +63,10 @@ const featureCards = [
   { id: 'mare-management', icon: '🐴', title: 'Mare Cycles', desc: 'Heat tracking, follicle exams, breeding records' },
   { id: 'foaling', icon: '🍼', title: 'Foaling', desc: '11-month milestones, calendar, outcomes' },
   { id: 'stallion-services', icon: '💰', title: 'Stallion Revenue', desc: 'Bookings, payments, performance metrics' },
+  { id: 'semen-inventory', icon: '❄️', title: 'Semen Inventory', desc: 'Dose tracking, storage, chain of custody' },
   { id: 'competition', icon: '🏆', title: 'Competition', desc: 'Shows, racing, producing records' },
   { id: 'buyer-crm', icon: '👥', title: 'Buyer CRM', desc: 'Lead scoring, sales pipeline, analytics' },
   { id: 'health-registry', icon: '📋', title: 'Health & Registry', desc: 'Vaccinations, Coggins, multi-registry' },
-  { id: 'marketplace', icon: '🛒', title: 'Marketplace', desc: 'Sales, stud services, verified listings' },
 ];
 
 const navItems = [
@@ -70,6 +74,7 @@ const navItems = [
   { id: 'mare-management', label: 'Mare Cycles' },
   { id: 'foaling', label: 'Foaling' },
   { id: 'stallion-services', label: 'Stallion' },
+  { id: 'semen-inventory', label: 'Semen' },
   { id: 'competition', label: 'Competition' },
   { id: 'buyer-crm', label: 'CRM' },
   { id: 'faq', label: 'FAQ' },
@@ -116,7 +121,7 @@ const navItems = [
         <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
           <h2 class="text-xl font-bold mb-3">TL;DR</h2>
           <p class="text-gray-700 leading-relaxed">
-            Horse breeding software with advanced genetics: predict foal colors across 13+ genes (Bay, Palomino, Buckskin, Tobiano, Overo, and more), screen for 16+ health conditions (OLWS, HYPP, HERDA, GBED), track mare reproductive cycles with follicle exams and ovulation confirmation, manage 11-month pregnancies with milestone checklists, coordinate stallion services with revenue tracking, and professionally manage high-value horse buyers with built-in CRM.
+            Horse breeding software with advanced genetics: predict foal colors across 13+ genes (Bay, Palomino, Buckskin, Tobiano, Overo, and more), screen for 16+ health conditions (OLWS, HYPP, HERDA, GBED), track mare reproductive cycles with follicle exams and ovulation confirmation, manage 11-month pregnancies with milestone checklists, coordinate stallion services with revenue tracking, manage frozen semen inventory with dose-level tracking and chain of custody, and professionally manage high-value horse buyers with built-in CRM.
           </p>
         </aside>
 
@@ -433,6 +438,112 @@ const navItems = [
             </div>
           </details>
 
+          <!-- Semen Inventory -->
+          <details id="semen-inventory" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">❄️</span>
+                <div>
+                  <h3 class="text-xl font-bold">Semen Inventory Management</h3>
+                  <p class="text-sm text-gray-600">Dose tracking • Storage management • Chain of custody • Expiration alerts</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Frozen semen is a valuable asset. Know exactly what you have, where it is, and when it expires. BreederHQ tracks inventory at the dose level with complete chain of custody.
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Collection Recording</h4>
+                  <p class="text-gray-700 mb-2">Log every collection with complete details:</p>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Collection method (AV, manual, electroejaculation)</li>
+                    <li>• Date and facility</li>
+                    <li>• Quality assessment at collection</li>
+                    <li>• Processing notes</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Quality Tracking</h4>
+                  <p class="text-gray-700 mb-2">Record detailed quality metrics:</p>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Concentration per batch</li>
+                    <li>• Motility percentage</li>
+                    <li>• Morphology assessment</li>
+                    <li>• Visual grades (Excellent, Good, Fair, Poor)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Storage Management</h4>
+                  <p class="text-gray-700 mb-2">Track exactly where inventory is stored:</p>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Storage type (Fresh, Cooled, Frozen)</li>
+                    <li>• Tank and rack location</li>
+                    <li>• Facility tracking for shipped semen</li>
+                    <li>• Transfer history between locations</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Dose-Level Tracking</h4>
+                  <p class="text-gray-700 mb-2">Know your inventory at all times:</p>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Available doses per batch</li>
+                    <li>• Automatic depletion as semen is used</li>
+                    <li>• Batch-specific quality history</li>
+                    <li>• Per-stallion inventory totals</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-6">
+                <h4 class="text-xl font-bold mb-4 text-amber-800">Expiration & Low Inventory Alerts</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-gray-700 mb-2"><strong>Automatic expiration tracking:</strong></p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Calculated based on storage type</li>
+                      <li>• Dashboard alerts for batches expiring within 30 days</li>
+                      <li>• Visual urgency indicators</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="text-gray-700 mb-2"><strong>Low inventory warnings:</strong></p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Stallions needing collection</li>
+                      <li>• Threshold-based alerts</li>
+                      <li>• Plan collections before you run out</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+                <h4 class="text-lg font-bold mb-3">Chain of Custody & Dispensing</h4>
+                <p class="text-gray-700 mb-3">Complete audit trail for every dose:</p>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
+                  <ul class="space-y-1">
+                    <li>• <strong>Breeding (On-Site)</strong> — Used at your facility</li>
+                    <li>• <strong>Ship to Mare Owner</strong> — With carrier and tracking</li>
+                    <li>• <strong>Transfer to Facility</strong> — Move between locations</li>
+                  </ul>
+                  <ul class="space-y-1">
+                    <li>• <strong>Sample Testing</strong> — Quality analysis</li>
+                    <li>• <strong>Discard</strong> — Expired or waste</li>
+                    <li>• Direct integration with breeding plans</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
           <!-- Competition & Racing -->
           <details id="competition" class="accordion-item">
             <summary class="accordion-header">
@@ -720,6 +831,11 @@ const navItems = [
           <div>
             <a href="/workflows/stallion-services" class="text-[hsl(24,95%,53%)] hover:underline">
               → Stallion Services Management
+            </a>
+          </div>
+          <div>
+            <a href="/workflows/semen-inventory" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Semen Inventory Management
             </a>
           </div>
           <div>

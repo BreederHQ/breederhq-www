@@ -1,0 +1,639 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Semen Inventory', url: '/workflows/semen-inventory' }
+];
+
+const faqs = [
+  {
+    question: 'Can I track semen from outside stallions?',
+    answer: 'Yes. Track semen you own from outside stallions the same way you track semen from your own stallions. Record storage location, quality metrics, and usage. When you use it for breeding, the system links to the appropriate stallion record.'
+  },
+  {
+    question: 'How does dose-level tracking work?',
+    answer: 'Each batch is recorded with a total dose count at collection. As you dispense doses—whether for breeding, shipping to mare owners, testing, or discard—the system automatically decrements the available count. You always know exactly how many doses remain per batch.'
+  },
+  {
+    question: 'What quality metrics are tracked?',
+    answer: 'Record concentration (million/ml), motility percentage, and morphology assessment for each batch. Assign visual quality grades (Excellent, Good, Fair, Poor) for quick reference. Quality data helps you prioritize which batches to use for breeding vs. shipping.'
+  },
+  {
+    question: 'How do expiration alerts work?',
+    answer: 'The system calculates expiration dates based on storage type: fresh semen (hours), cooled semen (days), frozen semen (years). Dashboard alerts highlight batches expiring within 30 days. You can set custom thresholds for alerts.'
+  },
+  {
+    question: 'Can I track semen shipped to mare owners?',
+    answer: 'Yes. When dispensing semen for shipment, record the recipient name, address, carrier, and tracking number. This creates a complete chain of custody from collection through delivery. Link shipments directly to breeding attempts in breeding plans.'
+  },
+  {
+    question: 'Does it integrate with breeding plans?',
+    answer: 'Yes. When you log a breeding attempt using AI, you can link it to a specific semen batch. The system automatically decrements the dose count and creates an audit trail showing which semen was used for which breeding.'
+  }
+];
+---
+
+<BaseLayout
+  title="Semen Inventory Management | BreederHQ"
+  description="Track frozen and cooled semen inventory at the dose level. Quality metrics, storage management, expiration alerts, chain of custody, and integration with breeding plans."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Semen Inventory</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Semen Inventory Management</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Frozen semen is a valuable asset that requires precise tracking. BreederHQ provides complete inventory management at the dose level: record collections with quality metrics (concentration, motility, morphology), track storage locations (tank, rack, facility), get automatic expiration alerts for batches expiring within 30 days, and maintain complete chain of custody for every dose—whether used for breeding, shipped to mare owners, or transferred between facilities.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-4">
+        When you're managing frozen semen from multiple stallions across multiple storage locations, you need to know exactly what you have, where it is, and when it expires. Manual tracking with spreadsheets leads to lost doses, expired inventory, and confusion about what's been used.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        BreederHQ tracks semen inventory at the dose level with complete chain of custody from collection through use.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The complexity of semen inventory</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Managing semen inventory involves multiple moving parts:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Multiple stallions</strong> — Each with different quality characteristics, collection frequency, and demand.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Multiple storage types</strong> — Fresh (hours), cooled (days), and frozen (years) with different handling requirements.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Multiple locations</strong> — Semen stored at your facility, at a collection center, or shipped to distribution centers.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Quality tracking</strong> — Not all batches are equal. You need to know which batches have the best quality for your most important breedings.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Expiration management</strong> — Cooled semen expires quickly. Even frozen semen has recommended storage limits.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Chain of custody</strong> — Who received what, when, and for what purpose? Especially important for shipped semen.</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-6 font-semibold">
+        Without proper tracking, you lose visibility into one of your most valuable breeding assets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Collection Recording -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Collection Recording</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Log every collection with complete details from the moment semen is collected.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Collection Details</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Collection date and time</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Collection method (AV, manual, electroejaculation)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Collection facility</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Technician/collector name</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Initial Assessment</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Volume collected</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Raw concentration</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Initial motility assessment</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Processing notes</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Processing & Storage</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Storage type (Fresh, Cooled, Frozen)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Total doses created</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Extender used</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Freezing date (if frozen)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Storage Location</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Storage facility</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tank identifier</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Rack/canister position</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Goblet/cane number</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality Tracking -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Quality Tracking</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Not all semen batches are equal. Track quality metrics so you can make informed decisions about which batches to use for which purposes.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">Quality Metrics</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-bold mb-2 text-lg">Concentration</h4>
+            <p class="text-gray-700 text-sm">Sperm count per milliliter. Higher concentration means more sperm per dose, which can improve conception rates.</p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2 text-lg">Motility</h4>
+            <p class="text-gray-700 text-sm">Percentage of sperm actively swimming. Critical for fertilization success. Track pre-freeze and post-thaw motility for frozen semen.</p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2 text-lg">Morphology</h4>
+            <p class="text-gray-700 text-sm">Percentage of normally-shaped sperm. Abnormal morphology can reduce fertility even with good motility.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border-l-4 border-green-500 p-5 rounded">
+          <h4 class="text-lg font-bold mb-2 text-green-800">Excellent Quality</h4>
+          <p class="text-gray-700 text-sm">High concentration, >60% motility post-thaw, normal morphology. Use for your highest-priority breedings or premium AI shipments.</p>
+        </div>
+
+        <div class="bg-white border-l-4 border-blue-500 p-5 rounded">
+          <h4 class="text-lg font-bold mb-2 text-blue-800">Good Quality</h4>
+          <p class="text-gray-700 text-sm">Adequate concentration, 40-60% motility post-thaw, mostly normal morphology. Standard breeding quality.</p>
+        </div>
+
+        <div class="bg-white border-l-4 border-yellow-500 p-5 rounded">
+          <h4 class="text-lg font-bold mb-2 text-yellow-800">Fair Quality</h4>
+          <p class="text-gray-700 text-sm">Lower concentration or motility (25-40%). May require double-dose insemination. Use before it degrades further.</p>
+        </div>
+
+        <div class="bg-white border-l-4 border-red-500 p-5 rounded">
+          <h4 class="text-lg font-bold mb-2 text-red-800">Poor Quality</h4>
+          <p class="text-gray-700 text-sm">Below viable thresholds. Consider discarding or use only for low-priority situations where pregnancy isn't critical.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inventory Dashboard -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Inventory Dashboard</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        See the status of your entire semen inventory at a glance. Know what you have, what's running low, and what needs attention.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Inventory Summary</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Total available doses across all stallions</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Doses by storage type (Fresh, Cooled, Frozen)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Per-stallion inventory breakdown</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Active batch count</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Usage Statistics</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Year-to-date doses used</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Doses shipped vs. used on-site</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Usage by stallion</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Monthly usage trends</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-lg p-6">
+        <h3 class="text-2xl font-bold mb-4 text-amber-800">Alerts & Warnings</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold mb-2">Expiring Soon</h4>
+            <ul class="space-y-1 text-sm text-gray-700">
+              <li>• Batches expiring within 30 days</li>
+              <li>• Visual urgency indicators (red/yellow)</li>
+              <li>• Quick action to use or discard</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">Low Inventory</h4>
+            <ul class="space-y-1 text-sm text-gray-700">
+              <li>• Stallions below threshold levels</li>
+              <li>• Collection scheduling reminders</li>
+              <li>• Demand vs. supply tracking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dispensing & Chain of Custody -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Dispensing & Chain of Custody</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Every dose has a destination. Track where your semen goes with complete chain of custody from tank to use.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">Dispense Types</h3>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="bg-green-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">🏠</div>
+            <div>
+              <p class="font-bold">Breeding (On-Site)</p>
+              <p class="text-gray-600 text-sm">Semen used at your facility for a breeding. Links directly to the breeding attempt record.</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-blue-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">📦</div>
+            <div>
+              <p class="font-bold">Ship to Mare Owner</p>
+              <p class="text-gray-600 text-sm">Record recipient name, address, carrier, and tracking number. Complete shipping documentation.</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-purple-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">🔄</div>
+            <div>
+              <p class="font-bold">Transfer to Facility</p>
+              <p class="text-gray-600 text-sm">Move doses between your storage locations. Track where inventory is at all times.</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-yellow-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">🔬</div>
+            <div>
+              <p class="font-bold">Sample Testing</p>
+              <p class="text-gray-600 text-sm">Quality analysis on stored batches. Post-thaw checks, longevity testing, etc.</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-red-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">🗑️</div>
+            <div>
+              <p class="font-bold">Discard</p>
+              <p class="text-gray-600 text-sm">Expired, damaged, or substandard doses. Document reason for disposal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Shipping Details</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Recipient name and contact</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Shipping address</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Carrier (FedEx, UPS, Counter-to-Counter)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tracking number</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Ship date and expected arrival</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Audit Trail</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Complete history per batch</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Who dispensed, when, and why</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Linked breeding plan (if applicable)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Timestamps for every transaction</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Notes and documentation</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration with Breeding Plans -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Breeding Plan Integration</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Semen inventory doesn't exist in isolation. When you log a breeding attempt using AI, connect it directly to your semen inventory.
+      </p>
+
+      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded mb-8">
+        <h3 class="text-xl font-bold mb-4">How It Works</h3>
+        <ol class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">1</span>
+            <span>Create a breeding plan for your mare/stallion pairing</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">2</span>
+            <span>Log a breeding attempt with AI (fresh, cooled, or frozen)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">3</span>
+            <span>Select the specific semen batch used from your inventory</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">4</span>
+            <span>System automatically decrements the dose count</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">5</span>
+            <span>Breeding attempt is linked to the batch for traceability</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Inventory to Breeding</h3>
+          <p class="text-gray-700 text-sm">Know which batch was used for each breeding. Track conception rates by batch quality. Identify high-performing batches.</p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Breeding to Inventory</h3>
+          <p class="text-gray-700 text-sm">From any breeding record, see which semen was used. Important for foal registration and pedigree verification.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Know Exactly What You Have</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Dose-level tracking. Quality metrics. Storage locations. Expiration alerts. Chain of custody. Breeding plan integration. Complete visibility into one of your most valuable breeding assets.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/horses" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See all horse features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/stallion-services" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Stallion Services Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/mare-reproductive-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Mare Reproductive Tracking
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Plans
+          </a>
+        </div>
+        <div>
+          <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Horse Breeding Software Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

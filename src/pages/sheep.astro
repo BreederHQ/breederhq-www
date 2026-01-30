@@ -29,6 +29,15 @@ const faqs = [
     answer: 'Yes. 14-day free trial with full access. No credit card required to start.'
   }
 ];
+
+const featureCards = [
+  { id: 'sheep-records', icon: '🐑', title: 'Sheep Records', desc: 'Complete flock profiles, pedigrees, registration' },
+  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, breeding groups, lambing' },
+  { id: 'health', icon: '🏥', title: 'Health & Testing', desc: 'OPP, scrapie compliance, vaccinations' },
+  { id: 'performance', icon: '📊', title: 'Performance', desc: 'NSIP data, weights, reproductive efficiency' },
+  { id: 'fiber', icon: '🧶', title: 'Fiber Records', desc: 'Fleece weights, shearing, wool quality' },
+  { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Waitlists, contracts, buyer management' }
+];
 ---
 
 <BaseLayout
@@ -52,8 +61,8 @@ const faqs = [
     </ol>
   </nav>
 
-  <!-- Section 1: What This Page Is About -->
-  <section class="py-20 px-4">
+  <!-- Hero + TL;DR -->
+  <section class="py-12 px-4">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-5xl font-bold mb-6">Sheep Breeding Software for Flocks of All Sizes</h1>
 
@@ -63,277 +72,293 @@ const faqs = [
           Sheep breeding software for fiber and meat operations managing seasonal breeding, lambing intensity, OPP testing, NSIP data, and multiple lamb tracking. Built for flocks with 20+ sheep that need performance tracking and organized breeding records.
         </p>
       </aside>
-      <p class="text-xl text-gray-700 leading-relaxed mb-4">
-        Sheep breeding has its own rhythms. Seasonal cycling. Lambing management. Fleece records for fiber breeds. Performance data for meat breeds. NSIP participation. Generic livestock software rarely handles any of this well.
-      </p>
     </div>
   </section>
 
-  <!-- Section 2: Why Breeders Search for This -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">When your flock needs better management</h2>
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Sheep operations face specific challenges:
-      </p>
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Seasonal breeding condensed into fall months</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Lambing season intensity</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Multiple lambs per ewe</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>OPP and disease testing requirements</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>NSIP data submission for performance flocks</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Fiber records for wool breeds</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Buyer demand for documented genetics</span>
-        </li>
+  <!-- Feature Cards Grid -->
+  <section class="py-8 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Flock Needs</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {featureCards.map(card => (
+          <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+            <div class="text-3xl mb-2">{card.icon}</div>
+            <h3 class="font-bold text-lg mb-1">{card.title}</h3>
+            <p class="text-sm text-gray-600">{card.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4">
+      <ul class="flex space-x-6 overflow-x-auto py-3 text-sm">
+        {featureCards.map(card => (
+          <li>
+            <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
+              {card.title}
+            </a>
+          </li>
+        ))}
       </ul>
-      <p class="text-lg text-gray-700 leading-relaxed mt-6">
-        If you're losing track of which ewe is bred to which ram, you need a better system.
-      </p>
+    </div>
+  </nav>
+
+  <!-- Accordion Sections -->
+  <section class="py-12 px-4">
+    <div class="max-w-4xl mx-auto space-y-4">
+
+      <!-- Sheep Records -->
+      <details id="sheep-records" class="accordion-section border border-gray-200 rounded-lg" open>
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🐑</span>
+            <div>
+              <h3 class="text-2xl font-bold">Sheep Records</h3>
+              <p class="text-gray-600">Complete flock management</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">For Every Sheep</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Registration numbers and scrapie tags</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Ear tags and electronic IDs</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Photos and descriptions</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Birth and purchase information</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Multi-generation pedigrees</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Flock Organization</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Active ewes and rams</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Growing lambs by age group</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Breeding groups</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Retired and sold animals</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Custom tags and categories</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Breeding -->
+      <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📅</span>
+            <div>
+              <h3 class="text-2xl font-bold">Breeding Management</h3>
+              <p class="text-gray-600">Seasonal cycles, breeding groups, lambing records</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Breeding Groups</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Multiple ewes per ram</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Ram introduction and removal dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Expected lambing date calculator (147 days)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Breeding season planning</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Ram rotation schedules</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Lambing Records</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Multiple lambs per birth (twins, triplets+)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Birth weights and presentations</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Dam and sire linked automatically</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Lambing difficulty notes</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Fostering and grafting records</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Health & Testing -->
+      <details id="health" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🏥</span>
+            <div>
+              <h3 class="text-2xl font-bold">Health & Testing</h3>
+              <p class="text-gray-600">OPP, scrapie compliance, vaccinations</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Disease Testing</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>OPP (Ovine Progressive Pneumonia)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Scrapie program compliance</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Johne's testing</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Test dates, results, lab info</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Annual testing reminders</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Routine Care</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Vaccination schedules (CDT, etc.)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Deworming protocols</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Hoof trimming records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Veterinary visits</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Medication history</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Performance -->
+      <details id="performance" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📊</span>
+            <div>
+              <h3 class="text-2xl font-bold">Performance Tracking</h3>
+              <p class="text-gray-600">NSIP data, weights, reproductive efficiency</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Growth Data</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Birth weights</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Weaning weights (60-90 day)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Post-weaning weights</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Average daily gain calculations</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Growth charts</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">NSIP Integration</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Performance data organization</li>
+                <li class="flex items-start"><span class="mr-2">•</span>EBV tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Reproductive efficiency metrics</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Lambing percentage tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Data export for NSIP submission</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Fiber Records -->
+      <details id="fiber" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🧶</span>
+            <div>
+              <h3 class="text-2xl font-bold">Fiber Records</h3>
+              <p class="text-gray-600">Fleece weights, shearing, wool quality</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Shearing Records</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Shearing dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Fleece weights</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Shearer notes</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Cost tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Year-over-year comparisons</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Wool Quality</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Staple length</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Micron count</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Crimp and handle</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Color and uniformity</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Lab test results</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Clients & Sales -->
+      <details id="clients" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">👥</span>
+            <div>
+              <h3 class="text-2xl font-bold">Clients & Sales</h3>
+              <p class="text-gray-600">Waitlists, contracts, buyer management</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Buyer Management</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Contact database</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Waitlist positions</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Breed/type preferences</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Communication history</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Deposit tracking</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Sales Records</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Sales linked to animals</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Contract generation</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Registration transfer tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Health certificate records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Revenue reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
     </div>
   </section>
 
-  <!-- Section 3: How Breeders Usually Handle It -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">How sheep operations typically manage records</h2>
-
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Paper records</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Lambing notebooks. Breeding group lists. Tag number logs. Works until you need to trace a lamb's history or analyze flock performance.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Spreadsheets</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Ewe list. Ram list. Lambing records. Wool weights. Performance data. None of it talking to each other.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">NSIP submission tools</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Good for data submission. Not designed for daily flock management.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Memory and ear tags</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            "The blue-tagged ewes were with the Dorset ram." Memory-based management works in small flocks. It doesn't scale.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4: Where That Breaks Down -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Why sheep breeding needs the right tools</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Sheep-specific biology:</h3>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Seasonal breeding</h4>
-            <p class="text-lg text-gray-700 leading-relaxed mb-3">
-              Most sheep are fall breeders. The ram goes in, and you have a defined window. Tracking who's bred when matters.
-            </p>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Lambing complexity</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>147-day gestation (~5 months)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Singles, twins, triplets common</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Lambing season can be intense</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Each lamb needs tracking</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Performance considerations</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Growth rates and weaning weights</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>NSIP estimated breeding values</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Fleece weight and quality (fiber breeds)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Reproductive efficiency</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-xl font-bold mb-3">Health requirements</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>OPP (Ovine Progressive Pneumonia) testing</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Scrapie program compliance</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Vaccination records</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: What a Correct System Looks Like -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The system sheep operations need</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Flock Records</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Every sheep with complete records</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Pedigrees and registration</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Performance data history</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Health and testing records</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Breeding Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Breeding group tracking</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Ram rotation schedules</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Expected lambing dates</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Lambing records with birth details</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Performance Tracking</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Lamb weights and growth</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>NSIP data organization</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Fleece records (fiber flocks)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Reproductive efficiency metrics</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Sales</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Buyer waitlist</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Sales documentation</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Registration transfers</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: How BreederHQ Supports This -->
-  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ understands sheep</h2>
-
-      <p class="text-xl leading-relaxed mb-8">
-        Seasonal breeding logic. Lambing management. Multiple lamb tracking. Performance data organization. Built for how sheep operations actually work—whether you're raising fiber sheep, meat sheep, or both.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4">
+  <!-- CTA Section -->
+  <section class="py-16 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Ready to organize your flock?</h2>
+      <p class="text-xl mb-8 opacity-90">14-day free trial. No credit card required.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Early Access
         </a>
@@ -344,67 +369,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 7: Who This Is For -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ is built for sheep operations that:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have 20+ sheep (or plan to)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Sell breeding stock</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Track performance data</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Maintain health testing records</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Need organized lambing records</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Want to analyze flock genetics</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Section 8: Who This Is Not For -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ probably isn't for you if:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700 mb-8">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You have a few pet sheep</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You're not breeding regularly</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Paper records handle your needs</span>
-        </li>
-      </ul>
-
-      <p class="text-lg text-gray-700 leading-relaxed">
-        No judgment. Not everyone needs software. If your current system works, keep using it.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 9: FAQ -->
+  <!-- FAQ Section -->
   <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Questions sheep breeders ask</h2>
@@ -417,7 +382,7 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Multiple ewes with one ram, tracked as a group with individual records.</p>
+          <p>Yes. Multiple ewes with one ram, tracked as a group with individual records for each animal.</p>
         </div>
       </details>
 
@@ -429,7 +394,7 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Each lamb tracked individually with dam and sire linked.</p>
+          <p>Yes. Each lamb tracked individually with dam and sire linked automatically.</p>
         </div>
       </details>
 
@@ -441,7 +406,7 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Performance data can be tracked for NSIP submission.</p>
+          <p>Performance data including birth weights, weaning weights, and growth metrics can be organized for NSIP submission.</p>
         </div>
       </details>
 
@@ -453,7 +418,7 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Fiber breeds can track shearing dates, weights, and quality.</p>
+          <p>Yes. Fiber breeds can track shearing dates, fleece weights, staple length, micron count, and quality metrics.</p>
         </div>
       </details>
 
@@ -471,7 +436,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 10: Related Resources -->
+  <!-- Related Resources -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Learn more</h2>
@@ -516,6 +481,39 @@ const faqs = [
       border-width: 0;
     }
 
+    .feature-card {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sticky-nav .nav-link.active {
+      color: hsl(24, 95%, 53%);
+      border-bottom: 2px solid hsl(24, 95%, 53%);
+    }
+
+    .accordion-section[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-header::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-content {
+      animation: slideDown 0.2s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .faq-item {
       border-bottom: 1px solid #e5e7eb;
       padding: 1.5rem 0;
@@ -555,4 +553,39 @@ const faqs = [
       font-size: 1.125rem;
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Smooth scroll and open accordion
+      const navLinks = document.querySelectorAll('.nav-link, .feature-card');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href')?.slice(1);
+          const target = document.getElementById(targetId || '');
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Scroll spy for sticky nav
+      const sections = document.querySelectorAll('.accordion-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('.nav-link').forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      }, { rootMargin: '-100px 0px -66%' });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
 </BaseLayout>

@@ -29,6 +29,15 @@ const faqs = [
     answer: 'Yes. 14-day free trial with full access. No credit card required to start.'
   }
 ];
+
+const featureCards = [
+  { id: 'goat-records', icon: '🐐', title: 'Goat Records', desc: 'Complete profiles, pedigrees, registration info' },
+  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, buck exposure, kidding dates' },
+  { id: 'health', icon: '🏥', title: 'Health & Testing', desc: 'CAE, CL, Johne\'s testing, vaccinations' },
+  { id: 'dairy', icon: '🥛', title: 'Dairy Production', desc: 'Milk records, DHIA data, linear appraisals' },
+  { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Waitlists, buyer management, contracts' },
+  { id: 'buyer-portal', icon: '🌐', title: 'Buyer Portal', desc: 'Public profiles for available kids' }
+];
 ---
 
 <BaseLayout
@@ -52,295 +61,304 @@ const faqs = [
     </ol>
   </nav>
 
-  <!-- Section 1: What This Page Is About -->
-  <section class="py-20 px-4">
+  <!-- Hero + TL;DR -->
+  <section class="py-12 px-4">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-5xl font-bold mb-6">Goat Breeding Software for Dairy and Meat Operations</h1>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Goat breeding software for dairy and meat operations with seasonal breeding, disease testing tracking (CAE, CL, Johne's), ADGA registration support, and multiple kid management. Built for flocks that need organized kidding records and performance tracking.
+          Goat breeding software for dairy and meat operations with seasonal breeding, disease testing tracking (CAE, CL, Johne's), ADGA registration support, and multiple kid management. Built for herds that need organized kidding records and performance tracking.
         </p>
       </aside>
-      <p class="text-xl text-gray-700 leading-relaxed mb-4">
-        Goat breeding—whether dairy, meat, or fiber—has specific requirements that generic livestock software handles poorly. Seasonal breeding windows. ADGA or registry requirements. Disease testing protocols. Multiple kids per kidding.
-      </p>
-      <p class="text-xl text-gray-700 leading-relaxed">
-        This is software built for goat breeders specifically.
-      </p>
     </div>
   </section>
 
-  <!-- Section 2: Why Breeders Search for This -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">When your goat operation needs better systems</h2>
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Goat operations hit management complexity quickly:
-      </p>
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Seasonal breeding with a limited window</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Multiple does cycling at once</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Disease testing requirements (CAE, CL, Johne's)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>ADGA or other registry paperwork</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Tracking multiple kids per doe</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Milk production records for dairy operations</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Buyer waitlists for quality breeding stock</span>
-        </li>
+  <!-- Feature Cards Grid -->
+  <section class="py-8 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Herd Needs</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {featureCards.map(card => (
+          <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+            <div class="text-3xl mb-2">{card.icon}</div>
+            <h3 class="font-bold text-lg mb-1">{card.title}</h3>
+            <p class="text-sm text-gray-600">{card.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4">
+      <ul class="flex space-x-6 overflow-x-auto py-3 text-sm">
+        {featureCards.map(card => (
+          <li>
+            <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
+              {card.title}
+            </a>
+          </li>
+        ))}
       </ul>
-      <p class="text-lg text-gray-700 leading-relaxed mt-6">
-        If you're spending more time on paperwork than with your goats, something needs to change.
-      </p>
+    </div>
+  </nav>
+
+  <!-- Accordion Sections -->
+  <section class="py-12 px-4">
+    <div class="max-w-4xl mx-auto space-y-4">
+
+      <!-- Goat Records -->
+      <details id="goat-records" class="accordion-section border border-gray-200 rounded-lg" open>
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🐐</span>
+            <div>
+              <h3 class="text-2xl font-bold">Goat Records</h3>
+              <p class="text-gray-600">Complete herd management</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">For Every Goat</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Registration numbers (ADGA, AGS, etc.)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Tattoos and microchip IDs</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Photos and descriptions</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Birth and purchase information</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Multi-generation pedigrees</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Herd Organization</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Active does and bucks</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Growing kids by age group</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Retired and sold animals</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Breeding groups</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Custom tags and categories</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Breeding -->
+      <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📅</span>
+            <div>
+              <h3 class="text-2xl font-bold">Breeding Management</h3>
+              <p class="text-gray-600">Seasonal cycles, exposure tracking, kidding records</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Seasonal Breeding</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>18-24 day cycle tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Buck exposure dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Standing heat observations</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Breeding confirmations</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Expected kidding calculator</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Kidding Records</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Multiple kids per birth (twins, triplets+)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Birth weights and presentations</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Dam and sire linked automatically</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Kidding difficulty notes</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Pedigrees build from breeding records</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Health & Testing -->
+      <details id="health" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🏥</span>
+            <div>
+              <h3 class="text-2xl font-bold">Health & Disease Testing</h3>
+              <p class="text-gray-600">CAE, CL, Johne's, vaccinations, hoof care</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Disease Testing</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>CAE (Caprine Arthritis Encephalitis)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>CL (Caseous Lymphadenitis)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Johne's disease</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Test dates, results, lab info</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Annual testing reminders</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Routine Care</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Vaccination schedules</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Deworming protocols</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Hoof trimming records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Veterinary visits and notes</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Medication history</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Dairy Production -->
+      <details id="dairy" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🥛</span>
+            <div>
+              <h3 class="text-2xl font-bold">Dairy Production</h3>
+              <p class="text-gray-600">Milk records, DHIA data, linear appraisals</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Milk Production</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Daily/weekly milk weights</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Lactation curves</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Peak production tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Butterfat and protein %</li>
+                <li class="flex items-start"><span class="mr-2">•</span>305-day lactation records</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">ADGA & Show</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Linear appraisal scores</li>
+                <li class="flex items-start"><span class="mr-2">•</span>DHIA test day data</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Production awards tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Show results and placings</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Champion titles</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Clients & Sales -->
+      <details id="clients" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">👥</span>
+            <div>
+              <h3 class="text-2xl font-bold">Clients & Sales</h3>
+              <p class="text-gray-600">Waitlists, contracts, buyer management</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Buyer Management</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Contact database</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Waitlist positions and preferences</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Breed/color/sex preferences</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Communication history</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Deposit tracking</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Sales Records</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Sales linked to animals</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Contract generation</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Bill of sale records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Health certificate tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Revenue reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Buyer Portal -->
+      <details id="buyer-portal" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🌐</span>
+            <div>
+              <h3 class="text-2xl font-bold">Buyer Portal</h3>
+              <p class="text-gray-600">Public profiles for available kids</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Public Listings</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Available kids page</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Photos and pedigrees</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Testing status displayed</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Price and deposit info</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Reserved/sold status</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Buyer Experience</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Self-service browsing</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Inquiry forms</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Waitlist application</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Your farm branding</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Mobile-friendly design</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
     </div>
   </section>
 
-  <!-- Section 3: How Breeders Usually Handle It -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">How goat breeders typically manage records</h2>
-
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Notebooks and barn cards</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Does have cards on their stalls. Breeding dates in a notebook. Kidding records on paper. Works until the notebook gets wet or you need to find something from two years ago.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Spreadsheets</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Herd list in one sheet. Breeding records in another. Kid records in a third. No connection between them. Formulas that seemed like a good idea but now confuse everyone.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">ADGA or registry tools</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Good for registration. Not designed for daily herd management.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">Memory</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            "She was bred in late October." "I think those kids are out of the spotted buck." Memory works until it fails at the worst possible moment.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4: Where That Breaks Down -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Why goat breeding needs specialized tools</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Goat-specific biology:</h3>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Seasonal breeding</h4>
-            <p class="text-lg text-gray-700 leading-relaxed mb-3">
-              Most goats are seasonal breeders (fall). The breeding window is limited. Miss it and you wait a year. Some breeds can cycle year-round, adding complexity.
-            </p>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Short cycles</h4>
-            <p class="text-lg text-gray-700 leading-relaxed mb-3">
-              18-24 day cycles during breeding season. Multiple opportunities but easy to lose track.
-            </p>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Multiple kids</h4>
-            <p class="text-lg text-gray-700 leading-relaxed mb-3">
-              Twins, triplets, and more are common. Each kid needs tracking from birth through sale.
-            </p>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Disease testing</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>CAE (Caprine Arthritis Encephalitis)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>CL (Caseous Lymphadenitis)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Johne's disease</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Annual testing often required for sales</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-xl font-bold mb-3">What generic tools miss:</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Seasonal breeding window tracking</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Multiple offspring per birth</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Disease testing schedules and results</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Milk production integration (dairy)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>ADGA linear appraisal records</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: What a Correct System Looks Like -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The system goat operations need</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Herd Records</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Every animal with complete records</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Pedigrees and registration information</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Disease testing history</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Linear appraisal scores (dairy)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Production records</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Breeding Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Seasonal cycle tracking</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Buck exposure dates and breeding confirmation</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Expected kidding dates</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Kid records linked to dams and sires</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Health Tracking</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>CAE/CL/Johne's test dates and results</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Vaccination records</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Hoof trimming schedules</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Veterinary notes</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Sales and Clients</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Waitlist management</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Buyer communication</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Sales records with animal links</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: How BreederHQ Supports This -->
-  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ understands goats</h2>
-
-      <p class="text-xl leading-relaxed mb-8">
-        Seasonal breeding logic. Multiple kid tracking. Disease testing history. Registry record keeping. A system built for how goat operations actually run—not adapted from dogs or horses.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4">
+  <!-- CTA Section -->
+  <section class="py-16 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Ready to organize your goat operation?</h2>
+      <p class="text-xl mb-8 opacity-90">14-day free trial. No credit card required.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Early Access
         </a>
@@ -351,67 +369,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 7: Who This Is For -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ is built for goat operations that:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have 10+ goats (or plan to)</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Sell breeding stock</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Maintain disease-free status</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Register with ADGA or other registries</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Have buyers waiting for quality kids</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Need organized records</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Section 8: Who This Is Not For -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ probably isn't for you if:</h2>
-
-      <ul class="space-y-3 text-lg text-gray-700 mb-8">
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You have a few pet goats</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>You're not breeding regularly</span>
-        </li>
-        <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>Paper records handle your needs</span>
-        </li>
-      </ul>
-
-      <p class="text-lg text-gray-700 leading-relaxed">
-        No judgment. Not everyone needs software. If your current system works, keep using it.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section 9: FAQ -->
+  <!-- FAQ Section -->
   <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Questions goat breeders ask</h2>
@@ -448,7 +406,7 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Production data can be tracked for dairy operations.</p>
+          <p>Production data can be tracked for dairy operations including daily weights, butterfat %, and lactation records.</p>
         </div>
       </details>
 
@@ -478,7 +436,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 10: Related Resources -->
+  <!-- Related Resources -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Learn more</h2>
@@ -523,6 +481,39 @@ const faqs = [
       border-width: 0;
     }
 
+    .feature-card {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sticky-nav .nav-link.active {
+      color: hsl(24, 95%, 53%);
+      border-bottom: 2px solid hsl(24, 95%, 53%);
+    }
+
+    .accordion-section[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-header::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-content {
+      animation: slideDown 0.2s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .faq-item {
       border-bottom: 1px solid #e5e7eb;
       padding: 1.5rem 0;
@@ -562,4 +553,39 @@ const faqs = [
       font-size: 1.125rem;
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Smooth scroll and open accordion
+      const navLinks = document.querySelectorAll('.nav-link, .feature-card');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href')?.slice(1);
+          const target = document.getElementById(targetId || '');
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Scroll spy for sticky nav
+      const sections = document.querySelectorAll('.accordion-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('.nav-link').forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      }, { rootMargin: '-100px 0px -66%' });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
 </BaseLayout>
