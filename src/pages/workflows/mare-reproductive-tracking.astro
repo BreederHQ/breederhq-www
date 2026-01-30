@@ -1,0 +1,735 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Mare Reproductive Tracking', url: '/workflows/mare-reproductive-tracking' }
+];
+
+const faqs = [
+  {
+    question: 'How does heat cycle prediction work?',
+    answer: 'BreederHQ analyzes each mare\'s historical cycle data to predict her next heat. Instead of assuming a generic 21-day cycle, the system learns from her actual patterns. The more cycles you record, the more accurate predictions become.'
+  },
+  {
+    question: 'Can I track progesterone levels?',
+    answer: 'Yes. You can log progesterone test results with dates and values (ng/mL). The system displays the progression to help you time breeding optimally. Many breeders use the 2.5 ng/mL threshold for AI timing.'
+  },
+  {
+    question: 'What follicle exam details can I record?',
+    answer: 'For each exam: follicle size (mm), ovary location (left/right), number of follicles, uterine edema score (0-4), cervix tone, and ovulation status. You can also attach notes and photos (ultrasound images).'
+  },
+  {
+    question: 'How do I track AI shipments?',
+    answer: 'Each breeding attempt can include AI shipment details: stallion station, carrier (FedEx, UPS, counter-to-counter), tracking number, expected and actual arrival times, container condition, and motility assessment after thaw or upon arrival.'
+  },
+  {
+    question: 'Does it work for embryo transfer programs?',
+    answer: 'Yes. You can track donor mare cycles, recipient mare synchronization, flush dates, embryo quality, transfer dates, and recipient outcomes. Multiple recipients can be linked to a single donor cycle.'
+  },
+  {
+    question: 'Can I see a mare\'s complete reproductive history?',
+    answer: 'Yes. Each mare has a reproductive history tab showing all cycles, breeding attempts, pregnancies, and foaling outcomes. Statistics include conception rate, average cycles per pregnancy, and complication history.'
+  }
+];
+---
+
+<BaseLayout
+  title="Mare Reproductive Tracking | BreederHQ"
+  description="Track mare heat cycles, follicle exams, ovulation, and AI timing. Pattern-based cycle predictions, complete reproductive history, and breeding attempt documentation for equine breeders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Mare Reproductive Tracking</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Mare Reproductive Tracking</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Mares are seasonal breeders with individual patterns. BreederHQ tracks heat cycles with per-mare predictions (not generic 21-day assumptions), logs follicle exams with full detail, records progesterone levels, documents AI shipment logistics, confirms ovulation timing, and maintains complete reproductive history. Know exactly where each mare is in her cycle and never miss a breeding window.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-4">
+        Equine reproduction is complex. Seasonal cycling means a limited window. Each mare has her own patterns. AI timing is critical. Miss the ovulation window and you've wasted a cycle—potentially an entire season.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        BreederHQ tracks everything so you can time breedings precisely and understand each mare's reproductive patterns.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why mare tracking matters</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Getting a mare pregnant isn't as simple as it sounds:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Seasonal polyestrous</strong> — Mares only cycle during increasing daylight (typically spring through fall). Miss the season and wait another year.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Individual variation</strong> — Some mares cycle like clockwork, others are erratic. "Every 21 days" is an average, not a rule.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Ovulation timing</strong> — Sperm viability is limited. For shipped cooled semen, timing relative to ovulation is critical.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Follicle development</strong> — Monitoring follicle size helps predict ovulation. A 35mm follicle behaves differently than a 45mm.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Semen logistics</strong> — Coordinating shipments, tracking delivery, assessing motility—all need documentation.</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-6 font-semibold">
+        Wall calendars and memory fail when you're managing multiple mares through multiple cycles.
+      </p>
+    </div>
+  </section>
+
+  <!-- Heat Cycle Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Heat Cycle Tracking</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        BreederHQ learns each mare's patterns and predicts her cycles based on her own history—not textbook averages.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Cycle Recording</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Heat start and end dates</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Estrus signs observed</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Teasing response notes</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Cycle intensity (strong/moderate/weak)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Pattern Recognition</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Average cycle length per mare</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Typical estrus duration</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Predicted next heat date</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Seasonality patterns</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Calendar View</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>All mares' cycles at a glance</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Predicted windows highlighted</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeding dates marked</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Vet visit scheduling</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Alerts</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Predicted heat approaching</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Time to start teasing</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Vet check reminders</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Order semen reminders</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Follicle Exams -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Follicle Exam Recording</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Ultrasound monitoring is the gold standard for timing breeding. BreederHQ captures all the details your vet observes.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">Exam Fields</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold mb-2">Follicle Details</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Size (mm)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Ovary location (left/right)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Number of follicles</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Follicle shape/texture</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">Uterine Status</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Edema score (0-4)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Cervix tone</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Fluid present (Y/N)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Abnormalities noted</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Ovulation Tracking</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Confirmed ovulation date</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Pre/post ovulation status</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Double ovulation detection</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeding timing calculation</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Image Attachment</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Ultrasound images</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Before/after comparisons</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Vet notes attachment</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Historical comparison</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progesterone Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Progesterone & Hormone Tracking</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Progesterone levels help pinpoint ovulation timing. Track results over time to understand each mare's patterns.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">What You Can Track</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-bold mb-2">Progesterone</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Test date</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Value (ng/mL)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Lab/method used</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Trend visualization</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">Ovulation Inducers</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>hCG administration</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Deslorelin implant</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Date/time given</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Expected ovulation</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">Other Hormones</h4>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Prostaglandin doses</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Regumate tracking</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Custom hormone entries</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breeding Attempts -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Breeding Attempt Documentation</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Every breeding attempt is recorded with complete details—especially important for AI where timing and semen handling matter.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Breeding Method</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Natural cover</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>AI - Fresh</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>AI - Cooled shipped</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>AI - Frozen</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Embryo transfer</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Timing Details</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeding date and time</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Relation to ovulation</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Multiple covers/inseminations</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Post-breeding treatment</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded mb-8">
+        <h3 class="text-xl font-bold mb-4">AI Shipment Tracking</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Stallion station name</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Carrier (FedEx, UPS, counter-to-counter)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tracking number</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Ship date and time</span>
+            </li>
+          </ul>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Expected arrival</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Actual arrival time</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Container condition</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Motility assessment</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reproductive History -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Complete Reproductive History</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Every mare's reproductive journey is documented. See patterns, track success rates, and make informed breeding decisions.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Timeline View</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>All cycles chronologically</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeding attempts per cycle</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Pregnancy outcomes</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Foaling results</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Statistics</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Conception rate (pregnancies/cycles)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Average cycles per pregnancy</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Early loss rate</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Live foal rate</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Problem Detection</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Repeat breeders identified</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Early loss patterns</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Cycle irregularity flags</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Uterine issue history</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Producing Record</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Total foals produced</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Offspring by sire</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Offspring achievements</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Producing dam status</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Know Every Mare's Cycle</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Pattern-based cycle predictions. Detailed follicle exam logging. AI shipment tracking. Complete reproductive history. Everything you need to time breedings precisely and maximize conception rates.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/horses" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See all horse features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/foaling-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Foaling Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/stallion-services" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Stallion Services Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-intelligence" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Intelligence Tools
+          </a>
+        </div>
+        <div>
+          <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Horse Breeding Software Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

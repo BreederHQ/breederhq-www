@@ -9,20 +9,44 @@ const breadcrumbs = [
 
 const faqs = [
   {
+    question: 'What coat colors can BreederHQ predict?',
+    answer: 'BreederHQ predicts outcomes for 13+ horse color genes including Bay, Black, Chestnut, Palomino, Buckskin, Dun, Gray, Roan, Tobiano, Overo, Sabino, Champagne, Cream, and Pearl. You can run simulations to see what 20 random foals might look like from any pairing.'
+  },
+  {
+    question: 'What genetic health conditions does it screen for?',
+    answer: 'BreederHQ automatically flags dangerous genetic combinations for 16+ inherited conditions including Lethal White Overo Syndrome (OLWS/LWO), HYPP, HERDA, GBED, PSSM1, MH, SCID, CA, LFS, JEB, WFFS, and breed-specific conditions. The system warns you before you make a risky pairing.'
+  },
+  {
     question: 'Does it handle AI and embryo transfer?',
-    answer: 'Yes. Different breeding methods can be tracked with appropriate details.'
+    answer: 'Yes. Track natural cover, AI (fresh, cooled, or frozen), and embryo transfer with full details. Log semen shipment information including carrier, tracking number, arrival condition, and motility assessment.'
+  },
+  {
+    question: 'How does mare reproductive tracking work?',
+    answer: 'Track heat cycles with per-mare pattern predictions. Log follicle exams including size, ovary location, uterine edema, and ovulation detection. Anchor breeding plans to confirmed ovulation dates for accurate foaling predictions. View complete reproductive history with success rates.'
+  },
+  {
+    question: 'What foaling milestones are tracked?',
+    answer: 'Auto-generated pregnancy milestones include: 15-day pregnancy check, 45-day heartbeat ultrasound, 90-day development check, 300-day monitoring begins, plus pre-foaling physical signs (udder development, wax, vulvar relaxation). Visual foaling countdown for each pregnant mare.'
+  },
+  {
+    question: 'Can I track show results and racing records?',
+    answer: 'Yes. Track conformation shows, performance tests, and racing with full details including placements, points, major wins, prize money, track conditions, speed figures, and judge information. Build producing sire/dam records from offspring achievements.'
   },
   {
     question: 'Can it manage stallion syndicate arrangements?',
-    answer: 'Ownership and partnership arrangements can be documented and tracked.'
+    answer: 'Yes. Track co-ownership with percentage splits, multiple owners per animal, and primary contact designation. Document ownership transfers with effective dates and maintain complete ownership history.'
   },
   {
-    question: 'What about breed registry integration?',
-    answer: 'BreederHQ maintains the records you need for registration. Official submission still goes through registry systems.'
+    question: 'What registries are supported?',
+    answer: 'Track registrations from AQHA, Jockey Club, APHA, AHA, USEF, and other registries. Store registration numbers with verification status, attach registration papers, and import pedigree data where available.'
   },
   {
-    question: 'Can I track across multiple seasons?',
-    answer: 'Yes. Mare breeding history carries forward year over year.'
+    question: 'Does it help manage horse buyers?',
+    answer: 'Yes. Built-in CRM with automatic lead scoring (0-100), visual sales pipeline (Inquiry → Viewing → Negotiation → Vet Check → Contract → Closed), email templates, activity logging, and conversion analytics. Professional tools for high-value horse sales.'
+  },
+  {
+    question: 'Can I track stallion revenue?',
+    answer: 'Yes. Revenue dashboard shows total income per stallion, breeding counts, and average fees. Manage seasonal breeding slots, track payments and outstanding balances, and monitor success rates per stallion.'
   },
   {
     question: 'Can I try it before paying?',
@@ -33,7 +57,7 @@ const faqs = [
 
 <BaseLayout
   title="Horse Breeding Software | BreederHQ"
-  description="Horse breeding software for equine operations. Seasonal cycle tracking, 11-month planning, mare and stallion management. Built for professional breeders."
+  description="Horse breeding software with genetics lab, foaling management, mare reproductive tracking, and stallion services. Predict coat colors across 13+ genes, screen for OLWS/HYPP/HERDA, and manage high-value horse sales with built-in CRM."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -52,286 +76,452 @@ const faqs = [
     </ol>
   </nav>
 
-  <!-- Section 1: What This Page Is About -->
+  <!-- Section 1: Hero -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">Horse Breeding Software for Serious Breeders</h1>
+      <h1 class="text-5xl font-bold mb-6">Horse Breeding Software for Serious Equine Programs</h1>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Horse breeding software for equine operations managing seasonal cycling, 11-month gestations, and AI/embryo transfer coordination. Built for the long planning horizons and high stakes of equine breeding, with stallion coordination, mare history tracking, and breeding method documentation.
+          Horse breeding software with advanced genetics: predict foal colors across 13+ genes (Bay, Palomino, Buckskin, Tobiano, Overo, and more), screen for 16+ health conditions (OLWS, HYPP, HERDA, GBED), track mare reproductive cycles with follicle exams and ovulation confirmation, manage 11-month pregnancies with milestone checklists, coordinate stallion services with revenue tracking, and professionally manage high-value horse buyers with built-in CRM.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed mb-4">
-        Horse breeding operates on different timescales than small animals. Eleven-month gestation. Seasonal cycling. Higher stakes per breeding. Complex ownership arrangements. Different record-keeping requirements entirely.
+        Horse breeding operates on different timescales than small animals. Eleven-month gestation. Seasonal cycling. Higher stakes per breeding. Complex ownership arrangements. Sophisticated genetics. High-value sales requiring professional buyer management.
       </p>
       <p class="text-xl text-gray-700 leading-relaxed">
-        Generic breeding software—even good breeding software—doesn't account for any of this.
+        Generic breeding software doesn't account for any of this. BreederHQ was built specifically for how equine breeding actually works.
       </p>
     </div>
   </section>
 
-  <!-- Section 2: Why Breeders Search for This -->
+  <!-- Section 2: The Stakes -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">When your breeding operation outgrows basic tools</h2>
+      <h2 class="text-4xl font-bold mb-8">When your breeding program outgrows basic tools</h2>
       <p class="text-lg text-gray-700 leading-relaxed mb-6">
         Equine breeding programs hit complexity at different points than small animal operations:
       </p>
       <ul class="space-y-3 text-lg text-gray-700">
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Managing seasonal cycling across multiple mares</span>
+          <span>Managing seasonal cycling across multiple mares with individual patterns</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Coordinating with stallion owners and breeding facilities</span>
+          <span>Coordinating with stallion owners, breeding facilities, and semen shipments</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Tracking AI and embryo transfer details</span>
+          <span>Tracking AI timing, follicle development, and ovulation confirmation</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Maintaining records for breed registries</span>
+          <span>Understanding color genetics and avoiding dangerous combinations like OLWS</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>High-value transactions requiring clear documentation</span>
+          <span>Managing 11-month pregnancies with critical milestone checkpoints</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>High-value transactions requiring professional documentation and buyer management</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
           <span>Foaling schedules that can't be missed</span>
         </li>
       </ul>
-      <p class="text-lg text-gray-700 leading-relaxed mt-6">
-        The stakes are higher. The timelines are longer. The margin for error is smaller.
+      <p class="text-lg text-gray-700 leading-relaxed mt-6 font-semibold">
+        The stakes are higher. The timelines are longer. The genetics are complex. The margin for error is smaller.
       </p>
     </div>
   </section>
 
-  <!-- Section 3: How Breeders Usually Handle It -->
+  <!-- Section 3: Genetics Lab -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Common approaches in equine breeding</h2>
+      <h2 class="text-4xl font-bold mb-8">Genetics Lab: Know What You'll Get Before You Breed</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Stop guessing what colors your foals will be. Stop worrying about dangerous genetic combinations. BreederHQ's Genetics Lab gives you data-driven breeding decisions.
+      </p>
+
+      <div class="space-y-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-2xl font-bold mb-4">Coat Color Predictions</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            See what colors your foals could be before breeding. BreederHQ predicts outcomes for 13+ horse color genes:
+          </p>
+          <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Bay, Black, Chestnut (Extension/Agouti)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Palomino, Buckskin, Cremello (Cream)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Dun, Red Dun, Grullo</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Gray (progressive graying)</span>
+              </li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Roan (true roan pattern)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Tobiano, Overo, Sabino (Paint patterns)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Champagne, Pearl</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3">•</span>
+                <span>Leopard Complex (Appaloosa)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+          <h3 class="text-2xl font-bold mb-4 text-red-800">Health Risk Assessment</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Automatically flags dangerous genetic combinations. BreederHQ screens for 16+ inherited conditions:
+          </p>
+          <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>OLWS/LWO</strong> — Lethal White Overo Syndrome</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>HYPP</strong> — Hyperkalemic Periodic Paralysis</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>HERDA</strong> — Hereditary Equine Regional Dermal Asthenia</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>GBED</strong> — Glycogen Branching Enzyme Deficiency</span>
+              </li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>PSSM1</strong> — Polysaccharide Storage Myopathy</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>MH</strong> — Malignant Hyperthermia</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span><strong>WFFS</strong> — Warmblood Fragile Foal Syndrome</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-red-600">⚠</span>
+                <span>Plus SCID, CA, LFS, JEB, and more</span>
+              </li>
+            </ul>
+          </div>
+          <p class="text-gray-700 mt-4 italic">
+            The system warns you before you make a carrier-to-carrier breeding that could produce affected foals.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Inbreeding Coefficient (COI)</h3>
+            <p class="text-gray-700">
+              Analyzes up to 10 generations of pedigree to calculate inbreeding risk. Color-coded risk levels (Low, Moderate, High, Critical) help you make informed decisions about genetic diversity.
+            </p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Punnett Square Visualization</h3>
+            <p class="text-gray-700">
+              See visual inheritance grids showing exactly how genes combine for each trait. Understand the probabilities, not just the possibilities.
+            </p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Offspring Simulator</h3>
+            <p class="text-gray-700">
+              Run Monte Carlo simulations to see what 20 random foals might look like from any pairing. Understand the range of possible outcomes before you commit.
+            </p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Best Match Finder</h3>
+            <p class="text-gray-700">
+              Automatically ranks all your stallions (or mares) to find the optimal breeding match based on genetics, health risks, and COI. Stop guessing which pairing is best.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Mare Reproductive Management -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Mare Reproductive Management</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Seasonal cycling. Individual mare patterns. Optimal breeding windows. BreederHQ tracks it all so you don't miss the right moment.
+      </p>
 
       <div class="space-y-6">
         <div>
-          <h3 class="text-2xl font-bold mb-3">Farm management software</h3>
+          <h3 class="text-2xl font-bold mb-3">Heat Cycle Tracking</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            General farm tools that have a "breeding" module bolted on. Not built for breeding—built for farm management with breeding as an afterthought.
+            Record cycle dates and predict upcoming heats based on your mare's individual patterns. See historical cycles to understand her specific rhythm—not just textbook averages.
           </p>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-3">Spreadsheets and calendars</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Mare sheets. Stallion logs. Breeding calendars on the wall. Works until you're managing more than a handful of mares or coordinating with outside stallions.
+          <h3 class="text-2xl font-bold mb-3">Follicle Exam Recording</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-3">
+            Log ultrasound results with complete detail:
           </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Follicle size progression</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Ovary location (left/right)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Uterine edema scoring</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Ovulation detection and confirmation</span>
+            </li>
+          </ul>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-3">Breed registry systems</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Registry-specific tools that handle registration but not the day-to-day management of your operation.
+          <h3 class="text-2xl font-bold mb-3">Breeding Attempt Documentation</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-3">
+            Track every breeding attempt with full details. For AI shipments:
           </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Carrier and tracking number</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Arrival time and condition</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Motility assessment</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Insemination timing relative to ovulation</span>
+            </li>
+          </ul>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-3">Memory and experience</h3>
+          <h3 class="text-2xl font-bold mb-3">Reproductive History</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            "She usually cycles around late March." Twenty years of experience keeping it all in your head. Works until it doesn't.
+            View complete breeding and foaling history for each mare with statistics on conception rates, breeding-to-pregnancy timing, and complication history. Know which mares are your best producers.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 4: Where That Breaks Down -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Why equine breeding needs specialized tools</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Horse-specific biology:</h3>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Seasonal polyestrous</h4>
-            <p class="text-lg text-gray-700 leading-relaxed mb-3">
-              Mares cycle in response to increasing daylight. The breeding season is finite. Missing optimal cycles means waiting an entire year.
-            </p>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Extended gestation</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>~340 days (11+ months)</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Long planning horizons</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Foaling dates that matter enormously</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="mb-6">
-            <h4 class="text-xl font-bold mb-3">Breeding method complexity</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Live cover coordination</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Artificial insemination timing</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Embryo transfer programs</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Shipped semen logistics</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-xl font-bold mb-3">What generic tools miss:</h4>
-            <ul class="space-y-2 text-lg text-gray-700">
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Seasonal cycling patterns</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>11-month forward planning</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Breeding method tracking</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Stallion coordination across facilities</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Foal heat breeding windows</span>
-              </li>
-              <li class="flex items-start">
-                <span class="mr-3">•</span>
-                <span>Mare history across multiple seasons</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: What a Correct System Looks Like -->
+  <!-- Section 5: Foaling Management -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The system equine breeders need</h2>
+      <h2 class="text-4xl font-bold mb-8">Foaling Management</h2>
 
-      <div class="space-y-8">
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Eleven months is a long time. A lot can go wrong—or right—between breeding and birth. BreederHQ guides you through pregnancy with milestone tracking so nothing falls through the cracks.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">Auto-Generated Pregnancy Milestones</h3>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">15</div>
+            <div>
+              <p class="font-bold">Day 15 — Pregnancy Check</p>
+              <p class="text-gray-600">First ultrasound to confirm pregnancy and check for twins</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">45</div>
+            <div>
+              <p class="font-bold">Day 45 — Heartbeat Confirmation</p>
+              <p class="text-gray-600">Ultrasound to confirm fetal heartbeat and viability</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">90</div>
+            <div>
+              <p class="font-bold">Day 90 — Development Check</p>
+              <p class="text-gray-600">Confirm normal fetal development; safe point for many after this</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">300</div>
+            <div>
+              <p class="font-bold">Day 300 — Monitoring Begins</p>
+              <p class="text-gray-600">Increased observation period starts; prepare foaling area</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">⚡</div>
+            <div>
+              <p class="font-bold">Pre-Foaling Signs Checklist</p>
+              <p class="text-gray-600">Udder development, waxing, vulvar relaxation, behavior changes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
         <div>
-          <h3 class="text-2xl font-bold mb-4">Mare and Stallion Records</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
+          <h3 class="text-xl font-bold mb-3">Foaling Calendar</h3>
+          <p class="text-gray-700">
+            Visual calendar showing expected and actual birth dates across your entire program. See at a glance who's due when.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-3">Foaling Countdown</h3>
+          <p class="text-gray-700">
+            Days-until-foaling countdown for each pregnant mare. Know exactly where you are in the timeline.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-3">Outcome Recording</h3>
+          <p class="text-gray-700">
+            Document delivery details, complications, vet calls, placenta passage timing, and mare condition post-foaling.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-3">Foal Heat Tracking</h3>
+          <p class="text-gray-700">
+            Track foal heat timing and rebreeding readiness. Plan your next season while managing the current foal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Stallion Services -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Stallion Services & Revenue Management</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Whether you're standing your own stallion or managing a breeding operation, BreederHQ tracks the business side of stallion services.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Revenue Dashboard</h3>
+          <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Complete records with pedigrees</span>
+              <span>Total revenue per stallion</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Breeding history across seasons</span>
+              <span>Breeding counts by season</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Health and soundness records</span>
+              <span>Average stud fee trends</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Registration information</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Ownership and syndicate tracking</span>
+              <span>Outstanding balance tracking</span>
             </li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Breeding Management</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Booking Management</h3>
+          <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Seasonal cycle tracking</span>
+              <span>Seasonal breeding slot allocation</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Breeding method documentation</span>
+              <span>Available slots tracking</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Stallion coordination</span>
+              <span>Mare approval workflow</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Expected foaling date calculation</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Mare status at a glance</span>
+              <span>Contract status per booking</span>
             </li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Client and Ownership</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Financial Tracking</h3>
+          <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Complex ownership arrangements</span>
+              <span>Stud fee and deposit tracking</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Breeder contracts and agreements</span>
+              <span>Breeding guarantee types (Live Foal, Stands & Nurses, 60-Day, Certified Pregnant)</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Stud fee tracking</span>
+              <span>Payment status per breeding</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Commission structures</span>
+              <span>Recent payments dashboard</span>
             </li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Documentation</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Performance Metrics</h3>
+          <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Everything needed for registration</span>
+              <span>Conception rate per stallion</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Health records for sales</span>
+              <span>Breeding success rates</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Complete breeding audit trail</span>
+              <span>Offspring tracking</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Producing record statistics</span>
             </li>
           </ul>
         </div>
@@ -339,31 +529,308 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 6: How BreederHQ Supports This -->
+  <!-- Section 7: Competitions & Achievements -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Competition & Racing Records</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Show ring. Race track. Performance arena. BreederHQ tracks achievements wherever your horses compete.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Competition Types</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Conformation shows</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Performance tests</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Racing (flat, harness, steeplechase)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Field trials</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breed specialties</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Result Recording</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Placements and points</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Major wins and championships</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Qualifying scores</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Judge information</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Racing-Specific Data</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Prize money and purses</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Finish times</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Track and distance</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Track conditions</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Speed figures</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Producing Records</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Offspring achievement tracking</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Champion/titled offspring counts</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Earnings summaries</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Build producing sire/dam records</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Buyer CRM -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Professional Buyer Management</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Horse sales are high-value transactions. Managing buyers professionally isn't optional—it's expected. BreederHQ includes a full CRM built for equine sales.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Lead Scoring</h3>
+          <p class="text-gray-700">
+            Automatic scoring (0-100) based on engagement, recency, budget fit, and interest level. Know which buyers to prioritize without guessing.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Sales Pipeline</h3>
+          <p class="text-gray-700">
+            Visual Kanban board: Inquiry → Viewing → Negotiation → Vet Check → Contract → Closed. Drag and drop deals through stages.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Activity Tracking</h3>
+          <p class="text-gray-700">
+            Log calls, emails, meetings, viewings, and offers. Complete timeline of every interaction with each buyer.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Email Tools</h3>
+          <p class="text-gray-700">
+            Templates for common communications. Send directly from the platform. Auto-generate follow-up tasks.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
+        <h3 class="text-xl font-bold mb-3">Analytics & Insights</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Conversion rates by source</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Average deal value and days-to-close</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Stale lead detection for re-engagement</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Win/loss analysis</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Additional Features -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Complete Horse Management</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Health & Veterinary Records</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Vaccination tracking (Core + Non-Core protocols)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Automatic status: Current, Due Soon, Expired</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Coggins and health certificates</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Veterinary exam logging</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Weight and body condition scoring</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Dental records</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Registry & Documentation</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Multi-registry tracking (AQHA, Jockey Club, APHA, AHA, USEF)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Registration verification status</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Document storage and organization</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Buyer portal document sharing</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Contracts & Ownership</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Contract templates with merge fields</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Digital signatures</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Multi-owner/syndicate tracking</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Ownership transfer history</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Marketplace Listings</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Stallion stud service listings</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Horses for sale</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Lease and guardian arrangements</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Inquiry management</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: CTA -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ handles equine complexity</h2>
+      <h2 class="text-4xl font-bold mb-8">Built for How Equine Breeding Actually Works</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        Seasonal cycling logic built in. 11-month planning horizons. Breeding method tracking. Stallion coordination. The long timelines and high stakes of equine breeding accounted for throughout.
+        Genetics lab with 13+ color genes and 16+ health screenings. Mare reproductive tracking with follicle exams and ovulation confirmation. Foaling milestones from day 15 through birth. Stallion revenue dashboards. Professional buyer CRM. Competition and racing records.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
-        Not a small-animal tool with horses added. A system that understands how equine breeding actually works.
+        Not a small-animal tool with horses added. A system built specifically for equine breeding programs.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
         <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Early Access
         </a>
-        <a href="/workflows/breeding-cycles" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
-          See breeding workflows →
+        <a href="/workflows/breeding-intelligence" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See breeding intelligence →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Section 7: Who This Is For -->
+  <!-- Section 11: Who This Is For -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">BreederHQ is built for equine breeders who:</h2>
@@ -371,19 +838,31 @@ const faqs = [
       <ul class="space-y-3 text-lg text-gray-700">
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Manage multiple mares</span>
+          <span>Manage multiple mares with overlapping breeding schedules</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Coordinate with outside stallions</span>
+          <span>Care about genetics—colors, health markers, and COI</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Need organized records for registration</span>
+          <span>Coordinate with outside stallions and semen shipments</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Track complex ownership arrangements</span>
+          <span>Stand their own stallions and track breeding revenue</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Need organized records for registration and sales</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Compete or race and want to track achievements</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Sell high-value horses and need professional buyer management</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -391,13 +870,13 @@ const faqs = [
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Are tired of scattered systems</span>
+          <span>Are tired of scattered systems that don't talk to each other</span>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- Section 8: Who This Is Not For -->
+  <!-- Section 12: Who This Is Not For -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">BreederHQ probably isn't for you if:</h2>
@@ -415,94 +894,62 @@ const faqs = [
           <span class="mr-3">•</span>
           <span>You're not producing foals regularly</span>
         </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You don't track genetics or health testing</span>
+        </li>
       </ul>
 
       <p class="text-lg text-gray-700 leading-relaxed">
-        If a simpler system works for your operation, use it.
+        If a simpler system works for your operation, use it. BreederHQ exists for when those tools stop being enough.
       </p>
     </div>
   </section>
 
-  <!-- Section 9: FAQ -->
+  <!-- Section 13: FAQ -->
   <section class="py-20 px-4 faq-section">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Questions equine breeders ask</h2>
 
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it handle AI and embryo transfer?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Different breeding methods can be tracked with appropriate details.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can it manage stallion syndicate arrangements?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Ownership and partnership arrangements can be documented and tracked.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>What about breed registry integration?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>BreederHQ maintains the records you need for registration. Official submission still goes through registry systems.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I track across multiple seasons?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Mare breeding history carries forward year over year.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I try it before paying?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. 14-day free trial with full access. No credit card required to start.</p>
-        </div>
-      </details>
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
     </div>
   </section>
 
-  <!-- Section 10: Related Resources -->
+  <!-- Section 14: Related Resources -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Learn more</h2>
       <div class="space-y-3 text-lg">
         <div>
-          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
-            → How to Track Breeding Cycles
+          <a href="/workflows/breeding-intelligence" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Intelligence Tools
           </a>
         </div>
         <div>
-          <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
-            → Managing Multi-Cycle Planning
+          <a href="/workflows/foaling-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Foaling Management Workflow
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/mare-reproductive-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Mare Reproductive Tracking
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/stallion-services" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Stallion Services Management
           </a>
         </div>
         <div>
