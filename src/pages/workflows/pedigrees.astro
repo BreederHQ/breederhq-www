@@ -29,6 +29,19 @@ const faqs = [
     answer: 'Yes. The system identifies and highlights common ancestors when evaluating a potential pairing.'
   }
 ];
+
+const howTo = {
+  name: 'How to Track Pedigrees and Calculate COI',
+  description: 'A step-by-step guide to building pedigree records and using them for breeding decisions with coefficient of inbreeding calculations.',
+  steps: [
+    { name: 'Enter your foundation animals', text: 'Start by adding your current breeding animals with their registration information, birth dates, and any known lineage.' },
+    { name: 'Build the ancestry tree', text: 'Add sire and dam for each animal. Continue adding ancestors as far back as you have information. The system links animals automatically.' },
+    { name: 'Verify pedigree connections', text: 'Review the pedigree visualization to ensure all connections are correct. Fix any broken links or missing ancestors.' },
+    { name: 'Check COI for planned breedings', text: 'When evaluating a potential breeding, view the calculated coefficient of inbreeding. The system flags HIGH and CRITICAL COI levels.' },
+    { name: 'Identify common ancestors', text: 'Review common ancestors between potential breeding pairs. The system shows contribution percentages for each common ancestor.' },
+    { name: 'Share pedigrees with buyers', text: 'Export professional pedigree charts or enable buyer portal access so clients can view their animal\'s complete lineage.' }
+  ]
+};
 ---
 
 <BaseLayout
@@ -36,6 +49,7 @@ const faqs = [
   description="Professional pedigree management for breeding programs. Lineage tracking, coefficient of inbreeding, and ancestry visualization."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
+  howTo={howTo}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

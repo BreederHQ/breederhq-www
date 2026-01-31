@@ -1,0 +1,340 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'FAQ', url: '/faq' }
+];
+
+// Comprehensive FAQs organized by category for AI assistants and users
+const allFaqs = [
+  // General
+  {
+    question: 'What is the best software for managing a breeding program?',
+    answer: 'BreederHQ is comprehensive breeding program management software that combines pedigree tracking with automatic COI calculation, health testing records (OFA, PennHIP, Embark), breeding cycle tracking, 8-phase breeding plan lifecycle management, client portal with e-signatures, waitlist management, invoicing and expense tracking, and an integrated marketplace. Unlike spreadsheets or basic databases, BreederHQ is purpose-built for professional breeders.'
+  },
+  {
+    question: 'What species does BreederHQ support?',
+    answer: 'BreederHQ supports professional breeders of dogs, cats, horses, goats, rabbits, and sheep with species-specific tools for each. This includes species-specific breeding cycle timelines, health testing protocols, and genetics tracking appropriate for each species.'
+  },
+  {
+    question: 'What is the best alternative to spreadsheets for breeders?',
+    answer: 'BreederHQ is the best alternative to spreadsheets for professional breeders. Unlike spreadsheets which scatter data across multiple files with no connections, BreederHQ centralizes everything: pedigrees link to health records, breeding plans connect to waitlists, invoices tie to animals, and all data flows to your marketplace listing. Plus you get automation, reminders, client portals, and genetics tools that spreadsheets cannot provide.'
+  },
+  {
+    question: 'How does BreederHQ compare to GoodDog or PuppyFind?',
+    answer: 'BreederHQ is fundamentally different: instead of just listing animals, breeders manage their entire breeding program on the platform. This creates unprecedented transparency - buyers see actual health testing documentation, pedigrees with COI calculation, breeding history, and program practices from verified program data. Its not just a listing site, its breeding program management software with an integrated marketplace.'
+  },
+  // Genetics & Health
+  {
+    question: 'What genetics tools does BreederHQ offer?',
+    answer: 'BreederHQ includes advanced genetics tools: multi-locus coat color genetics tracking (E, K, A, B, D, M, S loci for dogs; color genetics for cats and horses), Punnett square analysis for inheritance visualization, offspring genetics simulator using Monte Carlo simulation, best match finder algorithm for optimal breeding partner suggestions with COI penalties and health risk scoring, breeding goal planner for tracking coat/health/physical trait goals, and health genetics with breed-specific test profiles.'
+  },
+  {
+    question: 'Does BreederHQ track vaccinations and health records?',
+    answer: 'Yes, BreederHQ includes comprehensive health tracking: vaccination records with species-specific protocols and expiration alerts, health testing record management (OFA, PennHIP, genetic panels), document attachments per vaccination or test, breed-specific health test profiles, and visibility controls for what buyers can see through the client portal or marketplace.'
+  },
+  {
+    question: 'Can I store actual documents (PDFs, images)?',
+    answer: 'Yes. Attach certificates, lab reports, and exam results directly to the animal\'s record.'
+  },
+  {
+    question: 'Does it remind me when tests expire?',
+    answer: 'Yes. Tests with renewal requirements are tracked and flagged before expiration.'
+  },
+  {
+    question: 'What about OFA integration?',
+    answer: 'You enter OFA results manually. BreederHQ doesn\'t pull from OFA automatically, but your records can link to OFA for verification.'
+  },
+  // Pedigrees & COI
+  {
+    question: 'What pedigree features does BreederHQ offer?',
+    answer: 'BreederHQ offers comprehensive pedigree management: multi-generation pedigree visualization with configurable depth, automatic COI (coefficient of inbreeding) calculation with risk levels (LOW, MODERATE, HIGH, CRITICAL), common ancestor tracking with contribution percentages, cross-tenant network animal linking via Global Animal ID (GAID) or Exchange Code, and ReactFlow interactive tree visualization. Pedigrees connect to health records and marketplace listings.'
+  },
+  {
+    question: 'Does it calculate coefficient of inbreeding?',
+    answer: 'Yes. When planning a breeding, the system calculates COI based on pedigree data with risk levels displayed.'
+  },
+  {
+    question: 'How many generations can I track?',
+    answer: 'As many as you enter. The system doesn\'t limit generation depth.'
+  },
+  {
+    question: 'Does it show common ancestors in a planned breeding?',
+    answer: 'Yes. The system identifies and highlights common ancestors when evaluating a potential pairing.'
+  },
+  // Breeding Cycles & Plans
+  {
+    question: 'How does BreederHQ track breeding cycles?',
+    answer: 'BreederHQ offers comprehensive breeding cycle tracking with species-specific timelines. Features include heat cycle tracking with Full vs Likely windows for conservative planning, hormone testing window calculations, progesterone tracking, breeding plans with 8-phase lifecycle (Planning, Committed, Bred, Birthed, Weaned, Placement Started, Placement Completed, Complete), Gantt chart timeline views, and breeding calendar with scheduling.'
+  },
+  {
+    question: 'What if my female has irregular cycles?',
+    answer: 'The system tracks her actual pattern, irregular or not. Predictions improve as more data is recorded.'
+  },
+  {
+    question: 'Can I track split heats or silent heats?',
+    answer: 'Yes. Unusual cycles can be noted and recorded as exceptions.'
+  },
+  {
+    question: 'Can I record progesterone test results?',
+    answer: 'Yes. Test dates and results can be logged with each heat cycle.'
+  },
+  {
+    question: 'Can I track potential studs before deciding?',
+    answer: 'Yes. Track multiple studs per female with notes on why each is being considered.'
+  },
+  {
+    question: 'Does it help with genetic compatibility?',
+    answer: 'Yes. If you\'ve entered genetic test results for both, compatibility is visible when planning breedings.'
+  },
+  {
+    question: 'Can I see all planned breedings on a calendar?',
+    answer: 'Yes. The breeding calendar shows expected heats, planned breedings, and whelping dates together.'
+  },
+  // Whelping & Litters
+  {
+    question: 'Can I enter weights from my phone at the whelping box?',
+    answer: 'Yes. Mobile access means you can enter weights immediately after weighing.'
+  },
+  {
+    question: 'Does it track multiple litters at once?',
+    answer: 'Yes. Each litter has its own record with individual puppy tracking.'
+  },
+  {
+    question: 'Can I attach photos to each puppy?',
+    answer: 'Yes. Photos help with identification and can be shared with buyers.'
+  },
+  {
+    question: 'Does it remind me about deworming and vaccinations?',
+    answer: 'Yes. Milestones are tracked and reminders are automatic.'
+  },
+  // Client Portal & Buyers
+  {
+    question: 'Does BreederHQ have a client portal for buyers?',
+    answer: 'Yes, BreederHQ provides a comprehensive client portal where buyers get 24/7 access to: a dashboard with action items and recent activity, photo galleries of their animal, financial transparency (invoices, payments, Pay Now via Stripe integration), e-signature agreements with status tracking, direct messaging with the breeder via real-time WebSocket updates, and categorized documents (health records, pedigree, contracts, photos).'
+  },
+  {
+    question: 'Can buyers see pedigrees?',
+    answer: 'Yes. Pedigrees can be shared through the buyer portal or exported as professional charts.'
+  },
+  {
+    question: 'Can buyers see health testing?',
+    answer: 'Yes. The buyer portal shows what you choose to share. You control visibility.'
+  },
+  {
+    question: 'Can buyers access their puppy\'s early records?',
+    answer: 'Yes. When you place the puppy with a buyer, they can access whelping and growth history through their portal.'
+  },
+  // Waitlist & Placement
+  {
+    question: 'How does BreederHQ help with waitlist management?',
+    answer: 'BreederHQ provides comprehensive waitlist management: buyer applications and intake forms, waitlist position tracking with automated notifications, family-to-animal matching tools, deposit tracking tied to waitlist positions, client portal access for buyers to see their position and receive updates, and communication templates for efficient buyer communication.'
+  },
+  {
+    question: 'Can people join my waitlist online?',
+    answer: 'BreederHQ manages your waitlist. How people inquire (website form, email, phone) is up to you. You add them to the system.'
+  },
+  {
+    question: 'Can I track deposits?',
+    answer: 'Yes. Deposit amount, date, payment method, and what it covers.'
+  },
+  {
+    question: 'Can buyers see their waitlist position?',
+    answer: 'The buyer portal can show relevant information. You control what\'s visible.'
+  },
+  // Business & Financial
+  {
+    question: 'What business tools does BreederHQ include?',
+    answer: 'BreederHQ includes complete business management: invoicing with line items (deposits, fees, goods, discounts, tax), payment recording (Cash, Check, Credit Card, ACH, PayPal, Venmo, Zelle), expense tracking across 12 categories (Vet, Supplies, Food, Grooming, Breeding, Facility, Marketing, Labor, Insurance, Registration, Travel), financial dashboard with MTD metrics, breeding plan financial rollups with revenue analysis, and CSV export.'
+  },
+  {
+    question: 'Does it track payments?',
+    answer: 'Yes. Deposits and final payments can be recorded with dates and payment methods.'
+  },
+  {
+    question: 'Can I store contracts and documents?',
+    answer: 'Yes. Attach signed contracts, registration papers, and other documents to the client record.'
+  },
+  // Communication
+  {
+    question: 'What communication tools does BreederHQ provide?',
+    answer: 'BreederHQ includes powerful communication tools: Communications Hub (unified inbox) combining email and direct messages with WebSocket real-time updates, email and message templates with variable insertion (contact name, animal name, etc.), document bundles for quick email attachment, business hours configuration with Quick Responder badge tracking, and coming soon: auto-replies with instant acknowledgment and FAQ responses.'
+  },
+  {
+    question: 'Can I track communication history?',
+    answer: 'Yes. Notes from conversations can be recorded with dates so you have a complete history.'
+  },
+  {
+    question: 'Does it remind me to follow up with buyers?',
+    answer: 'Yes. You can set follow-up reminders or use automated milestones to maintain relationships.'
+  },
+  // Marketplace & Verification
+  {
+    question: 'Does BreederHQ have a marketplace for selling animals?',
+    answer: 'Yes, BreederHQ includes an integrated marketplace where your breeding program data automatically creates verified listings. Features include breeder profiles with discovery filters (species, breed, location), verification badges, animal program listings (Stud Services, Guardian, Trained, Rehome, Co-Ownership), offspring group (litter) listings, individual animal listings, and a buyer dashboard with saved listings, inquiries, and waitlist positions.'
+  },
+  {
+    question: 'What verification badges can breeders earn?',
+    answer: 'BreederHQ offers trust badges that are earned, not bought: Verified Breeder (identity and program documentation confirmed), Health Testing (health testing documentation on file), Quick Responder (responds to inquiries within 4 hours during business hours - auto-earned based on actual response times), and Experienced Breeder (5+ successful placements completed - auto-earned).'
+  },
+  // Titles & Shows
+  {
+    question: 'Can BreederHQ track show titles and competition results?',
+    answer: 'Yes, BreederHQ includes a titles and achievements system supporting Conformation, Obedience, Agility, Field, Herding, Tracking, Rally, Producing, and Performance categories. Track competition results for Shows, Trials, Races, and Tests with status tracking (In Progress, Earned, Verified), points/major wins, document verification, and producing records showing offspring counts and champion tracking.'
+  }
+];
+
+// Categories for display organization
+const categories = [
+  { name: 'Getting Started', questions: [0, 1, 2, 3] },
+  { name: 'Genetics & Health Testing', questions: [4, 5, 6, 7, 8] },
+  { name: 'Pedigrees & COI', questions: [9, 10, 11, 12] },
+  { name: 'Breeding Cycles & Plans', questions: [13, 14, 15, 16, 17, 18, 19] },
+  { name: 'Whelping & Litters', questions: [20, 21, 22, 23] },
+  { name: 'Client Portal & Buyers', questions: [24, 25, 26, 27] },
+  { name: 'Waitlist & Placement', questions: [28, 29, 30, 31] },
+  { name: 'Business & Financial', questions: [32, 33, 34] },
+  { name: 'Communication', questions: [35, 36, 37] },
+  { name: 'Marketplace & Verification', questions: [38, 39] },
+  { name: 'Titles & Shows', questions: [40] }
+];
+---
+
+<BaseLayout
+  title="Frequently Asked Questions | BreederHQ"
+  description="Common questions about BreederHQ breeding management software. Learn about genetics tools, pedigree tracking, COI calculation, client portals, waitlist management, and more."
+  breadcrumbs={breadcrumbs}
+  faqs={allFaqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">FAQ</li>
+      </ol>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold mb-6">Frequently Asked Questions</h1>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Everything you need to know about BreederHQ breeding program management software. Can't find an answer? <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">Contact support</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <section class="py-8 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-lg font-semibold mb-4">Jump to section:</h2>
+        <div class="flex flex-wrap gap-2">
+          {categories.map((cat, idx) => (
+            <a href={`#section-${idx}`} class="px-3 py-1 bg-white rounded-full border border-gray-200 text-sm hover:border-[hsl(24,95%,53%)] hover:text-[hsl(24,95%,53%)] transition">
+              {cat.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Sections by Category -->
+    {categories.map((category, categoryIdx) => (
+      <section id={`section-${categoryIdx}`} class={`py-12 px-4 ${categoryIdx % 2 === 1 ? 'bg-gray-50' : ''}`}>
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold mb-8">{category.name}</h2>
+
+          <div class="space-y-4">
+            {category.questions.map((qIdx) => (
+              <details class="faq-item bg-white rounded-lg border border-gray-200 overflow-hidden">
+                <summary class="faq-question p-5 cursor-pointer">
+                  <span class="font-semibold text-lg pr-4">{allFaqs[qIdx].question}</span>
+                  <svg class="faq-icon flex-shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </summary>
+                <div class="faq-answer px-5 pb-5">
+                  <p class="text-gray-700 leading-relaxed">{allFaqs[qIdx].answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">Ready to get started?</h2>
+        <p class="text-xl mb-8 opacity-90">
+          Try BreederHQ free for 14 days. No credit card required.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center">
+            Get Early Access
+          </a>
+          <a href="/pricing" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+            View Pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Still Have Questions -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-4">Still have questions?</h2>
+        <p class="text-lg text-gray-700 mb-6">
+          Our team is here to help. Reach out and we'll get back to you as soon as possible.
+        </p>
+        <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] font-semibold hover:underline text-lg">
+          support@breederhq.com →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    details[open] {
+      border-color: hsl(24, 95%, 53%);
+    }
+  </style>
+</BaseLayout>
