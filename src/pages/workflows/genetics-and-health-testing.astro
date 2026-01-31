@@ -29,6 +29,19 @@ const faqs = [
     answer: 'You enter OFA results manually. BreederHQ doesn\'t pull from OFA automatically, but your records can link to OFA for verification.'
   }
 ];
+
+const howTo = {
+  name: 'How to Track Genetics and Health Testing',
+  description: 'A step-by-step guide to organizing health testing records, genetic markers, and renewal tracking for breeding animals.',
+  steps: [
+    { name: 'Set up breed-specific health tests', text: 'Configure which health tests are required or recommended for your breed. Common tests include OFA hips/elbows, PennHIP, eye exams, and genetic panels.' },
+    { name: 'Enter test results', text: 'Record each test with the date performed, result, and expiration date if applicable. Link to official registry numbers when available.' },
+    { name: 'Attach documentation', text: 'Upload certificates, lab reports, and exam results as PDFs or images. Keep original documentation linked to each test record.' },
+    { name: 'Track genetic markers', text: 'Enter genetic test results including coat color genetics, health markers, and carrier status. Use this data for breeding compatibility checks.' },
+    { name: 'Monitor expiration dates', text: 'Review upcoming test expirations regularly. The system flags tests that need renewal before breeding.' },
+    { name: 'Configure buyer visibility', text: 'Choose which health testing results to share with buyers through the client portal. Transparency builds trust.' }
+  ]
+};
 ---
 
 <BaseLayout
@@ -36,6 +49,7 @@ const faqs = [
   description="Organize health testing for breeding programs. Document storage, renewal reminders, and genetics tracking in one place."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
+  howTo={howTo}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

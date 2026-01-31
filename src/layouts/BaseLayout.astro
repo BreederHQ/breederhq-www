@@ -10,11 +10,16 @@ interface Props {
   description: string;
   breadcrumbs?: Array<{ name: string; url: string }>;
   faqs?: Array<{ question: string; answer: string }>;
+  howTo?: {
+    name: string;
+    description: string;
+    steps: Array<{ name: string; text: string }>;
+  };
   noindex?: boolean;
   hideLogo?: boolean;
 }
 
-const { title, description, breadcrumbs, faqs, noindex, hideLogo } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, noindex, hideLogo } = Astro.props;
 const currentUrl = Astro.url.pathname;
 const fullUrl = `https://breederhq.com${currentUrl}`;
 const ogImage = 'https://breederhq.com/og-image.jpg'; // Default OG image
@@ -89,6 +94,15 @@ const softwareSchema = {
     "name": "BreederHQ",
     "url": "https://breederhq.com"
   }
+  // TODO: Add aggregateRating when customer reviews are available
+  // Example:
+  // "aggregateRating": {
+  //   "@type": "AggregateRating",
+  //   "ratingValue": "4.9",
+  //   "ratingCount": "47",
+  //   "bestRating": "5",
+  //   "worstRating": "1"
+  // }
 };
 
 // BreadcrumbList schema if breadcrumbs provided
@@ -119,6 +133,23 @@ if (faqs && faqs.length > 0) {
         "@type": "Answer",
         "text": faq.answer
       }
+    }))
+  };
+}
+
+// HowTo schema for workflow/tutorial pages
+let howToSchema;
+if (howTo && howTo.steps && howTo.steps.length > 0) {
+  howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": howTo.name,
+    "description": howTo.description,
+    "step": howTo.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.name,
+      "text": step.text
     }))
   };
 }
@@ -158,6 +189,9 @@ if (faqs && faqs.length > 0) {
     )}
     {faqSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    )}
+    {howToSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
     )}
 
     <!-- Analytics Scripts -->
