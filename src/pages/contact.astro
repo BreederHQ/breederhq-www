@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Contact', url: '/contact' }
+];
+
+const faqs = [
+  {
+    question: "How quickly will I get a response?",
+    answer: "We typically respond to all inquiries within 24 business hours. For urgent matters, please include 'Urgent' in your message."
+  },
+  {
+    question: "Is there phone support?",
+    answer: "Currently, BreederHQ provides support primarily via email and our contact form. This allows us to provide detailed, documented responses to your questions."
+  },
+  {
+    question: "Can I schedule a demo?",
+    answer: "Yes! Request a demo through the contact form and we'll set up a personalized walkthrough of BreederHQ tailored to your breeding program."
+  }
+];
+---
+
+<BaseLayout
+  title="Contact BreederHQ - Get in Touch with Our Team"
+  description="Have questions about BreederHQ breeding management software? Contact our team for support, sales inquiries, demo requests, or partnership opportunities."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          Contact Us
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Have questions about BreederHQ? Want to schedule a demo? We're here to help.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Form -->
+          <div>
+            <h2 class="text-2xl font-bold mb-6">Send Us a Message</h2>
+            <ContactForm
+              formId="contact-page-form"
+              submitText="Send Message"
+              source="contact_page"
+            />
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h2 class="text-2xl font-bold mb-6">Other Ways to Reach Us</h2>
+
+            <div class="space-y-6">
+              <!-- Email -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Email</h3>
+                  <a href="mailto:support@breederhq.com" class="text-primary hover:underline">
+                    support@breederhq.com
+                  </a>
+                  <p class="text-sm text-gray-500 mt-1">We respond within 24 business hours</p>
+                </div>
+              </div>
+
+              <!-- Social -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Social Media</h3>
+                  <div class="flex gap-3 mt-2">
+                    <a
+                      href="https://x.com/Breeder_HQ"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-gray-600 hover:text-primary transition"
+                      aria-label="X / Twitter"
+                    >
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/breeder-hq-46518939b/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-gray-600 hover:text-primary transition"
+                      aria-label="LinkedIn"
+                    >
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61585406435189"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-gray-600 hover:text-primary transition"
+                      aria-label="Facebook"
+                    >
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ Link -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">FAQ</h3>
+                  <p class="text-gray-600 text-sm">
+                    Find answers to common questions in our
+                    <a href="/faq" class="text-primary hover:underline">FAQ section</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Response Time Box -->
+            <div class="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+              <h3 class="font-semibold text-gray-900 mb-2">What to Expect</h3>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Response within 24 business hours
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Personalized support from our team
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Free demos available on request
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map(faq => (
+            <div class="bg-white border border-gray-200 rounded-lg p-6">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-center mt-8">
+          <a href="/faq" class="text-primary hover:underline font-medium">
+            View all FAQs &rarr;
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-primary py-16">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Ready to try BreederHQ?
+        </h2>
+        <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          Start your 14-day free trial and see how BreederHQ can transform your breeding program.
+        </p>
+        <a
+          href="/coming-soon"
+          class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block"
+        >
+          Get Early Access
+        </a>
+      </div>
+    </section>
+  </main>
+
+</BaseLayout>
