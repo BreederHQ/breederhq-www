@@ -62,6 +62,18 @@ const faqs = [
   {
     question: 'What communication tools does BreederHQ provide?',
     answer: 'BreederHQ includes powerful communication tools: Communications Hub (unified inbox) combining email and direct messages with WebSocket real-time updates, email and message templates with variable insertion (contact name, animal name, etc.), document bundles for quick email attachment, business hours configuration with Quick Responder badge tracking, and coming soon: auto-replies with instant acknowledgment and FAQ responses.'
+  },
+  {
+    question: 'Does BreederHQ have nutrition and feeding tracking?',
+    answer: 'Yes. BreederHQ includes comprehensive nutrition tracking: a food product catalog with automatic cost-per-ounce calculation, per-animal feeding plans with portion and schedule configuration, feeding logs with appetite scoring (1-5 scale) to catch health issues early, food transition documentation with outcome tracking, and cost analytics showing spending trends across your entire program. Feeding plans can be shared with buyers through the client portal.'
+  },
+  {
+    question: 'Can BreederHQ watermark my photos and documents?',
+    answer: 'Yes. BreederHQ automatically watermarks photos and PDF documents with text or your logo. You can configure watermark position, opacity, and size. Each document can have watermarking toggled individually. The system also tracks who views and downloads your files with a complete audit trail, so you know exactly where your content goes and who accessed it.'
+  },
+  {
+    question: 'Does BreederHQ warn about dangerous breeding combinations?',
+    answer: 'Yes. BreederHQ automatically detects lethal gene combinations and warns you before you breed. This includes Double Merle detection in dogs (which can cause deafness and blindness), Lethal White Overo in horses (always fatal), HYPP, HERDA, GBED, and other species-specific lethal combinations. The system checks both parents genetic test results when you plan a breeding and displays a red warning banner if a dangerous pairing is detected.'
   }
 ];
 ---
@@ -266,6 +278,19 @@ const faqs = [
             </p>
             <a href="/workflows/genetics-and-health-testing" class="text-primary font-medium">Learn more →</a>
           </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Nutrition Tracking</h3>
+            <p class="text-gray-600 mb-3">
+              Track food products, feeding plans, costs, and transitions. Know exactly what you're spending and catch appetite changes early.
+            </p>
+            <a href="/workflows/nutrition-tracking" class="text-primary font-medium">Learn more →</a>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3">Document Protection</h3>
+            <p class="text-gray-600 mb-3">
+              Watermark photos and documents automatically. Track who views and downloads your files. Protect your intellectual property.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -299,6 +324,18 @@ const faqs = [
             <h3 class="text-xl font-semibold mb-4">Built for Multiple Species</h3>
             <p class="text-gray-600">
               Not just dogs. BreederHQ supports professional breeders of dogs, cats, horses, goats, rabbits, and sheep—with species-specific tools for each.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold mb-4">Document Watermarking & Protection</h3>
+            <p class="text-gray-600">
+              Your photos and documents are valuable. BreederHQ automatically watermarks images and PDFs with your branding, tracks who views and downloads files, and maintains an audit trail—so you know exactly where your content goes.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold mb-4">Lethal Gene Warnings</h3>
+            <p class="text-gray-600">
+              Some breeding combinations can be fatal. BreederHQ automatically detects dangerous pairings like Double Merle (dogs) and Lethal White Overo (horses) and warns you before you breed—potentially saving lives.
             </p>
           </div>
         </div>
@@ -445,6 +482,21 @@ const faqs = [
       <h3>Communication Tools</h3>
       <p>
         Communication features include: communications hub (unified inbox) combining email and direct messages with WebSocket real-time updates, tag management, and template integration; email and message templates with categories (Email, DM, Social) and variable insertion support for contact_name, animal_name, etc. with preview mode; document bundles for grouping documents by purpose with quick attachment to emails and reorderable documents; business hours configuration with per-day schedule (15-minute intervals) and timezone selection; Quick Responder badge earned via response time tracking (respond within 4 hours during business hours with minimum 5 responses); auto-replies (coming soon) with instant acknowledgment, away messages, FAQ responses, and smart scheduling; direct messaging for breeder-to-breeder communication with thread management; and block user capability with three levels (Light: no waitlist, Medium: no messages, Heavy: full block) with optional reason tracking.
+      </p>
+
+      <h3>Nutrition and Feeding Tracking</h3>
+      <p>
+        BreederHQ includes comprehensive nutrition tracking: food product catalog with brand, type (dry, wet, raw, fresh, freeze-dried, supplements, treats), life stage (puppy, junior, adult, senior, breeding, performance), bag size and price with automatic cost-per-ounce calculation, and nutritional info (protein, fat, fiber, calories); per-animal feeding plans with food product assignment, portion size, feedings per day, feeding times, and automatic daily/monthly cost projections; feeding logs with quick logging, appetite scoring (1-5 scale), portion adjustments, skipped feeding tracking with reasons, and notes; food change documentation with reason categorization (life stage, health issue, vet recommendation, cost, availability, preference), transition protocol documentation, and outcome rating (excellent, good, fair, poor); and cost analytics dashboard with total cost, average per feeding, adherence rate, cost trend charts, cost by animal breakdown, and date range filtering with shareable URLs.
+      </p>
+
+      <h3>Document Watermarking and Access Tracking</h3>
+      <p>
+        BreederHQ protects your intellectual property with document watermarking and access tracking: automatic watermarking of photos and PDF documents with text or logo overlays; visual position selector for watermark placement; opacity and size controls; per-document watermark toggle; access tracking showing who viewed or downloaded each document with timestamp; complete audit trail for document access; S3-based caching for watermarked assets; and integration with the client portal and marketplace for consistent protection across all sharing contexts.
+      </p>
+
+      <h3>Lethal Gene Warnings</h3>
+      <p>
+        BreederHQ automatically detects dangerous breeding combinations and warns breeders before they commit: Double Merle detection for dogs (M/m x M/m pairings causing deafness, blindness, microphthalmia in 25% of offspring); Lethal White Overo (LWO) detection for horses (Frame gene O/o x O/o pairings producing 25% homozygous foals that cannot survive); Hairless x Hairless warnings for dogs; HYPP (Hyperkalemic Periodic Paralysis) carrier warnings for horses; HERDA (Hereditary Equine Regional Dermal Asthenia) detection; GBED (Glycogen Branching Enzyme Deficiency) detection which is always fatal; and breed-specific brachycephalic risk warnings. The system checks both parents' genetic test results when planning a breeding and displays prominent red warning banners with explanations when dangerous pairings are detected.
       </p>
 
       <h3>Why BreederHQ vs Alternatives</h3>

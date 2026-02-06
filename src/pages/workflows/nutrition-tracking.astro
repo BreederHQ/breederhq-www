@@ -1,0 +1,477 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Nutrition & Feeding', url: '/workflows/nutrition-tracking' }
+];
+
+const faqs = [
+  {
+    question: 'Can I track multiple food brands for different animals?',
+    answer: 'Yes. BreederHQ maintains a food product catalog where you can add any brand, type, and formulation. Each animal can have its own feeding plan with different products, portions, and schedules.'
+  },
+  {
+    question: 'How does cost tracking work?',
+    answer: 'When you add a food product, you enter the bag size and price. BreederHQ calculates cost-per-ounce automatically. Then, based on your feeding plans, it projects daily and monthly food costs per animal and across your entire program.'
+  },
+  {
+    question: 'Can I track food for puppies/kittens separately from adults?',
+    answer: 'Yes. Each animal has its own feeding plan, so puppies can be on puppy food with different portions while adults are on maintenance formulas. When you transition foods, the change is documented with outcome tracking.'
+  },
+  {
+    question: 'What if I feed raw or home-prepared diets?',
+    answer: 'BreederHQ supports all food types: dry kibble, wet food, raw, fresh, freeze-dried, supplements, and treats. You can track ingredients, costs, and portions for any feeding approach.'
+  },
+  {
+    question: 'Can I share feeding information with buyers?',
+    answer: 'Yes. Feeding plans and food recommendations can be included in the client portal, so buyers know exactly what their new pet has been eating and can maintain consistency during the transition home.'
+  },
+  {
+    question: 'Does this integrate with health tracking?',
+    answer: 'Yes. Appetite scores logged during feedings can flag potential health issues. Weight tracking in health records helps you adjust portions. Food changes are documented so vets can see dietary history when needed.'
+  }
+];
+---
+
+<BaseLayout
+  title="Nutrition & Feeding Tracking | BreederHQ"
+  description="Track food products, feeding plans, costs, and transitions for all your animals. Cost analytics, appetite monitoring, and feeding history documentation."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Nutrition & Feeding</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Track Every Meal, Every Cost, Every Transition</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Nutrition is foundational to animal health—yet most breeders track it in scattered notes or not at all. BreederHQ's Nutrition Tracking gives you a food product catalog with automatic cost calculation, per-animal feeding plans, feeding logs with appetite scores, food transition documentation with outcomes, and cost analytics across your entire program.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        What are you spending on food each month? Which animals are picky eaters? How did that food transition go last time? BreederHQ tracks it all—so you can optimize nutrition, catch problems early, and know your true costs.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Stop guessing. Start tracking. Your animals' health (and your budget) will thank you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why Track Nutrition?</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Most breeders know nutrition matters. But when you're managing multiple animals, litters, and life stages, it's easy to lose track of who's eating what, how much you're spending, and what worked (or didn't) in the past.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Without Tracking:</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3 text-red-500">✗</span>
+              <span>"What food was Rex on before the stomach issues?"</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 text-red-500">✗</span>
+              <span>"How much am I actually spending on food per month?"</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 text-red-500">✗</span>
+              <span>"Did Luna's appetite drop before she got sick?"</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 text-red-500">✗</span>
+              <span>"What did I tell the last buyer about feeding?"</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">With BreederHQ:</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3 text-green-500">✓</span>
+              <span>Complete food history for every animal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 text-green-500">✓</span>
+              <span>Automatic cost calculations and projections</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 text-green-500">✓</span>
+              <span>Appetite scores that flag potential issues</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 text-green-500">✓</span>
+              <span>Feeding plans shared automatically with buyers</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        Good nutrition data helps you make better decisions—for animal health, program budgeting, and buyer education.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Food Product Catalog -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Food Product Catalog</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Build a catalog of every food product you use. BreederHQ calculates cost-per-ounce automatically, so you always know what you're spending.
+      </p>
+
+      <div class="bg-gray-50 p-6 rounded mb-8">
+        <h3 class="text-xl font-bold mb-4">For each product, track:</h3>
+        <ul class="space-y-2 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Brand and product name</strong> — Orijen, Royal Canin, raw suppliers, etc.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Food type</strong> — Dry, wet, raw, fresh, freeze-dried, supplements, treats</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Life stage</strong> — Puppy, junior, adult, senior, all stages, breeding, performance</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Species support</strong> — Which species this product is appropriate for</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Bag size and price</strong> — Automatic cost-per-ounce calculation</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Nutritional info</strong> — Protein, fat, fiber percentages, calories per cup</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Once products are in your catalog, assigning them to feeding plans is instant. Change suppliers or prices? Update once, and all cost projections recalculate automatically.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Feeding Plans -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Per-Animal Feeding Plans</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Every animal can have its own feeding plan. Puppies on growth formula. Adults on maintenance. Pregnant females on high-calorie. Each plan is tailored and tracked separately.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">Plan Details</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Food product (from your catalog)</li>
+            <li>• Portion size per feeding</li>
+            <li>• Feedings per day</li>
+            <li>• Feeding times (optional)</li>
+            <li>• Special instructions or notes</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">Automatic Calculations</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Daily food consumption</li>
+            <li>• Daily cost per animal</li>
+            <li>• Monthly cost projection</li>
+            <li>• Total program food cost</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-4">Why This Matters</h3>
+        <p class="text-gray-700">
+          When you know exactly what each animal costs to feed, you can price placements accurately, identify cost-saving opportunities, and budget for growth. No more guessing at "roughly $X per month for food."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Feeding Logs -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Feeding Logs & Appetite Tracking</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Optionally log individual feedings to build a detailed history. Quick logging takes seconds and captures valuable health data.
+      </p>
+
+      <div class="bg-gray-50 p-6 rounded mb-8">
+        <h3 class="text-xl font-bold mb-4">What you can log:</h3>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Date and time</strong> — When the feeding occurred</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Appetite score (1-5)</strong> — Did they eat everything? Pick at it? Refuse?</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Portion adjustment</strong> — If you gave more or less than usual</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Skipped feeding</strong> — With a reason (illness, vet visit, etc.)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Notes</strong> — Any observations worth recording</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded">
+        <h3 class="text-xl font-bold mb-4">Early Warning System</h3>
+        <p class="text-gray-700">
+          Appetite changes are often the first sign of illness. When you log appetite scores, BreederHQ can help you spot patterns—like a dog that's been eating less for three days straight. Catch problems early, before they become emergencies.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Food Transitions -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Food Change Documentation</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Changing foods is risky—digestive upset, refusal, allergic reactions. BreederHQ helps you document transitions properly so you know what works for each animal.
+      </p>
+
+      <div class="bg-white p-6 rounded border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-4">When you change foods, document:</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Reason for change</strong> — Life stage, health issue, vet recommendation, cost, availability, preference</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Previous food</strong> — What they were eating before</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>New food</strong> — What you're transitioning to</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Transition protocol</strong> — How you're phasing in the new food</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Outcome rating</strong> — Excellent, good, fair, or poor</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Notes</strong> — Any reactions, adjustments, or observations</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Next time you need to change an animal's food, you'll have history to reference. "Last time we switched Luna to Brand X, she had loose stool for a week—try Brand Y instead."
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Cost Analytics -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Cost Analytics Dashboard</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        See the full financial picture of your feeding program. BreederHQ aggregates costs across all animals to show you exactly where your money goes.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">Summary Metrics</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Total food cost (period)</li>
+            <li>• Average cost per feeding</li>
+            <li>• Total feedings logged</li>
+            <li>• Feeding adherence rate</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded">
+          <h3 class="text-xl font-bold mb-4">Visual Charts</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Cost trend over time</li>
+            <li>• Cost breakdown by animal</li>
+            <li>• Top 10 animals by food cost</li>
+            <li>• Cost comparison by food type</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-4">Date Range Filtering</h3>
+        <p class="text-gray-700">
+          View analytics for the last 7 days, 30 days, 90 days, or custom date ranges. The date range is saved in the URL, so you can bookmark or share specific reports.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Integration -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Integrated with Everything Else</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Nutrition tracking isn't isolated—it connects to the rest of your breeding program.
+      </p>
+
+      <div class="space-y-6">
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Animal Profiles</h3>
+          <p class="text-gray-700">
+            Each animal's Nutrition tab shows their current feeding plan, recent feeding logs, food change history, and cost analytics. Everything in one place.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Health Records</h3>
+          <p class="text-gray-700">
+            Appetite scores from feeding logs can correlate with health events. Weight tracking helps you adjust portions. Vets can see dietary history when diagnosing issues.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Client Portal</h3>
+          <p class="text-gray-700">
+            Feeding plans can be shared with buyers through the portal, so they know exactly what their new pet has been eating. Consistent nutrition during the transition home reduces stress.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Financial Dashboard</h3>
+          <p class="text-gray-700">
+            Food costs roll up into your overall program financials. See feeding expenses alongside vet costs, supplies, and other categories for a complete picture.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Know What You're Feeding—and What It Costs</h2>
+      <p class="text-xl mb-8 opacity-90">
+        Stop guessing at nutrition. Start tracking with purpose.
+      </p>
+      <a href="/coming-soon" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+        Get Early Access
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-8">
+        {faqs.map(faq => (
+          <div class="border-b border-gray-200 pb-8 last:border-0">
+            <h3 class="faq-question">{faq.question}</h3>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .skip-link:focus {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 50;
+      padding: 1rem;
+      background: white;
+      color: black;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      border-radius: 0.5rem;
+    }
+
+    .faq-question {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.75rem;
+    }
+
+    .faq-answer {
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
