@@ -1,0 +1,464 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Titles & Competitions', url: '/workflows/titles-competitions' }
+];
+
+const faqs = [
+  {
+    question: 'What types of titles can I track?',
+    answer: 'BreederHQ supports Conformation, Obedience, Agility, Field, Herding, Tracking, Rally, Producing, and Performance titles. Each title includes status tracking (In Progress, Earned, Verified), points/major wins, and document verification.'
+  },
+  {
+    question: 'What competition types are supported?',
+    answer: 'Track Shows (conformation, breed rings), Trials (obedience, agility, field), Races (with racing-specific fields like prize money, track, distance, speed figures), and Tests (health certifications, temperament evaluations).'
+  },
+  {
+    question: 'How do producing records work?',
+    answer: 'Producing records track an animal\'s success as a parent. See total offspring count, titled offspring, champions, and grand champions produced. Great for marketing stud dogs or brood bitches.'
+  },
+  {
+    question: 'Can I attach documentation to titles?',
+    answer: 'Yes. Attach certificates, photos, or verification documents to any title. These can be displayed on your marketplace profile or shared with buyers interested in your breeding program\'s achievements.'
+  },
+  {
+    question: 'Does this work for horses?',
+    answer: 'Yes. Horse competitions include racing-specific fields: prize money, track conditions, distance, speed figures, and judge information. Track both racing and show careers.'
+  }
+];
+---
+
+<BaseLayout
+  title="Titles & Competition Tracking | BreederHQ"
+  description="Track show titles, competition results, racing records, and producing achievements. Document your breeding program's success with verified accomplishments."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Titles & Competitions</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Showcase Your Program's Achievements</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Track titles, competition results, and producing records for every animal in your program. Conformation, obedience, agility, field, herding, tracking, rally, and performance—all in one place. Racing fields for horses. Producing sire/dam records showing champion offspring. Verified achievements that prove your program's quality to buyers.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        A breeding program's reputation is built on results. Championship titles, performance records, and producing achievements demonstrate the quality you've worked to develop.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        BreederHQ makes these accomplishments visible, organized, and verifiable—not scattered across certificates in filing cabinets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Title Categories -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Track Every Type of Title</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        BreederHQ supports the full range of competitive achievements:
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🏆</div>
+          <h3 class="text-xl font-bold mb-2">Conformation</h3>
+          <p class="text-gray-600 text-sm">Championship, Grand Champion, Best in Show, Group placements</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🎯</div>
+          <h3 class="text-xl font-bold mb-2">Obedience</h3>
+          <p class="text-gray-600 text-sm">CD, CDX, UD, UDX, OTCH, and utility titles</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🏃</div>
+          <h3 class="text-xl font-bold mb-2">Agility</h3>
+          <p class="text-gray-600 text-sm">NA, OA, AX, MX, MACH and all agility levels</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🦆</div>
+          <h3 class="text-xl font-bold mb-2">Field</h3>
+          <p class="text-gray-600 text-sm">JH, SH, MH, FC, AFC, and field trial achievements</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🐑</div>
+          <h3 class="text-xl font-bold mb-2">Herding</h3>
+          <p class="text-gray-600 text-sm">HT, PT, HS, HI, HX, HC herding titles</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">👃</div>
+          <h3 class="text-xl font-bold mb-2">Tracking</h3>
+          <p class="text-gray-600 text-sm">TD, TDX, VST, CT tracking certifications</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🎪</div>
+          <h3 class="text-xl font-bold mb-2">Rally</h3>
+          <p class="text-gray-600 text-sm">RN, RA, RE, RAE rally obedience titles</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">🏅</div>
+          <h3 class="text-xl font-bold mb-2">Performance</h3>
+          <p class="text-gray-600 text-sm">Dock diving, barn hunt, lure coursing, and more</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <div class="text-3xl mb-2">👶</div>
+          <h3 class="text-xl font-bold mb-2">Producing</h3>
+          <p class="text-gray-600 text-sm">ROM, ROMC, and producing sire/dam designations</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">Title Status Tracking</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm font-medium">In Progress</span>
+            <p class="text-sm text-gray-600 mt-1">Working toward the title</p>
+          </div>
+          <div>
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Earned</span>
+            <p class="text-sm text-gray-600 mt-1">Title achieved</p>
+          </div>
+          <div>
+            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">Verified</span>
+            <p class="text-sm text-gray-600 mt-1">Documentation confirmed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Competition Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Track Individual Competition Results</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Beyond titles, track every competition entry with full details:
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🎪 Shows</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Show name and date</li>
+            <li>• Judge information</li>
+            <li>• Class entered</li>
+            <li>• Placement and points</li>
+            <li>• Major wins</li>
+            <li>• Photos from the ring</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🎯 Trials</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Trial name and location</li>
+            <li>• Event type</li>
+            <li>• Score achieved</li>
+            <li>• Qualifying status</li>
+            <li>• Handler information</li>
+            <li>• Notes and observations</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🐎 Races (Horses)</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Race name and track</li>
+            <li>• Distance and surface</li>
+            <li>• Finishing position</li>
+            <li>• Prize money earned</li>
+            <li>• Speed figures</li>
+            <li>• Track conditions</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📋 Tests</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Test type and date</li>
+            <li>• Testing organization</li>
+            <li>• Results/scores</li>
+            <li>• Certification status</li>
+            <li>• Documentation attached</li>
+            <li>• Expiration tracking</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Aggregate statistics calculated automatically: total shows entered, win percentage, points earned, and career highlights.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Producing Records -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Producing Sire & Dam Records</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        A great breeding animal produces great offspring. Producing records track an animal's success as a parent:
+      </p>
+
+      <div class="bg-white p-8 rounded-lg border border-gray-200 mb-8">
+        <div class="grid md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div class="text-4xl font-bold text-[hsl(24,95%,53%)]">47</div>
+            <div class="text-gray-600">Total Offspring</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-[hsl(24,95%,53%)]">23</div>
+            <div class="text-gray-600">Titled Offspring</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-[hsl(24,95%,53%)]">12</div>
+            <div class="text-gray-600">Champions</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-[hsl(24,95%,53%)]">5</div>
+            <div class="text-gray-600">Grand Champions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">For Stud Dogs/Stallions</h3>
+          <p class="text-gray-700 mb-3">
+            Showcase what your stud has produced. Buyers of breeding services want to see proven results.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-1">
+            <li>• Total offspring sired</li>
+            <li>• Champions by each dam</li>
+            <li>• Performance titles produced</li>
+            <li>• Health clearance statistics</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">For Brood Bitches/Mares</h3>
+          <p class="text-gray-700 mb-3">
+            Document a proven producer. Breeding-quality females with producing records command premium prices.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-1">
+            <li>• Litters/foals produced</li>
+            <li>• Champions by each sire</li>
+            <li>• Average litter quality</li>
+            <li>• Notable offspring achievements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Verification -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Verified Achievements Build Trust</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Anyone can claim "champion lines." BreederHQ lets you prove it:
+      </p>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-4">Document Verification</h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Attach title certificates and completion documents</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Upload show photos and result sheets</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Link to registry verification pages</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Verified badge shows on marketplace profile</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">Marketplace Integration</h3>
+        <p class="text-gray-700">
+          Verified titles appear on your marketplace profile. Buyers see real achievements, not just claims. This builds trust and differentiates your program from breeders who can't prove their pedigrees.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Document Your Program's Success</h2>
+      <p class="text-xl mb-8 opacity-90">
+        Titles. Competitions. Producing records. All in one place.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/coming-soon" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+          Get Early Access
+        </a>
+        <a href="/workflows/pedigrees" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary inline-block">
+          See Pedigree Features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What types of titles can I track?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ supports Conformation, Obedience, Agility, Field, Herding, Tracking, Rally, Producing, and Performance titles. Each title includes status tracking (In Progress, Earned, Verified), points/major wins, and document verification.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How do producing records work?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Producing records track an animal's success as a parent. See total offspring count, titled offspring, champions, and grand champions produced. Great for marketing stud dogs or brood bitches.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does this work for horses?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Horse competitions include racing-specific fields: prize money, track conditions, distance, speed figures, and judge information. Track both racing and show careers.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/pedigrees" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Pedigree Tracking
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Genetics & Health Testing
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Marketplace Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

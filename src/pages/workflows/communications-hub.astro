@@ -1,0 +1,511 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Communications Hub', url: '/workflows/communications-hub' }
+];
+
+const faqs = [
+  {
+    question: 'What channels does the Communications Hub support?',
+    answer: 'The hub combines email and direct messages (from the client portal and marketplace) into one unified inbox. You see everything in one place instead of checking multiple platforms.'
+  },
+  {
+    question: 'Can I use my own email address?',
+    answer: 'Yes. You can configure your custom email domain for sending messages. Replies come back to your unified inbox.'
+  },
+  {
+    question: 'What are document bundles?',
+    answer: 'Document bundles are pre-packaged sets of documents you send frequently. For example, a "Go-Home Packet" bundle might include health records, vaccination certificates, feeding instructions, and training resources. One click attaches the whole bundle.'
+  },
+  {
+    question: 'How does the Quick Responder badge work?',
+    answer: 'BreederHQ tracks your response times automatically. If you respond to inquiries within 4 hours during business hours (and have at least 5 responses), you earn the Quick Responder badge. It shows up on your marketplace profile.'
+  },
+  {
+    question: 'Are auto-replies available?',
+    answer: 'Auto-replies are coming soon. You\'ll be able to set instant acknowledgments, away messages, and FAQ-based automatic responses.'
+  }
+];
+---
+
+<BaseLayout
+  title="Communications Hub | BreederHQ"
+  description="Unified inbox for breeder communications. Email and messages in one place, templates with variable insertion, document bundles, and real-time notifications."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Communications Hub</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">One Inbox for All Client Communication</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Stop checking email, portal messages, and marketplace inquiries separately. The Communications Hub combines everything into one unified inbox with real-time updates. Use templates with variable insertion (buyer name, animal name, etc.). Attach document bundles with one click. Track response times to earn your Quick Responder badge. Configure business hours so buyers know when to expect replies.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        Professional breeders communicate constantly—with buyers, waitlist families, past clients, and marketplace inquiries. When those conversations are scattered across email, text, social media, and your website, things fall through the cracks.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        The Communications Hub brings everything together. One place to see, respond, and manage all client communication.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Scattered Communication Problem</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Right now, you probably check:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Personal email for client questions</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Business email for formal inquiries</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Text messages for quick updates</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Facebook Messenger for social inquiries</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Instagram DMs for photo requests</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Website contact forms</span>
+        </li>
+      </ul>
+
+      <div class="bg-white border-l-4 border-red-500 p-6 rounded mb-6">
+        <h3 class="text-xl font-bold mb-4">What goes wrong:</h3>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>An inquiry sits unanswered because you didn't see it</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>You can't find that conversation from last month</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>You type the same responses over and over</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Important details get lost in different threads</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>You look unprofessional when responses are slow or inconsistent</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        When communication is scattered, opportunities are lost and reputation suffers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Unified Inbox -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Everything in One Place</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The Communications Hub is your single dashboard for all client interactions:
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📧 Email</h3>
+          <p class="text-gray-700">
+            Incoming and outgoing emails from your configured email address. Full threading, attachments, and reply-to handling.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">💬 Portal Messages</h3>
+          <p class="text-gray-700">
+            Direct messages from buyers in your client portal. Real-time WebSocket updates—see new messages instantly.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🔔 Marketplace Inquiries</h3>
+          <p class="text-gray-700">
+            Inquiries from potential buyers on the BreederHQ Marketplace flow directly into your hub. No separate inbox to check.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🏷️ Smart Organization</h3>
+          <p class="text-gray-700">
+            Automatic folders: All, Inbox, Sent, Flagged, Drafts, Archived. Filter by channel, search by keyword, or filter by tags.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">Real-Time Updates</h3>
+        <p class="text-gray-700">
+          WebSocket-powered notifications mean you see new messages the moment they arrive. No refreshing. No waiting. Just instant awareness of new communication.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Templates -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Stop Typing the Same Thing Over and Over</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        How many times have you typed "Thank you for your interest in our program..."? Templates let you respond professionally and consistently without starting from scratch.
+      </p>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-4">Template Features</h3>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Variable insertion:</strong> Templates automatically fill in contact name, animal name, litter name, and other dynamic data</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Categories:</strong> Organize templates by type—Email, DM, Social</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Preview mode:</strong> See exactly what the message will look like before sending</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Quick access:</strong> One-click insertion from the compose window</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">Example: Inquiry Response</h4>
+          <p class="text-gray-600 text-sm italic">
+            "Hi {{contact_name}}, thank you for your interest in {{litter_name}}! I'd love to tell you more about our program..."
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">Example: Deposit Confirmation</h4>
+          <p class="text-gray-600 text-sm italic">
+            "Hi {{contact_name}}, I've received your deposit for {{animal_name}}. Your portal access has been activated..."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Document Bundles -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Document Bundles: One Click, All the Files</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Sending the same set of documents repeatedly? Document bundles let you package files together and attach them all with one click.
+      </p>
+
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-4">Common Bundle Examples</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold mb-2">📦 Go-Home Packet</h4>
+            <ul class="text-gray-700 space-y-1 text-sm">
+              <li>• Health records</li>
+              <li>• Vaccination certificate</li>
+              <li>• Feeding instructions</li>
+              <li>• Training resources</li>
+              <li>• Microchip registration</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-2">📋 Application Packet</h4>
+            <ul class="text-gray-700 space-y-1 text-sm">
+              <li>• Program overview</li>
+              <li>• Pricing information</li>
+              <li>• Health testing results</li>
+              <li>• Contract sample</li>
+              <li>• Waitlist process</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Create bundles once, reuse forever. Drag to reorder documents within bundles. Professional, consistent, and fast.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Quick Responder Badge -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Earn Your Quick Responder Badge</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Buyers want responsive breeders. The Quick Responder badge shows on your marketplace profile when you consistently respond quickly—and it's earned automatically, not self-reported.
+      </p>
+
+      <div class="bg-white p-8 rounded-lg border-2 border-yellow-400 mb-8">
+        <div class="flex items-center mb-4">
+          <svg class="w-12 h-12 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <div>
+            <h3 class="text-xl font-bold">Quick Responder</h3>
+            <p class="text-gray-600">Responds within 4 hours during business hours</p>
+          </div>
+        </div>
+        <div class="bg-gray-50 p-4 rounded">
+          <h4 class="font-bold mb-2">How to earn it:</h4>
+          <ul class="text-gray-700 space-y-1">
+            <li>• Respond to inquiries within 4 hours during your business hours</li>
+            <li>• Maintain this response time across at least 5 inquiries</li>
+            <li>• Badge is awarded automatically—no application needed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200">
+        <h3 class="text-xl font-bold mb-3">⏰ Business Hours Configuration</h3>
+        <p class="text-gray-700 mb-3">
+          Set your availability schedule so the system knows when to measure response times. Configure:
+        </p>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Per-day schedule (15-minute intervals)</li>
+          <li>• Timezone selection</li>
+          <li>• Different hours for different days</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Coming Soon -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Coming Soon: Auto-Replies</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        We're building automatic response features to help you manage high inquiry volumes:
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📨 Instant Acknowledgment</h3>
+          <p class="text-gray-700">
+            Auto-send a confirmation when someone inquires. "Thanks for reaching out! I'll respond within 24 hours."
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🏖️ Away Messages</h3>
+          <p class="text-gray-700">
+            Traveling or at a show? Set an away message with your return date so inquirers know when to expect a response.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">❓ FAQ Responses</h3>
+          <p class="text-gray-700">
+            Detect common questions and send relevant information automatically. "You asked about pricing—here's our current pricing guide."
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📅 Smart Scheduling</h3>
+          <p class="text-gray-700">
+            Configure when auto-replies send. Business hours only? Weekends included? You control the rules.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Never Miss Another Message</h2>
+      <p class="text-xl mb-8 opacity-90">
+        One inbox. Real-time updates. Professional responses.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/coming-soon" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+          Get Early Access
+        </a>
+        <a href="/workflows/client-portal" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary inline-block">
+          See Client Portal →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What channels does the Communications Hub support?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>The hub combines email and direct messages (from the client portal and marketplace) into one unified inbox. You see everything in one place instead of checking multiple platforms.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What are document bundles?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Document bundles are pre-packaged sets of documents you send frequently. For example, a "Go-Home Packet" bundle might include health records, vaccination certificates, feeding instructions, and training resources. One click attaches the whole bundle.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How does the Quick Responder badge work?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ tracks your response times automatically. If you respond to inquiries within 4 hours during business hours (and have at least 5 responses), you earn the Quick Responder badge. It shows up on your marketplace profile.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Portal Features
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/client-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Marketplace Listings
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

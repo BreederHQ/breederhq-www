@@ -1,0 +1,731 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Rearing Protocols', url: '/workflows/rearing-protocols' }
+];
+
+const faqs = [
+  {
+    question: 'What are rearing protocols?',
+    answer: 'Rearing protocols are structured developmental programs for puppies and other young animals. They include exercises, socialization activities, and handling routines designed to produce well-adjusted, confident animals. Examples include Early Neurological Stimulation (ENS), Early Scent Introduction (ESI), and the Rule of 7s.'
+  },
+  {
+    question: 'What benchmark protocols are included?',
+    answer: 'BreederHQ includes industry-standard protocols like ENS (Early Neurological Stimulation/Bio-Sensor Program), ESI (Early Scent Introduction), Rule of 7s, Puppy Culture exercises, and Avidog protocols. Each comes with day-by-day tasks, timing guidelines, and completion tracking.'
+  },
+  {
+    question: 'Can I create my own custom protocols?',
+    answer: 'Yes. The Protocol Builder lets you create custom protocols with your own phases, tasks, and timing. You can start from scratch or modify existing protocols to match your program\'s approach.'
+  },
+  {
+    question: 'How does per-puppy tracking work?',
+    answer: 'Each puppy in a litter gets individual progress tracking. You can mark tasks complete for the whole litter at once (batch completion) or track exceptions for individual puppies who missed or couldn\'t complete specific exercises.'
+  },
+  {
+    question: 'What is community protocol sharing?',
+    answer: 'Experienced breeders can share their custom protocols with the community. Other breeders can browse, rate, review, and import protocols that work well. It\'s a way to learn from breeders who have refined their approach over years.'
+  },
+  {
+    question: 'How do completion certificates work?',
+    answer: 'When a puppy completes a protocol, you can generate a digital certificate documenting their developmental program. Certificates include a verification code buyers can use to confirm authenticity. Great for demonstrating the care that went into raising each puppy.'
+  },
+  {
+    question: 'Do I need to use protocols to use BreederHQ?',
+    answer: 'No. Protocols are optional. Many breeders start without them and add protocols later as their program matures. The rest of BreederHQ works independently of the protocol system.'
+  }
+];
+---
+
+<BaseLayout
+  title="Rearing Protocols & Puppy Development | BreederHQ"
+  description="Structured puppy development with ENS, ESI, Rule of 7s, and custom protocols. Track progress per-puppy, share protocols with the community, and generate completion certificates for buyers."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Rearing Protocols</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Raise Better Puppies with Structured Protocols</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Rearing protocols like ENS, ESI, and Rule of 7s produce better-adjusted puppies. BreederHQ includes industry-standard protocols built-in, lets you create custom protocols, tracks completion per-puppy with exception handling, enables community protocol sharing with ratings and reviews, and generates verification certificates for buyers. Stop tracking development on paper. Start proving the care you put into every puppy.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        The best breeders don't just produce puppies—they develop them. Structured protocols like Early Neurological Stimulation (ENS) and Early Scent Introduction (ESI) create puppies that are more resilient, confident, and adaptable.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        But tracking these programs on paper or in spreadsheets? That's a mess. BreederHQ makes protocol tracking as professional as the protocols themselves.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Problem with Manual Protocol Tracking</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        You know protocols matter. You've read the research. You want to do it right. But implementation is hard:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Paper checklists get lost, wet, or illegible</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Spreadsheets work until you have multiple litters overlapping</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You can't prove to buyers what you actually did</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>When a puppy misses an exercise, you lose track of what to make up</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>New staff or helpers don't know what was already completed</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>You spend more time tracking than actually doing the exercises</span>
+        </li>
+      </ul>
+
+      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
+        <p class="text-lg text-gray-700 font-semibold">
+          The irony: breeders who care most about development often struggle most with documentation. The extra effort gets lost because there's no proof.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Protocol Library -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Industry-Standard Protocols Built-In</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        BreederHQ includes benchmark protocols used by professional breeders worldwide. No need to build from scratch—just assign a protocol to your litter and start tracking.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🧠 Early Neurological Stimulation (ENS)</h3>
+          <p class="text-gray-700 mb-3">
+            Also called the "Bio-Sensor Program" or "Super Dog Program." Five exercises performed daily from days 3-16 to improve stress tolerance, cardiovascular performance, and disease resistance.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Tactile stimulation</li>
+            <li>• Head held erect</li>
+            <li>• Head pointed down</li>
+            <li>• Supine position</li>
+            <li>• Thermal stimulation</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">👃 Early Scent Introduction (ESI)</h3>
+          <p class="text-gray-700 mb-3">
+            Expose puppies to novel scents daily from days 3-16. Develops scent discrimination and confidence with new stimuli. Essential for working dogs and service dog prospects.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• One new scent per day</li>
+            <li>• Track puppy reactions (positive/neutral/negative)</li>
+            <li>• Build scent exposure library</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">7️⃣ Rule of 7s</h3>
+          <p class="text-gray-700 mb-3">
+            By 7 weeks, puppies should have experienced 7 different surfaces, 7 different locations, 7 different toys, and more. Systematic socialization checklist.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• 7 surfaces (grass, concrete, carpet, etc.)</li>
+            <li>• 7 locations</li>
+            <li>• 7 challenges/obstacles</li>
+            <li>• 7 different food containers</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📚 Additional Protocols</h3>
+          <p class="text-gray-700 mb-3">
+            Beyond the classics, BreederHQ supports:
+          </p>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• Puppy Culture developmental stages</li>
+            <li>• Avidog enrichment programs</li>
+            <li>• Startle/recovery exercises</li>
+            <li>• Sound desensitization protocols</li>
+            <li>• Crate training introduction</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Each protocol includes day-by-day tasks, timing windows, and completion criteria. You don't need to research or design anything—just follow the schedule.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Custom Protocol Builder -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Build Your Own Protocols</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Every program is different. Maybe you've developed your own approach over years of breeding. Maybe you combine elements from multiple systems. Maybe your breed has specific developmental needs.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The Protocol Builder lets you create exactly what your program needs:
+      </p>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-4">Protocol Builder Features</h3>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Phases:</strong> Organize tasks into developmental stages (neonatal, transitional, socialization, etc.)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Tasks:</strong> Define specific activities with descriptions, timing, and frequency</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Day ranges:</strong> Specify when each task should be performed (e.g., days 3-16)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Dependencies:</strong> Some tasks require previous tasks to be completed first</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Notes/instructions:</strong> Add detailed guidance for each task</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Drag-and-drop reordering:</strong> Easily adjust task sequence</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Start from scratch, or clone an existing protocol and modify it. Your custom protocols work exactly like the built-in ones—full tracking, certificates, everything.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Per-Puppy Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Track Every Puppy, Every Task</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Real litters don't follow perfect schedules. One puppy might be sick during ENS exercises. Another might need extra attention. The tracking system handles real-world messiness.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">Batch Completion</h3>
+          <p class="text-gray-700">
+            Did today's ENS exercises with the whole litter? Mark the task complete for everyone at once. No need to check 8 individual boxes.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">Individual Tracking</h3>
+          <p class="text-gray-700">
+            Need to track one puppy differently? Each puppy has their own completion record. Perfect for puppies with different developmental timelines.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">Exception Handling</h3>
+          <p class="text-gray-700">
+            When a puppy misses a task, log it as an exception with a reason. "Blue collar missed Day 5 ESI due to vet visit." The system tracks what needs to be made up.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-4">Progress Dashboard</h3>
+          <p class="text-gray-700">
+            See litter-wide and per-puppy completion percentages at a glance. Know exactly where each puppy stands in their developmental program.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <p class="text-lg text-gray-700">
+          <strong>For helpers and staff:</strong> Anyone you authorize can log completions. They see today's tasks, mark them done, and add notes. No confusion about what's been done.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Community Sharing -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Learn from the Best Breeders</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The breeding community thrives on shared knowledge. Community Protocol Sharing lets experienced breeders share what works—and lets everyone benefit.
+      </p>
+
+      <div class="space-y-6 mb-8">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Share Your Protocols</h3>
+          <p class="text-gray-700 mb-3">
+            Developed a protocol that produces exceptional results? Share it with the community. Your protocol gets attributed to you, building your reputation as a knowledgeable breeder.
+          </p>
+          <p class="text-sm text-gray-500">
+            You control visibility: keep protocols private, share with specific breeders, or publish publicly.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Browse and Import</h3>
+          <p class="text-gray-700 mb-3">
+            Find protocols from experienced breeders in your breed or discipline. Filter by species, breed, purpose, and ratings. Import protocols with one click and customize for your program.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Ratings and Reviews</h3>
+          <p class="text-gray-700 mb-3">
+            Rate protocols 1-5 stars. Leave reviews about what worked and what didn't. The best protocols rise to the top. New breeders can trust community-vetted approaches.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Export and Backup</h3>
+          <p class="text-gray-700">
+            Export protocols to JSON format. Back them up, share via email, or import into another breeder's system. Your work isn't locked in.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        Community sharing is available on Enterprise plans. All other protocol features work on Pro plans.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Completion Certificates -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Prove the Care You Put Into Every Puppy</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Buyers want to know their puppy was raised right. Completion certificates provide documented proof of developmental programs—and differentiate you from breeders who just claim they "socialize puppies."
+      </p>
+
+      <div class="bg-white border-2 border-[hsl(24,95%,53%)] rounded-lg p-8 mb-8">
+        <div class="text-center mb-6">
+          <div class="text-5xl mb-4">🏅</div>
+          <h3 class="text-2xl font-bold">Certificate of Completion</h3>
+        </div>
+        <p class="text-gray-700 mb-4">Each certificate includes:</p>
+        <ul class="space-y-2 text-gray-700 mb-6">
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Puppy name and identification</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Protocol name and description</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Completion date and percentage</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span>Breeder name and program</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">✓</span>
+            <span><strong>Verification code</strong> for authenticity checking</span>
+          </li>
+        </ul>
+        <div class="bg-gray-50 p-4 rounded text-center">
+          <p class="text-sm text-gray-600 mb-1">Verification Code</p>
+          <code class="text-lg font-mono">BHQ-ENS-2026-XXXX-XXXX</code>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-bold mb-3">For Breeders</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Differentiate from breeders who don't document development</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Justify premium pricing with documented care</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Include in go-home packets alongside health records</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-3">For Buyers</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Verify certificates are authentic, not fabricated</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Understand exactly what developmental work was done</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Trust that the breeder invested in early development</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Temperament Testing Integration -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Temperament Testing: Match Puppies to Families</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Rearing protocols develop puppies. Temperament testing evaluates them. BreederHQ includes the <strong>Volhard Puppy Aptitude Test (PAT)</strong>—the industry standard for matching puppies to the right homes.
+      </p>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-4">Volhard PAT Scoring</h3>
+        <p class="text-gray-700 mb-4">
+          The Volhard PAT evaluates puppies at 49 days across 10 standardized tests:
+        </p>
+        <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+          <ul class="space-y-2">
+            <li class="flex items-start"><span class="mr-3">1.</span><span>Social Attraction</span></li>
+            <li class="flex items-start"><span class="mr-3">2.</span><span>Following</span></li>
+            <li class="flex items-start"><span class="mr-3">3.</span><span>Restraint</span></li>
+            <li class="flex items-start"><span class="mr-3">4.</span><span>Social Dominance</span></li>
+            <li class="flex items-start"><span class="mr-3">5.</span><span>Elevation Dominance</span></li>
+          </ul>
+          <ul class="space-y-2">
+            <li class="flex items-start"><span class="mr-3">6.</span><span>Retrieving</span></li>
+            <li class="flex items-start"><span class="mr-3">7.</span><span>Touch Sensitivity</span></li>
+            <li class="flex items-start"><span class="mr-3">8.</span><span>Sound Sensitivity</span></li>
+            <li class="flex items-start"><span class="mr-3">9.</span><span>Sight Sensitivity</span></li>
+            <li class="flex items-start"><span class="mr-3">10.</span><span>Stability</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📊 Score Radar Charts</h3>
+          <p class="text-gray-700">
+            Visual radar charts show each puppy's temperament profile at a glance. Quickly identify high-drive, independent, sensitive, or handler-focused puppies.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">👥 Sibling Comparison</h3>
+          <p class="text-gray-700">
+            Compare all puppies in a litter side-by-side. See which puppy is best suited for an active family vs. a calm home. Match drive levels to buyer lifestyles.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📈 Assessment History</h3>
+          <p class="text-gray-700">
+            Track multiple assessments over time. See how puppies develop. Compare 7-week scores to later evaluations.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📋 Buyer Reports</h3>
+          <p class="text-gray-700">
+            Generate temperament reports for buyers. Help them understand their puppy's personality and training needs before going home.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gray-100 p-6 rounded-lg">
+        <p class="text-lg text-gray-700 font-semibold">
+          Good breeders don't just sell puppies—they match them. Temperament testing turns puppy placement from guesswork into science.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Rearing Protocols Matter If You:</h2>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Already do ENS, ESI, or structured socialization</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Want to prove to buyers the care you invest</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Produce working dogs, service dogs, or sport prospects</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Have helpers who need clear daily task lists</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Want to match puppies to families based on temperament</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">✓</span>
+              <span>Believe in science-based puppy development</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-3xl font-bold mb-6">You Might Not Need This If:</h2>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You don't do structured developmental programs</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Your litters are small and tracking is simple</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Your buyers don't ask about early development</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You're not interested in temperament testing</span>
+            </li>
+          </ul>
+          <p class="text-sm text-gray-600 mt-4 italic">
+            Even then, if you want to start using protocols, BreederHQ makes it easy to begin.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Give Every Puppy the Best Start</h2>
+      <p class="text-xl mb-8 opacity-90">
+        Structured development. Documented care. Happier buyers.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/coming-soon" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+          Get Early Access
+        </a>
+        <a href="/workflows/whelping" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary inline-block">
+          See Whelping Features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What are rearing protocols?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Rearing protocols are structured developmental programs for puppies and other young animals. They include exercises, socialization activities, and handling routines designed to produce well-adjusted, confident animals. Examples include Early Neurological Stimulation (ENS), Early Scent Introduction (ESI), and the Rule of 7s.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What benchmark protocols are included?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ includes industry-standard protocols like ENS (Early Neurological Stimulation/Bio-Sensor Program), ESI (Early Scent Introduction), Rule of 7s, Puppy Culture exercises, and Avidog protocols. Each comes with day-by-day tasks, timing guidelines, and completion tracking.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I create my own custom protocols?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The Protocol Builder lets you create custom protocols with your own phases, tasks, and timing. You can start from scratch or modify existing protocols to match your program's approach.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How does per-puppy tracking work?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Each puppy in a litter gets individual progress tracking. You can mark tasks complete for the whole litter at once (batch completion) or track exceptions for individual puppies who missed or couldn't complete specific exercises.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How do completion certificates work?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>When a puppy completes a protocol, you can generate a digital certificate documenting their developmental program. Certificates include a verification code buyers can use to confirm authenticity. Great for demonstrating the care that went into raising each puppy.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/whelping" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping & Neonatal Care
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Waitlist & Placement Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Portal Features
+          </a>
+        </div>
+        <div>
+          <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Features
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

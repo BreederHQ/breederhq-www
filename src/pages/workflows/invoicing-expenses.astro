@@ -1,0 +1,528 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Invoicing & Expenses', url: '/workflows/invoicing-expenses' }
+];
+
+const faqs = [
+  {
+    question: 'What payment methods can I track?',
+    answer: 'BreederHQ tracks Cash, Check, Credit Card, Debit Card, ACH, Wire Transfer, PayPal, Venmo, and Zelle. Each payment can include a reference number for reconciliation.'
+  },
+  {
+    question: 'Can clients pay through the platform?',
+    answer: 'Yes. With Stripe integration, clients can pay invoices directly through their portal. You can also create Stripe invoices that are sent via email with a payment link.'
+  },
+  {
+    question: 'What expense categories are available?',
+    answer: 'Twelve categories: Veterinary, Supplies, Food, Grooming, Breeding, Facility, Marketing, Labor, Insurance, Registration, Travel, and Other. Each expense can be linked to specific animals.'
+  },
+  {
+    question: 'Can I export financial data?',
+    answer: 'Yes. Export invoices, payments, and expenses to CSV with configurable columns. Works with spreadsheets, accounting software, or your CPA.'
+  },
+  {
+    question: 'Does this replace accounting software?',
+    answer: 'BreederHQ handles breeder-specific invoicing and expense tracking. For full accounting (tax returns, depreciation, etc.), you may still want dedicated accounting software. Data exports make integration easy.'
+  },
+  {
+    question: 'How do breeding plan financial rollups work?',
+    answer: 'Each breeding plan shows total revenue, deposit timing (before/after birth), and average pricing. See the financial picture for each litter at a glance.'
+  }
+];
+---
+
+<BaseLayout
+  title="Invoicing & Expense Tracking | BreederHQ"
+  description="Professional invoicing for breeders. Create invoices with deposits and line items, track payments, log expenses by category, and see financial dashboards. Stripe integration included."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Invoicing & Expenses</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Stop Chasing Payments. Get Professional Invoicing.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          BreederHQ includes full invoicing and expense tracking built for breeders. Create invoices with deposits, service fees, goods, and discounts. Track payments via 9 methods including Stripe. Log expenses across 12 categories. See financial dashboards with outstanding balances, MTD metrics, and per-litter rollups. Export to CSV for your accountant.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        "Did they pay the deposit?" "What's their remaining balance?" "How much have I spent on vet bills this year?"
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        If you're tracking finances in spreadsheets, notebooks, or your head—you're losing money. Professional invoicing and expense tracking is included with BreederHQ.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Breeder Finance Problem</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Breeding is a business, but most breeders track finances like a hobby:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Handwritten deposit logs that don't sync with anything</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Venmo payments with no record of what they're for</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Expenses scattered across receipts, bank statements, and memory</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>No idea if a litter was profitable until tax time</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Embarrassing conversations asking clients what they owe</span>
+        </li>
+      </ul>
+
+      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
+        <p class="text-lg text-gray-700 font-semibold">
+          Generic accounting software doesn't understand breeding. It doesn't link invoices to litters, track deposits by waitlist position, or show revenue per breeding plan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Invoicing -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Professional Invoicing for Breeders</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Create clear, professional invoices that clients can understand and pay:
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-xl font-bold mb-4">Invoice Line Item Types</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="flex items-start">
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium mr-3">Deposit</span>
+            <span class="text-gray-700">Initial deposits, progress payments</span>
+          </div>
+          <div class="flex items-start">
+            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium mr-3">Service Fee</span>
+            <span class="text-gray-700">Stud fees, training, photography</span>
+          </div>
+          <div class="flex items-start">
+            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-medium mr-3">Goods</span>
+            <span class="text-gray-700">Puppy price, supplies, merchandise</span>
+          </div>
+          <div class="flex items-start">
+            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm font-medium mr-3">Discount</span>
+            <span class="text-gray-700">Early payment, returning client</span>
+          </div>
+          <div class="flex items-start">
+            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm font-medium mr-3">Tax</span>
+            <span class="text-gray-700">Sales tax where applicable</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📄 Invoice Status Tracking</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li><strong>Draft:</strong> Working on it, not sent</li>
+            <li><strong>Issued:</strong> Sent to client</li>
+            <li><strong>Partially Paid:</strong> Some payment received</li>
+            <li><strong>Paid:</strong> Fully paid</li>
+            <li><strong>Overdue:</strong> Past due date</li>
+            <li><strong>Void:</strong> Canceled</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🔗 Link to Breeding Data</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Anchor invoices to specific animals</li>
+            <li>• Link to offspring groups/litters</li>
+            <li>• Associate with breeding plans</li>
+            <li>• Connect to service codes</li>
+            <li>• Attach supporting documents</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">💳 Stripe Integration</h3>
+        <p class="text-gray-700 mb-3">
+          Connect your Stripe account for seamless online payments:
+        </p>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Create Stripe invoices directly from BreederHQ</li>
+          <li>• Clients pay via link in email or portal</li>
+          <li>• Automatic payment status sync</li>
+          <li>• Download PDFs for signed invoices</li>
+          <li>• Void invoices when needed</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Payment Tracking -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Track Every Payment Method</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Clients pay however is convenient for them. BreederHQ tracks it all:
+      </p>
+
+      <div class="grid grid-cols-3 md:grid-cols-5 gap-4 mb-8">
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">💵</div>
+          <div class="font-medium">Cash</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">📝</div>
+          <div class="font-medium">Check</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">💳</div>
+          <div class="font-medium">Credit Card</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">🏦</div>
+          <div class="font-medium">ACH</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">🔗</div>
+          <div class="font-medium">Wire</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">🅿️</div>
+          <div class="font-medium">PayPal</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">📱</div>
+          <div class="font-medium">Venmo</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">⚡</div>
+          <div class="font-medium">Zelle</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">💰</div>
+          <div class="font-medium">Debit Card</div>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Each payment record includes date, amount, method, reference number (for check numbers, transaction IDs, etc.), and automatic invoice balance updates.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Expense Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Know Where Your Money Goes</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Track every breeding expense with categories designed for your business:
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">🏥 Veterinary</h4>
+          <p class="text-sm text-gray-600">Exams, testing, procedures, medications</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">📦 Supplies</h4>
+          <p class="text-sm text-gray-600">Whelping supplies, collars, crates</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">🍖 Food</h4>
+          <p class="text-sm text-gray-600">Kibble, raw, supplements</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">✂️ Grooming</h4>
+          <p class="text-sm text-gray-600">Professional grooming, supplies</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">🐕 Breeding</h4>
+          <p class="text-sm text-gray-600">Stud fees, semen, AI costs</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">🏠 Facility</h4>
+          <p class="text-sm text-gray-600">Kennels, fencing, utilities</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">📣 Marketing</h4>
+          <p class="text-sm text-gray-600">Website, photos, advertising</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">👷 Labor</h4>
+          <p class="text-sm text-gray-600">Help, training, contractors</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">🛡️ Insurance</h4>
+          <p class="text-sm text-gray-600">Liability, health, property</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">📋 Registration</h4>
+          <p class="text-sm text-gray-600">AKC, microchips, licenses</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">🚗 Travel</h4>
+          <p class="text-sm text-gray-600">Shows, pickups, vet visits</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 class="font-bold mb-2">📁 Other</h4>
+          <p class="text-sm text-gray-600">Everything else</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200">
+        <h3 class="text-xl font-bold mb-3">Expense Features</h3>
+        <ul class="text-gray-700 space-y-2">
+          <li>• Link expenses to specific animals</li>
+          <li>• Track vendor information</li>
+          <li>• Attach receipt images</li>
+          <li>• Filter by date range, category, animal</li>
+          <li>• Export to CSV for tax prep</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Financial Dashboard -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">See Your Financial Picture at a Glance</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The financial dashboard gives you instant visibility into your breeding business:
+      </p>
+
+      <div class="bg-white p-8 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-6">Dashboard Metrics</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border-l-4 border-green-500 pl-4">
+            <div class="text-sm text-gray-600">Outstanding Invoices</div>
+            <div class="text-2xl font-bold">Total amount owed to you</div>
+          </div>
+          <div class="border-l-4 border-blue-500 pl-4">
+            <div class="text-sm text-gray-600">Month-to-Date Invoiced</div>
+            <div class="text-2xl font-bold">Revenue this month</div>
+          </div>
+          <div class="border-l-4 border-purple-500 pl-4">
+            <div class="text-sm text-gray-600">Month-to-Date Collected</div>
+            <div class="text-2xl font-bold">Payments received</div>
+          </div>
+          <div class="border-l-4 border-orange-500 pl-4">
+            <div class="text-sm text-gray-600">Month-to-Date Expenses</div>
+            <div class="text-2xl font-bold">Costs this month</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">📊 Breeding Plan Financial Rollups</h3>
+        <p class="text-gray-700 mb-3">
+          Each breeding plan shows aggregated financial data:
+        </p>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Total revenue per litter</li>
+          <li>• Deposit timing analysis (before/after birth)</li>
+          <li>• Average price per puppy</li>
+          <li>• Expenses linked to the litter</li>
+          <li>• Profit/loss visibility</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Run Your Breeding Business Professionally</h2>
+      <p class="text-xl mb-8 opacity-90">
+        Clear invoicing. Complete expense tracking. Financial visibility.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/coming-soon" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+          Get Early Access
+        </a>
+        <a href="/workflows/client-portal" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary inline-block">
+          See Client Portal →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What payment methods can I track?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ tracks Cash, Check, Credit Card, Debit Card, ACH, Wire Transfer, PayPal, Venmo, and Zelle. Each payment can include a reference number for reconciliation.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can clients pay through the platform?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. With Stripe integration, clients can pay invoices directly through their portal. You can also create Stripe invoices that are sent via email with a payment link.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does this replace accounting software?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ handles breeder-specific invoicing and expense tracking. For full accounting (tax returns, depreciation, etc.), you may still want dedicated accounting software. Data exports make integration easy.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I export financial data?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Export invoices, payments, and expenses to CSV with configurable columns. Works with spreadsheets, accounting software, or your CPA.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Portal (Payments & Invoices)
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Waitlist & Deposit Management
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/stallion-services" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Stallion Revenue Tracking
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
