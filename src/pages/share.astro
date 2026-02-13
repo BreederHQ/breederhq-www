@@ -1,0 +1,258 @@
+---
+export const prerender = false; // SSR — reads ?code= at request time
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Environment variables (configured in Vercel)
+const API_BASE = import.meta.env.BHQ_API_URL || 'http://localhost:6001';
+const APP_URL = import.meta.env.BHQ_APP_URL || 'https://app.breederhq.com';
+const SIGNUP_URL = import.meta.env.BHQ_SIGNUP_URL || '/coming-soon';
+const IOS_STORE_URL = import.meta.env.BHQ_IOS_STORE_URL || '#';
+const ANDROID_STORE_URL = import.meta.env.BHQ_ANDROID_STORE_URL || '#';
+
+// Read share code from URL
+const code = Astro.url.searchParams.get('code');
+
+// Fetch preview data server-side
+let preview: {
+  valid: boolean;
+  animals?: Array<{
+    name: string;
+    species: string;
+    breed: string;
+    sex: string;
+    photoUrl: string | null;
+    birthDate: string | null;
+  }>;
+  breederName?: string;
+  animalCount?: number;
+  accessTier?: string;
+  expiresAt?: string | null;
+} | null = null;
+let error: string | null = null;
+
+if (code) {
+  try {
+    const res = await fetch(
+      `${API_BASE}/api/v1/public/share-codes/${encodeURIComponent(code)}/preview`
+    );
+    if (res.ok) {
+      preview = await res.json();
+    } else {
+      const body = await res.json().catch(() => ({}));
+      error = body.error || 'invalid_code';
+    }
+  } catch {
+    error = 'network_error';
+  }
+} else {
+  error = 'no_code';
+}
+
+const webRedeemUrl = code
+  ? `${APP_URL}/share?code=${encodeURIComponent(code)}`
+  : `${APP_URL}`;
+
+const animal = preview?.valid && preview.animals?.length ? preview.animals[0] : null;
+
+const pageTitle = animal
+  ? `${animal.name} — Shared via BreederHQ`
+  : 'Share Code — BreederHQ';
+const pageDescription = animal && preview?.breederName
+  ? `${preview.breederName} shared ${animal.name} (${animal.breed}) with you on BreederHQ.`
+  : 'View a shared animal on BreederHQ — professional breeding management software.';
+
+// Species display label
+const speciesLabels: Record<string, string> = {
+  DOG: 'Dog',
+  CAT: 'Cat',
+  HORSE: 'Horse',
+  GOAT: 'Goat',
+  SHEEP: 'Sheep',
+  RABBIT: 'Rabbit',
+  PIG: 'Pig',
+  CATTLE: 'Cattle',
+};
+const speciesLabel = animal ? speciesLabels[animal.species] || animal.species : '';
+const sexLabel = animal?.sex === 'MALE' ? 'Male' : animal?.sex === 'FEMALE' ? 'Female' : '';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  noindex={true}
+>
+  <main class="min-h-[60vh]">
+    {preview?.valid && animal ? (
+      <!-- Valid Code: Animal Preview -->
+      <section class="py-16 bg-gradient-to-b from-white to-gray-50">
+        <div class="mx-auto max-w-md px-4">
+          <!-- Animal Card -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+            {animal.photoUrl ? (
+              <img
+                src={animal.photoUrl}
+                alt={animal.name}
+                class="w-full h-56 object-cover"
+              />
+            ) : (
+              <div class="w-full h-40 bg-gray-100 flex items-center justify-center">
+                <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+            )}
+            <div class="p-6">
+              <h1 class="text-2xl font-bold text-gray-900">{animal.name}</h1>
+              <p class="text-gray-600 mt-1">
+                {animal.breed}{sexLabel ? ` · ${sexLabel}` : ''}{speciesLabel ? ` · ${speciesLabel}` : ''}
+              </p>
+              {preview.breederName && (
+                <p class="text-sm text-gray-500 mt-3">
+                  Shared by <span class="font-medium text-gray-700">{preview.breederName}</span>
+                </p>
+              )}
+              {(preview.animalCount ?? 0) > 1 && (
+                <p class="text-sm text-primary mt-2 font-medium">
+                  +{(preview.animalCount ?? 0) - 1} more animal{(preview.animalCount ?? 0) > 2 ? 's' : ''} included
+                </p>
+              )}
+            </div>
+          </div>
+
+          <!-- Primary CTA -->
+          <div class="mt-8">
+            <a
+              href={SIGNUP_URL}
+              class="block w-full text-center bg-primary text-white py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity shadow-md"
+            >
+              Sign Up for BreederHQ
+            </a>
+            <p class="text-xs text-gray-500 text-center mt-2">
+              Create your free account to view and add this animal
+            </p>
+          </div>
+
+          <!-- Already Have Account -->
+          <div class="mt-8 border-t border-gray-200 pt-6">
+            <p class="text-sm text-gray-500 text-center mb-4 font-medium">Already have an account?</p>
+            <div class="space-y-3">
+              <a
+                href={webRedeemUrl}
+                class="block w-full text-center py-3 rounded-xl border border-gray-200 font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Log in on Web
+              </a>
+
+              <!-- Device-detected app download links (shown/hidden via JS) -->
+              <a
+                id="ios-download"
+                href={IOS_STORE_URL}
+                class="hidden w-full text-center py-3 rounded-xl border border-gray-200 font-medium text-gray-700 hover:bg-gray-50 transition-colors items-center justify-center gap-2"
+              >
+                <svg class="w-5 h-5 inline-block" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Download for iPhone
+              </a>
+              <a
+                id="android-download"
+                href={ANDROID_STORE_URL}
+                class="hidden w-full text-center py-3 rounded-xl border border-gray-200 font-medium text-gray-700 hover:bg-gray-50 transition-colors items-center justify-center gap-2"
+              >
+                <svg class="w-5 h-5 inline-block" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.523 15.341a.6.6 0 01-.6.6h-.6v1.8a.9.9 0 11-1.8 0v-1.8h-1.2v1.8a.9.9 0 11-1.8 0v-1.8h-.6a.6.6 0 01-.6-.6v-5.4h7.2v5.4zm-8.1-5.4a.9.9 0 00-.9.9v3.6a.9.9 0 101.8 0v-3.6a.9.9 0 00-.9-.9zm9 0a.9.9 0 00-.9.9v3.6a.9.9 0 101.8 0v-3.6a.9.9 0 00-.9-.9zm-2.09-3.86l1.04-1.04a.3.3 0 10-.424-.424l-1.14 1.14a4.48 4.48 0 00-1.91-.428c-.694 0-1.345.162-1.91.427l-1.14-1.14a.3.3 0 10-.424.425l1.04 1.04a3.94 3.94 0 00-1.79 3.26h8.44a3.94 3.94 0 00-1.79-3.26zm-3.61 1.86a.48.48 0 110-.96.48.48 0 010 .96zm3.6 0a.48.48 0 110-.96.48.48 0 010 .96z"/>
+                </svg>
+                Download for Android
+              </a>
+              <div id="desktop-downloads" class="hidden gap-3">
+                <a
+                  href={IOS_STORE_URL}
+                  class="flex-1 text-center py-3 rounded-xl border border-gray-200 font-medium text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+                >
+                  App Store
+                </a>
+                <a
+                  href={ANDROID_STORE_URL}
+                  class="flex-1 text-center py-3 rounded-xl border border-gray-200 font-medium text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+                >
+                  Google Play
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <!-- Error State -->
+      <section class="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div class="mx-auto max-w-md px-4 text-center">
+          <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+            <div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            {error === 'no_code' ? (
+              <>
+                <h1 class="text-xl font-bold text-gray-900 mb-2">No Share Code Provided</h1>
+                <p class="text-gray-600 text-sm">
+                  This link appears to be incomplete. Ask the breeder to share the full link or code with you.
+                </p>
+              </>
+            ) : error === 'code_not_found' ? (
+              <>
+                <h1 class="text-xl font-bold text-gray-900 mb-2">Share Code Not Found</h1>
+                <p class="text-gray-600 text-sm">
+                  This share code doesn't exist. Please check the code and try again.
+                </p>
+              </>
+            ) : error === 'code_expired' || error === 'code_max_uses_reached' ? (
+              <>
+                <h1 class="text-xl font-bold text-gray-900 mb-2">Share Code Expired</h1>
+                <p class="text-gray-600 text-sm">
+                  This share code is no longer active. Ask the breeder to generate a new one.
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 class="text-xl font-bold text-gray-900 mb-2">Something Went Wrong</h1>
+                <p class="text-gray-600 text-sm">
+                  We couldn't load this share code. Please try again later.
+                </p>
+              </>
+            )}
+            <a
+              href="/"
+              class="mt-6 inline-block text-primary font-medium hover:underline"
+            >
+              Visit BreederHQ
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <!-- Device detection script -->
+  <script>
+    const ua = navigator.userAgent || '';
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+
+    const iosLink = document.getElementById('ios-download');
+    const androidLink = document.getElementById('android-download');
+    const desktopLinks = document.getElementById('desktop-downloads');
+
+    if (isIOS && iosLink) {
+      iosLink.classList.remove('hidden');
+      iosLink.classList.add('flex');
+    } else if (isAndroid && androidLink) {
+      androidLink.classList.remove('hidden');
+      androidLink.classList.add('flex');
+    } else if (desktopLinks) {
+      desktopLinks.classList.remove('hidden');
+      desktopLinks.classList.add('flex');
+    }
+  </script>
+</BaseLayout>

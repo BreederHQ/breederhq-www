@@ -5,7 +5,7 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'static', // Static pages with on-demand SSR for API routes (via prerender: false)
+  output: 'static', // Static pages by default; SSR opt-in via `export const prerender = false`
   trailingSlash: 'never', // Canonical URLs without trailing slash (e.g. /about not /about/)
   adapter: vercel(),
   vite: {
