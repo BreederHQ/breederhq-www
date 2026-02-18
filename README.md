@@ -91,6 +91,19 @@ breederhq-www/
    vercel --prod
    ```
 
+### Required Vercel Environment Variables for Lead Notifications
+
+| Variable | Required | What it does |
+|----------|----------|-------------|
+| `SLACK_WEBHOOK_URL` | Yes | Posts "New Lead Submitted!" to Slack `#leads` channel |
+| `RESEND_API_KEY` | Yes | Sends email notifications via Resend |
+| `NOTIFICATION_EMAIL` | Yes | Email address that receives lead notifications (e.g., `leads@breederhq.com`) |
+| `CLEARBIT_SECRET_KEY` | Optional | Enriches leads with company/person data |
+| `HUBSPOT_API_KEY` | Optional | Auto-creates CRM contacts |
+| `ZAPIER_WEBHOOK_URL` | Optional | Forwards leads to Zapier |
+
+If any required variable is missing, that notification channel silently skips. Check Vercel dashboard > Settings > Environment Variables if notifications stop working.
+
 ## 📊 Features
 
 ### Analytics & Tracking
@@ -102,7 +115,8 @@ breederhq-www/
 ### Lead Capture
 - Smart contact forms with validation
 - Automatic lead enrichment (Clearbit)
-- Real-time Slack notifications
+- Real-time Slack notifications (`#leads` channel)
+- Email notifications via Resend (`NOTIFICATION_EMAIL`)
 - CRM integration (HubSpot, Zapier)
 
 ### Visitor Intelligence
