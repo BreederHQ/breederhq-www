@@ -9,44 +9,45 @@ const breadcrumbs = [
 
 const faqs = [
   {
+    question: 'Is this a real CRM or just a contact list?',
+    answer: 'It\'s a full CRM with a visual sales pipeline, lead scoring, deal tracking, email templates, task management, and conversion analytics. Not a generic CRM—built specifically for breeder sales workflows.'
+  },
+  {
+    question: 'What is the sales pipeline?',
+    answer: 'A visual Kanban board that shows every buyer\'s stage: Inquiry, Viewing, Negotiation, Vet Check, Contract, through to Closed. Drag and drop buyers between stages as they progress.'
+  },
+  {
+    question: 'How does lead scoring work?',
+    answer: 'The system scores buyers based on their engagement, how recently they\'ve been active, budget fit, interest level, and deal progress. Higher-scored buyers are flagged so you focus on the most promising prospects first.'
+  },
+  {
     question: 'Can I track communication history?',
-    answer: 'Yes. Notes from conversations can be recorded with dates so you have a complete history.'
-  },
-  {
-    question: 'Can I store contracts and documents?',
-    answer: 'Yes. Attach signed contracts, registration papers, and other documents to the client record.'
-  },
-  {
-    question: 'Does it track payments?',
-    answer: 'Yes. Deposits and final payments can be recorded with dates and payment methods.'
+    answer: 'Yes. Log calls, emails, meetings, viewings, and notes with dates. Every interaction is recorded on a timeline so you have a complete history.'
   },
   {
     question: 'Can buyers access their animal\'s information?',
     answer: 'Yes. The buyer portal gives clients access to pedigrees, health records, photos, and other information you choose to share.'
-  },
-  {
-    question: 'Does it remind me to follow up with buyers?',
-    answer: 'Yes. You can set follow-up reminders or use automated milestones to maintain relationships.'
   }
 ];
 
 const howTo = {
   name: 'How to Manage Breeder Clients',
-  description: 'A step-by-step guide to professional client management including communication tracking, contracts, and buyer portal setup.',
+  description: 'A step-by-step guide to professional client management including sales pipeline, lead scoring, communication tracking, contracts, and buyer portal setup.',
   steps: [
-    { name: 'Create client records', text: 'Add each buyer with contact information, preferences, and how they found you. Link clients to animals they\'ve purchased or are waiting for.' },
-    { name: 'Log communication history', text: 'Record notes from phone calls, emails, and in-person conversations with dates. Build a complete history for each client relationship.' },
+    { name: 'Create client records', text: 'Add each buyer with contact information, preferences, budget, and how they found you. Link clients to animals they\'ve purchased or are waiting for.' },
+    { name: 'Track buyers through the sales pipeline', text: 'Move buyers through stages on a visual Kanban board: Inquiry, Viewing, Negotiation, Vet Check, Contract, Closed. See your total pipeline value and which deals need attention.' },
+    { name: 'Log communication history', text: 'Record calls, emails, meetings, viewings, and notes with dates. Build a complete timeline of every interaction for each client relationship.' },
     { name: 'Upload contracts and documents', text: 'Attach signed purchase agreements, spay/neuter contracts, registration transfer documents, and other paperwork to each client record.' },
     { name: 'Track payments', text: 'Record deposits and final payments with amounts, dates, and payment methods. Link payments to specific animals or services.' },
     { name: 'Set up buyer portal access', text: 'Invite clients to their buyer portal where they can view pedigrees, health records, photos, and documents you choose to share.' },
-    { name: 'Schedule follow-ups', text: 'Set reminders for follow-up contact: post-placement check-ins, birthday messages, or annual health update requests.' }
+    { name: 'Review analytics', text: 'Check conversion rates by lead source, average time to placement, and which buyers have gone quiet. Use lead scoring to focus on the most promising prospects.' }
   ]
 };
 ---
 
 <BaseLayout
-  title="How to Manage Clients | BreederHQ"
-  description="Professional client management for breeders. Communication history, contract tracking, payment records, and buyer portal access."
+  title="Buyer CRM for Breeders | Sales Pipeline & Lead Scoring | BreederHQ"
+  description="Full buyer CRM built for breeders. Visual sales pipeline, lead scoring, deal tracking, communication history, contracts, analytics, and buyer portal. Manage buyers from first inquiry to forever home."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
   howTo={howTo}
@@ -74,7 +75,7 @@ const howTo = {
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Client management requires tracking communication history, contracts, payments, and ongoing relationships with buyers. Scattered emails and text messages fail. Professional systems keep all buyer information organized, accessible, and connected to the animals they've purchased.
+          Client management requires tracking communication history, contracts, payments, and ongoing relationships with buyers. Scattered emails and text messages fail. A proper system keeps all buyer information organized with a visual sales pipeline, lead scoring, and analytics—so you know exactly where every buyer stands and who needs attention.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
@@ -246,6 +247,28 @@ const howTo = {
         </div>
 
         <div>
+          <h3 class="text-2xl font-bold mb-4">A sales pipeline that shows where every buyer stands</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Visual pipeline from first inquiry through closing</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Drag-and-drop buyers between stages as they progress</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Lead scoring that highlights your most engaged prospects</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>See total pipeline value and which deals need attention</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
           <h3 class="text-2xl font-bold mb-4">Communication history tracked</h3>
           <ul class="space-y-2 text-lg text-gray-700">
             <li class="flex items-start">
@@ -334,6 +357,28 @@ const howTo = {
         </div>
 
         <div>
+          <h3 class="text-2xl font-bold mb-4">Analytics that show what's working</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Conversion rates by lead source</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Average time from inquiry to placement</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Stale lead detection so buyers don't slip through the cracks</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Win/loss tracking to improve your process</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
           <h3 class="text-2xl font-bold mb-4">Automated follow-ups</h3>
           <ul class="space-y-2 text-lg text-gray-700">
             <li class="flex items-start">
@@ -350,7 +395,7 @@ const howTo = {
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>No manual reminder setting needed</span>
+              <span>Auto-generated tasks for stale leads</span>
             </li>
           </ul>
         </div>
@@ -361,14 +406,14 @@ const howTo = {
   <!-- Section 6: How BreederHQ Supports This -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ organizes client relationships</h2>
+      <h2 class="text-4xl font-bold mb-8">BreederHQ includes a full buyer CRM</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        Complete client profiles connected to the animals they purchased. Communication history tracked in one place. Contracts and documents stored and accessible. Payment tracking per client. Buyer portal so clients can access information themselves. Automated follow-up reminders so relationships don't fall through the cracks.
+        Complete client profiles connected to the animals they purchased. A visual sales pipeline so you see every buyer's stage at a glance. Lead scoring that highlights your most engaged prospects. Communication history, contracts, and documents in one place. Payment tracking per client. Buyer portal so clients can access information themselves. Analytics that show conversion rates, average time to placement, and where leads drop off.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
-        Client management that scales with your program.
+        Not a generic CRM bolted on. Built specifically for how breeders manage buyers—from first inquiry to forever home.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
@@ -453,37 +498,49 @@ const howTo = {
 
       <details class="faq-item">
         <summary class="faq-question">
+          <span>Is this a real CRM or just a contact list?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>It's a full CRM with a visual sales pipeline, lead scoring, deal tracking, email templates, task management, and conversion analytics. Not a generic CRM—built specifically for breeder sales workflows.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What is the sales pipeline?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>A visual Kanban board that shows every buyer's stage: Inquiry, Viewing, Negotiation, Vet Check, Contract, through to Closed. Drag and drop buyers between stages as they progress.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How does lead scoring work?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>The system scores buyers based on their engagement, how recently they've been active, budget fit, interest level, and deal progress. Higher-scored buyers are flagged so you focus on the most promising prospects first.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
           <span>Can I track communication history?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Notes from conversations can be recorded with dates so you have a complete history.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I store contracts and documents?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Attach signed contracts, registration papers, and other documents to the client record.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it track payments?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. Deposits and final payments can be recorded with dates and payment methods.</p>
+          <p>Yes. Log calls, emails, meetings, viewings, and notes with dates. Every interaction is recorded on a timeline so you have a complete history.</p>
         </div>
       </details>
 
@@ -496,18 +553,6 @@ const howTo = {
         </summary>
         <div class="faq-answer">
           <p>Yes. The buyer portal gives clients access to pedigrees, health records, photos, and other information you choose to share.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Does it remind me to follow up with buyers?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. You can set follow-up reminders or use automated milestones to maintain relationships.</p>
         </div>
       </details>
     </div>
