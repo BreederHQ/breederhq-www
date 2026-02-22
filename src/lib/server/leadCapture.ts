@@ -287,7 +287,10 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ blocks }),
+      body: JSON.stringify({
+        text: `<!here> 🚨 New Lead Submitted\nName: ${lead.name || 'Not provided'}\nEmail: ${lead.email}`,
+        blocks,
+      }),
     });
 
     if (!response.ok) {
