@@ -1,0 +1,407 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'Best Sheep Breeding Software', url: '/compare/best-sheep-breeding-software' }
+];
+
+const faqs = [
+  {
+    question: 'What makes sheep breeding software different from other livestock software?',
+    answer: 'Sheep breeding software needs fiber/wool production tracking (fleece weight, micron analysis, staple length), tupping group management for ram exposure, seasonal breeding tied to photoperiod, and breed-specific health concerns like scrapie genotyping, OPP, and CL. Generic livestock software doesn\'t cover these sheep-specific workflows.'
+  },
+  {
+    question: 'Can sheep breeding software track fleece and fiber production?',
+    answer: 'Good sheep breeding software should track gross and clean fleece weights, yield percentages, micron analysis (mean fiber diameter, CV%, comfort factor), staple length, staple strength, and fleece grading (Prime, Choice, Standard, Utility, Reject). This data drives breeding decisions for fiber flocks.'
+  },
+  {
+    question: 'How do tupping groups work in sheep breeding software?',
+    answer: 'Tupping groups let you assign a ram to a group of ewes with exposure dates. The software tracks which ewes were exposed, confirms pregnancies per ewe, calculates group pregnancy rates, supports ram rotation between groups, and auto-creates individual breeding plans when pregnancies are confirmed.'
+  },
+  {
+    question: 'Does it track scrapie genotyping?',
+    answer: 'Yes. Sheep breeding software should track scrapie genotype (RR, QR, QQ at codons 136 and 171) and help you select for resistant genetics. The USDA Scrapie Eradication Program makes this tracking essential for many flocks.'
+  },
+  {
+    question: 'Can it handle both fiber and meat sheep breeds?',
+    answer: 'Yes. BreederHQ works for fiber breeds (Merino, Rambouillet, Corriedale, Romney) with fleece production tracking and meat breeds (Suffolk, Hampshire, Dorper, Katahdin) with weight gain and carcass data analytics. Hair sheep breeds are supported too.'
+  },
+  {
+    question: 'Does it work with breed registries?',
+    answer: 'Yes. BreederHQ tracks registration numbers, performance records, and flock designations for any breed registry including ASI, NSIP, breed-specific associations, and international registries. It generates the information you need for lamb registration.'
+  },
+  {
+    question: 'How does lambing management work?',
+    answer: 'Sheep breeding software should track the full 147-day gestation with milestone alerts, lambing details (presentation, singles/twins/triplets, complications), birth weights, and post-lambing ewe and lamb monitoring. It should handle multiples as individual records.'
+  },
+  {
+    question: 'Can it track EBVs and performance data?',
+    answer: 'Yes. For breeders participating in performance recording programs like NSIP, the software should track Estimated Breeding Values, growth rates, maternal traits, and wool/fiber measurements. This performance data drives genetic improvement in commercial flocks.'
+  }
+];
+---
+
+<BaseLayout
+  title="Best Sheep Breeding Software | BreederHQ"
+  description="What to look for in sheep breeding software. Fiber production tracking, tupping groups, fleece analysis, scrapie genotyping, and features that matter for professional sheep breeders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Best Sheep Breeding Software</li>
+    </ol>
+  </nav>
+
+  <!-- Opening -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">How to Choose Sheep Breeding Software in 2026</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Good sheep breeding software needs fiber/wool production tracking (fleece weights, micron analysis, grading), tupping group management for ram exposure, seasonal breeding awareness, and health tracking for scrapie genotyping, OPP, and CL. Avoid companion animal software or generic farm tools. Always test with your actual flock data.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Sheep breeding—whether for fiber, meat, or dual-purpose—has requirements that companion animal software doesn't address. Fleece production records, tupping groups, seasonal breeding, and sheep-specific disease testing all need purpose-built tools. This page explains what to look for—whether you choose BreederHQ or another platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- What to Look For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What to look for in sheep breeding software</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Fiber and wool production tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you breed fiber sheep, fleece data drives your program. Your software should track gross and clean fleece weights, yield percentages, micron analysis (mean fiber diameter, CV%, comfort factor), staple length, staple strength, and fleece grading. Micron trend analysis across shearings helps you track genetic progress.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Tupping group management</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Most sheep breeders don't hand-breed every ewe. You put a ram in with a group of ewes and track who was exposed. Your software should manage tupping groups with exposure dates, track pregnancy confirmation per ewe, support ram rotation between groups, and auto-create individual breeding plans when pregnancies are confirmed.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Seasonal breeding management</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Most sheep breeds are seasonal breeders—they cycle in autumn as daylight decreases. Some breeds like Dorper and Polypay can breed year-round. Your software should understand these patterns, track breeding seasons, and help you plan tupping schedules.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Scrapie genotyping</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Scrapie genotype tracking is essential for responsible sheep breeding. Your software should store genotype results (RR, QR, QQ at relevant codons) and help you select for resistant genetics. The USDA Scrapie Eradication Program makes this a practical necessity.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">OPP and CL health tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            OPP (Ovine Progressive Pneumonia) and CL (Caseous Lymphadenitis) are significant concerns in sheep flocks. Track test results for every animal, link them to records, and make health status visible to buyers. Documented flock health sells rams and breeding stock.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Lambing management</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Sheep commonly have twins and triplets. Your software should track the 147-day gestation with milestone alerts, lambing details (presentation, birth order, assistance needed), birth weights, and individual lamb records from birth through weaning and placement.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Performance recording and EBVs</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For breeders in performance programs like NSIP, track Estimated Breeding Values, growth rates, maternal traits, and fiber measurements. Performance data drives genetic improvement and adds value to your breeding stock.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Weight tracking and growth analytics</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Track birth weights, weaning weights, and growth rates. Compare lambs within a drop and across years. For meat breeders, weight gain data is critical for selecting productive ewes and rams.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Avoid -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Red flags in sheep breeding software</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Companion animal breeding software</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Dog and cat breeding software doesn't understand fleece production, tupping groups, seasonal cycling tied to photoperiod, or livestock-specific health testing. If it was built for puppies and kittens, it won't work for sheep.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No fiber/wool production tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you breed fiber sheep and the software can't track fleece weights, micron analysis, or yield data, you're keeping production records separately. That's the same spreadsheet problem you're trying to solve.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No tupping group support</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If the software only handles individual hand-breedings, it doesn't match how most sheep breeders manage their flocks. Tupping groups are fundamental to sheep breeding operations.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Generic farm management software</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Farm management software that tracks pasture rotation and inventory isn't breeding software. If it doesn't understand pedigrees, genetics, breeding cycles, and production records, it's the wrong tool for genetic improvement.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No scrapie genotype tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Scrapie genotyping is standard practice for responsible sheep breeders. If the software can't store and display genotype results, you're missing a critical piece of your breeding evaluation.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Treats lambings as single records</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Sheep commonly have multiples. Software that records "2 lambs born" without tracking each lamb individually isn't useful for pedigree records, performance data, or buyer placement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where BreederHQ Fits -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What BreederHQ offers sheep breeders</h2>
+
+      <p class="text-xl leading-relaxed mb-6">
+        BreederHQ was built with sheep breeding in mind. Fiber and wool production tracking with gross and clean fleece weights, micron analysis, staple measurements, and fleece grading. Micron trend analysis across shearings shows your genetic progress at a glance.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Tupping group management that matches how you actually breed—assign a ram to a group of ewes, track exposure dates, confirm pregnancies, rotate rams between groups, and auto-create individual breeding plans. Group analytics show pregnancy rates and breeding success.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Lambing management that treats each lamb as an individual. Weight tracking with growth curves. Scrapie genotyping and OPP/CL health tracking linked to pedigrees. Buyer portals where clients can see their animal's records and production data.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Works for fiber breeds, meat breeds, hair breeds, and dual-purpose flocks. Merinos to Suffolks, Katahdins to Corriedales. Join our early adopter program to test with your actual flock.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions to Ask -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Questions to ask any sheep breeding software vendor</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold mb-3">How does it track fleece and fiber production?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you enter fleece weights, micron analysis, staple length, and grading? Does it calculate yield percentages? Can you see micron trends across shearings? If it doesn't handle fiber data, fiber breeders are keeping separate records.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">How do tupping groups work?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you assign a ram to a group of ewes with exposure dates? Does it track pregnancy confirmation per ewe? Does it support ram rotation? Does it auto-create breeding plans? If you can only enter individual breedings, it doesn't match your reality.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Can it track scrapie genotyping?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you store genotype results for each animal? Does it display genotype on pedigrees and breeding evaluations? Can you filter breeding stock by genotype to select for resistance?
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">How does lambing management handle multiples?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Are lambs individual records? Can you track weights, markings, and dam behavior for each? Can you link each lamb to a buyer? Sheep regularly have twins and triplets—the software must handle this properly.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Does it track OPP and CL test results?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you store health test results and link them to individual animals and pedigrees? Can buyers verify flock health status? Documented health sells breeding stock.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Can it handle both fiber and meat breeds?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Fiber breeders need production tracking. Meat breeders need weight analytics. Dual-purpose flocks need both. Can the software handle different workflows for different production goals?
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Does it support performance recording?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you track EBVs, growth rates, and maternal traits? For breeders in NSIP or similar programs, performance data integration is essential for genetic improvement.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Can buyers access their animal's records?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A buyer portal where clients can see pedigrees, production data, and health records saves time and adds value. Especially important for selling breeding stock to other flocks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Making the Decision -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How to make your decision</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">1. Test with your actual flock</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Enter your ewes and rams. Set up a tupping group. Log some fleece data or weights. See if the workflow makes sense for how you actually manage your sheep—not how a dog breeder manages puppies.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">2. Check production tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you're a fiber breeder, fleece production tracking is non-negotiable. If you're a meat breeder, weight analytics matter most. Make sure the software has what your specific operation needs.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">3. Verify tupping group support</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Try creating a tupping group with a ram and multiple ewes. Does the workflow feel natural? Can you track pregnancies per ewe? Can you rotate rams? If it only supports hand-breeding, it doesn't match your operation.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">4. Ask other sheep breeders</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            What do successful breeders in your breed use? Check breed association forums and shepherd groups. Their experience matters—but test yourself too.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">5. Think about your records long-term</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You're building production records, pedigrees, and health data that drive your breeding decisions for years. Choose software that will grow with your flock and preserve your data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The bottom line</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Sheep breeding software needs to understand ovine production and reproduction. Fiber tracking, tupping groups, seasonal cycling, scrapie genotyping, and lambing management aren't optional—they're requirements.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Companion animal software won't work. Neither will generic farm management or livestock software that doesn't understand pedigrees and production records. You need software built for sheep breeding.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        Use free trials. Test with your actual flock data. Choose software that makes your breeding program and production records easier to manage—from shearing shed to sale ring.
+      </p>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/sheep" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Sheep Breeding Software Features
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
+            → How to Track Breeding Cycles
+          </a>
+        </div>
+        <div>
+          <a href="/compare/best-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → General Breeding Software Guide
+          </a>
+        </div>
+        <div>
+          <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
+            → BreederHQ vs. Spreadsheets
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>

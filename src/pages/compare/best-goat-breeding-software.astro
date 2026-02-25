@@ -1,0 +1,407 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'Best Goat Breeding Software', url: '/compare/best-goat-breeding-software' }
+];
+
+const faqs = [
+  {
+    question: 'What makes goat breeding software different from other livestock software?',
+    answer: 'Goat breeding software needs to handle dairy production tracking (305-day lactations, butterfat and protein percentages, DHIA records), breeding groups where bucks run with multiple does, seasonal cycling tied to photoperiod, and breed-specific health concerns like CAE, CL, and Johne\'s disease. Generic livestock software doesn\'t cover these goat-specific workflows.'
+  },
+  {
+    question: 'Can goat breeding software track milk production and DHIA records?',
+    answer: 'Good goat breeding software should track daily milk weights, butterfat and protein percentages, somatic cell counts (SCC), 305-day standardized lactation records using ADGA formulas, and monthly DHIA test day data. This is essential for dairy goat breeders improving their herds.'
+  },
+  {
+    question: 'How do breeding groups work in goat breeding software?',
+    answer: 'Breeding groups let you assign a buck to a group of does with exposure dates. The software tracks which does were exposed, confirms pregnancies per doe, calculates group pregnancy rates, and auto-creates individual breeding plans when pregnancies are confirmed. This matches how most goat breeders actually manage breedings.'
+  },
+  {
+    question: 'Does it track CAE, CL, and Johne\'s testing?',
+    answer: 'Yes. Goat breeding software should track CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johne\'s disease test results. These should link to individual goats and display on pedigrees so buyers can verify herd health status.'
+  },
+  {
+    question: 'Can it handle both dairy and meat goat breeding?',
+    answer: 'Yes. BreederHQ works for dairy breeds (Nigerian Dwarf, Nubian, LaMancha, Alpine, Saanen, Toggenburg, Oberhasli) and meat breeds (Boer, Kiko, Spanish, Savanna). Dairy breeders get milk production tracking; meat breeders get weight gain and growth analytics.'
+  },
+  {
+    question: 'Does it work with ADGA and AGS registries?',
+    answer: 'Yes. BreederHQ tracks registration numbers, linear appraisal scores, milk star designations, and show records for ADGA, AGS, and other goat registries. It generates the information you need for kid registration applications.'
+  },
+  {
+    question: 'How does kidding management work?',
+    answer: 'Goat breeding software should track the full 150-day gestation with milestone alerts, kidding details (presentation, singles/twins/triplets, complications), birth weights, and post-kidding dam and kid monitoring. It should handle multiple kids per birth as individual records.'
+  },
+  {
+    question: 'Can it track linear appraisal scores?',
+    answer: 'Yes. Good goat breeding software should track ADGA linear appraisal scores on the 1-9 scale across all body categories. These scores are critical for dairy breeders selecting for structural correctness and udder quality.'
+  }
+];
+---
+
+<BaseLayout
+  title="Best Goat Breeding Software | BreederHQ"
+  description="What to look for in goat breeding software. Dairy production tracking, breeding groups, DHIA records, CAE/CL testing, and features that matter for professional goat breeders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Best Goat Breeding Software</li>
+    </ol>
+  </nav>
+
+  <!-- Opening -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">How to Choose Goat Breeding Software in 2026</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Good goat breeding software needs dairy production tracking (305-day lactations, DHIA, butterfat/protein), breeding group management for buck exposure, seasonal cycling awareness, and health testing for CAE, CL, and Johne's. Avoid dog-focused or generic farm software. Always test with your actual herd data.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Goat breeding—whether dairy or meat—has unique requirements. Milk production records, breeding groups, seasonal cycling, and goat-specific disease testing all need purpose-built tools. This page explains what to look for—whether you choose BreederHQ or another platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- What to Look For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What to look for in goat breeding software</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Dairy production tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you breed dairy goats, milk production data drives your program. Your software should track daily milk weights, butterfat and protein percentages, somatic cell counts, MUN levels, and calculate 305-day standardized lactation records. Monthly DHIA test day data should feed into lifetime production summaries.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Breeding group management</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Most goat breeders don't hand-breed every doe. You put a buck in with a group of does and track who was exposed. Your software should manage breeding groups with exposure dates, track pregnancy confirmation per doe, calculate group pregnancy rates, and auto-create individual breeding plans when pregnancies are confirmed.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Seasonal cycling awareness</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Most goat breeds are seasonal breeders—they cycle in fall as daylight decreases. Some breeds like Nigerian Dwarfs can cycle year-round. Your software should understand these patterns and help you plan breeding seasons accordingly.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">CAE, CL, and Johne's tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Herd health status is everything in goat breeding. Track CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johne's disease test results for every animal. Link results to individual goats and make them visible on pedigrees. Buyers expect documented herd health.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Linear appraisal scores</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For dairy breeders, ADGA linear appraisal scores on the 1-9 scale are critical for selecting structural correctness and udder quality. Your software should track scores across all body categories and show them on individual animal records and pedigrees.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Kidding management</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Goats commonly have twins and triplets. Your software should track each kid as an individual record from birth through placement—weights, colors, markings, dam behavior, nursing status. If it treats a kidding as a single record, it's not built for goats.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">ADGA and AGS registry support</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Registration numbers, milk stars, linear appraisal designations, and show records matter. Your software should track these and generate the information you need for kid registration applications.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Weight tracking and growth analytics</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Whether you're breeding for dairy or meat, weight data matters. Track birth weights, weaning weights, and growth curves. Compare kids within a kidding and across kiddings. Flag animals that fall behind expected growth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Avoid -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Red flags in goat breeding software</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Dog or cat breeding software</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Software built for companion animals doesn't understand dairy production, breeding groups, seasonal cycling, or livestock-specific health testing. If it was built for puppies and kittens, it won't work for goats.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No dairy production tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you're breeding dairy goats and the software can't track milk weights, butterfat, protein, or calculate 305-day lactations, you're keeping production records separately. That defeats the purpose of breeding software.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No breeding group support</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If the software only handles individual hand-breedings, it doesn't match how most goat breeders work. You need breeding group management where a buck runs with a group of does.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Generic farm management software</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Farm management software that handles pasture rotation and feed inventories isn't breeding software. If it doesn't understand pedigrees, genetics, breeding cycles, and production records, it's the wrong tool for improving your herd.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">No goat-specific health tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            CAE, CL, and Johne's testing is standard practice for responsible goat breeders. If the software can't track these results and link them to individual animals, you're missing a critical workflow.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Treats kiddings as single records</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Goats commonly have multiples. Software that records "3 kids born" without tracking each kid individually isn't useful for pedigree records, buyer placement, or production analysis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where BreederHQ Fits -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What BreederHQ offers goat breeders</h2>
+
+      <p class="text-xl leading-relaxed mb-6">
+        BreederHQ was built with goat breeding in mind. Dairy production tracking with daily milk weights, butterfat and protein percentages, somatic cell counts, and 305-day standardized lactation records using ADGA formulas. Monthly DHIA test day data and linear appraisal scores.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Breeding group management that matches how you actually breed—assign a buck to a group of does, track exposure dates, confirm pregnancies, and let the software auto-create individual breeding plans. Group analytics show pregnancy rates and breeding success.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Kidding management that treats each kid as an individual. Weight tracking with growth curves and anomaly alerts. CAE, CL, and Johne's test tracking linked to pedigrees. Buyer portals where clients can see their animal's health records and production data.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Works for dairy and meat breeds. Nigerian Dwarfs to Boers. Small homestead herds to large commercial operations. Join our early adopter program to test with your actual herd.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions to Ask -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Questions to ask any goat breeding software vendor</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold mb-3">How does it track milk production?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you enter daily milk weights? Does it track butterfat and protein? Does it calculate 305-day standardized lactations? Can you import DHIA test day data? If it doesn't do these things, dairy breeders are keeping separate records.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">How do breeding groups work?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Can you assign a buck to a group of does with exposure dates? Does it track pregnancy confirmation per doe? Does it auto-create breeding plans? If you can only enter individual breedings, it doesn't match how most goat breeders work.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">What health tests can you track?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            CAE, CL, Johne's, brucellosis, and breed-specific tests. Can you store results? Do they show on pedigrees? Can buyers verify herd health status? This is non-negotiable for responsible goat breeders.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">How does it handle kiddings with multiples?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Are kids individual records or just a count? Can you track weights, colors, and markings for each? Can you link each kid to a buyer? Goats regularly have twins and triplets—the software must handle this.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Does it track linear appraisal scores?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For dairy breeders, linear appraisal is critical. Can the software store 1-9 scale scores across body categories? Do they appear on individual animal records and breeding evaluations?
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Can it handle both dairy and meat breeds?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Dairy breeders need production tracking. Meat breeders need weight gain analytics. If you breed both, can the software handle different workflows for different breeds?
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Does it understand seasonal breeding?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Most goat breeds are seasonal breeders. Does the software track cycling patterns tied to photoperiod? Can it predict breeding windows? Does it differentiate year-round breeders like Nigerian Dwarfs?
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">Can buyers access their animal's information?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A buyer portal where clients can see their animal's pedigree, health records, and production data saves you from constant update requests. This is especially valuable for dairy goat buyers evaluating bloodlines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Making the Decision -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How to make your decision</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">1. Test with your actual herd</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Enter your does and bucks. Set up a breeding group. Log some milk weights. See if the workflow makes sense for how you actually manage your goats—not how a dog breeder manages puppies.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">2. Check dairy vs. meat features</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you're a dairy breeder, production tracking is non-negotiable. If you're a meat breeder, weight analytics matter most. Make sure the software has what your specific operation needs.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">3. Verify breeding group support</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Try creating a breeding group with a buck and multiple does. Does the workflow feel natural? Can you track pregnancies per doe? If it only supports hand-breeding, it doesn't match your reality.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">4. Ask other goat breeders</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            What do successful breeders in your breed use? Check goat breeder forums and ADGA groups. Their experience matters—but test yourself too.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">5. Think about your records long-term</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You're building production records, pedigrees, and health data that drive your breeding decisions for years. Choose software that will grow with your herd and preserve your data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The bottom line</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Goat breeding software needs to understand caprine reproduction and production. Dairy tracking, breeding groups, seasonal cycling, and goat-specific health testing aren't optional—they're requirements.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Dog breeding software won't work. Neither will generic farm management or livestock software that doesn't understand pedigrees and production records. You need software built for goat breeding.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        Use free trials. Test with your actual herd data. Choose software that makes your breeding program and production records easier to manage.
+      </p>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Goat Breeding Software Features
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
+            → How to Track Breeding Cycles
+          </a>
+        </div>
+        <div>
+          <a href="/compare/best-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → General Breeding Software Guide
+          </a>
+        </div>
+        <div>
+          <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
+            → BreederHQ vs. Spreadsheets
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
