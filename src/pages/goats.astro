@@ -18,7 +18,11 @@ const faqs = [
   },
   {
     question: 'What about milk production records?',
-    answer: 'Production data can be tracked for dairy operations.'
+    answer: 'Full dairy production tracking: daily/session milk weights, butterfat and protein percentages, 305-day standardized lactation records using the ADGA formula, peak production tracking, monthly DHIA test day recording (including SCC and MUN), linear appraisal scores, bulk milking data import via CSV, and lifetime production analytics per doe.'
+  },
+  {
+    question: 'Can I manage breeding groups?',
+    answer: 'Yes. Assign one buck to a group of does with exposure start and end dates. After exposure, confirm pregnancies individually—each confirmed doe automatically gets her own breeding plan for kidding tracking. Track group pregnancy rates and analytics.'
   },
   {
     question: 'Does it work with ADGA?',
@@ -32,17 +36,17 @@ const faqs = [
 
 const featureCards = [
   { id: 'goat-records', icon: '🐐', title: 'Goat Records', desc: 'Complete profiles, pedigrees, registration info' },
-  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, buck exposure, kidding dates' },
+  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, breeding groups, kidding dates' },
   { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'CAE, CL, scrapie genotyping, vaccinations' },
-  { id: 'dairy', icon: '🥛', title: 'Dairy Production', desc: 'Milk records, DHIA data, linear appraisals' },
-  { id: 'clients', icon: '👥', title: 'Clients & Buyer CRM', desc: 'Sales pipeline, lead scoring, waitlists, contracts' },
-  { id: 'buyer-portal', icon: '🌐', title: 'Buyer Portal', desc: 'Public profiles for available kids' }
+  { id: 'dairy', icon: '🥛', title: 'Dairy Production', desc: 'Milk records, DHIA data, 305-day lactations, analytics' },
+  { id: 'breeding-groups', icon: '🐐', title: 'Breeding Groups', desc: 'Buck exposure groups, pregnancy confirmation' },
+  { id: 'clients', icon: '👥', title: 'Clients & Buyer CRM', desc: 'Sales pipeline, lead scoring, waitlists, contracts' }
 ];
 ---
 
 <BaseLayout
   title="Goat Breeding Software | BreederHQ"
-  description="Goat breeding software for dairy and meat operations. Seasonal breeding, kidding records, disease testing tracking. ADGA-compatible records."
+  description="Goat breeding software for dairy and meat operations. Milk production tracking, 305-day lactation records, DHIA data, breeding groups, kidding records, and disease testing. ADGA-compatible."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -237,7 +241,7 @@ const featureCards = [
             <span class="text-3xl">🥛</span>
             <div>
               <h3 class="text-2xl font-bold">Dairy Production</h3>
-              <p class="text-gray-600">Milk records, DHIA data, linear appraisals</p>
+              <p class="text-gray-600">Milk records, DHIA data, 305-day lactations, analytics</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -247,25 +251,74 @@ const featureCards = [
         <div class="accordion-content p-6 border-t border-gray-200">
           <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 class="font-bold text-lg mb-3">Milk Production</h4>
+              <h4 class="font-bold text-lg mb-3">Milking Records</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Daily/weekly milk weights</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Lactation curves</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Daily and session milk weights</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Butterfat and protein percentages</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Lactation cycle management</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Peak production tracking</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Butterfat and protein %</li>
-                <li class="flex items-start"><span class="mr-2">•</span>305-day lactation records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>305-day standardized lactation records (ADGA formula)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Bulk milking import via CSV</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-bold text-lg mb-3">ADGA & Show</h4>
+              <h4 class="font-bold text-lg mb-3">DHIA & Show Data</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Linear appraisal scores</li>
-                <li class="flex items-start"><span class="mr-2">•</span>DHIA test day data</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Monthly DHIA test day recording</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Somatic Cell Count (SCC) tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Milk Urea Nitrogen (MUN) values</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Linear appraisal scores (ADGA 1-9 scale)</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Production awards tracking</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Show results and placings</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Champion titles</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Show results and champion titles</li>
               </ul>
             </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <h4 class="font-bold text-lg mb-2">Dairy Production Analytics</h4>
+            <p class="text-gray-700 text-sm">Lifetime production statistics per doe, lactation history across all freshening cycles, and herd-level production trends. Compare does side-by-side, identify your highest producers, and make data-driven breeding decisions for your dairy program.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Breeding Groups -->
+      <details id="breeding-groups" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🐐</span>
+            <div>
+              <h3 class="text-2xl font-bold">Breeding Groups</h3>
+              <p class="text-gray-600">Buck exposure groups, pregnancy confirmation, group analytics</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Group Setup</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Assign one buck to a group of does</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Set exposure start and end dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Add and remove does from groups</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Expected kidding dates auto-calculated</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Buck rotation between groups</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">After Exposure</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Pregnancy confirmation per doe</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Auto-creates individual breeding plans when confirmed</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Group pregnancy rate tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Color-coded status indicators</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Group analytics and efficiency metrics</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <p class="text-gray-700 text-sm"><strong>Why this matters:</strong> Most goat operations use group breeding—not planned individual pairings. BreederHQ supports both approaches. Create a group, assign does and a buck, set the exposure window, then confirm pregnancies individually as you check them. Each confirmed doe automatically gets her own breeding plan for kidding tracking.</p>
           </div>
         </div>
       </details>

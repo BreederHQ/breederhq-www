@@ -9,8 +9,8 @@ const breadcrumbs = [
 
 const faqs = [
   {
-    question: 'Can it track breeding groups?',
-    answer: 'Yes. Multiple ewes with one ram, tracked as a group with individual records.'
+    question: 'Can it track tupping groups?',
+    answer: 'Yes. Create a tupping group with one ram and multiple ewes, set exposure dates, then confirm pregnancies individually. Each confirmed ewe gets her own breeding plan for lambing tracking. Track group pregnancy rates and analytics.'
   },
   {
     question: 'Does it handle twins and triplets?',
@@ -21,8 +21,8 @@ const faqs = [
     answer: 'Performance data can be tracked for NSIP submission.'
   },
   {
-    question: 'Can I track fleece records?',
-    answer: 'Yes. Fiber breeds can track shearing dates, weights, and quality.'
+    question: 'Can I track fleece records and lab results?',
+    answer: 'Yes. Full fiber production tracking: gross and clean fleece weights with automatic yield calculation, fleece grading (Prime through Reject), staple length, and lab test results including micron analysis, CV%, comfort factor, and staple strength. Track micron trends over time to see if fiber quality is improving, stable, or coarsening. Lifetime production history per animal.'
   },
   {
     question: 'Can I try it before paying?',
@@ -32,17 +32,17 @@ const faqs = [
 
 const featureCards = [
   { id: 'sheep-records', icon: '🐑', title: 'Sheep Records', desc: 'Complete flock profiles, pedigrees, registration' },
-  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, breeding groups, lambing' },
+  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Tupping groups, seasonal cycles, lambing records' },
   { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Scrapie genotyping, OPP, vaccinations' },
   { id: 'performance', icon: '📊', title: 'Performance', desc: 'NSIP data, weights, reproductive efficiency' },
-  { id: 'fiber', icon: '🧶', title: 'Fiber Records', desc: 'Fleece weights, shearing, wool quality' },
+  { id: 'fiber', icon: '🧶', title: 'Fiber & Wool', desc: 'Shearing, fleece grading, micron analysis, production analytics' },
   { id: 'clients', icon: '👥', title: 'Clients & Buyer CRM', desc: 'Sales pipeline, lead scoring, waitlists, contracts' }
 ];
 ---
 
 <BaseLayout
   title="Sheep Breeding Software | BreederHQ"
-  description="Sheep breeding software for flocks of all sizes. Seasonal breeding, lambing management, NSIP data tracking. Built for fiber and meat operations."
+  description="Sheep breeding software for flocks of all sizes. Fiber/wool production tracking, tupping groups, lambing management, NSIP data, micron analysis. Built for fiber and meat operations."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -167,13 +167,14 @@ const featureCards = [
         <div class="accordion-content p-6 border-t border-gray-200">
           <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 class="font-bold text-lg mb-3">Breeding Groups</h4>
+              <h4 class="font-bold text-lg mb-3">Tupping Groups</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Multiple ewes per ram</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Ram introduction and removal dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Assign one ram to a group of ewes</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Set exposure start and end dates</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Expected lambing date calculator (147 days)</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Breeding season planning</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Ram rotation schedules</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Pregnancy confirmation per ewe</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Auto-creates individual breeding plans when confirmed</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Group pregnancy rate and analytics</li>
               </ul>
             </div>
             <div>
@@ -184,8 +185,12 @@ const featureCards = [
                 <li class="flex items-start"><span class="mr-2">•</span>Dam and sire linked automatically</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Lambing difficulty notes</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Fostering and grafting records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Ram rotation between groups</li>
               </ul>
             </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <p class="text-gray-700 text-sm"><strong>How tupping groups work:</strong> Create a group, assign ewes and a ram, set the exposure window. After exposure ends, confirm pregnancies individually. Each confirmed ewe automatically gets her own breeding plan for lambing tracking. No extra data entry—the system flows naturally from group breeding to individual management.</p>
           </div>
         </div>
       </details>
@@ -276,8 +281,8 @@ const featureCards = [
           <div class="flex items-center gap-4">
             <span class="text-3xl">🧶</span>
             <div>
-              <h3 class="text-2xl font-bold">Fiber Records</h3>
-              <p class="text-gray-600">Fleece weights, shearing, wool quality</p>
+              <h3 class="text-2xl font-bold">Fiber & Wool Production</h3>
+              <p class="text-gray-600">Shearing records, fleece grading, micron analysis, production analytics</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -289,23 +294,29 @@ const featureCards = [
             <div>
               <h4 class="font-bold text-lg mb-3">Shearing Records</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Shearing dates</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Fleece weights</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Shearer notes</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Cost tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Gross and clean fleece weights</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Automatic yield calculation</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Fleece grading (Prime, Choice, Standard, Utility, Reject)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Staple length tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Shearing dates and shearer notes</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Year-over-year comparisons</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-bold text-lg mb-3">Wool Quality</h4>
+              <h4 class="font-bold text-lg mb-3">Lab Tests & Quality</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Staple length</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Micron count</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Crimp and handle</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Color and uniformity</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Lab test results</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Micron analysis (average fiber diameter)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Coefficient of variation (CV%)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Comfort factor percentage</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Staple strength measurements</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Micron trend analysis (improving, stable, or coarsening)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Color and uniformity grading</li>
               </ul>
             </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <h4 class="font-bold text-lg mb-2">Fiber Production Analytics</h4>
+            <p class="text-gray-700 text-sm">Lifetime fiber production history per animal, year-over-year trend charts, and flock-level production statistics. Track which bloodlines produce the finest fiber, identify animals whose micron counts are trending in the right direction, and make breeding decisions based on actual production data—not guesswork.</p>
           </div>
         </div>
       </details>

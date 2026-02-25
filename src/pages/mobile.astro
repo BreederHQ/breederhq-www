@@ -1,0 +1,655 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Mobile App', url: '/mobile' }
+];
+
+const faqs = [
+  {
+    question: 'Is the mobile app included with my subscription?',
+    answer: 'Yes. The mobile app is included with all BreederHQ plans at no additional cost. Download it from the App Store or Google Play and log in with the same account you use on the web.'
+  },
+  {
+    question: 'Does the app work offline?',
+    answer: 'The app requires an internet connection to sync data with your account. However, it\'s designed to work well on slower connections—pages load quickly and images are optimized for mobile bandwidth.'
+  },
+  {
+    question: 'Can I do everything from the mobile app?',
+    answer: 'The mobile app covers the most common tasks you\'d do away from your desk: recording weights, adding offspring, logging expenses, checking animal profiles, managing messages, and tracking breeding cycles. For complex tasks like genetics analysis or financial reporting, the full web platform is recommended.'
+  },
+  {
+    question: 'Will my data sync between phone and computer?',
+    answer: 'Yes. Everything you enter on your phone appears immediately on the web platform, and vice versa. There\'s one account, one dataset—access it from wherever you are.'
+  },
+  {
+    question: 'What devices are supported?',
+    answer: 'The app is available for iPhone (iOS 15+) and Android phones (Android 10+). The web platform works on any device with a modern browser, including tablets and iPads.'
+  },
+  {
+    question: 'Can I get push notifications?',
+    answer: 'Yes. The app sends push notifications for new messages, waitlist applications, payment received, contract signatures, and other important events. You control which notifications you receive in Settings.'
+  }
+];
+
+const featureCards = [
+  { id: 'animals', icon: '🐾', title: 'Animal Management', desc: 'Browse profiles, upload photos, check health records' },
+  { id: 'offspring', icon: '🍼', title: 'Offspring & Weights', desc: 'Add offspring, record daily weights, track litters' },
+  { id: 'breeding', icon: '📅', title: 'Breeding Cycles', desc: 'Track heat cycles, record observations, view projections' },
+  { id: 'messaging', icon: '💬', title: 'Messages', desc: 'Unified inbox for buyer and client conversations' },
+  { id: 'expenses', icon: '💰', title: 'Expense Tracking', desc: 'Log expenses with receipt photos on the go' },
+  { id: 'contacts', icon: '👥', title: 'Contacts', desc: 'Browse contacts, view details, manage relationships' }
+];
+---
+
+<BaseLayout
+  title="Mobile App for Breeders | BreederHQ"
+  description="Manage your breeding program from anywhere. Record weights at the whelping box, log expenses at the vet, upload photos from shows. iOS and Android."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Mobile App</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Your Breeding Program, in Your Pocket</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          The BreederHQ mobile app for iOS and Android puts your breeding program in your pocket. Record weights at the whelping box, log expenses at the vet, upload photos from shows, check animal profiles from the barn, and message buyers from anywhere. Everything syncs instantly with the web platform. Included with all plans.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Feature Cards Grid -->
+  <section class="py-8 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6 text-center">Everything You Need, Wherever You Are</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {featureCards.map(card => (
+          <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+            <div class="text-3xl mb-2">{card.icon}</div>
+            <h3 class="font-bold text-lg mb-1">{card.title}</h3>
+            <p class="text-sm text-gray-600">{card.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4">
+      <ul class="flex space-x-6 overflow-x-auto py-3 text-sm">
+        {featureCards.map(card => (
+          <li>
+            <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
+              {card.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Accordion Sections -->
+  <section class="py-12 px-4">
+    <div class="max-w-4xl mx-auto space-y-4">
+
+      <!-- Animals -->
+      <details id="animals" class="accordion-section border border-gray-200 rounded-lg" open>
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🐾</span>
+            <div>
+              <h3 class="text-2xl font-bold">Animal Management</h3>
+              <p class="text-gray-600">Full profiles, photos, and health records from your phone</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Browse & Search</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Full animal list with search and filters</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Profile photos and cover images</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Registration numbers and microchip IDs</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Pedigree information</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Quick status at a glance</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Health & Media</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Vaccination records and reminders</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Health trait tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Upload photos directly from camera</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Evidence photos for health records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Share animal profiles via QR code</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <p class="text-gray-700 text-sm"><strong>At the show ring:</strong> Pull up any animal's profile, titles, and pedigree instantly. Share profiles with other breeders by scanning a QR code—no need to exchange business cards or emails.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Offspring & Weights -->
+      <details id="offspring" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🍼</span>
+            <div>
+              <h3 class="text-2xl font-bold">Offspring & Weight Tracking</h3>
+              <p class="text-gray-600">Add offspring, record daily weights right at the whelping box</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Offspring Groups</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>View all litters and offspring groups</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Add new offspring with collar colors</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Birth details: sex, color, weight, time</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Delivery type and health status</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Offspring media gallery</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Weight Recording</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Quick weight entry with increment buttons</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Record weights for the whole litter fast</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Weight trend sparklines</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Automatic anomaly detection</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Metric and imperial toggle</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <p class="text-gray-700 text-sm"><strong>At the whelping box:</strong> Weigh each puppy, tap the weight, done. Quick increment buttons (+0.1oz, +0.5oz, +1oz) mean you can record an entire litter in under a minute. No laptop, no spreadsheet, no paper to transcribe later.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Breeding Cycles -->
+      <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📅</span>
+            <div>
+              <h3 class="text-2xl font-bold">Breeding Cycles</h3>
+              <p class="text-gray-600">Track heat cycles and record observations on the go</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Cycle Tracking</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Upcoming cycle notifications</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Record heat start and end dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Edit and delete cycle records</li>
+                <li class="flex items-start"><span class="mr-2">•</span>3-cycle lookahead projections</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Countdown to next expected cycle</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Why It Matters</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Never miss a breeding window</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Record observations immediately</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Data syncs to breeding plans on web</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Pattern history builds better predictions</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Push notifications when cycles are expected</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Messages -->
+      <details id="messaging" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">💬</span>
+            <div>
+              <h3 class="text-2xl font-bold">Messages</h3>
+              <p class="text-gray-600">Respond to buyers and clients from anywhere</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Unified Inbox</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>All conversations in one place</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Buyer portal messages</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Marketplace inquiry threads</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Date-separated conversation view</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Unread indicators</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Stay Responsive</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Push notifications for new messages</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Reply quickly from your phone</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Earn the Quick Responder badge</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Never leave a buyer waiting</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Real-time sync with web inbox</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Expenses -->
+      <details id="expenses" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">💰</span>
+            <div>
+              <h3 class="text-2xl font-bold">Expense Tracking</h3>
+              <p class="text-gray-600">Log costs and snap receipts right when they happen</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Quick Expense Entry</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>12 expense categories (vet, food, supplies, etc.)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Snap receipt photos with your camera</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Link to animals, plans, or offspring groups</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Vendor tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Notes and descriptions</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Why This Matters</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Log expenses at the vet before you forget</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Photograph receipts immediately</li>
+                <li class="flex items-start"><span class="mr-2">•</span>No more shoebox of receipts at tax time</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Expenses sync to financial dashboards</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Track true cost per animal or litter</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Contacts -->
+      <details id="contacts" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">👥</span>
+            <div>
+              <h3 class="text-2xl font-bold">Contacts</h3>
+              <p class="text-gray-600">Your buyer and client database, always accessible</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Contact Access</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Full contact list with search</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Color-coded tags</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Contact details and history</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Tap to call, email, or text</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Quick actions from contact card</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">On the Go</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Look up buyer info at a show</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Check communication history before a call</li>
+                <li class="flex items-start"><span class="mr-2">•</span>See which animals a buyer is interested in</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Review notes before a meeting</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Everything synced with web CRM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- Push Notifications -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-center">Push Notifications Keep You in the Loop</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8 text-center max-w-2xl mx-auto">
+        Get notified instantly when something needs your attention. New buyer inquiry, payment received, contract signed, waitlist application—you'll know right away without checking the app.
+      </p>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">💬</div>
+          <p class="text-sm font-semibold">New Messages</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">💳</div>
+          <p class="text-sm font-semibold">Payments</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">📝</div>
+          <p class="text-sm font-semibold">Contracts</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200 text-center">
+          <div class="text-2xl mb-2">📋</div>
+          <p class="text-sm font-semibold">Waitlist</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breeder Business Card -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white border-2 border-[hsl(24,95%,53%)] rounded-lg p-8">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-3xl font-bold mb-4">Your Digital Business Card</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-4">
+              At a show, meetup, or vet office? Pull up your Breeder Business Card with a QR code that links directly to your marketplace profile. The other person scans it—no app needed on their end—and they see your storefront, animals, programs, and contact information.
+            </p>
+            <p class="text-gray-600">
+              Share it via text, email, or just hold up your phone. Beats a paper card every time.
+            </p>
+          </div>
+          <div class="text-center">
+            <div class="inline-block bg-gray-50 p-8 rounded-lg border border-gray-200">
+              <div class="text-6xl mb-3">📱</div>
+              <p class="text-sm text-gray-500 font-semibold">QR Code → Your Storefront</p>
+              <p class="text-xs text-gray-400 mt-1">Share instantly, no app required for the other person</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Manage Your Program From Anywhere</h2>
+      <p class="text-xl mb-8 opacity-90">Your whelping box. The vet office. The show ring. Wherever breeding happens.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/coming-soon" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/whelping" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See Whelping Features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Is the mobile app included with my subscription?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The mobile app is included with all BreederHQ plans at no additional cost. Download it from the App Store or Google Play and log in with the same account you use on the web.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I do everything from the mobile app?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>The mobile app covers the most common tasks you'd do away from your desk: recording weights, adding offspring, logging expenses, checking animal profiles, managing messages, and tracking breeding cycles. For complex tasks like genetics analysis or financial reporting, the full web platform is recommended.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Will my data sync between phone and computer?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Everything you enter on your phone appears immediately on the web platform, and vice versa. There's one account, one dataset—access it from wherever you are.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I get push notifications?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The app sends push notifications for new messages, waitlist applications, payment received, contract signatures, and other important events. You control which notifications you receive in Settings.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What devices are supported?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>The app is available for iPhone (iOS 15+) and Android phones (Android 10+). The web platform works on any device with a modern browser, including tablets and iPads.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/whelping" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping & Neonatal Care
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Cycle Tracking
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Invoicing & Expenses
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/ai-copilot" class="text-[hsl(24,95%,53%)] hover:underline">
+            → AI Copilot
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/coming-soon" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .feature-card {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sticky-nav .nav-link.active {
+      color: hsl(24, 95%, 53%);
+      border-bottom: 2px solid hsl(24, 95%, 53%);
+    }
+
+    .accordion-section[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-header::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-content {
+      animation: slideDown 0.2s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.nav-link, .feature-card');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href')?.slice(1);
+          const target = document.getElementById(targetId || '');
+          if (target) {
+            if (target instanceof HTMLDetailsElement) {
+              target.open = true;
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      const sections = document.querySelectorAll('.accordion-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('.nav-link').forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      }, { rootMargin: '-100px 0px -66%' });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</BaseLayout>
