@@ -13,7 +13,8 @@
 > - PROTECTED FILES: Analytics.astro, BaseLayout.astro, sitemap.xml, robots.txt - will ASK before modifying
 > - NEVER remove isProduction checks, Schema.org data, or inline script patterns
 > - NEVER refactor is:inline scripts to imports (breaks Astro tracking)
-> - Env vars MUST use PUBLIC_ prefix for client exposure"
+> - Env vars MUST use PUBLIC_ prefix for client exposure
+> - **SITE UPDATES: Any content change MUST include an entry in site-updates.astro**"
 
 This confirms the instructions are active and that Claude has read the imported documentation.
 
@@ -78,6 +79,40 @@ These files contain critical integrations. **Ask before changing**:
 
 ---
 
+## 🚨 MANDATORY: Update Site Updates Page After Content Changes
+
+**Every time you modify marketing content** (page text, page renames, new pages, removed pages, feature descriptions, CTA changes, navigation changes), you **MUST** also update:
+
+**`src/pages/site-updates.astro`** — the public changelog at `/site-updates`
+
+### What to add
+
+Add a new entry (or append to today's existing entry) in the updates list with:
+- **Date** (today's date)
+- **What changed** — brief, user-facing description
+- **Link** to affected page(s) if applicable
+
+### When to update
+
+| Change Type | Update site-updates? |
+|-------------|---------------------|
+| New page added | **YES** — note the new page and what it covers |
+| Page renamed/moved | **YES** — note old → new URL |
+| Page content rewritten | **YES** — summarize what changed |
+| Page removed | **YES** — note removal |
+| Navigation/header/footer changes | **YES** — note restructuring |
+| Styling-only changes (colors, spacing) | No |
+| Bug fixes (broken links, typos) | No (unless user-visible behavior changed) |
+| Analytics/tracking changes | No |
+| Infrastructure/config changes | No |
+
+### Self-check before finishing content work
+
+- [ ] Did I modify any page content, add/remove pages, or rename URLs?
+- [ ] If yes, did I update `src/pages/site-updates.astro` with a changelog entry?
+
+---
+
 ## ✅ Safe Operations
 
 These are generally safe without special approval:
@@ -87,6 +122,34 @@ These are generally safe without special approval:
 - Styling changes (Tailwind classes)
 - Adding new components that don't touch analytics/SEO
 - Bug fixes that don't modify protected files
+
+---
+
+## 🐾 Species-Agnostic Language on Shared Pages
+
+BreederHQ supports 6 species: **Dogs, Cats, Horses, Goats, Rabbits, Sheep**.
+
+**Shared/general pages** (workflows, features, pricing, FAQ, index, mobile) must use **species-neutral language**. Do NOT use dog-specific terms on shared pages.
+
+| ❌ Dog-Specific (shared pages) | ✅ Species-Neutral |
+|-------------------------------|-------------------|
+| whelping box | birthing area |
+| puppy / puppies | offspring / newborns |
+| whelping | birthing / birth |
+| fading puppy syndrome | fading newborn syndrome |
+| 63 days from breeding | species-specific gestation periods |
+| 8 puppies | a large litter |
+
+**Species-specific pages** (`dogs.astro`, `cats.astro`, `horses.astro`, breed comparison pages, buyer guides) **should** use species-appropriate language — that's their purpose.
+
+**Decision matrix:**
+
+| Page Type | Use species-specific terms? |
+|-----------|---------------------------|
+| `/dogs`, `/cats`, `/horses` | ✅ Yes — that's the point |
+| `/breeds/*`, buyer guides | ✅ Yes — species-targeted SEO |
+| Workflow pages (`/workflows/*`) | ❌ No — must be species-neutral |
+| Feature pages, index, FAQ, mobile | ❌ No — must be species-neutral |
 
 ---
 

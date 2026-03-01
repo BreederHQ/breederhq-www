@@ -33,6 +33,14 @@ const faqs = [
     answer: 'When a puppy completes a protocol, you can generate a digital certificate documenting their developmental program. Certificates include a verification code buyers can use to confirm authenticity. Great for demonstrating the care that went into raising each puppy.'
   },
   {
+    question: 'What temperament tests are available?',
+    answer: 'BreederHQ includes two standardized assessments: the Volhard Puppy Aptitude Test (PAT) for general temperament evaluation, and the Gun Dog Aptitude Test for sporting and hunting dog evaluation. Volhard results also include a Working-Dog Role Suitability analysis that scores puppies for six working roles (K9, Military Working Dog, Guide Dog, Therapy Dog, Search & Rescue, and Detection).'
+  },
+  {
+    question: 'Can buyers see temperament test results?',
+    answer: 'Yes. You control which results are shared. When you mark an assessment as buyer-visible, it appears in the Buyer Portal with radar charts, temperament interpretations, and placement recommendations. Buyers can see the data that helps them understand their puppy before going home.'
+  },
+  {
     question: 'Do I need to use protocols to use BreederHQ?',
     answer: 'No. Protocols are optional. Many breeders start without them and add protocols later as their program matures. The rest of BreederHQ works independently of the protocol system.'
   }
@@ -40,8 +48,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Rearing Protocols & Puppy Development | BreederHQ"
-  description="Structured puppy development with ENS, ESI, Rule of 7s, and custom protocols. Track progress per-puppy, share protocols with the community, and generate completion certificates for buyers."
+  title="Rearing Protocols & Temperament Testing | BreederHQ"
+  description="Structured puppy development with ENS, ESI, Rule of 7s, and custom protocols. Temperament testing with Volhard PAT, Gun Dog Aptitude, and Working-Dog Role Suitability analysis. Track per-puppy progress, share results with buyers, and generate completion certificates."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -464,16 +472,17 @@ const faqs = [
   <!-- Section 8: Temperament Testing Integration -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Temperament Testing: Match Puppies to Families</h2>
+      <h2 class="text-4xl font-bold mb-8">Temperament Testing: Match Puppies to the Right Homes</h2>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        Rearing protocols develop puppies. Temperament testing evaluates them. BreederHQ includes the <strong>Volhard Puppy Aptitude Test (PAT)</strong>-the industry standard for matching puppies to the right homes.
+        Rearing protocols develop puppies. Temperament testing evaluates them. BreederHQ includes <strong>two standardized assessment types</strong> plus a working-dog suitability analysis, so whether you're placing companion puppies or evaluating future field trial prospects, you have the right tool.
       </p>
 
-      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
-        <h3 class="text-xl font-bold mb-4">Volhard PAT Scoring</h3>
+      <!-- Volhard PAT -->
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+        <h3 class="text-xl font-bold mb-4">Volhard Puppy Aptitude Test (PAT)</h3>
         <p class="text-gray-700 mb-4">
-          The Volhard PAT evaluates puppies at 49 days across 10 standardized tests:
+          The industry standard for evaluating puppy temperament. Administered at 49 days (7 weeks), the Volhard PAT scores each puppy across 10 standardized tests on a 1-6 scale:
         </p>
         <div class="grid md:grid-cols-2 gap-4 text-gray-700">
           <ul class="space-y-2">
@@ -491,41 +500,104 @@ const faqs = [
             <li class="flex items-start"><span class="mr-3">10.</span><span>Stability</span></li>
           </ul>
         </div>
+        <p class="text-gray-700 mt-4">
+          BreederHQ automatically calculates temperament profiles from scores: dominant, outgoing, adaptable, sensitive, or shy. Each profile comes with a placement recommendation and experience level guidance so you know exactly which homes are the best fit.
+        </p>
       </div>
 
+      <!-- Gun Dog Aptitude -->
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+        <h3 class="text-xl font-bold mb-4">Gun Dog Aptitude Test</h3>
+        <p class="text-gray-700 mb-4">
+          Purpose-built for sporting and hunting dog breeders. Evaluates puppies at 7-10 weeks across 10 field-relevant tests on a 1-5 scale:
+        </p>
+        <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+          <ul class="space-y-2">
+            <li class="flex items-start"><span class="mr-3">1.</span><span>Bird Drive</span></li>
+            <li class="flex items-start"><span class="mr-3">2.</span><span>Water Entry</span></li>
+            <li class="flex items-start"><span class="mr-3">3.</span><span>Marking Ability</span></li>
+            <li class="flex items-start"><span class="mr-3">4.</span><span>Retrieve Desire</span></li>
+            <li class="flex items-start"><span class="mr-3">5.</span><span>Cooperation</span></li>
+          </ul>
+          <ul class="space-y-2">
+            <li class="flex items-start"><span class="mr-3">6.</span><span>Wing Reaction</span></li>
+            <li class="flex items-start"><span class="mr-3">7.</span><span>Sound Sensitivity</span></li>
+            <li class="flex items-start"><span class="mr-3">8.</span><span>Prey Persistence</span></li>
+            <li class="flex items-start"><span class="mr-3">9.</span><span>Focus Under Distraction</span></li>
+            <li class="flex items-start"><span class="mr-3">10.</span><span>Overall Drive</span></li>
+          </ul>
+        </div>
+        <p class="text-gray-700 mt-4">
+          Results are automatically categorized into placement tiers: Field Trial Prospect, Serious Hunter, Casual Hunter, Pet with Hunting Potential, or Companion Home. No more guessing which puppy belongs on a hunting preserve versus a family couch.
+        </p>
+      </div>
+
+      <!-- Working Dog Role Suitability -->
+      <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)] mb-8">
+        <h3 class="text-xl font-bold mb-4">Working-Dog Role Suitability Analysis</h3>
+        <p class="text-gray-700 mb-4">
+          For breeders producing working dogs, BreederHQ goes beyond basic temperament profiles. After a Volhard PAT is scored, the system automatically evaluates each puppy's suitability for six working-dog roles:
+        </p>
+        <div class="grid md:grid-cols-3 gap-3 mb-4">
+          <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="font-semibold text-gray-800">K9 / Protection</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="font-semibold text-gray-800">Military Working Dog</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="font-semibold text-gray-800">Guide Dog</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="font-semibold text-gray-800">Therapy Dog</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="font-semibold text-gray-800">Search & Rescue</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded text-center">
+            <p class="font-semibold text-gray-800">Detection</p>
+          </div>
+        </div>
+        <p class="text-gray-700">
+          Each role gets a suitability score with specific strengths and concerns. You'll know instantly if a puppy is an excellent therapy dog candidate but a poor fit for protection work, or if they have the stability and drive for search and rescue. This level of data-driven placement is something most breeders have never had access to.
+        </p>
+      </div>
+
+      <!-- Assessment Tools Grid -->
+      <h3 class="text-2xl font-bold mb-6">Assessment Tools</h3>
       <div class="grid md:grid-cols-2 gap-6 mb-8">
         <div class="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">📊 Score Radar Charts</h3>
+          <h4 class="text-xl font-bold mb-3">Score Radar Charts</h4>
           <p class="text-gray-700">
-            Visual radar charts show each puppy's temperament profile at a glance. Quickly identify high-drive, independent, sensitive, or handler-focused puppies.
+            Visual radar charts show each puppy's profile at a glance. Both Volhard and Gun Dog assessments get their own chart type with category breakdowns. Quickly spot high-drive, independent, sensitive, or handler-focused puppies.
           </p>
         </div>
 
         <div class="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">👥 Sibling Comparison</h3>
+          <h4 class="text-xl font-bold mb-3">Sibling Comparison</h4>
           <p class="text-gray-700">
-            Compare all puppies in a litter side-by-side. See which puppy is best suited for an active family vs. a calm home. Match drive levels to buyer lifestyles.
+            Compare two puppies side-by-side with overlapping radar charts. See score-by-score differences with a delta column. For Volhard assessments, the comparison also shows each puppy's top working-dog role.
           </p>
         </div>
 
         <div class="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">📈 Assessment History</h3>
+          <h4 class="text-xl font-bold mb-3">Buyer Portal Integration</h4>
           <p class="text-gray-700">
-            Track multiple assessments over time. See how puppies develop. Compare 7-week scores to later evaluations.
+            Choose which assessment results to share with buyers. When enabled, buyers see radar charts, temperament interpretations, and placement recommendations directly in their portal. For Volhard results, buyers also see the top working-dog role suitability.
           </p>
         </div>
 
         <div class="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">📋 Buyer Reports</h3>
+          <h4 class="text-xl font-bold mb-3">Assessment History</h4>
           <p class="text-gray-700">
-            Generate temperament reports for buyers. Help them understand their puppy's personality and training needs before going home.
+            Track multiple assessments over time. Run a Volhard PAT at 7 weeks and a Gun Dog evaluation at 10 weeks for the same puppy. All results are stored and accessible from the rearing tab.
           </p>
         </div>
       </div>
 
       <div class="bg-gray-100 p-6 rounded-lg">
         <p class="text-lg text-gray-700 font-semibold">
-          Good breeders don't just sell puppies-they match them. Temperament testing turns puppy placement from guesswork into science.
+          Good breeders don't just sell puppies-they match them. Whether you're placing family companions, hunting prospects, or future service dogs, temperament testing turns placement from guesswork into science.
         </p>
       </div>
     </div>
@@ -673,6 +745,30 @@ const faqs = [
         </summary>
         <div class="faq-answer">
           <p>When a puppy completes a protocol, you can generate a digital certificate documenting their developmental program. Certificates include a verification code buyers can use to confirm authenticity. Great for demonstrating the care that went into raising each puppy.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What temperament tests are available?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>BreederHQ includes two standardized assessments: the Volhard Puppy Aptitude Test (PAT) for general temperament evaluation, and the Gun Dog Aptitude Test for sporting and hunting dog evaluation. Volhard results also include a Working-Dog Role Suitability analysis that scores puppies for six working roles (K9, Military Working Dog, Guide Dog, Therapy Dog, Search & Rescue, and Detection).</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can buyers see temperament test results?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. You control which results are shared. When you mark an assessment as buyer-visible, it appears in the Buyer Portal with radar charts, temperament interpretations, and placement recommendations. Buyers can see the data that helps them understand their puppy before going home.</p>
         </div>
       </details>
     </div>
