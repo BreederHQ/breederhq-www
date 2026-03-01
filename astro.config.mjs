@@ -10,6 +10,7 @@ const excludedPages = [
   'https://breederhq.com/404',
   'https://breederhq.com/share',
   'https://breederhq.com/pricing', // Redirects to /coming-soon — remove from sitemap when pricing launches
+  'https://breederhq.com/site-updates', // Internal update log for marketing manager — not for public indexing
 ];
 
 // https://astro.build/config
