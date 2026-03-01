@@ -29,6 +29,10 @@ const faqs = [
     answer: 'Yes. The buyer portal lets you share photos, updates, and documents without sending individual messages.'
   },
   {
+    question: 'Can I track medications and treatments?',
+    answer: 'Yes. Create treatment courses for any medication (Clavamox, Prednisolone, Revolution, etc.) with dosage and frequency. Log each dose as administered. Upload vet invoices for auto-extraction. Generate health reports to share with your vet or kitten buyers.'
+  },
+  {
     question: 'Can I try it first?',
     answer: 'Yes. Join our early adopter program for full access. Visit our Coming Soon page for details.'
   }
@@ -41,6 +45,7 @@ const featureCards = [
   { id: 'client-management', icon: '👥', title: 'Clients', desc: 'Waitlists, communication, contracts' },
   { id: 'business-ops', icon: '💰', title: 'Business', desc: 'Invoicing, deposits, expenses' },
   { id: 'buyer-portal', icon: '🏠', title: 'Buyer Portal', desc: 'Kitten updates, health docs' },
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Treatment courses, dose logging, health reports' },
 ];
 
 const navItems = [
@@ -49,6 +54,7 @@ const navItems = [
   { id: 'health-testing', label: 'Health' },
   { id: 'client-management', label: 'Clients' },
   { id: 'business-ops', label: 'Business' },
+  { id: 'medications', label: 'Meds' },
   { id: 'faq', label: 'FAQ' },
 ];
 ---
@@ -254,6 +260,7 @@ const navItems = [
                     <li>• FeLV/FIV status</li>
                     <li>• Test dates and lab results</li>
                     <li>• Vaccination records</li>
+                    <li>• <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication tracking</a> with dose logging</li>
                   </ul>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
@@ -373,6 +380,65 @@ const navItems = [
                   </ul>
                 </div>
               </div>
+            </div>
+          </details>
+
+          <!-- Medication Tracking -->
+          <details id="medications" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">💊</span>
+                <div>
+                  <h3 class="text-xl font-bold">Medication Tracking</h3>
+                  <p class="text-sm text-gray-600">Treatment courses • Dose logging • Health reports • Vet sharing</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Treatment Courses</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Course-based tracking (Clavamox, Prednisolone, Cerenia, etc.)</li>
+                    <li>• Dosage, route, frequency, and duration</li>
+                    <li>• Individual dose check-off with compliance tracking</li>
+                    <li>• Adverse reaction documentation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Smart Features</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Upload vet invoices — auto-extract medication details</li>
+                    <li>• Next-dose reminders and overdue alerts</li>
+                    <li>• Common cat medication templates pre-loaded</li>
+                    <li>• Controlled substance logging (Buprenorphine, etc.)</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Health Reports</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Full health report PDF (meds + vaccinations + testing)</li>
+                    <li>• Email directly to your vet</li>
+                    <li>• Secure share links with PIN protection</li>
+                    <li>• Buyer portal health documentation access</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Complete History</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Full treatment history per cat</li>
+                    <li>• Active, completed, and discontinued courses</li>
+                    <li>• Connected to vaccinations and health testing</li>
+                    <li>• Mobile quick-log for dose entry</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="mt-4 text-sm text-gray-500">
+                <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Learn more about medication tracking →</a>
+              </p>
             </div>
           </details>
 

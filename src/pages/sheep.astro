@@ -25,6 +25,10 @@ const faqs = [
     answer: 'Yes. Full fiber production tracking: gross and clean fleece weights with automatic yield calculation, fleece grading (Prime through Reject), staple length, and lab test results including micron analysis, CV%, comfort factor, and staple strength. Track micron trends over time to see if fiber quality is improving, stable, or coarsening. Lifetime production history per animal.'
   },
   {
+    question: 'Can I batch-deworm the whole flock at once?',
+    answer: 'Yes. Select multiple animals, choose the medication (Ivermectin, SafeGuard, etc.), and log it once. Each animal gets its own treatment record with individual tracking and lot/batch numbers.'
+  },
+  {
     question: 'Can I try it before paying?',
     answer: 'Yes. Join our early adopter program for full access. Visit our Coming Soon page for details.'
   }
@@ -36,7 +40,8 @@ const featureCards = [
   { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Scrapie genotyping, OPP, vaccinations' },
   { id: 'performance', icon: '📊', title: 'Performance', desc: 'NSIP data, weights, reproductive efficiency' },
   { id: 'fiber', icon: '🧶', title: 'Fiber & Wool', desc: 'Shearing, fleece grading, micron analysis, production analytics' },
-  { id: 'clients', icon: '👥', title: 'Clients & Buyer CRM', desc: 'Sales pipeline, lead scoring, waitlists, contracts' }
+  { id: 'clients', icon: '👥', title: 'Clients & Buyer CRM', desc: 'Sales pipeline, lead scoring, waitlists, contracts' },
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Batch deworming, treatment courses, health reports' }
 ];
 ---
 
@@ -228,7 +233,7 @@ const featureCards = [
                 <li class="flex items-start"><span class="mr-2">•</span>Deworming protocols</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Hoof trimming records</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Veterinary visits</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Medication history</li>
+                <li class="flex items-start"><span class="mr-2">•</span><a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication tracking</a> with batch deworming support</li>
               </ul>
             </div>
           </div>
@@ -362,6 +367,47 @@ const featureCards = [
             <h4 class="font-bold text-lg mb-2">Buyer CRM</h4>
             <p class="text-gray-700 text-sm">Full sales pipeline with drag-and-drop stages, lead scoring, email templates, task management, and conversion analytics. <a href="/workflows/client-management" class="text-[hsl(24,95%,53%)] hover:underline">Learn more</a></p>
           </div>
+        </div>
+      </details>
+
+      <!-- Medication Tracking -->
+      <details id="medications" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">💊</span>
+            <div>
+              <h3 class="text-2xl font-bold">Medication Tracking</h3>
+              <p class="text-gray-600">Batch deworming, treatment courses, health reports</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Batch Flock Treatments</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Deworm the entire flock in one entry</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Each animal gets its own treatment record</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Lot and batch numbers for traceability</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Common sheep medication templates (Ivermectin, Fenbendazole, Penicillin G, etc.)</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Individual Treatment Courses</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Course-based tracking with dose check-off</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Next-dose reminders and overdue alerts</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Adverse reaction documentation</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Full health report PDFs and secure vet sharing</li>
+              </ul>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-gray-500">
+            <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Learn more about medication tracking →</a>
+          </p>
         </div>
       </details>
 

@@ -25,6 +25,10 @@ const faqs = [
     answer: 'Genetics tracking helps with color prediction and planning.'
   },
   {
+    question: 'Can I track medications and treatments?',
+    answer: 'Yes. Create treatment courses for any medication (Meloxicam, Panacur, Revolution, Baytril, etc.) with dosage and frequency. Log each dose as administered. Generate health reports to share with your vet.'
+  },
+  {
     question: 'Can I try it before paying?',
     answer: 'Yes. Join our early adopter program for full access. Visit our Coming Soon page for details.'
   }
@@ -36,7 +40,8 @@ const featureCards = [
   { id: 'genetics', icon: '🧬', title: 'Color Genetics', desc: 'Predict colors, track genotypes' },
   { id: 'shows', icon: '🏆', title: 'Shows & ARBA', desc: 'Legs, GC status, show results' },
   { id: 'clients', icon: '👥', title: 'Clients & Buyer CRM', desc: 'Sales pipeline, lead scoring, waitlists, contracts' },
-  { id: 'buyer-portal', icon: '🌐', title: 'Buyer Portal', desc: 'Public listings for available kits' }
+  { id: 'buyer-portal', icon: '🌐', title: 'Buyer Portal', desc: 'Public listings for available kits' },
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Treatment courses, dose logging, health reports' }
 ];
 ---
 
@@ -351,6 +356,47 @@ const featureCards = [
               </ul>
             </div>
           </div>
+        </div>
+      </details>
+
+      <!-- Medication Tracking -->
+      <details id="medications" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">💊</span>
+            <div>
+              <h3 class="text-2xl font-bold">Medication Tracking</h3>
+              <p class="text-gray-600">Treatment courses, dose logging, health reports</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Treatment Courses</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Course-based tracking (Meloxicam, Panacur, Revolution, Baytril, etc.)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Individual dose check-off with compliance tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Dosage, route, frequency, and duration</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Next-dose reminders and overdue alerts</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Health Reports & Sharing</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Full health report PDF (meds + vaccinations)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Email directly to your vet</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Secure share links with PIN protection</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Upload vet invoices — auto-extract details</li>
+              </ul>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-gray-500">
+            <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Learn more about medication tracking →</a>
+          </p>
         </div>
       </details>
 

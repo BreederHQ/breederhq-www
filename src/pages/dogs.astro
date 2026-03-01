@@ -45,6 +45,10 @@ const faqs = [
     answer: 'ENS (Early Neurological Stimulation), ESI (Early Scent Introduction), Rule of 7s socialization, and more. You can use built-in protocols or create custom ones. Daily checklists track completion for each puppy.'
   },
   {
+    question: 'Can I track medications and treatments?',
+    answer: 'Yes. Create treatment courses for any medication (Rimadyl, Cephalexin, Apoquel, heartworm preventatives, etc.) with dosage and frequency. Log each dose as it\'s administered. Upload vet invoices and have medication details auto-extracted. Generate health reports to share with your vet or buyers.'
+  },
+  {
     question: 'Can I try it before paying?',
     answer: 'Yes. Join our early adopter program for full access. Visit our Coming Soon page for details.'
   }
@@ -57,6 +61,7 @@ const featureCards = [
   { id: 'puppy-development', icon: '🐾', title: 'Temperament', desc: 'Volhard PAT, rearing protocols, buyer matching' },
   { id: 'client-management', icon: '👥', title: 'Client Management', desc: 'Waitlists, communication, contracts' },
   { id: 'business-ops', icon: '💰', title: 'Business', desc: 'Invoicing, deposits, expense tracking' },
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Treatment courses, dose logging, health reports' },
 ];
 
 const navItems = [
@@ -66,6 +71,7 @@ const navItems = [
   { id: 'puppy-development', label: 'Temperament' },
   { id: 'client-management', label: 'Clients' },
   { id: 'business-ops', label: 'Business' },
+  { id: 'medications', label: 'Meds' },
   { id: 'faq', label: 'FAQ' },
 ];
 ---
@@ -174,6 +180,7 @@ const navItems = [
                     <li>• Breed-specific genetic panels</li>
                     <li>• Eye certifications with renewal reminders</li>
                     <li>• Cardiac clearances</li>
+                    <li>• <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication tracking</a> with dose logging</li>
                   </ul>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
@@ -475,6 +482,66 @@ const navItems = [
                   </ul>
                 </div>
               </div>
+            </div>
+          </details>
+
+          <!-- Medication Tracking -->
+          <details id="medications" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">💊</span>
+                <div>
+                  <h3 class="text-xl font-bold">Medication Tracking</h3>
+                  <p class="text-sm text-gray-600">Treatment courses • Dose logging • Health reports • Document upload</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Treatment Courses</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Course-based tracking (Rimadyl, Cephalexin, Apoquel, etc.)</li>
+                    <li>• Dosage, route, frequency, and duration</li>
+                    <li>• Individual dose check-off with compliance tracking</li>
+                    <li>• Prescribing vet and Rx number</li>
+                    <li>• Adverse reaction documentation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Smart Features</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Upload vet invoices — auto-extract medication details</li>
+                    <li>• Next-dose reminders and overdue alerts</li>
+                    <li>• Mobile quick-log for on-the-go dose entry</li>
+                    <li>• Common dog medication templates pre-loaded</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Health Reports</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Full health report PDF (meds + vaccinations)</li>
+                    <li>• Email directly to your vet</li>
+                    <li>• Secure share links with PIN protection</li>
+                    <li>• Buyer portal access to health documentation</li>
+                  </ul>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Complete Medication History</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Full treatment history per dog</li>
+                    <li>• Active, completed, and discontinued courses</li>
+                    <li>• Controlled substance audit trail</li>
+                    <li>• Connected to vaccinations and health testing</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="mt-4 text-sm text-gray-500">
+                <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Learn more about medication tracking →</a>
+              </p>
             </div>
           </details>
 

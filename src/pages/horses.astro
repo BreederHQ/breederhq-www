@@ -53,6 +53,10 @@ const faqs = [
     answer: 'Yes. BreederHQ tracks semen inventory at the dose level with complete chain of custody. Log collections with quality metrics (concentration, motility, morphology), track storage locations (tank, rack, facility), get automatic expiration alerts for batches expiring within 30 days, and maintain a complete audit trail for every dose-whether used for breeding, shipped to mare owners, or transferred between facilities.'
   },
   {
+    question: 'How does medication and withdrawal tracking work?',
+    answer: 'Create a treatment course for any medication (Banamine, Bute, SMZs, Regumate, etc.) with dosage and frequency. Log each dose as it\'s administered. For competition horses, the withdrawal period countdown recalculates from the most recent dose — not the start date — so your clearance date is always accurate. Visual badges show red (active), amber (clearing soon), or green (cleared).'
+  },
+  {
     question: 'Can I try it before paying?',
     answer: 'Yes. Join our early adopter program for full access. Visit our Coming Soon page for details.'
   }
@@ -67,6 +71,7 @@ const featureCards = [
   { id: 'competition', icon: '🏆', title: 'Competition', desc: 'Shows, racing, producing records' },
   { id: 'buyer-crm', icon: '👥', title: 'Buyer CRM', desc: 'Lead scoring, sales pipeline, analytics' },
   { id: 'health-registry', icon: '📋', title: 'Health & Registry', desc: 'Vaccinations, Coggins, multi-registry' },
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Treatment courses, withdrawal countdowns, stall cards' },
 ];
 
 const navItems = [
@@ -78,6 +83,7 @@ const navItems = [
   { id: 'competition', label: 'Competition' },
   { id: 'buyer-crm', label: 'CRM' },
   { id: 'health-registry', label: 'Health' },
+  { id: 'medications', label: 'Meds' },
   { id: 'faq', label: 'FAQ' },
 ];
 ---
@@ -669,7 +675,7 @@ const navItems = [
                 <span class="text-3xl">📋</span>
                 <div>
                   <h3 class="text-xl font-bold">Health, Registry & Marketplace</h3>
-                  <p class="text-sm text-gray-600">Vaccinations • Coggins • Multi-registry • Sales listings • Stud services</p>
+                  <p class="text-sm text-gray-600">Vaccinations • Coggins • Medications • Multi-registry • Sales listings • Stud services</p>
                 </div>
               </div>
               <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -684,6 +690,7 @@ const navItems = [
                     <li>• Vaccination tracking (Core + Non-Core protocols)</li>
                     <li>• Automatic status: Current, Due Soon, Expired</li>
                     <li>• Coggins and health certificates</li>
+                    <li>• <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication tracking</a> with withdrawal countdowns</li>
                     <li>• Veterinary exam logging</li>
                     <li>• Weight and body condition scoring</li>
                     <li>• Dental records</li>
@@ -723,6 +730,71 @@ const navItems = [
             </div>
           </details>
 
+          <!-- Medication Tracking -->
+          <details id="medications" class="accordion-item">
+            <summary class="accordion-header">
+              <div class="flex items-center gap-4">
+                <span class="text-3xl">💊</span>
+                <div>
+                  <h3 class="text-xl font-bold">Medication Tracking</h3>
+                  <p class="text-sm text-gray-600">Treatment courses • Withdrawal countdowns • Stall cards • Batch treatments</p>
+                </div>
+              </div>
+              <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="accordion-content">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Treatment Course Logging</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Course-based tracking (Banamine, Bute, SMZs, Regumate, etc.)</li>
+                    <li>• Individual dose check-off with compliance tracking</li>
+                    <li>• Dosage, route, frequency, and duration</li>
+                    <li>• Prescribing vet and prescription number</li>
+                    <li>• Controlled substance flagging and audit trail</li>
+                    <li>• Adverse reaction documentation</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Withdrawal Period Compliance</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Live countdown recalculates from most recent dose</li>
+                    <li>• Visual status: red (active), amber (clearing soon), green (clear)</li>
+                    <li>• Pre-loaded withdrawal days for common equine medications</li>
+                    <li>• Withdrawal badges visible in animal list and detail views</li>
+                    <li>• Dashboard alerts for upcoming and cleared withdrawals</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Barn-Ready Tools</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Printable stall cards with current meds and dosages</li>
+                    <li>• Mobile quick-log for barn staff</li>
+                    <li>• Next-dose-due reminders and overdue alerts</li>
+                    <li>• Upload vet invoices — auto-extract medication details</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Health Reports & Sharing</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Full health report PDF (meds + vaccinations + clearances)</li>
+                    <li>• Email reports directly to your vet</li>
+                    <li>• Secure share links with PIN protection</li>
+                    <li>• Client portal visibility for buyers</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="mt-4 text-sm text-gray-500">
+                <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Learn more about medication tracking →</a>
+              </p>
+            </div>
+          </details>
+
         </div>
       </div>
     </section>
@@ -733,7 +805,7 @@ const navItems = [
         <h2 class="text-4xl font-bold mb-8">Built for How Equine Breeding Actually Works</h2>
 
         <p class="text-xl leading-relaxed mb-8">
-          Genetics lab with 13+ color genes and 16+ health screenings. Mare reproductive tracking with follicle exams and ovulation confirmation. Foaling milestones from day 15 through birth. Stallion revenue dashboards. Professional buyer CRM. Competition and racing records.
+          Genetics lab with 13+ color genes and 16+ health screenings. Mare reproductive tracking with follicle exams and ovulation confirmation. Foaling milestones from day 15 through birth. Stallion revenue dashboards. Medication tracking with withdrawal period countdowns. Professional buyer CRM. Competition and racing records.
         </p>
 
         <p class="text-xl leading-relaxed mb-8">
