@@ -95,29 +95,18 @@ const videos = [
     <!-- Video Grid -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex-1">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {videos.map((video, i) => (
+        {videos.map((video) => (
           <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 flex flex-col">
-            <!-- Thumbnail (click to load iframe) -->
-            <div
-              id={`video-wrap-${i}`}
-              class="relative aspect-video bg-gray-900 cursor-pointer group"
-              data-loom-id={video.id}
-            >
-              <img
-                src={`https://cdn.loom.com/sessions/thumbnails/${video.id}-with-play.gif`}
-                alt={video.title}
-                class="absolute inset-0 w-full h-full object-cover"
+            <!-- Loom embed — native thumbnail with hover preview -->
+            <div class="relative aspect-video">
+              <iframe
+                src={`https://www.loom.com/embed/${video.id}`}
+                frameborder="0"
+                allowfullscreen
                 loading="lazy"
-                onerror={`this.onerror=null;this.src='https://cdn.loom.com/sessions/thumbnails/${video.id}/1280x720.jpg';`}
-              />
-              <!-- Play overlay -->
-              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                  <svg class="w-7 h-7 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </div>
+                allow="fullscreen"
+                class="absolute inset-0 w-full h-full"
+              ></iframe>
             </div>
 
             <!-- Info -->
@@ -137,23 +126,5 @@ const videos = [
       </div>
     </footer>
 
-    <!-- Click-to-play: swap thumbnail with Loom iframe -->
-    <script>
-      document.querySelectorAll('[data-loom-id]').forEach((wrap) => {
-        wrap.addEventListener('click', () => {
-          const id = wrap.getAttribute('data-loom-id');
-          if (!id) return;
-          const iframe = document.createElement('iframe');
-          iframe.src = `https://www.loom.com/embed/${id}?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true&autoplay=1`;
-          iframe.allow = 'autoplay; fullscreen';
-          iframe.allowFullscreen = true;
-          iframe.className = 'absolute inset-0 w-full h-full';
-          // Clear the wrapper and insert the iframe
-          wrap.innerHTML = '';
-          wrap.classList.remove('cursor-pointer', 'group');
-          wrap.appendChild(iframe);
-        });
-      });
-    </script>
   </body>
 </html>
