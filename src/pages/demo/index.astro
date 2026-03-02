@@ -1,0 +1,159 @@
+---
+export const prerender = false;
+import '../../styles/global.css';
+
+const DEMO_PASSWORD = import.meta.env.DEMO_PASSWORD;
+
+// Auth check — redirect to login if no valid cookie
+const cookie = Astro.cookies.get('bhq_demo_access');
+if (!cookie || cookie.value !== DEMO_PASSWORD) {
+  return Astro.redirect('/demo/login');
+}
+
+// ============================================================
+// VIDEO CONFIG — Add Loom videos here as you record them.
+// Each entry needs:
+//   id:          The Loom video ID (from the share URL)
+//   title:       Short title shown below the video
+//   description: One-liner shown under the title
+// ============================================================
+const videos = [
+  {
+    id: '0f4182cfa1444ff4828ef6061de28543',
+    title: 'Getting Started',
+    description: 'An overview of BreederHQ and the core platform experience.',
+  },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Animal Management',
+  //   description: 'Add and manage animals, track health records, and organize your program.',
+  // },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Breeding Plans',
+  //   description: 'Walk through the 8-phase breeding plan lifecycle.',
+  // },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Genetics Lab',
+  //   description: 'Coat color genetics, Punnett squares, and the offspring simulator.',
+  // },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Client Portal',
+  //   description: 'The buyer experience — portal access, e-signatures, and payments.',
+  // },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Marketplace',
+  //   description: 'Verified listings, breeder profiles, and buyer discovery.',
+  // },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Financials',
+  //   description: 'Invoicing, expense tracking, and the financial dashboard.',
+  // },
+  // {
+  //   id: 'LOOM_VIDEO_ID',
+  //   title: 'Communications',
+  //   description: 'Unified inbox, templates, and real-time messaging.',
+  // },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BreederHQ — Product Walkthrough</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body class="min-h-screen bg-gray-50 flex flex-col">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="/">
+          <img src="/logo.png" alt="BreederHQ" class="h-12 w-auto" />
+        </a>
+        <span class="text-xs text-gray-400 font-medium uppercase tracking-wider">
+          Private Preview
+        </span>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+      <h1 class="text-3xl font-bold text-gray-900">Product Walkthrough</h1>
+      <p class="mt-2 text-gray-500 max-w-2xl">
+        A hands-on look at BreederHQ — breeding program management software
+        built for serious breeders. Click any video below to watch.
+      </p>
+    </div>
+
+    <!-- Video Grid -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {videos.map((video, i) => (
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 flex flex-col">
+            <!-- Thumbnail (click to load iframe) -->
+            <div
+              id={`video-wrap-${i}`}
+              class="relative aspect-video bg-gray-900 cursor-pointer group"
+              data-loom-id={video.id}
+            >
+              <img
+                src={`https://cdn.loom.com/sessions/thumbnails/${video.id}-with-play.gif`}
+                alt={video.title}
+                class="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+                onerror={`this.onerror=null;this.src='https://cdn.loom.com/sessions/thumbnails/${video.id}/1280x720.jpg';`}
+              />
+              <!-- Play overlay -->
+              <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  <svg class="w-7 h-7 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="p-4">
+              <h2 class="font-semibold text-gray-900">{video.title}</h2>
+              <p class="text-sm text-gray-500 mt-1">{video.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white py-6 mt-auto">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
+        &copy; {new Date().getFullYear()} BreederHQ &mdash; Confidential. Please do not share.
+      </div>
+    </footer>
+
+    <!-- Click-to-play: swap thumbnail with Loom iframe -->
+    <script>
+      document.querySelectorAll('[data-loom-id]').forEach((wrap) => {
+        wrap.addEventListener('click', () => {
+          const id = wrap.getAttribute('data-loom-id');
+          if (!id) return;
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.loom.com/embed/${id}?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true&autoplay=1`;
+          iframe.allow = 'autoplay; fullscreen';
+          iframe.allowFullscreen = true;
+          iframe.className = 'absolute inset-0 w-full h-full';
+          // Clear the wrapper and insert the iframe
+          wrap.innerHTML = '';
+          wrap.classList.remove('cursor-pointer', 'group');
+          wrap.appendChild(iframe);
+        });
+      });
+    </script>
+  </body>
+</html>
