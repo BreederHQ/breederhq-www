@@ -21,6 +21,7 @@ export default defineConfig({
   output: 'static', // Static pages by default; SSR opt-in via `export const prerender = false`
   trailingSlash: 'never', // Canonical URLs without trailing slash (e.g. /about not /about/)
   adapter: vercel(),
+  security: { checkOrigin: false }, // Allow POST on SSR demo pages
   integrations: [
     sitemap({
       filter: (page) => !excludedPages.includes(page),
