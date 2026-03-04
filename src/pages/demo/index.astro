@@ -63,14 +63,14 @@ const videos = [
       <div style="display: flex; flex-direction: column; gap: 2rem;">
         {videos.map((video) => (
           <div style="border-radius: 0.75rem; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-            <iframe
-              src={`https://www.loom.com/embed/${video.id}`}
-              style="aspect-ratio: 16/9; width: 100%; display: block;"
-              frameborder="0"
-              allowfullscreen
-              loading="lazy"
-              allow="fullscreen"
-            ></iframe>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+              <iframe
+                src={`https://www.loom.com/embed/${video.id}`}
+                allowfullscreen
+                loading="lazy"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+              ></iframe>
+            </div>
             <div style="padding: 0.75rem 1rem;">
               <h2 style="font-weight: 600; color: #111827; font-size: 1rem; margin: 0;">{video.title}</h2>
             </div>
