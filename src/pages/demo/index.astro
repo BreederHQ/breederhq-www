@@ -64,16 +64,14 @@ const videos = [
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {videos.map((id) => (
           <div class="rounded-xl overflow-hidden shadow-sm border border-gray-200">
-            <div class="relative aspect-video">
-              <iframe
-                src={`https://www.loom.com/embed/${id}`}
-                frameborder="0"
-                allowfullscreen
-                loading="lazy"
-                allow="fullscreen"
-                class="absolute inset-0 w-full h-full"
-              ></iframe>
-            </div>
+            <iframe
+              src={`https://www.loom.com/embed/${id}`}
+              style="aspect-ratio: 16/9; width: 100%; display: block;"
+              frameborder="0"
+              allowfullscreen
+              loading="lazy"
+              allow="fullscreen"
+            ></iframe>
           </div>
         ))}
       </div>
