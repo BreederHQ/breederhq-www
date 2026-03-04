@@ -10,21 +10,20 @@ if (!cookie || cookie.value !== DEMO_PASSWORD) {
   return Astro.redirect('/demo/login');
 }
 
-// VIDEO CONFIG — Add Loom video IDs here (from the share URL).
-// Loom's embed handles titles/thumbnails automatically.
+// VIDEO CONFIG — Add Loom videos here as you record them.
 const videos = [
-  'beeeb6b6887e4a9b991cf3e749309374',  // Introductions
-  '8c1d61de2282405aae72421d567ba581',  // Platform Overview
-  'f874dd7e90a44889a4c470b0b5863e18',  // Mare Status Board
-  'b7232325737c449fa32ddaa06f8c2e5e',  // Cycle Progress
-  '786e7c5e3f1c42f3a05660204b74ff85',  // Understanding Breeding Plans
-  'fb36d09c92784b6ba8153b3c684857f9',  // Medication Management
-  '90cbab4a86f0452db960195f75584f17',  // Pre-Foaling Monitoring
-  '90b64e098e8f4d129c61ed7b59028572',  // Enhancing Breeder Protocols
-  '46b876b3c30f46aabefa41475855bc12',  // Genetics Lab
-  '1ab1a1ccb1664d73a13b963907f6f7ab',  // Data Reporting
-  'cd365bb3888f46268c2a022af60f9432',  // Commerce
-  'e820f90ac3b941ab887a07e728d8d83d',  // Demo Closing
+  { id: 'beeeb6b6887e4a9b991cf3e749309374', title: 'Introductions — Aaron & Carie' },
+  { id: '8c1d61de2282405aae72421d567ba581', title: 'Platform Overview' },
+  { id: 'f874dd7e90a44889a4c470b0b5863e18', title: 'Mare Status Board' },
+  { id: 'b7232325737c449fa32ddaa06f8c2e5e', title: 'Cycle Progress' },
+  { id: '786e7c5e3f1c42f3a05660204b74ff85', title: 'Understanding Breeding Plans' },
+  { id: 'fb36d09c92784b6ba8153b3c684857f9', title: 'Medication Management' },
+  { id: '90cbab4a86f0452db960195f75584f17', title: 'Pre-Foaling Monitoring' },
+  { id: '90b64e098e8f4d129c61ed7b59028572', title: 'Enhancing Breeder Protocols' },
+  { id: '46b876b3c30f46aabefa41475855bc12', title: 'Genetics Lab' },
+  { id: '1ab1a1ccb1664d73a13b963907f6f7ab', title: 'Data Reporting' },
+  { id: 'cd365bb3888f46268c2a022af60f9432', title: 'Commerce' },
+  { id: 'e820f90ac3b941ab887a07e728d8d83d', title: 'Demo Closing' },
 ];
 ---
 
@@ -60,18 +59,21 @@ const videos = [
     </div>
 
     <!-- Video Grid -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex-1">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {videos.map((id) => (
-          <div class="rounded-xl overflow-hidden shadow-sm border border-gray-200">
+    <main style="max-width: 960px; margin: 0 auto; padding: 0 1rem 4rem;">
+      <div style="display: flex; flex-direction: column; gap: 2rem;">
+        {videos.map((video) => (
+          <div style="border-radius: 0.75rem; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
             <iframe
-              src={`https://www.loom.com/embed/${id}`}
+              src={`https://www.loom.com/embed/${video.id}`}
               style="aspect-ratio: 16/9; width: 100%; display: block;"
               frameborder="0"
               allowfullscreen
               loading="lazy"
               allow="fullscreen"
             ></iframe>
+            <div style="padding: 0.75rem 1rem;">
+              <h2 style="font-weight: 600; color: #111827; font-size: 1rem; margin: 0;">{video.title}</h2>
+            </div>
           </div>
         ))}
       </div>
