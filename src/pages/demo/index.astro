@@ -10,54 +10,21 @@ if (!cookie || cookie.value !== DEMO_PASSWORD) {
   return Astro.redirect('/demo/login');
 }
 
-// ============================================================
-// VIDEO CONFIG — Add Loom videos here as you record them.
-// Each entry needs:
-//   id:          The Loom video ID (from the share URL)
-//   title:       Short title shown below the video
-//   description: One-liner shown under the title
-// ============================================================
+// VIDEO CONFIG — Add Loom video IDs here (from the share URL).
+// Loom's embed handles titles/thumbnails automatically.
 const videos = [
-  {
-    id: '8c1d61de2282405aae72421d567ba581',
-    title: 'Module Overview',
-    description: 'An overview of BreederHQ and the core platform experience.',
-  },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Animal Management',
-  //   description: 'Add and manage animals, track health records, and organize your program.',
-  // },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Breeding Plans',
-  //   description: 'Walk through the 8-phase breeding plan lifecycle.',
-  // },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Genetics Lab',
-  //   description: 'Coat color genetics, Punnett squares, and the offspring simulator.',
-  // },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Client Portal',
-  //   description: 'The buyer experience — portal access, e-signatures, and payments.',
-  // },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Marketplace',
-  //   description: 'Verified listings, breeder profiles, and buyer discovery.',
-  // },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Financials',
-  //   description: 'Invoicing, expense tracking, and the financial dashboard.',
-  // },
-  // {
-  //   id: 'LOOM_VIDEO_ID',
-  //   title: 'Communications',
-  //   description: 'Unified inbox, templates, and real-time messaging.',
-  // },
+  'beeeb6b6887e4a9b991cf3e749309374',  // Introductions
+  '8c1d61de2282405aae72421d567ba581',  // Platform Overview
+  'f874dd7e90a44889a4c470b0b5863e18',  // Mare Status Board
+  'b7232325737c449fa32ddaa06f8c2e5e',  // Cycle Progress
+  '786e7c5e3f1c42f3a05660204b74ff85',  // Understanding Breeding Plans
+  'fb36d09c92784b6ba8153b3c684857f9',  // Medication Management
+  '90cbab4a86f0452db960195f75584f17',  // Pre-Foaling Monitoring
+  '90b64e098e8f4d129c61ed7b59028572',  // Enhancing Breeder Protocols
+  '46b876b3c30f46aabefa41475855bc12',  // Genetics Lab
+  '1ab1a1ccb1664d73a13b963907f6f7ab',  // Data Reporting
+  'cd365bb3888f46268c2a022af60f9432',  // Commerce
+  'e820f90ac3b941ab887a07e728d8d83d',  // Demo Closing
 ];
 ---
 
@@ -95,24 +62,17 @@ const videos = [
     <!-- Video Grid -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex-1">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {videos.map((video) => (
-          <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 flex flex-col">
-            <!-- Loom embed — native thumbnail with hover preview -->
+        {videos.map((id) => (
+          <div class="rounded-xl overflow-hidden shadow-sm border border-gray-200">
             <div class="relative aspect-video">
               <iframe
-                src={`https://www.loom.com/embed/${video.id}`}
+                src={`https://www.loom.com/embed/${id}`}
                 frameborder="0"
                 allowfullscreen
                 loading="lazy"
                 allow="fullscreen"
                 class="absolute inset-0 w-full h-full"
               ></iframe>
-            </div>
-
-            <!-- Info -->
-            <div class="p-4">
-              <h2 class="font-semibold text-gray-900">{video.title}</h2>
-              <p class="text-sm text-gray-500 mt-1">{video.description}</p>
             </div>
           </div>
         ))}
