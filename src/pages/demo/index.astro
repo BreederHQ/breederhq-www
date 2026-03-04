@@ -2,7 +2,7 @@
 export const prerender = false;
 import '../../styles/global.css';
 
-const DEMO_PASSWORD = import.meta.env.DEMO_PASSWORD;
+const DEMO_PASSWORD = import.meta.env.DEMO_PASSWORD || process.env.DEMO_PASSWORD;
 
 // Auth check — redirect to login if no valid cookie
 const cookie = Astro.cookies.get('bhq_demo_access');
