@@ -1,5 +1,199 @@
 ---
-// Pricing page is temporarily disabled - redirects to coming-soon
-// When ready to enable pricing, restore from git history or backup
-return Astro.redirect('/coming-soon');
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.breederhq.com';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Pricing', url: '/pricing' }
+];
+
+const plans = [
+  {
+    name: 'Standard',
+    slug: 'standard',
+    price: 29,
+    yearlyPrice: 290,
+    description: 'Everything you need to manage your breeding program',
+    popular: false,
+    features: [
+      'Unlimited animals & contacts',
+      'Up to 5 marketplace listings',
+      'Breeding plans & calendar',
+      'Financial suite (invoices, expenses)',
+      'Document management',
+      'Health records',
+      'Waitlist management',
+      'Buyer portal (1 seat)',
+      'Free Breeder Service listings',
+      '5 GB storage',
+      'Email support',
+    ],
+  },
+  {
+    name: 'Pro',
+    slug: 'pro',
+    price: 79,
+    yearlyPrice: 790,
+    description: 'Advanced tools for growing breeding operations',
+    popular: true,
+    features: [
+      'Everything in Standard',
+      'Genetics Lab (7 analysis tabs)',
+      'E-signatures for contracts',
+      'Advanced reporting & analytics',
+      'AI Assistant (20/day)',
+      'Copilot (15/day)',
+      'Up to 50 marketplace listings',
+      '10 portal user seats',
+      '25 GB storage',
+      'Priority support',
+    ],
+  },
+  {
+    name: 'Enterprise',
+    slug: 'enterprise',
+    price: 159,
+    yearlyPrice: 1590,
+    description: 'Full-scale breeding management with AI and automation',
+    popular: false,
+    features: [
+      'Everything in Pro',
+      'Goal-Based Breeding AI',
+      'Offspring Simulator (Monte Carlo)',
+      'CRM automation & auto-replies',
+      'API access',
+      'Multi-location management',
+      'Unlimited marketplace listings',
+      'Unlimited portal users',
+      '100 GB storage',
+      'Dedicated support',
+    ],
+  },
+];
+
+const faqs = [
+  { question: 'Can I change plans later?', answer: 'Yes. You can upgrade or downgrade your plan at any time from your account settings. Changes take effect at the start of your next billing cycle.' },
+  { question: 'Is there a free trial?', answer: 'Yes! Every plan includes a 14-day free trial. No credit card required to start exploring. You will enter payment details when you are ready to subscribe.' },
+  { question: 'What happens when my trial ends?', answer: 'Your data is saved. Simply choose a plan and subscribe to pick up right where you left off.' },
+  { question: 'Can I cancel anytime?', answer: 'Absolutely. Cancel from your account settings at any time. You will retain access through the end of your paid period.' },
+  { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Rabbits, and Sheep with species-specific workflows for each.' },
+];
 ---
+
+<BaseLayout
+  title="Pricing - BreederHQ Breeding Management Software"
+  description="Simple, transparent pricing for professional breeders. Start your 14-day free trial today. Plans from $29/month."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-4">
+          Simple, transparent pricing
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">
+          Start your 14-day free trial today. No credit card required.
+        </p>
+        <p class="text-sm text-gray-500">
+          All plans include unlimited animals, contacts, and breeding plans.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {plans.map((plan) => (
+            <div
+              class={`relative rounded-2xl border-2 p-8 flex flex-col ${
+                plan.popular
+                  ? 'border-amber-500 shadow-xl shadow-amber-500/10'
+                  : 'border-gray-200'
+              }`}
+            >
+              {plan.popular && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span class="bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                <p class="text-gray-500 text-sm mb-6">{plan.description}</p>
+
+                <div class="mb-2">
+                  <span class="text-5xl font-bold text-gray-900">${plan.price}</span>
+                  <span class="text-gray-500 text-lg">/mo</span>
+                </div>
+                <p class="text-xs text-gray-400">
+                  or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
+                </p>
+              </div>
+
+              <a
+                href={`${appUrl}/register?plan=${plan.slug}`}
+                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold transition-colors mb-8 ${
+                  plan.popular
+                    ? 'bg-amber-500 text-white hover:bg-amber-600'
+                    : 'bg-gray-900 text-white hover:bg-gray-800'
+                }`}
+              >
+                Start Free Trial
+              </a>
+
+              <ul class="space-y-3 flex-1">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-2.5 text-sm text-gray-600">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-gray-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+        <div class="space-y-8">
+          {faqs.map((faq) => (
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-white">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Ready to get started?
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Join breeders who trust BreederHQ to manage their programs. Start your free trial today.
+        </p>
+        <a
+          href={`${appUrl}/register?plan=pro`}
+          class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition-colors"
+        >
+          Start Your Free Trial
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
