@@ -89,59 +89,59 @@ const faqs = [
 >
   <main>
     <!-- Hero -->
-    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+    <section class="bg-gradient-to-b from-amber-50/40 to-stone-50 py-20">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-4">
+        <h1 class="text-5xl font-bold tracking-tight text-stone-900 mb-4">
           Simple, transparent pricing
         </h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">
+        <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-3">
           Start your 14-day free trial today. No credit card required.
         </p>
-        <p class="text-sm text-gray-500">
+        <p class="text-sm text-stone-500">
           All plans include unlimited animals, contacts, and breeding plans.
         </p>
       </div>
     </section>
 
     <!-- Pricing Cards -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-stone-50">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {plans.map((plan) => (
             <div
-              class={`relative rounded-2xl border-2 p-8 flex flex-col ${
+              class={`relative rounded-2xl border p-8 flex flex-col bg-white ${
                 plan.popular
-                  ? 'border-amber-500 shadow-xl shadow-amber-500/10'
-                  : 'border-gray-200'
+                  ? 'border-amber-500 shadow-xl shadow-amber-500/15 ring-1 ring-amber-500/20'
+                  : 'border-stone-200 shadow-md shadow-stone-900/5'
               }`}
             >
               {plan.popular && (
                 <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span class="bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+                  <span class="bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                     Most Popular
                   </span>
                 </div>
               )}
 
               <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                <p class="text-gray-500 text-sm mb-6">{plan.description}</p>
+                <h3 class="text-2xl font-bold text-stone-900 mb-2">{plan.name}</h3>
+                <p class="text-stone-500 text-sm mb-6">{plan.description}</p>
 
                 <div class="mb-2">
-                  <span class="text-5xl font-bold text-gray-900">${plan.price}</span>
-                  <span class="text-gray-500 text-lg">/mo</span>
+                  <span class="text-5xl font-bold text-stone-900">${plan.price}</span>
+                  <span class="text-stone-500 text-lg">/mo</span>
                 </div>
-                <p class="text-xs text-gray-400">
+                <p class="text-xs text-stone-400">
                   or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
                 </p>
               </div>
 
               <a
                 href={`${appUrl}/register?plan=${plan.slug}`}
-                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold transition-colors mb-8 ${
+                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold transition-all mb-8 ${
                   plan.popular
-                    ? 'bg-amber-500 text-white hover:bg-amber-600'
-                    : 'bg-gray-900 text-white hover:bg-gray-800'
+                    ? 'bg-amber-500 text-white hover:bg-amber-600 shadow-md shadow-amber-500/25 hover:shadow-lg hover:shadow-amber-500/30'
+                    : 'bg-stone-800 text-white hover:bg-stone-700 shadow-md shadow-stone-900/15'
                 }`}
               >
                 Start Free Trial
@@ -149,8 +149,8 @@ const faqs = [
 
               <ul class="space-y-3 flex-1">
                 {plan.features.map((feature) => (
-                  <li class="flex items-start gap-2.5 text-sm text-gray-600">
-                    <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li class="flex items-start gap-2.5 text-sm text-stone-700">
+                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                     {feature}
@@ -164,14 +164,14 @@ const faqs = [
     </section>
 
     <!-- FAQ -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-white">
       <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+        <h2 class="text-3xl font-bold text-center text-stone-900 mb-12">Frequently Asked Questions</h2>
         <div class="space-y-8">
           {faqs.map((faq) => (
             <div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
-              <p class="text-gray-600">{faq.answer}</p>
+              <h3 class="text-lg font-semibold text-stone-900 mb-2">{faq.question}</h3>
+              <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>
@@ -179,17 +179,17 @@ const faqs = [
     </section>
 
     <!-- CTA -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-stone-50">
       <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+        <h2 class="text-3xl font-bold text-stone-900 mb-4">
           Ready to get started?
         </h2>
-        <p class="text-lg text-gray-600 mb-8">
+        <p class="text-lg text-stone-600 mb-8">
           Join breeders who trust BreederHQ to manage their programs. Start your free trial today.
         </p>
         <a
           href={`${appUrl}/register?plan=pro`}
-          class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition-colors"
+          class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition-all shadow-md shadow-amber-500/25 hover:shadow-lg hover:shadow-amber-500/30"
         >
           Start Your Free Trial
         </a>
