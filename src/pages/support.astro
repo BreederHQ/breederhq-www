@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Support', url: '/support' }
+];
+
+const faqs = [
+  {
+    question: "How do I get help inside the app?",
+    answer: "Click the Help icon in the top navigation bar to open the Help Center. You can browse articles by module, search for topics, or chat with our AI assistant for instant answers."
+  },
+  {
+    question: "How quickly will I get a response?",
+    answer: "We typically respond to all support requests within 24 business hours. For urgent matters, please include 'Urgent' in your subject line."
+  },
+  {
+    question: "What should I include in a support request?",
+    answer: "Include a clear description of the issue, what you expected to happen, and what happened instead. Screenshots and the URL of the page where you encountered the issue are especially helpful."
+  }
+];
+---
+
+<BaseLayout
+  title="Support Center - BreederHQ Help & Support"
+  description="Get help with your BreederHQ account. Browse help articles, access our FAQ, or contact our support team directly."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          Support Center
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Get help with your BreederHQ account. Browse our resources or reach out to our team.
+        </p>
+      </div>
+    </section>
+
+    <!-- Support Options Grid -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <!-- Help Center Card -->
+          <a
+            href="https://app.breederhq.com"
+            class="group p-6 bg-white border border-gray-200 rounded-xl hover:border-primary hover:shadow-lg transition-all"
+          >
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition">
+              Help Center
+            </h3>
+            <p class="text-gray-600 text-sm">
+              Browse 90+ help articles covering every feature. Available inside the app with AI-powered search.
+            </p>
+          </a>
+
+          <!-- FAQ Card -->
+          <a
+            href="/faq"
+            class="group p-6 bg-white border border-gray-200 rounded-xl hover:border-primary hover:shadow-lg transition-all"
+          >
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition">
+              FAQ
+            </h3>
+            <p class="text-gray-600 text-sm">
+              Quick answers to common questions about features, pricing, species support, and getting started.
+            </p>
+          </a>
+
+          <!-- Contact Card -->
+          <a
+            href="#contact-form"
+            class="group p-6 bg-white border border-gray-200 rounded-xl hover:border-primary hover:shadow-lg transition-all"
+          >
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition">
+              Contact Us
+            </h3>
+            <p class="text-gray-600 text-sm">
+              Reach our support team directly. We typically respond within 24 business hours.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="py-16 bg-gray-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Form -->
+          <div>
+            <h2 class="text-2xl font-bold mb-6">Submit a Support Request</h2>
+            <ContactForm
+              formId="support-page-form"
+              submitText="Submit Support Request"
+              source="support_page"
+              includePhone={false}
+            />
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
+
+            <div class="space-y-6">
+              <!-- Email -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Email</h3>
+                  <a href="mailto:support@breederhq.com" class="text-primary hover:underline">
+                    support@breederhq.com
+                  </a>
+                  <p class="text-sm text-gray-500 mt-1">We respond within 24 business hours</p>
+                </div>
+              </div>
+
+              <!-- In-App Help -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">In-App Help</h3>
+                  <p class="text-gray-600 text-sm">
+                    Already a user? Click the Help icon inside the app for articles and AI-powered assistance.
+                  </p>
+                </div>
+              </div>
+
+              <!-- FAQ Link -->
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">FAQ</h3>
+                  <p class="text-gray-600 text-sm">
+                    Find quick answers in our
+                    <a href="/faq" class="text-primary hover:underline">FAQ section</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Response Time Box -->
+            <div class="mt-8 p-4 bg-white border border-gray-200 rounded-lg">
+              <h3 class="font-semibold text-gray-900 mb-2">What to Expect</h3>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Response within 24 business hours
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Personalized support from our team
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Bug reports and feature requests tracked
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map(faq => (
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-center mt-8">
+          <a href="/faq" class="text-primary hover:underline font-medium">
+            View all FAQs &rarr;
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-primary py-16">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Ready to try BreederHQ?
+        </h2>
+        <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          Join our early adopter program and see how BreederHQ can transform your breeding program.
+        </p>
+        <a
+          href="/coming-soon"
+          class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block"
+        >
+          Get Early Access
+        </a>
+      </div>
+    </section>
+  </main>
+
+</BaseLayout>
