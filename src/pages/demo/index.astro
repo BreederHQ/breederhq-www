@@ -11,10 +11,13 @@ if (!cookie || cookie.value !== DEMO_PASSWORD) {
 }
 
 // VIDEO CONFIG — Add Loom videos here as you record them.
-const videos = [
+const drNyeVideos = [
   { id: 'e8ee5491be9e42f192497c98d4da1627', title: 'Creating Effective Breeding Plans with BreederHQ' },
   { id: '97b1866288844e759fb4f389f6b86962', title: 'Animal Profiles — Health, Genetics & Data' },
   { id: '09f400e9d7d4432b90ecc2526c6a1c55', title: 'Introducing - Genetics Lab Tools' },
+];
+
+const runningSpringsVideos = [
   { id: 'beeeb6b6887e4a9b991cf3e749309374', title: 'Introductions — Aaron & Carie' },
   { id: '8c1d61de2282405aae72421d567ba581', title: 'Platform Overview' },
   { id: 'f874dd7e90a44889a4c470b0b5863e18', title: 'Mare Status Board' },
@@ -63,7 +66,30 @@ const videos = [
 
     <!-- Video Grid -->
     <main style="max-width: 1100px; width: 100%; margin: 0 auto; padding: 0 2rem 4rem;">
-        {videos.map((video) => (
+        {drNyeVideos.map((video) => (
+          <div style="width: 100%; border-radius: 0.75rem; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; width: 100%;">
+              <iframe
+                src={`https://www.loom.com/embed/${video.id}`}
+                allowfullscreen
+                loading="lazy"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+              ></iframe>
+            </div>
+            <div style="padding: 0.75rem 1rem;">
+              <h2 style="font-weight: 600; color: #111827; font-size: 1rem; margin: 0;">{video.title}</h2>
+            </div>
+          </div>
+        ))}
+
+        <!-- Divider -->
+        <div style="display: flex; align-items: center; margin: 2.5rem 0;">
+          <div style="flex: 1; height: 1px; background-color: #d1d5db;"></div>
+          <span style="padding: 0 1rem; color: #6b7280; font-size: 0.875rem; font-weight: 500; white-space: nowrap;">Running Springs Demo</span>
+          <div style="flex: 1; height: 1px; background-color: #d1d5db;"></div>
+        </div>
+
+        {runningSpringsVideos.map((video) => (
           <div style="width: 100%; border-radius: 0.75rem; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 2rem;">
             <div style="position: relative; padding-bottom: 56.25%; height: 0; width: 100%;">
               <iframe
