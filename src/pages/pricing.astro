@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app-dev.breederhq.com';
-
 const breadcrumbs = [
   { name: 'Home', url: '/' },
   { name: 'Pricing', url: '/pricing' }
@@ -70,7 +68,7 @@ const plans = [
 
 const faqs = [
   { question: 'Can I change plans later?', answer: 'Yes. You can upgrade or downgrade your plan at any time from your account settings. Changes take effect at the start of your next billing cycle.' },
-  { question: 'Is there a free trial?', answer: 'Yes! Every plan includes a 14-day free trial. No credit card required to start exploring. You will enter payment details when you are ready to subscribe.' },
+  { question: 'Is there a free trial?', answer: 'Yes! Every plan includes a 14-day free trial. You will enter payment details when you start your trial.' },
   { question: 'What happens when my trial ends?', answer: 'Your data is saved. Simply choose a plan and subscribe to pick up right where you left off.' },
   { question: 'Can I cancel anytime?', answer: 'Absolutely. Cancel from your account settings at any time. You will retain access through the end of your paid period.' },
   { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Rabbits, and Sheep with species-specific workflows for each.' },
@@ -91,7 +89,7 @@ const faqs = [
           Simple, transparent pricing
         </h1>
         <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-3">
-          Start your 14-day free trial today. No credit card required.
+          Start your 14-day free trial today.
         </p>
         <p class="text-sm text-stone-500">
           All plans include unlimited animals, contacts, and breeding plans.
@@ -127,7 +125,7 @@ const faqs = [
                   <span class="text-5xl font-bold text-stone-800">${plan.price}</span>
                   <span class="text-stone-500 text-lg">/mo</span>
                 </div>
-                <p class="text-xs text-stone-400">
+                <p class="text-sm text-stone-500">
                   or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
                 </p>
               </div>
