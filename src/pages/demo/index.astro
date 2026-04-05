@@ -4,21 +4,21 @@ import '../../styles/global.css';
 
 const DEMO_PASSWORD = import.meta.env.DEMO_PASSWORD || process.env.DEMO_PASSWORD;
 
-// Auth check — redirect to login if no valid cookie
+// Auth check - redirect to login if no valid cookie
 const cookie = Astro.cookies.get('bhq_demo_access');
 if (!cookie || cookie.value !== DEMO_PASSWORD) {
   return Astro.redirect('/demo/login');
 }
 
-// VIDEO CONFIG — Add Loom videos here as you record them.
+// VIDEO CONFIG - Add Loom videos here as you record them.
 const drNyeVideos = [
   { id: 'e8ee5491be9e42f192497c98d4da1627', title: 'Creating Effective Breeding Plans with BreederHQ' },
-  { id: '97b1866288844e759fb4f389f6b86962', title: 'Animal Profiles — Health, Genetics & Data' },
+  { id: '97b1866288844e759fb4f389f6b86962', title: 'Animal Profiles - Health, Genetics & Data' },
   { id: '09f400e9d7d4432b90ecc2526c6a1c55', title: 'Introducing - Genetics Lab Tools' },
 ];
 
 const runningSpringsVideos = [
-  { id: 'beeeb6b6887e4a9b991cf3e749309374', title: 'Introductions — Aaron & Carie' },
+  { id: 'beeeb6b6887e4a9b991cf3e749309374', title: 'Introductions - Aaron & Carie' },
   { id: '8c1d61de2282405aae72421d567ba581', title: 'Platform Overview' },
   { id: 'f874dd7e90a44889a4c470b0b5863e18', title: 'Mare Status Board' },
   { id: 'b7232325737c449fa32ddaa06f8c2e5e', title: 'Cycle Progress' },
@@ -38,7 +38,7 @@ const runningSpringsVideos = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BreederHQ — Product Walkthrough</title>
+    <title>BreederHQ - Product Walkthrough</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
@@ -59,7 +59,7 @@ const runningSpringsVideos = [
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
       <h1 class="text-3xl font-bold text-gray-900">Product Walkthrough</h1>
       <p class="mt-2 text-gray-500 max-w-2xl">
-        A hands-on look at BreederHQ — breeding program management software
+        A hands-on look at BreederHQ, breeding program management software
         built for serious breeders. Click any video below to watch.
       </p>
     </div>
@@ -109,7 +109,7 @@ const runningSpringsVideos = [
     <!-- Footer -->
     <footer class="border-t border-gray-200 bg-white py-6 mt-auto">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
-        &copy; {new Date().getFullYear()} BreederHQ &mdash; Confidential. Please do not share.
+        &copy; {new Date().getFullYear()} BreederHQ - Confidential. Please do not share.
       </div>
     </footer>
 
