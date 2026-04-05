@@ -35,9 +35,11 @@ const faqs = [
 
 const featureCards = [
   { id: 'animals', icon: '🐾', title: 'Animal Management', desc: 'Browse profiles, upload photos, check health records' },
-  { id: 'offspring', icon: '🍼', title: 'Offspring & Weights', desc: 'Add offspring, record daily weights, track litters' },
-  { id: 'breeding', icon: '📅', title: 'Breeding Cycles', desc: 'Track heat cycles, record observations, view projections' },
+  { id: 'health', icon: '💊', title: 'Health & Medications', desc: 'Vaccinations, health tests, medication tracking' },
+  { id: 'breeding', icon: '📅', title: 'Breeding Plans & Cycles', desc: 'Track plans, record births, monitor heat cycles' },
+  { id: 'offspring', icon: '🍼', title: 'Offspring & Weights', desc: 'Add offspring, record daily weights, track development' },
   { id: 'messaging', icon: '💬', title: 'Messages', desc: 'Unified inbox for buyer and client conversations' },
+  { id: 'tasks', icon: '📋', title: 'Tasks & Calendar', desc: 'Daily tasks, upcoming events, and reminders' },
   { id: 'expenses', icon: '💰', title: 'Expense Tracking', desc: 'Log expenses with receipt photos on the go' },
   { id: 'contacts', icon: '👥', title: 'Contacts', desc: 'Browse contacts, view details, manage relationships' }
 ];
@@ -155,6 +157,92 @@ const featureCards = [
         </div>
       </details>
 
+      <!-- Health & Medications -->
+      <details id="health" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">💊</span>
+            <div>
+              <h3 class="text-2xl font-bold">Health & Medications</h3>
+              <p class="text-gray-600">Vaccinations, health tests, and medication tracking from your phone</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Vaccinations & Health Tests</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Record vaccinations with date, vet, clinic, and batch number</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Track expiration dates and renewal reminders</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Health test results with outcome tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Upload evidence photos directly from camera</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Core vs. non-core vaccination status at a glance</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Medication Tracking</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Add medications with dosage, route, and frequency</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Quick-log doses with one tap from the barn</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Active course progress and overdue alerts</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Withdrawal period tracking with clear-date countdown</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Controlled substance flagging</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <p class="text-gray-700 text-sm"><strong>At the vet:</strong> Record vaccinations and medications while you're still at the clinic. No more scribbling on paper to enter later-tap the details in, snap a photo of the paperwork, and it's done.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Breeding Plans & Cycles -->
+      <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📅</span>
+            <div>
+              <h3 class="text-2xl font-bold">Breeding Plans & Cycles</h3>
+              <p class="text-gray-600">Track breeding plans, record births, and monitor heat cycles</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Breeding Plans</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>View all active breeding plans from each animal's profile</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Phase status with color-coded badges</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Record birth dates and add offspring directly</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Upload birth photos and videos immediately</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Expected and actual birth date tracking</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Cycle Tracking</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Record heat start and end dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>3-cycle lookahead projections</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Countdown to next expected cycle</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Push notifications when cycles are expected</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Data syncs to breeding plans on web</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <p class="text-gray-700 text-sm"><strong>In the birthing area:</strong> When birth happens at 2 AM, record the date, add each offspring with sex, color, and weight, and snap a photo-all from your phone. No need to boot up a computer.</p>
+          </div>
+        </div>
+      </details>
+
       <!-- Offspring & Weights -->
       <details id="offspring" class="accordion-section border border-gray-200 rounded-lg">
         <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
@@ -198,46 +286,6 @@ const featureCards = [
         </div>
       </details>
 
-      <!-- Breeding Cycles -->
-      <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
-        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
-          <div class="flex items-center gap-4">
-            <span class="text-3xl">📅</span>
-            <div>
-              <h3 class="text-2xl font-bold">Breeding Cycles</h3>
-              <p class="text-gray-600">Track heat cycles and record observations on the go</p>
-            </div>
-          </div>
-          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </summary>
-        <div class="accordion-content p-6 border-t border-gray-200">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-bold text-lg mb-3">Cycle Tracking</h4>
-              <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Upcoming cycle notifications</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Record heat start and end dates</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Edit and delete cycle records</li>
-                <li class="flex items-start"><span class="mr-2">•</span>3-cycle lookahead projections</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Countdown to next expected cycle</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-3">Why It Matters</h4>
-              <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Never miss a breeding window</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Record observations immediately</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Data syncs to breeding plans on web</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Pattern history builds better predictions</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Push notifications when cycles are expected</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-
       <!-- Messages -->
       <details id="messaging" class="accordion-section border border-gray-200 rounded-lg">
         <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
@@ -272,6 +320,46 @@ const featureCards = [
                 <li class="flex items-start"><span class="mr-2">•</span>Earn the Quick Responder badge</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Never leave a buyer waiting</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Real-time sync with web inbox</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Tasks & Calendar -->
+      <details id="tasks" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📋</span>
+            <div>
+              <h3 class="text-2xl font-bold">Tasks & Calendar</h3>
+              <p class="text-gray-600">Daily tasks, upcoming events, and health reminders</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Daily Overview</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Today's tasks at a glance</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Overdue items highlighted</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Tap to mark tasks complete</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Upcoming events for the week</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Category filters: breeding, vaccinations, medications, placements</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">What Shows Up</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Breeding milestones and due dates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Vaccination expiration reminders</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Medication dose schedules</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Placement follow-ups</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Custom reminders</li>
               </ul>
             </div>
           </div>
