@@ -144,7 +144,7 @@ const categories = [
     features: [
       { name: 'Business Hours', standard: true, pro: true, enterprise: true },
       { name: 'Communications Hub', standard: false, pro: true, enterprise: true },
-      { name: 'Email Settings', standard: false, pro: true, enterprise: true },
+      { name: 'BreederHQ Email Address', standard: false, pro: true, enterprise: true, note: 'Dedicated email for inbound and outbound messaging' },
       { name: 'Document Bundles', standard: false, pro: true, enterprise: true },
       { name: 'Auto-Replies (Rule-Based Automation)', standard: false, pro: false, enterprise: true },
     ]
@@ -158,7 +158,6 @@ const categories = [
       { name: 'KPI Panel', standard: false, pro: true, enterprise: true },
       { name: 'Horse-Specific Widgets', standard: false, pro: true, enterprise: true },
       { name: 'Protocol Progress', standard: false, pro: true, enterprise: true },
-      { name: 'Gun Dog Aptitude', standard: false, pro: true, enterprise: true },
       { name: 'Ovulation Tracker', standard: false, pro: false, enterprise: true },
       { name: 'Foaling Analytics', standard: false, pro: false, enterprise: true },
       { name: 'Genetic Intelligence (COI Heatmap, Diversity Scoring)', standard: false, pro: false, enterprise: true },
@@ -167,9 +166,12 @@ const categories = [
   {
     name: 'Bloodlines & Pedigrees',
     features: [
-      { name: 'Bloodlines Home Page', standard: true, pro: true, enterprise: true },
+      { name: 'Multi-Generation Pedigree Visualization', standard: true, pro: true, enterprise: true },
+      { name: 'COI Calculation & Risk Levels', standard: true, pro: true, enterprise: true },
+      { name: 'Common Ancestor Tracking', standard: true, pro: true, enterprise: true },
+      { name: 'Cross-Tenant Network Animal Linking', standard: true, pro: true, enterprise: true },
       { name: 'Titles & Competitions Explorer', standard: false, pro: true, enterprise: true },
-      { name: 'Pedigree Explorer', standard: false, pro: true, enterprise: true },
+      { name: 'Interactive Pedigree Explorer', standard: false, pro: true, enterprise: true },
     ]
   },
   {
@@ -178,7 +180,7 @@ const categories = [
       { name: 'Help Center (Article Search)', standard: true, pro: true, enterprise: true },
       { name: 'Interactive Feature Tours', standard: true, pro: true, enterprise: true },
       { name: 'Help Assistant (Knowledge Base AI)', standard: false, pro: true, enterprise: true },
-      { name: 'Scout AI (Data-Aware Assistant)', standard: false, pro: true, enterprise: true },
+      { name: 'Scout AI (Data-Aware Breeder Assistant)', standard: false, pro: true, enterprise: true },
     ]
   },
   {
@@ -199,7 +201,7 @@ const categories = [
       { name: 'Audit Trail', standard: false, pro: false, enterprise: true },
       { name: 'Multi-Location Management', standard: false, pro: false, enterprise: true },
       { name: 'API Access', standard: false, pro: false, enterprise: true },
-      { name: 'Team Management', standard: false, pro: false, enterprise: true },
+      { name: 'Team Management (with role-based access)', standard: false, pro: false, enterprise: true },
     ]
   },
   {
@@ -336,96 +338,6 @@ const categories = [
           </div>
         ))}
 
-        <!-- Marketplace Note -->
-        <div class="mt-8 p-6 bg-amber-50 border border-amber-200 rounded-lg">
-          <h3 class="text-lg font-bold text-stone-800 mb-2">Marketplace Listing Fees</h3>
-          <p class="text-sm text-stone-600 mb-4">
-            Listing fees are separate from your subscription. Every tier can list and sell on the marketplace. You only pay when you publish a listing.
-          </p>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-amber-300">
-                  <th class="py-2 px-3 text-left text-stone-700">Listing Type</th>
-                  <th class="py-2 px-3 text-center text-stone-700">Horses</th>
-                  <th class="py-2 px-3 text-center text-stone-700">Dogs & Cats</th>
-                  <th class="py-2 px-3 text-center text-stone-700">Goats, Sheep & Rabbits</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bg-white">
-                  <td class="py-2 px-3 text-stone-600">Animal Sale (until sold)</td>
-                  <td class="py-2 px-3 text-center font-medium">$49</td>
-                  <td class="py-2 px-3 text-center font-medium">$25</td>
-                  <td class="py-2 px-3 text-center font-medium">$9</td>
-                </tr>
-                <tr class="bg-stone-50">
-                  <td class="py-2 px-3 text-stone-600">Breeding Booking (monthly)</td>
-                  <td class="py-2 px-3 text-center font-medium">$19/mo</td>
-                  <td class="py-2 px-3 text-center font-medium">$9/mo</td>
-                  <td class="py-2 px-3 text-center font-medium">$5/mo</td>
-                </tr>
-                <tr class="bg-white">
-                  <td class="py-2 px-3 text-stone-600">Breeding Program (per offspring at weaning)</td>
-                  <td class="py-2 px-3 text-center font-medium">$49</td>
-                  <td class="py-2 px-3 text-center font-medium">$25</td>
-                  <td class="py-2 px-3 text-center font-medium">$9</td>
-                </tr>
-                <tr class="bg-stone-50">
-                  <td class="py-2 px-3 text-stone-600">Breeder Services (subscribers)</td>
-                  <td class="py-2 px-3 text-center font-medium text-amber-600" colspan="3">Free - unlimited</td>
-                </tr>
-                <tr class="bg-white">
-                  <td class="py-2 px-3 text-stone-600">Breeder Services (non-subscribers)</td>
-                  <td class="py-2 px-3 text-center font-medium" colspan="3">$5/mo per listing</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="text-xs text-stone-500 mt-3">
-            No percentage of your sales, ever. You handle your own transactions. We never broker your deals.
-          </p>
-        </div>
-
-        <!-- Marketplace Upgrades -->
-        <div class="mt-6 p-6 bg-stone-50 border border-stone-200 rounded-lg">
-          <h3 class="text-lg font-bold text-stone-800 mb-2">Optional Marketplace Upgrades</h3>
-          <p class="text-sm text-stone-600 mb-4">
-            Boost your visibility when it matters. Never required.
-          </p>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-stone-300">
-                  <th class="py-2 px-3 text-left text-stone-700">Upgrade</th>
-                  <th class="py-2 px-3 text-center text-stone-700">Horses</th>
-                  <th class="py-2 px-3 text-center text-stone-700">Dogs & Cats</th>
-                  <th class="py-2 px-3 text-center text-stone-700">Goats, Sheep & Rabbits</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bg-white">
-                  <td class="py-2 px-3 text-stone-600">Boost (7-day)</td>
-                  <td class="py-2 px-3 text-center font-medium">$10</td>
-                  <td class="py-2 px-3 text-center font-medium">$5</td>
-                  <td class="py-2 px-3 text-center font-medium">$3</td>
-                </tr>
-                <tr class="bg-stone-50">
-                  <td class="py-2 px-3 text-stone-600">Boost (30-day)</td>
-                  <td class="py-2 px-3 text-center font-medium">$25</td>
-                  <td class="py-2 px-3 text-center font-medium">$15</td>
-                  <td class="py-2 px-3 text-center font-medium">$5</td>
-                </tr>
-                <tr class="bg-white">
-                  <td class="py-2 px-3 text-stone-600">Featured Listing (monthly)</td>
-                  <td class="py-2 px-3 text-center font-medium">$39/mo</td>
-                  <td class="py-2 px-3 text-center font-medium">$19/mo</td>
-                  <td class="py-2 px-3 text-center font-medium">$9/mo</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
 
       </div>
     </section>
