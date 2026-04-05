@@ -1,0 +1,468 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Pricing', url: '/pricing' },
+  { name: 'Compare Plans', url: '/pricing/compare' }
+];
+
+const faqs = [
+  { question: 'Can I change plans later?', answer: 'Yes. You can upgrade or downgrade your plan at any time from your account settings. Changes take effect at the start of your next billing cycle.' },
+  { question: 'Is there a free trial?', answer: 'Yes! Every plan includes a 14-day free trial with full access. No credit card required.' },
+  { question: 'Do all plans include marketplace access?', answer: 'Yes. Every subscription tier can list and sell on the marketplace. Tiers gate tools (genetics, AI, protocols), not the ability to sell. Marketplace listing fees are separate from subscription pricing.' },
+  { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Rabbits, and Sheep with species-specific workflows for each.' },
+];
+
+// Feature comparison data organized by category
+const categories = [
+  {
+    name: 'Animals',
+    features: [
+      { name: 'Animal Profiles & Status Tracking', standard: true, pro: true, enterprise: true },
+      { name: 'Health Records & Vaccinations', standard: true, pro: true, enterprise: true },
+      { name: 'Offspring Records', standard: true, pro: true, enterprise: true },
+      { name: 'Registry & Documents', standard: true, pro: true, enterprise: true },
+      { name: 'Media Gallery', standard: true, pro: true, enterprise: true },
+      { name: 'Breeding History (Data Entry)', standard: true, pro: true, enterprise: true },
+      { name: 'Cycle Info', standard: true, pro: true, enterprise: true },
+      { name: 'Lineage & Pedigree Explorer', standard: false, pro: true, enterprise: true },
+      { name: 'Genetics Tab', standard: false, pro: true, enterprise: true },
+      { name: 'Nutrition Tracking', standard: false, pro: true, enterprise: true },
+      { name: 'Titles & Competitions', standard: false, pro: true, enterprise: true },
+      { name: 'Breeding Profile & Analytics', standard: false, pro: true, enterprise: true },
+      { name: 'Privacy Controls & Sharing', standard: false, pro: true, enterprise: true },
+      { name: 'Activity Log', standard: false, pro: true, enterprise: true },
+      { name: 'Dairy Production Tracking', standard: false, pro: true, enterprise: true },
+      { name: 'Fiber/Wool Production Tracking', standard: false, pro: true, enterprise: true },
+      { name: 'Document Watermarking', standard: false, pro: true, enterprise: true },
+      { name: 'Network Animals & Share Codes', standard: false, pro: true, enterprise: true },
+      { name: 'Medication Tracking & Withdrawal', standard: true, pro: true, enterprise: true },
+      { name: 'Ovulation Pattern Analysis', standard: false, pro: false, enterprise: true },
+      { name: 'Document Access Log', standard: false, pro: false, enterprise: true },
+      { name: 'Team Tab', standard: false, pro: false, enterprise: true },
+      { name: 'Bulk Operations', standard: false, pro: false, enterprise: true },
+      { name: 'Audit Tab', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Breeding',
+    features: [
+      { name: 'Individual Breeding Plans', standard: true, pro: true, enterprise: true },
+      { name: 'Breeding Calendar', standard: true, pro: true, enterprise: true },
+      { name: 'What-If Planning (Schedule Alignment)', standard: true, pro: true, enterprise: true },
+      { name: 'Breeding Attempts', standard: true, pro: true, enterprise: true },
+      { name: 'Group Breeding Plans (Sheep & Goats)', standard: true, pro: true, enterprise: true },
+      { name: 'Genetics Lab (7 Analysis Tabs)', standard: false, pro: true, enterprise: true, note: 'Overview, Compare, Punnett Squares, Health Analysis, Color Preview, What\'s Missing, Pedigree' },
+      { name: 'Find a Match (Network Search)', standard: false, pro: true, enterprise: true },
+      { name: 'Mare Status & Reproductive Tracking', standard: false, pro: true, enterprise: true },
+      { name: 'Foaling Management & Calendar', standard: false, pro: true, enterprise: true },
+      { name: 'Pre-Foaling Monitor', standard: false, pro: true, enterprise: true },
+      { name: 'Post-Foaling Heat Tracker', standard: false, pro: true, enterprise: true },
+      { name: 'Supplement Protocols', standard: false, pro: true, enterprise: true },
+      { name: 'Birth Checklist', standard: false, pro: true, enterprise: true },
+      { name: 'Follicle Exams & Progesterone Tests', standard: false, pro: true, enterprise: true },
+      { name: 'Goal-Based Breeding (Reverse Phenotype Lookup)', standard: false, pro: false, enterprise: true },
+      { name: 'Offspring Simulator (Monte Carlo)', standard: false, pro: false, enterprise: true },
+      { name: 'Breeding Program Rules', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Offspring',
+    features: [
+      { name: 'Offspring Tracking & Management', standard: true, pro: true, enterprise: true },
+      { name: 'Weight & Growth Tracking', standard: true, pro: true, enterprise: true },
+      { name: 'Collar & ID Management', standard: true, pro: true, enterprise: true },
+      { name: 'Rearing Protocols (ENS, ESI, Rule of 7s)', standard: false, pro: true, enterprise: true },
+      { name: 'Neonatal Care', standard: false, pro: true, enterprise: true },
+      { name: 'Temperament Testing (Volhard PAT)', standard: false, pro: true, enterprise: true },
+      { name: 'Gun Dog Aptitude Program', standard: false, pro: true, enterprise: true },
+      { name: 'Group Analytics, Nutrition & Finances', standard: false, pro: true, enterprise: true },
+      { name: 'Custom Protocol Import/Export', standard: false, pro: true, enterprise: true },
+      { name: 'Community Protocol Sharing', standard: false, pro: false, enterprise: true },
+      { name: 'Completion Certificates', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Contacts & CRM',
+    features: [
+      { name: 'Contact Profiles & Notes', standard: true, pro: true, enterprise: true },
+      { name: 'Animals & Documents Tab', standard: true, pro: true, enterprise: true },
+      { name: 'Portal Tab', standard: true, pro: true, enterprise: true },
+      { name: 'Events & Reminders', standard: false, pro: true, enterprise: true },
+      { name: 'Compliance Tracking', standard: false, pro: true, enterprise: true },
+      { name: 'Messages & Quick DM', standard: false, pro: true, enterprise: true },
+      { name: 'Finances Tab', standard: false, pro: true, enterprise: true },
+      { name: 'Activity Feed', standard: false, pro: true, enterprise: true },
+      { name: 'CSV Export', standard: false, pro: true, enterprise: true },
+      { name: 'Email Composer & Templates', standard: false, pro: true, enterprise: true },
+      { name: 'Follow-Ups & Document Bundles', standard: false, pro: true, enterprise: true },
+      { name: 'CRM Analytics Dashboard', standard: false, pro: false, enterprise: true },
+      { name: 'Lead Scoring', standard: false, pro: false, enterprise: true },
+      { name: 'Follow-Up Automation', standard: false, pro: false, enterprise: true },
+      { name: 'Audit Tab', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Finance & Contracts',
+    features: [
+      { name: 'Invoices & Expenses', standard: true, pro: true, enterprise: true },
+      { name: 'Payouts & Stripe Integration', standard: true, pro: true, enterprise: true },
+      { name: 'Contracts & System Templates', standard: true, pro: true, enterprise: true },
+      { name: 'E-Signatures', standard: false, pro: true, enterprise: true },
+      { name: 'Custom Contract Templates', standard: false, pro: true, enterprise: true },
+      { name: 'Contract Audit Trail', standard: false, pro: true, enterprise: true },
+      { name: 'Advanced Reporting & Analytics', standard: false, pro: true, enterprise: true },
+    ]
+  },
+  {
+    name: 'Marketplace & Commerce',
+    features: [
+      { name: 'All Listing Types (Animal, Breeding, Service, Program)', standard: true, pro: true, enterprise: true },
+      { name: 'Booking Management', standard: true, pro: true, enterprise: true },
+      { name: 'Breeding Programs', standard: true, pro: true, enterprise: true },
+      { name: 'Free Breeder Service Listings', standard: true, pro: true, enterprise: true },
+      { name: 'Boosts & Featured Listings', standard: true, pro: true, enterprise: true },
+    ]
+  },
+  {
+    name: 'Buyer Portal',
+    features: [
+      { name: 'Portal Access & Dashboard', standard: true, pro: true, enterprise: true },
+      { name: 'Messaging', standard: true, pro: true, enterprise: true },
+      { name: 'Contract Signing', standard: true, pro: true, enterprise: true },
+      { name: 'Documents & Financial Summary', standard: true, pro: true, enterprise: true },
+      { name: 'Offspring Tracking', standard: true, pro: true, enterprise: true },
+      { name: 'Real-Time Messaging', standard: false, pro: true, enterprise: true },
+      { name: 'Scheduling & Booking', standard: false, pro: true, enterprise: true },
+      { name: 'Training Protocols & Certificates', standard: false, pro: true, enterprise: true },
+      { name: 'Buyer Health Data Access', standard: false, pro: true, enterprise: true },
+    ]
+  },
+  {
+    name: 'Marketing & Communications',
+    features: [
+      { name: 'Business Hours', standard: true, pro: true, enterprise: true },
+      { name: 'Communications Hub', standard: false, pro: true, enterprise: true },
+      { name: 'Email Settings', standard: false, pro: true, enterprise: true },
+      { name: 'Document Bundles', standard: false, pro: true, enterprise: true },
+      { name: 'Auto-Replies (Rule-Based Automation)', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Dashboard',
+    features: [
+      { name: 'Basic Dashboard Views', standard: true, pro: true, enterprise: true },
+      { name: 'Waitlist Gauge', standard: false, pro: true, enterprise: true },
+      { name: 'Financial Snapshot', standard: false, pro: true, enterprise: true },
+      { name: 'KPI Panel', standard: false, pro: true, enterprise: true },
+      { name: 'Horse-Specific Widgets', standard: false, pro: true, enterprise: true },
+      { name: 'Protocol Progress', standard: false, pro: true, enterprise: true },
+      { name: 'Gun Dog Aptitude', standard: false, pro: true, enterprise: true },
+      { name: 'Ovulation Tracker', standard: false, pro: false, enterprise: true },
+      { name: 'Foaling Analytics', standard: false, pro: false, enterprise: true },
+      { name: 'Genetic Intelligence (COI Heatmap, Diversity Scoring)', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Bloodlines & Pedigrees',
+    features: [
+      { name: 'Bloodlines Home Page', standard: true, pro: true, enterprise: true },
+      { name: 'Titles & Competitions Explorer', standard: false, pro: true, enterprise: true },
+      { name: 'Pedigree Explorer', standard: false, pro: true, enterprise: true },
+    ]
+  },
+  {
+    name: 'AI & Help',
+    features: [
+      { name: 'Help Center (Article Search)', standard: true, pro: true, enterprise: true },
+      { name: 'Interactive Feature Tours', standard: true, pro: true, enterprise: true },
+      { name: 'Help Assistant (Knowledge Base AI)', standard: false, pro: true, enterprise: true },
+      { name: 'Scout AI (Data-Aware Assistant)', standard: false, pro: true, enterprise: true },
+    ]
+  },
+  {
+    name: 'Admin & Settings',
+    features: [
+      { name: 'Account Management & Security', standard: true, pro: true, enterprise: true },
+      { name: 'Notification Settings', standard: true, pro: true, enterprise: true },
+      { name: 'Privacy & Sharing', standard: true, pro: true, enterprise: true },
+      { name: 'Module Settings (Breeding, Offspring)', standard: true, pro: true, enterprise: true },
+      { name: 'Tag Manager', standard: true, pro: true, enterprise: true },
+      { name: 'Food Products', standard: true, pro: true, enterprise: true },
+      { name: 'Data Management & Export', standard: true, pro: true, enterprise: true },
+      { name: 'Accessibility Settings', standard: true, pro: true, enterprise: true },
+      { name: 'AI & Privacy Controls', standard: false, pro: true, enterprise: true },
+      { name: 'Document Watermarking', standard: false, pro: true, enterprise: true },
+      { name: 'Staff Management', standard: false, pro: true, enterprise: true },
+      { name: 'Activity Log', standard: false, pro: true, enterprise: true },
+      { name: 'Audit Trail', standard: false, pro: false, enterprise: true },
+      { name: 'Multi-Location Management', standard: false, pro: false, enterprise: true },
+      { name: 'API Access', standard: false, pro: false, enterprise: true },
+      { name: 'Team Management', standard: false, pro: false, enterprise: true },
+    ]
+  },
+  {
+    name: 'Limits',
+    features: [
+      { name: 'Animals', standard: 'Unlimited', pro: 'Unlimited', enterprise: 'Unlimited' },
+      { name: 'Contacts', standard: 'Unlimited', pro: 'Unlimited', enterprise: 'Unlimited' },
+      { name: 'Breeding Plans', standard: 'Unlimited', pro: 'Unlimited', enterprise: 'Unlimited' },
+      { name: 'Marketplace Listings', standard: '5', pro: '50', enterprise: 'Unlimited' },
+      { name: 'Storage', standard: '500 MB', pro: '5 GB', enterprise: '25 GB' },
+      { name: 'SMS Notifications', standard: '50/mo', pro: '500/mo', enterprise: '5,000/mo' },
+      { name: 'Support', standard: 'Email', pro: 'Priority', enterprise: 'Dedicated' },
+    ]
+  },
+];
+---
+
+<BaseLayout
+  title="Compare Plans - Full Feature Breakdown | BreederHQ"
+  description="Compare every feature across BreederHQ's Standard, Pro, and Enterprise plans. See exactly what's included at each tier."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-amber-50 to-white py-16">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold tracking-tight text-stone-800 mb-4">
+          Compare Plans
+        </h1>
+        <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-3">
+          Every feature, every tier. See exactly what you get.
+        </p>
+        <p class="text-sm text-stone-500">
+          All plans include a 14-day free trial with full access. No credit card required.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing Summary -->
+    <section class="py-8 bg-white border-b border-stone-200">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-4 gap-4 text-center">
+          <div></div>
+          <div>
+            <h3 class="text-lg font-bold text-stone-800">Standard</h3>
+            <p class="text-3xl font-bold text-stone-800">$29<span class="text-base font-normal text-stone-500">/mo</span></p>
+            <p class="text-xs text-stone-500">or $290/yr</p>
+            <p class="text-xs text-stone-500 mt-1">Manage your records & sell</p>
+          </div>
+          <div class="relative">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">Most Popular</span>
+            <h3 class="text-lg font-bold text-stone-800">Pro</h3>
+            <p class="text-3xl font-bold text-stone-800">$79<span class="text-base font-normal text-stone-500">/mo</span></p>
+            <p class="text-xs text-stone-500">or $790/yr</p>
+            <p class="text-xs text-stone-500 mt-1">Breed smarter & grow</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-stone-800">Enterprise</h3>
+            <p class="text-3xl font-bold text-stone-800">$159<span class="text-base font-normal text-stone-500">/mo</span></p>
+            <p class="text-xs text-stone-500">or $1,590/yr</p>
+            <p class="text-xs text-stone-500 mt-1">The platform thinks for you</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Matrix -->
+    <section class="py-12 bg-white">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+
+        {categories.map((category) => (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold text-stone-800 mb-4 pb-2 border-b-2 border-amber-500">
+              {category.name}
+            </h2>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="sr-only">
+                  <tr>
+                    <th>Feature</th>
+                    <th>Standard</th>
+                    <th>Pro</th>
+                    <th>Enterprise</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {category.features.map((feature, idx) => (
+                    <tr class={idx % 2 === 0 ? 'bg-stone-50' : 'bg-white'}>
+                      <td class="py-2.5 px-3 text-stone-700 w-1/2">
+                        {feature.name}
+                        {feature.note && (
+                          <span class="block text-xs text-stone-400 mt-0.5">{feature.note}</span>
+                        )}
+                      </td>
+                      <td class="py-2.5 px-3 text-center w-1/6">
+                        {typeof feature.standard === 'string' ? (
+                          <span class="text-stone-700 font-medium text-xs">{feature.standard}</span>
+                        ) : feature.standard ? (
+                          <svg class="w-5 h-5 text-amber-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span class="text-stone-300">&mdash;</span>
+                        )}
+                      </td>
+                      <td class="py-2.5 px-3 text-center w-1/6">
+                        {typeof feature.pro === 'string' ? (
+                          <span class="text-stone-700 font-medium text-xs">{feature.pro}</span>
+                        ) : feature.pro ? (
+                          <svg class="w-5 h-5 text-amber-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span class="text-stone-300">&mdash;</span>
+                        )}
+                      </td>
+                      <td class="py-2.5 px-3 text-center w-1/6">
+                        {typeof feature.enterprise === 'string' ? (
+                          <span class="text-stone-700 font-medium text-xs">{feature.enterprise}</span>
+                        ) : feature.enterprise ? (
+                          <svg class="w-5 h-5 text-amber-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span class="text-stone-300">&mdash;</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+
+        <!-- Marketplace Note -->
+        <div class="mt-8 p-6 bg-amber-50 border border-amber-200 rounded-lg">
+          <h3 class="text-lg font-bold text-stone-800 mb-2">Marketplace Listing Fees</h3>
+          <p class="text-sm text-stone-600 mb-4">
+            Listing fees are separate from your subscription. Every tier can list and sell on the marketplace. You only pay when you publish a listing.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-amber-300">
+                  <th class="py-2 px-3 text-left text-stone-700">Listing Type</th>
+                  <th class="py-2 px-3 text-center text-stone-700">Horses</th>
+                  <th class="py-2 px-3 text-center text-stone-700">Dogs & Cats</th>
+                  <th class="py-2 px-3 text-center text-stone-700">Goats, Sheep & Rabbits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-white">
+                  <td class="py-2 px-3 text-stone-600">Animal Sale (until sold)</td>
+                  <td class="py-2 px-3 text-center font-medium">$49</td>
+                  <td class="py-2 px-3 text-center font-medium">$25</td>
+                  <td class="py-2 px-3 text-center font-medium">$9</td>
+                </tr>
+                <tr class="bg-stone-50">
+                  <td class="py-2 px-3 text-stone-600">Breeding Booking (monthly)</td>
+                  <td class="py-2 px-3 text-center font-medium">$19/mo</td>
+                  <td class="py-2 px-3 text-center font-medium">$9/mo</td>
+                  <td class="py-2 px-3 text-center font-medium">$5/mo</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="py-2 px-3 text-stone-600">Breeding Program (per offspring at weaning)</td>
+                  <td class="py-2 px-3 text-center font-medium">$49</td>
+                  <td class="py-2 px-3 text-center font-medium">$25</td>
+                  <td class="py-2 px-3 text-center font-medium">$9</td>
+                </tr>
+                <tr class="bg-stone-50">
+                  <td class="py-2 px-3 text-stone-600">Breeder Services (subscribers)</td>
+                  <td class="py-2 px-3 text-center font-medium text-amber-600" colspan="3">Free &mdash; unlimited</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="py-2 px-3 text-stone-600">Breeder Services (non-subscribers)</td>
+                  <td class="py-2 px-3 text-center font-medium" colspan="3">$5/mo per listing</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-stone-500 mt-3">
+            No percentage of your sales &mdash; ever. You handle your own transactions. We never broker your deals.
+          </p>
+        </div>
+
+        <!-- Marketplace Upgrades -->
+        <div class="mt-6 p-6 bg-stone-50 border border-stone-200 rounded-lg">
+          <h3 class="text-lg font-bold text-stone-800 mb-2">Optional Marketplace Upgrades</h3>
+          <p class="text-sm text-stone-600 mb-4">
+            Boost your visibility when it matters. Never required.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-stone-300">
+                  <th class="py-2 px-3 text-left text-stone-700">Upgrade</th>
+                  <th class="py-2 px-3 text-center text-stone-700">Horses</th>
+                  <th class="py-2 px-3 text-center text-stone-700">Dogs & Cats</th>
+                  <th class="py-2 px-3 text-center text-stone-700">Goats, Sheep & Rabbits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-white">
+                  <td class="py-2 px-3 text-stone-600">Boost (7-day)</td>
+                  <td class="py-2 px-3 text-center font-medium">$10</td>
+                  <td class="py-2 px-3 text-center font-medium">$5</td>
+                  <td class="py-2 px-3 text-center font-medium">$3</td>
+                </tr>
+                <tr class="bg-stone-50">
+                  <td class="py-2 px-3 text-stone-600">Boost (30-day)</td>
+                  <td class="py-2 px-3 text-center font-medium">$25</td>
+                  <td class="py-2 px-3 text-center font-medium">$15</td>
+                  <td class="py-2 px-3 text-center font-medium">$5</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="py-2 px-3 text-stone-600">Featured Listing (monthly)</td>
+                  <td class="py-2 px-3 text-center font-medium">$39/mo</td>
+                  <td class="py-2 px-3 text-center font-medium">$19/mo</td>
+                  <td class="py-2 px-3 text-center font-medium">$9/mo</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-stone-800">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Ready to get started?
+        </h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Start your 14-day free trial with full access. No credit card required.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <span class="inline-block bg-stone-300 text-stone-500 font-semibold py-3 px-8 rounded-lg cursor-not-allowed">
+            Coming Soon
+          </span>
+          <a href="/pricing" class="inline-block border-2 border-stone-400 text-stone-300 font-semibold py-3 px-8 rounded-lg hover:bg-stone-700 transition">
+            View Pricing &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center text-stone-800 mb-12">Frequently Asked Questions</h2>
+        <div class="space-y-8">
+          {faqs.map((faq) => (
+            <div class="border-b border-stone-200 pb-6">
+              <h3 class="text-lg font-semibold text-stone-800 mb-2">{faq.question}</h3>
+              <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

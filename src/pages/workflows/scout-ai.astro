@@ -4,44 +4,48 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const breadcrumbs = [
   { name: 'Home', url: '/' },
   { name: 'Workflows', url: '/workflows' },
-  { name: 'AI Copilot', url: '/workflows/ai-copilot' }
+  { name: 'Scout AI', url: '/workflows/scout-ai' }
 ];
 
 const faqs = [
   {
-    question: 'What kind of questions can I ask the AI Copilot?',
-    answer: 'Anything about your breeding program. Ask about your animals ("Which of my dogs carry the merle gene?"), your finances ("What\'s my total outstanding invoices?"), your breeding plans ("Show me all plans in the pregnancy phase"), your contacts, your waitlist, and more. The Copilot searches your actual data to answer.'
+    question: 'What kind of questions can I ask Scout AI?',
+    answer: 'Anything about your breeding program. Ask about your animals ("Which of my dogs carry the merle gene?"), your finances ("What\'s my total outstanding invoices?"), your breeding plans ("Show me all plans in the pregnancy phase"), your contacts, your waitlist, your offspring, medications, and more. Scout searches your actual data to answer.'
   },
   {
-    question: 'Is my data safe? Does the AI share my information?',
-    answer: 'Your data stays private. The AI Copilot only accesses your own breeding program data within your account. It cannot see other breeders\' data, and your conversations are not used to train AI models.'
+    question: 'Is my data safe? Does Scout share my information?',
+    answer: 'Your data stays private. Scout only accesses your own breeding program data within your account. It cannot see other breeders\' data, and your conversations are not used to train AI models. You can delete your conversation history at any time, and all AI query logs are automatically deleted after 90 days. Your organization admin can also disable Scout entirely if preferred.'
   },
   {
     question: 'How is this different from ChatGPT or other AI tools?',
-    answer: 'Generic AI tools don\'t know anything about your breeding program. They can give general advice, but they can\'t tell you which of your animals are due for vaccinations or what your revenue was last month. BreederHQ\'s AI Copilot is connected to your actual data-your animals, plans, finances, contacts, and more.'
+    answer: 'Generic AI tools don\'t know anything about your breeding program. They can give general advice, but they can\'t tell you which of your animals are due for vaccinations or what your revenue was last month. Scout AI is connected to your actual data-your animals, plans, finances, contacts, offspring, medications, and more-and uses specialized tools to search and retrieve accurate answers.'
   },
   {
     question: 'Do I need to learn special commands or syntax?',
-    answer: 'No. Just type naturally, the way you\'d ask a question to an assistant. "How many litters did I have this year?" or "Show me my dogs that are ready to breed" or "What\'s the COI for my planned breeding between Luna and Max?"'
+    answer: 'No. Just type naturally, the way you\'d ask a question to an assistant. "How many litters did I have this year?" or "Show me my dogs that are ready to breed" or "What medications is Luna currently on?"'
   },
   {
     question: 'Is there a limit to how many questions I can ask?',
-    answer: 'Yes. Usage depends on your plan level. All plans include the Help Assistant for general breeding questions. The data-aware Copilot is available on Pro and Enterprise plans with generous daily limits.'
+    answer: 'Yes. Usage depends on your plan level. Scout AI is available on Pro and Enterprise plans with generous daily limits. All plans include the Help Assistant for general breeding and platform questions.'
   },
   {
-    question: 'Can the AI Copilot make changes to my data?',
-    answer: 'No. The Copilot is read-only-it can search and retrieve your data to answer questions, but it cannot create, edit, or delete any records. Your data is always safe.'
+    question: 'Can Scout AI make changes to my data?',
+    answer: 'No. Scout is read-only-it can search and retrieve your data to answer questions, but it cannot create, edit, or delete any records. Your data is always safe.'
   },
   {
     question: 'What if I just have a general breeding question?',
-    answer: 'The Help Assistant answers general breeding and platform questions using our knowledge base of 25+ articles. It doesn\'t need access to your data-just ask things like "How do I set up a breeding plan?" or "What\'s the best way to track heat cycles?"'
+    answer: 'The Help Assistant answers general breeding and platform questions using our knowledge base of help articles. It doesn\'t need access to your data-just ask things like "How do I set up a breeding plan?" or "What\'s the best way to track heat cycles?"'
+  },
+  {
+    question: 'Can I pick up a conversation where I left off?',
+    answer: 'Yes. Scout automatically saves your conversations. You can view your conversation history, resume previous threads, and pick up right where you left off-even across sessions.'
   }
 ];
 ---
 
 <BaseLayout
-  title="AI Copilot - Your Breeding Program Assistant | BreederHQ"
-  description="Ask questions about your breeding program in plain English. BreederHQ's AI Copilot searches your animals, breeding plans, finances, and contacts to give you instant answers."
+  title="Scout AI - Your Breeding Program Assistant | BreederHQ"
+  description="Ask questions about your breeding program in plain English. Scout AI searches your animals, breeding plans, finances, medications, offspring, and contacts to give you instant answers."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -53,10 +57,10 @@ const faqs = [
   <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
       <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
-      <li class="text-gray-400">›</li>
+      <li class="text-gray-400">></li>
       <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
-      <li class="text-gray-400">›</li>
-      <li aria-current="page" class="text-gray-600">AI Copilot</li>
+      <li class="text-gray-400">></li>
+      <li aria-current="page" class="text-gray-600">Scout AI</li>
     </ol>
   </nav>
 
@@ -68,12 +72,12 @@ const faqs = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          BreederHQ includes two built-in AI assistants. The <strong>Help Assistant</strong> answers general breeding and platform questions from a knowledge base of 25+ articles. The <strong>AI Copilot</strong> goes further-it searches your actual animals, breeding plans, finances, contacts, waitlist, and offspring to answer questions about your specific program. Just type a question in plain English and get an instant, sourced answer. No special commands, no exports, no digging through spreadsheets.
+          BreederHQ includes two built-in AI assistants. The <strong>Help Assistant</strong> answers general breeding and platform questions from a knowledge base of help articles. <strong>Scout AI</strong> goes further-it searches your actual animals, breeding plans, finances, contacts, waitlist, offspring, and medications to answer questions about your specific program. Just type a question in plain English and get an instant, sourced answer. No special commands, no exports, no digging through spreadsheets.
         </p>
       </aside>
 
       <p class="text-xl text-gray-700 leading-relaxed mb-6">
-        Your breeding program generates a lot of data. Animal records, breeding plans, health tests, financial transactions, buyer contacts, waitlist entries. The information is there-but finding it when you need it means clicking through screens, filtering lists, and piecing things together yourself.
+        Your breeding program generates a lot of data. Animal records, breeding plans, health tests, medications, financial transactions, buyer contacts, waitlist entries. The information is there-but finding it when you need it means clicking through screens, filtering lists, and piecing things together yourself.
       </p>
 
       <p class="text-xl text-gray-700 leading-relaxed">
@@ -93,72 +97,71 @@ const faqs = [
 
       <ul class="space-y-3 text-lg text-gray-700 mb-8">
         <li class="flex items-start">
-          <span class="mr-3">•</span>
+          <span class="mr-3">&bull;</span>
           <span>"How many litters did I have this year?" - open breeding plans, filter by date, count manually</span>
         </li>
         <li class="flex items-start">
-          <span class="mr-3">•</span>
+          <span class="mr-3">&bull;</span>
           <span>"Which dogs carry the dilute gene?" - open each animal's genetics tab, check one by one</span>
         </li>
         <li class="flex items-start">
-          <span class="mr-3">•</span>
+          <span class="mr-3">&bull;</span>
           <span>"What's my total outstanding revenue?" - open finance, look at invoices, add up the numbers</span>
         </li>
         <li class="flex items-start">
-          <span class="mr-3">•</span>
+          <span class="mr-3">&bull;</span>
           <span>"Who's on my waitlist for a female?" - open waitlist, filter by preferences, cross-reference</span>
         </li>
         <li class="flex items-start">
-          <span class="mr-3">•</span>
-          <span>"How's my current litter doing?" - check offspring groups, weight records, care logs</span>
+          <span class="mr-3">&bull;</span>
+          <span>"What medications is my horse on?" - open the animal, find health records, check active courses</span>
         </li>
       </ul>
 
       <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
         <p class="text-lg text-gray-700 font-semibold">
-          Each question has an answer in your data. The AI Copilot finds it for you in seconds-no clicking, no filtering, no mental math.
+          Each question has an answer in your data. Scout AI finds it for you in seconds-no clicking, no filtering, no mental math.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Section 3: AI Copilot -->
+  <!-- Section 3: Scout AI -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">AI Copilot: Your Data, Instant Answers</h2>
+      <h2 class="text-4xl font-bold mb-8">Scout AI: Your Data, Instant Answers</h2>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        The AI Copilot is connected to your breeding program data. Ask a question in plain English, and it searches across your animals, breeding plans, offspring, contacts, finances, and waitlist to give you a direct answer.
+        Scout AI is connected to your breeding program data. Ask a question in plain English, and it searches across your animals, breeding plans, offspring, contacts, finances, waitlist, and medications to give you a direct answer. Scout uses 13 specialized tools to find exactly what you need.
       </p>
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">🐾 Animals</h3>
+          <h3 class="text-xl font-bold mb-3">Animals</h3>
           <p class="text-gray-700 mb-3">
-            Search and ask about your animals by name, breed, status, genetics, or any attribute.
+            Search and ask about your animals by name, breed, status, genetics, or any attribute. Get full profiles with health records, vaccinations, genetics, and titles.
           </p>
           <div class="text-sm text-gray-500 space-y-1 italic">
             <p>"Show me all my intact females"</p>
             <p>"Which animals are due for vaccinations?"</p>
-            <p>"When was Daisy's last Banamine?"</p>
-            <p>"Which horses have active withdrawal periods?"</p>
+            <p>"What's Luna's full health history?"</p>
           </div>
         </div>
 
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">📋 Breeding Plans</h3>
+          <h3 class="text-xl font-bold mb-3">Breeding Plans</h3>
           <p class="text-gray-700 mb-3">
             Check plan status, timelines, and details across your entire program.
           </p>
           <div class="text-sm text-gray-500 space-y-1 italic">
             <p>"How many litters am I expecting this spring?"</p>
             <p>"What plans are in the pregnancy phase?"</p>
-            <p>"When is my next expected whelping date?"</p>
+            <p>"When is my next expected due date?"</p>
           </div>
         </div>
 
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">💰 Finances</h3>
+          <h3 class="text-xl font-bold mb-3">Finances</h3>
           <p class="text-gray-700 mb-3">
             Get instant financial summaries without opening spreadsheets.
           </p>
@@ -170,14 +173,38 @@ const faqs = [
         </div>
 
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">👥 Contacts & Waitlist</h3>
+          <h3 class="text-xl font-bold mb-3">Contacts & Waitlist</h3>
           <p class="text-gray-700 mb-3">
             Find buyers, check waitlist status, and review your pipeline.
           </p>
           <div class="text-sm text-gray-500 space-y-1 italic">
-            <p>"Who's waiting for a female puppy?"</p>
+            <p>"Who's waiting for a female?"</p>
             <p>"How many people are on my waitlist?"</p>
             <p>"Show me contacts I haven't followed up with"</p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Medications & Health</h3>
+          <p class="text-gray-700 mb-3">
+            Check medication courses, active treatments, withdrawal periods, and compliance across your program.
+          </p>
+          <div class="text-sm text-gray-500 space-y-1 italic">
+            <p>"When was Daisy's last Banamine?"</p>
+            <p>"Which animals have active withdrawal periods?"</p>
+            <p>"What medications is Luna currently on?"</p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Offspring & Litters</h3>
+          <p class="text-gray-700 mb-3">
+            Track offspring records, litter health, weights, and life stage across all your litters.
+          </p>
+          <div class="text-sm text-gray-500 space-y-1 italic">
+            <p>"How's my current litter doing?"</p>
+            <p>"Which offspring are ready for placement?"</p>
+            <p>"Give me a health summary for the Spring litter"</p>
           </div>
         </div>
       </div>
@@ -191,7 +218,7 @@ const faqs = [
           </li>
           <li class="flex items-start">
             <span class="bg-[hsl(24,95%,53%)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</span>
-            <span><strong>The Copilot searches your data</strong> - it queries your animals, plans, finances, contacts, offspring, and waitlist</span>
+            <span><strong>Scout searches your data</strong> - it uses specialized tools to query your animals, plans, finances, contacts, offspring, medications, and waitlist</span>
           </li>
           <li class="flex items-start">
             <span class="bg-[hsl(24,95%,53%)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</span>
@@ -220,39 +247,80 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 4: Help Assistant -->
+  <!-- Section 4: Export & Share -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Help Assistant: Breeding Knowledge On Demand</h2>
+      <h2 class="text-4xl font-bold mb-8">More Than Answers: Export, Print, and Share</h2>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        Not every question is about your data. Sometimes you need to know <em>how</em> to do something. The Help Assistant answers general breeding and platform questions using a built-in knowledge base of 25+ articles covering every major feature.
+        Scout doesn't just answer questions-it helps you get information out of the platform and into the hands of the people who need it.
       </p>
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
         <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Export & Print</h3>
+          <p class="text-gray-700 mb-3">
+            When Scout returns data in a table, you can download it as a CSV file for your records or print a branded report. Useful for vet visits, buyer inquiries, or your own record-keeping.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Shareable Health Reports</h3>
+          <p class="text-gray-700 mb-3">
+            Ask Scout to generate a health report for any animal or litter. It creates a PIN-protected PDF link you can share with your vet-no account needed. Links expire after 72 hours for security.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Conversation History</h3>
+          <p class="text-gray-700 mb-3">
+            Scout automatically saves your conversations. Pick up where you left off, review past questions, and build on previous answers-even across different sessions.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">Context-Aware Suggestions</h3>
+          <p class="text-gray-700 mb-3">
+            Not sure what to ask? Scout suggests relevant questions based on which part of the platform you're using. Browsing animals? It suggests animal questions. On the finance page? Financial summaries.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Help Assistant -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Help Assistant: Breeding Knowledge On Demand</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Not every question is about your data. Sometimes you need to know <em>how</em> to do something. The Help Assistant answers general breeding and platform questions using a built-in knowledge base of help articles covering every major feature.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
           <h3 class="text-xl font-bold mb-3">Platform Questions</h3>
           <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>"How do I create a breeding plan?"</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>"How do I set up my waitlist?"</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>"How do I send an invoice?"</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>"What is COI and why does it matter?"</span>
             </li>
           </ul>
         </div>
 
-        <div class="bg-white p-6 rounded-lg border border-gray-200">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
           <h3 class="text-xl font-bold mb-3">Source Citations</h3>
           <p class="text-gray-700 mb-3">
             Every answer includes links to the relevant help articles so you can read more. No guessing where the information came from.
@@ -263,65 +331,11 @@ const faqs = [
         </div>
       </div>
 
-      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
+      <div class="bg-gray-50 border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
         <p class="text-lg text-gray-700">
-          <strong>Both assistants are built into the platform.</strong> The Help Assistant is available on all plans. The AI Copilot with data access is available on Pro and Enterprise plans.
+          <strong>Both assistants are built into the platform.</strong> The Help Assistant is available on all plans. Scout AI with data access is available on Pro and Enterprise plans.
         </p>
       </div>
-    </div>
-  </section>
-
-  <!-- Section 5: Suggested Questions & Context -->
-  <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Smart Suggestions Based on Where You Are</h2>
-
-      <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        Don't know what to ask? The AI Copilot suggests relevant questions based on which part of the platform you're using. Browsing your animals? It suggests animal-related questions. Looking at breeding plans? It suggests plan and genetics questions. On the finance page? Financial summaries.
-      </p>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-lg font-bold mb-3">On the Animals Page</h3>
-          <div class="space-y-2 text-sm text-gray-600">
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"How many active animals do I have?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"Which females are ready to breed?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"Show me animals with missing health tests"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"What medications is Luna currently on?"</div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-lg font-bold mb-3">On the Breeding Page</h3>
-          <div class="space-y-2 text-sm text-gray-600">
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"What plans are currently active?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"When is my next due date?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"Show me plans in the weaning phase"</div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-lg font-bold mb-3">On the Finance Page</h3>
-          <div class="space-y-2 text-sm text-gray-600">
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"What's my revenue this month?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"How many invoices are overdue?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"What are my top expense categories?"</div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h3 class="text-lg font-bold mb-3">On the Dashboard</h3>
-          <div class="space-y-2 text-sm text-gray-600">
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"Give me an overview of my farm"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"What needs my attention today?"</div>
-            <div class="bg-white px-3 py-2 rounded border border-gray-200">"How's my breeding program doing?"</div>
-          </div>
-        </div>
-      </div>
-
-      <p class="text-lg text-gray-700 leading-relaxed">
-        Suggestions are just a starting point. You can always type your own question about anything in your program.
-      </p>
     </div>
   </section>
 
@@ -336,7 +350,7 @@ const faqs = [
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
         <div class="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">🎯 Interactive Tours</h3>
+          <h3 class="text-xl font-bold mb-3">Interactive Tours</h3>
           <p class="text-gray-700 mb-3">
             Step-by-step walkthroughs that highlight each feature as you go. Tours launch automatically the first time you visit a new section, pointing out key buttons, explaining workflows, and getting you productive fast.
           </p>
@@ -346,9 +360,9 @@ const faqs = [
         </div>
 
         <div class="bg-white p-6 rounded-lg border border-gray-200">
-          <h3 class="text-xl font-bold mb-3">📚 Help Center</h3>
+          <h3 class="text-xl font-bold mb-3">Help Center</h3>
           <p class="text-gray-700 mb-3">
-            25+ searchable articles covering every major feature. Browse by module (Animals, Breeding, Offspring, Contacts, Finance, Marketplace, Genetics) or search by keyword.
+            Searchable articles covering every major feature. Browse by module (Animals, Breeding, Offspring, Contacts, Finance, Marketplace, Genetics) or search by keyword.
           </p>
           <p class="text-sm text-gray-500">
             Open the Help Center from any page without losing your place. Articles open in a slide-out panel.
@@ -364,36 +378,70 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 7: Who This Is For -->
+  <!-- Section 7: Privacy -->
   <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Your Data, Your Control</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        We take data privacy seriously. Scout AI is designed with transparency and control at every level.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-lg font-bold mb-3">Consent First</h3>
+          <p class="text-gray-700 text-sm">
+            Scout requires explicit consent before first use. You're always informed about how your data is used.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-lg font-bold mb-3">Organization Control</h3>
+          <p class="text-gray-700 text-sm">
+            Admins can enable or disable Scout for their entire organization. Staff members only get access if the admin allows it.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-lg font-bold mb-3">Delete Anytime</h3>
+          <p class="text-gray-700 text-sm">
+            Delete your entire conversation history and AI query logs at any time. Logs are also automatically deleted after 90 days.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Who This Is For -->
+  <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <div class="grid md:grid-cols-2 gap-8">
         <div>
-          <h2 class="text-3xl font-bold mb-6">The AI Copilot Helps If You:</h2>
+          <h2 class="text-3xl font-bold mb-6">Scout AI Helps If You:</h2>
           <ul class="space-y-3 text-gray-700">
             <li class="flex items-start">
-              <span class="mr-3">✓</span>
+              <span class="mr-3">&#10003;</span>
               <span>Manage a large program and need quick answers</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">✓</span>
+              <span class="mr-3">&#10003;</span>
               <span>Want financial summaries without building reports</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">✓</span>
+              <span class="mr-3">&#10003;</span>
               <span>Need to quickly find animals by genetics or status</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">✓</span>
+              <span class="mr-3">&#10003;</span>
               <span>Get asked questions by buyers and want fast answers</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">✓</span>
-              <span>Prefer asking over clicking through menus</span>
+              <span class="mr-3">&#10003;</span>
+              <span>Need to share health records with your vet quickly</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">✓</span>
-              <span>Want to learn the platform without reading documentation</span>
+              <span class="mr-3">&#10003;</span>
+              <span>Prefer asking over clicking through menus</span>
             </li>
           </ul>
         </div>
@@ -402,15 +450,15 @@ const faqs = [
           <h2 class="text-3xl font-bold mb-6">You Might Not Need This If:</h2>
           <ul class="space-y-3 text-gray-700">
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>You have a small program and know where everything is</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>You prefer navigating menus and dashboards directly</span>
             </li>
             <li class="flex items-start">
-              <span class="mr-3">•</span>
+              <span class="mr-3">&bull;</span>
               <span>You don't generate enough data to need AI-powered search</span>
             </li>
           </ul>
@@ -445,65 +493,19 @@ const faqs = [
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
 
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>What kind of questions can I ask the AI Copilot?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Anything about your breeding program. Ask about your animals ("Which of my dogs carry the merle gene?"), your finances ("What's my total outstanding invoices?"), your breeding plans ("Show me all plans in the pregnancy phase"), your contacts, your waitlist, and more. The Copilot searches your actual data to answer.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Is my data safe? Does the AI share my information?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Your data stays private. The AI Copilot only accesses your own breeding program data within your account. It cannot see other breeders' data, and your conversations are not used to train AI models.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>How is this different from ChatGPT or other AI tools?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Generic AI tools don't know anything about your breeding program. They can give general advice, but they can't tell you which of your animals are due for vaccinations or what your revenue was last month. BreederHQ's AI Copilot is connected to your actual data-your animals, plans, finances, contacts, and more.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Do I need to learn special commands or syntax?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>No. Just type naturally, the way you'd ask a question to an assistant. "How many litters did I have this year?" or "Show me my dogs that are ready to breed" or "What's the COI for my planned breeding between Luna and Max?"</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can the AI Copilot make changes to my data?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>No. The Copilot is read-only-it can search and retrieve your data to answer questions, but it cannot create, edit, or delete any records. Your data is always safe.</p>
-        </div>
-      </details>
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
     </div>
   </section>
 
@@ -518,6 +520,11 @@ const faqs = [
           </a>
         </div>
         <div>
+          <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Medication Tracking
+          </a>
+        </div>
+        <div>
           <a href="/workflows/client-management" class="text-[hsl(24,95%,53%)] hover:underline">
             → Client Management
           </a>
@@ -525,11 +532,6 @@ const faqs = [
         <div>
           <a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">
             → Invoicing & Expenses
-          </a>
-        </div>
-        <div>
-          <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
-            → BreederHQ vs. Spreadsheets
           </a>
         </div>
       </div>
