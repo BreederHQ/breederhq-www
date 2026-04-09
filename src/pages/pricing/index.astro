@@ -6,6 +6,8 @@ const breadcrumbs = [
   { name: 'Pricing', url: '/pricing' }
 ];
 
+const registerUrl = 'https://accounts.breederhq.com/register?intent=breeder_dashboard';
+
 const plans = [
   {
     name: 'Standard',
@@ -14,6 +16,7 @@ const plans = [
     yearlyPrice: 290,
     description: 'Everything you need to manage your breeding program',
     popular: false,
+    foundersEligible: false,
     features: [
       'Unlimited animals & contacts',
       'Breeding plans & calendar',
@@ -35,6 +38,9 @@ const plans = [
     yearlyPrice: 790,
     description: 'Advanced tools for growing breeding operations',
     popular: true,
+    foundersEligible: true,
+    foundersPrice: 39.50,
+    foundersYearlyPrice: 395,
     features: [
       'Everything in Standard',
       'Genetics Lab (7 analysis tabs)',
@@ -53,6 +59,9 @@ const plans = [
     yearlyPrice: 1590,
     description: 'Full-scale breeding management with AI and automation',
     popular: false,
+    foundersEligible: true,
+    foundersPrice: 79.50,
+    foundersYearlyPrice: 795,
     features: [
       'Everything in Pro',
       'Goal-Based Breeding AI',
@@ -72,16 +81,25 @@ const faqs = [
   { question: 'What happens when my trial ends?', answer: 'Your data is saved. Simply choose a plan and subscribe to pick up right where you left off.' },
   { question: 'Can I cancel anytime?', answer: 'Absolutely. Cancel from your account settings at any time. You will retain access through the end of your paid period.' },
   { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Rabbits, and Sheep with species-specific workflows for each.' },
+  { question: 'What is the Founders discount?', answer: 'The first 100 customers who use code FOUNDER50 at checkout get 50% off Pro or Enterprise for 12 months. The cap is enforced by Stripe.' },
 ];
 ---
 
 <BaseLayout
   title="Pricing - BreederHQ Breeding Management Software"
-  description="Simple, transparent pricing for professional breeders. Start your 14-day free trial today. Plans from $29/month."
+  description="Simple, transparent pricing for professional breeders. Start your 14-day free trial today. Plans from $29/month. Founders get 50% off Pro & Enterprise."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
   <main>
+    <!-- Founders Banner -->
+    <div class="bg-amber-500 text-white text-center py-3 px-4">
+      <a href="/founders" class="hover:underline font-medium">
+        Founding Member Special: Use code <strong class="font-mono">FOUNDER50</strong> for 50% off Pro &amp; Enterprise for 12 months &mdash; Only 100 spots
+        <span class="inline-block ml-1">&rarr;</span>
+      </a>
+    </div>
+
     <!-- Hero -->
     <section class="bg-gradient-to-b from-amber-50 to-white py-20">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
@@ -124,20 +142,41 @@ const faqs = [
                 <h3 class="text-2xl font-bold text-stone-800 mb-2">{plan.name}</h3>
                 <p class="text-stone-500 text-sm mb-6">{plan.description}</p>
 
-                <div class="mb-2">
-                  <span class="text-5xl font-bold text-stone-800">${plan.price}</span>
-                  <span class="text-stone-500 text-lg">/mo</span>
-                </div>
-                <p class="text-sm text-stone-500">
-                  or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
-                </p>
+                {plan.foundersEligible ? (
+                  <div class="mb-2">
+                    <div class="flex items-baseline justify-center gap-2 mb-1">
+                      <span class="text-2xl text-stone-400 line-through">${plan.price}</span>
+                      <span class="text-5xl font-bold text-amber-600">${plan.foundersPrice}</span>
+                      <span class="text-stone-500 text-lg">/mo</span>
+                    </div>
+                    <p class="text-xs text-amber-600 font-semibold mb-1">
+                      with FOUNDER50 for 12 months
+                    </p>
+                    <p class="text-sm text-stone-500">
+                      or ${plan.foundersYearlyPrice}/yr (normally ${plan.yearlyPrice}/yr)
+                    </p>
+                  </div>
+                ) : (
+                  <div class="mb-2">
+                    <span class="text-5xl font-bold text-stone-800">${plan.price}</span>
+                    <span class="text-stone-500 text-lg">/mo</span>
+                    <p class="text-sm text-stone-500 mt-1">
+                      or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
+                    </p>
+                  </div>
+                )}
               </div>
 
-              <span
-                class="block w-full text-center py-3 px-6 rounded-lg font-semibold mb-8 bg-stone-300 text-stone-500 cursor-not-allowed"
+              <a
+                href={registerUrl}
+                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold mb-8 transition ${
+                  plan.popular
+                    ? 'bg-amber-500 text-white hover:bg-amber-600'
+                    : 'bg-stone-800 text-white hover:bg-stone-900'
+                }`}
               >
-                Coming Soon
-              </span>
+                Start Free Trial
+              </a>
 
               <ul class="space-y-3 flex-1">
                 {plan.features.map((feature) => (
@@ -276,11 +315,12 @@ const faqs = [
         <p class="text-lg text-stone-300 mb-8">
           Join breeders who trust BreederHQ to manage their programs. Start your free trial today.
         </p>
-        <span
-          class="inline-block bg-stone-300 text-stone-500 font-semibold py-3 px-8 rounded-lg cursor-not-allowed"
+        <a
+          href={registerUrl}
+          class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition"
         >
-          Coming Soon
-        </span>
+          Start Free Trial
+        </a>
       </div>
     </section>
   </main>

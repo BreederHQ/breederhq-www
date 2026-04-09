@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Founders', url: '/founders' }
+];
+
+const registerUrl = 'https://accounts.breederhq.com/register?intent=breeder_dashboard';
+---
+
+<BaseLayout
+  title="Founding Member Special - 50% Off for 12 Months | BreederHQ"
+  description="Join BreederHQ as a Founding Member. Get 50% off Pro or Enterprise for your first 12 months. Only 100 spots available."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-b from-amber-50 to-white py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="inline-block bg-amber-500/10 text-amber-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            Limited to 100 Founding Members
+          </div>
+
+          <h1 class="text-5xl font-bold tracking-tight text-stone-800 sm:text-6xl mb-6">
+            50% Off Your First Year
+          </h1>
+
+          <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-4">
+            Be one of the first 100 breeders on BreederHQ and lock in half-price Pro or Enterprise for 12 months.
+          </p>
+
+          <p class="text-stone-500 mb-10">
+            No commitments. 14-day free trial included. Cancel anytime.
+          </p>
+
+          <!-- Promo Code Card -->
+          <div class="inline-block bg-white border-2 border-amber-500 rounded-xl px-8 py-6 shadow-lg shadow-amber-500/10 mb-10">
+            <p class="text-sm text-stone-500 mb-2">Enter this code at checkout</p>
+            <div class="flex items-center gap-4 justify-center">
+              <span class="text-4xl font-mono font-bold tracking-widest text-stone-800">FOUNDER50</span>
+              <button
+                id="copy-code"
+                class="text-amber-600 hover:text-amber-700 transition"
+                title="Copy to clipboard"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+            <p id="copy-feedback" class="text-xs text-green-600 mt-2 opacity-0 transition-opacity">Copied!</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={registerUrl}
+              class="bg-amber-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600 transition inline-block text-center"
+              style="min-height: 44px;"
+            >
+              Create Your Account
+            </a>
+            <a
+              href="/pricing"
+              class="border-2 border-stone-300 text-stone-700 px-8 py-4 rounded-lg text-lg font-semibold hover:border-stone-400 transition inline-block text-center"
+              style="min-height: 44px;"
+            >
+              See Plans &amp; Pricing
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center text-stone-800 mb-12">How It Works</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="bg-amber-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-600">1</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2 text-stone-800">Create a free account</h3>
+            <p class="text-stone-500 text-sm">
+              Sign up at accounts.breederhq.com. Pick your role (breeder, buyer, or service provider).
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-amber-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-600">2</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2 text-stone-800">Choose Pro or Enterprise</h3>
+            <p class="text-stone-500 text-sm">
+              Start your 14-day free trial. Monthly or annual billing&mdash;the discount applies to both.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="bg-amber-500/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-600">3</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2 text-stone-800">Enter FOUNDER50 at checkout</h3>
+            <p class="text-stone-500 text-sm">
+              The code takes 50% off every payment for your first 12 months. That's it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What You Get -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center text-stone-800 mb-4">What Founders Get</h2>
+        <p class="text-center text-stone-500 mb-12 max-w-2xl mx-auto">
+          The same platform everyone else uses&mdash;at half the price for a full year.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl border border-amber-500 p-6 shadow-md shadow-amber-500/10">
+            <div class="flex items-baseline gap-2 mb-1">
+              <h3 class="text-xl font-bold text-stone-800">Pro</h3>
+              <span class="text-sm text-stone-400 line-through">$79/mo</span>
+            </div>
+            <div class="mb-4">
+              <span class="text-3xl font-bold text-amber-600">$39.50</span>
+              <span class="text-stone-500">/mo for 12 months</span>
+            </div>
+            <ul class="space-y-2 text-sm text-stone-600">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                Unlimited animals, contacts &amp; breeding plans
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                Genetics Lab (7 analysis tabs)
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                Scout AI &amp; Help Assistant
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                E-signatures, advanced reporting &amp; 5 GB storage
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl border border-amber-500 p-6 shadow-md shadow-amber-500/10">
+            <div class="flex items-baseline gap-2 mb-1">
+              <h3 class="text-xl font-bold text-stone-800">Enterprise</h3>
+              <span class="text-sm text-stone-400 line-through">$159/mo</span>
+            </div>
+            <div class="mb-4">
+              <span class="text-3xl font-bold text-amber-600">$79.50</span>
+              <span class="text-stone-500">/mo for 12 months</span>
+            </div>
+            <ul class="space-y-2 text-sm text-stone-600">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                Everything in Pro
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                Goal-Based Breeding AI &amp; Offspring Simulator
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                CRM automation &amp; API access
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                Multi-location management &amp; 25 GB storage
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="text-center text-sm text-stone-500 mt-6">
+          Annual billing available too&mdash;Pro at $395/yr (normally $790), Enterprise at $795/yr (normally $1,590).
+        </p>
+      </div>
+    </section>
+
+    <!-- Urgency / Scarcity -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-stone-800 mb-4">Why 100 spots?</h2>
+        <p class="text-lg text-stone-600 leading-relaxed mb-6">
+          We're launching with a small group of founding breeders who'll help shape the platform. Your feedback matters more than volume right now. Once the 100 spots are claimed, the Founders discount is gone for good.
+        </p>
+        <p class="text-stone-500">
+          The cap is enforced by Stripe&mdash;one redemption per customer, no exceptions, no extensions.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center text-stone-800 mb-12">Founders FAQ</h2>
+        <div class="space-y-8">
+          <div class="border-b border-stone-200 pb-6">
+            <h3 class="text-lg font-semibold text-stone-800 mb-2">What tiers does the code work for?</h3>
+            <p class="text-stone-600 leading-relaxed">Pro ($79/mo or $790/yr) and Enterprise ($159/mo or $1,590/yr). The Standard plan is already affordable at $29/mo and isn't included.</p>
+          </div>
+          <div class="border-b border-stone-200 pb-6">
+            <h3 class="text-lg font-semibold text-stone-800 mb-2">How long does the discount last?</h3>
+            <p class="text-stone-600 leading-relaxed">12 months from your first paid invoice. After that, your plan renews at the regular price.</p>
+          </div>
+          <div class="border-b border-stone-200 pb-6">
+            <h3 class="text-lg font-semibold text-stone-800 mb-2">Does it work with annual billing?</h3>
+            <p class="text-stone-600 leading-relaxed">Yes. Monthly or annual&mdash;the 50% discount applies to both. Annual Pro becomes $395/yr instead of $790/yr.</p>
+          </div>
+          <div class="border-b border-stone-200 pb-6">
+            <h3 class="text-lg font-semibold text-stone-800 mb-2">Can I start with Standard and upgrade later?</h3>
+            <p class="text-stone-600 leading-relaxed">Yes, but the FOUNDER50 code must be applied at checkout. If you start on Standard without it, you can upgrade and enter the code then&mdash;as long as spots remain.</p>
+          </div>
+          <div class="border-b border-stone-200 pb-6">
+            <h3 class="text-lg font-semibold text-stone-800 mb-2">Is there a free trial?</h3>
+            <p class="text-stone-600 leading-relaxed">Yes. Every plan includes a 14-day free trial. You won't be charged until the trial ends.</p>
+          </div>
+          <div class="border-b border-stone-200 pb-6">
+            <h3 class="text-lg font-semibold text-stone-800 mb-2">What if the 100 spots run out?</h3>
+            <p class="text-stone-600 leading-relaxed">The code will stop working. Stripe enforces the cap automatically. There are no plans to extend or repeat this offer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-stone-800">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Ready to claim your spot?
+        </h2>
+        <p class="text-lg text-stone-300 mb-3">
+          Create your account, start your free trial, and enter <strong class="text-white font-mono">FOUNDER50</strong> at checkout.
+        </p>
+        <p class="text-stone-400 mb-8">
+          100 spots. 50% off. 12 months. That's the deal.
+        </p>
+        <a
+          href={registerUrl}
+          class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition"
+          style="min-height: 44px;"
+        >
+          Create Your Account
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    document.getElementById('copy-code')?.addEventListener('click', function() {
+      navigator.clipboard.writeText('FOUNDER50').then(function() {
+        var feedback = document.getElementById('copy-feedback');
+        if (feedback) {
+          feedback.style.opacity = '1';
+          setTimeout(function() { feedback.style.opacity = '0'; }, 2000);
+        }
+      });
+    });
+  </script>
+</BaseLayout>
