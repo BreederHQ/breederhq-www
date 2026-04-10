@@ -1,0 +1,587 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' },
+  { name: 'Using the Marketplace', url: '/buyers/using-the-marketplace' }
+];
+
+const faqs = [
+  {
+    question: 'Do I need an account to browse the marketplace?',
+    answer: 'No. You can browse breeder profiles, listings, and services without creating an account. You only need a free account to save favorites, message breeders, or join waitlists.'
+  },
+  {
+    question: 'Is there a fee for buyers?',
+    answer: 'No. Creating a buyer account and using the marketplace is completely free. Only breeders and service providers pay listing fees.'
+  },
+  {
+    question: 'How do I know if a breeder is trustworthy?',
+    answer: 'Look for verification badges on their profile. Breeders with the Verified Identity badge have confirmed their identity. Health Testing badges mean they document health screening for their animals. Check their response time, reviews, and how long they have been on the platform.'
+  },
+  {
+    question: 'What if a breeder does not respond to my message?',
+    answer: 'Some breeders receive many inquiries and may take a few days to respond. If you do not hear back within a week, try reaching out again or look for breeders with the Quick Responder badge, which means they typically reply within 4 hours.'
+  },
+  {
+    question: 'Can I search for breeders near me?',
+    answer: 'Yes. You can filter search results by location to find breeders in your area. Many breeders also offer shipping or transport arrangements for buyers who are further away.'
+  }
+];
+---
+
+<BaseLayout
+  title="How to Use the BreederHQ Marketplace | Buyer Guide"
+  description="A step-by-step guide to finding breeders, browsing listings, and connecting with responsible breeders on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-stone-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-stone-400">&rsaquo;</li>
+      <li><a href="/buyers" class="text-[hsl(24,95%,53%)] hover:underline">For Buyers</a></li>
+      <li class="text-stone-400">&rsaquo;</li>
+      <li aria-current="page" class="text-stone-600">Using the Marketplace</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">How to Use the BreederHQ Marketplace</h1>
+
+      <aside class="bg-stone-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded-xl" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Browse breeders and listings without an account. Create a free account to save favorites, message breeders, join waitlists, and access your buyer portal. Search by species, breed, location, and listing type. Look for verification badges and response time indicators to find trustworthy breeders.
+        </p>
+      </aside>
+      <p class="text-sm text-stone-700 leading-relaxed">
+        The BreederHQ Marketplace connects you with responsible breeders and animal service providers. Whether you are looking for a new companion, a breeding prospect, or professional animal services, this guide walks you through everything you need to know.
+      </p>
+    </div>
+  </section>
+
+  <!-- Getting Started -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Getting started</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          You do not need an account to start exploring the marketplace. Browse breeder profiles, view listings, and get a feel for what is available before committing to anything.
+        </p>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-4">What you can do without an account</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Browse all breeder profiles and listings</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Search and filter by species, breed, location, and more</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>View breeder verification badges and health testing records</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Read breeder descriptions and program details</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-4">What you get with a free account</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Save favorite breeders and listings for quick access later</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Message breeders directly through the platform</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Join waitlists for upcoming litters or available animals</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Access your buyer portal for payments, contracts, and updates</span>
+            </li>
+          </ul>
+        </div>
+
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Creating an account takes less than a minute. You just need an email address.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Searching & Filtering -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Searching and filtering</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          The marketplace has powerful search tools to help you find exactly what you are looking for.
+        </p>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Search by</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Species:</strong> Dogs, cats, horses, goats, rabbits, or sheep</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Breed:</strong> Search for a specific breed or browse all breeds within a species</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Location:</strong> Find breeders near you or search a specific area</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Listing type:</strong> Stud services, guardian homes, trained animals, rehomes, co-ownership, and more</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Filter by</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Verification level:</strong> Verified identity, health testing documented, and other trust indicators</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Badges:</strong> Quick Responder, Health Tested, and other earned badges</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Availability status:</strong> Accepting inquiries, waitlist open, or animals currently available</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-xl">
+          <p class="text-sm text-stone-700 leading-relaxed">
+            <strong>Tip:</strong> Start broad and narrow down. Searching by species and location first gives you a good overview of what is available in your area.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Understanding Listings -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Understanding listings</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">What you see on a breeder profile</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">
+            Every breeder profile on the marketplace includes key information to help you evaluate them at a glance.
+          </p>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Verification badges:</strong> Trust indicators that show the breeder has met specific criteria</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Health testing status:</strong> Whether the breeder documents health screening for their breeding animals</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Breeding history:</strong> How long they have been breeding and their program details</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Response time:</strong> How quickly they typically reply to messages</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Listing types explained</h3>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h4 class="font-bold mb-2">Stud Services</h4>
+              <p class="text-sm text-stone-600">A male animal available for breeding with your female. Includes terms, fees, and health testing information.</p>
+            </div>
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h4 class="font-bold mb-2">Guardian Home</h4>
+              <p class="text-sm text-stone-600">You raise the animal in your home full-time, but the breeder retains breeding rights for a set period.</p>
+            </div>
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h4 class="font-bold mb-2">Trained</h4>
+              <p class="text-sm text-stone-600">Animals that have received professional training or have specific working titles and certifications.</p>
+            </div>
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h4 class="font-bold mb-2">Rehome</h4>
+              <p class="text-sm text-stone-600">An adult animal looking for a new home. Often retired breeding animals or returns that need placement.</p>
+            </div>
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h4 class="font-bold mb-2">Co-Ownership</h4>
+              <p class="text-sm text-stone-600">Shared ownership between you and the breeder. Common for show prospects where both parties benefit.</p>
+            </div>
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h4 class="font-bold mb-2">Offspring / Litter</h4>
+              <p class="text-sm text-stone-600">Available or upcoming offspring from a planned breeding. May include waitlist options.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacting a Breeder -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Contacting a breeder</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Once you find a breeder you are interested in, you can message them directly through the platform. All communication stays in one place so nothing gets lost.
+        </p>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">What to include in your first message</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Introduce yourself and your household (who lives there, other pets, living situation)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Explain what you are looking for (pet, show prospect, working animal, breeding stock)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Share your experience level with the breed or species</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Ask about availability, timeline, and next steps</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Be genuine and patient. Good breeders want to know about you, not just sell to you.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-lg font-bold mb-2">About the Quick Responder badge</h3>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            Breeders with the Quick Responder badge typically reply to messages within 4 hours. If speed matters to you, look for this badge when browsing profiles. Keep in mind that even responsive breeders may take longer during busy breeding seasons.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Joining a Waitlist -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Joining a waitlist</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Responsible breeders often have more demand than supply. Waitlists are common and are actually a good sign.
+        </p>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">How waitlists work</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>You request to join a waitlist through the breeder's profile or a specific listing</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>The breeder reviews your application and may ask additional questions</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>If accepted, you may need to place a deposit to hold your position</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Your waitlist position is visible in your buyer portal so you always know where you stand</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Deposit expectations</h3>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            Most breeders require a deposit to join a waitlist, typically 10-25% of the total price. Deposit policies vary by breeder. Some are fully refundable, some are transferable to a future litter, and some are non-refundable. Always confirm the deposit terms before paying.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Your Buyer Portal -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Your buyer portal</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Once you begin working with a breeder on the platform, you get access to a dedicated buyer portal. This is your central hub for everything related to your purchase.
+        </p>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Payment Tracking</h4>
+            <p class="text-sm text-stone-600">See your balance, payment history, and upcoming payments all in one place.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Contracts</h4>
+            <p class="text-sm text-stone-600">Review, sign, and store contracts digitally. No paper shuffling.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Messaging</h4>
+            <p class="text-sm text-stone-600">All your conversations with the breeder in one thread.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Photo Updates</h4>
+            <p class="text-sm text-stone-600">Breeders can share photos and updates as your animal grows.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Documents</h4>
+            <p class="text-sm text-stone-600">Health records, registration papers, and other important files stored securely.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Waitlist Status</h4>
+            <p class="text-sm text-stone-600">Track your position and get notified when it is your turn.</p>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-xl">
+          <p class="text-sm text-stone-700 leading-relaxed">
+            <strong>Learn more:</strong> Visit our <a href="/buyers" class="text-[hsl(24,95%,53%)] hover:underline">buyer education hub</a> for a full overview of the buyer portal experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Finding Services -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Finding services</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          The marketplace is not just for finding breeders. It also connects you with professional animal service providers in your area.
+        </p>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Available service categories</h3>
+          <div class="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+            <div class="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 font-medium">Veterinary</div>
+            <div class="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 font-medium">Training</div>
+            <div class="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 font-medium">Grooming</div>
+            <div class="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 font-medium">Transport</div>
+            <div class="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 font-medium">Photography</div>
+            <div class="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 font-medium">Boarding</div>
+          </div>
+        </div>
+
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Search by service type and location to find providers near you. Service providers have their own profiles with descriptions, pricing information, and service areas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Ready to start browsing?</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        The BreederHQ Marketplace is free for buyers. Browse breeder profiles, explore listings, and find the right match for your family.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://marketplace.breederhq.com" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-stone-100 transition text-center" style="min-height: 44px;">
+          Browse the Marketplace
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Do I need an account to browse the marketplace?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No. You can browse breeder profiles, listings, and services without creating an account. You only need a free account to save favorites, message breeders, or join waitlists.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Is there a fee for buyers?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No. Creating a buyer account and using the marketplace is completely free. Only breeders and service providers pay listing fees.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How do I know if a breeder is trustworthy?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Look for verification badges on their profile. Breeders with the Verified Identity badge have confirmed their identity. Health Testing badges mean they document health screening for their animals. Check their response time, reviews, and how long they have been on the platform.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What if a breeder does not respond to my message?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Some breeders receive many inquiries and may take a few days to respond. If you do not hear back within a week, try reaching out again or look for breeders with the Quick Responder badge, which means they typically reply within 4 hours.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I search for breeders near me?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. You can filter search results by location to find breeders in your area. Many breeders also offer shipping or transport arrangements for buyers who are further away.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Continue learning</h2>
+      <div class="space-y-3 text-sm">
+        <div>
+          <a href="/buyers/evaluate-breeders" class="text-[hsl(24,95%,53%)] hover:underline">
+            How to Evaluate a Breeder
+          </a>
+        </div>
+        <div>
+          <a href="/buyers/contracts-and-agreements" class="text-[hsl(24,95%,53%)] hover:underline">
+            Understanding Contracts and Agreements
+          </a>
+        </div>
+        <div>
+          <a href="/buyers/what-does-it-cost" class="text-[hsl(24,95%,53%)] hover:underline">
+            What Does a Responsibly Bred Animal Actually Cost?
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-stone-200 shadow-lg md:hidden z-50">
+    <a href="https://marketplace.breederhq.com" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Browse the Marketplace
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 0.875rem;
+    }
+  </style>
+</BaseLayout>

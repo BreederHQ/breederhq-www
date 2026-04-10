@@ -1,0 +1,447 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Service Providers', url: '/for-providers' }
+];
+
+const faqs = [
+  {
+    question: 'How much does a service listing cost?',
+    answer: 'Service listings are $5/month. No commissions, no hidden fees, no per-lead charges. Cancel anytime.'
+  },
+  {
+    question: 'What types of services can I list?',
+    answer: 'Veterinary (especially reproductive specialists), training, photography, transport, grooming, boarding, and other breeder-specific services.'
+  },
+  {
+    question: 'Do I need a BreederHQ breeding subscription?',
+    answer: 'No. Service provider listings are completely separate from breeder subscriptions. You do not need to be a breeder to list your services.'
+  },
+  {
+    question: 'How do I get verified?',
+    answer: 'Upload your license, insurance, or relevant credentials. Verification is optional but recommended — verified listings receive significantly more inquiries.'
+  },
+  {
+    question: 'Can I pause my listing?',
+    answer: 'Yes. Pause and resume anytime from your dashboard. Your listing data is preserved while paused.'
+  },
+  {
+    question: 'What kind of ROI can I expect?',
+    answer: 'One new breeder client typically generates $500 to $3,000 in annual revenue depending on your service type. A single new client more than covers the listing cost.'
+  },
+  {
+    question: 'How is this different from Yelp or Google Business?',
+    answer: 'Those platforms are great for reaching general consumers and you should keep using them. BreederHQ is a complementary channel that puts you in front of professional breeders specifically - an audience that needs specialized services on a recurring basis and is hard to reach through general-purpose directories.'
+  }
+];
+---
+
+<BaseLayout
+  title="For Service Providers | BreederHQ Marketplace"
+  description="Reach professional breeders actively searching for veterinary, training, photography, transport, and grooming services. No commissions. List your services on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+
+  <main>
+
+    <!-- ============================================ -->
+    <!-- HERO                                         -->
+    <!-- ============================================ -->
+    <section class="bg-gradient-to-b from-emerald-50 to-white py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <img src="/marketplace-logo.png" alt="BreederHQ Marketplace" class="h-40 w-auto mx-auto mb-8" />
+          <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl leading-tight mb-6">
+            Be Seen by the People<br />
+            <span class="text-emerald-700">Who Need Your Services.</span>
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            The BreederHQ Marketplace puts your services in front of a growing community -
+            professional breeders, people shopping for animals, and pet owners looking for
+            trusted providers in their area. One listing. Maximum visibility.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+              class="bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-600 w-full sm:w-auto"
+            >
+              List Your Services
+            </a>
+            <a
+              href="https://accounts.breederhq.com/login"
+              class="text-gray-600 px-8 py-4 text-lg font-medium hover:text-emerald-700 w-full sm:w-auto"
+            >
+              Already listed? Sign In &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- WHY BREEDERS ARE DIFFERENT                   -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            More Visibility, More Clients
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Your listing is visible to everyone on the BreederHQ Marketplace - and the audience keeps growing.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">👀</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">A Growing Audience</h3>
+            <p class="text-sm text-gray-600">
+              Professional breeders, people shopping for animals, and pet owners looking for services -
+              the marketplace audience grows every day, and your listing is visible to all of them.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">📍</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Local Discovery</h3>
+            <p class="text-sm text-gray-600">
+              People search by service type, location, and species.
+              If you're in their area and offer what they need, they find you -
+              whether they're a breeder or a first-time pet owner.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🔄</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Repeat Business Built In</h3>
+            <p class="text-sm text-gray-600">
+              Many clients on the platform need services on a recurring basis -
+              not one-time visits. Breeders especially come back cycle after cycle,
+              and recommend you to their network.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Revenue callout -->
+        <div class="mt-12 bg-emerald-50 border border-emerald-200 rounded-xl p-8 text-center max-w-2xl mx-auto">
+          <p class="text-2xl font-bold text-gray-900 mb-2">
+            $500 - $3,000+
+          </p>
+          <p class="text-gray-600">
+            Typical annual revenue from a single breeder client, depending on your service type.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- THE PROBLEM TODAY                            -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Another Place to Be Found
+          </h2>
+          <p class="text-lg text-gray-600">
+            You're already listed on Google, maybe Yelp, maybe Thumbtack. BreederHQ is one more place where people looking for animal services can find you - especially the ones who don't search on those platforms.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Word of Mouth</h3>
+            <p class="text-sm text-gray-600 mb-2">High trust, but slow to build and geographically limited. You can't control it.</p>
+            <span class="text-xs text-amber-600 font-medium">Works, but doesn't grow</span>
+          </div>
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Facebook Groups</h3>
+            <p class="text-sm text-gray-600 mb-2">Direct breeder access, but self-promotion is banned in most groups. Gets you labeled as spam.</p>
+            <span class="text-xs text-red-500 font-medium">Risky reputation-wise</span>
+          </div>
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Breed Club Advertising</h3>
+            <p class="text-sm text-gray-600 mb-2">Targeted, but expensive ($500-$2,000/year per club), limited reach, mostly print-based.</p>
+            <span class="text-xs text-amber-600 font-medium">Expensive per lead</span>
+          </div>
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Google / Yelp / Thumbtack</h3>
+            <p class="text-sm text-gray-600 mb-2">Great for general consumers, but breeders with specialized needs don't search there for breeding-specific services.</p>
+            <span class="text-xs text-amber-600 font-medium">Doesn't reach this audience</span>
+          </div>
+        </div>
+
+        <div class="mt-10 text-center">
+          <p class="text-lg text-gray-700 font-medium">
+            For $5/mo, you add one more place where people can find you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- WHAT YOU GET                                  -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            What You Get on BreederHQ
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+          <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Your Service Listing</h3>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Professional profile with your services, coverage area, and credentials
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Flexible pricing display (fixed price, starting at, or contact for quote)
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Photos, descriptions, and service area details
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Pause and resume anytime - your data is preserved
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Targeted Visibility</h3>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Visible to breeders and buyers actively using the platform
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Searchable by service type, location, and species specialization
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Optional verification badge for credentials (license, insurance)
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Breeder recommendations - your best clients vouch for you publicly
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Service Types</h3>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-base">🩺</div>
+                <span class="text-gray-700">Veterinary</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-base">🎓</div>
+                <span class="text-gray-700">Training</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-base">📸</div>
+                <span class="text-gray-700">Photography</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-base">🚐</div>
+                <span class="text-gray-700">Transport</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-base">✂️</div>
+                <span class="text-gray-700">Grooming</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-base">🏠</div>
+                <span class="text-gray-700">Boarding</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Simple Economics</h3>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                $5/month per listing - flat fee, no commissions
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                No per-lead charges, no hidden fees
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                One new breeder client pays for the listing for years
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+                Cancel anytime - no contracts, no lock-in
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- VERIFICATION & TRUST BADGES                  -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-stone-50" id="trust">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Stand Out with Verification and Trust Badges
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Verification builds confidence. BreederHQ offers progressive verification tiers - from government ID
+            through full accreditation - plus earned badges that display on your profile and every listing.
+          </p>
+        </div>
+
+        <!-- Verification Tiers -->
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Verification Tiers</h3>
+        <div class="grid md:grid-cols-3 gap-6 mb-14">
+          <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+            <img src="/badges/id_verified.png" alt="ID Verified" class="h-20 mx-auto mb-4" />
+            <h4 class="font-bold text-gray-900 mb-1">ID Verified</h4>
+            <p class="text-xs text-blue-600 font-medium mb-3">Tier 1</p>
+            <p class="text-sm text-gray-600">
+              Government ID verification through Stripe Identity. Confirms you are a real person or business.
+            </p>
+          </div>
+          <div class="bg-white rounded-xl border-2 border-emerald-300 p-6 text-center">
+            <img src="/badges/verified.png" alt="Verified" class="h-20 mx-auto mb-4" />
+            <h4 class="font-bold text-gray-900 mb-1">Verified</h4>
+            <p class="text-xs text-emerald-600 font-medium mb-3">Tier 2</p>
+            <p class="text-sm text-gray-600">
+              Identity confirmed plus professional credentials and business documentation reviewed.
+            </p>
+          </div>
+          <div class="bg-gradient-to-br from-amber-50 to-white rounded-xl border-2 border-amber-400 p-6 text-center">
+            <img src="/badges/accredited.png" alt="Accredited" class="h-20 mx-auto mb-4" />
+            <h4 class="font-bold text-gray-900 mb-1">Accredited</h4>
+            <p class="text-xs text-amber-600 font-medium mb-3">Tier 3 - Highest</p>
+            <p class="text-sm text-gray-600">
+              Full BreederHQ Accreditation - identity verification, program documentation, and professional standards review.
+            </p>
+          </div>
+        </div>
+
+        <!-- Earned Badges -->
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Earned Badges</h3>
+        <p class="text-sm text-gray-600 mb-6">
+          Awarded automatically based on your track record. Can't be bought - only earned.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-14">
+          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
+            <img src="/badges/quick_responder.png" alt="Quick Responder" class="h-14 mx-auto mb-2" />
+            <h4 class="text-xs font-bold text-gray-900">Quick Responder</h4>
+            <p class="text-xs text-gray-500 mt-1">Responds within 4 hours</p>
+          </div>
+          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
+            <img src="/badges/established.png" alt="Established" class="h-14 mx-auto mb-2" />
+            <h4 class="text-xs font-bold text-gray-900">Established</h4>
+            <p class="text-xs text-gray-500 mt-1">6+ months, 3+ listings</p>
+          </div>
+          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
+            <img src="/badges/trusted.png" alt="Trusted" class="h-14 mx-auto mb-2" />
+            <h4 class="text-xs font-bold text-gray-900">Trusted</h4>
+            <p class="text-xs text-gray-500 mt-1">12+ months, zero disputes</p>
+          </div>
+          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
+            <img src="/badges/top_rated.png" alt="Top Rated" class="h-14 mx-auto mb-2" />
+            <h4 class="text-xs font-bold text-gray-900">Top Rated</h4>
+            <p class="text-xs text-gray-500 mt-1">4.5+ average rating</p>
+          </div>
+          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
+            <img src="/badges/founder.png" alt="Founder" class="h-14 mx-auto mb-2" />
+            <h4 class="text-xs font-bold text-gray-900">Founder</h4>
+            <p class="text-xs text-gray-500 mt-1">First 100 providers</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <p class="text-sm text-gray-600">
+            Badges display on your profile and on every listing card in search results.
+            Higher verification tiers and more badges mean more visibility and more inquiries.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- FAQ                                          -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-white rounded-xl border border-stone-200 p-6">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-sm text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- FINAL CTA                                    -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-gradient-to-br from-emerald-900 to-emerald-800">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">
+          Be seen where animal people are looking.
+        </h2>
+        <p class="text-lg text-emerald-200 mb-10 max-w-2xl mx-auto">
+          Breeders, buyers, and pet owners are all on the BreederHQ Marketplace.
+          $5/mo puts your services in front of them.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+            class="bg-white text-emerald-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50 w-full sm:w-auto"
+          >
+            List Your Services
+          </a>
+          <a
+            href="https://accounts.breederhq.com/login"
+            class="border-2 border-emerald-500 text-emerald-200 px-8 py-4 rounded-lg text-lg font-semibold hover:border-white hover:text-white w-full sm:w-auto"
+          >
+            Sign In
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

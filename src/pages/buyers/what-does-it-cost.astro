@@ -1,0 +1,524 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' },
+  { name: 'What Does It Cost?', url: '/buyers/what-does-it-cost' }
+];
+
+const faqs = [
+  {
+    question: 'Why are responsibly bred animals so much more expensive than pet store or online listings?',
+    answer: 'Responsible breeders invest heavily in health testing, genetic screening, veterinary care, quality nutrition, socialization, and proper facilities. These costs add up to thousands of dollars per litter before a single animal is placed. Cheaper sources skip most or all of these steps, which is why the upfront price is lower, but the long-term cost to you (and the animal) is often much higher.'
+  },
+  {
+    question: 'Are deposits refundable?',
+    answer: 'It depends on the breeder. Some deposits are fully refundable, some are transferable to a future litter, and some are non-refundable. Always confirm the deposit policy in writing before paying. Responsible breeders clearly state their deposit terms upfront.'
+  },
+  {
+    question: 'Do breeders offer payment plans?',
+    answer: 'Some do. Payment plans are more common for higher-priced animals like horses and show-quality dogs. Ask the breeder directly. If they use BreederHQ, payments can be tracked through the buyer portal regardless of the payment structure.'
+  },
+  {
+    question: 'What is the difference between pet price and breeding price?',
+    answer: 'Pet price is for animals sold with limited registration and a spay/neuter requirement. Breeding price, which includes full registration and breeding rights, is typically 50% to 100% higher because the buyer can use the animal to produce offspring. The price reflects the genetics and health testing investment the breeder has made.'
+  },
+  {
+    question: 'Should I negotiate on price?',
+    answer: 'It is generally not appropriate to negotiate with a responsible breeder the way you might at a car dealership. Their prices reflect real costs and years of investment. If the price is outside your budget, it is better to ask if the breeder has pet-quality animals at a lower price point, or to wait for a future litter, rather than trying to bargain down.'
+  }
+];
+---
+
+<BaseLayout
+  title="What Does a Responsibly Bred Animal Actually Cost? | Buyer Guide"
+  description="Understand pricing from responsible breeders, what goes into the cost, typical price ranges by species, and why it is worth the investment."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-stone-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-stone-400">&rsaquo;</li>
+      <li><a href="/buyers" class="text-[hsl(24,95%,53%)] hover:underline">For Buyers</a></li>
+      <li class="text-stone-400">&rsaquo;</li>
+      <li aria-current="page" class="text-stone-600">What Does It Cost?</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">What Does It Actually Cost?</h1>
+
+      <aside class="bg-stone-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded-xl" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Responsibly bred animals cost more upfront because breeders invest in health testing, genetics, veterinary care, and proper socialization. That higher price often saves you thousands in the long run compared to animals from sources that skip those steps. Prices vary widely by species, breed, and purpose.
+        </p>
+      </aside>
+      <p class="text-sm text-stone-700 leading-relaxed">
+        Sticker shock is real when you first start looking at responsibly bred animals. But understanding what goes into the price helps explain why it costs what it does, and why the cheaper alternative often ends up being the more expensive choice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why Responsible Breeding Costs More -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why responsible breeding costs more</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Responsible breeding is not a side hustle. It is a significant financial commitment. Here is where the money goes.
+        </p>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Health Testing</h4>
+            <p class="text-sm text-stone-600">$300 to $2,000+ per parent depending on species and breed. Includes hip/elbow evaluations, cardiac exams, eye exams, genetic panels, and breed-specific tests.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Genetic Screening</h4>
+            <p class="text-sm text-stone-600">DNA panels to identify carriers of hereditary conditions. Prevents producing offspring with preventable genetic diseases.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Veterinary Care</h4>
+            <p class="text-sm text-stone-600">Prenatal care for the dam, emergency preparedness, postnatal checkups for every offspring, first vaccinations, deworming, and microchipping.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Quality Nutrition</h4>
+            <p class="text-sm text-stone-600">Premium nutrition during pregnancy, lactation, and the critical early growth period. Proper nutrition in the first weeks has lifelong health impacts.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Socialization</h4>
+            <p class="text-sm text-stone-600">Structured socialization programs, enrichment activities, exposure to different environments, sounds, surfaces, and people during critical developmental windows.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Time Investment</h4>
+            <p class="text-sm text-stone-600">Round-the-clock care during birthing, hand-feeding when needed, individual attention for each offspring, buyer screening, and ongoing post-placement support.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Facilities</h4>
+            <p class="text-sm text-stone-600">Clean, safe, and appropriate housing. Whelping areas, outdoor space, climate control, and separate areas for different stages of development.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Registration & Documentation</h4>
+            <p class="text-sm text-stone-600">Registry fees, pedigree documentation, litter registration, individual registration papers, and record-keeping for every animal produced.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typical Price Ranges -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Typical price ranges by species</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          These are ballpark ranges for responsibly bred animals. Actual prices vary significantly by breed, region, bloodlines, intended purpose, and breeder reputation.
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-bold">Dogs</h3>
+              <span class="text-sm font-semibold text-[hsl(24,95%,53%)]">$1,500 - $5,000+</span>
+            </div>
+            <p class="text-sm text-stone-600">Varies widely by breed and purpose. Working and sporting breeds at the lower end, rare breeds and show prospects at the higher end. Some highly sought-after breeds or champion bloodlines can exceed $10,000.</p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-bold">Cats</h3>
+              <span class="text-sm font-semibold text-[hsl(24,95%,53%)]">$1,000 - $3,000+</span>
+            </div>
+            <p class="text-sm text-stone-600">Pedigreed cats from health-tested parents. Rare breeds, specific color patterns, and show-quality kittens command higher prices.</p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-bold">Horses</h3>
+              <span class="text-sm font-semibold text-[hsl(24,95%,53%)]">$5,000 - $50,000+</span>
+            </div>
+            <p class="text-sm text-stone-600">The widest range of any species. Weanlings and unstarted horses at the lower end, trained performance horses and proven bloodlines at the top. Discipline, breed, and training level are the biggest factors.</p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-bold">Goats</h3>
+              <span class="text-sm font-semibold text-[hsl(24,95%,53%)]">$200 - $2,000+</span>
+            </div>
+            <p class="text-sm text-stone-600">Pet and fiber goats at the lower end. Registered dairy breeds, proven milkers, and show stock at the higher end.</p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-bold">Rabbits</h3>
+              <span class="text-sm font-semibold text-[hsl(24,95%,53%)]">$50 - $500+</span>
+            </div>
+            <p class="text-sm text-stone-600">Pet rabbits at the lower end. Pedigreed show rabbits, rare breeds, and proven breeding stock at the higher end.</p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-bold">Sheep</h3>
+              <span class="text-sm font-semibold text-[hsl(24,95%,53%)]">$200 - $2,000+</span>
+            </div>
+            <p class="text-sm text-stone-600">Commercial stock at the lower end. Registered breeding stock, rare breeds, and proven fiber producers at the higher end.</p>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-xl">
+          <p class="text-sm text-stone-700 leading-relaxed">
+            <strong>Note:</strong> These ranges are for the U.S. market. Prices outside these ranges are not automatically suspicious. A price well below the typical range for the breed deserves questions about what corners were cut. A price well above it deserves questions about what justifies the premium.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Typically Included -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What is typically included in the price</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          When you buy from a responsible breeder, the price usually includes more than just the animal. Here is what you should expect.
+        </p>
+
+        <ul class="space-y-3 text-sm text-stone-700">
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Health testing of both parents</strong> with documented, verifiable results</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Age-appropriate vaccinations</strong> administered by a licensed veterinarian</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Deworming protocol</strong> completed before placement</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Microchip</strong> (common for dogs and cats, varies by species)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Registration papers</strong> (limited for pet placements, full for breeding stock)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Written health guarantee</strong> covering genetic conditions for a specified period</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Starter supplies</strong> such as food, blankets, or toys to ease the transition</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Ongoing breeder support</strong> for questions, guidance, and advice for the life of the animal</span>
+          </li>
+        </ul>
+
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Always ask what is included before committing. If a breeder cannot clearly explain what you are getting for the price, that is a concern.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden Costs of Cheap Animals -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The hidden costs of "cheap" animals</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          A lower purchase price does not mean a lower total cost. Animals from irresponsible sources often come with expenses that far exceed what you saved upfront.
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2 text-red-600">No health testing = unknown genetic risks</h4>
+            <p class="text-sm text-stone-600">Genetic conditions like hip dysplasia, heart disease, or progressive blindness can cost thousands in treatment, or result in a shortened lifespan. Health testing exists specifically to prevent these outcomes.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2 text-red-600">No socialization = behavior problems</h4>
+            <p class="text-sm text-stone-600">Animals that miss critical socialization windows often develop fear, anxiety, or aggression. Professional behavioral intervention can cost $100 to $300+ per session, and some issues never fully resolve.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2 text-red-600">No health guarantee = all risk is yours</h4>
+            <p class="text-sm text-stone-600">Without a health guarantee, every veterinary bill for genetic conditions comes out of your pocket with no recourse to the seller.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2 text-red-600">No breeder support = you are on your own</h4>
+            <p class="text-sm text-stone-600">Responsible breeders answer questions for the life of the animal. Without that support network, you may struggle with breed-specific issues that an experienced breeder could easily help you navigate.</p>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-xl">
+          <p class="text-sm text-stone-700 leading-relaxed">
+            <strong>The math is simple.</strong> A $500 animal with $8,000 in vet bills costs more than a $3,000 animal with a health guarantee and a breeder who helps you every step of the way.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Structures -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Payment structures</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Most breeders have a standard payment process. Here is what to expect.
+        </p>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Deposits</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Typically 10-25% of the total price</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Secures your spot on a waitlist or reserves a specific animal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Refund policies vary: fully refundable, transferable to a future litter, or non-refundable</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Always confirm the deposit terms in writing before paying</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Payment plans</h3>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            Some breeders offer payment plans, especially for higher-priced animals. This is more common with horses and show-quality dogs. If a breeder offers a payment plan, the terms should be clearly documented in your contract.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">"Pick of the litter" pricing</h3>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            Some breeders charge a premium for first pick of a litter. This means you choose before anyone else, giving you the best chance of getting the specific traits you want (color, markings, temperament, structure). Subsequent picks are priced lower.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Pet price vs. breeding price</h3>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            Most breeders have two price tiers. Pet price includes limited registration and a spay/neuter requirement. Breeding price includes full registration and breeding rights, and is typically 50% to 100% higher. The difference reflects the value of the genetics and the right to produce offspring.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- On BreederHQ -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Payments on BreederHQ</h2>
+
+      <div class="space-y-6">
+        <p class="text-xl leading-relaxed">
+          Breeders on BreederHQ handle payments through the buyer portal, giving you a clear, secure, and documented payment experience.
+        </p>
+
+        <ul class="space-y-3 text-lg">
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>See your balance.</strong> Know exactly what you owe and what you have paid at any time.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Pay securely online.</strong> No more Venmo screenshots, cash handoffs, or wondering if your payment was received.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Track every payment.</strong> Complete payment history with dates, amounts, and confirmation for your records.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Everything in one place.</strong> Payments, contracts, messages, and updates all live in your buyer portal.</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <a href="https://marketplace.breederhq.com" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-stone-100 transition text-center" style="min-height: 44px;">
+            Browse the Marketplace
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Why are responsibly bred animals so much more expensive?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Responsible breeders invest heavily in health testing, genetic screening, veterinary care, quality nutrition, socialization, and proper facilities. These costs add up to thousands of dollars per litter before a single animal is placed. Cheaper sources skip most or all of these steps, which is why the upfront price is lower, but the long-term cost to you (and the animal) is often much higher.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Are deposits refundable?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>It depends on the breeder. Some deposits are fully refundable, some are transferable to a future litter, and some are non-refundable. Always confirm the deposit policy in writing before paying. Responsible breeders clearly state their deposit terms upfront.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Do breeders offer payment plans?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Some do. Payment plans are more common for higher-priced animals like horses and show-quality dogs. Ask the breeder directly. If they use BreederHQ, payments can be tracked through the buyer portal regardless of the payment structure.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What is the difference between pet price and breeding price?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Pet price is for animals sold with limited registration and a spay/neuter requirement. Breeding price, which includes full registration and breeding rights, is typically 50% to 100% higher because the buyer can use the animal to produce offspring. The price reflects the genetics and health testing investment the breeder has made.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Should I negotiate on price?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>It is generally not appropriate to negotiate with a responsible breeder the way you might at a car dealership. Their prices reflect real costs and years of investment. If the price is outside your budget, it is better to ask if the breeder has pet-quality animals at a lower price point, or to wait for a future litter, rather than trying to bargain down.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Continue learning</h2>
+      <div class="space-y-3 text-sm">
+        <div>
+          <a href="/buyers/contracts-and-agreements" class="text-[hsl(24,95%,53%)] hover:underline">
+            Understanding Contracts and Agreements
+          </a>
+        </div>
+        <div>
+          <a href="/buyers/evaluate-breeders" class="text-[hsl(24,95%,53%)] hover:underline">
+            How to Evaluate a Breeder
+          </a>
+        </div>
+        <div>
+          <a href="/buyers/using-the-marketplace" class="text-[hsl(24,95%,53%)] hover:underline">
+            How to Use the BreederHQ Marketplace
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-stone-200 shadow-lg md:hidden z-50">
+    <a href="https://marketplace.breederhq.com" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Browse the Marketplace
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 0.875rem;
+    }
+  </style>
+</BaseLayout>

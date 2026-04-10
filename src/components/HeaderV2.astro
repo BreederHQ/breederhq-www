@@ -1,0 +1,263 @@
+---
+const { hideLogo = false } = Astro.props;
+---
+
+<!-- Founders Banner -->
+<div class="bg-stone-800 text-white text-center py-2 px-4 text-sm">
+  <a href="/founders" class="hover:underline">
+    <strong>Founding Member Special:</strong> 50% off Pro &amp; Enterprise for 12 months
+    <span class="inline-block ml-1 text-amber-400 font-semibold">Claim Yours &rarr;</span>
+  </a>
+</div>
+
+<header class="border-b border-stone-200 bg-white sticky top-0 z-40">
+  <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      <!-- Logo -->
+      {!hideLogo && (
+        <div class="flex items-center">
+          <a href="/" class="flex items-center">
+            <img src="/logo.png" alt="BreederHQ" class="h-14 w-auto" />
+          </a>
+        </div>
+      )}
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex md:items-center md:space-x-6">
+
+        <!-- ═══ BREEDERS ═══ -->
+        <div class="relative group" id="nav-breeders">
+          <a href="/for-breeders" class="text-gray-700 group-hover:text-primary font-medium inline-flex items-center gap-1 py-2">
+            Breeders
+            <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-primary transition" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <!-- Backdrop -->
+          <div class="fixed inset-0 bg-black/20 backdrop-blur-[1px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40 pointer-events-none"></div>
+          <!-- Mega dropdown -->
+          <div class="absolute left-0 mt-0 w-[640px] rounded-xl shadow-2xl bg-white ring-1 ring-black/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-6">
+
+            <!-- CTA card -->
+            <a
+              href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+              class="flex items-center gap-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition mb-4"
+            >
+              <img src="/logo.png" alt="BreederHQ" class="h-10 w-10 object-contain shrink-0" />
+              <div>
+                <div class="text-sm font-semibold text-gray-900">Start Your Free Trial</div>
+                <div class="text-xs text-gray-500">14 days free - cancel anytime</div>
+              </div>
+            </a>
+
+            <div class="grid grid-cols-3 gap-6">
+
+              <!-- Column 1: Platform -->
+              <div>
+                <a href="/for-breeders" class="block text-xs text-primary font-semibold mb-3 hover:underline">
+                  Why BreederHQ &rarr;
+                </a>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2">Platform</div>
+                <div class="space-y-1.5">
+                  <a href="/workflows/breeding-cycles" class="block text-sm text-gray-600 hover:text-primary">Breeding Cycles</a>
+                  <a href="/workflows/breeding-intelligence" class="block text-sm text-gray-600 hover:text-primary">Breeding Intelligence</a>
+                  <a href="/workflows/genetics-and-health-testing" class="block text-sm text-gray-600 hover:text-primary">Genetics &amp; Health</a>
+                  <a href="/workflows/offspring-care" class="block text-sm text-gray-600 hover:text-primary">Offspring Care</a>
+                  <a href="/workflows/rearing-protocols" class="block text-sm text-gray-600 hover:text-primary">Rearing &amp; Temperament</a>
+                  <a href="/workflows/pedigrees" class="block text-sm text-gray-600 hover:text-primary">Pedigrees</a>
+                  <a href="/workflows/medication-tracking" class="block text-sm text-gray-600 hover:text-primary">Health &amp; Medications</a>
+                  <a href="/workflows/nutrition-tracking" class="block text-sm text-gray-600 hover:text-primary">Nutrition Tracking</a>
+                </div>
+              </div>
+
+              <!-- Column 2: Business -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2 mt-7">Business</div>
+                <div class="space-y-1.5">
+                  <a href="/workflows/waitlists-and-placement" class="block text-sm text-gray-600 hover:text-primary">Waitlists &amp; Placement</a>
+                  <a href="/workflows/client-management" class="block text-sm text-gray-600 hover:text-primary">Buyer Management</a>
+                  <a href="/workflows/client-portal" class="block text-sm text-gray-600 hover:text-primary">Client Portal</a>
+                  <a href="/workflows/communications-hub" class="block text-sm text-gray-600 hover:text-primary">Communications Hub</a>
+                  <a href="/workflows/invoicing-expenses" class="block text-sm text-gray-600 hover:text-primary">Invoicing &amp; Expenses</a>
+                  <a href="/workflows/marketplace" class="block text-sm text-gray-600 hover:text-primary">Marketplace Listings</a>
+                  <a href="/workflows/scout-ai" class="block text-sm text-gray-600 hover:text-primary">Scout AI</a>
+                  <a href="/mobile" class="block text-sm text-gray-600 hover:text-primary">Mobile App</a>
+                </div>
+              </div>
+
+              <!-- Column 3: Species + Links -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2 mt-7">Species</div>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <a href="/dogs" class="text-sm text-gray-600 hover:text-primary">🐕 Dogs</a>
+                  <a href="/cats" class="text-sm text-gray-600 hover:text-primary">🐈 Cats</a>
+                  <a href="/horses" class="text-sm text-gray-600 hover:text-primary">🐴 Horses</a>
+                  <a href="/goats" class="text-sm text-gray-600 hover:text-primary">🐐 Goats</a>
+                  <a href="/rabbits" class="text-sm text-gray-600 hover:text-primary">🐇 Rabbits</a>
+                  <a href="/sheep" class="text-sm text-gray-600 hover:text-primary">🐑 Sheep</a>
+                </div>
+                <hr class="my-3 border-stone-100" />
+                <div class="space-y-1.5">
+                  <a href="/pricing" class="block text-sm text-gray-600 hover:text-primary font-medium">Pricing</a>
+                  <a href="/pricing/compare" class="block text-sm text-gray-600 hover:text-primary font-medium">Compare Plans</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ BUYERS ═══ -->
+        <div class="relative group" id="nav-buyers">
+          <a href="/buyers" class="text-gray-700 group-hover:text-primary font-medium inline-flex items-center gap-1 py-2">
+            Buyers
+            <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-primary transition" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <!-- Backdrop -->
+          <div class="fixed inset-0 bg-black/20 backdrop-blur-[1px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40 pointer-events-none"></div>
+          <!-- Mega dropdown -->
+          <div class="absolute left-0 mt-0 w-[520px] rounded-xl shadow-2xl bg-white ring-1 ring-black/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-6">
+
+            <!-- CTA card -->
+            <a
+              href="https://marketplace.breederhq.com"
+              class="flex items-center gap-3 p-3 rounded-lg bg-stone-50 hover:bg-stone-100 transition mb-4"
+            >
+              <img src="/marketplace-logo.png" alt="BreederHQ Marketplace" class="h-10 w-10 object-contain shrink-0" />
+              <div>
+                <div class="text-sm font-semibold text-gray-900">Browse the Marketplace</div>
+                <div class="text-xs text-gray-500">Find verified breeders and services</div>
+              </div>
+            </a>
+
+            <div class="grid grid-cols-2 gap-6">
+
+              <!-- Column 1: Getting Started -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2">Getting Started</div>
+                <div class="space-y-1.5">
+                  <a href="/buyers" class="block text-sm text-gray-600 hover:text-primary font-medium">Why BreederHQ Marketplace</a>
+                  <a href="/buyers/using-the-marketplace" class="block text-sm text-gray-600 hover:text-primary">How to Use the Marketplace</a>
+                  <a href="/buyers/why-breederhq-marketplace" class="block text-sm text-gray-600 hover:text-primary">BreederHQ vs Other Sites</a>
+                </div>
+              </div>
+
+              <!-- Column 2: Buyer Guides -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2">Buyer Guides</div>
+                <div class="space-y-1.5">
+                  <a href="/buyers/evaluate-breeders" class="block text-sm text-gray-600 hover:text-primary">How to Evaluate Breeders</a>
+                  <a href="/buyers/health-tests" class="block text-sm text-gray-600 hover:text-primary">Understanding Health Testing</a>
+                  <a href="/buyers/contracts-and-agreements" class="block text-sm text-gray-600 hover:text-primary">Contracts &amp; Agreements</a>
+                  <a href="/buyers/health-guarantees" class="block text-sm text-gray-600 hover:text-primary">Health Guarantees Explained</a>
+                  <a href="/buyers/what-does-it-cost" class="block text-sm text-gray-600 hover:text-primary">What Does It Actually Cost?</a>
+                  <a href="/buyers/red-flags" class="block text-sm text-gray-600 hover:text-primary">Red Flags to Avoid</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ SERVICE PROVIDERS ═══ -->
+        <div class="relative group" id="nav-providers">
+          <a href="/for-providers" class="text-gray-700 group-hover:text-primary font-medium inline-flex items-center gap-1 py-2">
+            Service Providers
+            <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-primary transition" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <!-- Backdrop -->
+          <div class="fixed inset-0 bg-black/20 backdrop-blur-[1px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40 pointer-events-none"></div>
+          <!-- Mega dropdown -->
+          <div class="absolute left-0 mt-0 w-[680px] rounded-xl shadow-2xl bg-white ring-1 ring-black/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 p-6">
+
+            <!-- CTA card -->
+            <a
+              href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+              class="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition mb-4"
+            >
+              <img src="/marketplace-logo.png" alt="BreederHQ Marketplace" class="h-10 w-10 object-contain shrink-0" />
+              <div>
+                <div class="text-sm font-semibold text-gray-900">List Your Services</div>
+                <div class="text-xs text-gray-500">$5/mo - reach breeders, buyers, and pet owners</div>
+              </div>
+            </a>
+
+            <div class="grid grid-cols-3 gap-6">
+
+              <!-- Column 1: Medical & Health -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2">Medical &amp; Health</div>
+                <div class="space-y-1.5">
+                  <a href="/for-providers/veterinary" class="block text-sm text-gray-600 hover:text-emerald-700">🩺 Veterinary</a>
+                  <a href="/for-providers/health-testing" class="block text-sm text-gray-600 hover:text-emerald-700">🧬 Health Testing</a>
+                  <a href="/for-providers/rehabilitation" class="block text-sm text-gray-600 hover:text-emerald-700">💪 Rehabilitation</a>
+                  <a href="/for-providers/nutrition" class="block text-sm text-gray-600 hover:text-emerald-700">🥗 Nutrition</a>
+                </div>
+
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2 mt-4">Logistics &amp; Media</div>
+                <div class="space-y-1.5">
+                  <a href="/for-providers/transport" class="block text-sm text-gray-600 hover:text-emerald-700">🚐 Transport</a>
+                  <a href="/for-providers/photography" class="block text-sm text-gray-600 hover:text-emerald-700">📸 Photography</a>
+                  <a href="/for-providers/merchandise" class="block text-sm text-gray-600 hover:text-emerald-700">🏷️ Merchandise</a>
+                </div>
+              </div>
+
+              <!-- Column 2: Care & Training -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2">Care &amp; Training</div>
+                <div class="space-y-1.5">
+                  <a href="/for-providers/training" class="block text-sm text-gray-600 hover:text-emerald-700">🎓 Training</a>
+                  <a href="/for-providers/behavioral" class="block text-sm text-gray-600 hover:text-emerald-700">🧠 Behavioral</a>
+                  <a href="/for-providers/handling" class="block text-sm text-gray-600 hover:text-emerald-700">🏅 Show Handling</a>
+                  <a href="/for-providers/grooming" class="block text-sm text-gray-600 hover:text-emerald-700">✂️ Grooming</a>
+                  <a href="/for-providers/boarding" class="block text-sm text-gray-600 hover:text-emerald-700">🏠 Boarding</a>
+                  <a href="/for-providers/pet-sitting" class="block text-sm text-gray-600 hover:text-emerald-700">🐾 Pet Sitting</a>
+                  <a href="/for-providers/farrier" class="block text-sm text-gray-600 hover:text-emerald-700">🔨 Farrier</a>
+                </div>
+              </div>
+
+              <!-- Column 3: Resources -->
+              <div>
+                <div class="text-xs text-gray-700 uppercase tracking-wider font-semibold mb-2">Resources</div>
+                <div class="space-y-1.5">
+                  <a href="/for-providers" class="block text-sm text-gray-600 hover:text-emerald-700 font-medium">Why List on BreederHQ</a>
+                  <a href="/for-providers#listings" class="block text-sm text-gray-600 hover:text-emerald-700">How Listings Work</a>
+                  <a href="/for-providers#trust" class="block text-sm text-gray-600 hover:text-emerald-700">Verification &amp; Badges</a>
+                  <a href="/for-providers#pricing" class="block text-sm text-gray-600 hover:text-emerald-700">Pricing</a>
+                </div>
+                <hr class="my-3 border-stone-100" />
+                <a href="https://marketplace.breederhq.com" class="block text-sm text-emerald-700 font-medium hover:underline">
+                  Browse Service Listings &rarr;
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ ABOUT ═══ -->
+        <a href="/about" class="text-gray-700 hover:text-primary font-medium">About</a>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex items-center space-x-4">
+        <a
+          href="https://accounts.breederhq.com/login"
+          class="hidden sm:inline-block text-gray-700 hover:text-primary font-medium"
+        >
+          Sign In
+        </a>
+        <a
+          href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+          class="bg-primary text-white px-6 py-2 rounded-lg hover:opacity-90 font-medium"
+        >
+          Get Started Free
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>

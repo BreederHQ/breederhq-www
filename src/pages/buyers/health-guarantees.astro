@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' },
+  { name: 'Health Guarantees', url: '/buyers/health-guarantees' }
+];
+
+const faqs = [
+  {
+    question: 'Are health guarantees legally enforceable?',
+    answer: 'Yes, if they are part of a written contract. A signed purchase agreement that includes health guarantee terms is a legally binding document. Verbal promises are much harder to enforce. Always get it in writing.'
+  },
+  {
+    question: 'What if my vet finds a problem after the guarantee period expires?',
+    answer: 'Unfortunately, most guarantees have firm expiration dates. This is why the duration matters so much when evaluating a guarantee. Some conditions (like hip dysplasia) may not be diagnosable until the animal is older, so look for guarantees that cover genetic conditions for at least 2 years.'
+  },
+  {
+    question: 'Should I still get pet insurance if the breeder offers a health guarantee?',
+    answer: 'Yes. A health guarantee covers genetic and congenital conditions from the breeder. Pet insurance covers accidents, illnesses, and other issues that happen after you take your animal home. They serve different purposes.'
+  },
+  {
+    question: 'What if the breeder and I disagree about a health claim?',
+    answer: 'Good contracts specify a dispute resolution process, often requiring a second veterinary opinion or an independent evaluation. If the contract does not address disputes, you may need to pursue resolution through small claims court or mediation.'
+  },
+  {
+    question: 'Is a lifetime health guarantee realistic?',
+    answer: 'Lifetime guarantees on genetic conditions do exist, but read the fine print. Some only cover specific conditions, some require ongoing care documentation, and some require the animal to be returned. A well-written 2-year guarantee with clear terms is often more practical than a vague lifetime promise.'
+  }
+];
+---
+
+<BaseLayout
+  title="Health Guarantees Explained | Buyer Guide | BreederHQ"
+  description="Understand what a good health guarantee covers, what's standard in the industry, and what red flags to watch for. A buyer's guide to breeder health guarantees."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+
+<main>
+
+  <!-- ============================================ -->
+  <!-- BREADCRUMBS                                  -->
+  <!-- ============================================ -->
+  <nav class="py-4 px-4 bg-stone-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-primary hover:underline">Home</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li><a href="/buyers" class="text-primary hover:underline">For Buyers</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li aria-current="page" class="text-gray-600">Health Guarantees</li>
+    </ol>
+  </nav>
+
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+        Health Guarantees Explained
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
+        What a good health guarantee covers, what's standard in the industry, and what to watch for before you commit.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHAT IS A HEALTH GUARANTEE?                  -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">What Is a Health Guarantee?</h2>
+      <div class="bg-stone-50 rounded-xl border border-stone-200 p-8">
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+          A health guarantee is a written commitment from the breeder covering genetic and congenital health conditions for a defined period after you take your animal home. It spells out what happens if your new animal develops a covered condition, and what the breeder will do about it.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+          This is not a nice-to-have. Health guarantees are standard practice among responsible breeders. A breeder who stands behind the health of their animals is telling you they are confident in their breeding program, their health testing, and their practices.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          If a breeder does not offer a written health guarantee, that should give you pause.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHAT A GOOD GUARANTEE COVERS                 -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">What a Good Guarantee Covers</h2>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Typically Covered</h3>
+          <ul class="space-y-3 text-sm text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-0.5 font-bold">&#10003;</span>
+              Genetic conditions (hip dysplasia, heart defects, inherited diseases specific to the breed)
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-0.5 font-bold">&#10003;</span>
+              Congenital defects present at birth but not immediately apparent
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-0.5 font-bold">&#10003;</span>
+              Genetic conditions: 1-2 years coverage is standard
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary mt-0.5 font-bold">&#10003;</span>
+              Infectious disease at time of sale: 48-72 hours is standard
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Usually NOT Covered</h3>
+          <ul class="space-y-3 text-sm text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-gray-400 mt-0.5 font-bold">&times;</span>
+              Injuries or accidents after sale
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-gray-400 mt-0.5 font-bold">&times;</span>
+              Diet-related issues or allergies
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-gray-400 mt-0.5 font-bold">&times;</span>
+              Owner negligence or failure to provide proper care
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-gray-400 mt-0.5 font-bold">&times;</span>
+              Parasites or infections picked up after the animal leaves the breeder
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-gray-400 mt-0.5 font-bold">&times;</span>
+              Behavioral or temperament issues
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- GUARANTEE VS WARRANTY                        -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Guarantee vs. Warranty</h2>
+      <div class="bg-stone-50 rounded-xl border border-stone-200 p-8">
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+          Some breeders call it a health guarantee. Others call it a health warranty. The terminology varies, but the concept is the same.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          What matters is not what it's called, but what's written in the contract. The specific conditions covered, the duration of coverage, and the remedies available are what you should focus on. A well-written "warranty" is better than a vague "guarantee."
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- REFUND VS REPLACEMENT VS REIMBURSEMENT       -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Refund vs. Replacement vs. Reimbursement</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8">
+        Different breeders handle health guarantee claims in different ways. Know which approach your breeder offers before you commit.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Replacement</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            The breeder provides another animal from a future litter at no cost. This is the most common approach. Keep in mind that this may mean waiting months for the next litter, and most families have already bonded with their animal.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Refund</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            The breeder returns part or all of the purchase price. Some offer full refunds, others offer partial. Some require the animal to be returned, others do not. Read the terms carefully.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Vet Reimbursement</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            The breeder covers veterinary costs up to a set cap. This is often the most practical option since most owners want to keep and treat their animal, not return it or replace it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- HOW TO EVALUATE A HEALTH GUARANTEE           -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">How to Evaluate a Health Guarantee</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8">
+        Not all health guarantees are created equal. Here's what to look for when reviewing one.
+      </p>
+
+      <div class="space-y-4">
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Duration</h3>
+          <p class="text-sm text-gray-700">Longer is generally better, but 1-2 years for genetic conditions is the industry standard. Anything less than 6 months is unusually short.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Conditions Covered</h3>
+          <p class="text-sm text-gray-700">A strong guarantee names the specific genetic conditions relevant to the breed. "General health" is vague. "Hip dysplasia, elbow dysplasia, cardiac conditions, and progressive retinal atrophy" is specific and meaningful.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Claims Process</h3>
+          <p class="text-sm text-gray-700">How do you file a claim? What documentation is required? The process should be clear and reasonable. If the contract does not explain how to make a claim, that is a gap worth asking about.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Veterinary Requirements</h3>
+          <p class="text-sm text-gray-700">Many guarantees require a vet examination within 48-72 hours of pickup. This is standard and reasonable. It protects both you and the breeder by establishing a baseline.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Documentation Requirements</h3>
+          <p class="text-sm text-gray-700">What records do you need to keep? Some guarantees require proof of regular veterinary care, appropriate diet, or spay/neuter by a certain age. Know these requirements upfront so you stay in compliance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- RED FLAGS                                    -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Red Flags</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8">
+        Watch for these warning signs when reviewing a health guarantee, or when a breeder discusses one with you.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-white rounded-xl border border-red-200 p-6">
+          <h3 class="font-bold text-red-700 mb-2">No health guarantee at all</h3>
+          <p class="text-sm text-gray-700">A breeder who offers no guarantee is telling you they are not willing to stand behind their animals. Walk away.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-red-200 p-6">
+          <h3 class="font-bold text-red-700 mb-2">Verbal-only promises</h3>
+          <p class="text-sm text-gray-700">If it's not in writing, it does not exist. "I'll take care of you if something happens" is not a guarantee.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-red-200 p-6">
+          <h3 class="font-bold text-red-700 mb-2">Return required, no refund</h3>
+          <p class="text-sm text-gray-700">Some guarantees require you to return your animal in order to receive a replacement, with no refund option. This puts you in an impossible position after you have bonded with your pet.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-red-200 p-6">
+          <h3 class="font-bold text-red-700 mb-2">Void if you use your own vet</h3>
+          <p class="text-sm text-gray-700">A guarantee that requires you to use the breeder's vet, or that becomes void if you choose your own veterinarian, is unreasonable.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-red-200 p-6">
+          <h3 class="font-bold text-red-700 mb-2">Extremely short duration</h3>
+          <p class="text-sm text-gray-700">Less than 6 months for genetic conditions is unusually short. Many genetic conditions do not become apparent until the animal is older.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-red-200 p-6">
+          <h3 class="font-bold text-red-700 mb-2">Excessive loopholes</h3>
+          <p class="text-sm text-gray-700">If the list of exclusions is longer than the list of covered conditions, the guarantee may not offer meaningful protection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- ON BREEDERHQ                                 -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">On the BreederHQ Marketplace</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8">
+        BreederHQ badges help you quickly identify breeders who are committed to health and accountability. These badges are earned through documented behavior, not purchased.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6 text-center">
+          <img src="/badges/health_tested.png" alt="Health Tested" class="h-16 mx-auto mb-4" />
+          <h3 class="font-bold text-gray-900 mb-2">Health Tested</h3>
+          <p class="text-sm text-gray-600">
+            Breeders with this badge have health testing documentation on file for their breeding animals. You can verify that testing was actually done, not just claimed.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6 text-center">
+          <img src="/badges/lifetime_guarantee.png" alt="Lifetime Guarantee" class="h-16 mx-auto mb-4" />
+          <h3 class="font-bold text-gray-900 mb-2">Lifetime Guarantee</h3>
+          <p class="text-sm text-gray-600">
+            This badge means the breeder offers a lifetime take-back policy. If you ever cannot keep your animal, they will take it back, no questions asked.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6 text-center">
+          <img src="/badges/return_policy.png" alt="Return Policy" class="h-16 mx-auto mb-4" />
+          <h3 class="font-bold text-gray-900 mb-2">Return Policy</h3>
+          <p class="text-sm text-gray-600">
+            This badge indicates the breeder has a documented return policy. The terms are available for you to review before you commit.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-500 text-center mt-8">
+        These badges appear on marketplace listings, so you can filter for breeders who stand behind their animals.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- RELATED GUIDES                               -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Continue Learning</h2>
+      <div class="space-y-4">
+        <a href="/buyers/evaluate-breeders" class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition">
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0">&#10003;</div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">How to Evaluate Breeders</h3>
+              <p class="text-sm text-gray-600">Essential questions to ask and what separates responsible breeders from the rest.</p>
+            </div>
+          </div>
+        </a>
+        <a href="/buyers/health-tests" class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition">
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0">&#129657;</div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">Understanding Health Testing</h3>
+              <p class="text-sm text-gray-600">Why health testing matters, which tests are important, and how to interpret results.</p>
+            </div>
+          </div>
+        </a>
+        <a href="/buyers/red-flags" class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition">
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0">&#128681;</div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">Red Flags to Avoid</h3>
+              <p class="text-sm text-gray-600">Warning signs of irresponsible practices and how to protect yourself.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</BaseLayout>

@@ -1,0 +1,364 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' },
+  { name: 'Why BreederHQ Marketplace', url: '/buyers/why-breederhq-marketplace' }
+];
+
+const faqs = [
+  {
+    question: 'Is the BreederHQ Marketplace free for buyers?',
+    answer: 'Yes. Browsing listings, messaging breeders, joining waitlists, and using the buyer portal are all completely free. Buyers never pay BreederHQ.'
+  },
+  {
+    question: 'How does identity verification work?',
+    answer: 'Breeders verify their identity through Stripe Identity, which checks a government-issued photo ID. This confirms the person behind the listing is who they say they are. Higher verification tiers include program documentation review and standards compliance review.'
+  },
+  {
+    question: 'Can breeders fake their data on BreederHQ?',
+    answer: 'Marketplace listings pull from actual program data that the breeder manages on the platform, including health records, pedigrees, and breeding plans. While no system is completely immune to misuse, this is fundamentally different from a blank text field where anyone can type anything.'
+  },
+  {
+    question: 'What if I find a breeder I like outside of BreederHQ?',
+    answer: 'That is perfectly fine. The buyer education guides on this site (evaluating breeders, understanding health tests, spotting red flags) are useful regardless of where you find your breeder. BreederHQ is one option, not the only option.'
+  },
+  {
+    question: 'What species are on the marketplace?',
+    answer: 'Dogs, cats, horses, goats, rabbits, and sheep. The marketplace also includes service providers (veterinary, training, grooming, transport, and more) across all species.'
+  },
+  {
+    question: 'Do I need an account to browse?',
+    answer: 'No. You can browse listings and view breeder profiles without creating an account. You will need a free account to message breeders, join waitlists, or use the buyer portal.'
+  }
+];
+---
+
+<BaseLayout
+  title="Why Use the BreederHQ Marketplace? | BreederHQ"
+  description="Not all places to find a breeder are equal. Learn what makes the BreederHQ Marketplace different from Facebook groups, classified sites, and other listing platforms."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+
+<main>
+
+  <!-- ============================================ -->
+  <!-- BREADCRUMBS                                  -->
+  <!-- ============================================ -->
+  <nav class="py-4 px-4 bg-stone-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-primary hover:underline">Home</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li><a href="/buyers" class="text-primary hover:underline">For Buyers</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li aria-current="page" class="text-gray-600">Why BreederHQ Marketplace</li>
+    </ol>
+  </nav>
+
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+        Why the BreederHQ Marketplace?
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
+        Not all places to find a breeder are created equal. Here's what makes BreederHQ different from the alternatives.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- HOW MOST PEOPLE FIND BREEDERS                -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">How Most People Find Breeders Today</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8">
+        If you have ever searched for a breeder, you have probably tried at least a few of these. Each has trade-offs.
+      </p>
+
+      <div class="space-y-4">
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Google Search</h3>
+          <p class="text-sm text-gray-700">Hit or miss. Search engine rankings reflect marketing skill, not breeding quality. The breeder at the top of Google may or may not be the best choice.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Facebook Groups</h3>
+          <p class="text-sm text-gray-700">Community recommendations can be helpful, but they are unverified opinions. Group dynamics, personal relationships, and popularity often influence who gets recommended.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Craigslist and Classifieds</h3>
+          <p class="text-sm text-gray-700">No verification, no accountability, high scam risk. Anyone can post anything. There is no way to validate claims before you show up with cash.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">PuppyFind, NextDayPets, and Similar Sites</h3>
+          <p class="text-sm text-gray-700">Self-reported listings with limited verification. Breeders fill out a form, and what they type is what you see. No connection to actual breeding program data.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">GoodDog</h3>
+          <p class="text-sm text-gray-700">Curated directory with screening, but limited in scope. Their subscription model favors breeders who list many litters. Coverage varies significantly by breed and region.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Breed Club Referrals</h3>
+          <p class="text-sm text-gray-700">Generally trustworthy, but the pool is small. Geographic limitations mean you may not find a referral near you. Not all good breeders are active in breed clubs.</p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-2">Word of Mouth</h3>
+          <p class="text-sm text-gray-700">The best signal available, but it does not scale. You are limited to whoever your friends and family happen to know.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- THE PROBLEM WITH SELF-REPORTED LISTINGS      -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">The Problem with Self-Reported Listings</h2>
+      <div class="bg-white rounded-xl border border-stone-200 p-8">
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+          On most listing sites, breeders type in whatever they want. There is a text field for health testing, and they type "health tested." There is a text field for pedigree, and they type "champion bloodlines." Photos could be from anywhere.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+          There is no connection between what is claimed and what is real. "Health tested" could mean a single vet visit. "Champion bloodlines" could mean a great-great-grandparent earned a title decades ago. You have no way to verify any of it before you commit.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          This is the fundamental problem with listing-only platforms. They are directories. They display what breeders say about themselves, not what breeders actually do.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHAT MAKES BREEDERHQ DIFFERENT               -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">What Makes BreederHQ Different</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8">
+        BreederHQ is not just a listing site. It is a breeding program management platform with an integrated marketplace.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Real Program Data</h3>
+          <p class="text-sm text-gray-700">
+            Breeders manage their actual breeding program on BreederHQ: health records, genetics, pedigrees, breeding plans, offspring tracking. Marketplace listings pull from that real data, not a blank form.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Government ID Verification</h3>
+          <p class="text-sm text-gray-700">
+            Identity verification through Stripe Identity checks a government-issued photo ID. You know the person behind the listing is who they say they are.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Progressive Verification Tiers</h3>
+          <p class="text-sm text-gray-700">
+            ID Verified (identity confirmed), Verified (identity plus program documentation reviewed), and Accredited (identity, program documentation, and standards compliance review). Each level is visible on the listing.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Earned Badges</h3>
+          <p class="text-sm text-gray-700">
+            Badges like Health Tested, Quick Responder, Experienced, and Trusted are earned through documented behavior on the platform. They cannot be purchased.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Built-in Buyer Portal</h3>
+          <p class="text-sm text-gray-700">
+            Payments, contracts, messaging, photo updates, and documents all in one place. No more scattered emails, texts, and Venmo screenshots.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <h3 class="font-bold text-gray-900 mb-3">Pedigrees with Real Data</h3>
+          <p class="text-sm text-gray-700">
+            Pedigree information includes COI (coefficient of inbreeding) calculations based on actual data in the system, not self-reported claims about lineage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SIDE-BY-SIDE COMPARISON                      -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Side-by-Side Comparison</h2>
+
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white rounded-xl border border-stone-200 text-sm">
+          <thead>
+            <tr class="border-b border-stone-200 bg-stone-50">
+              <th class="text-left p-4 font-bold text-gray-900">Feature</th>
+              <th class="text-center p-4 font-bold text-gray-900">Generic Listing Sites</th>
+              <th class="text-center p-4 font-bold text-gray-900">Facebook Groups</th>
+              <th class="text-center p-4 font-bold text-primary">BreederHQ Marketplace</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-100">
+            <tr>
+              <td class="p-4 text-gray-700">Verified identity</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-primary font-semibold">Yes (Stripe ID)</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Health testing proof</td>
+              <td class="p-4 text-center text-gray-400">Self-reported</td>
+              <td class="p-4 text-center text-gray-400">Word of mouth</td>
+              <td class="p-4 text-center text-primary font-semibold">Documented on platform</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Pedigree data</td>
+              <td class="p-4 text-center text-gray-400">Self-reported</td>
+              <td class="p-4 text-center text-gray-400">N/A</td>
+              <td class="p-4 text-center text-primary font-semibold">Real data with COI</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Buyer portal</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-primary font-semibold">Yes</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Secure payments</td>
+              <td class="p-4 text-center text-gray-400">Varies</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-primary font-semibold">Yes (Stripe)</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Earned badges</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-primary font-semibold">Yes</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Messaging</td>
+              <td class="p-4 text-center text-gray-400">Varies</td>
+              <td class="p-4 text-center text-gray-400">DMs</td>
+              <td class="p-4 text-center text-primary font-semibold">Built-in with tracking</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-700">Contracts</td>
+              <td class="p-4 text-center text-gray-400">External</td>
+              <td class="p-4 text-center text-gray-400">No</td>
+              <td class="p-4 text-center text-primary font-semibold">E-signatures built in</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- FREE FOR BUYERS                              -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">It's Free for Buyers</h2>
+      <div class="bg-stone-50 rounded-xl border border-stone-200 p-8 max-w-2xl mx-auto">
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+          Browsing listings, messaging breeders, joining waitlists, using the buyer portal - all free. You never pay BreederHQ.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Payments you make to breeders go directly to the breeder through Stripe's secure payment processing. BreederHQ does not take a cut of your purchase.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- CTA                                          -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-gradient-to-br from-stone-900 to-stone-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-white">
+        See it for yourself.
+      </h2>
+      <p class="text-lg text-stone-300 mb-10 max-w-2xl mx-auto">
+        Real data. Verified identity. Earned reputation.
+        Browse the BreederHQ Marketplace and see the difference.
+      </p>
+
+      <a
+        href="https://marketplace.breederhq.com"
+        class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block"
+      >
+        Browse the BreederHQ Marketplace
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- RELATED GUIDES                               -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Continue Learning</h2>
+      <div class="space-y-4">
+        <a href="/buyers/evaluate-breeders" class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition">
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0">&#10003;</div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">How to Evaluate Breeders</h3>
+              <p class="text-sm text-gray-600">Essential questions to ask and what separates responsible breeders from the rest.</p>
+            </div>
+          </div>
+        </a>
+        <a href="/buyers/health-guarantees" class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition">
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0">&#128203;</div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">Health Guarantees Explained</h3>
+              <p class="text-sm text-gray-600">What a good health guarantee covers, what's standard, and what to watch for.</p>
+            </div>
+          </div>
+        </a>
+        <a href="/buyers/red-flags" class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition">
+          <div class="flex items-start gap-4">
+            <div class="text-2xl shrink-0">&#128681;</div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">Red Flags to Avoid</h3>
+              <p class="text-sm text-gray-600">Warning signs of irresponsible practices and how to protect yourself.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</BaseLayout>

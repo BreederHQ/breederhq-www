@@ -1,0 +1,514 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' },
+  { name: 'Contracts & Agreements', url: '/buyers/contracts-and-agreements' }
+];
+
+const faqs = [
+  {
+    question: 'Should I have a lawyer review a breeder contract?',
+    answer: 'For standard pet purchases, it is usually not necessary. But if you are entering a co-ownership, guardian home, or breeding rights agreement with significant financial terms, having a lawyer review the contract is a reasonable precaution.'
+  },
+  {
+    question: 'What if I disagree with something in the contract?',
+    answer: 'Talk to the breeder about it before signing. Responsible breeders are willing to explain their terms and may be open to reasonable adjustments. If a breeder is unwilling to discuss their contract terms, that is worth noting.'
+  },
+  {
+    question: 'Are breeder contracts legally enforceable?',
+    answer: 'Yes, breeder contracts are legally binding agreements. Enforcement varies by jurisdiction, but courts generally uphold reasonable contract terms. This is why it is important to read and understand everything before you sign.'
+  },
+  {
+    question: 'What happens if the breeder breaks the contract?',
+    answer: 'Document everything and try to resolve it directly with the breeder first. If that fails, you may have legal options depending on your jurisdiction and the terms of the contract. Having a signed contract with clear terms gives you much stronger standing than a verbal agreement.'
+  },
+  {
+    question: 'Is it normal for breeders to require spay or neuter?',
+    answer: 'Yes, this is very common for pet-quality animals. Responsible breeders want to ensure their bloodlines are only continued through planned, health-tested breedings. If you want breeding rights, expect to pay a higher price and potentially meet additional requirements.'
+  }
+];
+---
+
+<BaseLayout
+  title="Understanding Breeder Contracts & Agreements | Buyer Guide"
+  description="Learn about common breeder contract types, what to look for in a breeding agreement, and how to spot red flags before you sign."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-stone-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-stone-400">&rsaquo;</li>
+      <li><a href="/buyers" class="text-[hsl(24,95%,53%)] hover:underline">For Buyers</a></li>
+      <li class="text-stone-400">&rsaquo;</li>
+      <li aria-current="page" class="text-stone-600">Contracts & Agreements</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Understanding Contracts & Agreements</h1>
+
+      <aside class="bg-stone-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded-xl" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-sm text-stone-700 leading-relaxed">
+          A written contract from a breeder is a good sign, not a red flag. It means the breeder is serious about protecting both you and the animal. Understand the different contract types, know what to look for, and always read everything before you sign.
+        </p>
+      </aside>
+      <p class="text-sm text-stone-700 leading-relaxed">
+        If you are buying from a responsible breeder, you will almost certainly be asked to sign a contract. This guide explains why contracts exist, what the common types are, what to look for in the fine print, and what should raise concerns.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why Breeders Use Contracts -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why breeders use contracts</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Responsible breeders invest years into their breeding programs, often spending thousands of dollars on health testing, genetics, veterinary care, and proper socialization. A contract is how they protect that investment and make sure the animals they produce go to good homes.
+        </p>
+
+        <p class="text-sm text-stone-700 leading-relaxed">
+          A contract protects you too. It puts the breeder's promises in writing: health guarantees, return policies, what you are getting, and what happens if something goes wrong.
+        </p>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-lg font-bold mb-3">A contract is a good sign because it means:</h3>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>The breeder takes responsibility for the animals they produce</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>There are clear expectations on both sides</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>Health guarantees and return policies are documented, not just verbal promises</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span>You have legal recourse if the breeder does not hold up their end</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-xl">
+          <p class="text-sm text-stone-700 leading-relaxed">
+            <strong>A breeder who does not use a contract is more concerning than one who does.</strong> Verbal agreements are nearly impossible to enforce and suggest the breeder is not invested in the outcome.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Contract Types -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Common contract types</h2>
+
+      <div class="space-y-8">
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-3">Pet Contract</h3>
+          <p class="text-sm text-stone-600 mb-3">The most common type. Used when you are buying an animal as a companion.</p>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Spay/neuter requirement:</strong> Most pet contracts require you to spay or neuter by a certain age. This is standard and protects the breeder's bloodlines.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>No breeding rights:</strong> You agree not to breed the animal. Registration papers may be limited or withheld until spay/neuter is confirmed.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Health guarantee:</strong> Covers genetic conditions for a specified period, usually 1 to 3 years depending on the breed and breeder.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Return clause:</strong> If you can no longer keep the animal, the breeder typically requires the animal be returned to them rather than rehomed privately.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-3">Breeding Rights Contract</h3>
+          <p class="text-sm text-stone-600 mb-3">Grants you permission to breed the animal. Usually comes at a higher price.</p>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Breeding conditions:</strong> May specify health testing requirements before breeding, approved mates, or litter limits.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Mentoring obligations:</strong> Some breeders require first-time breeders to work with a mentor (often the seller).</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Registration:</strong> Full registration papers are provided so offspring can be registered.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Higher price:</strong> Breeding prospects typically cost significantly more than pet-quality animals from the same litter.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-3">Co-Ownership Agreement</h3>
+          <p class="text-sm text-stone-600 mb-3">You and the breeder share ownership of the animal. Common for show prospects.</p>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Shared rights:</strong> Both parties are listed on registration papers. The breeder typically retains breeding rights.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Showing expectations:</strong> You may be expected to show the animal or make it available for the breeder to show.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Transfer conditions:</strong> The contract specifies when and how full ownership transfers to you, often after breeding or show goals are met.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Lower initial cost:</strong> Co-owned animals may cost less upfront because the breeder retains some value through breeding rights.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-3">Guardian Home Agreement</h3>
+          <p class="text-sm text-stone-600 mb-3">You raise the animal in your home full-time. The breeder retains breeding rights for a set period.</p>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Full-time companion:</strong> The animal lives with you as a family member. It is your pet in every practical sense.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Breeding periods:</strong> The animal may need to return to the breeder temporarily for breeding, whelping, or health testing.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Care requirements:</strong> The breeder typically dictates nutrition, veterinary care, and activity levels during breeding periods.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Low or no cost:</strong> Guardian home animals are often placed for free or at a very reduced price, since the breeder benefits from the breeding arrangement.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Eventual full ownership:</strong> After the breeding period ends (typically 2 to 4 litters), full ownership transfers to you and the animal is spayed or neutered.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-xl p-6">
+          <h3 class="text-2xl font-bold mb-3">Stud Service Contract</h3>
+          <p class="text-sm text-stone-600 mb-3">Terms for using a male animal for breeding with your female.</p>
+          <ul class="space-y-2 text-sm text-stone-700">
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Fee structure:</strong> May be a flat fee, pick of the litter, or a combination. Terms vary widely.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Health testing requirements:</strong> Both parties typically need to provide current health testing results.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Repeat breeding clause:</strong> What happens if the breeding does not produce a litter. Many stud contracts include a free repeat breeding.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">&#x2022;</span>
+              <span><strong>Litter obligations:</strong> Some stud owners require registration of all offspring or first pick from the litter.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Look For -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What to look for in a contract</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Before you sign anything, make sure you understand every term. Here are the key things to check.
+        </p>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Health Guarantee</h4>
+            <p class="text-sm text-stone-600">What is covered? For how long? What is the process if a genetic condition is discovered? Is replacement or refund offered?</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Return / Refund Policy</h4>
+            <p class="text-sm text-stone-600">What happens if you cannot keep the animal? Can you return it to the breeder? Under what conditions do you get a refund?</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Spay / Neuter Timeline</h4>
+            <p class="text-sm text-stone-600">By what age must the animal be spayed or neutered? Is there flexibility for veterinary advice on timing?</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Registration Transfer</h4>
+            <p class="text-sm text-stone-600">When are registration papers provided? Are they limited or full? What conditions must be met before transfer?</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Ongoing Breeder Contact</h4>
+            <p class="text-sm text-stone-600">Will the breeder be available for questions after placement? Are there requirements for keeping the breeder updated?</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-5">
+            <h4 class="font-bold mb-2">Dispute Resolution</h4>
+            <p class="text-sm text-stone-600">How are disagreements handled? Is there a mediation process? Which jurisdiction governs the contract?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Red Flags -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Red flags in contracts</h2>
+
+      <div class="space-y-6">
+        <p class="text-sm text-stone-700 leading-relaxed">
+          Most breeder contracts are straightforward and fair. But some include terms that should make you pause.
+        </p>
+
+        <ul class="space-y-4 text-sm text-stone-700">
+          <li class="flex items-start">
+            <span class="mr-3 text-red-500 font-bold">!</span>
+            <span><strong>No health guarantee at all.</strong> Every responsible breeder should stand behind the health of the animals they produce. No guarantee means no accountability.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-red-500 font-bold">!</span>
+            <span><strong>No return policy.</strong> A breeder who will not take an animal back is a breeder who does not truly care where their animals end up.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-red-500 font-bold">!</span>
+            <span><strong>Unreasonable restrictions.</strong> Demanding you use a specific veterinarian, specific food brand, or dictating routine care decisions goes beyond protecting the animal.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-red-500 font-bold">!</span>
+            <span><strong>Penalties for contacting a vet of your choice.</strong> You should always be able to seek veterinary care from any licensed veterinarian.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-red-500 font-bold">!</span>
+            <span><strong>Non-compete clauses for pet-quality animals.</strong> Some breeders include clauses preventing you from acquiring animals from other breeders. This is excessive for a pet placement.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-red-500 font-bold">!</span>
+            <span><strong>Vague or one-sided language.</strong> If the contract only protects the breeder and gives you no recourse, that is a problem.</span>
+          </li>
+        </ul>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-xl">
+          <p class="text-sm text-stone-700 leading-relaxed">
+            <strong>Trust your instincts.</strong> If a contract feels overly controlling or one-sided, it probably is. A good breeder wants a fair arrangement that works for everyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-Signatures on BreederHQ -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">E-signatures on BreederHQ</h2>
+
+      <div class="space-y-6">
+        <p class="text-xl leading-relaxed">
+          Breeders on BreederHQ can send contracts digitally, making the process simpler and more secure for everyone.
+        </p>
+
+        <ul class="space-y-3 text-lg">
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Review from any device.</strong> Open and read the full contract on your phone, tablet, or computer.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Sign electronically.</strong> No printing, scanning, or mailing required.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Stored permanently.</strong> Signed contracts are saved in your buyer portal. Access them anytime.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">&#x2022;</span>
+            <span><strong>Full audit trail.</strong> Every signature includes timestamps and a verifiable record of who signed and when.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Should I have a lawyer review a breeder contract?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>For standard pet purchases, it is usually not necessary. But if you are entering a co-ownership, guardian home, or breeding rights agreement with significant financial terms, having a lawyer review the contract is a reasonable precaution.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What if I disagree with something in the contract?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Talk to the breeder about it before signing. Responsible breeders are willing to explain their terms and may be open to reasonable adjustments. If a breeder is unwilling to discuss their contract terms, that is worth noting.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Are breeder contracts legally enforceable?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes, breeder contracts are legally binding agreements. Enforcement varies by jurisdiction, but courts generally uphold reasonable contract terms. This is why it is important to read and understand everything before you sign.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What happens if the breeder breaks the contract?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Document everything and try to resolve it directly with the breeder first. If that fails, you may have legal options depending on your jurisdiction and the terms of the contract. Having a signed contract with clear terms gives you much stronger standing than a verbal agreement.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Is it normal for breeders to require spay or neuter?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes, this is very common for pet-quality animals. Responsible breeders want to ensure their bloodlines are only continued through planned, health-tested breedings. If you want breeding rights, expect to pay a higher price and potentially meet additional requirements.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-stone-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Continue learning</h2>
+      <div class="space-y-3 text-sm">
+        <div>
+          <a href="/buyers/what-does-it-cost" class="text-[hsl(24,95%,53%)] hover:underline">
+            What Does a Responsibly Bred Animal Actually Cost?
+          </a>
+        </div>
+        <div>
+          <a href="/buyers/evaluate-breeders" class="text-[hsl(24,95%,53%)] hover:underline">
+            How to Evaluate a Breeder
+          </a>
+        </div>
+        <div>
+          <a href="/buyers/using-the-marketplace" class="text-[hsl(24,95%,53%)] hover:underline">
+            How to Use the BreederHQ Marketplace
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-stone-200 shadow-lg md:hidden z-50">
+    <a href="https://marketplace.breederhq.com" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Browse the Marketplace
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 0.875rem;
+    }
+  </style>
+</BaseLayout>
