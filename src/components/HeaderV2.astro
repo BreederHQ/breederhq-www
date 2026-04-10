@@ -3,12 +3,21 @@ const { hideLogo = false } = Astro.props;
 ---
 
 <!-- Founders Banner -->
-<div class="bg-stone-800 text-white text-center py-2 px-4 text-sm">
-  <a href="/founders" class="hover:underline">
+<div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-white text-center py-2.5 px-4 text-sm relative overflow-hidden">
+  <div class="absolute inset-0 bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.15)_50%,transparent_75%)] animate-[shimmer_3s_ease-in-out_infinite] bg-[length:200%_100%]"></div>
+  <a href="/founders" class="relative hover:underline inline-flex items-center gap-2">
+    <span class="text-amber-100">&#9733;</span>
     <strong>Founding Member Special:</strong> 50% off Pro &amp; Enterprise for 12 months
-    <span class="inline-block ml-1 text-amber-400 font-semibold">Claim Yours &rarr;</span>
+    <span class="inline-block bg-white text-amber-700 px-3 py-0.5 rounded-full text-xs font-bold ml-1">Claim Yours &rarr;</span>
   </a>
 </div>
+
+<style>
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+</style>
 
 <header class="border-b border-stone-200 bg-white sticky top-0 z-40">
   <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
