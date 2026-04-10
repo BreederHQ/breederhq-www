@@ -226,7 +226,7 @@ const categories = [
   faqs={faqs}
 >
   <main>
-    <!-- Hero -->
+    <!-- Hero + Pricing Cards -->
     <section class="bg-gradient-to-b from-amber-50 to-white py-16">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-5xl font-bold tracking-tight text-stone-800 mb-4">
@@ -235,17 +235,12 @@ const categories = [
         <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-3">
           The complete breakdown of what's included at every level.
         </p>
-        <p class="text-sm text-stone-500">
+        <p class="text-sm text-stone-500 mb-10">
           Try any plan free for 14 days. No commitment, cancel anytime.
         </p>
-      </div>
-    </section>
 
-    <!-- Pricing Summary -->
-    <section class="py-8 bg-white border-b border-stone-200">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-[3fr_1fr_1fr_1fr] gap-4 text-center">
-          <div></div>
+        <!-- Pricing Cards -->
+        <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
           <div>
             <h3 class="text-lg font-bold text-stone-800">Standard</h3>
             <p class="text-3xl font-bold text-stone-800">$29<span class="text-base font-normal text-stone-500">/mo</span></p>
@@ -273,21 +268,32 @@ const categories = [
     <section class="py-12 bg-white">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
-        {categories.map((category) => (
+        {categories.map((category, catIdx) => (
           <div class="mb-10">
             <h2 class="text-xl font-bold text-stone-800 mb-4 pb-2 border-b-2 border-amber-500">
               {category.name}
             </h2>
             <div class="overflow-x-auto">
               <table class="w-full text-sm">
-                <thead class="sr-only">
-                  <tr>
-                    <th>Feature</th>
-                    <th>Standard</th>
-                    <th>Pro</th>
-                    <th>Enterprise</th>
-                  </tr>
-                </thead>
+                {catIdx === 0 ? (
+                  <thead>
+                    <tr class="border-b border-stone-200">
+                      <th class="py-2.5 px-3 text-left w-1/2"></th>
+                      <th class="py-2.5 px-3 text-center w-1/6 text-xs font-bold text-stone-500 uppercase tracking-wider">Standard</th>
+                      <th class="py-2.5 px-3 text-center w-1/6 text-xs font-bold text-stone-500 uppercase tracking-wider">Pro</th>
+                      <th class="py-2.5 px-3 text-center w-1/6 text-xs font-bold text-stone-500 uppercase tracking-wider">Enterprise</th>
+                    </tr>
+                  </thead>
+                ) : (
+                  <thead class="sr-only">
+                    <tr>
+                      <th>Feature</th>
+                      <th>Standard</th>
+                      <th>Pro</th>
+                      <th>Enterprise</th>
+                    </tr>
+                  </thead>
+                )}
                 <tbody>
                   {category.features.map((feature, idx) => (
                     <tr class={idx % 2 === 0 ? 'bg-stone-50' : 'bg-white'}>
