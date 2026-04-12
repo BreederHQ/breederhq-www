@@ -14,7 +14,7 @@ const faqs = [
   },
   {
     question: 'How accurate are the offspring predictions?',
-    answer: 'The predictions use standard Punnett square mathematics-the same approach used by geneticists. They show probabilities, not guarantees. A 25% chance of a merle puppy means you might get zero merles or all merles in a small litter, but across many litters, the statistics hold.'
+    answer: 'The predictions use standard Punnett square mathematics, the same approach used by geneticists. They show probabilities, not guarantees. A 25% chance of a specific outcome means you might see zero or several in a small litter, but across many litters the statistics hold.'
   },
   {
     question: 'Can I use this if I only have partial genetic data?',
@@ -100,7 +100,7 @@ const faqs = [
         <ul class="space-y-3 text-lg text-gray-700">
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span>A carrier-to-carrier breeding can produce affected puppies</span>
+            <span>A carrier-to-carrier breeding can produce affected offspring</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
@@ -108,7 +108,7 @@ const faqs = [
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span>Lethal gene combinations (Double Merle, Lethal White Overo) can be fatal</span>
+            <span>Lethal gene combinations (Double Merle, Lethal White Overo, Manx Syndrome, Spider Lamb) can be fatal</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
@@ -151,7 +151,7 @@ const faqs = [
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span><strong>Health risk assessment</strong> - Are there carrier combinations that could produce affected puppies?</span>
+          <span><strong>Health risk assessment</strong> - Are there carrier combinations that could produce affected offspring?</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -201,7 +201,7 @@ const faqs = [
       <h2 class="text-4xl font-bold mb-8">Offspring Simulator</h2>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        What will the puppies actually look like? What health statuses will they carry?
+        What will the offspring actually look like? What health statuses will they carry?
       </p>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
@@ -287,7 +287,7 @@ const faqs = [
             Sometimes you want to see the underlying genetics, not just the summary. The Punnett Square Calculator shows you exactly how traits are inherited for any single locus.
           </p>
           <p class="text-gray-700 leading-relaxed">
-            Select parents, select the gene, and see all possible offspring genotypes with probability percentages. This is especially useful when explaining genetics to puppy buyers or working through complex decisions with mentors.
+            Select parents, select the gene, and see all possible offspring genotypes with probability percentages. This is especially useful when explaining genetics to buyers or working through complex decisions with mentors.
           </p>
         </div>
 
@@ -312,6 +312,9 @@ const faqs = [
             <li><strong>Dogs:</strong> E, K, A, B, D, M, S, H, I, Em loci plus coat type genetics</li>
             <li><strong>Cats:</strong> A, B, C, D, O, W, Fd loci</li>
             <li><strong>Horses:</strong> E, A, Cr, D, G, LP, TO, O, Rn loci</li>
+            <li><strong>Goats:</strong> A, B, E loci plus cashmere/angora fiber genetics</li>
+            <li><strong>Sheep:</strong> A, B, E, S loci plus wool type and horn genetics</li>
+            <li><strong>Rabbits:</strong> A, B, C, D, E, En, Du, W loci</li>
           </ul>
           <p class="text-gray-700 leading-relaxed">
             Every genetic test result you enter becomes part of the animal's profile and automatically factors into breeding predictions.
@@ -345,7 +348,7 @@ const faqs = [
           <strong>Some breeding combinations can be fatal.</strong> BreederHQ automatically detects dangerous pairings and warns you before you breed-potentially saving lives and preventing heartbreak.
         </p>
         <p class="text-gray-700 leading-relaxed">
-          These aren't just "undesirable outcomes." Lethal gene combinations can result in embryos that don't survive, puppies or foals that die shortly after birth, or animals with severe lifelong disabilities.
+          These aren't just "undesirable outcomes." Lethal gene combinations can result in embryos that don't survive, offspring that die shortly after birth, or animals with severe lifelong disabilities.
         </p>
       </div>
 
@@ -355,7 +358,7 @@ const faqs = [
         <div class="bg-white p-6 rounded border border-red-200">
           <h4 class="text-xl font-bold mb-3 text-red-700">🐕 Dogs: Double Merle</h4>
           <p class="text-gray-700 mb-3">
-            Breeding two merle dogs (M/m × M/m) produces 25% double merle (M/M) puppies, causing:
+            Breeding two merle dogs (M/m x M/m) produces 25% double merle (M/M) offspring, causing:
           </p>
           <ul class="space-y-1 text-gray-600 text-sm">
             <li>• Deafness (partial or complete)</li>
@@ -364,14 +367,14 @@ const faqs = [
             <li>• Increased sunlight sensitivity</li>
           </ul>
           <p class="mt-3 text-sm text-red-600 font-medium">
-            BreederHQ flags any M/m × M/m pairing before you commit.
+            BreederHQ flags any M/m x M/m pairing before you commit.
           </p>
         </div>
 
         <div class="bg-white p-6 rounded border border-red-200">
           <h4 class="text-xl font-bold mb-3 text-red-700">🐴 Horses: Lethal White Overo (LWO)</h4>
           <p class="text-gray-700 mb-3">
-            Breeding two Overo frame carriers (O/o × O/o) produces 25% homozygous (O/O) foals that:
+            Breeding two Overo frame carriers (O/o x O/o) produces 25% homozygous (O/O) foals that:
           </p>
           <ul class="space-y-1 text-gray-600 text-sm">
             <li>• Are born completely white</li>
@@ -383,18 +386,82 @@ const faqs = [
             BreederHQ warns when both parents carry the Frame gene.
           </p>
         </div>
+
+        <div class="bg-white p-6 rounded border border-red-200">
+          <h4 class="text-xl font-bold mb-3 text-red-700">🐱 Cats: Manx Syndrome</h4>
+          <p class="text-gray-700 mb-3">
+            Breeding two tailless Manx cats (M/m x M/m) produces 25% homozygous (M/M) kittens that:
+          </p>
+          <ul class="space-y-1 text-gray-600 text-sm">
+            <li>• Die in utero (homozygous is lethal)</li>
+            <li>• Surviving heterozygous kittens may have spina bifida</li>
+            <li>• Bowel and bladder dysfunction possible</li>
+            <li>• Hind limb weakness or paralysis</li>
+          </ul>
+          <p class="mt-3 text-sm text-red-600 font-medium">
+            BreederHQ flags tailless x tailless Manx pairings automatically.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-red-200">
+          <h4 class="text-xl font-bold mb-3 text-red-700">🐐 Goats: Beta-Mannosidosis</h4>
+          <p class="text-gray-700 mb-3">
+            Carrier-to-carrier breeding produces 25% affected kids with:
+          </p>
+          <ul class="space-y-1 text-gray-600 text-sm">
+            <li>• Progressive neurological decline</li>
+            <li>• Inability to stand or nurse</li>
+            <li>• Tremors and head pressing</li>
+            <li>• Fatal within weeks to months</li>
+          </ul>
+          <p class="mt-3 text-sm text-red-600 font-medium">
+            Common in Nubian and Nubian-cross breeds. BreederHQ flags carrier pairings.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-red-200">
+          <h4 class="text-xl font-bold mb-3 text-red-700">🐑 Sheep: Spider Lamb Syndrome</h4>
+          <p class="text-gray-700 mb-3">
+            Carrier-to-carrier breeding produces 25% affected lambs with:
+          </p>
+          <ul class="space-y-1 text-gray-600 text-sm">
+            <li>• Severe skeletal deformities</li>
+            <li>• Long, bent limbs and twisted spines</li>
+            <li>• Sunken or domed skulls</li>
+            <li>• Non-viable, requiring euthanasia</li>
+          </ul>
+          <p class="mt-3 text-sm text-red-600 font-medium">
+            Common in Suffolk and Hampshire. BreederHQ flags carrier pairings.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded border border-red-200">
+          <h4 class="text-xl font-bold mb-3 text-red-700">🐇 Rabbits: Megacolon (En/En)</h4>
+          <p class="text-gray-700 mb-3">
+            Breeding two English Spot or Charlie-pattern carriers (En/en x En/en) produces 25% homozygous (En/En) kits with:
+          </p>
+          <ul class="space-y-1 text-gray-600 text-sm">
+            <li>• Enlarged, non-functional colon</li>
+            <li>• Chronic GI stasis and bloating</li>
+            <li>• Failure to thrive</li>
+            <li>• Significantly shortened lifespan</li>
+          </ul>
+          <p class="mt-3 text-sm text-red-600 font-medium">
+            BreederHQ warns when both parents carry the En gene.
+          </p>
+        </div>
       </div>
 
       <div class="bg-white p-6 rounded border border-gray-200 mb-8">
-        <h4 class="text-xl font-bold mb-4">Other Lethal Combinations Detected:</h4>
+        <h4 class="text-xl font-bold mb-4">Other Combinations Detected:</h4>
         <ul class="space-y-2 text-gray-700">
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span><strong>Hairless × Hairless (dogs):</strong> Homozygous hairless puppies often non-viable</span>
+            <span><strong>Hairless x Hairless (dogs):</strong> Homozygous hairless offspring often non-viable</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span><strong>Brachycephalic extremes:</strong> Flagged for breeds with respiratory/birthing risks</span>
+            <span><strong>Brachycephalic extremes (dogs):</strong> Flagged for breeds with respiratory/birthing risks</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
@@ -407,6 +474,22 @@ const faqs = [
           <li class="flex items-start">
             <span class="mr-3">•</span>
             <span><strong>GBED (horses):</strong> Glycogen Branching Enzyme Deficiency (always fatal)</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Polycystic Kidney Disease (cats):</strong> PKD carrier pairing detection</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>G6S (goats):</strong> G6-Sulfatase Deficiency in Nubians</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Scrapie susceptibility (sheep):</strong> Genotype-based risk assessment</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Lethal White (rabbits):</strong> Dutch pattern homozygous lethality</span>
           </li>
         </ul>
       </div>
