@@ -134,23 +134,33 @@ const faqs = [
           <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="/for-breeders"
-              class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 w-full sm:w-72 text-center"
+              class="relative overflow-hidden bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold w-full sm:w-72 text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
-              I'm a Breeder
+              <span class="relative z-10">I'm a Breeder</span>
+              <span class="absolute inset-0 bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] animate-[shimmer_3s_ease-in-out_infinite] bg-[length:200%_100%]"></span>
             </a>
             <a
               href="https://marketplace.breederhq.com"
-              class="bg-stone-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-600 w-full sm:w-72 text-center"
+              class="relative overflow-hidden bg-stone-700 text-white px-8 py-4 rounded-lg text-lg font-semibold w-full sm:w-72 text-center shadow-lg hover:shadow-xl hover:scale-105 hover:bg-stone-600 transition-all duration-300"
             >
-              Browse the Marketplace
+              <span class="relative z-10">Browse the Marketplace</span>
+              <span class="absolute inset-0 bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.15)_50%,transparent_75%)] animate-[shimmer_3.5s_ease-in-out_infinite] bg-[length:200%_100%]"></span>
             </a>
             <a
               href="/for-providers"
-              class="bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-600 w-full sm:w-72 text-center"
+              class="relative overflow-hidden bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold w-full sm:w-72 text-center shadow-lg hover:shadow-xl hover:scale-105 hover:bg-emerald-600 transition-all duration-300"
             >
-              I'm a Service Provider
+              <span class="relative z-10">I'm a Service Provider</span>
+              <span class="absolute inset-0 bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.15)_50%,transparent_75%)] animate-[shimmer_4s_ease-in-out_infinite] bg-[length:200%_100%]"></span>
             </a>
           </div>
+
+          <style>
+            @keyframes shimmer {
+              0% { background-position: 200% 0; }
+              100% { background-position: -200% 0; }
+            }
+          </style>
         </div>
       </div>
     </section>
