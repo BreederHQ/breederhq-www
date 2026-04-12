@@ -26,11 +26,11 @@ const faqs = [
   },
   {
     question: 'Can Scout AI scan my genetics lab results?',
-    answer: 'Yes. Upload any genetics PDF or photo from any lab - GenSol, Paw Print, Wisdom Panel, UC Davis, Embark, and more. Scout AI extracts every test result with confidence scores (High, Medium, Low). You review a preview table, include or exclude individual results, and save. Each saved result links back to the source document. Unknown markers are flagged for review.'
+    answer: 'Yes. Upload any genetics PDF or photo from any lab, any species. Dog labs like Embark or Wisdom Panel, equine panels from UC Davis, goat and sheep testing from veterinary labs. Scout AI extracts every test result with confidence scores (High, Medium, Low). You review a preview table, include or exclude individual results, and save. Each saved result links back to the source document. Unknown markers are flagged for review.'
   },
   {
-    question: 'What about OFA integration?',
-    answer: 'You enter OFA results manually. BreederHQ doesn\'t pull from OFA automatically, but your records can link to OFA for verification.'
+    question: 'What about OFA or breed registry integration?',
+    answer: 'You enter registry results manually. BreederHQ doesn\'t pull from OFA, ADGA, AQHA, or other registries automatically, but your records can link to them for verification.'
   }
 ];
 
@@ -38,10 +38,10 @@ const howTo = {
   name: 'How to Track Genetics and Health Testing',
   description: 'A step-by-step guide to organizing health testing records, genetic markers, and renewal tracking for breeding animals.',
   steps: [
-    { name: 'Set up breed-specific health tests', text: 'Configure which health tests are required or recommended for your breed. Common tests include OFA hips/elbows, PennHIP, eye exams, and genetic panels.' },
+    { name: 'Set up breed-specific health tests', text: 'Configure which health tests are required or recommended for your breed. Common tests include OFA, PennHIP, eye exams, genetic panels, FAMACHA (goats/sheep), Coggins (horses), and CAE/CL (goats).' },
     { name: 'Enter test results', text: 'Record each test with the date performed, result, and expiration date if applicable. Link to official registry numbers when available.' },
     { name: 'Attach documentation', text: 'Upload certificates, lab reports, and exam results as PDFs or images. Keep original documentation linked to each test record.' },
-    { name: 'Scan genetics documents with Scout AI', text: 'Upload any genetics PDF or photo from any lab (GenSol, Paw Print, Wisdom Panel, UC Davis, Embark, and more). Scout AI reads the document and extracts every test result with confidence scores. Review, edit, and save - two clicks instead of manual entry.' },
+    { name: 'Scan genetics documents with Scout AI', text: 'Upload any genetics PDF or photo from any lab, any species. Scout AI reads the document and extracts every test result with confidence scores. Review, edit, and save. Two clicks instead of manual entry.' },
     { name: 'Track genetic markers', text: 'Enter genetic test results including coat color genetics, health markers, and carrier status. Use this data for breeding compatibility checks.' },
     { name: 'Monitor expiration dates', text: 'Review upcoming test expirations regularly. The system flags tests that need renewal before breeding.' },
     { name: 'Configure buyer visibility', text: 'Choose which health testing results to share with buyers through the client portal. Transparency builds trust.' }
@@ -106,7 +106,7 @@ const howTo = {
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Results live in different places (OFA database, lab reports, vet records)</span>
+          <span>Results live in different places (breed registries, lab reports, vet records)</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -143,14 +143,14 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-3">Email folders</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Lab results in email. OFA certificates in another email. Scattered across years of messages.
+            Lab results in email. Registry certificates in another email. Scattered across years of messages.
           </p>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-3">OFA database</h3>
+          <h3 class="text-2xl font-bold mb-3">Breed registries and databases</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            The official record for many tests. But it doesn't include everything, and you can't attach your own notes or track pending tests.
+            OFA, ADGA, AQHA, ARBA and others keep official records. But they don't include everything, and you can't attach your own notes or track pending tests.
           </p>
         </div>
 
@@ -180,7 +180,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-4">Results are scattered</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            DNA results from one lab. OFA results from the database. Eye exam from the veterinary ophthalmologist. Cardiac clearance from a cardiologist. Each in a different format, stored in a different place.
+            DNA results from one lab. Registry results from another. Specialist exams from the vet. FAMACHA scores in a notebook. Coggins in your email. Each in a different format, stored in a different place.
           </p>
         </div>
 
@@ -230,11 +230,11 @@ const howTo = {
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>OFA and equivalent results with dates</span>
+              <span>Registry and certification results with dates</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Specialist exam results (eyes, cardiac, patella)</span>
+              <span>Specialist exam results (eyes, cardiac, patella, FAMACHA, Coggins, CAE/CL)</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
@@ -328,7 +328,7 @@ const howTo = {
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
-        <strong>New: Scout AI Genetics Scanner.</strong> Upload any genetics PDF or photo from any lab - GenSol, Paw Print, Wisdom Panel, UC Davis, Embark, or any other provider. Scout AI reads the document and extracts every test result with confidence scores. You see a preview table with each result, matched marker, status, and confidence level. Review, adjust if needed, and save. Two clicks instead of hunting through manual entry. Each scanned result links back to the source document.
+        <strong>New: Scout AI Genetics Scanner.</strong> Upload any genetics PDF or photo from any lab, any species. Dog panels, equine genetic tests, goat and sheep lab results, cat DNA profiles, rabbit color genetics. Scout AI reads the document and extracts every test result with confidence scores. You see a preview table with each result, matched marker, status, and confidence level. Review, adjust if needed, and save. Two clicks instead of manual entry. Each scanned result links back to the source document.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
@@ -465,13 +465,13 @@ const howTo = {
 
       <details class="faq-item">
         <summary class="faq-question">
-          <span>What about OFA integration?</span>
+          <span>What about OFA or breed registry integration?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>You enter OFA results manually. BreederHQ doesn't pull from OFA automatically, but your records can link to OFA for verification.</p>
+          <p>You enter registry results manually. BreederHQ doesn't pull from OFA, ADGA, AQHA, or other registries automatically, but your records can link to them for verification.</p>
         </div>
       </details>
     </div>
