@@ -10,11 +10,11 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What coat colors can BreederHQ predict?',
-    answer: 'BreederHQ predicts outcomes for 13+ horse color genes including Bay, Black, Chestnut, Palomino, Buckskin, Dun, Gray, Roan, Tobiano, Overo, Sabino, Champagne, Cream, and Pearl. You can run simulations to see what 20 random foals might look like from any pairing.'
+    answer: 'BreederHQ predicts outcomes for 13 horse color and pattern genes covering common phenotypes like Bay, Black, Chestnut, Palomino, Buckskin, Cremello/Perlino, Dun, Gray, Roan, Tobiano, Frame Overo, Sabino, Champagne, Silver, and Leopard Complex (Appaloosa). You can run simulations to see what 20 random foals might look like from any pairing.'
   },
   {
     question: 'What genetic health conditions does it screen for?',
-    answer: 'BreederHQ automatically flags dangerous genetic combinations for 16+ inherited conditions including Lethal White Overo Syndrome (OLWS/LWO), HYPP, HERDA, GBED, PSSM1, MH, SCID, CA, LFS, JEB, WFFS, and breed-specific conditions. The system warns you before you make a risky pairing.'
+    answer: 'BreederHQ automatically flags dangerous genetic combinations for 13 inherited conditions: OLWS (Lethal White Overo Syndrome), HYPP, GBED, HERDA, MH, PSSM1, SCID, LFS, CA, OAAM, JEB, Hydrocephalus, and Friesian Dwarfism, plus breed-specific warnings for Quarter Horses, Arabians, Appaloosas, Belgian Drafts, and Friesians. The system warns you before you make a risky pairing.'
   },
   {
     question: 'Does it handle AI and embryo transfer?',
@@ -182,7 +182,7 @@ const navItems = [
                 <div class="bg-white border border-gray-200 rounded-lg p-6">
                   <h4 class="text-xl font-bold mb-4">Coat Color Predictions</h4>
                   <p class="text-gray-700 leading-relaxed mb-4">
-                    See what colors your foals could be before breeding. BreederHQ predicts outcomes for 13+ horse color genes:
+                    See what colors your foals could be before breeding. BreederHQ predicts outcomes across 13 horse color and pattern genes:
                   </p>
                   <div class="grid md:grid-cols-2 gap-4 text-gray-700">
                     <ul class="space-y-2">
@@ -193,8 +193,8 @@ const navItems = [
                     </ul>
                     <ul class="space-y-2">
                       <li class="flex items-start"><span class="mr-3">•</span><span>Roan (true roan pattern)</span></li>
-                      <li class="flex items-start"><span class="mr-3">•</span><span>Tobiano, Overo, Sabino (Paint patterns)</span></li>
-                      <li class="flex items-start"><span class="mr-3">•</span><span>Champagne, Pearl</span></li>
+                      <li class="flex items-start"><span class="mr-3">•</span><span>Tobiano, Frame Overo, Sabino (Paint patterns)</span></li>
+                      <li class="flex items-start"><span class="mr-3">•</span><span>Champagne, Silver Dapple</span></li>
                       <li class="flex items-start"><span class="mr-3">•</span><span>Leopard Complex (Appaloosa)</span></li>
                     </ul>
                   </div>
@@ -203,20 +203,25 @@ const navItems = [
                 <div class="bg-red-50 border border-red-200 rounded-lg p-6">
                   <h4 class="text-xl font-bold mb-4 text-red-800">Health Risk Assessment</h4>
                   <p class="text-gray-700 leading-relaxed mb-4">
-                    Automatically flags dangerous genetic combinations. BreederHQ screens for 16+ inherited conditions:
+                    Automatically flags dangerous genetic combinations. BreederHQ screens for 13 inherited conditions:
                   </p>
                   <div class="grid md:grid-cols-2 gap-4 text-gray-700">
                     <ul class="space-y-2">
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>OLWS/LWO</strong> - Lethal White Overo Syndrome</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>HYPP</strong> - Hyperkalemic Periodic Paralysis</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>HERDA</strong> - Hereditary Equine Regional Dermal Asthenia</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>GBED</strong> - Glycogen Branching Enzyme Deficiency</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>OLWS</strong>: Lethal White Overo Syndrome</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>HYPP</strong>: Hyperkalemic Periodic Paralysis</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>HERDA</strong>: Hereditary Equine Regional Dermal Asthenia</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>GBED</strong>: Glycogen Branching Enzyme Deficiency</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>PSSM1</strong>: Polysaccharide Storage Myopathy</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>MH</strong>: Malignant Hyperthermia</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>SCID</strong>: Severe Combined Immunodeficiency</span></li>
                     </ul>
                     <ul class="space-y-2">
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>PSSM1</strong> - Polysaccharide Storage Myopathy</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>MH</strong> - Malignant Hyperthermia</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>WFFS</strong> - Warmblood Fragile Foal Syndrome</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span>Plus SCID, CA, LFS, JEB, and more</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>LFS</strong>: Lavender Foal Syndrome</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>CA</strong>: Cerebellar Abiotrophy</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>OAAM</strong>: Occipitoatlantoaxial Malformation</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>JEB</strong>: Junctional Epidermolysis Bullosa</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>Hydro</strong>: Friesian Hydrocephalus</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>FrDwarf</strong>: Friesian Dwarfism</span></li>
                     </ul>
                   </div>
                   <p class="text-gray-700 mt-4 italic">
@@ -326,28 +331,28 @@ const navItems = [
                   <div class="flex items-start">
                     <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">15</div>
                     <div>
-                      <p class="font-bold">Day 15 - Pregnancy Check</p>
+                      <p class="font-bold">Day 15: Pregnancy Check</p>
                       <p class="text-gray-600 text-sm">First ultrasound to confirm pregnancy and check for twins</p>
                     </div>
                   </div>
                   <div class="flex items-start">
                     <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">45</div>
                     <div>
-                      <p class="font-bold">Day 45 - Heartbeat Confirmation</p>
+                      <p class="font-bold">Day 45: Heartbeat Confirmation</p>
                       <p class="text-gray-600 text-sm">Ultrasound to confirm fetal heartbeat and viability</p>
                     </div>
                   </div>
                   <div class="flex items-start">
                     <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">90</div>
                     <div>
-                      <p class="font-bold">Day 90 - Development Check</p>
+                      <p class="font-bold">Day 90: Development Check</p>
                       <p class="text-gray-600 text-sm">Confirm normal fetal development</p>
                     </div>
                   </div>
                   <div class="flex items-start">
                     <div class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 text-sm">300</div>
                     <div>
-                      <p class="font-bold">Day 300 - Monitoring Begins</p>
+                      <p class="font-bold">Day 300: Monitoring Begins</p>
                       <p class="text-gray-600 text-sm">Increased observation period; prepare foaling area</p>
                     </div>
                   </div>
