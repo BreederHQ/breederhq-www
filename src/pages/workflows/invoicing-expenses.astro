@@ -30,14 +30,22 @@ const faqs = [
   },
   {
     question: 'How do breeding plan financial rollups work?',
-    answer: 'Each breeding plan shows total revenue, deposit timing (before/after birth), and average pricing. See the financial picture for each litter at a glance.'
+    answer: 'Each breeding plan shows total revenue, deposit timing (before/after birth), and average pricing. See the financial picture for each litter or group of offspring at a glance.'
+  },
+  {
+    question: 'Can I log expenses from my phone?',
+    answer: 'Yes. The connected mobile app lets you snap a photo of any receipt with your phone camera, enter the amount, category, and which animal or breeding plan it belongs to, and save. Food purchases can link to a Food Product so nutrition costs roll up automatically. Everything syncs instantly to the web.'
+  },
+  {
+    question: 'Can I create invoices from my phone?',
+    answer: 'Invoice creation and Stripe invoice management is handled on the web for now, where you get the full line-item editor, tax rules, and payment-link workflow. Expense capture, receipt photos, and reviewing invoices are all available on the mobile app.'
   }
 ];
 ---
 
 <BaseLayout
-  title="Invoicing & Expense Tracking | BreederHQ"
-  description="Professional invoicing for breeders. Create invoices with deposits and line items, track payments, log expenses by category, and see financial dashboards. Stripe integration included."
+  title="Invoicing & Expenses, Built for Breeders | BreederHQ"
+  description="Create invoices with deposits and line items, track 9 payment methods including Stripe, and log expenses across 12 categories. Capture receipts from your phone camera in the mobile app."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -59,12 +67,12 @@ const faqs = [
   <!-- Section 1: Hero -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">Stop Chasing Payments. Get Professional Invoicing.</h1>
+      <h1 class="text-5xl font-bold mb-6">Invoicing & Expenses, Built for Breeders.</h1>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          BreederHQ includes full invoicing and expense tracking built for breeders. Create invoices with deposits, service fees, goods, and discounts. Track payments via 9 methods including Stripe. Log expenses across 12 categories. See financial dashboards with outstanding balances, MTD metrics, and per-litter rollups. Export to CSV for your accountant.
+          Full invoicing and expense tracking connected to your animals, offspring groups, and breeding plans. Create invoices with deposits, service fees, goods, and discounts. Track payments via 9 methods including Stripe. Log expenses across 12 categories and snap receipt photos right from the mobile app so paperwork gets captured as it happens. See financial dashboards with outstanding balances, month-to-date metrics, and per-group rollups. Export to CSV for your accountant.
         </p>
       </aside>
 
@@ -73,7 +81,7 @@ const faqs = [
       </p>
 
       <p class="text-xl text-gray-700 leading-relaxed">
-        If you're tracking finances in spreadsheets, notebooks, or your head-you're losing money. Professional invoicing and expense tracking is included with BreederHQ.
+        You already answer these questions every week. BreederHQ keeps the invoices, payments, and receipts organized and connected to the animals and breeding plans they belong to, so the answer is always a quick look away.
       </p>
     </div>
   </section>
@@ -81,10 +89,10 @@ const faqs = [
   <!-- Section 2: The Problem -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The Breeder Finance Problem</h2>
+      <h2 class="text-4xl font-bold mb-8">You already run this like a business. Here's where it gets complicated.</h2>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Breeding is a business, but most breeders track finances like a hobby:
+        You care about the numbers. The challenge is keeping them organized across multiple animals, breeding plans, and payment methods:
       </p>
 
       <ul class="space-y-3 text-lg text-gray-700 mb-8">
@@ -102,17 +110,17 @@ const faqs = [
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>No idea if a litter was profitable until tax time</span>
+          <span>No easy way to see if a litter or group was profitable until tax time</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Embarrassing conversations asking clients what they owe</span>
+          <span>Awkward conversations confirming what a client owes and what they've already paid</span>
         </li>
       </ul>
 
       <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
         <p class="text-lg text-gray-700 font-semibold">
-          Generic accounting software doesn't understand breeding. It doesn't link invoices to litters, track deposits by waitlist position, or show revenue per breeding plan.
+          Generic accounting software doesn't speak breeder. It doesn't link invoices to specific litters or offspring groups, track deposits by waitlist position, or show revenue per breeding plan.
         </p>
       </div>
     </div>
@@ -140,7 +148,7 @@ const faqs = [
           </div>
           <div class="flex items-start">
             <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-medium mr-3">Goods</span>
-            <span class="text-gray-700">Puppy price, supplies, merchandise</span>
+            <span class="text-gray-700">Animal price, supplies, merchandise</span>
           </div>
           <div class="flex items-start">
             <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm font-medium mr-3">Discount</span>
@@ -170,7 +178,7 @@ const faqs = [
           <h3 class="text-xl font-bold mb-3">🔗 Link to Breeding Data</h3>
           <ul class="text-gray-700 space-y-2">
             <li>• Anchor invoices to specific animals</li>
-            <li>• Link to offspring groups/litters</li>
+            <li>• Link to offspring groups (litters, foals, kids, lambs, kits)</li>
             <li>• Associate with breeding plans</li>
             <li>• Connect to service codes</li>
             <li>• Attach supporting documents</li>
@@ -264,7 +272,7 @@ const faqs = [
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <h4 class="font-bold mb-2">📦 Supplies</h4>
-          <p class="text-sm text-gray-600">Whelping supplies, collars, crates</p>
+          <p class="text-sm text-gray-600">Birthing supplies, collars, halters, crates</p>
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <h4 class="font-bold mb-2">🍖 Food</h4>
@@ -275,12 +283,12 @@ const faqs = [
           <p class="text-sm text-gray-600">Professional grooming, supplies</p>
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-          <h4 class="font-bold mb-2">🐕 Breeding</h4>
-          <p class="text-sm text-gray-600">Stud fees, semen, AI costs</p>
+          <h4 class="font-bold mb-2">🧬 Breeding</h4>
+          <p class="text-sm text-gray-600">Stud fees, live cover, artificial insemination, embryo transfer</p>
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <h4 class="font-bold mb-2">🏠 Facility</h4>
-          <p class="text-sm text-gray-600">Kennels, fencing, utilities</p>
+          <p class="text-sm text-gray-600">Barns, kennels, fencing, utilities</p>
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <h4 class="font-bold mb-2">📣 Marketing</h4>
@@ -296,7 +304,7 @@ const faqs = [
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <h4 class="font-bold mb-2">📋 Registration</h4>
-          <p class="text-sm text-gray-600">AKC, microchips, licenses</p>
+          <p class="text-sm text-gray-600">Registry fees, microchips, licenses</p>
         </div>
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <h4 class="font-bold mb-2">🚗 Travel</h4>
@@ -308,14 +316,27 @@ const faqs = [
         </div>
       </div>
 
-      <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
         <h3 class="text-xl font-bold mb-3">Expense Features</h3>
         <ul class="text-gray-700 space-y-2">
-          <li>• Link expenses to specific animals</li>
+          <li>• Link expenses to specific animals or breeding plans</li>
           <li>• Track vendor information</li>
-          <li>• Attach receipt images</li>
+          <li>• Attach receipt images (upload or camera capture)</li>
           <li>• Filter by date range, category, animal</li>
           <li>• Export to CSV for tax prep</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">📱 Log Expenses On the Go</h3>
+        <p class="text-gray-700 mb-3">
+          The connected mobile app makes expense capture something you can do the moment it happens. Walk out of the vet, the feed store, or the show grounds and have the receipt filed before you're back in the truck:
+        </p>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Snap a photo of the receipt with your phone camera</li>
+          <li>• Enter the amount, category, and which animal or breeding plan it belongs to</li>
+          <li>• Food purchases can link to a Food Product so nutrition costs roll up automatically</li>
+          <li>• Syncs instantly to the web so everything is in one place for tax time</li>
         </ul>
       </div>
     </div>
@@ -358,11 +379,11 @@ const faqs = [
           Each breeding plan shows aggregated financial data:
         </p>
         <ul class="text-gray-700 space-y-1">
-          <li>• Total revenue per litter</li>
+          <li>• Total revenue per litter or group</li>
           <li>• Deposit timing analysis (before/after birth)</li>
-          <li>• Average price per puppy</li>
-          <li>• Expenses linked to the litter</li>
-          <li>• Profit/loss visibility</li>
+          <li>• Average price per offspring</li>
+          <li>• Expenses linked to the breeding plan</li>
+          <li>• Profit and loss visibility</li>
         </ul>
       </div>
     </div>
@@ -371,9 +392,9 @@ const faqs = [
   <!-- CTA Section -->
   <section class="py-20 bg-primary text-white">
     <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="text-4xl font-bold mb-6">Run Your Breeding Business Professionally</h2>
+      <h2 class="text-4xl font-bold mb-6">Clear Numbers, Connected to Your Animals.</h2>
       <p class="text-xl mb-8 opacity-90">
-        Clear invoicing. Complete expense tracking. Financial visibility.
+        Invoicing, payments, and expenses in one place, with mobile receipt capture so the paperwork keeps up with you.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
@@ -436,6 +457,30 @@ const faqs = [
         </summary>
         <div class="faq-answer">
           <p>Yes. Export invoices, payments, and expenses to CSV with configurable columns. Works with spreadsheets, accounting software, or your CPA.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I log expenses from my phone?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The connected mobile app lets you snap a photo of any receipt with your phone camera, enter the amount, category, and which animal or breeding plan it belongs to, and save. Food purchases can link to a Food Product so nutrition costs roll up automatically. Everything syncs instantly to the web.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I create invoices from my phone?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Invoice creation and Stripe invoice management is handled on the web for now, where you get the full line-item editor, tax rules, and payment-link workflow. Expense capture, receipt photos, and reviewing invoices are all available on the mobile app.</p>
         </div>
       </details>
     </div>
