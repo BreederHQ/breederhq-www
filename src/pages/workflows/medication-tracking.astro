@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     question: 'Can I track a multi-day treatment course?',
-    answer: 'Yes. Create a treatment course with the dosage, frequency, and duration. Then check off each dose as you give it. The system tracks compliance (how many doses were given out of how many were prescribed)and reminds you when the next dose is due.'
+    answer: 'Yes. Create a treatment course with the dosage, frequency, and duration. Then check off each dose as you give it. The system tracks compliance (how many doses were given out of how many were prescribed) and reminds you when the next dose is due. Reminders can push to the connected mobile app so you get notified wherever you are.'
   },
   {
     question: 'Does it handle batch medications like deworming?',
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     question: 'Does the mobile app support medication tracking?',
-    answer: 'Yes. The mobile app has a quick-log screen designed for barn use. See your active treatment courses, tap to log a dose, and move on. Full course management (adding new medications, editing courses) is available on the web.'
+    answer: 'Yes. The mobile app has a quick-log screen designed for on-the-go use in the barn, kennel, or wherever you are. See your active treatment courses, tap to log a dose, and move on. Push notifications remind you when the next dose is due. Full course management (adding new medications, editing courses) is available on the web.'
   },
   {
     question: 'Does it track controlled substances?',
@@ -47,18 +47,18 @@ const howTo = {
   description: 'A step-by-step guide to logging medications, tracking treatment courses, monitoring withdrawal periods, and sharing health records for breeding animals.',
   steps: [
     { name: 'Add a medication course', text: 'Select the animal, choose from common medication templates or enter a custom medication. Set the dosage, route, frequency, and treatment duration. Add withdrawal period days if applicable.' },
-    { name: 'Log each dose', text: 'As you administer each dose, tap "Log Dose" to record the date, time, and who gave it. The system tracks compliance and calculates the next due date automatically.' },
+    { name: 'Log each dose', text: 'As you administer each dose, tap "Log Dose" in the mobile or web app to record the date, time, and who gave it. The system tracks compliance, calculates the next due date automatically, and sends a push notification when the next dose is coming up.' },
     { name: 'Monitor withdrawal periods', text: 'For competition or sale animals, the withdrawal countdown updates with every dose. A red badge shows days remaining. When the withdrawal clears, the badge turns green.' },
     { name: 'Upload supporting documents', text: 'Attach prescriptions, vet invoices, or lab results to any treatment course. Upload a PDF or photo and Scout AI auto-extracts medication details.' },
-    { name: 'Use batch medication for groups', text: 'For herd treatments like deworming, select multiple animals and log the medication once. Each animal gets individual tracking.' },
-    { name: 'Share health records', text: 'Download a full health report PDF, email it to your vet, or generate a secure share link with PIN protection. Print a stall card for barn-side reference.' }
+    { name: 'Use group medication for herds or kennels', text: 'For group treatments like deworming, select multiple animals and log the medication once. Each animal gets individual tracking.' },
+    { name: 'Share health records', text: 'Download a full health report PDF, email it to your vet, or generate a secure share link with PIN protection. Print a stall or kennel card for at-a-glance reference.' }
   ]
 };
 ---
 
 <BaseLayout
-  title="How to Track Medications and Withdrawal Periods | BreederHQ"
-  description="Track medications, log treatment courses, monitor withdrawal period countdowns, and share health records. Built for horses, dogs, cats, goats, sheep, and rabbits."
+  title="Medication Tracking That Keeps Up With You | BreederHQ"
+  description="You already manage medications. BreederHQ keeps the record-keeping organized: treatment courses, automatic withdrawal countdowns, mobile push reminders, and shareable health reports for vets and buyers."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
   howTo={howTo}
@@ -81,16 +81,16 @@ const howTo = {
   <!-- Section 1: What This Page Is About -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">How Professional Breeders Track Medications</h1>
+      <h1 class="text-5xl font-bold mb-6">Medication Tracking That Keeps Up With You.</h1>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Every breeding operation deals with medications, from routine deworming to post-surgical antibiotics to competition withdrawal compliance. Tracking what was given, when, how much, and when it clears shouldn't require a filing cabinet and a calendar. A proper medication tracker logs treatment courses, checks off individual doses, counts down withdrawal periods automatically, and gives you a shareable health report when your vet or a buyer asks for one.
+          You already manage medications for your animals, from routine deworming to post-surgical antibiotics to withdrawal compliance for competition or sale. BreederHQ keeps the record-keeping organized: treatment courses with dose-by-dose logging, automatic withdrawal countdowns, next-dose reminders that push to your phone, and shareable health reports for vets and buyers.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
-        Medications are part of responsible animal management. But the record-keeping that comes with them (tracking multi-day courses, remembering when the next dose is due, knowing when withdrawal periods clear for competition) is where most breeders lose control. This page covers how to manage medication tracking properly.
+        You know how to care for your animals. The challenge is keeping track of everything: multi-day courses, next-dose timing, and withdrawal periods for competition or sale. BreederHQ makes sure that record stays complete and accessible, without adding work to your day.
       </p>
     </div>
   </section>
@@ -98,9 +98,9 @@ const howTo = {
   <!-- Section 2: Why Breeders Search for This -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The medication tracking challenge</h2>
+      <h2 class="text-4xl font-bold mb-8">You already manage this. Here's what makes it complicated.</h2>
       <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Medication management creates complexity at every level:
+        You know what the animals need. The challenge is keeping everything straight across multiple animals and schedules:
       </p>
       <ul class="space-y-3 text-lg text-gray-700 mb-6">
         <li class="flex items-start">
@@ -129,7 +129,7 @@ const howTo = {
         </li>
       </ul>
       <p class="text-lg text-gray-700 leading-relaxed">
-        A missed dose, a miscounted withdrawal day, or a lost prescription record can mean a disqualification, a failed drug test, or a serious conversation with your veterinarian.
+        A missed dose, a miscounted withdrawal day, or a lost prescription record can mean a failed drug test, a disqualification, or a conversation with your vet or buyer you'd rather not have.
       </p>
     </div>
   </section>
@@ -137,11 +137,11 @@ const howTo = {
   <!-- Section 3: How Breeders Usually Handle It -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">How breeders typically track medications</h2>
+      <h2 class="text-4xl font-bold mb-8">The tools you've been using</h2>
 
       <div class="space-y-6">
         <div>
-          <h3 class="text-2xl font-bold mb-3">Whiteboard in the barn</h3>
+          <h3 class="text-2xl font-bold mb-3">Whiteboard in the barn or kennel</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
             "Daisy - Bute 2x daily through Friday." Works until someone erases it, the schedule changes, or you have 15 animals on different meds.
           </p>
@@ -150,7 +150,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-3">Sticky notes and calendars</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            A note on the stall door. A reminder on your phone. A mark on the feed-room calendar. Three systems that don't talk to each other and none of them show dose-by-dose compliance.
+            A note on the stall or kennel door. A reminder on your phone. A mark on the wall calendar. Three systems that don't talk to each other and none of them show dose-by-dose compliance.
           </p>
         </div>
 
@@ -171,7 +171,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-3">Memory</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            "I'm pretty sure she finished her antibiotics last week." "When did we last deworm the goats?" Memory is not a record-keeping system.
+            "I'm pretty sure she finished her antibiotics last week." "When did we last deworm the goats?" You know the info, but pulling it up on demand, weeks later, across multiple animals, is where memory stops being enough.
           </p>
         </div>
       </div>
@@ -181,41 +181,41 @@ const howTo = {
   <!-- Section 4: Where That Breaks Down -->
   <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Why medication tracking fails</h2>
+      <h2 class="text-4xl font-bold mb-8">Where those tools start to stretch thin</h2>
 
       <div class="space-y-8">
         <div>
-          <h3 class="text-2xl font-bold mb-4">Withdrawal periods are miscalculated</h3>
+          <h3 class="text-2xl font-bold mb-4">Withdrawal periods get miscalculated</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Your horse got Banamine on February 1st. Cleared by February 11th. Then she colicked again on February 5th and got another dose. Now clearance is February 15th, but if you're counting from the first dose, you think she's clear on the 11th. That four-day gap can mean a positive drug test at a show.
+            An animal gets a dose on the 1st, clearance is the 11th. Then something comes up and they get another dose on the 5th. Now clearance should be the 15th, but if you're counting from the first dose, you think they're clear on the 11th. That four-day gap can mean a positive drug test at a show or an unhappy buyer taking home an animal that hasn't cleared.
           </p>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Dose compliance is invisible</h3>
+          <h3 class="text-2xl font-bold mb-4">Dose compliance becomes invisible</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            The vet prescribed 10 days of antibiotics. How many did the animal actually get? Did the barn manager give Tuesday's dose? Did anyone log it? Without individual dose tracking, you're guessing about treatment completion.
+            The vet prescribed 10 days of antibiotics. How many doses did the animal actually get? Did someone give Tuesday's dose? Did anyone log it? Without individual dose tracking, you're guessing about treatment completion.
           </p>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Barn staff don't have the information</h3>
+          <h3 class="text-2xl font-bold mb-4">Helpers and staff don't have the information</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            You know what needs to happen. But you're not always in the barn. The information needs to be accessible to whoever is doing the administering, not locked in your head or your personal notes app.
+            You know what needs to happen. But you're not always there. The information needs to be accessible to whoever is doing the administering, not locked in your head or your personal notes app.
           </p>
         </div>
 
         <div>
           <h3 class="text-2xl font-bold mb-4">Health records are incomplete</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Your vet asks about medication history. You have vaccinations documented but medications are scattered across invoices, text messages, and memory. The health picture is incomplete.
+            Your vet asks about medication history. You have vaccinations documented, but medications are scattered across invoices, text messages, and memory. The health picture is incomplete.
           </p>
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Herd treatments have no audit trail</h3>
+          <h3 class="text-2xl font-bold mb-4">Group treatments have no audit trail</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            You dewormed 30 goats on Saturday. Which product? What dosage? Which animals? If a withdrawal question comes up or someone has a reaction, the details matter.
+            You dewormed 30 animals on Saturday. Which product? What dosage? Which animals? If a withdrawal question comes up or someone has a reaction, the details matter.
           </p>
         </div>
       </div>
@@ -225,7 +225,7 @@ const howTo = {
   <!-- Section 5: What a Correct System Looks Like -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">What proper medication tracking requires</h2>
+      <h2 class="text-4xl font-bold mb-8">What it looks like when everything is connected</h2>
 
       <div class="space-y-8">
         <div>
@@ -281,6 +281,10 @@ const howTo = {
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
+              <span>Push notifications to the connected mobile app so you get reminded wherever you are</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
               <span>Overdue doses are flagged automatically</span>
             </li>
             <li class="flex items-start">
@@ -291,7 +295,7 @@ const howTo = {
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Batch treatment support</h3>
+          <h3 class="text-2xl font-bold mb-4">Group treatment support</h3>
           <ul class="space-y-2 text-lg text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
@@ -336,14 +340,14 @@ const howTo = {
   <!-- Section 6: How BreederHQ Supports This -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">BreederHQ tracks medications the way they should be tracked</h2>
+      <h2 class="text-4xl font-bold mb-8">How BreederHQ brings it all together</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        Create treatment courses with dosage, frequency, and withdrawal information. Log each dose as it's administered: from the barn, from your phone, from anywhere. Withdrawal periods recalculate automatically with every dose. Upload vet documents and let Scout AI extract medication details. Generate health reports and share them securely with your vet, your trainer, or a buyer.
+        Create treatment courses with dosage, frequency, and withdrawal information. Log each dose as it's administered from anywhere, including the mobile app in your pocket. Withdrawal periods recalculate automatically with every dose. Next-dose reminders push to your phone so you never miss one. Upload vet documents and let Scout AI extract medication details. Generate health reports and share them securely with your vet, trainer, or a buyer.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
-        Built-in templates for common medications across horses, dogs, cats, goats, sheep, and rabbits. Batch treatments for herd-wide deworming. Controlled substance logging with audit trails. Stall cards you can print and hang on the door. Medication history that's actually complete.
+        Built-in templates for common medications across horses, dogs, cats, goats, sheep, and rabbits. Group treatments for herd-wide or kennel-wide deworming. Controlled substance logging with audit trails. Printable stall or kennel cards with current medications. A medication history that's actually complete.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
@@ -360,7 +364,7 @@ const howTo = {
   <!-- Section 7: Who This Is For -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">This matters for breeders who:</h2>
+      <h2 class="text-4xl font-bold mb-8">Built for breeders who:</h2>
 
       <ul class="space-y-3 text-lg text-gray-700">
         <li class="flex items-start">
@@ -369,7 +373,7 @@ const howTo = {
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Have barn staff administering medications</span>
+          <span>Have helpers or staff administering medications</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -381,7 +385,7 @@ const howTo = {
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Do regular herd treatments (deworming, fly control, seasonal protocols)</span>
+          <span>Do regular group treatments (deworming, fly control, seasonal protocols)</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -450,7 +454,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Create a treatment course with the dosage, frequency, and duration. Then check off each dose as you give it. The system tracks compliance (how many doses were given out of how many were prescribed)and reminds you when the next dose is due.</p>
+          <p>Yes. Create a treatment course with the dosage, frequency, and duration. Then check off each dose as you give it. The system tracks compliance (how many doses were given out of how many were prescribed) and reminds you when the next dose is due. Reminders can push to the connected mobile app so you get notified wherever you are.</p>
         </div>
       </details>
 
@@ -498,7 +502,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. The mobile app has a quick-log screen designed for barn use. See your active treatment courses, tap to log a dose, and move on. Full course management (adding new medications, editing courses) is available on the web.</p>
+          <p>Yes. The mobile app has a quick-log screen designed for on-the-go use in the barn, kennel, or wherever you are. See your active treatment courses, tap to log a dose, and move on. Push notifications remind you when the next dose is due. Full course management (adding new medications, editing courses) is available on the web.</p>
         </div>
       </details>
 
