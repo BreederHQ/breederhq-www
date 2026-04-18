@@ -34,15 +34,15 @@ const categories = [
       { name: 'Breeding Profile & Analytics', standard: false, pro: true, enterprise: true },
       { name: 'Privacy Controls & Sharing', standard: false, pro: true, enterprise: true },
       { name: 'Activity Log', standard: false, pro: true, enterprise: true },
-      { name: 'Dairy Production Tracking', standard: false, pro: true, enterprise: true },
-      { name: 'Fiber/Wool Production Tracking', standard: false, pro: true, enterprise: true },
+      { name: 'Dairy Production Tracking', standard: false, pro: true, enterprise: true, note: 'Goats' },
+      { name: 'Fiber/Wool Production Tracking', standard: false, pro: true, enterprise: true, note: 'Sheep & Goats' },
       { name: 'Document Watermarking', standard: false, pro: true, enterprise: true },
       { name: 'Network Animals & Share Codes', standard: false, pro: true, enterprise: true },
-      { name: 'Ovulation Pattern Analysis', standard: false, pro: false, enterprise: true },
+      { name: 'Ovulation Pattern Analysis', standard: false, pro: false, enterprise: true, note: 'Horses' },
       { name: 'Document Access Log', standard: false, pro: false, enterprise: true },
       { name: 'Team Tab', standard: false, pro: false, enterprise: true },
       { name: 'Bulk Operations', standard: false, pro: false, enterprise: true },
-      { name: 'Audit Tab', standard: false, pro: false, enterprise: true },
+      { name: 'Animal Audit Tab (per-animal change log)', standard: false, pro: false, enterprise: true },
     ]
   },
   {
@@ -52,16 +52,16 @@ const categories = [
       { name: 'Breeding Calendar', standard: true, pro: true, enterprise: true },
       { name: 'What-If Planning (Schedule Alignment)', standard: true, pro: true, enterprise: true },
       { name: 'Breeding Attempts', standard: true, pro: true, enterprise: true },
-      { name: 'Group Breeding Plans (Sheep & Goats)', standard: true, pro: true, enterprise: true },
+      { name: 'Group Breeding Plans', standard: true, pro: true, enterprise: true, note: 'Sheep & Goats' },
       { name: 'Genetics Lab (7 Analysis Tabs)', standard: false, pro: true, enterprise: true, note: 'Overview, Compare, Punnett Squares, Health Analysis, Color Preview, What\'s Missing, Pedigree' },
-      { name: 'Find a Match (Network Search)', standard: false, pro: true, enterprise: true },
-      { name: 'Mare Status & Reproductive Tracking', standard: false, pro: true, enterprise: true },
-      { name: 'Foaling Management & Calendar', standard: false, pro: true, enterprise: true },
-      { name: 'Pre-Foaling Monitor', standard: false, pro: true, enterprise: true },
-      { name: 'Post-Foaling Heat Tracker', standard: false, pro: true, enterprise: true },
+      { name: 'Find a Match (Network Search)', standard: false, pro: true, enterprise: true, note: 'Cross-tenant search for genetically compatible matches' },
+      { name: 'Mare Status & Reproductive Tracking', standard: false, pro: true, enterprise: true, note: 'Horses' },
+      { name: 'Foaling Management & Calendar', standard: false, pro: true, enterprise: true, note: 'Horses' },
+      { name: 'Pre-Foaling Monitor', standard: false, pro: true, enterprise: true, note: 'Horses' },
+      { name: 'Post-Foaling Heat Tracker', standard: false, pro: true, enterprise: true, note: 'Horses' },
       { name: 'Supplement Protocols', standard: false, pro: true, enterprise: true },
       { name: 'Birth Checklist', standard: false, pro: true, enterprise: true },
-      { name: 'Follicle Exams & Progesterone Tests', standard: false, pro: true, enterprise: true },
+      { name: 'Follicle Exams & Progesterone Tests', standard: false, pro: true, enterprise: true, note: 'Horses' },
       { name: 'Goal-Based Breeding (Reverse Phenotype Lookup)', standard: false, pro: false, enterprise: true },
       { name: 'Offspring Simulator', standard: false, pro: false, enterprise: true },
       { name: 'Breeding Program Rules', standard: false, pro: false, enterprise: true },
@@ -73,10 +73,10 @@ const categories = [
       { name: 'Offspring Tracking & Management', standard: true, pro: true, enterprise: true },
       { name: 'Weight & Growth Tracking', standard: true, pro: true, enterprise: true },
       { name: 'Collar & ID Management', standard: true, pro: true, enterprise: true },
-      { name: 'Rearing Protocols (ENS, ESI, Rule of 7s)', standard: false, pro: true, enterprise: true },
+      { name: 'Rearing Protocols (ENS, ESI, Rule of 7s)', standard: false, pro: true, enterprise: true, note: 'Built-in dog protocols; Protocol Builder for any species' },
       { name: 'Neonatal Care', standard: false, pro: true, enterprise: true },
-      { name: 'Temperament Testing (Volhard PAT)', standard: false, pro: true, enterprise: true },
-      { name: 'Gun Dog Aptitude Program', standard: false, pro: true, enterprise: true },
+      { name: 'Temperament Testing (Volhard PAT)', standard: false, pro: true, enterprise: true, note: 'Dogs' },
+      { name: 'Gun Dog Aptitude Program', standard: false, pro: true, enterprise: true, note: 'Dogs' },
       { name: 'Group Analytics, Nutrition & Finances', standard: false, pro: true, enterprise: true },
       { name: 'Custom Protocol Import/Export', standard: false, pro: true, enterprise: true },
       { name: 'Community Protocol Sharing', standard: false, pro: true, enterprise: true },
@@ -100,7 +100,7 @@ const categories = [
       { name: 'CRM Analytics Dashboard', standard: false, pro: false, enterprise: true },
       { name: 'Lead Scoring', standard: false, pro: false, enterprise: true },
       { name: 'Follow-Up Automation', standard: false, pro: false, enterprise: true },
-      { name: 'Audit Tab', standard: false, pro: false, enterprise: true },
+      { name: 'Contact Audit Tab (per-contact change log)', standard: false, pro: false, enterprise: true },
     ]
   },
   {
@@ -156,10 +156,10 @@ const categories = [
       { name: 'Waitlist Gauge', standard: false, pro: true, enterprise: true },
       { name: 'Financial Snapshot', standard: false, pro: true, enterprise: true },
       { name: 'KPI Panel', standard: false, pro: true, enterprise: true },
-      { name: 'Horse-Specific Widgets', standard: false, pro: true, enterprise: true },
+      { name: 'Horse-Specific Dashboard Widgets', standard: false, pro: true, enterprise: true, note: 'Horses' },
       { name: 'Protocol Progress', standard: false, pro: true, enterprise: true },
-      { name: 'Ovulation Tracker', standard: false, pro: false, enterprise: true },
-      { name: 'Foaling Analytics', standard: false, pro: false, enterprise: true },
+      { name: 'Ovulation Tracker', standard: false, pro: false, enterprise: true, note: 'Horses' },
+      { name: 'Foaling Analytics', standard: false, pro: false, enterprise: true, note: 'Horses' },
       { name: 'Genetic Intelligence (COI Heatmap, Diversity Scoring)', standard: false, pro: false, enterprise: true },
     ]
   },
@@ -195,12 +195,10 @@ const categories = [
       { name: 'Data Management & Export', standard: true, pro: true, enterprise: true },
       { name: 'Accessibility Settings', standard: true, pro: true, enterprise: true },
       { name: 'AI & Privacy Controls', standard: false, pro: true, enterprise: true },
-      { name: 'Document Watermarking', standard: false, pro: true, enterprise: true },
       { name: 'Staff Management', standard: false, pro: true, enterprise: true },
-      { name: 'Activity Log', standard: false, pro: true, enterprise: true },
-      { name: 'Audit Trail', standard: false, pro: false, enterprise: true },
+      { name: 'Organization-Wide Audit Trail', standard: false, pro: false, enterprise: true },
       { name: 'Multi-Location Management', standard: false, pro: false, enterprise: true },
-      { name: 'API Access', standard: false, pro: false, enterprise: true },
+      { name: 'API Access (for third-party integrations)', standard: false, pro: false, enterprise: true },
       { name: 'Team Management (with role-based access)', standard: false, pro: false, enterprise: true },
     ]
   },
@@ -250,17 +248,23 @@ const categories = [
           <div class="relative pt-4">
             <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">Most Popular</span>
             <h3 class="text-lg font-bold text-stone-800">Pro</h3>
-            <p class="text-3xl font-bold text-stone-800">$79<span class="text-base font-normal text-stone-500">/mo</span></p>
-            <p class="text-xs text-stone-500">or $790/yr</p>
+            <p class="text-stone-400 text-sm line-through mb-0">$79/mo</p>
+            <p class="text-3xl font-bold text-amber-600">$39.50<span class="text-base font-normal text-stone-500">/mo</span></p>
+            <p class="text-xs text-amber-600 font-semibold">with FOUNDER50</p>
             <p class="text-xs text-stone-500 mt-1">Breed smarter & grow</p>
           </div>
           <div>
             <h3 class="text-lg font-bold text-stone-800">Enterprise</h3>
-            <p class="text-3xl font-bold text-stone-800">$159<span class="text-base font-normal text-stone-500">/mo</span></p>
-            <p class="text-xs text-stone-500">or $1,590/yr</p>
+            <p class="text-stone-400 text-sm line-through mb-0">$159/mo</p>
+            <p class="text-3xl font-bold text-amber-600">$79.50<span class="text-base font-normal text-stone-500">/mo</span></p>
+            <p class="text-xs text-amber-600 font-semibold">with FOUNDER50</p>
             <p class="text-xs text-stone-500 mt-1">The platform thinks for you</p>
           </div>
         </div>
+
+        <p class="text-xs text-stone-500 mt-6">
+          Founders pricing: 50% off Pro or Enterprise for 12 months for the first 100 subscribers. <a href="/founders" class="text-amber-600 hover:underline">Learn more &rarr;</a>
+        </p>
       </div>
     </section>
 
@@ -358,9 +362,9 @@ const categories = [
           Start your 14-day free trial with full access. Cancel anytime.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <span class="inline-block bg-stone-300 text-stone-500 font-semibold py-3 px-8 rounded-lg cursor-not-allowed">
-            Coming Soon
-          </span>
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition">
+            Start Free Trial
+          </a>
           <a href="/pricing" class="inline-block border-2 border-stone-400 text-stone-300 font-semibold py-3 px-8 rounded-lg hover:bg-stone-700 transition">
             View Pricing &rarr;
           </a>
