@@ -1,0 +1,592 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breed Clubs', url: '/for-breed-clubs' }
+];
+
+const faqs = [
+  {
+    question: 'What does it cost for a breed club to partner with BreederHQ?',
+    answer: 'Nothing, during founding partner program. Your club and your members aren\'t charged for the club tooling — we\'re investing in this as a flagship feature. In exchange, we ask you to help us shape the admin tools and give us honest feedback about what your club actually needs. Long-term pricing will be transparent and proportionate to club size; we\'ll never charge per-animal or take a cut of registrations.'
+  },
+  {
+    question: 'Do my members have to switch from another tool?',
+    answer: 'No. Most of our breeder members are already tracking animals, health tests, and pedigrees on BreederHQ because it\'s the best-in-class tool for running their breeding program day-to-day. Your club registration becomes one more piece of structured data alongside everything they already have — not a new system they have to learn.'
+  },
+  {
+    question: 'We already have a stud book on [WordPress / Excel / old database]. How does that migrate?',
+    answer: 'We\'ll help you import it. During onboarding we sit down with you, map your fields to ours, and move the historical stud book over. Registrations going forward flow in naturally as your members record animals.'
+  },
+  {
+    question: 'Who owns the data?',
+    answer: 'Your club owns your registrations. Your members own their animal data. BreederHQ hosts and organizes it but never sells or licenses it. You can export your full stud book as CSV or JSON at any time. If you ever leave the platform, you walk away with everything.'
+  },
+  {
+    question: 'What about privacy? Our members are protective of their bloodlines.',
+    answer: 'Privacy is opt-in at every level. A member\'s club registration is private by default — visible to them and to your club, but not to the public marketplace or to other breeders searching the network. Members decide per-registration whether to opt into network visibility. Your members stay in control of their data.'
+  },
+  {
+    question: 'Can we require specific health tests as a condition of registration?',
+    answer: 'Yes. You configure the registration requirements — full, limited, foundation types, required health clearances, pedigree proof, age requirements, fee structure. Applications that don\'t meet them flag automatically. Your reviewers see everything needed to approve or reject without chasing members for attachments.'
+  },
+  {
+    question: 'What if two members both claim the same animal or the same stud?',
+    answer: 'BreederHQ animals are identifiable across the entire platform. A stud owned by Member A can be linked as the sire of Member B\'s litter only with Member A\'s approval. The data makes cross-member disputes solvable — you can see the full provenance chain, not take one side\'s word against the other.'
+  },
+  {
+    question: 'Is the club admin portal live today?',
+    answer: 'The breeder-facing side is live: members are recording club registrations, health tests, pedigrees, and opting into network-visible stud book browsing right now, today. The dedicated admin dashboard — approval queue view, aggregated member directory, club-wide stud book browser, admin login — is the Phase 3 work we\'re building with founding partners. Being a founding partner means you help us decide what gets built first and how it works.'
+  },
+  {
+    question: 'How do we apply?',
+    answer: 'Reach out below. We\'ll schedule a 30-minute call to understand your club\'s current workflow, show you what\'s live today, walk through what we\'re building, and — if it\'s a fit — start onboarding. No pressure, no contract required up front.'
+  }
+];
+---
+
+<BaseLayout
+  title="For Breed Clubs | BreederHQ"
+  description="The home of the breed. BreederHQ gives your breed club a live stud book, structured health and pedigree data, an approval workflow for registrations, and a direct connection to the breeders who already work on the platform every day. Founding partner program open."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+
+  <main>
+
+    <!-- ============================================ -->
+    <!-- HERO                                         -->
+    <!-- ============================================ -->
+    <section class="bg-gradient-to-b from-amber-50 via-orange-50 to-white py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-semibold uppercase tracking-wider mb-6">
+            <span aria-hidden>🏛</span>
+            <span>Founding Partner Program</span>
+          </div>
+          <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl leading-tight mb-6">
+            Your Stud Book.<br />
+            <span class="text-[hsl(24,95%,53%)]">Live. Real. Yours.</span>
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            BreederHQ is where your members already run their breeding programs — tracking
+            pedigrees, health clearances, genetic testing, and litters every day.
+            We want to be your club's operational home too: a live, structured,
+            queryable stud book that your members keep current just by using the tools they
+            already love.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/contact?topic=breed-club-partnership"
+              class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,45%)] w-full sm:w-auto"
+            >
+              Talk to Us About Partnering
+            </a>
+            <a
+              href="#what-your-club-gets"
+              class="text-gray-600 px-8 py-4 text-lg font-medium hover:text-[hsl(24,95%,53%)] w-full sm:w-auto"
+            >
+              See What's Already Live &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- THE PROBLEM TODAY                            -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Running a Breed Club in 2026 Is Harder Than It Should Be
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Your members are dedicated. Your standards are real. But the tools you have to
+            do this work? They haven't changed in 20 years.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl shrink-0">📄</span>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Your stud book is a PDF</h3>
+                <p class="text-sm text-gray-600">
+                  Published twice a year, six months out of date the day it drops, and
+                  impossible for anyone — including you — to actually search.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl shrink-0">📮</span>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Applications arrive by paper, check, or email</h3>
+                <p class="text-sm text-gray-600">
+                  A form here, a PDF health report there, a pedigree scan, and you
+                  re-key all of it into a spreadsheet. One litter can take an hour.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl shrink-0">🧬</span>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Health data doesn't flow back to you</h3>
+                <p class="text-sm text-gray-600">
+                  Your members test. You require it. But the results live in a
+                  member's filing cabinet — you can't see breed-wide trends or spot
+                  outliers, only what gets manually submitted.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl shrink-0">🔀</span>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Members live in five different systems</h3>
+                <p class="text-sm text-gray-600">
+                  BreederHQ for management. AKC online for papers. Email for registrations.
+                  Spreadsheets for everything else. No single source of truth — and you're
+                  the last one to know when something changes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl shrink-0">🕵️</span>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">You can't tell who's actively breeding</h3>
+                <p class="text-sm text-gray-600">
+                  Your member list is dues-paid vs. lapsed. You have no idea which members
+                  are on their 8th litter this year and which haven't bred in a decade.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl shrink-0">⚖️</span>
+              <div>
+                <h3 class="font-semibold text-gray-900 mb-2">Disputes come down to "whose word do we trust?"</h3>
+                <p class="text-sm text-gray-600">
+                  When two members claim the same stud, or a litter's sire is disputed,
+                  or a health clearance's validity is questioned — you have no data to
+                  fall back on. Only paperwork and testimony.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 text-center">
+          <p class="text-lg text-gray-700 font-medium max-w-2xl mx-auto">
+            Your members deserve better. Your breed deserves better.
+            <br />And you deserve to get your Saturdays back.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- WHAT YOUR CLUB GETS                          -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white" id="what-your-club-gets">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            What Your Club Gets on BreederHQ
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Every capability below is powered by the data your members are already
+            entering every day. Your club doesn't build any of it — it just shows up.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <!-- Live Stud Book -->
+          <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8 border border-amber-200">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-lg bg-amber-200 flex items-center justify-center text-2xl shrink-0">📖</div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">A live stud book. Queryable. Today.</h3>
+                <p class="text-sm text-gray-500 italic">Live now in the breeder side — admin view in Phase 3</p>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Every animal registered with your club, across every member, in one view
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Searchable by bloodline, sex, age, health status, registration type
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Updated in real time — the moment a member enters a record, you see it
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Members can opt in to cross-club visibility for breeding matches
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Export the full stud book as CSV, PDF, or via API. It's your data.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Structured Data -->
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-200">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-lg bg-blue-200 flex items-center justify-center text-2xl shrink-0">🧬</div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">Structured data, not PDF attachments</h3>
+                <p class="text-sm text-gray-500 italic">Live now in every member's dashboard</p>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-0.5 font-bold">&#10003;</span>
+                Health tests: OFA hips, elbows, DNA clearances — as structured records, not PDFs
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-0.5 font-bold">&#10003;</span>
+                Pedigrees: linked animals, not typed text. Verified against the real stud.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-0.5 font-bold">&#10003;</span>
+                Genetics: coat color, health markers, breed-specific loci — all queryable
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-0.5 font-bold">&#10003;</span>
+                Titles and show records — linked to the organization that awarded them
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-0.5 font-bold">&#10003;</span>
+                See your breed's health trends in aggregate, not just one-off submissions
+              </li>
+            </ul>
+          </div>
+
+          <!-- Approval Workflow -->
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-200">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-lg bg-green-200 flex items-center justify-center text-2xl shrink-0">✅</div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">Approval workflow, built in</h3>
+                <p class="text-sm text-gray-500 italic">Data flow live today — admin UI Phase 3</p>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5 font-bold">&#10003;</span>
+                You define registration types: Full, Limited, Foundation, Conditional
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5 font-bold">&#10003;</span>
+                You set health testing requirements per registration type
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5 font-bold">&#10003;</span>
+                Members submit applications with supporting data pre-attached
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5 font-bold">&#10003;</span>
+                Pending queue with health compliance status flagged automatically
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5 font-bold">&#10003;</span>
+                Approve, reject, or send back with notes — resubmission keeps history
+              </li>
+            </ul>
+          </div>
+
+          <!-- Member Tools -->
+          <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-xl p-8 border border-rose-200">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 rounded-lg bg-rose-200 flex items-center justify-center text-2xl shrink-0">🤝</div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">A direct line to your members</h3>
+                <p class="text-sm text-gray-500 italic">Breeder-side tools live now</p>
+              </div>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 mt-0.5 font-bold">&#10003;</span>
+                Members get smart suggestions: "Are you a member of [your club]?"
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 mt-0.5 font-bold">&#10003;</span>
+                Members track their club membership number, status, and expirations
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 mt-0.5 font-bold">&#10003;</span>
+                New members can submit applications without ever leaving the platform
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 mt-0.5 font-bold">&#10003;</span>
+                Find a Match: breeders can filter breeding candidates to club-registered animals
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-600 mt-0.5 font-bold">&#10003;</span>
+                Cross-tenant pedigree verification prevents disputed parentage
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- HOW IT FITS TOGETHER                         -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            How It Works, From Your Member's First Litter
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Imagine one of your members has just whelped a litter. Here's what happens.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+
+          <div class="bg-white rounded-xl border border-stone-200 p-6 flex gap-4">
+            <div class="w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white flex items-center justify-center font-bold shrink-0">1</div>
+            <div>
+              <h3 class="font-bold text-gray-900 mb-1">They record the litter on BreederHQ</h3>
+              <p class="text-sm text-gray-600">
+                Like they do every time. Sire, dam, whelp date, offspring, sexes, markings,
+                photos. It's their normal workflow — they're not doing anything extra for your club.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-stone-200 p-6 flex gap-4">
+            <div class="w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white flex items-center justify-center font-bold shrink-0">2</div>
+            <div>
+              <h3 class="font-bold text-gray-900 mb-1">The platform suggests your club</h3>
+              <p class="text-sm text-gray-600">
+                Because they've entered a breed you're linked to, BreederHQ asks:
+                "Are you a member of [your club]? Would you like to register this litter?"
+                One click — they're in your application flow.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-stone-200 p-6 flex gap-4">
+            <div class="w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white flex items-center justify-center font-bold shrink-0">3</div>
+            <div>
+              <h3 class="font-bold text-gray-900 mb-1">They submit — with all their data attached</h3>
+              <p class="text-sm text-gray-600">
+                Registration type, health compliance self-declared, their club membership
+                number auto-filled from their profile. Every health test, pedigree link,
+                and genetic result flows in with the application. No paper, no scans.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-stone-200 p-6 flex gap-4">
+            <div class="w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white flex items-center justify-center font-bold shrink-0">4</div>
+            <div>
+              <h3 class="font-bold text-gray-900 mb-1">You see it in your approval queue</h3>
+              <p class="text-sm text-gray-600">
+                With health compliance flagged green or yellow before you look.
+                Sire and dam link to their own records — not a typed string. Pedigree
+                verified against the real stud's owner. You approve, reject with notes,
+                or send back conditionally.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-stone-200 p-6 flex gap-4">
+            <div class="w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white flex items-center justify-center font-bold shrink-0">5</div>
+            <div>
+              <h3 class="font-bold text-gray-900 mb-1">Approved. And now it's in your stud book.</h3>
+              <p class="text-sm text-gray-600">
+                Instantly. Searchable. Linked to the breeder's animal record.
+                If the offspring ever titles, the title shows up on their registration.
+                If they go on to breed, the grandchildren appear in your stud book
+                automatically. The breed's history writes itself.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- FOUNDING PARTNERS                            -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-gradient-to-br from-amber-50 to-orange-50 border-y border-amber-200">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-200 border border-amber-300 text-amber-900 text-xs font-semibold uppercase tracking-wider mb-4">
+            <span aria-hidden>⭐</span>
+            <span>Limited Founding Partner Slots</span>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Help Us Build the Club Tool You Actually Want
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            We're choosing a small number of founding partner clubs — across breeds,
+            across species, and across sizes — to help us shape the club admin tooling
+            before it becomes generally available.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-10">
+          <div class="bg-white rounded-xl p-6 border border-amber-200">
+            <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <span aria-hidden>💎</span>
+              What founding partners get
+            </h3>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Direct input on what the admin tools do, and in what order
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Free use of the platform for your entire partnership period
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Hands-on onboarding — we migrate your stud book with you
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Founding Partner badge on your public profile, permanent
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Featured placement when we launch the club directory
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 border border-amber-200">
+            <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <span aria-hidden>🎯</span>
+              What we're looking for
+            </h3>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                An active club with members who breed, register, and compete
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                A point of contact willing to give us honest feedback regularly
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Willingness to try a new workflow and tell us where it breaks
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                Open to co-marketing: a short case study when you're happy
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-600 mt-0.5 font-bold">&#10003;</span>
+                That's it. No club size minimums, no exclusivity demands.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 border border-amber-300 text-center">
+          <p class="text-lg text-gray-900 font-medium mb-6">
+            If you're reading this and thinking "wait, this could actually work for us" —
+            that's the whole reason we wrote this page.
+          </p>
+          <a
+            href="/contact?topic=breed-club-partnership"
+            class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,45%)]"
+          >
+            Talk to Us About Partnering
+          </a>
+          <p class="text-xs text-gray-500 mt-4">
+            30-minute call, no pressure, no contract. We'll show you what's live,
+            walk through what's coming, and see if it's a fit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- FAQ                                          -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-sm text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- FINAL CTA                                    -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-gradient-to-br from-amber-900 via-orange-800 to-[hsl(24,95%,40%)]">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">
+          Your breed's history deserves better than a PDF.
+        </h2>
+        <p class="text-lg text-amber-100 mb-10 max-w-2xl mx-auto">
+          Let's talk about what your club needs. Thirty minutes. No commitment.
+          If it's a fit, we'll move fast. If it's not, you'll have learned
+          something about where the tools are going.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="/contact?topic=breed-club-partnership"
+            class="bg-white text-orange-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-50 w-full sm:w-auto"
+          >
+            Talk to Us About Partnering
+          </a>
+          <a
+            href="mailto:clubs@breederhq.com?subject=Breed%20Club%20Partnership%20Inquiry"
+            class="border-2 border-amber-300 text-amber-100 px-8 py-4 rounded-lg text-lg font-semibold hover:border-white hover:text-white w-full sm:w-auto"
+          >
+            Email clubs@breederhq.com
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
