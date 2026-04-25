@@ -3,13 +3,13 @@ const { hideLogo = false } = Astro.props;
 ---
 
 <!-- Founders Banner -->
-<div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-white text-center py-3.5 px-4 text-base relative overflow-hidden">
+<div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-white text-center py-2.5 sm:py-3.5 px-3 sm:px-4 text-sm sm:text-base relative overflow-hidden">
   <div class="absolute inset-0 bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.15)_50%,transparent_75%)] animate-[shimmer_3s_ease-in-out_infinite] bg-[length:200%_100%]"></div>
-  <a href="/founders" class="relative hover:underline inline-flex items-center gap-2.5">
-    <span class="text-xl">&#9733;</span>
-    <strong class="text-base">Founding Member Special:</strong>
-    <span>50% off Pro &amp; Enterprise for 12 months</span>
-    <span class="inline-block bg-white text-amber-700 px-4 py-1 rounded-full text-sm font-bold ml-2 shadow-sm hover:shadow-md transition-shadow">Claim Yours &rarr;</span>
+  <a href="/founders" class="relative hover:underline inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-2.5">
+    <span class="text-lg sm:text-xl">&#9733;</span>
+    <strong class="text-sm sm:text-base">Founding Member Special:</strong>
+    <span class="text-xs sm:text-base">50% off Pro &amp; Enterprise for 12 months</span>
+    <span class="inline-block bg-white text-amber-700 px-3 sm:px-4 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold sm:ml-2 shadow-sm hover:shadow-md transition-shadow">Claim Yours &rarr;</span>
   </a>
 </div>
 
@@ -257,7 +257,7 @@ const { hideLogo = false } = Astro.props;
       </div>
 
       <!-- CTA Buttons -->
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-3 sm:space-x-4">
         <a
           href="https://accounts.breederhq.com/login"
           class="hidden sm:inline-block text-gray-700 hover:text-primary font-medium"
@@ -266,11 +266,195 @@ const { hideLogo = false } = Astro.props;
         </a>
         <a
           href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
-          class="bg-primary text-white px-6 py-2 rounded-lg hover:opacity-90 font-medium"
+          class="bg-primary text-white px-4 sm:px-6 py-2 rounded-lg hover:opacity-90 font-medium text-sm sm:text-base whitespace-nowrap"
         >
           Get Started Free
         </a>
+
+        <!-- Mobile hamburger -->
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-primary"
+          aria-controls="mobile-menu-panel"
+          aria-expanded="false"
+          aria-label="Open main menu"
+        >
+          <svg id="mobile-menu-icon-open" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="mobile-menu-icon-close" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu-panel" class="md:hidden hidden border-t border-stone-200 bg-white max-h-[calc(100vh-5rem)] overflow-y-auto">
+    <div class="px-4 py-4 space-y-1">
+
+      <!-- Sign In (mobile only — hidden in top bar on xs) -->
+      <a href="https://accounts.breederhq.com/login" class="sm:hidden block px-3 py-2 rounded-md text-gray-700 hover:bg-stone-100 font-medium">
+        Sign In
+      </a>
+
+      <!-- Breeders accordion -->
+      <div class="border-b border-stone-100 pb-2">
+        <button type="button" class="mobile-accordion-toggle w-full flex items-center justify-between px-3 py-2 rounded-md text-gray-900 hover:bg-stone-100 font-semibold" aria-expanded="false">
+          <span>Breeders</span>
+          <svg class="mobile-accordion-chevron w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div class="mobile-accordion-content hidden pl-3 pr-1 pt-1 pb-2 space-y-3">
+          <a href="/for-breeders" class="block px-3 py-1.5 text-sm text-primary font-medium hover:underline">Why BreederHQ &rarr;</a>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Platform</div>
+            <a href="/workflows/breeding-cycles" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Breeding Cycles</a>
+            <a href="/workflows/breeding-intelligence" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Breeding Intelligence</a>
+            <a href="/workflows/genetics-and-health-testing" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Genetics &amp; Health</a>
+            <a href="/workflows/offspring-care" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Offspring Care</a>
+            <a href="/workflows/rearing-protocols" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Rearing &amp; Temperament</a>
+            <a href="/workflows/pedigrees" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Pedigrees</a>
+            <a href="/workflows/medication-tracking" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Health &amp; Medications</a>
+            <a href="/workflows/nutrition-tracking" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Nutrition Tracking</a>
+          </div>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Business</div>
+            <a href="/workflows/waitlists-and-placement" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Waitlists &amp; Placement</a>
+            <a href="/workflows/client-management" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Buyer Management</a>
+            <a href="/workflows/client-portal" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Client Portal</a>
+            <a href="/workflows/communications-hub" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Communications Hub</a>
+            <a href="/workflows/invoicing-expenses" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Invoicing &amp; Expenses</a>
+            <a href="/workflows/marketplace" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Marketplace Listings</a>
+            <a href="/workflows/scout-ai" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Scout AI</a>
+            <a href="/mobile" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Mobile App</a>
+          </div>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Species</div>
+            <div class="grid grid-cols-2 gap-1 px-3">
+              <a href="/dogs" class="py-1.5 text-sm text-gray-700 hover:text-primary">🐕 Dogs</a>
+              <a href="/cats" class="py-1.5 text-sm text-gray-700 hover:text-primary">🐈 Cats</a>
+              <a href="/horses" class="py-1.5 text-sm text-gray-700 hover:text-primary">🐴 Horses</a>
+              <a href="/goats" class="py-1.5 text-sm text-gray-700 hover:text-primary">🐐 Goats</a>
+              <a href="/rabbits" class="py-1.5 text-sm text-gray-700 hover:text-primary">🐇 Rabbits</a>
+              <a href="/sheep" class="py-1.5 text-sm text-gray-700 hover:text-primary">🐑 Sheep</a>
+            </div>
+          </div>
+          <div>
+            <a href="/pricing" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded font-medium">Pricing</a>
+            <a href="/pricing/compare" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded font-medium">Compare Plans</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buyers accordion -->
+      <div class="border-b border-stone-100 pb-2">
+        <button type="button" class="mobile-accordion-toggle w-full flex items-center justify-between px-3 py-2 rounded-md text-gray-900 hover:bg-stone-100 font-semibold" aria-expanded="false">
+          <span>Buyers</span>
+          <svg class="mobile-accordion-chevron w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div class="mobile-accordion-content hidden pl-3 pr-1 pt-1 pb-2 space-y-3">
+          <a href="https://marketplace.breederhq.com" class="block px-3 py-1.5 text-sm text-primary font-medium hover:underline">Browse the Marketplace &rarr;</a>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Getting Started</div>
+            <a href="/buyers" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Why BreederHQ Marketplace</a>
+            <a href="/buyers/using-the-marketplace" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">How to Use the Marketplace</a>
+            <a href="/buyers/why-breederhq-marketplace" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">BreederHQ vs Other Sites</a>
+          </div>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Buyer Guides</div>
+            <a href="/buyers/evaluate-breeders" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">How to Evaluate Breeders</a>
+            <a href="/buyers/health-tests" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Understanding Health Testing</a>
+            <a href="/buyers/contracts-and-agreements" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Contracts &amp; Agreements</a>
+            <a href="/buyers/health-guarantees" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Health Guarantees Explained</a>
+            <a href="/buyers/what-does-it-cost" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">What Does It Actually Cost?</a>
+            <a href="/buyers/red-flags" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">Red Flags to Avoid</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Providers accordion -->
+      <div class="border-b border-stone-100 pb-2">
+        <button type="button" class="mobile-accordion-toggle w-full flex items-center justify-between px-3 py-2 rounded-md text-gray-900 hover:bg-stone-100 font-semibold" aria-expanded="false">
+          <span>Service Providers</span>
+          <svg class="mobile-accordion-chevron w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div class="mobile-accordion-content hidden pl-3 pr-1 pt-1 pb-2 space-y-3">
+          <a href="/for-providers" class="block px-3 py-1.5 text-sm text-emerald-700 font-medium hover:underline">Why List on BreederHQ &rarr;</a>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Medical &amp; Health</div>
+            <a href="/for-providers/veterinary" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🩺 Veterinary</a>
+            <a href="/for-providers/health-testing" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🧬 Health Testing</a>
+            <a href="/for-providers/rehabilitation" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">💪 Rehabilitation</a>
+            <a href="/for-providers/nutrition" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🥗 Nutrition</a>
+          </div>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Care &amp; Training</div>
+            <a href="/for-providers/training" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🎓 Training</a>
+            <a href="/for-providers/behavioral" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🧠 Behavioral</a>
+            <a href="/for-providers/handling" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🏅 Show Handling</a>
+            <a href="/for-providers/grooming" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">✂️ Grooming</a>
+            <a href="/for-providers/boarding" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🏠 Boarding</a>
+            <a href="/for-providers/pet-sitting" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🐾 Pet Sitting</a>
+            <a href="/for-providers/farrier" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🔨 Farrier</a>
+          </div>
+          <div>
+            <div class="px-3 text-[11px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Logistics &amp; Media</div>
+            <a href="/for-providers/transport" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🚐 Transport</a>
+            <a href="/for-providers/photography" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">📸 Photography</a>
+            <a href="/for-providers/merchandise" class="block px-3 py-1.5 text-sm text-gray-700 hover:bg-stone-50 rounded">🏷️ Merchandise</a>
+          </div>
+          <a href="https://marketplace.breederhq.com" class="block px-3 py-1.5 text-sm text-emerald-700 font-medium hover:underline">Browse Service Listings &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Breed Clubs (no dropdown) -->
+      <a href="/for-breed-clubs" class="block px-3 py-2 rounded-md text-gray-900 hover:bg-stone-100 font-semibold border-b border-stone-100">
+        Breed Clubs
+      </a>
+
+      <!-- About (no dropdown) -->
+      <a href="/about" class="block px-3 py-2 rounded-md text-gray-900 hover:bg-stone-100 font-semibold">
+        About
+      </a>
+    </div>
+  </div>
 </header>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const panel = document.getElementById('mobile-menu-panel');
+    const iconOpen = document.getElementById('mobile-menu-icon-open');
+    const iconClose = document.getElementById('mobile-menu-icon-close');
+    if (!toggle || !panel || !iconOpen || !iconClose) return;
+
+    toggle.addEventListener('click', function () {
+      const isOpen = !panel.classList.contains('hidden');
+      panel.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Open main menu' : 'Close main menu');
+    });
+
+    document.querySelectorAll('.mobile-accordion-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const content = btn.nextElementSibling;
+        const chevron = btn.querySelector('.mobile-accordion-chevron');
+        if (!content) return;
+        const isOpen = !content.classList.contains('hidden');
+        content.classList.toggle('hidden');
+        if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+  })();
+</script>
