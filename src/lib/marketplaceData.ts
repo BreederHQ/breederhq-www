@@ -23,6 +23,19 @@ export interface BreederCard {
   logoUrl: string | null;
   bannerImageUrl: string | null;
   primarySpecies: string | null;
+  /** Trust + availability signals — surfaced on cards to lift CTR */
+  badges?: {
+    quickResponder?: boolean;
+    healthTesting?: boolean;
+    experiencedBreeder?: boolean;
+  };
+  availabilityStatus?: {
+    acceptingInquiries?: boolean;
+    waitlistOpen?: boolean;
+    availableNowCount?: number;
+    upcomingLittersCount?: number;
+  };
+  verificationTier?: "IDENTITY_VERIFIED" | "VERIFIED" | "ACCREDITED" | null;
 }
 
 export type SpeciesKey = "DOG" | "CAT" | "HORSE" | "GOAT" | "RABBIT" | "SHEEP";
