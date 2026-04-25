@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Find Breeders', url: '/find-breeders' },
+  { name: 'Dog Breeders', url: '/find-breeders/dogs' },
+];
+
+const faqs = [
+  {
+    question: 'How are dog breeders verified on BreederHQ?',
+    answer: 'BreederHQ uses progressive verification. ID Verified means government-issued ID is on file. Verified means identity plus program documentation has been reviewed. Accredited means full accreditation with standards compliance review. Beyond that, breeders earn behavioral badges like Quick Responder (responds within 4 hours), Health Tested (documentation on file), and Experienced (5+ placements completed) automatically based on real activity. Buyers see these badges directly on every breeder profile.',
+  },
+  {
+    question: 'What documentation can I see on a dog breeder profile?',
+    answer: 'Each breeder profile can include health testing results (OFA hips/elbows, PennHIP, Embark genetic panels, breed-specific clearances), pedigrees with COI calculation, breeding history, titled offspring, photos, and program details. The breeder controls visibility on each item — what you see is what they choose to publish, and BreederHQ surfaces what they actually have.',
+  },
+  {
+    question: 'How do I contact a dog breeder I find on BreederHQ?',
+    answer: 'Click into any breeder profile and use the Contact button or join their waitlist. Messages flow through the BreederHQ platform so the breeder gets organized inquiries, you get a record of the conversation, and your contact information is not shared until you choose to share it.',
+  },
+  {
+    question: 'Are all dog breeds represented?',
+    answer: 'BreederHQ supports breeders of any AKC, UKC, FCI, or independently-recognized dog breed. Coverage depends on which breeders have joined — newer markets will have fewer breeders. Use the breed filter on the breeders page to see what is available now.',
+  },
+  {
+    question: 'Does BreederHQ list rescue dogs or shelters?',
+    answer: 'No. BreederHQ is purpose-built for breeders running structured breeding programs. For rescue dogs, see Petfinder, Adopt-a-Pet, or your local shelter. For dogs from professional breeders with documented health testing and pedigrees, BreederHQ is the right place.',
+  },
+];
+---
+
+<BaseLayout
+  title="Find Verified Dog Breeders | BreederHQ"
+  description="Find verified dog breeders with real health testing, pedigrees, and breeding history. Browse trusted programs by breed and location on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main class="min-h-screen bg-white">
+    <a href="#main" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+      Skip to content
+    </a>
+
+    <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Find verified dog breeders
+        </h1>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          Real health testing. Real pedigrees. Real breeding history. The breeders on BreederHQ
+          publish their programs from inside the same platform they use to manage them — what you
+          see is grounded in actual records, not a self-written profile.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="https://marketplace.breederhq.com/breeders"
+            class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto"
+          >
+            Browse Dog Breeders
+          </a>
+          <a
+            href="https://marketplace.breederhq.com/animals"
+            class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto"
+          >
+            Browse Available Puppies
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+          What "verified" actually means
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity verified</h3>
+            <p class="text-gray-700 text-sm">Government-issued ID is on file. The Verified badge means identity AND program documentation has been reviewed. Accredited means full standards compliance review.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Health testing on file</h3>
+            <p class="text-gray-700 text-sm">Health Tested badge requires real documentation — OFA hips/elbows, PennHIP, Embark genetic panels, breed-specific clearances. Not a self-attestation.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Earned, not bought</h3>
+            <p class="text-gray-700 text-sm">Quick Responder is auto-granted from real response times. Experienced is auto-granted at 5+ placements. Breeders cannot purchase any badge.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          What you can see on a dog breeder profile
+        </h2>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li><strong>Health testing results</strong> — OFA scores, PennHIP, Embark panels, breed-specific clearances. Available by parent dog when the breeder has uploaded them.</li>
+          <li><strong>Pedigrees with COI</strong> — multi-generation pedigree trees with coefficient of inbreeding calculation per pairing.</li>
+          <li><strong>Breeding history</strong> — past litters, current pregnancies, upcoming planned breedings, and waitlist status.</li>
+          <li><strong>Titles and achievements</strong> — conformation, performance, working titles on parents and offspring.</li>
+          <li><strong>Photos and program story</strong> — gallery, what makes the program distinctive, who the breeder is.</li>
+          <li><strong>Contracts and guarantees</strong> — health guarantee terms, return policies, contract templates the breeder uses.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          How to evaluate the dog breeders you find
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/buyers/evaluate-breeders" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">How to Evaluate Breeders</h3>
+            <p class="text-sm text-gray-600">The questions to ask, what separates responsible breeders from the rest.</p>
+          </a>
+          <a href="/buyers/health-tests" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Understanding Health Testing</h3>
+            <p class="text-sm text-gray-600">Why it matters, which tests are important, how to interpret results.</p>
+          </a>
+          <a href="/buyers/red-flags" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Red Flags to Avoid</h3>
+            <p class="text-sm text-gray-600">Warning signs of irresponsible practices and how to protect yourself.</p>
+          </a>
+          <a href="/buyers/contracts-and-agreements" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contracts and Agreements</h3>
+            <p class="text-sm text-gray-600">What should be in your purchase contract, and what should not.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Ready to find your dog?
+        </h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Browse verified dog breeders on the BreederHQ Marketplace.
+        </p>
+        <a
+          href="https://marketplace.breederhq.com/breeders"
+          class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition"
+        >
+          Browse Dog Breeders
+        </a>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

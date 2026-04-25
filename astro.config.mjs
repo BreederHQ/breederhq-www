@@ -36,6 +36,11 @@ export default defineConfig({
           item.changefreq = 'monthly';
           item.priority = 0.9;
         }
+        // Find-breeders landing pages — high SEO intent ("find dog breeders" etc.)
+        else if (item.url.includes('/find-breeders')) {
+          item.changefreq = 'weekly';
+          item.priority = 0.9;
+        }
         // Comparison pages — high value for SEO
         else if (item.url.includes('/compare/')) {
           item.changefreq = 'monthly';

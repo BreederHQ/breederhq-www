@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Find Breeders', url: '/find-breeders' },
+];
+
+const speciesOptions = [
+  { slug: 'dogs', name: 'Dog breeders', desc: 'Health-tested, pedigreed dogs from verified programs.', icon: '🐕' },
+  { slug: 'cats', name: 'Cat breeders', desc: 'TICA, CFA, and registered catteries with documented health screening.', icon: '🐈' },
+  { slug: 'horses', name: 'Horse breeders', desc: 'Foals, breeding stock, and stallions with genetic clearance.', icon: '🐎' },
+  { slug: 'goats', name: 'Goat breeders', desc: 'Dairy and meat operations with DHIA records and disease testing.', icon: '🐐' },
+  { slug: 'rabbits', name: 'Rabbit breeders', desc: 'Show, meat, fiber, and pet rabbits with ARBA pedigrees.', icon: '🐇' },
+  { slug: 'sheep', name: 'Sheep breeders', desc: 'Wool, meat, dairy, and heritage breeds with NSIP data.', icon: '🐑' },
+];
+---
+
+<BaseLayout
+  title="Find Verified Breeders | BreederHQ"
+  description="Find verified breeders of dogs, cats, horses, goats, rabbits, and sheep. Real health testing, registered pedigrees, and breeding history on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+>
+  <main class="min-h-screen bg-white">
+    <a href="#main" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">Skip to content</a>
+
+    <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find verified breeders</h1>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          BreederHQ supports breeders of dogs, cats, horses, goats, rabbits, and sheep.
+          Every profile is grounded in real records — health testing, pedigrees, and breeding
+          history that the breeder maintains in the same platform they use to run their program.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {speciesOptions.map((s) => (
+            <a href={`/find-breeders/${s.slug}`} class="block bg-white border-2 border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-md transition">
+              <div class="text-4xl mb-3">{s.icon}</div>
+              <h2 class="text-xl font-bold text-gray-900 mb-2">{s.name}</h2>
+              <p class="text-gray-600 text-sm">{s.desc}</p>
+              <p class="mt-4 text-[hsl(24,95%,53%)] font-semibold text-sm">Browse {s.name.toLowerCase()} →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why "verified" matters here</h2>
+        <p class="text-lg text-gray-700 mb-4">
+          Most listing sites let breeders write whatever they want about themselves. BreederHQ does
+          not. The breeders on this platform manage their actual breeding program inside BreederHQ —
+          health testing records, pedigrees, breeding plans, waitlists, contracts. When they publish
+          a profile to the marketplace, what you see is grounded in those records.
+        </p>
+        <p class="text-lg text-gray-700 mb-4">
+          Behavioral badges (Quick Responder, Experienced) are auto-granted from real activity, not
+          purchased. The Health Tested badge requires real documentation. The Verified badge requires
+          identity AND program documentation review.
+        </p>
+        <p class="text-lg text-gray-700">
+          You can read more about how to evaluate any breeder you find in our
+          <a href="/buyers/evaluate-breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">buyer's guide to evaluating breeders</a>,
+          our guide on
+          <a href="/buyers/health-tests" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">understanding health testing</a>,
+          and our
+          <a href="/buyers/red-flags" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">red flags to avoid</a> guide.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Browse the full marketplace</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          See every verified breeder, every available animal, and every service provider on the
+          BreederHQ Marketplace.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">All Verified Breeders</a>
+          <a href="https://marketplace.breederhq.com/animals" class="bg-white text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-100 transition w-full sm:w-auto">All Available Animals</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

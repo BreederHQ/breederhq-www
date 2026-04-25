@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Find Breeders', url: '/find-breeders' },
+  { name: 'Rabbit Breeders', url: '/find-breeders/rabbits' },
+];
+
+const faqs = [
+  {
+    question: 'What rabbit breeds and operations are on BreederHQ?',
+    answer: 'ARBA-recognized show breeds (Holland Lop, Netherland Dwarf, Mini Rex, Lionhead, Flemish Giant, and many more), meat operations (New Zealand, Californian, Florida White), pet/companion rabbit breeders, and fiber breeders (Angora). Coverage depends on which rabbitries have joined.',
+  },
+  {
+    question: 'What rabbit health and quality data can I see on profiles?',
+    answer: 'Rabbit breeders can publish pedigrees with show wins on ancestors, parent rabbits with photos, available kits, biosecurity practices, and breeding history. Show breeders often include leg counts, Best in Show wins, and ARBA registration numbers.',
+  },
+  {
+    question: 'Can I find rabbits for show, meat, fiber, and pet?',
+    answer: 'Yes. Browse the breeders or animals pages and use the breed and intent filters. Different breeders specialize in different markets — show, meat, fiber, or pet — and that intent is on each listing.',
+  },
+];
+---
+
+<BaseLayout
+  title="Find Verified Rabbit Breeders | BreederHQ"
+  description="Find verified rabbit breeders for show, meat, fiber, and pet rabbits. ARBA pedigrees, breeding history, and verified operations on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main class="min-h-screen bg-white">
+    <a href="#main" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">Skip to content</a>
+
+    <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find verified rabbit breeders</h1>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          ARBA pedigrees with show records on ancestors. Real breeding history. Show, meat, fiber,
+          and pet rabbit breeders all in one place — with the documentation to back up their claims.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Rabbit Breeders</a>
+          <a href="https://marketplace.breederhq.com/animals" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Browse Available Rabbits</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a rabbit breeder profile</h2>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li><strong>Pedigrees</strong> — multi-generation pedigrees with leg counts and Best in Show wins on ancestors.</li>
+          <li><strong>Breeding history</strong> — past litters, current pregnancies, expected kits, and waitlist status.</li>
+          <li><strong>Available kits and adults</strong> — what is available now, with breed standard color and pattern details.</li>
+          <li><strong>Show records</strong> — parent rabbits' show wins and ARBA registration status.</li>
+          <li><strong>Biosecurity and health</strong> — RHDV2 vaccination, quarantine practices, herd health.</li>
+          <li><strong>Photos and program story</strong> — gallery, what makes the rabbitry distinctive.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your rabbit?</h2>
+        <p class="text-lg text-stone-300 mb-8">Browse verified rabbit breeders on the BreederHQ Marketplace.</p>
+        <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Rabbit Breeders</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

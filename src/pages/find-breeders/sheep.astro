@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Find Breeders', url: '/find-breeders' },
+  { name: 'Sheep Breeders', url: '/find-breeders/sheep' },
+];
+
+const faqs = [
+  {
+    question: 'What sheep breeds and operations are on BreederHQ?',
+    answer: 'Wool/fiber breeds (Shetland, Romney, Merino, BFL, Wensleydale, Cormo), meat breeds (Suffolk, Hampshire, Dorper, Katahdin, Texel), dairy breeds (East Friesian, Lacaune, Awassi), heritage and rare breeds, and dual-purpose flocks. NSIP and breed-specific registries are supported.',
+  },
+  {
+    question: 'Can I see NSIP performance data on profiles?',
+    answer: 'Yes. Sheep breeders enrolled in the National Sheep Improvement Program can publish NSIP EBVs (estimated breeding values) for growth, maternal traits, and fleece quality. This is documented production data, not self-attestation.',
+  },
+  {
+    question: 'What about scrapie certification and biosecurity?',
+    answer: 'Health Tested badge requires real documentation. Sheep breeders can publish Scrapie Free Flock Certification status, OPP testing, foot rot status, and biosecurity protocols.',
+  },
+  {
+    question: 'Can I find fleece, breeding stock, and lambs?',
+    answer: 'Yes. Browse for registered ewes, rams, and lambs. Fiber breeders often list fleece sales separately. Use the breed and intent filters to narrow results.',
+  },
+];
+---
+
+<BaseLayout
+  title="Find Verified Sheep Breeders | BreederHQ"
+  description="Find verified sheep breeders for wool, meat, dairy, and heritage breeds. NSIP records, scrapie certification, and registered pedigrees on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main class="min-h-screen bg-white">
+    <a href="#main" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">Skip to content</a>
+
+    <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find verified sheep breeders</h1>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          NSIP performance data. Scrapie certification. Registered pedigrees. Fiber, meat, dairy,
+          and heritage breeders publish documented records — not just self-written profiles.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Sheep Breeders</a>
+          <a href="https://marketplace.breederhq.com/animals" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Browse Available Sheep</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a sheep breeder profile</h2>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li><strong>NSIP performance data</strong> — EBVs for growth, maternal, fleece traits.</li>
+          <li><strong>Scrapie and disease status</strong> — Scrapie Free Flock Certification, OPP testing, foot rot status, biosecurity.</li>
+          <li><strong>Registered pedigrees</strong> — breed-specific registries with show records on ancestors.</li>
+          <li><strong>Lambing history</strong> — past lambing records, current pregnancies, expected lambs, waitlist status.</li>
+          <li><strong>Fleece data</strong> — for fiber breeds: micron count, staple length, color, fleece weight.</li>
+          <li><strong>Photos and program story</strong> — flock photos, breeding philosophy, what makes the program distinctive.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your sheep?</h2>
+        <p class="text-lg text-stone-300 mb-8">Browse verified sheep breeders on the BreederHQ Marketplace.</p>
+        <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Sheep Breeders</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
