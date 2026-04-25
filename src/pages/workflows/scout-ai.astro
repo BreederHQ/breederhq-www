@@ -39,6 +39,18 @@ const faqs = [
   {
     question: 'Can I pick up a conversation where I left off?',
     answer: 'Yes. Scout automatically saves your conversations. You can view your conversation history, resume previous threads, and pick up right where you left off, even across different sessions.'
+  },
+  {
+    question: 'What is Scout AI Repro Insight and how does it work?',
+    answer: 'Scout AI Repro Insight is an on-demand reproductive assessment for canine breeding plans. When you click "Get Expert Assessment" under the progesterone trend chart, Scout AI compares this cycle to her last 5 cycles, watches for split heats, stalled cycles, anovulatory patterns, and other anomalies, and returns a structured second opinion with a confidence rating, comparison to her past cycles, a clear recommendation, and a recommended next-test date. It does not replace your veterinarian, but it gives you a data-aware second opinion you can act on or take to your vet.'
+  },
+  {
+    question: 'Does Repro Insight cost extra?',
+    answer: 'No. Repro Insight is included with Pro and Enterprise plans at no additional cost. Each assessment is cached so re-clicking with the same data returns instantly. New tests trigger a fresh assessment automatically.'
+  },
+  {
+    question: 'Does Repro Insight work for horses or other species?',
+    answer: 'Currently canine only. Equine progesterone dynamics work very differently — high P4 in mares often means not in heat — so we are building a separate model. Other species may follow as we add reproductive data depth.'
   }
 ];
 ---
@@ -244,6 +256,67 @@ const faqs = [
           <p class="text-xs text-gray-500">Seconds, not minutes of searching</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Section 3.5: Scout AI Repro Insight -->
+  <section class="py-20 px-4 bg-purple-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">Scout AI Repro Insight</h2>
+      <p class="text-sm font-semibold uppercase tracking-wide text-purple-700 mb-6">A second opinion you can take to the vet</p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Reading a progesterone trend is hard. The numbers say one thing today, something different tomorrow, and you're left wondering whether she's about to ovulate, has already ovulated, or is pulling a stunt your last female didn't.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Scout AI Repro Insight reads the chart for you. It compares this cycle to her past cycles, watches for split heats and stalled surges, flags anything unusual, and gives you a plain-English recommendation with a confidence rating. One click. Sourced from her actual history, not a generic textbook.
+      </p>
+
+      <div class="bg-white border border-purple-200 p-6 rounded-lg mb-8">
+        <p class="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-2">Example assessment</p>
+        <p class="text-base text-gray-800 mb-3">
+          <strong>Split heat likely &middot; Medium confidence</strong>
+        </p>
+        <p class="text-base text-gray-700 mb-3">
+          Georgia's progesterone rose to 2.1 ng/mL on Apr 21 then fell back to 0.8 on Apr 24. This pattern is consistent with a split heat &mdash; a partial surge that resorbs before triggering ovulation.
+        </p>
+        <p class="text-sm text-gray-600 italic mb-3">
+          Compared to past cycles: Her 2025-09 cycle showed a similar shape and ultimately had a successful second surge 11 days later.
+        </p>
+        <p class="text-base text-gray-700 mb-1"><strong>Recommendation:</strong> Hold off on breeding decisions for 7-14 days. Resume testing on Apr 28.</p>
+        <p class="text-sm text-gray-500 mt-3">
+          A trend assessment, not medical advice. Always confirm timing decisions with your veterinarian.
+        </p>
+      </div>
+
+      <h3 class="text-2xl font-bold mb-4">What Repro Insight catches that math doesn't</h3>
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">&bull;</span>
+          <span><strong>Split heats</strong> &mdash; partial surges that resorb before ovulation. More common in certain bloodlines, harder to spot from numbers alone.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">&bull;</span>
+          <span><strong>Stalled cycles</strong> &mdash; rises that plateau and don't reach the breed zone.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">&bull;</span>
+          <span><strong>Anovulatory cycles</strong> &mdash; full estrus behavior without a successful surge.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">&bull;</span>
+          <span><strong>Anomalies</strong> &mdash; data that doesn't fit any normal pattern, where a vet consult is the right next step.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">&bull;</span>
+          <span><strong>History comparisons</strong> &mdash; "she did this exact same shape last cycle and ovulated 2 days later than the average."</span>
+        </li>
+      </ul>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        For breeders without a reproductive vet on speed-dial, this is the closest thing to having one in your pocket. Available on Pro and Enterprise plans. Currently supports canine breeding programs &mdash; equine support coming.
+      </p>
     </div>
   </section>
 
