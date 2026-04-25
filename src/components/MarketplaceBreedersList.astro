@@ -1,0 +1,109 @@
+---
+/**
+ * Renders a card grid of breeders fetched at build time.
+ *
+ * Used on /find-breeders/* species landing pages so the page actually shows
+ * the live breeders (instead of a generic "browse breeders" CTA that converts
+ * a buyer to a click rather than to a specific breeder).
+ *
+ * Empty array fallback: if the API is unreachable at build time, render a
+ * tasteful "We're growing" message instead of an empty grid.
+ */
+import type { BreederCard } from '../lib/marketplaceData';
+
+interface Props {
+  breeders: BreederCard[];
+  speciesLabel: string; // e.g. "dog", "cat", "horse"
+  emptyHeading?: string;
+  emptyBody?: string;
+}
+
+const {
+  breeders,
+  speciesLabel,
+  emptyHeading = `We're growing our ${speciesLabel} breeder roster`,
+  emptyBody = `${speciesLabel.charAt(0).toUpperCase() + speciesLabel.slice(1)} breeders are joining BreederHQ regularly. Check the marketplace directly for the latest verified breeders, or come back soon.`,
+} = Astro.props;
+
+function locationLabel(b: BreederCard): string {
+  if (b.city && b.state) return `${b.city}, ${b.state}`;
+  if (b.state) return b.state;
+  if (b.city) return b.city;
+  return '';
+}
+
+function breedSummary(b: BreederCard): string {
+  const list = (b.breeds || []).map((x) => x.name).filter(Boolean);
+  if (list.length === 0) return '';
+  if (list.length <= 3) return list.join(', ');
+  return `${list.slice(0, 3).join(', ')} and ${list.length - 3} more`;
+}
+---
+
+{breeders.length > 0 ? (
+  <section class="py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">
+        {speciesLabel ? `Verified ${speciesLabel} breeders on BreederHQ` : 'Verified breeders on BreederHQ'}
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {breeders.map((b) => {
+          const loc = locationLabel(b);
+          const breeds = breedSummary(b);
+          const profileUrl = `https://marketplace.breederhq.com/breeders/${b.tenantSlug}`;
+          return (
+            <a
+              href={profileUrl}
+              class="block bg-white border-2 border-stone-200 rounded-xl overflow-hidden hover:border-[hsl(24,95%,53%)] hover:shadow-md transition"
+            >
+              {b.bannerImageUrl ? (
+                <div class="aspect-video bg-stone-100 overflow-hidden">
+                  <img
+                    src={b.bannerImageUrl}
+                    alt={`${b.businessName} — verified ${speciesLabel ? speciesLabel + ' ' : ''}breeder${loc ? ' in ' + loc : ''}`}
+                    loading="lazy"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              ) : b.logoUrl ? (
+                <div class="aspect-video bg-stone-50 flex items-center justify-center p-8">
+                  <img
+                    src={b.logoUrl}
+                    alt={`${b.businessName} logo`}
+                    loading="lazy"
+                    class="max-h-full max-w-full object-contain"
+                  />
+                </div>
+              ) : null}
+              <div class="p-5">
+                <h3 class="text-lg font-bold text-gray-900 mb-1">{b.businessName}</h3>
+                {loc && (
+                  <p class="text-sm text-gray-600 mb-2">{loc}</p>
+                )}
+                {breeds && (
+                  <p class="text-sm text-gray-700">
+                    <span class="font-semibold">Breeds:</span> {breeds}
+                  </p>
+                )}
+                <p class="mt-4 text-[hsl(24,95%,53%)] font-semibold text-sm">View profile →</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+) : (
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-3">{emptyHeading}</h2>
+      <p class="text-gray-700 mb-6">{emptyBody}</p>
+      <a
+        href="https://marketplace.breederhq.com/breeders"
+        class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition"
+      >
+        Visit the marketplace
+      </a>
+    </div>
+  </section>
+)}

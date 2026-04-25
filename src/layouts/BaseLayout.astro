@@ -17,12 +17,19 @@ interface Props {
   };
   noindex?: boolean;
   hideLogo?: boolean;
+  /**
+   * Optional per-page Open Graph image. When omitted, the global default
+   * (https://breederhq.com/og-image.jpg) is used. Per-page values let species
+   * pages, find-breeders pages, and similar share with a more relevant
+   * preview image on social platforms.
+   */
+  ogImage?: string;
 }
 
-const { title, description, breadcrumbs, faqs, howTo, noindex, hideLogo } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
 const currentUrl = Astro.url.pathname;
 const fullUrl = `https://breederhq.com${currentUrl}`;
-const ogImage = 'https://breederhq.com/og-image.jpg'; // Default OG image
+const ogImage = ogImageProp || 'https://breederhq.com/og-image.jpg'; // Default OG image
 
 // Schema.org Organization - critical for AI assistants
 const organizationSchema = {

@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketplaceBreedersList from '../../components/MarketplaceBreedersList.astro';
+import { fetchBreeders } from '../../lib/marketplaceData';
+
+const breeders = await fetchBreeders('CAT');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -68,6 +72,8 @@ const faqs = [
         </div>
       </div>
     </section>
+
+    <MarketplaceBreedersList breeders={breeders} speciesLabel="cat" />
 
     <section class="py-16 px-4">
       <div class="max-w-5xl mx-auto">
