@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Embed on Your Website', url: '/workflows/embed-on-your-website' }
+];
+
+const faqs = [
+  {
+    question: 'Will it work on Squarespace, Wix, and WordPress?',
+    answer: 'Yes. The widget is a single <script> tag, so any website builder that lets you paste custom HTML — Squarespace Code Block, Wix HTML Embed, WordPress Custom HTML block — works without a plugin or theme change.'
+  },
+  {
+    question: 'Will it match my website\'s look?',
+    answer: 'Yes. The widget detects your site\'s light or dark theme automatically, or you can force light or dark mode. We also use a technique called Shadow DOM so your site\'s CSS won\'t accidentally bleed into the widget and break it.'
+  },
+  {
+    question: 'Do my visitors have to leave my site to see my animals?',
+    answer: 'No — the widget shows everything right on your page. When a visitor wants to inquire or learn more about a specific animal, the link takes them to your BreederHQ profile where the inquiry tools live.'
+  },
+  {
+    question: 'How fresh is the data?',
+    answer: 'Near-real-time. When you publish a new program, list a new puppy, or mark one reserved on BreederHQ, your website reflects the change the next time a visitor loads the page (cached for a few minutes for speed).'
+  },
+  {
+    question: 'Will it slow down my site?',
+    answer: 'No measurable impact. The widget loads asynchronously (in the background) and is under 10 KB compressed — smaller than most images on your page.'
+  },
+  {
+    question: 'Do I need any technical skills to install it?',
+    answer: 'If you can paste a snippet into your website, yes — that\'s it. No code to write, no API keys to manage, no maintenance.'
+  },
+  {
+    question: 'Can I show only one program (like just my Working Line dogs)?',
+    answer: 'Yes. You can paste one snippet on your homepage to show your whole storefront, and a different snippet on a niche page to show only that one program.'
+  },
+  {
+    question: 'What does it cost?',
+    answer: 'Nothing. The widget is included free for every Identity-Verified BreederHQ breeder.'
+  }
+];
+---
+
+<BaseLayout
+  title="Show Your Live BreederHQ Programs and Animals on Your Own Website | BreederHQ"
+  description="Paste one snippet onto your Squarespace, Wix, or WordPress site and your visitors see your live BreederHQ breeding programs and animal listings — automatically updated, on-brand, and linked back to your verified profile."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to main content
+  </a>
+
+  <main id="main-content">
+
+    <!-- ============================================ -->
+    <!-- HERO                                         -->
+    <!-- ============================================ -->
+    <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl leading-tight mb-6">
+            Your Live BreederHQ Storefront,<br />
+            <span class="text-primary">On Your Own Website.</span>
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Paste one snippet onto your Squarespace, Wix, or WordPress site
+            and your visitors see your live BreederHQ Breeding Programs and
+            Animal Listings, right on your page. Always up to date.
+            On-brand. Linked back to your verified profile.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+              class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 w-full sm:w-auto"
+            >
+              Start Your Free Trial
+            </a>
+            <a
+              href="#how-it-works"
+              class="text-gray-600 px-8 py-4 text-lg font-medium hover:text-primary w-full sm:w-auto"
+            >
+              See how it works &rarr;
+            </a>
+          </div>
+          <p class="mt-4 text-sm text-gray-400">Free for every Identity-Verified BreederHQ breeder.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- THE PROBLEM                                  -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          You Already Have a Website. Your Animals Live Somewhere Else.
+        </h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Your personal website is where buyers usually land first — from a
+          Google search, a recommendation, or your social media bio.
+          But your actual programs, current litters, and available animals
+          live on BreederHQ, where the inquiry tools, contracts, and
+          buyer-protection systems are.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          That split costs you. Buyers who don't click through to your
+          BreederHQ profile never see your live inventory. Buyers who do
+          click through have to compare what they saw on your website
+          against what's actually available — and any drift breaks trust.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          The Embed Widget closes that gap. Your live BreederHQ data
+          renders directly on your website, in a section you control,
+          without you doing any extra work to keep it in sync.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW IT WORKS                                 -->
+    <!-- ============================================ -->
+    <section id="how-it-works" class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
+          How It Works
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-2xl p-8 shadow-sm">
+            <div class="text-4xl mb-4">1️⃣</div>
+            <h3 class="text-xl font-semibold mb-3">Generate Your Snippet</h3>
+            <p class="text-gray-600 leading-relaxed">
+              In your BreederHQ Commerce dashboard, open Embed on My Website.
+              Choose whether to show your whole storefront or one specific
+              breeding program. Pick a theme. Copy the snippet.
+            </p>
+          </div>
+          <div class="bg-white rounded-2xl p-8 shadow-sm">
+            <div class="text-4xl mb-4">2️⃣</div>
+            <h3 class="text-xl font-semibold mb-3">Paste It Onto Your Page</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Open the page on your Squarespace, Wix, or WordPress site
+              where you want the widget to appear. Add a Code Block (or
+              Custom HTML block). Paste. Save.
+            </p>
+          </div>
+          <div class="bg-white rounded-2xl p-8 shadow-sm">
+            <div class="text-4xl mb-4">3️⃣</div>
+            <h3 class="text-xl font-semibold mb-3">Done</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Your visitors now see your live BreederHQ programs, current
+              litters, available animals, and your verification badges
+              right on your page. Everything updates automatically.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- WHAT VISITORS SEE                            -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
+          What Your Visitors See
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-3">Your Breeding Programs</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Each program shown with cover photo, breed and registration,
+              short description, active litter count, and how many animals
+              are currently available.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">Current and Upcoming Litters</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Live status of every litter — planned, bred, born, or going
+              home — with parent pair, color, expected dates, and how many
+              are still available. Species-aware language: "Available
+              Puppies" for dogs, "Available Foals" for horses, and so on.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">Available Offspring and Listings</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Cards for each animal currently available, with photo, sex,
+              age, color, and price. Click any card and the visitor lands
+              on the full listing on BreederHQ where they can inquire.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">Trust and Verification</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Your verification tier, every badge you've earned on the
+              platform, and the buyer-protection framework BreederHQ
+              provides. Visitors know they can trust what they see before
+              they ever send a deposit.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- DESIGN-FORWARD                               -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          It Looks Like It Belongs on Your Site
+        </h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-2">Matches Your Theme</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Light or dark mode is detected automatically. Or override
+              it: force light, force dark, your call.
+            </p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-2">Won't Break Your Layout</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              The widget renders in an isolated container so your site's
+              CSS can't accidentally style it, and its CSS can't bleed
+              onto your site.
+            </p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-2">Loads Fast</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Under 10 KB compressed. Loads asynchronously. Won't slow
+              down your page or hurt your search rankings.
+            </p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-2">Always Up to Date</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              You don't update anything. New litter on BreederHQ?
+              Marked one reserved? It's reflected on your website on the
+              next visitor's page load.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- LIVE PREVIEW                                 -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">
+          See It Before You Paste It
+        </h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto">
+          The Embed on My Website page in your dashboard shows a live
+          preview of how the widget will look — using your real data —
+          so you can adjust the theme, choose which sections to include,
+          and see how it'll look on a phone, tablet, or desktop before
+          you paste a single line into your site.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA                                          -->
+    <!-- ============================================ -->
+    <section class="bg-gradient-to-br from-primary to-primary-dark py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">
+          Ready to Connect Your Website to Your BreederHQ Storefront?
+        </h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          Start your free trial. Verify your identity. Generate your
+          snippet. The whole flow takes about 15 minutes from sign-up
+          to your first visitor seeing your live storefront on your own
+          site.
+        </p>
+        <a
+          href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+          class="inline-block bg-white text-primary px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100"
+        >
+          Start Your Free Trial
+        </a>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
