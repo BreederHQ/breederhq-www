@@ -27,7 +27,12 @@ interface Props {
 }
 
 const { title, description, breadcrumbs, faqs, howTo, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
-const currentUrl = Astro.url.pathname;
+// Astro is configured with `trailingSlash: 'never'`, so every page's canonical
+// URL must be slash-free — including the homepage. Without this normalization
+// the homepage canonical was `https://breederhq.com/` (with slash) while every
+// other page was slash-free, and Google flagged it as a duplicate-canonical
+// mismatch (chose the slash-free version itself). 2026-04-27.
+const currentUrl = Astro.url.pathname === '/' ? '' : Astro.url.pathname.replace(/\/$/, '');
 const fullUrl = `https://breederhq.com${currentUrl}`;
 const ogImage = ogImageProp || 'https://breederhq.com/og-image.jpg'; // Default OG image
 
