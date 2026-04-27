@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Data Deletion', url: '/data-deletion' }
+];
+
+const lastUpdated = 'April 27, 2026';
+---
+
+<BaseLayout
+  title="Data Deletion Instructions - BreederHQ"
+  description="How to request deletion of your BreederHQ account, your social-account connections, and the data we store from connected Facebook or Instagram accounts."
+  breadcrumbs={breadcrumbs}
+>
+
+  <main>
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 mb-4">
+          Data Deletion Instructions
+        </h1>
+        <p class="text-gray-500 mb-12">Last Updated: {lastUpdated}</p>
+
+        <div class="prose prose-lg max-w-none">
+          <p>
+            BreederHQ respects your right to control your data. This page explains how to delete your BreederHQ account and how to remove any data we store from connected third-party services like Facebook and Instagram.
+          </p>
+
+          <h2>Quick Options</h2>
+          <ul>
+            <li><strong>Disconnect a Facebook or Instagram account</strong> — In the BreederHQ app, go to <em>Marketing → Social Accounts</em> and click <strong>Disconnect</strong> on the platform you want to remove. We immediately stop publishing to that channel and delete the associated access token from our systems.</li>
+            <li><strong>Delete your entire BreederHQ account</strong> — Email <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a> from the email address on your account with the subject line <strong>"Delete my account"</strong>. We process deletion requests within 30 days.</li>
+            <li><strong>Request data export before deletion</strong> — Email <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a> with the subject line <strong>"Export my data"</strong> at least 7 days before requesting deletion.</li>
+          </ul>
+
+          <h2>Disconnecting Facebook or Instagram</h2>
+          <p>If you previously connected your Facebook Page or Instagram Business account to BreederHQ to publish posts, you can disconnect it at any time. Disconnecting deletes the access token we hold and stops all future activity on that channel from BreederHQ.</p>
+          <ol>
+            <li>Sign in to BreederHQ at <a href="https://app.breederhq.com">app.breederhq.com</a></li>
+            <li>Click <strong>Marketing</strong> in the left navigation</li>
+            <li>On the Marketing home page, click the <strong>Social Accounts</strong> tile under "Configure Your Hub"</li>
+            <li>Find the platform you want to disconnect (Facebook or Instagram) and click <strong>Disconnect</strong></li>
+            <li>Confirm the action when prompted</li>
+          </ol>
+          <p>You can also revoke BreederHQ's access from Facebook directly:</p>
+          <ol>
+            <li>Visit <a href="https://www.facebook.com/settings?tab=business_tools">facebook.com/settings?tab=business_tools</a></li>
+            <li>Find <strong>BreederHQ</strong> in your list of Business Integrations</li>
+            <li>Click <strong>Remove</strong></li>
+          </ol>
+          <p>Either path immediately invalidates the token. Posts that were already published to your Facebook Page or Instagram account remain on Meta's platforms — you can delete those individually on Facebook or Instagram if you want them removed.</p>
+
+          <h2>What We Store from Connected Social Accounts</h2>
+          <p>When you connect a Facebook Page or Instagram Business account to BreederHQ, we store only what is required to publish on your behalf:</p>
+          <ul>
+            <li>The Page or Instagram Business Account ID</li>
+            <li>The Page name and (where applicable) Instagram username, for display in the BreederHQ UI</li>
+            <li>An encrypted access token (AES-256-GCM at rest), used to publish posts when you ask us to</li>
+            <li>A record of each post you publish through BreederHQ to that channel (the post ID returned by Meta, the publish timestamp, and any error messages from a failed publish)</li>
+          </ul>
+          <p>We do not read or store your Page's existing posts, comments, messages, or insights. We do not access your Facebook profile data beyond what is required to identify the Pages you manage.</p>
+
+          <h2>Deleting Your Entire BreederHQ Account</h2>
+          <p>To delete your BreederHQ account and all associated data, email <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a> from the email address on your account.</p>
+          <p>Include in your message:</p>
+          <ul>
+            <li>Subject line: <strong>"Delete my account"</strong></li>
+            <li>Your account email address (for verification)</li>
+            <li>Optional: a reason for deletion, so we can improve the product</li>
+          </ul>
+          <p>We will:</p>
+          <ol>
+            <li>Confirm receipt within 2 business days</li>
+            <li>Verify your identity by replying to the email address on the account</li>
+            <li>Delete your account, animals, plans, contacts, media, messages, financial records, and any connected social account tokens within 30 days</li>
+            <li>Send a final confirmation when deletion is complete</li>
+          </ol>
+          <p>Deleted data may persist in encrypted backups for up to 30 additional days before being purged from those backups, after which it is unrecoverable.</p>
+
+          <h2>What Persists After Deletion</h2>
+          <p>The following data may be retained after account deletion for legitimate business purposes:</p>
+          <ul>
+            <li><strong>Financial records</strong> retained as required by tax and accounting law (typically 7 years), in anonymized form where possible</li>
+            <li><strong>Aggregated analytics</strong> that do not identify you (such as "X breeders published Y posts last quarter")</li>
+            <li><strong>Posts already published</strong> to external platforms like Facebook, Instagram, or your public marketplace listings — those copies live on those platforms and are not within our control to delete. You can remove them directly on each platform.</li>
+          </ul>
+
+          <h2>Exporting Your Data Before Deletion</h2>
+          <p>You can request a copy of your data before deleting your account. Email <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a> with the subject line <strong>"Export my data"</strong> at least 7 business days before you intend to request deletion. We will provide your data in a portable format (typically JSON plus media as a ZIP archive).</p>
+
+          <h2>Contact Us</h2>
+          <p>If you have questions about data deletion or any other privacy concern, contact us:</p>
+          <ul>
+            <li>Email: <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a></li>
+            <li>Postal mail: BreederHQ LLC, 10420 S Ridgeview Rd, Unit #2079, Olathe, KS 66061</li>
+          </ul>
+          <p>For broader information about how we handle your data, see our <a href="/privacy">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</BaseLayout>
+
+<style>
+  @reference "tailwindcss";
+
+  .prose h2 {
+    @apply text-2xl font-bold text-gray-900 mt-10 mb-4;
+  }
+  .prose h3 {
+    @apply text-xl font-semibold text-gray-900 mt-6 mb-3;
+  }
+  .prose p {
+    @apply text-gray-600 mb-4;
+  }
+  .prose ul {
+    @apply list-disc list-inside text-gray-600 mb-4 space-y-1;
+  }
+  .prose ol {
+    @apply list-decimal list-inside text-gray-600 mb-4 space-y-1;
+  }
+  .prose a {
+    @apply hover:underline;
+    color: hsl(var(--primary));
+  }
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
+</style>
