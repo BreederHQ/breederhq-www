@@ -57,6 +57,11 @@ export interface ScreenshotEntry {
    * credentials before navigation.
    */
   loginAs?: { email: string; password: string };
+  /**
+   * If true, this entry is captured manually (e.g. transient modals that
+   * require interactive form input). The auto-capture script skips these.
+   */
+  manual?: boolean;
 }
 
 // Login credentials for each multi-species seed tenant. Used as `loginAs` on
@@ -162,12 +167,17 @@ export const MANIFEST: ScreenshotEntry[] = [
   // as 0/N for every section, which is not marketing-quality. Re-add once the
   // seed creates AnimalTraitValue entries for Willow's vaccines + screenings.
   {
-    id: "breeding-plan-journey",
-    url: "/breeding?planId=240", // Willow × Hudson — drawer
-    viewport: "desktop-tall",
+    // Captured manually — this is the New Breeding Plan modal showing live
+    // COI calculation + genetic carrier conflict detection as the user
+    // picks Dam and Sire. Not auto-captureable because it requires opening
+    // a modal and filling form fields. Re-capture by hand if the modal UI changes.
+    id: "breeding-intelligence",
+    url: "(manual capture — New Breeding Plan modal with COI + carrier panel)",
+    viewport: "desktop",
     waitFor: "main",
-    description: "Breeding plan journey — phase timeline showing cycle → bred → pregnant",
-    usedOn: ["workflows/breeding-plans.astro", "workflows/breeding-intelligence.astro", "for-breeders.astro"],
+    description: "New Breeding Plan modal — live COI risk + genetic carrier conflict detection",
+    usedOn: ["workflows/breeding-intelligence.astro"],
+    manual: true,
   },
   {
     id: "breeding-plan-buyers",

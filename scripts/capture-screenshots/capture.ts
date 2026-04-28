@@ -179,7 +179,7 @@ async function main(): Promise<void> {
         if (!entry) throw new Error(`Unknown screenshot id: ${id}`);
         return entry;
       })
-    : MANIFEST;
+    : MANIFEST.filter((e) => !e.manual);
 
   if (args.dryRun) {
     console.log(`Would capture ${targets.length} screenshot(s) on env=${args.env}:`);

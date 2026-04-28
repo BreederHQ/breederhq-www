@@ -33,7 +33,7 @@ If anything's off, call it out by **shot id** (the kebab-case key in the table b
 | `animal-detail-overview` | Willow's detail — breed, DOB, microchip, breeding status, due date | /for-breeders, /compare/breederhq-vs-spreadsheets, /dogs | Marketing-quality. Note: drawer modal shape, dimmed backdrop. |
 | `animal-pedigree` | Willow's lineage tab — sire/dam/grandparents tree | /workflows/pedigrees, /for-breeders | Marketing-quality. |
 | `animal-genetics` | Willow's genetics tab — Embark panel + coat color loci | /workflows/genetics-and-health-testing, /workflows/breeding-intelligence, /workflows/scout-ai | Marketing-quality. |
-| `breeding-plan-journey` | Plan phase pipeline — Planning → Cycle → Bred → **Birth** active → Weaned → … | /workflows/breeding-plans, /workflows/breeding-intelligence, /for-breeders | Marketing-quality. |
+| `breeding-intelligence` | New Breeding Plan modal — live COI risk + genetic carrier conflict detection as Dam and Sire are picked | /workflows/breeding-intelligence | Manual capture. |
 | `breeding-plan-buyers` | Plan Buyers tab — 3 buyers assigned (David, Olivia, Sarah) with pick order, match status, deposit, balance | /workflows/waitlists-and-placement | Marketing-quality. |
 | `contact-detail` | Sarah Johnson contact drawer — sales pipeline, animals, finances tabs | /workflows/client-management, /for-breeders | Real, but only first/last name + email populated. Could enrich seed later for richer demo. |
 | `sales-pipeline` | Pipeline stages — Inquiry, Next Step Sent — KPI cards | /workflows/client-management | Marketing-quality. |
@@ -101,7 +101,7 @@ A second seed tenant covers a Quarter Horse breeding program. Login: `horses@bre
 After the user uploaded all tenant logos, banners, animal photos, and re-seeded storefront Standards & Credentials, we recaptured all 29 shots (1x DPR) and re-inspected each. Findings below are **product-side polish bugs** surfaced by marketing-quality screenshots, not screenshot-tooling issues.
 
 ### Confirmed marketing-grade (no blockers)
-`platform-dashboard`, `animals-list`, `animal-detail-overview`, `animal-genetics`, `breeding-plans-list`, `breeding-plan-journey`, `breeding-plan-buyers`, `offspring-list`, `contacts-list`, `finance-invoices`, `invoice-detail`, `comms-hub-inbox`, `marketplace-breeder-profile`, `portal-buyer-home`, `horse-platform-dashboard`, `horse-animals-list`, `horse-animal-detail`, `horse-animal-titles`, `horse-breeding-plans-list`, `horse-marketplace-profile`.
+`platform-dashboard`, `animals-list`, `animal-detail-overview`, `animal-genetics`, `breeding-plans-list`, `breeding-intelligence`, `breeding-plan-buyers`, `offspring-list`, `contacts-list`, `finance-invoices`, `invoice-detail`, `comms-hub-inbox`, `marketplace-breeder-profile`, `portal-buyer-home`, `horse-platform-dashboard`, `horse-animals-list`, `horse-animal-detail`, `horse-animal-titles`, `horse-breeding-plans-list`, `horse-marketplace-profile`.
 
 ### Product polish bugs found during marketing QA
 
