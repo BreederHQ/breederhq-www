@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'AI Privacy Policy', url: '/ai-privacy' }
+];
+
+const lastUpdated = 'April 28, 2026';
+---
+
+<BaseLayout
+  title="AI Privacy Policy - BreederHQ"
+  description="How BreederHQ's AI features handle your data: what is sent, what is technically blocked, retention, opt-out, and your rights."
+  breadcrumbs={breadcrumbs}
+>
+
+  <main>
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 mb-4">
+          AI Privacy Policy
+        </h1>
+        <p class="text-gray-500 mb-12">Last Updated: {lastUpdated}</p>
+
+        <div class="prose prose-lg max-w-none">
+          <p>
+            This AI Privacy Policy (this "Policy") describes how BreederHQ LLC ("BreederHQ," "we," "our," or "us") collects, processes, transmits, retains, and safeguards information when you use the artificial-intelligence-powered features in our web and mobile applications (the "AI Features"). This Policy supplements, and should be read together with, our general <a href="/privacy">Privacy Policy</a>, our <a href="/terms">Terms of Service</a>, and our <a href="/acceptable-use">Acceptable Use Policy</a>. Capitalized terms not defined here have the meanings given to them in those documents.
+          </p>
+          <p>
+            We have engineered the AI Features around a strict principle of <strong>data minimization</strong>: structured personal information about you and the people in your records is technically blocked from leaving our systems and is replaced with opaque pseudonymous identifiers before any prompt is transmitted to our third-party AI service provider.
+          </p>
+
+          <h2>1. Scope of the AI Features</h2>
+          <p>
+            The AI Features include in-application assistants (such as "Scout"), AI-assisted help-center search, AI-generated summaries, AI-assisted drafting tools, and AI-assisted document parsing. These features may, depending on the action you take:
+          </p>
+          <ul>
+            <li>Answer questions about how to use BreederHQ;</li>
+            <li>Summarize information drawn from records to which you already have access (animals, breeding plans, offspring, contacts, finances, and similar records);</li>
+            <li>Assist you in drafting messages, descriptions, or notes;</li>
+            <li>Extract structured data from documents you elect to upload (for example, vaccination records, medication labels, lab reports, or contract templates).</li>
+          </ul>
+          <p>
+            The AI Features do not make automated decisions that produce legal or similarly significant effects on you. AI-generated output is informational only and must be reviewed by you before being relied upon.
+          </p>
+
+          <h2>2. Two Categories of Data — Different Treatment</h2>
+          <p>
+            For purposes of this Policy, AI-related data falls into two distinct categories that we treat differently:
+          </p>
+          <ul>
+            <li><strong>(a) Stored Records</strong> — personal information that BreederHQ stores in its database on your behalf, such as your contacts' names, email addresses, phone numbers, and mailing addresses, your account credentials, and similar records.</li>
+            <li><strong>(b) User-Submitted Content</strong> — information you affirmatively submit to an AI Feature in real time, such as text you type into a chat with an AI assistant, files you upload to be parsed by an AI Feature, or content you paste into an AI-assisted draft.</li>
+          </ul>
+
+          <h2>3. Stored Records — Technical Safeguards Before Transmission</h2>
+          <p>
+            Before any prompt or context is transmitted to our third-party AI service provider, BreederHQ programmatically applies the following safeguards to Stored Records:
+          </p>
+          <ul>
+            <li><strong>Pseudonymization of identifying fields.</strong> Names (first, last, display, nickname), email addresses, telephone and messaging numbers, and postal-address fields are replaced with stable opaque identifiers (for example, "[Person:42]" or "[Email:42]") that have no meaning outside of your tenant.</li>
+            <li><strong>Suppression of authentication and payment material.</strong> Password hashes, password-reset tokens, multi-factor authentication secrets, recovery codes, session and refresh tokens, OAuth credentials, API keys and webhook secrets, taxpayer identification numbers (SSN/EIN/ITIN), payment-card numbers, card verification codes, and bank account/routing numbers are programmatically suppressed and never transmitted in any form.</li>
+            <li><strong>Pattern-based scrubbing of free-text fields.</strong> Free-text fields (notes, comments, and similar) are run through pattern detectors that strip email addresses, telephone numbers, government identifiers, payment-card-like number sequences, password-hash signatures, and API-key signatures before transmission.</li>
+            <li><strong>Re-hydration on return.</strong> When AI output is returned to you, BreederHQ re-hydrates the pseudonyms locally so the user-facing answer shows the real values. The third-party AI service provider never sees the pre-pseudonymization values.</li>
+          </ul>
+          <p>
+            These safeguards are implemented in code, are independent of any controls maintained by our AI service provider, and are exercised on every AI request involving Stored Records.
+          </p>
+
+          <h2>4. User-Submitted Content — Limitations and Your Responsibility</h2>
+          <p>
+            The technical safeguards described in Section 3 are designed to protect Stored Records that we hold on your behalf. They do not, and cannot, sanitize content that you affirmatively submit to an AI Feature in real time.
+          </p>
+          <p>
+            <strong>You acknowledge and agree that:</strong>
+          </p>
+          <ul>
+            <li>When you type a question, prompt, or message into an AI Feature, the text you type is transmitted to our AI service provider as written;</li>
+            <li>When you upload a file or document to an AI Feature for parsing or analysis, the contents of that file are transmitted to our AI service provider so the AI Feature can perform the requested function;</li>
+            <li>When you paste text into an AI-assisted draft or editor, the pasted text is transmitted to our AI service provider as written.</li>
+          </ul>
+          <p>
+            <strong>You are solely responsible for the content of User-Submitted Content.</strong> BreederHQ is not responsible, and accepts no liability, for personal information, confidential information, credentials, payment data, or other sensitive material that you elect to include in chat messages, prompts, uploaded files, or pasted content. We strongly recommend that you do not paste passwords, payment-card numbers, government identifiers, or other sensitive information into any AI Feature, and that you redact such information from any document before uploading it for parsing.
+          </p>
+          <p>
+            For documents you upload (for example, contract templates, vaccination records, medication labels, or lab reports), the document content is transmitted to the AI service provider in order to perform the parsing you requested. This is a feature-by-feature carve-out from the safeguards in Section 3, because the entire purpose of the parsing feature is for the AI to read the document.
+          </p>
+
+          <h2>5. Third-Party AI Service Provider</h2>
+          <p>
+            We use a single, vetted third-party AI service provider to power the AI Features. We have selected a provider that:
+          </p>
+          <ul>
+            <li>Operates under a written data-processing agreement with BreederHQ;</li>
+            <li>Contractually agrees not to use customer prompts or outputs to train its general-purpose AI models;</li>
+            <li>Maintains industry-standard security certifications (such as SOC 2 Type II);</li>
+            <li>Encrypts data in transit and at rest; and</li>
+            <li>Retains transmitted data only for the limited period required to deliver the service and meet abuse-monitoring obligations.</li>
+          </ul>
+          <p>
+            We do not publicly disclose the specific identity of our AI service provider in this Policy. Customers, regulators, and auditors who require this information for compliance, vendor-review, or data-protection-impact-assessment purposes may request it from us at <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a> and we will provide it under appropriate confidentiality terms.
+          </p>
+
+          <h2>6. No Use of Your Data for Model Training</h2>
+          <p>
+            <strong>Your data is not used to train general-purpose AI models.</strong> Our agreement with our AI service provider expressly prohibits the use of your prompts, context, or outputs to train, fine-tune, or otherwise improve foundation models or other customer-facing models.
+          </p>
+          <p>
+            BreederHQ may use de-identified, aggregated metrics about AI usage (for example, total queries per day, average response latency, error rates) to monitor and improve product quality. These metrics never include the content of your prompts or your records.
+          </p>
+
+          <h2>7. Retention</h2>
+          <ul>
+            <li><strong>AI query logs.</strong> Logs of AI prompts and responses, together with associated metadata, are retained by BreederHQ for ninety (90) days, after which they are automatically deleted.</li>
+            <li><strong>AI conversation history.</strong> Conversation history is retained until you delete it, your account is deleted, or the 90-day log retention period expires, whichever occurs first.</li>
+            <li><strong>AI service provider retention.</strong> Our AI service provider retains transmitted data only for the limited period required to deliver the service and meet abuse-monitoring obligations, after which it is deleted from their systems.</li>
+            <li><strong>Backups.</strong> Deleted AI-related data may persist in encrypted backups for up to thirty (30) days before being overwritten.</li>
+          </ul>
+
+          <h2>8. Your Rights and Controls</h2>
+          <p>You have the following controls over the AI Features and your AI-related data:</p>
+          <ul>
+            <li><strong>Disable the AI Features.</strong> Organization administrators may disable the AI Features for the entire organization in Settings. When disabled, no AI requests are made and no data is transmitted to the AI service provider.</li>
+            <li><strong>Decline consent.</strong> You may decline the AI Data Processing Notice. You may continue to use the rest of BreederHQ without using the AI Features.</li>
+            <li><strong>Delete AI history.</strong> You may permanently delete your AI query logs and conversation history at any time from the Help Center.</li>
+            <li><strong>Access.</strong> You may request a copy of the AI logs associated with your account.</li>
+            <li><strong>Correction and deletion.</strong> You may request correction or deletion of your personal information.</li>
+            <li><strong>Withdraw consent.</strong> You may withdraw consent at any time. Withdrawal does not affect AI processing that already occurred.</li>
+          </ul>
+          <p>
+            To exercise any of these rights, contact us at <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a>.
+          </p>
+
+          <h2>9. Security</h2>
+          <p>We protect AI-related data using the same security controls described in our general <a href="/privacy">Privacy Policy</a>, including:</p>
+          <ul>
+            <li>TLS encryption for all data in transit between BreederHQ, your devices, and our AI service provider;</li>
+            <li>Encryption at rest for stored AI logs;</li>
+            <li>Tenant-scoped access controls so AI assistants can only see data within your organization;</li>
+            <li>Audit logging of AI tool calls, including which records were referenced;</li>
+            <li>Rate limiting and abuse monitoring on AI endpoints; and</li>
+            <li>Periodic security review of AI prompts, tool definitions, and the data-minimization layer described in Section 3.</li>
+          </ul>
+
+          <h2>10. Children's Data</h2>
+          <p>
+            BreederHQ is not directed to children under 13 years of age, and the AI Features are not designed to process personal information of children. If you believe a child's information has been submitted to the AI Features, please contact us so we may delete it.
+          </p>
+
+          <h2>11. International Data Transfers</h2>
+          <p>
+            Our AI service provider may process data in the United States or in other countries. Where required by applicable law, we rely on appropriate safeguards (such as standard contractual clauses) for international transfers of personal information.
+          </p>
+
+          <h2>12. Limitations of AI Output</h2>
+          <p>
+            AI output may be incomplete, inaccurate, or out-of-date. You are responsible for reviewing AI-generated content before relying on it for medical, financial, legal, breeding, contractual, or other consequential decisions. The AI Features do not constitute professional advice.
+          </p>
+
+          <h2>13. Changes to This Policy</h2>
+          <p>
+            We may update this Policy from time to time. Material changes will be communicated by updating the "Last Updated" date and, where appropriate, by re-prompting you to acknowledge the AI Data Processing Notice in-application. Your continued use of the AI Features following the posting of revised terms constitutes your acceptance of those revised terms.
+          </p>
+
+          <h2>14. Contact Us</h2>
+          <p>If you have questions about this Policy or our AI data practices, please contact:</p>
+          <ul>
+            <li>Email: <a href="mailto:privacy@breederhq.com">privacy@breederhq.com</a></li>
+            <li>Mail: BreederHQ LLC, 10420 S Ridgeview Rd, Unit #2079, Olathe, KS 66061</li>
+            <li>Website: <a href="https://breederhq.com/contact">breederhq.com/contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</BaseLayout>
+
+<style>
+  @reference "tailwindcss";
+
+  .prose h2 {
+    @apply text-2xl font-bold text-gray-900 mt-10 mb-4;
+  }
+  .prose h3 {
+    @apply text-xl font-semibold text-gray-900 mt-6 mb-3;
+  }
+  .prose p {
+    @apply text-gray-600 mb-4;
+  }
+  .prose ul {
+    @apply list-disc list-inside text-gray-600 mb-4 space-y-1;
+  }
+  .prose a {
+    @apply hover:underline;
+    color: hsl(var(--primary));
+  }
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
+</style>
