@@ -60,7 +60,7 @@ function breedSummary(b: BreederCard): string {
                 <div class="aspect-video bg-stone-100 overflow-hidden">
                   <img
                     src={b.bannerImageUrl}
-                    alt={`${b.businessName} — verified ${speciesLabel ? speciesLabel + ' ' : ''}breeder${loc ? ' in ' + loc : ''}`}
+                    alt={`${b.businessName}, verified ${speciesLabel ? speciesLabel + ' ' : ''}breeder${loc ? ' in ' + loc : ''}`}
                     loading="lazy"
                     class="w-full h-full object-cover"
                   />
@@ -86,7 +86,7 @@ function breedSummary(b: BreederCard): string {
                   </p>
                 )}
 
-                {/* Trust + availability signals — only render when present */}
+                {/* Trust + availability signals - only render when present */}
                 {(b.badges?.healthTesting ||
                   b.badges?.quickResponder ||
                   b.badges?.experiencedBreeder ||
@@ -115,7 +115,7 @@ function breedSummary(b: BreederCard): string {
                   </div>
                 )}
 
-                {/* Availability — only when there's something to say */}
+                {/* Availability - only when there's something to say */}
                 {b.availabilityStatus && (b.availabilityStatus.availableNowCount || b.availabilityStatus.upcomingLittersCount || b.availabilityStatus.waitlistOpen) && (
                   <p class="text-xs text-gray-700 mb-3">
                     {b.availabilityStatus.availableNowCount ? (

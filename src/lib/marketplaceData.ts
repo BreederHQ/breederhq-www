@@ -1,7 +1,7 @@
 /**
  * Build-time data fetchers for marketplace embeds on the marketing site.
  *
- * Astro's static build runs these fetches at build time — no runtime cost,
+ * Astro's static build runs these fetches at build time - no runtime cost,
  * no client JS needed. The marketing site stays fully static, but with live
  * marketplace data baked in.
  *
@@ -23,7 +23,7 @@ export interface BreederCard {
   logoUrl: string | null;
   bannerImageUrl: string | null;
   primarySpecies: string | null;
-  /** Trust + availability signals — surfaced on cards to lift CTR */
+  /** Trust + availability signals - surfaced on cards to lift CTR */
   badges?: {
     quickResponder?: boolean;
     healthTesting?: boolean;
@@ -42,7 +42,7 @@ export type SpeciesKey = "DOG" | "CAT" | "HORSE" | "GOAT" | "RABBIT" | "SHEEP";
 
 /**
  * Fetch all public breeders, optionally filtered to a single species.
- * Empty array on any failure — caller is responsible for fallback copy.
+ * Empty array on any failure - caller is responsible for fallback copy.
  */
 export async function fetchBreeders(
   species?: SpeciesKey,
