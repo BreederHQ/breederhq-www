@@ -1,0 +1,549 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Outreach Hub', url: '/workflows/outreach-hub' }
+];
+
+const faqs = [
+  {
+    question: 'What is the Outreach Hub?',
+    answer: 'The Outreach Hub is a single place to write breeder announcements once, target the right audience (your buyers, your waitlist, or the public), and publish them through email, your client portal, your public marketplace profile, and Facebook and Instagram — all from one composer. It is part of the Marketing module on the Pro and Enterprise plans.'
+  },
+  {
+    question: 'How is this different from the Communications Hub?',
+    answer: 'The Communications Hub is your unified inbox for inbound conversations — emails, marketplace inquiries, and portal messages from one buyer at a time. The Outreach Hub is the outbound side: announcements, updates, and posts that go to many people at once. They share contacts and templates but solve different problems.'
+  },
+  {
+    question: 'Where can announcements be published?',
+    answer: 'In the in-app portal feed for approved buyers and waitlisters, on your public marketplace profile, by email to the eligible audience, and directly to your connected Facebook Page and Instagram Business account. You can pick any combination — buyers only, marketplace only, or both — for each announcement.'
+  },
+  {
+    question: 'Can I scope an announcement to one breeding plan or one program?',
+    answer: 'Yes. Announcements can be plan-scoped (only the families in that plan see it) or program-scoped (everyone following that breeding program). Plan announcements are great for litter updates; program announcements work for upcoming breedings, health-test results, and program news.'
+  },
+  {
+    question: 'What does Scout AI do in the Outreach Hub?',
+    answer: 'Scout AI drafts announcements from the actual data in your account — the litter, the program, the birth date, the colors, the parents — and adjusts the tone (Friendly, Professional, Excited, Concise) without rewriting the post yourself. It also offers Quiet Guidance: gentle suggestions on what to share next when you have not posted in a while, based on what is happening in your program.'
+  },
+  {
+    question: 'Will my buyers actually see the announcement?',
+    answer: 'Yes — and you can prove it. Every published announcement shows reach metrics: how many buyers were eligible, how many were emailed, and how many have actually seen it in the portal. No more "did anyone get my update?".'
+  },
+  {
+    question: 'How does social publishing work?',
+    answer: 'Connect your Facebook Page and your Instagram Business account once in the Social Accounts page. After that, the Outreach composer has Facebook and Instagram toggles — checking them publishes the same announcement to those platforms with photos and a backlink to your marketplace listing. UTM tracking is added automatically so you can see in your analytics which posts drove traffic.'
+  },
+  {
+    question: 'What if I do not know what to post?',
+    answer: 'Scout AI Quiet Guidance watches for important moments in your program — birth, weaning, placement, a new title, a health-test result — and suggests an announcement topic with a starter draft. You stay in control: every suggestion is a draft, never auto-published.'
+  },
+  {
+    question: 'Is the Outreach Hub included in my plan?',
+    answer: 'Plan announcements (litter updates) and Program announcements (program news) are included on Pro and Enterprise. Scout AI drafting and tone adjustment, Facebook and Instagram publishing, audience preview, and reach metrics are also Pro and Enterprise features.'
+  }
+];
+---
+
+<BaseLayout
+  title="Outreach Hub — Announcements, Email, Portal, Facebook & Instagram | BreederHQ"
+  description="Write once, publish everywhere. The Outreach Hub sends announcements to buyers and waitlisters by email and portal, posts to your public marketplace profile, and publishes to Facebook and Instagram — with Scout AI drafting and reach metrics."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Outreach Hub</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Write Once. Reach Everyone.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          The Outreach Hub is one composer for every announcement you send. Pick the audience (your buyers, your waitlist, or the public), pick the channels (email, client portal, public marketplace profile, Facebook, Instagram), and publish. Scope an announcement to a single breeding plan or to a whole program. Scout AI drafts the post from your real data and adjusts the tone. Reach metrics tell you exactly how many people saw it. Included with the Marketing module on Pro and Enterprise.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        Most breeders are doing the work of three people. You are not just running the program — you are also the marketing department. Birth photos go to one Facebook group, a litter update goes by email, your waitlist gets a separate text, and the marketplace listing is whatever you remembered to update last week.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        The Outreach Hub collapses all of that into one place. One composer, one audience picker, one publish button — and the announcement reaches every channel you chose, in your voice, on your schedule.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">You already make these announcements. They just live in five places.</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Right now a single litter update probably goes through:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>An email to approved buyers</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A separate email to the waitlist</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A Facebook Page post</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>An Instagram post (different photo crop, different caption)</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A marketplace listing edit so the public profile is current</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A reminder to anyone who emailed you last week asking for an update</span>
+        </li>
+      </ul>
+
+      <div class="bg-white border-l-4 border-red-500 p-6 rounded mb-6">
+        <h3 class="text-xl font-bold mb-4">Where it gets expensive:</h3>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>The five versions drift — wrong birth date on Instagram, wrong color counts on Facebook</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>You have no idea who saw what, so you re-send "just in case"</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>Half of it doesn't go out at all because you ran out of time</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>The marketplace profile sits stale, which is the one place buyers actually decide</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
+        One composer means one canonical update. Every audience hears the same story, in the right voice, at the same time.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: One Composer -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">One Composer, Every Audience</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Open the Outreach Hub, pick the parent (a breeding plan or a breeding program), pick the visibility, and write. The composer is the same whether you are sending to twelve approved buyers or to the entire public marketplace.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📋 Plan Announcements</h3>
+          <p class="text-gray-700">
+            Scoped to one breeding plan or litter. Birth updates, weighing photos, weaning notes, go-home checklists. Only families connected to that plan see it.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🐾 Program Announcements</h3>
+          <p class="text-gray-700">
+            Scoped to a whole breeding program. Upcoming pairings, new health-test results, titles earned, program news, waitlist openings.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🎯 Audience Visibility</h3>
+          <p class="text-gray-700">
+            Pick any combination: <strong>Buyers Only</strong> (in their portal), <strong>Marketplace Only</strong> (your public profile), or <strong>Both</strong>. The same announcement, the right audience.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📧 Email on Publish</h3>
+          <p class="text-gray-700">
+            One toggle sends the announcement by email to every eligible buyer when you publish. No mail-merge, no separate "newsletter" tool.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📸 Rich Media</h3>
+          <p class="text-gray-700">
+            Attach photos and short videos straight from your media vault — every program photo you have already uploaded is right there in the picker.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📝 Drafts & Audit Trail</h3>
+          <p class="text-gray-700">
+            Save drafts, schedule for later, unpublish if you change your mind. Every action is recorded with who, when, and what changed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Scout AI Drafting -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-3 mb-8 flex-wrap">
+        <h2 class="text-4xl font-bold">Scout AI Writes the First Draft</h2>
+        <span class="inline-block bg-[hsl(24,95%,53%)] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Pro &amp; Enterprise</span>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Most breeders do not stop posting because they don't have anything to say. They stop because they don't have time to write it. Scout AI drafts announcements from the actual data in your account — the litter name, the parents, the birth date, the color counts, the program — so you start with a real post, not a blank page.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">✍️ One-Click Drafts</h3>
+          <p class="text-gray-700">
+            Click "Draft with Scout" inside the composer. Scout reads the plan or program you are posting from and produces a complete, on-brand draft with the right names, dates, and details.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🎚️ Tone Adjustment</h3>
+          <p class="text-gray-700">
+            Same draft, different voice. Switch between <strong>Friendly</strong>, <strong>Professional</strong>, <strong>Excited</strong>, and <strong>Concise</strong> with one click — Scout rewrites without losing the facts.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🔒 Your Data, Your Privacy</h3>
+          <p class="text-gray-700">
+            Personal information about your buyers (names, emails, phones, addresses) is pseudonymized before any AI request — Scout sees the program facts, not the family list. <a href="/ai-privacy" class="text-[hsl(24,95%,53%)] hover:underline">Read the AI Privacy Policy →</a>
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">👤 You Always Approve</h3>
+          <p class="text-gray-700">
+            Every draft is a draft. Nothing publishes until you read it, edit it, and click publish. Scout writes the first version — you ship the final one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Quiet Guidance -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-3 mb-8 flex-wrap">
+        <h2 class="text-4xl font-bold">Scout AI Quiet Guidance</h2>
+        <span class="inline-block bg-[hsl(24,95%,53%)] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Pro &amp; Enterprise</span>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The hardest part of breeder marketing isn't writing — it's remembering. A puppy hits weaning and the photo never goes out. A dam earns a title and your buyers never hear about it. Quiet Guidance fixes that without nagging you.
+      </p>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)] mb-8">
+        <h3 class="text-xl font-bold mb-3">How it works</h3>
+        <p class="text-gray-700 mb-4">
+          Scout watches for moments in your program where an update is overdue or genuinely worth sharing — and surfaces a gentle suggestion in the Outreach Hub:
+        </p>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>"Your Sundance × Juniper Star plan reached the Birth phase 6 days ago — would you like to share a birth announcement?"</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>"Willow's CGC title was added to her record — your waitlist would love to hear about this."</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span>"It has been 3 weeks since your last program update. Here is a draft about the upcoming spring breeding."</span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Each suggestion comes with a starter draft you can publish, edit, or dismiss in one click. No notifications, no popups, no pressure — just a quiet list waiting for you when you open the Hub.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Channels -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Every Channel Your Buyers Actually Use</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Pick the channels per announcement. Some posts belong to your inner circle of approved buyers. Others belong on the public marketplace. Some belong everywhere. The composer lets you decide.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🏠 Client Portal Feed</h3>
+          <p class="text-gray-700">
+            Approved buyers and waitlisters see new announcements in their portal feed the moment you publish, with a sidebar dot badge so they know there is something new.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📧 Email on Publish</h3>
+          <p class="text-gray-700">
+            One toggle sends the same announcement by email to every eligible buyer at the moment of publication. Branded with your kennel, replies come back to your Communications Hub.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🌐 Public Marketplace Profile</h3>
+          <p class="text-gray-700">
+            Marketplace-visible announcements appear on your <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">public breeder profile</a> as fresh, dated content — exactly the kind of activity prospective buyers and search engines look for.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📘 Facebook Pages</h3>
+          <p class="text-gray-700">
+            Connect your Facebook Page once. After that, a single toggle in the composer publishes the same announcement to your Page with photos and a backlink — UTM tags included automatically.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📸 Instagram Business</h3>
+          <p class="text-gray-700">
+            Same toggle, same announcement, posted to your connected Instagram Business account. No copy-pasting captions, no resizing photos — the composer handles it.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📊 UTM Tracking</h3>
+          <p class="text-gray-700">
+            Every social link is auto-tagged with UTMs so you can see in Google Analytics which channels actually drove traffic to your marketplace listing or program page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Audience Preview & Reach -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Know Who Will See It. Know Who Did.</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Before you publish, the composer shows you exactly who is going to receive the announcement. After you publish, reach metrics tell you who actually saw it.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">👀 Audience Preview</h3>
+          <p class="text-gray-700">
+            "This will reach 42 approved buyers and 18 waitlisters via portal, plus the public marketplace profile." See the count before you commit. No more guessing whether the visibility settings are right.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📈 Reach Metrics</h3>
+          <p class="text-gray-700">
+            After publishing, every announcement shows three numbers: <strong>eligible</strong>, <strong>emailed</strong>, and <strong>seen</strong>. Direct evidence of how the message landed — no guessing.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <p class="text-gray-700 leading-relaxed">
+          When a buyer messages you to ask "did you send an update on the litter?", you can answer from data instead of memory.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Pairs With Comms Hub -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Outbound and Inbound. One Marketing Module.</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The Outreach Hub and the <a href="/workflows/communications-hub" class="text-[hsl(24,95%,53%)] hover:underline">Communications Hub</a> are two halves of the same Marketing module:
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+          <h3 class="text-xl font-bold mb-3">📤 Outreach Hub</h3>
+          <p class="text-gray-700 text-sm mb-3"><strong>Outbound, one-to-many.</strong></p>
+          <p class="text-gray-700">
+            Announcements, program updates, litter news, social posts. Write once, reach buyers, the waitlist, the marketplace, and your social accounts.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg border-2 border-gray-200">
+          <h3 class="text-xl font-bold mb-3">📥 Communications Hub</h3>
+          <p class="text-gray-700 text-sm mb-3"><strong>Inbound, one-to-one.</strong></p>
+          <p class="text-gray-700">
+            Replies, inquiries, portal DMs, marketplace messages. Unified inbox, templates, document bundles, auto-replies.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        They share contacts, they share your kennel branding, and they share a single marketing surface — so your buyers experience one consistent breeder, not five disconnected tools.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-4xl font-bold mb-6">Stop Posting Five Times. Post Once.</h2>
+      <p class="text-xl mb-8 opacity-90">
+        One composer. Every audience. Scout AI does the first draft.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">
+          Get Started Free
+        </a>
+        <a href="/workflows/communications-hub" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary inline-block">
+          See Communications Hub →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/communications-hub" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Communications Hub (Inbound Inbox)
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Scout AI (Data-Aware Assistant)
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Portal
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Marketplace Listings
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Plans
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Started Free
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
