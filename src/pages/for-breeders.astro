@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Screenshot from '../components/Screenshot.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -45,6 +46,15 @@ const breadcrumbs = [
             </a>
           </div>
           <p class="mt-4 text-sm text-gray-400">14-day free trial. Cancel anytime.</p>
+
+          <!-- Hero screenshot: real platform dashboard -->
+          <div class="mt-14">
+            <Screenshot
+              id="platform-dashboard"
+              alt="BreederHQ dashboard for a Labrador breeder showing 2 active breeding plans, 1 litter in care, and current finances"
+              loading="eager"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -83,6 +93,69 @@ const breadcrumbs = [
             <p class="text-sm text-gray-600">
               You do everything right (health testing, documentation, responsible practices),
               but buyers can't see any of it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- WHAT IT LOOKS LIKE — Real Product Screenshots -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white border-t border-stone-100">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Here's What It Actually Looks Like
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Real screens from a real working tenant. Not mockups.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <Screenshot
+              id="animals-list"
+              alt="Your animals at a glance — every dog with breed, status, and health record links"
+            />
+            <h3 class="mt-4 text-lg font-bold text-gray-900">Your Whole Herd, At A Glance</h3>
+            <p class="text-sm text-gray-600 mt-1">
+              Every animal with breed, sex, status, and tags. Click any card for the full profile, pedigree, health records, and breeding history.
+            </p>
+          </div>
+
+          <div>
+            <Screenshot
+              id="breeding-plans-list"
+              alt="Breeding plans showing phase progress for each pairing"
+            />
+            <h3 class="mt-4 text-lg font-bold text-gray-900">Breeding Plans, Phase By Phase</h3>
+            <p class="text-sm text-gray-600 mt-1">
+              Plan and track every breeding from heat detection through placement. The system tracks the phase automatically based on the dates you record.
+            </p>
+          </div>
+
+          <div>
+            <Screenshot
+              id="offspring-list"
+              alt="Litter view with collar colors, placement state, and buyer assignments"
+            />
+            <h3 class="mt-4 text-lg font-bold text-gray-900">Track Every Puppy Through Placement</h3>
+            <p class="text-sm text-gray-600 mt-1">
+              Collar colors, weights, photos, paperwork status, and which buyer each puppy is going to — all in one place.
+            </p>
+          </div>
+
+          <div>
+            <Screenshot
+              id="finance-invoices"
+              alt="Invoice ledger with paid invoices, deposits, and outstanding balances"
+            />
+            <h3 class="mt-4 text-lg font-bold text-gray-900">Invoicing Without The Spreadsheet</h3>
+            <p class="text-sm text-gray-600 mt-1">
+              Generate invoices from the breeding program data you already have. Track deposits, payments, and outstanding balances per buyer.
             </p>
           </div>
         </div>

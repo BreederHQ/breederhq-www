@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MarketplaceBreedersList from '../../components/MarketplaceBreedersList.astro';
+import Screenshot from '../../components/Screenshot.astro';
 import { fetchBreeders } from '../../lib/marketplaceData';
 
 const breeders = await fetchBreeders('DOG');
@@ -69,6 +70,16 @@ const faqs = [
           >
             Browse Available Puppies
           </a>
+        </div>
+
+        <div class="mt-16 max-w-3xl mx-auto">
+          <Screenshot
+            id="marketplace-breeder-profile"
+            alt="Public breeder profile in BreederHQ Marketplace showing health practices, registry affiliations, and breeding philosophy"
+          />
+          <p class="text-sm text-gray-500 mt-3 text-center italic">
+            Every breeder profile is published from the same software they use to manage their program — not a self-written ad.
+          </p>
         </div>
       </div>
     </section>

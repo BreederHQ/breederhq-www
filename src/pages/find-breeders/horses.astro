@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MarketplaceBreedersList from '../../components/MarketplaceBreedersList.astro';
+import Screenshot from '../../components/Screenshot.astro';
 import { fetchBreeders } from '../../lib/marketplaceData';
 
 const breeders = await fetchBreeders('HORSE');
@@ -69,6 +70,16 @@ const faqs = [
           >
             Browse Foals & Stock
           </a>
+        </div>
+
+        <div class="mt-16 max-w-3xl mx-auto">
+          <Screenshot
+            id="horse-marketplace-profile"
+            alt="Public horse breeder profile in BreederHQ Marketplace showing AQHA registry, health practices, and placement policies"
+          />
+          <p class="text-sm text-gray-500 mt-3 text-center italic">
+            Every breeder profile is published from the same software they use to manage their program — not a self-written ad.
+          </p>
         </div>
       </div>
     </section>

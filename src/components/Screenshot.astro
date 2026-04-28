@@ -1,0 +1,194 @@
+---
+/**
+ * <Screenshot> — renders a product screenshot with WebP/PNG fallback, optional device frame,
+ * and optional numbered annotations.
+ *
+ * Source assets live in public/images/screenshots/ and are produced by:
+ *   npm run screenshots:capture
+ *
+ * Usage:
+ *   <Screenshot id="platform-dashboard" alt="Platform dashboard" />
+ *   <Screenshot id="..." alt="..." frame="laptop" />
+ *   <Screenshot id="..." alt="..." annotations={[{ x: 20, y: 30, label: "1", text: "Quick add" }]} />
+ *
+ * Props:
+ *   id          — manifest entry id; matches /public/images/screenshots/{id}.{webp,png}
+ *   alt         — required; describe what the screenshot shows for accessibility/SEO
+ *   frame       — "none" | "browser" | "laptop" | "phone" — optional device chrome
+ *   annotations — optional array of numbered callouts overlaid on the image
+ *   loading     — "lazy" (default) | "eager" — use eager only for above-the-fold heroes
+ *   width       — intrinsic width hint for layout stability (default 1440)
+ *   height      — intrinsic height hint (default 900)
+ *   class       — extra classes on the outer wrapper
+ */
+
+interface Annotation {
+  /** Horizontal position as a percentage (0-100). */
+  x: number;
+  /** Vertical position as a percentage (0-100). */
+  y: number;
+  /** Label inside the dot (typically "1", "2", "3"). */
+  label: string;
+  /** Optional caption shown next to the dot. */
+  text?: string;
+}
+
+interface Props {
+  id: string;
+  alt: string;
+  frame?: "none" | "browser" | "laptop" | "phone";
+  annotations?: Annotation[];
+  loading?: "lazy" | "eager";
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const {
+  id,
+  alt,
+  frame = "browser",
+  annotations = [],
+  loading = "lazy",
+  width = 1440,
+  height = 900,
+  class: className = "",
+} = Astro.props;
+
+const webp = `/images/screenshots/${id}.webp`;
+const png = `/images/screenshots/${id}.png`;
+---
+
+<figure class={`screenshot screenshot--${frame} ${className}`}>
+  {frame === "browser" && (
+    <div class="screenshot__chrome screenshot__chrome--browser">
+      <span class="screenshot__dot screenshot__dot--red"></span>
+      <span class="screenshot__dot screenshot__dot--yellow"></span>
+      <span class="screenshot__dot screenshot__dot--green"></span>
+    </div>
+  )}
+
+  <div class="screenshot__viewport">
+    <picture>
+      <source srcset={webp} type="image/webp" />
+      <img
+        src={png}
+        alt={alt}
+        loading={loading}
+        decoding="async"
+        width={width}
+        height={height}
+        class="screenshot__img"
+      />
+    </picture>
+
+    {annotations.length > 0 && (
+      <div class="screenshot__annotations" aria-hidden="true">
+        {annotations.map((a) => (
+          <span class="screenshot__annotation" style={`left:${a.x}%;top:${a.y}%`}>
+            <span class="screenshot__annotation-dot">{a.label}</span>
+            {a.text && <span class="screenshot__annotation-text">{a.text}</span>}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+</figure>
+
+<style>
+  .screenshot {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0b0d12;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 30px 60px -20px rgba(0, 0, 0, 0.6),
+      0 18px 36px -18px rgba(0, 0, 0, 0.4);
+  }
+
+  .screenshot__chrome--browser {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px;
+    background: linear-gradient(180deg, #1a1d24 0%, #14161c 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .screenshot__dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .screenshot__dot--red { background: #ff5f57; }
+  .screenshot__dot--yellow { background: #febc2e; }
+  .screenshot__dot--green { background: #28c840; }
+
+  .screenshot__viewport {
+    position: relative;
+    aspect-ratio: var(--ratio, 1440 / 900);
+  }
+
+  .screenshot__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .screenshot__annotations {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .screenshot__annotation {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .screenshot__annotation-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: #f59e0b;
+    color: #1a1300;
+    font-weight: 700;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  }
+
+  .screenshot__annotation-text {
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .screenshot--none {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .screenshot--none .screenshot__chrome--browser { display: none; }
+
+  .screenshot--phone {
+    aspect-ratio: 390 / 844;
+    max-width: 320px;
+    margin: 0 auto;
+    border-radius: 36px;
+    border: 8px solid #0b0d12;
+    background: #0b0d12;
+  }
+  .screenshot--phone .screenshot__viewport { aspect-ratio: 390 / 844; }
+</style>
