@@ -85,7 +85,7 @@ const faqs = [
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="/contact?topic=breed-club-partnership"
+              href="#breed-club-contact"
               class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,45%)] w-full sm:w-auto"
             >
               Talk to Us About Partnering
@@ -819,8 +819,8 @@ const faqs = [
     <!-- ============================================ -->
     <!-- FINAL CTA                                    -->
     <!-- ============================================ -->
-    <section class="py-20 bg-gradient-to-br from-amber-900 via-orange-800 to-[hsl(24,95%,40%)]">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+    <section id="breed-club-contact" class="py-20 bg-gradient-to-br from-amber-900 via-orange-800 to-[hsl(24,95%,40%)]">
+      <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl font-bold mb-4 text-white">
           Your breed's history deserves better than a PDF.
         </h2>
@@ -830,21 +830,258 @@ const faqs = [
           something about where the tools are going.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="/contact?topic=breed-club-partnership"
-            class="bg-white text-orange-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-50 w-full sm:w-auto"
+        <!-- Lead capture form for breed clubs.
+             Posts to /api/contact with source=breed_club_landing so leads
+             are tagged in the #leads Slack channel. The /contact page is
+             still linked from the hero CTA above; this section gives
+             clubs a direct, in-context capture point. -->
+        <form
+          id="breed-club-form"
+          class="bg-white/95 backdrop-blur rounded-xl p-6 sm:p-8 text-left shadow-2xl"
+        >
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label for="bcf-name" class="block text-sm font-medium text-gray-900 mb-1">
+                Your name <span class="text-red-600">*</span>
+              </label>
+              <input
+                id="bcf-name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent text-gray-900"
+              />
+            </div>
+            <div>
+              <label for="bcf-email" class="block text-sm font-medium text-gray-900 mb-1">
+                Email <span class="text-red-600">*</span>
+              </label>
+              <input
+                id="bcf-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent text-gray-900"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label for="bcf-club" class="block text-sm font-medium text-gray-900 mb-1">
+                Club name <span class="text-red-600">*</span>
+              </label>
+              <input
+                id="bcf-club"
+                name="club"
+                type="text"
+                required
+                placeholder="e.g. American Standard Schnauzer Club"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent text-gray-900 placeholder:text-gray-400"
+              />
+            </div>
+            <div>
+              <label for="bcf-role" class="block text-sm font-medium text-gray-900 mb-1">
+                Your role
+              </label>
+              <select
+                id="bcf-role"
+                name="role"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent text-gray-900"
+              >
+                <option value="">Select…</option>
+                <option value="President">President</option>
+                <option value="Vice President">Vice President</option>
+                <option value="Secretary">Secretary</option>
+                <option value="Treasurer">Treasurer</option>
+                <option value="Board Member">Board Member</option>
+                <option value="Registrar">Registrar</option>
+                <option value="Health Committee">Health Committee</option>
+                <option value="Member">Member</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="bcf-members" class="block text-sm font-medium text-gray-900 mb-1">
+              Approximate club size
+            </label>
+            <select
+              id="bcf-members"
+              name="members"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent text-gray-900"
+            >
+              <option value="">Select…</option>
+              <option value="Under 50">Under 50 members</option>
+              <option value="50-200">50–200 members</option>
+              <option value="200-500">200–500 members</option>
+              <option value="500-1000">500–1,000 members</option>
+              <option value="1000+">1,000+ members</option>
+            </select>
+          </div>
+
+          <div class="mb-6">
+            <label for="bcf-notes" class="block text-sm font-medium text-gray-900 mb-1">
+              What are you hoping to solve?
+            </label>
+            <textarea
+              id="bcf-notes"
+              name="notes"
+              rows="4"
+              placeholder="Anything you'd like us to know before the call — current tools, biggest pain points, timeline, etc."
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent text-gray-900 placeholder:text-gray-400 resize-y"
+            ></textarea>
+          </div>
+
+          {/* Honeypot — bots tend to fill every field including hidden ones.
+               If this is non-empty on submit, we silently drop the lead. */}
+          <div class="hidden" aria-hidden="true">
+            <label for="bcf-website">Website (leave blank)</label>
+            <input
+              id="bcf-website"
+              name="website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div
+            id="bcf-error"
+            class="hidden mb-4 p-3 rounded-md bg-red-50 border border-red-200 text-sm text-red-800"
+            role="alert"
+          ></div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <button
+              type="submit"
+              id="bcf-submit"
+              class="bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white px-8 py-3 rounded-lg text-base font-semibold w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              Request a 30-minute call
+            </button>
+            <a
+              href="mailto:clubs@breederhq.com?subject=Breed%20Club%20Partnership%20Inquiry"
+              class="text-gray-700 hover:text-[hsl(24,95%,53%)] text-sm sm:text-base"
+            >
+              Or email clubs@breederhq.com
+            </a>
+          </div>
+        </form>
+
+        <div
+          id="bcf-success"
+          class="hidden bg-white/95 backdrop-blur rounded-xl p-8 text-center shadow-2xl"
+          role="status"
+        >
+          <svg
+            class="mx-auto mb-4 w-12 h-12 text-emerald-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
           >
-            Talk to Us About Partnering
-          </a>
-          <a
-            href="mailto:clubs@breederhq.com?subject=Breed%20Club%20Partnership%20Inquiry"
-            class="border-2 border-amber-300 text-amber-100 px-8 py-4 rounded-lg text-lg font-semibold hover:border-white hover:text-white w-full sm:w-auto"
-          >
-            Email clubs@breederhq.com
-          </a>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">
+            Thanks — we'll be in touch.
+          </h3>
+          <p class="text-gray-700">
+            We read every breed-club inquiry personally. Expect a reply within
+            one business day to schedule the call.
+          </p>
         </div>
       </div>
+
+      <script is:inline>
+        (function () {
+          var form = document.getElementById('breed-club-form');
+          if (!form) return;
+          var errorBox = document.getElementById('bcf-error');
+          var successBox = document.getElementById('bcf-success');
+          var submitBtn = document.getElementById('bcf-submit');
+
+          form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            errorBox.classList.add('hidden');
+            errorBox.textContent = '';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+
+            var fd = new FormData(form);
+            var honeypot = (fd.get('website') || '').toString().trim();
+            // Bot trap — pretend to succeed and silently drop. Don't tip off the bot.
+            if (honeypot) {
+              form.classList.add('hidden');
+              successBox.classList.remove('hidden');
+              return;
+            }
+
+            // Compose payload that matches /api/contact's LeadData shape.
+            // - name / email map directly
+            // - company holds the club name (the API serializer already
+            //   surfaces "company" prominently in the Slack lead message)
+            // - message holds role + member count + free-text notes
+            //   so support sees everything in one place
+            var clubName = (fd.get('club') || '').toString().trim();
+            var role = (fd.get('role') || '').toString().trim();
+            var members = (fd.get('members') || '').toString().trim();
+            var notes = (fd.get('notes') || '').toString().trim();
+            var messageParts = [];
+            if (role) messageParts.push('Role: ' + role);
+            if (members) messageParts.push('Club size: ' + members);
+            if (notes) messageParts.push('Notes: ' + notes);
+
+            // Pull UTM params off the current URL so attribution rides through.
+            var qs = new URLSearchParams(window.location.search);
+
+            var payload = {
+              name: (fd.get('name') || '').toString().trim(),
+              email: (fd.get('email') || '').toString().trim(),
+              company: clubName,
+              message: messageParts.join('\n'),
+              source: 'breed_club_landing',
+              utm_source: qs.get('utm_source') || undefined,
+              utm_medium: qs.get('utm_medium') || undefined,
+              utm_campaign: qs.get('utm_campaign') || undefined,
+              utm_term: qs.get('utm_term') || undefined,
+              utm_content: qs.get('utm_content') || undefined,
+            };
+
+            try {
+              var res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+              });
+              if (!res.ok) {
+                var body = await res.json().catch(function () { return {}; });
+                throw new Error(body.error || 'Submit failed');
+              }
+              form.classList.add('hidden');
+              successBox.classList.remove('hidden');
+              successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // Fire a GA4 event if gtag is present so we can measure
+              // breed-club lead conversion separately from generic /contact.
+              if (typeof window.gtag === 'function') {
+                window.gtag('event', 'breed_club_lead_submitted', {
+                  event_category: 'lead',
+                  event_label: clubName || 'unspecified_club',
+                });
+              }
+            } catch (err) {
+              errorBox.textContent =
+                'Sorry — something went wrong. Please try again, or email clubs@breederhq.com.';
+              errorBox.classList.remove('hidden');
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Request a 30-minute call';
+            }
+          });
+        })();
+      </script>
     </section>
 
   </main>
