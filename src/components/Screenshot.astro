@@ -55,7 +55,6 @@ const {
   class: className = "",
 } = Astro.props;
 
-const webp = `/images/screenshots/${id}.webp`;
 const png = `/images/screenshots/${id}.png`;
 ---
 
@@ -69,18 +68,15 @@ const png = `/images/screenshots/${id}.png`;
   )}
 
   <div class="screenshot__viewport">
-    <picture>
-      <source srcset={webp} type="image/webp" />
-      <img
-        src={png}
-        alt={alt}
-        loading={loading}
-        decoding="async"
-        width={width}
-        height={height}
-        class="screenshot__img"
-      />
-    </picture>
+    <img
+      src={png}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      width={width}
+      height={height}
+      class="screenshot__img"
+    />
 
     {annotations.length > 0 && (
       <div class="screenshot__annotations" aria-hidden="true">
