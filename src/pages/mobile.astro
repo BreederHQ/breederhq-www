@@ -3,33 +3,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
-  { name: 'Mobile App', url: '/mobile' }
+  { name: 'Mobile Companion', url: '/mobile' }
 ];
 
 const faqs = [
   {
-    question: 'Is the mobile app included with my subscription?',
-    answer: 'Yes. The mobile app is included with all BreederHQ plans at no additional cost. Download it from the App Store or Google Play and log in with the same account you use on the web.'
+    question: 'Is the BreederHQ Mobile Companion a replacement for the web app?',
+    answer: 'No. The Mobile Companion is intentionally not a full alternative to the BreederHQ web platform. The web app is where you run your program: setting up breeding plans, managing your storefront, configuring contracts, running reports, working in genetics, and everything else that needs a real screen. The Mobile Companion is built for the moments you are away from your laptop, when you just need to capture something quickly or check a piece of information from the barn, the vet office, or the show ring.'
   },
   {
-    question: 'Does the app work offline?',
-    answer: 'The app requires an internet connection to sync data with your account. It is designed to work well on slower connections, with pages that load quickly and images optimized for mobile bandwidth.'
+    question: 'What is the Mobile Companion actually for?',
+    answer: 'Quick capture and quick lookup. Recording newborn weights right after a birth, logging a vet visit before you forget, snapping a receipt photo, checking an animal profile or pedigree at a show, replying to a buyer message, marking a task done. The companion is deliberately scoped to the things you need away from a desk.'
   },
   {
-    question: 'Can I do everything from the mobile app?',
-    answer: 'The mobile app covers the most common tasks you\'d do away from your desk: recording weights, adding offspring, logging expenses, checking animal profiles, managing messages, and tracking breeding cycles. For complex tasks like genetics analysis or financial reporting, the full web platform is recommended.'
+    question: 'What should I still use the web app for?',
+    answer: 'Setting up and editing breeding plans and programs, building your marketplace storefront and listings, configuring contracts and templates, financial reporting and reconciliation, deep genetics work and pedigree analysis, waitlist management and placement decisions, settings and team configuration, and any other configuration or analysis work. If a task involves more than a tap or two, the web app is the right tool.'
+  },
+  {
+    question: 'Is the Mobile Companion included with my subscription?',
+    answer: 'Yes. The Mobile Companion is included with every BreederHQ plan at no additional cost. Download it from the App Store or Google Play and log in with the same account you use on the web.'
   },
   {
     question: 'Will my data sync between phone and computer?',
-    answer: 'Yes. Everything you enter on your phone appears immediately on the web platform, and vice versa. There is one account and one dataset that you can access from wherever you are.'
+    answer: 'Yes. Anything you capture in the Mobile Companion appears immediately in the web app, and anything you set up in the web app shows up in the companion. One account, one dataset.'
+  },
+  {
+    question: 'Does the Mobile Companion work offline?',
+    answer: 'The companion needs an internet connection to sync. It is built to work well on slower connections at the barn or vet office, but it is not a fully offline tool.'
   },
   {
     question: 'What devices are supported?',
-    answer: 'The app is available for iPhone (iOS 15+) and Android phones (Android 10+). The web platform works on any device with a modern browser, including tablets and iPads.'
+    answer: 'iPhone (iOS 15+) and Android phones (Android 10+). For tablets, iPads, and laptops, use the web app at app.breederhq.com — it works in any modern browser.'
   },
   {
     question: 'Can I get push notifications?',
-    answer: 'Yes. The app sends push notifications for new messages, waitlist applications, payment received, contract signatures, and other important events. You control which notifications you receive in Settings.'
+    answer: 'Yes. The Mobile Companion sends push notifications for new messages, waitlist applications, payments, contract signatures, and other time-sensitive events. You choose which ones you receive in Settings.'
   }
 ];
 
@@ -46,8 +54,8 @@ const featureCards = [
 ---
 
 <BaseLayout
-  title="Mobile App for Breeders | BreederHQ"
-  description="Manage your breeding program from anywhere. Record weights at birth, log expenses at the vet, upload photos from shows. iOS and Android."
+  title="BreederHQ Mobile Companion App | Quick-Capture Tool for Breeders"
+  description="The Mobile Companion app for iOS and Android is a focused on-the-go tool that pairs with the BreederHQ web platform. Capture weights, log vet visits, check profiles, and reply to buyers from the barn, the vet, or the show ring."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -60,28 +68,83 @@ const featureCards = [
     <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
       <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
       <li class="text-gray-400">›</li>
-      <li aria-current="page" class="text-gray-600">Mobile App</li>
+      <li aria-current="page" class="text-gray-600">Mobile Companion</li>
     </ol>
   </nav>
 
   <!-- Hero -->
   <section class="py-12 px-4">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">Your Breeding Program, in Your Pocket</h1>
+      <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">BreederHQ Mobile Companion App</p>
+      <h1 class="text-5xl font-bold mb-6">The On-The-Go Companion to the BreederHQ Web App</h1>
+      <p class="text-xl text-gray-700 leading-relaxed mb-6">
+        A focused, in-the-moment tool for the times you are away from your laptop. Not a replacement for the BreederHQ web app — a deliberate companion to it.
+      </p>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          The BreederHQ mobile app for iOS and Android puts your breeding program in your pocket. Record weights right after birth, log expenses at the vet, upload photos from shows, check animal profiles from the barn, and message buyers from anywhere. Everything syncs instantly with the web platform.
+          The BreederHQ Mobile Companion is an iOS and Android app designed for quick capture and quick lookup when you are away from your desk. Record newborn weights right after a birth, snap a receipt at the vet, pull up an animal's pedigree at a show, reply to a buyer message, mark a task done. Everything syncs instantly with the BreederHQ web app, where you do the deeper work — setting up breeding plans, managing your storefront, running reports, configuring contracts, and everything else that needs a real screen.
         </p>
       </aside>
+    </div>
+  </section>
+
+  <!-- Companion vs. Web App: What's it for? -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold mb-3">A Companion, Not a Replacement</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          The BreederHQ web app is where you run your breeding program. The Mobile Companion is built for the moments breeding actually happens — when you are not at your desk.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Mobile Companion -->
+        <div class="bg-[hsl(24,95%,97%)] border-2 border-[hsl(24,95%,53%)] rounded-xl p-6">
+          <div class="text-3xl mb-3">📱</div>
+          <h3 class="text-xl font-bold mb-1">Mobile Companion</h3>
+          <p class="text-sm text-gray-600 mb-4 italic">For quick capture and quick lookup, away from your desk.</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Record newborn weights at the moment of birth</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Log a vaccination or medication dose at the vet</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Snap an expense receipt before you lose it</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Pull up an animal's profile or pedigree at a show</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Reply to a buyer message from the road</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Mark a task complete, log a heat date, check a reminder</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Get push notifications for time-sensitive events</li>
+          </ul>
+        </div>
+
+        <!-- Web App -->
+        <div class="bg-stone-50 border-2 border-stone-300 rounded-xl p-6">
+          <div class="text-3xl mb-3">💻</div>
+          <h3 class="text-xl font-bold mb-1">BreederHQ Web App</h3>
+          <p class="text-sm text-gray-600 mb-4 italic">Where you run your breeding program.</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Build and edit breeding plans and programs</li>
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Manage your marketplace storefront and listings</li>
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Configure contracts, templates, pricing, and policies</li>
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Financial reporting, invoicing, and reconciliation</li>
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Genetics work, pedigree analysis, and compatibility</li>
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Waitlist management and placement decisions</li>
+            <li class="flex items-start"><span class="text-stone-500 mr-2">✓</span>Settings, team management, and integrations</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-gray-500 mt-8 max-w-3xl mx-auto">
+        One account, one dataset. The Mobile Companion captures in the moment; the web app is where you actually run things. Use the right tool for the moment.
+      </p>
     </div>
   </section>
 
   <!-- Feature Cards Grid -->
   <section class="py-8 px-4 bg-gray-50">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6 text-center">Everything You Need, Wherever You Are</h2>
+      <h2 class="text-2xl font-bold mb-2 text-center">What the Mobile Companion Covers</h2>
+      <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">A focused set of tasks designed for quick capture and quick lookup. Tap a card to see what's included.</p>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         {featureCards.map(card => (
           <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
@@ -119,8 +182,8 @@ const featureCards = [
           <div class="flex items-center gap-4">
             <span class="text-3xl">🐾</span>
             <div>
-              <h3 class="text-2xl font-bold">Animal Management</h3>
-              <p class="text-gray-600">Full profiles, photos, and health records from your phone</p>
+              <h3 class="text-2xl font-bold">Animal Lookup &amp; Quick Updates</h3>
+              <p class="text-gray-600">Pull up profiles, pedigrees, and health records when you're away from your desk</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -507,14 +570,15 @@ const featureCards = [
   <!-- CTA Section -->
   <section class="py-16 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-4">Manage Your Program From Anywhere</h2>
-      <p class="text-xl mb-8 opacity-90">The barn. The vet office. The show ring. Wherever breeding happens.</p>
+      <h2 class="text-4xl font-bold mb-4">A Companion for the Moments Breeding Happens</h2>
+      <p class="text-xl mb-2 opacity-90">The barn. The vet office. The show ring. The birthing area at 2 AM.</p>
+      <p class="text-lg mb-8 opacity-80">Sign up for BreederHQ to get the web app — your full breeding platform — and the Mobile Companion comes with it.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Started Free
         </a>
-        <a href="/workflows/offspring-care" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
-          See Offspring Features →
+        <a href="/for-breeders" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See the Full Web Platform →
         </a>
       </div>
     </div>
@@ -525,27 +589,51 @@ const featureCards = [
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
 
-      <details class="faq-item">
+      <details class="faq-item" open>
         <summary class="faq-question">
-          <span>Is the mobile app included with my subscription?</span>
+          <span>Is the BreederHQ Mobile Companion a replacement for the web app?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. The mobile app is included with all BreederHQ plans at no additional cost. Download it from the App Store or Google Play and log in with the same account you use on the web.</p>
+          <p>No. The Mobile Companion is intentionally not a full alternative to the BreederHQ web platform. The web app is where you run your program: setting up breeding plans, managing your storefront, configuring contracts, running reports, working in genetics, and everything else that needs a real screen. The Mobile Companion is built for the moments you are away from your laptop, when you just need to capture something quickly or check a piece of information from the barn, the vet office, or the show ring.</p>
         </div>
       </details>
 
       <details class="faq-item">
         <summary class="faq-question">
-          <span>Can I do everything from the mobile app?</span>
+          <span>What is the Mobile Companion actually for?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>The mobile app covers the most common tasks you'd do away from your desk: recording weights, adding offspring, logging expenses, checking animal profiles, managing messages, and tracking breeding cycles. For complex tasks like genetics analysis or financial reporting, the full web platform is recommended.</p>
+          <p>Quick capture and quick lookup. Recording newborn weights right after a birth, logging a vet visit before you forget, snapping a receipt photo, checking an animal profile or pedigree at a show, replying to a buyer message, marking a task done. The companion is deliberately scoped to the things you need away from a desk.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What should I still use the web app for?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Setting up and editing breeding plans and programs, building your marketplace storefront and listings, configuring contracts and templates, financial reporting and reconciliation, deep genetics work and pedigree analysis, waitlist management and placement decisions, settings and team configuration, and any other configuration or analysis work. If a task involves more than a tap or two, the web app is the right tool.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Is the Mobile Companion included with my subscription?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The Mobile Companion is included with every BreederHQ plan at no additional cost. Download it from the App Store or Google Play and log in with the same account you use on the web.</p>
         </div>
       </details>
 
@@ -557,19 +645,7 @@ const featureCards = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Everything you enter on your phone appears immediately on the web platform, and vice versa. There's one account and one dataset that you can access from wherever you are.</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">
-          <span>Can I get push notifications?</span>
-          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </summary>
-        <div class="faq-answer">
-          <p>Yes. The app sends push notifications for new messages, waitlist applications, payment received, contract signatures, and other important events. You control which notifications you receive in Settings.</p>
+          <p>Yes. Anything you capture in the Mobile Companion appears immediately in the web app, and anything you set up in the web app shows up in the companion. One account, one dataset.</p>
         </div>
       </details>
 
@@ -581,7 +657,7 @@ const featureCards = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>The app is available for iPhone (iOS 15+) and Android phones (Android 10+). The web platform works on any device with a modern browser, including tablets and iPads.</p>
+          <p>The Mobile Companion runs on iPhone (iOS 15+) and Android phones (Android 10+). For tablets, iPads, and laptops, use the web app at app.breederhq.com — it works in any modern browser.</p>
         </div>
       </details>
     </div>
