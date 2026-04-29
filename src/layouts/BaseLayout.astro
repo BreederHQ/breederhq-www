@@ -15,6 +15,25 @@ interface Props {
     description: string;
     steps: Array<{ name: string; text: string }>;
   };
+  /**
+   * Optional Article / BlogPosting structured data for long-form posts under
+   * /articles/*. When provided, BaseLayout emits Schema.org BlogPosting JSON-LD
+   * with author, datePublished, publisher, and mainEntityOfPage. This is what
+   * makes founder posts and editorial content eligible for Google News, Discover,
+   * and AI agent citations.
+   */
+  article?: {
+    headline: string;
+    description: string;
+    datePublished: string; // ISO 8601 date, e.g. "2026-04-29"
+    dateModified?: string; // optional, defaults to datePublished
+    author: {
+      name: string;
+      role?: string;
+      url?: string;
+    };
+    image?: string; // optional hero/social image; falls back to ogImage
+  };
   noindex?: boolean;
   hideLogo?: boolean;
   /**
@@ -26,7 +45,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, breadcrumbs, faqs, howTo, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, article, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
 // Astro is configured with `trailingSlash: 'never'`, so every page's canonical
 // URL must be slash-free - including the homepage. Without this normalization
 // the homepage canonical was `https://breederhq.com/` (with slash) while every
@@ -174,6 +193,39 @@ if (howTo && howTo.steps && howTo.steps.length > 0) {
     }))
   };
 }
+
+// BlogPosting schema for /articles/* and similar long-form editorial pages.
+// Strong SEO signal for Google News, Discover, and AI agent citations.
+let articleSchema;
+if (article) {
+  articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": article.headline,
+    "description": article.description,
+    "datePublished": article.datePublished,
+    "dateModified": article.dateModified || article.datePublished,
+    "image": article.image || ogImage,
+    "author": {
+      "@type": "Person",
+      "name": article.author.name,
+      ...(article.author.role ? { "jobTitle": article.author.role } : {}),
+      ...(article.author.url ? { "url": article.author.url } : {})
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BreederHQ",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breederhq.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": fullUrl
+    }
+  };
+}
 ---
 
 <!DOCTYPE html>
@@ -214,6 +266,9 @@ if (howTo && howTo.steps && howTo.steps.length > 0) {
     )}
     {howToSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+    )}
+    {articleSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
     )}
 
     <!-- Analytics Scripts -->
