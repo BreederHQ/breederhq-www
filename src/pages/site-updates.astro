@@ -28,6 +28,65 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== April 29, 2026 - Site-wide Edits + Mobile Screenshots ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">April 29, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Mobile screenshots added, screenshot component fixed, marketplace-mills callout, copy and nav cleanup, Genetics Lab tier reclassification</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Goal-Based Breeding &amp; Offspring Simulator moved from Enterprise to Pro</h3>
+          <p class="text-gray-700 mb-3">
+            Updated <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a>, <a href="/pricing/compare" class="text-[hsl(24,95%,53%)] hover:underline">/pricing/compare</a>, and <a href="/founders" class="text-[hsl(24,95%,53%)] hover:underline">/founders</a> to reflect that the full Genetics Lab (including Goal-Based Breeding and Offspring Simulator) is now part of the Pro tier rather than Enterprise-only. Pro now lists "Full Genetics Lab" instead of "Genetics Lab (7 analysis tabs)"; those two bullets were removed from the Enterprise feature list.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">/mobile now shows real iPhone and iPad screenshots</h3>
+          <p class="text-gray-700 mb-3">
+            Added a phone gallery (six iPhone screens, light and dark themes covering Dashboard, Animals List, Animal Detail, and Contact Detail) and an iPad gallery (three tablet screens) to <a href="/mobile" class="text-[hsl(24,95%,53%)] hover:underline">/mobile</a>. Screenshots live at <code>public/images/screenshots/mobile/</code>.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Screenshot component fixed for non-16:9 images</h3>
+          <p class="text-gray-700 mb-3">
+            Added a new <code>frame="native"</code> mode to the shared <code>&lt;Screenshot&gt;</code> component. Previously every screenshot was force-cropped to 1440x900 with <code>object-fit: cover</code> and wrapped in a fake macOS-style browser chrome, which mangled portrait/modal screenshots like the Breeding Intelligence hero. The new native mode preserves the source aspect ratio, removes the chrome, and uses <code>object-fit: contain</code>.
+          </p>
+          <p class="text-gray-700 mb-3">
+            Applied to <a href="/workflows/breeding-intelligence" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/breeding-intelligence</a> hero image so the New Breeding Plan modal shows at its real proportions.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New product screenshots from a real dev tenant</h3>
+          <p class="text-gray-700 mb-2">
+            Replaced thin/empty screenshots and added new ones across three workflow pages, captured from a populated BreederHQ dev tenant rather than seeded mockups.
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li><a href="/workflows/breeding-intelligence" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/breeding-intelligence</a>: added an Offspring Simulator screenshot showing a real Buckbeak x Aragog Hound pairing with COI 0.00%, color predictions per locus, and health-marker probabilities; added a Goal-Based Breeding screenshot showing five active goals with priority badges (HNPK, CMR1, Brindle, Long coat, Double Merle) and a matched pair scored 65/100.</li>
+            <li><a href="/workflows/outreach-hub" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/outreach-hub</a>: page previously had no screenshots at all. Added a hero image of the Outreach Hub list/empty state with channel cards (Email + Client Portal, Marketplace, Facebook + Instagram) and suggested posts; added a portrait composer screenshot showing the New Post form with Scout AI tone selection and channel toggles.</li>
+            <li><a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/client-portal</a>: replaced the empty buyer portal home shot with one showing real activity for a buyer (agreement waiting for signature, payment due in 16 days, full nav including Products We Love).</li>
+            <li><a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/scout-ai</a>: replaced the off-topic Animal Genetics shot with a real Scout AI answer pulled from a populated dev tenant, demonstrating how Scout reasons across animals, plans, contacts, and finances and cites its sources.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">/buyers/why-breederhq-marketplace: new "Marketplaces That Hide the Breeder" section</h3>
+          <p class="text-gray-700 mb-3">
+            Added a new section to <a href="/buyers/why-breederhq-marketplace" class="text-[hsl(24,95%,53%)] hover:underline">/buyers/why-breederhq-marketplace</a> covering middleman marketplaces that route all communication through the platform, hide the breeder identity, and bundle shipping into checkout. Six red flags listed: anonymous listings, no direct breeder messaging, no public profile, "buy now" with shipping, no visible health records, and the platform-as-merchant pattern. Closes with a positive contrast on how BreederHQ exposes the breeder rather than hiding them.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">/for-breeders: species-neutral headings, real-tenant framing, Scout emoji</h3>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>"Your Whole Herd, At A Glance" -&gt; "Every Animal, At a Glance" (species-neutral on a shared page)</li>
+            <li>"Track Every Puppy Through Placement" -&gt; "Track Every Newborn Through Placement"</li>
+            <li>Section subhead "Real screens from a real working tenant. Not mockups." rewritten to "These are real screens from a working BreederHQ account. No mockups, no marketing renders."</li>
+            <li>Replaced the generic 🤖 robot emoji on the Scout AI tile with the branded Scout emoji asset (<code>/images/scout/scout-emoji-front.png</code>, copied from the monorepo's shared <code>@bhq/ui</code> assets).</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">/workflows/offspring-care: replaced jargon "sparklines"</h3>
+          <p class="text-gray-700 mb-3">
+            "Weight Tracking with Sparklines" -&gt; "Weight Tracking at a Glance" with reworded body copy. Same change applied to the Offspring &amp; Weights section on <a href="/mobile" class="text-[hsl(24,95%,53%)] hover:underline">/mobile</a>.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Top nav: fixed broken anchors and clarified labels</h3>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>Service Providers dropdown's "How Listings Work" (<code>/for-providers#listings</code>) and "Pricing" (<code>/for-providers#pricing</code>) links were dead. Added matching anchor IDs to the corresponding sections on <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers</a>: <code>id="listings"</code> on the "What You Get on BreederHQ" section, <code>id="pricing"</code> on the pricing card (also retitled from "Simple Economics" to "Pricing").</li>
+            <li>Buyers dropdown labels reordered: "Marketplace Overview" (was "Why BreederHQ Marketplace") -&gt; "BreederHQ vs Other Sites" -&gt; "How to Use the Marketplace". Old "Why BreederHQ Marketplace" label was duplicating the URL of the comparison page below it. Both desktop and mobile menus updated.</li>
+          </ul>
+        </article>
+
         <!-- ========== April 29, 2026 - Breed Club Lead Form ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">April 29, 2026</h2>

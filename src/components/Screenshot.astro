@@ -36,7 +36,7 @@ interface Annotation {
 interface Props {
   id: string;
   alt: string;
-  frame?: "none" | "browser" | "laptop" | "phone";
+  frame?: "none" | "browser" | "laptop" | "phone" | "native";
   annotations?: Annotation[];
   loading?: "lazy" | "eager";
   width?: number;
@@ -137,6 +137,14 @@ const png = `/images/screenshots/${id}.png`;
     object-fit: cover;
   }
 
+  .screenshot--native .screenshot__viewport {
+    aspect-ratio: auto;
+  }
+  .screenshot--native .screenshot__img {
+    height: auto;
+    object-fit: contain;
+  }
+
   .screenshot__annotations {
     position: absolute;
     inset: 0;
@@ -181,6 +189,13 @@ const png = `/images/screenshots/${id}.png`;
     border-radius: 0;
   }
   .screenshot--none .screenshot__chrome--browser { display: none; }
+
+  .screenshot--native {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .screenshot--native .screenshot__chrome--browser { display: none; }
 
   .screenshot--phone {
     aspect-ratio: 390 / 844;
