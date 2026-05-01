@@ -35,13 +35,29 @@ const faqs = [
   {
     question: 'What does it cost to list?',
     answer: 'Animal listings are a one-time fee based on species, with no monthly charges and no commissions on sales. All listing fees are currently waived during our early access period.'
+  },
+  {
+    question: 'What is a Storefront and why does it matter?',
+    answer: 'Your Storefront is your public, branded presence on the BreederHQ Marketplace. Logo, banner, bio, your active listings, and your Breeding Programs in one page at your own marketplace.breederhq.com URL. Buyers searching the marketplace find breeders with complete Storefronts first; empty profiles drop out of results. Setup takes about 15 minutes.'
+  },
+  {
+    question: 'What does a Breeding Program do?',
+    answer: 'A Breeding Program is the operational hub for one of your lines. It holds your animals, plans, offspring, listings, waitlist, inquiries, and announcements in one place, and lets you set rules that automate listing offspring at weaning, applying default prices by sex, opening and closing waitlists, gating "Coming Soon" listings, and enforcing minimum photo counts. Announcements push to your public Storefront and to every committed buyer\'s client portal in one shot.'
+  },
+  {
+    question: 'Can I show my BreederHQ programs and listings on my own website?',
+    answer: 'Yes. The Embed Widget gives you one HTML snippet that you paste onto any page of your own site (Wix, Squarespace, WordPress, Webflow, Shopify, custom HTML). Your site then shows your live BreederHQ data and updates automatically every time something changes in BreederHQ. You choose what to show (full Storefront or a single program), which sections appear (Programs, Litters, Available Offspring, Individual Animals), and the theme.'
+  },
+  {
+    question: 'Do I need a Breeding Program to use the Marketplace?',
+    answer: 'No, but you should have one. You can post individual animal listings without a program. With a program, your listings, waitlist, announcements, and inquiries all live in one operational hub, and the rules engine handles repetitive work (auto-listing weaned offspring, default pricing, waitlist scoping) for you.'
   }
 ];
 ---
 
 <BaseLayout
-  title="Breeder Marketplace Connected to Your Records | BreederHQ"
-  description="Get discovered by serious buyers. List individual animals, offspring groups, and stud or program services. Verification badges earned from real health testing data, plus cross-network matching across the entire BreederHQ community."
+  title="Breeder Marketplace, Storefront, Programs, and Embed Widget | BreederHQ"
+  description="Get discovered by serious buyers with a complete Storefront, automate your sales pipeline with Breeding Programs, and show your live listings on your own Wix, Squarespace, or WordPress site with the Embed Widget. Verification badges earned from real health testing data."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -376,8 +392,146 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 7: Who This Is For -->
+  <!-- Section 6.5: Storefront, Programs, and Embed Widget -->
   <section class="py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold mb-6">Your Storefront, Your Programs, Your Website</h2>
+      <p class="text-xl text-gray-700 leading-relaxed mb-10">
+        Listings are only one piece of marketplace presence. The breeders who get found, get trusted, and get serious inquiries are the ones who set up three things: a complete Storefront, at least one active Breeding Program, and (if they run their own website) the Embed Widget. Each one takes about 15 minutes. Together they decide whether buyers see a real business or an empty profile.
+      </p>
+
+      <figure class="my-12">
+        <img
+          src="/images/screenshots/breeder_storefront.png"
+          alt="Example BreederHQ Storefront with logo, banner, bio, breeding programs, and active animal listings on a single branded page"
+          class="w-full rounded-lg shadow-xl border border-gray-200"
+          loading="lazy"
+          width="1600"
+          height="1000"
+        />
+        <figcaption class="text-sm text-gray-500 text-center mt-3 italic">
+          A complete Storefront: logo, banner, bio, programs, and active listings on one branded page at your own marketplace URL.
+        </figcaption>
+      </figure>
+
+      <!-- Storefront -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-bold mb-4">Your Storefront Is Your Shopfront</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Buyers searching the BreederHQ Marketplace right now are filtering by species, breed, and program style. The breeders they find first are the ones with a complete Storefront. The breeders they trust are the ones whose pages look like a real business. If your Storefront is empty or default, you are effectively invisible to those buyers, no matter how many listings you post.
+        </p>
+        <p class="text-lg font-semibold text-gray-900 mb-4">What a complete Storefront actually does:</p>
+        <ul class="space-y-3 text-lg text-gray-700 mb-6">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Buyers can find you.</strong> Marketplace search and discovery favor breeders with complete Storefronts. An empty profile drops out of results.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>You look like a real business.</strong> Logo, banner, bio. Three fields. They make the difference between "this is a hobby" and "this is a serious operation."</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Every listing performs better.</strong> Boosts, featured slots, and inquiries all funnel through your Storefront. A complete page raises the ceiling on every listing you post.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>One branded URL.</strong> Your Storefront lives at your own marketplace.breederhq.com slug. Bookmarkable, shareable, and consistent everywhere you point people.</span>
+          </li>
+        </ul>
+        <a href="https://app.breederhq.com/commerce/storefront" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+          Set Up Your Storefront →
+        </a>
+      </div>
+
+      <!-- Breeding Programs -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-bold mb-4">Breeding Programs Run Your Sales While You Sleep</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          A Breeding Program is the operational hub for one of your lines. It holds your animals, your plans, your offspring, your listings, your waitlist, your inquiries, and your announcements in one place. More importantly, it lets you set rules that automate the work you used to do by hand every night.
+        </p>
+        <p class="text-lg font-semibold text-gray-900 mb-4">What a Breeding Program automates:</p>
+        <ul class="space-y-3 text-lg text-gray-700 mb-6">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Listings post themselves.</strong> Set a rule: when an offspring hits weaning age and meets your minimum photo count, list it. Default prices apply by sex automatically.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Waitlists run themselves.</strong> Open a waitlist when a plan is announced. Close it when it fills. Scope by program, by breeder, or both. All by rule, all without you in the loop.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>"Coming Soon" gating.</strong> Offspring stay in a soft-launch state until you flip them live, so buyers see momentum before the listing opens.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Announcements reach everyone in one shot.</strong> Post once from the Announcements tab. It pushes to your public Storefront, to your client portal, and to the followers feed of every committed buyer. One post, three places.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Sales Pipeline view.</strong> Track every prospect from first inquiry through approval, across all your programs, in one dashboard.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Multi-breed support.</strong> Run several closely related lines under one operation without duplicating data.</span>
+          </li>
+        </ul>
+        <a href="https://app.breederhq.com/breeding/programs" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+          Set Up a Breeding Program →
+        </a>
+      </div>
+
+      <!-- Embed Widget -->
+      <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-4">Already Have Your Own Website? Stop Updating It By Hand</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          If you run a Wix, Squarespace, WordPress, Webflow, Shopify, or custom site, your "Available" page is almost certainly out of date right now. The Embed Widget fixes that for good. Copy one snippet from BreederHQ. Paste it onto your site. From that moment on, every change you make in BreederHQ shows up on your own website automatically. You never edit that page again.
+        </p>
+        <p class="text-lg font-semibold text-gray-900 mb-4">What the Embed Widget does on your site:</p>
+        <ul class="space-y-3 text-lg text-gray-700 mb-6">
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>One paste, then forget about it.</strong> A single HTML snippet works on any platform that lets you paste HTML. No plugin, no framework, no maintenance.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Pick what to show.</strong> Your full Storefront on one page, or a single program on a dedicated subpage. Toggle on Programs, Litters, Available Offspring, or Individual Animals in any combination.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Live data, your domain.</strong> Sell an offspring in BreederHQ, and the same minute your website updates. Open a waitlist, and it appears. Buyers landing on your site see what is actually available right now.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Match your site's design.</strong> Light, dark, or branded theme. Width control. The widget visually fits the page you drop it on.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>SEO and trust stay on your domain.</strong> Buyers convert on your site. The widget never sends them away to convert somewhere else.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3">•</span>
+            <span><strong>Built-in analytics.</strong> See widget impressions and engagement so you know what visitors are looking at on your own site.</span>
+          </li>
+        </ul>
+        <a href="/workflows/embed-on-your-website" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+          See How the Embed Widget Works →
+        </a>
+      </div>
+
+      <!-- One Thing Tonight callout -->
+      <aside class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded mt-8" role="complementary" aria-label="One thing tonight">
+        <h3 class="text-xl font-bold mb-3 text-gray-900">One Thing Tonight</h3>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Pick the one that gets you furthest with the least effort. Empty Storefront? Do that first; nothing else you do gets seen until it is set up. Storefront done? Set up your most active line as a Breeding Program and turn on the auto-list rule. Got both, plus your own website? Drop the Embed Widget on your "Available" page and never update it by hand again. Any of the three pays off this week.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">Built for breeders who:</h2>
 
@@ -415,7 +569,7 @@ const faqs = [
   </section>
 
   <!-- Section 8: Who This Is Not For -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">This probably isn't for you if:</h2>
 
@@ -441,7 +595,7 @@ const faqs = [
   </section>
 
   <!-- Section 9: FAQ -->
-  <section class="py-20 px-4 faq-section">
+  <section class="py-20 px-4 faq-section bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Frequently asked questions</h2>
 
@@ -528,14 +682,67 @@ const faqs = [
           <p>Animal listings are a one-time fee based on species, with no monthly charges and no commissions on sales. All listing fees are currently waived during our early access period.</p>
         </div>
       </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What is a Storefront and why does it matter?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Your Storefront is your public, branded presence on the BreederHQ Marketplace. Logo, banner, bio, your active listings, and your Breeding Programs in one page at your own marketplace.breederhq.com URL. Buyers searching the marketplace find breeders with complete Storefronts first; empty profiles drop out of results. Setup takes about 15 minutes.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What does a Breeding Program do?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>A Breeding Program is the operational hub for one of your lines. It holds your animals, plans, offspring, listings, waitlist, inquiries, and announcements in one place, and lets you set rules that automate listing offspring at weaning, applying default prices by sex, opening and closing waitlists, gating "Coming Soon" listings, and enforcing minimum photo counts. Announcements push to your public Storefront and to every committed buyer's client portal in one shot.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I show my BreederHQ programs and listings on my own website?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The Embed Widget gives you one HTML snippet that you paste onto any page of your own site (Wix, Squarespace, WordPress, Webflow, Shopify, custom HTML). Your site then shows your live BreederHQ data and updates automatically every time something changes in BreederHQ. You choose what to show (full Storefront or a single program), which sections appear (Programs, Litters, Available Offspring, Individual Animals), and the theme.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Do I need a Breeding Program to use the Marketplace?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No, but you should have one. You can post individual animal listings without a program. With a program, your listings, waitlist, announcements, and inquiries all live in one operational hub, and the rules engine handles repetitive work (auto-listing weaned offspring, default pricing, waitlist scoping) for you.</p>
+        </div>
+      </details>
     </div>
   </section>
 
   <!-- Section 10: Related Resources -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Learn more</h2>
       <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Embed Your Programs on Your Own Website
+          </a>
+        </div>
         <div>
           <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">
             → Waitlist and Placement Management
