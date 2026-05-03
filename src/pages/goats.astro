@@ -10,7 +10,7 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'Does it track CAE and CL status?',
-    answer: 'Yes. Track CAE, CL, and scrapie status as genetic health markers on each animal.'
+    answer: 'Yes. Track CAE, CL, Johne\'s-related herd-health evidence, and scrapie status alongside the rest of each animal\'s health history.'
   },
   {
     question: 'Can it handle multiple kids per kidding?',
@@ -29,8 +29,12 @@ const faqs = [
     answer: 'BreederHQ maintains records for registration. Official submission goes through ADGA systems.'
   },
   {
-    question: 'Can I batch-deworm the whole herd at once?',
-    answer: 'Yes. Select multiple animals, choose the medication (Ivermectin, SafeGuard, etc.), and log it once. Each animal gets its own treatment record with individual dose tracking and lot/batch numbers for traceability.'
+    question: 'Can it help me document a responsible parasite-management program?',
+    answer: 'Yes. Breeders can publish FAMACHA monitoring and fecal egg count (FEC) monitoring in their storefront credentials, then keep deworming and medication records per animal or group so buyers, staff, and veterinarians can review a documented herd-health program.'
+  },
+  {
+    question: 'Can I put my BreederHQ listings on my own breeder website?',
+    answer: 'Yes. BreederHQ supports live website embeds so your planned breedings, available kids, and breeder credibility can appear on your own Squarespace, Wix, WordPress, or custom site without maintaining the same inventory twice.'
   },
   {
     question: 'Can I try it before paying?',
@@ -41,17 +45,18 @@ const faqs = [
 const featureCards = [
   { id: 'goat-records', icon: '🐐', title: 'Goat Records', desc: 'Complete profiles, pedigrees, registration info' },
   { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, breeding groups, kidding dates' },
-  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'CAE, CL, scrapie genotyping, vaccinations' },
+  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'CAE, CL, Johne\'s, parasite credibility, hoof care' },
   { id: 'dairy', icon: '🥛', title: 'Dairy Production', desc: 'Milk records, DHIA data, 305-day lactations, analytics' },
   { id: 'breeding-groups', icon: '🐐', title: 'Breeding Groups', desc: 'Buck exposure groups, pregnancy confirmation' },
   { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Sales pipeline, lead scoring, waitlists, contracts' },
-  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Batch deworming, treatment courses, health reports' }
+  { id: 'buyer-portal', icon: '🌐', title: 'Website & Buyers', desc: 'Live listings, waitlists, website embeds' },
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Selective treatment records, batch logging, health reports' }
 ];
 ---
 
 <BaseLayout
   title="Goat Breeding Software | BreederHQ"
-  description="Goat breeding software for dairy and meat operations. 305-day lactation records, DHIA data, breeding groups, kidding records, ADGA-compatible."
+  description="Goat breeding software for dairy and meat operations. DHIA records, breeding groups, kidding records, FAMACHA/FEC credibility, breeder websites, and ADGA-compatible tracking."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -78,9 +83,12 @@ const featureCards = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Goat breeding software for dairy and meat operations with seasonal breeding, disease testing tracking (CAE, CL, Johne's), ADGA registration support, and multiple kid management. Built for herds that need organized kidding records and performance tracking.
+          Goat breeding software for dairy and meat operations with seasonal breeding, disease testing tracking (CAE, CL, Johne's), FAMACHA/FEC credibility, ADGA registration support, breeder-website embeds, and multiple kid management. Built for herds that need organized kidding records, documented health practices, and a more professional buyer experience.
         </p>
       </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Track breedings, kidding, milk production, herd-health evidence, and buyer communication in one system. Built for breeders who need more than notebooks, spreadsheets, and a Facebook page.
+      </p>
     </div>
   </section>
 
@@ -206,7 +214,7 @@ const featureCards = [
             <span class="text-3xl">🏥</span>
             <div>
               <h3 class="text-2xl font-bold">Health & Genetics</h3>
-              <p class="text-gray-600">CAE, CL, scrapie, vaccinations, hoof care</p>
+              <p class="text-gray-600">CAE, CL, Johne's, parasite credibility, vaccinations, hoof care</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,12 +237,17 @@ const featureCards = [
               <h4 class="font-bold text-lg mb-3">Routine Care</h4>
               <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start"><span class="mr-2">•</span>Vaccination schedules</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Deworming protocols</li>
+                <li class="flex items-start"><span class="mr-2">•</span>FAMACHA and fecal egg count (FEC) monitoring credentials on breeder profiles</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Targeted deworming and medication records by animal or group</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Hoof trimming records</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Veterinary visits and notes</li>
                 <li class="flex items-start"><span class="mr-2">•</span><a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication tracking</a> with batch deworming support</li>
               </ul>
             </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <h4 class="font-bold text-lg mb-2">Health credibility buyers can actually evaluate</h4>
+            <p class="text-gray-700 text-sm">Responsible goat breeders need more than vague claims about being "tested" or "clean." BreederHQ helps you document CAE, CL, Johne's-related herd-health evidence, plus parasite-management credibility like FAMACHA and FEC monitoring, so buyers can see a real program instead of generic promises.</p>
           </div>
         </div>
       </details>
@@ -372,14 +385,14 @@ const featureCards = [
         </div>
       </details>
 
-      <!-- Buyer Portal -->
+      <!-- Breeder Website & Buyer Experience -->
       <details id="buyer-portal" class="accordion-section border border-gray-200 rounded-lg">
         <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🌐</span>
             <div>
-              <h3 class="text-2xl font-bold">Buyer Portal</h3>
-              <p class="text-gray-600">Public profiles for available kids</p>
+              <h3 class="text-2xl font-bold">Breeder Website & Buyer Experience</h3>
+              <p class="text-gray-600">Live listings, waitlists, website embeds</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -399,15 +412,19 @@ const featureCards = [
               </ul>
             </div>
             <div>
-              <h4 class="font-bold text-lg mb-3">Buyer Experience</h4>
+              <h4 class="font-bold text-lg mb-3">Your Own Website</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Self-service browsing</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Inquiry forms</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Waitlist application</li>
-                <li class="flex items-start"><span class="mr-2">•</span>Your farm branding</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Embed live listings on Squarespace, Wix, WordPress, or a custom site</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Show planned breedings and available kids without duplicate updates</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Display trust badges, testing credibility, and breeder policies</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Inquiry forms and waitlist links that point back into BreederHQ</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Mobile-friendly design</li>
               </ul>
             </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <h4 class="font-bold text-lg mb-2">One inventory, not two</h4>
+            <p class="text-gray-700 text-sm">If you already have a breeder website, you should not have to update goats, kids, and planned breedings in two places. BreederHQ lets your site show live data from your program while keeping inquiries, waitlists, and status changes inside one system. <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline">Learn more about website embeds →</a></p>
           </div>
         </div>
       </details>
@@ -418,8 +435,8 @@ const featureCards = [
           <div class="flex items-center gap-4">
             <span class="text-3xl">💊</span>
             <div>
-              <h3 class="text-2xl font-bold">Medication Tracking</h3>
-              <p class="text-gray-600">Batch deworming, treatment courses, health reports</p>
+              <h3 class="text-2xl font-bold">Medications & Parasite Records</h3>
+              <p class="text-gray-600">Selective treatment, batch logging when needed, health reports</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -431,16 +448,17 @@ const featureCards = [
             <div>
               <h4 class="font-bold text-lg mb-3">Batch Treatments</h4>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="mr-2">•</span>Deworm the entire herd in one entry</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Log herd or pen treatments quickly when you actually need them</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Each animal gets its own treatment record</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Lot and batch numbers for traceability</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Common goat medication templates (Ivermectin, SafeGuard, Penicillin G, etc.)</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-bold text-lg mb-3">Individual Treatment Courses</h4>
+              <h4 class="font-bold text-lg mb-3">Selective Treatment Records</h4>
               <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start"><span class="mr-2">•</span>Course-based tracking with dose check-off</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Targeted deworming history by animal with clear dates and products used</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Next-dose reminders and overdue alerts</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Adverse reaction documentation</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Scout AI auto-extracts details from vet invoices</li>
@@ -528,6 +546,30 @@ const featureCards = [
 
       <details class="faq-item">
         <summary class="faq-question">
+          <span>Can it help me document a responsible parasite-management program?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Breeders can publish FAMACHA monitoring and fecal egg count (FEC) monitoring in their storefront credentials, then keep deworming and medication records per animal or group so buyers, staff, and veterinarians can review a documented herd-health program.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I put my BreederHQ listings on my own breeder website?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. BreederHQ supports live website embeds so your planned breedings, available kids, and breeder credibility can appear on your own Squarespace, Wix, WordPress, or custom site without maintaining the same inventory twice.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
           <span>Can I try it before paying?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -563,6 +605,11 @@ const featureCards = [
         <div>
           <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
             → Genetics and Health Testing
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Put your live BreederHQ listings on your breeder website
           </a>
         </div>
         <div>
