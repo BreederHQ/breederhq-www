@@ -28,6 +28,23 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== May 3, 2026 - Default OG image fix ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 3, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Fixed broken Facebook/social link previews by shipping a real default Open Graph image</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Default Open Graph image now exists at <code>/og-image.jpg</code></h3>
+          <p class="text-gray-700 mb-3">
+            Every page on breederhq.com referenced <code>https://breederhq.com/og-image.jpg</code> as the default Open Graph image, but the file did not exist - returning a 404. The result was that Facebook, LinkedIn, Slack, and similar link unfurlers had no image to render in previews, which is what produced the blank/black image area on shared posts (including the recent <a href="/articles/breeder-software-has-a-data-problem" class="text-[hsl(24,95%,53%)] hover:underline">Breeder Software Has a Data Problem</a> article on the BreederHQ Facebook page).
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>Added a 1200x630 branded OG image at <code>/og-image.jpg</code>: BreederHQ logo centered on a dark gradient with a brand-orange glow accent and "Professional breeding program management" tagline.</li>
+            <li>Added <code>scripts/generate-og-image.mjs</code> so the image can be regenerated from <code>/logo.png</code> via <code>node scripts/generate-og-image.mjs</code> if the brand mark or tagline ever changes.</li>
+            <li>Per-page <code>ogImage</code> overrides (already supported in BaseLayout) continue to work - this only fixes the default fallback used when no custom image is set.</li>
+            <li>BaseLayout also gained a gated <code>&lt;meta name="facebook-domain-verification"&gt;</code> tag driven by a new optional <code>PUBLIC_FB_DOMAIN_VERIFICATION</code> env var. The tag is a no-op when the env var is unset; available for future re-verification if FB ever requires it.</li>
+          </ul>
+        </article>
+
         <!-- ========== May 1, 2026 - Marketplace page: Storefront, Programs, Embed Widget section ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 1, 2026</h2>

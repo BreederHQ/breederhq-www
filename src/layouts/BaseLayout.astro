@@ -55,6 +55,12 @@ const currentUrl = Astro.url.pathname === '/' ? '' : Astro.url.pathname.replace(
 const fullUrl = `https://breederhq.com${currentUrl}`;
 const ogImage = ogImageProp || 'https://breederhq.com/og-image.jpg'; // Default OG image
 
+// Facebook Business Manager domain verification. When set, FB links the domain
+// to our Page so link previews show "BreederHQ" attribution instead of
+// "Link unavailable". Code is issued by Business Settings → Brand Safety →
+// Domains. No-op until PUBLIC_FB_DOMAIN_VERIFICATION is configured in Vercel.
+const fbDomainVerification = import.meta.env.PUBLIC_FB_DOMAIN_VERIFICATION;
+
 // Schema.org Organization - critical for AI assistants
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -239,6 +245,9 @@ if (article) {
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={fullUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {fbDomainVerification && (
+      <meta name="facebook-domain-verification" content={fbDomainVerification} />
+    )}
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
