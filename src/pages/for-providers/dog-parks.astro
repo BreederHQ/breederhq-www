@@ -1,0 +1,594 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Private Dog Parks', url: '/for-providers/dog-parks' }
+];
+
+const faqs = [
+  {
+    question: 'How much does a dog park listing cost?',
+    answer: 'Dog park listings are $5/month per live listing, and they are currently free during our early access period. No commissions, no per-booking fees, and no membership wall for the people booking your space.'
+  },
+  {
+    question: 'Do my guests need a paid membership to book?',
+    answer: 'No. Anyone can browse and book your space without a paid subscription. This is a deliberate difference from other private-park platforms that gate booking behind monthly credit packages.'
+  },
+  {
+    question: 'What kinds of spaces can I list?',
+    answer: 'Private fenced yards, training fields, agility areas, swim spots and ponds, indoor practice spaces, sniff trails, and multi-use private properties. If your space is private, dog-safe, and bookable by the hour, it fits.'
+  },
+  {
+    question: 'How does booking work?',
+    answer: 'You set availability windows in your dashboard. Guests pick a real open time slot, choose how many dogs are coming, and book. You can run instant booking or require approval before each visit.'
+  },
+  {
+    question: 'How do I get paid?',
+    answer: 'Guests pay through the platform at the time of booking. Funds are paid out to your connected payout account on a regular schedule. There is no per-booking platform cut.'
+  },
+  {
+    question: 'Can I require vaccinations or set rules?',
+    answer: 'Yes. Each listing has fields for vaccination requirements, arrival instructions, host rules, hazard notes, and which kinds of guest dogs you welcome (reactive-friendly, small-dog-friendly, puppy-friendly, females-in-heat policy, and so on).'
+  },
+  {
+    question: 'Is this only for dogs?',
+    answer: 'Private Dog Parks is the first facility category we launched, but the underlying system is built for more. Equine arenas, livestock facilities, and other species-specific spaces are on the roadmap.'
+  },
+  {
+    question: 'Can I pause my listing?',
+    answer: 'Yes. Pause and resume anytime. Paused listings are not billed, and your data, photos, and availability are preserved.'
+  }
+];
+---
+
+<BaseLayout
+  title="Private Dog Parks on BreederHQ Marketplace"
+  description="List your private fenced yard, training field, agility area, or swim spot on the BreederHQ Marketplace. $5/month, no commissions, no membership wall for guests."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+<main>
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section class="bg-gradient-to-b from-emerald-50 to-white py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="text-4xl mb-4">🌳</div>
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl leading-tight mb-6">
+        Rent Out Your Yard.<br />
+        <span class="text-emerald-700">Keep What You Earn.</span>
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+        List your private fenced yard, training field, agility area, or swim spot on the BreederHQ Marketplace.
+        Dog owners book real time slots, you get paid, and we do not take a cut of every visit. One flat $5/month per listing.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+          class="bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-600 w-full sm:w-auto"
+        >
+          List Your Space
+        </a>
+        <a
+          href="https://marketplace.breederhq.com/private-dog-parks"
+          class="text-emerald-700 px-8 py-4 text-lg font-medium hover:text-emerald-800 w-full sm:w-auto"
+        >
+          Browse Dog Parks &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHO THIS IS FOR                              -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Spaces That Earn on BreederHQ</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          If your space is private, dog-safe, and bookable by the hour, it fits. Hosts list everything from a half-acre fenced yard to a five-acre training field with a pond.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <div class="text-3xl mb-3">🏡</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Private Yards</h3>
+          <p class="text-sm text-gray-600">
+            Fully fenced backyards rented by the hour. The most popular category, especially for reactive dogs and apartment owners without a yard of their own.
+          </p>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <div class="text-3xl mb-3">🏃</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Training Fields</h3>
+          <p class="text-sm text-gray-600">
+            Open acreage for off-leash work, recall training, scent work, and field training for sporting breeds. Acreage and distractions are first-class searchable filters.
+          </p>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <div class="text-3xl mb-3">🤸</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Agility Areas</h3>
+          <p class="text-sm text-gray-600">
+            Spaces with permanent or portable agility equipment. Great for hobbyist trainers and competitive teams who need a private course without a club membership.
+          </p>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <div class="text-3xl mb-3">💦</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Swim Spots</h3>
+          <p class="text-sm text-gray-600">
+            Private ponds, lakes, pools, and dock-diving spots. High-margin niche; one of the fastest-growing search categories on the marketplace.
+          </p>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <div class="text-3xl mb-3">🏠</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Indoor Spaces</h3>
+          <p class="text-sm text-gray-600">
+            Climate-controlled barns, warehouses, and indoor training rooms. The category that books all winter long in cold-weather markets.
+          </p>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <div class="text-3xl mb-3">🌲</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Sniff Trails &amp; Multi-Use</h3>
+          <p class="text-sm text-gray-600">
+            Private wooded trails, pasture loops, and combo properties. Perfect for enrichment walks, decompression sessions, and reactive-dog work.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHY BREEDERHQ                                -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Built for Hosts. Not for Skimming.</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          We built this for hosts who are tired of giving up a quarter of every booking, and for guests who are tired of being forced into a monthly subscription just to rent a yard.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Flat $5/month per live listing</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            One predictable fee. We do not take a percentage of your bookings. Run a dozen visits a month and the math works out the same: you keep your earnings.
+          </p>
+          <span class="text-xs text-emerald-700 font-medium">Free during early access</span>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">No membership wall for guests</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            Anyone can find your space and book it. No monthly credit packages, no expiring credits, no signup-tax that drives away first-time visitors.
+          </p>
+          <span class="text-xs text-emerald-700 font-medium">More guests, more bookings</span>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Real time slots, not best-effort</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            You set availability windows with duration, capacity, and buffer time between bookings. The system generates real, conflict-free slots and shows guests only what is actually open.
+          </p>
+          <span class="text-xs text-emerald-700 font-medium">No double bookings</span>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Approval or instant book - your call</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            Some hosts want every visit reviewed first. Others want guests to confirm and pay in one tap. You choose per listing.
+          </p>
+          <span class="text-xs text-emerald-700 font-medium">Your space, your rules</span>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Verified breeder ecosystem</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            BreederHQ is already trusted by professional breeders, trainers, and serious dog owners. Your listing inherits a real audience instead of starting from zero on a generic directory.
+          </p>
+          <span class="text-xs text-emerald-700 font-medium">Trusted audience built in</span>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Pause and resume anytime</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            Going on vacation? Renovating the yard? Pause your listing in one click. Paused listings are not billed and your photos, rules, and availability are preserved.
+          </p>
+          <span class="text-xs text-emerald-700 font-medium">No contracts, no lock-in</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHAT YOUR LISTING INCLUDES                   -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-white">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">A Real Listing Page, Not a Lead Form</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          Every dog park listing gets a dedicated detail page with everything a guest needs to decide and book in one visit. No back-and-forth before they can see if your space is right for them.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Photos, Map, and Hero</h3>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Custom hero media layout that shows off your space first
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Multi-photo gallery - guests want to see fence, terrain, and entry
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              On-page map with approximate location (full address shown after booking)
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Sticky booking rail that follows the guest as they scroll
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Facility Details</h3>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Fence status, height, and material
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Acreage band from a quarter acre to five acres or more
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Terrain type: short grass, long grass, woods, sand, water, mulch, turf
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Resident-animal separation, privacy, and exclusivity disclosure
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Amenities</h3>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Water for dogs, hose, restrooms, hand sanitizer, dog bags
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Chairs, rain shelter, sun shade, evening lighting, parking
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Toys, agility equipment, digging area, swim features, indoor space
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Fertilizer-free and pesticide-free flags for sensitive dogs
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Distractions &amp; Suitability</h3>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Disclose whether other dogs are visible or audible
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Reactive-dog-friendly, small-dog-friendly, puppy-friendly tags
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Females-in-heat policy and nearby livestock disclosure
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Hazard notes for pools, drop-offs, water sources, or other risks
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Booking Rules</h3>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Per-dog or per-visit pricing, with maximum dog count
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Slot duration, interval, capacity, and buffer time between bookings
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Advance-notice requirement, from same-day to multi-day
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Vaccination requirements, host rules, and arrival instructions
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-stone-50 rounded-xl p-8 border border-stone-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Trust &amp; Reviews</h3>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Host trust panel showing verification, response time, and tenure
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Auto-resolved badges: Top Spot, Rising Star, New
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Buyer reviews collected automatically after each completed visit
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
+              Optional verification badge with credentials or insurance docs
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- BOOKING FLOW                                 -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-stone-50">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">How Booking Works</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          A clean, four-step lifecycle from the moment a guest finds your space to the moment they head home. No manual start or complete buttons. The system handles it.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center mx-auto mb-4">1</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Date &amp; Time Selected</h3>
+          <p class="text-sm text-gray-600">
+            Guest picks a real open slot, dog count, and confirms the price.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center mx-auto mb-4">2</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Booked</h3>
+          <p class="text-sm text-gray-600">
+            Payment succeeds (or you approve a manual-payment reservation). The slot is reserved.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center mx-auto mb-4">3</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Visit Happens</h3>
+          <p class="text-sm text-gray-600">
+            Guest follows your arrival instructions and uses the space during the booked window.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center mx-auto mb-4">4</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Completed</h3>
+          <p class="text-sm text-gray-600">
+            The booking auto-completes at the end of the slot window. Review prompt goes out automatically.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 bg-white rounded-xl p-6 border border-stone-200">
+        <h3 class="font-semibold text-gray-900 mb-3">Things you control from your dashboard</h3>
+        <div class="grid md:grid-cols-2 gap-3 text-sm text-gray-700">
+          <div class="flex items-start gap-2"><span class="text-emerald-600 font-bold mt-0.5">&#10003;</span> Approve, decline, reschedule, or cancel bookings</div>
+          <div class="flex items-start gap-2"><span class="text-emerald-600 font-bold mt-0.5">&#10003;</span> Move a booking onto a different open slot</div>
+          <div class="flex items-start gap-2"><span class="text-emerald-600 font-bold mt-0.5">&#10003;</span> Confirm manual payment or issue a refund</div>
+          <div class="flex items-start gap-2"><span class="text-emerald-600 font-bold mt-0.5">&#10003;</span> Message the guest directly from the booking</div>
+          <div class="flex items-start gap-2"><span class="text-emerald-600 font-bold mt-0.5">&#10003;</span> Open or close availability windows on the fly</div>
+          <div class="flex items-start gap-2"><span class="text-emerald-600 font-bold mt-0.5">&#10003;</span> Edit facility details and rules anytime</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- COMPARISON TABLE                             -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-white">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">How We Stack Up</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          A quick side-by-side against the largest private dog-park platform.
+        </p>
+      </div>
+
+      <div class="overflow-hidden rounded-xl border border-stone-200">
+        <table class="w-full text-sm">
+          <thead class="bg-stone-50">
+            <tr>
+              <th class="text-left p-4 font-semibold text-gray-900">&nbsp;</th>
+              <th class="text-left p-4 font-semibold text-emerald-700">BreederHQ Marketplace</th>
+              <th class="text-left p-4 font-semibold text-gray-500">Largest Competitor</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-200 bg-white">
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Host fee</td>
+              <td class="p-4 text-gray-700">$5/month flat per listing</td>
+              <td class="p-4 text-gray-500">~24% commission per booking</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Per-booking platform cut</td>
+              <td class="p-4 text-emerald-700 font-semibold">None</td>
+              <td class="p-4 text-gray-500">22% plus payment processing</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Guest membership required</td>
+              <td class="p-4 text-emerald-700 font-semibold">No</td>
+              <td class="p-4 text-gray-500">Yes, $20-$120/month for credits</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Anyone can browse and book</td>
+              <td class="p-4 text-emerald-700 font-semibold">Yes</td>
+              <td class="p-4 text-gray-500">Members only as of late 2024</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Real time-slot booking</td>
+              <td class="p-4 text-gray-700">Yes, with capacity and buffers</td>
+              <td class="p-4 text-gray-500">Yes</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Built-in audience</td>
+              <td class="p-4 text-gray-700">Breeders, trainers, serious dog owners</td>
+              <td class="p-4 text-gray-500">General consumer dog owners</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Pause anytime</td>
+              <td class="p-4 text-emerald-700 font-semibold">Yes, free while paused</td>
+              <td class="p-4 text-gray-500">Yes</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Multi-species roadmap</td>
+              <td class="p-4 text-gray-700">Yes, equine and livestock planned</td>
+              <td class="p-4 text-gray-500">Dogs only</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs text-gray-500 mt-4 text-center">
+        Competitor pricing reflects publicly published host commission and guest membership tiers as of early 2026.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- EARNINGS                                     -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Where the Money Actually Goes</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          On a $15 booking with the major competitor, the host nets about $11 after the 22% commission and payment processing.
+          Same booking on BreederHQ: the host nets about $14.50, with no per-booking platform fee.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <p class="text-sm text-gray-500 mb-1">1 booking/month</p>
+          <p class="text-2xl font-bold text-gray-900">+$3 - $4</p>
+          <p class="text-xs text-gray-500 mt-1">extra in your pocket</p>
+        </div>
+        <div class="bg-white rounded-xl border-2 border-emerald-300 p-6 text-center">
+          <p class="text-sm text-gray-500 mb-1">10 bookings/month</p>
+          <p class="text-2xl font-bold text-emerald-700">+$30 - $40</p>
+          <p class="text-xs text-gray-500 mt-1">extra in your pocket</p>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
+          <p class="text-sm text-gray-500 mb-1">40 bookings/month</p>
+          <p class="text-2xl font-bold text-gray-900">+$120 - $160</p>
+          <p class="text-xs text-gray-500 mt-1">extra in your pocket</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-gray-500 mt-6 text-center max-w-2xl mx-auto">
+        Estimates based on a $15 average booking and the public commission rate of the largest competitor. Your actual earnings depend on your pricing, location, and booking volume.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- FINAL CTA                                    -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-gradient-to-br from-emerald-900 to-emerald-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-white">
+        Your space, your rules, your earnings.
+      </h2>
+      <p class="text-lg text-emerald-200 mb-3">
+        <span class="line-through opacity-60">$5/month per listing</span> Free during early access.
+      </p>
+      <p class="text-base text-emerald-200 mb-10 max-w-2xl mx-auto">
+        No commissions. No membership wall for guests. Cancel anytime.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+          class="bg-white text-emerald-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50 w-full sm:w-auto"
+        >
+          List Your Space
+        </a>
+        <a
+          href="https://marketplace.breederhq.com/private-dog-parks"
+          class="bg-emerald-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-400 w-full sm:w-auto"
+        >
+          Browse Dog Parks
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</BaseLayout>
