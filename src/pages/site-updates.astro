@@ -28,6 +28,49 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== May 6, 2026 (later) - Dog Parks SEO content moat ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 6, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Three new SEO surfaces for the Private Dog Parks vertical: Sniffspot comparison page, earnings calculator, and city-level guide pages</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/compare/sniffspot-alternative" class="text-[hsl(24,95%,53%)] hover:underline">/compare/sniffspot-alternative</a></h3>
+          <p class="text-gray-700 mb-3">
+            Bottom-funnel comparison page targeting users actively shopping for a Sniffspot replacement. Side-by-side comparison table covering host listing fee, per-booking commission, guest membership requirement, time-slot booking, payout schedule, and multi-category ecosystem coverage. All Sniffspot facts cited from sniffspot.com/host with a clear note that Sniffspot's specific commission percentage is not publicly disclosed on their marketing pages. Includes ten FAQs (FAQPage schema), a "for hosts / for bookers" split, a "mirror your existing listing" migration section, and full nominative-fair-use trademark disclaimer.
+          </p>
+          <p class="text-gray-700 mb-3">
+            Page also added to the <a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">/compare</a> hub.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">New page: <a href="/for-providers/dog-parks/earnings-calculator" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/dog-parks/earnings-calculator</a></h3>
+          <p class="text-gray-700 mb-3">
+            Interactive earnings calculator for prospective hosts. Inputs: hourly rate, bookings per week, average booking duration, and an adjustable comparison commission rate. Outputs: monthly gross, BreederHQ take-home (gross minus $5/month), comparison-platform take-home, and annual difference. Calculator inputs sync to the URL so hosts can copy a shareable link. Page also includes a "what drives earnings" section (fence quality, acreage, location, availability, photos, response time) and seven FAQs.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">New page: <a href="/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/dog-parks</a> (cities directory)</h3>
+          <p class="text-gray-700 mb-3">
+            Top-level "Private Dog Parks for Rent" hub linking to all Phase 1 city pages. Includes a "what is a private dog park" explainer, a "when is a private dog park the right choice" grid (reactive dogs, training, apartment dogs, recovery, bad weather, females in heat), and six FAQs.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">New dynamic route: <code class="bg-gray-100 px-2 py-0.5 rounded text-sm">/dog-parks/[city]</code> (Phase 1 launch with 10 metros)</h3>
+          <p class="text-gray-700 mb-3">
+            Astro static-site-generated city pages built from <code class="bg-gray-100 px-2 py-0.5 rounded text-sm">src/data/dog-park-cities.ts</code>. Each page fetches live featured listings at build time from the public marketplace API (<code class="bg-gray-100 px-2 py-0.5 rounded text-sm">https://marketplace.breederhq.com/api/v1/marketplace/public/listings?category=facilities&amp;subcategory=private_dog_park&amp;city=...</code>) and falls back gracefully to a "Be the first host in this metro" empty state when no listings exist yet.
+          </p>
+          <p class="text-gray-700 mb-3">Phase 1 metros (10): Kansas City MO, Seattle, Portland, Denver, Austin, Los Angeles, San Francisco Bay Area, Chicago, Boston, Minneapolis-St. Paul. Each city page includes a metro-specific intro, a "why private over public" rationale, featured listings or empty-state, a "when private dog parks are the right choice" grid, a host-acquisition CTA with city pre-filled in the registration deep link, and city-specific FAQs (FAQPage schema).</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: <a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/dog-parks</a></h3>
+          <p class="text-gray-700 mb-3">
+            Added a "More for Dog Park Hosts" section before the final CTA cross-linking the three new pages (sniffspot comparison, earnings calculator, browse-by-city).
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Architecture notes</h3>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>City list lives in <code class="bg-gray-100 px-2 py-0.5 rounded text-sm">src/data/dog-park-cities.ts</code> — adding or removing metros is a single-file edit. New entries auto-generate routes and appear in the directory page.</li>
+            <li>The earnings calculator is implemented as vanilla JS in an <code class="bg-gray-100 px-2 py-0.5 rounded text-sm">is:inline</code> script with no framework dependency, matching the rest of the www site.</li>
+            <li>Build-time API fetches use a 10-second timeout and silently fall back to empty state on failure — a flaky API will not break a deploy.</li>
+            <li>All three new surfaces emit FAQPage JSON-LD via BaseLayout for rich-result eligibility.</li>
+          </ul>
+        </article>
+
         <!-- ========== May 6, 2026 - Private Dog Parks landing page ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 6, 2026</h2>

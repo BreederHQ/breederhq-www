@@ -1,0 +1,295 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dogParkCities, type DogParkCity } from '../../data/dog-park-cities';
+
+export async function getStaticPaths() {
+  return dogParkCities.map((city) => ({
+    params: { city: city.slug },
+    props: { city }
+  }));
+}
+
+interface MarketplaceListing {
+  id: number;
+  slug: string;
+  title: string;
+  city: string | null;
+  state: string | null;
+  priceCents: number | null;
+  priceType: string | null;
+  priceDisplay?: string;
+  images: string[];
+  cardSummary?: string | null;
+}
+
+interface ListingsResponse {
+  items: MarketplaceListing[];
+  total: number;
+  page: number;
+  limit: number;
+  hasMore: boolean;
+}
+
+const { city } = Astro.props as { city: DogParkCity };
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Private Dog Parks', url: '/dog-parks' },
+  { name: city.name, url: `/dog-parks/${city.slug}` }
+];
+
+// Fetch live listings at build time. Fall back to empty list if unreachable -
+// the page still ships with full content; the listings section just shows the
+// "Be the first to list" empty state.
+let listings: MarketplaceListing[] = [];
+let listingsTotal = 0;
+try {
+  const apiUrl = `https://marketplace.breederhq.com/api/v1/marketplace/public/listings?category=facilities&subcategory=private_dog_park&city=${encodeURIComponent(city.apiCityName)}&state=${encodeURIComponent(city.state)}&limit=12&sort=-publishedAt`;
+  const res = await fetch(apiUrl, { signal: AbortSignal.timeout(10000) });
+  if (res.ok) {
+    const data = (await res.json()) as ListingsResponse;
+    listings = data.items || [];
+    listingsTotal = data.total || 0;
+  }
+} catch {
+  // Build proceeds with empty listings; not a fatal failure.
+}
+
+const faqs = [
+  {
+    question: `Are there private dog parks for rent in ${city.name}?`,
+    answer: listingsTotal > 0
+      ? `Yes. There are ${listingsTotal} private dog park listing${listingsTotal === 1 ? '' : 's'} on BreederHQ Marketplace in ${city.name}. Hourly rates, fence types, and amenities vary by listing.`
+      : `Listings in ${city.name} are limited right now. If you own a fenced yard, training field, or other private dog space in the area, you can be one of the first hosts in the metro - $5/month per live listing, no per-booking commission.`
+  },
+  {
+    question: `How much does it cost to rent a private dog park in ${city.name}?`,
+    answer: `Hourly rates in ${city.name} typically range from $8 to $25 depending on fence quality, acreage, amenities (water access, agility equipment, swim spots), and time of day. Each listing on BreederHQ shows the host's hourly rate up front.`
+  },
+  {
+    question: `Why book a private dog park instead of the public one?`,
+    answer: city.whyPrivate
+  },
+  {
+    question: `What kinds of private spaces can I book in ${city.name}?`,
+    answer: 'Private fenced yards, training fields, agility courses, swim spots and ponds, indoor practice spaces, sniff trails, and multi-use private properties. Filter by fence type, acreage, suitability tags (reactive-friendly, small-dog-friendly, puppy-friendly), and amenities to find the right fit.'
+  },
+  {
+    question: `How do I become a private dog park host in ${city.name}?`,
+    answer: 'List your space on BreederHQ Marketplace. The fee is $5/month per live listing with no per-booking commission. Set your own hourly rate, availability, vaccination requirements, and house rules. Pause anytime without losing data.'
+  },
+  {
+    question: `Do my guests need a paid membership to book my listing?`,
+    answer: `No. Anyone can book a private dog park on BreederHQ without a paid subscription or credit pack. This is a deliberate difference from platforms that require guests to buy monthly credits before they can book.`
+  }
+];
+---
+
+<BaseLayout
+  title={`Private Dog Parks for Rent in ${city.name} | BreederHQ`}
+  description={`Find private fenced yards, training fields, agility areas, and swim spots for hourly booking in ${city.name}. Browse listings or list your own private dog park space - $5/month, no commissions.`}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">Private Dog Parks</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">{city.name}</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-16 px-4 bg-gradient-to-b from-white to-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-4">Private Dog Parks in {city.name}</h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-6">
+          {city.intro}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href={`https://marketplace.breederhq.com/services/facilities/private-dog-parks?city=${encodeURIComponent(city.apiCityName)}&state=${encodeURIComponent(city.state)}`}
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            Browse Listings in {city.name}
+          </a>
+          <a
+            href={`https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new&city=${encodeURIComponent(city.apiCityName)}`}
+            class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            List Your Space in {city.name}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured listings -->
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold mb-3">Featured Private Dog Parks in {city.name}</h2>
+        {listingsTotal > 0 ? (
+          <p class="text-gray-600 mb-8">{listingsTotal} {listingsTotal === 1 ? 'listing' : 'listings'} available. Showing {Math.min(listings.length, listingsTotal)}.</p>
+        ) : (
+          <p class="text-gray-600 mb-8">No live listings yet in {city.name}. Be the first host in your metro.</p>
+        )}
+
+        {listings.length > 0 ? (
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {listings.map((listing) => (
+              <a
+                href={`https://marketplace.breederhq.com/listings/${listing.slug}`}
+                class="block bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:border-[hsl(24,95%,53%)] transition"
+              >
+                {listing.images && listing.images.length > 0 ? (
+                  <img
+                    src={listing.images[0]}
+                    alt={listing.title}
+                    class="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm">No photo</div>
+                )}
+                <div class="p-4">
+                  <h3 class="font-bold text-gray-900 mb-1 line-clamp-2">{listing.title}</h3>
+                  {listing.cardSummary && (
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">{listing.cardSummary}</p>
+                  )}
+                  <p class="text-sm text-gray-500">
+                    {[listing.city, listing.state].filter(Boolean).join(', ')}
+                  </p>
+                  {listing.priceDisplay && (
+                    <p class="font-bold text-[hsl(24,95%,53%)] mt-2">{listing.priceDisplay}</p>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-8 rounded-lg">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Be the first private dog park host in {city.name}</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+              Listing first means your space ranks first in {city.name} search results, captures early bookings, and earns the "Rising Star" badge as you build reviews. The fee is $5/month per live listing - no commission, no obligation, pause anytime.
+            </p>
+            <a
+              href={`https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new&city=${encodeURIComponent(city.apiCityName)}`}
+              class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
+            >
+              List Your Space →
+            </a>
+          </div>
+        )}
+
+        {listings.length > 0 && listingsTotal > listings.length && (
+          <div class="text-center mt-10">
+            <a
+              href={`https://marketplace.breederhq.com/services/facilities/private-dog-parks?city=${encodeURIComponent(city.apiCityName)}&state=${encodeURIComponent(city.state)}`}
+              class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-8 rounded-lg transition"
+            >
+              See All {listingsTotal} Listings in {city.name} →
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Why private -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Why Book a Private Dog Park in {city.name}?</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          {city.whyPrivate}
+        </p>
+        <div class="grid md:grid-cols-2 gap-6 mt-10">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Reactive or selective dogs</h3>
+            <p class="text-gray-700">A private booking means no other dogs in the space. Perfect for dogs in behavior modification or recovery.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Off-leash training</h3>
+            <p class="text-gray-700">A fenced, private space lets you practice recall, obedience, and agility without distractions or off-leash strangers.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Apartment-living dogs</h3>
+            <p class="text-gray-700">If you don't have a yard, an hourly private space is the closest thing to giving your dog a yard for an afternoon.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Bad weather</h3>
+            <p class="text-gray-700">Indoor practice spaces and covered yards extend exercise time when public parks are unusable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Become a host -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Have Private Dog Space in {city.name}? Earn From It.</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          If you have a fenced yard, training field, agility area, swim spot, or indoor practice space in {city.name}, you can list it on BreederHQ Marketplace for hourly bookings.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          The fee is $5 per month per live listing - no per-booking commission, no setup fee, no membership wall for your guests. You set your hourly rate, your availability, and your house rules.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href={`https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new&city=${encodeURIComponent(city.apiCityName)}`}
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
+          >
+            List Your Space
+          </a>
+          <a
+            href="/for-providers/dog-parks/earnings-calculator"
+            class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-3 px-6 rounded-lg transition"
+          >
+            Estimate Your Earnings
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-[hsl(24,95%,53%)]">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Other cities -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Browse Private Dog Parks in Other Cities</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {dogParkCities.filter((c) => c.slug !== city.slug).map((other) => (
+            <a
+              href={`/dog-parks/${other.slug}`}
+              class="block px-4 py-3 bg-gray-50 hover:bg-[hsl(24,95%,53%)] hover:text-white border border-gray-200 rounded-lg text-center font-semibold text-gray-700 transition"
+            >
+              {other.name}
+            </a>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">See all city pages →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

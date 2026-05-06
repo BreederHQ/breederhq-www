@@ -1,0 +1,378 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Private Dog Parks', url: '/for-providers/dog-parks' },
+  { name: 'Earnings Calculator', url: '/for-providers/dog-parks/earnings-calculator' }
+];
+
+const faqs = [
+  {
+    question: 'How accurate is this calculator?',
+    answer: 'The calculator is a planning tool, not a forecast. It multiplies your hourly rate by your weekly bookings and average duration, then subtracts platform fees. Real earnings depend on demand in your area, your fence quality and amenities, your responsiveness, and how many bookings you actually accept. Use it to compare scenarios, not to predict your bank balance.'
+  },
+  {
+    question: 'What does BreederHQ charge?',
+    answer: 'A flat $5 per month per live listing. No per-booking commission, no setup fee, no monthly minimum bookings requirement. Pause anytime to stop billing while preserving your data, photos, and availability.'
+  },
+  {
+    question: 'What does the comparison column assume?',
+    answer: 'The "competitor commission" column is illustrative. Specific commission percentages charged by other private-dog-park platforms are not consistently disclosed on their public marketing pages. The default 22% is a placeholder you can change to model whatever rate you want to compare against - if you know the actual rate from a payout statement, enter it.'
+  },
+  {
+    question: 'Will my earnings vary by city?',
+    answer: 'Yes, significantly. Hourly rates in dense urban areas with limited off-leash options run higher than rural areas with public dog park access. Booking frequency depends on local demand, your visibility in search, photos, reviews, and how flexible your availability is.'
+  },
+  {
+    question: 'Can I share my calculation with someone?',
+    answer: 'Yes. Every input change updates the URL with your numbers. Copy the URL from your browser to share a specific scenario - it will load with the same inputs when the recipient opens it.'
+  },
+  {
+    question: 'Where do my bookings happen?',
+    answer: 'Bookings happen on BreederHQ Marketplace. Guests pick a real time slot from your availability, choose how many dogs are coming, and book - either instantly or pending your approval, your choice per listing.'
+  },
+  {
+    question: 'How do I get paid?',
+    answer: 'Through Stripe Connect. Payouts run on a regular schedule once your account is set up. There is no per-booking platform commission deducted from your earnings.'
+  }
+];
+
+const service = {
+  name: 'Private Dog Park Hosting on BreederHQ',
+  description: 'Earnings calculator for hosting private dog park bookings on BreederHQ. Flat $5/month per live listing, no commissions.',
+  serviceType: 'Private Dog Park Hosting',
+  priceCurrency: 'USD',
+  price: '5',
+  priceUnit: 'MONTH' as const,
+  offerDescription: '$5 per month per live listing. No per-booking commission.',
+  areaServed: 'United States',
+  offerUrl: 'https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new'
+};
+---
+
+<BaseLayout
+  title="Private Dog Park Earnings Calculator | BreederHQ"
+  description="Estimate what you can earn hosting a private dog park on BreederHQ. Compare BreederHQ's flat $5/month fee against percentage-commission models. Share scenarios via URL."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">Service Providers</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">Private Dog Parks</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Earnings Calculator</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-16 px-4 bg-gradient-to-b from-white to-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-4">Private Dog Park Earnings Calculator</h1>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Plug in your hourly rate, weekly bookings, and average visit duration. See what you'd take home on BreederHQ versus a commission-based platform.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="py-12 px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="bg-white border-2 border-[hsl(24,95%,53%)] rounded-2xl shadow-lg p-8">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Inputs -->
+            <div>
+              <h2 class="text-2xl font-bold mb-6 text-gray-900">Your Listing</h2>
+
+              <div class="mb-6">
+                <label for="rate" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Hourly rate: <span id="rate-display" class="text-[hsl(24,95%,53%)] font-bold">$10</span>
+                </label>
+                <input
+                  type="range"
+                  id="rate"
+                  min="5"
+                  max="40"
+                  step="1"
+                  value="10"
+                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[hsl(24,95%,53%)]"
+                  aria-describedby="rate-help"
+                />
+                <p id="rate-help" class="text-xs text-gray-500 mt-1">$5 to $40 per hour. Most US listings fall between $8 and $20.</p>
+              </div>
+
+              <div class="mb-6">
+                <label for="bookings" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Bookings per week: <span id="bookings-display" class="text-[hsl(24,95%,53%)] font-bold">4</span>
+                </label>
+                <input
+                  type="range"
+                  id="bookings"
+                  min="0"
+                  max="20"
+                  step="1"
+                  value="4"
+                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[hsl(24,95%,53%)]"
+                  aria-describedby="bookings-help"
+                />
+                <p id="bookings-help" class="text-xs text-gray-500 mt-1">0 to 20 per week. Casual hosts run 1-3, active hosts 5-10, busy listings 10+.</p>
+              </div>
+
+              <div class="mb-6">
+                <label for="duration" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Average booking duration: <span id="duration-display" class="text-[hsl(24,95%,53%)] font-bold">1.0</span> hours
+                </label>
+                <input
+                  type="range"
+                  id="duration"
+                  min="0.5"
+                  max="3"
+                  step="0.5"
+                  value="1"
+                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[hsl(24,95%,53%)]"
+                  aria-describedby="duration-help"
+                />
+                <p id="duration-help" class="text-xs text-gray-500 mt-1">Most visits run 30-60 minutes; agility and training sessions can run longer.</p>
+              </div>
+
+              <div class="mb-2">
+                <label for="commission" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Comparison commission rate: <span id="commission-display" class="text-gray-700 font-bold">22%</span>
+                </label>
+                <input
+                  type="range"
+                  id="commission"
+                  min="0"
+                  max="50"
+                  step="1"
+                  value="22"
+                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-gray-600"
+                  aria-describedby="commission-help"
+                />
+                <p id="commission-help" class="text-xs text-gray-500 mt-1">Adjust to match the actual percentage another platform charges. Default 22% is illustrative; specific rates are not publicly disclosed by all platforms.</p>
+              </div>
+            </div>
+
+            <!-- Outputs -->
+            <div class="bg-gray-50 rounded-xl p-6 flex flex-col justify-between">
+              <div>
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Your Estimated Take-Home</h2>
+
+                <div class="mb-6">
+                  <p class="text-sm text-gray-600 uppercase font-semibold tracking-wide">Monthly gross bookings</p>
+                  <p id="gross" class="text-3xl font-bold text-gray-900">$173</p>
+                </div>
+
+                <div class="mb-6 pb-6 border-b border-gray-200">
+                  <p class="text-sm text-[hsl(24,95%,53%)] uppercase font-semibold tracking-wide">BreederHQ take-home</p>
+                  <p id="bhq-net" class="text-4xl font-bold text-[hsl(24,95%,53%)]">$168</p>
+                  <p class="text-xs text-gray-500 mt-1">Gross minus $5/month flat fee</p>
+                </div>
+
+                <div class="mb-6">
+                  <p class="text-sm text-gray-600 uppercase font-semibold tracking-wide">Comparison platform take-home</p>
+                  <p id="comp-net" class="text-3xl font-bold text-gray-700">$135</p>
+                  <p class="text-xs text-gray-500 mt-1">Gross minus <span id="comp-pct">22%</span> commission</p>
+                </div>
+
+                <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded">
+                  <p class="text-xs text-emerald-700 uppercase font-semibold tracking-wide">Annual difference</p>
+                  <p id="annual-diff" class="text-3xl font-bold text-emerald-700">+$398</p>
+                  <p class="text-xs text-emerald-700 mt-1">More per year on BreederHQ at these inputs</p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                id="copy-link"
+                class="mt-6 w-full bg-white border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-3 px-4 rounded-lg transition"
+              >
+                Copy Shareable Link
+              </button>
+              <p id="copy-status" class="text-center text-xs text-gray-500 mt-2 h-4"></p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-500 mt-6 max-w-3xl">
+          This calculator is a planning tool. Real earnings depend on local demand, your responsiveness, photo quality, fence quality, amenities, and how many bookings you accept. The "comparison commission" column is illustrative; specific rates charged by other platforms are not consistently disclosed on their public marketing pages.
+        </p>
+      </div>
+    </section>
+
+    <!-- Earnings drivers -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8">What Actually Drives Earnings</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Fence quality</h3>
+            <p class="text-gray-700">Fully fenced 6-foot perimeters command premium rates and unlock reactive-dog-friendly traffic that pays more for safety.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Acreage and amenities</h3>
+            <p class="text-gray-700">More space, water access, agility equipment, swim spots, indoor shelter, and toy availability all push your hourly rate up.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Location</h3>
+            <p class="text-gray-700">Dense urban areas with limited public off-leash options pay more per booking but have more competition. Suburban listings often win on volume.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Availability flexibility</h3>
+            <p class="text-gray-700">Listings with weekend, evening, and short-notice availability convert at much higher rates. Restrictive availability caps your booking count fast.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Photo quality</h3>
+            <p class="text-gray-700">Listings with 8+ high-quality photos showing fence, terrain, and amenities book substantially more than text-heavy listings.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Response time</h3>
+            <p class="text-gray-700">Approval-required listings live or die on host response time. Quick approvers earn the "Quick Responder" badge and rank higher in search.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-gray-50 rounded-lg p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-[hsl(24,95%,53%)]">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4 bg-gradient-to-br from-emerald-900 to-emerald-700 text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-4">Ready to List Your Space?</h2>
+        <p class="text-xl text-emerald-100 mb-10">$5/month per live listing. No commissions. Pause anytime.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+            class="inline-block bg-white text-emerald-900 hover:bg-emerald-50 font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            List Your Space
+          </a>
+          <a
+            href="/compare/sniffspot-alternative"
+            class="inline-block border-2 border-white text-white hover:bg-white hover:text-emerald-900 font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            See Full Comparison
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      const rate = $('rate');
+      const bookings = $('bookings');
+      const duration = $('duration');
+      const commission = $('commission');
+
+      const rateDisplay = $('rate-display');
+      const bookingsDisplay = $('bookings-display');
+      const durationDisplay = $('duration-display');
+      const commissionDisplay = $('commission-display');
+
+      const grossEl = $('gross');
+      const bhqNetEl = $('bhq-net');
+      const compNetEl = $('comp-net');
+      const compPctEl = $('comp-pct');
+      const annualDiffEl = $('annual-diff');
+
+      const copyBtn = $('copy-link');
+      const copyStatus = $('copy-status');
+
+      const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+
+      function readUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        const r = parseFloat(params.get('rate'));
+        const b = parseFloat(params.get('bookings'));
+        const d = parseFloat(params.get('duration'));
+        const c = parseFloat(params.get('commission'));
+        if (!isNaN(r) && r >= 5 && r <= 40) rate.value = String(r);
+        if (!isNaN(b) && b >= 0 && b <= 20) bookings.value = String(b);
+        if (!isNaN(d) && d >= 0.5 && d <= 3) duration.value = String(d);
+        if (!isNaN(c) && c >= 0 && c <= 50) commission.value = String(c);
+      }
+
+      function recalc(updateUrl) {
+        const r = parseFloat(rate.value);
+        const b = parseFloat(bookings.value);
+        const d = parseFloat(duration.value);
+        const c = parseFloat(commission.value);
+
+        rateDisplay.textContent = '$' + r;
+        bookingsDisplay.textContent = String(b);
+        durationDisplay.textContent = d.toFixed(1);
+        commissionDisplay.textContent = c + '%';
+
+        const monthlyGross = r * b * d * 4.33;
+        const bhqNet = Math.max(0, monthlyGross - 5);
+        const compNet = monthlyGross * (1 - c / 100);
+        const annualDiff = (bhqNet - compNet) * 12;
+
+        grossEl.textContent = fmt(monthlyGross);
+        bhqNetEl.textContent = fmt(bhqNet);
+        compNetEl.textContent = fmt(compNet);
+        compPctEl.textContent = c + '%';
+
+        const sign = annualDiff >= 0 ? '+' : '-';
+        annualDiffEl.textContent = sign + fmt(Math.abs(annualDiff));
+
+        if (updateUrl) {
+          const u = new URL(window.location.href);
+          u.searchParams.set('rate', String(r));
+          u.searchParams.set('bookings', String(b));
+          u.searchParams.set('duration', String(d));
+          u.searchParams.set('commission', String(c));
+          window.history.replaceState({}, '', u.toString());
+        }
+      }
+
+      [rate, bookings, duration, commission].forEach((el) => {
+        el.addEventListener('input', () => recalc(true));
+      });
+
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          copyStatus.textContent = 'Link copied to clipboard.';
+          setTimeout(() => { copyStatus.textContent = ''; }, 2500);
+        } catch (e) {
+          copyStatus.textContent = 'Copy failed - select the URL bar manually.';
+          setTimeout(() => { copyStatus.textContent = ''; }, 4000);
+        }
+      });
+
+      readUrlParams();
+      recalc(false);
+    })();
+  </script>
+</BaseLayout>

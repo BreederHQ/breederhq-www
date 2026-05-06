@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dogParkCities } from '../../data/dog-park-cities';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Private Dog Parks', url: '/dog-parks' }
+];
+
+const faqs = [
+  {
+    question: 'What is a private dog park?',
+    answer: 'A private dog park is a fenced yard, training field, agility area, swim spot, or indoor practice space that an owner rents out by the hour. You book a slot, you and your dog get exclusive use during that slot, and no other dogs are present unless you brought them.'
+  },
+  {
+    question: 'Why use a private dog park instead of a public one?',
+    answer: 'Private dog parks are best for reactive or selective dogs, dogs recovering from training or injury, off-leash training practice, apartment dogs without yards, and bad-weather days when public parks are unusable. You control the environment, the timing, and who else is there.'
+  },
+  {
+    question: 'How much do private dog parks cost to book?',
+    answer: 'Hourly rates typically range from $8 to $25 in the US, with most listings between $10 and $15. Rate depends on fence quality, acreage, amenities (water, agility, swim), location, and demand.'
+  },
+  {
+    question: 'How does BreederHQ Marketplace differ from other private-dog-park platforms?',
+    answer: 'Two main differences. Hosts pay a flat $5/month per live listing with no per-booking commission. Guests do not need a paid membership or credit pack to book. See /compare/sniffspot-alternative for a side-by-side comparison.'
+  },
+  {
+    question: 'Can I list my own private dog park?',
+    answer: 'Yes. List a fenced yard, training field, agility area, swim spot, or indoor practice space on BreederHQ for $5/month per live listing. No per-booking commission, no setup fee. Pause anytime without losing data.'
+  },
+  {
+    question: `Why don't I see my city listed?`,
+    answer: 'BreederHQ is rolling out city pages metro by metro. If your city is not listed yet, you can still browse all listings on the marketplace at marketplace.breederhq.com/services/facilities/private-dog-parks and filter by your location. New city pages are added as host supply grows.'
+  }
+];
+---
+
+<BaseLayout
+  title="Private Dog Parks for Rent | BreederHQ Marketplace"
+  description="Browse private fenced yards, training fields, agility areas, and swim spots for hourly booking across the US. No membership required to book. List your own space for $5/month."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Private Dog Parks</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-4">Private Dog Parks for Rent</h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-6">
+          Browse private fenced yards, training fields, agility areas, swim spots, indoor practice spaces, and sniff trails for hourly booking. No paid membership required to book. Pick a slot, book it, show up.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="https://marketplace.breederhq.com/services/facilities/private-dog-parks"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            Browse All Listings
+          </a>
+          <a
+            href="/for-providers/dog-parks"
+            class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            List Your Space
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cities -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-bold mb-3">Private Dog Parks by City</h2>
+        <p class="text-gray-600 mb-10">City pages with featured listings, local context, and what to know about booking a private dog park in your area.</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {dogParkCities.map((city) => (
+            <a
+              href={`/dog-parks/${city.slug}`}
+              class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-[hsl(24,95%,53%)] hover:shadow-md transition"
+            >
+              <h3 class="font-bold text-xl text-gray-900 mb-2">{city.name}</h3>
+              <p class="text-sm text-gray-600 line-clamp-3">{city.intro}</p>
+              <p class="text-[hsl(24,95%,53%)] font-semibold text-sm mt-3">View listings →</p>
+            </a>
+          ))}
+        </div>
+
+        <div class="mt-10 bg-amber-50 border-l-4 border-amber-500 p-6 rounded-lg">
+          <p class="text-gray-700">
+            <strong>Don't see your city?</strong> BreederHQ Marketplace has listings nationwide. Browse <a href="https://marketplace.breederhq.com/services/facilities/private-dog-parks" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">all private dog park listings</a> and filter by your location, or be the first host in your area: <a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">list your space →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What & why -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">What's a Private Dog Park?</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          A private dog park is exactly what it sounds like: a fenced, private space you book by the hour for exclusive use with your own dog (or your own group). No other dogs in the space, no off-leash strangers, no surprises.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Hosts list private yards, training fields, agility areas, swim spots, indoor practice spaces, sniff trails, and multi-use private properties. Bookers pick a real time slot, set how many dogs are coming, and book. The host either approves the booking or accepts it instantly, depending on their listing settings.
+        </p>
+
+        <h2 class="text-3xl font-bold mb-6">When Is a Private Dog Park the Right Choice?</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Reactive or selective dogs</h3>
+            <p class="text-gray-700">Some dogs can't safely use public dog parks. Private bookings give them off-leash time without the risk.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Training and recall practice</h3>
+            <p class="text-gray-700">A controlled, fenced environment is ideal for off-leash recall, agility, scent work, and obedience drills.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Apartment-dwelling dogs</h3>
+            <p class="text-gray-700">No yard at home? An hourly private booking is the closest thing to giving your dog a yard for the afternoon.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Recovery and rehabilitation</h3>
+            <p class="text-gray-700">Dogs recovering from injury or surgery need controlled exercise. Private bookings give them safe space without other dogs.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Bad weather backup</h3>
+            <p class="text-gray-700">Indoor practice spaces and covered yards keep your dog exercised when public parks are frozen, muddy, or closed.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-lg mb-2 text-gray-900">Females in heat</h3>
+            <p class="text-gray-700">Public parks aren't an option. Private fenced bookings give females in heat (and their owners) safe outdoor time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Become a host -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Have Private Dog Space? Earn From It.</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          If you own a fenced yard, training field, agility course, swim spot, indoor practice space, or any other private dog-friendly property, list it on BreederHQ Marketplace.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          The fee is $5/month per live listing - no per-booking commission, no setup fee, no membership wall for your guests. You set your hourly rate, your availability, and your house rules. Pause anytime.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="/for-providers/dog-parks"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
+          >
+            How Hosting Works
+          </a>
+          <a
+            href="/for-providers/dog-parks/earnings-calculator"
+            class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-3 px-6 rounded-lg transition"
+          >
+            Earnings Calculator
+          </a>
+          <a
+            href="/compare/sniffspot-alternative"
+            class="inline-block border-2 border-gray-400 text-gray-700 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition"
+          >
+            See Comparison
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-[hsl(24,95%,53%)]">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

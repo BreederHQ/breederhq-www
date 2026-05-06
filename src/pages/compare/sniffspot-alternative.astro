@@ -1,0 +1,334 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'Sniffspot Alternative', url: '/compare/sniffspot-alternative' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ a Sniffspot alternative?',
+    answer: 'Yes. BreederHQ Marketplace lets dog owners book private fenced yards, training fields, agility areas, swim spots, and other private spaces by the hour - the same use case Sniffspot popularized. The differences are in fee structure, guest access, and the broader ecosystem (BreederHQ also covers breeders, trainers, groomers, boarding, and more in one platform).'
+  },
+  {
+    question: 'How much does it cost to list a private dog park on BreederHQ?',
+    answer: '$5 per month per live listing. There is no per-booking commission, no setup fee, and no monthly minimum bookings requirement. Hosts can pause a listing anytime and resume later without losing data, photos, or availability.'
+  },
+  {
+    question: 'Do my guests have to pay a membership to book my space?',
+    answer: 'No. On BreederHQ, anyone can browse and book a private dog park without a paid subscription or credit pack. This is a deliberate difference from platforms that require guests to buy monthly credit packages before they can book.'
+  },
+  {
+    question: 'How does Sniffspot pay hosts?',
+    answer: 'According to Sniffspot\'s public host page, Sniffspot pays via direct deposit once per month (sniffspot.com/host). BreederHQ uses Stripe to send payouts on a regular schedule to your connected payout account.'
+  },
+  {
+    question: 'How much do private dog park hosts actually earn?',
+    answer: 'Sniffspot\'s host marketing page advertises that some hosts earn up to $3,000 per month, with at least one published testimonial referencing $5,500 earned since starting (sniffspot.com/host). Actual earnings on any platform depend on your location, hourly rate, fence quality, amenities, and how many bookings you accept. Try the BreederHQ earnings calculator at /for-providers/dog-parks/earnings-calculator.'
+  },
+  {
+    question: 'Why is BreederHQ\'s fee a flat $5 per month instead of a percentage?',
+    answer: 'A flat fee means your earnings scale with your bookings. If you run a busy listing, you keep more of every booking. If you run a quiet listing, the math still works because the cost is predictable. Percentage-based commission models charge you more as you earn more, which can become significant on a high-revenue listing.'
+  },
+  {
+    question: 'Can I move my Sniffspot listing to BreederHQ without starting from scratch?',
+    answer: 'Yes. You can mirror your existing listing in a few minutes - photos, description, rules, vaccination requirements, fence type, amenities, and availability all map cleanly. Many hosts run on both platforms while they evaluate which one performs better in their market.'
+  },
+  {
+    question: 'Are there spaces other than private dog parks on BreederHQ Marketplace?',
+    answer: 'Yes. BreederHQ Marketplace covers verified breeders, breeding programs, individual animals, and a wide range of service providers: training, grooming, boarding, pet sitting, transport, photography, veterinary services, behavioral specialists, handling, health testing, nutrition, rehabilitation, and merchandise. Listing a private dog park puts you in front of the same audience that\'s already shopping for related services.'
+  },
+  {
+    question: 'Is BreederHQ available in my city?',
+    answer: 'BreederHQ is a US-based platform, and listings can be created in any US metro. Browse city pages at /dog-parks to see existing listings near you, or list your space first to be one of the first hosts in your area.'
+  },
+  {
+    question: 'Does using "Sniffspot" in this URL mean BreederHQ is affiliated with Sniffspot?',
+    answer: 'No. Sniffspot is a registered trademark of Sniffspot, Inc. BreederHQ is not affiliated with, endorsed by, or sponsored by Sniffspot. We reference the Sniffspot name only to describe the same category of service so prospective hosts and bookers can compare options. Comparison facts on this page reflect publicly disclosed Sniffspot information as of May 2026.'
+  }
+];
+
+const service = {
+  name: 'Private Dog Park Hosting on BreederHQ',
+  description: 'List your private fenced yard, training field, agility area, or swim spot on the BreederHQ Marketplace. Flat $5/month per live listing, no commissions, no membership wall for guests.',
+  serviceType: 'Private Dog Park Hosting',
+  priceCurrency: 'USD',
+  price: '5',
+  priceUnit: 'MONTH' as const,
+  offerDescription: '$5 per month per live listing. No per-booking commission. No guest-side membership requirement.',
+  areaServed: 'United States',
+  offerUrl: 'https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new'
+};
+---
+
+<BaseLayout
+  title="Sniffspot Alternative: BreederHQ Private Dog Parks (Flat $5/mo, No Commission)"
+  description="Looking for a Sniffspot alternative? BreederHQ charges hosts a flat $5/month per listing with no per-booking commission and no membership wall for your guests. Compare side-by-side."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Sniffspot Alternative</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">The Sniffspot Alternative for Hosts Who Want to Keep More of What They Earn</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed mb-3">
+            BreederHQ Marketplace lets dog owners book private fenced yards, training fields, agility areas, and swim spots - the same category Sniffspot popularized. Three differences:
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li><strong>Hosts pay a flat $5/month per live listing.</strong> No per-booking commission.</li>
+            <li><strong>Guests don't need a paid membership to book.</strong> No credit packages, no monthly subscription.</li>
+            <li><strong>Listings live in a multi-category ecosystem.</strong> Same audience that's shopping for breeders, trainers, groomers, and boarding.</li>
+          </ul>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          If you've been hosting on Sniffspot, you know the model: list your private space, set rules, accept bookings. It works.
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          BreederHQ does the same thing with a different commercial structure - one designed to leave more money with the host on every booking.
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Here's an honest, cited comparison.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+          <a
+            href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            List Your Space on BreederHQ
+          </a>
+          <a
+            href="https://marketplace.breederhq.com/services/facilities/private-dog-parks"
+            class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            Browse Private Dog Parks
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Comparison -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-bold mb-3">BreederHQ vs. Sniffspot: Side-by-Side</h2>
+        <p class="text-gray-600 mb-8">All Sniffspot facts cited below are from sniffspot.com/host and Sniffspot's public marketing pages as of May 2026. Specific commission percentages are not disclosed on Sniffspot's public marketing pages, so this comparison focuses on what each platform publicly states.</p>
+
+        <div class="overflow-x-auto bg-white rounded-lg shadow">
+          <table class="w-full border-collapse">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="text-left p-4 font-bold text-gray-900">Feature</th>
+                <th class="text-left p-4 font-bold text-[hsl(24,95%,53%)]">BreederHQ</th>
+                <th class="text-left p-4 font-bold text-gray-700">Sniffspot</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-800">
+              <tr class="border-t border-gray-200">
+                <td class="p-4 font-semibold">Host listing fee</td>
+                <td class="p-4">Flat $5/month per live listing</td>
+                <td class="p-4">Free to start; commission on bookings (percentage not publicly disclosed on host marketing page)</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold">Per-booking commission</td>
+                <td class="p-4">$0 (none)</td>
+                <td class="p-4">Yes (commission deducted from host earnings)</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="p-4 font-semibold">Guest-side membership required to book?</td>
+                <td class="p-4">No</td>
+                <td class="p-4">Sniffspot offers paid memberships ("Sniffspot Plus") that change pricing for guests</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold">Time-slot booking with capacity and buffer</td>
+                <td class="p-4">Yes</td>
+                <td class="p-4">Yes</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="p-4 font-semibold">Instant book or approval workflow</td>
+                <td class="p-4">Yes (host choice per listing)</td>
+                <td class="p-4">Yes</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold">Vaccination and rule fields</td>
+                <td class="p-4">Yes (vaccination, arrival instructions, host rules, hazard notes, suitability tags)</td>
+                <td class="p-4">Yes</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="p-4 font-semibold">Payout schedule</td>
+                <td class="p-4">Stripe-connected payouts on a regular schedule</td>
+                <td class="p-4">Direct deposit once per month (per sniffspot.com/host)</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold">Pause and resume listing without losing data</td>
+                <td class="p-4">Yes</td>
+                <td class="p-4">Yes</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="p-4 font-semibold">Multi-category ecosystem</td>
+                <td class="p-4">Yes - breeders, trainers, groomers, boarding, photography, transport, vet, etc.</td>
+                <td class="p-4">No - private dog parks only</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-gray-50">
+                <td class="p-4 font-semibold">Multi-species roadmap (equine arenas, livestock facilities, etc.)</td>
+                <td class="p-4">Yes (on roadmap)</td>
+                <td class="p-4">Dog-only</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="p-4 font-semibold">Geographic availability</td>
+                <td class="p-4">United States</td>
+                <td class="p-4">United States, Canada, UK, Australia</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-sm text-gray-500 mt-4">
+          Sources: <a href="https://www.sniffspot.com/host" rel="nofollow noopener" class="underline">sniffspot.com/host</a>. Comparison reflects publicly disclosed information as of May 2026 and is provided for nominative comparison only.
+        </p>
+      </div>
+    </section>
+
+    <!-- For Hosts -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-6">For Hosts: Why a Flat $5/month Beats a Percentage Cut</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Percentage-based commission models charge you more as you earn more. A busy host with a high-rate listing can lose hundreds of dollars per month to commission alone. A flat fee inverts that math: the more you earn, the more of every booking you keep.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 my-10">
+          <div class="bg-white border-2 border-[hsl(24,95%,53%)] p-6 rounded-lg">
+            <p class="text-gray-500 text-sm uppercase font-semibold mb-2">Casual host</p>
+            <p class="text-3xl font-bold text-gray-900">5 bookings / month</p>
+            <p class="text-gray-600 mt-2">$50-$150 in monthly bookings. BreederHQ takes $5. The math is obvious.</p>
+          </div>
+          <div class="bg-white border-2 border-[hsl(24,95%,53%)] p-6 rounded-lg">
+            <p class="text-gray-500 text-sm uppercase font-semibold mb-2">Active host</p>
+            <p class="text-3xl font-bold text-gray-900">20 bookings / month</p>
+            <p class="text-gray-600 mt-2">$200-$600 in monthly bookings. BreederHQ still takes $5. A 22% commission would take $44-$132.</p>
+          </div>
+          <div class="bg-white border-2 border-[hsl(24,95%,53%)] p-6 rounded-lg">
+            <p class="text-gray-500 text-sm uppercase font-semibold mb-2">High-volume host</p>
+            <p class="text-3xl font-bold text-gray-900">60+ bookings / month</p>
+            <p class="text-gray-600 mt-2">$600-$1,800 in monthly bookings. BreederHQ still takes $5. Commission models would take $132-$396.</p>
+          </div>
+        </div>
+
+        <p class="text-gray-600 italic">
+          The 22% figure above is illustrative, not a Sniffspot disclosure. Sniffspot's host commission is not stated on their public host marketing page; specific savings will depend on the actual fee structure they apply to your bookings.
+        </p>
+
+        <div class="mt-10">
+          <a href="/for-providers/dog-parks/earnings-calculator" class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition">
+            Try the Earnings Calculator →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- For Bookers -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-6">For Bookers: No Subscription Wall</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          On BreederHQ, anyone can browse and book a private dog park without paying a monthly fee or buying credit packs first. Pick a slot, book it, show up.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          That's it. No tiers, no credits expiring, no upsell to "Plus" before you can book your favorite spot.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          You also see your booking sit alongside the rest of your dog's life - the breeder you bought from, the trainer you work with, the groomer you visit. One marketplace, one account.
+        </p>
+      </div>
+    </section>
+
+    <!-- Migration -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-6">Already a Sniffspot Host? Mirror Your Listing in 5 Minutes</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Photos, descriptions, fence type, amenities, vaccination requirements, host rules, suitability tags, and availability all map cleanly. Most hosts can mirror an existing listing in well under an hour.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          You don't have to delete your existing listing on another platform. Run on both for a month, see which one books better in your market, and make the call from real data.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          The pause-and-resume feature is built for this: list confidently, evaluate, and pause if it's not working - your photos, rules, and availability stay intact.
+        </p>
+
+        <div class="mt-10">
+          <a
+            href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            Start Your BreederHQ Listing →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ section is auto-rendered by BaseLayout via the faqs prop and emitted as FAQPage JSON-LD. -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg shadow-sm p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-[hsl(24,95%,53%)]">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4 bg-gradient-to-br from-emerald-900 to-emerald-700 text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-4">Ready to Keep More of What You Earn?</h2>
+        <p class="text-xl text-emerald-100 mb-10">List your private dog park on BreederHQ. $5/month, no commissions, no membership wall.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+            class="inline-block bg-white text-emerald-900 hover:bg-emerald-50 font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            List Your Space
+          </a>
+          <a
+            href="https://marketplace.breederhq.com/services/facilities/private-dog-parks"
+            class="inline-block border-2 border-white text-white hover:bg-white hover:text-emerald-900 font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            Browse Dog Parks
+          </a>
+        </div>
+        <p class="text-sm text-emerald-200 mt-8 max-w-2xl mx-auto">
+          Sniffspot is a registered trademark of Sniffspot, Inc. BreederHQ is not affiliated with, endorsed by, or sponsored by Sniffspot. Comparisons reflect publicly disclosed Sniffspot information as of May 2026.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
