@@ -34,6 +34,30 @@ interface Props {
     };
     image?: string; // optional hero/social image; falls back to ogImage
   };
+  /**
+   * Optional Service / Offer structured data for category/offering landing pages
+   * (e.g. /for-providers/dog-parks). When provided, BaseLayout emits Schema.org
+   * Service JSON-LD with provider, areaServed, and a nested Offer block. This is
+   * the right schema for "we sell this category of service" pages — distinct
+   * from the site-wide SoftwareApplication schema which describes the platform.
+   */
+  service?: {
+    name: string;
+    description: string;
+    serviceType: string; // e.g. "Private Dog Park Hosting"
+    /** ISO 4217 currency code, defaults to USD */
+    priceCurrency?: string;
+    /** Numeric price; combine with priceCurrency. Omit for "contact for quote" pages */
+    price?: string;
+    /** e.g. "MONTH" for $5/month recurring */
+    priceUnit?: 'MONTH' | 'YEAR' | 'HOUR' | 'DAY';
+    /** Free text describing the offer in human-readable form */
+    offerDescription?: string;
+    /** Country, region, or city; defaults to "United States" */
+    areaServed?: string;
+    /** Optional URL where buyers can take action on the offer */
+    offerUrl?: string;
+  };
   noindex?: boolean;
   hideLogo?: boolean;
   /**
@@ -45,7 +69,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, breadcrumbs, faqs, howTo, article, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, article, service, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
 // Astro is configured with `trailingSlash: 'never'`, so every page's canonical
 // URL must be slash-free - including the homepage. Without this normalization
 // the homepage canonical was `https://breederhq.com/` (with slash) while every
@@ -200,6 +224,47 @@ if (howTo && howTo.steps && howTo.steps.length > 0) {
   };
 }
 
+// Service / Offer schema for category/offering landing pages (e.g. dog parks,
+// other rentable facility types). Distinct from the site-wide
+// SoftwareApplication schema — this describes a specific service offered on
+// the page, with a price, a provider, and an area served. Drives Google's
+// Service rich results and gives AI assistants a structured representation
+// of what we actually sell on this page.
+let serviceSchema;
+if (service) {
+  const offer: Record<string, unknown> = {
+    "@type": "Offer",
+    "priceCurrency": service.priceCurrency || "USD",
+    ...(service.price !== undefined ? { "price": service.price } : {}),
+    ...(service.priceUnit ? { "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": service.price,
+      "priceCurrency": service.priceCurrency || "USD",
+      "unitCode": service.priceUnit
+    } } : {}),
+    ...(service.offerDescription ? { "description": service.offerDescription } : {}),
+    ...(service.offerUrl ? { "url": service.offerUrl } : {}),
+    "availability": "https://schema.org/InStock"
+  };
+  serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.name,
+    "description": service.description,
+    "serviceType": service.serviceType,
+    "provider": {
+      "@type": "Organization",
+      "name": "BreederHQ",
+      "url": "https://breederhq.com"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": service.areaServed || "United States"
+    },
+    "offers": offer
+  };
+}
+
 // BlogPosting schema for /articles/* and similar long-form editorial pages.
 // Strong SEO signal for Google News, Discover, and AI agent citations.
 let articleSchema;
@@ -275,6 +340,9 @@ if (article) {
     )}
     {howToSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+    )}
+    {serviceSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
     )}
     {articleSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />

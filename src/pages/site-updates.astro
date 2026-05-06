@@ -56,6 +56,16 @@ const breadcrumbs = [
             <li>The "What types of services can I list?" FAQ answer was expanded to include private dog parks (rentable yards, fields, swim spots, agility areas).</li>
           </ul>
 
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">SEO: topical H1 and Service / Offer JSON-LD</h3>
+          <p class="text-gray-700 mb-3">
+            Two SEO fixes flagged in an external audit of the new <a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/dog-parks</a> page.
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>The page now has a topically aligned <code>&lt;h1&gt;</code>: "List a Private Dog Park on BreederHQ Marketplace". The previous H1 was a pure benefit hook ("Rent Out Your Yard. Keep What You Earn.") with no keyword overlap to the actual search query, which weakened the page's topical signal. The original benefit copy is preserved as a large secondary line directly under the H1 so the visual hook is kept.</li>
+            <li>Added a page-specific <code>Service</code> JSON-LD block with a nested <code>Offer</code> ($5.00 USD per month, <code>UnitPriceSpecification</code> with unitCode <code>MONTH</code>), <code>provider</code> set to BreederHQ, and <code>areaServed</code> set to United States. This is the right schema for category/offering landing pages and is distinct from the site-wide <code>SoftwareApplication</code> schema, which describes the platform as a whole. The new block sits alongside the existing Organization, SoftwareApplication, BreadcrumbList, and FAQPage schemas.</li>
+            <li>Implementation: <a href="/" class="text-[hsl(24,95%,53%)] hover:underline">BaseLayout</a> gained a new optional <code>service</code> prop (name, description, serviceType, price, priceCurrency, priceUnit, offerDescription, areaServed, offerUrl). Fully typed and reusable, so the other 14 service-category pages can adopt the same schema without further layout changes.</li>
+          </ul>
+
           <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: site-wide header navigation</h3>
           <ul class="list-disc list-inside text-gray-700 space-y-1">
             <li>Added a new <strong>Facilities</strong> subsection to the Service Providers mega-nav menu (desktop) with "🌳 Private Dog Parks" as its first entry, marked with a "New" pill. Facilities sits below Logistics &amp; Media in the first column to keep facility-style listings (rentable physical spaces) visually separate from human-delivered services.</li>
