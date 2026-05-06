@@ -56,6 +56,18 @@ const breadcrumbs = [
             <li>The "What types of services can I list?" FAQ answer was expanded to include private dog parks (rentable yards, fields, swim spots, agility areas).</li>
           </ul>
 
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">CTA bridge to host-signup flow + broken-URL fix</h3>
+          <p class="text-gray-700 mb-3">
+            External audit feedback on the new <a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/dog-parks</a> page asked us to build a clearer bridge from the landing page to a host-signup flow. While auditing the existing CTAs we also found a P0 bug in the secondary CTA URL.
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li><strong>Bug fix:</strong> Both "Browse Dog Parks" CTAs (hero + final) previously linked to <code>https://marketplace.breederhq.com/private-dog-parks</code>, which is a 404. The actual canonical route is <code>/services/facilities/private-dog-parks</code> (Services → Facilities → Private Dog Parks, matching the marketplace's own taxonomy). All references corrected, including the JSON-LD <code>offerUrl</code>.</li>
+            <li><strong>Primary CTA upgraded</strong> to a forward-compatible host-signup deep link: <code>?intent=provider_marketplace&amp;category=private_dog_park&amp;returnTo=/services/facilities/private-dog-parks/new</code>. The accounts <code>RegisterPage</code> component currently reads only <code>intent</code> and <code>promo</code> (verified in source), so <code>category</code> and <code>returnTo</code> are inert today and the URL loads cleanly into the standard provider registration. When the host wizard catches up, the same URL begins routing users straight to the dog-park listing-create flow without any marketing-site edit. Same URL is used in both hero and final CTAs and as the JSON-LD <code>offerUrl</code>.</li>
+            <li><strong>CTA labels rewritten</strong> for action-clarity: "List Your Space" → "List Your Dog Park"; "Browse Dog Parks" → "Browse Dog Parks Near Me".</li>
+            <li><strong>Tertiary "See a Sample Listing" CTA intentionally not shipped.</strong> The audit suggested three CTAs but a sample-listing link without a real seed listing slug would either (a) duplicate the secondary CTA's destination if it points at a filtered browse view, or (b) link to a placeholder / 404 if it points at a fake slug. Both options are worse than not having the CTA. Add when a real seed listing exists.</li>
+            <li><strong>Cross-repo follow-up:</strong> accounts (RegisterPage + finish-setup chain) and marketplace (provider listing-create wizard) need to honor <code>?category=private_dog_park</code> for the deep link to do anything useful. Filed as a separate ticket. Code-adjacent <code>{`{/* TODO */}`}</code> breadcrumbs were left next to both CTAs and the schema <code>offerUrl</code> in the Astro source so the cross-repo work is discoverable from the page itself.</li>
+          </ul>
+
           <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">SEO: topical H1 and Service / Offer JSON-LD</h3>
           <p class="text-gray-700 mb-3">
             Two SEO fixes flagged in an external audit of the new <a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/dog-parks</a> page.

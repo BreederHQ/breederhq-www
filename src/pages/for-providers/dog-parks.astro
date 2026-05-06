@@ -57,7 +57,13 @@ const faqs = [
     priceUnit: "MONTH",
     offerDescription: "$5/month per live listing. Free during early access. No commissions, no per-booking fees, and no guest membership required to browse or book.",
     areaServed: "United States",
-    offerUrl: "https://accounts.breederhq.com/register?intent=provider_marketplace"
+    // Forward-compatible deep link: ?category and ?returnTo are inert in
+    // accounts today (verified 2026-05-06: RegisterPage reads only ?intent
+    // and ?promo). When the host wizard catches up, it will prefill
+    // "Private Dog Park" and route to the listing-create flow without any
+    // marketing-site edit. See the cross-repo TODO note further down where
+    // this same URL is used as the primary CTA href.
+    offerUrl: "https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
   }}
 >
 <main>
@@ -80,17 +86,36 @@ const faqs = [
         Dog owners book real time slots, you get paid, and we do not take a cut of every visit. One flat $5/month per listing.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/*
+          PRIMARY CTA — host signup deep link.
+          Forward-compatible URL: ?category=private_dog_park and ?returnTo
+          are inert in accounts today (RegisterPage only reads ?intent and
+          ?promo, verified 2026-05-06). When the host wizard supports
+          category prefill + post-onboarding return, this URL begins routing
+          users straight to the dog-park listing-create flow without any
+          marketing-site edit.
+
+          Cross-repo follow-up: accounts must accept ?category, persist it
+          through the verify → finish-setup chain, and have marketplace's
+          listing-create wizard read it to preselect Private Dog Park. File
+          this as a single ticket spanning accounts + marketplace.
+
+          Tertiary "See a Sample Listing" CTA is intentionally NOT present
+          yet — see site-updates entry for 2026-05-06. Add when a real seed
+          listing slug exists; do not link to a filtered browse view (that
+          duplicates the secondary CTA's destination).
+        */}
         <a
-          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
           class="bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-600 w-full sm:w-auto"
         >
-          List Your Space
+          List Your Dog Park
         </a>
         <a
-          href="https://marketplace.breederhq.com/private-dog-parks"
+          href="https://marketplace.breederhq.com/services/facilities/private-dog-parks"
           class="text-emerald-700 px-8 py-4 text-lg font-medium hover:text-emerald-800 w-full sm:w-auto"
         >
-          Browse Dog Parks &rarr;
+          Browse Dog Parks Near Me &rarr;
         </a>
       </div>
     </div>
@@ -588,17 +613,22 @@ const faqs = [
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/*
+          PRIMARY CTA — same forward-compatible host-signup deep link as
+          the hero. See hero CTA comment block for full rationale and
+          cross-repo follow-up notes.
+        */}
         <a
-          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
           class="bg-white text-emerald-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50 w-full sm:w-auto"
         >
-          List Your Space
+          List Your Dog Park
         </a>
         <a
-          href="https://marketplace.breederhq.com/private-dog-parks"
+          href="https://marketplace.breederhq.com/services/facilities/private-dog-parks"
           class="bg-emerald-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-400 w-full sm:w-auto"
         >
-          Browse Dog Parks
+          Browse Dog Parks Near Me
         </a>
       </div>
     </div>
