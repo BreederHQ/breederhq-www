@@ -40,11 +40,8 @@ export interface BreederCard {
 
 // CATTLE is the remaining stealth species and is intentionally excluded
 // from the public marketplace surface. ALPACA and LLAMA were promoted to
-// public 2026-05-07. The Footer + find-breeders/* landing pages still
-// reference only the original 6 species — alpaca/llama copy + .astro
-// pages will land in a follow-up marketing PR. Until then, fetchBreeders()
-// accepts ALPACA / LLAMA via the API but no public www page links to
-// /find-breeders/alpacas or /llamas.
+// public 2026-05-07 and are included across the public www species and
+// breeder-directory surfaces.
 export type SpeciesKey =
   | "DOG"
   | "CAT"

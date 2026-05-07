@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/#for-breeders' },
+  { name: 'Alpaca Breeding', url: '/alpacas' }
+];
+
+const faqs = [
+  {
+    question: 'Does BreederHQ work for both Huacaya and Suri alpaca breeders?',
+    answer: 'Yes. BreederHQ supports Huacaya and Suri programs, including pedigree tracking, breeding records, cria tracking, health records, fiber-related notes, and marketplace visibility for breeders who want a more professional public presence.'
+  },
+  {
+    question: 'Can I track fiber and fleece information in BreederHQ?',
+    answer: 'Yes. Alpaca breeders can record fleece and fiber details alongside the rest of the herd record. That keeps pedigree, production, and buyer-facing information in one place instead of scattered across spreadsheets and notebooks.'
+  },
+  {
+    question: 'Can I manage cria records and buyer communication?',
+    answer: 'Yes. Breeding plans, cria records, documents, and buyer communication all connect inside one platform so breeders can move from breeding decisions to follow-up and sales without re-entering the same information in multiple places.'
+  },
+  {
+    question: 'Can I publish my alpaca program publicly?',
+    answer: 'Yes. BreederHQ breeders can publish verified marketplace profiles and available animals backed by the records they actually maintain inside the platform.'
+  }
+];
+
+const featureCards = [
+  { id: 'herd-records', icon: '🦙', title: 'Herd Records', desc: 'Pedigrees, herd organization, cria history' },
+  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Induced-ovulator breeding plans, due dates, birthing' },
+  { id: 'fiber', icon: '🧶', title: 'Fiber & Fleece', desc: 'Production notes, fleece records, buyer context' },
+  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Testing, medications, documents, pedigrees' },
+  { id: 'inventory', icon: '🧪', title: 'Reproductive Inventory', desc: 'Semen and embryo inventory with storage tracking' },
+  { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Waitlists, inquiries, contracts, breeder website embeds' }
+];
+---
+
+<BaseLayout
+  title="Alpaca Breeding Software | BreederHQ"
+  description="Alpaca breeding software for Huacaya and Suri programs. Pedigrees, cria records, fiber notes, reproductive inventory, buyer communication, and marketplace visibility."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Alpaca Breeding</li>
+      </ol>
+    </nav>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Alpaca Breeding Software for Modern Camelid Programs</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            BreederHQ gives alpaca breeders one place to manage pedigrees, induced-ovulator breeding records,
+            cria tracking, health documents, fiber notes, reproductive inventory, and buyer communication. It
+            is built for programs that need real records, not just a basic listing page.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Track your alpacas from breeding through cria records and post-weaning decisions, then publish a
+          marketplace presence backed by the same records you use to run the herd every day.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-8 px-4 bg-gray-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Alpaca Program Needs</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {featureCards.map(card => (
+            <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+              <div class="text-3xl mb-2">{card.icon}</div>
+              <h3 class="font-bold text-lg mb-1">{card.title}</h3>
+              <p class="text-sm text-gray-600">{card.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto space-y-12">
+        <section id="herd-records">
+          <h2 class="text-3xl font-bold mb-4">Herd Records and Pedigrees</h2>
+          <p class="text-lg text-gray-700">
+            Keep complete alpaca records in one place: herd roster, lineage, registration details, photos,
+            cria history, and the notes breeders actually need during day-to-day management.
+          </p>
+        </section>
+
+        <section id="breeding">
+          <h2 class="text-3xl font-bold mb-4">Breeding Plans Built for Camelids</h2>
+          <p class="text-lg text-gray-700 mb-4">
+            Alpacas do not fit a dog-style heat-cycle workflow. BreederHQ supports induced-ovulator breeding
+            planning so breeders can work from breeding dates, due dates, birthing records, weaning, and
+            post-weaning outcomes without forcing camelids through the wrong lifecycle model.
+          </p>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Breeding plans with alpaca-specific timeline behavior</li>
+            <li>• Expected birthing and cria tracking</li>
+            <li>• Post-weaning outcome tracking instead of buyer-placement-only assumptions</li>
+          </ul>
+        </section>
+
+        <section id="fiber">
+          <h2 class="text-3xl font-bold mb-4">Fiber and Fleece Context</h2>
+          <p class="text-lg text-gray-700">
+            Record the fleece and production context that matters to alpaca programs. Keep quality notes,
+            show context, and buyer-facing details connected to the same animal record as the pedigree and
+            breeding history.
+          </p>
+        </section>
+
+        <section id="health">
+          <h2 class="text-3xl font-bold mb-4">Health, Documents, and Genetics</h2>
+          <p class="text-lg text-gray-700">
+            Store testing, treatment history, medications, uploaded documents, and genetics notes in one
+            place. Health records stay connected to the actual alpaca, not buried in a separate file system.
+          </p>
+        </section>
+
+        <section id="inventory">
+          <h2 class="text-3xl font-bold mb-4">Reproductive Inventory</h2>
+          <p class="text-lg text-gray-700">
+            Track semen and embryo inventory with storage locations, quantity history, and lot detail. That
+            gives camelid programs the same inventory backbone already used across the platform without
+            maintaining separate handwritten tank records.
+          </p>
+        </section>
+
+        <section id="clients">
+          <h2 class="text-3xl font-bold mb-4">Buyer Communication and Marketplace Visibility</h2>
+          <p class="text-lg text-gray-700">
+            Use BreederHQ to manage inquiries, waitlists, contracts, and a public-facing breeder profile.
+            Buyers see a more credible program because your public presence is backed by real records instead
+            of a disconnected static listing.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to run your alpaca program on BreederHQ?</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Start a free trial or browse verified alpaca breeders already publishing on the marketplace.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Start Your Free Trial</a>
+          <a href="/find-breeders/alpacas" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Find Alpaca Breeders</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

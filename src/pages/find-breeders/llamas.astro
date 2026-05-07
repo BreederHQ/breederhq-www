@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketplaceBreedersList from '../../components/MarketplaceBreedersList.astro';
+import { fetchBreeders } from '../../lib/marketplaceData';
+
+const breeders = await fetchBreeders('LLAMA');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Find Breeders', url: '/find-breeders' },
+  { name: 'Llama Breeders', url: '/find-breeders/llamas' },
+];
+
+const faqs = [
+  {
+    question: 'What kinds of llama breeders are on BreederHQ?',
+    answer: 'BreederHQ supports llama breeding programs focused on companion, guard, fiber, performance, and breeding-stock goals. The marketplace is built for breeders who want a profile grounded in real records rather than a simple classified ad.',
+  },
+  {
+    question: 'Can I see breeding and offspring records on llama profiles?',
+    answer: 'Yes. Llama breeders can publish the real data they keep in BreederHQ, including pedigrees, offspring history, health documentation, and program details that help buyers understand what the breeder is actually producing.',
+  },
+  {
+    question: 'Does BreederHQ only fit large ranches?',
+    answer: 'No. It works for larger herds and smaller breeder-run operations alike, especially when the goal is to keep organized breeding records and present a more professional buyer experience.',
+  },
+  {
+    question: 'How do I contact a llama breeder?',
+    answer: 'Use the breeder profile on the marketplace. Messages stay organized inside the platform instead of getting lost across email, social media, and text chains.',
+  },
+];
+---
+
+<BaseLayout
+  title="Find Verified Llama Breeders | BreederHQ"
+  description="Find verified llama breeders with pedigrees, cria records, health documentation, and program details on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main class="min-h-screen bg-white">
+    <a href="#main" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">Skip to content</a>
+
+    <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find verified llama breeders</h1>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          Pedigrees, cria records, health documentation, and real program context for llama breeders,
+          all published from the same platform they use to manage their herd.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Llama Breeders</a>
+          <a href="https://marketplace.breederhq.com/animals" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Browse Available Llamas</a>
+        </div>
+      </div>
+    </section>
+
+    <MarketplaceBreedersList breeders={breeders} speciesLabel="llama" />
+
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a llama breeder profile</h2>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li><strong>Pedigrees and breeding history</strong>: real sire and dam records instead of generic lineage claims.</li>
+          <li><strong>Cria and herd records</strong>: offspring history, herd-development notes, and breeder priorities where published.</li>
+          <li><strong>Health documentation</strong>: the records the breeder actually maintains inside BreederHQ.</li>
+          <li><strong>Program focus</strong>: companion, guard, fiber, show, or breeding-stock goals explained in the breeder's own profile.</li>
+          <li><strong>Photos and buyer context</strong>: current animals, breeder story, and what makes the operation distinctive.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your llama breeder?</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Browse verified llama breeders on the BreederHQ Marketplace.
+        </p>
+        <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Llama Breeders</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

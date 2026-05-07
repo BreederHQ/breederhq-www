@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/#for-breeders' },
+  { name: 'Llama Breeding', url: '/llamas' }
+];
+
+const faqs = [
+  {
+    question: 'Does BreederHQ work for llama breeders focused on more than fiber?',
+    answer: 'Yes. BreederHQ works for breeding programs focused on fiber, companion, guard, performance, or breeding-stock goals. The platform is built around the breeder program itself, not one narrow sale category.'
+  },
+  {
+    question: 'Can I track cria records and breeding history for llamas?',
+    answer: 'Yes. Breeding plans, cria records, pedigrees, and health documentation are all connected inside one system so llama breeders can keep a complete herd history.'
+  },
+  {
+    question: 'What about semen and embryo inventory?',
+    answer: 'BreederHQ includes reproductive inventory support so breeders can track semen and embryo lots, storage locations, and quantity history inside the same system as the breeding program.'
+  },
+  {
+    question: 'Can I publish my llama program on the marketplace?',
+    answer: 'Yes. Llama breeders can publish a verified breeder profile and available animals with the public information backed by the records they already maintain in BreederHQ.'
+  }
+];
+
+const featureCards = [
+  { id: 'herd-records', icon: '🦙', title: 'Herd Records', desc: 'Pedigrees, registration details, cria history' },
+  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Camelid breeding timelines, due dates, birthing records' },
+  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Testing, medications, documents, lineage' },
+  { id: 'inventory', icon: '🧪', title: 'Reproductive Inventory', desc: 'Semen and embryo lots with storage tracking' },
+  { id: 'buyers', icon: '👥', title: 'Buyers & Clients', desc: 'Inquiries, contracts, waitlists, communications' },
+  { id: 'marketplace', icon: '🌐', title: 'Marketplace', desc: 'Public breeder profile and available-animal visibility' }
+];
+---
+
+<BaseLayout
+  title="Llama Breeding Software | BreederHQ"
+  description="Llama breeding software for companion, guard, fiber, performance, and breeding-stock programs. Pedigrees, cria records, inventory, health records, and buyer communication."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Llama Breeding</li>
+      </ol>
+    </nav>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Llama Breeding Software for Modern Herd Management</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            BreederHQ helps llama breeders manage pedigrees, breeding records, cria outcomes, reproductive
+            inventory, health documents, buyer communication, and a more credible public marketplace presence
+            from one connected platform.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Whether your llama program is focused on breeding stock, companion animals, guard llamas, or
+          fiber and performance goals, BreederHQ keeps the herd record and the public-facing breeder profile
+          tied to the same real data.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-8 px-4 bg-gray-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Llama Program Needs</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {featureCards.map(card => (
+            <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+              <div class="text-3xl mb-2">{card.icon}</div>
+              <h3 class="font-bold text-lg mb-1">{card.title}</h3>
+              <p class="text-sm text-gray-600">{card.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto space-y-12">
+        <section id="herd-records">
+          <h2 class="text-3xl font-bold mb-4">Herd Records and Pedigrees</h2>
+          <p class="text-lg text-gray-700">
+            Keep registration details, lineage, photos, and cria history in one structured herd record
+            instead of spreading that information across notebooks, registry printouts, and ad hoc spreadsheets.
+          </p>
+        </section>
+
+        <section id="breeding">
+          <h2 class="text-3xl font-bold mb-4">Breeding Plans That Fit Camelids</h2>
+          <p class="text-lg text-gray-700">
+            Llamas need a camelid-aware breeding workflow, not a generic dog or horse cycle tracker. BreederHQ
+            supports breeding records, due dates, birthing, weaning, and post-weaning outcome tracking without
+            forcing the wrong terminology or lifecycle assumptions onto llama programs.
+          </p>
+        </section>
+
+        <section id="health">
+          <h2 class="text-3xl font-bold mb-4">Health, Documents, and Genetics</h2>
+          <p class="text-lg text-gray-700">
+            Keep health testing, treatment history, uploaded documents, and pedigree context attached to the
+            actual llama record so staff, partners, and future buyers can review the real history when needed.
+          </p>
+        </section>
+
+        <section id="inventory">
+          <h2 class="text-3xl font-bold mb-4">Reproductive Inventory</h2>
+          <p class="text-lg text-gray-700">
+            Track semen and embryo inventory with lot details, storage chain, and quantity events. That keeps
+            llama reproductive inventory connected to the animals and breeding plans it actually belongs to.
+          </p>
+        </section>
+
+        <section id="buyers">
+          <h2 class="text-3xl font-bold mb-4">Buyer and Client Workflow</h2>
+          <p class="text-lg text-gray-700">
+            Manage inquiries, waitlists, contracts, and communication inside the same platform as the breeding
+            program so buyer follow-up does not become a second disconnected system.
+          </p>
+        </section>
+
+        <section id="marketplace">
+          <h2 class="text-3xl font-bold mb-4">Marketplace Visibility</h2>
+          <p class="text-lg text-gray-700">
+            Publish a verified breeder profile and available animals with public credibility grounded in the same
+            records you use to run the herd. That is a stronger signal than a static listing with no operational context.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to run your llama program on BreederHQ?</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Start a free trial or browse verified llama breeders already publishing on the marketplace.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Start Your Free Trial</a>
+          <a href="/find-breeders/llamas" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Find Llama Breeders</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

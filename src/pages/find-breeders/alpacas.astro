@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketplaceBreedersList from '../../components/MarketplaceBreedersList.astro';
+import { fetchBreeders } from '../../lib/marketplaceData';
+
+const breeders = await fetchBreeders('ALPACA');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Find Breeders', url: '/find-breeders' },
+  { name: 'Alpaca Breeders', url: '/find-breeders/alpacas' },
+];
+
+const faqs = [
+  {
+    question: 'What kinds of alpaca breeders are on BreederHQ?',
+    answer: 'BreederHQ supports Huacaya and Suri alpaca programs, from seedstock and fiber-focused herds to smaller companion and hobby operations. Coverage depends on which breeders have joined, but the marketplace is built for programs that want to publish real records instead of generic ad copy.',
+  },
+  {
+    question: 'Can I see fiber and health credentials on alpaca profiles?',
+    answer: 'Yes. Alpaca breeders can publish the records they actually maintain in BreederHQ, including pedigrees, health testing, cria history, and fiber-related notes such as fleece quality, micron information, or show results where relevant to the program.',
+  },
+  {
+    question: 'Can I contact an alpaca breeder directly through BreederHQ?',
+    answer: 'Yes. Buyers can contact breeders through the marketplace profile and keep the conversation organized inside the platform instead of moving immediately to scattered texts and emails.',
+  },
+  {
+    question: 'Is BreederHQ only for large alpaca farms?',
+    answer: 'No. The platform works for larger breeding programs and for smaller alpaca herds that still want organized records, professional buyer communication, and a more credible public profile.',
+  },
+];
+---
+
+<BaseLayout
+  title="Find Verified Alpaca Breeders | BreederHQ"
+  description="Find verified alpaca breeders with pedigrees, cria records, health documentation, and fiber-focused program details on the BreederHQ Marketplace."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main class="min-h-screen bg-white">
+    <a href="#main" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">Skip to content</a>
+
+    <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find verified alpaca breeders</h1>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          Pedigrees, cria records, health documentation, and fiber-focused program details, published
+          from the same software breeders use to run their alpaca program day to day.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Alpaca Breeders</a>
+          <a href="https://marketplace.breederhq.com/animals" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Browse Available Alpacas</a>
+        </div>
+      </div>
+    </section>
+
+    <MarketplaceBreedersList breeders={breeders} speciesLabel="alpaca" />
+
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on an alpaca breeder profile</h2>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li><strong>Pedigrees and lineage</strong>: documented sire and dam records instead of vague breeding claims.</li>
+          <li><strong>Cria history</strong>: past breedings, cria outcomes, and herd-development context when breeders choose to publish it.</li>
+          <li><strong>Fiber and fleece detail</strong>: micron, handle, color, show or fiber notes, and the program priorities that matter to the breeder.</li>
+          <li><strong>Health documentation</strong>: the records and testing the breeder actually keeps inside BreederHQ.</li>
+          <li><strong>Program story</strong>: herd goals, photos, and the kind of alpacas the breeder is trying to produce.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your alpaca breeder?</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Browse verified alpaca breeders on the BreederHQ Marketplace.
+        </p>
+        <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Alpaca Breeders</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
