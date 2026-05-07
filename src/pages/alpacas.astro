@@ -13,32 +13,46 @@ const faqs = [
     answer: 'Yes. BreederHQ supports Huacaya and Suri programs, including pedigree tracking, breeding records, cria tracking, health records, fiber-related notes, and marketplace visibility for breeders who want a more professional public presence.'
   },
   {
+    question: 'How does breeding work for alpacas — they are induced ovulators?',
+    answer: 'Alpacas are induced ovulators, meaning they do not have a predictable heat cycle like dogs or horses. BreederHQ supports the actual camelid breeding workflow: breeding events trigger ovulation, so the platform tracks breeding date, expected cria due date (approximately 345 days), birthing, and cria outcomes without forcing alpacas through a cycle-detection model that does not apply to them.'
+  },
+  {
     question: 'Can I track fiber and fleece information in BreederHQ?',
-    answer: 'Yes. Alpaca breeders can record fleece and fiber details alongside the rest of the herd record. That keeps pedigree, production, and buyer-facing information in one place instead of scattered across spreadsheets and notebooks.'
+    answer: 'Yes. Alpaca breeders can record fleece and fiber details — micron data, handle, color, shearing notes, and production context — alongside pedigree, breeding history, and health records. That keeps all the information buyers care about in one place instead of scattered across spreadsheets and notebooks.'
   },
   {
     question: 'Can I manage cria records and buyer communication?',
     answer: 'Yes. Breeding plans, cria records, documents, and buyer communication all connect inside one platform so breeders can move from breeding decisions to follow-up and sales without re-entering the same information in multiple places.'
   },
   {
-    question: 'Can I publish my alpaca program publicly?',
-    answer: 'Yes. BreederHQ breeders can publish verified marketplace profiles and available animals backed by the records they actually maintain inside the platform.'
+    question: 'Does BreederHQ support semen and embryo inventory for alpacas?',
+    answer: 'Yes. The reproductive inventory system tracks semen lots (straw count, sire identity, storage location, motility) and embryo lots (donor dam, sire, flush date, stage and grade, freeze method) with a complete quantity ledger. Storage is tracked across multiple facilities down to individual tank, cane, and goblet positions.'
+  },
+  {
+    question: 'Can I publish my alpaca program publicly on the marketplace?',
+    answer: 'Yes. BreederHQ breeders can publish verified marketplace profiles and available animals backed by the records they actually maintain inside the platform. Alpaca programs are publicly listed on the marketplace now.'
+  },
+  {
+    question: 'Does it handle AOBA and ARI registration records?',
+    answer: 'BreederHQ maintains records and documentation for registration. Official submission goes through AOBA, ARI, or other registry systems directly. The platform keeps your pedigrees, registration numbers, and supporting records organized so the submission process is easier.'
   }
 ];
 
 const featureCards = [
-  { id: 'herd-records', icon: '🦙', title: 'Herd Records', desc: 'Pedigrees, herd organization, cria history' },
-  { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Induced-ovulator breeding plans, due dates, birthing' },
-  { id: 'fiber', icon: '🧶', title: 'Fiber & Fleece', desc: 'Production notes, fleece records, buyer context' },
-  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Testing, medications, documents, pedigrees' },
-  { id: 'inventory', icon: '🧪', title: 'Reproductive Inventory', desc: 'Semen and embryo inventory with storage tracking' },
-  { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Waitlists, inquiries, contracts, breeder website embeds' }
+  { id: 'herd-records', icon: '🦙', title: 'Herd Records', desc: 'Pedigrees, registration, cria history, photos' },
+  { id: 'breeding', icon: '📅', title: 'Breeding Plans', desc: 'Induced-ovulator workflow, due dates, birthing records' },
+  { id: 'cria', icon: '🐣', title: 'Cria Care', desc: 'Birth records, neonatal health, weaning, outcomes' },
+  { id: 'fiber', icon: '🧶', title: 'Fiber and Fleece', desc: 'Shearing records, micron data, production context' },
+  { id: 'health', icon: '🏥', title: 'Health and Genetics', desc: 'Testing, medications, documents, pedigrees' },
+  { id: 'inventory', icon: '🧪', title: 'Reproductive Inventory', desc: 'Semen and embryo lots with storage tracking' },
+  { id: 'clients', icon: '👥', title: 'Buyers and Clients', desc: 'Waitlists, inquiries, contracts, communications' },
+  { id: 'marketplace', icon: '🌐', title: 'Marketplace', desc: 'Verified profile, available animals, public credibility' }
 ];
 ---
 
 <BaseLayout
   title="Alpaca Breeding Software | BreederHQ"
-  description="Alpaca breeding software for Huacaya and Suri programs. Pedigrees, cria records, fiber notes, reproductive inventory, buyer communication, and marketplace visibility."
+  description="Alpaca breeding software for Huacaya and Suri programs. Camelid-aware breeding plans, pedigrees, cria records, induced-ovulator workflows, fiber notes, reproductive inventory, buyer communication, and marketplace visibility for camelid breeders."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -57,6 +71,7 @@ const featureCards = [
       </ol>
     </nav>
 
+    <!-- Hero + TL;DR -->
     <section class="py-12 px-4">
       <div class="max-w-4xl mx-auto">
         <h1 class="text-5xl font-bold mb-6">Alpaca Breeding Software for Modern Camelid Programs</h1>
@@ -65,22 +80,24 @@ const featureCards = [
           <h2 class="text-xl font-bold mb-3">TL;DR</h2>
           <p class="text-gray-700 leading-relaxed">
             BreederHQ gives alpaca breeders one place to manage pedigrees, induced-ovulator breeding records,
-            cria tracking, health documents, fiber notes, reproductive inventory, and buyer communication. It
-            is built for programs that need real records, not just a basic listing page.
+            cria tracking, fiber notes, health documents, reproductive inventory, and buyer communication. Built
+            for Huacaya and Suri programs that need real records — not just a basic listing page.
           </p>
         </aside>
 
         <p class="text-xl text-gray-700 leading-relaxed">
           Track your alpacas from breeding through cria records and post-weaning decisions, then publish a
-          marketplace presence backed by the same records you use to run the herd every day.
+          marketplace presence backed by the same records you use to run the herd every day. Alpaca programs
+          are now publicly listed on the BreederHQ Marketplace.
         </p>
       </div>
     </section>
 
+    <!-- Feature Cards Grid -->
     <section class="py-8 px-4 bg-gray-50">
       <div class="max-w-5xl mx-auto">
         <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Alpaca Program Needs</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           {featureCards.map(card => (
             <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
               <div class="text-3xl mb-2">{card.icon}</div>
@@ -92,67 +109,413 @@ const featureCards = [
       </div>
     </section>
 
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
+      <div class="max-w-5xl mx-auto px-4">
+        <ul class="flex space-x-6 overflow-x-auto py-3 text-sm">
+          {featureCards.map(card => (
+            <li>
+              <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
+                {card.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Accordion Sections -->
     <section class="py-12 px-4">
-      <div class="max-w-4xl mx-auto space-y-12">
-        <section id="herd-records">
-          <h2 class="text-3xl font-bold mb-4">Herd Records and Pedigrees</h2>
-          <p class="text-lg text-gray-700">
-            Keep complete alpaca records in one place: herd roster, lineage, registration details, photos,
-            cria history, and the notes breeders actually need during day-to-day management.
-          </p>
-        </section>
+      <div class="max-w-4xl mx-auto space-y-4">
 
-        <section id="breeding">
-          <h2 class="text-3xl font-bold mb-4">Breeding Plans Built for Camelids</h2>
-          <p class="text-lg text-gray-700 mb-4">
-            Alpacas do not fit a dog-style heat-cycle workflow. BreederHQ supports induced-ovulator breeding
-            planning so breeders can work from breeding dates, due dates, birthing records, weaning, and
-            post-weaning outcomes without forcing camelids through the wrong lifecycle model.
-          </p>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Breeding plans with alpaca-specific timeline behavior</li>
-            <li>• Expected birthing and cria tracking</li>
-            <li>• Post-weaning outcome tracking instead of buyer-placement-only assumptions</li>
-          </ul>
-        </section>
+        <!-- Herd Records -->
+        <details id="herd-records" class="accordion-section border border-gray-200 rounded-lg" open>
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🦙</span>
+              <div>
+                <h3 class="text-2xl font-bold">Herd Records and Pedigrees</h3>
+                <p class="text-gray-600">Complete profiles, lineage, and herd organization</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">For Every Alpaca</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Registration numbers (AOBA, ARI, and other registries)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Microchip IDs and tattoos</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Photos, fiber type (Huacaya or Suri), color, and phenotype</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Birth date, dam and sire, purchase information</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Multi-generation pedigrees with lineage depth</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Custom notes for program-specific context</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Herd Organization</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Active females, herdsires, crias, and fiber animals</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Sold, retired, and historical records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Custom tags and herd categories</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Breeding history linked to each animal</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Show records and performance documentation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
 
-        <section id="fiber">
-          <h2 class="text-3xl font-bold mb-4">Fiber and Fleece Context</h2>
-          <p class="text-lg text-gray-700">
-            Record the fleece and production context that matters to alpaca programs. Keep quality notes,
-            show context, and buyer-facing details connected to the same animal record as the pedigree and
-            breeding history.
-          </p>
-        </section>
+        <!-- Breeding Plans -->
+        <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">📅</span>
+              <div>
+                <h3 class="text-2xl font-bold">Breeding Plans Built for Camelids</h3>
+                <p class="text-gray-600">Induced-ovulator workflow, due dates, and birthing records</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <p class="text-gray-700 mb-4">
+              Alpacas do not fit a dog-style heat-cycle workflow. They are induced ovulators — ovulation is triggered
+              by the breeding event itself, not a predictable cycle. BreederHQ supports the actual camelid breeding
+              process without forcing the wrong lifecycle model onto your program.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Breeding Workflow</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Breeding events with male (herdsire) and female pairing</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Expected due date calculation (~345-day gestation)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pregnancy confirmation and recheck records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Breeding attempt history per female</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>No heat-cycle detection required — matches real alpaca biology</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Birthing and After</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Birthing records tied to the breeding plan</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Cria gender, color, fiber type, and birth weight</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Weaning milestone tracking</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Post-weaning outcome recording</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Full breeding history per animal for future decisions</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
 
-        <section id="health">
-          <h2 class="text-3xl font-bold mb-4">Health, Documents, and Genetics</h2>
-          <p class="text-lg text-gray-700">
-            Store testing, treatment history, medications, uploaded documents, and genetics notes in one
-            place. Health records stay connected to the actual alpaca, not buried in a separate file system.
-          </p>
-        </section>
+        <!-- Cria Care -->
+        <details id="cria" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🐣</span>
+              <div>
+                <h3 class="text-2xl font-bold">Cria Care and Early Development</h3>
+                <p class="text-gray-600">Birth outcomes, neonatal health, nursing, and growth</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Birth Records</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Birth date, time, and presentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Birth weight tracking</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Sex, fiber type, and color at birth</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Dam and sire linkage to pedigree</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Assistance level and delivery notes</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Neonatal Health</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Nursing status: nursing well, assisted, bottle fed, orphaned</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Neonatal health: thriving, watch, critical</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Early vaccinations and treatments</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Veterinary care notes and follow-up records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Weight milestones through weaning</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
 
-        <section id="inventory">
-          <h2 class="text-3xl font-bold mb-4">Reproductive Inventory</h2>
-          <p class="text-lg text-gray-700">
-            Track semen and embryo inventory with storage locations, quantity history, and lot detail. That
-            gives camelid programs the same inventory backbone already used across the platform without
-            maintaining separate handwritten tank records.
-          </p>
-        </section>
+        <!-- Fiber and Fleece -->
+        <details id="fiber" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🧶</span>
+              <div>
+                <h3 class="text-2xl font-bold">Fiber and Fleece Records</h3>
+                <p class="text-gray-600">Shearing notes, micron data, and production context</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <p class="text-gray-700 mb-4">
+              Fiber is one of the primary value drivers in alpaca programs. BreederHQ keeps fleece information
+              connected to the same animal record as pedigree and breeding history — so the context buyers care
+              about stays organized and accessible.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Fiber Records</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Shearing records with date, weight, and notes</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Micron data and fiber diameter records over time</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Handle, luster, crimp density, and staple length notes</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Fiber type (Huacaya fleece vs. Suri lock structure)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Show ribbon and fiber evaluation results</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Production Context</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Historical clip weight per animal per year</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Fleece quality trend over the animal's lifetime</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Fiber notes published to public marketplace profile</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Linked to breeding history for genetic selection context</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
 
-        <section id="clients">
-          <h2 class="text-3xl font-bold mb-4">Buyer Communication and Marketplace Visibility</h2>
-          <p class="text-lg text-gray-700">
-            Use BreederHQ to manage inquiries, waitlists, contracts, and a public-facing breeder profile.
-            Buyers see a more credible program because your public presence is backed by real records instead
-            of a disconnected static listing.
-          </p>
-        </section>
+        <!-- Health and Genetics -->
+        <details id="health" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🏥</span>
+              <div>
+                <h3 class="text-2xl font-bold">Health, Documents, and Genetics</h3>
+                <p class="text-gray-600">Testing, medications, vet records, and pedigree genetics</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Health Records</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Vaccination schedules and administration history</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Medication treatment courses with dose logging</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>BVD and disease testing documentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Fecal egg counts and parasite management records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Uploaded health certificates, Coggins, and vet records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Body weight and body condition score tracking</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Genetics and Registration</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>DNA typing and parentage verification records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Genetic testing documentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Multi-generation pedigree with lineage depth</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>AOBA, ARI registration number storage</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Show record and halter class results</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Reproductive Inventory -->
+        <details id="inventory" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🧪</span>
+              <div>
+                <h3 class="text-2xl font-bold">Reproductive Inventory</h3>
+                <p class="text-gray-600">Semen and embryo lots with storage tracking and quantity ledger</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <p class="text-gray-700 mb-4">
+              Programs using AI or embryo transfer for high-value herdsires can track all reproductive assets
+              in one system — replacing handwritten tank notes and disconnected spreadsheets.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Semen Lots</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Sire identity, collection date, and collection method</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Straw count, format, and extender</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pre-freeze and post-thaw motility percentages</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Health testing documentation per lot</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Accession number and lot number tracking</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Embryo Lots</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Donor dam and sire linkage</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Collection date and fertilization type</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Embryo stage and grade per lot</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Freeze method and freeze date</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Genetic testing status and results</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Storage Tracking</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Multiple storage providers: vet clinics, IVF labs, owner tanks</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Container and position tracking (cane, canister, goblet)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Active and inactive container status</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Quantity Ledger</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Append-only transaction history per lot</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Events: received, used, transferred, shipped, disposed</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Auto-depletes lot when quantity reaches zero</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Buyers and Clients -->
+        <details id="clients" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">👥</span>
+              <div>
+                <h3 class="text-2xl font-bold">Buyers and Client Communication</h3>
+                <p class="text-gray-600">Inquiries, waitlists, contracts, and sales pipeline</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Sales Pipeline</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Buyer inquiry tracking and response management</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Waitlist applications and buyer prioritization</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Deposits, reservations, and payment tracking</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Bill of sale and purchase agreement templates</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>E-signature document collection</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Invoicing and financial tracking</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Communication Tools</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Centralized communications hub</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Outreach and follow-up templates</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Client portal for buyer record review</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Contact history tied to individual animals</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Live website embed for your own breeder website</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Marketplace -->
+        <details id="marketplace" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🌐</span>
+              <div>
+                <h3 class="text-2xl font-bold">Marketplace and Public Visibility</h3>
+                <p class="text-gray-600">Verified breeder profile backed by real records</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <p class="text-gray-700 mb-4">
+              Alpaca programs are now publicly listed on the BreederHQ Marketplace. Your public presence is backed
+              by the records you already maintain — not a separate static listing you have to maintain twice.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Breeder Profile</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Verified identity and program documentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Program story, goals, and herd philosophy</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Health credentials and documentation badges</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Behavioral badges earned from real activity</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Public pedigrees and herd photos</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Animal Listings</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Available crias, herdsires, and females</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Planned breedings and upcoming availability</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pedigree and fiber detail on each listing</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Health documentation linked to listing</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Buyer inquiry directly through the platform</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
       </div>
     </section>
 
+    <!-- Who This Is For -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Who This Is For</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-green-700">Good fit for:</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Huacaya and Suri programs focused on fiber quality and genetics</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Seedstock breeders using AI or embryo transfer</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Smaller alpaca herds wanting organized records and a professional buyer experience</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Programs that sell to other breeders and want marketplace credibility</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Breeders managing show animals alongside a fiber or breeding program</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-red-700">Not the right fit for:</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start"><span class="text-red-400 mr-2 mt-1">✗</span>Commercial fiber operations needing bulk flock management (not individual animal records)</li>
+              <li class="flex items-start"><span class="text-red-400 mr-2 mt-1">✗</span>Breeders wanting a simple static website with no operational records</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
     <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-white mb-4">Ready to run your alpaca program on BreederHQ?</h2>
@@ -165,5 +528,29 @@ const featureCards = [
         </div>
       </div>
     </section>
+
+    <!-- Mobile sticky CTA -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-200 shadow-lg">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg text-base font-semibold text-center hover:bg-[hsl(24,95%,48%)] transition">
+        Start Your Free Trial
+      </a>
+    </div>
   </main>
+
+  <style>
+    .accordion-section[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+  </style>
+
+  <script is:inline>
+    document.querySelectorAll('.accordion-section').forEach(section => {
+      section.addEventListener('toggle', () => {
+        const icon = section.querySelector('.accordion-icon');
+        if (icon) {
+          icon.style.transform = section.open ? 'rotate(180deg)' : '';
+        }
+      });
+    });
+  </script>
 </BaseLayout>

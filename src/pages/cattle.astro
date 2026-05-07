@@ -1,0 +1,592 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/#for-breeders' },
+  { name: 'Cattle Breeding', url: '/cattle' }
+];
+
+const faqs = [
+  {
+    question: 'What types of cattle operations does BreederHQ support?',
+    answer: 'BreederHQ is built for seedstock and registered cattle programs, Highland and miniature breed operations, show programs, and pet-placement breeders. The platform handles individual animal management, breeding records, calving tracking, and reproductive inventory — the workflows that matter most to these segments.'
+  },
+  {
+    question: 'Can I track AI and embryo transfer programs in BreederHQ?',
+    answer: 'Yes. Reproductive inventory is one of the headline features for cattle breeders. You can track semen lots (straw count, motility, collection date, sire identity, storage location) and embryo lots (donor dam, sire, flush date, embryo stage and grade, freeze method, storage position) with a complete quantity ledger showing every receive, use, transfer, and disposal event. Multiple labs and storage facilities can be managed from one account.'
+  },
+  {
+    question: 'How does BreederHQ handle calving windows instead of exact due dates?',
+    answer: 'Cattle programs — especially those using bull turnout — often work with calving windows rather than a single predicted date. BreederHQ supports expected calving ranges derived from breeding and exposure dates so you can track the full group instead of forcing every cow into a single due-date model.'
+  },
+  {
+    question: 'Can I track synchronization protocol records?',
+    answer: 'Yes. Synchronization protocols (CIDR, OvSynch, and similar programs) are part of mainstream cattle breeding workflow, not advanced repro. You can record sync events, AI dates, and pregnancy check outcomes as part of each breeding plan.'
+  },
+  {
+    question: 'How do post-weaning outcomes work for cattle?',
+    answer: 'After weaning, cattle calves have multiple destination paths: retained, sold, transferred, feedlot, backgrounding, replacement heifer, breeding prospect, show prospect, pet placement, or harvested. BreederHQ records post-weaning outcomes as an append-only history so you have a clear record of where each animal went and when — without forcing a dog-style buyer-placement pipeline onto a cattle operation.'
+  },
+  {
+    question: 'Can BreederHQ handle a program that uses multiple semen stud facilities?',
+    answer: 'Yes. One of the specific pain points this was built for: cattle breeders often use 5 to 10 semen stud and embryo labs nationwide and track inventory in Excel or handwritten notes across each. BreederHQ lets you track semen and embryo lots with storage provider, facility site, specific tank and cane position, and full quantity history — all in one system, regardless of how many external labs hold your inventory.'
+  },
+  {
+    question: 'Does BreederHQ work for cow-calf pair management?',
+    answer: 'Yes. Before weaning, dam and calf are tracked as a pair. Calf birth weight, nursing status, neonatal health, and early milestones are captured on the calf record, linked to the dam. After weaning the calf becomes its own animal record with its own post-weaning outcome tracking.'
+  },
+  {
+    question: 'Can I publish my cattle program on the marketplace?',
+    answer: 'Yes. Cattle breeders can publish a verified breeder profile and available animals on the BreederHQ Marketplace, backed by the pedigrees, health records, and breeding data they already maintain in the platform.'
+  }
+];
+
+const featureCards = [
+  { id: 'cattle-records', icon: '🐄', title: 'Cattle Records', desc: 'Complete herd profiles, pedigrees, registration, photos' },
+  { id: 'breeding', icon: '📅', title: 'Breeding Management', desc: 'AI, natural service, sync protocols, pregnancy checks' },
+  { id: 'calving', icon: '🐮', title: 'Calving Records', desc: 'Calf tracking, birth weight, nursing status, calf health' },
+  { id: 'inventory', icon: '🧪', title: 'Reproductive Inventory', desc: 'Semen and embryo lots across multiple labs, full ledger' },
+  { id: 'post-weaning', icon: '📋', title: 'Post-Weaning Outcomes', desc: 'Disposition tracking: retained, sold, feedlot, replacement' },
+  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Testing, vaccinations, medications, pedigree genetics' },
+  { id: 'clients', icon: '👥', title: 'Buyers & Clients', desc: 'Sales pipeline, inquiries, contracts, communications' },
+  { id: 'marketplace', icon: '🌐', title: 'Marketplace', desc: 'Verified breeder profile, available animal listings' }
+];
+---
+
+<BaseLayout
+  title="Cattle Breeding Software | BreederHQ"
+  description="Cattle breeding software for seedstock, registered, show, and pet-placement programs. AI and embryo tracking, semen inventory across multiple labs, calving records, and post-weaning outcome management."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/#for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Cattle Breeding</li>
+      </ol>
+    </nav>
+
+    <!-- Hero + TL;DR -->
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Cattle Breeding Software for Seedstock and Registered Programs</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            BreederHQ gives cattle breeders one platform for herd records, AI and natural service breeding plans,
+            semen and embryo inventory across multiple labs, calving records, post-weaning outcome tracking, and
+            a verified marketplace presence. Built for seedstock programs, registered and show operations, Highland
+            and miniature breed breeders, and pet-placement cattle programs.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Most cattle breeders track semen and embryo inventory across 5 to 10 external labs using Excel
+          spreadsheets and handwritten tank notes. BreederHQ replaces that with a centralized reproductive
+          inventory system — straw counts, storage locations, quantity ledgers, donor records — connected to
+          the same platform that manages your herd, breeding plans, and buyer communications.
+        </p>
+      </div>
+    </section>
+
+    <!-- Feature Cards Grid -->
+    <section class="py-8 px-4 bg-gray-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Cattle Program Needs</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {featureCards.map(card => (
+            <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+              <div class="text-3xl mb-2">{card.icon}</div>
+              <h3 class="font-bold text-lg mb-1">{card.title}</h3>
+              <p class="text-sm text-gray-600">{card.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
+      <div class="max-w-5xl mx-auto px-4">
+        <ul class="flex space-x-6 overflow-x-auto py-3 text-sm">
+          {featureCards.map(card => (
+            <li>
+              <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
+                {card.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Accordion Sections -->
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto space-y-4">
+
+        <!-- Cattle Records -->
+        <details id="cattle-records" class="accordion-section border border-gray-200 rounded-lg" open>
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🐄</span>
+              <div>
+                <h3 class="text-2xl font-bold">Cattle Records</h3>
+                <p class="text-gray-600">Complete herd profiles, pedigrees, and organization</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">For Every Animal</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Registration numbers (AHA, AAA, ABBA, and other breed registries)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>EID tags, NUES/USDA tags, and brand information</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Photos, breed, color, and phenotype details</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Birth date, purchase information, and acquisition history</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Multi-generation pedigrees with sire and dam linkage</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>EPD context and breed association references</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Herd Organization</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Cows, bulls, heifers, steers, and calves</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Active, sold, retired, and historical records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Custom tags, pasture groups, and categories</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Dam-calf pair tracking through weaning</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Donor dam and flush candidate management</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Breeding Management -->
+        <details id="breeding" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">📅</span>
+              <div>
+                <h3 class="text-2xl font-bold">Breeding Management</h3>
+                <p class="text-gray-600">AI, natural service, synchronization protocols, and pregnancy checks</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Breeding Events</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Artificial insemination events with sire and semen lot linkage</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Natural service with bull exposure start and end dates</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Embryo transfer events with donor, recipient, and embryo lot</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Heat detection observations and breeding confirmations</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Expected calving windows (60-90 day range from bull turnout)</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Synchronization and Pregnancy</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Sync protocol tracking (CIDR, OvSynch, CO-Synch, and similar programs)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pregnancy check recording with method and date</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Open cow identification and re-breeding decisions</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Calf-to-cow ratio tracking and breeding efficiency metrics</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Full breeding history per animal, reviewable at any time</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+              <p class="text-sm text-amber-800">
+                <strong>Built for how cattle operations actually work:</strong> Calving windows, bull exposure groups, and synchronization cohorts — not a dog-style single heat-cycle model.
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <!-- Calving Records -->
+        <details id="calving" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🐮</span>
+              <div>
+                <h3 class="text-2xl font-bold">Calving Records and Calf Tracking</h3>
+                <p class="text-gray-600">Birth outcomes, calf health, nursing, and cow-calf pair management</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Calving Details</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Birth date, time, and presentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Birth weight in pounds and ounces</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Assistance level (unassisted, minimal, moderate, significant)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Sex, color, and physical description</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Dam and sire linkage to pedigree</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Twins and multiple births tracked individually</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Neonatal Calf Health</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Nursing status: nursing well, assisted, bottle fed, orphaned</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Colostrum administration and source</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Neonatal health: thriving, watch, critical, deceased</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Veterinary care requirements and notes</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Vaccinations and early treatment records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Weight gain milestones through weaning</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Reproductive Inventory -->
+        <details id="inventory" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🧪</span>
+              <div>
+                <h3 class="text-2xl font-bold">Reproductive Inventory</h3>
+                <p class="text-gray-600">Semen and embryo lots across multiple labs — one system, full ledger</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <p class="text-gray-700 mb-6">
+              The headline feature for cattle breeders who use AI and embryo transfer programs: a centralized inventory system that replaces scattered spreadsheets and handwritten tank notes across multiple external labs.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Semen Inventory</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Lot tracking: sire identity, collection date, collection method</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Straw count, format (quarter-ml, half-ml), extender</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pre-freeze and post-thaw motility percentages</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>CSS qualification and health testing documentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Accession number, lot number, and label text</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Complete quantity ledger: received, used, transferred, shipped</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Embryo Inventory</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Lot tracking: donor dam, sire, flush date</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Fertilization type: conventional flush, IVF, ICSI</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Embryo stage: morula, compact morula, blastocyst, hatched</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Grade, freeze date, freeze method (conventional, vitrified)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Sexed embryo flag with sex designation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Genetic testing status and results per lot</li>
+                </ul>
+              </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Storage Management</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Multiple storage providers: bull studs, IVF labs, vet clinics, owner tanks</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Per-facility site and storage account tracking</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Container management: LN2 tank, vapor shipper, dry shipper</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Granular position tracking: cane code, canister, goblet</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Active and inactive container status</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Quantity Ledger and Audit</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Append-only transaction history (immutable audit trail)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Transaction types: received, added, used, transferred, shipped, disposed, adjusted</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Related animal and breeding plan linkage per event</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Auto-depletes lot to zero-quantity status</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Tenant-level summary dashboard across all lots</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Post-Weaning Outcomes -->
+        <details id="post-weaning" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">📋</span>
+              <div>
+                <h3 class="text-2xl font-bold">Post-Weaning Outcomes</h3>
+                <p class="text-gray-600">Disposition tracking built for how cattle operations actually work</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <p class="text-gray-700 mb-4">
+              After weaning, a calf's path diverges based on the operation. BreederHQ records post-weaning outcomes as an append-only history — no buyer-deposit pipeline required, just a clear record of what happened to each animal.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Selectable Outcomes</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Retained in herd</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Sold (direct, at auction, private treaty)</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Transferred to partner or related operation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>On feed / sent to feedlot</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Backgrounding / grow-out</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Replacement heifer designation</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Additional Outcomes</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Breeding prospect</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Show prospect</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pet placement</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Harvested</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Custom outcome with notes</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Full outcome history per animal (append-only)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Health and Genetics -->
+        <details id="health" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🏥</span>
+              <div>
+                <h3 class="text-2xl font-bold">Health and Genetics</h3>
+                <p class="text-gray-600">Testing, vaccinations, medications, and pedigree genetics</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Health Documentation</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>BVD (PI testing), Johne's, and brucellosis testing records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Vaccination schedules and administration history</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Medication treatment courses with dose logging</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Withdrawal period tracking for treated animals</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Uploaded health certificates, Coggins, and vet records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Body condition scoring and weight records</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Genetics and Registration</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>DNA typing and parentage verification records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Genetic disease testing documentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Multi-generation pedigree depth</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Registry documentation for AHA, AAA, ABBA, and other associations</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Show record and performance data</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>EPD reference notes and external genomic results</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Buyers and Clients -->
+        <details id="clients" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">👥</span>
+              <div>
+                <h3 class="text-2xl font-bold">Buyers and Client Communication</h3>
+                <p class="text-gray-600">Sales pipeline, inquiries, contracts, and follow-up</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Sales Pipeline</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Buyer inquiry tracking and response management</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Lead scoring and follow-up reminders</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Bill of sale and purchase agreement templates</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>E-signature document collection</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Invoicing and payment tracking</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Communication Tools</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Outreach hub for prospect communication</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Message templates for common inquiries</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Client portal for buyers to review animal records</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Automated follow-up tools for registered programs</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Contact history tied to individual animals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Marketplace -->
+        <details id="marketplace" class="accordion-section border border-gray-200 rounded-lg">
+          <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">🌐</span>
+              <div>
+                <h3 class="text-2xl font-bold">Marketplace and Public Presence</h3>
+                <p class="text-gray-600">Verified breeder profile backed by real records</p>
+              </div>
+            </div>
+            <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="accordion-content p-6 border-t border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-lg mb-3">Breeder Profile</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>Verified breeder identity and program documentation</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Program story, goals, and herd philosophy</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Health credentials and testing badges</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Behavioral badges earned from real platform activity</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Public pedigrees and herd photos</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg mb-3">Available Animal Listings</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="mr-2">•</span>For-sale calves, heifers, cows, and bulls</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Planned breedings and upcoming availability</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Pedigree depth shown directly on listing</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Health documentation linked to listing</li>
+                  <li class="flex items-start"><span class="mr-2">•</span>Buyer contact and inquiry through the platform</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Who This Is For -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Who This Is For</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-green-700">Good fit for:</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Seedstock and registered cattle programs using AI and ET</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Highland, Angus, Hereford, Simmental, and other registered breed programs</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Miniature cattle breeders (Mini Jerseys, Dexter, Miniature Herefords)</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Show operations tracking calves for seedstock and show markets</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Pet-placement breeders (Highland, Dexters, minis) with buyer pipelines</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Programs using multiple AI studs and embryo labs</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span>Breeders who want a professional public presence backed by real records</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-red-700">Not the right fit for:</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start"><span class="text-red-400 mr-2 mt-1">✗</span>Large commercial cow-calf operations managing hundreds of animals without individual records</li>
+              <li class="flex items-start"><span class="text-red-400 mr-2 mt-1">✗</span>Feedlot and finishing operations without a breeding component</li>
+              <li class="flex items-start"><span class="text-red-400 mr-2 mt-1">✗</span>Dairy operations (commercial dairy workflow is a separate domain)</li>
+              <li class="flex items-start"><span class="text-red-400 mr-2 mt-1">✗</span>Operations needing herd-level bulk management software (not individual records)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to run your cattle program on BreederHQ?</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Start a free trial or browse verified cattle breeders already publishing on the marketplace.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Start Your Free Trial</a>
+          <a href="/find-breeders/cattle" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">Find Cattle Breeders</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile sticky CTA -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-200 shadow-lg">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg text-base font-semibold text-center hover:bg-[hsl(24,95%,48%)] transition">
+        Start Your Free Trial
+      </a>
+    </div>
+  </main>
+
+  <style>
+    .accordion-section[open] .accordion-icon {
+      transform: rotate(180deg);
+    }
+    .sticky-nav .nav-link.active {
+      color: hsl(24, 95%, 53%);
+      border-bottom: 2px solid hsl(24, 95%, 53%);
+    }
+  </style>
+
+  <script is:inline>
+    document.querySelectorAll('.accordion-section').forEach(section => {
+      section.addEventListener('toggle', () => {
+        const icon = section.querySelector('.accordion-icon');
+        if (icon) {
+          icon.style.transform = section.open ? 'rotate(180deg)' : '';
+        }
+      });
+    });
+
+    const navLinks = document.querySelectorAll('.sticky-nav .nav-link');
+    const sections = document.querySelectorAll('.accordion-section');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</BaseLayout>

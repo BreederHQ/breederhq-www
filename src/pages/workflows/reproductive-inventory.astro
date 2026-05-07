@@ -1,0 +1,344 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Breeders', url: '/for-breeders' },
+  { name: 'Reproductive Inventory', url: '/workflows/reproductive-inventory' }
+];
+
+const faqs = [
+  {
+    question: 'What types of inventory can I track in BreederHQ?',
+    answer: 'BreederHQ tracks semen and embryo inventory, with support for oocytes and other biological material. Each lot has full detail tracking (sire, donor dam, collection date, grade, stage, freeze method), quantity ledger (received, used, transferred, shipped, disposed, adjusted), and granular storage tracking down to individual tank, cane, and goblet positions.'
+  },
+  {
+    question: 'Can I manage inventory across multiple external labs and bull studs?',
+    answer: 'Yes. This is the primary use case. You can configure multiple storage providers — bull studs, IVF labs, vet clinics, owner LN2 tanks, university repositories — each with their own facility sites, storage accounts, and containers. Inventory lots are linked to specific storage positions regardless of how many external facilities hold your material.'
+  },
+  {
+    question: 'How does the quantity ledger work?',
+    answer: 'Every quantity change is recorded as an append-only transaction event — received, added, used, transferred out, transferred in, shipped, disposed, lost, or adjusted. The current quantity is always a derivation of the full event history, not a number someone edited. When a lot reaches zero, it automatically transitions to depleted status. The full history is always available for audit and compliance review.'
+  },
+  {
+    question: 'Can I track individual straws and embryos, not just lot-level counts?',
+    answer: 'Yes. For programs that need unit-level detail, BreederHQ supports individual unit tracking within a lot — each straw or embryo with its own grade, stage, freeze code, and status. When a unit is used for a transfer, the recipient animal and transfer outcome can be recorded at the unit level.'
+  },
+  {
+    question: 'What storage hierarchy does BreederHQ support?',
+    answer: 'BreederHQ models the full storage chain: Storage Provider (the lab or stud) → Facility Site (physical location with address and contacts) → Storage Account (billing account) → Container (LN2 tank, vapor shipper, dry shipper, freezer, incubator) → Storage Position (cane code, canister number, goblet number). Each level is managed independently so you can track exactly where material is at any point in time.'
+  },
+  {
+    question: 'Which species does the reproductive inventory system support?',
+    answer: 'Reproductive inventory is available for all species supported by BreederHQ: horses, cattle, alpacas, llamas, goats, sheep, dogs, cats, and rabbits. Semen inventory is available for male animals; embryo inventory is available for female donors with a linked sire.'
+  },
+  {
+    question: 'How is inventory linked to breeding plans?',
+    answer: 'Semen and embryo lots are linked to the animal profiles of the sire and donor. When a lot is used in a breeding plan (AI or ET), the breeding event and the quantity event are both recorded, connecting the inventory transaction to the actual breeding outcome. That gives you traceability from lot to calf.'
+  },
+  {
+    question: 'Can I get a summary of my total inventory across all facilities?',
+    answer: 'Yes. A tenant-level summary dashboard shows your total inventory counts across all lots — broken down by type (semen vs. embryo), status (available, reserved, used, transferred, depleted), and quantity by unit — so you can see your full inventory position at a glance without querying each facility separately.'
+  }
+];
+---
+
+<BaseLayout
+  title="Reproductive Inventory Management | BreederHQ"
+  description="Track semen and embryo inventory across multiple labs and storage facilities. Lot-level detail, quantity ledger, granular storage positions, and full audit trail — connected to your breeding program."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">For Breeders</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Reproductive Inventory</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Reproductive Inventory Management</h1>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Track semen and embryo inventory across multiple external labs and storage facilities from one
+            centralized system. Lot-level detail, append-only quantity ledger, granular storage positions down
+            to the individual cane and goblet, and full audit trail — connected to the animals and breeding
+            plans they belong to.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Breeders using AI and embryo transfer programs often manage genetic material across five to ten
+          external facilities — bull studs, IVF labs, vet clinics, university repositories — and track all of
+          it in Excel spreadsheets or handwritten tank notes. BreederHQ replaces that with a structured
+          inventory system that stays connected to your herd records and breeding plans.
+        </p>
+      </div>
+    </section>
+
+    <!-- Who This Is For Banner -->
+    <section class="py-6 px-4 bg-amber-50 border-y border-amber-200">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-amber-900 font-medium">
+          <strong>Available for all species:</strong> Horses, Cattle, Camelids (Alpacas and Llamas), Goats, Sheep, Dogs, Cats, and Rabbits.
+          Semen inventory links to male sires. Embryo inventory links to female donors with linked sires.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content Sections -->
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto space-y-16">
+
+        <!-- Lot Tracking -->
+        <div id="lot-tracking">
+          <h2 class="text-3xl font-bold mb-6">Semen and Embryo Lot Tracking</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Every lot of genetic material gets a complete record — not just a straw count, but the full
+            context that matters for breeding decisions and compliance.
+          </p>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-4">🧬 Semen Lots</h3>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Sire identity:</strong> linked to the animal record or manual identity entry for external sires</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Collection date and method:</strong> AV, EE, or epididymal</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Format and straw size:</strong> straw, pellet, vial, or ampule; quarter-ml or half-ml</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Motility:</strong> pre-freeze and post-thaw percentages</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Concentration and extender</strong></div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>CSS qualification</strong> and health testing documentation</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Accession number, lot number, batch number,</strong> and label text</div></li>
+              </ul>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-4">🔬 Embryo Lots</h3>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Donor dam and sire:</strong> linked to animal records or manual identity for external animals</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Collection date and fertilization type:</strong> conventional flush, IVF, or ICSI</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Embryo stage:</strong> morula, compact morula, blastocyst, expanded blastocyst, hatched blastocyst</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Grade, freeze date,</strong> and freeze method (conventional, vitrified, direct transfer)</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Sexed embryo flag</strong> with sex designation (male, female, or unknown)</div></li>
+                <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2 mt-1">•</span><div><strong>Genetic testing status</strong> and results per lot</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storage Hierarchy -->
+        <div id="storage">
+          <h2 class="text-3xl font-bold mb-6">Storage Hierarchy — Five Levels Deep</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            BreederHQ models the complete storage chain from the organization that holds your material
+            down to the individual position inside a container. Every level is independently managed so
+            you know exactly where inventory sits regardless of how many external facilities hold it.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl">
+              <div class="text-2xl font-bold text-[hsl(24,95%,53%)] w-8 shrink-0">1</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Storage Provider</h3>
+                <p class="text-gray-700">The organization holding your material: bull stud, IVF lab, vet clinic, university repository, owner facility, or cooperative. Multiple providers can be configured per account.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl">
+              <div class="text-2xl font-bold text-[hsl(24,95%,53%)] w-8 shrink-0">2</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Facility Site</h3>
+                <p class="text-gray-700">The physical location of a provider — with address, contact information, billing status, and any site-specific notes. One provider can have multiple sites.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl">
+              <div class="text-2xl font-bold text-[hsl(24,95%,53%)] w-8 shrink-0">3</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Storage Account</h3>
+                <p class="text-gray-700">The billing account at a facility site. Multiple breeders may share a site but maintain separate accounts. Inventory lots are assigned to a specific account.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl">
+              <div class="text-2xl font-bold text-[hsl(24,95%,53%)] w-8 shrink-0">4</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Container</h3>
+                <p class="text-gray-700">The physical storage unit: LN2 tank, vapor shipper, dry shipper, freezer, or incubator. Containers have active/inactive status so decommissioned tanks are flagged appropriately.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl">
+              <div class="text-2xl font-bold text-[hsl(24,95%,53%)] w-8 shrink-0">5</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Storage Position</h3>
+                <p class="text-gray-700">Granular position within a container: cane code, canister number, goblet number, and any position notes. Supports approximate positions (flagged as such) when exact placement is not recorded.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quantity Ledger -->
+        <div id="ledger">
+          <h2 class="text-3xl font-bold mb-6">Append-Only Quantity Ledger</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Every quantity change is recorded as an immutable transaction event — not an edited number in a
+            spreadsheet cell. The current quantity is always derived from the full event history, giving you
+            a complete audit trail for compliance, insurance, or dispute resolution.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="font-bold text-lg mb-3">Transaction Types</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Received — new lot arrives from lab or stud</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Added — additional units added to existing lot</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Transferred In — material moved in from another account</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Used — straws or embryos used in breeding</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Transferred Out — material sent to another facility</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Shipped — lot dispatched for use or transfer</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Disposed — material discarded (with reason)</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Lost — unaccounted loss</li>
+                <li class="flex items-start"><span class="text-gray-400 mr-2">±</span>Adjusted — correction with explanation</li>
+              </ul>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="font-bold text-lg mb-3">Each Transaction Records</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Transaction date and quantity change</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Related animal (sire used, recipient, etc.)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Related breeding plan linkage</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Performer identity (who recorded it)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Notes and context</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Automatic lot status transitions (AVAILABLE → DEPLETED at zero)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="p-5 bg-stone-50 border border-stone-200 rounded-xl">
+            <p class="text-gray-700">
+              <strong>Auto-depletion:</strong> When a lot reaches zero quantity, it automatically transitions to DEPLETED
+              status. Depleted lots remain in the system with their full history intact — they are not deleted.
+              The current quantity is always consistent with the ledger sum, enforced by the system.
+            </p>
+          </div>
+        </div>
+
+        <!-- Unit-Level Tracking -->
+        <div id="units">
+          <h2 class="text-3xl font-bold mb-6">Individual Unit Tracking</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            For programs that need detail below the lot level, BreederHQ supports individual unit tracking
+            — each straw or embryo as a discrete record.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold text-lg mb-3">Per-Unit Detail</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Grade, stage, sex, and freeze code per unit</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Status: available, reserved, used, disposed</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Individual unit notes</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-3">Transfer Tracking</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Recipient animal linkage (for ET transfers)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Transfer outcome recording</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Traceability from unit to recipient animal to born offspring</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animal Integration -->
+        <div id="integration">
+          <h2 class="text-3xl font-bold mb-6">Connected to Your Herd — Not a Separate System</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Reproductive inventory in BreederHQ is not a standalone module — it is connected to animal profiles,
+            breeding plans, and offspring records so the full chain from genetic material to born animal is
+            traceable in one system.
+          </p>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <div class="text-4xl mb-3">🐄</div>
+              <h3 class="font-bold mb-2">Animal Profile</h3>
+              <p class="text-sm text-gray-600">Semen lots automatically appear on the sire's profile. Embryo lots appear on both donor dam and sire profiles. The inventory tab shows current lots and quantity at a glance.</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <div class="text-4xl mb-3">📅</div>
+              <h3 class="font-bold mb-2">Breeding Plans</h3>
+              <p class="text-sm text-gray-600">AI and ET breeding events link to the specific lot used. Quantity events record which breeding plan consumed which units, keeping the ledger and the breeding record synchronized.</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <div class="text-4xl mb-3">📊</div>
+              <h3 class="font-bold mb-2">Inventory Dashboard</h3>
+              <p class="text-sm text-gray-600">Tenant-level aggregate: total lots by type and status, total quantities by unit, and a filterable lot list across all storage providers — your full inventory position in one view.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Species Section -->
+        <div id="species">
+          <h2 class="text-3xl font-bold mb-6">Available Across All Supported Species</h2>
+          <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+            <a href="/dogs" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐕</div>
+              <div class="text-sm font-semibold">Dogs</div>
+            </a>
+            <a href="/cats" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐈</div>
+              <div class="text-sm font-semibold">Cats</div>
+            </a>
+            <a href="/horses" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐴</div>
+              <div class="text-sm font-semibold">Horses</div>
+            </a>
+            <a href="/alpacas" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🦙</div>
+              <div class="text-sm font-semibold">Alpacas</div>
+            </a>
+            <a href="/goats" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐐</div>
+              <div class="text-sm font-semibold">Goats</div>
+            </a>
+            <a href="/sheep" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐑</div>
+              <div class="text-sm font-semibold">Sheep</div>
+            </a>
+            <a href="/cattle" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐄</div>
+              <div class="text-sm font-semibold">Cattle</div>
+            </a>
+            <a href="/llamas" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🦙</div>
+              <div class="text-sm font-semibold">Llamas</div>
+            </a>
+            <a href="/rabbits" class="text-center p-4 bg-white border border-gray-200 rounded-xl hover:border-[hsl(24,95%,53%)] transition">
+              <div class="text-3xl mb-2">🐇</div>
+              <div class="text-sm font-semibold">Rabbits</div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Replace your spreadsheets with a real inventory system</h2>
+        <p class="text-lg text-stone-300 mb-8">
+          Centralize your semen and embryo inventory across every lab and facility in one connected platform.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Start Your Free Trial</a>
+          <a href="/for-breeders" class="bg-white border-2 border-stone-300 text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[hsl(24,95%,53%)] transition w-full sm:w-auto">See All Features</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
