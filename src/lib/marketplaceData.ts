@@ -38,7 +38,22 @@ export interface BreederCard {
   verificationTier?: "IDENTITY_VERIFIED" | "VERIFIED" | "ACCREDITED" | null;
 }
 
-export type SpeciesKey = "DOG" | "CAT" | "HORSE" | "GOAT" | "RABBIT" | "SHEEP";
+// CATTLE is the remaining stealth species and is intentionally excluded
+// from the public marketplace surface. ALPACA and LLAMA were promoted to
+// public 2026-05-07. The Footer + find-breeders/* landing pages still
+// reference only the original 6 species — alpaca/llama copy + .astro
+// pages will land in a follow-up marketing PR. Until then, fetchBreeders()
+// accepts ALPACA / LLAMA via the API but no public www page links to
+// /find-breeders/alpacas or /llamas.
+export type SpeciesKey =
+  | "DOG"
+  | "CAT"
+  | "HORSE"
+  | "GOAT"
+  | "RABBIT"
+  | "SHEEP"
+  | "ALPACA"
+  | "LLAMA";
 
 /**
  * Fetch all public breeders, optionally filtered to a single species.
