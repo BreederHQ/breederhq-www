@@ -14,15 +14,15 @@ const faqs = [
   },
   {
     question: 'Can I manage inventory across multiple external labs and bull studs?',
-    answer: 'Yes. This is the primary use case. You can configure multiple storage providers — bull studs, IVF labs, vet clinics, owner LN2 tanks, university repositories — each with their own facility sites, storage accounts, and containers. Inventory lots are linked to specific storage positions regardless of how many external facilities hold your material.'
+    answer: 'Yes. This is the primary use case. You can configure multiple storage providers (bull studs, IVF labs, vet clinics, owner LN2 tanks, university repositories), each with their own facility sites, storage accounts, and containers. Inventory lots are linked to specific storage positions regardless of how many external facilities hold your material.'
   },
   {
     question: 'How does the quantity ledger work?',
-    answer: 'Every quantity change is recorded as an append-only transaction event — received, added, used, transferred out, transferred in, shipped, disposed, lost, or adjusted. The current quantity is always a derivation of the full event history, not a number someone edited. When a lot reaches zero, it automatically transitions to depleted status. The full history is always available for audit and compliance review.'
+    answer: 'Every quantity change is recorded as an append-only transaction event: received, added, used, transferred out, transferred in, shipped, disposed, lost, or adjusted. The current quantity is always a derivation of the full event history, not a number someone edited. When a lot reaches zero, it automatically transitions to depleted status. The full history is always available for audit and compliance review.'
   },
   {
     question: 'Can I track individual straws and embryos, not just lot-level counts?',
-    answer: 'Yes. For programs that need unit-level detail, BreederHQ supports individual unit tracking within a lot — each straw or embryo with its own grade, stage, freeze code, and status. When a unit is used for a transfer, the recipient animal and transfer outcome can be recorded at the unit level.'
+    answer: 'Yes. For programs that need unit-level detail, BreederHQ supports individual unit tracking within a lot, with each straw or embryo carrying its own grade, stage, freeze code, and status. When a unit is used for a transfer, the recipient animal and transfer outcome can be recorded at the unit level.'
   },
   {
     question: 'What storage hierarchy does BreederHQ support?',
@@ -38,14 +38,14 @@ const faqs = [
   },
   {
     question: 'Can I get a summary of my total inventory across all facilities?',
-    answer: 'Yes. A tenant-level summary dashboard shows your total inventory counts across all lots — broken down by type (semen vs. embryo), status (available, reserved, used, transferred, depleted), and quantity by unit — so you can see your full inventory position at a glance without querying each facility separately.'
+    answer: 'Yes. A tenant-level summary dashboard shows your total inventory counts across all lots, broken down by type (semen vs. embryo), status (available, reserved, used, transferred, depleted), and quantity by unit, so you can see your full inventory position at a glance without querying each facility separately.'
   }
 ];
 ---
 
 <BaseLayout
   title="Reproductive Inventory Management | BreederHQ"
-  description="Track semen and embryo inventory across multiple labs and storage facilities. Lot-level detail, quantity ledger, granular storage positions, and full audit trail — connected to your breeding program."
+  description="Track semen and embryo inventory across multiple labs and storage facilities. Lot-level detail, quantity ledger, granular storage positions, and full audit trail, connected to your breeding program."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -74,14 +74,14 @@ const faqs = [
           <p class="text-gray-700 leading-relaxed">
             Track semen and embryo inventory across multiple external labs and storage facilities from one
             centralized system. Lot-level detail, append-only quantity ledger, granular storage positions down
-            to the individual cane and goblet, and full audit trail — connected to the animals and breeding
+            to the individual cane and goblet, and full audit trail, connected to the animals and breeding
             plans they belong to.
           </p>
         </aside>
 
         <p class="text-xl text-gray-700 leading-relaxed">
           Breeders using AI and embryo transfer programs often manage genetic material across five to ten
-          external facilities — bull studs, IVF labs, vet clinics, university repositories — and track all of
+          external facilities (bull studs, IVF labs, vet clinics, university repositories) and track all of
           it in Excel spreadsheets or handwritten tank notes. BreederHQ replaces that with a structured
           inventory system that stays connected to your herd records and breeding plans.
         </p>
@@ -106,7 +106,7 @@ const faqs = [
         <div id="lot-tracking">
           <h2 class="text-3xl font-bold mb-6">Semen and Embryo Lot Tracking</h2>
           <p class="text-lg text-gray-700 mb-6">
-            Every lot of genetic material gets a complete record — not just a straw count, but the full
+            Every lot of genetic material gets a complete record. Not just a straw count, but the full
             context that matters for breeding decisions and compliance.
           </p>
           <div class="grid md:grid-cols-2 gap-8">
@@ -138,7 +138,7 @@ const faqs = [
 
         <!-- Storage Hierarchy -->
         <div id="storage">
-          <h2 class="text-3xl font-bold mb-6">Storage Hierarchy — Five Levels Deep</h2>
+          <h2 class="text-3xl font-bold mb-6">Storage Hierarchy: Five Levels Deep</h2>
           <p class="text-lg text-gray-700 mb-6">
             BreederHQ models the complete storage chain from the organization that holds your material
             down to the individual position inside a container. Every level is independently managed so
@@ -156,7 +156,7 @@ const faqs = [
               <div class="text-2xl font-bold text-[hsl(24,95%,53%)] w-8 shrink-0">2</div>
               <div>
                 <h3 class="font-bold text-lg mb-1">Facility Site</h3>
-                <p class="text-gray-700">The physical location of a provider — with address, contact information, billing status, and any site-specific notes. One provider can have multiple sites.</p>
+                <p class="text-gray-700">The physical location of a provider, with address, contact information, billing status, and any site-specific notes. One provider can have multiple sites.</p>
               </div>
             </div>
             <div class="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl">
@@ -187,7 +187,7 @@ const faqs = [
         <div id="ledger">
           <h2 class="text-3xl font-bold mb-6">Append-Only Quantity Ledger</h2>
           <p class="text-lg text-gray-700 mb-6">
-            Every quantity change is recorded as an immutable transaction event — not an edited number in a
+            Every quantity change is recorded as an immutable transaction event, not an edited number in a
             spreadsheet cell. The current quantity is always derived from the full event history, giving you
             a complete audit trail for compliance, insurance, or dispute resolution.
           </p>
@@ -195,15 +195,15 @@ const faqs = [
             <div class="bg-white border border-gray-200 rounded-xl p-6">
               <h3 class="font-bold text-lg mb-3">Transaction Types</h3>
               <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Received — new lot arrives from lab or stud</li>
-                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Added — additional units added to existing lot</li>
-                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Transferred In — material moved in from another account</li>
-                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Used — straws or embryos used in breeding</li>
-                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Transferred Out — material sent to another facility</li>
-                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Shipped — lot dispatched for use or transfer</li>
-                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Disposed — material discarded (with reason)</li>
-                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Lost — unaccounted loss</li>
-                <li class="flex items-start"><span class="text-gray-400 mr-2">±</span>Adjusted — correction with explanation</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Received: new lot arrives from lab or stud</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Added: additional units added to existing lot</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">+</span>Transferred In: material moved in from another account</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Used: straws or embryos used in breeding</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Transferred Out: material sent to another facility</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Shipped: lot dispatched for use or transfer</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Disposed: material discarded (with reason)</li>
+                <li class="flex items-start"><span class="text-red-400 mr-2">−</span>Lost: unaccounted loss</li>
+                <li class="flex items-start"><span class="text-gray-400 mr-2">±</span>Adjusted: correction with explanation</li>
               </ul>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-6">
@@ -221,7 +221,7 @@ const faqs = [
           <div class="p-5 bg-stone-50 border border-stone-200 rounded-xl">
             <p class="text-gray-700">
               <strong>Auto-depletion:</strong> When a lot reaches zero quantity, it automatically transitions to DEPLETED
-              status. Depleted lots remain in the system with their full history intact — they are not deleted.
+              status. Depleted lots remain in the system with their full history intact; they are not deleted.
               The current quantity is always consistent with the ledger sum, enforced by the system.
             </p>
           </div>
@@ -231,8 +231,8 @@ const faqs = [
         <div id="units">
           <h2 class="text-3xl font-bold mb-6">Individual Unit Tracking</h2>
           <p class="text-lg text-gray-700 mb-6">
-            For programs that need detail below the lot level, BreederHQ supports individual unit tracking
-            — each straw or embryo as a discrete record.
+            For programs that need detail below the lot level, BreederHQ supports individual unit tracking,
+            with each straw or embryo as a discrete record.
           </p>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
@@ -256,9 +256,9 @@ const faqs = [
 
         <!-- Animal Integration -->
         <div id="integration">
-          <h2 class="text-3xl font-bold mb-6">Connected to Your Herd — Not a Separate System</h2>
+          <h2 class="text-3xl font-bold mb-6">Connected to Your Herd, Not a Separate System</h2>
           <p class="text-lg text-gray-700 mb-6">
-            Reproductive inventory in BreederHQ is not a standalone module — it is connected to animal profiles,
+            Reproductive inventory in BreederHQ is not a standalone module. It is connected to animal profiles,
             breeding plans, and offspring records so the full chain from genetic material to born animal is
             traceable in one system.
           </p>
@@ -276,7 +276,7 @@ const faqs = [
             <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
               <div class="text-4xl mb-3">📊</div>
               <h3 class="font-bold mb-2">Inventory Dashboard</h3>
-              <p class="text-sm text-gray-600">Tenant-level aggregate: total lots by type and status, total quantities by unit, and a filterable lot list across all storage providers — your full inventory position in one view.</p>
+              <p class="text-sm text-gray-600">Tenant-level aggregate: total lots by type and status, total quantities by unit, and a filterable lot list across all storage providers. Your full inventory position in one view.</p>
             </div>
           </div>
         </div>
