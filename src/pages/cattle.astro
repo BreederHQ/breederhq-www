@@ -115,21 +115,6 @@ const featureCards = [
       </div>
     </section>
 
-    <!-- Sticky Navigation -->
-    <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
-      <div class="max-w-5xl mx-auto px-4">
-        <ul class="flex flex-wrap gap-x-6 gap-y-2 py-3 text-sm">
-          {featureCards.map(card => (
-            <li>
-              <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
-                {card.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
-
     <!-- Accordion Sections -->
     <section class="py-12 px-4">
       <div class="max-w-4xl mx-auto space-y-4">
@@ -555,10 +540,6 @@ const featureCards = [
     .accordion-section[open] .accordion-icon {
       transform: rotate(180deg);
     }
-    .sticky-nav .nav-link.active {
-      color: hsl(24, 95%, 53%);
-      border-bottom: 2px solid hsl(24, 95%, 53%);
-    }
   </style>
 
   <script is:inline>
@@ -570,23 +551,5 @@ const featureCards = [
         }
       });
     });
-
-    const navLinks = document.querySelectorAll('.sticky-nav .nav-link');
-    const sections = document.querySelectorAll('.accordion-section');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + entry.target.id) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-
-    sections.forEach(section => observer.observe(section));
   </script>
 </BaseLayout>
