@@ -28,6 +28,55 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== May 8, 2026 - Marketplace Facilities Expansion (8 facility types live) ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 8, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Marketing site coverage for the eight-facility-type expansion of BreederHQ Marketplace. Seven new for-providers pages, a new umbrella /facilities page, mega-nav updates, and soft-rename of the dog parks vertical.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/facilities" class="text-[hsl(24,95%,53%)] hover:underline">/facilities</a> (umbrella hub)</h3>
+          <p class="text-gray-700 mb-3">
+            Single hub page covering every facility type and subtype the marketplace supports. Card grid for all 8 categories (Dog Parks &amp; Play Spots, Equine, Livestock, Indoor Training Halls, Boarding, Wash &amp; Grooming, Event &amp; Show, Specialty), each card lists the subtypes available within that category and the booking model. "What every facility listing includes" feature grid (local discovery, detail-rich profiles, photo galleries, reviews and trust badges, inquiry-to-book workflow, vaccination/waiver/insurance fields). Three-step "How it works" section. Final pricing CTA: $5/month per LIVE listing, free during early access, no commissions, no per-booking fees, same price across all 8 facility types.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">New pages: 7 facility verticals under /for-providers</h3>
+          <ul class="list-disc list-inside text-gray-700 space-y-1 mb-3">
+            <li><a href="/for-providers/equine" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/equine</a> — indoor and outdoor arenas, round pens, boarding, pasture rental, wash racks, trail access</li>
+            <li><a href="/for-providers/livestock" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/livestock</a> — handling alleys, working chutes, scales, AI/repro, loading facilities, pasture rental</li>
+            <li><a href="/for-providers/indoor-training" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/indoor-training</a> — agility halls, flyball lanes, scent work rooms, obedience halls, cat play studios, small animal training</li>
+            <li><a href="/for-providers/boarding-facilities" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/boarding-facilities</a> — dog kennels, cat boarding catteries, exotic boarding, equine boarding, livestock boarding, in-home boarding</li>
+            <li><a href="/for-providers/wash-grooming" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/wash-grooming</a> — self-wash, pro grooming bay rentals, dog wash bars, livestock and equine wash racks</li>
+            <li><a href="/for-providers/events-shows" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/events-shows</a> — trial venues, conformation rings, agility trial sites, fun matches, clinic spaces, photo studios, breed club meeting spaces</li>
+            <li><a href="/for-providers/specialty-facilities" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/specialty-facilities</a> — hydrotherapy, treadmills, rehab and PT, sensory rooms, scent work, fitness, whelping/neonatal</li>
+          </ul>
+          <p class="text-gray-700 mb-3">
+            Each page follows the same five-section template used by existing /for-providers/* pages: hero with primary CTA (host signup deep link with category prefill), "what you can list" two-column grid covering the subtypes, "why it works" three-up benefit grid, "your listing includes" feature grid, and pricing CTA. Buyer flow note on each page clarifies that these facility types use a contact-to-book inquiry workflow at launch (Dog Parks &amp; Play Spots remains the only category with the slot+buffer real-time reservation calendar).
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: mega-nav (HeaderV2.astro)</h3>
+          <p class="text-gray-700 mb-3">
+            Service Providers dropdown now lists all 8 facility types under FACILITIES (was previously only Private Dog Parks). Desktop and mobile menus both updated. Each new entry has a "New" badge. New "View all facility types" link drops users to the /facilities umbrella.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers</a> hub</h3>
+          <p class="text-gray-700 mb-3">
+            Service Types card now has a dedicated FACILITIES subsection listing all 8 facility verticals with their emoji + page link, plus a "see all" cross-link to /facilities.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Soft rename: Private Dog Parks → Dog Parks &amp; Play Spots</h3>
+          <p class="text-gray-700 mb-3">
+            User-facing display labels updated on <a href="/for-providers/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/dog-parks</a> (title, h1, breadcrumb, meta description) and <a href="/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">/dog-parks</a> (title only) to align with the new platform display label. <strong>URLs are unchanged</strong> (still /dog-parks and /for-providers/dog-parks). Body copy preserves the high-intent search phrase "private dog park" since that's the indexed term &mdash; soft rename pattern protects existing SEO equity. FAQ entry on the host page updated to reflect that equine, livestock, indoor training, boarding, wash &amp; grooming, event &amp; show, and specialty facilities are now live (no longer "on the roadmap").
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Architecture notes</h3>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>All 7 new pages reuse the existing 5-section /for-providers/* template — no new components, no new layouts.</li>
+            <li>Host signup CTAs include forward-compatible deep links with <code class="bg-gray-100 px-2 py-0.5 rounded text-sm">?category=&lt;type&gt;&amp;returnTo=&lt;path&gt;</code> params that are inert in accounts today; when the host wizard supports category prefill, these links activate without any marketing-site edit.</li>
+            <li>Each per-type page uses a different brand-color palette (amber for equine, yellow for livestock, sky for indoor training, green for boarding, pink for wash &amp; grooming, violet for events, fuchsia for specialty) so they're visually distinct in the mega-nav and search results.</li>
+            <li>No buyer-side per-type landings on www at launch — the marketplace browse pages already exist and are SEO-indexable. Adding www-side landings would risk SEO cannibalization. We'll add them only if a vertical earns enough traffic to warrant city/region trees like /dog-parks/[city] does.</li>
+            <li>sitemap.xml needs the 8 new URLs added in a follow-up commit.</li>
+          </ul>
+        </article>
+
         <!-- ========== May 6, 2026 (later) - Dog Parks SEO content moat ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 6, 2026</h2>
