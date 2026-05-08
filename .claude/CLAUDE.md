@@ -10,7 +10,7 @@
 **At the start of every new session**, before responding to any user request, acknowledge that you have loaded these instructions by saying:
 
 > "CLAUDE.md loaded for breederhq-www. Context docs imported. Key rules I will follow:
-> - PROTECTED FILES: Analytics.astro, BaseLayout.astro, sitemap.xml, robots.txt - will ASK before modifying
+> - PROTECTED FILES: Analytics.astro, BaseLayout.astro, robots.txt - will ASK before modifying
 > - NEVER remove isProduction checks, Schema.org data, or inline script patterns
 > - NEVER refactor is:inline scripts to imports (breaks Astro tracking)
 > - Env vars MUST use PUBLIC_ prefix for client exposure
@@ -46,8 +46,7 @@ These files contain critical integrations. **Ask before changing**:
 | `src/lib/server/leadCapture.ts` | Lead enrichment, Slack notifications | Break lead flow |
 | `src/pages/api/track-visitor.ts` | High-value visitor detection | Lose B2B intelligence |
 | `src/middleware.ts` | Security headers | Security vulnerabilities |
-| `public/robots.txt` | Search engine directives | Could block crawlers |
-| `public/sitemap.xml` | 164 indexed URLs with priorities | Break search indexing |
+| `public/robots.txt` | Search engine directives (advertises auto-generated sitemap-index.xml) | Could block crawlers |
 | `vercel.json` | Security headers, redirects | Security/routing issues |
 | `.env.example` | Environment variable template | Break setup documentation |
 
@@ -71,7 +70,7 @@ These files contain critical integrations. **Ask before changing**:
 
 5. **Remove `define:vars` directives** - Required for passing env vars to inline scripts
 
-6. **Modify sitemap.xml priorities or changefreq values** - These affect crawl behavior
+6. **Sitemap is auto-generated** - The site uses `@astrojs/sitemap` which generates `sitemap-index.xml` and `sitemap-0.xml` into `dist/client/` at build time from every `.astro` page in `src/pages/`. There is no manual sitemap to maintain. New pages get picked up automatically on the next deploy. (Historical note: `public/sitemap.xml` was a manual sitemap that has been retired — it returned 404 in production, was not advertised in robots.txt, and was not submitted to Google Search Console. Auto-generation now covers everything.)
 
 7. **Change robots.txt crawler directives** - Could block important search engines
 
