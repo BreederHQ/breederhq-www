@@ -314,8 +314,11 @@ const faqs = [
             <li>Breeder has not actually started performance: no breeding has occurred, no litter has been produced, no specific puppy is identifiable.</li>
             <li>Statute of frauds or other formality issues with the contract (rare, but possible when the agreement was never reduced to writing).</li>
           </ul>
-          <p class="text-lg text-gray-700 leading-relaxed">
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
             If you believe one of these applies to you, document everything in writing, request the refund in writing, give the breeder a reasonable opportunity to respond, and consult an attorney before filing a chargeback or small claims action. See our guide on <a href="/buyers/red-flags" class="text-[hsl(24,95%,53%)] hover:underline">red flags to watch for when buying a puppy</a> for related guidance.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If your dispute is about the puppy being sick or misrepresented rather than your own change of mind, see <a href="/articles/puppy-health-guarantee-what-it-covers" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Health Guarantee: What It Actually Covers (and What It Doesn't)</a> for how those clauses typically work and what they almost never cover.
           </p>
         </section>
 
@@ -408,15 +411,10 @@ const faqs = [
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
         <div class="space-y-6">
           {faqs.map(faq => (
-            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
-              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
-                <span>{faq.question}</span>
-                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </summary>
-              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
-            </details>
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 class="font-semibold text-lg text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-700 leading-relaxed">{faq.answer}</p>
+            </div>
           ))}
         </div>
       </div>

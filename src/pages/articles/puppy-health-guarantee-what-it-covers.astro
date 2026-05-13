@@ -1,0 +1,461 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Puppy Health Guarantee: What It Actually Covers', url: '/articles/puppy-health-guarantee-what-it-covers' }
+];
+
+// Single source of truth for the article's last-reviewed date.
+// Update this when the content is re-verified; every visible date and the
+// JSON-LD dateModified read from these constants.
+const lastReviewedISO = '2026-05-13';
+const lastReviewedDate = new Date(lastReviewedISO + 'T00:00:00Z');
+const lastReviewedMonthYear = lastReviewedDate.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC'
+});
+
+const faqs = [
+  {
+    question: 'What Does a Puppy Health Guarantee Usually Cover?',
+    answer: 'Most puppy health guarantees cover a narrow list of congenital and hereditary conditions that appear within a defined window after purchase. Common examples include severe hip or elbow dysplasia, certain cardiac defects, and a small set of breed-specific genetic conditions. Most contracts do not cover infectious illness diagnosed after a short initial window, behavioral issues, allergies, weight-related joint problems, or any condition the breeder classifies as environmental or owner-caused. The remedy is usually a replacement puppy, a partial refund, or a capped contribution toward vet costs, not an open-ended promise to cover whatever goes wrong.'
+  },
+  {
+    question: 'How Long Does a Puppy Health Guarantee Last?',
+    answer: 'Coverage windows vary widely by condition class and by contract. Typical patterns are short windows of seven to fourteen days for infectious illness from the time of pickup, six to twelve months for cardiac conditions, one to two years for hip and elbow dysplasia, and two to three years (or rarely "lifetime") for a narrow list of named hereditary conditions. "Lifetime" guarantees almost always carry the most exclusions and voiding triggers, so longer is not automatically better. Read the per-condition windows and the list of named conditions, not just the headline duration.'
+  },
+  {
+    question: 'Can a Breeder Require Me to Use Their Vet?',
+    answer: 'Many contracts include a "vet of choice" clause stating that the breeder\'s veterinarian, or a board-certified specialist of the breeder\'s choosing, must confirm any covered diagnosis. These clauses are generally enforceable as written. The buyer is still free to use their own veterinarian for ordinary care, but a covered diagnosis usually has to be verified by the breeder\'s vet (or pathologist, in the case of necropsy) before the remedy is triggered. If the breeder\'s designated vet is hours away or the diagnostic standard is unusually high, that is a meaningful term to negotiate before signing.'
+  },
+  {
+    question: 'What is the Difference Between a Replacement Puppy and a Refund?',
+    answer: 'A replacement puppy clause obligates the breeder to provide a future puppy from a future litter (often without a defined timeline) if a covered condition is diagnosed. The buyer typically keeps the original puppy or returns it, depending on the contract. A refund clause returns some or all of the purchase price. Refund clauses are usually capped at the purchase price and often require returning the puppy. Neither clause covers the vet bills, surgeries, or ongoing care costs the buyer has already paid. Capped vet-cost contribution clauses are a third pattern that contributes a fixed dollar amount toward documented vet bills, separate from refund or replacement.'
+  },
+  {
+    question: 'What Voids a Puppy Health Guarantee?',
+    answer: 'Common voiding triggers include: failing a required initial vet check within a short window after pickup, missing vaccinations or worming on the contract\'s schedule, spaying or neutering outside a specified age window, feeding a food brand or protein not approved by the contract, not maintaining specific supplements, transferring or rehoming the puppy, allowing the puppy to become overweight, failing to notify the breeder within a contractual window after diagnosis, and failing to submit a necropsy by a board-certified pathologist if the puppy dies. The contract usually lists every trigger explicitly. Buyers miss them because the list is long and many are unrelated to the condition itself.'
+  },
+  {
+    question: 'Do I Have to Return the Puppy to Get the Guarantee Honored?',
+    answer: 'It depends on the contract. Some replacement-puppy clauses require returning the original puppy to receive a replacement. Some refund clauses require returning the puppy as a condition of the refund. Capped vet-cost contribution clauses generally do not require return. For buyers who have already bonded with the puppy, a return-required remedy is effectively no remedy at all. Read this term carefully before signing. If returning the puppy is unacceptable to you, negotiate for a vet-cost contribution or partial refund without return as the remedy.'
+  },
+  {
+    question: 'Are Puppy Health Guarantees Regulated by Law?',
+    answer: 'Lightly, and mostly only when the seller qualifies as a "pet dealer" or "pet store" under a state statute. A handful of states (California, New York, New Jersey, Connecticut, Florida, Pennsylvania, Massachusetts, Minnesota, Virginia, and others) have pet purchaser protection statutes that set a floor for remedies when a puppy is sick or congenitally defective. Those statutes typically require a defined notification window, a veterinary diagnosis, and a remedy menu that includes some combination of refund, replacement, or vet-cost recovery up to the purchase price. In states without a specific statute, the contract controls under general contract law. Private hobby breeders are often outside the statutory definition of "pet dealer," so the statute may not apply at all even in covered states.'
+  },
+  {
+    question: 'Can I Negotiate a Breeder\'s Health Guarantee?',
+    answer: 'Sometimes, and it costs nothing to ask. Established breeders with a strong waitlist usually offer a standard contract on a take-it-or-leave-it basis. Smaller breeders or breeders earlier in their program may be more open to negotiation. The most negotiable terms are usually: the per-condition coverage window, the list of named conditions, the vet-of-choice requirement, the voiding triggers around food and supplements, and whether the remedy requires returning the puppy. Make any agreed changes in writing as a contract amendment, signed by both parties, not as a side conversation or text message.'
+  }
+];
+---
+
+<BaseLayout
+  title="Puppy Health Guarantee: What It Actually Covers (and What It Doesn't) | BreederHQ"
+  description="A teardown of what a puppy health guarantee actually protects, what the fine print usually excludes, and what to read before you sign."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Puppy Health Guarantee: What It Actually Covers (and What It Doesn't)",
+    description: "A teardown of what a puppy health guarantee actually protects, what the fine print usually excludes, and what to read before you sign.",
+    datePublished: lastReviewedISO,
+    dateModified: lastReviewedISO,
+    author: {
+      name: "BreederHQ Editorial",
+      role: "BreederHQ"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Health Guarantee</li>
+      </ol>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Buyer Guide</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-3">
+          Puppy Health Guarantee: What It Actually Covers (and What It Doesn't)
+        </h1>
+        <p class="text-sm text-gray-500 mb-6">Last Reviewed: {lastReviewedMonthYear}</p>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          A teardown of the four most common health-guarantee clause types, what each one really commits the breeder to, and the questions to ask before you sign.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed {lastReviewedMonthYear}</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 13, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>13 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <!-- Intro -->
+        <section class="mb-12">
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            "Health guarantee" sounds like a money-back promise. It usually isn't. In most puppy contracts, the health guarantee is a narrow clause that covers a short list of named conditions, requires specific diagnostic procedures, and offers a defined remedy (often a replacement puppy or a capped refund) rather than open-ended liability for whatever might go wrong.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            This article is a teardown of what a puppy health guarantee actually protects, what the fine print usually excludes, and the questions a buyer should ask before paying a deposit. The secondary audience is breeders who want to write defensible language that is fair to buyers and enforceable in their state.
+          </p>
+
+          <!-- Disclaimer -->
+          <aside class="bg-amber-50 border-l-4 border-amber-500 p-6 mb-2 rounded" role="complementary" aria-label="Legal disclaimer">
+            <p class="text-gray-800 leading-relaxed font-semibold mb-2">This Article is General Information, Not Legal Advice.</p>
+            <p class="text-gray-700 leading-relaxed">
+              Health-guarantee clauses are contracts, and their enforceability depends on your state's contract law and consumer-protection statutes. For a binding answer on your specific contract, consult a licensed attorney in your state. Last reviewed {lastReviewedMonthYear}.
+            </p>
+          </aside>
+        </section>
+
+        <!-- Section: The Core Tension -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Core Tension: Whose Risk Is It?</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            A health guarantee is a contract clause, not a consumer-product warranty. It is not regulated by the federal Magnuson-Moss Warranty Act in the same way a refrigerator warranty is, and outside of a handful of state pet purchaser protection statutes, there is no statutory floor for what it must contain. It is whatever the breeder writes and the buyer signs.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The clause exists for two reasons that pull in opposite directions. The first reason is to protect the buyer from breeders who knowingly sell sick puppies or who fail to disclose hereditary conditions documented in the parents. The second reason is to protect the breeder from buyers who blame congenital issues on the breeder when the cause was post-sale husbandry: poor diet, missed vaccinations, environmental exposure, untreated injuries, or weight problems that turn into joint problems.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Almost every health-guarantee dispute happens in the gap between those two purposes. The rest of this article walks through the four most common clause patterns and what each one really means in that gap.
+          </p>
+        </section>
+
+        <!-- Section: The Four Common Clause Types -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Four Common Clause Types</h2>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">1. Replacement Puppy Only</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The breeder agrees to provide a future puppy from a future litter if a covered defect is diagnosed within the coverage window. No cash refund. The original puppy typically stays with the buyer, though some contracts require return as a condition of replacement.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "If a covered congenital defect is diagnosed and confirmed in writing by a licensed veterinarian within twenty-four (24) months of date of birth, Breeder will provide Buyer with a replacement puppy of equivalent pick from Breeder's next available litter of the same breed. The replacement is the sole and exclusive remedy."
+          </blockquote>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Replacement puppy must be selected from Breeder's available litters within twelve (12) months of Breeder offering a replacement. Buyer may not assign or transfer this right. No cash refunds will be offered in lieu of replacement."
+          </blockquote>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it really commits the breeder to:</strong> a future puppy at some point, on the breeder's timeline. The breeder controls when the next litter is born, who else is on the waitlist, and what "equivalent pick" means.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it does not cover:</strong> vet bills the buyer has already paid (often the largest dollar exposure in a defect case), the timeline (the next litter could be a year or more away), the bond with the original puppy, the surgery and recovery costs, or any ongoing care the original puppy will still need. The replacement is a different dog, not a do-over.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            <strong>Who it favors:</strong> the breeder. This is the most common clause in US breeding contracts because it caps the breeder's downside at the production cost of one future puppy.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">2. Partial Refund or Pro-Rated Refund</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The breeder refunds a portion of the purchase price, often after veterinary documentation of a covered condition. Pro-rated refunds scale the refund to the puppy's age at diagnosis: a defect diagnosed at six months yields a higher refund than the same defect diagnosed at twenty months.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "If a covered hereditary condition is diagnosed within twelve (12) months of date of birth, Breeder will refund 50% of the purchase price upon receipt of (a) written diagnosis from a board-certified specialist of Breeder's choosing, and (b) return of the puppy to Breeder in good condition."
+          </blockquote>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Refund amount is pro-rated against age at diagnosis on a sliding scale: 100% refund within six (6) months, 75% within twelve (12) months, 50% within eighteen (18) months, 25% within twenty-four (24) months. No refund after twenty-four (24) months."
+          </blockquote>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it really commits the breeder to:</strong> a defined dollar amount, capped at the original purchase price. Refunds are usually issued within thirty to ninety days of all conditions being met.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it does not cover:</strong> vet costs above the purchase price (typical hip surgery runs four to ten times the purchase price of most companion-bred puppies), diagnostic costs incurred to establish the covered diagnosis, and (in many contracts) the cost of returning the puppy. Most pro-rated clauses also require the breeder's chosen specialist for the diagnosis, which the buyer pays for unless the contract says otherwise.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            <strong>Who it favors:</strong> split. Pro-rated refunds are more buyer-friendly than replacement-only when the puppy is diagnosed early. They become breeder-friendly as the puppy ages because the refund shrinks while the vet bills do not.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">3. Vet Cost Contribution (Capped)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The breeder contributes up to a stated dollar amount toward documented vet bills for a covered condition. The buyer keeps the puppy. The contribution is a hard cap, not a percentage.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Breeder will reimburse Buyer for documented veterinary expenses directly related to treatment of a covered hereditary condition diagnosed within twenty-four (24) months of date of birth, up to a maximum reimbursement of $500. Reimbursement requires itemized invoices and written confirmation of diagnosis from a licensed veterinarian."
+          </blockquote>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Veterinary cost contribution is limited to surgical treatment of covered conditions. Diagnostic costs, follow-up care, medications, rehabilitation, and any costs incurred prior to written notification of Breeder are not reimbursable."
+          </blockquote>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it really commits the breeder to:</strong> a known, capped dollar amount. The buyer can plan around it.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it does not cover:</strong> the gap between the cap and the real cost. A $500 cap on a $6,000 hip-replacement surgery covers about 8% of the bill. Caps also commonly exclude diagnostic costs (the X-rays, MRIs, and specialist consults that establish the diagnosis in the first place), which can run into the thousands before the cap is even unlocked.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            <strong>Who it favors:</strong> the breeder, unless the cap is set realistically relative to the named conditions. Caps above $2,500 on conditions like hip dysplasia start to look genuinely buyer-friendly. Caps below $1,000 on the same conditions are mostly cosmetic.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">4. "Lifetime" Health Guarantee</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The headline says "lifetime." The fine print almost always doesn't mean what buyers think it means. A lifetime guarantee usually covers a very narrow list of named hereditary conditions for the life of the puppy, with extensive voiding triggers and a remedy capped at the original purchase price.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Breeder offers a lifetime health guarantee against the following hereditary conditions: hip dysplasia (OFA Severe or Worse), elbow dysplasia (Grade III), Progressive Retinal Atrophy, and Degenerative Myelopathy (DM/DM affected). This guarantee is contingent on Buyer maintaining the puppy on Breeder-approved diet, supplements, and veterinary protocol for the life of the dog."
+          </blockquote>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Lifetime coverage is void if puppy is spayed or neutered before eighteen (18) months of age, if puppy is fed a commercial diet not on Breeder's approved list, if vaccinations deviate from the recommended schedule, or if puppy is transferred to a third party without written notification to Breeder."
+          </blockquote>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it really commits the breeder to:</strong> a narrow set of conditions, on strict compliance terms, with a remedy that almost always tops out at the original purchase price. Some lifetime clauses explicitly limit the remedy to a replacement puppy (see clause type 1), making the "lifetime" label largely marketing.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>What it does not cover:</strong> common buyer behavior. The diet, supplement, vaccination, and spay/neuter triggers in lifetime guarantees void coverage for a significant share of buyers who follow their own vet's advice instead of the breeder's protocol. Behavioral issues, allergies, and weight-related joint problems are universally excluded.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Who it favors:</strong> appears buyer-friendly, often breeder-friendly in practice. The duration is generous, but the voiding triggers and remedy cap usually neutralize it. A short, clear guarantee with a meaningful remedy is generally a better deal than a "lifetime" guarantee with thirty pages of conditions.
+          </p>
+        </section>
+
+        <!-- Section: What guarantees almost never cover -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Health Guarantees Almost Never Cover</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The list below is consistent across nearly every breeder contract in the US, regardless of clause type. These exclusions are the rule, not the exception.
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6 list-disc pl-6">
+            <li>Conditions diagnosed after the coverage window expires. Common windows are seven to fourteen days for infectious illness, six to twelve months for cardiac defects, one to two years for hip and elbow dysplasia, and a small set of named conditions extended to two to three years or "lifetime."</li>
+            <li>Conditions not on the breeder's listed inclusion list. Open-ended language ("any hereditary or congenital defect") is rare in real contracts. Most clauses name specific conditions, and anything not named is not covered.</li>
+            <li>Anything the contract classifies as "environmental" or "owner-caused." This category typically includes allergies, behavioral issues, weight-related joint problems, dental issues, ear infections, and injuries.</li>
+            <li>Vet visits, diagnostics, and ongoing care costs. Most clauses pay only for the specific remedy named (refund, replacement, or capped contribution), not for the diagnostic work that established the covered diagnosis or the ongoing care the puppy will still need.</li>
+            <li>The cost of the lost relationship. A replacement puppy is a different dog. None of the clause types meaningfully compensate for that.</li>
+            <li>Spay or neuter outside the contract's window. Many contracts void coverage if the puppy is altered before a specified age, typically twelve to eighteen months for medium and large breeds.</li>
+            <li>Diet outside the contract's list. Many contracts require feeding a specific brand, protein source, or "all life stages" formulation. Switching to a different food, even on a vet's recommendation, can void coverage.</li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For a related read on the deposit side of the contract, see <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Deposit Refund Rules by State</a>.
+          </p>
+        </section>
+
+        <!-- Section: Voiding clauses -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Voiding Clauses to Watch For</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Voiding clauses are the second most common reason buyers lose health-guarantee disputes, after coverage windows expiring. They turn an apparently strong guarantee into nothing because the buyer did something routine that the contract treated as disqualifying.
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6 list-disc pl-6">
+            <li>Vet-of-choice clauses. The breeder's veterinarian, or a board-certified specialist of the breeder's choosing, must confirm the diagnosis. Diagnoses from the buyer's own vet do not trigger the remedy.</li>
+            <li>Necropsy requirements. If the puppy dies, the buyer must pay for and submit a necropsy by a board-certified veterinary pathologist within a defined window, often seventy-two hours. Without the necropsy, no remedy.</li>
+            <li>Return-the-puppy clauses. The original puppy must be returned to the breeder as a condition of receiving a replacement or refund. For most buyers, this is effectively no remedy because they have already bonded with the puppy.</li>
+            <li>Notification windows. The buyer must notify the breeder in writing within a defined number of days of diagnosis, often seven to fourteen. Late notification voids the remedy regardless of the merits.</li>
+            <li>Diet and supplement requirements. The puppy must be fed a specific brand or protein and maintained on specific supplements. Switching, even temporarily, can void coverage.</li>
+            <li>Spay or neuter timing windows. The puppy must remain intact until a defined age, or must be altered by a defined age. Either direction is enforceable depending on the contract.</li>
+            <li>Registration restrictions. The puppy must remain registered with a specific kennel club, in the original buyer's name, and not transferred. Some contracts treat transfer to a family member or co-owner as a void.</li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For a broader checklist on what to watch for during the breeder-evaluation process, see <a href="/buyers/red-flags" class="text-[hsl(24,95%,53%)] hover:underline">red flags to watch for when buying a puppy</a>.
+          </p>
+        </section>
+
+        <!-- Section: Comparison table -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Comparison Table: Four Clause Types Side-by-Side</h2>
+
+          <!-- About This Guide callout -->
+          <aside class="bg-sky-50 border-l-4 border-sky-500 p-6 mb-6 rounded" role="complementary" aria-label="About this guide">
+            <p class="text-gray-900 font-semibold mb-2">About This Guide</p>
+            <p class="text-gray-700 leading-relaxed">
+              Health-guarantee norms and contract language change over time. The clause patterns and example language in this article reflect common practice as of {lastReviewedMonthYear}. Always read the specific contract you are being asked to sign, not a summary of typical contracts. The "Last Reviewed" date appears at the top and bottom of this page.
+            </p>
+          </aside>
+
+          <div class="overflow-x-auto mb-6 border border-gray-200 rounded-lg">
+            <table class="w-full text-left border-collapse text-sm">
+              <thead class="bg-gray-50">
+                <tr class="border-b-2 border-gray-300">
+                  <th class="py-3 px-3 font-semibold">Clause Type</th>
+                  <th class="py-3 px-3 font-semibold">What Breeder Commits</th>
+                  <th class="py-3 px-3 font-semibold">Buyer's Out-of-Pocket Exposure</th>
+                  <th class="py-3 px-3 font-semibold">Common Voiding Triggers</th>
+                  <th class="py-3 px-3 font-semibold">Favors</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 px-3 font-semibold">Replacement Puppy Only</td>
+                  <td class="py-2 px-3">A future puppy from a future litter, on breeder's timeline.</td>
+                  <td class="py-2 px-3">High. Buyer pays all vet bills. Replacement does not offset costs already incurred.</td>
+                  <td class="py-2 px-3">Late notification, vet-of-choice failures, return-the-puppy requirements.</td>
+                  <td class="py-2 px-3">Breeder</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 px-3 font-semibold">Partial / Pro-Rated Refund</td>
+                  <td class="py-2 px-3">A defined dollar refund, often scaled to age at diagnosis.</td>
+                  <td class="py-2 px-3">Medium to high. Refund capped at purchase price; surgery often exceeds it.</td>
+                  <td class="py-2 px-3">Diet, spay/neuter, return requirement, vet-of-choice.</td>
+                  <td class="py-2 px-3">Split</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 px-3 font-semibold">Vet Cost Contribution (Capped)</td>
+                  <td class="py-2 px-3">Up to a stated cap toward documented vet bills.</td>
+                  <td class="py-2 px-3">Medium. Buyer covers the gap above the cap and usually all diagnostic costs.</td>
+                  <td class="py-2 px-3">Late notification, diagnostic cost exclusions, breeder pre-approval clauses.</td>
+                  <td class="py-2 px-3">Breeder if cap is low; balanced if cap is realistic.</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-3 font-semibold">"Lifetime" Guarantee</td>
+                  <td class="py-2 px-3">Coverage on a narrow named-condition list for the life of the dog.</td>
+                  <td class="py-2 px-3">Variable. Often high because remedy is capped at purchase price.</td>
+                  <td class="py-2 px-3">Diet, supplements, spay/neuter timing, vaccinations, transfer, vet-of-choice.</td>
+                  <td class="py-2 px-3">Appears buyer-friendly; often breeder-friendly in practice.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-base text-gray-600 leading-relaxed italic">
+            No clause type is inherently good or bad. A clear, short guarantee with a meaningful remedy is generally better than a long guarantee with extensive voiding triggers. Read the named conditions, the coverage windows, the remedy, and the voiding triggers as a package.
+          </p>
+        </section>
+
+        <!-- Section: State law backstop -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">State Law Backstop: When Statutes Override the Contract</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            A handful of states (California, New York, New Jersey, Connecticut, Florida, Pennsylvania, Massachusetts, Minnesota, Virginia, and others) have pet purchaser protection statutes that set a statutory floor for what a health guarantee must offer. Where they apply, the statute can override less generous contract language: a contract that promises a $250 vet contribution may be overridden by a statute that entitles the buyer to refund, replacement, or vet-cost recovery up to the purchase price.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The catch is that most of these statutes apply only to sellers who qualify as a "pet dealer" or "pet shop" under the statute's own definition. Private hobby breeders are often outside the definition entirely, even in states with strong statutes. Whether a specific breeder is covered depends on the state, the breeder's volume, and whether the breeder is licensed or registered under the statute.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For the full state-by-state statute table, see <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Deposit Refund Rules by State</a>. The same statutes that govern deposits often also govern health-guarantee minimums where the seller qualifies as a pet dealer under state law.
+          </p>
+        </section>
+
+        <!-- Section: Questions to ask -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Questions to Ask Before You Sign</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Get every answer in writing, inside the signed contract itself. Verbal assurances from a breeder do not modify a written contract under the parol evidence rule in nearly every state.
+          </p>
+          <ol class="space-y-3 text-lg text-gray-700 list-decimal pl-6 mb-6">
+            <li>What conditions are covered, by name? Do not accept "congenital defects" or "hereditary conditions" without a specific list.</li>
+            <li>How long is the coverage window for each condition class? Is it the same for hips, hearts, eyes, and named genetic conditions, or does it vary?</li>
+            <li>What is the remedy: refund, replacement, vet cost contribution, or a combination? Capped at what dollar amount?</li>
+            <li>Must I use the breeder's veterinarian for the covered diagnosis, or can any licensed veterinarian confirm it?</li>
+            <li>What voids the guarantee? Ask for every trigger, written out, in one place.</li>
+            <li>Is there a necropsy requirement if the puppy dies? Who pays for the necropsy, and how quickly must it be submitted?</li>
+            <li>Must I return the puppy to receive the remedy? If so, who pays for transportation?</li>
+            <li>Are there food, supplement, vaccination, or spay/neuter requirements that affect coverage?</li>
+            <li>What is the notification window after diagnosis, and in what form (email, certified letter, signed form)?</li>
+            <li>Where is the dispute resolution venue, and under which state's law is the contract governed?</li>
+          </ol>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For broader contract context beyond the health-guarantee clause, see <a href="/buyers/contracts-and-agreements" class="text-[hsl(24,95%,53%)] hover:underline">what a real puppy contract should include</a> and the overview at <a href="/buyers/health-guarantees" class="text-[hsl(24,95%,53%)] hover:underline">what a real health guarantee looks like</a>.
+          </p>
+        </section>
+
+        <!-- Section: Sample defensible contract language -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Sample Defensible Contract Language</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The clauses below are examples for discussion with your attorney, not templates to copy verbatim. Contract language must be tailored to your state, your program, and the specific transaction. Treat these as starting points, not finished products.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Example: Buyer-Friendly Language</h3>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Breeder warrants that, at the time of pickup, Puppy is in good health and free of communicable disease as confirmed by Breeder's veterinarian within seven (7) days of pickup. Breeder further warrants Puppy against severe hip dysplasia (OFA Severe), severe elbow dysplasia (Grade III), and the following named hereditary conditions for twenty-four (24) months from date of birth: [list]. If a covered condition is diagnosed within the coverage window and confirmed in writing by a licensed veterinarian of Buyer's choosing, Breeder will, at Buyer's election, (a) refund the purchase price without requiring return of Puppy, or (b) reimburse documented veterinary expenses related to treatment of the covered condition up to the purchase price. Buyer must notify Breeder in writing within thirty (30) days of diagnosis."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Example: Industry-Standard Balanced Language</h3>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Breeder guarantees Puppy against the following hereditary conditions diagnosed within the windows indicated: hip dysplasia (24 months), elbow dysplasia (24 months), Progressive Retinal Atrophy (24 months), and Degenerative Myelopathy DM/DM affected (lifetime). Diagnosis must be confirmed in writing by a licensed veterinarian, with radiographs (where applicable) reviewed by a board-certified specialist. Buyer's sole remedy is, at Breeder's election, (a) a replacement puppy from Breeder's next available litter of equivalent pick, or (b) a 50% refund of the purchase price without return of Puppy. Buyer must notify Breeder in writing within fourteen (14) days of diagnosis. Guarantee is void if Puppy is not maintained on a high-quality commercial diet appropriate for breed and life stage."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Example: Breeder-Protective but Fair Language</h3>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-6 text-gray-800 italic">
+            "Breeder guarantees Puppy against the following named hereditary conditions for twenty-four (24) months: [list]. Diagnosis must be confirmed by a board-certified specialist; Breeder will pay 50% of specialist diagnostic costs, capped at $500. Remedy is a replacement puppy from Breeder's next available litter or, at Buyer's election, a partial refund pro-rated by age at diagnosis. If Puppy dies and Buyer believes a covered condition is the cause, a necropsy by a board-certified veterinary pathologist is required within seven (7) days of death; Breeder will pay 50% of necropsy cost upon presentation of the report. Guarantee does not cover infectious disease beyond seven (7) days from pickup, behavioral issues, weight-related orthopedic issues, or conditions arising from injury or environmental exposure."
+          </blockquote>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Each of these clauses has tradeoffs, edge cases, and interactions with state-specific consumer protection law. Take any contract you intend to sign or offer to an attorney licensed in your state before using it.
+          </p>
+        </section>
+
+        <!-- Closing -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Closing Notes</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A puppy health guarantee is a contract clause with a narrow scope and a defined remedy. The headline label ("lifetime," "comprehensive," "industry-leading") rarely tells you what is actually covered. The covered conditions, the coverage windows, the remedy, the voiding triggers, and the diagnostic requirements do. Read them as a package before you sign, and get every answer in writing.
+          </p>
+          <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-8">
+            <p class="text-base text-gray-800 leading-relaxed mb-2">
+              <strong>Last Reviewed:</strong> {lastReviewedMonthYear}. Contract norms and state statutes change. Re-verify before relying on any specific clause pattern.
+            </p>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Spotted something out of date? Email <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will review it.
+            </p>
+          </div>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            BreederHQ helps breeders write clear, defensible contracts and helps buyers find breeders who use them. <a href="https://marketplace.breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">Browse verified breeders →</a>
+          </p>
+
+          <div class="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold mb-3">Looking for a Responsible Breeder?</h3>
+            <p class="text-stone-300 mb-6">Find breeders who use written contracts, named-condition health guarantees, and clear deposit terms.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://marketplace.breederhq.com" class="bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Browse Verified Breeders
+              </a>
+              <a href="/articles/puppy-deposit-refund-rules-by-state" class="border-2 border-stone-500 text-stone-200 px-6 py-3 rounded-lg font-semibold hover:border-white hover:text-white transition">
+                Read the Deposit Guide
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </article>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 class="font-semibold text-lg text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-700 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
