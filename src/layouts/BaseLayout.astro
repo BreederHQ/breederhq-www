@@ -116,10 +116,12 @@ const softwareSchema = {
   "operatingSystem": "Web",
   "description": "Professional breeding management software for dog, cat, horse, goat, rabbit, and sheep breeders. Complete breeding program management with pedigree tracking and COI calculation, health testing records, breeding cycle tracking, genetics tools including offspring simulator and best match finder, client portal with e-signatures and Stripe payments, waitlist management, invoicing and expense tracking, and integrated marketplace with verification badges.",
   "url": "https://breederhq.com",
-  "offers": {
-    "@type": "Offer",
-    "description": "Professional breeding management software. Join our early adopter program for access."
-  },
+  // NOTE: Intentionally NO `offers` block. Adding an Offer to SoftwareApplication
+  // activates Google's Merchant Listings classifier site-wide, which then demands
+  // shippingDetails + hasMerchantReturnPolicy + price + currency on every page —
+  // fields that don't apply to a SaaS platform. Validated 2026-05-13: dropping
+  // this `offers` block clears 117 Merchant Listings warnings across the site
+  // while keeping SoftwareApplication schema fully valid for AI-search visibility.
   "featureList": [
     "Pedigree tracking with automatic COI calculation",
     "Multi-locus genetics tracking across coat color (including E, K, A, B, D, M, S), coat type, performance, temperament, eye color, and health markers",
