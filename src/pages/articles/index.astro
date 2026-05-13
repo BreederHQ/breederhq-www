@@ -71,39 +71,86 @@ const articles = [
     <!-- Featured: Founder's Perspective -->
     <section class="pt-4 pb-4 px-4 bg-white">
       <div class="max-w-4xl mx-auto">
-        <a
-          href={`/articles/${featured.slug}`}
-          class="block bg-white rounded-xl border border-gray-300 shadow-sm hover:shadow-lg hover:border-amber-400 hover:-translate-y-0.5 transition-all duration-200 p-8 group relative"
-          aria-label={`Featured: ${featured.title}`}
-        >
-          <div class="flex items-center gap-2 mb-3">
-            <span class="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded">
-              Featured
-            </span>
-            <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">{featured.tag}</p>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1 group-hover:text-gray-700 transition">
-            {featured.title}
-          </h2>
-          <p class="text-lg md:text-xl text-gray-500 font-medium mb-3">
-            {featured.subtitle}
-          </p>
-          <p class="text-gray-700 leading-relaxed mb-6">
-            {featured.excerpt}
-          </p>
-          <div class="flex items-center gap-3 text-sm text-gray-500 border-t border-gray-200 pt-4">
-            <div>
-              <p class="font-semibold text-gray-900">{featured.author}</p>
-              <p class="text-xs">{featured.role}</p>
+        <div class="featured-frame relative rounded-xl p-[2px] group">
+          <a
+            href={`/articles/${featured.slug}`}
+            class="block bg-white rounded-[10px] shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 p-8 relative"
+            aria-label={`Featured: ${featured.title}`}
+          >
+            <div class="flex items-center gap-2 mb-3">
+              <span class="featured-chip inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-800 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded overflow-hidden relative">
+                <span class="relative z-10">Featured</span>
+              </span>
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">{featured.tag}</p>
             </div>
-            <span class="text-gray-300">&middot;</span>
-            <p>{featured.date}</p>
-            <span class="text-gray-300">&middot;</span>
-            <p>{featured.readTime}</p>
-          </div>
-        </a>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1 group-hover:text-gray-700 transition">
+              {featured.title}
+            </h2>
+            <p class="text-lg md:text-xl text-gray-500 font-medium mb-3">
+              {featured.subtitle}
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              {featured.excerpt}
+            </p>
+            <div class="flex items-center gap-3 text-sm text-gray-500 border-t border-gray-200 pt-4">
+              <div>
+                <p class="font-semibold text-gray-900">{featured.author}</p>
+                <p class="text-xs">{featured.role}</p>
+              </div>
+              <span class="text-gray-300">&middot;</span>
+              <p>{featured.date}</p>
+              <span class="text-gray-300">&middot;</span>
+              <p>{featured.readTime}</p>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
+
+    <style>
+      .featured-frame {
+        background: linear-gradient(
+          120deg,
+          #fcd34d 0%,
+          #fde68a 25%,
+          #fef3c7 50%,
+          #fde68a 75%,
+          #fcd34d 100%
+        );
+        background-size: 300% 300%;
+        animation: featured-frame-pan 9s ease-in-out infinite;
+      }
+      @keyframes featured-frame-pan {
+        0%   { background-position:   0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position:   0% 50%; }
+      }
+      .featured-chip::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          110deg,
+          transparent 0%,
+          transparent 35%,
+          rgba(255, 255, 255, 0.85) 50%,
+          transparent 65%,
+          transparent 100%
+        );
+        transform: translateX(-100%);
+        animation: chip-shimmer 3.2s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes chip-shimmer {
+        0%   { transform: translateX(-100%); }
+        60%  { transform: translateX(100%); }
+        100% { transform: translateX(100%); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .featured-frame { animation: none; }
+        .featured-chip::before { animation: none; display: none; }
+      }
+    </style>
 
     <!-- Section divider -->
     <section class="px-4 bg-white">
