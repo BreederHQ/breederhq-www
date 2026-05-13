@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Puppy Deposit Refund Rules by State', url: '/articles/puppy-deposit-refund-rules-by-state' }
+];
+
+// Single source of truth for the article's last-reviewed date.
+// Update this when the legal content is re-verified; everything downstream
+// (header subline, citations callout, table column, closing date, JSON-LD
+// dateModified) reads from these constants.
+const lastReviewedISO = '2026-05-13';
+const lastReviewedDate = new Date(lastReviewedISO + 'T00:00:00Z');
+const lastReviewedMonthYear = lastReviewedDate.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC'
+});
+const lastReviewedShort = lastReviewedDate.toLocaleDateString('en-US', {
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC'
+});
+
+const faqs = [
+  {
+    question: 'Is a Puppy Deposit Refundable?',
+    answer: 'It depends on what your written contract says and which state you are in. In most cases, the contract controls. If the contract calls the deposit "non-refundable," courts in nearly every state will enforce that, as long as the contract is clear and the breeder has not breached it. If the contract is silent or ambiguous, general state contract law and consumer protection statutes determine the outcome. Some states (California, New York, New Jersey, Connecticut, Florida, Pennsylvania, Virginia, and others) have specific pet purchaser protection statutes, but those statutes mostly cover refunds when a puppy is sick or misrepresented, not when a buyer changes their mind.'
+  },
+  {
+    question: 'Can a Breeder Keep My Deposit if I Change My Mind?',
+    answer: 'In most cases, yes. If you signed a contract with a non-refundable deposit clause and you are the one cancelling, the breeder is generally entitled to keep the deposit. Buyer-initiated cancellation is the most common reason people lose deposits. Some breeders will refund as a courtesy, especially if they can quickly place the puppy with another buyer, but they are not legally required to do so absent specific contract language.'
+  },
+  {
+    question: 'What if the Breeder Cancels the Litter?',
+    answer: 'When the breeder is the cancelling party (the breeding did not take, the litter was lost, the breeder retained the puppy you were promised, or the breeder simply decided not to deliver), you are almost always entitled to a full refund. This is true even if the contract says the deposit is non-refundable, because the breeder has failed to perform. Document everything in writing and ask for the refund in writing first before escalating.'
+  },
+  {
+    question: 'Are Deposits Regulated by State Law?',
+    answer: 'Yes, but lightly. A handful of states have specific puppy or pet purchaser protection statutes, including California (Cal. Health & Safety Code §122045 et seq.), New York (NY Gen. Bus. Law §753), New Jersey (Pet Purchase Protection Act), Connecticut (Conn. Gen. Stat. §22-344b), Florida (Fla. Stat. §828.29), and Pennsylvania (Dog Purchaser Protection Act). These laws mostly govern refunds and remedies when a puppy is sick, congenitally defective, or materially misrepresented. They do not generally regulate the refundability of a voluntary buyer cancellation. For that, general contract law applies in every state.'
+  },
+  {
+    question: 'What is the Difference Between a Deposit and a Holding Fee?',
+    answer: 'The terms are often used interchangeably, but the legal treatment can differ depending on how the contract defines them. A "deposit" typically applies to the final purchase price if the sale goes through and may or may not be refundable if it does not. A "non-refundable holding fee" is treated as payment for the breeder to hold a spot or take the puppy off the market, and is generally not credited against the price or refunded. The label matters less than the contract language. Always read the conditions, not just the word.'
+  },
+  {
+    question: 'Can I Dispute a Deposit Charge With My Credit Card?',
+    answer: 'You can file a chargeback with your credit card issuer, and many buyers do. Whether the chargeback succeeds depends on the facts. Card networks generally side with the cardholder when the merchant failed to deliver the promised goods, but they generally side with the merchant when the cardholder voluntarily cancelled an agreement that explicitly stated the deposit was non-refundable. Filing a chargeback also typically ends the relationship with the breeder, so consider whether you have other options first. Always try to resolve the dispute directly in writing before involving the card issuer.'
+  },
+  {
+    question: 'Should I Pay a Deposit Before Puppies Are Born?',
+    answer: 'It is common practice and is not inherently a red flag. Many serious breeders take pre-birth deposits to gauge demand, prioritize buyers on a pick list, and cover the cost of producing the litter. The risk is that no specific puppy exists yet, so what you are paying for is a place in line, not a specific animal. Before paying, get the cancellation terms in writing: What happens if the breeding does not take? What if the litter is smaller than expected and there is no puppy for you? What if your color, sex, or temperament preference is not in the litter? Does the deposit roll to a future litter, transfer to another buyer, or refund?'
+  },
+  {
+    question: 'What if the Puppy I Get is Sick?',
+    answer: 'This is where state pet purchaser protection statutes do most of their real work. If you live in California, New York, New Jersey, Connecticut, Florida, Pennsylvania, Virginia, Massachusetts, or one of the other states with a puppy lemon law, you typically have a defined window (often 14 to 30 days for general illness, longer for congenital defects) to seek a remedy. Remedies usually include returning the puppy for a refund, keeping the puppy and recovering vet costs up to the purchase price, or replacing the puppy. Notify the breeder in writing and follow the statute exactly. Outside those states, your remedy depends on the contract (especially the health guarantee) and general consumer protection law.'
+  }
+];
+---
+
+<BaseLayout
+  title="Puppy Deposit Refund Rules by State (2026 Guide) | BreederHQ"
+  description="50-state reference for whether puppy deposits are refundable, what pet lemon laws actually cover, and sample contract clauses for buyers and breeders. Updated 2026."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Puppy Deposit Refund Rules by State",
+    description: "A 50-state reference for whether puppy deposits are refundable, what state pet purchaser protection statutes actually cover, and sample contract clauses for buyers and breeders.",
+    datePublished: "2026-05-13",
+    dateModified: lastReviewedISO,
+    author: {
+      name: "BreederHQ Editorial",
+      role: "BreederHQ"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Deposit Refund Rules by State</li>
+      </ol>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Buyer Guide</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-3">
+          Puppy Deposit Refund Rules by State
+        </h1>
+        <p class="text-sm text-gray-500 mb-6">Last Reviewed: {lastReviewedMonthYear}</p>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          A 50-state reference for when puppy deposits are refundable, what pet lemon laws actually cover, and sample contract clauses you can take to your attorney.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed {lastReviewedMonthYear}</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 13, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>14 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <!-- Disclaimer -->
+        <aside class="bg-amber-50 border-l-4 border-amber-500 p-6 mb-10 rounded" role="complementary" aria-label="Legal disclaimer">
+          <p class="text-gray-800 leading-relaxed font-semibold mb-2">This Article is General Information, Not Legal Advice.</p>
+          <p class="text-gray-700 leading-relaxed">
+            Refund outcomes depend on the specific language of your contract and your state's consumer protection laws. For a binding answer in your situation, consult a licensed attorney in your state. Statutes and case law change. Last reviewed {lastReviewedMonthYear}.
+          </p>
+        </aside>
+
+        <!-- Intro -->
+        <section class="mb-12">
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Most puppy buyers find out the hard way that deposits are governed by two layers of law, both of which vary by state: the contract you signed with the breeder, and the consumer protection statutes that sit underneath that contract. The contract usually wins. The statutes only kick in when the contract is silent, ambiguous, or unenforceable.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            This guide is a plain-English reference for both audiences who tend to read it: puppy buyers trying to figure out whether they can get their money back, and breeders trying to write contracts that hold up. It covers what determines refundability, the most common deposit clause types, a 50-state table of pet purchaser protection statutes, how pre-birth deposits are treated, when buyers can usually recover a deposit even with a "non-refundable" clause, and sample contract language to discuss with an attorney.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            What this guide does not do: tell you whether your specific deposit is refundable. Only your contract, your state's law, and ideally a licensed attorney can answer that.
+          </p>
+        </section>
+
+        <!-- Section: Three things that determine refundability -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Three Things That Actually Determine Whether Your Deposit is Refundable</h2>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">1. The Contract Language (The Dominant Factor)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            In every US state, a signed written contract between two adults is presumed enforceable. If your contract says the deposit is non-refundable and you cancel, you are very likely going to lose the deposit. Courts overwhelmingly enforce non-refundable deposit clauses in pet sale contracts, as long as the language is clear and the breeder has not breached. The first thing to read is your contract. The second thing to read is your contract again.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">2. Who is Cancelling</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The single biggest predictor of whether you get your money back is who is cancelling the deal. If the breeder is cancelling (the breeding failed, the litter was lost, the breeder retained your pick, the breeder cannot deliver), you are almost always entitled to a full refund regardless of what the contract says about refundability. If you are cancelling (you changed your mind, your life circumstances changed, you found another breeder), you are usually not entitled to a refund if the contract says non-refundable.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">3. State Consumer Protection Law</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            State law sits underneath the contract and only matters in three situations: the contract is silent on refundability, the contract is so ambiguous that a court must interpret it, or the contract is unconscionable or violates a specific consumer protection statute. Most state "puppy lemon laws" govern remedies when a puppy turns out to be sick or misrepresented, not voluntary buyer cancellation. We cover the state-specific statutes in the table below.
+          </p>
+        </section>
+
+        <!-- Section: Common deposit clause types -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Common Deposit Clause Types You Will See</h2>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Non-Refundable Deposit (Most Common)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The breeder retains the deposit if the buyer cancels for any reason. The deposit is typically applied to the final purchase price if the sale goes through. This is the dominant clause type in US dog breeding contracts.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-6 text-gray-800 italic">
+            "Buyer agrees that the deposit of $___ is non-refundable. The deposit will be applied to the final purchase price at the time of pickup. If Buyer cancels the purchase for any reason, the deposit is forfeited."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Partial Refund / Forfeiture Clause</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The breeder retains a portion of the deposit (often the smaller share) and refunds the rest if the buyer cancels by a defined deadline. Less common, but more buyer-friendly and often easier to defend if challenged because the breeder is only keeping an amount tied to actual costs.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-6 text-gray-800 italic">
+            "If Buyer cancels more than thirty (30) days before scheduled pickup, Breeder will refund 50% of the deposit. If Buyer cancels within thirty (30) days of scheduled pickup, the entire deposit is forfeited."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Refundable-With-Cause Clause</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The deposit is refundable only under defined conditions, typically related to breeder non-performance. The puppy does not arrive, the breeder cannot deliver the agreed sex or color, the breeder retains the puppy, or similar.
+          </p>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-6 text-gray-800 italic">
+            "The deposit is refundable only if (a) Breeder is unable to produce a puppy matching Buyer's selected sex and color, (b) Breeder cancels the breeding, or (c) no live puppy results from the breeding. The deposit is not refundable for Buyer-initiated cancellation."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">"Holding Fee" vs. "Deposit" vs. "Down Payment"</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Terminology matters because courts read the contract literally. A "deposit" usually applies to the purchase price. A "holding fee" is generally payment for the breeder to hold the puppy or a spot off the market, and is usually not credited against the price. A "down payment" is the most clearly partial-purchase-price language. If your contract uses one of these terms, look for a definition; if there is no definition, the surrounding language controls.
+          </p>
+        </section>
+
+        <!-- Section: State-by-state reference table -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">State-by-State Pet Purchaser Protection Reference</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            These laws govern refunds and remedies when the puppy is sick or misrepresented, not when the buyer changes their mind. For buyer-initiated cancellation in every state listed below, the written contract controls.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            "Limited" in the table means the state has a narrow statute (often applying only to pet stores or licensed dealers, not private breeders, or limited to specific defects). Always check whether the statute applies to private breeders in your state before relying on it.
+          </p>
+
+          <!-- Citations and Currency callout -->
+          <aside class="bg-sky-50 border-l-4 border-sky-500 p-6 mb-6 rounded" role="complementary" aria-label="Citation currency notice">
+            <p class="text-gray-900 font-semibold mb-2">About These Citations</p>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              Statute citations in this table reflect what those laws said as of {lastReviewedMonthYear}. Laws change. Citations may be renumbered, amended, or repealed after this article is published. Before relying on any citation below, verify the current text at the state legislature's official website. The "Last reviewed" date for this article appears at the top and bottom of the page.
+            </p>
+            <p class="text-gray-700 leading-relaxed text-sm">
+              Every row in this table reflects statute language as of {lastReviewedMonthYear}. To verify a specific statute, search the state legislature's official website using the citation shown.
+            </p>
+          </aside>
+
+          <div class="overflow-x-auto mb-6 border border-gray-200 rounded-lg">
+            <table class="w-full text-left border-collapse text-sm">
+              <thead class="bg-gray-50">
+                <tr class="border-b-2 border-gray-300">
+                  <th class="py-3 px-3 font-semibold">State</th>
+                  <th class="py-3 px-3 font-semibold">Pet Lemon Law</th>
+                  <th class="py-3 px-3 font-semibold">Statute Citation</th>
+                  <th class="py-3 px-3 font-semibold">Notes</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Alabama</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Alaska</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Arizona</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">A.R.S. §44-1799 et seq.</td><td class="py-2 px-3">Pet dealer disclosure law; private breeder application is narrow.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Arkansas</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">Ark. Code §4-97-101 et seq.</td><td class="py-2 px-3">Pet store consumer protection focus; covers congenital defect remedies.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">California</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">Cal. Health & Safety Code §122045 et seq.</td><td class="py-2 px-3">Polanco-Lockyer Act. Buyer remedies for illness and congenital defects within defined window. Applies to most retail and many private sales.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Colorado</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Connecticut</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">Conn. Gen. Stat. §22-344b</td><td class="py-2 px-3">Defined remedy window for sick or defective puppies. Refund, replacement, or vet cost recovery up to purchase price.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Delaware</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">3 Del. C. §8201 et seq.</td><td class="py-2 px-3">Pet dealer regulation with limited consumer remedies.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">District of Columbia</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Florida</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">Fla. Stat. §828.29</td><td class="py-2 px-3">Pet Lemon Law. Requires Official Certificate of Veterinary Inspection at sale. Defined remedies for illness or congenital defect within statutory window.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Georgia</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Hawaii</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Idaho</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Illinois</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">225 ILCS 605/3.15 et seq.</td><td class="py-2 px-3">Animal Welfare Act. Pet dealer disclosure and remedy provisions for diseased animals.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Indiana</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Iowa</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Kansas</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Kentucky</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Louisiana</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Maine</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">7 M.R.S. §4151 et seq.</td><td class="py-2 px-3">Animal welfare licensing with limited consumer remedy provisions.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Maryland</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">Md. Code, Bus. Reg. §19-701 et seq.</td><td class="py-2 px-3">Pet store and dealer regulation; private breeder application is narrow.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Massachusetts</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">940 CMR 12.00</td><td class="py-2 px-3">Sale of Dogs and Cats regulations. Health certificate required; remedies for sick or defective animals within defined window.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Michigan</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Minnesota</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">Minn. Stat. §325F.79 et seq.</td><td class="py-2 px-3">Dog and cat sale warranty provisions. Remedies for illness or congenital defect within defined window.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Mississippi</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Missouri</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Montana</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Nebraska</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Nevada</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">NRS 597.997 et seq.</td><td class="py-2 px-3">Pet dealer disclosure and limited remedy provisions.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">New Hampshire</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">RSA 437:8 et seq.</td><td class="py-2 px-3">Pet vendor licensing; limited consumer remedies for diseased animals.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">New Jersey</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">N.J.S.A. 56:8-92 et seq.</td><td class="py-2 px-3">Pet Purchase Protection Act. Strong buyer remedies: refund, replacement, or vet cost recovery for illness or congenital defect within statutory window.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">New Mexico</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">New York</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">NY Gen. Bus. Law §753</td><td class="py-2 px-3">Article 35-D. Defined remedy window for sick or congenitally defective puppies and kittens. Refund, replacement, or vet cost recovery.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">North Carolina</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">North Dakota</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Ohio</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Oklahoma</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Oregon</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Pennsylvania</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">3 P.S. §459-101 et seq.</td><td class="py-2 px-3">Dog Purchaser Protection Act. Remedies for sick or congenitally defective dogs within defined window.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Rhode Island</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">South Carolina</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">S.C. Code §47-13-160</td><td class="py-2 px-3">Pet dealer disclosure with limited consumer remedies.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">South Dakota</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Tennessee</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Texas</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Utah</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Vermont</td><td class="py-2 px-3">Limited</td><td class="py-2 px-3">20 V.S.A. §3541 et seq.</td><td class="py-2 px-3">Pet merchant licensing; limited consumer remedy provisions.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Virginia</td><td class="py-2 px-3">Yes</td><td class="py-2 px-3">Va. Code §3.2-6511 et seq.</td><td class="py-2 px-3">Pet shop dealer requirements and buyer remedies for sick or unfit animals.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Washington</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">West Virginia</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr class="border-b border-gray-200"><td class="py-2 px-3">Wisconsin</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+                <tr><td class="py-2 px-3">Wyoming</td><td class="py-2 px-3">No</td><td class="py-2 px-3 text-gray-400">N/A</td><td class="py-2 px-3">No specific puppy/pet purchase statute. General contract and UCC rules apply.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-base text-gray-600 leading-relaxed italic">
+            Important: Many of these statutes apply only to "pet dealers" or "pet stores" as defined in the statute. Whether a private hobby or professional breeder is covered varies state by state. Read the statutory definitions before relying on a specific section.
+          </p>
+        </section>
+
+        <!-- Section: Pre-birth deposits -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What About Deposits Paid Before the Puppies Are Born?</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Pre-birth deposits go by many names: waitlist deposit, pick deposit, litter deposit, reservation fee. The legal treatment is the same in concept but trickier in practice, because no specific puppy exists yet at the time of payment. You are paying for a place in line, not a specific animal.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The most common contract patterns for handling the "what if there is no puppy for me" scenario are: the deposit rolls forward to the next litter, the deposit is transferable to another buyer on the waitlist, or the deposit is applied to a different litter from the same breeder. A well-written pre-birth deposit contract spells out exactly which of these applies and under what conditions. A poorly written one leaves the buyer guessing.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Breeders take pre-birth deposits because producing a litter is expensive (stud fees, progesterone testing, ultrasounds, whelping supplies, vet care, food, registration) and they need to gauge real demand before committing. That is a legitimate business reason. The question for buyers is not whether to ever pay a pre-birth deposit, but whether the cancellation terms are reasonable and clearly written. Read those terms before paying.
+          </p>
+        </section>
+
+        <!-- Section: When buyers can recover despite non-refundable language -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">When Buyers Can Usually Get a Refund Even With a "Non-Refundable" Clause</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            A non-refundable deposit clause is not a magic shield. It does not entitle the breeder to keep your money when the breeder is the one who failed to perform. The following scenarios usually result in a refund, regardless of what the contract says about refundability:
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6 list-disc pl-6">
+            <li>Breeder cancels the breeding or cannot deliver the agreed puppy.</li>
+            <li>Puppy dies or is medically unfit before pickup.</li>
+            <li>Material misrepresentation: breed, parentage, registration status, health, or temperament does not match what was advertised.</li>
+            <li>Contract is unconscionable or violates state consumer protection law (the deposit amount is wildly disproportionate to actual damages, terms hidden in fine print, predatory clauses).</li>
+            <li>Breeder has not actually started performance: no breeding has occurred, no litter has been produced, no specific puppy is identifiable.</li>
+            <li>Statute of frauds or other formality issues with the contract (rare, but possible when the agreement was never reduced to writing).</li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you believe one of these applies to you, document everything in writing, request the refund in writing, give the breeder a reasonable opportunity to respond, and consult an attorney before filing a chargeback or small claims action. See our guide on <a href="/buyers/red-flags" class="text-[hsl(24,95%,53%)] hover:underline">red flags to watch for when buying a puppy</a> for related guidance.
+          </p>
+        </section>
+
+        <!-- Section: Checklist -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Buyers Should Ask Before Paying a Deposit</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Use this checklist before sending a deposit. Get every answer in writing, ideally inside the signed contract itself.
+          </p>
+          <ol class="space-y-3 text-lg text-gray-700 list-decimal pl-6 mb-6">
+            <li>Is this a "deposit," a "non-refundable holding fee," or a "down payment"? Get the term defined in writing.</li>
+            <li>Under what specific conditions is the deposit refundable, and under what conditions is it not?</li>
+            <li>What happens if the litter is smaller than expected and you do not get your pick?</li>
+            <li>What happens if the breeder cancels the breeding or the litter is lost?</li>
+            <li>Does the deposit transfer to a future litter, to another buyer, or neither?</li>
+            <li>Is the deposit a fixed amount or a percentage of total price, and how is it credited against the final purchase price?</li>
+            <li>Will you sign a written contract before paying, with all terms spelled out?</li>
+            <li>Who holds the funds (the breeder directly, a third-party escrow, a payment processor with dispute protections)?</li>
+          </ol>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A breeder who hesitates to put any of these answers in writing is telling you something. A breeder who already has the answers documented in their standard contract is telling you something else. Pair this checklist with our broader guide on <a href="/buyers/health-guarantees" class="text-[hsl(24,95%,53%)] hover:underline">what a real health guarantee looks like</a>, since deposit terms and health guarantee terms tend to live in the same contract.
+          </p>
+        </section>
+
+        <!-- Section: Sample defensible contract language -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Sample Defensible Contract Language</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The clauses below are examples for discussion with your attorney, not templates to copy verbatim. Contract language must be tailored to your state, your program, and your specific transaction. Treat these as starting points, not finished products.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Example: Fair Non-Refundable Deposit Language</h3>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Buyer agrees to pay a non-refundable deposit of $___ to reserve a puppy from the [Sire] x [Dam] litter expected [Date]. The deposit will be applied in full to the purchase price at the time of pickup. The deposit is non-refundable if Buyer cancels for any reason. The deposit is fully refundable within fourteen (14) days if: (a) the breeding does not result in a live litter, (b) Breeder cancels the breeding, (c) no puppy in the litter matches Buyer's selected sex and color and Buyer declines to wait for a future litter, or (d) Breeder is otherwise unable to deliver a puppy as agreed."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Example: Buyer-Friendly Partial-Refund Language</h3>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-4 text-gray-800 italic">
+            "Buyer agrees to pay a deposit of $___ to reserve a puppy. If Buyer cancels the purchase more than thirty (30) days before scheduled pickup, Breeder will refund 50% of the deposit within thirty (30) days. If Buyer cancels within thirty (30) days of scheduled pickup, the entire deposit is forfeited. If Breeder cancels for any reason, or if no puppy matching Buyer's selections is available, the full deposit will be refunded within fourteen (14) days."
+          </blockquote>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Example: Transferable Deposit Clause (for Pre-Birth Deposits)</h3>
+          <blockquote class="bg-gray-100 border-l-4 border-gray-400 p-4 mb-6 text-gray-800 italic">
+            "Buyer's deposit reserves a place on the waitlist for the [Sire] x [Dam] breeding expected [Date]. If the breeding does not result in a litter that includes a puppy matching Buyer's selections, Buyer may elect to: (a) roll the deposit forward to the next planned breeding by Breeder, (b) transfer the deposit to a different planned breeding currently on Breeder's calendar, or (c) receive a full refund within thirty (30) days. Buyer must make the election in writing within fourteen (14) days of being notified that no matching puppy is available."
+          </blockquote>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Each of these clauses has tradeoffs, edge cases, and interactions with state-specific consumer protection law. Take them to an attorney licensed in your state before using them. For breeders writing contracts for the first time, our guide on <a href="/buyers/contracts-and-agreements" class="text-[hsl(24,95%,53%)] hover:underline">what a real puppy contract should include</a> covers the broader contract structure these clauses sit inside.
+          </p>
+        </section>
+
+        <!-- Closing -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Closing Notes</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Puppy deposits are governed first by the contract you signed and second by your state's consumer protection law. Most states do not have a specific statute regulating buyer-initiated deposit forfeiture, so the written agreement carries almost all of the weight. Read the contract before you sign. Get every promise in writing. If something goes wrong, document everything and talk to a licensed attorney in your state.
+          </p>
+          <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-8">
+            <p class="text-base text-gray-800 leading-relaxed mb-2">
+              <strong>Last Reviewed:</strong> {lastReviewedMonthYear}. Statutes change. Re-verify any citation before relying on it.
+            </p>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Spotted a citation that is out of date? Email <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will review it.
+            </p>
+          </div>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            BreederHQ helps breeders write clear, defensible contracts and helps buyers find breeders who use them. <a href="https://marketplace.breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">Browse verified breeders →</a>
+          </p>
+
+          <div class="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold mb-3">Looking for a Responsible Breeder?</h3>
+            <p class="text-stone-300 mb-6">Find breeders who use written contracts, verified health testing, and clear deposit terms.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://marketplace.breederhq.com" class="bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Browse Verified Breeders
+              </a>
+              <a href="/buyers/contracts-and-agreements" class="border-2 border-stone-500 text-stone-200 px-6 py-3 rounded-lg font-semibold hover:border-white hover:text-white transition">
+                What a Real Contract Includes
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </article>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
