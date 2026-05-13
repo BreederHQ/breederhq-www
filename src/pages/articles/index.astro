@@ -78,8 +78,8 @@ const articles = [
             aria-label={`Featured: ${featured.title}`}
           >
             <div class="flex items-center gap-2 mb-3">
-              <span class="featured-chip inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-800 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded overflow-hidden relative">
-                <span class="relative z-10">Featured</span>
+              <span class="featured-chip inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-800 border border-amber-300 px-2 py-0.5 rounded">
+                Featured
               </span>
               <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">{featured.tag}</p>
             </div>
@@ -110,45 +110,40 @@ const articles = [
     <style>
       .featured-frame {
         background: linear-gradient(
-          120deg,
-          #fcd34d 0%,
-          #fde68a 25%,
+          110deg,
+          #b45309 0%,
+          #f59e0b 20%,
+          #fbbf24 35%,
           #fef3c7 50%,
-          #fde68a 75%,
-          #fcd34d 100%
+          #fbbf24 65%,
+          #f59e0b 80%,
+          #b45309 100%
         );
-        background-size: 300% 300%;
-        animation: featured-frame-pan 9s ease-in-out infinite;
+        background-size: 250% 100%;
+        animation: featured-frame-pan 5s linear infinite;
+        box-shadow:
+          0 0 0 1px rgba(245, 158, 11, 0.18),
+          0 4px 14px -4px rgba(245, 158, 11, 0.35);
       }
       @keyframes featured-frame-pan {
         0%   { background-position:   0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position:   0% 50%; }
+        100% { background-position: 250% 50%; }
       }
-      .featured-chip::before {
-        content: "";
-        position: absolute;
-        inset: 0;
+      .featured-chip {
         background: linear-gradient(
           110deg,
-          transparent 0%,
-          transparent 35%,
-          rgba(255, 255, 255, 0.85) 50%,
-          transparent 65%,
-          transparent 100%
+          #fef3c7 0%,
+          #fef3c7 38%,
+          #fffbeb 50%,
+          #fef3c7 62%,
+          #fef3c7 100%
         );
-        transform: translateX(-100%);
-        animation: chip-shimmer 3.2s ease-in-out infinite;
-        pointer-events: none;
+        background-size: 250% 100%;
+        animation: chip-shimmer 2.4s linear infinite;
       }
       @keyframes chip-shimmer {
-        0%   { transform: translateX(-100%); }
-        60%  { transform: translateX(100%); }
-        100% { transform: translateX(100%); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .featured-frame { animation: none; }
-        .featured-chip::before { animation: none; display: none; }
+        0%   { background-position: 250% 50%; }
+        100% { background-position:   0% 50%; }
       }
     </style>
 
