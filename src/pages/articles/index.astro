@@ -6,6 +6,17 @@ const breadcrumbs = [
   { name: 'Articles', url: '/articles' }
 ];
 
+const featured = {
+  slug: 'breeder-software-has-a-data-problem',
+  title: 'Breeder Software Has a Data Problem (And We\'re Here to Solve It)',
+  excerpt: 'Why we built BreederHQ around a unified data layer first, and Scout AI second. Records-management software stops at storing your data. The real problem is connecting it and making it answer real business questions.',
+  author: 'Aaron Payne',
+  role: 'Founder, BreederHQ',
+  date: 'April 29, 2026',
+  readTime: '7 min read',
+  tag: 'Founder\u2019s Perspective'
+};
+
 const articles = [
   {
     slug: 'puppy-health-guarantee-what-it-covers',
@@ -26,16 +37,6 @@ const articles = [
     date: 'May 13, 2026',
     readTime: '14 min read',
     tag: 'Buyer Guide'
-  },
-  {
-    slug: 'breeder-software-has-a-data-problem',
-    title: 'Breeder Software Has a Data Problem (And We\'re Here to Solve It)',
-    excerpt: 'Why we built BreederHQ around a unified data layer first, and Scout AI second. Records-management software stops at storing your data. The real problem is connecting it and making it answer real business questions.',
-    author: 'Aaron Payne',
-    role: 'Founder, BreederHQ',
-    date: 'April 29, 2026',
-    readTime: '7 min read',
-    tag: 'Founder Perspective'
   }
 ];
 ---
@@ -66,8 +67,63 @@ const articles = [
       </div>
     </section>
 
+    <!-- Featured: Founder's Perspective -->
+    <section class="pt-4 pb-8 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <a
+          href={`/articles/${featured.slug}`}
+          class="block relative rounded-2xl overflow-hidden border-2 border-[hsl(24,95%,53%)] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-200 group"
+          aria-label={`Featured: ${featured.title}`}
+        >
+          <!-- Accent ribbon -->
+          <div class="absolute top-0 left-0 right-0 bg-[hsl(24,95%,53%)] text-white text-center text-xs font-bold uppercase tracking-widest py-2 z-10">
+            Featured &middot; Founder&rsquo;s Perspective
+          </div>
+
+          <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white pt-14 pb-10 px-8 md:px-12">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[hsl(24,95%,63%)] mb-4">
+              {featured.tag}
+            </p>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5 group-hover:text-[hsl(24,95%,63%)] transition">
+              {featured.title}
+            </h2>
+            <p class="text-lg text-stone-200 leading-relaxed mb-8 max-w-3xl">
+              {featured.excerpt}
+            </p>
+            <div class="flex flex-wrap items-center gap-3 text-sm text-stone-300 border-t border-stone-700 pt-5">
+              <div>
+                <p class="font-semibold text-white">{featured.author}</p>
+                <p class="text-xs text-stone-400">{featured.role}</p>
+              </div>
+              <span class="text-stone-600">&middot;</span>
+              <p>{featured.date}</p>
+              <span class="text-stone-600">&middot;</span>
+              <p>{featured.readTime}</p>
+              <span class="ml-auto inline-flex items-center gap-1 text-[hsl(24,95%,63%)] font-semibold group-hover:gap-2 transition-all">
+                Read the essay
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section divider -->
+    <section class="px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center gap-4 py-6">
+          <div class="flex-1 h-px bg-gray-200"></div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">More From BreederHQ Editorial</p>
+          <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- Articles List -->
-    <section class="pt-4 pb-16 px-4 bg-white">
+    <section class="pt-2 pb-16 px-4 bg-white">
       <div class="max-w-4xl mx-auto">
         <div class="space-y-6">
           {articles.map(article => (
@@ -84,9 +140,9 @@ const articles = [
                   <p class="font-semibold text-gray-900">{article.author}</p>
                   <p class="text-xs">{article.role}</p>
                 </div>
-                <span class="text-gray-300">·</span>
+                <span class="text-gray-300">&middot;</span>
                 <p>{article.date}</p>
-                <span class="text-gray-300">·</span>
+                <span class="text-gray-300">&middot;</span>
                 <p>{article.readTime}</p>
               </div>
             </a>
