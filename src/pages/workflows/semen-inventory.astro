@@ -18,7 +18,27 @@ const faqs = [
   },
   {
     question: 'What quality metrics are tracked?',
-    answer: 'Record concentration (million/ml), motility percentage, and morphology assessment for each batch. Assign visual quality grades (Excellent, Good, Fair, Poor) for quick reference. Quality data helps you prioritize which batches to use for breeding vs. shipping.'
+    answer: 'Record concentration (million/ml), motility percentage, and morphology assessment for each batch. Assign visual quality grades (Excellent, Good, Fair, Poor) for quick reference. Quality data helps you prioritize which batches to use for breeding vs. shipping. Pro plans add full semen analysis records, including multiple tests per donor or lot, detailed motion metrics, and attached lab reports.'
+  },
+  {
+    question: 'Can I track semen quality over time?',
+    answer: 'Yes, on the Pro plan. Every semen analysis is stored as its own dated record, not a value that gets overwritten. Each donor has a quality history chart showing total motility, progressive motility, concentration, and morphology across every analysis on file. Each lot shows every test ever run on it-initial freeze, first post-thaw, follow-up re-tests. You can show buyers, vets, or partners the actual trajectory of a donor instead of one number from one day.'
+  },
+  {
+    question: 'Can I upload lab reports?',
+    answer: 'Yes, on the Pro plan. Drop a PDF or photo onto an analysis record and BreederHQ reads the report and pre-fills every field it can identify. You review the extracted values side-by-side with the original report, edit anything that needs correction, and commit. The original PDF stays attached to the record permanently. You always see and approve the values before they\'re saved.'
+  },
+  {
+    question: 'What types of semen analyses can I record?',
+    answer: 'Five types: fresh (at collection), chilled/cooled (before shipment or use), post-thaw (after thawing frozen doses), re-test (a follow-up analysis on an existing lot), and breeding soundness exam (BSE), a full evaluation tied to the donor, not a specific lot. The same lot can have all five over its lifetime, each as its own record.'
+  },
+  {
+    question: 'Will the headline numbers on a lot stay accurate over time?',
+    answer: 'Yes. The motility and concentration shown on each lot can pull from the most recent confirmed analysis instead of being a free-text field someone typed once. Every value is labeled so you know whether it came from a verified lab report or was entered manually. You always know which numbers are trustworthy and which are someone\'s recollection.'
+  },
+  {
+    question: 'What is CASA?',
+    answer: 'CASA stands for computer-assisted semen analysis. It\'s the lab equipment most reproductive vets use to measure motility, concentration, morphology, and detailed motion metrics like VCL, VAP, VSL, LIN, and STR. If your vet sends you a CASA report, BreederHQ can parse it, pre-fill the analysis record, and keep the original PDF attached. You don\'t need to know what any of the acronyms mean to use the feature. Just upload the report.'
   },
   {
     question: 'How do expiration alerts work?',
@@ -37,7 +57,7 @@ const faqs = [
 
 <BaseLayout
   title="Semen Inventory Management | BreederHQ"
-  description="Track frozen and cooled semen inventory at the dose level. Quality metrics, storage management, expiration alerts, chain of custody, and integration with breeding plans."
+  description="Track frozen and cooled semen inventory at the dose level. Quality metrics, semen analysis records with full history, attached lab reports, storage management, expiration alerts, chain of custody, and integration with breeding plans."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -64,7 +84,7 @@ const faqs = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Frozen semen is a valuable asset that requires precise tracking. BreederHQ provides complete inventory management at the dose level: record collections with quality metrics (concentration, motility, morphology), track storage locations (tank, rack, facility), get automatic expiration alerts for batches expiring within 30 days, and maintain complete chain of custody for every dose-whether used for breeding, shipped to mare owners, or transferred between facilities.
+          Frozen semen is a valuable asset that requires precise tracking. BreederHQ provides complete inventory management at the dose level: record collections with quality metrics (concentration, motility, morphology), track storage locations (tank, rack, facility), get automatic expiration alerts for batches expiring within 30 days, and maintain complete chain of custody for every dose-whether used for breeding, shipped to mare owners, or transferred between facilities. Pro plans add a full semen analysis layer: per-test records, donor quality history over time, and attached lab reports parsed automatically and reviewed by you before they're committed.
         </p>
       </aside>
 
@@ -227,7 +247,7 @@ const faqs = [
       <h2 class="text-4xl font-bold mb-8">Quality Tracking</h2>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        Not all semen batches are equal. Track quality metrics so you can make informed decisions about which batches to use for which purposes.
+        Not all semen batches are equal. Track quality metrics so you can make informed decisions about which batches to use for which purposes. These are the headline numbers shown on every lot. For breeders who need the full picture, including multiple analyses per donor, trend lines over time, and the original lab reports, see <a href="#semen-analysis" class="text-[hsl(24,95%,53%)] hover:underline">Semen Analysis Records</a> below.
       </p>
 
       <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
@@ -272,8 +292,236 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Semen Analysis Records (Pro) -->
+  <section id="semen-analysis" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">Semen Analysis Records</h2>
+      <p class="text-sm font-semibold text-[hsl(24,95%,53%)] uppercase tracking-wide mb-6">Included on the Pro plan</p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A single motility number on a lot tells you almost nothing. Quality changes between collection and freeze, between freeze and thaw, between this year and last. Real reproductive recordkeeping treats every analysis as its own dated record, not a value you overwrite each time you run a new test.
+      </p>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        BreederHQ stores every analysis as a permanent record tied to the donor, the lot, and the original lab report. Every test is preserved. Every report is searchable. Every number has provenance.
+      </p>
+
+      <!-- Analysis Types -->
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">One Donor, Many Analyses</h3>
+        <p class="text-gray-700 mb-6">
+          The same donor and the same lot can be analyzed in different contexts. Each one is its own record, with its own date, operator, and result set.
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border-l-4 border-blue-500 pl-4 py-2">
+            <p class="font-bold">Fresh Collection</p>
+            <p class="text-sm text-gray-600">Initial analysis at the moment of collection, before extender or processing.</p>
+          </div>
+          <div class="border-l-4 border-cyan-500 pl-4 py-2">
+            <p class="font-bold">Chilled / Cooled</p>
+            <p class="text-sm text-gray-600">Quality check after cooling, before shipment or use.</p>
+          </div>
+          <div class="border-l-4 border-purple-500 pl-4 py-2">
+            <p class="font-bold">Post-Thaw</p>
+            <p class="text-sm text-gray-600">Quality after thawing frozen doses. The number that actually predicts success.</p>
+          </div>
+          <div class="border-l-4 border-amber-500 pl-4 py-2">
+            <p class="font-bold">Re-Test</p>
+            <p class="text-sm text-gray-600">Follow-up analysis on an existing lot, months or years later. Confirms doses still meet the standard.</p>
+          </div>
+          <div class="border-l-4 border-green-500 pl-4 py-2 md:col-span-2">
+            <p class="font-bold">Breeding Soundness Exam (BSE)</p>
+            <p class="text-sm text-gray-600">Full evaluation tied to the donor, not a specific lot. Documents the animal's overall breeding fitness for the season.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What Gets Captured -->
+      <h3 class="text-2xl font-bold mb-6">What gets captured on every analysis</h3>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-xl font-bold mb-3">Headline Quality Numbers</h4>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Total motility</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Progressive motility</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Concentration (million/ml)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Total sperm count</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Viable sperm</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Morphology (normal forms)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-xl font-bold mb-3">Detailed Motion Metrics</h4>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>VCL: curvilinear velocity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>VAP: average path velocity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>VSL: straight-line velocity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>LIN: linearity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>STR: straightness</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Any custom fields your lab reports</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-xl font-bold mb-3">Provenance &amp; Audit</h4>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Lab or clinic name</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Operator / technician</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Date and time of analysis</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Source: manual entry vs. lab report</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Original PDF attached to the record</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Confirmed-by-you flag for verified results</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-xl font-bold mb-3">What It's Tied To</h4>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>The donor animal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>The specific lot (when applicable)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>The collection record</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Any breeding attempts that used the lot</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Upload Lab Report -->
+      <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded mb-8">
+        <h3 class="text-xl font-bold mb-4">Upload a lab report. We do the typing.</h3>
+        <p class="text-gray-700 mb-4">
+          Most labs hand you a PDF. Re-typing twenty fields into a form is where good intentions die. Upload the report and BreederHQ reads it for you.
+        </p>
+        <ol class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">1</span>
+            <span>Drop the PDF (or photo) onto the analysis record</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">2</span>
+            <span>The system reads the report and pre-fills every field it can identify</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">3</span>
+            <span>Review the extracted values side-by-side with the original PDF</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">4</span>
+            <span>Edit anything that needs correction, then commit</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-[hsl(24,95%,53%)] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">5</span>
+            <span>The original report stays attached to the record forever</span>
+          </li>
+        </ol>
+        <p class="text-gray-600 text-sm mt-4 italic">
+          You always see and approve the values before they're saved. No surprises, no silent edits.
+        </p>
+      </div>
+
+      <!-- Trend History -->
+      <h3 class="text-2xl font-bold mb-4">Quality history, not a single snapshot</h3>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Every analysis adds a point to the donor's trend chart. See whether a stallion is improving, holding steady, or declining, with the data to show buyers, vets, or future partners.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-lg font-bold mb-2">Per-Donor Trends</h4>
+          <p class="text-gray-700 text-sm">Chart total and progressive motility, concentration, and morphology across every analysis on file. Spot patterns long before a problem becomes a missed breeding season.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-lg font-bold mb-2">Per-Lot History</h4>
+          <p class="text-gray-700 text-sm">Open any lot and see every analysis ever run on it: initial freeze, first post-thaw, the re-test you did last year. Buyers and vets get the full picture, not just the headline.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h4 class="text-lg font-bold mb-2">Compare Analyses</h4>
+          <p class="text-gray-700 text-sm">Stack two or more analyses side-by-side. Useful for confirming a re-test result, settling a dispute, or showing a buyer the trajectory of a young donor.</p>
+        </div>
+      </div>
+
+      <!-- Manual vs Derived -->
+      <div class="bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
+        <h3 class="text-xl font-bold mb-3">The lot summary becomes trustworthy</h3>
+        <p class="text-gray-700 mb-3">
+          The motility and concentration shown at the top of every lot used to be free-text fields, populated by whatever someone typed when the lot was created. With analysis records in place, those headline numbers can pull from the most recent confirmed analysis, with a clear label showing whether the value is manual or derived from verified lab data.
+        </p>
+        <p class="text-gray-700">
+          You'll always know which numbers come from a real test and which ones are someone's best recollection.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Inventory Dashboard -->
-  <section class="py-20 px-4">
+  <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">Inventory Dashboard</h2>
 
@@ -352,7 +600,7 @@ const faqs = [
   </section>
 
   <!-- Dispensing & Chain of Custody -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">Dispensing & Chain of Custody</h2>
 
@@ -458,7 +706,7 @@ const faqs = [
   </section>
 
   <!-- Integration with Breeding Plans -->
-  <section class="py-20 px-4">
+  <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">Breeding Plan Integration</h2>
 
@@ -512,7 +760,7 @@ const faqs = [
       <h2 class="text-4xl font-bold mb-8">Know Exactly What You Have</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        Dose-level tracking. Quality metrics. Storage locations. Expiration alerts. Chain of custody. Breeding plan integration. Complete visibility into one of your most valuable breeding assets.
+        Dose-level tracking. Quality metrics. Full semen analysis history with attached lab reports on Pro. Storage locations. Expiration alerts. Chain of custody. Breeding plan integration. Complete visibility into one of your most valuable breeding assets.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
