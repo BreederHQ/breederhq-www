@@ -1250,3 +1250,29 @@ document.addEventListener('click', e => {
     state.selectedAvailabilityIdx = Number(t.dataset.windowIdx);
     renderAvailabilityDetail();
     // scroll into view
+    setTimeout(() => {
+      document.getElementById('availability-detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+});
+
+document.getElementById('add-dog-btn').addEventListener('click', () => {
+  if (state.dogs.length >= 3) {
+    document.getElementById('fourth-modal').classList.add('open');
+    return;
+  }
+  state.dogs.push(makeDog({ name: '' }));
+  render();
+  // focus the new dog's name input
+  setTimeout(() => {
+    const inputs = document.querySelectorAll('#dog-cards input[data-field="name"]');
+    const last = inputs[inputs.length - 1];
+    if (last) last.focus();
+  }, 30);
+});
+
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('fourth-modal').classList.remove('open');
+});
+
+render();
