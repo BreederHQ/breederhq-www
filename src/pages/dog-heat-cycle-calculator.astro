@@ -1,0 +1,347 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Dog Heat Cycle Calculator', url: '/dog-heat-cycle-calculator' }
+];
+
+// This page is an authority/landing entry point for the "dog heat cycle
+// calculator" search intent. The actual interactive tool lives at
+// /tools/heat-cycle-calculator. We canonical to the tool so ranking signals
+// consolidate to one URL and avoid duplicate-content competition.
+const canonical = 'https://breederhq.com/tools/heat-cycle-calculator';
+---
+
+<BaseLayout
+  title="Dog Heat Cycle Calculator: How It Works | BreederHQ"
+  description="What a dog heat cycle calculator can and cannot tell you. How the math works, why progesterone testing matters more, and where to use the free tool."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Dog Heat Cycle Calculator</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">What a Dog Heat Cycle Calculator Actually Tells You</h1>
+
+      <p class="text-sm text-gray-500 mb-8">
+        <strong class="text-gray-700">Last Reviewed: May 16, 2026.</strong> Written and reviewed by the BreederHQ Operations Team, working with active dog breeders and reproductive veterinarians.
+      </p>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          A heat cycle calculator turns one date (the first day of heat) into a useful planning framework: when proestrus and estrus probably fall, when to schedule the first progesterone test, and roughly when whelping and the next heat will land. It cannot tell you when your dam will actually ovulate. That is what progesterone testing is for.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        If you search for a dog heat cycle calculator, you are usually one of three breeders. The first is preparing for a planned breeding and wants to know when to start watching. The second has a dam in heat right now and wants to know whether she is past the breeding window. The third has just had a dam come into heat for the first time and is trying to understand what is happening.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed mt-6">
+        A calculator helps all three, but only as a starting framework. This page explains what the math actually does, where it fails, and how to use the free tool without making decisions it cannot support.
+      </p>
+
+      <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+        <p class="text-lg text-gray-800 leading-relaxed mb-4">
+          <strong>Looking for the actual tool?</strong> The interactive calculator lives one click away.
+        </p>
+        <a href="/tools/heat-cycle-calculator" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+          Open the Free Heat Cycle Calculator →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: How a Heat Cycle Calculator Works -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How a Dog Heat Cycle Calculator Works</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Every dog heat cycle calculator does the same thing under the hood. It takes a single date (the first day of heat, Day 1 of proestrus) and applies textbook intervals to project the rest of the cycle. The intervals come from decades of canine reproductive literature and are well-established as averages.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Proestrus: Day 1 to Roughly Day 9</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The visible start of the cycle. Vulva swells, discharge appears, intact males notice. She is not yet fertile. A calculator places this window first because the input date is its starting point.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Estrus: Roughly Day 10 to Day 21</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The fertile phase. She becomes receptive. Ovulation occurs in this window, usually a few days after the LH surge. The estrus range a calculator shows is broad because the textbook range is broad.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Estimated Breeding Window: Roughly Day 11 to Day 15</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            This is the textbook overlap of "post-LH-surge" and "eggs mature enough to fertilize." A calculator can show this range, but it cannot tell you where in the range your dam actually is. Two dams whose proestrus starts on the same day will not necessarily ovulate on the same day.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Estimated Whelping: Roughly Day 69 to Day 79</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Calculated as 63 days from estimated ovulation (around Day 11), with a buffer for ovulation-timing uncertainty. If the dam is bred and ovulation is confirmed by progesterone, the actual whelping date is far tighter: 63 days from ovulation, give or take a day or two.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Estimated Next Heat: Four to Nine Months Out</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The textbook average is six months. Real dams cycle anywhere from four to nine months apart. A calculator shows the range because the range is real. Narrowing it requires tracking her actual cycle history over multiple seasons.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: What a Calculator Cannot Tell You -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What a Heat Cycle Calculator Cannot Tell You</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">When Your Dam Actually Ovulates</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Ovulation timing is driven by the LH surge, which only progesterone testing can pinpoint. The breeding window on a calculator is a textbook approximation. For natural cover where multiple ties are possible, that approximation can be enough. For chilled or frozen semen, it is not.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Whether Her Cycle Is Normal</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Split heats, silent heats, and unusually short or long cycles all happen. A calculator assumes the cycle behaves like the textbook. If your dam has a history of split or silent heats, the calculator is not aware of that.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">When the Next Cycle Will Land</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The four-to-nine-month range a calculator shows for the next heat is just the textbook range. Your dam has her own rhythm. The only way to predict her next heat with real confidence is to track her actual intervals across multiple cycles.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Litter Size, Health, or Outcome</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            None of those are calendar math. They are determined by genetics, breeding-pair compatibility, timing accuracy, prenatal health, and a lot of other factors a calculator has no visibility into.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: When a Calculator Is the Right Tool -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">When a Calculator Is the Right Tool to Reach For</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">First-Time Breeder Trying to Understand the Cycle</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If this is your first heat with this dam (or your first heat ever), a calculator gives you a mental map. You can see roughly where she should be on any given day and what should happen next.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Scheduling the First Progesterone Test</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The estimated breeding window tells you when to plan to start P4 testing. Day 5 to 7 of proestrus is a typical first pull. The calculator helps you put that on the calendar so the test happens at the right time.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Coordinating with a Stud Owner</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            "She started heat on May 4, so we are looking at a breeding around mid-May" gives the stud owner a real window to work with. The actual breeding date will firm up from progesterone, but the calculator gives you the conversation-starter.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Communicating with Buyers</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            "If this breeding takes, we are looking at puppies around the end of July and go-home around early October" is the conversation buyers want to have. The calculator gives you the dates to share without overcommitting to them.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: When a Calculator Is the Wrong Tool -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">When a Calculator Is the Wrong Tool</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Deciding When to Breed</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Calendar math does not decide the breeding date. Progesterone does. Especially for chilled and frozen semen, the cost of breeding off the calculator instead of off P4 results is measured in lost litters and wasted shipments.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Tracking History Across Cycles</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A standalone calculator forgets everything when you close the tab. It cannot show you "her last three cycles averaged 184 days" because it does not know about her last three cycles. Real tracking requires a system that persists.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Predicting an Irregular Cycler</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If your dam has a history of split heats, silent heats, or wildly variable intervals, a textbook calculator will mislead more than it helps. The fix is to log what actually happens and use that pattern, not the textbook one.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Diagnosing a Reproductive Problem</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A calculator is a planning tool, not a diagnostic. If a dam is cycling unusually, has missed conception repeatedly, or is showing signs of pyometra or other reproductive issues, that is a vet conversation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: How to Use the Free Calculator -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Use the Free Calculator</h2>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Enter the first day of heat. The tool returns proestrus and estrus phase ranges, a rough breeding window, an estimated whelping window, and an approximate next-heat date. It is anonymous, no signup, nothing saved. Use it to plan when to start observing and when to book the first progesterone test.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        For real cycle tracking (per-dam history, P4 trend charts, breeding records that tie to whelping math, waitlist movement when the litter resolves), the calculator stops being enough. That is what BreederHQ is for.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/tools/heat-cycle-calculator" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Open the Calculator
+        </a>
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          Track Cycles in BreederHQ Free →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Important Limitations -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Important Limitations</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A calculator is an educational planning tool, not medical or veterinary advice</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>It does not replace progesterone testing</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Cycle length, ovulation timing, and gestation all vary by individual</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>First cycles are often irregular and may not follow textbook patterns</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Frozen and chilled semen require precision that calendar math cannot provide</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>For actual breeding decisions, work with your reproductive veterinarian and use progesterone testing</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Open the Free Heat Cycle Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Heat Cycle Tracking, Explained
+          </a>
+        </div>
+        <div>
+          <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Testing in Dogs
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/heat-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Tracking Workflow in BreederHQ
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+        <div>
+          <a href="/free-tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Breeding Planner (Multi-Species)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/tools/heat-cycle-calculator" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Open the Calculator
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>

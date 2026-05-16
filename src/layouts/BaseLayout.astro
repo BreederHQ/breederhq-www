@@ -61,6 +61,14 @@ interface Props {
   noindex?: boolean;
   hideLogo?: boolean;
   /**
+   * Optional canonical URL override. When provided, the page declares this URL
+   * as its canonical instead of its own path. Use for funnel/landing pages that
+   * exist primarily for SEO keyword targeting but should consolidate ranking
+   * signals into a different "real" page (e.g. an authority landing page that
+   * canonicals into the actual tool). Pass a full absolute URL.
+   */
+  canonicalOverride?: string;
+  /**
    * Optional per-page Open Graph image. When omitted, the global default
    * (https://breederhq.com/og-image.jpg) is used. Per-page values let species
    * pages, find-breeders pages, and similar share with a more relevant
@@ -69,7 +77,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, breadcrumbs, faqs, howTo, article, service, noindex, hideLogo, ogImage: ogImageProp } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, article, service, noindex, hideLogo, ogImage: ogImageProp, canonicalOverride } = Astro.props;
 // Astro is configured with `trailingSlash: 'never'`, so every page's canonical
 // URL must be slash-free - including the homepage. Without this normalization
 // the homepage canonical was `https://breederhq.com/` (with slash) while every
@@ -77,6 +85,9 @@ const { title, description, breadcrumbs, faqs, howTo, article, service, noindex,
 // mismatch (chose the slash-free version itself). 2026-04-27.
 const currentUrl = Astro.url.pathname === '/' ? '' : Astro.url.pathname.replace(/\/$/, '');
 const fullUrl = `https://breederhq.com${currentUrl}`;
+// Canonical defaults to this page's own URL. Funnel/landing pages may pass
+// `canonicalOverride` to consolidate ranking signals into a different page.
+const canonicalUrl = canonicalOverride || fullUrl;
 const ogImage = ogImageProp || 'https://breederhq.com/og-image.jpg'; // Default OG image
 const breederHQOrganizationId = 'https://breederhq.com/#organization';
 
@@ -331,7 +342,7 @@ if (article) {
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="canonical" href={fullUrl} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {fbDomainVerification && (
       <meta name="facebook-domain-verification" content={fbDomainVerification} />
@@ -339,7 +350,7 @@ if (article) {
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={fullUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -347,7 +358,7 @@ if (article) {
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={fullUrl} />
+    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />

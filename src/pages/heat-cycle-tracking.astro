@@ -1,0 +1,522 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Screenshot from '../components/Screenshot.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Heat Cycle Tracking', url: '/heat-cycle-tracking' }
+];
+
+const faqs = [
+  {
+    question: 'How often does a female dog come into heat?',
+    answer: 'Most dams cycle every five to nine months, with six to seven being typical. Young dams are often irregular for the first one or two cycles. Larger breeds tend toward longer intervals; smaller breeds tend toward shorter ones. The only interval that matters is hers, which is why generic six-month reminders miss so often.'
+  },
+  {
+    question: 'How long does a heat cycle last in total?',
+    answer: 'Proestrus and estrus together usually run about three weeks. Proestrus averages 7 to 10 days, estrus averages 5 to 10 days. Diestrus (whether bred or not) runs another 60 to 90 days, then anestrus until the next cycle starts. The fertile window inside that three weeks is short, which is why timing matters.'
+  },
+  {
+    question: 'When is the optimal breeding window?',
+    answer: 'Visual signs suggest the window but do not confirm it. Optimal breeding typically falls a few days after the LH surge, which is what progesterone testing tracks. Eyeballing color and swelling will produce litters, but it will also produce a lot of missed breedings. Serious programs use P4 testing.'
+  },
+  {
+    question: 'How do I track a heat cycle if she\'s never had one before?',
+    answer: 'Record everything you observe from the day you notice anything: first swelling, first spotting, first interest from intact males. That first cycle establishes the baseline for predicting the second. Predictions get better with each recorded cycle.'
+  },
+  {
+    question: 'What about silent heats or split heats?',
+    answer: 'They happen. A silent heat shows minimal external signs but still includes ovulation. A split heat starts, stops, and restarts. Both are real and both are why a tracking system has to record what actually happened rather than what the textbook says should happen.'
+  },
+  {
+    question: 'Does heat tracking work for cats, horses, goats, rabbits, or sheep?',
+    answer: 'Yes. The biology is different across species (induced ovulators like cats and rabbits work differently from spontaneous ovulators like dogs and horses), but the principle is the same: record actual cycles, learn the individual\'s pattern, predict the next window. BreederHQ adapts cycle tracking to each species.'
+  }
+];
+
+const howTo = {
+  name: 'How to Track a Heat Cycle from First Sign to Next Prediction',
+  description: 'The basic workflow for recording a heat cycle and using that record to predict the next one.',
+  steps: [
+    { name: 'Note the first sign', text: 'The day you notice swelling, spotting, or behavior change is Day 1. Record it the day it happens, not three days later from memory.' },
+    { name: 'Track daily through proestrus', text: 'Log discharge color changes, swelling, and any male interest. Proestrus typically runs 7 to 10 days and ends when she\'ll stand for a male.' },
+    { name: 'Mark the shift to estrus', text: 'Estrus is the fertile phase. Discharge typically lightens, she becomes receptive, and ovulation occurs inside this window. This is when progesterone testing pays off.' },
+    { name: 'Record the end of the cycle', text: 'Note the day external signs resolve. Total proestrus plus estrus is usually about three weeks.' },
+    { name: 'Let the system predict the next cycle', text: 'With one full cycle on record, you get a rough prediction. With three, you get a much better one. Predictions improve with every cycle.' },
+    { name: 'Adjust for irregularities', text: 'Note split heats, silent heats, or season skips. The system tracks the actual pattern, not the textbook one.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Dog Heat Cycle Tracking: Phases, Timing, and Prediction | BreederHQ"
+  description="What dog heat cycle tracking actually requires for a serious breeding program. The four phases, cycle-length variation, prediction, and where most breeders go wrong."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Heat Cycle Tracking</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Dog Heat Cycle Tracking, Explained for Breeders</h1>
+
+      <p class="text-sm text-gray-500 mb-8">
+        <strong class="text-gray-700">Last Reviewed: May 16, 2026.</strong> Written and reviewed by the BreederHQ Operations Team, working with active dog breeders and reproductive veterinarians.
+      </p>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          A heat cycle is four phases: proestrus, estrus, diestrus, and anestrus. The fertile window inside that cycle is short and varies by individual. Tracking heat cycles means recording each one accurately and using the pattern to predict the next, not setting a generic six-month reminder and hoping.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Heat cycle tracking is the foundation of every breeding decision. The breeding window comes out of it. The whelping date comes out of the breeding date. The puppy go-home date comes out of the whelping date. The waitlist position resolves to a puppy on that go-home date. Every other thing in a breeding program follows from getting the heat cycle right.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed mt-6">
+        This page covers what a heat cycle actually is, how each phase behaves, what tracking looks like in practice, and where most breeders lose ground.
+      </p>
+
+      <div class="mt-12">
+        <Screenshot
+          id="breeding-calendar"
+          alt="Heat cycle tracking calendar with proestrus, estrus, and predicted next-heat windows"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: The Four Phases -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Four Phases of a Heat Cycle</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Proestrus (Roughly 7 to 10 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            This is when the cycle becomes visible. The vulva swells, discharge appears (typically red), and intact males notice well before the dam is receptive. She is not yet fertile. The body is preparing. Estrogen is climbing, follicles are developing, and the eggs are not yet ready.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Estrus (Roughly 5 to 10 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            This is the fertile phase. The discharge typically lightens, swelling softens slightly, and she becomes receptive to mating. Ovulation occurs in this window, usually a couple of days after the LH surge. The window for optimal fertilization is short, measured in days, not weeks. This is where progesterone testing earns its keep.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Diestrus (Roughly 60 to 90 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Whether or not the dam was bred, her body goes through a luteal phase. Progesterone stays elevated. If she conceived, this overlaps with gestation. If she didn\'t, she may still show pseudo-pregnancy signs. From a tracking perspective, this phase is mostly recording: ultrasound, x-ray, weight, and behavior.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Anestrus (Variable, Months)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The quiet phase between cycles. Reproductive hormones return to baseline. Length varies enormously. Some dams come back into heat after a few months, others go six or more. Anestrus length is the single biggest reason generic calendar reminders fail. Her anestrus is her anestrus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: What Cycle-Length Variation Looks Like -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why Cycle Length Varies So Much</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Breed and Size</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Larger breeds tend toward longer cycles, sometimes eight to twelve months between heats. Smaller breeds cycle more frequently, sometimes every four to five. Within any breed there\'s still wide individual variation.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Age and Maturity</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            First and second heats are often irregular. Cycles tend to stabilize after the second or third. Mature dams in their prime are usually the most predictable. As dams age, cycles often lengthen.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Health and Stress</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Illness, surgery, major travel, dietary changes, and stress events can push a cycle. A move, a kennel cough, or a competition season can shift things by weeks.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Environment</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Other intact females in the household can synchronize cycles. Photoperiod matters more in some species than dogs. Indoor versus outdoor housing has subtle effects. None of these are deterministic, all of them are real.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Individual Pattern</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            After everything else, each dam has her own rhythm. The only way to know it is to track it. Two dams of the same breed in the same household will not cycle on the same schedule.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: How Most Programs Track It -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How Breeders Usually Track Heat Cycles Today</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Sticky Note on the Fridge</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            "Ruby, March 4." Works for one dam. Doesn\'t survive a kitchen renovation. Doesn\'t generate a next-heat prediction. Doesn\'t help when buyers ask "when is your next litter?"
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Google Calendar Reminder Set for Six Months Out</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Works when she cycles every six months. Fails when she cycles every five or every eight. The reminder fires on a day she\'s already two weeks into proestrus or six weeks before she\'ll cycle.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Spreadsheet with Dates and Intervals</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Better. Lets you see her actual intervals. Still depends on you remembering to open it and check, and still doesn\'t connect to breeding plans, progesterone results, or the waitlist.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Notebook with Detailed Notes</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The richest data, the least searchable format. Excellent for one dam if you genuinely review it every week. Falls apart at four dams. Falls apart at year five when you\'re flipping through three notebooks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What Proper Heat Cycle Tracking Looks Like -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What Heat Cycle Tracking Actually Requires</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Per-Dam Records, Not Program-Wide Averages</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Every heat date logged against the specific dam</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Interval calculation for each individual</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Notes about anything unusual (silent, split, season skip)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>History that survives across years</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Phase-Level Detail, Not Just a Start Date</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Start of proestrus, shift to estrus, end of cycle</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Progesterone readings logged inside the cycle they belong to</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeding dates logged inside the cycle</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Confirmation events (ultrasound, x-ray) attached to the cycle</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Prediction That Uses Her Pattern</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Next-heat window calculated from her actual intervals</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Confidence range that widens for irregular dams and narrows for regular ones</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Advance notice that gives you time to schedule progesterone testing and confirm stud availability</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>A view across all dams at once</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Connections to Everything Downstream</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Heat date drives expected breeding window</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Breeding date drives expected whelping date</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Whelping date drives expected go-home date</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Waitlist sees movement when the litter resolves</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: How BreederHQ Does It -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How BreederHQ Handles Heat Cycle Tracking</h2>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Each dam has her own heat history. Predictions for the next cycle come from her actual intervals, not from a textbook average. Progesterone readings log against the cycle they belong to, and the trend chart projects the breed-zone window automatically with a plain-English note that uses her name. Breeding dates auto-calculate the whelping date, and the waitlist moves when the litter resolves.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        For breeders with multiple dams, the calendar view shows all upcoming cycles at once so you can see conflicts before they happen. Pro and Enterprise plans add Scout AI Repro Insight, an on-demand assessment that compares the current cycle to past cycles and flags split heats or anomalies.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        You record what happened. The system handles the math, the prediction, and the downstream consequences.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Start Tracking for Free
+        </a>
+        <a href="/tools/heat-cycle-calculator" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          Try the Free Calculator →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Who Needs Real Heat Cycle Tracking</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders with two or more breeding dams</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Programs that plan breedings months in advance</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Anyone using progesterone testing for breeding timing</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders working with stud owners or repro vets who need accurate dates</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders with irregular cyclers where the textbook average doesn't apply</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Anyone whose buyers ask "when is the next litter?" and deserves a real answer</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Who Doesn't Need This -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Who Probably Doesn't Need This</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Pet owners tracking a single spayed dog for general health</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>One-time breeders with one dam and a sticky note that works</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Programs that breed opportunistically without planning</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        The sticky note works until the program grows. Most programs find the breaking point earlier than they expected.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 10: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Dog Heat Cycle Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Testing in Dogs
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/heat-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Tracking Workflow in BreederHQ
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Plans
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Start Tracking for Free
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

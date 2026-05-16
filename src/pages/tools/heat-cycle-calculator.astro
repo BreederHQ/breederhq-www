@@ -1,0 +1,731 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Heat Cycle Calculator', url: '/tools/heat-cycle-calculator' }
+];
+
+const lastReviewedISO = '2026-05-16';
+
+const faqs = [
+  {
+    question: 'How accurate is a dog heat cycle calculator?',
+    answer: 'A calculator like this gives you a rough framework based on textbook averages. Real dams vary. Proestrus can run 7 to 10 days, estrus another 5 to 10 days, and the next cycle can land anywhere from four to nine months later. Use this as a planning starting point, not as a breeding decision. The only reliable way to time an actual breeding is progesterone testing.'
+  },
+  {
+    question: 'Should I breed on the dates this calculator shows?',
+    answer: 'No. The optimal breeding window shown here is a textbook estimate. Real ovulation timing is determined by the LH surge, which only progesterone testing can pinpoint. Use this calculator to plan when to start watching for signs and when to schedule the first P4 test. Defer to your reproductive vet on actual breeding dates.'
+  },
+  {
+    question: 'How is the whelping date calculated?',
+    answer: 'The estimated whelping window assumes ovulation occurs around day 11 of the cycle and gestation runs 63 days from ovulation. That puts whelping at roughly 73 to 75 days from the first day of heat. If you know the actual breeding date, count 63 days from there for a tighter estimate. If you know the actual ovulation date from progesterone, count exactly 63 days from ovulation.'
+  },
+  {
+    question: 'Why does the next heat date have such a wide range?',
+    answer: 'Because dams vary that much. The textbook average is six months, but four to nine months are all within normal. Breed, age, health, and individual pattern all matter. The only way to predict her next heat accurately is to track her actual cycle history. Logging this cycle is the first step.'
+  },
+  {
+    question: 'Does this work for first-time heats?',
+    answer: 'A first cycle is often irregular and may be silent, split, or shorter than the textbook. Treat the predictions for first-time heats as especially loose. Plan to observe carefully and rely on progesterone testing rather than calendar math.'
+  },
+  {
+    question: 'Can I save these predictions or share them with my vet?',
+    answer: 'This calculator is anonymous and doesn\'t save anything. If you want to keep the predictions, log the cycle in BreederHQ. The system stores cycle history per dam, refines predictions as more cycles are recorded, and lets you log progesterone readings against each cycle for real timing.'
+  }
+];
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/heat-cycle-calculator#tool',
+  'name': 'Heat Cycle Calculator',
+  'description': 'Free heat cycle calculator for dog breeders. Enter the first day of heat to estimate proestrus, estrus, the rough breeding window, the estimated whelping window, and the approximate next-heat date. Educational tool only. Progesterone testing should guide actual breeding decisions.',
+  'url': 'https://breederhq.com/tools/heat-cycle-calculator',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Dog Breeding Calculator',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Estimate proestrus and estrus phase ranges from the first day of heat',
+    'Show approximate optimal breeding window',
+    'Estimate whelping window',
+    'Estimate next heat window',
+    'Anonymous, no signup, no data saved'
+  ]
+};
+---
+
+<BaseLayout
+  title="Free Heat Cycle Calculator for Dog Breeders | BreederHQ"
+  description="Free heat cycle calculator for dog breeders. Enter the first day of heat to estimate proestrus, estrus, the breeding window, the whelping date, and the next heat. Educational tool. Progesterone testing should guide actual breeding."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Heat Cycle Calculator</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Intro -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Estimate a Dog&rsquo;s Heat Cycle from One Date</h1>
+      <p class="text-sm text-gray-500 mb-6">
+        <strong class="text-gray-700">Last Reviewed: May 16, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active dog breeders and reproductive veterinarians.
+      </p>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Enter the first day of heat. This free calculator returns estimated phase ranges (proestrus and estrus), a rough breeding window, an estimated whelping window, and an approximate next-heat date. It is a planning tool based on textbook averages, not a breeding decision tool. Real timing should come from progesterone testing and your reproductive vet.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Calculator -->
+  <section class="px-4 pb-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="dhc-card">
+        <form id="dhc-form" class="dhc-form" novalidate>
+          <label for="dhc-input" class="dhc-label">First Day of Heat</label>
+          <p class="dhc-help">The day you first noticed swelling, spotting, or behavior change. This becomes Day 1 of the cycle.</p>
+          <div class="dhc-input-row">
+            <input
+              type="date"
+              id="dhc-input"
+              name="heat-start"
+              class="dhc-input"
+              aria-describedby="dhc-input-help"
+              required
+            />
+            <button type="submit" class="dhc-button">Calculate</button>
+          </div>
+          <p id="dhc-error" class="dhc-error" role="alert" hidden></p>
+        </form>
+
+        <div id="dhc-results" class="dhc-results" hidden aria-live="polite">
+          <h2 class="dhc-results-title">Estimated Cycle</h2>
+          <p class="dhc-results-subtitle">Based on textbook averages for canine reproductive cycles. Your dam may vary.</p>
+
+          <div class="dhc-grid">
+            <div class="dhc-result-block">
+              <div class="dhc-result-label">Proestrus</div>
+              <div class="dhc-result-value" id="dhc-proestrus"></div>
+              <div class="dhc-result-note">Visible signs begin. Not yet fertile. Typically 7 to 10 days.</div>
+            </div>
+
+            <div class="dhc-result-block">
+              <div class="dhc-result-label">Estrus</div>
+              <div class="dhc-result-value" id="dhc-estrus"></div>
+              <div class="dhc-result-note">Fertile phase. Receptive to breeding. Typically 5 to 10 days.</div>
+            </div>
+
+            <div class="dhc-result-block dhc-result-block--accent">
+              <div class="dhc-result-label">Estimated Breeding Window</div>
+              <div class="dhc-result-value" id="dhc-breeding"></div>
+              <div class="dhc-result-note">Textbook estimate only. Progesterone testing is the only way to pinpoint the actual fertile window for your dam.</div>
+            </div>
+
+            <div class="dhc-result-block">
+              <div class="dhc-result-label">Estimated Whelping Window</div>
+              <div class="dhc-result-value" id="dhc-whelping"></div>
+              <div class="dhc-result-note">Assumes ovulation around day 11 and gestation of 63 days from ovulation. Count 63 days from confirmed breeding for a tighter estimate.</div>
+            </div>
+
+            <div class="dhc-result-block">
+              <div class="dhc-result-label">Estimated Next Heat</div>
+              <div class="dhc-result-value" id="dhc-next"></div>
+              <div class="dhc-result-note">Wide range because cycles vary from four to nine months. Tracking her actual history narrows this considerably.</div>
+            </div>
+          </div>
+
+          <div class="dhc-disclaimer">
+            <strong>Important.</strong> This calculator is an educational planning tool. It is not medical or veterinary advice and does not replace progesterone testing. Cycle length, ovulation timing, and gestation vary by individual. For actual breeding decisions, work with your reproductive veterinarian and use progesterone testing to pinpoint ovulation.
+          </div>
+
+          <div class="dhc-cta">
+            <p class="dhc-cta-text">
+              Want to save this cycle and refine predictions as you record more? BreederHQ tracks heat history per dam, lets you log progesterone readings against each cycle, and projects the next cycle from her actual pattern instead of textbook averages.
+            </p>
+            <div class="dhc-cta-buttons">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="dhc-cta-primary">
+                Track This Cycle in BreederHQ Free
+              </a>
+              <a href="/heat-cycle-tracking" class="dhc-cta-secondary">
+                Learn About Heat Cycle Tracking →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How To Use -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How to Use This Calculator</h2>
+      <ol class="space-y-4 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="dhc-ol-num">1</span>
+          <span><strong>Identify Day 1.</strong> Day 1 is the first day you noticed swelling, spotting, or other signs of proestrus. If you're between two possible dates, use the earlier one.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="dhc-ol-num">2</span>
+          <span><strong>Enter the date and calculate.</strong> The calculator returns estimated phase ranges and a textbook breeding window.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="dhc-ol-num">3</span>
+          <span><strong>Use it for planning, not deciding.</strong> Schedule the first progesterone test toward the start of the estimated breeding window. The P4 results are what tell you when she's actually ovulating.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="dhc-ol-num">4</span>
+          <span><strong>Confirm with your repro vet.</strong> Final breeding date is a vet decision based on progesterone trend, not on calendar math.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- What the Numbers Mean -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">What the Numbers Mean</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Proestrus (Days 1 to ~9)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The cycle becomes visible. Vulva swells, discharge appears (typically red), intact males notice. She is not fertile yet. Plan, observe, and decide whether to start progesterone testing toward the back end of this window.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Estrus (Roughly Days 10 to 21)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The fertile phase. Discharge typically lightens, she becomes receptive. Ovulation occurs in this window, usually a couple of days after the LH surge. The actual fertile window is only a few days long inside this two-week range, which is why progesterone testing matters.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Breeding Window (Approximately Days 11 to 15)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            This is a textbook range, not a recommendation. Real ovulation timing for your dam can fall earlier or later. The breeding window shown here is a starting framework for scheduling progesterone tests, not a list of dates to breed on.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Whelping Window (Roughly Day 73 ± 5)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Calculated as 63 days from estimated ovulation (around day 11 of the cycle), with a buffer because ovulation timing is uncertain. If you know the breeding date, count 63 days from there for a tighter estimate. If progesterone confirmed ovulation, count exactly 63 days from ovulation.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Next Heat (Roughly 6 Months, with a Wide Range)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The textbook average is six months. Real cycles run anywhere from four to nine months. Breed, age, and individual pattern all matter. The only way to predict your dam\'s next heat with real accuracy is to track her actual cycle history.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Isn't a Breeding Decision Tool -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Why This Isn't a Breeding Decision Tool</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        A calendar can show you when proestrus probably started. A calendar cannot show you when your dam ovulated. The fertile window is only a few days long inside a three-week cycle, and individual dams hit that window on different days. Breeding from a calendar produces litters when the calendar happens to be close to reality and missed cycles when it doesn\'t.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Progesterone testing measures what\'s actually happening in the cycle. The trend across multiple readings identifies the LH surge, ovulation, and the maturation window. That trend is what serious programs breed on. The calendar is what they use to schedule the first progesterone draw.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Read more in <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">Progesterone Testing in Dogs</a> and the <a href="/workflows/heat-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Heat Tracking Workflow</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Tracking, Explained
+          </a>
+        </div>
+        <div>
+          <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Testing in Dogs
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/heat-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Tracking Workflow in BreederHQ
+          </a>
+        </div>
+        <div>
+          <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Management
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+        <div>
+          <a href="/free-tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Breeding Planner (Multi-Species)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Track Cycles in BreederHQ Free
+    </a>
+  </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('dhc-form');
+      var input = document.getElementById('dhc-input');
+      var error = document.getElementById('dhc-error');
+      var results = document.getElementById('dhc-results');
+      if (!form || !input || !error || !results) return;
+
+      // Default input to today for convenience
+      try {
+        var today = new Date();
+        var iso = today.toISOString().slice(0, 10);
+        input.value = iso;
+        input.max = iso;
+      } catch (e) { /* noop */ }
+
+      function addDays(date, n) {
+        var d = new Date(date.getTime());
+        d.setDate(d.getDate() + n);
+        return d;
+      }
+
+      function fmt(date) {
+        // Format as "Mon, May 16, 2026" in user's locale
+        try {
+          return date.toLocaleDateString(undefined, {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      function range(start, end) {
+        return fmt(start) + ' to ' + fmt(end);
+      }
+
+      function setText(id, value) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function calculate(heatStartStr) {
+        // Parse as local-date to avoid TZ shifting back a day
+        var parts = heatStartStr.split('-');
+        if (parts.length !== 3) return null;
+        var year = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;
+        var day = parseInt(parts[2], 10);
+        var d1 = new Date(year, month, day);
+        if (isNaN(d1.getTime())) return null;
+
+        // Day 1 of heat = d1. Day N = d1 + (N - 1) days.
+        var proestrusStart = d1;
+        var proestrusEnd = addDays(d1, 8);       // Day 1 to Day 9 (~7-10)
+        var estrusStart = addDays(d1, 9);        // Day 10
+        var estrusEnd = addDays(d1, 20);         // Day 21 (broad upper bound)
+        var breedingStart = addDays(d1, 10);     // Day 11
+        var breedingEnd = addDays(d1, 14);       // Day 15
+        // Assume ovulation ~Day 11; gestation 63 days from ovulation -> Day 74
+        // Buffer ±5 days for ovulation uncertainty -> Day 69 to Day 79
+        var whelpingStart = addDays(d1, 68);     // Day 69
+        var whelpingEnd = addDays(d1, 78);       // Day 79
+        // Next heat: ~6 months, range ~4-9 months from start of THIS cycle
+        var nextHeatStart = addDays(d1, 120);    // ~4 months
+        var nextHeatEnd = addDays(d1, 270);      // ~9 months
+
+        return {
+          proestrus: range(proestrusStart, proestrusEnd),
+          estrus: range(estrusStart, estrusEnd),
+          breeding: range(breedingStart, breedingEnd),
+          whelping: range(whelpingStart, whelpingEnd),
+          next: range(nextHeatStart, nextHeatEnd)
+        };
+      }
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        error.hidden = true;
+        error.textContent = '';
+
+        var val = input.value;
+        if (!val) {
+          error.textContent = 'Enter the first day of heat.';
+          error.hidden = false;
+          input.focus();
+          return;
+        }
+
+        var out = calculate(val);
+        if (!out) {
+          error.textContent = 'That date doesn\u2019t look valid. Try again.';
+          error.hidden = false;
+          input.focus();
+          return;
+        }
+
+        setText('dhc-proestrus', out.proestrus);
+        setText('dhc-estrus', out.estrus);
+        setText('dhc-breeding', out.breeding);
+        setText('dhc-whelping', out.whelping);
+        setText('dhc-next', out.next);
+
+        results.hidden = false;
+        // Smooth scroll the results into view without yanking focus
+        try {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (e) { /* noop */ }
+      });
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Calculator styles, scoped under .dhc-card */
+    .dhc-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .dhc-form {
+      margin-bottom: 1.5rem;
+    }
+
+    .dhc-label {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .dhc-help {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .dhc-input-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .dhc-input {
+      flex: 1 1 220px;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 44px;
+    }
+
+    .dhc-input:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .dhc-button {
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 150ms ease;
+    }
+
+    .dhc-button:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .dhc-error {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #b91c1c;
+      font-size: 0.95rem;
+    }
+
+    .dhc-results {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+    }
+
+    .dhc-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .dhc-results-subtitle {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .dhc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .dhc-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .dhc-result-block--accent {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .dhc-result-block {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    .dhc-result-block--accent {
+      background: hsl(24, 95%, 97%);
+      border-color: hsl(24, 95%, 80%);
+    }
+
+    .dhc-result-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #6b7280;
+      margin-bottom: 0.35rem;
+    }
+
+    .dhc-result-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.35rem;
+    }
+
+    .dhc-result-note {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    .dhc-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .dhc-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .dhc-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .dhc-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .dhc-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .dhc-cta-primary:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .dhc-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .dhc-cta-secondary:hover {
+      background: #ffffff;
+    }
+
+    .dhc-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* FAQ styles (match other cornerstone pages) */
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

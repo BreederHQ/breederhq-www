@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' }
+];
+
+const tools = [
+  {
+    href: '/tools/heat-cycle-calculator',
+    title: 'Heat Cycle Calculator',
+    species: 'Dogs',
+    description: 'Enter the first day of heat to estimate proestrus, estrus, the rough breeding window, the estimated whelping window, and the approximate next-heat date.'
+  },
+  {
+    href: '/free-tools/breeding-planner',
+    title: 'Breeding Planner',
+    species: 'Dogs, Horses, Goats, Sheep, Cattle',
+    description: 'Project upcoming heat cycles, breeding windows, and the open time between them for up to three females across multiple species.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Tools for Breeders | BreederHQ"
+  description="Free tools for dog and livestock breeders. Heat cycle calculator, breeding planner, and more. No signup, no data saved."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Tools</li>
+      </ol>
+    </nav>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Free Tools for Breeders</h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-12">
+          Free, anonymous, no-signup utilities that run in your browser. Use them for planning. Use BreederHQ for the actual records.
+        </p>
+
+        <div class="space-y-6">
+          {tools.map((tool) => (
+            <a href={tool.href} class="block p-6 bg-gray-50 border border-gray-200 rounded-lg hover:border-[hsl(24,95%,53%)] hover:bg-white transition">
+              <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
+                <h2 class="text-2xl font-bold text-gray-900">{tool.title}</h2>
+                <span class="text-sm text-gray-500">{tool.species}</span>
+              </div>
+              <p class="text-lg text-gray-700 leading-relaxed">{tool.description}</p>
+              <p class="mt-3 text-[hsl(24,95%,53%)] font-semibold">Open Tool →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,564 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Screenshot from '../components/Screenshot.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Puppy Application Management', url: '/puppy-application-management' }
+];
+
+const faqs = [
+  {
+    question: 'Do buyers have to create an account to apply?',
+    answer: 'They get a buyer profile, but they don\'t need to install anything or remember a password. The application link emails them a magic link to come back to their submission, their waitlist position, and (later) the puppy you matched them with.'
+  },
+  {
+    question: 'Can I keep my existing application questions?',
+    answer: 'Yes. The application builder is a question editor, not a fixed form. Move questions you already ask into it, add new ones, mark which are required, and order them however you want. Your application is your application.'
+  },
+  {
+    question: 'What happens to applications I want to decline?',
+    answer: 'Declined applications are kept with a reason note. They\'re searchable, and if the applicant comes back next year you have the history. Nobody gets ghosted by accident because the system records the decision and lets you send a polite decline message in one click.'
+  },
+  {
+    question: 'How does the waitlist actually work?',
+    answer: 'Each approved applicant goes onto a waitlist tied to a specific litter or a future-litter pool. Position is visible to the buyer in the portal. When a litter is born, you can pull from the waitlist in whatever order you use (deposit order, application order, preference match, breeder discretion) and the system records the match.'
+  },
+  {
+    question: 'Does it integrate with payments?',
+    answer: 'Yes. Deposits and balances go through Stripe in the portal. Money lands in your bank account directly. The deposit is tied to a litter, not floating in a generic Stripe ledger, so refund decisions later are clean.'
+  },
+  {
+    question: 'What about contracts?',
+    answer: 'Upload your contract template. Buyer signs in the portal. Signed copy stores against the buyer, the puppy, and the litter. No more "I think we still have a copy of the contract somewhere."'
+  }
+];
+
+const howTo = {
+  name: 'How to Run Puppy Applications End to End',
+  description: 'The full workflow from application open to puppy placement using BreederHQ.',
+  steps: [
+    { name: 'Build your application', text: 'Put your existing questions into the application builder. Mark required fields, add custom fields for things specific to your program.' },
+    { name: 'Share the application link', text: 'A single URL goes on your website, social profiles, and email replies. Applicants land on the form, fill it out, and submit.' },
+    { name: 'Review and approve', text: 'New applications appear in your inbox. Review answers, take notes, approve to the waitlist, decline with a reason, or follow up with questions.' },
+    { name: 'Place approved applicants on a waitlist', text: 'Each approved buyer goes on the waitlist for a specific litter or a future-litter pool. Position is visible to them in the portal.' },
+    { name: 'Collect deposits if you require them', text: 'Send a deposit invoice through the portal. Buyer pays via Stripe. Deposit ties to the litter so it\'s clean later.' },
+    { name: 'Match buyers to puppies as the litter develops', text: 'When the puppies are old enough to evaluate, match each approved buyer to a specific puppy. The buyer sees their puppy in the portal.' },
+    { name: 'Send the contract and collect the balance', text: 'Contract signed in the portal. Balance invoice sent through the portal. Pay-now button goes to Stripe. You see status without chasing.' },
+    { name: 'Close out at pickup', text: 'Mark the puppy as placed. Records persist for warranty conversations, returning-buyer conversations, and tax records.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Puppy Application Management for Dog Breeders | BreederHQ"
+  description="Manage puppy applications, waitlists, deposits, contracts, and placement in one connected system. No more spreadsheets, lost emails, or duplicate deposits."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Puppy Application Management</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Puppy Application Management That Doesn't Live in Your Inbox</h1>
+
+      <p class="text-sm text-gray-500 mb-8">
+        <strong class="text-gray-700">Last Reviewed: May 16, 2026.</strong> Written and reviewed by the BreederHQ Operations Team, working with active dog breeders running real waitlists and puppy placements.
+      </p>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Applications, waitlists, deposits, contracts, and placement all belong to the same workflow. When they live in five tools they don\'t talk to each other, which is how deposits get lost, contracts go missing, and the wrong buyer ends up with the wrong puppy. BreederHQ keeps the chain in one place.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        The buyer pipeline is the part of a breeding program that feels the most like a business and gets handled the least like one. Heat dates have a system. Pedigrees have a system. Applications usually have a Google Form, a label in Gmail, a tab in a spreadsheet, and a memory of who already paid.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed mt-6">
+        That works until it doesn\'t. The litter where you accidentally took two deposits on one puppy. The waitlist where you can\'t remember whether the buyer at the top is still active. The contract that the buyer is asking for and you can\'t find. The deposit Venmo from "Aunt Sarah" that you\'re ninety percent sure was for the May litter but might have been for the September one.
+      </p>
+
+      <div class="mt-12">
+        <Screenshot
+          id="breeding-calendar"
+          alt="Puppy application management view showing applications, waitlist positions, and litter assignments"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Why Breeders Hit a Wall -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Where Application Management Falls Apart</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The failure modes are predictable:
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Applications sit in a Gmail label and the third-most-promising buyer goes a week without a reply</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>The Google Form spreadsheet has 47 entries and no way to mark which ones you've replied to</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>The waitlist is a piece of paper that hasn't been updated since two buyers backed out</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Deposits arrive through three payment apps and a personal check</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Contracts are emailed back and forth as Word attachments, signed with a phone-photo of an actual signature</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>The "approved" list and the "deposited" list and the "matched to a puppy" list are three different documents that have to be reconciled by hand</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A returning buyer asks "do you still have my application from last year?" and the honest answer is no</span>
+        </li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        The buyers see this. Buyers who get a slow, disorganized intake experience compare it against the breeders who don\'t and draw their own conclusions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: How Most Breeders Handle It -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Five-Tool Application Stack</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Google Form for Applications</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Easy to set up. No status field. No way to track approval. Each application becomes a row in a spreadsheet you forget to check.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Gmail Labels for Tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            "Waitlist 2026," "Approved," "Pending." Manual labeling. Search-dependent. Becomes unusable around year three when the same buyer has six threads across two litters.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Waitlist Document</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Word document or Google Doc with names in order. Updated when you remember. Never quite matches the spreadsheet.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Stripe, PayPal, Venmo, or Personal Checks for Deposits</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Whoever is easiest for the buyer. Money arrives, you write it down somewhere. Reconciling at year-end is a project.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Word Doc Contract Sent by Email</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Sent as an attachment. Buyer prints, signs, photographs, sends back. Signature is half-readable. Storage is "in that folder somewhere."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Why That Breaks -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why the Five-Tool Stack Doesn't Scale</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">The Tools Don't Talk</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            An application in Google Forms doesn\'t know it became a waitlist entry. The waitlist entry doesn\'t know a deposit arrived in Venmo. The deposit doesn\'t know a contract was signed. You are the integration, and you have a life.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Buyers Notice the Delay</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Three-day reply times during application season is normal when everything is in your inbox. To the buyer, three days reads as "she\'s not interested." The buyer who was your second-best applicant moved on by the time you replied.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Position Disputes Become a Thing</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            "I thought I was third on the waitlist?" If the answer lives in a Word doc you update by hand, you can\'t prove otherwise. If position is visible in a portal, the conversation doesn\'t happen.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Returning Buyers Get Treated Like Strangers</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The family that took a puppy in 2023 and wants another in 2026 has to fill out the whole application again. You don\'t remember the relationship. Their puppy\'s littermates are unfindable in the system.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Year-End Reconciliation Is a Nightmare</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Tax time, the buyer asks for a receipt, the contract dispute lands. The records you need exist across five tools and three years. Producing the answer takes hours.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What Proper Application Management Looks Like -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What Proper Application Management Requires</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">One Application, One Inbox</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Application questions you control</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Required vs. optional fields</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Submissions arrive in one place, not a spreadsheet</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Each submission has a status: new, reviewing, approved, declined, on waitlist</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">A Waitlist That Updates Itself</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Approved applicants move onto the waitlist automatically</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Position is visible to the buyer in the portal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tied to a specific litter or a future-litter pool</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Drops and skips are recorded with reasons</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Deposits That Belong to a Litter</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Invoiced through the portal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Paid through Stripe, no manual reconciliation</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tied to the specific litter, not floating in a generic ledger</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Refunds clean and auditable</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Contracts In, Not Attached</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Your contract template, uploaded once</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Signed in the portal with an audit trail</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Signed copy stores against buyer, puppy, and litter</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Searchable years later</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">A Real Buyer History</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Every application this buyer has ever submitted</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Every puppy they've taken</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Every contract they've signed</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Every payment they've made</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: How BreederHQ Does It -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How BreederHQ Handles Puppy Applications</h2>
+
+      <p class="text-xl leading-relaxed mb-6">
+        One application link, one inbox, one waitlist per litter or per pool. Applications arrive with status, you approve or decline in one click, approved applicants move to the waitlist automatically with visible position. Deposits invoice through the portal and run through Stripe. Contracts are signed in the portal and stored against the buyer, the puppy, and the litter.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        When the puppies are old enough to evaluate, you match approved buyers to specific puppies and the buyer sees their puppy in the portal. The contract goes out, the balance invoice goes out, the buyer pays, you mark the puppy placed. Records persist for warranty conversations, returning-buyer conversations, and tax records.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        The buyer never has to install anything. You never have to reconcile across five tools.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Started Free
+        </a>
+        <a href="/workflows/client-portal" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See the Client Portal →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Who This Workflow Is For</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders running an application process for each litter</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders with active waitlists</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders taking deposits</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders with returning buyers across multiple litters</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders who want buyers to self-serve their status instead of emailing for updates</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders who want a real audit trail when a contract dispute or warranty claim shows up</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Who Doesn't Need This -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Who Probably Doesn't Need This</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700 mb-8">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Breeders who place puppies only to family and close friends</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Programs that don't use applications or waitlists</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Anyone whose current process never drops a deposit, never loses a contract, never misses an email</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        That last case is rarer than breeders realize. The system you have works until the day it doesn\'t.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 10: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Client Portal Workflow
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Waitlists and Placement
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Invoicing and Expenses
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/communications-hub" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Communications Hub
+          </a>
+        </div>
+        <div>
+          <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deposit Refund Rules by State
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Started Free
+    </a>
+  </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

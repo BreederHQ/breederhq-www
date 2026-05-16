@@ -46,6 +46,16 @@ export default defineConfig({
           item.changefreq = 'monthly';
           item.priority = 0.8;
         }
+        // Cornerstone SEO pages — top-level commercial / authority / funnel content
+        else if (/^https:\/\/breederhq\.com\/(dog-breeding-software|heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|dog-heat-cycle-calculator|tools\/heat-cycle-calculator)$/.test(item.url)) {
+          item.changefreq = 'monthly';
+          item.priority = 0.9;
+        }
+        // Tools index — gateway to interactive utilities
+        else if (item.url === 'https://breederhq.com/tools') {
+          item.changefreq = 'monthly';
+          item.priority = 0.7;
+        }
         // Workflow pages — core feature content
         else if (item.url.includes('/workflows/') || item.url.endsWith('/workflows')) {
           item.changefreq = 'monthly';
