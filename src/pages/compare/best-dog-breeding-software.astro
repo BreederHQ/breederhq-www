@@ -9,46 +9,127 @@ const breadcrumbs = [
 
 const faqs = [
   {
-    question: 'What makes dog breeding software different from general pet software?',
-    answer: 'Dog breeding software needs to understand canine reproduction: heat cycles, progesterone timing, 63-day gestation, OFA/PennHIP tracking, COI calculation, and litter management. Generic pet software doesn\'t have these breeding-specific features.'
+    question: 'Is BreederHQ really free?',
+    answer: 'The starter tier is genuinely free. Paid tiers unlock advanced operational features such as expanded marketing, multi-staff workflows, and expanded marketplace tooling. Verify current pricing on the pricing page.'
   },
   {
-    question: 'Can dog breeding software calculate COI (Coefficient of Inbreeding)?',
-    answer: 'Good dog breeding software should calculate COI from pedigree data and help you evaluate breeding decisions before you make them. BreederHQ calculates COI automatically from your pedigree records.'
+    question: 'What is the difference between dog breeding software and a dog breeding marketplace?',
+    answer: 'A marketplace helps buyers find you. Breeding software runs your program: heats, breedings, litters, waitlists, contracts, buyer portal. Most breeders need both. BreederHQ includes both in one system.'
   },
   {
-    question: 'How does progesterone test tracking work?',
-    answer: 'Dog breeding software should let you enter multiple progesterone tests per cycle, calculate optimal breeding timing, and predict ovulation based on the data. This is essential for timing breedings correctly.'
+    question: 'Will dog breeding software work for multiple breeds?',
+    answer: 'Good operational dog breeding software should. Different breeds have different cycle patterns and different health-testing requirements. BreederHQ handles one breed or many, and applies breed-specific health-testing expectations.'
   },
   {
-    question: 'Can I track OFA and health testing results?',
-    answer: 'Yes. Dog breeding software should track OFA numbers, PennHIP scores, genetic test results, and clearances. These should link to individual dogs and display on pedigrees so you can see health testing at a glance.'
+    question: 'Does dog breeding software calculate COI?',
+    answer: 'The good tools do. BreederHQ calculates COI from your pedigree data so you can evaluate a planned breeding before you make it, not after the litter is on the ground.'
   },
   {
-    question: 'Does it work for multiple dog breeds?',
-    answer: 'Yes. BreederHQ works for one breed or multiple breeds. Different breeds have different health testing requirements and characteristics, and the software accommodates breed-specific needs.'
+    question: 'How is progesterone test timing handled?',
+    answer: 'A serious tool lets you log multiple tests across a heat, plot the trend, and surface the optimal breeding window. If the tool only accepts a single date, it is not built for modern dog breeding. BreederHQ supports multi-point progesterone tracking on each heat.'
   },
   {
-    question: 'How does litter management work in dog breeding software?',
-    answer: 'Each puppy should be an individual record (not just a count) where you can track weights, colors, markings, and link each puppy to a buyer. Good software treats litters as collections of individual puppies.'
+    question: 'Can buyers see their puppy information directly?',
+    answer: 'In BreederHQ, yes. Each buyer has a portal with their puppy records, photos, pedigree, contracts, and documents. This is the single biggest time win in modern breeder software.'
   },
   {
-    question: 'Can buyers access their puppy information?',
-    answer: 'Yes. BreederHQ includes buyer portals where clients can see their puppy\'s information, pedigree, photos, and documents. This saves you countless hours answering repetitive questions.'
+    question: 'Does it work on the phone?',
+    answer: 'BreederHQ is designed mobile-first. The whelping area, the show grounds, and the front porch with a buyer are all places the tool needs to work, not just the desk.'
   },
   {
-    question: 'Does it handle AI (artificial insemination) breedings?',
-    answer: 'Yes. Dog breeding software should handle documentation and timing for frozen semen, fresh chilled, and surgical AI-all common methods in dog breeding.'
+    question: 'What about AKC and registry support?',
+    answer: 'BreederHQ tracks registration numbers, titles, DNA profiles, and the documentation you need for litter registrations. Generated outputs can be used to support registry submissions.'
+  },
+  {
+    question: 'Does OFA and health test data live on the pedigree?',
+    answer: 'Yes. Health testing recorded on the dog surfaces on the pedigree so you can see clearances at a glance when planning breedings.'
+  },
+  {
+    question: 'What happens to my data if I leave?',
+    answer: 'You can export your data. If a tool traps your data, you do not own your program, you rent it. This applies to every breeding tool, not just BreederHQ.'
+  },
+  {
+    question: 'Is BreederHQ built for dogs?',
+    answer: 'Yes. Dog breeding is operationally the most complex breeding program to run: narrow breeding windows, progesterone-driven timing, individual puppy records, waitlists, deposits, contracts, and a high-touch buyer experience. BreederHQ is built around those workflows natively. Other species are supported, but the dog program is the center of the product.'
+  },
+  {
+    question: 'Why do you not rank competitors with stars or scores?',
+    answer: 'Because a star rating implies we ran a controlled, repeatable evaluation across vendors, and we have not. We describe public positioning honestly and point out where each tool center of gravity is. That is a more useful signal for an operational buyer than a number.'
   }
 ];
+
+// Workflow stages: visual content only, NOT structured data
+const workflowStages = [
+  'Heat Cycle',
+  'Progesterone',
+  'Breeding',
+  'Pregnancy',
+  'Whelping',
+  'Puppy Records',
+  'Applications',
+  'Deposits',
+  'Contracts',
+  'Placement'
+];
+
+// Article schema: page-level "buyer's guide" intent signal
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Best Dog Breeding Software in 2026: A Working Breeder's Comparison",
+  "description": "A working breeder's comparison of dog breeding software in 2026. Heat cycles, progesterone, litters, waitlists, contracts, and buyer portals. See where each tool fits.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "datePublished": "2026-05-16",
+  "dateModified": "2026-05-16",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/best-dog-breeding-software"
+  }
+};
+
+// ItemList schema: compared products only (not workflow stages)
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Dog Breeding Software Compared",
+  "description": "Operational comparison of dog breeding software products in 2026.",
+  "itemListOrder": "https://schema.org/ItemListOrderDescending",
+  "numberOfItems": 7,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "BreederHQ" },
+    { "@type": "ListItem", "position": 2, "name": "DogBreederPro" },
+    { "@type": "ListItem", "position": 3, "name": "Breedera" },
+    { "@type": "ListItem", "position": 4, "name": "ZooEasy" },
+    { "@type": "ListItem", "position": 5, "name": "Kintraks" },
+    { "@type": "ListItem", "position": 6, "name": "PedFast" },
+    { "@type": "ListItem", "position": 7, "name": "Breeder Cloud Pro" }
+  ]
+};
 ---
 
 <BaseLayout
-  title="Best Dog Breeding Software | BreederHQ"
-  description="What to look for in dog breeding software. OFA tracking, COI calculation, progesterone timing, and features that matter for responsible dog breeders."
+  title="Best Dog Breeding Software (2026): Honest Comparison | BreederHQ"
+  description="A working breeder's comparison of dog breeding software in 2026. Heat cycles, progesterone, litters, waitlists, contracts. See where each tool fits."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: Article + ItemList -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
   </a>
@@ -64,160 +145,557 @@ const faqs = [
     </ol>
   </nav>
 
-  <!-- Opening -->
+  <!-- Hero -->
   <section class="py-20 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-5xl font-bold mb-6">How to Choose Dog Breeding Software in 2026</h1>
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">The Best Dog Breeding Software in 2026: A Working Breeder's Comparison</h1>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Good dog breeding software needs OFA/PennHIP tracking, COI calculation, progesterone test timing, and understanding of canine reproductive cycles. Avoid generic pet software or systems that don't distinguish between seasonal and year-round cycling breeds. Always test with your actual breeding program data.
+          Most dog breeding software falls into one of three categories: pedigree databases, kennel record systems, or breeder marketplaces. Very few tools actually run the operational side of a breeding program: heat cycles, progesterone timing, litters, waitlists, deposits, contracts, and buyer communication in one connected workflow. This guide compares the major options so you can pick the right tool for the way you actually run your program.
         </p>
       </aside>
-      <p class="text-xl text-gray-700 leading-relaxed">
-        Dog breeding has specific requirements. Your software needs to understand canine reproduction, breed-specific health testing, and registry requirements. This page explains what to look for-whether you choose BreederHQ or another platform.
+
+      <!-- Workflow visual: pill strip (visual content, not schema) -->
+      <div class="my-10">
+        <h2 class="text-2xl font-bold mb-4">The modern breeding workflow</h2>
+        <div class="overflow-x-auto pb-3 -mx-2 px-2" aria-label="Stages of a modern dog breeding program">
+          <ol class="flex items-center gap-2 min-w-max">
+            {workflowStages.map((stage, i) => (
+              <>
+                <li class="inline-flex items-center px-4 py-2 rounded-full border-2 border-[hsl(24,95%,53%)] bg-white text-sm font-semibold text-gray-900 whitespace-nowrap shadow-sm">
+                  {stage}
+                </li>
+                {i < workflowStages.length - 1 && (
+                  <li aria-hidden="true" class="text-[hsl(24,95%,53%)] font-bold text-lg">→</li>
+                )}
+              </>
+            ))}
+          </ol>
+        </div>
+        <p class="mt-4 text-lg text-gray-700">
+          <strong>Most breeder software handles one or two of these workflows.</strong> Operational breeders need all of them connected.
+        </p>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-8">
+        Dog breeding is operational work. Between heat cycles, progesterone tests, whelping nights, puppy applications, deposits, contracts, vet records, and the steady drip of buyer questions, the software you choose either makes that easier or quietly makes it harder.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        The hard part is that the category is fragmented. Some tools are pedigree databases dressed up with a "breeder" label. Some are old kennel record systems. Some are buyer-facing marketplaces that do not run your program at all. They are not interchangeable, and picking the wrong type costs you months of data entry before you realize it.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        This page compares the tools real dog breeders shortlist in 2026, explains what each is actually good for, and is honest about where each one falls short for an operational program.
       </p>
     </div>
   </section>
 
-  <!-- What to Look For -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">What to look for in dog breeding software</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold mb-4">OFA and PennHIP integration</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Health testing is non-negotiable in responsible dog breeding. Your software should track OFA numbers, PennHIP scores, genetic test results, and clearances. It should link these to individual dogs and show them on pedigrees.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">COI calculation</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Coefficient of Inbreeding matters. The software should calculate COI from pedigree data and help you evaluate breeding decisions before you make them. If it can't do this, you're calculating manually or ignoring it.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Progesterone test tracking</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Timing is everything in dog breeding. The software should track progesterone levels, predict optimal breeding windows, and help you plan AI or natural breedings based on actual data.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Heat cycle management</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Every breed is different. Some cycle every 6 months, some every 12. Your software should track individual patterns, predict future cycles, and alert you when bitches are due.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Breed-specific health tests</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Golden Retrievers need different tests than German Shepherds. The software should understand breed-specific requirements and let you track what matters for your breed.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">AKC and UKC registry support</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Registration numbers, titles, and DNA profiles matter. Your software should track these and generate the information you need for litter registrations.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Litter management</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            From whelping through placement. Track individual puppies, weights, colors, markings. Link puppies to buyers. Generate documentation. If the software treats a litter as one record instead of individual puppies, it's not built for breeding.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-4">Waitlist and buyer management</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Good breeders have waitlists. Your software should help you manage them-track preferences, match puppies to buyers, and handle the communication that comes with every litter.
-          </p>
-        </div>
+  <!-- Quick comparison table -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Quick comparison: dog breeding software at a glance</h2>
+      <p class="text-gray-700 mb-6">
+        The table below is a positioning summary, not a feature audit. It reflects how each tool publicly markets itself. Verify with a trial against your own data before you commit.
+      </p>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-100 text-left">
+            <tr>
+              <th scope="col" class="px-4 py-3 font-semibold">Software</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Best suited for</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Primary focus</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Mobile-first</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Buyer portal</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Marketplace</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="bg-[hsl(24,95%,97%)]">
+              <th scope="row" class="px-4 py-3 font-bold text-left">BreederHQ</th>
+              <td class="px-4 py-3">Operational breeders running a program end-to-end</td>
+              <td class="px-4 py-3">Operations + records + clients + marketplace</td>
+              <td class="px-4 py-3">Yes</td>
+              <td class="px-4 py-3">Yes</td>
+              <td class="px-4 py-3">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-4 py-3 font-semibold text-left">DogBreederPro</th>
+              <td class="px-4 py-3">Breeders who primarily need kennel records</td>
+              <td class="px-4 py-3">Kennel record-keeping</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">No</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Breedera</th>
+              <td class="px-4 py-3">Hobby breeders who want a phone-first cycle and litter tracker</td>
+              <td class="px-4 py-3">Heat, litter, and whelping logs</td>
+              <td class="px-4 py-3">Yes</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">No</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-4 py-3 font-semibold text-left">ZooEasy</th>
+              <td class="px-4 py-3">Multi-species clubs and pedigree-driven breeders</td>
+              <td class="px-4 py-3">Pedigree database and records</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">No</td>
+              <td class="px-4 py-3">No</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Kintraks</th>
+              <td class="px-4 py-3">Long-running breeders who want a traditional records tool</td>
+              <td class="px-4 py-3">Pedigree, records, registry exports</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">No</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-4 py-3 font-semibold text-left">PedFast</th>
+              <td class="px-4 py-3">Pedigree printing and breed club work</td>
+              <td class="px-4 py-3">Pedigree generation</td>
+              <td class="px-4 py-3">No (desktop-leaning)</td>
+              <td class="px-4 py-3">No</td>
+              <td class="px-4 py-3">No</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Breeder Cloud Pro</th>
+              <td class="px-4 py-3">Kennel-style breeders who want records and contracts in one place</td>
+              <td class="px-4 py-3">Records and contracts</td>
+              <td class="px-4 py-3">Limited</td>
+              <td class="px-4 py-3">Partial</td>
+              <td class="px-4 py-3">No</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <th scope="row" class="px-4 py-3 font-semibold text-left">GoodDog <span class="font-normal text-gray-500">(marketplace context only)</span></th>
+              <td class="px-4 py-3">Breeders who want a buyer-facing listing channel</td>
+              <td class="px-4 py-3">Buyer-facing marketplace and directory</td>
+              <td class="px-4 py-3">Yes (buyer side)</td>
+              <td class="px-4 py-3">N/A</td>
+              <td class="px-4 py-3">Is a marketplace</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <p class="text-sm text-gray-600 mt-4">
+        <strong>How to read this table.</strong> "Best suited for" describes the breeder type each tool's public positioning targets. "Primary focus" describes the center of gravity of the product. A "Limited" rating means the capability exists in some form but is not the product's strength based on public positioning. None of this replaces a trial.
+      </p>
     </div>
   </section>
 
-  <!-- What to Avoid -->
+  <!-- What makes great dog breeding software -->
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Red flags in dog breeding software</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">What makes great dog breeding software?</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-10">
+        Before we go vendor by vendor, here is the rubric that matters once you are running a real program. If a tool fails on more than two of these, it is the wrong tool, no matter how slick the marketing is.
+      </p>
 
       <div class="space-y-8">
         <div>
-          <h3 class="text-2xl font-bold mb-4">Generic pet management systems</h3>
+          <h3 class="text-2xl font-bold mb-3">1. It understands canine reproduction, not "pets in general"</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Software built for pet daycares or veterinary clinics is not breeding software. If it doesn't understand heat cycles, progesterone timing, and litter management, it won't work for breeding.
+            Dogs are not cats and they are not livestock. A real dog breeding tool models heat cycles (including breeds that cycle every six months vs. every twelve), the 63-day gestation window, progesterone-driven breeding timing, AI methods (fresh, chilled, frozen, surgical), and the difference between a mating and a confirmed pregnancy. If the software treats a breeding as a single date field, it does not understand dog breeding.
           </p>
         </div>
-
         <div>
-          <h3 class="text-2xl font-bold mb-4">No distinction between breeding types</h3>
+          <h3 class="text-2xl font-bold mb-3">2. Progesterone tracking is first-class</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Dogs cycle differently than cats or horses. Software that treats all species the same doesn't understand canine reproduction. If it can't handle seasonal vs. year-round cycling, it's not for dogs.
+            Modern dog breeding runs on progesterone numbers. The tool should let you log multiple tests across a heat, plot the trend, and surface the ovulation window before you ship semen or book a stud trip, not weeks after the breeding is over.
           </p>
         </div>
-
         <div>
-          <h3 class="text-2xl font-bold mb-4">Manual pedigree entry without import</h3>
+          <h3 class="text-2xl font-bold mb-3">3. Litters are collections of individual puppies, not a single row</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Entering 5-generation pedigrees manually is a waste of time. Good software imports from registries or pedigree databases. If you're typing everything, the software is working against you.
+            Every puppy is a record. Weights, colors, markings, microchip, ENS, vet visits, the buyer it goes to. If the system stores "Litter A had 8 puppies" and that is it, you are going to keep using a spreadsheet for the part that actually matters.
           </p>
         </div>
-
         <div>
-          <h3 class="text-2xl font-bold mb-4">No health test tracking</h3>
+          <h3 class="text-2xl font-bold mb-3">4. Health testing connects to pedigrees</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            If you can't track OFA numbers, genetic tests, and clearances in the system, you're keeping separate records. That defeats the purpose of breeding software.
+            OFA, PennHIP, Embark, Wisdom Panel, breed-specific DNA panels, eye and cardiac clearances. These need to live on the individual dog and show up on the pedigree. Otherwise health testing is data you have to look up manually every time you plan a breeding.
           </p>
         </div>
-
         <div>
-          <h3 class="text-2xl font-bold mb-4">Limited to one breed</h3>
+          <h3 class="text-2xl font-bold mb-3">5. Waitlists, deposits, and contracts are not afterthoughts</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Some breeders work with multiple breeds. If the software locks you to one breed or charges per breed, that's a problem if you expand.
+            If you are a working breeder, your day-to-day pain is not pedigrees. It is the waitlist that is six months old, the deposit you cannot remember if you collected, and the contract you sent on email and cannot find. A serious tool treats waitlists, deposits, and contracts as core objects, not bolt-ons.
           </p>
         </div>
-
         <div>
-          <h3 class="text-2xl font-bold mb-4">No genetic calculations</h3>
+          <h3 class="text-2xl font-bold mb-3">6. Buyers can self-serve</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            COI, color genetics, trait predictions-these matter. Software that only stores data without calculating anything isn't helping you make better breeding decisions.
+            The single biggest time win in modern breeder software is letting buyers see their own puppy records, photos, pedigree, and documents without emailing you. A buyer portal is the difference between answering the same five questions 40 times per litter and answering them zero times.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">7. It works on the phone, in the whelping area, at 3 a.m.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Half the actual work happens away from a desk. The tool should be usable one-handed, on a phone, in low light, with one hand on a puppy. "Mobile-friendly" is not enough. Mobile-first matters.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">8. The data is yours</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Export. CSV, PDF, your pedigrees in a standard format. If you cannot get your data out, you do not own your program, you rent it.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Where BreederHQ Fits -->
+  <!-- Workflow matrix -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">How dog breeding tools actually differ: a workflow matrix</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A feature checkbox does not tell you whether the tool fits the way you work. This matrix maps the major operational workflows in a modern dog breeding program against where each tool's public positioning puts its center of gravity. A check means the workflow is a clear strength of how the product publicly positions itself. A dash means the workflow is either not the product's focus or not clearly addressed in its public materials. This is not a feature audit, and tools change. Use it as a shortlist filter, not a buying decision.
+      </p>
+
+      <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-100 text-left">
+            <tr>
+              <th scope="col" class="px-3 py-3 font-semibold">Workflow</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">BreederHQ</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">DogBreederPro</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">Breedera</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">ZooEasy</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">Kintraks</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">PedFast</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">Breeder Cloud Pro</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">GoodDog</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {[
+              ['Heat cycle tracking',           ['✓','–','✓','–','–','–','–','N/A']],
+              ['Progesterone timing workflow',  ['✓','–','–','–','–','–','–','N/A']],
+              ['AI / frozen semen documentation',['✓','–','–','–','–','–','–','N/A']],
+              ['Whelping & litter records',     ['✓','✓','✓','–','✓','–','✓','N/A']],
+              ['Individual puppy tracking',     ['✓','✓','✓','–','✓','–','✓','N/A']],
+              ['Pedigree generation',           ['✓','✓','–','✓','✓','✓','✓','N/A']],
+              ['COI calculation',               ['✓','–','–','✓','✓','✓','–','N/A']],
+              ['OFA / health test tracking',    ['✓','–','–','✓','✓','–','–','N/A']],
+              ['Puppy applications / intake',   ['✓','–','–','–','–','–','–','–']],
+              ['Waitlist management',           ['✓','–','–','–','–','–','–','–']],
+              ['Deposits & payments',           ['✓','–','–','–','–','–','✓','–']],
+              ['Contracts & e-signatures',      ['✓','–','–','–','–','–','✓','–']],
+              ['Buyer portal',                  ['✓','–','–','–','–','–','–','N/A']],
+              ['In-app breeder ↔ buyer messaging',['✓','–','–','–','–','–','–','✓ (buyer-side)']],
+              ['Public storefront / listings',  ['✓','–','–','–','–','–','–','✓']],
+              ['Marketplace exposure',          ['✓','–','–','–','–','–','–','✓']],
+              ['Mobile-first usage',            ['✓','–','✓','–','–','–','–','✓ (buyer-side)']]
+            ].map(([workflow, marks]) => (
+              <tr>
+                <th scope="row" class="px-3 py-2 font-medium text-left">{workflow}</th>
+                {(marks as string[]).map((m, idx) => (
+                  <td class={`px-3 py-2 text-center ${idx === 0 ? 'bg-[hsl(24,95%,97%)] font-semibold text-[hsl(24,95%,40%)]' : 'text-gray-700'}`}>{m}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-base text-gray-700 leading-relaxed mt-6">
+        <strong>The honest read on this matrix.</strong> Most tools were built for one slice of the work (pedigrees, or records, or marketing) and grew sideways from there. BreederHQ was built the other direction: starting from the operational program and pulling pedigrees, records, clients, and marketplace into one place. That is why this matrix looks the way it does. If your program only needs one slice, a focused tool is fine. If you are running an end-to-end program, the seams between tools are where most breeders lose time.
+      </p>
+    </div>
+  </section>
+
+  <!-- Individual breakdowns -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-10">Individual breakdowns</h2>
+
+      <!-- BreederHQ -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-3">BreederHQ</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4"><strong>Best suited for:</strong> Working breeders running a full program: heat cycles, breedings, litters, waitlists, deposits, contracts, buyer portal, and a marketplace presence, in one connected system.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">What it does well.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-4 space-y-2">
+          <li>Treats the program as one connected system: dogs, heats, breedings, litters, puppies, applications, waitlist, contracts, deposits, buyers, marketplace, all linked.</li>
+          <li>Heat cycle tracking with multi-point progesterone logging and breeding-window guidance.</li>
+          <li>Individual puppy records, not litter-as-a-row.</li>
+          <li>OFA, PennHIP, and DNA test results that live on the dog and surface on the pedigree.</li>
+          <li>COI calculation from pedigree data.</li>
+          <li>Built-in buyer portal so puppy buyers self-serve their puppy records, photos, pedigree, contracts, and documents.</li>
+          <li>Built-in marketplace presence at marketplace.breederhq.com. Listings, breeder profile, and inquiries flow into the same system as your operations.</li>
+          <li>Mobile-first design for whelping nights, shows, and on-the-go updates.</li>
+          <li>Built around dogs first, because dog breeding workflows are operationally the most complex: short, time-critical breeding windows, progesterone-driven timing, individual puppy records, and high-touch buyer programs. The product is shaped by those constraints.</li>
+        </ul>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may not fit.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-4 space-y-2">
+          <li>If you only want to print pedigrees, a focused pedigree tool will feel lighter.</li>
+          <li>If you do not want a buyer-facing marketplace presence, you will leave features on the table.</li>
+          <li>Active development means the product is moving. Breeders who prefer "set it and forget it" software that has not changed in a decade should know that is not us.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Pricing model.</strong> Free tier available. Paid tiers unlock advanced operational features. Verify current pricing on the pricing page.</p>
+      </div>
+
+      <!-- DogBreederPro -->
+      <div class="mb-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">DogBreederPro</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Breeders whose primary need is kennel-style records and litter logs in a focused, no-frills tool.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> DogBreederPro positions itself around kennel record-keeping for dog breeders. The product appears focused on the records side of the program (dogs, litters, basic documents) rather than the operational planning side.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Public positioning does not emphasize modern progesterone-timing workflows.</li>
+          <li>Buyer-facing portal and integrated waitlist, deposit, and contract flows do not appear to be the product's center of gravity.</li>
+          <li>A breeder running an active program will likely still need separate tools for waitlist management, contracts, and buyer communication.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Verify before deciding.</strong> Run a free trial with one of your actual breeding cycles end to end. Pay attention to where you have to leave the tool to get something done.</p>
+      </div>
+
+      <!-- Breedera -->
+      <div class="mb-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">Breedera</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Hobby and smaller-program breeders who want a phone-first tool focused on heat cycles, breedings, and litter logs.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breedera publicly markets itself as a mobile-first breeding tracker focused on heats, breedings, whelping, and litter records, designed to be used on the phone day to day.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> The mobile-first design is genuinely useful for the parts of the program that happen away from a desk: logging a heat, updating puppy weights during whelp checks, snapping a photo of a new litter.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Public positioning is concentrated on the breeding-and-whelping core. Waitlist management, deposit and contract handling, and a full buyer portal do not appear to be the product's primary emphasis.</li>
+          <li>Programs that need to operate the full pipeline (application, waitlist, deposit, contract, placement, buyer portal) will likely outgrow it.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Smaller programs whose biggest pain is "I need to stop tracking heats in a notebook." Breedera is a clean answer to that specific problem.</p>
+      </div>
+
+      <!-- ZooEasy -->
+      <div class="mb-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">ZooEasy</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Multi-species clubs, pedigree-driven breeders, and breeders whose primary daily work is keeping a clean breeding-records database.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> ZooEasy publicly positions itself as a multi-species pedigree and breeding records database. It is not dog-specific. It serves dog, cat, horse, rabbit, and other animal breeders with a strong emphasis on pedigree management, inbreeding analysis, and structured records.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Deep pedigree management, COI and relatedness analysis, and the ability to maintain a clean multi-generation database across many animals. Strong for breed clubs and breeders who treat the database itself as the deliverable.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>The product's center of gravity is records and pedigree, not operational workflow. Heat cycle and progesterone-timing workflows do not appear to be primary emphases.</li>
+          <li>Buyer-facing portal, waitlist, deposit, contract, and marketplace tooling do not appear to be the product's focus.</li>
+          <li>The interface and user experience reflect the product's heritage as a records database rather than a modern mobile-first operations tool.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders and clubs whose work is fundamentally pedigree- and records-driven, not those running an end-to-end puppy program.</p>
+      </div>
+
+      <!-- Kintraks -->
+      <div class="mb-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">Kintraks</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Established breeders who want a long-running, traditional records-and-pedigree tool with registry export features.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Kintraks is a long-established breeder records product with pedigree, breeding records, and registration support. It targets breeders who want a comprehensive records system from a vendor that has been in the category for a long time.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Maturity. The product has had years to round out its records and pedigree features, and it is familiar to breeders who have used desktop-style breeder software before.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>The product's heritage and public positioning emphasize records and pedigree over modern workflow tooling like progesterone timing, integrated waitlist management, buyer portals, and marketplace presence.</li>
+          <li>User experience reflects the product's age. Breeders coming from modern SaaS may find the workflow patterns dated.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders whose current pain is "I need a real records system" rather than "I need to run my whole program in one place."</p>
+      </div>
+
+      <!-- PedFast -->
+      <div class="mb-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">PedFast</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Breed clubs, pedigree-heavy breeders, and anyone whose primary deliverable is a printed or digital pedigree.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> PedFast publicly positions itself around pedigree generation: building, formatting, and printing pedigrees, primarily on a Windows desktop workflow.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Pedigree work. If your output is pedigrees (for buyers, breed clubs, or registries) a focused pedigree tool will produce cleaner results than a general operations tool that also prints pedigrees.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Pedigrees are one part of running a program. Heat cycle tracking, progesterone timing, litter operations, waitlists, contracts, deposits, and buyer portals are not the product's focus.</li>
+          <li>A desktop-leaning workflow is at odds with how most breeders actually run their day (phone in hand, in the whelping area or at a show).</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders whose biggest job is pedigree production, not program operations.</p>
+      </div>
+
+      <!-- Breeder Cloud Pro -->
+      <div class="mb-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">Breeder Cloud Pro</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Kennel-style operations that need records plus contracts and basic client tooling in one place.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breeder Cloud Pro publicly positions itself as a kennel and breeder records platform with support for contracts, payments, and customer records.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Bundling records with contracts and payments in one tool is genuinely useful. Fewer separate apps to wire together than the records-only competitors.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Public positioning does not emphasize modern progesterone-timing workflows or deep heat-cycle planning.</li>
+          <li>A breeder-grade public storefront and dedicated buyer portal where puppy buyers self-serve their records do not appear to be primary emphases.</li>
+          <li>Integrated marketplace exposure is not part of the product.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Established kennel operations whose biggest gap is "I have records, but my contracts and payments are scattered." Breeder Cloud Pro is built around closing that specific gap.</p>
+      </div>
+
+      <!-- GoodDog -->
+      <div class="mb-4 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-3">GoodDog <span class="text-gray-500 font-normal text-base">(marketplace context only)</span></h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3">
+          GoodDog is not breeder operations software. It is a buyer-facing marketplace where prospective puppy buyers discover breeders, plus a directory-style breeder profile. It belongs in this comparison only so the distinction stays clean.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>What GoodDog is for.</strong> Helping buyers find breeders, and giving breeders a curated directory presence.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>What GoodDog is not for.</strong> Running your program. Heat cycle tracking, progesterone timing, litter records, waitlists, contracts, deposits, and your day-to-day operational work all live somewhere else.</p>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>How it relates to BreederHQ.</strong> BreederHQ is operations and marketplace in one system. The program records, the buyer pipeline, and a public listing presence at marketplace.breederhq.com all live in the same place. If you are already on GoodDog, you do not have to leave it. But GoodDog by itself does not replace breeder operations software.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best for by breeder type -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">Best for: by breeder type</h2>
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for the working program running everything in one place: BreederHQ.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">You want one system for heats, breedings, litters, puppies, applications, waitlists, deposits, contracts, the buyer portal, and a public marketplace presence. The cost of jumping between tools is the cost you are trying to eliminate.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for a hobby breeder who just wants to stop tracking heats in a notebook: Breedera.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">The mobile-first approach to logging cycles and litters is a clean upgrade from paper. You will outgrow it if you scale into deposits, contracts, and a real waitlist.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for a pedigree- and records-driven breeder or club: ZooEasy or Kintraks.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">If the database itself is the deliverable, pick the tool with the strongest records and pedigree heritage. Plan to use separate tools for the operational and buyer-facing work.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for pedigree printing: PedFast.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">If your output is pedigrees (for clubs, registries, or buyers) a focused pedigree tool will produce better results than a general operations tool that also prints pedigrees.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for a kennel that needs records plus contracts in one place: Breeder Cloud Pro.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">Closing the records-plus-contracts gap is the product's reason to exist. Just understand that it is not built around a modern buyer portal or marketplace presence.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for buyer-side visibility: BreederHQ's marketplace or GoodDog.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">BreederHQ's marketplace is part of the same system that runs your program. GoodDog is a separate buyer-facing channel. Many breeders use both. Neither, by itself, replaces operations software.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace vs operations -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Marketplace vs. operations software: the distinction every breeder should understand</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        This is where most breeders waste the first six months of their software search, so it is worth being explicit.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        <strong>Marketplaces</strong> are buyer-facing. Their job is to help puppy buyers find breeders. The breeder's profile is the product. Marketplaces do not run your program. They do not track heat cycles, they do not manage your waitlist, they do not hold your contracts, and they do not handle puppy records after placement. Examples in dogs: GoodDog, AKC Marketplace, the marketplace at marketplace.breederhq.com.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        <strong>Operations software</strong> is breeder-facing. Its job is to run your program: heats, breedings, litters, puppies, waitlists, contracts, deposits, buyer communication. You log into it every day. Buyers may see a portal slice of it, but it is built for you. Examples in dogs: BreederHQ, DogBreederPro, Breedera, Breeder Cloud Pro, Kintraks.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        <strong>Pedigree-and-records tools</strong> are a subset of operations software focused on the database layer: animals, pedigrees, COI, health testing. Examples: ZooEasy, Kintraks, PedFast.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        <strong>Where BreederHQ is different.</strong> It is the operations system and the marketplace at the same time. Your listings, profile, and buyer inquiries live in the same place as your heats, breedings, litters, contracts, and waitlist. That is why this page exists. Most breeders do not realize this combination is now an option.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mobile experience -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Mobile experience: where breeder software actually gets used</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">A meaningful share of the work in any active dog program happens away from a desk:</p>
+      <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-6 space-y-2">
+        <li>Logging a new heat the morning you noticed it.</li>
+        <li>Updating puppy weights during whelp checks.</li>
+        <li>Snapping a photo of a litter for the buyer portal.</li>
+        <li>Answering a buyer question between sessions at a show.</li>
+        <li>Reviewing a progesterone result the vet just texted you.</li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        If the tool is not usable on a phone, in low light, with one hand, it does not matter how good the desktop interface looks. You will not use it, and the records will drift.
+      </p>
+
+      <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-100 text-left">
+            <tr>
+              <th scope="col" class="px-4 py-3 font-semibold">Tool</th>
+              <th scope="col" class="px-4 py-3 font-semibold">Mobile experience (public positioning)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="bg-[hsl(24,95%,97%)]"><th scope="row" class="px-4 py-3 font-bold text-left">BreederHQ</th><td class="px-4 py-3">Mobile-first. The product is designed to be used on the phone in the whelping area, at shows, and on the go.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breedera</th><td class="px-4 py-3">Mobile-first phone-centric tracker.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">DogBreederPro</th><td class="px-4 py-3">Appears to be desktop-leaning with mobile access. Not the product's primary emphasis.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">ZooEasy</th><td class="px-4 py-3">Records-database heritage. Not publicly positioned as a mobile-first product.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Kintraks</th><td class="px-4 py-3">Long-running records tool. Mobile is not the primary emphasis.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">PedFast</th><td class="px-4 py-3">Desktop-leaning pedigree production workflow.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breeder Cloud Pro</th><td class="px-4 py-3">Web-accessible. Mobile is not publicly emphasized as the primary use mode.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-base text-gray-600 mt-4">Verify with a trial. The fastest way to tell whether a tool is genuinely mobile-first is to try logging a real heat and a real litter weight on your phone, in your barn or whelping area, in actual conditions.</p>
+    </div>
+  </section>
+
+  <!-- Pros / Cons -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-10">Pros and cons at a glance</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">BreederHQ</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> End-to-end operations in one system. Built around dogs natively because dog breeding is operationally the most complex. Mobile-first. Buyer portal. Built-in marketplace presence. Active development. Free tier.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Newer than legacy tools. If you want decade-old, unchanging software, this is not it. If your only need is pedigree printing, a focused pedigree tool will feel lighter.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">DogBreederPro</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Focused on dog kennel records. Familiar to breeders who want a records-first tool.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Public positioning suggests it is not built around modern progesterone timing, integrated waitlist and contract flows, or a dedicated buyer portal. Operational breeders may still need separate tools.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Breedera</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Genuinely mobile-first. Clean upgrade from paper or notes for heat and litter tracking.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Operational depth (waitlist, deposits, contracts, full buyer portal, marketplace) does not appear to be the product's primary emphasis. Active programs may outgrow it.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">ZooEasy</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Deep pedigree and records database. Multi-species. Strong for clubs and pedigree-driven breeders.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Records-database heritage shows in the user experience. Not publicly positioned around heat-cycle workflows, waitlists, contracts, buyer portals, or a marketplace.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Kintraks</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Mature records and pedigree tool. Familiar to breeders who have used traditional breeder software.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Public positioning emphasizes records and pedigree over modern operational workflows. UX reflects the product's age.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">PedFast</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Focused on pedigree generation and formatting. Good at the one job it is built for.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Not built to run an operational program. Desktop-leaning workflow.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Breeder Cloud Pro</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Bundles records with contracts and payments. Useful for kennel operations that want fewer separate apps.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Public positioning does not emphasize modern progesterone timing, a dedicated buyer portal, or marketplace presence.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">GoodDog <span class="text-gray-500 font-normal text-base">(marketplace, not operations software)</span></h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Buyer-facing visibility. Curated directory presence.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> It is not breeder operations software. You still need a separate system to run your program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it feels like to run a program on BreederHQ -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">What BreederHQ offers dog breeders</h2>
-
-      <p class="text-xl leading-relaxed mb-6">
-        BreederHQ was built with canine reproduction in mind. Heat cycle tracking with progesterone test timing. OFA and health test tracking linked to individual dogs and pedigrees. COI calculation from pedigree data.
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">What it actually feels like to run a program on BreederHQ</h2>
+      <p class="text-lg leading-relaxed mb-6">
+        We have spent the page being honest about competitors. It is fair to be specific about what we are.
       </p>
-
-      <p class="text-xl leading-relaxed mb-6">
-        Litter management that treats each puppy as an individual. Waitlist tools that help you match puppies to buyers. Buyer portals where your clients can see their puppy's information, pedigree, and documents.
+      <p class="text-lg leading-relaxed mb-6">
+        BreederHQ is built for the working breeder. The shape of the product follows the shape of the work:
       </p>
-
-      <p class="text-xl leading-relaxed mb-6">
-        Works for one breed or twenty. Seasonal cycling breeds and year-round cycling breeds. Small hobby breeders and larger programs. Mobile-friendly for when you're at shows or whelping at 3 AM.
-      </p>
-
-      <p class="text-xl leading-relaxed mb-8">
-        Join our early adopter program with full access to test with your actual breeding program.
-      </p>
-
+      <ul class="space-y-4 text-lg leading-relaxed mb-8">
+        <li><strong>Heats and breedings.</strong> Open a girl's profile, log the heat, drop in progesterone results as they come back, see the breeding window. When you breed, the breeding is linked to the heat. When she is pregnant, the litter is linked to the breeding.</li>
+        <li><strong>Whelping and litters.</strong> Each puppy is an individual record from the night they are born. Weights, colors, markings, microchip, ENS, vet visits, all on the puppy, not on the litter row.</li>
+        <li><strong>Applications, waitlists, deposits, contracts.</strong> Buyers apply through your storefront. Approved applicants land on your waitlist. Deposits and contracts are tracked against the buyer. When you place a puppy, the puppy is linked to the buyer and the buyer portal opens.</li>
+        <li><strong>Buyer portal.</strong> Your buyer logs in and sees their puppy: photos, pedigree, contracts, vet records, the whole file, without emailing you. The 40 "do you have any updates?" emails per litter go away.</li>
+        <li><strong>Marketplace.</strong> Your program shows up at marketplace.breederhq.com. Inquiries come back into the same system. No second tool.</li>
+      </ul>
       <div class="flex flex-col sm:flex-row gap-4">
         <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Started Free
@@ -226,170 +704,63 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Questions to Ask -->
-  <section class="py-20 px-4 bg-gray-50">
+  <!-- How to decide -->
+  <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">Questions to ask any dog breeding software vendor</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-xl font-bold mb-3">How does it track progesterone tests?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Can you enter multiple tests per cycle? Does it calculate optimal breeding timing? Does it predict ovulation based on the data? If not, you're still using spreadsheets.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it calculate COI?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            How many generations? Can you see COI before the breeding happens? If it only shows COI after puppies are born, that's too late.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">How are health tests stored?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Can you track OFA numbers, test results, and clearances? Do they show on pedigrees? Can you filter breeding stock by health clearances? This is essential for responsible breeding.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">How does litter management work?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Are puppies individual records or just a count? Can you track weights, colors, markings? Can you link each puppy to a buyer? The answer matters.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">Does it understand seasonal vs. year-round cycling?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Some breeds cycle every 6 months like clockwork. Others are irregular. Can the software track and predict both patterns?
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">Can buyers access information directly?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            A buyer portal where clients can see their puppy's information, pedigree, and photos saves you countless hours answering questions. If it doesn't have this, you're still manually managing every request.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">What about AI breedings?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Frozen semen, fresh chilled, surgical AI-these are common in dog breeding. Does the software handle the documentation and timing for different AI methods?
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-bold mb-3">How does it handle co-ownership?</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Many dogs have multiple owners or breeding rights arrangements. Can the software track these relationships and permissions?
-          </p>
-        </div>
-      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">How to actually decide</h2>
+      <ol class="space-y-4 text-lg text-gray-700 leading-relaxed list-decimal pl-6">
+        <li><strong>Shortlist 2 to 3 tools</strong> that match your breeder type from the "Best for" section.</li>
+        <li><strong>Use the free trials.</strong> Enter your real dogs. Log a real heat. Log a real litter. Plan a real breeding.</li>
+        <li><strong>Test mobile.</strong> Whatever you are going to use in the whelping area, use it there, not at your desk.</li>
+        <li><strong>Test the buyer side.</strong> If the tool has a buyer portal, send yourself a test buyer flow. Time how long it takes you to share a puppy update with a buyer.</li>
+        <li><strong>Export your data.</strong> Confirm you can get it out before you put more of it in.</li>
+        <li><strong>Then commit.</strong></li>
+      </ol>
     </div>
   </section>
 
-  <!-- Making the Decision -->
-  <section class="py-20 px-4">
+  <!-- FAQ -->
+  <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">How to make your decision</h2>
-
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">Frequently asked questions</h2>
       <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold mb-3">1. Test with your actual breeding program</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Enter your dogs. Enter a breeding. Track a heat cycle. See if the workflow makes sense for how you actually work.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">2. Check breed-specific features</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            Different breeds have different requirements. Make sure the software can handle the health tests and characteristics specific to your breed.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">3. Try the buyer-facing features</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            If the software has buyer portals or client-facing tools, test them. This is where you'll save the most time once you have a litter on the ground.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">4. Ask other breeders in your breed</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            What do successful breeders in your breed use? Their experience matters. But also test yourself-what works for them might not work for you.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-bold mb-3">5. Consider long-term value</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">
-            You're building a database of your breeding program. Choose software that will be around in 5 years and can grow with your program.
-          </p>
-        </div>
+        {faqs.map((faq) => (
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">{faq.question}</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Conclusion -->
-  <section class="py-20 px-4 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-bold mb-8">The bottom line</h2>
-
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Dog breeding software needs to understand canine reproduction. Heat cycles, progesterone timing, health testing, COI calculation-these aren't optional features.
-      </p>
-
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        Generic pet software won't work. Neither will livestock software or systems built for other species. You need software built specifically for dog breeding.
-      </p>
-
-      <p class="text-lg text-gray-700 leading-relaxed font-semibold">
-        Use free trials. Test with your actual data. Choose software that makes your work easier, not harder.
-      </p>
-    </div>
-  </section>
-
-  <!-- Related Resources -->
-  <section class="py-20 px-4">
+  <!-- Related resources -->
+  <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Learn more</h2>
       <div class="space-y-3 text-lg">
-        <div>
-          <a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">
-            → See verified dog breeders using BreederHQ on the marketplace
-          </a>
-        </div>
-        <div>
-          <a href="/find-breeders/dogs" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">
-            → Find verified dog breeders by breed
-          </a>
-        </div>
-        <div>
-          <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
-            → Dog Breeding Software Features
-          </a>
-        </div>
-        <div>
-          <a href="/compare/best-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
-            → General Breeding Software Guide
-          </a>
-        </div>
-        <div>
-          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
-            → How to Track Breeding Cycles
-          </a>
-        </div>
-        <div>
-          <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">
-            → BreederHQ vs. Spreadsheets
-          </a>
-        </div>
+        <div><a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">→ Dog breeding software features</a></div>
+        <div><a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">→ Heat cycles and progesterone timing</a></div>
+        <div><a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists and placement</a></div>
+        <div><a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">→ Genetics and health testing</a></div>
+        <div><a href="/compare/best-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">→ The general breeding software buyer's guide</a></div>
+        <div><a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">→ How BreederHQ compares to spreadsheets</a></div>
+        <div><a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">→ Verified dog breeders using BreederHQ on the marketplace</a></div>
+        <div><a href="/find-breeders/dogs" class="text-[hsl(24,95%,53%)] hover:underline">→ Find verified dog breeders by breed</a></div>
       </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Run your whole dog program in one system</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        If you want to see what running an end-to-end dog program in one system actually feels like, the free tier is the fastest way.
+      </p>
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-[hsl(24,95%,53%)] text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free
+      </a>
     </div>
   </section>
 
