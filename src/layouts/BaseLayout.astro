@@ -78,6 +78,7 @@ const { title, description, breadcrumbs, faqs, howTo, article, service, noindex,
 const currentUrl = Astro.url.pathname === '/' ? '' : Astro.url.pathname.replace(/\/$/, '');
 const fullUrl = `https://breederhq.com${currentUrl}`;
 const ogImage = ogImageProp || 'https://breederhq.com/og-image.jpg'; // Default OG image
+const breederHQOrganizationId = 'https://breederhq.com/#organization';
 
 // Facebook Business Manager domain verification. When set, FB links the domain
 // to our Page so link previews show "BreederHQ" attribution instead of
@@ -89,6 +90,7 @@ const fbDomainVerification = import.meta.env.PUBLIC_FB_DOMAIN_VERIFICATION;
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": breederHQOrganizationId,
   "name": "BreederHQ",
   "url": "https://breederhq.com",
   "logo": "https://breederhq.com/logo.png",
@@ -97,12 +99,36 @@ const organizationSchema = {
   "sameAs": [
     "https://x.com/Breeder_HQ",
     "https://www.linkedin.com/in/breeder-hq-46518939b/",
-    "https://www.facebook.com/profile.php?id=61585406435189"
+    "https://www.facebook.com/profile.php?id=61585406435189",
+    // sameAs: external profiles that describe the same BreederHQ entity.
+    // Each URL must be a legitimate, owner-controlled profile. Do NOT invent URLs.
+    // Inventory checklist (confirm before adding):
+    //   - Instagram        — TODO: confirm or skip
+    //   - YouTube          — TODO: confirm or skip
+    //   - TikTok           — TODO: confirm or skip
+    //   - Crunchbase       — TODO: confirm or skip
+    //   - G2               — TODO: confirm or skip
+    //   - Capterra         — TODO: confirm or skip
+    //   - AlternativeTo    — TODO: confirm or skip
+    //   - Product Hunt     — TODO: confirm or skip
+    //   - LinkedIn Company Page (different from current personal LI link) — TODO
+    //   - GitHub           — TODO: confirm or skip
   ],
+  // TODO: Add a PostalAddress when BreederHQ's registered or mailing address is confirmed.
+  "founder": {
+    "@type": "Person",
+    "@id": "https://breederhq.com/#aaron-payne",
+    "name": "Aaron Payne",
+    "jobTitle": "Founder",
+    "sameAs": [
+      // TODO: Aaron's personal LinkedIn URL
+      // TODO: Aaron's personal X/Twitter URL (if separate from @Breeder_HQ)
+    ]
+  },
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "url": "https://breederhq.com/contact"
+    "email": "support@breederhq.com"
   }
 };
 
@@ -162,9 +188,7 @@ const softwareSchema = {
     "Cross-tenant stud book search with opt-in network visibility"
   ],
   "provider": {
-    "@type": "Organization",
-    "name": "BreederHQ",
-    "url": "https://breederhq.com"
+    "@id": breederHQOrganizationId
   }
   // TODO: Add aggregateRating when customer reviews are available
   // Example:
@@ -255,9 +279,7 @@ if (service) {
     "description": service.description,
     "serviceType": service.serviceType,
     "provider": {
-      "@type": "Organization",
-      "name": "BreederHQ",
-      "url": "https://breederhq.com"
+      "@id": breederHQOrganizationId
     },
     "areaServed": {
       "@type": "Country",
@@ -286,12 +308,7 @@ if (article) {
       ...(article.author.url ? { "url": article.author.url } : {})
     },
     "publisher": {
-      "@type": "Organization",
-      "name": "BreederHQ",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://breederhq.com/logo.png"
-      }
+      "@id": breederHQOrganizationId
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
