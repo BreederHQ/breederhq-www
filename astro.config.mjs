@@ -47,7 +47,7 @@ export default defineConfig({
           item.priority = 0.8;
         }
         // Cornerstone SEO pages — top-level commercial / authority / funnel content
-        else if (/^https:\/\/breederhq\.com\/(dog-breeding-software|heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|dog-heat-cycle-calculator|tools\/heat-cycle-calculator)$/.test(item.url)) {
+        else if (/^https:\/\/breederhq\.com\/(dog-breeding-software|heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|dog-heat-cycle-calculator|tools\/heat-cycle-calculator|tools\/breeding-planner)$/.test(item.url)) {
           item.changefreq = 'monthly';
           item.priority = 0.9;
         }

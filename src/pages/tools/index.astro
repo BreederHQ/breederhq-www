@@ -6,6 +6,19 @@ const breadcrumbs = [
   { name: 'Tools', url: '/tools' }
 ];
 
+// Collection schema lets individual tools link back to this hub via isPartOf.
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': 'https://breederhq.com/tools#collection',
+  'name': 'Free Tools for Breeders',
+  'url': 'https://breederhq.com/tools',
+  'description': 'Free, anonymous, no-signup utilities for dog and livestock breeders.',
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  }
+};
+
 const tools = [
   {
     href: '/tools/heat-cycle-calculator',
@@ -14,7 +27,7 @@ const tools = [
     description: 'Enter the first day of heat to estimate proestrus, estrus, the rough breeding window, the estimated whelping window, and the approximate next-heat date.'
   },
   {
-    href: '/free-tools/breeding-planner',
+    href: '/tools/breeding-planner',
     title: 'Breeding Planner',
     species: 'Dogs, Horses, Goats, Sheep, Cattle',
     description: 'Project upcoming heat cycles, breeding windows, and the open time between them for up to three females across multiple species.'
@@ -27,6 +40,8 @@ const tools = [
   description="Free tools for dog and livestock breeders. Heat cycle calculator, breeding planner, and more. No signup, no data saved."
   breadcrumbs={breadcrumbs}
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
   <main>
     <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
       <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
