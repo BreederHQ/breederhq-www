@@ -1,0 +1,1537 @@
+    .fbp-root {
+      /* Light theme — matches breederhq-www marketing site palette but with
+         the chart palette pushed up in saturation so things still pop. The
+         marketing site provides the chrome (bg, foreground, hairline); the
+         chart provides the energy (phase colors, availability, today line). */
+
+      /* Page chrome — tuned to match the breederhq-www marketing site's
+         vibrant warm-cream aesthetic. White cards lift off a warm off-white
+         page; borders and shadows are tinted slightly warm to match the
+         orange brand rather than fighting it with cool gray. */
+      --bg: hsl(36 22% 96%);                 /* page — warm cream off-white */
+      --surface: hsl(0 0% 100%);             /* cards — pure white pop */
+      --surface-tint: hsl(36 30% 99%);       /* card top gradient stop (warm) */
+      --surface-header: hsl(36 22% 97%);     /* card header strip */
+      --surface-strong: hsl(36 15% 95%);     /* inset / muted card-internal areas */
+      --hairline: hsl(30 14% 82%);           /* warm-toned border, more visible */
+      --hairline-soft: hsl(30 14% 90%);      /* lighter dividers inside cards */
+      --foreground: hsl(224 71% 4%);
+      --muted: hsl(220 9% 46%);
+      --brand-orange: 24 95% 53%;
+      --brand-orange-soft: hsl(24 95% 96%);  /* tinted background for orange accents */
+      --amber: #b45309;
+
+      /* Availability band — saturated teal/emerald that reads as a data
+         overlay, not pastel mint. Pumped opacity so it's visible on white
+         without being washed out, plus a crisp dashed border for definition. */
+      --green-band: rgba(16, 185, 129, 0.22);
+      --green-band-border: rgba(5, 150, 105, 0.7);
+      --green-text: hsl(160 84% 24%);
+
+      /* Phase palette — modern, saturated, distinct.
+         Each color is a confident mid-tone that lights up on a white card.
+         No browns. Placement is now a deep teal/slate so it cools-anchors
+         the end of the cycle instead of feeling like dirt. */
+      --phase-preheat: #2563eb;        /* royal blue */
+      --phase-breeding: #10b981;       /* emerald */
+      --phase-gestation: #8b5cf6;      /* violet */
+      --phase-whelping: #ec4899;       /* hot pink — the moment! */
+      --phase-puppycare: #f59e0b;      /* warm amber */
+      --phase-gohome: #0d9488;         /* deep teal — was brown */
+
+      --today: #ef4444;                /* bright red, not muddy */
+
+      /* Roomongo partner branding — derived from logo's primary blue */
+      --roomongo-brand: 217 91% 60%;
+
+      /* Layered shadows with a slight cool tint — feels softer than pure
+         neutral gray and gives the cards real depth on the off-white page. */
+      --card-shadow:
+        0 1px 0 rgba(15, 23, 42, 0.02),
+        0 2px 4px rgba(15, 23, 42, 0.04),
+        0 6px 16px -8px rgba(15, 23, 42, 0.08);
+      --card-shadow-strong:
+        0 1px 0 rgba(15, 23, 42, 0.03),
+        0 4px 8px rgba(15, 23, 42, 0.06),
+        0 12px 28px -12px rgba(15, 23, 42, 0.14);
+      --card-shadow-hover:
+        0 1px 0 rgba(15, 23, 42, 0.03),
+        0 6px 12px rgba(15, 23, 42, 0.08),
+        0 16px 32px -12px rgba(15, 23, 42, 0.18);
+    }
+    .fbp-root, .fbp-root * { box-sizing: border-box; }
+    .fbp-root { background: var(--bg); color: var(--foreground); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* HEADER */
+    header.site {
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--hairline);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; letter-spacing: -0.01em;
+    }
+    .brand-dot { width: 22px; height: 22px; border-radius: 6px; background: hsl(var(--brand-orange)); }
+    .nav-stub { color: var(--muted); font-size: 13px; }
+
+    /* HERO */
+    section.hero {
+      padding: 36px 24px 12px;
+      /* Responsive: fills viewport width. No max cap so the page adapts to
+         whatever screen size the breeder is on — laptop, desktop, ultrawide. */
+    }
+    .fbp-root h1 {
+      font-size: 48px;
+      letter-spacing: -0.025em;
+      margin: 0 0 12px;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+    .fbp-root h1 .accent { color: hsl(var(--brand-orange)); }
+    .subhead {
+      color: var(--muted);
+      margin: 0 0 4px;
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: none;
+      white-space: nowrap;
+    }
+    /* On narrower viewports the subhead physically can't fit on one line —
+       drop the nowrap so it wraps naturally rather than overflowing. */
+    @media (max-width: 900px) {
+      .subhead {
+        white-space: normal;
+        max-width: 720px;
+      }
+    }
+    .madeby { color: var(--muted); font-size: 12px; margin-top: 8px; opacity: 0.7; }
+
+    /* MAIN */
+    main.tool {
+      padding: 16px 24px 80px;
+      /* Responsive: no max cap — the .layout grid below handles the column
+         widths, the right column has minmax(0, 1fr) so the Gantt scrolls
+         internally, and the left input column stays a fixed 360px. */
+      min-width: 0;
+    }
+
+    .layout {
+      display: grid;
+      /* minmax(0, 1fr) — without the 0 minimum, the right column expands to
+         fit the widest inner content (the long Gantt) and the page itself
+         grows horizontally. Forcing min=0 makes the column behave like a
+         fixed-width viewport so the gantt-wrap's overflow-x produces an
+         internal scrollbar instead of pushing the page wider. */
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 24px;
+    }
+    .layout > * { min-width: 0; }   /* same rule for every direct grid child */
+    @media (max-width: 920px) {
+      .layout { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* INPUT COLUMN — full-color, branded cards */
+    .input-col { display: flex; flex-direction: column; gap: 16px; }
+
+    .dog-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      padding: 0;                     /* zero — header strip + body have their own padding */
+      position: relative;
+      box-shadow: var(--card-shadow);
+      transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+      overflow: hidden;
+    }
+    .dog-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      border-color: hsl(30 14% 70%);
+      transform: translateY(-2px);
+    }
+
+    /* Card header — colored strip, species icon badge, big species name,
+       optional EXAMPLE pill on the right. */
+    .dog-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, hsl(var(--brand-orange) / 0.10), hsl(var(--brand-orange) / 0.02));
+      border-bottom: 1px solid var(--hairline-soft);
+    }
+    .species-badge {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      background: hsl(var(--brand-orange) / 0.16);
+      color: hsl(var(--brand-orange));
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px hsl(var(--brand-orange) / 0.18);
+    }
+    .dog-card-header .header-title {
+      flex: 1;
+      min-width: 0;
+    }
+    .dog-card-header .header-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: hsl(var(--brand-orange));
+      margin-bottom: 2px;
+    }
+    /* Editable header name. Looks like plain bold text at rest; cursor + a
+       very subtle hover background hint that it's editable. Real edit only
+       activates on click/focus. */
+    .dog-card-header .header-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.1;
+      display: inline-block;
+      padding: 2px 4px;
+      margin: -2px -4px;
+      border-radius: 4px;
+      cursor: text;
+      outline: none;
+      transition: background 0.12s;
+    }
+    .dog-card-header .header-name:hover {
+      background: hsl(var(--brand-orange) / 0.08);
+    }
+    .dog-card-header .header-name:focus {
+      background: white;
+      box-shadow: 0 0 0 2px hsl(var(--brand-orange) / 0.45);
+    }
+    /* Show placeholder text when empty (contenteditable doesn't get one for free) */
+    .dog-card-header .header-name:empty::before {
+      content: attr(data-placeholder);
+      color: var(--muted);
+      font-style: italic;
+      font-weight: 600;
+    }
+    .example-pill {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+      background: hsl(var(--brand-orange));
+      padding: 4px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+    }
+
+    .dog-card-body { padding: 18px; }
+    .dog-card-body .row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .dog-card-body .row:last-child { margin-bottom: 0; }
+
+    label.lbl {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--foreground);
+      letter-spacing: 0.01em;
+    }
+    label.lbl .lbl-hint {
+      color: var(--muted);
+      font-weight: 400;
+      margin-left: 4px;
+    }
+    label.lbl .lbl-required {
+      color: hsl(0 84% 50%);
+      font-weight: 700;
+      margin-left: 2px;
+    }
+    /* Required-but-empty date field gets an amber outline so the breeder
+       sees what's blocking the projection. */
+    .dog-card.needs-date input[data-field="lastHeat"] {
+      border-color: hsl(38 92% 55%);
+      background: hsl(48 100% 98%);
+    }
+    .dog-card.needs-date input[data-field="lastHeat"]:focus {
+      border-color: hsl(38 92% 50%);
+      box-shadow: 0 0 0 3px hsl(38 92% 50% / 0.18);
+    }
+
+    input[type="text"], input[type="date"], select {
+      background: var(--surface);
+      border: 1.5px solid var(--hairline);
+      color: var(--foreground);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font: inherit;
+      font-size: 14px;
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input[type="text"]:hover, input[type="date"]:hover, select:hover {
+      border-color: hsl(30 14% 70%);
+    }
+    input[type="text"]:focus, input[type="date"]:focus, select:focus {
+      outline: none;
+      border-color: hsl(var(--brand-orange));
+      box-shadow: 0 0 0 3px hsl(var(--brand-orange) / 0.15);
+    }
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23475569' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 34px;
+    }
+
+    .seasonal-note {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid hsl(38 92% 70%);
+      background: hsl(48 100% 96%);
+      color: var(--amber);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .date-clear-row { display: flex; gap: 8px; align-items: center; }
+    .date-clear-row input[type="text"] { flex: 1; }
+    button.clear-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--hairline);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    button.clear-btn:hover {
+      color: var(--foreground);
+      border-color: hsl(var(--brand-orange));
+      background: hsl(var(--brand-orange) / 0.06);
+    }
+
+    /* Mode indicator — colored status pill, not a flat gray box */
+    .mode-indicator {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mode-indicator::before {
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      content: '';
+      flex-shrink: 0;
+    }
+    .mode-indicator.anchored {
+      color: hsl(160 84% 22%);
+      background: hsl(160 84% 96%);
+      border: 1px solid hsl(160 84% 78%);
+    }
+    .mode-indicator.anchored::before { background: hsl(160 84% 38%); box-shadow: 0 0 0 3px hsl(160 84% 38% / 0.18); }
+    .mode-indicator.scenario {
+      color: var(--amber);
+      background: hsl(48 100% 96%);
+      border: 1px solid hsl(38 92% 70%);
+      font-style: normal;
+    }
+    .mode-indicator.scenario::before { background: var(--amber); box-shadow: 0 0 0 3px hsl(38 92% 50% / 0.18); }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--hairline-soft);
+    }
+    .delete-link {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .delete-link:hover { color: #b91c1c; background: hsl(0 84% 96%); }
+
+    /* Add-another-animal button — orange dashed CTA */
+    .add-dog-btn {
+      width: 100%;
+      background: hsl(var(--brand-orange) / 0.04);
+      border: 2px dashed hsl(var(--brand-orange) / 0.5);
+      color: hsl(var(--brand-orange));
+      padding: 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: all 0.18s;
+    }
+    .add-dog-btn:hover {
+      background: hsl(var(--brand-orange));
+      color: white;
+      border-color: hsl(var(--brand-orange));
+      border-style: solid;
+      box-shadow: var(--card-shadow);
+      transform: translateY(-1px);
+    }
+    .add-dog-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* STEP 2 outer card. Wraps the picker rows AND the gantt as siblings. */
+    .step-2-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+    }
+    /* CYCLE PICKER — inner block of the Step 2 card. No chrome of its own. */
+    .picker-strip {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 0;
+      box-shadow: none;
+    }
+    /* Step headers (Step 1, Step 2, Step 3) — consistent visual identity
+       across the three regions of the tool. Step 2 lives INSIDE the picker
+       card (.picker-section-header / .step-header used together). Steps 1
+       and 3 sit OUTSIDE cards with the .step-header-inline variant. */
+    .picker-section-header,
+    .step-header {
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--hairline-soft);
+    }
+    .step-header-inline {
+      margin-bottom: 14px;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    /* Step header used in Step 3 when we want to drop the bottom border —
+       the celebratory finding callout below provides its own visual close. */
+    .step-header-with-finding {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 18px;
+    }
+
+    /* "We found you X days open" callout — the discovery moment of Step 3.
+       Emerald-tinted card that ties to the availability band color, with a
+       display-sized day count so the number is unmistakable. */
+    /* Single-line discovery banner. All pieces inline so the whole thing
+       reads as one sentence: "WE FOUND YOU · 100 days open · May 16-Aug 23" */
+    .finding-callout {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg,
+          hsl(160 84% 96%) 0%,
+          hsl(160 84% 92%) 100%);
+      border: 1.5px solid hsl(160 84% 60%);
+      box-shadow: 0 2px 8px hsl(160 84% 45% / 0.10);
+    }
+    .finding-callout-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: hsl(160 84% 28%);
+      background: hsl(160 84% 38% / 0.18);
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .finding-days {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+      color: hsl(160 84% 22%);
+      letter-spacing: -0.015em;
+    }
+    .finding-days-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: hsl(160 84% 26%);
+      margin-left: -4px;
+    }
+    .finding-callout-dates {
+      font-size: 12px;
+      font-weight: 600;
+      color: hsl(160 30% 30%);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    .picker-section-eyebrow,
+    .step-eyebrow {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: hsl(var(--brand-orange));
+      background: hsl(var(--brand-orange) / 0.10);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .picker-section-heading,
+    .step-heading {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--foreground);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .picker-section-help,
+    .step-help {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 720px;
+    }
+
+    /* Compact horizontal picker row: reorder | name + mode | chips (3 fixed
+       columns) | hint. Using grid (not flex) so chip column 1 lines up at
+       the same x across every dog row. */
+    .picker-row {
+      display: grid;
+      grid-template-columns:
+        auto                            /* reorder buttons */
+        minmax(170px, 220px)            /* name + mode tag column */
+        repeat(3, minmax(0, 1fr))       /* three chip columns, equal width */
+        auto;                           /* "tap to switch" hint */
+      align-items: center;
+      gap: 8px 10px;
+      margin-bottom: 8px;
+      padding: 8px 12px;
+      background: var(--surface-strong);
+      border-radius: 10px;
+      border: 1px solid var(--hairline-soft);
+    }
+    .picker-row:last-child { margin-bottom: 0; }
+    /* Up/down reorder buttons */
+    .picker-row-reorder {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    button.reorder-btn {
+      background: transparent;
+      border: 1px solid var(--hairline);
+      color: var(--muted);
+      width: 22px;
+      height: 16px;
+      border-radius: 4px;
+      font-size: 9px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.12s;
+    }
+    button.reorder-btn:not(:disabled):hover {
+      color: hsl(var(--brand-orange));
+      border-color: hsl(var(--brand-orange));
+      background: hsl(var(--brand-orange) / 0.08);
+    }
+    button.reorder-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .picker-row-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+    .picker-row-heading .name { font-weight: 700; font-size: 13px; }
+    /* Inline editable name in the picker row. Blends in at rest, looks
+       like a real input on hover/focus so the breeder discovers it's editable. */
+    input.picker-row-name {
+      font: inherit;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--foreground);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 3px 6px;
+      margin: -3px -6px;            /* visually flush at rest */
+      width: auto;
+      min-width: 0;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    input.picker-row-name:hover {
+      background: hsl(var(--brand-orange) / 0.05);
+      border-color: hsl(var(--brand-orange) / 0.30);
+      cursor: text;
+    }
+    input.picker-row-name:focus {
+      outline: none;
+      background: var(--surface);
+      border-color: hsl(var(--brand-orange));
+      box-shadow: 0 0 0 3px hsl(var(--brand-orange) / 0.15);
+    }
+    .picker-row-heading .mode-tag {
+      font-size: 9px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+    .picker-row-heading .mode-tag.scenario { font-style: italic; }
+    .picker-row-hint {
+      margin-left: auto;
+      font-size: 10px;
+      color: hsl(var(--brand-orange));
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+    /* display:contents makes each .chip a direct child of the picker grid
+       (without flattening DOM), so chips occupy individual grid columns and
+       align across rows. */
+    .chips { display: contents; }
+    .chip {
+      background: var(--surface);
+      border: 1.5px solid var(--hairline);
+      color: var(--foreground);
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
+      min-width: 0;
+      transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .chip:hover {
+      border-color: hsl(var(--brand-orange));
+      background: hsl(var(--brand-orange) / 0.04);
+      transform: translateY(-1px);
+    }
+    .chip.selected {
+      background: hsl(var(--brand-orange));
+      border-color: hsl(var(--brand-orange));
+      color: white;
+      box-shadow: 0 2px 8px hsl(var(--brand-orange) / 0.35);
+    }
+    .chip .chip-dot { display: inline-block; margin-right: 6px; color: hsl(var(--brand-orange)); }
+    .chip.selected .chip-dot { color: white; }
+    .chip:not(.selected) .chip-dot { color: var(--muted); }
+
+    /* GANTT
+       Three vertical regions inside .gantt-wrap:
+         1. .gantt-frame    — flex row: fixed label column + scrolling chart
+         2. .legend         — fixed below the chart, doesn't scroll horizontally
+       The horizontal scrollbar lives on .gantt-scroll, NOT on .gantt-wrap.
+       That keeps the dog-name column and the legend visually anchored. */
+    .gantt-wrap {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      padding: 22px;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      box-shadow: var(--card-shadow-strong);
+    }
+    /* When the gantt sits INSIDE the Step 2 picker card, drop its own
+       chrome so the parent card provides the boundary. */
+    .gantt-wrap.gantt-wrap-embedded {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      margin-top: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--hairline-soft);
+    }
+    .gantt-frame {
+      display: flex;
+      align-items: stretch;
+      min-width: 0;
+    }
+    .lane-labels-col {
+      flex: 0 0 140px;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      position: relative;
+      z-index: 3;             /* above scrolling content for visual anchoring */
+      /* Adds a soft right edge so the labels look anchored when the chart
+         scrolls behind them */
+      box-shadow: 6px 0 8px -6px rgba(0,0,0,0.08);
+    }
+    .lane-labels-col .header-spacer {
+      height: 38px;            /* matches gantt-header (30px) + 8px margin */
+      border-bottom: 1px solid var(--hairline);
+    }
+    .lane-labels-col .lane-label-row {
+      height: 72px;            /* matches new .lane height (track + risk strip) */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 12px;
+      padding-bottom: 22px;     /* keep label vertically aligned with the TRACK, not the wing strip */
+      margin-bottom: 8px;       /* matches .lane margin-bottom */
+      font-size: 13px;
+      color: var(--foreground);
+      white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .lane-labels-col .lane-label-row .lane-mode {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .lane-labels-col .lane-label-row .lane-mode.scenario { font-style: italic; }
+    .gantt-scroll {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: var(--hairline) transparent;
+    }
+    .gantt-scroll::-webkit-scrollbar {
+      height: 10px;
+      background: transparent;
+    }
+    .gantt-scroll::-webkit-scrollbar-track {
+      background: transparent;
+      border-top: 1px solid var(--hairline);
+    }
+    .gantt-scroll::-webkit-scrollbar-thumb {
+      background: var(--hairline);
+      border-radius: 6px;
+      border: 2px solid var(--surface);
+    }
+    .gantt-scroll::-webkit-scrollbar-thumb:hover {
+      background: var(--muted);
+    }
+    .gantt {
+      position: relative;
+      /* width set dynamically by renderGantt; overflows .gantt-scroll horizontally */
+    }
+    /* Inside .gantt-scroll the chart now has NO label column — labels live
+       outside the scroll viewport in .lane-labels-col. The header is just a
+       single months row, and each lane is just a track. */
+    .gantt-header {
+      height: 30px;
+      margin-bottom: 8px;
+      position: relative;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .month-tick {
+      position: absolute;
+      font-size: 12px;
+      color: var(--muted);
+      transform: translateX(-50%);
+      bottom: 4px;
+    }
+    .month-tick::before {
+      content: "";
+      position: absolute;
+      bottom: -6px; left: 50%;
+      width: 1px; height: 4px;
+      background: var(--hairline);
+      transform: translateX(-50%);
+    }
+
+    .lane {
+      position: relative;
+      height: 72px;             /* 50 (track) + 22 (risk strip) */
+      margin-bottom: 8px;
+      pointer-events: none;
+    }
+    .lane-track {
+      position: relative;
+      top: 5px;
+      height: 40px;
+      background: var(--surface-strong);
+      border-radius: 8px;
+      overflow: visible;
+      pointer-events: none;
+    }
+    /* Risk-wing annotation strip — sits BELOW the main lane track so the
+       wings never overlap the colored phase bars. Visually anchored to the
+       track above by tight vertical proximity. */
+    .lane-risk-strip {
+      position: relative;
+      top: 8px;
+      height: 18px;
+      pointer-events: none;
+    }
+    .phase-bar {
+      position: absolute;
+      top: 5px;
+      height: 30px;
+      border-radius: 5px;
+      opacity: 0.92;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+      z-index: 2;
+      pointer-events: auto;
+      transition: z-index 0s, transform 0.12s ease-out, box-shadow 0.12s ease-out, opacity 0.12s ease-out;
+    }
+    /* All phase bars render at the same height. Overlay phases (e.g.
+       breeding window) start with a slightly higher resting z-index so
+       they're visible on top of the longer phase they overlap (e.g.
+       gestation). On hover, ANY bar lifts above its neighbors so the
+       breeder can see overlapped data fully. */
+    .phase-bar.is-overlay {
+      z-index: 3;
+    }
+    .phase-bar:hover {
+      z-index: 10;                    /* always-on-top while hovered */
+      opacity: 1;
+      cursor: pointer;
+      transform: translateY(-1px);
+      box-shadow:
+        0 4px 10px rgba(15, 23, 42, 0.18),
+        0 0 0 1.5px rgba(255, 255, 255, 0.9) inset,
+        0 0 0 2px rgba(15, 23, 42, 0.08);
+    }
+
+    .availability-band {
+      position: absolute;
+      top: 0; bottom: 0;
+      background: var(--green-band);
+      border: 1.5px dashed var(--green-band-border);
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 0;
+      overflow: hidden;
+      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      /* Animated dashed border (marching ants) on non-selected bands */
+      background-image:
+        linear-gradient(var(--green-band), var(--green-band));
+    }
+    /* Diagonal shimmer sweep — a translucent white band that travels across
+       every availability band on a slow loop. The band's overflow: hidden
+       clips the sweep cleanly to its rectangle. */
+    .availability-band::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: -60%;
+      width: 40%;
+      background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-18deg);
+      animation: band-shimmer 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes band-shimmer {
+      0%   { left: -60%; opacity: 0; }
+      20%  { opacity: 1; }
+      80%  { opacity: 1; }
+      100% { left: 120%; opacity: 0; }
+    }
+    @keyframes band-cta-pulse {
+      0%   { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15), 0 0 0 0 hsl(160 84% 30% / 0.55); }
+      70%  { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15), 0 0 0 10px hsl(160 84% 30% / 0); }
+      100% { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15), 0 0 0 0 hsl(160 84% 30% / 0); }
+    }
+
+    .availability-band:hover {
+      background: rgba(16, 185, 129, 0.32);
+      border-color: hsl(160 84% 30%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
+    }
+
+    .availability-band.is-selected {
+      background: rgba(16, 185, 129, 0.28);
+      border-color: hsl(160 84% 26%);
+      border-style: solid;
+      box-shadow: 0 0 0 2px hsl(160 84% 26% / 0.25);
+      animation: band-selected-breathe 2.4s ease-in-out infinite;
+    }
+    @keyframes band-selected-breathe {
+      0%, 100% {
+        box-shadow:
+          0 0 0 2px hsl(160 84% 26% / 0.25),
+          0 0 0 6px hsl(160 84% 30% / 0);
+      }
+      50% {
+        box-shadow:
+          0 0 0 2px hsl(160 84% 26% / 0.35),
+          0 0 0 8px hsl(160 84% 30% / 0.20);
+      }
+    }
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .availability-band::before,
+      .availability-band.is-selected {
+        animation: none;
+      }
+    }
+
+    /* LOCKED FEATURE GHOST — risk wings.
+       Faint silhouette of where the paid planner's variability wings would
+       render. Striped, low-saturation, with a lock icon that ties to the
+       upsell. */
+    /* Wings live in the lane-risk-strip beneath the main track, sized to fit
+       that strip exactly. No z-index competition with phase bars. */
+    .risk-wing-ghost {
+      position: absolute;
+      top: 0;
+      height: 18px;
+      border-radius: 4px;
+      background:
+        repeating-linear-gradient(
+          135deg,
+          hsl(var(--brand-orange) / 0.22) 0px,
+          hsl(var(--brand-orange) / 0.22) 4px,
+          hsl(var(--brand-orange) / 0.06) 4px,
+          hsl(var(--brand-orange) / 0.06) 8px
+        );
+      border: 1px dashed hsl(var(--brand-orange) / 0.65);
+      pointer-events: auto;
+      cursor: help;
+      opacity: 1;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;       /* let the lock pill spill above if needed */
+    }
+    .risk-wing-ghost:hover {
+      border-color: hsl(var(--brand-orange));
+      background:
+        repeating-linear-gradient(
+          135deg,
+          hsl(var(--brand-orange) / 0.38) 0px,
+          hsl(var(--brand-orange) / 0.38) 4px,
+          hsl(var(--brand-orange) / 0.12) 4px,
+          hsl(var(--brand-orange) / 0.12) 8px
+        );
+      box-shadow: 0 2px 6px hsl(var(--brand-orange) / 0.25);
+    }
+    /* Lock badge — small orange pill with the lock emoji, centered in each
+       wing. Visible enough to read as a "locked feature" cue. */
+    .risk-wing-lock {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 9px;
+      font-weight: 700;
+      color: hsl(var(--brand-orange));
+      background: white;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid hsl(var(--brand-orange) / 0.45);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+      pointer-events: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .availability-label {
+      position: absolute;
+      top: 50%;                       /* vertically centered inside the band */
+      left: 8px;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      background: hsl(160 84% 30%);
+      padding: 3px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15);
+    }
+
+    .today-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 0;
+      border-left: 2px dashed var(--today);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .today-label {
+      /* "Today" sits in the months header strip, NOT in the chart area where
+         it would collide with availability labels. Simple red text — the
+         dashed line is the strong visual marker; this just names it.
+         Pinned to the LEFT of the line (not centered on it) so it doesn't
+         get clipped when today is at the very start of the timeline. */
+      position: absolute;
+      top: -22px;
+      margin-left: 4px;
+      font-size: 10px;
+      color: var(--today);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    /* AVAILABILITY DETAIL */
+    /* Step 3 outer card — same chrome as picker-strip card. */
+    .availability-card {
+      margin-top: 16px;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--card-shadow);
+    }
+    .availability-card:empty { display: none; }
+    /* Inner detail block no longer needs its own card chrome. */
+    .availability-detail {
+      margin-top: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+    }
+    /* Availability heading + days line — applied whether they're inside the
+       step-header or the availability-detail block. */
+    .step-header h3,
+    .availability-detail h3 {
+      margin: 10px 0 4px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+    .step-header .dates,
+    .availability-detail .dates {
+      color: var(--green-text);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .availability-detail .prompt {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    /* Generic suggestion card — matches the structural shape of the BHQ /
+       Roomongo cards (icon + eyebrow + title + sub) but uses a warm
+       neutral (stone/sand) palette so it reads as "a thought worth
+       considering," not as a commercial CTA. Sits in the same warm color
+       family as the BHQ orange cards so it doesn't look orphaned, but
+       desaturated enough to clearly carry lower visual weight. */
+    .suggestion {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1.5px solid hsl(30 16% 86%);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      background:
+        linear-gradient(135deg,
+          hsl(32 28% 95%) 0%,
+          hsl(32 28% 98%) 100%),
+        var(--surface);
+      box-shadow: var(--card-shadow);
+    }
+    .suggestion .s-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: hsl(30 20% 91%);
+      color: hsl(28 18% 38%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: inset 0 0 0 1px hsl(30 16% 82%);
+    }
+    .suggestion .s-body { flex: 1; min-width: 0; }
+    .suggestion .s-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: hsl(28 18% 42%);
+      margin-bottom: 3px;
+    }
+    .suggestion .s-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .suggestion .s-sub {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* BreederHQ upsell suggestion — beefed up as a real CTA card.
+       Icon badge on the left, copy in the middle, animated arrow on the right.
+       Soft orange gradient + orange-tinted border = same visual weight as the
+       Roomongo card so the upsell holds its ground against the partner. */
+    a.suggestion-bhq {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1.5px solid hsl(var(--brand-orange) / 0.30);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      background:
+        linear-gradient(135deg,
+          hsl(var(--brand-orange) / 0.10) 0%,
+          hsl(var(--brand-orange) / 0.03) 100%),
+        var(--surface);
+      text-decoration: none;
+      color: var(--foreground);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+    }
+    a.suggestion-bhq:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: hsl(var(--brand-orange) / 0.60);
+    }
+    a.suggestion-bhq:hover .sb-arrow {
+      transform: translateX(4px);
+      background: hsl(var(--brand-orange));
+      color: white;
+    }
+    .sb-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: hsl(var(--brand-orange) / 0.16);
+      color: hsl(var(--brand-orange));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: inset 0 0 0 1px hsl(var(--brand-orange) / 0.22);
+    }
+    .sb-body { flex: 1; min-width: 0; }
+    .sb-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: hsl(var(--brand-orange));
+      margin-bottom: 3px;
+    }
+    .sb-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .sb-sub {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .sb-arrow {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 999px;
+      background: hsl(var(--brand-orange) / 0.12);
+      color: hsl(var(--brand-orange));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+    }
+
+    /* Multi-pathway BHQ suggestion (used by the "add another breeding female"
+       card to surface marketplace / guardian / co-ownership routes). */
+    .suggestion-bhq-multi {
+      margin-bottom: 12px;
+      border: 1.5px solid hsl(var(--brand-orange) / 0.30);
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg,
+          hsl(var(--brand-orange) / 0.10) 0%,
+          hsl(var(--brand-orange) / 0.03) 100%),
+        var(--surface);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+    .suggestion-bhq-multi a.suggestion-bhq.suggestion-bhq-header {
+      /* Header inherits the .suggestion-bhq look but lives inside the
+         multi-card. Remove its own chrome so the parent provides it.
+         No divider line below: the pathways block uses a contrasting
+         background instead of a border to separate visually. */
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .suggestion-bhq-multi a.suggestion-bhq.suggestion-bhq-header:hover {
+      transform: none;
+      background: hsl(var(--brand-orange) / 0.05);
+      box-shadow: none;
+    }
+    /* Pathways block: indented from card edges + cooler/lighter background
+       tone so it reads as a "drawer" of options under the header. */
+    .sb-pathways {
+      display: flex;
+      flex-direction: column;
+      margin: 0 14px 14px;
+      padding: 8px;
+      gap: 2px;
+      background: hsl(0 0% 100% / 0.65);
+      border: 1px solid hsl(var(--brand-orange) / 0.15);
+      border-radius: 12px;
+    }
+    a.sb-pathway {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--foreground);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    a.sb-pathway:hover {
+      background: hsl(var(--brand-orange) / 0.10);
+      transform: translateX(2px);
+    }
+    .sb-pathway-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: hsl(var(--brand-orange) / 0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      margin-top: 1px;
+    }
+    .sb-pathway-body { flex: 1; min-width: 0; }
+    .sb-pathway-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .sb-pathway-title::after {
+      content: ' →';
+      color: hsl(var(--brand-orange));
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    a.sb-pathway:hover .sb-pathway-title::after {
+      opacity: 1;
+    }
+    .sb-pathway-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    /* Split pathway row: same shape as an anchored pathway, but the row
+       itself is a div (not a link), and two side-by-side action buttons
+       sit on the right. Used when a single CTA isn't enough (Guardian Home
+       Placement, Co-Ownership: list vs. find). */
+    .sb-pathway-split {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--foreground);
+      transition: background 0.15s ease;
+    }
+    .sb-pathway-split:hover { background: hsl(var(--brand-orange) / 0.05); }
+    .sb-pathway-split .sb-pathway-title::after { content: ''; }   /* no arrow on split rows */
+    .sb-pathway-actions {
+      flex-shrink: 0;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    a.sb-pathway-btn {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1.5px solid hsl(var(--brand-orange) / 0.40);
+      background: white;
+      color: hsl(var(--brand-orange));
+    }
+    a.sb-pathway-btn:hover {
+      border-color: hsl(var(--brand-orange));
+      background: hsl(var(--brand-orange) / 0.08);
+    }
+    a.sb-pathway-btn.sb-pathway-btn-primary {
+      background: hsl(var(--brand-orange));
+      color: white;
+      border-color: hsl(var(--brand-orange));
+    }
+    a.sb-pathway-btn.sb-pathway-btn-primary:hover {
+      filter: brightness(1.06);
+      color: white;
+    }
+
+    /* ROOMONGO PARTNER CARD */
+    .roomongo-card {
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      background: var(--surface-strong);
+    }
+    .roomongo-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px;
+      background: linear-gradient(90deg, hsl(var(--roomongo-brand) / 0.18), hsl(var(--roomongo-brand) / 0.06));
+      border-bottom: 1px solid var(--hairline);
+    }
+    .roomongo-brand {
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 13px; letter-spacing: -0.01em;
+      color: var(--foreground);
+    }
+    .roomongo-logo-img {
+      height: 28px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+      /* Roomongo logo is a full-color wordmark on transparent background;
+         no inversion or background needed on the dark theme. */
+    }
+    .roomongo-tagline {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0;
+      margin-left: 2px;
+    }
+    .roomongo-human-note {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--foreground);
+      margin: 0 0 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid hsl(var(--roomongo-brand) / 0.35);
+      background: hsl(var(--roomongo-brand) / 0.08);
+    }
+    .roomongo-partner-tag {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .roomongo-card .roomongo-body {
+      padding: 10px 12px;
+    }
+    .roomongo-prompt {
+      font-size: 12px; color: var(--muted);
+      margin: 0 0 10px;
+    }
+    .roomongo-prompt strong { color: var(--foreground); font-weight: 600; }
+
+    /* "Take a Trip — You Deserve a Break" pitch block at the top of the
+       Roomongo body. Frames the offering around the breeder's earned
+       downtime first, with Roomongo as the way to actually take it. */
+    .trip-pitch {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed hsl(var(--roomongo-brand) / 0.30);
+    }
+    .trip-pitch-eyebrow {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: hsl(var(--roomongo-brand));
+      background: hsl(var(--roomongo-brand) / 0.12);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .trip-pitch-heading {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      color: var(--foreground);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .trip-pitch-sub {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 720px;
+    }
+    .trip-pitch-sub strong { color: var(--foreground); font-weight: 700; }
+    .destinations { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 12px; }
+    @media (min-width: 720px) {
+      .destinations { grid-template-columns: repeat(3, 1fr); }
+    }
+    .destination {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .destination:hover {
+      border-color: hsl(var(--roomongo-brand));
+      transform: translateY(-1px);
+    }
+    .destination .dest-image {
+      height: 90px;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--surface-strong);
+    }
+    .destination .dest-body { padding: 8px 10px; }
+    .destination .dest-name { font-size: 12px; font-weight: 600; }
+    .destination .dest-region { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .destination .dest-price { font-size: 11px; color: hsl(var(--roomongo-brand)); margin-top: 4px; font-weight: 600; }
+    .destination .dest-price .price-note { color: var(--muted); font-weight: 400; }
+    .roomongo-cta-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--hairline);
+    }
+    .roomongo-cta-row .cta-meta { font-size: 11px; color: var(--muted); }
+    .roomongo-cta-btn {
+      background: hsl(var(--roomongo-brand));
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: filter 0.15s;
+    }
+    .roomongo-cta-btn:hover { filter: brightness(1.1); }
+    .roomongo-disclosure {
+      font-size: 10px; color: var(--muted);
+      padding: 8px 12px;
+      border-top: 1px solid var(--hairline);
+      background: var(--surface);
+      font-style: italic;
+    }
+
+    /* CTA */
+    .cta-card {
+      margin-top: 20px;
+      background: linear-gradient(180deg, var(--surface), var(--surface-strong));
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+    }
+    .cta-card .copy h4 { margin: 0 0 4px; font-size: 15px; }
+    .cta-card .copy p { margin: 0; color: var(--muted); font-size: 13px; }
+    .cta-btn {
+      background: hsl(var(--brand-orange));
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
+    }
+    a.cta-btn:hover { color: white; filter: brightness(1.06); }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 420px;
+      width: calc(100% - 32px);
+    }
+    .modal h3 { margin: 0 0 8px; }
+    .modal p { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .modal-actions button,
+    .modal-actions a { padding: 8px 14px; border-radius: 8px; font: inherit; font-size: 13px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+    .modal .primary { background: hsl(var(--brand-orange)); color: white; border: none; font-weight: 600; }
+    a.modal .primary, .modal a.primary:hover { color: white; }
+    .modal .secondary { background: transparent; color: var(--foreground); border: 1px solid var(--hairline); }
+
+    /* LEGEND */
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--hairline);
+      font-size: 11px; color: var(--muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
+
+    /* DEMO BANNER */
+    .demo-banner {
+      background: rgba(245, 158, 11, 0.12);
+      border-bottom: 1px solid rgba(180, 83, 9, 0.35);
+      color: var(--amber);
+      padding: 8px 24px;
+      font-size: 12px;
+      text-align: center;
+    }

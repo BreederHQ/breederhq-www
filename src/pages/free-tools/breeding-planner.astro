@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Inline the prototype's CSS and JS at build time via Vite's ?raw import.
+// The mockup is a single self-contained HTML file (see
+// c:/tmp/breeding-planner-mockup.html); its styles and behavior are kept
+// verbatim here. CSS is scoped under .fbp-root so :root variables and other
+// rules cannot bleed into the marketing site. JS only touches DOM nodes
+// inside .fbp-root and the modal, so it is self-contained.
+import plannerCss from './_breeding-planner.css?raw';
+import plannerJs from './_breeding-planner.js?raw';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Free Tools', url: '/free-tools' },
+  { name: 'Breeding Planner', url: '/free-tools/breeding-planner' }
+];
+
+const lastReviewedISO = '2026-05-16';
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/free-tools/breeding-planner#tool',
+  'name': 'Breeding Planner',
+  'description': 'Free breeding planner for dogs, horses, goats, sheep, and cattle. Project upcoming heat cycles, breeding windows, gestation, birthing, and offspring-care phases from a single last-heat date. See the open time between commitments. No signup required.',
+  'url': 'https://breederhq.com/free-tools/breeding-planner',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Livestock Breeding Planner',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'isPartOf': {
+    '@id': 'https://breederhq.com/free-tools#collection'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Project upcoming heat cycles from a single last-heat date',
+    'Up to 3 females, any mix of dogs, horses, goats, sheep, and cattle',
+    'Gantt chart of pre-heat, breeding, gestation, birthing, and offspring-care phases',
+    'Open-window detection between commitments across all your animals',
+    'Anonymous and disposable, no signup or email required'
+  ]
+};
+---
+
+<BaseLayout
+  title="Free Breeding Planner for Dogs, Horses, Goats, Sheep, and Cattle | BreederHQ"
+  description="Free breeding planner. Project upcoming heat cycles, breeding windows, and the open time between them. Dogs, horses, goats, sheep, and cattle. No signup."
+  breadcrumbs={breadcrumbs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-7xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/free-tools" class="text-[hsl(24,95%,53%)] hover:underline">Free Tools</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Breeding Planner</li>
+      </ol>
+    </nav>
+
+    <!-- Marketing-site hero -->
+    <section class="bg-gradient-to-b from-stone-50 to-white pt-12 pb-8 px-4">
+      <div class="max-w-7xl mx-auto">
+        <span class="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-800 border border-amber-300 bg-amber-50 px-2 py-0.5 rounded mb-4">
+          Free Tool, No Signup
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-3">
+          Free Breeding Planner
+        </h1>
+        <p class="text-lg text-gray-600 max-w-3xl leading-relaxed">
+          For dogs, horses, goats, sheep, and cattle. See your upcoming cycles, breeding windows, and the open time between them.
+        </p>
+        <p class="text-sm text-gray-500 mt-2">Anonymous and disposable. No signup, no email gate, no catch.</p>
+      </div>
+    </section>
+
+    <!-- Tool root: all mockup CSS is scoped under .fbp-root -->
+    <div class="fbp-root">
+      <main class="tool">
+        <div class="layout">
+
+          <!-- INPUT COLUMN -->
+          <div class="input-col">
+            <div class="step-header">
+              <span class="step-eyebrow">Step 1 · Add Your Animals</span>
+              <div class="step-heading">Who are you planning for?</div>
+              <p class="step-help">Add up to 3 female animals. Set the species and your best guess at when each one last started heat. That's all the math needs.</p>
+            </div>
+            <div id="dog-cards"></div>
+            <button id="add-dog-btn" class="add-dog-btn">+ Add another animal</button>
+          </div>
+
+          <!-- RIGHT COLUMN: STEP 2 (picker + gantt) and STEP 3 (availability) -->
+          <div>
+            <div class="step-2-card">
+              <div id="picker-strip" class="picker-strip"></div>
+              <div class="gantt-wrap gantt-wrap-embedded">
+                <div class="gantt-frame">
+                  <div class="lane-labels-col" id="lane-labels-col"></div>
+                  <div class="gantt-scroll" id="gantt-scroll">
+                    <div class="gantt" id="gantt"></div>
+                  </div>
+                </div>
+                <div class="legend" id="legend"></div>
+              </div>
+            </div>
+
+            <div id="availability-detail" class="availability-card"></div>
+
+            <div class="cta-card">
+              <div class="copy">
+                <h4>Want BreederHQ to record your animals' real cycle history and learn from it over time?</h4>
+                <p>This free tool projects from a single date. BreederHQ refines projections from your full recorded history, across unlimited animals and multiple species.</p>
+              </div>
+              <a class="cta-btn" href="https://breederhq.com/founders" target="_blank" rel="noopener">Sign up free &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- 4th dog modal -->
+      <div id="fourth-modal" class="modal-backdrop">
+        <div class="modal">
+          <h3>3 animals is the free limit</h3>
+          <p>BreederHQ supports unlimited animals in one plan, plus sire selection, contracts, and waitlists. Sign up free to add more.</p>
+          <div class="modal-actions">
+            <button class="secondary" id="modal-close">Maybe later</button>
+            <a class="primary" href="https://breederhq.com/founders" target="_blank" rel="noopener">Sign up free &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Below-tool marketing content for SEO depth -->
+    <section class="py-12 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-3xl mx-auto prose-section">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">What This Tool Does</h2>
+        <p class="text-gray-700 leading-relaxed mb-6">
+          The Free Breeding Planner projects the next three heat cycles for any female from a single last-heat date, then maps the full reproductive year for up to three animals on one chart. It shows the pre-heat, breeding, gestation, birthing, and offspring-care phases for each animal, and highlights the open windows between commitments. Use it to spot conflicts before they happen, plan vet visits or training around your busiest weeks, or decide whether your year has room for another female.
+        </p>
+
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 mt-10">Who This Tool Is For</h2>
+        <p class="text-gray-700 leading-relaxed mb-6">
+          Breeders of dogs, horses, goats, sheep, and cattle. These are the cyclic-ovulator species where projecting from one heat date is biologically honest. The tool intentionally does not cover spontaneous or induced ovulators, those species do not cycle predictably enough for single-date projection to be useful.
+        </p>
+
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 mt-10">How It Works</h2>
+        <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-2 mb-6">
+          <li>Add up to 3 females. Pick the species and enter your best guess at the last heat date.</li>
+          <li>For each animal, pick which upcoming cycle you plan to breed on.</li>
+          <li>Read the Gantt chart. Each animal's phases appear as colored bars across the year, with open windows between commitments shown as green availability bands.</li>
+        </ol>
+
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 mt-10">What This Tool Does Not Do</h2>
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed space-y-2 mb-6">
+          <li>It does not track history. Each session starts fresh, no account is created, no data is saved.</li>
+          <li>It does not pair sires with dams, manage contracts, run waitlists, or invoice buyers.</li>
+          <li>It does not use real cycle history to refine its projections. It projects from a single date with species-average cycle lengths.</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed mb-6">
+          The full BreederHQ platform does all of that. If you want real-time cycle tracking, full breeding-program management, integrated genetics and health testing, a marketplace, and a client portal, see the <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">platform overview</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-3xl mx-auto">
+        <div class="rounded-xl border-2 border-amber-300 bg-amber-50/40 p-8 md:p-10 shadow-sm">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+            Want These Projections Connected to Real Data?
+          </h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            The full BreederHQ platform refines projections from your animals' real recorded cycle history, across unlimited animals and multiple species, and threads it through your breeding plans, contracts, waitlists, and marketplace listings.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://breederhq.com/founders"
+              class="inline-flex items-center justify-center bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,48%)] text-white font-semibold px-6 py-3 rounded-lg shadow-sm hover:shadow transition"
+            >
+              Sign Up Free
+            </a>
+            <a
+              href="/for-breeders"
+              class="inline-flex items-center justify-center bg-white hover:bg-amber-50 text-amber-800 border border-amber-300 font-semibold px-6 py-3 rounded-lg transition"
+            >
+              See the Platform
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mockup CSS, scoped under .fbp-root to keep it from leaking into the site -->
+  <style is:global set:html={plannerCss}></style>
+
+  <!-- Mockup JS, kept inline (is:inline) and verbatim from the prototype.
+       Operates only on DOM nodes under .fbp-root so it is self-contained. -->
+  <script is:inline set:html={plannerJs}></script>
+</BaseLayout>

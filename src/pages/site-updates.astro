@@ -28,19 +28,34 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
-        <!-- ========== May 16, 2026 - New /free-tools hub page + nav entry ========== -->
+        <!-- ========== May 16, 2026 - Free Breeding Planner shipped + hub + nav + species cross-links ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 16, 2026</h2>
-          <p class="text-sm text-gray-500 mb-4">Foundation laid for a new family of free utilities published under <a href="/free-tools" class="text-[hsl(24,95%,53%)] hover:underline">/free-tools</a>. Launches with the hub page and a single live tool slot (Breeding Planner page ships separately). Strategy is topical authority: a directory that grows over time, internally linked, with CollectionPage schema unifying the entries under the canonical Organization entity.</p>
+          <p class="text-sm text-gray-500 mb-4">Launched a new family of free utilities under <a href="/free-tools" class="text-[hsl(24,95%,53%)] hover:underline">/free-tools</a>. First live tool is the Free Breeding Planner: project upcoming heat cycles, breeding windows, and the open time between commitments for up to 3 females across dogs, horses, goats, sheep, and cattle. Anonymous and disposable, no signup. Strategy is topical authority: a directory that grows over time, internally linked, with CollectionPage and SoftwareApplication schema unifying the entries under the canonical Organization entity.</p>
 
           <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/free-tools" class="text-[hsl(24,95%,53%)] hover:underline">/free-tools</a> (hub)</h3>
           <p class="text-gray-700 mb-3">
-            Hub for BreederHQ's free utilities. Hero with amber "BreederHQ Free Tools" chip + standalone-or-platform framing. "Available Now" grid (currently one card: Breeding Planner). "Coming Soon" grid with four planned tools (COI Calculator, Whelping Kit Checklist, Stud Fee Comparison, Puppy Weight Tracker) visually muted so they read as future, not active. "Why We Give These Away" philosophy section. Closing amber-bordered CTA card with primary "Get Started Free" (brand orange, the only authorized use on this page) and secondary "See the Platform" buttons. Emits CollectionPage JSON-LD with ItemList of live tools, referencing the canonical Organization @id for entity-graph unification. lastReviewedISO drives datePublished and dateModified.
+            Hub for BreederHQ's free utilities. Hero with amber "BreederHQ Free Tools" chip + standalone-or-platform framing. "Available Now" grid (Breeding Planner). "Coming Soon" grid with four planned tools (COI Calculator, Whelping Kit Checklist, Stud Fee Comparison, Puppy Weight Tracker) visually muted so they read as future, not active. "Why We Give These Away" philosophy section. Closing amber-bordered CTA card. Emits CollectionPage JSON-LD with ItemList of live tools, referencing the canonical Organization @id for entity-graph unification.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">New page: <a href="/free-tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">/free-tools/breeding-planner</a> (the tool itself)</h3>
+          <p class="text-gray-700 mb-3">
+            Single-page interactive tool ported from the standalone prototype. Step 1: add up to 3 females (species + last-heat date). Step 2: pick which upcoming cycle to breed on, see the Gantt chart for the full reproductive year with pre-heat, breeding, gestation, birthing, and offspring-care phases. Step 3: see availability windows between commitments with tier-aware suggestions (plan another breeding, add a female via marketplace / guardian / co-ownership, or schedule vet/clinic time depending on window size). Marketing-site hero, breadcrumbs, and an SEO-targeted "What This Tool Does / Who It Is For / How It Works / What It Does Not Do" content block below the tool. SoftwareApplication JSON-LD with offers.price=0, featureList, and isPartOf pointing at the /free-tools collection. All tool CSS scoped under <code>.fbp-root</code> to prevent leakage into the marketing site; tool JS bundled inline at build time via Vite ?raw imports.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">New redirect: <code>/planner &rarr; /free-tools/breeding-planner</code> (vercel.json)</h3>
+          <p class="text-gray-700 mb-3">
+            Short shareable URL. 301 permanent. Canonical URL remains the directory-pattern version for SEO topic-silo benefit; <code>/planner</code> exists only for marketing copy and verbal sharing.
           </p>
 
           <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: site-wide header (HeaderV2.astro)</h3>
-          <p class="text-gray-700">
+          <p class="text-gray-700 mb-3">
             Added a top-level <strong>Free Tools</strong> link to the desktop nav (between Breed Clubs and Articles) and to the mobile menu panel. No dropdown for v1, single direct link to /free-tools. Will promote to a real dropdown when tool #2 ships.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: species pages and <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">/for-breeders</a></h3>
+          <p class="text-gray-700">
+            Added a "Free Breeding Planner" cross-link as the first item in the "Learn more" section on <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">/dogs</a>, <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">/horses</a>, <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">/goats</a>, and <a href="/sheep" class="text-[hsl(24,95%,53%)] hover:underline">/sheep</a> with species-specific copy (dam/mare/doe/ewe phrasing and whelping/foaling/kidding/lambing date predictions). Added a "Want to try us before you sign up?" teaser section on /for-breeders just above the breed-club teaser, pointing at the tool. Cat and rabbit pages intentionally skipped, those species are not in the tool because they are not cyclic ovulators. Cattle page also skipped pending its public launch (cattle IS supported in the tool but the marketing page is not live yet).
           </p>
         </article>
 
