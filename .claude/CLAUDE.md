@@ -126,7 +126,9 @@ These are generally safe without special approval:
 
 ## 🐾 Species-Agnostic Language on Shared Pages
 
-BreederHQ supports 6 species: **Dogs, Cats, Horses, Goats, Rabbits, Sheep**.
+BreederHQ supports 9 species: **Dogs, Cats, Horses, Goats, Rabbits, Sheep, Alpacas, Llamas, Cattle**.
+
+Note: Alpacas and Llamas launched 2026-05-07. Cattle is stealth-launched (piloted, not yet publicly marketed) but IS a supported species in-platform.
 
 **Shared/general pages** (workflows, features, pricing, FAQ, index, mobile) must use **species-neutral language**. Do NOT use dog-specific terms on shared pages.
 
