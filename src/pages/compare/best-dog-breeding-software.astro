@@ -160,20 +160,18 @@ const itemListSchema = {
       <!-- Workflow visual: pill strip (visual content, not schema) -->
       <div class="my-10">
         <h2 class="text-2xl font-bold mb-4">The modern breeding workflow</h2>
-        <div class="overflow-x-auto pb-3 -mx-2 px-2" aria-label="Stages of a modern dog breeding program">
-          <ol class="flex items-center gap-2 min-w-max">
-            {workflowStages.map((stage, i) => (
-              <>
-                <li class="inline-flex items-center px-4 py-2 rounded-full border-2 border-[hsl(24,95%,53%)] bg-white text-sm font-semibold text-gray-900 whitespace-nowrap shadow-sm">
-                  {stage}
-                </li>
-                {i < workflowStages.length - 1 && (
-                  <li aria-hidden="true" class="text-[hsl(24,95%,53%)] font-bold text-lg">→</li>
-                )}
-              </>
-            ))}
-          </ol>
-        </div>
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-3" aria-label="Stages of a modern dog breeding program">
+          {workflowStages.map((stage, i) => (
+            <>
+              <li class="inline-flex items-center px-4 py-2 rounded-full border-2 border-[hsl(24,95%,53%)] bg-white text-sm font-semibold text-gray-900 whitespace-nowrap shadow-sm">
+                {stage}
+              </li>
+              {i < workflowStages.length - 1 && (
+                <li aria-hidden="true" class="text-[hsl(24,95%,53%)] font-bold text-lg">→</li>
+              )}
+            </>
+          ))}
+        </ol>
         <p class="mt-4 text-lg text-gray-700">
           <strong>Most breeder software handles one or two of these workflows.</strong> Operational breeders need all of them connected.
         </p>
