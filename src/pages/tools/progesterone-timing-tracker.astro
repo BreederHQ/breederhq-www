@@ -12,7 +12,7 @@ const lastReviewedISO = '2026-05-16';
 const faqs = [
   {
     question: 'What does this progesterone tracker actually do?',
-    answer: 'You enter the first day of heat and any progesterone test results you have so far. The tool plots them in cycle order, shows the trend across readings, and offers general interpretation language tied to common P4 ranges (baseline, LH surge area, post-ovulation maturation). It is a planning and visualization aid. It is not a veterinary diagnostic tool, and it does not tell you a breeding date.'
+    answer: 'You enter the first day of heat and your progesterone test results as they come back. The tool plots them on a trend chart, estimates the LH surge date (where P4 crossed ~2 ng/mL), estimates the ovulation date (where P4 crossed ~5 ng/mL), and projects a breeding window based on method (natural, fresh chilled, or frozen). With only a couple of readings these are interpolated estimates that refine as you add more data. It is a planning and visualization aid built around standard canine reproductive ranges. It is not a veterinary diagnostic, and your reproductive vet is the source of truth on the actual breeding date.'
   },
   {
     question: 'What do the progesterone ranges mean?',
@@ -132,54 +132,93 @@ const articleSchema = {
   <section class="px-4 pb-8">
     <div class="max-w-4xl mx-auto">
       <div class="ptt-card">
-        <form id="ptt-form" class="ptt-form" novalidate>
-          <div class="ptt-field">
-            <label for="ptt-heat-start" class="ptt-label">First Day of Heat <span aria-hidden="true" class="ptt-req">*</span></label>
-            <p class="ptt-help">The day you first noticed swelling, spotting, or behavior change. This becomes Day 1.</p>
-            <input
-              type="date"
-              id="ptt-heat-start"
-              name="heat-start"
-              class="ptt-input"
-              required
-            />
+        <div class="ptt-card-header">
+          <div class="ptt-card-header-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
           </div>
+          <div>
+            <div class="ptt-card-header-title">Log a Progesterone Cycle</div>
+            <div class="ptt-card-header-sub">Anchor with the heat-start date, then add P4 readings as they come back from the lab.</div>
+          </div>
+        </div>
 
-          <div class="ptt-field">
-            <label for="ptt-method" class="ptt-label">Breeding Method <span class="ptt-optional">(optional)</span></label>
-            <p class="ptt-help">Used only to phrase the general timing context. Your vet still decides the actual day.</p>
-            <select id="ptt-method" name="method" class="ptt-input">
-              <option value="unsure">Not sure yet</option>
-              <option value="natural">Natural (live cover)</option>
-              <option value="fresh-chilled">Fresh chilled semen</option>
-              <option value="frozen">Frozen semen</option>
-            </select>
+        <form id="ptt-form" class="ptt-form" novalidate>
+          <div class="ptt-grid-two">
+            <div class="ptt-field">
+              <label for="ptt-heat-start" class="ptt-label">First Day of Heat <span aria-hidden="true" class="ptt-req">*</span></label>
+              <p class="ptt-help">The day you first noticed swelling, spotting, or behavior change. This becomes Day 1.</p>
+              <input
+                type="date"
+                id="ptt-heat-start"
+                name="heat-start"
+                class="ptt-input"
+                required
+              />
+            </div>
+
+            <div class="ptt-field">
+              <label for="ptt-method" class="ptt-label">Breeding Method <span class="ptt-optional">(optional)</span></label>
+              <p class="ptt-help">Phrases the general timing context. Your vet still decides the actual day.</p>
+              <div class="ptt-select-wrap">
+                <select id="ptt-method" name="method" class="ptt-input ptt-select">
+                  <option value="unsure">Not sure yet</option>
+                  <option value="natural">Natural (live cover)</option>
+                  <option value="fresh-chilled">Fresh chilled semen</option>
+                  <option value="frozen">Frozen semen</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <fieldset class="ptt-rows-fieldset">
-            <legend class="ptt-label">Progesterone Test Results</legend>
-            <p class="ptt-help">Add one row per test. Date of draw and the P4 value in ng/mL. Add as many as you have.</p>
+            <div class="ptt-rows-header">
+              <div>
+                <legend class="ptt-label ptt-rows-legend">Progesterone Test Results</legend>
+                <p class="ptt-help">One row per test. Date of draw and P4 value in ng/mL.</p>
+              </div>
+              <button type="button" id="ptt-add-row" class="ptt-button-secondary">
+                <span aria-hidden="true" class="ptt-plus">+</span>
+                <span>Add Test Row</span>
+              </button>
+            </div>
 
             <div id="ptt-rows" class="ptt-rows" role="group" aria-label="Progesterone test rows">
               <!-- Rows injected by script -->
             </div>
-
-            <div class="ptt-rows-actions">
-              <button type="button" id="ptt-add-row" class="ptt-button-secondary">+ Add Test Row</button>
-            </div>
           </fieldset>
 
           <div class="ptt-form-actions">
-            <button type="submit" class="ptt-button">Update Timeline</button>
+            <button type="submit" class="ptt-button">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              <span>Update Timeline</span>
+            </button>
           </div>
 
           <p id="ptt-error" class="ptt-error" role="alert" hidden></p>
         </form>
 
         <div id="ptt-results" class="ptt-results" hidden aria-live="polite">
-          <h2 class="ptt-results-title">Cycle Timeline</h2>
-          <p class="ptt-results-subtitle">Readings shown in chronological order with general interpretation language. Your vet decides actual breeding timing.</p>
+          <h2 class="ptt-results-title">Cycle Projection</h2>
+          <p class="ptt-results-subtitle">Estimated based on your P4 trend and standard canine reproductive ranges. Your reproductive vet decides actual breeding timing.</p>
 
+          <div id="ptt-projection" class="ptt-projection">
+            <!-- Projection cards injected by script -->
+          </div>
+
+          <div id="ptt-chart-wrap" class="ptt-chart-wrap">
+            <h3 class="ptt-section-title">Trend Chart</h3>
+            <div id="ptt-chart" class="ptt-chart" role="img" aria-label="Progesterone trend chart">
+              <!-- SVG injected by script -->
+            </div>
+            <div class="ptt-chart-legend">
+              <span class="ptt-legend-item"><span class="ptt-legend-dot ptt-legend-baseline"></span>Baseline (under 1)</span>
+              <span class="ptt-legend-item"><span class="ptt-legend-dot ptt-legend-lh"></span>LH surge range (~2)</span>
+              <span class="ptt-legend-item"><span class="ptt-legend-dot ptt-legend-ovulation"></span>Ovulation range (4-10)</span>
+              <span class="ptt-legend-item"><span class="ptt-legend-dot ptt-legend-maturation"></span>Maturation (10+)</span>
+            </div>
+          </div>
+
+          <h3 class="ptt-section-title">Reading Detail</h3>
           <div id="ptt-timeline" class="ptt-timeline">
             <!-- Timeline rows injected by script -->
           </div>
@@ -403,7 +442,10 @@ const articleSchema = {
       var results = document.getElementById('ptt-results');
       var timelineEl = document.getElementById('ptt-timeline');
       var summaryEl = document.getElementById('ptt-summary');
-      if (!form || !heatInput || !rowsEl || !addRowBtn || !error || !results || !timelineEl || !summaryEl) return;
+      var projectionEl = document.getElementById('ptt-projection');
+      var chartEl = document.getElementById('ptt-chart');
+      var chartWrapEl = document.getElementById('ptt-chart-wrap');
+      if (!form || !heatInput || !rowsEl || !addRowBtn || !error || !results || !timelineEl || !summaryEl || !projectionEl || !chartEl || !chartWrapEl) return;
 
       var rowSeq = 0;
 
@@ -413,6 +455,14 @@ const articleSchema = {
         heatInput.max = iso;
       } catch (e) { /* noop */ }
 
+      function renumberRows() {
+        var all = rowsEl.querySelectorAll('.ptt-row');
+        for (var i = 0; i < all.length; i++) {
+          var chip = all[i].querySelector('.ptt-row-num');
+          if (chip) chip.textContent = String(i + 1);
+        }
+      }
+
       function addRow(prefillDate, prefillValue) {
         rowSeq += 1;
         var id = 'ptt-row-' + rowSeq;
@@ -421,19 +471,18 @@ const articleSchema = {
         wrap.setAttribute('data-row-id', id);
 
         wrap.innerHTML =
-          '<div class="ptt-row-fields">' +
-          '  <div class="ptt-row-field">' +
-          '    <label class="ptt-row-label" for="' + id + '-date">Test Date</label>' +
-          '    <input type="date" id="' + id + '-date" class="ptt-input ptt-row-date" />' +
-          '  </div>' +
-          '  <div class="ptt-row-field">' +
-          '    <label class="ptt-row-label" for="' + id + '-value">P4 (ng/mL)</label>' +
-          '    <input type="number" min="0" step="0.1" id="' + id + '-value" class="ptt-input ptt-row-value" placeholder="e.g. 2.3" inputmode="decimal" />' +
-          '  </div>' +
-          '  <div class="ptt-row-action">' +
-          '    <button type="button" class="ptt-row-remove" aria-label="Remove row">Remove</button>' +
-          '  </div>' +
-          '</div>';
+          '<span class="ptt-row-num" aria-hidden="true">1</span>' +
+          '<div class="ptt-row-field">' +
+          '  <label class="ptt-row-label" for="' + id + '-date">Test Date</label>' +
+          '  <input type="date" id="' + id + '-date" class="ptt-input ptt-row-input ptt-row-date" />' +
+          '</div>' +
+          '<div class="ptt-row-field">' +
+          '  <label class="ptt-row-label" for="' + id + '-value">P4 (ng/mL)</label>' +
+          '  <input type="number" min="0" step="0.1" id="' + id + '-value" class="ptt-input ptt-row-input ptt-row-value" placeholder="e.g. 2.3" inputmode="decimal" />' +
+          '</div>' +
+          '<button type="button" class="ptt-row-remove" aria-label="Remove row">' +
+          '  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>' +
+          '</button>';
 
         var dateEl = wrap.querySelector('.ptt-row-date');
         var valEl = wrap.querySelector('.ptt-row-value');
@@ -442,10 +491,12 @@ const articleSchema = {
 
         var removeBtn = wrap.querySelector('.ptt-row-remove');
         removeBtn.addEventListener('click', function () {
-          wrap.parentNode && wrap.parentNode.removeChild(wrap);
+          if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+          renumberRows();
         });
 
         rowsEl.appendChild(wrap);
+        renumberRows();
       }
 
       // Seed with one empty row
@@ -561,6 +612,225 @@ const articleSchema = {
         );
       }
 
+      // Method-specific breeding window math, measured in days from ovulation estimate
+      function breedingWindowDays(method) {
+        if (method === 'natural') return { startOffset: 2, endOffset: 5, label: 'Natural (live cover)' };
+        if (method === 'fresh-chilled') return { startOffset: 3, endOffset: 5, label: 'Fresh chilled semen' };
+        if (method === 'frozen') return { startOffset: 4, endOffset: 6, label: 'Frozen semen' };
+        return { startOffset: 2, endOffset: 6, label: 'Method not selected' };
+      }
+
+      // Linear interpolation across the trend to estimate the date when P4 first crossed a threshold.
+      function crossingDate(readings, threshold) {
+        for (var i = 0; i < readings.length; i++) {
+          if (readings[i].value >= threshold) {
+            if (i === 0) {
+              return { date: readings[i].date, day: readings[i].day, exact: true, atOrBefore: true };
+            }
+            var prev = readings[i - 1];
+            var curr = readings[i];
+            if (curr.value === prev.value) {
+              return { date: curr.date, day: curr.day, exact: true, atOrBefore: false };
+            }
+            var frac = (threshold - prev.value) / (curr.value - prev.value);
+            if (frac < 0) frac = 0;
+            if (frac > 1) frac = 1;
+            var dayDelta = (curr.day - prev.day) * frac;
+            var estDay = prev.day + dayDelta;
+            var estMs = prev.date.getTime() + (curr.date.getTime() - prev.date.getTime()) * frac;
+            return { date: new Date(estMs), day: Math.round(estDay), exact: false, atOrBefore: false };
+          }
+        }
+        return null;
+      }
+
+      function addDays(date, n) {
+        var d = new Date(date.getTime());
+        d.setDate(d.getDate() + Math.round(n));
+        return d;
+      }
+
+      function buildProjection(readings, method) {
+        if (readings.length === 0) {
+          return '<div class="ptt-proj-empty">Add at least one P4 reading to see a projection.</div>';
+        }
+
+        var lhEst = crossingDate(readings, 2);
+        var ovuEst = crossingDate(readings, 5);
+        var last = readings[readings.length - 1];
+        var win = breedingWindowDays(method);
+
+        var lhBlock = '';
+        if (lhEst) {
+          var lhPrefix = lhEst.atOrBefore ? 'On or before ' : 'Estimated ';
+          var lhExactNote = lhEst.exact ? '' : ' (interpolated)';
+          lhBlock =
+            '<div class="ptt-proj-card ptt-proj-lh">' +
+            '  <div class="ptt-proj-label">LH surge estimate</div>' +
+            '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(lhEst.date)) + '</div>' +
+            '  <div class="ptt-proj-note">' + escapeHtml(lhPrefix) + 'P4 crossed ~2 ng/mL near Day ' + lhEst.day + escapeHtml(lhExactNote) + '.</div>' +
+            '</div>';
+        } else {
+          lhBlock =
+            '<div class="ptt-proj-card ptt-proj-pending">' +
+            '  <div class="ptt-proj-label">LH surge estimate</div>' +
+            '  <div class="ptt-proj-value">Not reached yet</div>' +
+            '  <div class="ptt-proj-note">Latest reading is ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL. Watch for the cross near ~2 ng/mL.</div>' +
+            '</div>';
+        }
+
+        var ovuBlock = '';
+        if (ovuEst) {
+          var ovuPrefix = ovuEst.atOrBefore ? 'On or before ' : 'Estimated ';
+          var ovuExactNote = ovuEst.exact ? '' : ' (interpolated)';
+          ovuBlock =
+            '<div class="ptt-proj-card ptt-proj-ovulation">' +
+            '  <div class="ptt-proj-label">Ovulation estimate</div>' +
+            '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(ovuEst.date)) + '</div>' +
+            '  <div class="ptt-proj-note">' + escapeHtml(ovuPrefix) + 'P4 crossed ~5 ng/mL near Day ' + ovuEst.day + escapeHtml(ovuExactNote) + '.</div>' +
+            '</div>';
+        } else {
+          ovuBlock =
+            '<div class="ptt-proj-card ptt-proj-pending">' +
+            '  <div class="ptt-proj-label">Ovulation estimate</div>' +
+            '  <div class="ptt-proj-value">Not reached yet</div>' +
+            '  <div class="ptt-proj-note">Watch for P4 to cross ~5 ng/mL. Eggs mature for ~2 days after ovulation.</div>' +
+            '</div>';
+        }
+
+        var winBlock = '';
+        if (ovuEst) {
+          var winStart = addDays(ovuEst.date, win.startOffset);
+          var winEnd = addDays(ovuEst.date, win.endOffset);
+          winBlock =
+            '<div class="ptt-proj-card ptt-proj-window">' +
+            '  <div class="ptt-proj-label">Projected breeding window</div>' +
+            '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(winStart)) + ' to ' + escapeHtml(fmtDate(winEnd)) + '</div>' +
+            '  <div class="ptt-proj-note">' + escapeHtml(win.label) + '. Day ' + win.startOffset + ' to Day ' + win.endOffset + ' post-ovulation, when eggs are typically fertilizable. Your vet sets the actual day.</div>' +
+            '</div>';
+        } else {
+          winBlock =
+            '<div class="ptt-proj-card ptt-proj-pending">' +
+            '  <div class="ptt-proj-label">Projected breeding window</div>' +
+            '  <div class="ptt-proj-value">Pending ovulation</div>' +
+            '  <div class="ptt-proj-note">Once P4 crosses ~5 ng/mL the window projects from there. ' + escapeHtml(win.label) + '.</div>' +
+            '</div>';
+        }
+
+        var caveat =
+          '<div class="ptt-proj-caveat">' +
+          '<strong>How these estimates work.</strong> The LH surge is estimated as the point P4 crosses ~2 ng/mL. Ovulation is estimated at ~5 ng/mL. With only a few draws these are interpolated between readings, so they shift as you add data. Lab assays vary. Treat these as planning estimates, not vet-grade timing. Your reproductive vet&rsquo;s read of the full curve is the source of truth.' +
+          '</div>';
+
+        return lhBlock + ovuBlock + winBlock + caveat;
+      }
+
+      function buildChart(readings) {
+        if (readings.length === 0) return '';
+
+        var w = 720;
+        var h = 280;
+        var padL = 44;
+        var padR = 16;
+        var padT = 16;
+        var padB = 36;
+        var innerW = w - padL - padR;
+        var innerH = h - padT - padB;
+
+        var minDay = readings[0].day;
+        var maxDay = readings[readings.length - 1].day;
+        if (minDay === maxDay) maxDay = minDay + 1;
+        var dayPad = Math.max(1, Math.round((maxDay - minDay) * 0.08));
+        minDay = minDay - dayPad;
+        maxDay = maxDay + dayPad;
+
+        var maxV = 12;
+        for (var i = 0; i < readings.length; i++) {
+          if (readings[i].value > maxV) maxV = Math.ceil(readings[i].value / 5) * 5;
+        }
+
+        function xFor(day) {
+          return padL + ((day - minDay) / (maxDay - minDay)) * innerW;
+        }
+        function yFor(val) {
+          return padT + innerH - (val / maxV) * innerH;
+        }
+
+        function bandRect(yTop, yBot, fill) {
+          var y = Math.min(yTop, yBot);
+          var height = Math.abs(yBot - yTop);
+          return '<rect x="' + padL + '" y="' + y + '" width="' + innerW + '" height="' + height + '" fill="' + fill + '" opacity="0.45"/>';
+        }
+
+        var svg = '';
+        svg += '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" class="ptt-chart-svg">';
+
+        // Bands (under 1, 1-2.5, 2.5-10, 10+)
+        svg += bandRect(yFor(0), yFor(1), '#f3f4f6');
+        svg += bandRect(yFor(1), yFor(2.5), '#fef3c7');
+        svg += bandRect(yFor(2.5), yFor(10), '#dcfce7');
+        svg += bandRect(yFor(10), yFor(maxV), '#dbeafe');
+
+        // Threshold lines at 2 and 5
+        svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + yFor(2) + '" y2="' + yFor(2) + '" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4"/>';
+        svg += '<text x="' + (padL + innerW - 4) + '" y="' + (yFor(2) - 4) + '" text-anchor="end" font-size="11" fill="#92400e" font-family="system-ui, sans-serif">LH surge ~2</text>';
+        svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + yFor(5) + '" y2="' + yFor(5) + '" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 4"/>';
+        svg += '<text x="' + (padL + innerW - 4) + '" y="' + (yFor(5) - 4) + '" text-anchor="end" font-size="11" fill="#166534" font-family="system-ui, sans-serif">Ovulation ~5</text>';
+
+        // Y-axis ticks
+        var ticks = [0, 2, 5, 10];
+        if (maxV > 15) ticks.push(Math.round(maxV / 5) * 5);
+        for (var t = 0; t < ticks.length; t++) {
+          if (ticks[t] > maxV) continue;
+          var yy = yFor(ticks[t]);
+          svg += '<text x="' + (padL - 8) + '" y="' + (yy + 4) + '" text-anchor="end" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif">' + ticks[t] + '</text>';
+        }
+        svg += '<text x="10" y="' + (padT + innerH / 2) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif" transform="rotate(-90 10 ' + (padT + innerH / 2) + ')">ng/mL</text>';
+
+        // X-axis ticks (every ~3 days)
+        var dayRange = maxDay - minDay;
+        var step = dayRange <= 8 ? 1 : (dayRange <= 16 ? 2 : 3);
+        for (var d = Math.ceil(minDay); d <= maxDay; d++) {
+          if ((d - Math.ceil(minDay)) % step !== 0) continue;
+          var xx = xFor(d);
+          svg += '<line x1="' + xx + '" x2="' + xx + '" y1="' + (padT + innerH) + '" y2="' + (padT + innerH + 4) + '" stroke="#9ca3af" stroke-width="1"/>';
+          svg += '<text x="' + xx + '" y="' + (padT + innerH + 18) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif">D' + d + '</text>';
+        }
+        svg += '<text x="' + (padL + innerW / 2) + '" y="' + (h - 4) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif">Day of cycle</text>';
+
+        // Axis lines
+        svg += '<line x1="' + padL + '" x2="' + padL + '" y1="' + padT + '" y2="' + (padT + innerH) + '" stroke="#d1d5db" stroke-width="1"/>';
+        svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + (padT + innerH) + '" y2="' + (padT + innerH) + '" stroke="#d1d5db" stroke-width="1"/>';
+
+        // Trend line
+        if (readings.length >= 2) {
+          var pathD = '';
+          for (var p = 0; p < readings.length; p++) {
+            var px = xFor(readings[p].day);
+            var py = yFor(readings[p].value);
+            pathD += (p === 0 ? 'M' : 'L') + px.toFixed(1) + ' ' + py.toFixed(1) + ' ';
+          }
+          svg += '<path d="' + pathD + '" fill="none" stroke="hsl(24, 95%, 53%)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+        }
+
+        // Data points
+        for (var k = 0; k < readings.length; k++) {
+          var c = classifyValue(readings[k].value);
+          var fill = '#6b7280';
+          if (c.band === 'baseline') fill = '#9ca3af';
+          else if (c.band === 'lh') fill = '#f59e0b';
+          else if (c.band === 'ovulation') fill = '#16a34a';
+          else if (c.band === 'maturation') fill = '#2563eb';
+          var cx = xFor(readings[k].day);
+          var cy = yFor(readings[k].value);
+          svg += '<circle cx="' + cx + '" cy="' + cy + '" r="5.5" fill="' + fill + '" stroke="#ffffff" stroke-width="2"/>';
+          svg += '<text x="' + cx + '" y="' + (cy - 10) + '" text-anchor="middle" font-size="11" font-weight="600" fill="#111827" font-family="system-ui, sans-serif">' + readings[k].value.toFixed(1) + '</text>';
+        }
+
+        svg += '</svg>';
+        return svg;
+      }
+
       function buildTimeline(readings) {
         if (readings.length === 0) {
           return '<p class="ptt-empty">No test rows with both a date and a value yet.</p>';
@@ -631,6 +901,9 @@ const articleSchema = {
 
         readings.sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
 
+        projectionEl.innerHTML = buildProjection(readings, method);
+        chartEl.innerHTML = buildChart(readings);
+        chartWrapEl.style.display = readings.length === 0 ? 'none' : '';
         timelineEl.innerHTML = buildTimeline(readings);
         summaryEl.innerHTML = buildSummary(readings, method);
 
@@ -669,22 +942,70 @@ const articleSchema = {
     .ptt-card {
       background: #ffffff;
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      border-radius: 14px;
+      padding: 0;
+      box-shadow: 0 4px 12px rgba(17, 24, 39, 0.06), 0 1px 2px rgba(17, 24, 39, 0.04);
+      overflow: hidden;
+    }
+
+    .ptt-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 1.1rem 1.5rem;
+      background: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(18, 90%, 48%) 100%);
+      color: #ffffff;
+    }
+
+    .ptt-card-header-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .ptt-card-header-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .ptt-card-header-sub {
+      font-size: 0.9rem;
+      opacity: 0.92;
+      line-height: 1.4;
+      margin-top: 0.15rem;
     }
 
     .ptt-form {
-      margin-bottom: 1.5rem;
+      padding: 1.5rem;
     }
 
     .ptt-field {
-      margin-bottom: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    .ptt-grid-two {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .ptt-grid-two {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     .ptt-label {
       display: block;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: #111827;
       margin-bottom: 0.25rem;
@@ -698,19 +1019,21 @@ const articleSchema = {
     .ptt-optional {
       font-weight: 400;
       color: #6b7280;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-left: 0.25rem;
     }
 
     .ptt-help {
-      font-size: 0.95rem;
+      font-size: 0.875rem;
       color: #6b7280;
       margin-bottom: 0.5rem;
+      line-height: 1.4;
     }
 
     .ptt-input {
+      display: block;
       width: 100%;
-      padding: 0.65rem 0.85rem;
+      padding: 0.7rem 0.9rem;
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 1rem;
@@ -718,123 +1041,198 @@ const articleSchema = {
       background: #ffffff;
       min-height: 44px;
       box-sizing: border-box;
+      font-family: inherit;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
     }
 
     .ptt-input:focus {
-      outline: 2px solid hsl(24, 95%, 53%);
-      outline-offset: 1px;
+      outline: none;
+      border-color: hsl(24, 95%, 53%);
+      box-shadow: 0 0 0 3px hsla(24, 95%, 53%, 0.18);
+    }
+
+    .ptt-select-wrap {
+      position: relative;
+    }
+
+    .ptt-select {
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 2.5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b7280'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 18px 18px;
     }
 
     .ptt-rows-fieldset {
-      border: 1px dashed #e5e7eb;
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 0 0 1.25rem 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem 1.25rem;
+      margin: 0 0 1.5rem 0;
+      background: #fafbfc;
     }
 
     .ptt-rows-fieldset legend {
-      padding: 0 0.5rem;
+      padding: 0;
+      float: none;
+    }
+
+    .ptt-rows-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .ptt-rows-legend {
+      margin-bottom: 0.1rem;
     }
 
     .ptt-rows {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
+      gap: 0.6rem;
     }
 
     .ptt-row {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 0.75rem;
-    }
-
-    .ptt-row-fields {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      align-items: flex-end;
       gap: 0.75rem;
-      align-items: end;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      flex-wrap: wrap;
     }
 
-    @media (min-width: 640px) {
-      .ptt-row-fields {
-        grid-template-columns: 1fr 1fr auto;
-      }
+    .ptt-row-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 95%);
+      color: hsl(24, 95%, 40%);
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-bottom: 0.35rem;
+      line-height: 1;
+    }
+
+    .ptt-row-field {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 140px;
+      min-width: 140px;
     }
 
     .ptt-row-label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      color: #374151;
+      color: #6b7280;
       margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .ptt-row-action {
-      display: flex;
-      justify-content: flex-end;
+    .ptt-row-input {
+      padding: 0.55rem 0.75rem;
+      min-height: 40px;
+      font-size: 0.95rem;
     }
 
     .ptt-row-remove {
-      padding: 0.55rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
       background: #ffffff;
       color: #b91c1c;
       border: 1px solid #fecaca;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      border-radius: 8px;
       cursor: pointer;
-      min-height: 40px;
+      transition: background 120ms ease, border-color 120ms ease;
+      flex-shrink: 0;
+      margin-bottom: 0.2rem;
     }
 
     .ptt-row-remove:hover {
       background: #fef2f2;
+      border-color: #fca5a5;
     }
 
-    .ptt-rows-actions {
-      display: flex;
-      justify-content: flex-start;
+    .ptt-row-remove:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
     }
 
     .ptt-button {
-      padding: 0.75rem 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
       background: hsl(24, 95%, 53%);
       color: #ffffff;
       border: 0;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       min-height: 44px;
-      transition: background 150ms ease;
+      transition: background 150ms ease, transform 80ms ease, box-shadow 150ms ease;
+      box-shadow: 0 1px 2px rgba(194, 65, 12, 0.25);
     }
 
     .ptt-button:hover {
       background: hsl(24, 95%, 48%);
+      box-shadow: 0 2px 6px rgba(194, 65, 12, 0.3);
+    }
+
+    .ptt-button:active {
+      transform: translateY(1px);
     }
 
     .ptt-button-secondary {
-      padding: 0.55rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 0.95rem;
       background: #ffffff;
       color: hsl(24, 95%, 40%);
-      border: 1px solid #d1d5db;
+      border: 1px solid #fed7aa;
       border-radius: 8px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 38px;
+      transition: background 120ms ease, border-color 120ms ease;
+      flex-shrink: 0;
     }
 
     .ptt-button-secondary:hover {
       background: #fff7ed;
-      border-color: hsl(24, 95%, 80%);
+      border-color: hsl(24, 95%, 70%);
+    }
+
+    .ptt-plus {
+      font-size: 1.05rem;
+      line-height: 1;
+      font-weight: 700;
     }
 
     .ptt-form-actions {
       display: flex;
       justify-content: flex-end;
-      margin-top: 0.25rem;
+      margin-top: 0.5rem;
     }
 
     .ptt-error {
@@ -865,6 +1263,149 @@ const articleSchema = {
       margin-bottom: 1.5rem;
       font-size: 0.95rem;
     }
+
+    .ptt-section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 1.5rem 0 0.75rem 0;
+      letter-spacing: -0.01em;
+    }
+
+    .ptt-projection {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 720px) {
+      .ptt-projection {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .ptt-proj-caveat {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .ptt-proj-card {
+      padding: 1rem 1.15rem;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ptt-proj-lh {
+      background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+      border-color: #fde68a;
+    }
+
+    .ptt-proj-ovulation {
+      background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+      border-color: #bbf7d0;
+    }
+
+    .ptt-proj-window {
+      background: linear-gradient(180deg, hsl(24, 95%, 96%) 0%, #ffffff 100%);
+      border-color: hsl(24, 95%, 80%);
+    }
+
+    .ptt-proj-pending {
+      background: #f9fafb;
+      border-style: dashed;
+    }
+
+    .ptt-proj-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ptt-proj-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.3;
+    }
+
+    .ptt-proj-note {
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.45;
+    }
+
+    .ptt-proj-caveat {
+      padding: 0.85rem 1.1rem;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      color: #78350f;
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .ptt-proj-empty {
+      padding: 1rem;
+      background: #f9fafb;
+      border: 1px dashed #e5e7eb;
+      border-radius: 8px;
+      color: #6b7280;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .ptt-chart-wrap {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 0.85rem 1rem 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .ptt-chart {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .ptt-chart-svg {
+      width: 100%;
+      height: auto;
+      min-width: 320px;
+      display: block;
+    }
+
+    .ptt-chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      padding-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .ptt-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .ptt-legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .ptt-legend-baseline { background: #9ca3af; }
+    .ptt-legend-lh { background: #f59e0b; }
+    .ptt-legend-ovulation { background: #16a34a; }
+    .ptt-legend-maturation { background: #2563eb; }
 
     .ptt-timeline {
       display: flex;
