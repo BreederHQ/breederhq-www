@@ -14,7 +14,7 @@
 > - NEVER remove isProduction checks, Schema.org data, or inline script patterns
 > - NEVER refactor is:inline scripts to imports (breaks Astro tracking)
 > - Env vars MUST use PUBLIC_ prefix for client exposure
-> - **SITE UPDATES: Any content change MUST include an entry in site-updates.astro**"
+> - **SITE UPDATES: Any content change MUST add a fragment under `src/pages/_site-updates/YYYY-MM-DD-<slug>.astro` — NEVER edit `site-updates.astro` directly (multi-agent contention hazard, see CLAUDE.md)**"
 
 This confirms the instructions are active and that Claude has read the imported documentation.
 
@@ -78,37 +78,169 @@ These files contain critical integrations. **Ask before changing**:
 
 ---
 
-## 🚨 MANDATORY: Update Site Updates Page After Content Changes
+## 🚨 MANDATORY: Log Content Changes via the Site Updates Fragment Pattern
 
-**Every time you modify marketing content** (page text, page renames, new pages, removed pages, feature descriptions, CTA changes, navigation changes), you **MUST** also update:
+**Every time you modify marketing content** (page text, page renames, new pages, removed pages, feature descriptions, CTA changes, navigation changes), you **MUST** log a site-updates entry. **As of 2026-05-17 the policy is: write a fragment file, do NOT edit `site-updates.astro` directly.**
 
-**`src/pages/site-updates.astro`** — the public changelog at `/site-updates`
+### Why we use fragments (the multi-agent coordination problem)
 
-### What to add
+On 2026-05-17 we ran four agents in parallel to ship four marketplace pages on the same day (Lexington geo page, Trust page, Equine Boarding hub, Farriers hub). All four needed to log entries in `src/pages/site-updates.astro`. The result:
+- One agent's `Edit` retry absorbed three other agents' entries into its diff after the "file modified since read" error forced a re-Read.
+- Another agent had to retry three times against concurrent writes.
+- Cross-references were written to pages that did not yet exist on disk.
 
-Add a new entry (or append to today's existing entry) in the updates list with:
-- **Date** (today's date)
-- **What changed** — brief, user-facing description
-- **Link** to affected page(s) if applicable
+The shared changelog file became a write-contention bottleneck. The fix is to remove the shared file from the hot path entirely: each launch writes its own fragment, and the aggregated changelog is rebuilt at compile time.
 
-### When to update
+### The fragment pattern
 
-| Change Type | Update site-updates? |
-|-------------|---------------------|
-| New page added | **YES** — note the new page and what it covers |
-| Page renamed/moved | **YES** — note old → new URL |
+```
+src/pages/_site-updates/
+├── 2026-05-17-farriers.astro              ← one fragment per content change
+├── 2026-05-17-lexington-equine-boarding.astro
+├── 2026-05-17-trust.astro
+├── 2026-05-17-equine-boarding-hub.astro
+└── _archive/                               ← optional; see Cleanup section
+    └── 2025-12-31-end-of-year-roundup.astro
+```
+
+`src/pages/site-updates.astro` becomes an aggregator: it uses Vite's `import.meta.glob` (synchronous, eager) to pull every fragment under `_site-updates/`, sorts them by filename descending (newest first), and renders them inline. **No human or agent edits `site-updates.astro` once the aggregator lands.**
+
+### Filename rules (deterministic ordering + collision avoidance)
+
+```
+YYYY-MM-DD-<kebab-slug>.astro
+```
+
+- **Date prefix is mandatory** — drives sort order (descending filename = newest first).
+- **Slug must be unique within the day** — if two agents both ship "farrier" content the same day, qualify the slugs: `2026-05-17-farriers-category-hub.astro` and `2026-05-17-farrier-provider-page.astro`. If the slug collides, the build aborts; fix by qualifying.
+- **Lowercase, hyphen-separated.** No spaces, no underscores in the slug (underscore is reserved for the `_archive/` directory and the `_site-updates` parent).
+- **Leading underscore on the directory name** (`_site-updates/`) prevents Astro from treating fragments as routable pages. Critical — without the underscore, every fragment becomes a public URL.
+
+### Fragment file shape
+
+Every fragment is a standalone Astro snippet that renders ONE `<article>` block. No `<BaseLayout>`, no `<main>`, no `<section>` — those belong to the aggregator. The fragment is append-only and self-contained.
+
+```astro
+---
+// src/pages/_site-updates/2026-05-17-farriers.astro
+export const updateMeta = {
+  date: '2026-05-17',          // ISO date — also encoded in filename, kept here for the rendered <h2>
+  title: 'Flagship marketplace category landing page: Farriers',
+  tags: ['marketplace', 'seo', 'farriers'],  // optional, for future filtering
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Launched the flagship BreederHQ Marketplace category landing page for farriers at <a href="/services/farriers" class="text-[hsl(24,95%,53%)] hover:underline">/services/farriers</a>...</p>
+  <!-- New file / Sections / SEO / Internal links / Navigation blocks as before -->
+</article>
+```
+
+The exported `updateMeta` object is optional today but reserved for the aggregator to consume later (tag filtering, RSS feed, JSON-LD for the changelog itself). Keep it accurate.
+
+### The aggregator pattern (`src/pages/site-updates.astro`)
+
+The aggregator file is the ONLY place `import.meta.glob('./_site-updates/*.astro')` runs. It is small, stable, and changes only when the rendering shell changes — not when content changes.
+
+```astro
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Site Updates', url: '/site-updates' },
+];
+
+// Eager glob — every fragment is bundled at build time, sorted by filename descending.
+// Filename convention `YYYY-MM-DD-<slug>.astro` makes the sort deterministic.
+const fragmentModules = import.meta.glob('./_site-updates/*.astro', { eager: true });
+const fragments = Object.entries(fragmentModules)
+  .sort(([a], [b]) => b.localeCompare(a))   // newest first
+  .map(([, mod]) => (mod as any).default);
+---
+<BaseLayout
+  title="Site Updates - BreederHQ"
+  description="Internal update log for the BreederHQ marketing website."
+  breadcrumbs={breadcrumbs}
+  noindex={true}
+>
+  <main>
+    <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 mb-4">Site Updates</h1>
+        <p class="text-lg text-gray-600">A running log of content changes to breederhq.com. Newest first.</p>
+      </div>
+    </section>
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
+        {fragments.map((Fragment) => <Fragment />)}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+```
+
+This file is now PROTECTED. Treat it like `BaseLayout.astro` — do not edit it to add content. Content goes in fragments.
+
+### Append-only behavior (the rule that makes this work)
+
+1. **Agents create new fragments. Agents do not modify existing fragments.** Once a fragment is committed, treat it as immutable history — corrections go in a new fragment that references the older one ("On 2026-05-17 we said X; correction: Y").
+2. **Agents do not modify `site-updates.astro`.** If you find yourself reaching for it, you are doing it wrong. The aggregator only changes when its rendering shell changes (rare, requires explicit approval as a PROTECTED file).
+3. **One fragment per content change.** Do not bundle three unrelated launches into one fragment. The whole point is to avoid contention; one launch = one fragment.
+
+### Collision avoidance rules (multi-agent launches)
+
+| Scenario | Rule |
+|---|---|
+| Two agents launching the same day | Each writes its own fragment. Different slugs. No coordination needed. |
+| Two agents touching adjacent topics ("farriers" and "farrier-providers") | Qualify slugs explicitly: `farriers-category-hub` vs `farrier-provider-page`. Don't truncate. |
+| Slug collision detected at build | `npm run build` aborts (Vite throws on duplicate glob entries — and even if it didn't, our slug-uniqueness convention would catch it). Resolve by renaming and committing again. |
+| Agent A references a page Agent B is about to ship | Write the cross-link anyway. Astro doesn't validate internal links at build time. Worst case is a temporary 404 if Agent B doesn't land; document the dependency in `updateMeta` if it matters. |
+| Agent's fragment needs to be retracted before launch | Delete the fragment file in the same PR. Don't ship a fragment that documents an unshipped change. |
+
+### What goes in a fragment vs. what does not
+
+| Change Type | Write a fragment? |
+|---|---|
+| New page added | **YES** — describe sections, SEO targets, internal links |
+| Page renamed / moved | **YES** — note old → new URL, redirect status |
 | Page content rewritten | **YES** — summarize what changed |
-| Page removed | **YES** — note removal |
-| Navigation/header/footer changes | **YES** — note restructuring |
+| Page removed | **YES** — note removal and any redirect added |
+| Navigation / header / footer restructured | **YES** — describe the structural change |
+| Multi-page launch (e.g. four hubs the same day) | **YES, but one fragment per page** — never one fragment covering all four |
 | Styling-only changes (colors, spacing) | No |
 | Bug fixes (broken links, typos) | No (unless user-visible behavior changed) |
-| Analytics/tracking changes | No |
-| Infrastructure/config changes | No |
+| Analytics / tracking changes | No |
+| Infrastructure / config changes | No (use commit messages) |
+
+### Cleanup and archive guidance
+
+The fragment directory will grow unbounded if left alone. Two strategies, in order of preference:
+
+1. **Roll-up after the year ends.** On 2027-01-15 (or first business day after the year boundary), an annual cleanup pass moves all fragments older than the current calendar year into `src/pages/_site-updates/_archive/`. The aggregator's glob can be widened to include the archive, or the archive can be quietly dropped from the live page if the changelog is intended as a recent-changes log only. Repo policy as of 2026-05-17: **archive but keep rendering** (changelog page should show ~13 months of history at any time).
+2. **Quarterly roll-up if the directory exceeds ~150 fragments.** At that density the page renders fine but new contributors can't scan the directory in their editor. Cut a quarterly archive: `_archive/2026-Q1/`, `_archive/2026-Q2/`, etc.
+
+Do **not** delete fragments. The changelog is the public log of what shipped — historical accuracy matters when triaging regressions or briefing new hires.
+
+### Migration plan (one-time, not yet executed)
+
+The existing `src/pages/site-updates.astro` is monolithic — every entry since 2026-01 lives in one ~2,000-line file. The migration is straightforward but not free:
+
+1. Extract each `<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">...</article>` block into its own fragment file under `_site-updates/`.
+2. Name each file by the `<h2>` date plus a slug derived from the entry's first heading.
+3. Rewrite `site-updates.astro` to the aggregator shape above.
+4. Mark `site-updates.astro` PROTECTED in this CLAUDE.md (add to the protected-files table).
+5. Verify the build output matches the pre-migration HTML byte-for-byte aside from the fragment-ordering improvement.
+
+Until the migration ships, the legacy "edit `site-updates.astro` directly" workflow remains in effect — but ALL agents working on multi-page launches must coordinate verbally or via a separate channel to avoid the contention pattern from 2026-05-17. The fragment pattern is the durable fix.
 
 ### Self-check before finishing content work
 
 - [ ] Did I modify any page content, add/remove pages, or rename URLs?
-- [ ] If yes, did I update `src/pages/site-updates.astro` with a changelog entry?
+- [ ] If yes, **did I write a new fragment under `src/pages/_site-updates/`** (preferred), or — if the migration hasn't shipped — append to `site-updates.astro` with full awareness of the contention risk?
+- [ ] Is my fragment filename `YYYY-MM-DD-<unique-slug>.astro`?
+- [ ] Does my fragment contain exactly one `<article>` block, no `<BaseLayout>` / `<main>` / `<section>` wrapping?
+- [ ] Did I avoid editing or renaming any other agent's fragment?
 
 ---
 
