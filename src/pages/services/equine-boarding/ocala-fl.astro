@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Equine Boarding', url: '/services/equine-boarding' },
+  { name: 'Ocala, FL', url: '/services/equine-boarding/ocala-fl' }
+];
+
+const faqs = [
+  {
+    question: 'What does horse boarding typically cost in Ocala, FL?',
+    answer: 'Ocala boarding pricing is segmented sharply between the year-round resident market and the seasonal winter market. Year-round pasture board on Marion County acreage typically sits in the lower range, full-care stall board with daily turnout sits in the middle, and full-service training board at the major sport horse facilities (especially during the World Equestrian Center season) can reach the top of the national range. Stalls and short-term layups at premium facilities book up well in advance of the winter circuit. Pricing on BreederHQ Marketplace is set by each facility.'
+  },
+  {
+    question: 'What makes Ocala a top boarding market in the United States?',
+    answer: 'Ocala sits in Marion County, which has historically described itself as the Horse Capital of the World on the strength of an unusually dense Thoroughbred breeding industry, a deep population of training centers and farms, and the karst-influenced limestone soils of north central Florida that produce strong forage and natural mineral content for growing horses. Over the past two decades the region has also become one of the most important winter destinations in North American sport horse competition, anchored by the World Equestrian Center on the west side of Ocala and the established hunter/jumper, eventing, and dressage communities across the county.'
+  },
+  {
+    question: 'Is Ocala only for Thoroughbreds and high-performance horses?',
+    answer: 'No. While the Thoroughbred breeding industry and the World Equestrian Center anchor the public face of the region, Marion County and the surrounding counties (Alachua, Levy, Citrus, Sumter, Lake) support large communities for Warmbloods, Quarter Horses, Arabians, Paso Finos, gaited breeds, sport ponies, and trail and pleasure horses. Many year-round boarding facilities are family-scale operations on rolling pasture, well outside the show-circuit price tier.'
+  },
+  {
+    question: 'How does the winter circuit affect Ocala boarding availability?',
+    answer: 'The competition season around the World Equestrian Center, HITS Ocala, and the broader Florida winter circuit creates a meaningful surge in seasonal demand for stalls, training board, layups, and short-term boarding from approximately late fall through spring. If you intend to ship in for the season, book months in advance. Year-round residents in Marion County are usually insulated from this, but adjacent counties and trailer parking near show venues are not.'
+  },
+  {
+    question: 'What equine medical resources are available in Ocala?',
+    answer: 'Marion County has one of the deepest concentrations of equine veterinarians in the Southeast, including large referral hospitals and well-established sport horse and reproductive practices. Specialty work in lameness, advanced imaging, surgery, reproduction, and neonatal care is available within the county. Owners with performance, breeding, or layup horses generally have shorter referral distances in Ocala than in most other regions.'
+  },
+  {
+    question: 'What facility features should I prioritize when boarding in Ocala?',
+    answer: 'Florida boarding decisions weight differently than Bluegrass or Northeast decisions. Ask about shade and tree cover (Florida summer heat is a real welfare factor), fly and parasite management, footing in any covered arena (covered arenas matter more in Ocala than in cooler regions), pasture rotation and overgrazing on sandy soils, hurricane preparedness and storm protocols, water source and well capacity, and trailer access for show season if relevant. For winter circuit boarders, ask explicitly about stall availability for the months you intend to be there.'
+  }
+];
+
+const service = {
+  name: 'Horse Boarding in Ocala, Florida',
+  description: 'Discover equine boarding facilities in Ocala, Florida and Marion County. Pasture board, stall board, training board, layup, and seasonal winter circuit boarding near the World Equestrian Center and HITS Ocala.',
+  serviceType: 'Equine Boarding',
+  areaServed: 'Ocala, Florida',
+  offerDescription: 'Geographic boarding directory connecting horse owners with verified equine facilities in Marion County and surrounding north central Florida.',
+  offerUrl: '/services/equine-boarding/ocala-fl'
+};
+
+const nearbyAreas = [
+  { name: 'Reddick & Northwest Marion County', note: 'Heart of the historic Thoroughbred breeding belt. Many of the established broodmare and training farms sit on the rolling pasture between Ocala and the Alachua County line.' },
+  { name: 'Citra & Anthony', note: 'Quieter pasture country northeast of Ocala with a mix of breeding farms and family-scale boarding.' },
+  { name: 'Williston & Levy County', note: 'West of Ocala. Lower density, larger acreage, and more pasture-board oriented than the central Marion County market.' },
+  { name: 'Dunnellon & Citrus County', note: 'Southwest of Ocala along the Withlacoochee. Mix of trail, pleasure, and small-farm boarding.' },
+  { name: 'Belleview & South Marion County', note: 'Closer to the Lake County line. Steady year-round boarding market with growing sport horse barns.' },
+  { name: 'Bushnell & Sumter County', note: 'South of Ocala. Heavier in Quarter Horse, gaited breeds, and pleasure boarding than in Marion County proper.' },
+  { name: 'Alachua & Gainesville', note: 'North of Ocala. Mix of university-adjacent eventing and dressage barns and rural pasture board on the Alachua County prairie.' },
+  { name: 'The Villages & Lake County', note: 'Southeast of Ocala. Growing retiree-rider population and a steady pleasure and trail horse boarding base.' }
+];
+---
+
+<BaseLayout
+  title="Horse Boarding in Ocala, FL | Equine Boarding in Marion County | BreederHQ"
+  description="Find horse boarding in Ocala, Florida and Marion County. Pasture board, full-care stall board, training board, layup, and seasonal winter circuit boarding near the World Equestrian Center and HITS Ocala."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/equine-boarding" class="text-amber-700 hover:underline">Equine Boarding</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Ocala, FL</li>
+      </ol>
+    </nav>
+
+    <!-- 1. Hero -->
+    <section class="py-16 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Ocala, Florida</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
+          Horse Boarding in Ocala and Marion County
+        </h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          Ocala is the second great horse capital in the United States. Marion County&apos;s combination of limestone-influenced sandy loam, year-round growing season, deep Thoroughbred breeding tradition, and the modern weight of the World Equestrian Center and HITS Ocala have made it one of the most concentrated equine economies in the world.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          This is the Ocala regional page on BreederHQ Marketplace. Verified facility listings populate as local providers join; in the meantime, the page is a working introduction to what the Marion County boarding market actually looks like and what to ask before signing a board contract here specifically.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#featured-providers"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg text-center transition"
+          >
+            See Featured Providers
+          </a>
+          <a
+            href="/for-providers/equine-services"
+            class="inline-block border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-semibold py-3 px-6 rounded-lg text-center transition"
+          >
+            List Your Facility
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Ocala Equine Ecosystem -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">The Ocala Equine Ecosystem</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Marion County sits on the eastern edge of the Brooksville Ridge, where Floridan aquifer limestone weathers up through sandy loam to produce pasture conditions unusual for the state. The mineral profile is one of the reasons north central Florida developed a Thoroughbred breeding industry in the twentieth century, and it continues to shape why so many breeding farms, training centers, and rehabilitation operations are concentrated here rather than elsewhere in the Southeast.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Two modern venues anchor the current sport horse economy. The <strong>World Equestrian Center</strong> on the west side of Ocala is one of the largest equestrian complexes in the world by indoor and outdoor footprint, and it hosts a year-round calendar of hunter/jumper, dressage, Western, and breed competitions. <strong>HITS Ocala</strong>, on the south side, runs a long-established winter hunter/jumper circuit. Together they make Ocala one of the dominant winter destinations in North American sport horse competition.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Around those venues sits the older Marion County Thoroughbred industry, with training centers, breeding farms, and consignors that have shipped horses to the major auction and racing markets for generations. Ocala Breeders&apos; Sales (OBS) runs juvenile-in-training, mixed, and yearling sales that anchor the regional Thoroughbred calendar and create predictable peaks of farm activity throughout the year.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          The veterinary and equine professional community in Marion County is correspondingly deep. Referral hospitals, sport horse practices, reproductive specialists, and a large population of farriers, equine dentists, bodyworkers, and transport operators all maintain full-time practices in the area. For an owner, the practical effect is that specialist access is among the shortest in the United States.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. What To Look For -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">What To Look For in Boarding in Ocala</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Florida boarding decisions weight differently than Bluegrass or Northeast decisions. The questions below are the ones that consistently matter most in Marion County specifically.
+        </p>
+
+        <div class="space-y-6">
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Shade, ventilation, and heat management</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Florida summer is a genuine welfare consideration. Ask about tree cover in pastures, run-in sheds, fans in stalls, ventilation design in the barn, and turnout schedule during peak heat. A good Ocala facility will have explicit answers, not improvisation.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Footing and covered arena access</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Covered arenas are significantly more important in Ocala than in cooler regions because of sun, heat, and afternoon thunderstorms. Ask about footing type, depth, watering and drag schedule, lighting, and shared-use rules. For boarders intending to compete at WEC or HITS, ask how the facility&apos;s footing compares to the show ring.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pasture management on sandy soil</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Marion County pasture is productive but sensitive to overgrazing. Ask about stocking density, rotation, reseeding cadence, and how the farm manages overgrazed paddocks. Ask about sand colic prevention practices and whether feed is offered off the ground or in lined feeders.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Hurricane preparedness</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Hurricane preparedness is a real boarding question in Florida. Ask whether the farm has a written storm plan, how horses are handled in pasture versus barn during a named storm, where hay and feed reserves are stored, and how the facility communicates with boarders during evacuation orders. A facility that has thought through this is materially safer to board at.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Winter circuit availability</h3>
+            <p class="text-gray-700 leading-relaxed">
+              If you intend to ship in for the winter circuit, ask explicitly about stall and field availability for the months you plan to be in Ocala. Premium facilities book months in advance for WEC and HITS season. Confirm pricing tier (winter circuit rates often differ from year-round rates), trailer parking, and whether the facility accepts grooms and trainers on site.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Fly, parasite, and water management</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Florida humidity drives fly pressure and parasite load. Ask about the farm&apos;s deworming program, fly management (predator wasps, masks, spray systems), and how water sources are kept clean year-round. These are baseline questions in north central Florida, not optional ones.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Featured Providers placeholder -->
+    <section id="featured-providers" class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Featured Ocala Boarding Providers</h2>
+        <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Verified Ocala facility listings are coming soon</h3>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Ocala is the second regional boarding page on BreederHQ Marketplace, alongside Lexington, Kentucky. The provider directory below this section will populate as local Marion County facilities list their farms. We are intentionally not displaying placeholder, AI-generated, or scraped facility listings - every entry that appears here will be a real, owner-managed listing.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            If you operate a boarding, training, layup, or pasture facility in Marion County or the surrounding area and want to be one of the first verified listings on this page, you can create your facility profile now.
+          </p>
+          <a
+            href="/for-providers/equine-services"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            List Your Facility
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Nearby Areas -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Nearby Areas in North Central Florida</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Boarding farms within a reasonable trailer drive of Ocala extend across Marion County and into the surrounding counties. The communities below share the same regional veterinary and farrier networks and frequently appear on a Marion County boarder&apos;s short list.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {nearbyAreas.map((area) => (
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-1">{area.name}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{area.note}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-sm text-gray-500 mt-8">
+          City-specific boarding pages for these areas will be added as facility coverage grows.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. FAQ -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="bg-stone-50 border border-stone-200 rounded-xl p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-amber-700">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Provider CTA + Related -->
+    <section class="py-16 px-4 bg-gradient-to-b from-white to-amber-50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Operate a Boarding Facility in Marion County?</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto">
+          BreederHQ Marketplace is building a verified directory of equine facilities, starting in the regions where the equine economy is deepest. Ocala is the second regional boarding page, alongside Lexington, Kentucky. Listing early means your facility is among the first owners see when they search Marion County.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/for-providers/equine-services"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            List Your Equine Facility
+          </a>
+          <a
+            href="/trust"
+            class="inline-block border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            How BreederHQ Verifies Listings
+          </a>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-stone-200 text-left">
+          <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">Related on BreederHQ</h3>
+          <ul class="grid sm:grid-cols-2 gap-3 text-sm">
+            <li>
+              <a href="/services/equine-boarding" class="text-amber-700 hover:underline">All Equine Boarding</a>
+              <span class="text-gray-500"> - the national boarding hub</span>
+            </li>
+            <li>
+              <a href="/services/equine-boarding/lexington-ky" class="text-amber-700 hover:underline">Horse Boarding in Lexington, KY</a>
+              <span class="text-gray-500"> - the other major US horse capital</span>
+            </li>
+            <li>
+              <a href="/services/farriers" class="text-amber-700 hover:underline">All Farriers</a>
+              <span class="text-gray-500"> - the national farrier hub</span>
+            </li>
+            <li>
+              <a href="/for-providers/equine-services" class="text-amber-700 hover:underline">For Equine Service Providers</a>
+              <span class="text-gray-500"> - list your facility or service</span>
+            </li>
+            <li>
+              <a href="/trust" class="text-amber-700 hover:underline">Trust &amp; Verification</a>
+              <span class="text-gray-500"> - how we verify listings</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

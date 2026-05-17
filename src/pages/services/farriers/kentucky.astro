@@ -1,0 +1,307 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Farriers', url: '/services/farriers' },
+  { name: 'Kentucky', url: '/services/farriers/kentucky' }
+];
+
+const faqs = [
+  {
+    question: 'What does it cost to have a farrier come out in Kentucky?',
+    answer: 'Kentucky farrier pricing spans a wide range because the market includes everything from pasture trim circuits in the rural counties to specialist racetrack plate work at Keeneland and Churchill Downs. A routine trim is the least expensive service, a four-shoe reset on a sound horse sits in the middle, and corrective or therapeutic work with pads, glue-ons, hand-forged shoes, or hospital plates sits at the top. Sale-prep work for Keeneland September or January is its own pricing tier. Every provider on BreederHQ Marketplace sets and shows their own pricing.'
+  },
+  {
+    question: 'Why is Kentucky an unusually deep market for farriers?',
+    answer: 'Kentucky has one of the highest equine densities in the United States. The Inner Bluegrass alone supports a Thoroughbred breeding industry that processes thousands of weanlings and yearlings every year through sales prep, plus a year-round training and racing population at Keeneland, Churchill Downs (Louisville), Turfway Park (Florence), and Ellis Park (Henderson). On top of that base sits an active Standardbred industry at The Red Mile in Lexington, a Saddlebred industry concentrated around Shelbyville and Louisville, and a steady year-round population of pleasure, eventing, hunter/jumper, Western, and trail horses statewide. That depth produces an unusually large, specialized farrier community.'
+  },
+  {
+    question: 'How do AFA certifications work, and which ones matter most in Kentucky?',
+    answer: 'The American Farriers Association (AFA) administers a tiered voluntary credential: Certified Farrier (CF), Certified Tradesman Farrier (CTF), and Certified Journeyman Farrier (CJF), with Therapeutic Endorsement (TE) and Educator (E) sitting on top of CJF. Kentucky has a higher per-capita concentration of CJF and CJF-TE farriers than most states because the breeding, racing, and high-performance sport horse populations all create demand for advanced corrective and therapeutic work. AFA certification is voluntary in the United States, but it is one of the few objective trade benchmarks a horse owner can rely on.'
+  },
+  {
+    question: 'Are there farriers in Kentucky who specialize in racetrack work?',
+    answer: 'Yes. Plate work at the major Kentucky tracks (Keeneland, Churchill Downs, Turfway, Ellis Park) and at the Keeneland training track is a distinct specialty - turn-out shoes, race plates, glue-ons for thin or sensitive feet, and bar shoes for therapeutic cases. Plate farriers typically maintain a stable of training and racing clients and work on a tight schedule keyed to race meets and breeze days. If you have a Thoroughbred in training, look for a farrier whose listed specialty includes racetrack plate work.'
+  },
+  {
+    question: 'Where do Kentucky farriers train?',
+    answer: 'The Kentucky Horseshoeing School in Mount Eden is one of the best-known farrier training programs in the country and draws students nationally. Many practicing Kentucky farriers either attended KHS or apprenticed under graduates. Other Kentucky farriers come up through the racetrack apprentice route (working under a plate farrier for several seasons), the AFA apprentice and certification track, or other accredited farrier schools followed by Kentucky-based mentorship. None of those paths is inherently better; the credential, the working specialty, and the references matter more than the school name.'
+  },
+  {
+    question: 'How do I find a farrier near me on BreederHQ in Kentucky?',
+    answer: 'BreederHQ Marketplace lets you search farriers by coverage area, specialty (trim, shoe, corrective, therapeutic, performance, racetrack plate, sale prep), and species or breed focus. Each provider profile shows AFA certifications, regions served, and the type of work accepted. You can message providers directly through the marketplace without sharing your phone number until you are ready.'
+  }
+];
+
+const service = {
+  name: 'Farriers in Kentucky',
+  description: 'Find AFA-certified farriers, racetrack plate specialists, corrective and therapeutic farriers, sale-prep farriers, and barefoot trimmers across Kentucky on BreederHQ Marketplace.',
+  serviceType: 'Farrier and Hoof Care',
+  areaServed: 'Kentucky',
+  offerDescription: 'Regional farrier directory connecting Kentucky horse owners and breeding operations with verified farriers across the state.',
+  offerUrl: '/services/farriers/kentucky'
+};
+
+const regions = [
+  { name: 'Inner Bluegrass (Lexington, Versailles, Paris, Georgetown, Midway, Nicholasville)', note: 'The densest farrier market in the state. Driven by Thoroughbred breeding, Keeneland training and sales, and a deep sport horse population. Strong CJF and therapeutic representation.' },
+  { name: 'Louisville Metro & Churchill Downs corridor', note: 'Plate farriers tied to Churchill Downs and the spring and fall meets, plus a substantial Saddlebred and pleasure horse community in Oldham, Shelby, and Jefferson counties.' },
+  { name: 'Northern Kentucky & Turfway Park', note: 'Racetrack plate work tied to Turfway Park (Florence), plus a growing eventing and hunter/jumper population in Boone, Kenton, and Campbell counties.' },
+  { name: 'Western Kentucky (Henderson, Owensboro, Paducah)', note: 'Ellis Park anchors a smaller but real racetrack community. Mixed pleasure, stock horse, and trail populations across the rural counties.' },
+  { name: 'Eastern Kentucky (Winchester, Mt. Sterling, Morehead, Pikeville)', note: 'More pasture and trail oriented. Smaller per-farm trim circuits, with growing eventing and trail communities around the Daniel Boone National Forest.' },
+  { name: 'South Central Kentucky (Bowling Green, Glasgow, Somerset)', note: 'Mix of stock horse, pleasure, and trail clients, plus emerging sport horse barns. Generally longer farrier driving radii because of lower farm density.' }
+];
+
+const specialties = [
+  { label: 'Routine Trimming', detail: 'Pasture, pleasure, retired, and trim-only clients on 5 to 8 week cycles.' },
+  { label: 'Performance Shoeing', detail: 'Hunter/jumper, eventing, dressage, Saddlebred, reining, and Western performance.' },
+  { label: 'Racetrack Plate Work', detail: 'Keeneland, Churchill Downs, Turfway Park, Ellis Park, and training-center plates.' },
+  { label: 'Sale Prep', detail: 'Keeneland September, Keeneland November, Keeneland January, and Fasig-Tipton sale preparation.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes, hospital plates, and conformation cases for breeding stock and growing horses.' },
+  { label: 'Foal & Yearling Work', detail: 'First trims, balance work, conformation management, and yearling sale presentation.' }
+];
+---
+
+<BaseLayout
+  title="Farriers in Kentucky | AFA-Certified Hoof Care Across the Bluegrass | BreederHQ"
+  description="Find farriers in Kentucky on BreederHQ Marketplace. AFA-certified trimmers, performance shoers, racetrack plate specialists, sale-prep farriers, and corrective and therapeutic hoof care across the Bluegrass and statewide."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/farriers" class="text-amber-700 hover:underline">Farriers</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Kentucky</li>
+      </ol>
+    </nav>
+
+    <!-- 1. Hero -->
+    <section class="py-16 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Kentucky</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
+          Farriers in Kentucky
+        </h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          Kentucky has one of the deepest and most specialized farrier communities in the United States. The combination of Thoroughbred breeding in the Inner Bluegrass, year-round racing at Keeneland, Churchill Downs, Turfway Park, and Ellis Park, an established Standardbred industry at The Red Mile, a strong Saddlebred presence around Shelbyville and Louisville, and a steady statewide pleasure, sport, and trail horse population produces a market where specialist farriers can build full-time practices around a single discipline.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          This is the Kentucky regional directory for the BreederHQ Marketplace farrier hub. Provider profiles populate as farriers list their services; in the meantime, the page is a working introduction to the Kentucky farrier landscape and what to look for when hiring locally.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#featured-providers"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg text-center transition"
+          >
+            See Featured Providers
+          </a>
+          <a
+            href="/for-providers/farriers"
+            class="inline-block border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-semibold py-3 px-6 rounded-lg text-center transition"
+          >
+            List Your Farrier Practice
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Kentucky Farrier Ecosystem -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">The Kentucky Farrier Ecosystem</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Four overlapping equine economies drive Kentucky farrier demand. The Inner Bluegrass Thoroughbred industry, centered on Lexington and the surrounding Fayette, Woodford, Bourbon, and Scott counties, supports the largest concentration of breeding farms in North America. Sales prep cycles tied to <strong>Keeneland September</strong>, <strong>Keeneland November</strong>, and <strong>Keeneland January</strong>, along with the Fasig-Tipton sales held nearby in Lexington, create predictable peaks of yearling and weanling farrier work every year.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Year-round racing and training at <strong>Keeneland</strong>, <strong>Churchill Downs</strong> in Louisville, <strong>Turfway Park</strong> in Florence, and <strong>Ellis Park</strong> in Henderson sustains a specialist plate farrier community that operates on tight, schedule-driven rotations keyed to race meets and breeze days. Standardbred racing and training at <strong>The Red Mile</strong> in Lexington adds a parallel specialty community working with harness horses, where shoeing decisions affect gait and gait soundness in ways that differ meaningfully from flat racing.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          The fourth layer is the broad sport, pleasure, and breed-show population: hunter/jumper and eventing concentrated around Lexington and the Kentucky Horse Park, Saddlebreds around Shelbyville and the World Championship Horse Show grounds in Louisville, and a steady statewide population of trail, ranch, stock horse, and pleasure riders. That non-Thoroughbred population is large enough that most Kentucky farriers can specialize without leaving the state for work.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Education feeds this ecosystem directly. The <strong>Kentucky Horseshoeing School</strong> in Mount Eden is one of the longest-running and best-known farrier training programs in the country, and it draws students from across the United States and internationally. Many practicing Kentucky farriers either trained at KHS or apprenticed under graduates, which contributes to a regional baseline of technical fundamentals you can reasonably expect from a Kentucky-licensed practice.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Specialties Kentucky Farriers Cover -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Specialties Kentucky Farriers Cover</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Not every farrier does every kind of work. The categories below are the most common specialties Kentucky farriers list on a profile, and the right hire usually means matching the farrier&apos;s focus to your horse&apos;s job.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {specialties.map((s) => (
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-1">{s.label}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. What To Look For -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">What To Look For When Hiring a Kentucky Farrier</h2>
+        <div class="space-y-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Credentials and apprenticeship lineage</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Ask about AFA certification (CF, CTF, CJF, TE), where the farrier trained, and who they apprenticed under. In Kentucky, a CJF or CJF-TE credential is genuinely common, and asking is reasonable. A serious practice will answer without hesitation.
+            </p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Discipline and species match</h3>
+            <p class="text-gray-700 leading-relaxed">
+              A plate farrier who specializes in racing Thoroughbreds is not the natural fit for a Saddlebred show string, and a corrective specialist who works young horses on the Bluegrass breeding farms is not the natural fit for high-mileage trail strings in Eastern Kentucky. Ask the farrier what their typical client looks like.
+            </p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Schedule reliability and route geography</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Most Kentucky farriers run a route. Ask which day of the week they typically run your area, how far in advance they schedule, and how they handle emergencies (lost shoes, abscesses, lameness call-outs). Reliability of cycle is one of the strongest predictors of long-horse soundness.
+            </p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Vet collaboration</h3>
+            <p class="text-gray-700 leading-relaxed">
+              For any therapeutic or corrective case, ask which veterinarians the farrier works with regularly. In Kentucky that often means Hagyard Equine Medical Institute, Rood &amp; Riddle Equine Hospital, or Park Equine, but it can also mean a strong local solo practice. Vet-farrier collaboration is one of the single most important predictors of corrective outcome.
+            </p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pricing transparency and references</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Ask for the standard trim, four-shoe reset, and corrective-work rates, and ask for two or three current client references in your area. A reputable Kentucky farrier expects these questions and will answer them directly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Featured Providers placeholder -->
+    <section id="featured-providers" class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Featured Kentucky Farriers</h2>
+        <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Verified Kentucky farrier listings are coming soon</h3>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            This is the first regional farrier page on BreederHQ Marketplace. The provider directory below this section will populate as Kentucky farriers list their practices. We are intentionally not displaying placeholder, AI-generated, or scraped farrier listings - every entry that appears here will be a real, farrier-managed listing with verifiable credentials and references.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            If you are a practicing farrier in Kentucky and want to be one of the first verified listings on this page, you can create your provider profile now.
+          </p>
+          <a
+            href="/for-providers/farriers"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            List Your Farrier Practice
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Regional Coverage -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Regional Farrier Coverage Across Kentucky</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Kentucky&apos;s farrier market is concentrated in distinct regional clusters. The notes below summarize the working character of each region as horse owners typically experience it.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {regions.map((r) => (
+            <div class="bg-stone-50 border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-1">{r.name}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{r.note}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-sm text-gray-500 mt-8">
+          City-level farrier pages will be added as provider coverage grows.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="bg-white border border-stone-200 rounded-xl p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-amber-700">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Provider CTA + Related -->
+    <section class="py-16 px-4 bg-gradient-to-b from-white to-amber-50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Practicing in Kentucky? List Your Farrier Business.</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto">
+          BreederHQ Marketplace is building a verified directory of equine service providers, starting in the states where the equine economy is deepest. Kentucky is the first state-level farrier page. Listing early means your practice is among the first results horse owners see when they search Kentucky.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/for-providers/farriers"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            List Your Farrier Practice
+          </a>
+          <a
+            href="/trust"
+            class="inline-block border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            How BreederHQ Verifies Listings
+          </a>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-stone-200 text-left">
+          <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">Related on BreederHQ</h3>
+          <ul class="grid sm:grid-cols-2 gap-3 text-sm">
+            <li>
+              <a href="/services/farriers" class="text-amber-700 hover:underline">All Farriers</a>
+              <span class="text-gray-500"> - the national farrier hub</span>
+            </li>
+            <li>
+              <a href="/services/equine-boarding/lexington-ky" class="text-amber-700 hover:underline">Horse Boarding in Lexington, KY</a>
+              <span class="text-gray-500"> - same Bluegrass ecosystem, boarding side</span>
+            </li>
+            <li>
+              <a href="/services/equine-boarding" class="text-amber-700 hover:underline">All Equine Boarding</a>
+              <span class="text-gray-500"> - the national boarding hub</span>
+            </li>
+            <li>
+              <a href="/for-providers/equine-services" class="text-amber-700 hover:underline">For Equine Service Providers</a>
+              <span class="text-gray-500"> - list your facility or service</span>
+            </li>
+            <li>
+              <a href="/for-providers/farriers" class="text-amber-700 hover:underline">For Farriers</a>
+              <span class="text-gray-500"> - provider acquisition page</span>
+            </li>
+            <li>
+              <a href="/trust" class="text-amber-700 hover:underline">Trust &amp; Verification</a>
+              <span class="text-gray-500"> - how we verify listings</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
