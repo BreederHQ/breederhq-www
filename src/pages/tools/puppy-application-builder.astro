@@ -1,6 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+const sections = [
+  { id: 'household', label: 'Household basics', count: 5, defaultOn: true },
+  { id: 'experience', label: 'Experience with dogs', count: 5, defaultOn: true },
+  { id: 'breed-fit', label: 'Breed fit', count: 5, defaultOn: true },
+  { id: 'lifestyle', label: 'Lifestyle and schedule', count: 5, defaultOn: true },
+  { id: 'housing', label: 'Housing and yard setup', count: 5, defaultOn: true },
+  { id: 'children-pets', label: 'Children and other pets', count: 5, defaultOn: true },
+  { id: 'training', label: 'Training expectations', count: 5, defaultOn: true },
+  { id: 'vet', label: 'Vet reference', count: 4, defaultOn: false },
+  { id: 'placement', label: 'Placement preferences', count: 5, defaultOn: true },
+  { id: 'contract', label: 'Contract and deposit acknowledgement', count: 5, defaultOn: true }
+];
+
 const breadcrumbs = [
   { name: 'Home', url: '/' },
   { name: 'Tools', url: '/tools' },
@@ -147,7 +160,15 @@ const articleSchema = {
               <p class="pab-help">Toggle the sections that match how you screen. The generated template updates instantly.</p>
 
               <div class="pab-options" id="pab-options">
-                <!-- Section toggles injected by script -->
+                {sections.map((s) => (
+                  <label class="pab-option">
+                    <input type="checkbox" class="pab-checkbox" data-section={s.id} checked={s.defaultOn} />
+                    <span class="pab-option-text">
+                      <span class="pab-option-label">{s.label}</span>
+                      <span class="pab-option-count">{s.count} questions</span>
+                    </span>
+                  </label>
+                ))}
               </div>
 
               <div class="pab-toggle-row no-print">
@@ -548,20 +569,6 @@ const articleSchema = {
       var printBtn = document.getElementById('pab-print');
 
       if (!optionsContainer || !templatePre) return;
-
-      // Render section toggles
-      var html = '';
-      SECTIONS.forEach(function (s) {
-        html += '' +
-          '<label class="pab-option">' +
-            '<input type="checkbox" class="pab-checkbox" data-section="' + s.id + '"' + (s.defaultOn ? ' checked' : '') + ' />' +
-            '<span class="pab-option-text">' +
-              '<span class="pab-option-label">' + s.label + '</span>' +
-              '<span class="pab-option-count">' + s.questions.length + ' questions</span>' +
-            '</span>' +
-          '</label>';
-      });
-      optionsContainer.innerHTML = html;
 
       function getSelectedIds() {
         var ids = [];
