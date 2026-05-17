@@ -596,7 +596,7 @@ const articleSchema = {
     })();
   </script>
 
-  <style>
+  <style is:global>
     .sr-only {
       position: absolute;
       width: 1px;
@@ -769,9 +769,17 @@ const articleSchema = {
       white-space: nowrap;
     }
 
-    .pdg-th-age { white-space: nowrap; }
-    .pdg-th-date { white-space: nowrap; }
-    .pdg-th-note { width: 99%; }
+    .pdg-th-age, .pdg-cell-age {
+      white-space: nowrap !important;
+      min-width: 6ch;
+      width: 6ch;
+    }
+    .pdg-th-date, .pdg-cell-date {
+      white-space: nowrap !important;
+      min-width: 13ch;
+      width: 13ch;
+    }
+    .pdg-th-note, .pdg-cell-note { width: auto; }
 
     .pdg-row td {
       padding: 0.85rem 1rem;
@@ -781,7 +789,6 @@ const articleSchema = {
 
     .pdg-row:last-child td { border-bottom: 0; }
 
-    .pdg-cell-age, .pdg-cell-date { white-space: nowrap; }
     .pdg-weeks { font-size: 1.05rem; font-weight: 700; color: #111827; white-space: nowrap; }
     .pdg-date { font-size: 0.95rem; color: #111827; font-weight: 500; white-space: nowrap; }
     .pdg-badge-wrap { margin-top: 0.35rem; }
