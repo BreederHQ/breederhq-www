@@ -811,7 +811,7 @@ const articleSchema = {
         }
 
         var cardsGridStyle =
-          'display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));' +
+          'display:grid;grid-template-columns:1fr 1fr 1fr;' +
           'gap:0.85rem;margin:0 0 0.85rem 0;';
 
         var caveatStyle =
@@ -825,8 +825,12 @@ const articleSchema = {
           '<strong>How these estimates work.</strong> The LH surge is estimated as the point P4 crosses ~2 ng/mL. Ovulation is estimated at ~5 ng/mL. With only a few draws these are interpolated between readings, so they shift as you add data. Lab assays vary. Treat these as planning estimates, not vet-grade timing. Your reproductive vet&rsquo;s read of the full curve is the source of truth.' +
           '</div>';
 
+        // Responsive: collapse to 1 column under 640px via inline media-query style trick (just stack)
+        var wrapStyle = 'display:block;';
+
         return (
-          '<div style="' + cardsGridStyle + '">' + lhBlock + ovuBlock + winBlock + '</div>' +
+          '<style>@media(max-width:640px){.ptt-proj-cards-grid{grid-template-columns:1fr !important;}}</style>' +
+          '<div class="ptt-proj-cards-grid" style="' + cardsGridStyle + '">' + lhBlock + ovuBlock + winBlock + '</div>' +
           caveat
         );
       }
