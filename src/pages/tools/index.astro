@@ -19,56 +19,115 @@ const collectionSchema = {
   }
 };
 
-const tools = [
+// Tool catalog. `species` is the structured list used for filtering and badges;
+// `speciesLabel` is the human-readable label rendered on the card. `icon` is an
+// emoji that distinguishes tool categories at a glance.
+//
+// When adding a new tool: include every species it supports in the `species`
+// array using the lowercase canonical keys below (dogs/cats/horses/goats/sheep/
+// cattle/rabbits/alpacas/llamas). The filter pills will pick them up
+// automatically.
+type SpeciesKey = 'dogs' | 'cats' | 'horses' | 'goats' | 'sheep' | 'cattle' | 'rabbits' | 'alpacas' | 'llamas';
+
+interface Tool {
+  href: string;
+  title: string;
+  species: SpeciesKey[];
+  speciesLabel: string;
+  icon: string;
+  description: string;
+}
+
+const tools: Tool[] = [
   {
     href: '/tools/heat-cycle-calculator',
     title: 'Heat Cycle Calculator',
-    species: 'Dogs',
+    species: ['dogs'],
+    speciesLabel: 'Dogs',
+    icon: '🩸',
     description: 'Enter the first day of heat to estimate proestrus, estrus, the rough breeding window, the estimated whelping window, and the approximate next-heat date.'
   },
   {
     href: '/tools/progesterone-timing-tracker',
     title: 'Progesterone Timing Tracker',
-    species: 'Dogs',
+    species: ['dogs'],
+    speciesLabel: 'Dogs',
+    icon: '🧪',
     description: 'Log P4 test results in cycle order, see the trend across readings, and bring organized data to your reproductive vet. Educational planning tool. Not veterinary advice.'
   },
   {
     href: '/tools/whelping-date-calculator',
     title: 'Whelping Date Calculator',
-    species: 'Dogs, Horses, Goats, Sheep, Cattle',
+    species: ['dogs', 'horses', 'goats', 'sheep', 'cattle'],
+    speciesLabel: 'Dogs, Horses, Goats, Sheep, Cattle',
+    icon: '📅',
     description: 'Enter a breeding date (or progesterone-confirmed ovulation date for dogs) to estimate the due date, the normal due window, and species-specific prep and monitoring dates.'
   },
   {
     href: '/tools/breeding-planner',
     title: 'Breeding Planner',
-    species: 'Dogs, Horses, Goats, Sheep, Cattle',
+    species: ['dogs', 'horses', 'goats', 'sheep', 'cattle'],
+    speciesLabel: 'Dogs, Horses, Goats, Sheep, Cattle',
+    icon: '🗓️',
     description: 'Project upcoming heat cycles, breeding windows, and the open time between them for up to three females across multiple species.'
   },
   {
     href: '/tools/puppy-vaccination-schedule-generator',
     title: 'Puppy Vaccination Schedule Generator',
-    species: 'Dogs',
+    species: ['dogs'],
+    speciesLabel: 'Dogs',
+    icon: '💉',
     description: 'Enter a litter\u2019s birth date to generate a general puppy vaccination planning schedule from 6 to 16 weeks, with optional go-home handoff dates. Planning tool only. Confirm specific vaccines and protocol with your veterinarian.'
   },
   {
     href: '/tools/puppy-deworming-schedule-generator',
     title: 'Puppy Deworming Schedule Generator',
-    species: 'Dogs',
+    species: ['dogs'],
+    speciesLabel: 'Dogs',
+    icon: '💊',
     description: 'Enter a litter\u2019s birth date to generate a general puppy deworming planning schedule from 2 to 12 weeks, with optional go-home handoff dates. Planning tool only. Discuss products, doses, and protocol with your veterinarian.'
   },
   {
     href: '/tools/puppy-weight-tracker',
     title: 'Puppy Weight Tracker',
-    species: 'Dogs',
-    description: 'Log a puppy\u2019s birth date and each weight reading in ounces, grams, or pounds. See daily gain, total gain, and a trend summary that flags flat or declining patterns. Visualization tool only. Not veterinary advice.'
+    species: ['dogs'],
+    speciesLabel: 'Dogs',
+    icon: '⚖️',
+    description: 'Log a litter\u2019s birth date and each weight reading in ounces, grams, or pounds. See daily gain, total gain, and a trend summary that flags flat or declining patterns. Visualization tool only. Not veterinary advice.'
   },
   {
     href: '/tools/puppy-application-builder',
     title: 'Puppy Application Builder',
-    species: 'Dogs',
+    species: ['dogs'],
+    speciesLabel: 'Dogs',
+    icon: '📝',
     description: 'Toggle the screening sections you want (household, experience, breed fit, lifestyle, housing, training, vet reference, placement, contract acknowledgement) and generate a ready-to-send puppy application template. Template builder only. No data collected.'
   }
 ];
+
+// Species filter pill row. Order matters: All comes first, then species in the
+// order we want users to see them. Species not represented by any current tool
+// (e.g. cats, rabbits, alpacas, llamas) are still rendered as "soon" pills so
+// breeders can see what's planned.
+const speciesFilters: Array<{ key: 'all' | SpeciesKey; label: string; emoji: string }> = [
+  { key: 'all',     label: 'All tools', emoji: '⭐' },
+  { key: 'dogs',    label: 'Dogs',      emoji: '🐕' },
+  { key: 'horses',  label: 'Horses',    emoji: '🐎' },
+  { key: 'goats',   label: 'Goats',     emoji: '🐐' },
+  { key: 'sheep',   label: 'Sheep',     emoji: '🐑' },
+  { key: 'cattle',  label: 'Cattle',    emoji: '🐄' },
+  { key: 'cats',    label: 'Cats',      emoji: '🐈' },
+  { key: 'rabbits', label: 'Rabbits',   emoji: '🐇' },
+  { key: 'alpacas', label: 'Alpacas',   emoji: '🦙' },
+  { key: 'llamas',  label: 'Llamas',    emoji: '🦙' }
+];
+
+// Whether at least one tool supports this species. Drives whether the pill is
+// active or rendered as "coming soon".
+function hasTools(key: 'all' | SpeciesKey): boolean {
+  if (key === 'all') return true;
+  return tools.some((t) => t.species.includes(key));
+}
 ---
 
 <BaseLayout
@@ -80,7 +139,7 @@ const tools = [
 
   <main>
     <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
-      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <ol class="flex items-center space-x-2 max-w-6xl mx-auto text-sm">
         <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
         <li class="text-gray-400">›</li>
         <li aria-current="page" class="text-gray-600">Tools</li>
@@ -88,25 +147,182 @@ const tools = [
     </nav>
 
     <section class="py-16 px-4">
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-6xl mx-auto">
         <h1 class="text-5xl font-bold mb-6">Free Tools for Breeders</h1>
-        <p class="text-xl text-gray-700 leading-relaxed mb-12">
+        <p class="text-xl text-gray-700 leading-relaxed mb-10 max-w-3xl">
           Free, anonymous, no-signup utilities that run in your browser. Use them for planning. Use BreederHQ for the actual records.
         </p>
 
-        <div class="space-y-6">
+        <!-- Species filter pill row.
+             Drives the data-active attribute on the grid below, which CSS uses
+             to show/hide tool cards based on their data-species values. -->
+        <nav aria-label="Filter tools by species" class="mb-10">
+          <p class="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wide">Filter by species</p>
+          <ul class="flex flex-wrap gap-2" id="species-filter">
+            {speciesFilters.map((f) => {
+              const enabled = hasTools(f.key);
+              const isAll = f.key === 'all';
+              return (
+                <li>
+                  <button
+                    type="button"
+                    class={`species-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium border transition ${
+                      enabled
+                        ? 'bg-white text-gray-800 border-gray-300 hover:border-[hsl(24,95%,53%)] hover:text-[hsl(24,95%,53%)] cursor-pointer'
+                        : 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed'
+                    }`}
+                    data-filter={f.key}
+                    aria-pressed={isAll ? 'true' : 'false'}
+                    disabled={!enabled}
+                  >
+                    <span aria-hidden="true">{f.emoji}</span>
+                    {f.label}
+                    {!enabled && <span class="text-xs ml-1">(soon)</span>}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <!-- Tool card grid.
+             Each card carries data-species="dogs horses ..." so the filter
+             script can hide/show without a re-render. -->
+        <ul
+          id="tools-grid"
+          data-active="all"
+          class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {tools.map((tool) => (
-            <a href={tool.href} class="block p-6 bg-gray-50 border border-gray-200 rounded-lg hover:border-[hsl(24,95%,53%)] hover:bg-white transition">
-              <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
-                <h2 class="text-2xl font-bold text-gray-900">{tool.title}</h2>
-                <span class="text-sm text-gray-500">{tool.species}</span>
-              </div>
-              <p class="text-lg text-gray-700 leading-relaxed">{tool.description}</p>
-              <p class="mt-3 text-[hsl(24,95%,53%)] font-semibold">Open Tool →</p>
-            </a>
+            <li
+              class="tool-card flex"
+              data-species={tool.species.join(' ')}
+            >
+              <a
+                href={tool.href}
+                class="flex flex-col h-full w-full p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-[hsl(24,95%,53%)] hover:shadow-md transition group"
+              >
+                <div class="flex items-start gap-3 mb-3">
+                  <span
+                    aria-hidden="true"
+                    class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[hsl(24,95%,95%)] text-xl"
+                  >
+                    {tool.icon}
+                  </span>
+                  <h2 class="text-lg font-bold text-gray-900 leading-tight group-hover:text-[hsl(24,95%,53%)]">
+                    {tool.title}
+                  </h2>
+                </div>
+
+                <!-- Species badges: one chip per supported species, makes the
+                     card scannable at a glance instead of a comma-separated
+                     gray label in the corner. -->
+                <ul class="flex flex-wrap gap-1.5 mb-3" aria-label="Supported species">
+                  {tool.species.map((s) => (
+                    <li>
+                      <span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-gray-100 text-gray-700 capitalize">
+                        {s}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <p class="text-base text-gray-700 leading-relaxed mb-4 flex-grow">
+                  {tool.description}
+                </p>
+
+                <p class="mt-auto text-[hsl(24,95%,53%)] font-semibold group-hover:underline">
+                  Open Tool →
+                </p>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
+
+        <!-- Empty state for filter: revealed via CSS when the grid's
+             data-active filter produces no visible cards. -->
+        <p id="tools-empty" class="hidden mt-8 text-center text-gray-600">
+          No tools yet for that species. <button type="button" id="tools-reset" class="text-[hsl(24,95%,53%)] font-semibold hover:underline">Show all tools</button>.
+        </p>
       </div>
     </section>
   </main>
+
+  <!-- Filter logic. Inline per repo Astro conventions (no module import for
+       small interactive scripts). Toggles the grid's data-active attribute
+       and the pressed state of each pill. CSS in the <style> block below
+       handles the actual show/hide. -->
+  <script is:inline>
+    (function () {
+      var grid = document.getElementById('tools-grid');
+      var filterBar = document.getElementById('species-filter');
+      var emptyEl = document.getElementById('tools-empty');
+      var resetBtn = document.getElementById('tools-reset');
+      if (!grid || !filterBar) return;
+
+      function setFilter(key) {
+        grid.setAttribute('data-active', key);
+        var pills = filterBar.querySelectorAll('.species-pill');
+        for (var i = 0; i < pills.length; i++) {
+          var p = pills[i];
+          var match = p.getAttribute('data-filter') === key;
+          p.setAttribute('aria-pressed', match ? 'true' : 'false');
+          if (match) {
+            p.classList.add('bg-[hsl(24,95%,53%)]', 'text-white', 'border-[hsl(24,95%,53%)]');
+            p.classList.remove('bg-white', 'text-gray-800', 'border-gray-300');
+          } else if (!p.disabled) {
+            p.classList.remove('bg-[hsl(24,95%,53%)]', 'text-white', 'border-[hsl(24,95%,53%)]');
+            p.classList.add('bg-white', 'text-gray-800', 'border-gray-300');
+          }
+        }
+        // Show/hide empty-state message based on visible cards.
+        var cards = grid.querySelectorAll('.tool-card');
+        var anyVisible = false;
+        for (var j = 0; j < cards.length; j++) {
+          var supported = (cards[j].getAttribute('data-species') || '').split(' ');
+          var visible = key === 'all' || supported.indexOf(key) !== -1;
+          if (visible) anyVisible = true;
+        }
+        if (emptyEl) emptyEl.classList.toggle('hidden', anyVisible);
+      }
+
+      filterBar.addEventListener('click', function (e) {
+        var target = e.target;
+        while (target && target !== filterBar && !target.classList.contains('species-pill')) {
+          target = target.parentNode;
+        }
+        if (!target || target === filterBar) return;
+        if (target.disabled) return;
+        var key = target.getAttribute('data-filter');
+        if (key) setFilter(key);
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          setFilter('all');
+        });
+      }
+
+      // Initialize to the "all" pill being pressed.
+      setFilter('all');
+    })();
+  </script>
+
+  <style>
+    /* Filter-driven visibility. The grid's data-active attribute is the species
+       key (or "all"). Each card lists the species it supports in data-species.
+       When data-active is anything other than "all", we hide cards whose
+       data-species attribute doesn't contain the active key. */
+    #tools-grid[data-active="dogs"]    .tool-card:not([data-species~="dogs"]),
+    #tools-grid[data-active="cats"]    .tool-card:not([data-species~="cats"]),
+    #tools-grid[data-active="horses"]  .tool-card:not([data-species~="horses"]),
+    #tools-grid[data-active="goats"]   .tool-card:not([data-species~="goats"]),
+    #tools-grid[data-active="sheep"]   .tool-card:not([data-species~="sheep"]),
+    #tools-grid[data-active="cattle"]  .tool-card:not([data-species~="cattle"]),
+    #tools-grid[data-active="rabbits"] .tool-card:not([data-species~="rabbits"]),
+    #tools-grid[data-active="alpacas"] .tool-card:not([data-species~="alpacas"]),
+    #tools-grid[data-active="llamas"]  .tool-card:not([data-species~="llamas"]) {
+      display: none;
+    }
+  </style>
 </BaseLayout>

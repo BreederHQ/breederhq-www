@@ -28,6 +28,17 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== May 17, 2026 - /tools hub layout overhaul: species filter + card grid ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Layout and scannability overhaul of the <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">/tools</a> hub. The previous design was a single-column stack of identical-looking bordered cards with the species rendered as gray text in the corner &mdash; functional, but it forced breeders to read every card to find tools for their species and wasted desktop horizontal space.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Updated page: <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">/tools</a></h3>
+          <p class="text-gray-700 mb-3">
+            Five changes. (1) Switched from a single-column <code>space-y-6</code> stack to a responsive card grid: 1 column on mobile, 2 at <code>sm+</code>, 3 at <code>lg+</code>. Page also widened from <code>max-w-4xl</code> to <code>max-w-6xl</code> to use desktop horizontal space. (2) Added a species filter pill row at the top with all nine BreederHQ species (Dogs, Horses, Goats, Sheep, Cattle, Cats, Rabbits, Alpacas, Llamas) plus an &ldquo;All tools&rdquo; default; species without any tools yet (Cats, Rabbits, Alpacas, Llamas) render as disabled &ldquo;coming soon&rdquo; pills so breeders can see what is planned. Active pill highlights in brand orange. Inline vanilla-JS filter toggles a <code>data-active</code> attribute on the grid, CSS hides non-matching cards via attribute selectors (no re-render, no framework). (3) Replaced the gray comma-separated species text in each card&rsquo;s corner with per-species badge chips at the top of the card &mdash; one chip per supported species, immediately scannable. (4) Added a per-tool emoji icon (heat cycle &rarr; 🩸, progesterone &rarr; 🧪, whelping &rarr; 📅, breeding planner &rarr; 🗓️, vaccination &rarr; 💉, deworming &rarr; 💊, weight tracker &rarr; ⚖️, application builder &rarr; 📝) in a tinted orange rounded square, giving each card a visual anchor and breaking the wall-of-text feel. (5) Added an empty-state message with a &ldquo;Show all tools&rdquo; reset link that appears when a filter would produce zero cards (currently never triggered by live tools, future-proofs for the disabled species). CollectionPage schema and the underlying tool list are unchanged; this is presentation-only.
+          </p>
+        </article>
+
         <!-- ========== May 17, 2026 - Breeding Planner: breed-aware cycle variability section + FAQ ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
