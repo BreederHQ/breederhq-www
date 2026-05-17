@@ -474,18 +474,46 @@ const articleSchema = {
         var wrap = document.createElement('div');
         wrap.className = 'ptt-row';
         wrap.setAttribute('data-row-id', id);
+        wrap.setAttribute('style',
+          'display:flex;flex-direction:row;align-items:flex-end;gap:0.75rem;' +
+          'background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;' +
+          'padding:0.85rem 0.9rem;flex-wrap:nowrap;'
+        );
+
+        var numStyle =
+          'display:inline-flex;align-items:center;justify-content:center;' +
+          'width:28px;height:28px;border-radius:50%;background:hsl(24,95%,95%);' +
+          'color:hsl(24,95%,40%);font-weight:700;font-size:0.85rem;flex-shrink:0;' +
+          'line-height:1;margin-bottom:6px;';
+
+        var fieldStyle = 'display:flex;flex-direction:column;flex:1 1 0;min-width:0;margin:0;';
+
+        var labelStyle =
+          'display:block;font-size:0.7rem;font-weight:700;color:#6b7280;' +
+          'margin:0 0 0.3rem 0;text-transform:uppercase;letter-spacing:0.05em;line-height:1.2;';
+
+        var inputStyle =
+          'display:block;width:100%;padding:0.55rem 0.7rem;border:1px solid #d1d5db;' +
+          'border-radius:8px;font-size:0.95rem;color:#111827;background:#ffffff;' +
+          'min-height:40px;box-sizing:border-box;font-family:inherit;';
+
+        var trashStyle =
+          'display:inline-flex;align-items:center;justify-content:center;' +
+          'width:36px;height:36px;padding:0;background:#ffffff;color:#b91c1c;' +
+          'border:1px solid #fecaca;border-radius:8px;cursor:pointer;' +
+          'flex-shrink:0;margin:0 0 2px 0;';
 
         wrap.innerHTML =
-          '<span class="ptt-row-num" aria-hidden="true">1</span>' +
-          '<div class="ptt-row-field">' +
-          '  <label class="ptt-row-label" for="' + id + '-date">Test Date</label>' +
-          '  <input type="date" id="' + id + '-date" class="ptt-input ptt-row-input ptt-row-date" />' +
+          '<span class="ptt-row-num" style="' + numStyle + '" aria-hidden="true">1</span>' +
+          '<div class="ptt-row-field" style="' + fieldStyle + '">' +
+          '  <label class="ptt-row-label" style="' + labelStyle + '" for="' + id + '-date">Test Date</label>' +
+          '  <input type="date" id="' + id + '-date" class="ptt-row-date" style="' + inputStyle + '" />' +
           '</div>' +
-          '<div class="ptt-row-field">' +
-          '  <label class="ptt-row-label" for="' + id + '-value">P4 (ng/mL)</label>' +
-          '  <input type="number" min="0" step="0.1" id="' + id + '-value" class="ptt-input ptt-row-input ptt-row-value" placeholder="e.g. 2.3" inputmode="decimal" />' +
+          '<div class="ptt-row-field" style="' + fieldStyle + '">' +
+          '  <label class="ptt-row-label" style="' + labelStyle + '" for="' + id + '-value">P4 (ng/mL)</label>' +
+          '  <input type="number" min="0" step="0.1" id="' + id + '-value" class="ptt-row-value" style="' + inputStyle + '" placeholder="e.g. 2.3" inputmode="decimal" />' +
           '</div>' +
-          '<button type="button" class="ptt-row-remove" aria-label="Remove row" title="Remove row">' +
+          '<button type="button" class="ptt-row-remove" style="' + trashStyle + '" aria-label="Remove row" title="Remove row">' +
           '  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
           '    <polyline points="3 6 5 6 21 6"/>' +
           '    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>' +
