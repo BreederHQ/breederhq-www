@@ -387,7 +387,17 @@ if (article) {
   </head>
   <body>
     <Header hideLogo={hideLogo} />
-    <slot />
+    <!--
+      Pagefind site search (free, static, client-side, no external service).
+      The wrapper marks this region as the searchable body. Pagefind indexes
+      ONLY content inside data-pagefind-body when at least one page declares
+      it, which scopes search to real page content and excludes nav, footer,
+      analytics, and other boilerplate. The /search page is excluded via
+      data-pagefind-ignore on its own root.
+    -->
+    <div data-pagefind-body>
+      <slot />
+    </div>
     <Footer />
 
     <!-- Tracking Initialization -->

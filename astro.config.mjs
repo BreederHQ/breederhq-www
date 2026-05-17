@@ -13,6 +13,7 @@ const excludedPages = [
   'https://breederhq.com/site-updates', // Internal update log for marketing manager — not for public indexing
   'https://breederhq.com/demo',
   'https://breederhq.com/demo/login',
+  'https://breederhq.com/search', // Client-side search UI — no content to index
 ];
 
 // https://astro.build/config
@@ -47,7 +48,7 @@ export default defineConfig({
           item.priority = 0.8;
         }
         // Cornerstone SEO pages — top-level commercial / authority / funnel content
-        else if (/^https:\/\/breederhq\.com\/(dog-breeding-software|heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|dog-heat-cycle-calculator|tools\/heat-cycle-calculator|tools\/breeding-planner|tools\/whelping-date-calculator)$/.test(item.url)) {
+        else if (/^https:\/\/breederhq\.com\/(dog-breeding-software|heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|dog-heat-cycle-calculator|tools\/heat-cycle-calculator|tools\/progesterone-timing-tracker|tools\/breeding-planner|tools\/whelping-date-calculator|tools\/puppy-vaccination-schedule-generator|tools\/puppy-deworming-schedule-generator)$/.test(item.url)) {
           item.changefreq = 'monthly';
           item.priority = 0.9;
         }

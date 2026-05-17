@@ -28,9 +28,72 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
-        <!-- ========== May 17, 2026 - New free tool: Whelping Date Calculator ========== -->
+        <!-- ========== May 17, 2026 - Site search ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Added site search to breederhq.com. Static, free, runs entirely in the browser. No external service, no API, no tracking of search queries by a third party. Powered by Pagefind, which builds a sharded WebAssembly-driven search index from the production HTML output during the deploy.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/search" class="text-[hsl(24,95%,53%)] hover:underline">/search</a></h3>
+          <p class="text-gray-700 mb-3">
+            Search across articles, workflows, species pages, comparisons, buyer guides, and free tools. The page reads <code>?q=...</code> from the URL so search URLs are shareable and bookmarkable. Results show title, URL, and an excerpt with the matched terms highlighted. Page is noindex (it has no content of its own) and excluded from the sitemap.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: site-wide header (HeaderV2.astro)</h3>
+          <p class="text-gray-700 mb-3">
+            Added a magnifying-glass icon entry in the desktop header CTA cluster (next to Sign In / Get Started Free) and a "Search" link in the mobile menu panel below Contact.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Index scope (BaseLayout.astro, HeaderV2.astro, Footer.astro)</h3>
+          <p class="text-gray-700">
+            Wrapped the BaseLayout slot in a <code>data-pagefind-body</code> region so search indexes only real page content. Tagged the global header, the Founders banner, and the global footer with <code>data-pagefind-ignore="all"</code> so nav menus, CTAs, and footer link grids never appear in search results. Production index: 132 pages, ~6,400 words, ~1.8MB of shards (only the shards matching a given query are fetched at runtime — typical request is well under 100KB).
+          </p>
+        </article>
+
+        <!-- ========== May 16, 2026 - New free tool: Progesterone Timing Tracker for Dogs ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 16, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Added a new free tool: Progesterone Timing Tracker for Dogs. Anonymous, in-browser, no signup or data persistence. Targets the progesterone testing keyword cluster (progesterone testing dogs, dog progesterone levels, progesterone timing dogs, when to breed dog progesterone, dog breeding progesterone chart) while staying carefully framed as a planning and visualization aid rather than a veterinary diagnostic.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">/tools/progesterone-timing-tracker</a></h3>
+          <p class="text-gray-700 mb-3">
+            Breeders enter a heat start date and one or more progesterone test rows (date + P4 value in ng/mL), with an optional breeding method selector (Natural, Fresh chilled, Frozen semen, or Not sure). The tool sorts readings chronologically, computes day-of-cycle from the heat anchor, and renders a color-coded timeline keyed to general interpretation bands (baseline under 1, LH surge area around 2, ovulation range 4 to 10, post-ovulation maturation above that). A trend summary describes the latest reading in context, the direction across readings, and the method-specific framing, and explicitly tells breeders to defer to their reproductive vet on actual breeding timing. Disclaimer banners appear both above the form and inside the results card. Vanilla JS, no persistence, mobile-friendly, dates parsed in local timezone to avoid day-off bugs. Emits SoftwareApplication, Article, FAQPage, and BreadcrumbList JSON-LD. Internally cross-links to /progesterone-testing-dogs, /heat-cycle-tracking, /dog-heat-cycle-calculator, /tools/heat-cycle-calculator, /dog-breeding-software, and /tools.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">/tools</a> hub</h3>
+          <p class="text-gray-700 mb-3">
+            Added the Progesterone Timing Tracker as the second card in the tool list, grouped next to the Heat Cycle Calculator so the dog reproductive utilities sit together. Updated the meta description to reference the new tool.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: astro.config.mjs</h3>
+          <p class="text-gray-700">
+            Added <code>tools/progesterone-timing-tracker</code> to the cornerstone-SEO sitemap regex so it inherits priority 0.9 and monthly changefreq, matching the heat cycle calculator, breeding planner, and other cornerstone tool pages.
+          </p>
+        </article>
+
+        <!-- ========== May 16, 2026 - New free tool: Puppy Vaccination Schedule Generator ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 16, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">New free tool added under /tools. A planning-only calendar generator for puppy vaccination milestones, deliberately scoped to dates and breeder/buyer responsibility rather than specific vaccine prescriptions.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">/tools/puppy-vaccination-schedule-generator</a></h3>
+          <p class="text-gray-700 mb-3">
+            Free Puppy Vaccination Schedule Generator. Inputs: litter birth date (required) and planned go-home date (optional). Output: a calendar of common planning milestones at 6, 8, 10, 12, 14, and 16 weeks of age, with each row showing the calculated date, age in weeks, a "discuss with vet" note, and (when a go-home date is entered) a Breeder or Buyer responsibility badge. Vanilla JS, local-timezone-safe date parsing, no persistence, no signup. Includes Copy and Print buttons so breeders can drop the schedule into a buyer handoff packet. Copy framing is deliberate: "common planning milestone," "many veterinary protocols include," "confirm with your veterinarian," "local regulations and risk factors vary." The tool does not name specific vaccines, doses, or routes. Emits SoftwareApplication and Article JSON-LD inline; BreadcrumbList and FAQPage flow from BaseLayout via the breadcrumbs and faqs props.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">/tools</a></h3>
+          <p class="text-gray-700 mb-3">
+            Tools hub now lists the Puppy Vaccination Schedule Generator alongside the Heat Cycle Calculator, Whelping Date Calculator, and Breeding Planner.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: astro.config.mjs sitemap</h3>
+          <p class="text-gray-700">
+            Added <code>tools/puppy-vaccination-schedule-generator</code> to the cornerstone-pages regex so the new tool is emitted with priority 0.9 / monthly changefreq alongside the other anchor tool pages.
+          </p>
+        </article>
+
+        <!-- ========== May 16, 2026 - New free tool: Whelping Date Calculator ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 16, 2026</h2>
           <p class="text-sm text-gray-500 mb-4">Launched a new interactive free tool: a multi-species whelping and birthing date calculator. Supports dogs (with optional progesterone-confirmed ovulation date for tighter accuracy), horses, goats, sheep, and cattle. Targets a broader keyword cluster than the existing heat-cycle calculator (dog due date calculator, dog pregnancy calculator, goat kidding calculator, horse foaling calculator, cow calving calculator, sheep lambing calculator, breeding due date calculator).</p>
 
           <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">/tools/whelping-date-calculator</a></h3>
