@@ -1,5 +1,24 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SpeciesSwitcher from '../../components/SpeciesSwitcher.astro';
+
+// Sections in document order. Used to render the in-page TOC (sticky left
+// rail on desktop, accordion on mobile). The `id` must match the anchor on
+// the corresponding <section> element below.
+const sections = [
+  { id: 'tldr',         label: 'TL;DR' },
+  { id: 'quick-table',  label: 'Quick comparison' },
+  { id: 'rubric',       label: 'What makes great software' },
+  { id: 'matrix',       label: 'Workflow matrix' },
+  { id: 'breakdowns',   label: 'Vendor breakdowns' },
+  { id: 'best-for',     label: 'Best for: by breeder type' },
+  { id: 'marketplace-vs-ops', label: 'Marketplace vs. operations' },
+  { id: 'mobile',       label: 'Mobile experience' },
+  { id: 'pros-cons',    label: 'Pros and cons' },
+  { id: 'breederhq',    label: 'What BreederHQ feels like' },
+  { id: 'decide',       label: 'How to decide' },
+  { id: 'faq',          label: 'FAQ' }
+];
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -145,12 +164,52 @@ const itemListSchema = {
     </ol>
   </nav>
 
+  <!-- Floating desktop TOC: position: sticky inside a tall absolute container.
+       Hidden on mobile (a <details> accordion above the hero handles small screens). -->
+  <aside
+    aria-label="On this page"
+    class="hidden xl:block fixed left-6 top-32 w-56 z-30"
+  >
+    <nav class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 max-h-[80vh] overflow-y-auto">
+      <p class="text-xs font-bold uppercase tracking-wide text-gray-500 mb-3">On this page</p>
+      <ol class="space-y-2 text-sm">
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="text-gray-700 hover:text-[hsl(24,95%,53%)] hover:underline block">
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </aside>
+
+  <!-- Mobile / tablet TOC: collapsible accordion above the hero -->
+  <div class="xl:hidden px-4 pt-4 max-w-5xl mx-auto">
+    <details class="bg-white border border-gray-200 rounded-lg shadow-sm">
+      <summary class="cursor-pointer px-4 py-3 font-semibold text-gray-800 select-none">
+        On this page (jump to section)
+      </summary>
+      <ol class="px-4 pb-4 pt-1 space-y-2 text-sm">
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="text-gray-700 hover:text-[hsl(24,95%,53%)] hover:underline block">
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </details>
+  </div>
+
   <!-- Hero -->
   <section class="py-20 px-4">
     <div class="max-w-5xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">The Best Dog Breeding Software in 2026: A Working Breeder's Comparison</h1>
 
-      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+      <SpeciesSwitcher active="dogs" />
+
+      <aside id="tldr" class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded scroll-mt-24" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
           Most dog breeding software falls into one of three categories: pedigree databases, kennel record systems, or breeder marketplaces. Very few tools actually run the operational side of a breeding program: heat cycles, progesterone timing, litters, waitlists, deposits, contracts, and buyer communication in one connected workflow. This guide compares the major options so you can pick the right tool for the way you actually run your program.
@@ -190,7 +249,7 @@ const itemListSchema = {
   </section>
 
   <!-- Quick comparison table -->
-  <section class="py-16 px-4 bg-gray-50">
+  <section id="quick-table" class="py-16 px-4 bg-gray-50 scroll-mt-24">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Quick comparison: dog breeding software at a glance</h2>
       <p class="text-gray-700 mb-6">
@@ -283,7 +342,7 @@ const itemListSchema = {
   </section>
 
   <!-- What makes great dog breeding software -->
-  <section class="py-20 px-4">
+  <section id="rubric" class="py-20 px-4 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-8">What makes great dog breeding software?</h2>
       <p class="text-lg text-gray-700 leading-relaxed mb-10">
@@ -344,7 +403,7 @@ const itemListSchema = {
   </section>
 
   <!-- Workflow matrix -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section id="matrix" class="py-20 px-4 bg-gray-50 scroll-mt-24">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">How dog breeding tools actually differ: a workflow matrix</h2>
       <p class="text-lg text-gray-700 leading-relaxed mb-6">
@@ -404,13 +463,16 @@ const itemListSchema = {
   </section>
 
   <!-- Individual breakdowns -->
-  <section class="py-20 px-4">
+  <section id="breakdowns" class="py-20 px-4 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-10">Individual breakdowns</h2>
 
       <!-- BreederHQ -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-bold mb-3">BreederHQ</h3>
+      <article id="v-breederhq" class="bg-white border-2 border-[hsl(24,95%,53%)] rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">BreederHQ</h3>
+          <p class="text-sm font-semibold text-[hsl(24,95%,53%)] uppercase tracking-wide">Operations + records + clients + marketplace, one system</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-4"><strong>Best suited for:</strong> Working breeders running a full program: heat cycles, breedings, litters, waitlists, deposits, contracts, buyer portal, and a marketplace presence, in one connected system.</p>
         <p class="text-lg font-semibold text-gray-900 mb-2">What it does well.</p>
         <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-4 space-y-2">
@@ -431,11 +493,14 @@ const itemListSchema = {
           <li>Active development means the product is moving. Breeders who prefer "set it and forget it" software that has not changed in a decade should know that is not us.</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Pricing model.</strong> Free tier available. Paid tiers unlock advanced operational features. Verify current pricing on the pricing page.</p>
-      </div>
+      </article>
 
       <!-- DogBreederPro -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">DogBreederPro</h3>
+      <article id="v-dogbreederpro" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">DogBreederPro</h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Kennel record-keeping</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Breeders whose primary need is kennel-style records and litter logs in a focused, no-frills tool.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> DogBreederPro positions itself around kennel record-keeping for dog breeders. The product appears focused on the records side of the program (dogs, litters, basic documents) rather than the operational planning side.</p>
         <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
@@ -445,11 +510,14 @@ const itemListSchema = {
           <li>A breeder running an active program will likely still need separate tools for waitlist management, contracts, and buyer communication.</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Verify before deciding.</strong> Run a free trial with one of your actual breeding cycles end to end. Pay attention to where you have to leave the tool to get something done.</p>
-      </div>
+      </article>
 
       <!-- Breedera -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">Breedera</h3>
+      <article id="v-breedera" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">Breedera</h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Mobile-first heat and litter tracker</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Hobby and smaller-program breeders who want a phone-first tool focused on heat cycles, breedings, and litter logs.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breedera publicly markets itself as a mobile-first breeding tracker focused on heats, breedings, whelping, and litter records, designed to be used on the phone day to day.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> The mobile-first design is genuinely useful for the parts of the program that happen away from a desk: logging a heat, updating puppy weights during whelp checks, snapping a photo of a new litter.</p>
@@ -459,11 +527,14 @@ const itemListSchema = {
           <li>Programs that need to operate the full pipeline (application, waitlist, deposit, contract, placement, buyer portal) will likely outgrow it.</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Smaller programs whose biggest pain is "I need to stop tracking heats in a notebook." Breedera is a clean answer to that specific problem.</p>
-      </div>
+      </article>
 
       <!-- ZooEasy -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">ZooEasy</h3>
+      <article id="v-zooeasy" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">ZooEasy</h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Multi-species pedigree database</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Multi-species clubs, pedigree-driven breeders, and breeders whose primary daily work is keeping a clean breeding-records database.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> ZooEasy publicly positions itself as a multi-species pedigree and breeding records database. It is not dog-specific. It serves dog, cat, horse, rabbit, and other animal breeders with a strong emphasis on pedigree management, inbreeding analysis, and structured records.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Deep pedigree management, COI and relatedness analysis, and the ability to maintain a clean multi-generation database across many animals. Strong for breed clubs and breeders who treat the database itself as the deliverable.</p>
@@ -474,11 +545,14 @@ const itemListSchema = {
           <li>The interface and user experience reflect the product's heritage as a records database rather than a modern mobile-first operations tool.</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders and clubs whose work is fundamentally pedigree- and records-driven, not those running an end-to-end puppy program.</p>
-      </div>
+      </article>
 
       <!-- Kintraks -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">Kintraks</h3>
+      <article id="v-kintraks" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">Kintraks</h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Traditional records and pedigree tool</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Established breeders who want a long-running, traditional records-and-pedigree tool with registry export features.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Kintraks is a long-established breeder records product with pedigree, breeding records, and registration support. It targets breeders who want a comprehensive records system from a vendor that has been in the category for a long time.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Maturity. The product has had years to round out its records and pedigree features, and it is familiar to breeders who have used desktop-style breeder software before.</p>
@@ -488,11 +562,14 @@ const itemListSchema = {
           <li>User experience reflects the product's age. Breeders coming from modern SaaS may find the workflow patterns dated.</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders whose current pain is "I need a real records system" rather than "I need to run my whole program in one place."</p>
-      </div>
+      </article>
 
       <!-- PedFast -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">PedFast</h3>
+      <article id="v-pedfast" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">PedFast</h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pedigree generation</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Breed clubs, pedigree-heavy breeders, and anyone whose primary deliverable is a printed or digital pedigree.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> PedFast publicly positions itself around pedigree generation: building, formatting, and printing pedigrees, primarily on a Windows desktop workflow.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Pedigree work. If your output is pedigrees (for buyers, breed clubs, or registries) a focused pedigree tool will produce cleaner results than a general operations tool that also prints pedigrees.</p>
@@ -502,11 +579,14 @@ const itemListSchema = {
           <li>A desktop-leaning workflow is at odds with how most breeders actually run their day (phone in hand, in the whelping area or at a show).</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders whose biggest job is pedigree production, not program operations.</p>
-      </div>
+      </article>
 
       <!-- Breeder Cloud Pro -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">Breeder Cloud Pro</h3>
+      <article id="v-breedercloudpro" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-100">
+          <h3 class="text-2xl font-bold mb-1">Breeder Cloud Pro</h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Records plus contracts and payments</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Kennel-style operations that need records plus contracts and basic client tooling in one place.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breeder Cloud Pro publicly positions itself as a kennel and breeder records platform with support for contracts, payments, and customer records.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Bundling records with contracts and payments in one tool is genuinely useful. Fewer separate apps to wire together than the records-only competitors.</p>
@@ -517,23 +597,26 @@ const itemListSchema = {
           <li>Integrated marketplace exposure is not part of the product.</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Established kennel operations whose biggest gap is "I have records, but my contracts and payments are scattered." Breeder Cloud Pro is built around closing that specific gap.</p>
-      </div>
+      </article>
 
       <!-- GoodDog -->
-      <div class="mb-4 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">GoodDog <span class="text-gray-500 font-normal text-base">(marketplace context only)</span></h3>
+      <article id="v-gooddog" class="bg-gray-50 border border-gray-200 rounded-xl shadow-sm p-6 md:p-8 mb-8 scroll-mt-24">
+        <header class="mb-4 pb-4 border-b border-gray-200">
+          <h3 class="text-2xl font-bold mb-1">GoodDog <span class="text-gray-500 font-normal text-base">(marketplace context only)</span></h3>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Buyer-facing marketplace, not operations software</p>
+        </header>
         <p class="text-lg text-gray-700 leading-relaxed mb-3">
           GoodDog is not breeder operations software. It is a buyer-facing marketplace where prospective puppy buyers discover breeders, plus a directory-style breeder profile. It belongs in this comparison only so the distinction stays clean.
         </p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>What GoodDog is for.</strong> Helping buyers find breeders, and giving breeders a curated directory presence.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>What GoodDog is not for.</strong> Running your program. Heat cycle tracking, progesterone timing, litter records, waitlists, contracts, deposits, and your day-to-day operational work all live somewhere else.</p>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>How it relates to BreederHQ.</strong> BreederHQ is operations and marketplace in one system. The program records, the buyer pipeline, and a public listing presence at marketplace.breederhq.com all live in the same place. If you are already on GoodDog, you do not have to leave it. But GoodDog by itself does not replace breeder operations software.</p>
-      </div>
+      </article>
     </div>
   </section>
 
   <!-- Best for by breeder type -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section id="best-for" class="py-20 px-4 bg-gray-50 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-8">Best for: by breeder type</h2>
       <div class="space-y-6">
@@ -566,7 +649,7 @@ const itemListSchema = {
   </section>
 
   <!-- Marketplace vs operations -->
-  <section class="py-20 px-4">
+  <section id="marketplace-vs-ops" class="py-20 px-4 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Marketplace vs. operations software: the distinction every breeder should understand</h2>
       <p class="text-lg text-gray-700 leading-relaxed mb-6">
@@ -588,7 +671,7 @@ const itemListSchema = {
   </section>
 
   <!-- Mobile experience -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section id="mobile" class="py-20 px-4 bg-gray-50 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Mobile experience: where breeder software actually gets used</h2>
       <p class="text-lg text-gray-700 leading-relaxed mb-4">A meaningful share of the work in any active dog program happens away from a desk:</p>
@@ -603,32 +686,66 @@ const itemListSchema = {
         If the tool is not usable on a phone, in low light, with one hand, it does not matter how good the desktop interface looks. You will not use it, and the records will drift.
       </p>
 
-      <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
-        <table class="w-full text-sm">
-          <thead class="bg-gray-100 text-left">
-            <tr>
-              <th scope="col" class="px-4 py-3 font-semibold">Tool</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Mobile experience (public positioning)</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr class="bg-[hsl(24,95%,97%)]"><th scope="row" class="px-4 py-3 font-bold text-left">BreederHQ</th><td class="px-4 py-3">Mobile-first. The product is designed to be used on the phone in the whelping area, at shows, and on the go.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breedera</th><td class="px-4 py-3">Mobile-first phone-centric tracker.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">DogBreederPro</th><td class="px-4 py-3">Appears to be desktop-leaning with mobile access. Not the product's primary emphasis.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">ZooEasy</th><td class="px-4 py-3">Records-database heritage. Not publicly positioned as a mobile-first product.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Kintraks</th><td class="px-4 py-3">Long-running records tool. Mobile is not the primary emphasis.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">PedFast</th><td class="px-4 py-3">Desktop-leaning pedigree production workflow.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breeder Cloud Pro</th><td class="px-4 py-3">Web-accessible. Mobile is not publicly emphasized as the primary use mode.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Card grid replaces previous repetitive 2-col table; easier to scan,
+           visually distinct from the quick-comparison and workflow-matrix tables. -->
+      <ul class="grid gap-4 sm:grid-cols-2">
+        <li class="bg-white border-2 border-[hsl(24,95%,53%)] rounded-lg p-5 shadow-sm">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">BreederHQ</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-[hsl(24,95%,40%)] bg-[hsl(24,95%,95%)] px-2 py-0.5 rounded-full">Mobile-first</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Designed to be used on the phone in the whelping area, at shows, and on the go.</p>
+        </li>
+        <li class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">Breedera</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-[hsl(24,95%,40%)] bg-[hsl(24,95%,95%)] px-2 py-0.5 rounded-full">Mobile-first</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Phone-centric tracker built around heat and litter logs on the go.</p>
+        </li>
+        <li class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">DogBreederPro</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Desktop-leaning</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Mobile access exists, but it is not the product's primary emphasis.</p>
+        </li>
+        <li class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">ZooEasy</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Records-database</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Not publicly positioned as a mobile-first product.</p>
+        </li>
+        <li class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">Kintraks</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Desktop-leaning</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Long-running records tool. Mobile is not the primary emphasis.</p>
+        </li>
+        <li class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">PedFast</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Desktop</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Desktop-leaning pedigree production workflow.</p>
+        </li>
+        <li class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm sm:col-span-2">
+          <div class="flex items-baseline justify-between gap-2 mb-2">
+            <h3 class="text-lg font-bold">Breeder Cloud Pro</h3>
+            <span class="text-xs font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Web-accessible</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed">Mobile is not publicly emphasized as the primary use mode.</p>
+        </li>
+      </ul>
 
       <p class="text-base text-gray-600 mt-4">Verify with a trial. The fastest way to tell whether a tool is genuinely mobile-first is to try logging a real heat and a real litter weight on your phone, in your barn or whelping area, in actual conditions.</p>
     </div>
   </section>
 
   <!-- Pros / Cons -->
-  <section class="py-20 px-4">
+  <section id="pros-cons" class="py-20 px-4 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-10">Pros and cons at a glance</h2>
 
@@ -678,22 +795,63 @@ const itemListSchema = {
   </section>
 
   <!-- What it feels like to run a program on BreederHQ -->
-  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
-    <div class="max-w-4xl mx-auto">
+  <section id="breederhq" class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white scroll-mt-24">
+    <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-6">What it actually feels like to run a program on BreederHQ</h2>
       <p class="text-lg leading-relaxed mb-6">
         We have spent the page being honest about competitors. It is fair to be specific about what we are.
       </p>
-      <p class="text-lg leading-relaxed mb-6">
+      <p class="text-lg leading-relaxed mb-8">
         BreederHQ is built for the working breeder. The shape of the product follows the shape of the work:
       </p>
-      <ul class="space-y-4 text-lg leading-relaxed mb-8">
-        <li><strong>Heats and breedings.</strong> Open a girl's profile, log the heat, drop in progesterone results as they come back, see the breeding window. When you breed, the breeding is linked to the heat. When she is pregnant, the litter is linked to the breeding.</li>
-        <li><strong>Whelping and litters.</strong> Each puppy is an individual record from the night they are born. Weights, colors, markings, microchip, ENS, vet visits, all on the puppy, not on the litter row.</li>
-        <li><strong>Applications, waitlists, deposits, contracts.</strong> Buyers apply through your storefront. Approved applicants land on your waitlist. Deposits and contracts are tracked against the buyer. When you place a puppy, the puppy is linked to the buyer and the buyer portal opens.</li>
-        <li><strong>Buyer portal.</strong> Your buyer logs in and sees their puppy: photos, pedigree, contracts, vet records, the whole file, without emailing you. The 40 "do you have any updates?" emails per litter go away.</li>
-        <li><strong>Marketplace.</strong> Your program shows up at marketplace.breederhq.com. Inquiries come back into the same system. No second tool.</li>
+
+      <!-- Workflow tile grid: visually distinct from the bullet-list vendor cards above.
+           Signals "this is us" by breaking the prose-card rhythm of the competitor section. -->
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+        <li class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span aria-hidden="true" class="text-2xl">🩺</span>
+            <h3 class="text-lg font-bold">Heats &amp; breedings</h3>
+          </div>
+          <p class="text-base leading-relaxed text-white/95">Log the heat, drop in progesterone results, see the breeding window. The breeding links to the heat. The litter links to the breeding.</p>
+        </li>
+        <li class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span aria-hidden="true" class="text-2xl">📋</span>
+            <h3 class="text-lg font-bold">Whelping &amp; litters</h3>
+          </div>
+          <p class="text-base leading-relaxed text-white/95">Each puppy is an individual record from the night they are born. Weights, colors, markings, microchip, ENS, vet visits.</p>
+        </li>
+        <li class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span aria-hidden="true" class="text-2xl">📝</span>
+            <h3 class="text-lg font-bold">Applications &amp; waitlist</h3>
+          </div>
+          <p class="text-base leading-relaxed text-white/95">Buyers apply through your storefront. Approved applicants land on your waitlist. Deposits and contracts tracked against the buyer.</p>
+        </li>
+        <li class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span aria-hidden="true" class="text-2xl">🔐</span>
+            <h3 class="text-lg font-bold">Buyer portal</h3>
+          </div>
+          <p class="text-base leading-relaxed text-white/95">Your buyer logs in and sees their puppy: photos, pedigree, contracts, vet records. The "any updates?" emails go away.</p>
+        </li>
+        <li class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span aria-hidden="true" class="text-2xl">🛍️</span>
+            <h3 class="text-lg font-bold">Marketplace</h3>
+          </div>
+          <p class="text-base leading-relaxed text-white/95">Your program shows up at marketplace.breederhq.com. Inquiries come back into the same system. No second tool.</p>
+        </li>
+        <li class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span aria-hidden="true" class="text-2xl">📱</span>
+            <h3 class="text-lg font-bold">Mobile-first</h3>
+          </div>
+          <p class="text-base leading-relaxed text-white/95">Built to be used on the phone in the whelping area, at shows, and on the front porch with a buyer.</p>
+        </li>
       </ul>
+
       <div class="flex flex-col sm:flex-row gap-4">
         <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Started Free
@@ -703,7 +861,7 @@ const itemListSchema = {
   </section>
 
   <!-- How to decide -->
-  <section class="py-20 px-4">
+  <section id="decide" class="py-20 px-4 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-8">How to actually decide</h2>
       <ol class="space-y-4 text-lg text-gray-700 leading-relaxed list-decimal pl-6">
@@ -718,7 +876,7 @@ const itemListSchema = {
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 px-4 bg-gray-50">
+  <section id="faq" class="py-20 px-4 bg-gray-50 scroll-mt-24">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-8">Frequently asked questions</h2>
       <div class="space-y-6">
@@ -768,6 +926,17 @@ const itemListSchema = {
       Get Started Free
     </a>
   </div>
+
+  <!-- Desktop floating CTA: persistent on long-page scroll so the conversion path
+       never goes off-screen. Hidden on mobile (sticky mobile CTA above covers that). -->
+  <a
+    href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+    class="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[hsl(24,95%,53%)] text-white px-5 py-3 rounded-full font-bold shadow-lg hover:bg-[hsl(24,95%,48%)] hover:shadow-xl transition"
+    style="min-height: 44px;"
+  >
+    <span aria-hidden="true">→</span>
+    Start Free
+  </a>
   </main>
 
   <style>
