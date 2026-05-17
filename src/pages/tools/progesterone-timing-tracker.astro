@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -434,6 +435,18 @@ const articleSchema = {
       Track Cycles in BreederHQ Free
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Workflows and Tools"
+    links={[
+      { title: "Progesterone Timing", description: "Multi-point progesterone logging with breeding-window guidance.", url: "/workflows/breeding-cycles" },
+      { title: "Heat Cycle Tracking", description: "Log heats, track ovulation windows, plan breeding timing.", url: "/workflows/heat-tracking" },
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Free Heat Cycle Calculator", description: "Estimate your animal's next heat cycle window.", url: "/tools/heat-cycle-calculator" },
+      { title: "Free Breeding Planner", description: "Calculate gestation timelines and milestone dates.", url: "/tools/breeding-planner" }
+    ]}
+  />
+
+
   </main>
 
   <script is:inline>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -246,6 +247,19 @@ function hasTools(key: 'all' | SpeciesKey): boolean {
         </p>
       </div>
     </section>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Heat Cycle Tracking", description: "Log heats, track ovulation windows, plan breeding timing.", url: "/workflows/heat-tracking" },
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Waitlists and Placement", description: "Applications, matching, deposits, automated notifications.", url: "/workflows/waitlists-and-placement" },
+      { title: "Genetics and Health Testing", description: "OFA, PennHIP, Embark, COI calculation, multi-locus color.", url: "/workflows/genetics-and-health-testing" },
+      { title: "Whelping and Offspring Care", description: "Weight tracking, anomaly alerts, neonatal dashboard.", url: "/workflows/offspring-care" },
+      { title: "Dog Breeding Software", description: "Run your entire dog breeding program in one connected system.", url: "/dogs" }
+    ]}
+  />
+
+
   </main>
 
   <!-- Filter logic. Inline per repo Astro conventions (no module import for

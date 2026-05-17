@@ -28,6 +28,80 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== May 17, 2026 - Related Workflows internal-linking mesh across workflow, tool, species, and comparison pages ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Added a reusable Related Workflows component and wired it into 46 pages across the site to build semantic continuity between operational workflows. The goal is internal-linking architecture for SEO and AI-citation entity grounding, not a redesign &mdash; existing page content, headings, and CTAs are untouched on every modified page.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New component: <code>src/components/RelatedWorkflows.astro</code></h3>
+          <p class="text-gray-700 mb-3">
+            Compact, theme-consistent card grid that takes a heading, optional intro line, and 3 to 6 related links. Each link renders as a real <code>&lt;h3&gt;</code> with a short description and amber-accented hover state. Section background is <code>bg-stone-50</code> with a top hairline; cards are white with stone hairlines that transition to amber on hover. No brand-orange anywhere &mdash; the entire treatment uses amber tints (amber-400, amber-600, amber-700) to stay distinct from primary conversion CTAs.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Pages updated (46 total)</h3>
+          <p class="text-gray-700 mb-3">
+            <strong>Workflow pages (25):</strong>
+            <a href="/workflows/heat-tracking" class="text-[hsl(24,95%,53%)] hover:underline">heat-tracking</a>,
+            <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">breeding-cycles</a>,
+            <a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">breeding-plans</a>,
+            <a href="/workflows/breeding-intelligence" class="text-[hsl(24,95%,53%)] hover:underline">breeding-intelligence</a>,
+            <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">genetics-and-health-testing</a>,
+            <a href="/workflows/pedigrees" class="text-[hsl(24,95%,53%)] hover:underline">pedigrees</a>,
+            <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">waitlists-and-placement</a>,
+            <a href="/workflows/outreach-hub" class="text-[hsl(24,95%,53%)] hover:underline">outreach-hub</a>,
+            <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">client-portal</a>,
+            <a href="/workflows/client-management" class="text-[hsl(24,95%,53%)] hover:underline">client-management</a>,
+            <a href="/workflows/communications-hub" class="text-[hsl(24,95%,53%)] hover:underline">communications-hub</a>,
+            <a href="/workflows/offspring-care" class="text-[hsl(24,95%,53%)] hover:underline">offspring-care</a>,
+            <a href="/workflows/rearing-protocols" class="text-[hsl(24,95%,53%)] hover:underline">rearing-protocols</a>,
+            <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">medication-tracking</a>,
+            <a href="/workflows/nutrition-tracking" class="text-[hsl(24,95%,53%)] hover:underline">nutrition-tracking</a>,
+            <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">marketplace</a>,
+            <a href="/workflows/foaling-management" class="text-[hsl(24,95%,53%)] hover:underline">foaling-management</a>,
+            <a href="/workflows/mare-reproductive-tracking" class="text-[hsl(24,95%,53%)] hover:underline">mare-reproductive-tracking</a>,
+            <a href="/workflows/stallion-services" class="text-[hsl(24,95%,53%)] hover:underline">stallion-services</a>,
+            <a href="/workflows/semen-inventory" class="text-[hsl(24,95%,53%)] hover:underline">semen-inventory</a>,
+            <a href="/workflows/reproductive-inventory" class="text-[hsl(24,95%,53%)] hover:underline">reproductive-inventory</a>,
+            <a href="/workflows/titles-competitions" class="text-[hsl(24,95%,53%)] hover:underline">titles-competitions</a>,
+            <a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">invoicing-expenses</a>,
+            <a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">scout-ai</a>,
+            <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline">embed-on-your-website</a>.
+          </p>
+          <p class="text-gray-700 mb-3">
+            <strong>Species pages (9):</strong>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">dogs</a>,
+            <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">horses</a>,
+            <a href="/cats" class="text-[hsl(24,95%,53%)] hover:underline">cats</a>,
+            <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">goats</a>,
+            <a href="/sheep" class="text-[hsl(24,95%,53%)] hover:underline">sheep</a>,
+            <a href="/cattle" class="text-[hsl(24,95%,53%)] hover:underline">cattle</a>,
+            <a href="/rabbits" class="text-[hsl(24,95%,53%)] hover:underline">rabbits</a>,
+            <a href="/alpacas" class="text-[hsl(24,95%,53%)] hover:underline">alpacas</a>,
+            <a href="/llamas" class="text-[hsl(24,95%,53%)] hover:underline">llamas</a>. Headings are species-specific where it fits (&ldquo;Related Dog Breeding Workflows&rdquo;, &ldquo;Related Horse Breeding Workflows&rdquo;, etc.).
+          </p>
+          <p class="text-gray-700 mb-3">
+            <strong>Tool pages (9):</strong>
+            <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">/tools</a> hub,
+            <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">breeding-planner</a>,
+            <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">heat-cycle-calculator</a>,
+            <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">progesterone-timing-tracker</a>,
+            <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">whelping-date-calculator</a>,
+            <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">puppy-weight-tracker</a>,
+            <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">puppy-vaccination-schedule-generator</a>,
+            <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">puppy-deworming-schedule-generator</a>,
+            <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">puppy-application-builder</a>. Heading is &ldquo;Related Workflows and Tools&rdquo; on tool pages.
+          </p>
+          <p class="text-gray-700 mb-3">
+            <strong>Comparison pages (3):</strong>
+            <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">best-dog-breeding-software</a>,
+            <a href="/compare/best-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">best-breeding-software</a>,
+            <a href="/compare/breederhq-vs-spreadsheets" class="text-[hsl(24,95%,53%)] hover:underline">breederhq-vs-spreadsheets</a>.
+          </p>
+          <p class="text-gray-700">
+            Link maps were curated per page so neighboring pages in the same operational cluster reinforce each other (heat tracking links to progesterone, progesterone back to heat; whelping care links to rearing protocols, medication, nutrition; horse pages cross-link mare/stallion/foaling/semen as one cluster; buyer pages cross-link waitlist/portal/comms/outreach). Each map also includes at least one tool or species hub link so the entire mesh is reachable in 2 hops from any node. Homepage, articles, find-breeders, buyers, for-providers, dog-parks, facilities, legal, and pre-auth pages were intentionally left out &mdash; the mesh is scoped to operational workflows, tools, species, and comparisons only. No new pages, no sitemap changes, no schema changes.
+          </p>
+        </article>
+
         <!-- ========== May 17, 2026 - /tools hub layout overhaul: species filter + card grid ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>

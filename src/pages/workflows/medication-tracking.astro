@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -555,6 +556,18 @@ const howTo = {
       Get Early Access
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Whelping and Offspring Care", description: "Weight tracking, anomaly alerts, neonatal dashboard.", url: "/workflows/offspring-care" },
+      { title: "Rearing Protocols", description: "ENS, ESI, Volhard PAT, Gun Dog Aptitude testing.", url: "/workflows/rearing-protocols" },
+      { title: "Nutrition Tracking", description: "Daily feeding, supplement protocols, weight monitoring.", url: "/workflows/nutrition-tracking" },
+      { title: "Free Puppy Deworming Schedule Generator", description: "Generate species-specific deworming schedules.", url: "/tools/puppy-deworming-schedule-generator" },
+      { title: "Free Puppy Vaccination Schedule Generator", description: "Generate species-specific puppy vaccination schedules.", url: "/tools/puppy-vaccination-schedule-generator" }
+    ]}
+  />
+
+
   </main>
 
   <style>

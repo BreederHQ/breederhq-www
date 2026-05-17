@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -377,6 +378,18 @@ const articleSchema = {
       Track Breedings in BreederHQ Free
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Workflows and Tools"
+    links={[
+      { title: "Whelping and Offspring Care", description: "Weight tracking, anomaly alerts, neonatal dashboard.", url: "/workflows/offspring-care" },
+      { title: "Free Puppy Weight Tracker", description: "Log daily weights and see growth curves vs. breed averages.", url: "/tools/puppy-weight-tracker" },
+      { title: "Free Puppy Vaccination Schedule Generator", description: "Generate species-specific puppy vaccination schedules.", url: "/tools/puppy-vaccination-schedule-generator" },
+      { title: "Free Puppy Deworming Schedule Generator", description: "Generate species-specific deworming schedules.", url: "/tools/puppy-deworming-schedule-generator" },
+      { title: "Free Breeding Planner", description: "Calculate gestation timelines and milestone dates.", url: "/tools/breeding-planner" }
+    ]}
+  />
+
+
   </main>
 
   <script is:inline>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -340,5 +341,16 @@ const faqs = [
         </div>
       </div>
     </section>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Semen Inventory", description: "Track frozen and chilled semen straws across breeding programs.", url: "/workflows/semen-inventory" },
+      { title: "Stallion Services", description: "Manage breeding contracts, semen collection, and stud services.", url: "/workflows/stallion-services" },
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Mare Reproductive Tracking", description: "Heat detection, teasing, and ovulation timing for mares.", url: "/workflows/mare-reproductive-tracking" }
+    ]}
+  />
+
+
   </main>
 </BaseLayout>

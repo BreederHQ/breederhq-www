@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -333,6 +334,18 @@ const softwareAppSchema = {
       Track Cycles in BreederHQ Free
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Workflows and Tools"
+    links={[
+      { title: "Heat Cycle Tracking", description: "Log heats, track ovulation windows, plan breeding timing.", url: "/workflows/heat-tracking" },
+      { title: "Progesterone Timing", description: "Multi-point progesterone logging with breeding-window guidance.", url: "/workflows/breeding-cycles" },
+      { title: "Free Progesterone Timing Tracker", description: "Log progesterone values and see your ovulation window.", url: "/tools/progesterone-timing-tracker" },
+      { title: "Free Breeding Planner", description: "Calculate gestation timelines and milestone dates.", url: "/tools/breeding-planner" },
+      { title: "Free Whelping Date Calculator", description: "Predict whelping windows from breeding date.", url: "/tools/whelping-date-calculator" }
+    ]}
+  />
+
+
   </main>
 
   <script is:inline>

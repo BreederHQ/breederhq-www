@@ -1,0 +1,38 @@
+---
+interface RelatedLink {
+  title: string;
+  description: string;
+  url: string;
+}
+
+interface Props {
+  heading?: string;
+  intro?: string;
+  links: RelatedLink[];
+}
+
+const { heading = "Related Workflows", intro, links } = Astro.props;
+---
+
+{links && links.length > 0 && (
+  <section class="py-12 bg-stone-50 border-t border-stone-200">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">{heading}</h2>
+        {intro && <p class="text-base text-gray-600">{intro}</p>}
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {links.map(link => (
+          <a
+            href={link.url}
+            class="group block p-4 rounded-lg border border-stone-200 bg-white hover:border-amber-400 hover:shadow-sm transition-all"
+          >
+            <h3 class="font-semibold text-gray-900 text-base mb-1 group-hover:text-amber-700 transition-colors">{link.title}</h3>
+            <p class="text-sm text-gray-600 mb-2">{link.description}</p>
+            <span class="text-amber-600 text-sm font-medium" aria-hidden="true">&rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

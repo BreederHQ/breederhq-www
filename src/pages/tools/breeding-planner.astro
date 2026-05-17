@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 // Inline the prototype's CSS and JS at build time via Vite's ?raw import.
 // The mockup is a single self-contained HTML file (see
@@ -158,6 +159,19 @@ const softwareAppSchema = {
             </div>
           </div>
         </div>
+  <RelatedWorkflows
+    heading="Related Workflows and Tools"
+    links={[
+      { title: "Heat Cycle Tracking", description: "Log heats, track ovulation windows, plan breeding timing.", url: "/workflows/heat-tracking" },
+      { title: "Progesterone Timing", description: "Multi-point progesterone logging with breeding-window guidance.", url: "/workflows/breeding-cycles" },
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Free Heat Cycle Calculator", description: "Estimate your animal's next heat cycle window.", url: "/tools/heat-cycle-calculator" },
+      { title: "Free Whelping Date Calculator", description: "Predict whelping windows from breeding date.", url: "/tools/whelping-date-calculator" },
+      { title: "Dog Breeding Software", description: "Run your entire dog breeding program in one connected system.", url: "/dogs" }
+    ]}
+  />
+
+
       </main>
 
       <!-- 4th dog modal -->

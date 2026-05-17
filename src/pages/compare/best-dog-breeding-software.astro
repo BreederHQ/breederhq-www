@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -768,6 +769,19 @@ const itemListSchema = {
       Get Started Free
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Heat Cycle Tracking", description: "Log heats, track ovulation windows, plan breeding timing.", url: "/workflows/heat-tracking" },
+      { title: "Progesterone Timing", description: "Multi-point progesterone logging with breeding-window guidance.", url: "/workflows/breeding-cycles" },
+      { title: "Waitlists and Placement", description: "Applications, matching, deposits, automated notifications.", url: "/workflows/waitlists-and-placement" },
+      { title: "Genetics and Health Testing", description: "OFA, PennHIP, Embark, COI calculation, multi-locus color.", url: "/workflows/genetics-and-health-testing" },
+      { title: "Dog Breeding Software", description: "Run your entire dog breeding program in one connected system.", url: "/dogs" },
+      { title: "BreederHQ vs Spreadsheets", description: "Why working breeders are leaving spreadsheets behind.", url: "/compare/breederhq-vs-spreadsheets" }
+    ]}
+  />
+
+
   </main>
 
   <style>

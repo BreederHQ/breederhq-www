@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -538,6 +539,17 @@ const featureCards = [
         Start Your Free Trial
       </a>
     </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Genetics and Health Testing", description: "OFA, PennHIP, Embark, COI calculation, multi-locus color.", url: "/workflows/genetics-and-health-testing" },
+      { title: "Pedigrees", description: "Multi-generation pedigree tracking with COI on every breeding.", url: "/workflows/pedigrees" },
+      { title: "Waitlists and Placement", description: "Applications, matching, deposits, automated notifications.", url: "/workflows/waitlists-and-placement" }
+    ]}
+  />
+
+
   </main>
 
   <style>
