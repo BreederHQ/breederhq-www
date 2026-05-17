@@ -201,8 +201,11 @@ const articleSchema = {
           <h2 class="ptt-results-title">Cycle Projection</h2>
           <p class="ptt-results-subtitle">Estimated based on your P4 trend and standard canine reproductive ranges. Your reproductive vet decides actual breeding timing.</p>
 
-          <div id="ptt-projection" class="ptt-projection">
-            <!-- Projection cards injected by script -->
+          <div class="ptt-projection-wrap">
+            <h3 class="ptt-section-title ptt-section-title--inset">Projection Cards</h3>
+            <div id="ptt-projection" class="ptt-projection">
+              <!-- Projection cards injected by script -->
+            </div>
           </div>
 
           <div id="ptt-chart-wrap" class="ptt-chart-wrap">
@@ -218,9 +221,11 @@ const articleSchema = {
             </div>
           </div>
 
-          <h3 class="ptt-section-title">Reading Detail</h3>
-          <div id="ptt-timeline" class="ptt-timeline">
-            <!-- Timeline rows injected by script -->
+          <div class="ptt-timeline-wrap">
+            <h3 class="ptt-section-title ptt-section-title--inset">Reading Detail</h3>
+            <div id="ptt-timeline" class="ptt-timeline">
+              <!-- Timeline rows injected by script -->
+            </div>
           </div>
 
           <div class="ptt-summary" id="ptt-summary">
@@ -1310,7 +1315,7 @@ const articleSchema = {
       display: grid !important;
       grid-template-columns: 1fr !important;
       gap: 0.85rem !important;
-      margin-bottom: 1.5rem !important;
+      margin: 0 !important;
     }
 
     @media (min-width: 720px) {
@@ -1447,12 +1452,21 @@ const articleSchema = {
       grid-column: 1 / -1;
     }
 
-    .ptt-chart-wrap {
+    .ptt-chart-wrap,
+    .ptt-projection-wrap,
+    .ptt-timeline-wrap {
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 10px;
-      padding: 0.85rem 1rem 0.75rem;
-      margin-bottom: 0.5rem;
+      padding: 1rem 1.15rem 1.1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .ptt-projection-wrap .ptt-section-title--inset,
+    .ptt-timeline-wrap .ptt-section-title--inset,
+    .ptt-chart-wrap .ptt-section-title {
+      margin-top: 0 !important;
+      margin-bottom: 0.85rem !important;
     }
 
     .ptt-chart {
