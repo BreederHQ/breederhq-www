@@ -1,0 +1,375 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Farriers', url: '/for-providers/farriers' }
+];
+
+const faqs = [
+  {
+    question: 'How much does it cost to list my farrier business on BreederHQ?',
+    answer: 'A live listing is a flat $5 per month and is free during early access. There is no commission on the work you book, no per-visit platform fee, and no booking fee taken from your invoices. You keep 100% of every dollar your clients pay you.'
+  },
+  {
+    question: 'Do horse owners actually search online for a farrier?',
+    answer: 'Yes. Search engines consistently show meaningful monthly volume for queries like "farrier near me", "horseshoer in [city]", and "corrective farrier [region]". Most of that traffic lands on Yelp pages, Facebook groups, and farrier association directories that were not built as professional discovery tools. A dedicated, equine-native listing surfaces against those queries on its own merits.'
+  },
+  {
+    question: 'I am an AFA Certified Farrier. Can I show my credentials on my listing?',
+    answer: 'Yes. You can upload AFA certifications (CF, CJF, TE) and any continuing-education credentials. Once reviewed, your listing carries a verified credential badge that horse owners and barn managers see in search results and on your profile. Apprentice farriers and uncertified working farriers are welcome to list as well; the badge simply reflects what is on file.'
+  },
+  {
+    question: 'How is this different from Facebook groups or a Yelp listing?',
+    answer: 'Facebook groups depend on whoever is moderating that day and bury your name under unrelated posts. Yelp ranks by ad spend and does not understand the difference between a barefoot trimmer, a corrective farrier, and a therapeutic specialist. BreederHQ treats farrier work as a real equine discipline: you list your specialties, travel radius, AFA credentials, day-rate ranges, and references, and you appear in a search built specifically for horse people.'
+  },
+  {
+    question: 'Will BreederHQ handle scheduling and payment for me?',
+    answer: 'No, and that is intentional. You stay in control of your own book. Horse owners and barn managers contact you through the marketplace, and you handle scheduling, invoicing, and payment exactly the way you do today. BreederHQ is a discovery and credential layer, not a booking middleman.'
+  },
+  {
+    question: 'Do I have to be full-time or in a specific region?',
+    answer: 'No. Solo farriers, part-time farriers, road farriers covering multi-county routes, and therapeutic specialists who travel for referral cases can all list. You define your coverage area, your typical drive radius, and any regions where you only accept barn-call minimums.'
+  },
+  {
+    question: 'How quickly can I get listed?',
+    answer: 'You can create a listing in roughly fifteen minutes. Credential verification is a separate step: upload your AFA paperwork or continuing-education certificates and the badge typically appears within a few business days once review is complete.'
+  }
+];
+
+const service = {
+  name: 'Farrier Listings on BreederHQ Marketplace',
+  description: 'Professional discovery for working farriers. Flat $5/month listing, no commissions, no booking fees, full credential visibility for AFA Certified Farriers, Journeymen, and Therapeutic Endorsement holders.',
+  serviceType: 'Farrier Listing',
+  priceCurrency: 'USD',
+  price: '5',
+  priceUnit: 'MONTH' as const,
+  offerDescription: 'Flat $5 per month per live listing. No commission, no booking fees, no platform cut. Free during early access.',
+  areaServed: 'United States',
+  offerUrl: 'https://accounts.breederhq.com/register?intent=provider_marketplace&category=farrier&returnTo=/services/farriers/new'
+};
+
+const article = {
+  headline: 'Farrier Listings on BreederHQ: Professional Discovery for Working Farriers',
+  description: 'A dedicated farrier directory built for the equine ecosystem. Credential-aware listings, flat-fee pricing, and no commissions on the work you book.',
+  datePublished: '2026-05-17',
+  author: {
+    name: 'BreederHQ Editorial',
+    role: 'Equine Services',
+    url: 'https://breederhq.com/'
+  }
+};
+---
+
+<BaseLayout
+  title="Certified Farrier Listings | Advertise Your Farrier Business on BreederHQ"
+  description="List your farrier business on BreederHQ Marketplace. Flat $5/month, no commissions, no booking fees. AFA credential visibility, equine-native search, and discovery alongside breeders, trainers, and boarding facilities. Keep 100% of your revenue."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+  article={article}
+>
+  <main>
+    {/* ========== 1. Hero ========== */}
+    <section class="bg-gradient-to-b from-stone-100 to-white py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm uppercase tracking-wider text-stone-600 mb-3">For Working Farriers</p>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          A Real Directory for Real Farriers
+        </h1>
+        <p class="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
+          Horse owners are already searching online for a farrier. The problem is where those searches land: generic review sites, Facebook groups, and association directories never built for professional discovery. BreederHQ is a credential-aware listing platform for the equine ecosystem.
+        </p>
+        <a
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=farrier&returnTo=/services/farriers/new"
+          class="inline-block bg-stone-800 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-700"
+        >
+          List Your Farrier Business
+        </a>
+        <p class="text-sm text-stone-600 mt-4">Flat $5/month. Free during early access. No commissions. No booking fees.</p>
+      </div>
+    </section>
+
+    {/* ========== 2. Why Farriers Need Better Discovery ========== */}
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Farriers Need Better Discovery</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          The way working farriers get found has barely changed in twenty years. Most new clients still come from a barn manager forwarding a phone number, a trainer recommending you in passing, or a horse owner asking around at a show. That word-of-mouth pipeline is real and it works, but it is not enough on its own anymore.
+        </p>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Search has moved online</h3>
+            <p class="text-sm text-gray-700">
+              "Farrier near me", "horseshoer in [city]", and "corrective farrier" are searched every month at meaningful volume across the US. New horse owners and people relocating into horse country use search first and ask around second.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Referrals do not scale alone</h3>
+            <p class="text-sm text-gray-700">
+              If your only growth channel is the next barn calling the last barn, your route fills slowly and unevenly. A dedicated listing covers the gap between referrals.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Specialty work is invisible</h3>
+            <p class="text-sm text-gray-700">
+              Owners who specifically need barefoot trimming, glue-on application, laminitis support, or sport-specific shoeing cannot tell those specialties apart on a generic listing site. They give up and call whoever shows up first.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Credentials get lost</h3>
+            <p class="text-sm text-gray-700">
+              An AFA Certified Farrier and an unlicensed hobbyist look identical on a Google Maps pin. There is no surfaced credential signal, and the platform does not know to surface one.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ========== 3. Why Yelp/Facebook Groups Fail ========== */}
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Yelp and Facebook Groups Fail Farriers</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          The most common channels horse owners use to find a farrier today are general-purpose tools that were not designed for equine professionals. Each has structural problems that have nothing to do with you personally.
+        </p>
+        <div class="space-y-5">
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Yelp</h3>
+            <p class="text-sm text-gray-700">
+              Yelp ranks businesses by advertising spend and review velocity, not by skill, credentials, or specialty. It also lumps farriers into broad pet-services categories alongside dog groomers and pet sitters. The result is that a working farrier with twenty years on the job and CJF certification can rank below a brand-new shop that buys ads.
+            </p>
+          </div>
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Facebook Groups</h3>
+            <p class="text-sm text-gray-700">
+              Local horse and barn groups are full of "Anyone know a good farrier?" posts, and you may be one of three people tagged in the comments. That is not professional infrastructure. Group posts disappear in days, are visible only to current members, and depend on whoever happens to be online that hour. They are not searchable, indexable, or credential-aware.
+            </p>
+          </div>
+          <div class="bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Association Directories</h3>
+            <p class="text-sm text-gray-700">
+              Association directories are valuable for credential lookup, but they are not built for owner-side discovery. Most are barebones lists, often state-by-state, with no specialty filters, no photos, no coverage maps, and no way for owners to tell who is actively taking new clients.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ========== 4. Credential Visibility ========== */}
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Your Credentials Are Front and Center</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          BreederHQ understands that the AFA credential ladder is a real signal of competence and continuing education. Your listing surfaces it in the places horse owners actually look: search results, profile header, and shareable preview cards.
+        </p>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">AFA Certifications Recognized</h3>
+            <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside">
+              <li>Certified Farrier (CF)</li>
+              <li>Certified Journeyman Farrier (CJF)</li>
+              <li>Therapeutic Endorsement (TE)</li>
+              <li>Apprentice and continuing-education status</li>
+            </ul>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Specialty Tagging</h3>
+            <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside">
+              <li>Barefoot trimming and natural hoof care</li>
+              <li>Corrective and therapeutic shoeing</li>
+              <li>Laminitis and founder management</li>
+              <li>Sport-specific shoeing (dressage, jumping, reining, endurance)</li>
+              <li>Glue-on and composite shoe application</li>
+              <li>Foal first trims and young-horse work</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-sm text-stone-600 mt-6">
+          Uncertified working farriers are welcome and can list freely. The credential badge simply reflects whatever you have on file, so horse owners get an accurate picture rather than a false one.
+        </p>
+      </div>
+    </section>
+
+    {/* ========== 5. Pricing Comparison ========== */}
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Pricing That Respects Your Margins</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          Farrier work is paid by the visit, and the margin on a single trim or shoeing job is too thin to share with a software platform. BreederHQ uses a flat-fee listing model so the math is always in your favor.
+        </p>
+        <div class="overflow-x-auto bg-white rounded-xl border border-stone-200">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-stone-100 text-left">
+                <th class="p-4 font-semibold text-gray-900">Model</th>
+                <th class="p-4 font-semibold text-gray-900">Listing Cost</th>
+                <th class="p-4 font-semibold text-gray-900">Per-Job Fee</th>
+                <th class="p-4 font-semibold text-gray-900">You Keep</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-200">
+              <tr>
+                <td class="p-4 font-medium text-gray-900">BreederHQ</td>
+                <td class="p-4 text-gray-700">Flat $5/month (free during early access)</td>
+                <td class="p-4 text-gray-700">None</td>
+                <td class="p-4 font-semibold text-emerald-700">100%</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-medium text-gray-900">Generic booking platforms</td>
+                <td class="p-4 text-gray-700">Often free to list</td>
+                <td class="p-4 text-gray-700">10 to 20% per job, sometimes higher</td>
+                <td class="p-4 text-gray-700">80 to 90% after platform cut</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-medium text-gray-900">Yelp / Google Ads</td>
+                <td class="p-4 text-gray-700">Pay-per-click ad spend</td>
+                <td class="p-4 text-gray-700">None, but no credential signal</td>
+                <td class="p-4 text-gray-700">100% of revenue minus unpredictable ad bills</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-medium text-gray-900">Facebook Groups</td>
+                <td class="p-4 text-gray-700">Free</td>
+                <td class="p-4 text-gray-700">None</td>
+                <td class="p-4 text-gray-700">100%, but no professional discovery</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-stone-600 mt-6">
+          No commissions. No booking fees. No payout delays. You invoice your clients the way you always have, and BreederHQ stays out of the transaction.
+        </p>
+      </div>
+    </section>
+
+    {/* ========== 6. Verification Badges ========== */}
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Verification Badges That Mean Something</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          A badge is only useful if it represents real review. BreederHQ verification is granted after document review, not after a checkbox.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <div class="text-2xl mb-3">✓</div>
+            <h3 class="font-semibold text-gray-900 mb-2">Credential Verified</h3>
+            <p class="text-sm text-gray-700">
+              Your AFA certification, continuing-education record, or formal apprenticeship documentation has been reviewed and is on file.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <div class="text-2xl mb-3">📍</div>
+            <h3 class="font-semibold text-gray-900 mb-2">Coverage Verified</h3>
+            <p class="text-sm text-gray-700">
+              Your declared service area has been confirmed, so owners outside your radius do not waste your time and you do not waste theirs.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <div class="text-2xl mb-3">🐴</div>
+            <h3 class="font-semibold text-gray-900 mb-2">Equine-Native Profile</h3>
+            <p class="text-sm text-gray-700">
+              Your specialties, day-rate ranges, and references sit in a profile designed for equine work, not retrofitted from a general home-services template.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ========== 7. What Providers Get ========== */}
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">What You Get with Your Listing</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Equine-native profile with specialties, AFA credentials, and continuing education</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Coverage area map with travel radius and minimum-call thresholds</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Photo gallery for shoeing, trimming, and corrective work</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Day-rate ranges and barn-call pricing on your terms</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">References from breeders, trainers, and barn managers you already work with</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Discovery alongside the equine ecosystem: breeders, trainers, and boarding facilities</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Direct inquiries from owners; you handle scheduling and invoicing</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-stone-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">Pause or resume your listing anytime without losing your profile data</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ========== 8. FAQ ========== */}
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-sm text-gray-700">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ========== Related on BreederHQ ========== */}
+    <section class="py-12 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Related on BreederHQ</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <a href="https://marketplace.breederhq.com/services/farriers" class="block p-5 bg-white rounded-lg border border-stone-200 hover:border-stone-400">
+            <h3 class="font-semibold text-gray-900 mb-1">Browse Farriers</h3>
+            <p class="text-sm text-gray-600">See live farrier listings across the marketplace.</p>
+          </a>
+          <a href="https://marketplace.breederhq.com/services/equine-boarding" class="block p-5 bg-white rounded-lg border border-stone-200 hover:border-stone-400">
+            <h3 class="font-semibold text-gray-900 mb-1">Equine Boarding</h3>
+            <p class="text-sm text-gray-600">Boarding facilities and barns in the same ecosystem.</p>
+          </a>
+          <a href="/for-providers/equine" class="block p-5 bg-white rounded-lg border border-stone-200 hover:border-stone-400">
+            <h3 class="font-semibold text-gray-900 mb-1">Other Equine Providers</h3>
+            <p class="text-sm text-gray-600">Trainers, transporters, and equine veterinarians.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* ========== 9. CTA ========== */}
+    <section class="py-20 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">
+          <span class="line-through opacity-60 text-2xl">$5/mo</span> Free during early access
+        </h2>
+        <p class="text-sm text-stone-300 mb-3">Flat-fee listing. No commissions. No booking fees. Keep 100% of your revenue.</p>
+        <p class="text-lg text-stone-200 mb-8 max-w-2xl mx-auto">
+          Put your farrier business in a directory built for the equine ecosystem and the breeders, trainers, and barn managers who actually need you.
+        </p>
+        <a
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=farrier&returnTo=/services/farriers/new"
+          class="inline-block bg-white text-stone-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-100"
+        >
+          List Your Farrier Business
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
