@@ -1,0 +1,1330 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Puppy Weight Tracker', url: '/tools/puppy-weight-tracker' }
+];
+
+const lastReviewedISO = '2026-05-17';
+
+const faqs = [
+  {
+    question: 'What is a normal newborn puppy weight?',
+    answer: 'Newborn puppy weights vary widely by breed. Toy breeds may weigh as little as 2 to 4 ounces (about 55 to 115 grams) at birth. Medium breeds typically fall in the 8 to 16 ounce (about 230 to 450 gram) range. Large and giant breeds can be 1 pound or more at birth. Litter size, dam nutrition, and individual variation also influence birth weight. There is no single number that is universally normal. What matters more than the absolute number is the trend: most healthy puppies gain weight every day from day one, often doubling their birth weight by about 7 to 10 days of age.'
+  },
+  {
+    question: 'How often should I weigh newborn puppies?',
+    answer: 'Many breeders weigh every puppy at the same time each day for the first two weeks of life, then taper to every two or three days once weights are climbing steadily. Some breeders weigh twice a day for the first 48 to 72 hours, when failure-to-thrive risk is highest. The cadence is less important than the consistency: weigh at the same time of day, on the same scale, before or after feedings consistently, so day-over-day comparisons are meaningful. This tracker will calculate gain since the previous entry regardless of cadence, so you can use whatever schedule fits your routine.'
+  },
+  {
+    question: 'What does a flat or declining weight mean?',
+    answer: 'A flat or declining trend in a newborn puppy can have many causes, including latch or feeding difficulty, competition with stronger littermates, dehydration, infection, congenital issues, or simply being on the small end of the litter. It is a signal to pay closer attention, not a diagnosis. The right response is to discuss the trend with your veterinarian and consider whether supplemental feeding, closer monitoring, or a vet visit is appropriate. This tool flags flat or declining trends so they are easy to spot. It does not interpret why and is not a substitute for veterinary evaluation.'
+  },
+  {
+    question: 'Does this tool save my data?',
+    answer: 'No. This tracker is anonymous and runs entirely in your browser. Nothing is saved to a server. If you refresh the page or close the tab, the entries are gone. For persistent per-puppy weight records that follow the puppy through the litter, into the go-home packet, and into the buyer\u2019s account, use BreederHQ. The full platform tracks individual puppy weights over time, attaches them to litter and puppy records, and lets you hand a complete history to the new family at placement.'
+  },
+  {
+    question: 'Can I track more than one puppy at once?',
+    answer: 'This tool is intentionally scoped to one puppy at a time so the trend is easy to read at a glance. For a full litter with multiple puppies, weigh each puppy and either keep separate tracker tabs open or move the litter into BreederHQ, where every puppy has its own record and the litter-wide view is built in.'
+  },
+  {
+    question: 'Why can I switch between ounces, grams, and pounds?',
+    answer: 'Different breeders use different units. Toy breeders almost always work in grams because the increments are small. Many medium-breed dog breeders use ounces. Larger breeds and livestock often use pounds. You can enter each row in whichever unit you used on the scale, and the table normalizes everything to the display unit you choose at the top so the trend is consistent. Unit conversion is exact (1 ounce = 28.3495 grams; 1 pound = 16 ounces = 453.592 grams).'
+  },
+  {
+    question: 'Is this veterinary advice?',
+    answer: 'No. This tracker is an organizational and visualization aid. It calculates daily gain and total gain, normalizes units, and flags flat or declining trends, but it does not interpret what those numbers mean for an individual puppy. Newborn weight patterns vary by breed, litter size, and health status. A flat or declining trend may be worth discussing with your veterinarian. The interpretation and any clinical decisions are theirs.'
+  }
+];
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/puppy-weight-tracker#tool',
+  'name': 'Puppy Weight Tracker',
+  'description': 'Free puppy weight tracker for dog breeders. Log birth date and weight entries in ounces, grams, or pounds, and see daily gain, total gain, normalized weights, and a simple trend summary. Anonymous, in-browser, no data saved. Visualization tool only. Not veterinary advice.',
+  'url': 'https://breederhq.com/tools/puppy-weight-tracker',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Dog Breeding Calculator',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'isPartOf': {
+    '@id': 'https://breederhq.com/tools#collection'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Log a puppy or litter label and birth date',
+    'Add unlimited weight entries with date, weight, and unit selector (ounces, grams, pounds)',
+    'Normalize all weights to a chosen display unit',
+    'Calculate daily gain since the previous entry and total gain since the first entry',
+    'Flag a flat or declining trend as a "watch closely" signal',
+    'Anonymous, no signup, no data saved'
+  ]
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://breederhq.com/tools/puppy-weight-tracker#article',
+  'headline': 'Puppy Weight Tracker for Breeders',
+  'description': 'Free puppy weight tracker for breeders. Log weight entries in ounces, grams, or pounds and see daily gain, total gain, and a simple trend summary across readings. For breeder visualization and recordkeeping. Not veterinary advice.',
+  'url': 'https://breederhq.com/tools/puppy-weight-tracker',
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'author': {
+    '@type': 'Organization',
+    'name': 'BreederHQ Operations Team',
+    'url': 'https://breederhq.com/about'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': 'https://breederhq.com/tools/puppy-weight-tracker'
+  }
+};
+---
+
+<BaseLayout
+  title="Free Puppy Weight Tracker for Breeders | BreederHQ"
+  description="Free puppy weight tracker for dog breeders. Log birth date and weight entries in ounces, grams, or pounds and see daily gain, total gain, and a trend summary across readings. Anonymous, no signup, no data saved. Visualization tool only. Not veterinary advice."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Puppy Weight Tracker</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Intro -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Track Newborn Puppy Weights and See the Trend at a Glance</h1>
+      <p class="text-sm text-gray-500 mb-6">
+        <strong class="text-gray-700">Last Reviewed: May 17, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active dog breeders. Visualization and recordkeeping tool. Not veterinary advice.
+      </p>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Enter a puppy name or label, a birth date, and each weight reading as you take it. This free tracker normalizes every entry to one display unit, calculates daily gain since the prior reading and total gain since the first reading, and flags a flat or declining trend so it is easy to spot. Newborn puppy weight patterns vary by breed, litter size, and health status. A flat or declining trend may be worth discussing with your veterinarian.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Tracker -->
+  <section class="px-4 pb-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="pwt-card">
+        <form id="pwt-form" class="pwt-form" novalidate>
+          <div class="pwt-row-fields">
+            <div class="pwt-field">
+              <label for="pwt-name" class="pwt-label">Puppy Name or Label</label>
+              <p class="pwt-help">A name, color collar, or birth-order label. Whatever you use to tell puppies apart.</p>
+              <input
+                type="text"
+                id="pwt-name"
+                name="puppy-name"
+                class="pwt-input"
+                placeholder="Pink collar, Puppy 1, Biscuit..."
+                maxlength="80"
+              />
+            </div>
+
+            <div class="pwt-field">
+              <label for="pwt-birth" class="pwt-label">Birth Date</label>
+              <p class="pwt-help">The day the puppy was born. Used to calculate age at each reading.</p>
+              <input
+                type="date"
+                id="pwt-birth"
+                name="birth-date"
+                class="pwt-input"
+              />
+            </div>
+          </div>
+
+          <div class="pwt-field">
+            <label for="pwt-display-unit" class="pwt-label">Display Unit</label>
+            <p class="pwt-help">All entries are normalized to this unit in the results table. Switch any time.</p>
+            <select id="pwt-display-unit" class="pwt-input pwt-select" name="display-unit">
+              <option value="g">Grams (g)</option>
+              <option value="oz" selected>Ounces (oz)</option>
+              <option value="lb">Pounds (lb)</option>
+            </select>
+          </div>
+
+          <fieldset class="pwt-entries-wrap">
+            <legend class="pwt-label">Weight Entries</legend>
+            <p class="pwt-help">Add one row per reading. Enter each weight in whichever unit you used on the scale. The table normalizes everything to the display unit above.</p>
+
+            <div id="pwt-entries" class="pwt-entries" role="list">
+              <!-- rows injected here -->
+            </div>
+
+            <div class="pwt-entries-actions">
+              <button type="button" id="pwt-add-row" class="pwt-action-button">+ Add Row</button>
+            </div>
+          </fieldset>
+
+          <div class="pwt-actions">
+            <button type="submit" class="pwt-button">Calculate Trend</button>
+          </div>
+
+          <p id="pwt-error" class="pwt-error" role="alert" hidden></p>
+        </form>
+
+        <div id="pwt-results" class="pwt-results" hidden aria-live="polite">
+          <div class="pwt-results-header">
+            <div>
+              <h2 class="pwt-results-title">Weight Trend</h2>
+              <p class="pwt-results-subtitle" id="pwt-results-subtitle"></p>
+            </div>
+            <div class="pwt-results-actions no-print">
+              <button type="button" id="pwt-copy" class="pwt-action-button">Copy</button>
+              <button type="button" id="pwt-print" class="pwt-action-button">Print</button>
+            </div>
+          </div>
+
+          <div id="pwt-summary-cards" class="pwt-summary-cards"></div>
+
+          <div id="pwt-trend-banner" class="pwt-trend-banner" hidden></div>
+
+          <div class="pwt-table-wrap">
+            <table id="pwt-table" class="pwt-table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Gain since prior</th>
+                  <th scope="col">Total gain</th>
+                </tr>
+              </thead>
+              <tbody id="pwt-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="pwt-disclaimer">
+            <strong>Important.</strong> This tracker calculates and visualizes weights. It does not diagnose. Newborn puppy weight patterns vary by breed, litter size, and health status. A flat or declining trend may be worth discussing with your veterinarian.
+          </div>
+
+          <div class="pwt-cta">
+            <p class="pwt-cta-text">
+              Want per-puppy weight records that persist across the whole litter, attach to puppy and litter records, and travel with the puppy into the buyer&rsquo;s account at go-home? BreederHQ keeps individual puppy records, full litter tracking, and a clean buyer handoff packet.
+            </p>
+            <div class="pwt-cta-buttons">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="pwt-cta-primary">
+                Track Puppy Records in BreederHQ Free
+              </a>
+              <a href="/puppy-application-management" class="pwt-cta-secondary">
+                Learn About Puppy Application Management →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How To Use -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How to Use This Tracker</h2>
+      <ol class="space-y-4 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="pwt-ol-num">1</span>
+          <span><strong>Label the puppy.</strong> Enter a name, collar color, or birth-order label so you can tell which tab is which if you are tracking multiple puppies in multiple tabs.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pwt-ol-num">2</span>
+          <span><strong>Enter the birth date.</strong> The tracker shows the puppy&rsquo;s age in days at each reading, which is the number that actually matters when comparing the trend to general expectations.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pwt-ol-num">3</span>
+          <span><strong>Add a row for each reading.</strong> Date, weight, and the unit you used on the scale. Mix units across rows if you switched scales. The table will normalize everything to the display unit.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pwt-ol-num">4</span>
+          <span><strong>Read the trend.</strong> The table shows daily gain since the previous reading and total gain since the first reading. A summary banner calls out steady gain, slow gain, flat, or declining.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pwt-ol-num">5</span>
+          <span><strong>Discuss anything concerning with your vet.</strong> This is a visualization, not a diagnosis. A flat or declining trend, especially in the first two weeks, is worth a veterinary conversation.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- What the Trend Means -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">What the Trend Means</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Daily Gain</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Daily gain is the change from the previous reading divided by the number of days between the two readings. It is a rough rate. Newborn puppies typically gain weight every day from day one and often double their birth weight by about 7 to 10 days of age. After the first two weeks, gain often accelerates and the daily rate climbs.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Total Gain</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Total gain is the difference between the latest reading and the first reading you entered. It is the cleanest single number for the overall trajectory of the puppy.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">&ldquo;Watch Closely&rdquo; Banner</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If a reading is the same as or lower than the previous reading, the tracker flags the entry and shows a watch-closely banner. This is a visibility tool, not a diagnosis. There are many possible reasons for a flat or declining reading, including normal short-term variation, scale or measurement inconsistency, or genuine concerns about latch, feeding, hydration, or illness. The right response is to weigh again sooner than your normal cadence and discuss what you are seeing with your veterinarian if it persists.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Consistency Matters</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Weigh at the same time of day, on the same scale, in roughly the same feeding context (consistently before or consistently after a feed). Day-over-day changes in newborn puppies are small. Inconsistent measurement conditions can mask a real trend or create a false one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Isn't a Diagnostic Tool -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Why This Isn&rsquo;t a Diagnostic Tool</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        A weight tracker can tell you that a puppy gained 12 grams overnight or lost 4 grams since yesterday. It cannot tell you why. Newborn puppy outcomes depend on breed, litter size, dam health, latch quality, environmental temperature, and many individual factors that no calendar or chart can see. The role of this tool is to make the trend easy to read and to remove the manual math, so you can spend your attention on the puppies and on a clean conversation with your vet when something looks off.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        For ongoing per-puppy records across the litter, attached to vet notes, deworming and vaccination events, and the buyer handoff packet, the right home for the data is BreederHQ, not a browser tab.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Read more in <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Application Management</a> and the <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">Dog Breeding Software</a> overview.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Tools for Breeders
+          </a>
+        </div>
+        <div>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Whelping Date Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Puppy Vaccination Schedule Generator
+          </a>
+        </div>
+        <div>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Puppy Deworming Schedule Generator
+          </a>
+        </div>
+        <div>
+          <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Management
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50 no-print">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Track Puppy Records in BreederHQ Free
+    </a>
+  </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('pwt-form');
+      var nameInput = document.getElementById('pwt-name');
+      var birthInput = document.getElementById('pwt-birth');
+      var displayUnitSelect = document.getElementById('pwt-display-unit');
+      var entriesContainer = document.getElementById('pwt-entries');
+      var addRowBtn = document.getElementById('pwt-add-row');
+      var error = document.getElementById('pwt-error');
+      var results = document.getElementById('pwt-results');
+      var summaryCards = document.getElementById('pwt-summary-cards');
+      var trendBanner = document.getElementById('pwt-trend-banner');
+      var tableBody = document.getElementById('pwt-table-body');
+      var subtitle = document.getElementById('pwt-results-subtitle');
+      var copyBtn = document.getElementById('pwt-copy');
+      var printBtn = document.getElementById('pwt-print');
+      if (!form || !entriesContainer || !addRowBtn || !error || !results || !summaryCards || !tableBody || !subtitle) return;
+
+      var rowSeq = 0;
+
+      // Default birth date to today
+      try {
+        var today = new Date();
+        var iso = today.toISOString().slice(0, 10);
+        if (birthInput) birthInput.value = iso;
+      } catch (e) { /* noop */ }
+
+      function parseLocalDate(str) {
+        if (!str) return null;
+        var parts = str.split('-');
+        if (parts.length !== 3) return null;
+        var year = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;
+        var day = parseInt(parts[2], 10);
+        var d = new Date(year, month, day);
+        if (isNaN(d.getTime())) return null;
+        return d;
+      }
+
+      function fmtLong(date) {
+        try {
+          return date.toLocaleDateString(undefined, {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      function fmtShort(date) {
+        try {
+          return date.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      // Conversion factors to grams (canonical internal unit)
+      var TO_GRAMS = { g: 1, oz: 28.3495, lb: 453.592 };
+      var UNIT_LABEL = { g: 'g', oz: 'oz', lb: 'lb' };
+
+      function toGrams(value, unit) {
+        var factor = TO_GRAMS[unit];
+        if (!factor) return null;
+        return value * factor;
+      }
+
+      function fromGrams(grams, unit) {
+        var factor = TO_GRAMS[unit];
+        if (!factor) return null;
+        return grams / factor;
+      }
+
+      function formatWeight(grams, displayUnit) {
+        if (grams === null || grams === undefined || isNaN(grams)) return '';
+        var value = fromGrams(grams, displayUnit);
+        var decimals;
+        if (displayUnit === 'g') decimals = 1;
+        else if (displayUnit === 'oz') decimals = 2;
+        else decimals = 3; // lb
+        return value.toFixed(decimals) + ' ' + UNIT_LABEL[displayUnit];
+      }
+
+      function formatGain(grams, displayUnit) {
+        if (grams === null || grams === undefined || isNaN(grams)) return '';
+        var sign = grams > 0 ? '+' : (grams < 0 ? '-' : '');
+        var abs = Math.abs(grams);
+        var value = fromGrams(abs, displayUnit);
+        var decimals;
+        if (displayUnit === 'g') decimals = 1;
+        else if (displayUnit === 'oz') decimals = 2;
+        else decimals = 3;
+        return sign + value.toFixed(decimals) + ' ' + UNIT_LABEL[displayUnit];
+      }
+
+      function daysBetween(a, b) {
+        var ms = b.getTime() - a.getTime();
+        return Math.round(ms / 86400000);
+      }
+
+      function addRow(prefill) {
+        rowSeq += 1;
+        var rowId = 'pwt-row-' + rowSeq;
+        var defaultDate = '';
+        try {
+          defaultDate = new Date().toISOString().slice(0, 10);
+        } catch (e) { /* noop */ }
+
+        var wrap = document.createElement('div');
+        wrap.className = 'pwt-entry-row';
+        wrap.setAttribute('role', 'listitem');
+        wrap.setAttribute('data-row-id', rowId);
+
+        wrap.innerHTML = '' +
+          '<div class="pwt-entry-grid">' +
+            '<div class="pwt-entry-cell">' +
+              '<label class="pwt-entry-label">Date</label>' +
+              '<input type="date" class="pwt-input pwt-entry-date" value="' + (prefill && prefill.date ? prefill.date : defaultDate) + '" />' +
+            '</div>' +
+            '<div class="pwt-entry-cell">' +
+              '<label class="pwt-entry-label">Weight</label>' +
+              '<input type="number" inputmode="decimal" step="0.01" min="0" class="pwt-input pwt-entry-weight" placeholder="0.00" value="' + (prefill && prefill.weight ? prefill.weight : '') + '" />' +
+            '</div>' +
+            '<div class="pwt-entry-cell">' +
+              '<label class="pwt-entry-label">Unit</label>' +
+              '<select class="pwt-input pwt-select pwt-entry-unit">' +
+                '<option value="g"' + (prefill && prefill.unit === 'g' ? ' selected' : '') + '>g</option>' +
+                '<option value="oz"' + (!prefill || prefill.unit === 'oz' || !prefill.unit ? ' selected' : '') + '>oz</option>' +
+                '<option value="lb"' + (prefill && prefill.unit === 'lb' ? ' selected' : '') + '>lb</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="pwt-entry-cell pwt-entry-remove-cell">' +
+              '<button type="button" class="pwt-remove-button" aria-label="Remove this row">Remove</button>' +
+            '</div>' +
+          '</div>';
+
+        var removeBtn = wrap.querySelector('.pwt-remove-button');
+        if (removeBtn) {
+          removeBtn.addEventListener('click', function () {
+            wrap.parentNode && wrap.parentNode.removeChild(wrap);
+          });
+        }
+
+        entriesContainer.appendChild(wrap);
+      }
+
+      // Seed with two empty rows
+      addRow();
+      addRow();
+
+      addRowBtn.addEventListener('click', function () {
+        addRow();
+      });
+
+      function collectEntries() {
+        var rows = entriesContainer.querySelectorAll('.pwt-entry-row');
+        var entries = [];
+        for (var i = 0; i < rows.length; i += 1) {
+          var dateEl = rows[i].querySelector('.pwt-entry-date');
+          var weightEl = rows[i].querySelector('.pwt-entry-weight');
+          var unitEl = rows[i].querySelector('.pwt-entry-unit');
+          var dateStr = dateEl && dateEl.value ? dateEl.value : '';
+          var weightStr = weightEl && weightEl.value ? weightEl.value : '';
+          var unit = unitEl && unitEl.value ? unitEl.value : 'oz';
+          if (!dateStr && !weightStr) continue; // skip empty rows
+          if (!dateStr || !weightStr) {
+            return { errorMessage: 'Each weight entry needs both a date and a weight value, or leave the row blank.' };
+          }
+          var date = parseLocalDate(dateStr);
+          if (!date) {
+            return { errorMessage: 'One of the entry dates doesn\u2019t look valid.' };
+          }
+          var weight = parseFloat(weightStr);
+          if (isNaN(weight) || weight <= 0) {
+            return { errorMessage: 'Each weight must be a positive number.' };
+          }
+          var grams = toGrams(weight, unit);
+          if (grams === null) {
+            return { errorMessage: 'Unknown unit on one of the rows.' };
+          }
+          entries.push({ date: date, grams: grams, originalWeight: weight, originalUnit: unit });
+        }
+        return { entries: entries };
+      }
+
+      function describeTrend(entries) {
+        if (entries.length < 2) return null;
+        var dropCount = 0;
+        var flatCount = 0;
+        var gainCount = 0;
+        for (var i = 1; i < entries.length; i += 1) {
+          var diff = entries[i].grams - entries[i - 1].grams;
+          if (diff < -0.0001) dropCount += 1;
+          else if (diff <= 0.0001) flatCount += 1;
+          else gainCount += 1;
+        }
+
+        var last = entries[entries.length - 1];
+        var prev = entries[entries.length - 2];
+        var latestDiff = last.grams - prev.grams;
+
+        var watch = false;
+        var headline = '';
+        var detail = '';
+        var tone = 'ok';
+
+        if (latestDiff < -0.0001) {
+          watch = true;
+          tone = 'watch';
+          headline = 'Watch closely: the most recent reading is lower than the previous reading.';
+          detail = 'A drop in weight between readings can have many causes and is not a diagnosis. Consider weighing again sooner than your normal cadence. A flat or declining trend may be worth discussing with your veterinarian.';
+        } else if (latestDiff <= 0.0001) {
+          watch = true;
+          tone = 'watch';
+          headline = 'Watch closely: the most recent reading is flat compared to the previous reading.';
+          detail = 'Newborn puppies typically gain weight every day. A flat reading is not automatically concerning but is worth a closer look at feeding, latch, and any environmental factors. A flat or declining trend may be worth discussing with your veterinarian.';
+        } else if (dropCount > 0 || flatCount > 0) {
+          tone = 'mixed';
+          headline = 'Most recent reading is up, but the overall trend is mixed.';
+          detail = 'There are ' + dropCount + ' drop(s) and ' + flatCount + ' flat reading(s) across this series. Newborn puppy weight patterns vary by breed, litter size, and health status. Bring the pattern to your veterinarian if it concerns you.';
+        } else {
+          tone = 'ok';
+          headline = 'Trend is gaining across all readings.';
+          detail = 'Every reading is higher than the previous one. Keep your weighing cadence consistent (same time of day, same scale) so day-over-day comparisons stay meaningful.';
+        }
+
+        return { watch: watch, headline: headline, detail: detail, tone: tone };
+      }
+
+      function render(entries, displayUnit, puppyName, birthDate) {
+        // Sort entries chronologically
+        entries.sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
+
+        var first = entries[0];
+
+        // Summary cards
+        var summaryHtml = '';
+        summaryHtml += '<div class="pwt-summary-card"><div class="pwt-summary-label">Readings</div><div class="pwt-summary-value">' + entries.length + '</div></div>';
+        summaryHtml += '<div class="pwt-summary-card"><div class="pwt-summary-label">First reading</div><div class="pwt-summary-value">' + formatWeight(first.grams, displayUnit) + '</div><div class="pwt-summary-sub">' + fmtShort(first.date) + '</div></div>';
+
+        if (entries.length > 1) {
+          var last = entries[entries.length - 1];
+          var totalGain = last.grams - first.grams;
+          var totalDays = daysBetween(first.date, last.date);
+          summaryHtml += '<div class="pwt-summary-card"><div class="pwt-summary-label">Latest reading</div><div class="pwt-summary-value">' + formatWeight(last.grams, displayUnit) + '</div><div class="pwt-summary-sub">' + fmtShort(last.date) + '</div></div>';
+          summaryHtml += '<div class="pwt-summary-card"><div class="pwt-summary-label">Total gain</div><div class="pwt-summary-value">' + formatGain(totalGain, displayUnit) + '</div><div class="pwt-summary-sub">over ' + totalDays + ' day' + (totalDays === 1 ? '' : 's') + '</div></div>';
+        }
+        summaryCards.innerHTML = summaryHtml;
+
+        // Trend banner
+        var trend = describeTrend(entries);
+        if (trend) {
+          var bannerClass = 'pwt-trend-banner pwt-trend-' + trend.tone;
+          trendBanner.className = bannerClass;
+          trendBanner.innerHTML = '<strong>' + trend.headline + '</strong><br /><span class="pwt-trend-detail">' + trend.detail + '</span>';
+          trendBanner.hidden = false;
+        } else {
+          trendBanner.hidden = true;
+          trendBanner.innerHTML = '';
+        }
+
+        // Table rows
+        var bodyHtml = '';
+        for (var i = 0; i < entries.length; i += 1) {
+          var e = entries[i];
+          var ageDays = birthDate ? daysBetween(birthDate, e.date) : null;
+          var ageCell = '';
+          if (ageDays !== null) {
+            if (ageDays < 0) {
+              ageCell = 'before birth';
+            } else {
+              ageCell = ageDays + ' day' + (ageDays === 1 ? '' : 's');
+            }
+          } else {
+            ageCell = '';
+          }
+
+          var gainCell = '';
+          var rowClass = '';
+          if (i === 0) {
+            gainCell = '<span class="pwt-muted">first reading</span>';
+          } else {
+            var diff = e.grams - entries[i - 1].grams;
+            var spanDays = daysBetween(entries[i - 1].date, e.date);
+            var perDay = spanDays > 0 ? diff / spanDays : diff;
+            var perDayStr = spanDays > 1 ? ' <span class="pwt-muted">(' + formatGain(perDay, displayUnit) + '/day)</span>' : '';
+            gainCell = formatGain(diff, displayUnit) + perDayStr;
+            if (diff < -0.0001) rowClass = ' class="pwt-row-drop"';
+            else if (diff <= 0.0001) rowClass = ' class="pwt-row-flat"';
+          }
+
+          var totalGainCell = i === 0 ? '<span class="pwt-muted">first reading</span>' : formatGain(e.grams - first.grams, displayUnit);
+
+          var ageHtml = ageCell === '' ? '<span class="pwt-muted">no birth date</span>' : ageCell;
+
+          bodyHtml += '<tr' + rowClass + '>' +
+            '<td>' + fmtShort(e.date) + '</td>' +
+            '<td>' + ageHtml + '</td>' +
+            '<td>' + formatWeight(e.grams, displayUnit) + '</td>' +
+            '<td>' + gainCell + '</td>' +
+            '<td>' + totalGainCell + '</td>' +
+          '</tr>';
+        }
+        tableBody.innerHTML = bodyHtml;
+
+        // Subtitle
+        var subtitleParts = [];
+        if (puppyName) subtitleParts.push('Puppy: ' + puppyName);
+        if (birthDate) subtitleParts.push('Born: ' + fmtLong(birthDate));
+        subtitleParts.push('Display unit: ' + UNIT_LABEL[displayUnit]);
+        subtitle.textContent = subtitleParts.join(' • ');
+      }
+
+      function buildPlainText(entries, displayUnit, puppyName, birthDate) {
+        var lines = [];
+        lines.push('Puppy Weight Tracker');
+        if (puppyName) lines.push('Puppy: ' + puppyName);
+        if (birthDate) lines.push('Birth date: ' + fmtLong(birthDate));
+        lines.push('Display unit: ' + UNIT_LABEL[displayUnit]);
+        lines.push('');
+        lines.push('Date           Age          Weight        Gain since prior   Total gain');
+        var first = entries[0];
+        for (var i = 0; i < entries.length; i += 1) {
+          var e = entries[i];
+          var ageStr = birthDate ? (daysBetween(birthDate, e.date) + 'd') : '-';
+          var weightStr = formatWeight(e.grams, displayUnit);
+          var gainStr = i === 0 ? '(first)' : formatGain(e.grams - entries[i - 1].grams, displayUnit);
+          var totalStr = i === 0 ? '-' : formatGain(e.grams - first.grams, displayUnit);
+          lines.push(fmtShort(e.date) + '  ' + ageStr + '  ' + weightStr + '  ' + gainStr + '  ' + totalStr);
+        }
+        var trend = describeTrend(entries);
+        if (trend) {
+          lines.push('');
+          lines.push(trend.headline);
+          lines.push(trend.detail);
+        }
+        lines.push('');
+        lines.push('Visualization tool only. Newborn puppy weight patterns vary by breed, litter size, and health status. A flat or declining trend may be worth discussing with your veterinarian.');
+        lines.push('Generated by BreederHQ: https://breederhq.com/tools/puppy-weight-tracker');
+        return lines.join('\n');
+      }
+
+      var currentPlainText = '';
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        error.hidden = true;
+        error.textContent = '';
+
+        var collected = collectEntries();
+        if (collected.errorMessage) {
+          error.textContent = collected.errorMessage;
+          error.hidden = false;
+          return;
+        }
+        var entries = collected.entries;
+        if (entries.length === 0) {
+          error.textContent = 'Add at least one weight entry with a date and a weight value.';
+          error.hidden = false;
+          return;
+        }
+
+        var displayUnit = displayUnitSelect && displayUnitSelect.value ? displayUnitSelect.value : 'oz';
+        var puppyName = nameInput && nameInput.value ? nameInput.value.trim() : '';
+        var birthStr = birthInput && birthInput.value ? birthInput.value : '';
+        var birthDate = birthStr ? parseLocalDate(birthStr) : null;
+
+        render(entries, displayUnit, puppyName, birthDate);
+        currentPlainText = buildPlainText(entries, displayUnit, puppyName, birthDate);
+
+        results.hidden = false;
+        try {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (e) { /* noop */ }
+      });
+
+      // Re-render on display unit change if results are visible
+      if (displayUnitSelect) {
+        displayUnitSelect.addEventListener('change', function () {
+          if (!results.hidden) {
+            // Trigger a re-submit
+            var fakeEv = { preventDefault: function () {} };
+            form.dispatchEvent(new Event('submit', { cancelable: true }));
+          }
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          if (!currentPlainText) return;
+          var done = function () {
+            var original = copyBtn.textContent;
+            copyBtn.textContent = 'Copied';
+            setTimeout(function () { copyBtn.textContent = original; }, 1500);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(currentPlainText).then(done, function () {
+              fallbackCopy(currentPlainText);
+              done();
+            });
+          } else {
+            fallbackCopy(currentPlainText);
+            done();
+          }
+        });
+      }
+
+      function fallbackCopy(text) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (e) { /* noop */ }
+      }
+
+      if (printBtn) {
+        printBtn.addEventListener('click', function () {
+          window.print();
+        });
+      }
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .pwt-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .pwt-form {
+      margin-bottom: 1.5rem;
+    }
+
+    .pwt-field {
+      margin-bottom: 1.25rem;
+    }
+
+    .pwt-row-fields {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .pwt-row-fields {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .pwt-row-fields .pwt-field {
+      margin-bottom: 0;
+    }
+
+    .pwt-label {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+      padding: 0;
+    }
+
+    .pwt-help {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .pwt-input {
+      width: 100%;
+      max-width: 320px;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+
+    .pwt-input:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .pwt-select {
+      appearance: auto;
+    }
+
+    .pwt-entries-wrap {
+      border: 1px dashed #d1d5db;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pwt-entries {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .pwt-entry-row {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    .pwt-entry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      align-items: end;
+    }
+
+    @media (min-width: 640px) {
+      .pwt-entry-grid {
+        grid-template-columns: 1.2fr 1fr 0.7fr auto;
+        gap: 0.75rem;
+      }
+    }
+
+    .pwt-entry-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4b5563;
+      margin-bottom: 0.25rem;
+    }
+
+    .pwt-entry-cell .pwt-input {
+      max-width: 100%;
+    }
+
+    .pwt-entry-remove-cell {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .pwt-remove-button {
+      padding: 0.6rem 1rem;
+      background: #ffffff;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      width: 100%;
+    }
+
+    .pwt-remove-button:hover {
+      background: #fef2f2;
+    }
+
+    .pwt-entries-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .pwt-actions {
+      margin-top: 0.5rem;
+    }
+
+    .pwt-button {
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 150ms ease;
+    }
+
+    .pwt-button:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .pwt-error {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #b91c1c;
+      font-size: 0.95rem;
+    }
+
+    .pwt-results {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+    }
+
+    .pwt-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .pwt-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .pwt-results-subtitle {
+      color: #6b7280;
+      font-size: 0.95rem;
+      max-width: 540px;
+    }
+
+    .pwt-results-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .pwt-action-button {
+      padding: 0.5rem 1rem;
+      background: #ffffff;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 36px;
+    }
+
+    .pwt-action-button:hover {
+      background: #f9fafb;
+    }
+
+    .pwt-summary-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .pwt-summary-cards {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .pwt-summary-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+    }
+
+    .pwt-summary-label {
+      font-size: 0.8rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .pwt-summary-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .pwt-summary-sub {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.15rem;
+    }
+
+    .pwt-trend-banner {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .pwt-trend-ok {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+    }
+
+    .pwt-trend-mixed {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #78350f;
+    }
+
+    .pwt-trend-watch {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .pwt-trend-detail {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-weight: 400;
+    }
+
+    .pwt-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+
+    .pwt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      min-width: 560px;
+    }
+
+    .pwt-table th,
+    .pwt-table td {
+      padding: 0.65rem 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+
+    .pwt-table th {
+      background: #f9fafb;
+      font-weight: 600;
+      color: #374151;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pwt-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .pwt-row-drop td {
+      background: #fef2f2;
+    }
+
+    .pwt-row-flat td {
+      background: #fffbeb;
+    }
+
+    .pwt-muted {
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+
+    .pwt-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .pwt-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .pwt-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .pwt-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .pwt-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .pwt-cta-primary:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .pwt-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .pwt-cta-secondary:hover {
+      background: #ffffff;
+    }
+
+    .pwt-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      .breadcrumb,
+      .faq-section,
+      .pwt-cta,
+      header,
+      footer { display: none !important; }
+      .pwt-card {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+      .pwt-table {
+        min-width: 0;
+      }
+    }
+  </style>
+</BaseLayout>

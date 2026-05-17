@@ -60,6 +60,27 @@ const breadcrumbs = [
           </p>
         </article>
 
+        <!-- ========== May 17, 2026 - New free tool: Puppy Weight Tracker ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Added a new free tool: Puppy Weight Tracker. Anonymous, in-browser, no signup or data persistence. Targets the newborn puppy weight keyword cluster (puppy weight tracker, newborn puppy weight chart, puppy weight chart, litter weight tracking, puppy growth tracker) while staying carefully scoped as a visualization and recordkeeping aid rather than a diagnostic.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New page: <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">/tools/puppy-weight-tracker</a></h3>
+          <p class="text-gray-700 mb-3">
+            Inputs: puppy name or label, birth date, display unit (ounces, grams, or pounds), and unlimited weight entries with date, weight, and per-row unit selector. Each row can be added or removed individually. Output: a normalized weight table showing date, age in days, normalized weight, daily gain since the previous reading (with a per-day rate when the gap is more than one day), and total gain since the first reading. Summary cards show reading count, first reading, latest reading, and total gain over the elapsed days. A trend banner classifies the series as gaining, mixed, or watch-closely (flat or declining latest reading), with deliberately cautious copy: "Newborn puppy weight patterns vary by breed, litter size, and health status. A flat or declining trend may be worth discussing with your veterinarian." Vanilla JS, local-timezone-safe date parsing, exact unit conversion (1 oz = 28.3495 g, 1 lb = 453.592 g), no persistence, no signup, no diagnostic claims. Includes Copy and Print buttons. Switching the display unit after a calculation re-renders the table without re-entering data. Emits SoftwareApplication and Article JSON-LD inline (SoftwareApplication includes isPartOf pointing at the /tools CollectionPage); BreadcrumbList and FAQPage flow from BaseLayout via the breadcrumbs and faqs props. Internally cross-links to /tools, /tools/whelping-date-calculator, /tools/puppy-vaccination-schedule-generator, /tools/puppy-deworming-schedule-generator, /puppy-application-management, and /dog-breeding-software.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">/tools</a> hub</h3>
+          <p class="text-gray-700 mb-3">
+            Added the Puppy Weight Tracker as the next card after the Puppy Deworming Schedule Generator so all four puppy operational tools (vaccination, deworming, weight, plus the whelping date calculator nearby) sit together in the list.
+          </p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Updated: astro.config.mjs sitemap</h3>
+          <p class="text-gray-700">
+            Added <code>tools/puppy-weight-tracker</code> to the cornerstone-pages regex so the new tool is emitted with priority 0.9 / monthly changefreq alongside the other anchor tool pages.
+          </p>
+        </article>
+
         <!-- ========== May 17, 2026 - New free tool: Puppy Deworming Schedule Generator ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
