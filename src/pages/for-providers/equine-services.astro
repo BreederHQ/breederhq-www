@@ -1,0 +1,461 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Equine Services', url: '/for-providers/equine-services' }
+];
+
+const faqs = [
+  {
+    question: 'Who is the equine services marketplace for?',
+    answer: 'Boarding facilities, horse trainers, riding instructors, breeding facilities, and equine service professionals who want structured online discovery instead of relying on word of mouth, Facebook groups, and generic local directories.'
+  },
+  {
+    question: 'How much does it cost to list?',
+    answer: 'Listings are a flat $5 per month per provider account during general availability. There are no commissions, no per-inquiry fees, and no per-booking fees. Early access listings are free while we build out the equine category.'
+  },
+  {
+    question: 'Do I need to handle bookings or payment through BreederHQ?',
+    answer: 'No. Equine providers use a contact-to-book workflow. Riders, owners, and clients send an inquiry through your listing, and you handle scheduling and payment directly. You keep the relationship and the revenue.'
+  },
+  {
+    question: 'Can I list a discipline specialization, like dressage or reining?',
+    answer: 'Yes. Trainer and instructor listings include discipline tags so people searching for a specific discipline can find you. Facility listings include arena dimensions, footing, and lighting so a discipline-specific search returns appropriate venues.'
+  },
+  {
+    question: 'Can a breeding facility list here, or is that under a different category?',
+    answer: 'Breeding facilities can list as equine facilities and surface their stallion services, foaling barns, mare care, and boarding capacity. Stallion advertising for individual sires is handled through the breeder side of the marketplace.'
+  },
+  {
+    question: 'How does verification work?',
+    answer: 'Provider accounts can add verification signals like business address, insurance status, and association memberships. Verified providers get a badge on their listing. Verification is optional and free.'
+  },
+  {
+    question: 'Will my listing show up in Google search?',
+    answer: 'Listings are indexed pages on the BreederHQ Marketplace and are eligible for search-engine indexing. Each listing gets a stable URL you can share, link from your own site, and put on business cards.'
+  }
+];
+---
+
+<BaseLayout
+  title="Equine Services Marketplace for Facilities, Trainers, and Breeding Operations"
+  description="A structured marketplace for equine boarding facilities, horse trainers, riding instructors, breeding facilities, and equine service professionals. Flat $5/month. No commissions. Built for discipline-specific discovery and trust."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+<main>
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-amber-50 to-white py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-4">
+        For Equine Service Providers
+      </div>
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+        A Real Marketplace for Equine Services
+      </h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+        Boarding facilities, horse trainers, riding instructors, breeding operations, and equine service professionals.
+        BreederHQ Marketplace is building structured discovery and trust infrastructure for the equine industry,
+        because Facebook groups and generic local directories are not enough.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=equine_services" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600">
+          List Your Equine Service
+        </a>
+        <a href="#pricing" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold border border-amber-200 hover:bg-amber-50">
+          See Pricing
+        </a>
+      </div>
+      <p class="text-xs text-gray-500 mt-6">
+        Flat $5/month per account. No commissions. No per-booking fees.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why Equine Discovery Is Broken -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Equine Discovery Is Broken</h2>
+      <p class="text-gray-600 mb-10">
+        Finding the right barn, trainer, instructor, or breeding facility online is harder than it should be.
+        Equine discovery has been stuck in 2008.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Fragmented Across Facebook Groups</h3>
+          <p class="text-sm text-gray-600">
+            Most equine recommendations happen in regional Facebook groups, private texts, and word-of-mouth chains.
+            Discovery depends on knowing the right person.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Generic Directories Miss Discipline Detail</h3>
+          <p class="text-sm text-gray-600">
+            A "horse trainer near me" search returns a phone-number list with no discipline, no certification, no facility detail.
+            A dressage rider and a reining rider get the same useless result.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Stale Personal Websites</h3>
+          <p class="text-sm text-gray-600">
+            Provider websites are built once and rarely updated. Pricing is from 2019,
+            the boarding capacity is wrong, and the contact form goes to a dead inbox.
+          </p>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">No Trust Signals</h3>
+          <p class="text-sm text-gray-600">
+            There is no consistent way to tell a hobby operation from a credentialed professional.
+            Insurance, business registration, association memberships, and verified reviews are invisible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Generic Directories Fail Equine Providers -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Generic Directories Fail Equine Providers</h2>
+      <p class="text-gray-600 mb-10">
+        Yellow-pages-style directories and generic pet-service marketplaces were not built for the equine ecosystem.
+        The structure does not match the work.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">No Concept of Discipline</h3>
+          <p class="text-sm text-gray-600">
+            Generic directories treat "horse trainer" as one category. The equine world runs on discipline.
+            Hunter/jumper, dressage, reining, cutting, working cow, endurance, eventing, gaited, and Western pleasure
+            are different specialties with different facilities, certifications, and clientele.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">No Concept of Facility Type</h3>
+          <p class="text-sm text-gray-600">
+            A 50-stall full-service boarding barn and a 4-stall self-care pasture board are not the same product.
+            Generic directories collapse them into "boarding," which helps nobody.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">No Vaccination or Biosecurity Filters</h3>
+          <p class="text-sm text-gray-600">
+            Equine providers care about Coggins, vaccination status, and biosecurity. Generic directories
+            have no place to display those requirements, so they live in DM threads and PDF intake forms.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">No Breeding-Operation Surface</h3>
+          <p class="text-sm text-gray-600">
+            Breeding facilities have stallions, mare care, foaling barns, and seasonal capacity.
+            None of that fits in a generic "pet services" listing. Breeding operations end up invisible
+            or wedged into the wrong category.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facility & Credential Visibility -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Facility and Credential Visibility</h2>
+      <p class="text-gray-600 mb-10">
+        Your listing is structured so the details that matter to equine clients are visible up front,
+        not buried in a contact form.
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg">
+          <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+          <span class="text-sm text-gray-700">
+            <strong class="text-gray-900">Facility detail.</strong> Arena dimensions, footing, indoor/outdoor,
+            stall count, turnout, wash rack, trailer parking, trail access.
+          </span>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg">
+          <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+          <span class="text-sm text-gray-700">
+            <strong class="text-gray-900">Trainer specialization.</strong> Discipline tags, level of competition,
+            young-horse vs. finished-horse focus, riders accepted, and clinic availability.
+          </span>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg">
+          <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+          <span class="text-sm text-gray-700">
+            <strong class="text-gray-900">Instructor specialization.</strong> Beginner through advanced,
+            age range, lesson horse availability, and certification (USDF, CHA, BHS, USHJA, and similar).
+          </span>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg">
+          <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+          <span class="text-sm text-gray-700">
+            <strong class="text-gray-900">Breeding facility surface.</strong> Stallion services, mare care,
+            foaling barn capacity, weanling and yearling handling, embryo transfer support.
+          </span>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg">
+          <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+          <span class="text-sm text-gray-700">
+            <strong class="text-gray-900">Biosecurity and intake.</strong> Vaccination requirements,
+            Coggins policy, quarantine procedures, and waiver requirements.
+          </span>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg">
+          <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+          <span class="text-sm text-gray-700">
+            <strong class="text-gray-900">Credential signals.</strong> Business registration, insurance status,
+            and association membership badges when verified.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace Benefits -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Marketplace Benefits</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">📍</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Local and Discipline-Specific Discovery</h3>
+          <p class="text-sm text-gray-600">
+            Riders, horse owners, and clinic organizers search by location, discipline, facility type,
+            and certification. Your listing surfaces when it actually matches.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">🎯</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Right-Fit Inquiries</h3>
+          <p class="text-sm text-gray-600">
+            Discipline tags, vaccination requirements, capacity, and pricing are visible up front.
+            Clients self-qualify before they ever message you.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">🔗</div>
+          <h3 class="font-semibold text-gray-900 mb-2">A Real, Linkable Listing</h3>
+          <p class="text-sm text-gray-600">
+            Each listing gets a stable URL you can share, link from your own site, post on Facebook,
+            and put on business cards. The marketplace does the SEO work.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">🛡️</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Equine Ecosystem Trust</h3>
+          <p class="text-sm text-gray-600">
+            Verification, credentials, and reviews are surfaced consistently across every provider type.
+            Clients can compare like with like.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">💬</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Built-In Inquiry Workflow</h3>
+          <p class="text-sm text-gray-600">
+            Inquiries route through a structured contact form with the client's intent, horse details,
+            and timeline already filled in. No more guessing what someone needs.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">🐎</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Built for the Equine Ecosystem</h3>
+          <p class="text-sm text-gray-600">
+            Discipline, gait, breed, registry, and biosecurity are first-class fields, not afterthoughts.
+            This is not a generic pet directory.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flat-Fee Pricing -->
+  <section id="pricing" class="py-16 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Flat-Fee Pricing</h2>
+      <p class="text-gray-600 mb-10 text-center">
+        One simple price per provider account. No commissions on the work you book. No per-inquiry surcharge.
+      </p>
+      <div class="bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl p-8 border border-amber-200">
+        <div class="text-center mb-6">
+          <div class="text-sm font-semibold text-amber-800 uppercase tracking-wide mb-2">Provider Listing</div>
+          <div class="text-5xl font-bold text-gray-900 mb-1">
+            <span class="line-through opacity-40 text-2xl mr-2">$5</span>Free
+          </div>
+          <p class="text-sm text-gray-600">During early access. $5/month when general availability opens.</p>
+        </div>
+        <ul class="space-y-3 text-sm text-gray-700 mb-8">
+          <li class="flex items-start gap-3">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span>Full listing with discipline, credential, and facility detail</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span>Unlimited inquiries through the built-in contact workflow</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span>Verified-provider badge when verification is complete</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span>Photos, schedule, pricing, and policy fields</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span>Indexed listing URL for search-engine and social sharing</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span>No commission on bookings. No per-inquiry fee. Cancel anytime.</span>
+          </li>
+        </ul>
+        <div class="text-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=equine_services" class="inline-block bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600">
+            Claim Your Listing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verification -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Verification</h2>
+      <p class="text-gray-600 mb-10">
+        Verification is how clients tell a serious operation from a hobby Facebook post.
+        Provider accounts can add verification signals as part of their listing.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Business and Address</h3>
+          <p class="text-sm text-gray-600">
+            Verify your operating business name and physical address. Adds a badge to your listing
+            and helps with discovery for local equine searches.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Insurance Status</h3>
+          <p class="text-sm text-gray-600">
+            Indicate active care, custody, and control coverage or commercial equine liability.
+            Clients filter for insured operations.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Association Membership</h3>
+          <p class="text-sm text-gray-600">
+            Surface USDF, USEF, USHJA, AQHA, CHA, BHS, and similar memberships and certifications
+            as structured badges on your listing.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <h3 class="font-semibold text-gray-900 mb-2">Verified Client Reviews</h3>
+          <p class="text-sm text-gray-600">
+            Reviews are linked to actual inquiries that came through the marketplace,
+            so they cannot be drive-by drama from unrelated parties.
+          </p>
+        </div>
+      </div>
+      <p class="text-xs text-gray-500 mt-6">
+        Verification is optional and free. Listings can launch without verification and add it later.
+        Read more about how verification works across the marketplace on the <a href="/trust" class="text-amber-700 hover:underline font-medium">BreederHQ trust page</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Where Equine Clients Are Searching (demand-side proof) -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-3">Where Equine Clients Are Searching</h2>
+      <p class="text-gray-600 mb-8">
+        These are the public BreederHQ Marketplace category pages your listing surfaces on.
+        Horse owners and riders land here when they are looking for equine services.
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/services/equine-boarding" class="block bg-white rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Equine Boarding</h3>
+          <p class="text-sm text-gray-600">Full-service, self-care, and pasture boarding for horse owners searching by location and facility type.</p>
+        </a>
+        <a href="/services/farriers" class="block bg-white rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Farriers</h3>
+          <p class="text-sm text-gray-600">Trim, shoeing, corrective, and therapeutic farrier work, browsable by region and specialty.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related provider categories (supply side) -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Provider Categories</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/for-providers/equine" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Equine Facilities</h3>
+          <p class="text-sm text-gray-600">Indoor and outdoor arenas, round pens, wash racks, and trail access.</p>
+        </a>
+        <a href="/for-providers/boarding-facilities" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Boarding Facilities</h3>
+          <p class="text-sm text-gray-600">List your boarding operation across full-service, self-care, and pasture board.</p>
+        </a>
+        <a href="/for-providers/farrier" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Farriers (Provider)</h3>
+          <p class="text-sm text-gray-600">List your farrier practice, regions served, and specialties.</p>
+        </a>
+        <a href="/for-providers/training" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Training</h3>
+          <p class="text-sm text-gray-600">Discipline-tagged trainer listings across every equine sport.</p>
+        </a>
+        <a href="/for-providers/veterinary" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Veterinary</h3>
+          <p class="text-sm text-gray-600">Equine vets, reproductive specialists, and mobile practitioners.</p>
+        </a>
+        <a href="/for-providers/transport" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+          <h3 class="font-semibold text-gray-900 mb-1">Transport</h3>
+          <p class="text-sm text-gray-600">Short-haul and cross-country equine transport providers.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 bg-gradient-to-br from-amber-900 to-amber-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-white">List Your Equine Service in Minutes</h2>
+      <p class="text-lg text-amber-200 mb-8 max-w-2xl mx-auto">
+        Whether you run a 60-stall hunter/jumper barn, a one-trainer dressage program, a reining clinic,
+        or a thoroughbred breeding farm, your listing surfaces to the right clients.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=equine_services" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-50">
+          List Your Equine Service
+        </a>
+        <a href="/for-providers" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold border border-amber-600 hover:bg-amber-600">
+          Browse All Provider Categories
+        </a>
+      </div>
+      <p class="text-xs text-amber-200 mt-6">
+        Flat $5/month. No commissions. No per-booking fees. Cancel anytime.
+      </p>
+    </div>
+  </section>
+</main>
+</BaseLayout>
+</content>
+</invoke>
