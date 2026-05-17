@@ -677,14 +677,14 @@ const articleSchema = {
           var lhExactNote = lhEst.exact ? '' : ' (interpolated)';
           lhBlock =
             '<div class="ptt-proj-card ptt-proj-lh">' +
-            '  <div class="ptt-proj-label">LH surge estimate</div>' +
+            '  <h4 class="ptt-proj-label">LH surge estimate</h4>' +
             '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(lhEst.date)) + '</div>' +
             '  <div class="ptt-proj-note">' + escapeHtml(lhPrefix) + 'P4 crossed ~2 ng/mL near Day ' + lhEst.day + escapeHtml(lhExactNote) + '.</div>' +
             '</div>';
         } else {
           lhBlock =
             '<div class="ptt-proj-card ptt-proj-pending">' +
-            '  <div class="ptt-proj-label">LH surge estimate</div>' +
+            '  <h4 class="ptt-proj-label">LH surge estimate</h4>' +
             '  <div class="ptt-proj-value">Not reached yet</div>' +
             '  <div class="ptt-proj-note">Latest reading is ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL. Watch for the cross near ~2 ng/mL.</div>' +
             '</div>';
@@ -696,14 +696,14 @@ const articleSchema = {
           var ovuExactNote = ovuEst.exact ? '' : ' (interpolated)';
           ovuBlock =
             '<div class="ptt-proj-card ptt-proj-ovulation">' +
-            '  <div class="ptt-proj-label">Ovulation estimate</div>' +
+            '  <h4 class="ptt-proj-label">Ovulation estimate</h4>' +
             '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(ovuEst.date)) + '</div>' +
             '  <div class="ptt-proj-note">' + escapeHtml(ovuPrefix) + 'P4 crossed ~5 ng/mL near Day ' + ovuEst.day + escapeHtml(ovuExactNote) + '.</div>' +
             '</div>';
         } else {
           ovuBlock =
             '<div class="ptt-proj-card ptt-proj-pending">' +
-            '  <div class="ptt-proj-label">Ovulation estimate</div>' +
+            '  <h4 class="ptt-proj-label">Ovulation estimate</h4>' +
             '  <div class="ptt-proj-value">Not reached yet</div>' +
             '  <div class="ptt-proj-note">Watch for P4 to cross ~5 ng/mL. Eggs mature for ~2 days after ovulation.</div>' +
             '</div>';
@@ -715,14 +715,14 @@ const articleSchema = {
           var winEnd = addDays(ovuEst.date, win.endOffset);
           winBlock =
             '<div class="ptt-proj-card ptt-proj-window">' +
-            '  <div class="ptt-proj-label">Projected breeding window</div>' +
+            '  <h4 class="ptt-proj-label">Projected breeding window</h4>' +
             '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(winStart)) + ' to ' + escapeHtml(fmtDate(winEnd)) + '</div>' +
             '  <div class="ptt-proj-note">' + escapeHtml(win.label) + '. Day ' + win.startOffset + ' to Day ' + win.endOffset + ' post-ovulation, when eggs are typically fertilizable. Your vet sets the actual day.</div>' +
             '</div>';
         } else {
           winBlock =
             '<div class="ptt-proj-card ptt-proj-pending">' +
-            '  <div class="ptt-proj-label">Projected breeding window</div>' +
+            '  <h4 class="ptt-proj-label">Projected breeding window</h4>' +
             '  <div class="ptt-proj-value">Pending ovulation</div>' +
             '  <div class="ptt-proj-note">Once P4 crosses ~5 ng/mL the window projects from there. ' + escapeHtml(win.label) + '.</div>' +
             '</div>';
@@ -1329,9 +1329,10 @@ const articleSchema = {
       #ptt-projection.ptt-projection {
         grid-template-columns: 1fr 1fr 1fr !important;
       }
-      #ptt-projection .ptt-proj-caveat {
-        grid-column: 1 / -1 !important;
-      }
+    }
+
+    #ptt-projection .ptt-proj-caveat {
+      grid-column: 1 / -1 !important;
     }
 
     #ptt-projection .ptt-proj-card {
@@ -1384,35 +1385,27 @@ const articleSchema = {
     }
     #ptt-projection .ptt-proj-pending::before { background: #d1d5db !important; }
 
+    #ptt-projection h4.ptt-proj-label,
     #ptt-projection .ptt-proj-label {
-      display: flex !important;
-      align-items: center;
-      gap: 0.4rem;
+      display: block !important;
       font-size: 0.72rem !important;
-      font-weight: 700 !important;
+      font-weight: 800 !important;
       color: #6b7280 !important;
       text-transform: uppercase !important;
-      letter-spacing: 0.06em !important;
-      margin: 0 !important;
-    }
-
-    #ptt-projection .ptt-proj-label::before {
-      content: "";
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: 0.5;
-      flex-shrink: 0;
+      letter-spacing: 0.08em !important;
+      margin: 0 0 0.2rem 0 !important;
+      padding: 0 !important;
+      line-height: 1.2 !important;
     }
 
     #ptt-projection .ptt-proj-value {
-      font-size: 1.15rem !important;
-      font-weight: 700 !important;
+      font-size: 1.2rem !important;
+      font-weight: 800 !important;
       color: #111827 !important;
-      line-height: 1.3 !important;
-      margin: 0 !important;
+      line-height: 1.25 !important;
+      letter-spacing: -0.01em !important;
+      margin: 0 0 0.25rem 0 !important;
+      padding: 0 !important;
     }
 
     #ptt-projection .ptt-proj-note {
@@ -1420,6 +1413,7 @@ const articleSchema = {
       color: #4b5563 !important;
       line-height: 1.5 !important;
       margin: 0 !important;
+      padding: 0 !important;
     }
 
     #ptt-projection .ptt-proj-caveat {
