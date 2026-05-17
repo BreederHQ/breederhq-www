@@ -1,0 +1,936 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Whelping Date Calculator', url: '/tools/whelping-date-calculator' }
+];
+
+const lastReviewedISO = '2026-05-16';
+
+const faqs = [
+  {
+    question: 'How accurate is a whelping date calculator?',
+    answer: 'For dogs, the answer depends on what date you enter. Counting 63 days from a confirmed breeding date is a textbook estimate that often lands within a few days of the actual whelping. Counting 63 days from a progesterone-confirmed ovulation date is the most accurate calendar method available. Counting from a breeding date without progesterone testing is looser because sperm can live in the reproductive tract for several days, so the actual conception date can be off from the breeding date. Treat the result as a planning window, not a guaranteed day.'
+  },
+  {
+    question: 'Why does the calculator ask for ovulation date for dogs?',
+    answer: 'In dogs, breeding and ovulation are not the same event. Sperm can survive in the reproductive tract for up to a week, so a single breeding can result in fertilization days later when ovulation finally occurs. Gestation is most accurately measured from ovulation (63 days), not from the breeding act. If you have a progesterone-confirmed ovulation date, use it. If you do not, the calculator falls back to 63 days from the breeding date with a wider window.'
+  },
+  {
+    question: 'How long is gestation for each species?',
+    answer: 'Dogs average 63 days from ovulation. Horses average 340 days but normal range is 320 to 365. Goats average 150 days (range roughly 145 to 155). Sheep average 147 days (range 142 to 152). Cattle average 283 days (range 279 to 287). Breed, individual animal, litter size, and ovulation timing all affect the actual length, so every result here is a window, not a guarantee.'
+  },
+  {
+    question: 'When should I start preparing the whelping or birthing area?',
+    answer: 'For dogs, set up the whelping box about a week before the estimated due date so the dam has time to nest. For horses, prepare the foaling stall two to three weeks early because mares often go into labor at night and you want to be ready. For goats, sheep, and cattle, prepare the birthing area one to two weeks before the estimated due date. The dates this calculator returns reflect that recommended prep timing.'
+  },
+  {
+    question: 'When should I begin closer monitoring?',
+    answer: 'Begin closer monitoring about a week before the estimated due date for dogs, goats, and sheep. For horses, start watching nightly two to three weeks before the due date and consider a foaling alarm or camera. For cattle, begin twice-daily checks one to two weeks before the due date. The "begin closer monitoring" date the calculator returns is calibrated to each species.'
+  },
+  {
+    question: 'Can I save these dates or share them with my vet?',
+    answer: 'This calculator is anonymous and does not save anything. If you want to keep the dates and track the whole reproductive cycle, BreederHQ records ovulation, breeding, gestation, and whelping or birthing per animal, then refines predictions as you log more events. The free tier covers everything most breeders need.'
+  }
+];
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/whelping-date-calculator#tool',
+  'name': 'Whelping Date Calculator',
+  'description': 'Free whelping and birthing date calculator for dog, horse, goat, sheep, and cattle breeders. Enter a breeding date (or ovulation date for dogs) to estimate the due date, the due window, and species-specific prep dates. Planning tool only. Veterinary guidance should override estimates.',
+  'url': 'https://breederhq.com/tools/whelping-date-calculator',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Breeding Due Date Calculator',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'isPartOf': {
+    '@id': 'https://breederhq.com/tools#collection'
+  },
+  'featureList': [
+    'Estimate whelping date for dogs from breeding date or progesterone-confirmed ovulation date',
+    'Estimate foaling date for horses with normal gestation range',
+    'Estimate kidding date for goats',
+    'Estimate lambing date for sheep',
+    'Estimate calving date for cattle',
+    'Species-specific birthing prep dates and closer monitoring dates',
+    'Anonymous, no signup, no data saved'
+  ]
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Whelping Date Calculator: Estimate Due Dates for Dogs, Horses, Goats, Sheep, and Cattle',
+  'description': 'Free multi-species whelping and birthing date calculator. Enter a breeding date or ovulation date to estimate the due date and prep dates.',
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'author': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': 'https://breederhq.com/tools/whelping-date-calculator'
+  }
+};
+---
+
+<BaseLayout
+  title="Whelping Date Calculator: Dog, Horse, Goat, Sheep, Cattle | BreederHQ"
+  description="Free whelping date calculator for dog breeders and a due date calculator for horses, goats, sheep, and cattle. Enter a breeding or ovulation date to estimate the due date, the due window, and species-specific prep dates."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Whelping Date Calculator</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Intro -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Whelping Date Calculator for Dogs, Horses, Goats, Sheep, and Cattle</h1>
+      <p class="text-sm text-gray-500 mb-6">
+        <strong class="text-gray-700">Last Reviewed: May 16, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active breeders and reproductive veterinarians.
+      </p>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Pick a species, enter a breeding date (or a progesterone-confirmed ovulation date if you have one for dogs), and this free calculator returns an estimated due date, a normal due window, and species-specific prep dates. It is a planning tool based on textbook gestation averages, not a veterinary decision tool. Real timing should come from your reproductive vet.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Calculator -->
+  <section class="px-4 pb-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="wdc-card">
+        <form id="wdc-form" class="wdc-form" novalidate>
+          <label for="wdc-species" class="wdc-label">Species</label>
+          <p class="wdc-help">Each species has its own gestation length and prep timing.</p>
+          <select id="wdc-species" name="species" class="wdc-input wdc-select" required>
+            <option value="dog" selected>Dog (whelping, ~63 days)</option>
+            <option value="horse">Horse (foaling, ~340 days)</option>
+            <option value="goat">Goat (kidding, ~150 days)</option>
+            <option value="sheep">Sheep (lambing, ~147 days)</option>
+            <option value="cattle">Cattle (calving, ~283 days)</option>
+          </select>
+
+          <label for="wdc-breeding-date" class="wdc-label wdc-label--spaced">Breeding Date</label>
+          <p class="wdc-help">The date the breeding occurred. For dogs, if you bred multiple days in a row, use the first breeding date.</p>
+          <input
+            type="date"
+            id="wdc-breeding-date"
+            name="breeding-date"
+            class="wdc-input"
+            required
+          />
+
+          <div id="wdc-ovulation-wrap" class="wdc-ovulation">
+            <label for="wdc-ovulation-date" class="wdc-label wdc-label--spaced">Ovulation Date (Optional, Dogs Only)</label>
+            <p class="wdc-help">If you have a progesterone-confirmed ovulation date, enter it for the most accurate estimate. Leave blank if you do not.</p>
+            <input
+              type="date"
+              id="wdc-ovulation-date"
+              name="ovulation-date"
+              class="wdc-input"
+            />
+          </div>
+
+          <div class="wdc-button-row">
+            <button type="submit" class="wdc-button">Calculate Due Date</button>
+          </div>
+          <p id="wdc-error" class="wdc-error" role="alert" hidden></p>
+        </form>
+
+        <div id="wdc-results" class="wdc-results" hidden aria-live="polite">
+          <h2 class="wdc-results-title" id="wdc-results-title">Estimated Due Date</h2>
+          <p class="wdc-results-subtitle" id="wdc-results-subtitle">Based on textbook averages for this species. Your animal may vary.</p>
+
+          <div class="wdc-grid">
+            <div class="wdc-result-block wdc-result-block--accent">
+              <div class="wdc-result-label" id="wdc-due-label">Estimated Due Date</div>
+              <div class="wdc-result-value" id="wdc-due"></div>
+              <div class="wdc-result-note" id="wdc-due-note"></div>
+            </div>
+
+            <div class="wdc-result-block">
+              <div class="wdc-result-label">Estimated Due Window</div>
+              <div class="wdc-result-value" id="wdc-window"></div>
+              <div class="wdc-result-note" id="wdc-window-note"></div>
+            </div>
+
+            <div class="wdc-result-block">
+              <div class="wdc-result-label" id="wdc-prep-label">When to Prepare the Whelping Area</div>
+              <div class="wdc-result-value" id="wdc-prep"></div>
+              <div class="wdc-result-note" id="wdc-prep-note"></div>
+            </div>
+
+            <div class="wdc-result-block">
+              <div class="wdc-result-label">When to Begin Closer Monitoring</div>
+              <div class="wdc-result-value" id="wdc-monitor"></div>
+              <div class="wdc-result-note" id="wdc-monitor-note"></div>
+            </div>
+          </div>
+
+          <div class="wdc-disclaimer">
+            <strong>Important.</strong> This calculator is an educational planning tool. It is not medical or veterinary advice. Gestation length varies by species, breed, individual animal, litter size, and ovulation timing. For dogs without a progesterone-confirmed ovulation date, the estimate is looser because sperm can live in the reproductive tract for several days. Veterinary guidance should override estimates.
+          </div>
+
+          <div class="wdc-cta">
+            <p class="wdc-cta-text">
+              Want to track the whole reproductive cycle from heat through whelping or birthing? BreederHQ records ovulation, breeding, gestation, and whelping or birthing per animal, refines predictions as you log more events, and keeps a permanent reproductive record for every dam.
+            </p>
+            <div class="wdc-cta-buttons">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="wdc-cta-primary">
+                Track This Breeding in BreederHQ Free
+              </a>
+              <a href="/tools" class="wdc-cta-secondary">
+                See Other Free Tools →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How To Use -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How to Use This Calculator</h2>
+      <ol class="space-y-4 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="wdc-ol-num">1</span>
+          <span><strong>Pick the species.</strong> Gestation length and prep timing differ across dogs, horses, goats, sheep, and cattle. The calculator adjusts every output based on which species you select.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="wdc-ol-num">2</span>
+          <span><strong>Enter the breeding date.</strong> For dogs, use the first breeding if there were several. For livestock, use the date the breeding occurred (live cover or AI).</span>
+        </li>
+        <li class="flex items-start">
+          <span class="wdc-ol-num">3</span>
+          <span><strong>If you have a progesterone-confirmed ovulation date for a dog, enter it.</strong> Counting 63 days from ovulation is the most accurate calendar method available for dogs. Without it, the calculator counts 63 days from breeding with a wider window.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="wdc-ol-num">4</span>
+          <span><strong>Use the prep date.</strong> Set up the whelping box or birthing area on or before the prep date so the dam has time to settle into it.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="wdc-ol-num">5</span>
+          <span><strong>Begin closer monitoring on the monitoring date.</strong> Watch for early labor signs and stay reachable by your vet.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Gestation by species -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">Gestation Length by Species</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Dog Gestation (~63 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Canine gestation is 63 days from ovulation, plus or minus a day or two. From a single breeding date, the actual whelping can land anywhere within roughly a 7-day window because sperm can survive for several days in the reproductive tract. A progesterone-confirmed ovulation date tightens the window dramatically. See <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">Progesterone Testing in Dogs</a> for how to get one.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Horse Gestation (~340 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Mares carry foals for an average of 340 days, but normal range runs from about 320 to 365 days. Maiden mares sometimes go later. Foaling almost always happens at night, so plan to have a camera or alarm system in place two to three weeks before the due date.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Goat Gestation (~150 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Does carry kids for roughly 150 days, with a normal range of about 145 to 155 days. Single kids sometimes go a touch longer than multiples. Prepare the kidding pen and watch for ligament softening and udder development in the final week.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Sheep Gestation (~147 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Ewes carry lambs for an average of 147 days, with a normal range of 142 to 152 days. Breed matters here. Hair breeds tend toward the shorter end, larger meat breeds toward the longer end. Have the lambing jugs ready a week early.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Cattle Gestation (~283 Days)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Cows carry calves for an average of 283 days, with a normal range of 279 to 287 days. Heifers sometimes go a few days earlier, and certain breeds (Brahman, for example) tend to run longer. Begin twice-daily checks one to two weeks before the due date.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why a calendar isn't enough -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Why a Calendar Estimate Is Only a Starting Point</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Gestation lengths in textbooks are population averages. A given dam, mare, doe, ewe, or cow can deliver anywhere within a normal range that spans days or even weeks. Litter size, breed, individual pattern, and the actual conception date (which is not necessarily the breeding date in dogs) all shift the real due date.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        For dogs, the most accurate calendar method available is progesterone testing to confirm ovulation, then counting 63 days forward. For livestock, ultrasound at the appropriate stage confirms pregnancy and helps you anticipate the delivery. The dates this calculator returns are a planning framework. Vet input and actual signs (nesting, udder development, ligament softening, milk drop) are what tell you when delivery is imminent.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        For more on the canine side, see <a href="/dog-heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">Dog Heat Cycle Calculator</a>, the in-tool <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">Heat Cycle Calculator</a>, and <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Heat Cycle Tracking</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">
+            → All Free Tools
+          </a>
+        </div>
+        <div>
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/dog-heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Heat Cycle Calculator (Overview)
+          </a>
+        </div>
+        <div>
+          <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Testing in Dogs
+          </a>
+        </div>
+        <div>
+          <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Tracking, Explained
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Track Breedings in BreederHQ Free
+    </a>
+  </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('wdc-form');
+      var speciesSelect = document.getElementById('wdc-species');
+      var breedingInput = document.getElementById('wdc-breeding-date');
+      var ovulationInput = document.getElementById('wdc-ovulation-date');
+      var ovulationWrap = document.getElementById('wdc-ovulation-wrap');
+      var error = document.getElementById('wdc-error');
+      var results = document.getElementById('wdc-results');
+      if (!form || !speciesSelect || !breedingInput || !ovulationInput || !ovulationWrap || !error || !results) return;
+
+      // Species config: gestation in days from breeding (or ovulation for dogs),
+      // species-specific window, prep lead, monitor lead, terminology.
+      var SPECIES = {
+        dog: {
+          gestation: 63,
+          windowMinus: 3,
+          windowPlus: 3,
+          prepLead: 7,
+          monitorLead: 5,
+          term: 'whelping',
+          prepNoun: 'whelping box',
+          motherNoun: 'dam',
+          monitorNote: 'Watch for nesting, restlessness, refusing food, and a drop in rectal temperature in the final 24 hours.',
+          dueNote: 'Counted 63 days from the date you entered.',
+          windowNote: 'Most whelpings fall within a few days of the estimate.'
+        },
+        horse: {
+          gestation: 340,
+          windowMinus: 20,
+          windowPlus: 25,
+          prepLead: 21,
+          monitorLead: 21,
+          term: 'foaling',
+          prepNoun: 'foaling stall',
+          motherNoun: 'mare',
+          monitorNote: 'Foaling almost always happens at night. Consider a foaling alarm or camera.',
+          dueNote: 'Counted 340 days from the breeding date.',
+          windowNote: 'Normal mare gestation ranges from about 320 to 365 days.'
+        },
+        goat: {
+          gestation: 150,
+          windowMinus: 5,
+          windowPlus: 5,
+          prepLead: 10,
+          monitorLead: 7,
+          term: 'kidding',
+          prepNoun: 'kidding pen',
+          motherNoun: 'doe',
+          monitorNote: 'Watch for ligament softening at the tail head, udder filling, and behavior changes.',
+          dueNote: 'Counted 150 days from the breeding date.',
+          windowNote: 'Normal doe gestation runs about 145 to 155 days.'
+        },
+        sheep: {
+          gestation: 147,
+          windowMinus: 5,
+          windowPlus: 5,
+          prepLead: 7,
+          monitorLead: 5,
+          term: 'lambing',
+          prepNoun: 'lambing jugs',
+          motherNoun: 'ewe',
+          monitorNote: 'Watch for udder development, isolation behavior, and pawing at bedding.',
+          dueNote: 'Counted 147 days from the breeding date.',
+          windowNote: 'Normal ewe gestation runs about 142 to 152 days.'
+        },
+        cattle: {
+          gestation: 283,
+          windowMinus: 4,
+          windowPlus: 4,
+          prepLead: 14,
+          monitorLead: 10,
+          term: 'calving',
+          prepNoun: 'calving pen',
+          motherNoun: 'cow',
+          monitorNote: 'Begin twice-daily checks. Watch for udder development, vulvar relaxation, and isolation.',
+          dueNote: 'Counted 283 days from the breeding date.',
+          windowNote: 'Normal cow gestation runs about 279 to 287 days.'
+        }
+      };
+
+      // Today, ISO local
+      function todayISO() {
+        try {
+          var t = new Date();
+          var y = t.getFullYear();
+          var m = String(t.getMonth() + 1).padStart(2, '0');
+          var d = String(t.getDate()).padStart(2, '0');
+          return y + '-' + m + '-' + d;
+        } catch (e) {
+          return '';
+        }
+      }
+
+      // Default breeding date to today; allow past or near future
+      try {
+        var iso = todayISO();
+        if (iso) {
+          breedingInput.value = iso;
+        }
+      } catch (e) { /* noop */ }
+
+      function parseLocalDate(str) {
+        if (!str) return null;
+        var parts = str.split('-');
+        if (parts.length !== 3) return null;
+        var year = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;
+        var day = parseInt(parts[2], 10);
+        var d = new Date(year, month, day);
+        if (isNaN(d.getTime())) return null;
+        return d;
+      }
+
+      function addDays(date, n) {
+        var d = new Date(date.getTime());
+        d.setDate(d.getDate() + n);
+        return d;
+      }
+
+      function fmt(date) {
+        try {
+          return date.toLocaleDateString(undefined, {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      function range(start, end) {
+        return fmt(start) + ' to ' + fmt(end);
+      }
+
+      function setText(id, value) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function toggleOvulation() {
+        if (speciesSelect.value === 'dog') {
+          ovulationWrap.style.display = '';
+        } else {
+          ovulationWrap.style.display = 'none';
+          ovulationInput.value = '';
+        }
+      }
+
+      speciesSelect.addEventListener('change', toggleOvulation);
+      toggleOvulation();
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        error.hidden = true;
+        error.textContent = '';
+
+        var species = speciesSelect.value;
+        var cfg = SPECIES[species];
+        if (!cfg) {
+          error.textContent = 'Pick a species.';
+          error.hidden = false;
+          return;
+        }
+
+        var breedingDate = parseLocalDate(breedingInput.value);
+        if (!breedingDate) {
+          error.textContent = 'Enter a valid breeding date.';
+          error.hidden = false;
+          breedingInput.focus();
+          return;
+        }
+
+        // For dogs, prefer ovulation date if provided
+        var anchorDate = breedingDate;
+        var anchorLabel = 'breeding date';
+        var windowMinus = cfg.windowMinus;
+        var windowPlus = cfg.windowPlus;
+
+        if (species === 'dog' && ovulationInput.value) {
+          var ov = parseLocalDate(ovulationInput.value);
+          if (!ov) {
+            error.textContent = 'Ovulation date is not valid.';
+            error.hidden = false;
+            ovulationInput.focus();
+            return;
+          }
+          anchorDate = ov;
+          anchorLabel = 'progesterone-confirmed ovulation date';
+          windowMinus = 1;
+          windowPlus = 2;
+        } else if (species === 'dog') {
+          // Slightly wider window when only breeding date is known
+          windowMinus = 4;
+          windowPlus = 4;
+        }
+
+        var dueDate = addDays(anchorDate, cfg.gestation);
+        var windowStart = addDays(dueDate, -windowMinus);
+        var windowEnd = addDays(dueDate, windowPlus);
+        var prepDate = addDays(dueDate, -cfg.prepLead);
+        var monitorDate = addDays(dueDate, -cfg.monitorLead);
+
+        // Update labels and copy based on species
+        var titleEl = document.getElementById('wdc-results-title');
+        var subtitleEl = document.getElementById('wdc-results-subtitle');
+        var dueLabelEl = document.getElementById('wdc-due-label');
+        var dueNoteEl = document.getElementById('wdc-due-note');
+        var windowNoteEl = document.getElementById('wdc-window-note');
+        var prepLabelEl = document.getElementById('wdc-prep-label');
+        var prepNoteEl = document.getElementById('wdc-prep-note');
+        var monitorNoteEl = document.getElementById('wdc-monitor-note');
+
+        var capTerm = cfg.term.charAt(0).toUpperCase() + cfg.term.slice(1);
+
+        if (titleEl) titleEl.textContent = 'Estimated ' + capTerm + ' Date';
+        if (subtitleEl) subtitleEl.textContent = 'Based on textbook averages for ' + (species === 'cattle' ? 'cattle' : species + 's') + '. Your ' + cfg.motherNoun + ' may vary.';
+        if (dueLabelEl) dueLabelEl.textContent = 'Estimated ' + capTerm + ' Date';
+        if (dueNoteEl) {
+          if (species === 'dog' && ovulationInput.value) {
+            dueNoteEl.textContent = 'Counted 63 days from the progesterone-confirmed ovulation date you entered. This is the tightest calendar estimate available for dogs.';
+          } else {
+            dueNoteEl.textContent = cfg.dueNote;
+          }
+        }
+        if (windowNoteEl) {
+          if (species === 'dog' && !ovulationInput.value) {
+            windowNoteEl.textContent = 'Wider for dogs because sperm can live for several days. A progesterone-confirmed ovulation date would tighten this considerably.';
+          } else {
+            windowNoteEl.textContent = cfg.windowNote;
+          }
+        }
+        if (prepLabelEl) {
+          prepLabelEl.textContent = species === 'dog'
+            ? 'When to Prepare the Whelping Area'
+            : 'When to Prepare the Birthing Area';
+        }
+        if (prepNoteEl) {
+          prepNoteEl.textContent = 'Set up the ' + cfg.prepNoun + ' on or before this date so the ' + cfg.motherNoun + ' has time to settle into it.';
+        }
+        if (monitorNoteEl) {
+          monitorNoteEl.textContent = cfg.monitorNote;
+        }
+
+        setText('wdc-due', fmt(dueDate));
+        setText('wdc-window', range(windowStart, windowEnd));
+        setText('wdc-prep', fmt(prepDate));
+        setText('wdc-monitor', fmt(monitorDate));
+
+        results.hidden = false;
+        try {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (e) { /* noop */ }
+      });
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .wdc-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .wdc-form {
+      margin-bottom: 1.5rem;
+    }
+
+    .wdc-label {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .wdc-label--spaced {
+      margin-top: 1.25rem;
+    }
+
+    .wdc-help {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .wdc-input {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+
+    .wdc-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 12px 8px;
+      padding-right: 2.5rem;
+    }
+
+    .wdc-input:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .wdc-ovulation {
+      margin-top: 0;
+    }
+
+    .wdc-button-row {
+      margin-top: 1.5rem;
+    }
+
+    .wdc-button {
+      padding: 0.75rem 1.75rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 150ms ease;
+    }
+
+    .wdc-button:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .wdc-error {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #b91c1c;
+      font-size: 0.95rem;
+    }
+
+    .wdc-results {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .wdc-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .wdc-results-subtitle {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .wdc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .wdc-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .wdc-result-block--accent {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .wdc-result-block {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    .wdc-result-block--accent {
+      background: hsl(24, 95%, 97%);
+      border-color: hsl(24, 95%, 80%);
+    }
+
+    .wdc-result-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #6b7280;
+      margin-bottom: 0.35rem;
+    }
+
+    .wdc-result-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.35rem;
+    }
+
+    .wdc-result-note {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    .wdc-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .wdc-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .wdc-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .wdc-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .wdc-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .wdc-cta-primary:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .wdc-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .wdc-cta-secondary:hover {
+      background: #ffffff;
+    }
+
+    .wdc-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
