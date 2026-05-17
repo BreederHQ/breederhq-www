@@ -1,0 +1,977 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Puppy Deworming Schedule Generator', url: '/tools/puppy-deworming-schedule-generator' }
+];
+
+const lastReviewedISO = '2026-05-17';
+
+const faqs = [
+  {
+    question: 'Is this an official puppy deworming protocol?',
+    answer: 'No. This generator returns a calendar of common planning milestones at 2, 4, 6, 8, 10, and 12 weeks of age. It does not prescribe medications, doses, products, or routes. Parasite risk and the appropriate protocol for a litter are decided by your veterinarian based on breed, region, kennel environment, dam history, and known parasite pressure in your area. Treat the output as a planning skeleton, not a medical recommendation.'
+  },
+  {
+    question: 'Which dewormer should I use for puppies?',
+    answer: 'That is a veterinary decision, not a calendar decision. Different products target different parasites (roundworms, hookworms, whipworms, tapeworms, coccidia, giardia), and parasite pressure varies dramatically by region and by kennel environment. Bring this calendar to your vet and ask them to map the actual product, dose, and route onto the dates. Some protocols pair scheduled deworming with periodic fecal testing instead of routine treatment.'
+  },
+  {
+    question: 'Why does the schedule start at 2 weeks?',
+    answer: 'Many veterinary planning conventions for breeders begin handling parasite milestones around the 2-week mark, with follow-up touchpoints every two weeks through about 12 weeks of age. The cadence is intended to plan around common parasite life cycles, not to prescribe a specific medication at each visit. Your vet may use a slightly different cadence or pair the schedule with fecal exams.'
+  },
+  {
+    question: 'What if my puppies go home before 12 weeks?',
+    answer: 'Most puppies are released somewhere in the 8-to-12 week window, which means the last one or two milestones may transfer to the new family. Enter the planned go-home date and the generator flags which milestones fall before handoff (breeder responsibility) and which fall after (buyer responsibility). Use this to build a clean handoff packet so the new family knows which parasite-management touchpoints remain and which need a vet conversation.'
+  },
+  {
+    question: 'Can I save or print this schedule?',
+    answer: 'This generator is anonymous and does not save anything. Use the Print or Copy buttons on the result card to capture the schedule for your records or for a buyer handoff packet. For per-puppy records that persist across the litter\u2019s lifetime (visits, weights, deworming history, vet notes, documents, buyer handoff), use BreederHQ.'
+  },
+  {
+    question: 'Does this replace fecal testing?',
+    answer: 'No. Many veterinarians pair scheduled deworming with periodic fecal exams to confirm whether parasites are actually present and which species you are dealing with. Some kennels rely more on fecal-driven treatment than calendar-driven treatment. The right balance is a veterinary decision based on your environment and history.'
+  }
+];
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/puppy-deworming-schedule-generator#tool',
+  'name': 'Puppy Deworming Schedule Generator',
+  'description': 'Free puppy deworming schedule generator for dog breeders. Enter a litter\u2019s birth date and an optional go-home date to generate a general planning calendar of common deworming milestones from 2 to 12 weeks of age. Planning tool only. Specific products, doses, and protocols should be confirmed with a veterinarian.',
+  'url': 'https://breederhq.com/tools/puppy-deworming-schedule-generator',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Dog Breeding Calculator',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'isPartOf': {
+    '@id': 'https://breederhq.com/tools#collection'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Generate a 2 to 12 week puppy deworming planning calendar from a litter birth date',
+    'Show calendar dates and age in weeks for each milestone',
+    'Flag breeder vs. buyer responsibility based on planned go-home date',
+    'Print or copy the schedule for buyer handoff packets',
+    'Anonymous, no signup, no data saved'
+  ]
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://breederhq.com/tools/puppy-deworming-schedule-generator#article',
+  'headline': 'Puppy Deworming Schedule Generator for Breeders',
+  'description': 'Free planning calendar of common puppy deworming milestones from 2 to 12 weeks of age, with optional go-home handoff flagging. For breeder operational planning. Confirm specific products, doses, and protocols with your veterinarian.',
+  'url': 'https://breederhq.com/tools/puppy-deworming-schedule-generator',
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'author': {
+    '@type': 'Organization',
+    'name': 'BreederHQ Operations Team',
+    'url': 'https://breederhq.com/about'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': 'https://breederhq.com/tools/puppy-deworming-schedule-generator'
+  }
+};
+---
+
+<BaseLayout
+  title="Free Puppy Deworming Schedule Generator for Breeders | BreederHQ"
+  description="Free puppy deworming schedule generator for dog breeders. Enter a litter's birth date to get a planning calendar from 2 to 12 weeks, with optional go-home handoff dates. Planning tool only. Confirm products, doses, and protocols with your veterinarian."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Puppy Deworming Schedule Generator</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: Intro -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Generate a Puppy Deworming Planning Schedule from One Date</h1>
+      <p class="text-sm text-gray-500 mb-6">
+        <strong class="text-gray-700">Last Reviewed: May 17, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active dog breeders. Reviewed against general veterinary planning conventions. Not a medical protocol.
+      </p>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Enter a litter&rsquo;s birth date. This free generator returns a calendar of common puppy deworming planning milestones at 2, 4, 6, 8, 10, and 12 weeks of age. Optionally enter a planned go-home date and the generator will flag which milestones fall on the breeder and which transfer to the buyer. Specific products, doses, and the actual protocol are decided by your veterinarian based on breed, region, kennel environment, and parasite pressure.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Generator -->
+  <section class="px-4 pb-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="pdg-card">
+        <form id="pdg-form" class="pdg-form" novalidate>
+          <div class="pdg-field">
+            <label for="pdg-birth" class="pdg-label">Litter Birth Date</label>
+            <p class="pdg-help">The day the litter was born. This becomes Day 0 of the planning calendar.</p>
+            <input
+              type="date"
+              id="pdg-birth"
+              name="birth-date"
+              class="pdg-input"
+              required
+            />
+          </div>
+
+          <div class="pdg-field">
+            <label for="pdg-gohome" class="pdg-label">Planned Go-Home Date <span class="pdg-optional">(optional)</span></label>
+            <p class="pdg-help">If you have a target placement date, we&rsquo;ll flag which milestones fall before handoff (breeder) and which fall after (buyer).</p>
+            <input
+              type="date"
+              id="pdg-gohome"
+              name="go-home-date"
+              class="pdg-input"
+            />
+          </div>
+
+          <div class="pdg-actions">
+            <button type="submit" class="pdg-button">Generate Schedule</button>
+          </div>
+
+          <p id="pdg-error" class="pdg-error" role="alert" hidden></p>
+        </form>
+
+        <div id="pdg-results" class="pdg-results" hidden aria-live="polite">
+          <div class="pdg-results-header">
+            <div>
+              <h2 class="pdg-results-title">Planning Schedule</h2>
+              <p class="pdg-results-subtitle" id="pdg-results-subtitle"></p>
+            </div>
+            <div class="pdg-results-actions no-print">
+              <button type="button" id="pdg-copy" class="pdg-action-button">Copy</button>
+              <button type="button" id="pdg-print" class="pdg-action-button">Print</button>
+            </div>
+          </div>
+
+          <div class="pdg-table-wrap">
+            <div id="pdg-schedule" class="pdg-schedule"></div>
+          </div>
+
+          <div class="pdg-disclaimer">
+            <strong>Important.</strong> This is a general planning calendar of age-based milestones. It is not a veterinary protocol and does not name specific dewormers, doses, or routes. Parasite risks vary by region and litter environment. The actual protocol for a litter, including which products to use and whether to pair scheduled deworming with fecal testing, is a veterinary decision. Confirm with your veterinarian.
+          </div>
+
+          <div class="pdg-cta">
+            <p class="pdg-cta-text">
+              Want to track each puppy&rsquo;s actual deworming events, weights, fecal results, and documents across the whole litter and hand a clean record to the buyer at placement? BreederHQ keeps per-puppy records, attaches treatment notes and documents, and builds the handoff packet for you.
+            </p>
+            <div class="pdg-cta-buttons">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="pdg-cta-primary">
+                Track Puppy Records in BreederHQ Free
+              </a>
+              <a href="/puppy-application-management" class="pdg-cta-secondary">
+                Learn About Puppy Application Management →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How To Use -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How to Use This Generator</h2>
+      <ol class="space-y-4 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="pdg-ol-num">1</span>
+          <span><strong>Enter the litter&rsquo;s birth date.</strong> If puppies were born across two days, use the first day. That becomes Day 0 of the planning calendar.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pdg-ol-num">2</span>
+          <span><strong>Add a planned go-home date if you have one.</strong> The generator will mark each milestone as breeder responsibility or buyer responsibility based on whether it falls before or after handoff.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pdg-ol-num">3</span>
+          <span><strong>Take the schedule to your vet.</strong> Ask them to map the actual deworming protocol onto the calendar. The dates are general; the products, doses, and whether to pair with fecal testing are theirs to decide.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="pdg-ol-num">4</span>
+          <span><strong>Use the post-go-home rows in the buyer handoff packet.</strong> New families consistently underestimate how many parasite touchpoints remain after pickup. Showing them the remaining milestones up front reduces missed treatments and follow-up confusion.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- What the Schedule Means -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">What the Schedule Means</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Common Planning Milestones (2 to 12 Weeks)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Many veterinary planning conventions for breeders cluster early parasite-management touchpoints every two weeks from about 2 weeks of age through 12 weeks. The cadence is intended to plan around common parasite life cycles in young animals, not to prescribe a specific medication at each visit. The exact ages, the products used, and how scheduled treatment pairs with fecal testing depend on the protocol your vet runs.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Why We Don&rsquo;t List Specific Products or Doses</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Listing specific dewormers and doses on a calendar would be wrong. Different products target different parasites, and parasite pressure varies dramatically by region, kennel environment, dam history, and individual puppy. Some protocols emphasize scheduled treatment; others rely more heavily on fecal-driven treatment. This tool gives you the calendar skeleton; your vet decides what goes on it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Breeder vs. Buyer Responsibility</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If the litter goes home before 12 weeks (typical for most breeds), one or two of the final scheduled milestones transfer to the new family. Making that boundary explicit in the handoff packet prevents the &ldquo;I thought you already did that one&rdquo; conversation later. The generator flags it for you when you enter a go-home date.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Recordkeeping Matters as Much as the Schedule</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Breeders should track each deworming milestone, the product and dose used, vet notes, and the buyer handoff record per puppy. A calendar tells you when something is scheduled; a record tells you what actually happened. Buyers and vets both lean on the second one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Isn't a Medical Protocol -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Why This Isn&rsquo;t a Medical Protocol</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        A calendar can tell you when a puppy turns 6 weeks old. A calendar cannot tell you which dewormer that puppy needs, at what dose, or whether your region requires a different approach to parasite management. Deworming is a clinical decision that takes into account the dam&rsquo;s history, breed considerations, local parasite prevalence, the kennel environment, and the puppy&rsquo;s individual health on the day of treatment.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        This generator is an operational planning tool. It tells you which dates to put on the litter&rsquo;s calendar, which to put on the buyer handoff packet, and which to confirm with the vet ahead of time so you can plan treatments and any paired fecal exams. The actual protocol is theirs.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Read more in <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Application Management</a> and the <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">Dog Breeding Software</a> overview.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Tools for Breeders
+          </a>
+        </div>
+        <div>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Puppy Vaccination Schedule Generator
+          </a>
+        </div>
+        <div>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Whelping Date Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Heat Cycle Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Management
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50 no-print">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Track Puppy Records in BreederHQ Free
+    </a>
+  </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('pdg-form');
+      var birthInput = document.getElementById('pdg-birth');
+      var goHomeInput = document.getElementById('pdg-gohome');
+      var error = document.getElementById('pdg-error');
+      var results = document.getElementById('pdg-results');
+      var schedule = document.getElementById('pdg-schedule');
+      var subtitle = document.getElementById('pdg-results-subtitle');
+      var copyBtn = document.getElementById('pdg-copy');
+      var printBtn = document.getElementById('pdg-print');
+      if (!form || !birthInput || !error || !results || !schedule || !subtitle) return;
+
+      // Default birth date to today
+      try {
+        var today = new Date();
+        var iso = today.toISOString().slice(0, 10);
+        birthInput.value = iso;
+      } catch (e) { /* noop */ }
+
+      var MILESTONES = [
+        { weeks: 2, note: 'Common planning milestone. Many veterinary protocols include an early parasite touchpoint around this age. Discuss product and dose with your veterinarian.' },
+        { weeks: 4, note: 'Common planning milestone. Often the second scheduled deworming touchpoint in breeder protocols. Parasite risks vary by region and litter environment.' },
+        { weeks: 6, note: 'Common planning milestone. Often paired with the first puppy wellness or vaccination visit; ask whether a fecal exam belongs at this visit.' },
+        { weeks: 8, note: 'Common planning milestone. Often the first milestone attended by buyers if go-home falls at 8 weeks. Confirm protocol and any paired testing with your veterinarian.' },
+        { weeks: 10, note: 'Common planning milestone. Many veterinary protocols include a later booster touchpoint around this age. Confirm product and dose with your veterinarian.' },
+        { weeks: 12, note: 'Common planning milestone. Often the final early-life scheduled touchpoint and a good moment to align the buyer on ongoing adult parasite prevention.' }
+      ];
+
+      function parseLocalDate(str) {
+        if (!str) return null;
+        var parts = str.split('-');
+        if (parts.length !== 3) return null;
+        var year = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;
+        var day = parseInt(parts[2], 10);
+        var d = new Date(year, month, day);
+        if (isNaN(d.getTime())) return null;
+        return d;
+      }
+
+      function addDays(date, n) {
+        var d = new Date(date.getTime());
+        d.setDate(d.getDate() + n);
+        return d;
+      }
+
+      function fmtLong(date) {
+        try {
+          return date.toLocaleDateString(undefined, {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      function fmtShort(date) {
+        try {
+          return date.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      function buildSchedule(birthDate, goHomeDate) {
+        return MILESTONES.map(function (m) {
+          var date = addDays(birthDate, m.weeks * 7);
+          var owner = null;
+          if (goHomeDate) {
+            owner = date.getTime() < goHomeDate.getTime() ? 'breeder' : 'buyer';
+          }
+          return {
+            weeks: m.weeks,
+            date: date,
+            note: m.note,
+            owner: owner
+          };
+        });
+      }
+
+      function renderSchedule(rows, goHomeDate) {
+        var html = '';
+        rows.forEach(function (row) {
+          var ownerBadge = '';
+          if (row.owner === 'breeder') {
+            ownerBadge = '<span class="pdg-badge pdg-badge--breeder">Breeder</span>';
+          } else if (row.owner === 'buyer') {
+            ownerBadge = '<span class="pdg-badge pdg-badge--buyer">Buyer (after go-home)</span>';
+          }
+
+          html += '' +
+            '<div class="pdg-row">' +
+              '<div class="pdg-row-age">' +
+                '<div class="pdg-row-weeks">' + row.weeks + ' weeks</div>' +
+                '<div class="pdg-row-date">' + fmtLong(row.date) + '</div>' +
+                ownerBadge +
+              '</div>' +
+              '<div class="pdg-row-body">' +
+                '<div class="pdg-row-title">Common planning milestone</div>' +
+                '<div class="pdg-row-note">' + row.note + '</div>' +
+                '<div class="pdg-row-discuss">Discuss protocol, product, and dosage with your veterinarian.</div>' +
+              '</div>' +
+            '</div>';
+        });
+
+        if (goHomeDate) {
+          html += '' +
+            '<div class="pdg-handoff">' +
+              '<strong>Go-home date:</strong> ' + fmtLong(goHomeDate) + '. ' +
+              'Milestones before this date are typically the breeder\u2019s responsibility. Milestones on or after this date transfer to the buyer and belong in the handoff packet.' +
+            '</div>';
+        }
+
+        return html;
+      }
+
+      function buildPlainText(rows, birthDate, goHomeDate) {
+        var lines = [];
+        lines.push('Puppy Deworming Planning Schedule');
+        lines.push('Litter birth date: ' + fmtLong(birthDate));
+        if (goHomeDate) {
+          lines.push('Planned go-home date: ' + fmtLong(goHomeDate));
+        }
+        lines.push('');
+        rows.forEach(function (row) {
+          var line = row.weeks + ' weeks  ' + fmtShort(row.date);
+          if (row.owner === 'breeder') line += '  [Breeder]';
+          if (row.owner === 'buyer') line += '  [Buyer (after go-home)]';
+          lines.push(line);
+          lines.push('  ' + row.note);
+        });
+        lines.push('');
+        lines.push('Planning tool only. Discuss protocol, product, and dosage with your veterinarian. Parasite risks vary by region and litter environment.');
+        lines.push('Generated by BreederHQ: https://breederhq.com/tools/puppy-deworming-schedule-generator');
+        return lines.join('\n');
+      }
+
+      var currentPlainText = '';
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        error.hidden = true;
+        error.textContent = '';
+
+        var birthStr = birthInput.value;
+        if (!birthStr) {
+          error.textContent = 'Enter the litter\u2019s birth date.';
+          error.hidden = false;
+          birthInput.focus();
+          return;
+        }
+
+        var birthDate = parseLocalDate(birthStr);
+        if (!birthDate) {
+          error.textContent = 'That birth date doesn\u2019t look valid. Try again.';
+          error.hidden = false;
+          birthInput.focus();
+          return;
+        }
+
+        var goHomeStr = goHomeInput && goHomeInput.value ? goHomeInput.value : '';
+        var goHomeDate = null;
+        if (goHomeStr) {
+          goHomeDate = parseLocalDate(goHomeStr);
+          if (!goHomeDate) {
+            error.textContent = 'That go-home date doesn\u2019t look valid. Leave it blank or try again.';
+            error.hidden = false;
+            goHomeInput.focus();
+            return;
+          }
+          if (goHomeDate.getTime() < birthDate.getTime()) {
+            error.textContent = 'Go-home date can\u2019t be before the birth date.';
+            error.hidden = false;
+            goHomeInput.focus();
+            return;
+          }
+        }
+
+        var rows = buildSchedule(birthDate, goHomeDate);
+        schedule.innerHTML = renderSchedule(rows, goHomeDate);
+
+        var subtitleText = 'Birth date: ' + fmtLong(birthDate) + '.';
+        if (goHomeDate) {
+          subtitleText += ' Go-home: ' + fmtLong(goHomeDate) + '.';
+        }
+        subtitleText += ' Confirm products, doses, and protocol with your veterinarian.';
+        subtitle.textContent = subtitleText;
+
+        currentPlainText = buildPlainText(rows, birthDate, goHomeDate);
+
+        results.hidden = false;
+        try {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (e) { /* noop */ }
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          if (!currentPlainText) return;
+          var done = function () {
+            var original = copyBtn.textContent;
+            copyBtn.textContent = 'Copied';
+            setTimeout(function () { copyBtn.textContent = original; }, 1500);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(currentPlainText).then(done, function () {
+              fallbackCopy(currentPlainText);
+              done();
+            });
+          } else {
+            fallbackCopy(currentPlainText);
+            done();
+          }
+        });
+      }
+
+      function fallbackCopy(text) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (e) { /* noop */ }
+      }
+
+      if (printBtn) {
+        printBtn.addEventListener('click', function () {
+          window.print();
+        });
+      }
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .pdg-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .pdg-form {
+      margin-bottom: 1.5rem;
+    }
+
+    .pdg-field {
+      margin-bottom: 1.25rem;
+    }
+
+    .pdg-label {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .pdg-optional {
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+
+    .pdg-help {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .pdg-input {
+      width: 100%;
+      max-width: 320px;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 44px;
+    }
+
+    .pdg-input:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .pdg-actions {
+      margin-top: 0.5rem;
+    }
+
+    .pdg-button {
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 150ms ease;
+    }
+
+    .pdg-button:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .pdg-error {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #b91c1c;
+      font-size: 0.95rem;
+    }
+
+    .pdg-results {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+    }
+
+    .pdg-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .pdg-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .pdg-results-subtitle {
+      color: #6b7280;
+      font-size: 0.95rem;
+      max-width: 540px;
+    }
+
+    .pdg-results-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .pdg-action-button {
+      padding: 0.5rem 1rem;
+      background: #ffffff;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 36px;
+    }
+
+    .pdg-action-button:hover {
+      background: #f9fafb;
+    }
+
+    .pdg-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .pdg-schedule {
+      display: grid;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .pdg-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .pdg-row {
+        grid-template-columns: 220px 1fr;
+        gap: 1.25rem;
+        align-items: start;
+      }
+    }
+
+    .pdg-row-weeks {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .pdg-row-date {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin-top: 0.15rem;
+    }
+
+    .pdg-badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.15rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pdg-badge--breeder {
+      background: hsl(24, 95%, 95%);
+      color: hsl(24, 95%, 35%);
+      border: 1px solid hsl(24, 95%, 80%);
+    }
+
+    .pdg-badge--buyer {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .pdg-row-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.35rem;
+    }
+
+    .pdg-row-note {
+      font-size: 0.95rem;
+      color: #4b5563;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .pdg-row-discuss {
+      font-size: 0.85rem;
+      color: #6b7280;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .pdg-handoff {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #1e3a8a;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .pdg-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .pdg-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .pdg-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .pdg-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .pdg-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .pdg-cta-primary:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .pdg-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .pdg-cta-secondary:hover {
+      background: #ffffff;
+    }
+
+    .pdg-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      .breadcrumb,
+      .faq-section,
+      .pdg-cta,
+      header,
+      footer { display: none !important; }
+      .pdg-card {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+      .pdg-row {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</BaseLayout>
