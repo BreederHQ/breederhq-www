@@ -19,6 +19,7 @@ const SPECIES = {
     parentFemale: 'dam',
     parentMale: 'sire',
     seasonal: false,
+    breedNote: 'Uses a generalized 210-day canine cycle estimate. Some breeds cycle significantly more or less often. <a href="#breed-cycle-variability">See breed-specific cycle ranges →</a>',
     biology: {
       cycleLenDays: 210,
       preHeatStart: 0,
@@ -428,6 +429,7 @@ function renderDogCards() {
               : `Add a last heat date to see ${escapeHtml(dog.name || 'your animal')}'s projection`}
           </div>
           ${sp.seasonal ? `<div class="seasonal-note">${sp.seasonalNote}</div>` : ''}
+          ${sp.breedNote ? `<div class="breed-note">${sp.breedNote}</div>` : ''}
         </div>
         ${state.dogs.length > 1 ? `
           <div class="card-actions">

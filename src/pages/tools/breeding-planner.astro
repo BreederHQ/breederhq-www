@@ -18,6 +18,41 @@ const breadcrumbs = [
 
 const lastReviewedISO = '2026-05-16';
 
+const faqs = [
+  {
+    question: 'Why does my German Shepherd cycle every 4 to 5 months instead of 7?',
+    answer: 'Some breeds cycle on a shorter interval than the canine average. German Shepherd Dogs, Rottweilers, Dobermans, and Boxers commonly cycle every 4 to 5 months (roughly 130 to 180 days) rather than the textbook 6 to 7 months. This is well-documented in the reproductive literature (Concannon 2011 is the standard reference). The free planner on this page uses a generalized 210-day cycle for all dogs because it only has a single date to work from. Inside BreederHQ, projections refine from each individual girl\'s recorded cycle history, so a Shepherd who has cycled at 140, 145, and 138 days projects forward at her actual interval, not a species default.'
+  },
+  {
+    question: 'What about Basenjis and other once-a-year breeders?',
+    answer: 'A handful of dog breeds cycle once a year rather than twice. Basenjis, Norwegian Elkhounds, Pharaoh Hounds, Finnish Spitz, and Tibetan Mastiffs are the most commonly cited annual cyclers, and most of them are photoperiod-sensitive (cycles cluster in the autumn). The free planner does not model this. If you breed one of these and project forward at 210 days, the math will be wrong by months. The breed-specific cycle ranges section below has the documented intervals BreederHQ uses for these breeds in-platform.'
+  },
+  {
+    question: 'Does this free tool know about my specific breed?',
+    answer: 'No. This tool is intentionally simple: one species default, one date in, projection out. It is meant for a fast look at the next 12 months across up to 3 animals, not breed-precise planning. Breed-aware cycle ranges, photoperiod modelling, and per-animal pattern learning live inside BreederHQ\'s heat-cycle records, where you can log actual cycle starts over time and the projections refine themselves.'
+  },
+  {
+    question: 'How does BreederHQ handle breed and individual variability differently?',
+    answer: 'Two ways. First, the platform carries a documented cycle-interval range for breeds that materially differ from the species default (the breeds listed in this page\'s breed-specific section, plus seasonal flags for photoperiod-sensitive breeds). Second, once you have recorded two or more heat starts for an individual girl, projections shift to her own pattern rather than the breed default. A Boxer who actually cycles at 165 days projects at 165, not 150. This matters most for stud bookings, semen orders, vet scheduling, and waitlist commitments, where being off by a month is a real operational problem.'
+  },
+  {
+    question: 'Are these cycle ranges scientifically established or anecdotal?',
+    answer: 'Both, depending on the breed. The short-interval cyclers (German Shepherd, Rottweiler, Doberman, Boxer) and the photoperiod-sensitive annual cyclers (Basenji, Norwegian Elkhound, Pharaoh Hound, Finnish Spitz, Tibetan Mastiff) appear in peer-reviewed reproductive literature, most prominently Concannon\'s 2011 review of canine reproductive biology, with more recent work on Basenjis published in Nature Scientific Reports in 2025. Some other breeds (Rhodesian Ridgeback is one example) are documented primarily through clinical observation and breed-club reproductive health references rather than controlled studies. Where the evidence is clinical rather than experimental, BreederHQ flags it as such.'
+  }
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Free Breeding Planner with Breed-Aware Cycle Notes',
+  'description': 'A free breeding planner for dogs, horses, goats, sheep, and cattle, with breed-specific cycle interval ranges for dog breeds that differ materially from the canine average.',
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'author': { '@id': 'https://breederhq.com/#organization' },
+  'publisher': { '@id': 'https://breederhq.com/#organization' },
+  'mainEntityOfPage': 'https://breederhq.com/tools/breeding-planner'
+};
+
 const softwareAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -56,8 +91,10 @@ const softwareAppSchema = {
   title="Free Breeding Planner for Dogs, Horses, Goats, Sheep, and Cattle | BreederHQ"
   description="Free breeding planner. Project upcoming heat cycles, breeding windows, and the open time between them. Dogs, horses, goats, sheep, and cattle. No signup."
   breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
   <main>
     <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
@@ -135,6 +172,109 @@ const softwareAppSchema = {
         </div>
       </div>
     </div>
+
+    <!-- Breed-specific cycle variability -->
+    <section id="breed-cycle-variability" class="bg-white py-16 border-t border-gray-200">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 mb-3">How accurate is this for my breed?</h2>
+        <p class="text-lg text-gray-700 mb-4">
+          The free planner above uses a generalized 210-day cycle for every dog, a 21-day cycle for horses and goats and cattle, and a 17-day cycle for sheep. Those are reasonable species averages for a single-date projection, but several dog breeds cycle on materially different intervals. If you breed one of these, project with that in mind.
+        </p>
+        <p class="text-sm text-gray-600 mb-10">
+          The ranges below are the same values BreederHQ uses in-platform. Sources are cited at the end of each group. None of this replaces a reproductive vet, and individual animals vary within their breed.
+        </p>
+
+        <!-- Short-interval cyclers -->
+        <div class="mb-10">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-2">Short-interval cyclers (about every 4 to 5 months)</h3>
+          <p class="text-gray-700 mb-4">
+            These breeds commonly cycle every 130 to 180 days rather than the textbook 6 to 7 months. Plan stud bookings, semen orders, and waitlist commitments around the shorter interval, not the canine average.
+          </p>
+          <ul class="space-y-2 text-gray-800">
+            <li><strong>German Shepherd Dog</strong>: typical interval about 135 days (range ~120 to 180)</li>
+            <li><strong>Rottweiler</strong>: typical interval about 150 days (range ~130 to 210)</li>
+            <li><strong>Doberman Pinscher</strong>: typical interval about 150 days (range ~130 to 210)</li>
+            <li><strong>Boxer</strong>: typical interval about 150 days (range ~130 to 210)</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3">Sources: Concannon 2011 review of canine reproductive biology; breed-club reproductive health references (DPCA and others).</p>
+        </div>
+
+        <!-- Annual / photoperiod-sensitive cyclers -->
+        <div class="mb-10">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-2">Annual / photoperiod-sensitive cyclers (about once a year)</h3>
+          <p class="text-gray-700 mb-4">
+            These breeds typically cycle once a year, and in most of them the cycles cluster around a particular season because the breed is photoperiod-sensitive. If you project these breeds forward at 210 days the math is off by months. The planner above does not model this.
+          </p>
+          <ul class="space-y-2 text-gray-800">
+            <li><strong>Basenji</strong>: typical interval about 365 days (range ~330 to 400); autumn photoperiod sensitive</li>
+            <li><strong>Norwegian Elkhound</strong>: typical interval about 365 days (range ~330 to 400); autumn photoperiod sensitive</li>
+            <li><strong>Pharaoh Hound</strong>: typical interval about 365 days (range ~330 to 400); autumn photoperiod sensitive</li>
+            <li><strong>Finnish Spitz</strong>: typical interval about 330 to 365 days (range ~270 to 400); autumn photoperiod sensitive</li>
+            <li><strong>Tibetan Mastiff</strong>: typical interval about 365 days (range ~330 to 400); short-day breeder (autumn / winter)</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3">Sources: Concannon 2011; Merck Veterinary Manual (canine reproductive disorders); Nature Scientific Reports 2025 (Australian Basenji non-seasonal breeding study).</p>
+        </div>
+
+        <!-- Variable-interval breeds -->
+        <div class="mb-10">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-2">Variable-interval breeds (longer than the canine average)</h3>
+          <p class="text-gray-700 mb-4">
+            Some breeds run longer than the 6 to 7 month average without being annual cyclers. Evidence here is more clinical than experimental, so treat the range as a starting point and confirm against the actual girl in front of you.
+          </p>
+          <ul class="space-y-2 text-gray-800">
+            <li><strong>Rhodesian Ridgeback</strong>: typical interval about 240 days (range ~180 to 330)</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3">Sources: Clinical observations and breed-club reproductive references. Less heavily studied than the breeds above.</p>
+        </div>
+
+        <!-- Seasonal species -->
+        <div class="mb-10">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-2">Seasonal species (horses, goats, sheep)</h3>
+          <p class="text-gray-700 mb-4">
+            Three of the species in this tool are seasonal breeders in their natural state. The planner assumes year-round cycling for simplicity, but in practice:
+          </p>
+          <ul class="space-y-2 text-gray-800">
+            <li><strong>Horses</strong>: long-day breeders. Mares typically cycle April through October in the northern hemisphere; cycles taper in winter.</li>
+            <li><strong>Goats</strong>: short-day breeders. Most does cycle September through February.</li>
+            <li><strong>Sheep</strong>: short-day breeders. Most ewes cycle September through February, though some breeds cycle year-round.</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3">The planner flags these species inline when you select them. Cattle are not seasonal and cycle year-round.</p>
+        </div>
+
+        <!-- Why this matters -->
+        <div class="rounded-2xl bg-gray-50 border border-gray-200 p-6 mt-12">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Why a generalized planner can only get you so far</h3>
+          <p class="text-gray-700 mb-3">
+            Cycle interval is not just a breed property. It is also an individual property that shifts over a girl\'s reproductive life: most bitches lengthen their interval by a few weeks as they mature, then shorten again after a litter, and a small percentage drift in ways their breed averages will not predict.
+          </p>
+          <p class="text-gray-700 mb-3">
+            A single-date projector, whether this tool, a spreadsheet, or a generic calendar, cannot account for any of that. It assumes the next cycle behaves like the species default.
+          </p>
+          <p class="text-gray-700">
+            BreederHQ records each heat as you log it. Once a girl has two or more cycle starts on file, her projections shift to her own pattern rather than the breed default. Breed-specific ranges (the values above) are the starting point only; her actual recorded history is what the platform projects forward from after that.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-gray-50 py-16 border-t border-gray-200">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 mb-8">Frequently asked questions</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <details class="group rounded-xl bg-white border border-gray-200 p-5">
+              <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+                <h3 class="text-lg font-semibold text-gray-900">{faq.question}</h3>
+                <span class="text-[hsl(24,95%,53%)] text-2xl leading-none group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="text-gray-700 mt-4 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Mockup CSS, scoped under .fbp-root to keep it from leaking into the site -->

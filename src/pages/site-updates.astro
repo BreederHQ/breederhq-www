@@ -28,6 +28,34 @@ const breadcrumbs = [
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
 
+        <!-- ========== May 17, 2026 - Breeding Planner: breed-aware cycle variability section + FAQ ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Added a breed-cycle variability section, an FAQ, and an inline dog-cycle disclaimer to the free breeding planner. The free planner uses a generalized 210-day canine cycle estimate, but several dog breeds cycle materially differently. The new content names those breeds explicitly so breeders setting expectations from the tool understand where the species default does and does not apply.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Updated page: <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">/tools/breeding-planner</a></h3>
+          <p class="text-gray-700 mb-3">
+            New "How accurate is this for my breed?" section below the tool, organized into four groups: short-interval cyclers (German Shepherd Dog, Rottweiler, Doberman Pinscher, Boxer; about 4 to 5 month intervals); annual / photoperiod-sensitive cyclers (Basenji, Norwegian Elkhound, Pharaoh Hound, Finnish Spitz, Tibetan Mastiff; about once a year, mostly autumn); variable-interval breeds (Rhodesian Ridgeback; longer than the canine average); and seasonal species (horses, goats, sheep). Each breed lists the typical interval and observed range, with sources cited at the end of each group (Concannon 2011, Merck Veterinary Manual, Nature Scientific Reports 2025, breed-club references). Ranges match the values BreederHQ uses in-platform via <code>species-biology.generated.json</code>. The section closes with a "Why a generalized planner can only get you so far" callout that explains why per-animal recorded history beats any species or breed default. A new FAQ section (5 questions) follows, covering German Shepherd cycle interval, Basenji annual cycling, what the free tool does and does not know about specific breeds, how BreederHQ handles variability differently, and the evidence basis for the cycle ranges. The FAQ is wired into BaseLayout via the <code>faqs</code> prop so it emits FAQPage schema automatically. Page now also emits an Article JSON-LD block in addition to the existing SoftwareApplication schema.
+          </p>
+          <p class="text-gray-700 mb-3">
+            Inside the tool itself, when a breeder selects Dog as the species for an animal, a subtle inline note now appears under the date input: "Uses a generalized 210-day canine cycle estimate. Some breeds cycle significantly more or less often. See breed-specific cycle ranges →". The link anchors down to the new section. Styled as a neutral informational note (slate, not amber) so it visually distinguishes from the existing amber seasonal warning shown for horses, goats, and sheep. Both notes are species-conditional: only the relevant one renders for a given selection.
+          </p>
+          <p class="text-gray-700">
+            Positioning is matter-of-fact: the free tool is intentionally a single-date projector, the breed-specific ranges are public reproductive science, and the platform differentiator (per-animal pattern learning from recorded cycle history) is mentioned once, factually, without hard upsell language. Long-tail SEO benefit: named breed coverage for "German Shepherd heat cycle interval", "Basenji breeding season", "Tibetan Mastiff cycle frequency", and similar breed-specific cycle queries that competing generic calculators do not address.
+          </p>
+        </article>
+
+        <!-- ========== May 17, 2026 - Heat Cycle Tracking hero screenshot swap ========== -->
+        <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
+          <p class="text-sm text-gray-500 mb-4">Replaced the hero screenshot on the heat cycle tracking page with a new in-app capture that shows the actual heat cycle record (phases, predicted next-heat windows, progesterone results) instead of the older breeding calendar view.</p>
+
+          <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Updated page: <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">/heat-cycle-tracking</a></h3>
+          <p class="text-gray-700 mb-3">
+            Hero now uses <code>heat-cycle-record-capture.png</code> rendered at its native 937 x 892 resolution with no browser chrome and no upscaling. Image is centered and capped at its native width so it never enlarges past the source pixels on wider viewports.
+          </p>
+        </article>
+
         <!-- ========== May 17, 2026 - Progesterone Timing Tracker upgrade: projections + SVG chart ========== -->
         <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
           <h2 class="text-2xl font-bold text-gray-900 mb-1">May 17, 2026</h2>
