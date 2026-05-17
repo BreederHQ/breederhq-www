@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Equine Boarding', url: '/services/equine-boarding' },
+  { name: 'Lexington, KY', url: '/services/equine-boarding/lexington-ky' }
+];
+
+const faqs = [
+  {
+    question: 'What does horse boarding typically cost in Lexington, KY?',
+    answer: 'Boarding in the Lexington area runs a wide spectrum because the market spans pasture board on small Bluegrass acreage all the way up to full-service training and layup at internationally known Thoroughbred farms. Pasture board with run-in sheds and basic care commonly sits in the lower range, full-care stall board with daily turnout sits in the middle, and full-service training board with arena access, blanketing, and individualized feed programs sits at the top. Lexington pricing also reflects proximity to Keeneland, the Kentucky Horse Park, and the major breeding farms - facilities within a short trailer drive of those hubs usually command a premium.'
+  },
+  {
+    question: 'Why is Lexington considered a top location for boarding a horse?',
+    answer: 'Lexington sits in the heart of the Inner Bluegrass region and is widely referred to as the Horse Capital of the World. The combination of karst-fed limestone pastures, an unusually dense concentration of equine veterinarians and farriers, two major equine venues (Keeneland and the Kentucky Horse Park), and a deep population of trainers, breeders, and farm staff means owners have access to a level of equine infrastructure that is hard to match anywhere else in North America.'
+  },
+  {
+    question: 'Are there boarding options for non-Thoroughbreds in Lexington?',
+    answer: 'Yes. While Thoroughbred breeding and racing define the region, Fayette County and the surrounding counties (Bourbon, Woodford, Scott, Jessamine, Clark, Madison) support strong communities for Warmbloods, Standardbreds, American Saddlebreds, Arabians, sport ponies, and stock breeds. Many barns specialize in eventing, dressage, hunter/jumper, saddle seat, Western disciplines, and trail. The Kentucky Horse Park itself hosts events across nearly every breed and discipline, which has built local demand for diverse boarding programs.'
+  },
+  {
+    question: 'What facility features should I prioritize when boarding in Lexington?',
+    answer: 'Ask about pasture rotation and acreage per horse (the Bluegrass karst can sustain quality grazing but is not unlimited), water source and freeze protection, fencing type and condition, run-in sheds or stalls, footing in any arena, hay quality and storage, and trailer parking. For owners with performance or breeding horses, also ask about on-call vet preference, farrier rotation, biosecurity practices for new arrivals, and proximity to Hagyard, Rood & Riddle, or Park Equine if you have a preferred clinic.'
+  },
+  {
+    question: 'How close are major equine hospitals to Lexington boarding farms?',
+    answer: 'Most boarding facilities in Fayette County are within roughly a 15 to 30 minute trailer drive of Hagyard Equine Medical Institute and Rood & Riddle Equine Hospital, both of which are headquartered in Lexington. Park Equine Hospital has Woodford County and Mt. Brilliant locations. This concentration of advanced equine medicine is one of the practical reasons Lexington commands its reputation - emergency access is unusually short for a rural setting.'
+  },
+  {
+    question: 'How do I verify a boarding facility is legitimate?',
+    answer: 'Visit in person before signing a contract. Ask to see the pastures, stalls, hay, water, and feed room. Ask how long the current barn manager has been on site, who their preferred vet and farrier are, and request references from current and former boarders. A reputable facility will welcome the questions. BreederHQ publishes a Trust page that outlines what we verify on listings and what stays the owner\'s responsibility to confirm.'
+  }
+];
+
+// Service schema for the geographic boarding offering.
+const service = {
+  name: 'Horse Boarding in Lexington, Kentucky',
+  description: 'Discover equine boarding facilities in Lexington, Kentucky and the surrounding Bluegrass region. Pasture board, stall board, full-service training board, and layup with proximity to Keeneland, the Kentucky Horse Park, and the major equine veterinary hospitals.',
+  serviceType: 'Equine Boarding',
+  areaServed: 'Lexington, Kentucky',
+  offerDescription: 'Geographic boarding directory connecting horse owners with verified equine facilities in the Bluegrass region.',
+  offerUrl: '/services/equine-boarding/lexington-ky'
+};
+
+const nearbyAreas = [
+  { name: 'Versailles & Woodford County', note: 'Home to many of the region\'s most established Thoroughbred farms; short drive west of Lexington.' },
+  { name: 'Georgetown & Scott County', note: 'Rolling pasture country immediately north of Lexington with growing pleasure and sport horse barns.' },
+  { name: 'Paris & Bourbon County', note: 'Historic horse country northeast of Lexington with deep Thoroughbred and pasture board presence.' },
+  { name: 'Nicholasville & Jessamine County', note: 'South of Lexington; mix of breeding, training, and family-scale boarding facilities.' },
+  { name: 'Winchester & Clark County', note: 'East of Lexington; popular with trail, eventing, and pasture board owners.' },
+  { name: 'Richmond & Madison County', note: 'Southeast of Lexington near Eastern Kentucky University; strong sport horse and stock horse community.' },
+  { name: 'Midway', note: 'Small Woodford County town between Lexington and Frankfort, sitting in the densest cluster of Thoroughbred farms in North America.' },
+  { name: 'Frankfort & Franklin County', note: 'State capital with quieter horse country to the west of Lexington and easy access to the Bluegrass Parkway.' }
+];
+---
+
+<BaseLayout
+  title="Horse Boarding in Lexington, KY | Equine Boarding in the Bluegrass | BreederHQ"
+  description="Find horse boarding in Lexington, Kentucky and the surrounding Bluegrass region. Pasture board, full-care stall board, training board, and layup near Keeneland, the Kentucky Horse Park, and the major equine hospitals."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/equine-boarding" class="text-amber-700 hover:underline">Equine Boarding</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Lexington, KY</li>
+      </ol>
+    </nav>
+
+    <!-- 1. Hero -->
+    <section class="py-16 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Lexington, Kentucky</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
+          Horse Boarding in Lexington and the Bluegrass Region
+        </h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          Lexington is the Horse Capital of the World, and the boarding market reflects it. From pasture board on family-scale Bluegrass farms to full-service training, breeding support, and layup at internationally recognized operations, the choices in and around Fayette County span the entire equine industry.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          This page is a guided introduction to boarding in the Lexington area. It is the first geographic listing page on BreederHQ Marketplace; the verified facility directory will populate as local providers list their farms.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#featured-providers"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg text-center transition"
+          >
+            See Featured Providers
+          </a>
+          <a
+            href="/for-providers/equine-services"
+            class="inline-block border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-semibold py-3 px-6 rounded-lg text-center transition"
+          >
+            List Your Facility
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Lexington Equine Ecosystem -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">The Lexington Equine Ecosystem</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Lexington sits in the Inner Bluegrass, a geological region defined by phosphorus-rich Ordovician limestone weathered into the karst pasture land that gives the Bluegrass its name and its forage quality. That soil chemistry is one of the practical reasons the area became the global center of Thoroughbred breeding in the nineteenth century, and it continues to shape why so many breeding, training, and boarding operations are clustered in Fayette, Woodford, and Bourbon counties.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Two venues anchor the public face of the industry. <strong>Keeneland</strong>, on the west side of Lexington, hosts spring and fall race meets, the world&apos;s largest Thoroughbred auction calendar, and a year-round training track that handles a significant share of the breed&apos;s elite prospects. The <strong>Kentucky Horse Park</strong>, on the north side, is a working horse park and competition venue that hosts events across nearly every breed and discipline, including the Rolex / Defender Kentucky Three-Day Event, the Land Rover Kentucky CCI5*-L, USEF national championships, and a constant rotation of breed shows.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-5">
+          Surrounding those venues is one of the densest concentrations of equine professionals in the world. <strong>Hagyard Equine Medical Institute</strong> and <strong>Rood &amp; Riddle Equine Hospital</strong> are both headquartered in Lexington and are widely cited among the leading referral hospitals in equine medicine. The local farrier and equine dentistry communities are similarly deep, and the supporting trades (feed, hay, fencing, barn construction, equine insurance, sales prep, transport) operate at a scale that simply does not exist in most regions.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          The combined effect is a market where a boarder can usually find a facility tailored to their discipline, a vet who knows their horse personally, a farrier on a predictable rotation, and a community of riders or breeders within an easy drive. That depth is the real reason Lexington commands the reputation it does.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. What To Look For In Boarding In Lexington -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">What To Look For in Boarding in Lexington</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          The Bluegrass offers genuinely strong baseline conditions for horses, but not every facility in the region operates at the same standard. The questions below are the ones that consistently separate well-managed boarding programs from operations that simply happen to be located in horse country.
+        </p>
+
+        <div class="space-y-6">
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pasture quality and stocking density</h3>
+            <p class="text-gray-700 leading-relaxed">
+              The karst-fed Bluegrass pastures can support good forage, but they are not bottomless. Ask how many horses share a given pasture, how rotation is managed, and how the farm handles overgrazing, mud, and reseeding. A reputable Lexington facility can answer this in concrete terms.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Fencing and infrastructure</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Four-board oak fence is the regional standard for a reason. Ask about fence type, age, repair cadence, run-in shed condition, and whether perimeter and interior fencing meet the discipline you intend to use the horse for. A weanling farm and a retired trail horse pasture have very different requirements.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Veterinary and farrier access</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Ask which clinic the farm primarily uses (Hagyard, Rood &amp; Riddle, Park Equine, or another local practice) and how the farm handles after-hours emergencies. Ask the farrier rotation and whether the facility accommodates an owner-preferred farrier. Proximity to the major hospitals is one of Lexington&apos;s genuine advantages; a good barn will tell you exactly how that proximity is operationalized.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Hay, feed, and water</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Ask what hay the facility feeds, where it sources from, and how it stores it. Ask the standard grain program, whether they accommodate supplements, and how often water sources are checked in winter. The Bluegrass winters can produce hard freezes; a barn that has thought through freeze management is worth more than a barn that has not.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Biosecurity for new arrivals</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Given the volume of horses moving through Lexington for sales, racing, breeding, and competition, the better facilities have explicit isolation protocols for new arrivals. Ask what theirs is, particularly if you are bringing a horse in during sales weeks or after major events at the Horse Park.
+            </p>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Arena, turnout, and trailer access</h3>
+            <p class="text-gray-700 leading-relaxed">
+              If you ride, ask about arena footing, lighting, jumps, and shared-use scheduling. Ask the typical turnout window (hours per day, group composition). Ask where trailers park, whether the driveway can accommodate a gooseneck or a sales-style trailer, and whether the farm restricts hauling in and out around specific events.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Featured Providers placeholder -->
+    <section id="featured-providers" class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Featured Lexington Boarding Providers</h2>
+        <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Verified Lexington facility listings are coming soon</h3>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            This is the first geographic boarding page on BreederHQ Marketplace. The provider directory below this section will populate as local Lexington and Bluegrass area facilities list their farms. We are intentionally not displaying placeholder, AI-generated, or scraped facility listings - every entry that appears here will be a real, owner-managed listing.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            If you operate a boarding, training, layup, or pasture facility in the Lexington area and want to be one of the first verified listings on this page, you can create your facility profile now.
+          </p>
+          <a
+            href="/for-providers/equine-services"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            List Your Facility
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Nearby Areas -->
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Nearby Areas in the Bluegrass</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Boarding farms within a reasonable trailer drive of Lexington extend well beyond Fayette County. The communities below are part of the same equine economy, share the same veterinary and farrier networks, and frequently appear on a Lexington-area boarder&apos;s short list.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {nearbyAreas.map((area) => (
+            <div class="bg-white border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-1">{area.name}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{area.note}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-sm text-gray-500 mt-8">
+          City-specific boarding pages for these areas will be added as facility coverage grows.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. FAQ -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="bg-stone-50 border border-stone-200 rounded-xl p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-amber-700">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Provider CTA -->
+    <section class="py-16 px-4 bg-gradient-to-b from-white to-amber-50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Operate a Boarding Facility in the Bluegrass?</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl mx-auto">
+          BreederHQ Marketplace is building a verified directory of equine facilities, starting in the regions where the equine economy is deepest. Lexington is the first. Listing early means your facility is among the first owners see when they search the Bluegrass.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/for-providers/equine-services"
+            class="inline-block bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            List Your Equine Facility
+          </a>
+          <a
+            href="/trust"
+            class="inline-block border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            How BreederHQ Verifies Listings
+          </a>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-stone-200 text-left">
+          <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">Related on BreederHQ</h3>
+          <ul class="grid sm:grid-cols-2 gap-3 text-sm">
+            <li>
+              <a href="/services/equine-boarding" class="text-amber-700 hover:underline">All Equine Boarding</a>
+              <span class="text-gray-500"> - the national boarding hub</span>
+            </li>
+            <li>
+              <a href="/services/farriers/kentucky" class="text-amber-700 hover:underline">Farriers in Kentucky</a>
+              <span class="text-gray-500"> - regional farrier directory</span>
+            </li>
+            <li>
+              <a href="/for-providers/equine-services" class="text-amber-700 hover:underline">For Equine Service Providers</a>
+              <span class="text-gray-500"> - list your facility or service</span>
+            </li>
+            <li>
+              <a href="/trust" class="text-amber-700 hover:underline">Trust &amp; Verification</a>
+              <span class="text-gray-500"> - how we verify listings</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
