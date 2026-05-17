@@ -421,6 +421,9 @@ function renderDogCards() {
                    data-dog="${dog.id}" data-field="lastHeat"
                    value="${dog.lastHeat ? formatDateForInput(dog.lastHeat) : ''}"
                    placeholder="MM/DD/YYYY" />
+            <input type="date" class="date-picker-btn" aria-label="Pick last heat start date"
+                   data-dog="${dog.id}" data-field="lastHeatPicker"
+                   value="${dog.lastHeat ? isoDate(dog.lastHeat) : ''}" />
             ${dog.lastHeat ? `<button class="clear-btn" data-action="clear-date" data-dog="${dog.id}">Clear</button>` : ''}
           </div>
           <div class="mode-indicator ${mode}">
@@ -1165,6 +1168,29 @@ document.addEventListener('input', e => {
       updatePickerRowName(dog, t);
       updateGanttLaneName(dog);
       renderAvailabilityDetail();
+    } else if (t.dataset.field === 'lastHeatPicker') {
+      // Native date picker — value is always YYYY-MM-DD or empty.
+      const raw = t.value;
+      if (raw === '') {
+        if (dog.lastHeat !== null) {
+          dog.lastHeat = null;
+          dog.isExample = false;
+          dog.selectedCycleIdx = 0;
+          state.selectedAvailabilityIdx = null;
+          render();
+        }
+        return;
+      }
+      const parsed = parseUserDate(raw);
+      if (!parsed) return;
+      if (dog.lastHeat && isoDate(dog.lastHeat) === isoDate(parsed)) return;
+      dog.lastHeat = parsed;
+      dog.isExample = false;
+      dog.selectedCycleIdx = 0;
+      state.selectedAvailabilityIdx = null;
+      // Full re-render is safe here — the date picker doesn't hold a caret like
+      // the text input does, and we want the text input's value to refresh.
+      render();
     } else if (t.dataset.field === 'lastHeat') {
       // Text input — accept MM/DD/YYYY or YYYY-MM-DD. Only commit when the
       // value parses to a real date with a sane year; otherwise wait for the

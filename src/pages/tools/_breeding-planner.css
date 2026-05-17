@@ -312,6 +312,31 @@
     .breed-note a:hover { text-decoration: underline; }
     .date-clear-row { display: flex; gap: 8px; align-items: center; }
     .date-clear-row input[type="text"] { flex: 1; }
+    /* Compact native date picker rendered as a calendar-icon button beside
+       the typed input. The text field stays the primary entry path; this is
+       a "pick from a calendar" shortcut. We hide the displayed value entirely
+       (it'd just duplicate the text input) and keep the picker indicator. */
+    input[type="date"].date-picker-btn {
+      flex: 0 0 auto;
+      width: 44px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: transparent;       /* hide the rendered date text */
+      position: relative;
+    }
+    input[type="date"].date-picker-btn::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.7;
+      margin: 0;
+      padding: 0;
+    }
+    input[type="date"].date-picker-btn::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
+    input[type="date"].date-picker-btn::-webkit-datetime-edit,
+    input[type="date"].date-picker-btn::-webkit-inner-spin-button {
+      display: none;
+    }
     button.clear-btn {
       background: var(--surface);
       border: 1.5px solid var(--hairline);
