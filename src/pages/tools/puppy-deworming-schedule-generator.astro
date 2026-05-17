@@ -397,7 +397,6 @@ const articleSchema = {
       function fmtLong(date) {
         try {
           return date.toLocaleDateString(undefined, {
-            weekday: 'short',
             year: 'numeric',
             month: 'short',
             day: 'numeric'
@@ -770,19 +769,21 @@ const articleSchema = {
       white-space: nowrap;
     }
 
-    .pdg-th-note { width: 100%; }
+    .pdg-th-age { width: 80px; }
+    .pdg-th-date { width: 160px; }
+    .pdg-th-note { width: auto; }
 
     .pdg-row td {
-      padding: 0.85rem;
+      padding: 0.85rem 1rem;
       border-bottom: 1px solid #f1f5f9;
       vertical-align: top;
     }
 
     .pdg-row:last-child td { border-bottom: 0; }
 
-    .pdg-cell-age { white-space: nowrap; width: 1%; }
+    .pdg-cell-age { white-space: nowrap; }
     .pdg-weeks { font-size: 1.05rem; font-weight: 700; color: #111827; }
-    .pdg-cell-date { white-space: nowrap; width: 1%; }
+    .pdg-cell-date { white-space: nowrap; }
     .pdg-date { font-size: 0.95rem; color: #111827; font-weight: 500; }
     .pdg-badge-wrap { margin-top: 0.35rem; }
     .pdg-cell-note { color: #4b5563; line-height: 1.5; }

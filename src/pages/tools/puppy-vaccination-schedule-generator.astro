@@ -394,7 +394,6 @@ const articleSchema = {
       function fmtLong(date) {
         try {
           return date.toLocaleDateString(undefined, {
-            weekday: 'short',
             year: 'numeric',
             month: 'short',
             day: 'numeric'
@@ -769,10 +768,12 @@ const articleSchema = {
       white-space: nowrap;
     }
 
-    .pvg-th-note { width: 100%; }
+    .pvg-th-age { width: 80px; }
+    .pvg-th-date { width: 160px; }
+    .pvg-th-note { width: auto; }
 
     .pvg-row td {
-      padding: 0.85rem;
+      padding: 0.85rem 1rem;
       border-bottom: 1px solid #f1f5f9;
       vertical-align: top;
     }
@@ -783,7 +784,6 @@ const articleSchema = {
 
     .pvg-cell-age {
       white-space: nowrap;
-      width: 1%;
     }
 
     .pvg-weeks {
@@ -794,7 +794,6 @@ const articleSchema = {
 
     .pvg-cell-date {
       white-space: nowrap;
-      width: 1%;
     }
 
     .pvg-date {
