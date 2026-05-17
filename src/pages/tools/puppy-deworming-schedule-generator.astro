@@ -446,19 +446,23 @@ const articleSchema = {
           }
 
           html += '' +
-            '<div class="pdg-row">' +
-              '<div class="pdg-row-age">' +
-                '<div class="pdg-row-weeks">' + row.weeks + ' weeks</div>' +
-                '<div class="pdg-row-date">' + fmtLong(row.date) + '</div>' +
-                ownerBadge +
-              '</div>' +
-              '<div class="pdg-row-body">' +
-                '<div class="pdg-row-title">Common planning milestone</div>' +
-                '<div class="pdg-row-note">' + row.note + '</div>' +
-                '<div class="pdg-row-discuss">Discuss protocol, product, and dosage with your veterinarian.</div>' +
-              '</div>' +
-            '</div>';
+            '<tr class="pdg-row">' +
+              '<td class="pdg-cell-age">' +
+                '<div class="pdg-weeks">' + row.weeks + ' wks</div>' +
+              '</td>' +
+              '<td class="pdg-cell-date">' +
+                '<div class="pdg-date">' + fmtLong(row.date) + '</div>' +
+                (ownerBadge ? '<div class="pdg-badge-wrap">' + ownerBadge + '</div>' : '') +
+              '</td>' +
+              '<td class="pdg-cell-note">' + row.note + '</td>' +
+            '</tr>';
         });
+        html = '' +
+          '<table class="pdg-table"><thead><tr>' +
+            '<th scope="col" class="pdg-th pdg-th-age">Age</th>' +
+            '<th scope="col" class="pdg-th pdg-th-date">Date</th>' +
+            '<th scope="col" class="pdg-th pdg-th-note">Planning note</th>' +
+          '</tr></thead><tbody>' + html + '</tbody></table>';
 
         if (goHomeDate) {
           html += '' +
@@ -740,50 +744,58 @@ const articleSchema = {
     }
 
     .pdg-schedule {
-      display: grid;
-      gap: 0.75rem;
       margin-bottom: 1.5rem;
     }
 
-    .pdg-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      background: #f9fafb;
+    .pdg-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 8px;
-      padding: 1rem 1.25rem;
-    }
-
-    @media (min-width: 640px) {
-      .pdg-row {
-        grid-template-columns: 220px 1fr;
-        gap: 1.25rem;
-        align-items: start;
-      }
-    }
-
-    .pdg-row-weeks {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .pdg-row-date {
+      overflow: hidden;
       font-size: 0.95rem;
-      color: #4b5563;
-      margin-top: 0.15rem;
     }
+
+    .pdg-th {
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6b7280;
+      background: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    .pdg-th-note { width: 100%; }
+
+    .pdg-row td {
+      padding: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+
+    .pdg-row:last-child td { border-bottom: 0; }
+
+    .pdg-cell-age { white-space: nowrap; width: 1%; }
+    .pdg-weeks { font-size: 1.05rem; font-weight: 700; color: #111827; }
+    .pdg-cell-date { white-space: nowrap; width: 1%; }
+    .pdg-date { font-size: 0.95rem; color: #111827; font-weight: 500; }
+    .pdg-badge-wrap { margin-top: 0.35rem; }
+    .pdg-cell-note { color: #4b5563; line-height: 1.5; }
 
     .pdg-badge {
       display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.15rem 0.6rem;
-      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.7rem;
       font-weight: 600;
       border-radius: 9999px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      white-space: nowrap;
     }
 
     .pdg-badge--breeder {
@@ -798,25 +810,19 @@ const articleSchema = {
       border: 1px solid #bfdbfe;
     }
 
-    .pdg-row-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 0.35rem;
+    @media (max-width: 540px) {
+      .pdg-table, .pdg-table thead, .pdg-table tbody, .pdg-table tr, .pdg-table td, .pdg-table th { display: block; }
+      .pdg-table thead { display: none; }
+      .pdg-row { border-bottom: 1px solid #e5e7eb; padding: 0.85rem; }
+      .pdg-row:last-child { border-bottom: 0; }
+      .pdg-row td { padding: 0.15rem 0; border-bottom: 0; }
+      .pdg-cell-age, .pdg-cell-date { width: auto; display: inline-block; margin-right: 0.75rem; }
+      .pdg-cell-note { margin-top: 0.35rem; }
     }
 
-    .pdg-row-note {
-      font-size: 0.95rem;
-      color: #4b5563;
-      line-height: 1.5;
-      margin-bottom: 0.5rem;
-    }
-
+    /* Unused legacy class kept to no-op */
     .pdg-row-discuss {
-      font-size: 0.85rem;
-      color: #6b7280;
-      font-style: italic;
-      line-height: 1.5;
+      display: none;
     }
 
     .pdg-handoff {

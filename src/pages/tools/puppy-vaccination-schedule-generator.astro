@@ -365,12 +365,12 @@ const articleSchema = {
       } catch (e) { /* noop */ }
 
       var MILESTONES = [
-        { weeks: 6, note: 'Common planning milestone. Many veterinary protocols include an initial puppy visit around this age.' },
-        { weeks: 8, note: 'Common planning milestone. Often the first vet visit attended by buyers if go-home falls at 8 weeks.' },
-        { weeks: 10, note: 'Common planning milestone. Many veterinary protocols include a booster visit around this age.' },
-        { weeks: 12, note: 'Common planning milestone. Often paired with regionally appropriate boosters; confirm with your vet.' },
-        { weeks: 14, note: 'Common planning milestone for later boosters. Confirm whether this visit is needed under your vet\u2019s protocol.' },
-        { weeks: 16, note: 'Common planning milestone. Often the final puppy series visit and a typical age for rabies eligibility in many US jurisdictions; confirm local rules with your vet.' }
+        { weeks: 6, note: 'Many veterinary protocols include an initial puppy visit around this age.' },
+        { weeks: 8, note: 'Often the first vet visit attended by buyers if go-home falls at 8 weeks.' },
+        { weeks: 10, note: 'Many veterinary protocols include a booster visit around this age.' },
+        { weeks: 12, note: 'Often paired with regionally appropriate boosters. Confirm with your vet.' },
+        { weeks: 14, note: 'A later booster point. Confirm whether this visit is needed under your vet\u2019s protocol.' },
+        { weeks: 16, note: 'Often the final puppy series visit and a typical age for rabies eligibility in many US jurisdictions. Confirm local rules with your vet.' }
       ];
 
       function parseLocalDate(str) {
@@ -443,19 +443,23 @@ const articleSchema = {
           }
 
           html += '' +
-            '<div class="pvg-row">' +
-              '<div class="pvg-row-age">' +
-                '<div class="pvg-row-weeks">' + row.weeks + ' weeks</div>' +
-                '<div class="pvg-row-date">' + fmtLong(row.date) + '</div>' +
-                ownerBadge +
-              '</div>' +
-              '<div class="pvg-row-body">' +
-                '<div class="pvg-row-title">Common planning milestone</div>' +
-                '<div class="pvg-row-note">' + row.note + '</div>' +
-                '<div class="pvg-row-discuss">Discuss specific vaccines, doses, and any regionally required boosters with your veterinarian.</div>' +
-              '</div>' +
-            '</div>';
+            '<tr class="pvg-row">' +
+              '<td class="pvg-cell-age">' +
+                '<div class="pvg-weeks">' + row.weeks + ' wks</div>' +
+              '</td>' +
+              '<td class="pvg-cell-date">' +
+                '<div class="pvg-date">' + fmtLong(row.date) + '</div>' +
+                (ownerBadge ? '<div class="pvg-badge-wrap">' + ownerBadge + '</div>' : '') +
+              '</td>' +
+              '<td class="pvg-cell-note">' + row.note + '</td>' +
+            '</tr>';
         });
+        html = '' +
+          '<table class="pvg-table"><thead><tr>' +
+            '<th scope="col" class="pvg-th pvg-th-age">Age</th>' +
+            '<th scope="col" class="pvg-th pvg-th-date">Date</th>' +
+            '<th scope="col" class="pvg-th pvg-th-note">Planning note</th>' +
+          '</tr></thead><tbody>' + html + '</tbody></table>';
 
         if (goHomeDate) {
           html += '' +
@@ -739,50 +743,84 @@ const articleSchema = {
     }
 
     .pvg-schedule {
-      display: grid;
-      gap: 0.75rem;
       margin-bottom: 1.5rem;
     }
 
-    .pvg-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      background: #f9fafb;
+    .pvg-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 8px;
-      padding: 1rem 1.25rem;
+      overflow: hidden;
+      font-size: 0.95rem;
     }
 
-    @media (min-width: 640px) {
-      .pvg-row {
-        grid-template-columns: 220px 1fr;
-        gap: 1.25rem;
-        align-items: start;
-      }
+    .pvg-th {
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6b7280;
+      background: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
     }
 
-    .pvg-row-weeks {
-      font-size: 1.15rem;
+    .pvg-th-note { width: 100%; }
+
+    .pvg-row td {
+      padding: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+
+    .pvg-row:last-child td {
+      border-bottom: 0;
+    }
+
+    .pvg-cell-age {
+      white-space: nowrap;
+      width: 1%;
+    }
+
+    .pvg-weeks {
+      font-size: 1.05rem;
       font-weight: 700;
       color: #111827;
     }
 
-    .pvg-row-date {
+    .pvg-cell-date {
+      white-space: nowrap;
+      width: 1%;
+    }
+
+    .pvg-date {
       font-size: 0.95rem;
+      color: #111827;
+      font-weight: 500;
+    }
+
+    .pvg-badge-wrap {
+      margin-top: 0.35rem;
+    }
+
+    .pvg-cell-note {
       color: #4b5563;
-      margin-top: 0.15rem;
+      line-height: 1.5;
     }
 
     .pvg-badge {
       display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.15rem 0.6rem;
-      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.7rem;
       font-weight: 600;
       border-radius: 9999px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      white-space: nowrap;
     }
 
     .pvg-badge--breeder {
@@ -797,25 +835,22 @@ const articleSchema = {
       border: 1px solid #bfdbfe;
     }
 
-    .pvg-row-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 0.35rem;
-    }
-
-    .pvg-row-note {
-      font-size: 0.95rem;
-      color: #4b5563;
-      line-height: 1.5;
-      margin-bottom: 0.5rem;
-    }
-
-    .pvg-row-discuss {
-      font-size: 0.85rem;
-      color: #6b7280;
-      font-style: italic;
-      line-height: 1.5;
+    @media (max-width: 540px) {
+      .pvg-table, .pvg-table thead, .pvg-table tbody, .pvg-table tr, .pvg-table td, .pvg-table th {
+        display: block;
+      }
+      .pvg-table thead { display: none; }
+      .pvg-row {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 0.85rem;
+      }
+      .pvg-row:last-child { border-bottom: 0; }
+      .pvg-row td {
+        padding: 0.15rem 0;
+        border-bottom: 0;
+      }
+      .pvg-cell-age, .pvg-cell-date { width: auto; display: inline-block; margin-right: 0.75rem; }
+      .pvg-cell-note { margin-top: 0.35rem; }
     }
 
     .pvg-handoff {
