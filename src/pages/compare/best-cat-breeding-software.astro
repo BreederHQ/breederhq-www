@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -399,6 +400,17 @@ const faqs = [
       Get Started Free
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Cat Breeding Workflows"
+    links={[
+      { title: "Cat Breeding Software", description: "Run your entire cat breeding program in one connected system.", url: "/cats" },
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Genetics and Health Testing", description: "OFA, PennHIP, Embark, COI calculation, multi-locus color.", url: "/workflows/genetics-and-health-testing" },
+      { title: "Pedigrees", description: "Multi-generation pedigree tracking with COI on every breeding.", url: "/workflows/pedigrees" },
+      { title: "Waitlists and Placement", description: "Applications, matching, deposits, automated notifications.", url: "/workflows/waitlists-and-placement" },
+      { title: "Best Breeding Software", description: "The parent guide comparing breeding software across species.", url: "/compare/best-breeding-software" }
+    ]}
+  />
   </main>
 
   <style>

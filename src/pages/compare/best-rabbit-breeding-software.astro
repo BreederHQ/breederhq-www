@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -399,6 +400,16 @@ const faqs = [
       Get Started Free
     </a>
   </div>
+  <RelatedWorkflows
+    heading="Related Rabbit Breeding Workflows"
+    links={[
+      { title: "Rabbit Breeding Software", description: "Run your entire rabbit breeding program in one connected system.", url: "/rabbits" },
+      { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+      { title: "Genetics and Health Testing", description: "OFA, PennHIP, Embark, COI calculation, multi-locus color.", url: "/workflows/genetics-and-health-testing" },
+      { title: "Pedigrees", description: "Multi-generation pedigree tracking with COI on every breeding.", url: "/workflows/pedigrees" },
+      { title: "Whelping and Offspring Care", description: "Weight tracking, anomaly alerts, neonatal dashboard.", url: "/workflows/offspring-care" }
+    ]}
+  />
   </main>
 
   <style>
