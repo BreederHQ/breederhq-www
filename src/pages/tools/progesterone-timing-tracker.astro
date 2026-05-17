@@ -1,0 +1,1123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Progesterone Timing Tracker', url: '/tools/progesterone-timing-tracker' }
+];
+
+const lastReviewedISO = '2026-05-16';
+
+const faqs = [
+  {
+    question: 'What does this progesterone tracker actually do?',
+    answer: 'You enter the first day of heat and any progesterone test results you have so far. The tool plots them in cycle order, shows the trend across readings, and offers general interpretation language tied to common P4 ranges (baseline, LH surge area, post-ovulation maturation). It is a planning and visualization aid. It is not a veterinary diagnostic tool, and it does not tell you a breeding date.'
+  },
+  {
+    question: 'What do the progesterone ranges mean?',
+    answer: 'Under 1 ng/mL is generally considered baseline or very early in the cycle. Around 2 ng/mL is the range where the LH surge often occurs in dogs. Roughly 4 to 10 ng/mL is the range where ovulation commonly happens. Above that, the eggs continue maturing and become fertilizable a few days after ovulation. These are general framing values, not decision thresholds. Different labs, sample handling, and individual dams all shift the numbers. Your reproductive vet is the source of truth on what your specific results mean.'
+  },
+  {
+    question: 'Why does the tool not just tell me when to breed?',
+    answer: 'Because that is a veterinary judgment call, not a calculator output. The optimal breeding day depends on the progesterone trend across multiple draws, the breeding method (natural, fresh chilled, or frozen), the male\u2019s availability, the lab\u2019s reference ranges, and any history specific to your dam. A single number out of context is not enough. The tool surfaces the trend and the general interpretation. Your vet decides the timing.'
+  },
+  {
+    question: 'How does breeding method change the timing?',
+    answer: 'Natural breedings are forgiving, since live cover spans several days and sperm survive in the reproductive tract. Fresh chilled semen is less forgiving and is typically used closer to peak fertility. Frozen semen is the most timing-sensitive, since thawed sperm have a very short lifespan and need to be deposited very close to the fertile window, often via surgical or trans-cervical insemination. The tracker lets you note the method so your vet has full context, but the actual timing decision still comes from your repro vet.'
+  },
+  {
+    question: 'How many tests should I run during a cycle?',
+    answer: 'Most programs start with a baseline draw early in proestrus and then test every two to three days, tightening to daily as values rise. Frozen-semen cycles tend to test more often to catch the LH surge precisely. Your repro vet will recommend a cadence based on the trend they are seeing. The tracker can hold as many readings as you log.'
+  },
+  {
+    question: 'Does this tool save my data?',
+    answer: 'No. Everything you enter stays in your browser tab and disappears when you close it. Nothing is sent to a server, nothing is saved to an account, and nothing is shared. If you want to keep a progesterone history per dam across cycles, log the values in BreederHQ. That way they live alongside her heat cycle history, breeding records, and litter outcomes for next time.'
+  }
+];
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/progesterone-timing-tracker#tool',
+  'name': 'Progesterone Timing Tracker for Dogs',
+  'description': 'Free progesterone timing tracker for dog breeders. Enter the first day of heat and your P4 test results to visualize the trend, see general interpretation language, and bring organized data to your reproductive vet. Educational planning tool only. Not veterinary advice.',
+  'url': 'https://breederhq.com/tools/progesterone-timing-tracker',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Dog Breeding Calculator',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'isPartOf': {
+    '@id': 'https://breederhq.com/tools#collection'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Log progesterone (P4) test results in cycle order',
+    'Visualize the P4 trend across readings',
+    'Tag readings with day of cycle relative to heat start',
+    'Show general interpretation bands (baseline, LH surge, ovulation, maturation)',
+    'Optional breeding method context (natural, fresh chilled, frozen, not sure)',
+    'Anonymous, no signup, no data saved'
+  ]
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Progesterone Timing Tracker for Dogs',
+  'description': 'Free progesterone timing tracker for dog breeders. Log P4 results, visualize the trend, and bring organized data to your reproductive vet.',
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'author': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'mainEntityOfPage': 'https://breederhq.com/tools/progesterone-timing-tracker'
+};
+---
+
+<BaseLayout
+  title="Free Progesterone Timing Tracker for Dogs | BreederHQ"
+  description="Free progesterone timing tracker for dog breeders. Log P4 test results, see the trend across readings, and bring organized data to your reproductive vet. Educational planning tool. Not veterinary advice."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Progesterone Timing Tracker</li>
+    </ol>
+  </nav>
+
+  <!-- Intro -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Progesterone Timing Tracker for Dogs</h1>
+      <p class="text-sm text-gray-500 mb-6">
+        <strong class="text-gray-700">Last Reviewed: May 16, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active dog breeders and reproductive veterinarians.
+      </p>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Log your P4 results in cycle order, see the trend across readings, and bring organized data to your reproductive vet. This is a planning and visualization tool, not a veterinary diagnostic. The actual breeding decision belongs to your vet, working from the full P4 trend and your dam&rsquo;s history.
+      </p>
+
+      <div class="ptt-banner-disclaimer">
+        <strong>Important.</strong> This tracker does not replace progesterone interpretation by a veterinarian. Lab assays, sample handling, and individual dams all shift the numbers. Treat all guidance here as general framing. Your reproductive vet is the source of truth on what your specific results mean and when to breed.
+      </div>
+    </div>
+  </section>
+
+  <!-- The Tracker -->
+  <section class="px-4 pb-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="ptt-card">
+        <form id="ptt-form" class="ptt-form" novalidate>
+          <div class="ptt-field">
+            <label for="ptt-heat-start" class="ptt-label">First Day of Heat <span aria-hidden="true" class="ptt-req">*</span></label>
+            <p class="ptt-help">The day you first noticed swelling, spotting, or behavior change. This becomes Day 1.</p>
+            <input
+              type="date"
+              id="ptt-heat-start"
+              name="heat-start"
+              class="ptt-input"
+              required
+            />
+          </div>
+
+          <div class="ptt-field">
+            <label for="ptt-method" class="ptt-label">Breeding Method <span class="ptt-optional">(optional)</span></label>
+            <p class="ptt-help">Used only to phrase the general timing context. Your vet still decides the actual day.</p>
+            <select id="ptt-method" name="method" class="ptt-input">
+              <option value="unsure">Not sure yet</option>
+              <option value="natural">Natural (live cover)</option>
+              <option value="fresh-chilled">Fresh chilled semen</option>
+              <option value="frozen">Frozen semen</option>
+            </select>
+          </div>
+
+          <fieldset class="ptt-rows-fieldset">
+            <legend class="ptt-label">Progesterone Test Results</legend>
+            <p class="ptt-help">Add one row per test. Date of draw and the P4 value in ng/mL. Add as many as you have.</p>
+
+            <div id="ptt-rows" class="ptt-rows" role="group" aria-label="Progesterone test rows">
+              <!-- Rows injected by script -->
+            </div>
+
+            <div class="ptt-rows-actions">
+              <button type="button" id="ptt-add-row" class="ptt-button-secondary">+ Add Test Row</button>
+            </div>
+          </fieldset>
+
+          <div class="ptt-form-actions">
+            <button type="submit" class="ptt-button">Update Timeline</button>
+          </div>
+
+          <p id="ptt-error" class="ptt-error" role="alert" hidden></p>
+        </form>
+
+        <div id="ptt-results" class="ptt-results" hidden aria-live="polite">
+          <h2 class="ptt-results-title">Cycle Timeline</h2>
+          <p class="ptt-results-subtitle">Readings shown in chronological order with general interpretation language. Your vet decides actual breeding timing.</p>
+
+          <div id="ptt-timeline" class="ptt-timeline">
+            <!-- Timeline rows injected by script -->
+          </div>
+
+          <div class="ptt-summary" id="ptt-summary">
+            <!-- Trend summary injected by script -->
+          </div>
+
+          <div class="ptt-bands">
+            <h3 class="ptt-bands-title">General Interpretation Bands</h3>
+            <ul class="ptt-bands-list">
+              <li><strong>Under 1 ng/mL.</strong> Baseline. Often early in the cycle, before things start moving.</li>
+              <li><strong>Around 2 ng/mL.</strong> LH surge often occurs in this general range. Watch closely from here.</li>
+              <li><strong>Roughly 4 to 10 ng/mL.</strong> Ovulation commonly occurs in this range. Eggs need time to mature after ovulation.</li>
+              <li><strong>Higher values.</strong> Continued maturation. Optimal breeding window depends on method and the full P4 trend, which is a veterinary call.</li>
+            </ul>
+            <p class="ptt-bands-note">These are general framing values, not decision thresholds. Defer to your reproductive vet on what your specific numbers mean.</p>
+          </div>
+
+          <div class="ptt-disclaimer">
+            <strong>Important.</strong> This is an educational planning tool. It does not replace progesterone interpretation by a veterinarian. Use your vet&rsquo;s reading of the full trend, lab reference ranges, and your dam&rsquo;s history as the source of truth on timing.
+          </div>
+
+          <div class="ptt-cta">
+            <p class="ptt-cta-text">
+              Want this trend saved alongside the dam&rsquo;s heat history, breeding records, and litter outcomes? BreederHQ keeps progesterone readings per cycle, per dam, so next year&rsquo;s planning starts with real history instead of a blank page.
+            </p>
+            <div class="ptt-cta-buttons">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="ptt-cta-primary">
+                Track Cycles in BreederHQ Free
+              </a>
+              <a href="/progesterone-testing-dogs" class="ptt-cta-secondary">
+                Learn About Progesterone Testing →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How to Use This Tracker</h2>
+      <ol class="space-y-4 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="ptt-ol-num">1</span>
+          <span><strong>Set the first day of heat.</strong> That anchors the day-of-cycle on every reading. If you&rsquo;re between two possible dates, use the earlier one.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="ptt-ol-num">2</span>
+          <span><strong>Add each test result.</strong> Enter the date of the draw and the P4 value in ng/mL. Add a new row for each test as they come back.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="ptt-ol-num">3</span>
+          <span><strong>Read the trend, not a single number.</strong> Direction and rate of change matter more than any one value. The timeline shows readings in cycle order so the trend is visible at a glance.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="ptt-ol-num">4</span>
+          <span><strong>Share the trend with your vet.</strong> Optimal breeding timing is a veterinary judgment call based on the full trend, the method, and your dam&rsquo;s history. Bring the data, let them call the day.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Interpretation Detail -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">What the Numbers Generally Mean</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Baseline (Under 1 ng/mL)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Early in the cycle. Often consistent with proestrus or the start of testing. The job here is to establish a baseline, not to decide anything yet.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">LH Surge Range (Around 2 ng/mL)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Values often consistent with the LH surge in dogs. This is the point most repro vets use as a reference for counting forward to peak fertility. Sample cadence usually tightens to daily here.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Ovulation Range (Roughly 4 to 10 ng/mL)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Values commonly consistent with ovulation. The eggs released still need to mature before they are fertilizable, which is why optimal breeding usually comes a couple of days after ovulation, not on the same day.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Post-Ovulation Maturation (Higher Values)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Continued rise. Timing within this window depends heavily on method (natural vs fresh chilled vs frozen) and on the full P4 trend leading in. This is where your reproductive vet earns their fee.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 text-base text-gray-600 leading-relaxed">
+        Values, units, and reference ranges vary by lab assay and by sample handling. A 5 ng/mL on one assay is not always equivalent to a 5 on another. Use the trend across multiple readings from the same lab, and let your vet calibrate to that lab&rsquo;s reference ranges.
+      </div>
+    </div>
+  </section>
+
+  <!-- Method-specific framing -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">How Method Changes the Conversation</h2>
+      <div class="space-y-5 text-lg text-gray-700 leading-relaxed">
+        <p>
+          <strong>Natural breeding.</strong> The most forgiving. Live cover typically spans several days, and viable sperm persist in the reproductive tract for a meaningful window. Most repro vets are comfortable with a wider day-range here.
+        </p>
+        <p>
+          <strong>Fresh chilled semen.</strong> Less forgiving. Sperm motility and viability drop with chilling and transport time. Timing usually targets a tighter window closer to peak fertility.
+        </p>
+        <p>
+          <strong>Frozen semen.</strong> The most timing-sensitive. Thawed frozen sperm have a short lifespan, often only hours. Cycles using frozen typically test more often, and inseminations are often surgical or trans-cervical, placed close to the fertile peak.
+        </p>
+        <p>
+          <strong>Not sure yet.</strong> That&rsquo;s fine. Test, log the trend, and discuss method with your vet alongside the data. You don&rsquo;t need to have method decided to start tracking.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why this isn't a breeding decision tool -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Why This Isn&rsquo;t a Breeding Decision Tool</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Optimal breeding timing depends on the shape of the entire P4 curve, the rate of change between draws, the lab&rsquo;s reference ranges, the method, the male&rsquo;s availability, and anything specific to this dam&rsquo;s history. A single number, or even a calculator&rsquo;s opinion, cannot replace that.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        The job of this tracker is to make the trend visible and the data organized. The job of your reproductive vet is to interpret it and call the day. Treat your vet&rsquo;s interpretation as the source of truth.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Read more in <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">Progesterone Testing in Dogs</a> and the <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Heat Cycle Tracking guide</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Testing in Dogs
+          </a>
+        </div>
+        <div>
+          <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Tracking, Explained
+          </a>
+        </div>
+        <div>
+          <a href="/dog-heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Heat Cycle Calculator (Educational Guide)
+          </a>
+        </div>
+        <div>
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Free Heat Cycle Calculator
+          </a>
+        </div>
+        <div>
+          <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Dog Breeding Software Overview
+          </a>
+        </div>
+        <div>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">
+            → All Free Tools
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Track Cycles in BreederHQ Free
+    </a>
+  </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('ptt-form');
+      var heatInput = document.getElementById('ptt-heat-start');
+      var methodInput = document.getElementById('ptt-method');
+      var rowsEl = document.getElementById('ptt-rows');
+      var addRowBtn = document.getElementById('ptt-add-row');
+      var error = document.getElementById('ptt-error');
+      var results = document.getElementById('ptt-results');
+      var timelineEl = document.getElementById('ptt-timeline');
+      var summaryEl = document.getElementById('ptt-summary');
+      if (!form || !heatInput || !rowsEl || !addRowBtn || !error || !results || !timelineEl || !summaryEl) return;
+
+      var rowSeq = 0;
+
+      try {
+        var today = new Date();
+        var iso = today.toISOString().slice(0, 10);
+        heatInput.max = iso;
+      } catch (e) { /* noop */ }
+
+      function addRow(prefillDate, prefillValue) {
+        rowSeq += 1;
+        var id = 'ptt-row-' + rowSeq;
+        var wrap = document.createElement('div');
+        wrap.className = 'ptt-row';
+        wrap.setAttribute('data-row-id', id);
+
+        wrap.innerHTML =
+          '<div class="ptt-row-fields">' +
+          '  <div class="ptt-row-field">' +
+          '    <label class="ptt-row-label" for="' + id + '-date">Test Date</label>' +
+          '    <input type="date" id="' + id + '-date" class="ptt-input ptt-row-date" />' +
+          '  </div>' +
+          '  <div class="ptt-row-field">' +
+          '    <label class="ptt-row-label" for="' + id + '-value">P4 (ng/mL)</label>' +
+          '    <input type="number" min="0" step="0.1" id="' + id + '-value" class="ptt-input ptt-row-value" placeholder="e.g. 2.3" inputmode="decimal" />' +
+          '  </div>' +
+          '  <div class="ptt-row-action">' +
+          '    <button type="button" class="ptt-row-remove" aria-label="Remove row">Remove</button>' +
+          '  </div>' +
+          '</div>';
+
+        var dateEl = wrap.querySelector('.ptt-row-date');
+        var valEl = wrap.querySelector('.ptt-row-value');
+        if (prefillDate && dateEl) dateEl.value = prefillDate;
+        if (prefillValue != null && valEl) valEl.value = String(prefillValue);
+
+        var removeBtn = wrap.querySelector('.ptt-row-remove');
+        removeBtn.addEventListener('click', function () {
+          wrap.parentNode && wrap.parentNode.removeChild(wrap);
+        });
+
+        rowsEl.appendChild(wrap);
+      }
+
+      // Seed with one empty row
+      addRow();
+
+      addRowBtn.addEventListener('click', function () {
+        addRow();
+      });
+
+      function parseLocalDate(str) {
+        if (!str) return null;
+        var parts = str.split('-');
+        if (parts.length !== 3) return null;
+        var y = parseInt(parts[0], 10);
+        var m = parseInt(parts[1], 10) - 1;
+        var d = parseInt(parts[2], 10);
+        var dt = new Date(y, m, d);
+        if (isNaN(dt.getTime())) return null;
+        return dt;
+      }
+
+      function diffDays(a, b) {
+        var ms = a.getTime() - b.getTime();
+        return Math.round(ms / 86400000);
+      }
+
+      function fmtDate(date) {
+        try {
+          return date.toLocaleDateString(undefined, {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        } catch (e) {
+          return date.toDateString();
+        }
+      }
+
+      function classifyValue(v) {
+        if (v < 1) return { band: 'baseline', label: 'Baseline range', note: 'Often early in the cycle.' };
+        if (v < 2.5) return { band: 'lh', label: 'LH surge range', note: 'Often consistent with the LH surge in dogs. Cadence typically tightens here.' };
+        if (v <= 10) return { band: 'ovulation', label: 'Ovulation range', note: 'Commonly consistent with ovulation. Eggs need time to mature.' };
+        return { band: 'maturation', label: 'Post-ovulation maturation', note: 'Continued rise. Optimal breeding window depends on method and full trend, a veterinary call.' };
+      }
+
+      function methodLanguage(method) {
+        if (method === 'natural') {
+          return 'With natural breeding, timing is generally the most forgiving. Your vet may suggest a wider day-range based on the full trend.';
+        }
+        if (method === 'fresh-chilled') {
+          return 'With fresh chilled semen, timing is tighter. Your vet will usually aim for a narrower window closer to peak fertility, based on the full trend.';
+        }
+        if (method === 'frozen') {
+          return 'With frozen semen, timing is the most critical. Your vet will usually want frequent draws and may place insemination close to the fertile peak.';
+        }
+        return 'Once method is decided (natural, fresh chilled, or frozen), your vet will narrow the suggested window. The trend you log here is the input for that decision.';
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function buildSummary(readings, method) {
+        if (readings.length === 0) {
+          return '<p class="ptt-summary-text">No test results entered yet. Add a row and update the timeline.</p>';
+        }
+
+        var first = readings[0];
+        var last = readings[readings.length - 1];
+        var direction = 'flat';
+        if (readings.length >= 2) {
+          if (last.value > first.value + 0.2) direction = 'rising';
+          else if (last.value < first.value - 0.2) direction = 'falling';
+        }
+
+        var lastClass = classifyValue(last.value);
+        var guidance = '';
+
+        if (lastClass.band === 'baseline') {
+          guidance = 'The latest reading is still in the baseline range. Cycle may be approaching the LH surge but is not there yet. Continue per your vet&rsquo;s recommended cadence.';
+        } else if (lastClass.band === 'lh') {
+          guidance = 'The latest reading is in the LH surge range. Many programs tighten test cadence to daily from this point. Discuss next-step timing with your vet.';
+        } else if (lastClass.band === 'ovulation') {
+          guidance = 'The latest reading is in the range often consistent with ovulation. Optimal breeding timing usually comes a couple of days after ovulation, but the actual day is your vet&rsquo;s call.';
+        } else {
+          guidance = 'The latest reading is in the post-ovulation maturation range. Eggs are typically fertilizable in this window for a limited time. Discuss timing with your vet based on method.';
+        }
+
+        var trendNote = '';
+        if (readings.length === 1) {
+          trendNote = 'Only one reading logged so far. Trend becomes more informative with additional draws over the next few days.';
+        } else if (direction === 'rising') {
+          trendNote = 'P4 has risen across logged readings. Trend direction is consistent with cycle progression.';
+        } else if (direction === 'falling') {
+          trendNote = 'P4 appears to have dropped between readings. Recheck sample handling, lab, and timing with your vet. Drops mid-cycle can also reflect lab assay variation.';
+        } else {
+          trendNote = 'P4 has been relatively flat across readings. May still be early. Discuss cadence with your vet.';
+        }
+
+        return (
+          '<h3 class="ptt-summary-title">Trend Summary</h3>' +
+          '<p class="ptt-summary-text"><strong>Latest reading:</strong> ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL on ' + escapeHtml(fmtDate(last.date)) + ' (Day ' + last.day + '). ' + escapeHtml(lastClass.label) + '.</p>' +
+          '<p class="ptt-summary-text">' + escapeHtml(trendNote) + '</p>' +
+          '<p class="ptt-summary-text">' + escapeHtml(guidance) + '</p>' +
+          '<p class="ptt-summary-text"><strong>Method context.</strong> ' + escapeHtml(methodLanguage(method)) + '</p>' +
+          '<p class="ptt-summary-text ptt-summary-vet"><strong>Suggested next action.</strong> Share this trend with your reproductive vet. Your vet&rsquo;s interpretation of the full curve is the source of truth on when to breed.</p>'
+        );
+      }
+
+      function buildTimeline(readings) {
+        if (readings.length === 0) {
+          return '<p class="ptt-empty">No test rows with both a date and a value yet.</p>';
+        }
+        var html = '';
+        for (var i = 0; i < readings.length; i++) {
+          var r = readings[i];
+          var c = classifyValue(r.value);
+          html +=
+            '<div class="ptt-tl-row ptt-tl-' + c.band + '">' +
+            '  <div class="ptt-tl-day">Day ' + r.day + '</div>' +
+            '  <div class="ptt-tl-date">' + escapeHtml(fmtDate(r.date)) + '</div>' +
+            '  <div class="ptt-tl-value">' + escapeHtml(r.value.toFixed(1)) + ' ng/mL</div>' +
+            '  <div class="ptt-tl-band">' + escapeHtml(c.label) + '<span class="ptt-tl-note">' + escapeHtml(c.note) + '</span></div>' +
+            '</div>';
+        }
+        return html;
+      }
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        error.hidden = true;
+        error.textContent = '';
+
+        var heatStart = parseLocalDate(heatInput.value);
+        if (!heatStart) {
+          error.textContent = 'Enter a valid first day of heat to anchor the cycle.';
+          error.hidden = false;
+          heatInput.focus();
+          return;
+        }
+
+        var method = methodInput && methodInput.value ? methodInput.value : 'unsure';
+
+        var rowEls = rowsEl.querySelectorAll('.ptt-row');
+        var readings = [];
+        for (var i = 0; i < rowEls.length; i++) {
+          var dEl = rowEls[i].querySelector('.ptt-row-date');
+          var vEl = rowEls[i].querySelector('.ptt-row-value');
+          var dateStr = dEl ? dEl.value : '';
+          var valStr = vEl ? vEl.value : '';
+          if (!dateStr && !valStr) continue; // skip fully-empty rows
+          if (!dateStr || !valStr) {
+            error.textContent = 'Each test row needs both a date and a P4 value. Remove empty rows or fill them in.';
+            error.hidden = false;
+            return;
+          }
+          var dt = parseLocalDate(dateStr);
+          if (!dt) {
+            error.textContent = 'One of the test dates is not valid. Check the date pickers.';
+            error.hidden = false;
+            return;
+          }
+          var v = parseFloat(valStr);
+          if (isNaN(v) || v < 0) {
+            error.textContent = 'P4 values must be a number of 0 or greater (ng/mL).';
+            error.hidden = false;
+            return;
+          }
+          if (v > 100) {
+            error.textContent = 'A P4 value above 100 ng/mL is outside expected range for this tool. Double-check the entry.';
+            error.hidden = false;
+            return;
+          }
+          var dayOfCycle = diffDays(dt, heatStart) + 1;
+          readings.push({ date: dt, value: v, day: dayOfCycle });
+        }
+
+        readings.sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
+
+        timelineEl.innerHTML = buildTimeline(readings);
+        summaryEl.innerHTML = buildSummary(readings, method);
+
+        results.hidden = false;
+        try {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (e) { /* noop */ }
+      });
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .ptt-banner-disclaimer {
+      margin-top: 1.5rem;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .ptt-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .ptt-form {
+      margin-bottom: 1.5rem;
+    }
+
+    .ptt-field {
+      margin-bottom: 1.25rem;
+    }
+
+    .ptt-label {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .ptt-req {
+      color: #b91c1c;
+      margin-left: 0.15rem;
+    }
+
+    .ptt-optional {
+      font-weight: 400;
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-left: 0.25rem;
+    }
+
+    .ptt-help {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+
+    .ptt-input {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+
+    .ptt-input:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .ptt-rows-fieldset {
+      border: 1px dashed #e5e7eb;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0 0 1.25rem 0;
+    }
+
+    .ptt-rows-fieldset legend {
+      padding: 0 0.5rem;
+    }
+
+    .ptt-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .ptt-row {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    .ptt-row-fields {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      align-items: end;
+    }
+
+    @media (min-width: 640px) {
+      .ptt-row-fields {
+        grid-template-columns: 1fr 1fr auto;
+      }
+    }
+
+    .ptt-row-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.25rem;
+    }
+
+    .ptt-row-action {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .ptt-row-remove {
+      padding: 0.55rem 0.9rem;
+      background: #ffffff;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 40px;
+    }
+
+    .ptt-row-remove:hover {
+      background: #fef2f2;
+    }
+
+    .ptt-rows-actions {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .ptt-button {
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 150ms ease;
+    }
+
+    .ptt-button:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .ptt-button-secondary {
+      padding: 0.55rem 1rem;
+      background: #ffffff;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 40px;
+    }
+
+    .ptt-button-secondary:hover {
+      background: #fff7ed;
+      border-color: hsl(24, 95%, 80%);
+    }
+
+    .ptt-form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.25rem;
+    }
+
+    .ptt-error {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #b91c1c;
+      font-size: 0.95rem;
+    }
+
+    .ptt-results {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .ptt-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .ptt-results-subtitle {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .ptt-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ptt-tl-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-left-width: 6px;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    @media (min-width: 640px) {
+      .ptt-tl-row {
+        grid-template-columns: 90px 1fr 1.2fr 1.8fr;
+        align-items: start;
+        gap: 0.75rem;
+      }
+    }
+
+    .ptt-tl-baseline { border-left-color: #9ca3af; }
+    .ptt-tl-lh { border-left-color: hsl(24, 95%, 53%); }
+    .ptt-tl-ovulation { border-left-color: hsl(142, 76%, 36%); }
+    .ptt-tl-maturation { border-left-color: hsl(217, 91%, 60%); }
+
+    .ptt-tl-day {
+      font-weight: 700;
+      color: #111827;
+      font-size: 0.95rem;
+    }
+
+    .ptt-tl-date {
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+
+    .ptt-tl-value {
+      font-weight: 700;
+      color: #111827;
+      font-size: 1rem;
+    }
+
+    .ptt-tl-band {
+      color: #1f2937;
+      font-size: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .ptt-tl-note {
+      color: #6b7280;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .ptt-empty {
+      padding: 1rem;
+      background: #f9fafb;
+      border: 1px dashed #e5e7eb;
+      border-radius: 8px;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .ptt-summary {
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ptt-summary-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .ptt-summary-text {
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .ptt-summary-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .ptt-summary-vet {
+      padding-top: 0.6rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .ptt-bands {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ptt-bands-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.6rem;
+    }
+
+    .ptt-bands-list {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin-bottom: 0.6rem;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .ptt-bands-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .ptt-bands-note {
+      color: #6b7280;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .ptt-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .ptt-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .ptt-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .ptt-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .ptt-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .ptt-cta-primary:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .ptt-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .ptt-cta-secondary:hover {
+      background: #ffffff;
+    }
+
+    .ptt-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>
