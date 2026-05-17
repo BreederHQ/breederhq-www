@@ -1,0 +1,393 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Equine Boarding', url: '/services/equine-boarding' }
+];
+
+const faqs = [
+  {
+    question: 'What is the difference between pasture board, full care, and self care?',
+    answer: 'Pasture board keeps your horse on turnout 24/7 with run-in shelter, group feeding, and minimal individual handling. Full care includes a stall, twice-daily feeding, stall cleaning, blanket changes, turnout to a paddock or pasture, and basic handling for the farrier and veterinarian. Self care provides a stall or paddock and storage for your feed and shavings, but you are responsible for all daily horse care, supplies, and labor.'
+  },
+  {
+    question: 'How much does horse boarding cost?',
+    answer: 'Boarding rates vary widely by region, facility type, and level of care. Pasture board typically runs lower than full care because labor and stall maintenance are reduced. Full care at a training facility with an indoor arena, heated wash stall, and on-site trainer will sit at the high end of the local range. Show barns in major metro areas charge significantly more than rural pasture-board operations. Always confirm what is and is not included: hay quality, grain, bedding, blanketing, holding for vet and farrier, and turnout time are common line items.'
+  },
+  {
+    question: 'What should I look for in a boarding facility?',
+    answer: 'Evaluate fencing condition, footing in stalls and arenas, turnout size and rotation, hay and water quality, manure management, biosecurity for new arrivals, fire-safety setup, and the facility\'s relationship with a local equine veterinarian and farrier. Ask about feeding schedules, blanketing policy, supplement handling, who is on the property overnight, and how emergencies are handled. A well-run barn welcomes a thorough tour.'
+  },
+  {
+    question: 'Do I need a training facility or just boarding?',
+    answer: 'Training facilities offer boarding plus on-site instruction, regular professional rides, and access to coaches who specialize in dressage, hunter/jumper, western performance, eventing, or another discipline. Choose a training barn if you compete, are advancing through the levels, or want your young horse started under saddle. A traditional boarding barn is the right fit if you ride independently and value turnout, trail access, or lower cost over coaching infrastructure.'
+  },
+  {
+    question: 'How important is turnout?',
+    answer: 'Turnout is one of the most important boarding decisions you will make. Horses are designed to move and forage for most of the day. Look at turnout group sizes, individual versus group turnout options, paddock size, footing during wet seasons, and whether mares, geldings, and stallions are housed separately. Confirm hours of turnout, not just whether turnout is offered.'
+  },
+  {
+    question: 'What facility features matter most for performance horses?',
+    answer: 'Performance and show barns should offer an indoor arena with quality footing, an outdoor arena, hot and cold wash stalls, a covered round pen or lunge area, secure tack and feed rooms, ample trailer parking and turnaround, and on-site or close veterinary access. Reliable footing maintenance and dust control matter as much as the arena itself.'
+  },
+  {
+    question: 'Does the facility coordinate farrier and veterinary visits?',
+    answer: 'Most full-care facilities will hold your horse for scheduled farrier and veterinary appointments, and many have a preferred farrier and veterinarian who service the property on regular rotations. Confirm whether holding is included in board or billed separately, and whether you can use your own service providers.'
+  },
+  {
+    question: 'What about breeding facilities?',
+    answer: 'A breeding facility offers mare care for boarding, breeding, foaling, and rebreeding, as well as stallion services, semen collection, shipping, and frozen storage. Look for breeding sheds, foaling stalls with cameras, foaling attendants, an ultrasound-equipped exam stall, mare and foal turnout, and a working relationship with a reproductive veterinarian.'
+  }
+];
+---
+
+<BaseLayout
+  title="Equine Boarding Facilities | BreederHQ Marketplace"
+  description="Find equine boarding facilities near you. Compare pasture board, full care, self care, and training barns. Turnout, arenas, veterinary access, farrier coordination, and breeding facilities for horse owners."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={{
+    name: 'Equine Boarding',
+    description: 'Discovery directory for horse boarding facilities including pasture board, full care, self care, training barns, and breeding facilities.',
+    serviceType: 'Equine Boarding',
+    areaServed: 'United States',
+    offerDescription: 'Find equine boarding facilities by type of care, turnout, arena access, veterinary and farrier coordination, and breeding services.',
+    offerUrl: 'https://breederhq.com/services/equine-boarding'
+  }}
+>
+  <main>
+    <!-- Breadcrumb nav (visible) -->
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">Horses</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Equine Boarding</li>
+      </ol>
+    </nav>
+
+    <!-- Section 1: Hero -->
+    <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <p class="text-sm font-semibold uppercase tracking-wide text-amber-700 mb-3">Equine Services on BreederHQ Marketplace</p>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">Equine Boarding Facilities</h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-6">
+          Pasture board, full care, self care, training barns, and breeding facilities. Browse equine boarding by type of care, turnout, arena access, and proximity to your veterinarian and farrier.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed mb-10">
+          Horses are not pets in cages. They are 1,000-pound athletes with seasonal cycling, daily turnout needs, hoof-care schedules every four to six weeks, and a digestive system that does not tolerate inconsistent forage. The boarding facility you choose shapes your horse&rsquo;s soundness, behavior, and performance more than almost any other decision you will make as an owner.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/horses" class="inline-flex items-center justify-center bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-[hsl(24,95%,47%)] transition">
+            Browse Equine Services
+          </a>
+          <a href="/for-providers/equine-services" class="inline-flex items-center justify-center border-2 border-stone-300 text-gray-800 px-6 py-3 rounded-lg text-base font-semibold hover:border-amber-600 hover:text-amber-700 transition">
+            List Your Facility
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Types of Equine Boarding -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Types of Equine Boarding</h2>
+        <p class="text-gray-600 mb-10">Boarding is not a single product. The level of care, turnout model, and facility focus all matter, and the right fit depends on your horse, your discipline, and how much daily care you want to do yourself.</p>
+
+        <div class="space-y-6">
+          <div class="border border-stone-200 rounded-xl p-6 bg-stone-50">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pasture Board</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Horses live out 24/7 in groups with run-in shelter, ad-lib or scheduled hay, and shared automatic or trough water. Pasture board is typically the lowest-cost option and is well suited to easy keepers, retired horses, broodmares, and young stock that benefit from constant movement and herd dynamics. Confirm shelter capacity for the herd, footing in wet seasons, and how supplements, blankets, and individual feed are handled.
+            </p>
+          </div>
+
+          <div class="border border-stone-200 rounded-xl p-6 bg-stone-50">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Full Care (Stall Board)</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Your horse has an assigned stall and is fed, watered, mucked, turned out, brought in, and handled by barn staff on a fixed daily schedule. Blanketing, fly masks, holding for the farrier and veterinarian, and basic medication administration are usually included or available for a small fee. Full care is the standard for performance horses, show barns, and any owner whose schedule does not permit daily care.
+            </p>
+          </div>
+
+          <div class="border border-stone-200 rounded-xl p-6 bg-stone-50">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Self Care</h3>
+            <p class="text-gray-700 leading-relaxed">
+              The facility provides a stall, paddock, or pasture spot and storage for your hay, grain, and bedding. You are responsible for daily feeding, watering, stall cleaning, turnout, and supplies. Self care is the lowest-cost option, but it requires you to be on the property every day, including holidays, storms, and emergencies. Backup-coverage arrangements with another boarder are essential.
+            </p>
+          </div>
+
+          <div class="border border-stone-200 rounded-xl p-6 bg-stone-50">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Training Facilities</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Boarding plus an on-site trainer or training program in a specific discipline: dressage, hunter/jumper, eventing, western performance, reining, cutting, barrel racing, ranch riding, or driving. Programs may include a set number of professional rides per week, lessons, show coaching, and horse development from green-broke through finished. Expect higher monthly cost and a more structured program calendar.
+            </p>
+          </div>
+
+          <div class="border border-stone-200 rounded-xl p-6 bg-stone-50">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Breeding Facilities</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Specialized boarding for broodmares, foaling, and rebreeding, plus stallion services such as collection, cooled shipped semen, frozen storage, and live cover. Look for foaling stalls with cameras, attended foal watch, an ultrasound-equipped exam area, separate mare and foal turnout, a quarantine area for incoming mares, and a working relationship with a board-certified theriogenologist or reproductive veterinarian.
+            </p>
+          </div>
+
+          <div class="border border-stone-200 rounded-xl p-6 bg-stone-50">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Retirement and Rehabilitation Board</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Quiet facilities focused on senior horses, layups after injury or surgery, and long-term retirees. Look for individualized feeding programs, soft-tissue rehabilitation experience, hand-walking and controlled exercise protocols, and the ability to coordinate closely with your veterinarian on a written rehab plan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: What to Look For -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">What to Look for in a Boarding Facility</h2>
+        <p class="text-gray-600 mb-10">A good barn tour answers operational questions, not just aesthetic ones. Bring a notebook. Walk the property. Talk to current boarders.</p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Fencing and Footing</h3>
+            <p class="text-sm text-gray-600">Intact fencing with no broken boards or downed wire. Stall and arena footing that is level, dust-controlled, and well-drained. Paddocks that are not bottomless mud during the wet season.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Turnout Program</h3>
+            <p class="text-sm text-gray-600">Hours per day, group versus individual, paddock size, herd composition, and how new horses are introduced. Confirm whether turnout is reduced in winter or wet weather.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Hay and Feed Quality</h3>
+            <p class="text-sm text-gray-600">Ask to see the hay. Look for clean, green, leafy forage with no mold or dust. Confirm grain brands, supplement handling, feeding frequency, and how dietary changes are managed.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Water</h3>
+            <p class="text-sm text-gray-600">Automatic waterers or buckets cleaned daily. Heated water in winter climates. Reliable water supply in pasture turnout.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Biosecurity and Quarantine</h3>
+            <p class="text-sm text-gray-600">Vaccination and Coggins requirements for incoming horses, isolation protocol for new arrivals, and a written response plan for infectious disease.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Fire and Emergency Plan</h3>
+            <p class="text-sm text-gray-600">Smoke detectors, accessible fire extinguishers, clearly posted emergency contacts, a documented evacuation plan, and at least one staff member on or near the property overnight.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Veterinary Relationship</h3>
+            <p class="text-sm text-gray-600">A named primary equine veterinarian, defined emergency-vet coverage, and willingness to hold your horse for routine appointments.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Farrier Coordination</h3>
+            <p class="text-sm text-gray-600">A regular farrier on the property every four to six weeks, with the option to use your own. The facility should schedule, hold, and confirm appointments.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Staff Coverage</h3>
+            <p class="text-sm text-gray-600">Who feeds and checks horses on weekends, holidays, and overnight. How illness or injury is detected and communicated to owners.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">Boarding Contract</h3>
+            <p class="text-sm text-gray-600">A written agreement covering rates, included services, payment terms, notice period, liability, vaccination requirements, and what happens if board goes unpaid.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Facility Features -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Facility Features</h2>
+        <p class="text-gray-600 mb-10">Filter facilities by the features that actually matter for your horse and your discipline.</p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Indoor Arena</h3>
+            <p class="text-sm text-gray-600">Year-round riding regardless of weather, with footing maintenance and lighting.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Outdoor Arena</h3>
+            <p class="text-sm text-gray-600">Dressage court, jump field, or all-purpose arena with sand or fiber footing.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Round Pen / Lunge Area</h3>
+            <p class="text-sm text-gray-600">Covered or open round pen for groundwork, lunging, and starting young horses.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Hot &amp; Cold Wash Stalls</h3>
+            <p class="text-sm text-gray-600">Essential for show prep, post-ride cool-out, and rehabilitation hydrotherapy.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Heated Tack Room</h3>
+            <p class="text-sm text-gray-600">Secure, climate-stable storage for saddles, bridles, and personal gear.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Individual Turnout</h3>
+            <p class="text-sm text-gray-600">Private paddocks for stallions, valuable show horses, or horses that do not group well.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Group Turnout</h3>
+            <p class="text-sm text-gray-600">Mare bands, gelding groups, and youngstock pastures with established herd dynamics.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Trailer Parking</h3>
+            <p class="text-sm text-gray-600">Long-term parking and turnaround space for two-horse straight loads through gooseneck rigs.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Trail Access</h3>
+            <p class="text-sm text-gray-600">On-property trails or direct access to public riding areas.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Cross-Country Schooling</h3>
+            <p class="text-sm text-gray-600">Permanent fences and water complexes for eventers and field-hunter prospects.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">Foaling Stalls &amp; Cameras</h3>
+            <p class="text-sm text-gray-600">Oversized foaling stalls with monitored cameras and attended foal watch.</p>
+          </div>
+          <div class="border border-stone-200 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">On-Site Veterinary</h3>
+            <p class="text-sm text-gray-600">Resident or regularly scheduled equine veterinarian and an exam stall with stocks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Boarding Cost Factors -->
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Boarding Cost Factors</h2>
+        <p class="text-gray-600 mb-10">Monthly board can vary by several hundred dollars within the same zip code. Understanding what drives the price helps you compare facilities fairly.</p>
+
+        <div class="space-y-5">
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Level of Care</h3>
+            <p class="text-sm text-gray-700">Self care is cheapest, pasture board sits in the middle, and full care at a training facility is the most expensive. Each level represents a different labor and infrastructure cost to the facility.</p>
+          </div>
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Region and Land Cost</h3>
+            <p class="text-sm text-gray-700">Suburban barns near major metros pay more for land, hay, labor, and insurance than rural pasture operations. Boarding rates reflect those costs.</p>
+          </div>
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Hay and Grain Included</h3>
+            <p class="text-sm text-gray-700">Some facilities include premium hay and a base grain in the monthly rate. Others bill hay, grain, and supplements separately. Always compare the all-in monthly cost, not just the headline board rate.</p>
+          </div>
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Turnout Time</h3>
+            <p class="text-sm text-gray-700">24/7 turnout reduces stall-cleaning labor and bedding cost. Limited turnout with daily in-and-out adds staff time, which is priced into the board.</p>
+          </div>
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Facility Amenities</h3>
+            <p class="text-sm text-gray-700">Indoor arenas, heated wash stalls, on-site trainers, cross-country courses, and round pens all carry a real operating cost and are reflected in board.</p>
+          </div>
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Add-On Services</h3>
+            <p class="text-sm text-gray-700">Blanketing, fly-mask rotation, holding for vet and farrier, medication administration, fly-spray application, scheduled hand-walking, and supplement mixing may be included or billed as line items.</p>
+          </div>
+          <div class="bg-white border-l-4 border-amber-500 rounded-r-lg p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">Training and Lessons</h3>
+            <p class="text-sm text-gray-700">Training board bundles a set number of professional rides or lessons per week. Compare on a per-ride basis, not just the bundle price.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Regional Equine Hubs -->
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Regional Equine Hubs</h2>
+        <p class="text-gray-600 mb-10">Certain regions concentrate equine infrastructure, veterinary specialists, farriers, and competition venues. Boarding availability and pricing in these areas reflects the higher concentration of programs.</p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Ocala, FL</h3>
+            <p class="text-sm text-gray-700">The Horse Capital of the World. Heavy concentration of Thoroughbred, sport horse, and Quarter Horse operations, year-round outdoor competition, and the World Equestrian Center.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Wellington, FL</h3>
+            <p class="text-sm text-gray-700">Winter capital of show jumping, dressage, and polo. Dense seasonal market for full-care and training board during the circuit.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Lexington, KY</h3>
+            <p class="text-sm text-gray-700">Thoroughbred and Saddlebred heartland. Premier reproductive veterinary care, the Kentucky Horse Park, and a deep bench of breeding farms.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Aiken, SC</h3>
+            <p class="text-sm text-gray-700">Eventing, steeplechase, and polo hub with mild winters. Strong network of cross-country schooling facilities and sport horse training barns.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Scottsdale, AZ</h3>
+            <p class="text-sm text-gray-700">Arabian and reining stronghold with the Scottsdale Arabian Show and year-round outdoor riding climate.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Weatherford / Fort Worth, TX</h3>
+            <p class="text-sm text-gray-700">Cutting, reining, and ranch horse capital. Deep population of training facilities and breeding operations across western performance disciplines.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Temecula / San Diego, CA</h3>
+            <p class="text-sm text-gray-700">Hunter/jumper, dressage, and Arabian show circuits with year-round outdoor riding and a concentration of FEI-level training programs.</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Middleburg / Northern VA</h3>
+            <p class="text-sm text-gray-700">Foxhunting, eventing, and field hunter country with historic boarding farms, hunt territory, and direct access to East Coast competition venues.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: FAQ -->
+    <section id="faq" class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="bg-white border border-stone-200 rounded-lg p-5 group">
+              <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-start gap-4">
+                <span>{faq.question}</span>
+                <span class="text-amber-600 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
+              </summary>
+              <p class="mt-3 text-gray-700 text-sm leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+
+        <div class="mt-12 p-6 bg-white border border-stone-200 rounded-xl">
+          <h3 class="font-semibold text-gray-900 mb-2">Related</h3>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li>
+              <a href="/horses" class="text-amber-700 hover:underline">Horse Breeding Software</a> for breeders managing broodmare bands, foaling, and stallion services.
+            </li>
+            <li>
+              <a href="/services/farriers" class="text-amber-700 hover:underline">Find Farriers</a> in your area.
+            </li>
+            <li>
+              <a href="/trust" class="text-amber-700 hover:underline">Trust &amp; Safety</a> on the BreederHQ Marketplace.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Provider CTA -->
+    <section class="py-16 bg-gradient-to-br from-stone-900 to-stone-800">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm font-semibold uppercase tracking-wide text-amber-400 mb-3">For Boarding Facility Owners</p>
+        <h2 class="text-3xl font-bold mb-4 text-white">Reach Horse Owners Actively Looking for a Barn</h2>
+        <p class="text-lg text-stone-200 mb-3 max-w-2xl mx-auto">
+          BreederHQ Marketplace puts your boarding facility in front of horse owners searching by region, level of care, turnout, arena access, and discipline focus.
+        </p>
+        <p class="text-base text-stone-300 mb-8 max-w-2xl mx-auto">
+          List your stalls and pasture spots, surface your indoor arena and wash stalls, document your veterinary and farrier relationships, and show prospective boarders the facility before they ever pick up the phone.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/for-providers/equine-services" class="inline-flex items-center justify-center bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,47%)] transition">
+            List Your Facility
+          </a>
+          <a href="/trust" class="inline-flex items-center justify-center border-2 border-stone-400 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:border-amber-400 hover:text-amber-300 transition">
+            How Trust &amp; Verification Works
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
