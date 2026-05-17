@@ -641,13 +641,28 @@ const articleSchema = {
           trendNote = 'P4 has been relatively flat across readings. May still be early. Discuss cadence with your vet.';
         }
 
+        var headingStyle =
+          'display:flex;align-items:center;gap:0.6rem;' +
+          'font-size:1.15rem;font-weight:800;color:#111827;' +
+          'letter-spacing:-0.01em;margin:0 0 0.85rem 0;padding:0;line-height:1.2;';
+
+        var accentStyle =
+          'display:inline-block;width:3px;height:18px;border-radius:2px;' +
+          'background:hsl(24,95%,53%);flex-shrink:0;';
+
+        var paraStyle =
+          'display:block;color:#1f2937;line-height:1.6;font-size:1rem;' +
+          'margin:0 0 0.6rem 0;padding:0;';
+
+        var vetParaStyle = paraStyle + 'padding-top:0.6rem;border-top:1px solid #e5e7eb;margin-bottom:0;';
+
         return (
-          '<h3 class="ptt-summary-title">Trend Summary</h3>' +
-          '<p class="ptt-summary-text"><strong>Latest reading:</strong> ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL on ' + escapeHtml(fmtDate(last.date)) + ' (Day ' + last.day + '). ' + escapeHtml(lastClass.label) + '.</p>' +
-          '<p class="ptt-summary-text">' + escapeHtml(trendNote) + '</p>' +
-          '<p class="ptt-summary-text">' + escapeHtml(guidance) + '</p>' +
-          '<p class="ptt-summary-text"><strong>Method context.</strong> ' + escapeHtml(methodLanguage(method)) + '</p>' +
-          '<p class="ptt-summary-text ptt-summary-vet"><strong>Suggested next action.</strong> Share this trend with your reproductive vet. Your vet&rsquo;s interpretation of the full curve is the source of truth on when to breed.</p>'
+          '<h3 style="' + headingStyle + '"><span style="' + accentStyle + '" aria-hidden="true"></span>Trend Summary</h3>' +
+          '<p style="' + paraStyle + '"><strong>Latest reading:</strong> ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL on ' + escapeHtml(fmtDate(last.date)) + ' (Day ' + last.day + '). ' + escapeHtml(lastClass.label) + '.</p>' +
+          '<p style="' + paraStyle + '">' + escapeHtml(trendNote) + '</p>' +
+          '<p style="' + paraStyle + '">' + escapeHtml(guidance) + '</p>' +
+          '<p style="' + paraStyle + '"><strong>Method context.</strong> ' + escapeHtml(methodLanguage(method)) + '</p>' +
+          '<p style="' + vetParaStyle + '"><strong>Suggested next action.</strong> Share this trend with your reproductive vet. Your vet&rsquo;s interpretation of the full curve is the source of truth on when to breed.</p>'
         );
       }
 
@@ -691,7 +706,7 @@ const articleSchema = {
 
       function buildProjection(readings, method) {
         if (readings.length === 0) {
-          return '<div class="ptt-proj-empty">Add at least one P4 reading to see a projection.</div>';
+          return '<div style="padding:1rem;background:#f9fafb;border:1px dashed #e5e7eb;border-radius:8px;color:#6b7280;text-align:center;">Add at least one P4 reading to see a projection.</div>';
         }
 
         var lhEst = crossingDate(readings, 2);
@@ -699,69 +714,121 @@ const articleSchema = {
         var last = readings[readings.length - 1];
         var win = breedingWindowDays(method);
 
-        var lhBlock = '';
+        var cardBase =
+          'display:flex;flex-direction:column;gap:0.4rem;' +
+          'padding:1rem 1.15rem 1rem 1.4rem;border-radius:12px;' +
+          'border-width:1px;border-style:solid;background:#ffffff;' +
+          'box-shadow:0 1px 3px rgba(17,24,39,0.05);' +
+          'position:relative;overflow:hidden;';
+
+        var accentBase =
+          'position:absolute;top:0;left:0;bottom:0;width:5px;display:block;';
+
+        var labelStyle =
+          'display:block;font-size:0.72rem;font-weight:800;color:#6b7280;' +
+          'text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.2rem 0;' +
+          'padding:0;line-height:1.2;';
+
+        var valueStyle =
+          'display:block;font-size:1.2rem;font-weight:800;color:#111827;' +
+          'line-height:1.25;letter-spacing:-0.01em;margin:0 0 0.25rem 0;padding:0;';
+
+        var noteStyle =
+          'display:block;font-size:0.875rem;color:#4b5563;line-height:1.5;' +
+          'margin:0;padding:0;';
+
+        function card(variant, labelText, valueText, noteText) {
+          var bg, border, accent;
+          if (variant === 'lh') {
+            bg = 'linear-gradient(180deg,#fffbeb 0%,#ffffff 70%)';
+            border = '#fde68a';
+            accent = '#f59e0b';
+          } else if (variant === 'ovulation') {
+            bg = 'linear-gradient(180deg,#f0fdf4 0%,#ffffff 70%)';
+            border = '#bbf7d0';
+            accent = '#16a34a';
+          } else if (variant === 'window') {
+            bg = 'linear-gradient(180deg,hsl(24,95%,96%) 0%,#ffffff 70%)';
+            border = 'hsl(24,95%,80%)';
+            accent = 'hsl(24,95%,53%)';
+          } else {
+            bg = '#f9fafb';
+            border = '#e5e7eb';
+            accent = '#d1d5db';
+          }
+          var cardStyle = cardBase + 'background:' + bg + ';border-color:' + border + ';' +
+            (variant === 'pending' ? 'border-style:dashed;' : '');
+          var accentStyle = accentBase + 'background:' + accent + ';';
+          return (
+            '<div style="' + cardStyle + '">' +
+            '<span style="' + accentStyle + '" aria-hidden="true"></span>' +
+            '<h4 style="' + labelStyle + '">' + escapeHtml(labelText) + '</h4>' +
+            '<div style="' + valueStyle + '">' + valueText + '</div>' +
+            '<div style="' + noteStyle + '">' + noteText + '</div>' +
+            '</div>'
+          );
+        }
+
+        var lhBlock, ovuBlock, winBlock;
+
         if (lhEst) {
           var lhPrefix = lhEst.atOrBefore ? 'On or before ' : 'Estimated ';
           var lhExactNote = lhEst.exact ? '' : ' (interpolated)';
-          lhBlock =
-            '<div class="ptt-proj-card ptt-proj-lh">' +
-            '  <h4 class="ptt-proj-label">LH surge estimate</h4>' +
-            '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(lhEst.date)) + '</div>' +
-            '  <div class="ptt-proj-note">' + escapeHtml(lhPrefix) + 'P4 crossed ~2 ng/mL near Day ' + lhEst.day + escapeHtml(lhExactNote) + '.</div>' +
-            '</div>';
+          lhBlock = card('lh', 'LH surge estimate',
+            escapeHtml(fmtDate(lhEst.date)),
+            escapeHtml(lhPrefix) + 'P4 crossed ~2 ng/mL near Day ' + lhEst.day + escapeHtml(lhExactNote) + '.'
+          );
         } else {
-          lhBlock =
-            '<div class="ptt-proj-card ptt-proj-pending">' +
-            '  <h4 class="ptt-proj-label">LH surge estimate</h4>' +
-            '  <div class="ptt-proj-value">Not reached yet</div>' +
-            '  <div class="ptt-proj-note">Latest reading is ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL. Watch for the cross near ~2 ng/mL.</div>' +
-            '</div>';
+          lhBlock = card('pending', 'LH surge estimate', 'Not reached yet',
+            'Latest reading is ' + escapeHtml(last.value.toFixed(1)) + ' ng/mL. Watch for the cross near ~2 ng/mL.'
+          );
         }
 
-        var ovuBlock = '';
         if (ovuEst) {
           var ovuPrefix = ovuEst.atOrBefore ? 'On or before ' : 'Estimated ';
           var ovuExactNote = ovuEst.exact ? '' : ' (interpolated)';
-          ovuBlock =
-            '<div class="ptt-proj-card ptt-proj-ovulation">' +
-            '  <h4 class="ptt-proj-label">Ovulation estimate</h4>' +
-            '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(ovuEst.date)) + '</div>' +
-            '  <div class="ptt-proj-note">' + escapeHtml(ovuPrefix) + 'P4 crossed ~5 ng/mL near Day ' + ovuEst.day + escapeHtml(ovuExactNote) + '.</div>' +
-            '</div>';
+          ovuBlock = card('ovulation', 'Ovulation estimate',
+            escapeHtml(fmtDate(ovuEst.date)),
+            escapeHtml(ovuPrefix) + 'P4 crossed ~5 ng/mL near Day ' + ovuEst.day + escapeHtml(ovuExactNote) + '.'
+          );
         } else {
-          ovuBlock =
-            '<div class="ptt-proj-card ptt-proj-pending">' +
-            '  <h4 class="ptt-proj-label">Ovulation estimate</h4>' +
-            '  <div class="ptt-proj-value">Not reached yet</div>' +
-            '  <div class="ptt-proj-note">Watch for P4 to cross ~5 ng/mL. Eggs mature for ~2 days after ovulation.</div>' +
-            '</div>';
+          ovuBlock = card('pending', 'Ovulation estimate', 'Not reached yet',
+            'Watch for P4 to cross ~5 ng/mL. Eggs mature for ~2 days after ovulation.'
+          );
         }
 
-        var winBlock = '';
         if (ovuEst) {
           var winStart = addDays(ovuEst.date, win.startOffset);
           var winEnd = addDays(ovuEst.date, win.endOffset);
-          winBlock =
-            '<div class="ptt-proj-card ptt-proj-window">' +
-            '  <h4 class="ptt-proj-label">Projected breeding window</h4>' +
-            '  <div class="ptt-proj-value">' + escapeHtml(fmtDate(winStart)) + ' to ' + escapeHtml(fmtDate(winEnd)) + '</div>' +
-            '  <div class="ptt-proj-note">' + escapeHtml(win.label) + '. Day ' + win.startOffset + ' to Day ' + win.endOffset + ' post-ovulation, when eggs are typically fertilizable. Your vet sets the actual day.</div>' +
-            '</div>';
+          winBlock = card('window', 'Projected breeding window',
+            escapeHtml(fmtDate(winStart)) + ' to ' + escapeHtml(fmtDate(winEnd)),
+            escapeHtml(win.label) + '. Day ' + win.startOffset + ' to Day ' + win.endOffset + ' post-ovulation, when eggs are typically fertilizable. Your vet sets the actual day.'
+          );
         } else {
-          winBlock =
-            '<div class="ptt-proj-card ptt-proj-pending">' +
-            '  <h4 class="ptt-proj-label">Projected breeding window</h4>' +
-            '  <div class="ptt-proj-value">Pending ovulation</div>' +
-            '  <div class="ptt-proj-note">Once P4 crosses ~5 ng/mL the window projects from there. ' + escapeHtml(win.label) + '.</div>' +
-            '</div>';
+          winBlock = card('pending', 'Projected breeding window', 'Pending ovulation',
+            'Once P4 crosses ~5 ng/mL the window projects from there. ' + escapeHtml(win.label) + '.'
+          );
         }
 
+        var cardsGridStyle =
+          'display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));' +
+          'gap:0.85rem;margin:0 0 0.85rem 0;';
+
+        var caveatStyle =
+          'display:block;width:100%;box-sizing:border-box;' +
+          'padding:1rem 1.15rem;background:#fffbeb;' +
+          'border:1px solid #fde68a;border-radius:10px;' +
+          'color:#78350f;font-size:0.875rem;line-height:1.55;margin:0;';
+
         var caveat =
-          '<div class="ptt-proj-caveat">' +
+          '<div style="' + caveatStyle + '">' +
           '<strong>How these estimates work.</strong> The LH surge is estimated as the point P4 crosses ~2 ng/mL. Ovulation is estimated at ~5 ng/mL. With only a few draws these are interpolated between readings, so they shift as you add data. Lab assays vary. Treat these as planning estimates, not vet-grade timing. Your reproductive vet&rsquo;s read of the full curve is the source of truth.' +
           '</div>';
 
-        return lhBlock + ovuBlock + winBlock + caveat;
+        return (
+          '<div style="' + cardsGridStyle + '">' + lhBlock + ovuBlock + winBlock + '</div>' +
+          caveat
+        );
       }
 
       function buildChart(readings) {
@@ -872,20 +939,58 @@ const articleSchema = {
 
       function buildTimeline(readings) {
         if (readings.length === 0) {
-          return '<p class="ptt-empty">No test rows with both a date and a value yet.</p>';
+          return '<div style="padding:1rem;background:#f9fafb;border:1px dashed #e5e7eb;border-radius:8px;color:#6b7280;text-align:center;">No test rows with both a date and a value yet.</div>';
         }
-        var html = '';
+
+        var bandAccent = {
+          baseline: '#9ca3af',
+          lh: '#f59e0b',
+          ovulation: '#16a34a',
+          maturation: '#2563eb'
+        };
+
+        var html = '<div style="display:flex;flex-direction:column;gap:0.55rem;">';
+
         for (var i = 0; i < readings.length; i++) {
           var r = readings[i];
           var c = classifyValue(r.value);
+          var accent = bandAccent[c.band] || '#9ca3af';
+
+          var rowStyle =
+            'display:grid;grid-template-columns:74px 160px 110px 1fr;' +
+            'align-items:center;column-gap:1rem;row-gap:0.35rem;' +
+            'padding:0.85rem 1rem;background:#ffffff;' +
+            'border:1px solid #e5e7eb;border-left:4px solid ' + accent + ';' +
+            'border-radius:10px;box-shadow:0 1px 2px rgba(17,24,39,0.03);';
+
+          var dayStyle =
+            'display:inline-flex;align-items:center;justify-content:center;' +
+            'padding:0.2rem 0.6rem;background:#f3f4f6;color:#111827;' +
+            'font-weight:700;font-size:0.8rem;border-radius:999px;' +
+            'width:fit-content;line-height:1.2;letter-spacing:0.02em;';
+
+          var dateStyle = 'color:#4b5563;font-size:0.9rem;';
+          var valueStyle = 'font-weight:700;color:#111827;font-size:1.05rem;';
+          var bandStyle =
+            'display:flex;flex-direction:column;gap:0.15rem;' +
+            'color:#1f2937;font-size:0.9rem;font-weight:600;';
+          var noteStyle =
+            'display:block;color:#6b7280;font-size:0.8rem;font-weight:400;' +
+            'line-height:1.4;';
+
           html +=
-            '<div class="ptt-tl-row ptt-tl-' + c.band + '">' +
-            '  <div class="ptt-tl-day">Day ' + r.day + '</div>' +
-            '  <div class="ptt-tl-date">' + escapeHtml(fmtDate(r.date)) + '</div>' +
-            '  <div class="ptt-tl-value">' + escapeHtml(r.value.toFixed(1)) + ' ng/mL</div>' +
-            '  <div class="ptt-tl-band">' + escapeHtml(c.label) + '<span class="ptt-tl-note">' + escapeHtml(c.note) + '</span></div>' +
+            '<div style="' + rowStyle + '">' +
+            '<span style="' + dayStyle + '">Day ' + r.day + '</span>' +
+            '<span style="' + dateStyle + '">' + escapeHtml(fmtDate(r.date)) + '</span>' +
+            '<span style="' + valueStyle + '">' + escapeHtml(r.value.toFixed(1)) + ' ng/mL</span>' +
+            '<div style="' + bandStyle + '">' +
+            '<span>' + escapeHtml(c.label) + '</span>' +
+            '<span style="' + noteStyle + '">' + escapeHtml(c.note) + '</span>' +
+            '</div>' +
             '</div>';
         }
+
+        html += '</div>';
         return html;
       }
 
