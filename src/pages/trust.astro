@@ -1,0 +1,499 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Trust & Verification', url: '/trust' }
+];
+
+const faqs = [
+  {
+    question: 'How does BreederHQ verify breeders and service providers?',
+    answer: 'Verification on BreederHQ is layered. Identity verification confirms a real person through a government-issued photo ID via a secure third-party identity service. Credential verification is a separate workflow where providers may submit license numbers, certification documents, registry memberships, or insurance proof, which BreederHQ can review and tie to the public profile. Higher tiers add program documentation review and standards compliance review. Not every verification system is fully operational across every category, and verification workflows are expanding over time.'
+  },
+  {
+    question: 'What does a verification badge actually mean?',
+    answer: 'Each badge corresponds to a specific check that BreederHQ has performed or that the provider has documented through the platform. A badge is not a general endorsement, it is a statement that a particular piece of evidence was reviewed. Hovering or tapping a badge on a public profile is designed to surface what the badge represents and when it was last verified.'
+  },
+  {
+    question: 'Are reviews on BreederHQ verified?',
+    answer: 'BreederHQ is designed to support reviews from people who actually transacted with a provider or breeder through the platform, rather than open public posting. The exact rollout varies by category, and the review system continues to expand. The goal is to reduce drive-by complaints and reciprocal review trading, both of which are common on general-purpose review platforms.'
+  },
+  {
+    question: 'Can a breeder or provider pay to remove a bad review?',
+    answer: 'No. BreederHQ does not sell review removal, review hiding, or paid reputation management. Providers may respond publicly to reviews, and clearly fraudulent or harassing content can be reported, but legitimate negative reviews from verified transactions are not removable by payment.'
+  },
+  {
+    question: 'How is this different from Yelp, Rover, or Thumbtack?',
+    answer: 'General-purpose marketplaces are built for one-time consumer transactions across hundreds of unrelated categories. BreederHQ is built specifically for animal services and breeding, where the buyer-provider relationship typically extends across years and multiple animals. Verification, credentials, and reviews on BreederHQ are designed around the categories breeders and animal owners actually care about, such as registry status, professional certifications, breed club affiliation, and insurance, rather than generic star ratings.'
+  },
+  {
+    question: 'Why does breeder-focused trust matter?',
+    answer: 'A bad outcome with a breeder or animal service provider is rarely just a refund problem. It can mean a sick puppy, an injured horse, a lost season of breeding work, or a years-long emotional impact on a family. The threshold for trust in this category is higher than for a haircut or a furniture delivery, and the verification system should reflect that.'
+  },
+  {
+    question: 'Is verification required to list on BreederHQ?',
+    answer: 'A baseline level of identity verification is required for paid features and for higher-visibility listings. Additional credential and program verification is optional but visible on the public profile, so buyers can see exactly what has and has not been verified for each provider or breeder.'
+  },
+  {
+    question: 'How do I report a concern about a verified provider?',
+    answer: 'Every public profile and listing on the BreederHQ Marketplace is designed to surface a reporting option. Concerns about credentials, behavior, or accuracy of claims can be submitted through the platform, and BreederHQ reviews reports against the underlying verification record.'
+  }
+];
+
+const article = {
+  headline: 'Trust and Verification on the BreederHQ Marketplace',
+  description: 'How BreederHQ verifies breeders and service providers, what badges mean, how reviews work, and why a breeder-focused trust system is different from general-purpose review platforms.',
+  datePublished: '2026-05-17',
+  author: {
+    name: 'BreederHQ',
+    url: 'https://breederhq.com/about'
+  }
+};
+---
+
+<BaseLayout
+  title="Trust & Verification on the BreederHQ Marketplace"
+  description="How BreederHQ verifies breeders and service providers, what verification tiers and badges mean, how reviews work, and why breeder-focused trust is different from Yelp, Rover, and Thumbtack."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={article}
+>
+
+<main>
+
+  <!-- ============================================ -->
+  <!-- BREADCRUMBS                                  -->
+  <!-- ============================================ -->
+  <nav class="py-4 px-4 bg-stone-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-primary hover:underline">Home</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li aria-current="page" class="text-gray-600">Trust &amp; Verification</li>
+    </ol>
+  </nav>
+
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3">Trust Infrastructure</div>
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+        Trust &amp; Verification on the BreederHQ Marketplace
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
+        BreederHQ is built around a verifiable connection between a real person, a real program, and the public claims they make. This page explains how that verification works, what each badge represents, and why a marketplace built specifically for breeders and animal services treats trust differently than a general-purpose review site.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHY TRUST MATTERS                            -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Trust Matters in Animal Services</h2>
+      <div class="space-y-4">
+        <p class="text-sm text-gray-700 leading-relaxed">
+          The decisions buyers and owners make in this category are not short transactions. A puppy or a horse is a 10 to 30 year commitment. A farrier, a reproductive veterinarian, or a boarding facility becomes a recurring part of an animal&rsquo;s life. The cost of getting it wrong is paid in animal welfare, not just dollars.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          On general-purpose review platforms, the worst case is usually a bad haircut, a late delivery, or a refund dispute. In animal services, the worst case can be a genetic disease that was never disclosed, a sport horse with an undiagnosed lameness, or a litter raised in conditions that produce lifelong behavioral problems. The verification system has to reflect that.
+        </p>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          BreederHQ&rsquo;s trust infrastructure is designed around the specific evidence that actually predicts good outcomes in this category, such as registry memberships, breed club affiliation, health testing on the parents, professional certifications, insurance coverage, and a history of completed placements through the platform. Generic star ratings are part of the picture, but they are not the foundation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- VERIFICATION TIERS                           -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">Verification Tiers</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8 max-w-3xl">
+        Verification on BreederHQ is layered, so buyers can see exactly what has and has not been confirmed for each profile. Tiers are visible directly on listings and public profiles. Not every category supports every tier today, and tiers are expanding over time.
+      </p>
+
+      <div class="space-y-6">
+
+        <!-- Tier 1: ID Verified -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0 w-12 h-12 rounded-full bg-stone-100 text-gray-700 flex items-center justify-center text-lg font-bold">1</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2 flex-wrap">
+                <h3 class="text-xl font-bold text-gray-900">ID Verified</h3>
+                <span class="inline-flex items-center gap-1 rounded-full bg-stone-100 text-gray-700 text-xs font-semibold px-2.5 py-0.5">Identity confirmed</span>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                A real person stands behind the listing. Identity is confirmed through a government-issued photo ID via a secure third-party identity service. The legal name on file is matched against the verification document. This is the floor, not the ceiling, of trust.
+              </p>
+              <p class="text-xs text-gray-500">What it confirms: the person operating the account is who they say they are.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2: Verified -->
+        <div class="bg-white rounded-xl border-2 border-amber-400 p-6">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0 w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-bold">2</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2 flex-wrap">
+                <h3 class="text-xl font-bold text-gray-900">Verified</h3>
+                <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5">Identity + documentation</span>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                Identity verification plus a review of program or business documentation. For breeders, this can include registry membership, breed club affiliation, and program records on the platform. For service providers, this can include a license number, an active certification, or proof of insurance, depending on the category.
+              </p>
+              <p class="text-xs text-gray-500">What it confirms: identity, plus documented evidence that the program or business operates as described.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3: Accredited -->
+        <div class="bg-white rounded-xl border-2 border-emerald-500 p-6">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0 w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">3</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2 flex-wrap">
+                <h3 class="text-xl font-bold text-gray-900">Accredited</h3>
+                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5">Identity + documentation + standards review</span>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                Identity, documentation, and a standards compliance review. Accreditation is designed to support breeders and providers who can demonstrate adherence to a recognized standard, such as a breed club code of ethics, an AKC Breeder of Merit designation, USDA licensure where applicable, or a documented professional credential. Accreditation is the most rigorous tier and is reserved for profiles that meet a higher documentation bar.
+              </p>
+              <p class="text-xs text-gray-500">What it confirms: identity, documentation, and an explicit review against a standard that BreederHQ can name on the public profile.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="text-xs text-gray-500 mt-6 italic">
+        Tier availability varies by service category and is expanding. A profile&rsquo;s current tier and the date of the most recent verification are visible on the public listing.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- CREDENTIAL VERIFICATION EXAMPLES              -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">Credential Verification Examples</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8 max-w-3xl">
+        BreederHQ supports credential verification across the categories that matter most to breeders and animal owners. The examples below illustrate the kinds of credentials providers may submit, and which BreederHQ can verify and display on the public profile. Not every credential type is fully operational across every category today, and the catalog of verifiable credentials continues to expand.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Training -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Training &amp; Behavior</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Professional Certifications</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li><strong>CPDT-KA</strong> (Certified Professional Dog Trainer, Knowledge Assessed)</li>
+            <li><strong>IAABC</strong> (International Association of Animal Behavior Consultants)</li>
+            <li>Other recognized behavior and training credentials</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">Providers may submit certification numbers and issuing-body documentation. BreederHQ can verify active status against the issuing body where verification is supported.</p>
+        </div>
+
+        <!-- Farriers -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Equine Hoof Care</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Farrier Credentials</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li><strong>AFA</strong> (American Farriers Association) certifications</li>
+            <li>Apprenticeship and journeyman documentation</li>
+            <li>Therapeutic and corrective specialty credentials</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">Verification workflows are designed to support certification level (CF, CJF, and similar) along with current standing.</p>
+        </div>
+
+        <!-- USDA / Regulatory -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Regulatory</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">USDA &amp; Government Licensure</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li><strong>USDA</strong> licensure (where applicable to the operation)</li>
+            <li>State-level kennel, cattery, or facility licensing</li>
+            <li>Animal welfare inspection status</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">USDA licensure has specific applicability rules. Display is intended to be honest about scope, including operations for which licensure is not required.</p>
+        </div>
+
+        <!-- Breeders -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Breeders</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Registry &amp; Breeder Programs</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li><strong>AKC Breeder of Merit</strong> and similar tiered breeder programs</li>
+            <li>Breed-specific national club membership</li>
+            <li>Documented health-testing programs on parents</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">Breeder credentials are designed to be tied to the actual program records the breeder manages on BreederHQ, rather than free-text claims.</p>
+        </div>
+
+        <!-- Equine -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Equine Industry</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Equine Certifications</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li>Reproductive veterinary specialty credentials</li>
+            <li>Equine dental, chiropractic, and bodywork certifications</li>
+            <li>Discipline-specific instructor and trainer certifications</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">Equine credential categories are broad and vary by discipline. BreederHQ can verify recognized certifying bodies where verification is supported.</p>
+        </div>
+
+        <!-- Insurance -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Risk &amp; Liability</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Insurance Verification</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li>Liability coverage for service providers</li>
+            <li>Care, custody, and control coverage for boarding and training</li>
+            <li>Facility liability for hosted operations</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">Providers may submit certificates of insurance. BreederHQ can verify active status and policy dates where applicable.</p>
+        </div>
+
+        <!-- Breed Clubs -->
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6 md:col-span-2">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Breed Community</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Breed Club Verification</h3>
+          <ul class="text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+            <li>National and regional breed club membership</li>
+            <li>Adherence to a club code of ethics</li>
+            <li>Breed club referral and mentor status, where the club supports it</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3 italic">Breed clubs that partner with BreederHQ can support direct verification of member status. Clubs interested in participating can reach BreederHQ through the contact form.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- HOW REVIEWS WORK                              -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">How Reviews Work</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8 max-w-3xl">
+        Reviews on BreederHQ are designed for a category where the relationship is long, the stakes are high, and reciprocal review trading is common. The review system is intentionally narrower than a general-purpose platform, and continues to be refined.
+      </p>
+
+      <div class="space-y-4">
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Verified transaction reviews</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            BreederHQ is designed to support reviews from people who actually completed a transaction with a provider or breeder through the platform. The goal is to anchor each review in a real, documented interaction rather than open public posting.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Structured, not just star ratings</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Reviews are designed to capture more than a single five-star number. Communication, follow-through, accuracy of program claims, and post-placement support each contribute to the picture a buyer sees.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Providers and breeders may respond publicly</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Public response is part of the system. A thoughtful response to a critical review is itself a signal, and BreederHQ is designed to surface both the original review and the response together.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">No paid removal, no paid rank manipulation</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            BreederHQ does not sell review removal, review suppression, or paid placement above legitimate reviews. Clearly fraudulent, harassing, or off-topic content can be reported and reviewed, but legitimate negative reviews from verified transactions are not removable by payment.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Designed to discourage retaliatory reviews</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            The review system is designed to make it hard to use reviews as a retaliation tool, in either direction. A breeder cannot leave a damaging review of a buyer in retaliation for a refund request, and a buyer cannot flood a provider with negative reviews from accounts that never transacted with them.
+          </p>
+        </div>
+
+      </div>
+
+      <p class="text-xs text-gray-500 mt-6 italic">
+        Review system rollout varies by category. The exact mechanics of who can review, when, and how a review is verified continue to evolve as the marketplace matures.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- WHY BREEDERHQ IS DIFFERENT                   -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">Why BreederHQ Is Different from Yelp, Rover, or Thumbtack</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-8 max-w-3xl">
+        General-purpose review platforms are powerful tools, but they were not built for animal services or breeding. The category-specific differences add up.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white rounded-xl border border-stone-200 text-sm">
+          <thead>
+            <tr class="border-b border-stone-200 bg-stone-50">
+              <th class="text-left p-4 font-bold text-gray-900">Dimension</th>
+              <th class="text-left p-4 font-bold text-gray-700">General-purpose review platforms</th>
+              <th class="text-left p-4 font-bold text-primary">BreederHQ Marketplace</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-100">
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">What gets verified</td>
+              <td class="p-4 text-gray-700 align-top">Usually a phone number and a business address.</td>
+              <td class="p-4 text-gray-700 align-top">Identity, program documentation, professional certifications, registry membership, insurance, and breed club affiliation, layered by tier.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">Who can leave a review</td>
+              <td class="p-4 text-gray-700 align-top">Generally any visitor with an account, regardless of transaction history.</td>
+              <td class="p-4 text-gray-700 align-top">Designed for reviewers who completed an actual transaction or engagement through the platform.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">Category fit</td>
+              <td class="p-4 text-gray-700 align-top">Built for one-time consumer transactions across hundreds of unrelated categories.</td>
+              <td class="p-4 text-gray-700 align-top">Built specifically for animal services, breeding, and the long-term relationships those involve.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">Credential awareness</td>
+              <td class="p-4 text-gray-700 align-top">Generic. A &ldquo;professional&rdquo; badge typically just means a business has paid for a profile.</td>
+              <td class="p-4 text-gray-700 align-top">Category-aware. Surfaces CPDT-KA, IAABC, AFA, USDA, AKC Breeder of Merit, breed club status, equine specialty credentials, and insurance.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">Connection to underlying program data</td>
+              <td class="p-4 text-gray-700 align-top">None. Profiles are self-reported text fields.</td>
+              <td class="p-4 text-gray-700 align-top">Listings are tied to the breeder&rsquo;s actual program records on the platform, including health testing, pedigrees, and offspring history.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">Paid rank manipulation</td>
+              <td class="p-4 text-gray-700 align-top">Often a core revenue stream, with paid placement above organic results.</td>
+              <td class="p-4 text-gray-700 align-top">No paid review removal. No paid placement above legitimate verified results.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-gray-900 align-top">Relationship after the transaction</td>
+              <td class="p-4 text-gray-700 align-top">Typically ends with the booking.</td>
+              <td class="p-4 text-gray-700 align-top">Designed for the multi-year relationship between a buyer, an animal, and the breeder or service provider.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- PROVIDER CTA                                  -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-emerald-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl border border-emerald-200 p-8 md:p-12">
+        <div class="text-xs uppercase tracking-wider text-emerald-700 font-semibold mb-2">For Service Providers</div>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Build a profile that earns trust</h2>
+        <p class="text-sm text-gray-700 leading-relaxed mb-6 max-w-2xl">
+          List your services on the BreederHQ Marketplace, document your credentials, and let buyers see the verification work you have already done. Tiered verification is designed to support providers across training, veterinary, hoof care, equine specialties, transport, photography, and more.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+            class="bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-800 inline-block"
+          >
+            List Your Services
+          </a>
+          <a
+            href="/for-providers"
+            class="bg-white text-emerald-700 border border-emerald-200 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 inline-block"
+          >
+            How Provider Listings Work
+          </a>
+        </div>
+        <div class="mt-6 grid sm:grid-cols-2 gap-3 text-sm">
+          <a href="/for-providers/farriers" class="text-emerald-700 hover:underline">List as a farrier &rarr;</a>
+          <a href="/for-providers/equine-services" class="text-emerald-700 hover:underline">List equine services &rarr;</a>
+          <a href="/for-providers/training" class="text-emerald-700 hover:underline">Training providers &rarr;</a>
+          <a href="/for-providers/veterinary" class="text-emerald-700 hover:underline">Veterinary providers &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- CONSUMER CTA                                  -->
+  <!-- ============================================ -->
+  <section class="py-20 bg-gradient-to-br from-stone-900 to-stone-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="text-xs uppercase tracking-wider text-amber-400 font-semibold mb-3">For Buyers &amp; Animal Owners</div>
+      <h2 class="text-3xl font-bold mb-4 text-white">
+        See the verification, not just the listing.
+      </h2>
+      <p class="text-lg text-stone-300 mb-10 max-w-2xl mx-auto">
+        Browse breeders and service providers on the BreederHQ Marketplace. Every profile shows what has been verified, when it was verified, and what each badge represents.
+      </p>
+
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a
+          href="https://marketplace.breederhq.com"
+          class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block"
+        >
+          Browse the Marketplace
+        </a>
+        <a
+          href="/buyers/why-breederhq-marketplace"
+          class="bg-white text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-100 inline-block"
+        >
+          BreederHQ vs Other Sites
+        </a>
+      </div>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto text-sm">
+        <a href="/buyers/evaluate-breeders" class="text-stone-300 hover:text-white">How to evaluate breeders &rarr;</a>
+        <a href="/buyers/red-flags" class="text-stone-300 hover:text-white">Red flags to avoid &rarr;</a>
+        <a href="/buyers/health-tests" class="text-stone-300 hover:text-white">Understanding health testing &rarr;</a>
+        <a href="/buyers/health-guarantees" class="text-stone-300 hover:text-white">Health guarantees explained &rarr;</a>
+        <a href="/services/farriers" class="text-stone-300 hover:text-white">Find a farrier &rarr;</a>
+        <a href="/services/equine-boarding" class="text-stone-300 hover:text-white">Find equine boarding &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</BaseLayout>

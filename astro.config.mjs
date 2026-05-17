@@ -67,6 +67,11 @@ export default defineConfig({
           item.changefreq = 'monthly';
           item.priority = 0.8;
         }
+        // Trust & Verification page — foundational marketplace trust infrastructure
+        else if (item.url === 'https://breederhq.com/trust') {
+          item.changefreq = 'monthly';
+          item.priority = 0.8;
+        }
         // Buyer education pages
         else if (item.url.includes('/buyers')) {
           item.changefreq = 'monthly';
