@@ -1,0 +1,1077 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Puppy Application Builder', url: '/tools/puppy-application-builder' }
+];
+
+const lastReviewedISO = '2026-05-17';
+
+const faqs = [
+  {
+    question: 'What is a puppy application?',
+    answer: 'A puppy application is a short questionnaire a breeder asks an interested buyer to complete before approving them for a litter, deposit, or waitlist spot. It is a screening conversation in written form. Good applications cover household basics, experience with dogs, lifestyle, housing, training expectations, and how the buyer plans to handle the practical realities of raising a puppy. The goal is to gather enough context to decide whether a placement is a good fit for both the buyer and the puppy.'
+  },
+  {
+    question: 'Is this builder an actual application form I can collect responses with?',
+    answer: 'No. This is a template builder. It generates the question text you want to ask. It does not collect responses, does not store buyer data, and does not have a backend. Use the copy button to drop the generated template into Google Forms, Typeform, a Word doc, an email, or your own website, then collect responses there. If you want application intake, waitlist management, deposit tracking, and buyer communication in one place with responses tied to the right litter and program, that is what BreederHQ does.'
+  },
+  {
+    question: 'What sections should a puppy application include?',
+    answer: 'Most breeders cover ten core areas: household basics (who lives in the home), experience with dogs, breed fit (whether the buyer understands the breed they are asking about), lifestyle and schedule, housing and yard setup, children and other pets, training expectations, a vet reference, placement preferences (sex, color, working vs. companion), and a contract and deposit acknowledgement. You will not need every section for every program. Toggle the sections that match how you screen and the generator will build a template you can send.'
+  },
+  {
+    question: 'Do these questions guarantee buyer quality?',
+    answer: 'No. A written application is one data point in a screening conversation, not a guarantee. The strongest screens combine a written application with a phone or video call, a reference check, and time. Breeders who lean on the application alone tend to get burned by buyers who knew what answer they were supposed to give. Use this template as the starting point of a conversation, not the entire decision.'
+  },
+  {
+    question: 'How long should a puppy application be?',
+    answer: 'Long enough to learn what you need, short enough that serious buyers will actually complete it. Most well-run breeders land somewhere between 15 and 30 questions. The exact length depends on how much of the screening you do in writing vs. on a follow-up call. If a buyer ghosts after seeing the application, that is usually information, not a problem with the application length.'
+  },
+  {
+    question: 'Should I ask for sensitive information like income or home value?',
+    answer: 'Most breeders avoid direct income or home value questions. They tend to make buyers defensive and the answers are not reliable. Better proxies are lifestyle questions (work schedule, time spent at home, who covers care during travel), housing questions (rent vs. own, landlord approval if renting, fence type), and a frank conversation about expected costs of food, vet care, training, and emergencies. The point is fit, not means testing.'
+  },
+  {
+    question: 'Do I need a separate application per program or breed?',
+    answer: 'Often yes, especially if you run multiple programs with different temperaments, working requirements, or buyer profiles (e.g., a sport line vs. a companion line). The shared sections (household, lifestyle, housing, vet reference) usually carry over, but the breed fit and placement preference sections should be specific to each program. Build one template per program and reuse the shared sections.'
+  },
+  {
+    question: 'Where do my buyers actually fill this out?',
+    answer: 'Wherever you collect form responses today. Google Forms and Typeform are common free options. Some breeders embed the application on their own website. Others send it as a PDF or Word doc and accept responses by email. This builder generates the question text. You decide where to host it. If you want intake, waitlist, deposits, contracts, and buyer comms in one workflow tied to the right litter, that is what BreederHQ is built for.'
+  }
+];
+
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/puppy-application-builder#tool',
+  'name': 'Puppy Application Builder',
+  'description': 'Free puppy application template builder for dog breeders. Toggle the screening sections you want (household basics, experience, breed fit, lifestyle, housing, children and pets, training, vet reference, placement preferences, contract acknowledgement) and generate a ready-to-send application template. No data collected. No backend. No signup.',
+  'url': 'https://breederhq.com/tools/puppy-application-builder',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Dog Breeding Template Builder',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'isPartOf': {
+    '@id': 'https://breederhq.com/tools#collection'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Toggle the puppy application sections you want to include',
+    'Generate a structured application template with section headings and suggested questions',
+    'Copy the plain-text application to clipboard or print it',
+    'Anonymous in-browser tool. No data collected. No backend. No signup'
+  ]
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://breederhq.com/tools/puppy-application-builder#article',
+  'headline': 'Puppy Application Builder for Dog Breeders',
+  'description': 'Build a structured puppy application template from a checklist of common screening sections. Free, anonymous, no data collected.',
+  'url': 'https://breederhq.com/tools/puppy-application-builder',
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'author': {
+    '@type': 'Organization',
+    'name': 'BreederHQ Operations Team',
+    'url': 'https://breederhq.com/about'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': 'https://breederhq.com/tools/puppy-application-builder'
+  }
+};
+---
+
+<BaseLayout
+  title="Free Puppy Application Template Builder for Breeders | BreederHQ"
+  description="Build a puppy application template in seconds. Toggle the screening sections you want (household, experience, breed fit, lifestyle, vet reference, placement, contract acknowledgement) and copy the result. Free, anonymous, no signup, no data collected."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Application Builder</li>
+      </ol>
+    </nav>
+
+    <!-- Intro -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">Build a Puppy Application Template in Seconds</h1>
+        <p class="text-sm text-gray-500 mb-6">
+          <strong class="text-gray-700">Last Reviewed: May 17, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active dog breeders. Template builder only. No data collected.
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Pick the screening sections you want. The generator builds a structured puppy application template with section headings and ready-to-use questions you can copy into Google Forms, Typeform, a Word doc, an email, or your own website. The goal is screening for fit, not gatekeeping. This is a planning template, not a guarantee of buyer quality.
+        </p>
+      </div>
+    </section>
+
+    <!-- The Builder -->
+    <section class="px-4 pb-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="pab-card">
+          <form id="pab-form" class="pab-form" novalidate>
+            <fieldset class="pab-fieldset">
+              <legend class="pab-legend">Choose the sections to include</legend>
+              <p class="pab-help">Toggle the sections that match how you screen. The generated template updates instantly.</p>
+
+              <div class="pab-options" id="pab-options">
+                <!-- Section toggles injected by script -->
+              </div>
+
+              <div class="pab-toggle-row no-print">
+                <button type="button" id="pab-select-all" class="pab-link-button">Select all</button>
+                <span class="pab-toggle-sep">·</span>
+                <button type="button" id="pab-clear-all" class="pab-link-button">Clear all</button>
+              </div>
+            </fieldset>
+
+            <div class="pab-field">
+              <label for="pab-program" class="pab-label">Program or Breed Name <span class="pab-optional">(optional)</span></label>
+              <p class="pab-help">Shown at the top of the template. Example: &ldquo;Golden Retriever Companion Program&rdquo;.</p>
+              <input
+                type="text"
+                id="pab-program"
+                name="program-name"
+                class="pab-input"
+                placeholder="e.g., Labrador Companion Litter"
+                maxlength="120"
+              />
+            </div>
+          </form>
+
+          <div id="pab-results" class="pab-results" aria-live="polite">
+            <div class="pab-results-header">
+              <div>
+                <h2 class="pab-results-title">Generated Application Template</h2>
+                <p class="pab-results-subtitle">Copy the text below into your form tool, email, or website. Edit freely to match your voice.</p>
+              </div>
+              <div class="pab-results-actions no-print">
+                <button type="button" id="pab-copy" class="pab-action-button">Copy</button>
+                <button type="button" id="pab-print" class="pab-action-button">Print</button>
+              </div>
+            </div>
+
+            <pre id="pab-template" class="pab-template" tabindex="0">Toggle at least one section above to generate the template.</pre>
+
+            <div class="pab-disclaimer">
+              <strong>Important.</strong> This builder generates question text only. It does not collect, store, or transmit any buyer responses. You decide where to host the actual application (Google Forms, Typeform, your website, BreederHQ, etc.). A written application is one screening signal among several. Pair it with a conversation and reference checks before placing a puppy.
+            </div>
+
+            <div class="pab-cta">
+              <p class="pab-cta-text">
+                Build the full application, waitlist, buyer communication, deposits, and placement workflow inside BreederHQ. Intake responses land tied to the right litter and program, waitlist movement is tracked, deposits and contracts live alongside the buyer record, and nothing falls through email threads.
+              </p>
+              <div class="pab-cta-buttons">
+                <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="pab-cta-primary">
+                  Run Applications Inside BreederHQ Free
+                </a>
+                <a href="/puppy-application-management" class="pab-cta-secondary">
+                  Learn About Puppy Application Management →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How To Use -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">How to Use This Builder</h2>
+        <ol class="space-y-4 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="pab-ol-num">1</span>
+            <span><strong>Toggle the sections you want.</strong> Most breeders use 6 to 8 of the 10 sections. Skip what is not relevant to your program. Add the program or breed name if you run multiple programs.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="pab-ol-num">2</span>
+            <span><strong>Review the generated template.</strong> Edit the wording to match your voice. The questions are starting points, not commandments. Cut anything that does not earn its place.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="pab-ol-num">3</span>
+            <span><strong>Copy it into your form tool.</strong> Google Forms, Typeform, a Word doc, your website, or BreederHQ. The builder generates the questions. You decide where buyers actually submit them.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="pab-ol-num">4</span>
+            <span><strong>Pair it with a real conversation.</strong> A written application screens for the obvious mismatches. A 20-minute phone or video call screens for everything that matters more.</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- What Each Section Covers -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8">What Each Section Covers</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Household Basics</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Who lives in the home, ages of household members, rent or own, how long at the current address. The point is context, not means testing. A puppy joining a stable household with one or two adults is different from one joining a household with five kids under ten, and both can be great placements.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Experience with Dogs</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Past and current dogs, breeds owned, what happened to previous dogs. First-time owners are not disqualified. Buyers who lost three dogs in a row to preventable causes are a different conversation.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Breed Fit</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Why this breed, what they expect from the breed, what research they have done. Buyers who picked the breed off a movie or because it looked cute on Instagram are not bad people, but they need more education before a placement makes sense.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Lifestyle and Schedule</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Hours the puppy will be alone, work-from-home vs. office, travel frequency, who covers care during travel. This is usually where breed-fit problems show up. A high-drive working line and a 60-hour office week do not pair well.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Housing and Yard Setup</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              House or apartment, yard or no yard, fence type and height, landlord approval if renting. Some breeds genuinely need fenced space. Others do not. Be honest with yourself about what your line actually needs.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Children and Other Pets</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Ages of children, other dogs or cats in the home, plans for socialization and introductions. This is fit information, not approval information. A litter raised in a chaotic family home may be the perfect placement for a chaotic family home.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Training Expectations</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Plans for puppy class, crate training, house training, what training approach the buyer expects to use. Buyers who plan to send the puppy to a board-and-train at four months for everything tend to set themselves up poorly.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Vet Reference</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Current or planned vet, permission to call. Most breeders skip this for first-time owners and use it for buyers with a stated dog history.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Placement Preferences</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Sex preference, color preference, companion vs. working vs. sport, willingness to be flexible. This is where breeders learn whether a buyer is anchored to one specific puppy or genuinely fit for the litter.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Contract and Deposit Acknowledgement</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Confirmation that the buyer has read the contract terms, understands the deposit policy, and accepts the spay/neuter and return-to-breeder clauses. This is a yes/no acknowledgement, not the contract itself. See <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Deposit Refund Rules by State</a> for context on what to put in your deposit clause.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screening Philosophy -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Screening for Fit, Not Gatekeeping</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          The best applications read like a breeder trying to find the right home for each puppy, not like a court interrogation. Buyers can tell the difference. Buyers who feel judged tend to either ghost or perform. Neither helps you place puppies well.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Skip questions you would not act on. If a no answer to a question would not change your decision, the question is noise. Cut it. The shorter the application, the more honest the responses tend to be.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Read more in <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Application Management</a> and the <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">Dog Breeding Software</a> overview.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4 faq-section bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Free Tools for Breeders
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Application Management
+            </a>
+          </div>
+          <div>
+            <a href="/dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+          <div>
+            <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Best Dog Breeding Software Compared
+            </a>
+          </div>
+          <div>
+            <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Deposit Refund Rules by State
+            </a>
+          </div>
+          <div>
+            <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Vaccination Schedule Generator
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50 no-print">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Run Applications Inside BreederHQ Free
+      </a>
+    </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      var SECTIONS = [
+        {
+          id: 'household',
+          label: 'Household basics',
+          heading: 'Household Basics',
+          intro: 'Tell us a bit about your home and the people in it.',
+          defaultOn: true,
+          questions: [
+            'Who lives in your household? (Names or initials and ages are fine.)',
+            'Do you rent or own your home? If you rent, does your lease allow dogs of this breed and size, and is the landlord aware?',
+            'How long have you lived at your current address?',
+            'What city and state are you located in?',
+            'Have all adults in the household agreed to bringing a puppy home?'
+          ]
+        },
+        {
+          id: 'experience',
+          label: 'Experience with dogs',
+          heading: 'Experience With Dogs',
+          intro: 'A snapshot of your history with dogs helps us match you to the right puppy.',
+          defaultOn: true,
+          questions: [
+            'What dogs have you owned in the past 10 years? (Breed, sex, and how long you had them.)',
+            'Do you currently own any dogs? If yes, please describe them.',
+            'If past dogs are no longer with you, what happened to them?',
+            'Have you raised a puppy from 8 weeks old before?',
+            'Have you ever rehomed a dog? If yes, please share the situation.'
+          ]
+        },
+        {
+          id: 'breed-fit',
+          label: 'Breed fit',
+          heading: 'Breed Fit',
+          intro: 'Help us understand why this breed and what you expect.',
+          defaultOn: true,
+          questions: [
+            'Why are you drawn to this breed specifically?',
+            'What have you read or watched about the breed in preparation?',
+            'What aspects of the breed are you most looking forward to?',
+            'What aspects of the breed concern you or are you unsure about?',
+            'Have you spent time around adult dogs of this breed in person?'
+          ]
+        },
+        {
+          id: 'lifestyle',
+          label: 'Lifestyle and schedule',
+          heading: 'Lifestyle and Schedule',
+          intro: 'A realistic picture of your week helps us flag fit issues early.',
+          defaultOn: true,
+          questions: [
+            'On a typical weekday, how many hours will the puppy be left alone?',
+            'Do you work from home, in an office, on a hybrid schedule, or something else?',
+            'How often do you travel overnight? Who will care for the puppy when you do?',
+            'What activities do you plan to do with the dog? (Walks, hikes, training sports, casual companionship, work, etc.)',
+            'On a 1 to 10 scale, how active is your household day to day?'
+          ]
+        },
+        {
+          id: 'housing',
+          label: 'Housing and yard setup',
+          heading: 'Housing and Yard Setup',
+          intro: 'A few details about the puppy\u2019s living environment.',
+          defaultOn: true,
+          questions: [
+            'Do you have a yard? If yes, is it fenced? What is the fence height and material?',
+            'If you do not have a yard, how will the puppy get outside for potty breaks and exercise?',
+            'Where will the puppy sleep? Where will it spend the day when you are home? When you are away?',
+            'Will the puppy be primarily indoors, primarily outdoors, or a mix?',
+            'Are there any pools, ponds, livestock, or other environmental considerations we should know about?'
+          ]
+        },
+        {
+          id: 'children-pets',
+          label: 'Children and other pets',
+          heading: 'Children and Other Pets',
+          intro: 'Context on who the puppy will share the home with.',
+          defaultOn: true,
+          questions: [
+            'Are there children in the home or who visit regularly? Please share ages.',
+            'Have your children spent time around dogs before? Are they comfortable with them?',
+            'Do you have other pets in the home? Please list species, breed (if applicable), age, and temperament.',
+            'How do your current pets respond to new animals being introduced?',
+            'What is your plan for introducing the puppy to existing pets and children?'
+          ]
+        },
+        {
+          id: 'training',
+          label: 'Training expectations',
+          heading: 'Training Expectations',
+          intro: 'How you plan to raise and train the puppy tells us a lot about fit.',
+          defaultOn: true,
+          questions: [
+            'What is your plan for house training and crate training?',
+            'Do you plan to enroll in a puppy socialization or obedience class? Have you identified a trainer?',
+            'What training approach are you most familiar or comfortable with?',
+            'How will you handle the first few months of chewing, biting, and adolescence?',
+            'Are there any specific behaviors or goals you want to work toward? (e.g., off-leash reliability, therapy work, sport titles, calm companion.)'
+          ]
+        },
+        {
+          id: 'vet',
+          label: 'Vet reference',
+          heading: 'Vet Reference',
+          intro: 'For buyers with prior dogs, a vet reference helps us understand your history.',
+          defaultOn: false,
+          questions: [
+            'Do you have a current or planned veterinarian? Please provide the clinic name, city, and phone number.',
+            'May we contact your vet for a reference?',
+            'How do you plan to budget for routine vet care, vaccinations, and unexpected medical costs?',
+            'Are you familiar with the typical first-year vet schedule for a puppy?'
+          ]
+        },
+        {
+          id: 'placement',
+          label: 'Placement preferences',
+          heading: 'Placement Preferences',
+          intro: 'Your preferences help us match you to the right puppy in the litter.',
+          defaultOn: true,
+          questions: [
+            'Do you have a sex preference? How flexible are you?',
+            'Do you have a color or marking preference? How flexible are you?',
+            'Are you looking for a companion, a working or sport prospect, or are you open to either?',
+            'How important is a specific personality match vs. other factors?',
+            'What is your ideal timeline for bringing a puppy home? Are you open to waiting for a future litter if the current one is not a fit?'
+          ]
+        },
+        {
+          id: 'contract',
+          label: 'Contract and deposit acknowledgement',
+          heading: 'Contract and Deposit Acknowledgement',
+          intro: 'Please confirm you have reviewed our placement terms before submitting.',
+          defaultOn: true,
+          questions: [
+            'I have read the puppy purchase contract and understand the terms. (Yes / No / I have not received it yet.)',
+            'I understand the deposit amount and refund policy as written in the contract. (Yes / No / I have questions.)',
+            'I agree to the spay/neuter expectations described in the contract. (Yes / No / I have questions.)',
+            'I agree to the return-to-breeder clause if I am ever unable to keep the dog. (Yes / No / I have questions.)',
+            'Is there anything in the contract you would like to discuss before signing?'
+          ]
+        }
+      ];
+
+      var optionsContainer = document.getElementById('pab-options');
+      var templatePre = document.getElementById('pab-template');
+      var programInput = document.getElementById('pab-program');
+      var selectAllBtn = document.getElementById('pab-select-all');
+      var clearAllBtn = document.getElementById('pab-clear-all');
+      var copyBtn = document.getElementById('pab-copy');
+      var printBtn = document.getElementById('pab-print');
+
+      if (!optionsContainer || !templatePre) return;
+
+      // Render section toggles
+      var html = '';
+      SECTIONS.forEach(function (s) {
+        html += '' +
+          '<label class="pab-option">' +
+            '<input type="checkbox" class="pab-checkbox" data-section="' + s.id + '"' + (s.defaultOn ? ' checked' : '') + ' />' +
+            '<span class="pab-option-text">' +
+              '<span class="pab-option-label">' + s.label + '</span>' +
+              '<span class="pab-option-count">' + s.questions.length + ' questions</span>' +
+            '</span>' +
+          '</label>';
+      });
+      optionsContainer.innerHTML = html;
+
+      function getSelectedIds() {
+        var ids = [];
+        var nodes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].checked) ids.push(nodes[i].getAttribute('data-section'));
+        }
+        return ids;
+      }
+
+      function buildTemplate() {
+        var selected = getSelectedIds();
+        if (selected.length === 0) {
+          return 'Toggle at least one section above to generate the template.';
+        }
+
+        var lines = [];
+        var programName = programInput && programInput.value ? programInput.value.trim() : '';
+        if (programName) {
+          lines.push('Puppy Application: ' + programName);
+        } else {
+          lines.push('Puppy Application');
+        }
+        lines.push('');
+        lines.push('Thank you for your interest. This application helps us understand your home and lifestyle so we can match you to the right puppy. There are no wrong answers. We are looking for fit, not a perfect resume. Please answer honestly.');
+        lines.push('');
+
+        // Always-on contact block at the top
+        lines.push('Contact Information');
+        lines.push('-------------------');
+        lines.push('1. Your full name');
+        lines.push('2. Email address');
+        lines.push('3. Phone number');
+        lines.push('4. Best way to reach you (email, text, phone call)');
+        lines.push('');
+
+        SECTIONS.forEach(function (s) {
+          if (selected.indexOf(s.id) === -1) return;
+          lines.push(s.heading);
+          lines.push(repeatChar('-', s.heading.length));
+          if (s.intro) {
+            lines.push(s.intro);
+            lines.push('');
+          }
+          s.questions.forEach(function (q, i) {
+            lines.push((i + 1) + '. ' + q);
+          });
+          lines.push('');
+        });
+
+        lines.push('Anything Else');
+        lines.push('-------------');
+        lines.push('Is there anything else you would like us to know about you, your home, or what you are looking for in a puppy?');
+        lines.push('');
+        lines.push('Thank you for taking the time to complete this. We will be in touch within a few days to follow up.');
+
+        return lines.join('\n');
+      }
+
+      function repeatChar(ch, n) {
+        var out = '';
+        for (var i = 0; i < n; i++) out += ch;
+        return out;
+      }
+
+      function render() {
+        templatePre.textContent = buildTemplate();
+      }
+
+      optionsContainer.addEventListener('change', render);
+      if (programInput) programInput.addEventListener('input', render);
+
+      if (selectAllBtn) {
+        selectAllBtn.addEventListener('click', function () {
+          var nodes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+          for (var i = 0; i < nodes.length; i++) nodes[i].checked = true;
+          render();
+        });
+      }
+
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', function () {
+          var nodes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+          for (var i = 0; i < nodes.length; i++) nodes[i].checked = false;
+          render();
+        });
+      }
+
+      function fallbackCopy(text) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (e) { /* noop */ }
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          var text = templatePre.textContent || '';
+          if (!text) return;
+          var done = function () {
+            var original = copyBtn.textContent;
+            copyBtn.textContent = 'Copied';
+            setTimeout(function () { copyBtn.textContent = original; }, 1500);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, function () {
+              fallbackCopy(text);
+              done();
+            });
+          } else {
+            fallbackCopy(text);
+            done();
+          }
+        });
+      }
+
+      if (printBtn) {
+        printBtn.addEventListener('click', function () {
+          window.print();
+        });
+      }
+
+      // Initial render
+      render();
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .pab-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .pab-form {
+      margin-bottom: 1.5rem;
+    }
+
+    .pab-fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0 0 1.25rem;
+    }
+
+    .pab-legend {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+      padding: 0;
+    }
+
+    .pab-help {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .pab-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .pab-options {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .pab-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fafafa;
+      cursor: pointer;
+      min-height: 44px;
+      transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    .pab-option:hover {
+      border-color: hsl(24, 95%, 70%);
+      background: #ffffff;
+    }
+
+    .pab-checkbox {
+      margin-top: 0.2rem;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      accent-color: hsl(24, 95%, 53%);
+      cursor: pointer;
+    }
+
+    .pab-option-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+    }
+
+    .pab-option-label {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .pab-option-count {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.1rem;
+    }
+
+    .pab-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .pab-link-button {
+      background: transparent;
+      border: 0;
+      color: hsl(24, 95%, 40%);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      font-size: 0.9rem;
+    }
+
+    .pab-link-button:hover {
+      text-decoration: underline;
+    }
+
+    .pab-toggle-sep {
+      color: #d1d5db;
+    }
+
+    .pab-field {
+      margin-bottom: 1.25rem;
+    }
+
+    .pab-label {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .pab-optional {
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+
+    .pab-input {
+      width: 100%;
+      max-width: 480px;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 44px;
+    }
+
+    .pab-input:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .pab-results {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+    }
+
+    .pab-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .pab-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .pab-results-subtitle {
+      color: #6b7280;
+      font-size: 0.95rem;
+      max-width: 540px;
+    }
+
+    .pab-results-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .pab-action-button {
+      padding: 0.5rem 1rem;
+      background: #ffffff;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 36px;
+    }
+
+    .pab-action-button:hover {
+      background: #f9fafb;
+    }
+
+    .pab-template {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #111827;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 0 0 1.5rem;
+      max-height: 520px;
+      overflow: auto;
+    }
+
+    .pab-template:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+    }
+
+    .pab-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .pab-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .pab-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .pab-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .pab-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .pab-cta-primary:hover {
+      background: hsl(24, 95%, 48%);
+    }
+
+    .pab-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .pab-cta-secondary:hover {
+      background: #ffffff;
+    }
+
+    .pab-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* FAQ styles (match other cornerstone pages) */
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    /* Print styles */
+    @media print {
+      .no-print { display: none !important; }
+      .breadcrumb,
+      .faq-section,
+      .pab-cta,
+      header,
+      footer { display: none !important; }
+      .pab-card {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+      .pab-template {
+        max-height: none;
+        overflow: visible;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</BaseLayout>
