@@ -480,8 +480,14 @@ const articleSchema = {
           '  <label class="ptt-row-label" for="' + id + '-value">P4 (ng/mL)</label>' +
           '  <input type="number" min="0" step="0.1" id="' + id + '-value" class="ptt-input ptt-row-input ptt-row-value" placeholder="e.g. 2.3" inputmode="decimal" />' +
           '</div>' +
-          '<button type="button" class="ptt-row-remove" aria-label="Remove row">' +
-          '  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>' +
+          '<button type="button" class="ptt-row-remove" aria-label="Remove row" title="Remove row">' +
+          '  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+          '    <polyline points="3 6 5 6 21 6"/>' +
+          '    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>' +
+          '    <path d="M10 11v6"/>' +
+          '    <path d="M14 11v6"/>' +
+          '    <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>' +
+          '  </svg>' +
           '</button>';
 
         var dateEl = wrap.querySelector('.ptt-row-date');
@@ -1097,19 +1103,20 @@ const articleSchema = {
       gap: 0.6rem;
     }
 
-    .ptt-row {
-      display: flex;
-      align-items: flex-end;
-      gap: 0.75rem;
+    .ptt-rows .ptt-row {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-end !important;
+      gap: 0.75rem !important;
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 10px;
       padding: 0.75rem 0.85rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap !important;
     }
 
-    .ptt-row-num {
-      display: inline-flex;
+    .ptt-rows .ptt-row-num {
+      display: inline-flex !important;
       align-items: center;
       justify-content: center;
       width: 28px;
@@ -1120,37 +1127,38 @@ const articleSchema = {
       font-weight: 700;
       font-size: 0.85rem;
       flex-shrink: 0;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.2rem;
       line-height: 1;
     }
 
-    .ptt-row-field {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 140px;
-      min-width: 140px;
+    .ptt-rows .ptt-row-field {
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 1 140px !important;
+      min-width: 0 !important;
     }
 
-    .ptt-row-label {
-      display: block;
-      font-size: 0.78rem;
+    .ptt-rows .ptt-row-label {
+      display: block !important;
+      font-size: 0.72rem;
       font-weight: 600;
       color: #6b7280;
-      margin-bottom: 0.25rem;
+      margin: 0 0 0.25rem 0 !important;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
-    .ptt-row-input {
+    .ptt-rows .ptt-row-input {
       padding: 0.55rem 0.75rem;
       min-height: 40px;
       font-size: 0.95rem;
+      width: 100%;
     }
 
-    .ptt-row-remove {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .ptt-rows .ptt-row-remove {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
       width: 36px;
       height: 36px;
       padding: 0;
@@ -1159,19 +1167,29 @@ const articleSchema = {
       border: 1px solid #fecaca;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 120ms ease, border-color 120ms ease;
+      transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
       flex-shrink: 0;
-      margin-bottom: 0.2rem;
+      margin: 0 0 0.2rem auto !important;
     }
 
-    .ptt-row-remove:hover {
+    .ptt-rows .ptt-row-remove:hover {
       background: #fef2f2;
       border-color: #fca5a5;
+      color: #991b1b;
     }
 
-    .ptt-row-remove:focus {
+    .ptt-rows .ptt-row-remove:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+    }
+
+    @media (max-width: 520px) {
+      .ptt-rows .ptt-row {
+        flex-wrap: wrap !important;
+      }
+      .ptt-rows .ptt-row-field {
+        flex-basis: calc(50% - 0.4rem) !important;
+      }
     }
 
     .ptt-button {
