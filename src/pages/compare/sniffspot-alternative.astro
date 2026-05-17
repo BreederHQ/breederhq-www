@@ -1,5 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const relatedLinks = [
+  { title: 'List a Private Dog Park', description: 'List your fenced yard, training field, or swim spot.', url: '/for-providers/dog-parks' },
+  { title: 'Dog Park Earnings Calculator', description: 'Estimate your monthly earnings as a private dog park host.', url: '/for-providers/dog-parks/earnings-calculator' },
+  { title: 'Browse Private Dog Parks', description: 'See private dog parks listed by city across the US.', url: '/dog-parks' },
+  { title: 'For Service Providers', description: 'Veterinarians, trainers, transporters, and more on BreederHQ.', url: '/for-providers' },
+  { title: 'Marketplace Listings', description: 'Verified listings powered by your real breeding program data.', url: '/workflows/marketplace' },
+  { title: 'Facilities', description: 'All facility verticals on BreederHQ Marketplace.', url: '/facilities' }
+];
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -330,5 +340,11 @@ const service = {
         </p>
       </div>
     </section>
+
+    <RelatedWorkflows
+      heading="Related Pages for Hosts and Marketplace Visibility"
+      intro="If you're a host listing a private space or a provider looking for marketplace visibility, these pages are most relevant."
+      links={relatedLinks}
+    />
   </main>
 </BaseLayout>
