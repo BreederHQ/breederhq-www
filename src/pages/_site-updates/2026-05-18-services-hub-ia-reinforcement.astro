@@ -1,0 +1,33 @@
+---
+export const updateMeta = {
+  date: '2026-05-18',
+  title: 'IA reinforcement: /services hub + nav exposure for geographic marketplace',
+  tags: ['marketplace', 'ia', 'navigation', 'services-hub'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 18, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Tightly scoped IA reinforcement pass. The semantic graph for the three geographic marketplace pages shipped 2026-05-17 (Lexington equine boarding, Ocala equine boarding, Kentucky farriers) was strong inside the cluster but functionally orphaned from real navigation. Reachability audit flagged: no <code>/services</code> hub existed, category hubs did not surface regional pages, and global nav had zero exposure to <code>/services</code>. This pass closes those gaps without touching the homepage, expanding categories, or adding new geo pages.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New file</h3>
+  <p class="text-gray-700 mb-3">
+    <a href="/services" class="text-[hsl(24,95%,53%)] hover:underline">/services</a> (<code>src/pages/services/index.astro</code>) &mdash; the Services hub. Specialist-first positioning: explicitly frames the marketplace as a narrow specialist directory rather than a long-tail generic pet-services catalog. Sections: live categories (Equine Boarding, Farriers), regional spotlights (Lexington KY, Ocala FL, Kentucky farriers), categories in development (Dog Training, Livestock Services with &ldquo;In Development&rdquo; chips and no broken outbound links), and a cross-link block to <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">/trust</a> + <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers</a>.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Category hub reinforcement</h3>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li><code>/services/equine-boarding</code> &mdash; the existing Regional Equine Hubs section had Lexington and Ocala as plaintext cards. Converted both to real anchor cards linking to the geographic pages. Wellington, Aiken, Scottsdale, etc. stay plaintext until pages ship.</li>
+    <li><code>/services/farriers</code> &mdash; added a new &ldquo;State-level directories&rdquo; block above the existing regional marketplace-filter grid, with Kentucky as the first entry. Region grid preserved as-is.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Navigation exposure (deliberately lightweight)</h3>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li><strong>HeaderV2:</strong> single line added to the Buyers dropdown &ldquo;Getting Started&rdquo; column &mdash; <code>Find Services</code> &rarr; <code>/services</code>. No mega-nav restructuring, no new top-level item.</li>
+    <li><strong>Footer:</strong> added <code>Marketplace Services</code> and <code>Trust &amp; Verification</code> entries to the Resources column, right after the existing <code>For Service Providers</code> link.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Out of scope (explicitly not touched)</h3>
+  <p class="text-gray-700 mb-3">
+    Homepage was not edited. No new categories were added beyond the four named in the hub (Equine Boarding live, Farriers live, Dog Training planned, Livestock Services planned). No new geographic pages. No mobile mega-nav restructuring. No unrelated marketplace sections.
+  </p>
+</article>
