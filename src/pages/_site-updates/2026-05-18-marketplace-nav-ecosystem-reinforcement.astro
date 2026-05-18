@@ -1,0 +1,48 @@
+---
+export const updateMeta = {
+  date: '2026-05-18',
+  title: 'Marketplace nav exposure + ecosystem reinforcement + farrier canonicalization',
+  tags: ['marketplace', 'ia', 'navigation', 'farriers', 'equine', 'canonicalization'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 18, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Second pass of the marketplace IA reinforcement. The earlier 2026-05-18 pass shipped the <a href="/services" class="text-[hsl(24,95%,53%)] hover:underline">/services</a> hub, footer entries, and a buried Services link inside the Buyers dropdown. This pass adds real navigational legitimacy for the Services branch, completes the 3-direction provider-page pattern on <a href="/for-providers/farriers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/farriers</a>, reinforces the equine ecosystem from <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">/horses</a>, and canonicalizes farrier provider URLs to the plural form.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">HeaderV2: proper Services dropdown</h3>
+  <p class="text-gray-700 mb-3">
+    Added a top-level <strong>Services</strong> nav item between Buyers and Service Providers. Compact 420px-wide dropdown (vs. the 760px For Providers mega-menu). Single column: Equine Specialists group (Farriers + Kentucky sub-link, Equine Boarding + Lexington and Ocala sub-links), Trust &amp; Verification, and a CTA to list a service business. Ecosystem-oriented, not directory-style.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">3-direction provider page pattern</h3>
+  <p class="text-gray-700 mb-3">
+    <code>/for-providers/farriers</code> previously had a thin &ldquo;Related on BreederHQ&rdquo; block with three weak links (two pointed at the marketplace.breederhq.com subdomain). Replaced with the standard 3-direction block per the provider-acquisition rule:
+  </p>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li>Demand side: <a href="/services/farriers" class="text-[hsl(24,95%,53%)] hover:underline">/services/farriers</a>, <a href="/services/farriers/kentucky" class="text-[hsl(24,95%,53%)] hover:underline">/services/farriers/kentucky</a>, <a href="/services" class="text-[hsl(24,95%,53%)] hover:underline">/services</a></li>
+    <li>Trust: <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">/trust</a></li>
+    <li>Sibling provider categories: equine-services, veterinary, training, transport, equine facilities</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Equine ecosystem reinforcement on /horses</h3>
+  <p class="text-gray-700 mb-3">
+    Added an &ldquo;Equine specialist services on BreederHQ Marketplace&rdquo; sub-block inside the existing &ldquo;Learn more&rdquo; section on <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">/horses</a>. Three links: farriers directory, equine boarding directory, and trust. This wires the highest-traffic equine landing page into the marketplace ecosystem graph without redesigning the page or adding a marketplace promo section.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Farrier URL canonicalization (Option A)</h3>
+  <p class="text-gray-700 mb-3">
+    Canonicalized the farrier provider page to the plural form for taxonomy symmetry with <code>/services/farriers</code>. Concrete changes:
+  </p>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li><strong>Deleted</strong> <code>src/pages/for-providers/farrier.astro</code> (the older 126-line singular version).</li>
+    <li><strong>Canonical:</strong> <a href="/for-providers/farriers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers/farriers</a> (395 lines, content-rich).</li>
+    <li><strong>308 redirect</strong> added to <code>vercel.json</code>: <code>/for-providers/farrier</code> &rarr; <code>/for-providers/farriers</code> (permanent).</li>
+    <li>Updated inbound links in <code>HeaderV2.astro</code> (desktop + mobile menus), <code>services/farriers.astro</code> (3 occurrences), and <code>for-providers/equine-services.astro</code> (1 occurrence).</li>
+    <li>Legacy <code>site-updates.astro</code> entries pointing at the singular URL are left alone &mdash; the 308 handles them and that file is protected per repo policy.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Out of scope (explicitly not touched)</h3>
+  <p class="text-gray-700 mb-3">
+    Homepage was not edited (R4/R5 from the audit were held for a later pass). No new geographic pages. No new categories. No homepage marketplace promo sections. No mobile mega-nav restructuring. The audit identified <code>/for-providers.astro</code> (parent) as also missing demand-side links to <code>/services/*</code> &mdash; that remediation (R5) is deferred.
+  </p>
+</article>
