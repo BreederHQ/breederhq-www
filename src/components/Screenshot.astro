@@ -42,6 +42,9 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
+  /** When `frame="native"`, crops the image to this aspect ratio from the top — used to remove
+   *  baked-in dark page backdrop space below a modal in the source PNG. Format: "W / H". */
+  trimRatio?: string;
 }
 
 const {
@@ -53,12 +56,15 @@ const {
   width = 1440,
   height = 900,
   class: className = "",
+  trimRatio,
 } = Astro.props;
 
 const png = `/images/screenshots/${id}.png`;
+const trim = frame === "native" && trimRatio;
+const viewportStyle = trim ? `--trim-ratio: ${trimRatio};` : undefined;
 ---
 
-<figure class={`screenshot screenshot--${frame} ${className}`}>
+<figure class={`screenshot screenshot--${frame} ${trim ? "screenshot--trim" : ""} ${className}`} style={viewportStyle}>
   {frame === "browser" && (
     <div class="screenshot__chrome screenshot__chrome--browser">
       <span class="screenshot__dot screenshot__dot--red"></span>
@@ -139,6 +145,15 @@ const png = `/images/screenshots/${id}.png`;
   .screenshot--native .screenshot__img {
     height: auto;
     object-fit: contain;
+  }
+  .screenshot--native.screenshot--trim .screenshot__viewport {
+    aspect-ratio: var(--trim-ratio, 720 / 660);
+    overflow: hidden;
+  }
+  .screenshot--native.screenshot--trim .screenshot__img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
   }
 
   .screenshot__annotations {
