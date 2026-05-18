@@ -1,0 +1,49 @@
+---
+export const updateMeta = {
+  date: '2026-05-18',
+  title: 'IA consistency pass: mobile services nav + /for-providers demand graph + taxonomy audit',
+  tags: ['marketplace', 'ia', 'navigation', 'mobile', 'for-providers', 'taxonomy'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 18, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Final consistency pass on the marketplace IA reinforcement. Three deferred items closed: mobile Services exposure (parity with the desktop dropdown), a demand-graph section on the <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers</a> parent page, and a recorded taxonomy recommendation for provider URLs. The <a href="/services" class="text-[hsl(24,95%,53%)] hover:underline">/services</a> hub structure was reviewed and intentionally left as-is.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Mobile Services accordion (HeaderV2)</h3>
+  <p class="text-gray-700 mb-3">
+    Inserted a new mobile accordion between Buyers and Service Providers. Compact, no nested trees, ecosystem-aware. Exposes: All Services, Farriers, Equine Boarding, Trust &amp; Verification, and a CTA to <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers</a>. Mirrors the desktop dropdown without dumping geo links or every category. The Service Providers accordion below it remains unchanged for true provider acquisition.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">/for-providers demand graph section</h3>
+  <p class="text-gray-700 mb-3">
+    Added a &ldquo;Where Provider Listings Appear on BreederHQ Marketplace&rdquo; section directly above the FAQ on <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">/for-providers</a>. Three anchor cards point to <a href="/services" class="text-[hsl(24,95%,53%)] hover:underline">/services</a>, <a href="/services/farriers" class="text-[hsl(24,95%,53%)] hover:underline">/services/farriers</a>, and <a href="/services/equine-boarding" class="text-[hsl(24,95%,53%)] hover:underline">/services/equine-boarding</a>. No fabricated metrics, no fake provider traffic numbers, no lead-gen hype. Professional, marketplace-native framing. This closes R5 (deferred from the prior IA pass).
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Services hub structure review (no changes)</h3>
+  <p class="text-gray-700 mb-3">
+    Reviewed the <a href="/services" class="text-[hsl(24,95%,53%)] hover:underline">/services</a> hub against the original spec heading list (&ldquo;Equine &amp; Specialist Services / Professional Animal Services / Featured Categories&rdquo;) vs. the as-shipped status-aware structure (&ldquo;Live Service Categories / Regional Spotlights / Categories in Development / Trust + Providers cross-links&rdquo;). The status-aware structure is more honest about coverage: only two live categories exist today, and a &ldquo;Professional Animal Services&rdquo; section showing one planned entry (Dog Training) would oversell. Decision: keep the as-shipped structure. Revisit when a third or fourth live category lands.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Provider taxonomy audit (recommendation, no implementation)</h3>
+  <p class="text-gray-700 mb-3">
+    The current pattern is category-general slugs: <code>/for-providers/training</code>, <code>/for-providers/boarding</code>, <code>/for-providers/grooming</code>, <code>/for-providers/transport</code>, <code>/for-providers/veterinary</code>. These read as taxonomy nodes rather than consumer-facing search terms. The earlier spec referenced consumer-explicit forms like <code>/for-providers/dog-trainers</code> and <code>/for-providers/pet-boarding</code>.
+  </p>
+  <p class="text-gray-700 mb-3">
+    <strong>Recommendation: keep category-general slugs.</strong> Reasons:
+  </p>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li><strong>Scales across species.</strong> <code>/for-providers/training</code> covers dog trainers, horse trainers, and livestock handlers under one provider acquisition page. A <code>/for-providers/dog-trainers</code> URL forces a parallel <code>/for-providers/horse-trainers</code>, <code>/for-providers/livestock-trainers</code>, etc., to maintain symmetry.</li>
+    <li><strong>Mirrors the supply side.</strong> <code>/for-providers/*</code> is provider acquisition. Providers self-identify by service category (trainer, vet, farrier), not by their consumer-facing target species. A horse trainer who also takes dog clients is one provider, one listing.</li>
+    <li><strong>Demand side is where species-explicit URLs belong.</strong> <code>/services/dog-training</code> and <code>/services/equine-boarding</code> (consumer-facing) can and should be species-explicit because that is how consumers search. The split is intentional: provider acquisition = category-general, consumer discovery = species-explicit.</li>
+    <li><strong>SEO impact of renaming is non-trivial.</strong> Six provider pages have inbound links from HeaderV2, the Services dropdown, the footer, geo pages, and the farrier provider 3-direction block. A taxonomy rename would require 308 redirects on all six, plus auditing every internal link site-wide. The keyword targets on <code>/for-providers/*</code> are provider-side (&ldquo;list dog training business&rdquo;), where slug specificity matters less.</li>
+    <li><strong>Two real exceptions already exist.</strong> <code>/for-providers/farriers</code> and <code>/for-providers/equine-services</code> are species-specific because the service is intrinsically species-specific. The pattern is: if the service maps to exactly one species, use a species-explicit slug; otherwise stay general. <code>training</code> and <code>boarding</code> serve multiple species and should stay general.</li>
+  </ul>
+  <p class="text-gray-700 mb-3">
+    <strong>Migration risk if reversed:</strong> medium. Six pages × seven inbound link locations each ~= 40 link edits, plus six redirects in <code>vercel.json</code>, plus a regeneration of the HeaderV2 Service Providers mega-menu. Not done in this pass.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Out of scope (explicitly not touched)</h3>
+  <p class="text-gray-700 mb-3">
+    No homepage edits. No new geo pages. No new service categories. No taxonomy rename. No trust expansion. Concurrent uncommitted work on <code>/horses</code> by another agent was left untouched.
+  </p>
+</article>
