@@ -1,0 +1,15 @@
+---
+export const updateMeta = {
+  date: '2026-05-18',
+  title: 'Horses page: removed laptop frames from four product screenshots',
+  tags: ['horses', 'screenshots', 'ui'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 18, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Updated four product screenshots on <a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">/horses</a> to render at their native size and aspect ratio without the macOS laptop chrome wrapper. The earlier letterboxed-in-a-laptop treatment cropped the imagery and added empty dark space around each shot. Affected screenshots: the breeding plan journey (Birth Checklist), the horse profile detail panel, the three-generation pedigree, and the titles tab.
+  </p>
+  <p class="text-sm text-gray-500 mb-2"><strong>How</strong>: passed <code>frame="native"</code> to the existing <code>&lt;Screenshot&gt;</code> component, which drops the device chrome, removes the fixed 1440×900 aspect ratio, and switches the image to <code>object-fit: contain</code> so it renders at its intrinsic resolution.</p>
+  <p class="text-sm text-gray-500"><strong>Files</strong>: <code>src/pages/horses.astro</code>.</p>
+</article>
