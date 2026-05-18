@@ -1,0 +1,53 @@
+---
+// src/pages/_site-updates/2026-05-18-terms-page-reconciliation.astro
+export const updateMeta = {
+  date: '2026-05-18',
+  title: 'Terms of Service page: reconciled with canonical Marketplace version',
+  tags: ['legal', 'terms', 'reconciliation'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 18, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Reconciled <a href="/terms" class="text-[hsl(24,95%,53%)] hover:underline">/terms</a> on the
+    marketing site with the canonical Terms of Service v2.0 published on the
+    BreederHQ Marketplace.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">What changed</h3>
+  <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+    <li>
+      The marketing-site <a href="/terms" class="text-[hsl(24,95%,53%)] hover:underline">/terms</a>
+      page previously rendered a Feb 8, 2026 version of the Terms of Service
+      that had drifted from the canonical version maintained in the platform's
+      legal package.
+    </li>
+    <li>
+      <strong>Now:</strong> <a href="/terms" class="text-[hsl(24,95%,53%)] hover:underline">/terms</a>
+      is a short notice page that points users to the canonical version
+      published at
+      <a href="https://marketplace.breederhq.com/terms" class="text-[hsl(24,95%,53%)] hover:underline">marketplace.breederhq.com/terms</a>.
+    </li>
+    <li>
+      Eliminates the two-document drift problem (Stage 2 of the legal-clarity
+      initiative described in the platform repo's
+      LEGAL-COUNSEL-REVIEW-2026-05.md).
+    </li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Why</h3>
+  <p class="text-gray-700 mb-2">
+    Maintaining two non-identical copies of the Terms of Service created a
+    contract-formation ambiguity: a visitor who read the marketing-site /terms
+    before signup saw different terms than the version they would later sign
+    when they registered. Single-source-of-truth via redirect-style notice
+    page eliminates the drift permanently.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Scope</h3>
+  <p class="text-gray-700">
+    Marketing site only. Backing canonical document (Terms of Service v2.0,
+    effective 2026-06-17) lives in the breederhq platform monorepo at
+    <code>packages/ui/src/legal/terms-of-service-2.0.md</code>.
+  </p>
+</article>
