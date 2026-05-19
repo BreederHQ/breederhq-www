@@ -57,13 +57,9 @@ const faqs = [
     priceUnit: "MONTH",
     offerDescription: "$5/month per live listing. Free during early access. No commissions, no per-booking fees, and no guest membership required to browse or book.",
     areaServed: "United States",
-    // Forward-compatible deep link: ?category and ?returnTo are inert in
-    // accounts today (verified 2026-05-06: RegisterPage reads only ?intent
-    // and ?promo). When the host wizard catches up, it will prefill
-    // "Private Dog Park" and route to the listing-create flow without any
-    // marketing-site edit. See the cross-repo TODO note further down where
-    // this same URL is used as the primary CTA href.
-    offerUrl: "https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+    // Canonical provider entry — accounts app consumes only ?intent.
+    // See docs/MARKETPLACE-CONTRACTS.md §4.
+    offerUrl: "https://accounts.breederhq.com/register?intent=provider_marketplace"
   }}
 >
 <main>
@@ -87,26 +83,17 @@ const faqs = [
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         {/*
-          PRIMARY CTA — host signup deep link.
-          Forward-compatible URL: ?category=private_dog_park and ?returnTo
-          are inert in accounts today (RegisterPage only reads ?intent and
-          ?promo, verified 2026-05-06). When the host wizard supports
-          category prefill + post-onboarding return, this URL begins routing
-          users straight to the dog-park listing-create flow without any
-          marketing-site edit.
+          PRIMARY CTA — canonical provider entry. The accounts app consumes
+          only ?intent; after register/login the visitor lands on
+          /provider/start (ProviderEntryPage) where they self-select facility
+          type. See docs/MARKETPLACE-CONTRACTS.md §4.
 
-          Cross-repo follow-up: accounts must accept ?category, persist it
-          through the verify → finish-setup chain, and have marketplace's
-          listing-create wizard read it to preselect Private Dog Park. File
-          this as a single ticket spanning accounts + marketplace.
-
-          Tertiary "See a Sample Listing" CTA is intentionally NOT present
-          yet — see site-updates entry for 2026-05-06. Add when a real seed
-          listing slug exists; do not link to a filtered browse view (that
-          duplicates the secondary CTA's destination).
+          Tertiary "See a Sample Listing" CTA intentionally not present —
+          would duplicate the secondary CTA's destination or link to a fake
+          slug. Add only when a real seed listing exists.
         */}
         <a
-          href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
           class="bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-600 w-full sm:w-auto"
         >
           List Your Dog Park
@@ -666,13 +653,9 @@ const faqs = [
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        {/*
-          PRIMARY CTA — same forward-compatible host-signup deep link as
-          the hero. See hero CTA comment block for full rationale and
-          cross-repo follow-up notes.
-        */}
+        {/* PRIMARY CTA — same canonical provider entry as the hero. */}
         <a
-          href="https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new"
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
           class="bg-white text-emerald-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50 w-full sm:w-auto"
         >
           List Your Dog Park

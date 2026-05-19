@@ -39,8 +39,12 @@
  *     that slug via `getServiceCategoryHubBySlug(slug)` and locks the filter.
  *
  *   Provider intent (accounts.breederhq.com/register):
- *     ?intent=provider_marketplace&category=<lowercase_enum>
- *     The category param value mirrors the SERVICE_TYPE enum value lowercased.
+ *     ?intent=provider_marketplace
+ *     The accounts app consumes only `intent`. After register/login the visitor
+ *     is routed through /provider/start (ProviderEntryPage) where they
+ *     self-select category. Earlier scheme included `?category=<X>` and
+ *     `?returnTo=<X>` but neither is consumed — they were dropped in Phase 6.
+ *     See docs/MARKETPLACE-CONTRACTS.md for the authoritative scheme.
  *
  * If a /services/<category> hub on breederhq-www does not map to a real
  * CATEGORY_OPTIONS value, fetchServiceListings returns an empty result
