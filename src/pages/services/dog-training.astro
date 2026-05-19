@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Dog Training', url: '/services/dog-training' }
+];
+---
+
+<BaseLayout
+  title="Dog Training Providers on BreederHQ Marketplace"
+  description="Browse dog training providers on BreederHQ Marketplace. Filter by methodology, sport specialty, breed experience, and coverage area. Obedience, agility, field, behavior modification, and breed-specific training."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Dog Training</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Dog Training</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse dog trainers on BreederHQ Marketplace. Filter by methodology, sport or working specialty, breed experience, and coverage area. Trainers list their own credentials, class schedules, and what they take on.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Dog Trainers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- What this category covers -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Category Covers</h2>
+        <p class="text-gray-600 mb-6">Trainers on BreederHQ work across a wider span than the typical "puppy class" directory captures.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Puppy socialization and early neurological stimulation (ENS)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Basic and advanced obedience</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Agility, flyball, and dog sport</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Field and hunt training for sporting breeds</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Conformation ring training and stacking</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Protection sport, IGP, and bite work</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Service dog and therapy dog preparation</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Recall and off-leash reliability</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Herding and working-breed handling</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Board-and-train programs</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How to browse -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter for finding the right trainer:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Species and breed expertise.</strong> A working-line trainer is not the same as a doodle-puppy class. Filter to trainers who have actually titled or placed dogs in the work you want.</li>
+          <li><strong class="text-gray-900">Methodology.</strong> Positive reinforcement, balanced, e-collar, prong, sport-specific. The right methodology is the one that fits your dog and your handling skill.</li>
+          <li><strong class="text-gray-900">Class format.</strong> Group class, private lessons, board-and-train, day train, or hybrid. Mobile and in-home trainers are filterable separately.</li>
+          <li><strong class="text-gray-900">Coverage area.</strong> Trainers list service area or facility location. Sport and working trainers often travel for trials.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What to look for when hiring -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring a Trainer</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">A clear methodology.</strong> The trainer should be able to explain how they get behavior, how they handle mistakes, and what the dog's emotional state looks like through the process.</li>
+          <li><strong class="text-gray-900">Real titles or placements, not just years of experience.</strong> Twenty years of pet obedience does not qualify someone to start a working Malinois.</li>
+          <li><strong class="text-gray-900">Honest scope.</strong> Good trainers turn down work that isn't a fit, especially for reactivity, aggression, and high-drive working dogs that need a behaviorist or sport specialist instead.</li>
+          <li><strong class="text-gray-900">Credentials matched to the work.</strong> CPDT-KA, KPA, IAABC, IPO/IGP titles, AKC titles, herding instinct certifications. Each signals different things — ask which apply to your goal.</li>
+          <li><strong class="text-gray-900">A facility (or service area) that matches the work.</strong> Field trainers need fields and birds. Agility trainers need full-size equipment. Sport trainers need helpers and decoys.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services#behavioral" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🧠</div>
+            <div class="font-semibold text-gray-900">Behavioral</div>
+            <p class="text-xs text-gray-600 mt-1">Reactivity, aggression, and behavior modification specialists.</p>
+          </a>
+          <a href="/services#handling" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏅</div>
+            <div class="font-semibold text-gray-900">Show Handling</div>
+            <p class="text-xs text-gray-600 mt-1">AKC and UKC handlers, ring training, show grooming.</p>
+          </a>
+          <a href="/for-providers/indoor-training" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏟️</div>
+            <div class="font-semibold text-gray-900">Indoor Training Halls</div>
+            <p class="text-xs text-gray-600 mt-1">Bookable indoor halls for agility, scent work, obedience, and sport.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider cross-link -->
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/training" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a dog trainer?</p>
+            <p class="text-sm text-gray-600">List your training business on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Grooming', url: '/services/grooming' }
+];
+---
+
+<BaseLayout
+  title="Grooming Providers on BreederHQ Marketplace"
+  description="Browse groomers on BreederHQ Marketplace. Filter by breed expertise, coat type, mobile vs. salon, and show-prep specialization. Dog, cat, equine, and livestock grooming."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Grooming</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Grooming</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse groomers on BreederHQ Marketplace. Filter by breed expertise, coat type, mobile vs. salon, and show-prep specialization. Includes dog, cat, equine, and livestock grooming.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Groomers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- What this category covers -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Category Covers</h2>
+        <p class="text-gray-600 mb-6">Grooming on BreederHQ spans show-ring prep, breed-specific coat work, and recurring pet maintenance — across more than just dogs.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Breed-specific trims and pattern work</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Show grooming and pre-show prep</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Hand-stripping for terriers and wire coats</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Double-coat de-shedding and undercoat work</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Doodle and poodle-coat specialization</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Cat grooming, lion cuts, and longhair maintenance</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Equine clipping, body clips, and mane/tail work</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Livestock fitting and show-prep grooming</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Mobile grooming for multi-animal households</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Nail, ear, sanitary, and sensitive-skin services</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How to browse -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter for finding the right groomer:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Species and breed expertise.</strong> A groomer who does Yorkies all day is not the same as one who hand-strips Wire Fox Terriers. Filter to actual breed experience, not "all breeds."</li>
+          <li><strong class="text-gray-900">Coat-type specialty.</strong> Double coats, drop coats, wire coats, curly coats, and silky coats all require different tools, time, and technique.</li>
+          <li><strong class="text-gray-900">Mobile or salon.</strong> Mobile groomers come to you and often work one animal at a time. Salons offer more equipment, multi-animal scheduling, and lower per-visit cost.</li>
+          <li><strong class="text-gray-900">Show vs. pet grooming.</strong> Show grooming is a different craft — pattern work, hand-stripping, blending, and breed standard adherence. Pet grooming is faster and more practical.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What to look for when hiring -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring a Groomer</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">A portfolio of your breed (or coat type).</strong> Photos of finished work in your breed beat any credential. If they don't have photos of your coat type, ask why.</li>
+          <li><strong class="text-gray-900">A clear policy on senior, anxious, or reactive animals.</strong> Groomers who specialize in difficult animals will say so. Groomers who don't should refer out.</li>
+          <li><strong class="text-gray-900">Honest time estimates.</strong> A breed-correct Bichon trim takes time. A 45-minute "full groom" on a heavy double coat is rushing the work.</li>
+          <li><strong class="text-gray-900">Sanitation and recovery space.</strong> Clean tables, fresh blades between dogs, and a calm holding area between bath and table.</li>
+          <li><strong class="text-gray-900">Credentials matched to the work.</strong> NDGAA, ISCC, breed-club mentorships, and certified master groomer titles signal show-grooming depth.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services#handling" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏅</div>
+            <div class="font-semibold text-gray-900">Show Handling</div>
+            <p class="text-xs text-gray-600 mt-1">Professional handlers, ring training, and show-day support.</p>
+          </a>
+          <a href="/for-providers/wash-grooming" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🛁</div>
+            <div class="font-semibold text-gray-900">Wash &amp; Grooming Spaces</div>
+            <p class="text-xs text-gray-600 mt-1">Self-wash and pro grooming bay rentals.</p>
+          </a>
+          <a href="/services#boarding" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏠</div>
+            <div class="font-semibold text-gray-900">Boarding</div>
+            <p class="text-xs text-gray-600 mt-1">Boarding facilities that bundle grooming with overnight stays.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider cross-link -->
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/grooming" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a groomer?</p>
+            <p class="text-sm text-gray-600">List your grooming business on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

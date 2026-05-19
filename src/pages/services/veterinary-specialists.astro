@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Veterinary Specialists', url: '/services/veterinary-specialists' }
+];
+---
+
+<BaseLayout
+  title="Veterinary Specialists on BreederHQ Marketplace"
+  description="Browse veterinary specialists on BreederHQ Marketplace. Reproductive vets, equine vets, exotic animal specialists, sports medicine, and theriogenologists. For breeders, performance owners, and complex cases."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Veterinary Specialists</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Veterinary Specialists</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          BreederHQ Marketplace surfaces veterinary specialists, not general practice. Reproductive vets, equine vets, exotic-animal vets, sports medicine, and theriogenologists. For breeders, performance owners, and cases your regular vet refers out.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Veterinary Specialists
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- What this category covers -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Category Covers</h2>
+        <p class="text-gray-600 mb-6">Specialist veterinary covers the work that general practice refers out — reproductive medicine, species-specific expertise, and performance medicine.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Canine reproductive specialists (theriogenologists)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Equine reproductive specialists</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Progesterone testing, AI, and TCI</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Surgical and TCI AI, frozen semen handling</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Equine ambulatory and performance vets</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Sports medicine and lameness work</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Exotic, avian, and reptile specialists</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Veterinary geneticists for breeding decisions</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Whelping, foaling, and neonatal support</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Referral surgery and orthopedics</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How to browse -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter for finding the right specialist:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Species.</strong> Canine repro, equine repro, exotic medicine, and small ruminant work are different specialties. Filter to the species first, specialty second.</li>
+          <li><strong class="text-gray-900">Specialty area.</strong> Reproductive medicine, sports medicine, internal medicine, surgery, ophthalmology, dermatology, cardiology, neurology, oncology.</li>
+          <li><strong class="text-gray-900">Board certification.</strong> DACT (theriogenology), DACVIM (internal medicine), DACVS (surgery), DACVO (ophthalmology), DACVSMR (sports medicine and rehab).</li>
+          <li><strong class="text-gray-900">Ambulatory vs. hospital.</strong> Equine specialists often come to your barn. Repro and surgical specialists typically work from a hospital with imaging and lab.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What to look for when hiring -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring a Specialist</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Verifiable board certification.</strong> DACT, DACVIM, DACVS, and equivalent credentials are issued by the American College of Veterinary Specialists. Verify on AVMA or the relevant specialty college's directory.</li>
+          <li><strong class="text-gray-900">Volume in your specific case.</strong> A repro vet who runs 200 progesterones a year is meaningfully different from one who runs 20. Ask.</li>
+          <li><strong class="text-gray-900">Referral relationship.</strong> Most good specialists work in coordination with your primary vet, not around them. Continuity of records matters.</li>
+          <li><strong class="text-gray-900">Imaging and lab on-site.</strong> For repro and sports medicine specifically, ultrasound, radiograph, and same-day lab work change what's possible during a single visit.</li>
+          <li><strong class="text-gray-900">Honest scope.</strong> Specialists who decline cases outside their area, or who refer to subspecialists when appropriate, are doing the work right.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services#health-testing" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🧬</div>
+            <div class="font-semibold text-gray-900">Health Testing</div>
+            <p class="text-xs text-gray-600 mt-1">OFA, PennHIP, CHIC, CERF, and genetic panel providers.</p>
+          </a>
+          <a href="/services#rehabilitation" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">💪</div>
+            <div class="font-semibold text-gray-900">Rehabilitation</div>
+            <p class="text-xs text-gray-600 mt-1">Canine and equine physical therapy and sports recovery.</p>
+          </a>
+          <a href="/services#equine-services" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐎</div>
+            <div class="font-semibold text-gray-900">Equine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Training, lessons, and ambulatory equine support.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider cross-link -->
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/veterinary" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a veterinary specialist?</p>
+            <p class="text-sm text-gray-600">List your specialty practice on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Transport', url: '/services/transport' }
+];
+---
+
+<BaseLayout
+  title="Animal Transport Providers on BreederHQ Marketplace"
+  description="Browse animal transport providers on BreederHQ Marketplace. Filter by species, ground vs. air, USDA compliance, and coverage area. Puppy delivery, equine shipping, livestock hauling, and international transport."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Transport</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Animal Transport</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse animal transport providers on BreederHQ Marketplace. Filter by species, ground or air, USDA compliance, and coverage area. Move animals from breeder to buyer, between barns, or across the country.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Transport Providers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- What this category covers -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Category Covers</h2>
+        <p class="text-gray-600 mb-6">Animal transport spans species, distances, and regulatory regimes. The right provider depends on what you're moving and how far.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Ground transport of puppies and adult dogs</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> USDA-licensed commercial pet transport</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Equine shipping (commercial vans, EquiJet, custom)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Livestock and cattle hauling</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Exotic and small-animal transport</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Cat transport and cattery-to-buyer delivery</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Nanny-style flight services</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> International transport (USDA APHIS, CDC, IATA)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Show-circuit and event transport</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Climate-controlled and team-driving long-haul</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How to browse -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter for finding the right transporter:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Species.</strong> Dog/cat, equine, livestock, and exotic transporters operate under different equipment, training, and regulations. Don't cross-shop them.</li>
+          <li><strong class="text-gray-900">Ground or air.</strong> Ground works for most regional moves. Air is faster but requires more paperwork, especially internationally.</li>
+          <li><strong class="text-gray-900">USDA license.</strong> USDA APHIS licensed transporters are required for commercial puppy moves. Verify the license, not just the claim.</li>
+          <li><strong class="text-gray-900">Route and frequency.</strong> Some transporters run scheduled circuits (e.g., FL-NY weekly). Others do bespoke runs. Schedule fit can change the price by half.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What to look for when hiring -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring a Transporter</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Verifiable USDA APHIS license</strong> for commercial puppy/kitten transport across state lines. Ask for the license number.</li>
+          <li><strong class="text-gray-900">Climate control and team driving for long routes.</strong> A team-driven temperature-controlled van is the floor for multi-day cross-country moves.</li>
+          <li><strong class="text-gray-900">Vehicle photos and condition.</strong> The vehicle is the product. Photos of the actual rig, not stock imagery.</li>
+          <li><strong class="text-gray-900">Live tracking and check-ins.</strong> GPS tracking, scheduled photo updates, and a real phone number you can reach 24/7.</li>
+          <li><strong class="text-gray-900">Insurance and carrier liability.</strong> Cargo insurance specific to live animals. General auto insurance is not enough.</li>
+          <li><strong class="text-gray-900">Honest schedule.</strong> Transporters who promise a 48-hour cross-country run on solo drivers should be a hard no.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services#boarding" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏠</div>
+            <div class="font-semibold text-gray-900">Boarding</div>
+            <p class="text-xs text-gray-600 mt-1">Overnight stops and layover boarding along a route.</p>
+          </a>
+          <a href="/services#veterinary" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Veterinary</div>
+            <p class="text-xs text-gray-600 mt-1">Health certificates and pre-travel exams.</p>
+          </a>
+          <a href="/services#photography" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">📸</div>
+            <div class="font-semibold text-gray-900">Photography</div>
+            <p class="text-xs text-gray-600 mt-1">Pre-delivery photos for buyers receiving long-distance.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider cross-link -->
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/transport" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a transport provider?</p>
+            <p class="text-sm text-gray-600">List your animal transport business on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

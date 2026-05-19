@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Boarding', url: '/services/boarding' }
+];
+---
+
+<BaseLayout
+  title="Boarding Providers on BreederHQ Marketplace"
+  description="Browse boarding providers on BreederHQ Marketplace. Filter by species, facility type, in-home vs. kennel, and coverage area. Dog, cat, exotic, livestock, and equine boarding."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Boarding</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Boarding</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse boarding providers on BreederHQ Marketplace. Filter by species, facility type, in-home vs. kennel, and coverage area. For dedicated equine boarding, see the separate Equine Boarding category.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Boarding Providers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- What this category covers -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Category Covers</h2>
+        <p class="text-gray-600 mb-6">Boarding on BreederHQ covers overnight care across species and care models, not just dog kennels.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Traditional dog kennels with indoor/outdoor runs</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Cage-free and suite-style dog boarding</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> In-home dog boarding (limited intake)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Cat boarding and dedicated catteries</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Exotic and small-animal boarding</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Livestock and small-farm boarding</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Luxury and concierge boarding</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Medical and senior-care boarding</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Boarding bundled with training or grooming</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Holiday and long-stay arrangements</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How to browse -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter for finding the right boarder:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Species.</strong> Dog, cat, exotic, livestock. Mixed-species facilities exist but specialty boarders usually do one thing well.</li>
+          <li><strong class="text-gray-900">Facility type.</strong> Traditional kennel, suite-style, cage-free, or in-home. Each has tradeoffs on cost, attention, and exposure to other animals.</li>
+          <li><strong class="text-gray-900">Care level.</strong> Standard, premium, medical, or senior. Medical boarding is essential for animals on time-sensitive medications.</li>
+          <li><strong class="text-gray-900">Add-ons.</strong> Training during stay, grooming, transport, and live updates. Bundled services often beat coordinating across providers.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What to look for when hiring -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring a Boarder</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Tour before you book.</strong> A reputable facility welcomes a walkthrough. If they don't, that's the answer.</li>
+          <li><strong class="text-gray-900">Vaccine, intake, and biosecurity policy.</strong> What they require of other dogs is what they're requiring of yours. Stricter is better.</li>
+          <li><strong class="text-gray-900">Staff-to-animal ratio and overnight coverage.</strong> Ask who is on the property at 2 a.m., not just at noon.</li>
+          <li><strong class="text-gray-900">Emergency plan and veterinary relationship.</strong> Confirm which vet they use, what's authorized without owner contact, and what's billed how.</li>
+          <li><strong class="text-gray-900">Fit for your animal specifically.</strong> Reactive, senior, medicated, and high-drive animals don't all do well in the same setup. Honest facilities will tell you when they're not the fit.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/equine-boarding" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏇</div>
+            <div class="font-semibold text-gray-900">Equine Boarding</div>
+            <p class="text-xs text-gray-600 mt-1">Pasture, full care, training board, and breeding facilities.</p>
+          </a>
+          <a href="/services#pet-sitting" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐾</div>
+            <div class="font-semibold text-gray-900">Pet Sitting</div>
+            <p class="text-xs text-gray-600 mt-1">In-home sitters, drop-in visits, and overnight care.</p>
+          </a>
+          <a href="/for-providers/boarding-facilities" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏠</div>
+            <div class="font-semibold text-gray-900">Boarding Facilities</div>
+            <p class="text-xs text-gray-600 mt-1">Bookable kennels, catteries, and overnight infrastructure.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider cross-link -->
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/boarding" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a boarding provider?</p>
+            <p class="text-sm text-gray-600">List your boarding business on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
