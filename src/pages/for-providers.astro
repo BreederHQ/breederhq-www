@@ -20,8 +20,8 @@ const faqs = [
     answer: 'No. Service provider listings are completely separate from breeder subscriptions. You do not need to be a breeder to list your services.'
   },
   {
-    question: 'How do I get verified?',
-    answer: 'Upload your license, insurance, or relevant credentials. Verification is optional but recommended. Verified listings receive significantly more inquiries.'
+    question: 'How does identity and credential display work?',
+    answer: 'You can complete identity verification through Stripe Identity (a service operated by Stripe, Inc.), which adds an "Identity confirmed via Stripe Identity" indicator to your profile. For credentials issued by organizations that maintain a public registry (OFA, AKC, AFA, state licensing boards), BreederHQ may query the registry and display a "Confirmed via [registry] registry" passthrough indicator. Anything else is your own attestation. BreederHQ does not verify, vet, or vouch for credentials. See /trust for the full policy.'
   },
   {
     question: 'Can I pause my listing?',
@@ -245,7 +245,7 @@ const faqs = [
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
-                Optional verification badge for credentials (license, insurance)
+                Identity and credential indicators on your profile (Stripe Identity, registry passthrough)
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-emerald-600 mt-0.5 font-bold">&#10003;</span>
@@ -354,86 +354,47 @@ const faqs = [
 
 
     <!-- ============================================ -->
-    <!-- VERIFICATION & TRUST BADGES                  -->
+    <!-- IDENTITY & CREDENTIALS                       -->
     <!-- ============================================ -->
     <section class="py-20 bg-stone-50" id="trust">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-14">
           <h2 class="text-3xl font-bold text-gray-900 mb-4">
-            Stand Out with Verification and Trust Badges
+            Identity and Credentials on Your Profile
           </h2>
           <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-            Verification builds confidence. BreederHQ offers progressive verification tiers, from government ID
-            through full accreditation, plus earned badges that display on your profile and every listing.
+            BreederHQ does not verify or vouch for providers. What appears on your profile comes from three layers buyers can see and weigh for themselves.
           </p>
         </div>
 
-        <!-- Verification Tiers -->
-        <h3 class="text-xl font-bold text-gray-900 mb-6">Verification Tiers</h3>
-        <div class="grid md:grid-cols-3 gap-6 mb-14">
-          <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
-            <img src="/badges/id_verified.png" alt="ID Verified" class="h-20 mx-auto mb-4" />
-            <h4 class="font-bold text-gray-900 mb-1">ID Verified</h4>
-            <p class="text-xs text-blue-600 font-medium mb-3">Tier 1</p>
-            <p class="text-sm text-gray-600">
-              Government-issued ID verification. Confirms you are a real person or business.
+        <div class="grid md:grid-cols-3 gap-6 mb-10">
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 1</div>
+            <h3 class="font-bold text-gray-900 mb-2">Identity confirmation (Stripe Identity)</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              You can complete identity verification through Stripe Identity, a service operated by Stripe, Inc. If Stripe confirms your identity, your profile shows <em>&ldquo;Identity confirmed via Stripe Identity&rdquo;</em> with the date.
             </p>
           </div>
-          <div class="bg-white rounded-xl border-2 border-emerald-300 p-6 text-center">
-            <img src="/badges/verified.png" alt="Verified" class="h-20 mx-auto mb-4" />
-            <h4 class="font-bold text-gray-900 mb-1">Verified</h4>
-            <p class="text-xs text-emerald-600 font-medium mb-3">Tier 2</p>
-            <p class="text-sm text-gray-600">
-              Identity confirmed plus professional credentials and business documentation reviewed.
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 2</div>
+            <h3 class="font-bold text-gray-900 mb-2">Public-registry passthrough</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              For credentials issued by organizations with a public registry (OFA, AKC, AFA, state licensing boards), BreederHQ may query the registry and display <em>&ldquo;Confirmed via [registry] registry&rdquo;</em> with the query date and a link to the source record.
             </p>
           </div>
-          <div class="bg-gradient-to-br from-amber-50 to-white rounded-xl border-2 border-amber-400 p-6 text-center">
-            <img src="/badges/accredited.png" alt="Accredited" class="h-20 mx-auto mb-4" />
-            <h4 class="font-bold text-gray-900 mb-1">Accredited</h4>
-            <p class="text-xs text-amber-600 font-medium mb-3">Tier 3, Highest</p>
-            <p class="text-sm text-gray-600">
-              Full BreederHQ Accreditation: identity verification, program documentation, and professional standards review.
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 3</div>
+            <h3 class="font-bold text-gray-900 mb-2">Your own attestation</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              For credentials without a Layer 2 passthrough, what appears on your profile is your own attestation. You may upload supporting documents. BreederHQ does not open, read, or vouch for any uploaded document.
             </p>
-          </div>
-        </div>
-
-        <!-- Earned Badges -->
-        <h3 class="text-xl font-bold text-gray-900 mb-6">Earned Badges</h3>
-        <p class="text-sm text-gray-600 mb-6">
-          Awarded automatically based on your track record. Can't be bought, only earned.
-        </p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-14">
-          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
-            <img src="/badges/quick_responder.png" alt="Quick Responder" class="h-14 mx-auto mb-2" />
-            <h4 class="text-xs font-bold text-gray-900">Quick Responder</h4>
-            <p class="text-xs text-gray-500 mt-1">Responds within 4 hours</p>
-          </div>
-          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
-            <img src="/badges/established.png" alt="Established" class="h-14 mx-auto mb-2" />
-            <h4 class="text-xs font-bold text-gray-900">Established</h4>
-            <p class="text-xs text-gray-500 mt-1">6+ months, 3+ listings</p>
-          </div>
-          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
-            <img src="/badges/trusted.png" alt="Trusted" class="h-14 mx-auto mb-2" />
-            <h4 class="text-xs font-bold text-gray-900">Trusted</h4>
-            <p class="text-xs text-gray-500 mt-1">12+ months, zero disputes</p>
-          </div>
-          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
-            <img src="/badges/top_rated.png" alt="Top Rated" class="h-14 mx-auto mb-2" />
-            <h4 class="text-xs font-bold text-gray-900">Top Rated</h4>
-            <p class="text-xs text-gray-500 mt-1">4.5+ average rating</p>
-          </div>
-          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center">
-            <img src="/badges/founder.png" alt="Founder" class="h-14 mx-auto mb-2" />
-            <h4 class="text-xs font-bold text-gray-900">Founder</h4>
-            <p class="text-xs text-gray-500 mt-1">First 100 providers</p>
           </div>
         </div>
 
         <div class="bg-white rounded-xl border border-stone-200 p-6 text-center">
           <p class="text-sm text-gray-600">
-            Badges display on your profile and on every listing card in search results.
-            Higher verification tiers and more badges mean more visibility and more inquiries.
+            BreederHQ may also display <strong>Profile Indicators</strong> based on your account history on the platform (joined date, typical response time, completed transactions, open disputes). Indicators are facts, not endorsements.
+            <a href="/trust" class="text-emerald-700 hover:underline ml-1">Read the full Identity &amp; Credentials policy &rarr;</a>
           </p>
         </div>
       </div>

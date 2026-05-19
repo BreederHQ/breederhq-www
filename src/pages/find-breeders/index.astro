@@ -24,8 +24,8 @@ const speciesOptions = [
 ---
 
 <BaseLayout
-  title="Find Verified Breeders | BreederHQ"
-  description="Find verified breeders of dogs, cats, horses, goats, alpacas, llamas, rabbits, and sheep. Real health testing, registered pedigrees, and breeding history on the BreederHQ Marketplace."
+  title="Find Breeders | BreederHQ"
+  description="Find breeders of dogs, cats, horses, goats, alpacas, llamas, rabbits, and sheep on the BreederHQ Marketplace. Real health testing, registered pedigrees, and breeding history on the BreederHQ Marketplace."
   breadcrumbs={breadcrumbs}
 >
   <main class="min-h-screen bg-white">
@@ -33,7 +33,7 @@ const speciesOptions = [
 
     <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find verified breeders</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find breeders</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
           BreederHQ supports breeders of dogs, cats, horses, goats, alpacas, llamas, rabbits, sheep, and cattle.
           Every profile is grounded in real records: health testing, pedigrees, and breeding
@@ -57,7 +57,7 @@ const speciesOptions = [
       </div>
     </section>
 
-    <MarketplaceBreedersList breeders={breeders} speciesLabel="" emptyHeading="We're growing the breeder roster" emptyBody="Verified breeders are joining BreederHQ regularly across all 9 public species. Visit the marketplace directly for the latest." />
+    <MarketplaceBreedersList breeders={breeders} speciesLabel="" emptyHeading="We're growing the breeder roster" emptyBody="Breeders are joining BreederHQ regularly across all 9 public species. Visit the marketplace directly for the latest." />
 
     <section class="py-16 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
@@ -69,9 +69,12 @@ const speciesOptions = [
           a profile to the marketplace, what you see is grounded in those records.
         </p>
         <p class="text-lg text-gray-700 mb-4">
-          Behavioral badges (Quick Responder, Experienced) are auto-granted from real activity, not
-          purchased. The Health Tested badge requires real documentation. The Verified badge requires
-          identity AND program documentation review.
+          Each profile may show three kinds of indicators: identity confirmation via Stripe Identity
+          (operated by Stripe, Inc.), public-registry passthrough where supported (OFA, AKC, AFA, etc.)
+          with a link to the source record, and the breeder\u2019s own attestations for everything else.
+          BreederHQ does not verify or vouch for credentials beyond what these passthroughs return.
+          Profile Indicators like typical response time and completed transactions are calculated from
+          actual platform account history.
         </p>
         <p class="text-lg text-gray-700">
           You can read more about how to evaluate any breeder you find in our
@@ -88,11 +91,11 @@ const speciesOptions = [
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-white mb-4">Browse the full marketplace</h2>
         <p class="text-lg text-stone-300 mb-8">
-          See every verified breeder, every available animal, and every service provider on the
+          See every breeder listing, every available animal, and every service provider on the
           BreederHQ Marketplace.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">All Verified Breeders</a>
+          <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse All Breeders</a>
           <a href="https://marketplace.breederhq.com/animals" class="bg-white text-stone-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-100 transition w-full sm:w-auto">All Available Animals</a>
         </div>
       </div>

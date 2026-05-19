@@ -1,0 +1,65 @@
+---
+const date = '2026-05-19';
+const title = 'Legal-clarity cleanup: replaced verification overstatement with the 3-layer trust model across the marketing site';
+---
+<section class="space-y-2">
+  <p class="text-sm text-gray-500">{date}</p>
+  <h2 class="text-xl font-bold text-gray-900">{title}</h2>
+  <p>
+    Aligned <code>breederhq-www</code> with the legal-clarity remediation completed in the platform (see
+    <code>docs/codebase/architecture/LEGAL-CLARITY-REMEDIATION-2026-06.md</code> and the help article
+    <code>docs/help/articles/marketplace/trust-and-verification.md</code>). The marketplace no longer
+    operates badges or tiers that imply BreederHQ verifies, vets, vouches for, or reviews providers,
+    so the marketing site can no longer say it does.
+  </p>
+  <ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5">
+    <li>
+      <strong><code>/trust</code> rewritten from scratch.</strong> Hero, tier section, credential-verification
+      examples, and reviews section all replaced with the three-layer model: Stripe Identity passthrough,
+      public-registry passthrough (OFA / AKC / AFA / state licensing boards), and provider self-attestation.
+      Profile Indicators (joined date, typical response time, completed transactions, open disputes)
+      documented as account-history facts, not endorsements. Page title changed from
+      "Trust &amp; Verification" to "Identity &amp; Credentials."
+    </li>
+    <li>
+      <strong>Retired the "Verification Tiers + Earned Badges" sections</strong> on <code>/for-providers</code>,
+      <code>/for-breeders</code>, <code>/index</code>, <code>/buyers</code>, and <code>/buyers/why-breederhq-marketplace</code>.
+      Each replaced with a three-layer Identity &amp; Credentials block linking to <code>/trust</code>.
+      Sibling FAQs that described nonexistent tier systems (ID Verified / Verified / Accredited) were
+      rewritten to honestly describe what BreederHQ does and does not do.
+    </li>
+    <li>
+      <strong>Per-category sweep across <code>/for-providers/*</code>.</strong> Every "Optional verification badge for credentials"
+      bullet, every "Upload your credentials for a verified badge" paragraph, and the Farriers page&rsquo;s
+      "Verification Badges That Mean Something" section were replaced with three-layer language
+      (Stripe Identity confirmation, AFA / registry passthrough where supported, provider attestation
+      for everything else).
+    </li>
+    <li>
+      <strong>Buyer-facing &ldquo;Verified Breeders&rdquo; marketing copy neutralized.</strong> Removed claims
+      about "verified breeders," "verified marketplace profile," "verified listings," "Browse Verified Breeders,"
+      "Find verified breeders" headlines, and "Verification badges are earned through documented behavior"
+      from species pages (cats, dogs, horses, goats, sheep, rabbits, alpacas, llamas, cattle), articles,
+      <code>/about</code>, <code>/faq</code>, <code>/find-breeders/*</code>, <code>/compare/*</code>,
+      <code>/workflows/*</code>, and <code>/buyers/health-guarantees</code>.
+    </li>
+    <li>
+      <strong>Geographic and category pages.</strong> <code>/services/farriers</code>,
+      <code>/services/farriers/kentucky</code>, <code>/services/equine-boarding</code>,
+      <code>/services/equine-boarding/lexington-ky</code>, <code>/services/equine-boarding/ocala-fl</code>,
+      and the Florida / Texas farrier geo pages now describe identity-and-credential indicators in
+      passthrough terms only, with JSON-LD <code>offerDescription</code> rewritten to match.
+    </li>
+    <li>
+      <strong>Header, footer, and sibling-link labels.</strong> Renamed "Trust &amp; Verification" to
+      "Identity &amp; Credentials" in <code>HeaderV2.astro</code> (desktop and mobile entries), the global
+      <code>Footer.astro</code>, the <code>/for-providers/farriers</code> sibling block, and
+      <code>/services/equine-boarding</code>&rsquo;s lower related-links list. URLs unchanged
+      (<code>/trust</code> remains the canonical path).
+    </li>
+  </ul>
+  <p>
+    Operating principle reaffirmed: identity and credential display on BreederHQ is a passthrough plus
+    self-attestation system, not a vouching system. The marketing site must match.
+  </p>
+</section>

@@ -14,8 +14,8 @@ const breadcrumbs = [
 
 const faqs = [
   {
-    question: 'How are horse breeders verified on BreederHQ?',
-    answer: 'BreederHQ uses progressive verification (ID Verified, Verified, Accredited) plus earned behavioral badges. Verification works independently of registry: Jockey Club, AQHA, KWPN, AHA, USEF, or independently registered horses are all welcome. Quick Responder, Health Tested, and Experienced badges are auto-granted from real platform activity, not purchased.',
+    question: 'Does BreederHQ verify horse breeders?',
+    answer: 'No. BreederHQ does not verify, vet, or vouch for breeders. A profile may show three kinds of indicators: identity confirmation via Stripe Identity (operated by Stripe, Inc.), public-registry passthrough where supported, and the breeder\u2019s own attestations for everything else. Independently registered horses and breeders without a registry passthrough are welcome \u2014 their information appears as Layer 3 attestation. BreederHQ may also display Profile Indicators based on platform account history. See /trust for the full policy.',
   },
   {
     question: 'What documentation can I see on a horse breeder profile?',
@@ -89,22 +89,25 @@ const faqs = [
     <section class="py-16 px-4">
       <div class="max-w-5xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
-          What "verified" actually means
+          What the indicators on a breeder profile mean
         </h2>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity verified</h3>
-            <p class="text-gray-700 text-sm">Government-issued ID is on file. The Verified badge means identity AND program documentation has been reviewed.</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity confirmation</h3>
+            <p class="text-gray-700 text-sm">"Identity confirmed via Stripe Identity" means Stripe (not BreederHQ) confirmed the breeder\u2019s government-issued ID matched the legal name on file. BreederHQ does not perform the verification itself.</p>
           </div>
           <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Genetic testing on file</h3>
-            <p class="text-gray-700 text-sm">Health Tested badge requires real documentation: HYPP, HERDA, OLWS Frame, GBED, PSSM, MH, breed-specific panels. Not self-attested.</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Registry passthrough (where supported)</h3>
+            <p class="text-gray-700 text-sm">"Confirmed via [registry] registry" means BreederHQ queried that public registry and got a matching record. The registry is the authoritative source; click through to confirm current status.</p>
           </div>
           <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Earned, not bought</h3>
-            <p class="text-gray-700 text-sm">Quick Responder and Experienced badges are auto-granted from real platform activity. Breeders cannot purchase any badge.</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breeder\u2019s own attestation</h3>
+            <p class="text-gray-700 text-sm">Genetic testing results (HYPP, HERDA, OLWS Frame, GBED, PSSM, MH, breed-specific panels), performance records, and program history are the breeder\u2019s own attestation. BreederHQ does not open, read, or vouch for any uploaded document.</p>
           </div>
         </div>
+        <p class="text-center mt-6">
+          <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
+        </p>
       </div>
     </section>
 

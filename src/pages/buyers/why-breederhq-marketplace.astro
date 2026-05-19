@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     question: 'How does identity verification work?',
-    answer: 'Breeders verify their identity by submitting a government-issued photo ID, which is confirmed through a secure third-party identity service. This confirms the person behind the listing is who they say they are. Higher verification tiers include program documentation review and standards compliance review.'
+    answer: 'Breeders can complete identity verification through Stripe Identity, a service operated by Stripe, Inc. (not by BreederHQ). Stripe checks a government-issued photo ID against the legal name on file and returns the result to BreederHQ. The profile then shows "Identity confirmed via Stripe Identity" with the date. BreederHQ does not perform the verification itself, and the indicator does not mean BreederHQ has vouched for the breeder\u2019s competence, character, or program. See /trust for the full policy.'
   },
   {
     question: 'Can breeders fake their data on BreederHQ?',
@@ -207,7 +207,7 @@ const faqs = [
       <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
         <h3 class="text-lg font-bold text-gray-900 mb-3">How BreederHQ is different</h3>
         <p class="text-sm text-gray-700 leading-relaxed mb-3">
-          On BreederHQ, the breeder is not hidden, they are the listing. Every listing is tied to a verified breeder profile with a name, a program, a location, health-testing records, and a direct messaging channel. You can see who they are, what they do, and how to reach them, before any money changes hands.
+          On BreederHQ, the breeder is not hidden, they are the listing. Every listing is tied to a public breeder profile with a name, a program, a location, the breeder\u2019s own health-testing attestations, and a direct messaging channel. You can see who they are, what they say about their program, and how to reach them, before any money changes hands. Where applicable the profile also shows identity confirmation via Stripe Identity and public-registry passthrough indicators.
         </p>
         <p class="text-sm text-gray-700 leading-relaxed">
           BreederHQ does not sit between you and the breeder. We give you the tools to evaluate the breeder, then get out of the way so you can build a real relationship.
@@ -262,21 +262,21 @@ const faqs = [
           </p>
         </div>
         <div class="bg-white rounded-xl border border-stone-200 p-6">
-          <h3 class="font-bold text-gray-900 mb-3">Government ID Verification</h3>
+          <h3 class="font-bold text-gray-900 mb-3">Identity confirmation (Stripe Identity)</h3>
           <p class="text-sm text-gray-700">
-            Identity verification checks a government-issued photo ID. You know the person behind the listing is who they say they are.
+            Breeders can complete identity verification through Stripe Identity. The profile shows the result Stripe returned, with the date. BreederHQ does not perform the verification itself.
           </p>
         </div>
         <div class="bg-white rounded-xl border border-stone-200 p-6">
-          <h3 class="font-bold text-gray-900 mb-3">Progressive Verification Tiers</h3>
+          <h3 class="font-bold text-gray-900 mb-3">Public-registry passthrough</h3>
           <p class="text-sm text-gray-700">
-            ID Verified (identity confirmed), Verified (identity plus program documentation reviewed), and Accredited (identity, program documentation, and standards compliance review). Each level is visible on the listing.
+            For credentials issued by organizations with a public registry (OFA, AKC, AFA, state licensing boards), the profile may show "Confirmed via [registry] registry" with a link to the source record. The registry is the authoritative source.
           </p>
         </div>
         <div class="bg-white rounded-xl border border-stone-200 p-6">
-          <h3 class="font-bold text-gray-900 mb-3">Earned Badges</h3>
+          <h3 class="font-bold text-gray-900 mb-3">Profile Indicators</h3>
           <p class="text-sm text-gray-700">
-            Badges like Health Tested, Quick Responder, Experienced, and Trusted are earned through documented behavior on the platform. They cannot be purchased.
+            Joined date, typical response time, completed transactions, and open disputes are calculated from the breeder\u2019s actual account history on BreederHQ. They are facts about platform behavior, not endorsements, and they cannot be purchased.
           </p>
         </div>
         <div class="bg-white rounded-xl border border-stone-200 p-6">
@@ -315,10 +315,10 @@ const faqs = [
           </thead>
           <tbody class="divide-y divide-stone-100">
             <tr>
-              <td class="p-4 text-gray-700">Verified identity</td>
+              <td class="p-4 text-gray-700">Identity confirmation</td>
               <td class="p-4 text-center text-gray-400">No</td>
               <td class="p-4 text-center text-gray-400">No</td>
-              <td class="p-4 text-center text-primary font-semibold">Yes (Stripe ID)</td>
+              <td class="p-4 text-center text-primary font-semibold">Via Stripe Identity</td>
             </tr>
             <tr>
               <td class="p-4 text-gray-700">Health testing proof</td>
@@ -345,7 +345,7 @@ const faqs = [
               <td class="p-4 text-center text-primary font-semibold">Yes (Stripe)</td>
             </tr>
             <tr>
-              <td class="p-4 text-gray-700">Earned badges</td>
+              <td class="p-4 text-gray-700">Profile Indicators (response time, completed transactions)</td>
               <td class="p-4 text-center text-gray-400">No</td>
               <td class="p-4 text-center text-gray-400">No</td>
               <td class="p-4 text-center text-primary font-semibold">Yes</td>

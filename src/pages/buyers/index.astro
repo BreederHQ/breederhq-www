@@ -17,12 +17,12 @@ const faqs = [
     answer: 'On most listing sites, breeders self-report their information. On BreederHQ, breeders manage their entire breeding program on the platform: health records, genetics, breeding plans, and pedigrees. The marketplace listings are backed by that real data, not just claims.'
   },
   {
-    question: 'What do the verification badges mean?',
-    answer: 'ID Verified means government-issued ID has been confirmed. Verified means identity plus program documentation reviewed by BreederHQ. Accredited is the highest tier: identity verification, program documentation, and standards compliance review. Other badges like Health Tested, Quick Responder, and Experienced are earned automatically through documented behavior.'
+    question: 'What do the identity and credential indicators on profiles mean?',
+    answer: 'BreederHQ does not verify or vouch for breeders. A profile may show three kinds of indicators. (1) "Identity confirmed via Stripe Identity" means Stripe, Inc. confirmed the person\u2019s government-issued photo ID matched the legal name on file. (2) "Confirmed via [registry] registry" means BreederHQ queried a public registry (OFA, AKC, AFA, etc.) and the registry returned a matching record; the registry is the authoritative source and a link to it appears with the indicator. (3) Anything else on the profile is the breeder\u2019s own attestation. Separately, Profile Indicators reflect platform account history (typical response time, completed transactions). See /trust for the full policy.'
   },
   {
     question: 'Can I message a breeder before committing?',
-    answer: 'Yes. You can message any breeder directly through the marketplace. If they have the Quick Responder badge, they typically reply within 4 hours during business hours.'
+    answer: 'Yes. You can message any breeder directly through the marketplace. The breeder\u2019s typical response time appears on their profile as a Profile Indicator based on their actual reply history through the platform.'
   },
   {
     question: 'What is the buyer portal?',
@@ -36,8 +36,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="BreederHQ Marketplace for Buyers | Find Verified Breeders & Animal Services"
-  description="Find reputable breeders backed by real data: verified identity, health testing, pedigrees, and breeding history. Browse the BreederHQ Marketplace."
+  title="BreederHQ Marketplace for Buyers | Find Breeders & Animal Services"
+  description="Find reputable breeders backed by real data: identity confirmation, health testing attestations, pedigrees, and breeding history. Browse the BreederHQ Marketplace."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -110,11 +110,11 @@ const faqs = [
           <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">🛡️</span>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Verified Identity</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Identity Confirmation</h3>
           <p class="text-sm text-gray-600">
-            Breeders and providers can verify their identity through government-issued ID checks,
-            submit program documentation for review, or complete full BreederHQ Accreditation
-            with standards compliance review. You see the verification level on every listing.
+            Breeders and providers can complete identity verification through Stripe Identity
+            (operated by Stripe, Inc.). Where the issuing body maintains a public registry, BreederHQ
+            may also display registry passthrough indicators. BreederHQ does not vouch for credentials.
           </p>
         </div>
 
@@ -122,11 +122,11 @@ const faqs = [
           <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">⭐</span>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Earned Reputation</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Account-History Indicators</h3>
           <p class="text-sm text-gray-600">
-            Badges like Quick Responder, Health Tested, Experienced, and Trusted
-            are awarded automatically based on real behavior.
-            They can't be purchased, only earned.
+            Profile Indicators like typical response time, completed transactions,
+            and open disputes are calculated from a breeder\u2019s actual account history
+            on BreederHQ. They are facts, not endorsements, and they cannot be purchased.
           </p>
         </div>
       </div>
@@ -186,7 +186,7 @@ const faqs = [
             </li>
             <li class="flex items-start gap-2">
               <span class="text-primary mt-0.5 font-bold">&#10003;</span>
-              Verified providers with credentials on file
+              Providers with identity confirmation and credential indicators on their profile
             </li>
             <li class="flex items-start gap-2">
               <span class="text-primary mt-0.5 font-bold">&#10003;</span>
@@ -205,103 +205,55 @@ const faqs = [
 
 
   <!-- ============================================ -->
-  <!-- VERIFICATION & TRUST                         -->
+  <!-- IDENTITY & CREDENTIALS                       -->
   <!-- ============================================ -->
   <section class="py-20 bg-white">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Know Who You're Dealing With
+          What the Indicators on a Profile Mean
         </h2>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Every listing shows the breeder or provider's verification level and earned badges.
-          Here's what they mean.
+          BreederHQ does not verify or vouch for breeders. A profile may show three kinds of indicators that buyers can weigh for themselves.
         </p>
       </div>
 
-      <!-- Verification Tiers -->
-      <h3 class="text-xl font-bold text-gray-900 mb-6">Verification Levels</h3>
-      <div class="grid md:grid-cols-3 gap-6 mb-14">
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6 text-center">
-          <img src="/badges/id_verified.png" alt="ID Verified" class="h-20 mx-auto mb-4" />
-          <h4 class="font-bold text-gray-900 mb-1">ID Verified</h4>
-          <p class="text-sm text-gray-600">
-            Government-issued ID has been verified. This person is who they say they are.
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 1</div>
+          <h3 class="font-bold text-gray-900 mb-2">Identity confirmation (Stripe Identity)</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Stripe Identity (a service operated by Stripe, Inc.) confirmed the person\u2019s government-issued photo ID matched the legal name on file. The profile shows the date of the confirmation.
           </p>
         </div>
-        <div class="bg-stone-50 rounded-xl border-2 border-emerald-300 p-6 text-center">
-          <img src="/badges/verified.png" alt="Verified" class="h-20 mx-auto mb-4" />
-          <h4 class="font-bold text-gray-900 mb-1">Verified</h4>
-          <p class="text-sm text-gray-600">
-            Identity confirmed plus breeding program or business documentation reviewed by BreederHQ.
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 2</div>
+          <h3 class="font-bold text-gray-900 mb-2">Public-registry passthrough</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            BreederHQ queried a public registry (OFA, AKC, AFA, state licensing boards, etc.) and the registry returned a matching record. A link to the source record appears with the indicator. The registry is the authoritative source.
           </p>
         </div>
-        <div class="bg-gradient-to-br from-amber-50 to-stone-50 rounded-xl border-2 border-amber-400 p-6 text-center">
-          <img src="/badges/accredited.png" alt="Accredited" class="h-20 mx-auto mb-4" />
-          <h4 class="font-bold text-gray-900 mb-1">Accredited</h4>
-          <p class="text-sm text-gray-600">
-            The highest level: identity verification, program documentation, and standards compliance review.
+        <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+          <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 3</div>
+          <h3 class="font-bold text-gray-900 mb-2">Breeder\u2019s own attestation</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Health testing results, breeding program details, business policies, and any credential without Layer 2 passthrough are the breeder\u2019s own attestation. BreederHQ does not open, read, or vouch for any uploaded document.
           </p>
         </div>
       </div>
 
-      <!-- Earned Badges -->
-      <h3 class="text-xl font-bold text-gray-900 mb-6">What the Badges Tell You</h3>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/quick_responder.png" alt="Quick Responder" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Quick Responder</h4>
-          <p class="text-xs text-gray-500 mt-1">Replies within 4 hours</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/health_tested.png" alt="Health Tested" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Health Tested</h4>
-          <p class="text-xs text-gray-500 mt-1">Health testing on file</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/experienced.png" alt="Experienced" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Experienced</h4>
-          <p class="text-xs text-gray-500 mt-1">5+ successful placements</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/trusted.png" alt="Trusted" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Trusted</h4>
-          <p class="text-xs text-gray-500 mt-1">12+ months, zero disputes</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/top_rated.png" alt="Top Rated" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Top Rated</h4>
-          <p class="text-xs text-gray-500 mt-1">Consistently high ratings</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/lifetime_guarantee.png" alt="Lifetime Guarantee" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Lifetime Guarantee</h4>
-          <p class="text-xs text-gray-500 mt-1">Lifetime take-back policy</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/return_policy.png" alt="Return Policy" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Return Policy</h4>
-          <p class="text-xs text-gray-500 mt-1">Documented return policy</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/accepts_payments.png" alt="Accepts Payments" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Accepts Payments</h4>
-          <p class="text-xs text-gray-500 mt-1">Secure online payments</p>
-        </div>
-        <div class="bg-stone-50 rounded-xl border border-stone-200 p-4 text-center">
-          <img src="/badges/founder.png" alt="Founder" class="h-14 mx-auto mb-2" />
-          <h4 class="text-xs font-bold text-gray-900">Founder</h4>
-          <p class="text-xs text-gray-500 mt-1">Among the first 100</p>
-        </div>
-      </div>
-
-      <div class="mt-8 text-center">
-        <p class="text-sm text-gray-500">
-          All badges are earned through documented behavior. They can't be purchased.
+      <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+        <h3 class="font-bold text-gray-900 mb-3">Profile Indicators (Account-History Facts)</h3>
+        <p class="text-sm text-gray-600 leading-relaxed mb-3">
+          BreederHQ may also display Profile Indicators based on the account\u2019s actual history on the platform. These are facts about platform behavior, not endorsements.
         </p>
+        <ul class="text-sm text-gray-600 space-y-1.5 list-disc list-inside mb-4">
+          <li><strong>Joined date</strong> — when the account was created on BreederHQ</li>
+          <li><strong>Typical response time</strong> — rolling average for buyer inquiries through the platform</li>
+          <li><strong>Completed transactions</strong> — count of platform transactions closed without a pending dispute</li>
+          <li><strong>Open disputes</strong> — count of unresolved platform disputes at time of display</li>
+        </ul>
+        <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
       </div>
     </div>
   </section>
