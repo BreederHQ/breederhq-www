@@ -41,10 +41,16 @@ const breadcrumbs = [
 // Fetch live listings at build time. Fall back to empty list if unreachable -
 // the page still ships with full content; the listings section just shows the
 // "Be the first to list" empty state.
+//
+// API contract is `category=<lowercase_enum>&city=&state=` — see
+// docs MARKETPLACE-ARCHITECTURE.md and src/lib/marketplaceListings.ts.
+// The marketplace stores private dog parks under category=PRIVATE_DOG_PARK,
+// not under a parent category "facilities". That older form returned empty
+// silently against the real backend.
 let listings: MarketplaceListing[] = [];
 let listingsTotal = 0;
 try {
-  const apiUrl = `https://marketplace.breederhq.com/api/v1/marketplace/public/listings?category=facilities&subcategory=private_dog_park&city=${encodeURIComponent(city.apiCityName)}&state=${encodeURIComponent(city.state)}&limit=12&sort=-publishedAt`;
+  const apiUrl = `https://marketplace.breederhq.com/api/v1/marketplace/public/listings?category=private_dog_park&city=${encodeURIComponent(city.apiCityName)}&state=${encodeURIComponent(city.state)}&limit=12&sort=-publishedAt`;
   const res = await fetch(apiUrl, { signal: AbortSignal.timeout(10000) });
   if (res.ok) {
     const data = (await res.json()) as ListingsResponse;
@@ -121,7 +127,7 @@ const faqs = [
             Browse Listings in {city.name}
           </a>
           <a
-            href={`https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new&city=${encodeURIComponent(city.apiCityName)}`}
+            href={`https://accounts.breederhq.com/register?intent=provider_marketplace`}
             class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
           >
             List Your Space in {city.name}
@@ -179,7 +185,7 @@ const faqs = [
               Listing first means your space ranks first in {city.name} search results, captures early bookings, and earns the "Rising Star" badge as you build reviews. The fee is $5/month per live listing - no commission, no obligation, pause anytime.
             </p>
             <a
-              href={`https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new&city=${encodeURIComponent(city.apiCityName)}`}
+              href={`https://accounts.breederhq.com/register?intent=provider_marketplace`}
               class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
             >
               List Your Space →
@@ -240,7 +246,7 @@ const faqs = [
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
-            href={`https://accounts.breederhq.com/register?intent=provider_marketplace&category=private_dog_park&returnTo=/services/facilities/private-dog-parks/new&city=${encodeURIComponent(city.apiCityName)}`}
+            href={`https://accounts.breederhq.com/register?intent=provider_marketplace`}
             class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
           >
             List Your Space

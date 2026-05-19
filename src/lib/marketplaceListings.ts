@@ -1,17 +1,54 @@
 /**
  * Build-time marketplace listing fetch + URL builders for /services and /facilities pages.
  *
- * Single source of truth for:
- *   - category/subcategory slugs used by the marketplace API
- *   - the public marketplace browse URL scheme
- *   - the public marketplace listing-detail URL scheme
+ * SOURCE OF TRUTH — DO NOT INVENT ROUTES OR PARAMS.
+ *
+ * Real marketplace contracts (verified against breederhq):
+ *
+ *   Browse routes (apps/marketplace/src/routes/MarketplaceRoutes.tsx):
+ *     /services                                  → services index
+ *     /services/category/:categorySlug           → service-category browse (filter locked)
+ *     /services/facilities                       → facilities hub
+ *     /services/facilities/:facilitySlug         → facility-category browse (filter locked)
+ *     /services/:slugOrId                        → service detail (NOT a category route)
+ *     /listings/:slug                            → listing detail (legacy alias)
+ *     /providers/:idOrSlug                       → provider profile
+ *
+ *   Public API (breederhq-api/src/routes/marketplace-listings.ts ::: /public/listings):
+ *     GET /api/v1/marketplace/public/listings
+ *       ?category=<lowercase_enum>      // e.g. category=training, category=farriers
+ *       &subcategory=<string>           // optional finer split inside a category
+ *       &city=<string>                  // ILIKE %city%
+ *       &state=<string>                 // ILIKE %state%
+ *       &search=<string>
+ *       &sort=-publishedAt | newest | rating-desc | price-asc | price-desc | name-asc | name-desc
+ *       &page=<int>&limit=<int (max 50)>
+ *     Backend normalises category to lowercase and compares exactly:
+ *       LOWER(l.category) = '<lowercase_enum>'
+ *     Enum values come from apps/marketplace/src/marketplace/features/services-index/services-index.constants.ts
+ *     CATEGORY_OPTIONS — currently:
+ *       TRAINING, GROOMING, TRANSPORT, BOARDING, VETERINARY, PHOTOGRAPHY,
+ *       HEALTH_TESTING, HANDLING, NUTRITION, PET_SITTING, REHABILITATION,
+ *       BEHAVIORAL, FARRIERS, EQUINE_BOARDING, EQUINE_SERVICES, EQUINE_REPRO,
+ *       LIVESTOCK_SERVICES, PRIVATE_DOG_PARK, EQUINE_FACILITY,
+ *       LIVESTOCK_FACILITY, INDOOR_TRAINING_FACILITY, BOARDING_FACILITY,
+ *       WASH_GROOMING_FACILITY, EVENT_SHOW_FACILITY, SPECIALTY_FACILITY,
+ *       MERCHANDISE, OTHER_SERVICE.
+ *     The marketplace's marketplace-hubs.ts derives the slug for each value
+ *     by `value.toLowerCase().replace(/_/g, "-")`. The browse route consumes
+ *     that slug via `getServiceCategoryHubBySlug(slug)` and locks the filter.
+ *
+ *   Provider intent (accounts.breederhq.com/register):
+ *     ?intent=provider_marketplace&category=<lowercase_enum>
+ *     The category param value mirrors the SERVICE_TYPE enum value lowercased.
+ *
+ * If a /services/<category> hub on breederhq-www does not map to a real
+ * CATEGORY_OPTIONS value, fetchServiceListings returns an empty result
+ * synchronously (no API call), and helpers return a degraded browseUrl
+ * that points at the marketplace services index. The page still renders
+ * editorial content + an honest empty state.
  *
  * Mirrors the pattern proven by src/pages/dog-parks/[city].astro.
- *
- * Fetches happen at Astro build time. If the marketplace API is unreachable,
- * helpers return zero-listing results so pages still render their static
- * editorial content with an honest empty state. No fake counts, no fake
- * inventory.
  */
 
 export interface MarketplaceListing {
@@ -34,6 +71,13 @@ export interface ListingsResult {
   browseUrl: string;
   /** Marketplace listing-creation flow URL for providers in this category. */
   listingFlowUrl: string;
+  /**
+   * True when this result resolves to a real marketplace browse category.
+   * False when the category does not exist in the real marketplace and the
+   * result is a graceful degraded empty (browseUrl points at /services).
+   * Used by the page to suppress fake "0 listings in <Category>" framing.
+   */
+  scopedToRealCategory: boolean;
 }
 
 const MARKETPLACE_HOST = 'https://marketplace.breederhq.com';
@@ -41,15 +85,14 @@ const ACCOUNTS_HOST = 'https://accounts.breederhq.com';
 const API_BASE = `${MARKETPLACE_HOST}/api/v1/marketplace/public/listings`;
 
 /**
- * Category map.
+ * Service categories supported on breederhq-www buyer hubs.
  *
- * The marketplace's public listing index supports two top-level filters:
- *   - category=services with serviceCategory=<slug> for service providers
- *   - category=facilities with subcategory=<slug> for bookable facilities
- *
- * Categories that are still pure provider directories (no marketplace
- * listing inventory yet) point to the category browse page; listings
- * will surface automatically once providers start listing.
+ * - `apiEnum` is the exact lowercase value the public listings API expects
+ *   in the `category` query parameter. It must match the lowercased value
+ *   from CATEGORY_OPTIONS in apps/marketplace/.../services-index.constants.ts.
+ * - `browseSlug` is the marketplace browse slug under `/services/category/<slug>`.
+ *   It is derived from the enum value by lowercasing + hyphenating, matching
+ *   what marketplace-hubs.ts builds.
  */
 export type CategoryKey =
   | 'farriers'
@@ -70,6 +113,51 @@ export type CategoryKey =
   | 'transport'
   | 'photography';
 
+interface CategoryDescriptor {
+  /** Lowercase enum sent to the API `category` param. Empty = no real support. */
+  apiEnum: string;
+  /** Marketplace browse slug under `/services/category/`. Empty = degrade to /services. */
+  browseSlug: string;
+  /** Provider-flow `category` value on accounts.breederhq.com/register. */
+  intentCategory: string;
+}
+
+/**
+ * Mapping: breederhq-www slug → real marketplace contract.
+ *
+ * Every entry here is verified against the actual CATEGORY_OPTIONS in
+ * apps/marketplace/.../services-index.constants.ts. The 5 specialist
+ * categories (farriers, equine-boarding, equine-services, equine-repro,
+ * livestock-services) were added to the marketplace constants in the
+ * same change that introduced this file's current form — they are now
+ * real first-class categories.
+ *
+ * Note on `veterinary-specialists` and `show-handling`: these breederhq-www
+ * slugs are buyer-side editorial labels. The real marketplace has parent
+ * categories `VETERINARY` and `HANDLING`. We map to those parents truthfully.
+ */
+const CATEGORY_MAP: Record<CategoryKey, CategoryDescriptor> = {
+  farriers:               { apiEnum: 'farriers',           browseSlug: 'farriers',           intentCategory: 'farriers' },
+  'equine-boarding':      { apiEnum: 'equine_boarding',    browseSlug: 'equine-boarding',    intentCategory: 'equine_boarding' },
+  'equine-services':      { apiEnum: 'equine_services',    browseSlug: 'equine-services',    intentCategory: 'equine_services' },
+  'equine-repro':         { apiEnum: 'equine_repro',       browseSlug: 'equine-repro',       intentCategory: 'equine_repro' },
+  'livestock-services':   { apiEnum: 'livestock_services', browseSlug: 'livestock-services', intentCategory: 'livestock_services' },
+  'dog-training':         { apiEnum: 'training',           browseSlug: 'training',           intentCategory: 'training' },
+  behavioral:             { apiEnum: 'behavioral',         browseSlug: 'behavioral',         intentCategory: 'behavioral' },
+  // show-handling on www → HANDLING in the marketplace (no specialist sub-route exists).
+  'show-handling':        { apiEnum: 'handling',           browseSlug: 'handling',           intentCategory: 'handling' },
+  grooming:               { apiEnum: 'grooming',           browseSlug: 'grooming',           intentCategory: 'grooming' },
+  boarding:               { apiEnum: 'boarding',           browseSlug: 'boarding',           intentCategory: 'boarding' },
+  'pet-sitting':          { apiEnum: 'pet_sitting',        browseSlug: 'pet-sitting',        intentCategory: 'pet_sitting' },
+  // veterinary-specialists on www → VETERINARY parent (no specialist sub-route exists).
+  'veterinary-specialists': { apiEnum: 'veterinary',       browseSlug: 'veterinary',         intentCategory: 'veterinary' },
+  'health-testing':       { apiEnum: 'health_testing',     browseSlug: 'health-testing',     intentCategory: 'health_testing' },
+  rehabilitation:         { apiEnum: 'rehabilitation',     browseSlug: 'rehabilitation',     intentCategory: 'rehabilitation' },
+  nutrition:              { apiEnum: 'nutrition',          browseSlug: 'nutrition',          intentCategory: 'nutrition' },
+  transport:              { apiEnum: 'transport',          browseSlug: 'transport',          intentCategory: 'transport' },
+  photography:            { apiEnum: 'photography',        browseSlug: 'photography',        intentCategory: 'photography' },
+};
+
 export type FacilityKey =
   | 'dog-parks'
   | 'equine'
@@ -80,73 +168,79 @@ export type FacilityKey =
   | 'livestock'
   | 'specialty';
 
-interface CategoryDescriptor {
-  /** Path segment in the marketplace browse URL. */
-  browseSlug: string;
-  /** API filter value passed to the listings index. */
-  apiCategory: string;
-  apiServiceCategory?: string;
-  /** Provider acquisition flow descriptor for the new-listing URL. */
-  intentCategory: string;
-}
-
-const CATEGORY_MAP: Record<CategoryKey, CategoryDescriptor> = {
-  'farriers': { browseSlug: 'services/farriers', apiCategory: 'services', apiServiceCategory: 'farriers', intentCategory: 'farriers' },
-  'equine-boarding': { browseSlug: 'services/equine-boarding', apiCategory: 'services', apiServiceCategory: 'equine-boarding', intentCategory: 'equine-boarding' },
-  'equine-services': { browseSlug: 'services/equine-services', apiCategory: 'services', apiServiceCategory: 'equine-services', intentCategory: 'equine-services' },
-  'equine-repro': { browseSlug: 'services/equine-repro', apiCategory: 'services', apiServiceCategory: 'equine-repro', intentCategory: 'equine-repro' },
-  'livestock-services': { browseSlug: 'services/livestock-services', apiCategory: 'services', apiServiceCategory: 'livestock-services', intentCategory: 'livestock-services' },
-  'dog-training': { browseSlug: 'services/dog-training', apiCategory: 'services', apiServiceCategory: 'dog-training', intentCategory: 'dog-training' },
-  'behavioral': { browseSlug: 'services/behavioral', apiCategory: 'services', apiServiceCategory: 'behavioral', intentCategory: 'behavioral' },
-  'show-handling': { browseSlug: 'services/show-handling', apiCategory: 'services', apiServiceCategory: 'show-handling', intentCategory: 'handling' },
-  'grooming': { browseSlug: 'services/grooming', apiCategory: 'services', apiServiceCategory: 'grooming', intentCategory: 'grooming' },
-  'boarding': { browseSlug: 'services/boarding', apiCategory: 'services', apiServiceCategory: 'boarding', intentCategory: 'boarding' },
-  'pet-sitting': { browseSlug: 'services/pet-sitting', apiCategory: 'services', apiServiceCategory: 'pet-sitting', intentCategory: 'pet-sitting' },
-  'veterinary-specialists': { browseSlug: 'services/veterinary-specialists', apiCategory: 'services', apiServiceCategory: 'veterinary-specialists', intentCategory: 'veterinary' },
-  'health-testing': { browseSlug: 'services/health-testing', apiCategory: 'services', apiServiceCategory: 'health-testing', intentCategory: 'health-testing' },
-  'rehabilitation': { browseSlug: 'services/rehabilitation', apiCategory: 'services', apiServiceCategory: 'rehabilitation', intentCategory: 'rehabilitation' },
-  'nutrition': { browseSlug: 'services/nutrition', apiCategory: 'services', apiServiceCategory: 'nutrition', intentCategory: 'nutrition' },
-  'transport': { browseSlug: 'services/transport', apiCategory: 'services', apiServiceCategory: 'transport', intentCategory: 'transport' },
-  'photography': { browseSlug: 'services/photography', apiCategory: 'services', apiServiceCategory: 'photography', intentCategory: 'photography' }
-};
-
 interface FacilityDescriptor {
+  /** Lowercase enum sent to the API `category` param. */
+  apiEnum: string;
+  /** Marketplace facility browse slug under `/services/facilities/`. */
   browseSlug: string;
-  apiSubcategory: string;
+  /** Provider-flow category value. */
   intentCategory: string;
 }
 
+/**
+ * Facility categories. Browse slug matches FACILITY_HUBS in
+ * apps/marketplace/src/marketplace/features/hubs/marketplace-hubs.ts.
+ * The API `category` filter takes the SERVICE_TYPE enum value lowercased
+ * — the marketplace stores facilities under the same `category` column as
+ * services, not under a separate `subcategory` field.
+ */
 const FACILITY_MAP: Record<FacilityKey, FacilityDescriptor> = {
-  'dog-parks': { browseSlug: 'services/facilities/private-dog-parks', apiSubcategory: 'private_dog_park', intentCategory: 'private_dog_park' },
-  'equine': { browseSlug: 'services/facilities/equine', apiSubcategory: 'equine', intentCategory: 'equine_facility' },
-  'indoor-training': { browseSlug: 'services/facilities/indoor-training', apiSubcategory: 'indoor_training', intentCategory: 'indoor_training' },
-  'boarding': { browseSlug: 'services/facilities/boarding', apiSubcategory: 'boarding', intentCategory: 'boarding_facility' },
-  'wash-grooming': { browseSlug: 'services/facilities/wash-grooming', apiSubcategory: 'wash_grooming', intentCategory: 'wash_grooming' },
-  'events-shows': { browseSlug: 'services/facilities/events-shows', apiSubcategory: 'events_shows', intentCategory: 'event_venue' },
-  'livestock': { browseSlug: 'services/facilities/livestock', apiSubcategory: 'livestock', intentCategory: 'livestock_facility' },
-  'specialty': { browseSlug: 'services/facilities/specialty', apiSubcategory: 'specialty', intentCategory: 'specialty_facility' }
+  'dog-parks':       { apiEnum: 'private_dog_park',          browseSlug: 'private-dog-parks', intentCategory: 'private_dog_park' },
+  equine:            { apiEnum: 'equine_facility',           browseSlug: 'equine',            intentCategory: 'equine_facility' },
+  'indoor-training': { apiEnum: 'indoor_training_facility',  browseSlug: 'indoor-training',   intentCategory: 'indoor_training_facility' },
+  boarding:          { apiEnum: 'boarding_facility',         browseSlug: 'boarding',          intentCategory: 'boarding_facility' },
+  'wash-grooming':   { apiEnum: 'wash_grooming_facility',    browseSlug: 'wash-grooming',     intentCategory: 'wash_grooming_facility' },
+  'events-shows':    { apiEnum: 'event_show_facility',       browseSlug: 'events-shows',      intentCategory: 'event_show_facility' },
+  livestock:         { apiEnum: 'livestock_facility',        browseSlug: 'livestock',         intentCategory: 'livestock_facility' },
+  specialty:         { apiEnum: 'specialty_facility',        browseSlug: 'specialty',         intentCategory: 'specialty_facility' },
 };
 
 export interface ScopedQuery {
-  /** Optional metro city used for both filtering and display. */
+  /** Optional metro city. */
   city?: string;
-  /** US state abbreviation (e.g. 'KY', 'TX') or full name. */
+  /** US state abbreviation (e.g. 'KY', 'TX') or full state name. */
   state?: string;
 }
 
-function buildBrowseUrl(slugPath: string, scope: ScopedQuery = {}): string {
-  const url = new URL(`${MARKETPLACE_HOST}/${slugPath}`);
+function buildServiceCategoryBrowseUrl(browseSlug: string, scope: ScopedQuery = {}): string {
+  const url = new URL(`${MARKETPLACE_HOST}/services/category/${browseSlug}`);
   if (scope.city) url.searchParams.set('city', scope.city);
   if (scope.state) url.searchParams.set('state', scope.state);
   return url.toString();
 }
 
-function buildListingFlowUrl(intent: string, scope: ScopedQuery = {}): string {
-  const url = new URL(`${ACCOUNTS_HOST}/register`);
-  url.searchParams.set('intent', 'provider_marketplace');
-  url.searchParams.set('category', intent);
+function buildFacilityBrowseUrl(browseSlug: string, scope: ScopedQuery = {}): string {
+  const url = new URL(`${MARKETPLACE_HOST}/services/facilities/${browseSlug}`);
   if (scope.city) url.searchParams.set('city', scope.city);
   if (scope.state) url.searchParams.set('state', scope.state);
+  return url.toString();
+}
+
+/** Degraded browse URL when no real category mapping exists. */
+function buildServicesIndexUrl(scope: ScopedQuery = {}): string {
+  const url = new URL(`${MARKETPLACE_HOST}/services`);
+  if (scope.city) url.searchParams.set('city', scope.city);
+  if (scope.state) url.searchParams.set('state', scope.state);
+  return url.toString();
+}
+
+/**
+ * Provider listing-flow URL. Sends the visitor to the real provider intent
+ * on accounts.breederhq.com. The `category` param is intentionally omitted
+ * — the accounts/login flow only consumes `intent` and does not branch on
+ * category. Adding a category= param would be fake specificity.
+ *
+ * After register/login the user lands at marketplace's /provider/start
+ * (ProviderEntryPage), where they choose their category from the real
+ * provider onboarding UI.
+ *
+ * The `_intentCategory` and `_scope` args are kept on the signature so
+ * future consumers can be extended without breaking call sites, and so
+ * analytics could be re-added via a real channel if needed later.
+ */
+function buildListingFlowUrl(_intentCategory: string, _scope: ScopedQuery = {}): string {
+  const url = new URL(`${ACCOUNTS_HOST}/register`);
+  url.searchParams.set('intent', 'provider_marketplace');
   return url.toString();
 }
 
@@ -162,7 +256,6 @@ async function fetchPublicListings(
     const data = (await res.json()) as { items?: MarketplaceListing[]; total?: number };
     return { items: data.items || [], total: data.total || 0 };
   } catch {
-    // Build proceeds with empty listings; not a fatal failure.
     return { items: [], total: 0 };
   }
 }
@@ -177,21 +270,29 @@ export async function fetchServiceListings(
   limit = 9
 ): Promise<ListingsResult> {
   const desc = CATEGORY_MAP[category];
+  if (!desc || !desc.apiEnum) {
+    return {
+      items: [],
+      total: 0,
+      browseUrl: buildServicesIndexUrl(scope),
+      listingFlowUrl: buildListingFlowUrl(desc?.intentCategory || '', scope),
+      scopedToRealCategory: false,
+    };
+  }
   const query = new URLSearchParams({
-    category: desc.apiCategory,
+    category: desc.apiEnum,
     limit: String(limit),
-    sort: '-publishedAt'
+    sort: '-publishedAt',
   });
-  if (desc.apiServiceCategory) query.set('serviceCategory', desc.apiServiceCategory);
   if (scope.city) query.set('city', scope.city);
   if (scope.state) query.set('state', scope.state);
-
   const { items, total } = await fetchPublicListings(query);
   return {
     items,
     total,
-    browseUrl: buildBrowseUrl(desc.browseSlug, scope),
-    listingFlowUrl: buildListingFlowUrl(desc.intentCategory, scope)
+    browseUrl: buildServiceCategoryBrowseUrl(desc.browseSlug, scope),
+    listingFlowUrl: buildListingFlowUrl(desc.intentCategory, scope),
+    scopedToRealCategory: true,
   };
 }
 
@@ -205,20 +306,19 @@ export async function fetchFacilityListings(
 ): Promise<ListingsResult> {
   const desc = FACILITY_MAP[facility];
   const query = new URLSearchParams({
-    category: 'facilities',
-    subcategory: desc.apiSubcategory,
+    category: desc.apiEnum,
     limit: String(limit),
-    sort: '-publishedAt'
+    sort: '-publishedAt',
   });
   if (scope.city) query.set('city', scope.city);
   if (scope.state) query.set('state', scope.state);
-
   const { items, total } = await fetchPublicListings(query);
   return {
     items,
     total,
-    browseUrl: buildBrowseUrl(desc.browseSlug, scope),
-    listingFlowUrl: buildListingFlowUrl(desc.intentCategory, scope)
+    browseUrl: buildFacilityBrowseUrl(desc.browseSlug, scope),
+    listingFlowUrl: buildListingFlowUrl(desc.intentCategory, scope),
+    scopedToRealCategory: true,
   };
 }
 
@@ -227,17 +327,19 @@ export function listingDetailUrl(slug: string): string {
   return `${MARKETPLACE_HOST}/listings/${slug}`;
 }
 
-/** Scoped browse URL for a category — useful for hero CTAs that don't render listings. */
+/** Scoped browse URL for a service category — for hero CTAs that don't render listings. */
 export function serviceBrowseUrl(category: CategoryKey, scope: ScopedQuery = {}): string {
-  return buildBrowseUrl(CATEGORY_MAP[category].browseSlug, scope);
+  const desc = CATEGORY_MAP[category];
+  if (!desc || !desc.apiEnum) return buildServicesIndexUrl(scope);
+  return buildServiceCategoryBrowseUrl(desc.browseSlug, scope);
 }
 
 export function facilityBrowseUrl(facility: FacilityKey, scope: ScopedQuery = {}): string {
-  return buildBrowseUrl(FACILITY_MAP[facility].browseSlug, scope);
+  return buildFacilityBrowseUrl(FACILITY_MAP[facility].browseSlug, scope);
 }
 
 export function serviceListingFlowUrl(category: CategoryKey, scope: ScopedQuery = {}): string {
-  return buildListingFlowUrl(CATEGORY_MAP[category].intentCategory, scope);
+  return buildListingFlowUrl(CATEGORY_MAP[category]?.intentCategory || '', scope);
 }
 
 export function facilityListingFlowUrl(facility: FacilityKey, scope: ScopedQuery = {}): string {
