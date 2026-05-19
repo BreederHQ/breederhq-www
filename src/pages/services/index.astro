@@ -6,50 +6,162 @@ const breadcrumbs = [
   { name: 'Services', url: '/services' }
 ];
 
-const categories = [
+// Sections follow docs/MARKETPLACE-ARCHITECTURE.md — full taxonomy distributed
+// across cards. Hubs that exist as real pages get direct links; everything else
+// links to the matching /for-providers/<category> until Phase 2 buyer hubs ship.
+
+const equineLivestock = [
   {
-    href: '/services/equine-boarding',
-    label: 'Equine Boarding',
-    summary: 'Pasture board, full-care stall board, training board, layup, and breeding facilities.',
-    audience: 'For horse owners, breeders, eventers, sport horse competitors, and racing operations.',
-    status: 'live'
-  },
-  {
-    href: '/services/farriers',
+    id: 'farriers',
+    emoji: '🔨',
     label: 'Farriers',
-    summary: 'Routine trimming, performance shoeing, racetrack plate work, sale prep, and corrective and therapeutic hoof care. AFA-credential aware.',
-    audience: 'For horse owners and breeding operations hiring trimmers, shoers, and specialists.',
-    status: 'live'
+    href: '/services/farriers',
+    summary: 'Routine trimming, performance shoeing, racetrack plate work, sale prep, corrective and therapeutic hoof care. AFA-credential aware.',
+    regions: [
+      { href: '/services/farriers/kentucky', label: 'Kentucky' }
+    ]
   },
   {
-    href: '/services/dog-training',
-    label: 'Dog Training',
-    summary: 'Obedience, sport, working, and behavior modification trainers. Credential and methodology aware.',
-    audience: 'For dog owners and breeders placing puppies into training programs.',
-    status: 'planned'
+    id: 'equine-boarding',
+    emoji: '🏇',
+    label: 'Equine Boarding',
+    href: '/services/equine-boarding',
+    summary: 'Pasture board, full-care stall board, training board, layup, and breeding facilities.',
+    regions: [
+      { href: '/services/equine-boarding/lexington-ky', label: 'Lexington, KY' },
+      { href: '/services/equine-boarding/ocala-fl', label: 'Ocala, FL' }
+    ]
   },
   {
-    href: '/services/livestock-services',
+    id: 'equine-services',
+    emoji: '🐎',
+    label: 'Equine Services',
+    href: '/for-providers/equine-services',
+    summary: 'Training, lessons, sale prep, fitness, equine massage, and equine bodywork across discipline-specific programs.'
+  },
+  {
+    id: 'livestock-services',
+    emoji: '🐄',
     label: 'Livestock Services',
-    summary: 'Working livestock support across goats, sheep, alpacas, llamas, and cattle: AI and pregnancy work, shearing, hoof trimming, and herd health.',
-    audience: 'For livestock breeders and small-farm operators.',
-    status: 'planned'
+    href: '/for-providers/livestock',
+    summary: 'Working livestock support across goats, sheep, alpacas, llamas, and cattle: AI and pregnancy work, shearing, hoof trimming, herd health.'
   }
 ];
 
-const liveCategories = categories.filter((c) => c.status === 'live');
-const plannedCategories = categories.filter((c) => c.status === 'planned');
+const careTraining = [
+  {
+    id: 'dog-training',
+    emoji: '🎓',
+    label: 'Dog Training',
+    href: '/for-providers/training',
+    summary: 'Obedience, sport, working, behavior modification, and breed-specific training. Credential and methodology aware.'
+  },
+  {
+    id: 'behavioral',
+    emoji: '🧠',
+    label: 'Behavioral',
+    href: '/for-providers/behavioral',
+    summary: 'Reactivity, aggression, separation anxiety, and behavior modification specialists.'
+  },
+  {
+    id: 'handling',
+    emoji: '🏅',
+    label: 'Show Handling',
+    href: '/for-providers/handling',
+    summary: 'AKC and UKC professional handlers, conformation ring training, and show grooming specialists.'
+  },
+  {
+    id: 'grooming',
+    emoji: '✂️',
+    label: 'Grooming',
+    href: '/for-providers/grooming',
+    summary: 'Breed-specific, show, and specialty grooming. Mobile and salon. Includes equine and livestock grooming.'
+  },
+  {
+    id: 'boarding',
+    emoji: '🏠',
+    label: 'Boarding',
+    href: '/for-providers/boarding',
+    summary: 'Overnight and short-term boarding for dogs, cats, exotics, livestock, horses, and in-home arrangements.'
+  },
+  {
+    id: 'pet-sitting',
+    emoji: '🐾',
+    label: 'Pet Sitting',
+    href: '/for-providers/pet-sitting',
+    summary: 'Credentialed in-home sitters, drop-in visits, and overnight care. PSI and species-specialty aware.'
+  }
+];
+
+const medical = [
+  {
+    id: 'veterinary',
+    emoji: '🩺',
+    label: 'Veterinary',
+    href: '/for-providers/veterinary',
+    summary: 'General practice, reproductive vets, equine vets, exotic animal specialists, and sports medicine.'
+  },
+  {
+    id: 'health-testing',
+    emoji: '🧬',
+    label: 'Health Testing',
+    href: '/for-providers/health-testing',
+    summary: 'OFA, PennHIP, CHIC, CERF, and genetic panels. Veterinary geneticists, repro vets, and specialist clinics.'
+  },
+  {
+    id: 'rehabilitation',
+    emoji: '💪',
+    label: 'Rehabilitation',
+    href: '/for-providers/rehabilitation',
+    summary: 'Canine and equine physical therapy, post-surgical care, hydrotherapy, and sports medicine recovery.'
+  },
+  {
+    id: 'nutrition',
+    emoji: '🥗',
+    label: 'Nutrition',
+    href: '/for-providers/nutrition',
+    summary: 'Animal nutritionists, raw and BARF specialists, performance feeding, and species-specific diet planning.'
+  }
+];
+
+const logistics = [
+  {
+    id: 'transport',
+    emoji: '🚐',
+    label: 'Transport',
+    href: '/for-providers/transport',
+    summary: 'USDA-compliant ground and air transport for puppies, adult dogs, horses, livestock, and exotic animals.'
+  },
+  {
+    id: 'photography',
+    emoji: '📸',
+    label: 'Photography',
+    href: '/for-providers/photography',
+    summary: 'Litter photography, show photography, equine portraiture, and breeder marketing media.'
+  }
+];
+
+const facilityTypes = [
+  { emoji: '🐎', label: 'Equine Facilities', href: '/for-providers/equine' },
+  { emoji: '🐄', label: 'Livestock Facilities', href: '/for-providers/livestock' },
+  { emoji: '🏟️', label: 'Indoor Training Halls', href: '/for-providers/indoor-training' },
+  { emoji: '🏠', label: 'Boarding Facilities', href: '/for-providers/boarding-facilities' },
+  { emoji: '🛁', label: 'Wash & Grooming Spaces', href: '/for-providers/wash-grooming' },
+  { emoji: '🏆', label: 'Event & Show Spaces', href: '/for-providers/events-shows' },
+  { emoji: '🌳', label: 'Dog Parks & Play Spots', href: '/for-providers/dog-parks' },
+  { emoji: '✨', label: 'Specialty Facilities', href: '/for-providers/specialty-facilities' }
+];
 
 const regionalSpotlights = [
   {
     href: '/services/equine-boarding/lexington-ky',
     label: 'Horse Boarding in Lexington, KY',
-    note: 'Bluegrass equine ecosystem, Keeneland, Kentucky Horse Park, hospital proximity.'
+    note: 'Bluegrass equine ecosystem, Keeneland, Kentucky Horse Park.'
   },
   {
     href: '/services/equine-boarding/ocala-fl',
     label: 'Horse Boarding in Ocala, FL',
-    note: 'Marion County Thoroughbred industry, World Equestrian Center, HITS Ocala winter circuit.'
+    note: 'Marion County Thoroughbred industry, World Equestrian Center, HITS winter circuit.'
   },
   {
     href: '/services/farriers/kentucky',
@@ -60,8 +172,8 @@ const regionalSpotlights = [
 ---
 
 <BaseLayout
-  title="Services on BreederHQ Marketplace | Specialist Directory for Breeders and Animal Owners"
-  description="Find specialist services on BreederHQ Marketplace: equine boarding, farriers, dog training, and livestock services. Built for breeders and animal owners who need credential-aware, ecosystem-aware professionals, not generic directory listings."
+  title="Services on BreederHQ Marketplace | Find Providers Across Every Animal Category"
+  description="Find providers on BreederHQ Marketplace across training, grooming, boarding, veterinary, farriers, equine, livestock, transport, photography, and bookable facilities. Built for breeders, animal owners, and pet households."
   breadcrumbs={breadcrumbs}
 >
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
@@ -77,52 +189,139 @@ const regionalSpotlights = [
       </ol>
     </nav>
 
-    <!-- Hero / Positioning -->
-    <section class="py-16 px-4 bg-gradient-to-b from-amber-50 to-white">
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
       <div class="max-w-4xl mx-auto">
         <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">BreederHQ Marketplace</p>
         <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
-          Services Built for Breeders and Animal Owners
+          Services for Breeders, Animal Owners, and Pet Households
         </h1>
-        <p class="text-xl text-gray-700 leading-relaxed mb-4">
-          BreederHQ Marketplace is a specialist directory. Provider profiles show credentials, coverage area, working specialty, species and breed focus, and the ecosystem the provider actually operates in. The categories below are intentionally narrow: deep coverage of work that breeders and serious animal owners hire for, instead of the long-tail generic pet-services catalog.
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse providers by category, region, and specialty. Every listing carries structured professional identity: credentials, methodologies, species expertise, and coverage area. Find the right specialist instead of scrolling through a generic directory.
         </p>
-        <p class="text-lg text-gray-700 leading-relaxed">
-          We are building category by category, region by region. Every listing is real.
-        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse the Marketplace
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
 
-    <!-- Live categories -->
-    <section class="py-16 px-4 bg-white">
+    <!-- Equine & Livestock Specialists -->
+    <section id="equine-livestock" class="py-12 px-4 bg-white scroll-mt-20">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-3">Live Service Categories</h2>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-          Categories with editorial directories, schema-grounded content, and an open provider listing path.
-        </p>
-        <div class="grid sm:grid-cols-2 gap-5">
-          {liveCategories.map((c) => (
-            <a href={c.href} class="block bg-stone-50 border border-stone-200 rounded-xl p-6 hover:border-amber-500 hover:shadow-sm transition">
-              <h3 class="text-xl font-semibold text-gray-900 mb-2">{c.label}</h3>
-              <p class="text-gray-700 leading-relaxed mb-3">{c.summary}</p>
-              <p class="text-sm text-gray-500">{c.audience}</p>
-              <p class="text-sm font-semibold text-amber-700 mt-4">Browse {c.label} →</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Equine &amp; Livestock Specialists</h2>
+        <p class="text-gray-600 mb-6">Specialist ecosystems where BreederHQ runs deepest. Regional spotlights live inside the relevant cards.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {equineLivestock.map((c) => (
+            <a id={c.id} href={c.href} class="block bg-stone-50 border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition scroll-mt-20">
+              <div class="flex items-baseline gap-2 mb-1">
+                <span class="text-xl">{c.emoji}</span>
+                <h3 class="text-lg font-semibold text-gray-900">{c.label}</h3>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed mb-3">{c.summary}</p>
+              {c.regions && (
+                <div class="flex flex-wrap gap-2 mb-2">
+                  {c.regions.map((r) => (
+                    <a href={r.href} class="text-xs px-2 py-1 bg-white border border-stone-200 rounded text-amber-700 hover:border-amber-400">{r.label}</a>
+                  ))}
+                </div>
+              )}
+              <p class="text-sm font-semibold text-amber-700">Browse {c.label} →</p>
             </a>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Regional spotlights -->
-    <section class="py-16 px-4 bg-stone-50">
+    <!-- Care & Training -->
+    <section class="py-12 px-4 bg-stone-50">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-3">Regional Spotlights</h2>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-          Editorially deep regional pages anchored on the actual equine and breeding economies of each region. These are the prototype pages for the geographic directory rolling out across the marketplace.
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Care &amp; Training</h2>
+        <p class="text-gray-600 mb-6">Training, behavior, handling, grooming, boarding, and pet care providers.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {careTraining.map((c) => (
+            <a id={c.id} href={c.href} class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition scroll-mt-20">
+              <div class="flex items-baseline gap-2 mb-1">
+                <span class="text-xl">{c.emoji}</span>
+                <h3 class="text-lg font-semibold text-gray-900">{c.label}</h3>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed mb-3">{c.summary}</p>
+              <p class="text-sm font-semibold text-amber-700">Browse {c.label} →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Medical -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Medical</h2>
+        <p class="text-gray-600 mb-6">Veterinary, health testing, rehabilitation, and nutrition specialists.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {medical.map((c) => (
+            <a id={c.id} href={c.href} class="block bg-stone-50 border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition scroll-mt-20">
+              <div class="flex items-baseline gap-2 mb-1">
+                <span class="text-xl">{c.emoji}</span>
+                <h3 class="text-base font-semibold text-gray-900">{c.label}</h3>
+              </div>
+              <p class="text-xs text-gray-700 leading-relaxed mb-2">{c.summary}</p>
+              <p class="text-xs font-semibold text-amber-700">Browse →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Logistics & Media -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Logistics &amp; Media</h2>
+        <p class="text-gray-600 mb-6">Animal transport and professional photography.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {logistics.map((c) => (
+            <a id={c.id} href={c.href} class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition scroll-mt-20">
+              <div class="flex items-baseline gap-2 mb-1">
+                <span class="text-xl">{c.emoji}</span>
+                <h3 class="text-lg font-semibold text-gray-900">{c.label}</h3>
+              </div>
+              <p class="text-sm text-gray-700 leading-relaxed mb-3">{c.summary}</p>
+              <p class="text-sm font-semibold text-amber-700">Browse {c.label} →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities (integrated peer branch) -->
+    <section id="facilities" class="py-14 px-4 bg-gradient-to-br from-amber-50 to-stone-50 scroll-mt-20">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-baseline justify-between mb-2 flex-wrap gap-2">
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Facilities</h2>
+          <a href="/facilities" class="text-sm font-semibold text-amber-700 hover:underline">Explore all facility types →</a>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-6 max-w-3xl">
+          Bookable physical infrastructure: arenas, kennels, indoor halls, wash bays, event venues, dog parks, and specialty spaces. BreederHQ models facilities as a first-class branch of the marketplace, distinct from provider services.
         </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {facilityTypes.map((f) => (
+            <a href={f.href} class="block bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-400 hover:shadow-sm transition">
+              <div class="text-xl mb-1">{f.emoji}</div>
+              <div class="text-sm font-medium text-gray-900">{f.label}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Regional Spotlights -->
+    <section id="regions" class="py-12 px-4 bg-white scroll-mt-20">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Regional Spotlights</h2>
+        <p class="text-gray-600 mb-6">Editorially deep regional pages anchored on the real equine and breeding economies of each region.</p>
         <div class="grid sm:grid-cols-3 gap-4">
           {regionalSpotlights.map((r) => (
-            <a href={r.href} class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition">
+            <a href={r.href} class="block bg-stone-50 border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition">
               <h3 class="font-semibold text-gray-900 mb-1">{r.label}</h3>
               <p class="text-sm text-gray-600 leading-relaxed">{r.note}</p>
             </a>
@@ -131,47 +330,16 @@ const regionalSpotlights = [
       </div>
     </section>
 
-    <!-- Planned categories -->
-    <section class="py-16 px-4 bg-white">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-3">Categories in Development</h2>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-          Specialist categories the marketplace is being built to cover. Provider acquisition pages exist where applicable; the public directory pages will follow as coverage warrants.
-        </p>
-        <div class="grid sm:grid-cols-2 gap-5">
-          {plannedCategories.map((c) => (
-            <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
-              <div class="flex items-start justify-between gap-3 mb-2">
-                <h3 class="text-xl font-semibold text-gray-900">{c.label}</h3>
-                <span class="text-xs font-semibold uppercase tracking-wide text-amber-700 bg-amber-100 px-2 py-1 rounded">In Development</span>
-              </div>
-              <p class="text-gray-700 leading-relaxed mb-3">{c.summary}</p>
-              <p class="text-sm text-gray-500">{c.audience}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Trust + Providers cross-link -->
-    <section class="py-16 px-4 bg-gradient-to-b from-white to-amber-50">
+    <!-- Provider cross-link -->
+    <section class="py-12 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
-        <div class="grid sm:grid-cols-2 gap-6">
-          <a href="/trust" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-amber-500 hover:shadow-sm transition">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">How Trust &amp; Verification Works</h3>
-            <p class="text-gray-700 leading-relaxed">
-              How BreederHQ verifies identity, credentials, and reviews on the marketplace, and how a breeder-focused trust system differs from Yelp, Rover, and Thumbtack.
-            </p>
-            <p class="text-sm font-semibold text-amber-700 mt-4">Read Trust &amp; Verification →</p>
-          </a>
-          <a href="/for-providers" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-amber-500 hover:shadow-sm transition">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">For Service Providers</h3>
-            <p class="text-gray-700 leading-relaxed">
-              List your business on BreederHQ Marketplace. Flat-fee, no commission. Provider acquisition pages by category, including farriers, equine services, veterinary, training, transport, and more.
-            </p>
-            <p class="text-sm font-semibold text-amber-700 mt-4">For Providers Overview →</p>
-          </a>
-        </div>
+        <a href="/for-providers" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-emerald-500 hover:shadow-sm transition">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">For Service Providers</h3>
+          <p class="text-gray-700 leading-relaxed">
+            List your business on BreederHQ Marketplace. Flat-fee, no commission. Acquisition pages exist for every service category, plus eight first-class facility types.
+          </p>
+          <p class="text-sm font-semibold text-emerald-700 mt-4">For Providers Overview →</p>
+        </a>
       </div>
     </section>
   </main>
