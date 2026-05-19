@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Arizona', url: '/services/farriers/arizona' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Arizona?', answer: 'The Scottsdale corridor (Scottsdale, Paradise Valley, Cave Creek, Wickenburg) anchors high-performance hunter/jumper, dressage, polo, and Arabian breeding. The Phoenix and Tucson metros support pleasure and racing. Northern Arizona (Prescott, Flagstaff) supports trail and ranch. Yuma supports winter livestock and quarter horse populations.' },
+  { question: 'What about Scottsdale Arabian Horse Show?', answer: 'The Scottsdale Arabian Horse Show is the largest Arabian event in the world. Arabian-specialist farriers travel for the show, but Scottsdale supports a year-round high-performance Arabian breeding and show community.' },
+  { question: 'What about Wickenburg and team roping?', answer: 'Wickenburg is the team roping capital of the world and hosts major roping events year-round. Roping farriers focus on speed shoeing, grip, and durability for daily heavy work.' }
+];
+const service = { name: 'Farriers in Arizona', description: 'Scottsdale Arabian, hunter/jumper, team roping, and ranch farriers across Arizona.', serviceType: 'Farrier and Hoof Care', areaServed: 'Arizona', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/arizona' };
+const regions = [
+  { name: 'Scottsdale Corridor (Scottsdale, Paradise Valley, Cave Creek)', note: 'Arabian horse capital. Hunter/jumper, dressage, polo. Deep CJF representation.' },
+  { name: 'Wickenburg & Team Roping Country', note: 'Team roping capital of the world. Speed and grip shoeing.' },
+  { name: 'Phoenix Metro & Surrounding', note: 'Mixed pleasure, hunter/jumper, racing.' },
+  { name: 'Northern Arizona (Prescott, Flagstaff, Sedona)', note: 'Trail, ranch, and pleasure country.' },
+  { name: 'Tucson & Southern Arizona', note: 'Mixed pleasure, polo, and ranch.' }
+];
+const specialties = [
+  { label: 'Arabian Show', detail: 'Scottsdale Arabian-specific shoeing.' },
+  { label: 'Hunter/Jumper & Dressage', detail: 'Scottsdale circuit performance work.' },
+  { label: 'Team Roping', detail: 'Wickenburg speed and grip work.' },
+  { label: 'Polo', detail: 'Polo pony plate work.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/equine-boarding/scottsdale-az', emoji: '🏇', title: 'Equine Boarding in Scottsdale', note: 'Scottsdale corridor boarding.' },
+  { href: '/services/farriers/california', emoji: '🔨', title: 'Farriers in California', note: 'Adjacent show-circuit market.' }
+];
+---
+<GeoPage title="Farriers in Arizona | BreederHQ Marketplace" description="Find AFA-certified farriers in Arizona. Scottsdale Arabian specialists, hunter/jumper performance shoers, Wickenburg team roping farriers, and corrective specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Arizona" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Arizona" introBody="Find farriers across Arizona on BreederHQ Marketplace. Arizona spans the Scottsdale Arabian capital and high-performance show circuit, the team roping center at Wickenburg, ranch and trail country across northern Arizona, and pleasure and racing populations in the Phoenix and Tucson metros." regionsHeading="Regional Farrier Markets in Arizona" regionsIntro="Five distinct corridors anchored by Scottsdale and Wickenburg." regions={regions} specialtiesHeading="Farrier Specialties in Arizona" specialtiesIntro="The Arabian capital and team roping center drive heavy specialization." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Arizona?" />

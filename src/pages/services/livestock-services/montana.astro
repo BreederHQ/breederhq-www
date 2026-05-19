@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Montana', url: '/services/livestock-services/montana' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Montana?', answer: 'Montana is one of the largest cattle states in the country with a significant sheep industry as well. Cattle ranching dominates the eastern half of the state; sheep operations cluster in the central and western parts. Working livestock services run on a circuit model with long driving radii — 100 miles between operations is normal.' },
+  { question: 'What about wool sheep shearing?', answer: 'Montana sheep shearing runs late spring (May-June) on a circuit model. Shearers travel between operations across the central plains and western mountain valleys. The state has retained more of its wool industry than most.' },
+  { question: 'What about cattle AI and breeding?', answer: 'Montana cattle breeding services concentrate around larger ranching operations and the MSU Animal & Range Sciences program. AI runs in defined breeding seasons, often coordinated across multi-ranch herd-share programs.' }
+];
+const service = { name: 'Livestock Services in Montana', description: 'Cattle AI/ET, sheep shearing, herd health, hoof trimming, and ranch services across Montana.', serviceType: 'Livestock Services', areaServed: 'Montana', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/montana' };
+const regions = [
+  { name: 'Eastern Montana (Miles City, Glendive, Sidney)', note: 'Large-scale cattle ranching. Herd health, breeding, and working services.' },
+  { name: 'Central Montana (Lewistown, Big Timber, Roundup)', note: 'Mixed cattle and sheep. Spring shearing circuit.' },
+  { name: 'Bozeman / Gallatin Valley', note: 'MSU-adjacent. Specialist breeding, herd health, dairy goat services.' },
+  { name: 'Western Montana (Missoula, Hamilton, Polson)', note: 'Sheep, beef cattle, small ruminants.' },
+  { name: 'Northern Montana (Havre, Great Falls, Cut Bank)', note: 'Wheat and cattle country. Large-scale herd work.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Embryo Transfer', detail: 'Eastern Montana ranch breeding programs.' },
+  { label: 'Sheep Shearing', detail: 'Spring circuit shearing across central and western MT.' },
+  { label: 'Herd Health & Vaccination', detail: 'Working herd programs.' },
+  { label: 'Hoof Trimming', detail: 'Cattle, sheep, and small ruminant hoof care.' },
+  { label: 'Disbudding & Castration', detail: 'Young stock work.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/farriers/montana', emoji: '🔨', title: 'Farriers in Montana', note: 'Ranch and working horse farriers.' },
+  { href: '/facilities/livestock', emoji: '🐄', title: 'Livestock Facilities', note: 'Handling, sorting, AI/repro spaces.' }
+];
+---
+<GeoPage title="Livestock Services in Montana | BreederHQ Marketplace" description="Find livestock service providers in Montana. Cattle AI and ET, sheep shearing on the spring circuit, herd health, hoof trimming, and ranch services across eastern, central, and western Montana." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Montana" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Montana" introBody="Find livestock service providers across Montana on BreederHQ Marketplace. Montana is one of the largest cattle states in the country with a retained wool sheep industry. Eastern Montana anchors large-scale ranch work; central and western Montana support spring sheep shearing circuits; the Bozeman corridor adds MSU-adjacent specialist breeding services." regionsHeading="Livestock Service Markets Across Montana" regionsIntro="Five corridors with different livestock industries." regions={regions} specialtiesHeading="Livestock Service Specialties in Montana" specialtiesIntro="Ranch-scale work dominates; specialty services cluster around MSU and the wool industry." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Montana?" />

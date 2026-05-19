@@ -40,6 +40,13 @@ const equineLivestock = [
     summary: 'Training, lessons, sale prep, fitness, equine massage, and equine bodywork across discipline-specific programs.'
   },
   {
+    id: 'equine-repro',
+    emoji: '🧬',
+    label: 'Equine Reproduction',
+    href: '/services/equine-repro',
+    summary: 'Theriogenologists, AI (fresh, cooled, frozen), embryo transfer, stallion collection, and foaling specialists.'
+  },
+  {
     id: 'livestock-services',
     emoji: '🐄',
     label: 'Livestock Services',
@@ -60,14 +67,14 @@ const careTraining = [
     id: 'behavioral',
     emoji: '🧠',
     label: 'Behavioral',
-    href: '/for-providers/behavioral',
+    href: '/services/behavioral',
     summary: 'Reactivity, aggression, separation anxiety, and behavior modification specialists.'
   },
   {
-    id: 'handling',
+    id: 'show-handling',
     emoji: '🏅',
     label: 'Show Handling',
-    href: '/for-providers/handling',
+    href: '/services/show-handling',
     summary: 'AKC and UKC professional handlers, conformation ring training, and show grooming specialists.'
   },
   {
@@ -88,7 +95,7 @@ const careTraining = [
     id: 'pet-sitting',
     emoji: '🐾',
     label: 'Pet Sitting',
-    href: '/for-providers/pet-sitting',
+    href: '/services/pet-sitting',
     summary: 'Credentialed in-home sitters, drop-in visits, and overnight care. PSI and species-specialty aware.'
   }
 ];
@@ -112,14 +119,14 @@ const medical = [
     id: 'rehabilitation',
     emoji: '💪',
     label: 'Rehabilitation',
-    href: '/for-providers/rehabilitation',
+    href: '/services/rehabilitation',
     summary: 'Canine and equine physical therapy, post-surgical care, hydrotherapy, and sports medicine recovery.'
   },
   {
     id: 'nutrition',
     emoji: '🥗',
     label: 'Nutrition',
-    href: '/for-providers/nutrition',
+    href: '/services/nutrition',
     summary: 'Animal nutritionists, raw and BARF specialists, performance feeding, and species-specific diet planning.'
   }
 ];
@@ -136,20 +143,20 @@ const logistics = [
     id: 'photography',
     emoji: '📸',
     label: 'Photography',
-    href: '/for-providers/photography',
+    href: '/services/photography',
     summary: 'Litter photography, show photography, equine portraiture, and breeder marketing media.'
   }
 ];
 
 const facilityTypes = [
-  { emoji: '🐎', label: 'Equine Facilities', href: '/for-providers/equine' },
-  { emoji: '🐄', label: 'Livestock Facilities', href: '/for-providers/livestock' },
-  { emoji: '🏟️', label: 'Indoor Training Halls', href: '/for-providers/indoor-training' },
-  { emoji: '🏠', label: 'Boarding Facilities', href: '/for-providers/boarding-facilities' },
-  { emoji: '🛁', label: 'Wash & Grooming Spaces', href: '/for-providers/wash-grooming' },
-  { emoji: '🏆', label: 'Event & Show Spaces', href: '/for-providers/events-shows' },
-  { emoji: '🌳', label: 'Dog Parks & Play Spots', href: '/for-providers/dog-parks' },
-  { emoji: '✨', label: 'Specialty Facilities', href: '/for-providers/specialty-facilities' }
+  { emoji: '🐎', label: 'Equine Facilities', href: '/facilities/equine' },
+  { emoji: '🐄', label: 'Livestock Facilities', href: '/facilities/livestock' },
+  { emoji: '🏟️', label: 'Indoor Training Halls', href: '/facilities/indoor-training' },
+  { emoji: '🏠', label: 'Boarding Facilities', href: '/facilities/boarding' },
+  { emoji: '🛁', label: 'Wash & Grooming Spaces', href: '/facilities/wash-grooming' },
+  { emoji: '🏆', label: 'Event & Show Spaces', href: '/facilities/events-shows' },
+  { emoji: '🌳', label: 'Dog Parks & Play Spots', href: '/facilities/dog-parks' },
+  { emoji: '✨', label: 'Specialty Facilities', href: '/facilities/specialty' }
 ];
 
 const regionalSpotlights = [
@@ -317,15 +324,33 @@ const regionalSpotlights = [
     <!-- Regional Spotlights -->
     <section id="regions" class="py-12 px-4 bg-white scroll-mt-20">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Regional Spotlights</h2>
-        <p class="text-gray-600 mb-6">Editorially deep regional pages anchored on the real equine and breeding economies of each region.</p>
-        <div class="grid sm:grid-cols-3 gap-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Regional Pages</h2>
+        <p class="text-gray-600 mb-6">Selective state and metro pages with real local content. Geo coverage lives on each parent category hub, not in nav.</p>
+        <div class="grid sm:grid-cols-3 gap-4 mb-6">
           {regionalSpotlights.map((r) => (
             <a href={r.href} class="block bg-stone-50 border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition">
               <h3 class="font-semibold text-gray-900 mb-1">{r.label}</h3>
               <p class="text-sm text-gray-600 leading-relaxed">{r.note}</p>
             </a>
           ))}
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+          <a href="/services/farriers#regions" class="block bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-400 transition">
+            <p class="font-semibold text-gray-900">Farriers by State</p>
+            <p class="text-xs text-gray-500 mt-1">20 state directories</p>
+          </a>
+          <a href="/services/equine-boarding" class="block bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-400 transition">
+            <p class="font-semibold text-gray-900">Equine Boarding Metros</p>
+            <p class="text-xs text-gray-500 mt-1">10 ecosystem metros</p>
+          </a>
+          <a href="/services/dog-training" class="block bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-400 transition">
+            <p class="font-semibold text-gray-900">Dog Training Metros</p>
+            <p class="text-xs text-gray-500 mt-1">10 metro pages</p>
+          </a>
+          <a href="/services/livestock-services" class="block bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-400 transition">
+            <p class="font-semibold text-gray-900">Livestock by State</p>
+            <p class="text-xs text-gray-500 mt-1">10 state pages</p>
+          </a>
         </div>
       </div>
     </section>

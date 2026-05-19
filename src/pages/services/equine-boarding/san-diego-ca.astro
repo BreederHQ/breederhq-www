@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Equine Boarding', url: '/services/equine-boarding' }, { name: 'San Diego, CA', url: '/services/equine-boarding/san-diego-ca' }];
+const faqs = [
+  { question: 'Where do horse owners board in San Diego County?', answer: 'The major equine corridors are Rancho Santa Fe / Fairbanks Ranch (high-performance hunter/jumper and polo), Del Mar (Del Mar racetrack and surrounding training), Bonsall and Fallbrook (mixed sport horse and breeding), Ramona and inland North County (more turnout, ranch and trail), and Jamul and East County (ranch and trail).' },
+  { question: 'What about Del Mar racetrack?', answer: 'Del Mar runs a summer Thoroughbred meet (July-September) and a fall meet (November). Year-round training continues at Del Mar and adjacent training centers. Plate farriers and racetrack support cluster around the track and Bonsall.' },
+  { question: 'What about polo in San Diego?', answer: 'San Diego Polo Club at Rancho Santa Fe runs a polo season (June-October). Polo string boarding clusters in Rancho Santa Fe and Fairbanks Ranch.' }
+];
+const service = { name: 'Equine Boarding in San Diego, CA', description: 'Hunter/jumper, dressage, polo, racetrack, and ranch boarding across San Diego County.', serviceType: 'Equine Boarding', areaServed: 'San Diego, CA', offerDescription: 'San Diego County equine boarding directory.', offerUrl: '/services/equine-boarding/san-diego-ca' };
+const regions = [
+  { name: 'Rancho Santa Fe / Fairbanks Ranch', note: 'Densest high-performance market. Hunter/jumper and polo.' },
+  { name: 'Del Mar', note: 'Del Mar racetrack and surrounding training facilities.' },
+  { name: 'Bonsall / Fallbrook', note: 'Mixed sport horse, breeding, and racetrack-adjacent training.' },
+  { name: 'Ramona / Inland North County', note: 'Larger lots, ranch and trail, mixed discipline.' },
+  { name: 'Jamul / East County', note: 'Ranch, trail, and pleasure populations.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper Training Board', detail: 'Rancho Santa Fe and Fairbanks Ranch circuit performance.' },
+  { label: 'Polo Facility', detail: 'San Diego Polo Club string boarding.' },
+  { label: 'Racetrack Training', detail: 'Del Mar training board with track access.' },
+  { label: 'Breeding Facility', detail: 'Bonsall and Fallbrook mare and stallion facilities.' },
+  { label: 'Ranch & Trail', detail: 'Ramona and East County larger-lot boarding.' }
+];
+const relatedCards = [
+  { href: '/services/farriers/california', emoji: '🔨', title: 'Farriers in California', note: 'Southern California farriers.' },
+  { href: '/services/equine-services', emoji: '🐎', title: 'Equine Services', note: 'Trainers, vets, bodyworkers.' },
+  { href: '/services/equine-boarding/scottsdale-az', emoji: '🏇', title: 'Equine Boarding in Scottsdale', note: 'Adjacent winter equine corridor.' }
+];
+---
+<GeoPage title="Equine Boarding in San Diego, CA | BreederHQ Marketplace" description="Find equine boarding in San Diego County. Hunter/jumper and polo in Rancho Santa Fe, Del Mar racetrack training, breeding in Bonsall and Fallbrook, ranch and trail in Ramona and East County." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Equine Boarding" location="San Diego, CA" categorySlug="equine-boarding" parentHref="/services/equine-boarding" parentLabel="Equine Boarding" introHeading="Equine Boarding in San Diego, CA" introBody="Find equine boarding across San Diego County on BreederHQ Marketplace. San Diego County spans the high-performance hunter/jumper and polo populations of Rancho Santa Fe and Fairbanks Ranch, Del Mar racetrack and surrounding training, breeding and sport horse populations in Bonsall and Fallbrook, and ranch and trail country across the inland and East County." regionsHeading="Boarding Markets in San Diego County" regionsIntro="Five distinct corridors with different discipline bases." regions={regions} specialtiesHeading="Boarding Specialties in San Diego" specialtiesIntro="Rancho Santa Fe and Del Mar anchor the premium specialization." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/equine" providerLabel="Operate a San Diego-area boarding facility?" />

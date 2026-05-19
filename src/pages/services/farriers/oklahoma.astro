@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Farriers', url: '/services/farriers' },
+  { name: 'Oklahoma', url: '/services/farriers/oklahoma' }
+];
+
+const faqs = [
+  { question: 'Where does the farrier demand concentrate in Oklahoma?', answer: 'Oklahoma is the Quarter Horse capital — AQHA headquarters is in Amarillo TX but the breeding industry has a heavy footprint across Oklahoma. The Oklahoma City and Tulsa metros support cutting, reining, and reined cow horse barns. Pauls Valley, Purcell, and the Marietta corridor hold significant ranch and quarter horse populations. Northeast Oklahoma (Claremore, Catoosa) supports a growing barrel racing community. Remington Park (OKC) runs Quarter Horse and Thoroughbred meets.' },
+  { question: 'What about cutting and reining shoeing?', answer: 'Oklahoma is the home of the World Equestrian Center events and major NCHA and NRHA shows in OKC. Cutting and reining farriers in Oklahoma do high-volume performance work including sliding plates, balanced shoes for stops and turns, and corrective work for performance soundness. Many travel the major show circuit.' },
+  { question: 'What about racetrack plate work?', answer: 'Remington Park (OKC) and Will Rogers Downs (Claremore) run Quarter Horse and mixed meets. Plate farriers at these tracks work breeze days and race days on tight schedules tied to the racing calendar.' },
+  { question: 'Are there ranch farriers across western Oklahoma?', answer: 'Yes. Western Oklahoma supports working ranches, cow horse breeders, and roping operations. Ranch farriers in this region focus on practical, durable shoeing for working horses and often carry decades of experience without formal AFA credentialing.' }
+];
+
+const service = { name: 'Farriers in Oklahoma', description: 'Find AFA-certified farriers, cutting and reining specialists, racetrack plate farriers, ranch farriers, and corrective specialists across Oklahoma.', serviceType: 'Farrier and Hoof Care', areaServed: 'Oklahoma', offerDescription: 'Statewide farrier directory for Oklahoma horse owners and breeding operations.', offerUrl: '/services/farriers/oklahoma' };
+
+const regions = [
+  { name: 'Oklahoma City Metro (Edmond, Norman, Yukon, Mustang)', note: 'Cutting, reining, and reined cow horse hub. NRHA, NCHA, NRCHA events drive demand. Strong CJF representation.' },
+  { name: 'Tulsa Metro (Broken Arrow, Owasso, Catoosa, Claremore)', note: 'Hunter/jumper, dressage, barrel racing, and growing eventing population. Will Rogers Downs racetrack circuit.' },
+  { name: 'Central / South Oklahoma (Pauls Valley, Purcell, Marietta, Ardmore)', note: 'Heart of quarter horse country. Ranch, cutting, and breeding operations. Practical-experience farriers.' },
+  { name: 'Western Oklahoma (Woodward, Elk City, Clinton, Weatherford)', note: 'Ranch, cow horse, and roping country. Longer driving radii, working farriers.' },
+  { name: 'Northeast Oklahoma (Bartlesville, Vinita, Pryor)', note: 'Mixed pleasure, barrel racing, and growing trail community.' }
+];
+const specialties = [
+  { label: 'Routine Trimming', detail: 'Pasture, pleasure, and trim-only clients on 5 to 8 week cycles.' },
+  { label: 'Cutting & Reining', detail: 'Sliding plates, balanced performance shoes for NRHA, NCHA, NRCHA events.' },
+  { label: 'Racetrack Plate Work', detail: 'Remington Park, Will Rogers Downs, Fair Meadows training and racing plates.' },
+  { label: 'Ranch Shoeing', detail: 'Working ranch horses, roping horses, cow horse durability shoeing.' },
+  { label: 'Barrel Racing', detail: 'Performance shoeing for speed events, grip and breakover work.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes for breeding stock and growing horses.' }
+];
+---
+
+<BaseLayout title="Farriers in Oklahoma | BreederHQ Marketplace" description="Find AFA-certified farriers in Oklahoma. Cutting and reining specialists, racetrack plate farriers at Remington Park, ranch farriers across western Oklahoma, and corrective specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service}>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb"><ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm"><li><a href="/" class="text-amber-700 hover:underline">Home</a></li><li class="text-gray-400" aria-hidden="true">›</li><li><a href="/services" class="text-amber-700 hover:underline">Services</a></li><li class="text-gray-400" aria-hidden="true">›</li><li><a href="/services/farriers" class="text-amber-700 hover:underline">Farriers</a></li><li class="text-gray-400" aria-hidden="true">›</li><li aria-current="page" class="text-gray-600">Oklahoma</li></ol></nav>
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Farriers · Oklahoma</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Farriers in Oklahoma</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">Find farriers across Oklahoma on BreederHQ Marketplace. Oklahoma is the heart of American Quarter Horse country, with deep cutting, reining, and reined cow horse industries centered around Oklahoma City and Tulsa, a working-ranch farrier community across the western half of the state, and racetrack plate work at Remington Park and Will Rogers Downs.</p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">Browse Farriers in Oklahoma <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="py-12 px-4 bg-white"><div class="max-w-4xl mx-auto"><h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Regional Farrier Markets in Oklahoma</h2><p class="text-gray-600 mb-6">Oklahoma's farrier markets cluster around five distinct regions.</p><div class="grid sm:grid-cols-2 gap-4">{regions.map((r) => (<div class="bg-stone-50 border border-stone-200 rounded-xl p-5"><h3 class="font-semibold text-gray-900 mb-2">{r.name}</h3><p class="text-sm text-gray-700 leading-relaxed">{r.note}</p></div>))}</div></div></section>
+    <section class="py-12 px-4 bg-stone-50"><div class="max-w-4xl mx-auto"><h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Farrier Specialties in Oklahoma</h2><p class="text-gray-600 mb-6">The quarter-horse-dominated discipline mix drives demand toward performance and ranch shoeing.</p><div class="grid sm:grid-cols-2 gap-4">{specialties.map((s) => (<div class="bg-white border border-stone-200 rounded-lg p-4"><h3 class="font-semibold text-gray-900 mb-1">{s.label}</h3><p class="text-sm text-gray-700">{s.detail}</p></div>))}</div></div></section>
+    <section class="py-12 px-4 bg-white"><div class="max-w-5xl mx-auto"><h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2><div class="grid sm:grid-cols-3 gap-4"><a href="/services/farriers" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition"><div class="text-xl mb-1">🔨</div><div class="font-semibold text-gray-900">All Farriers</div><p class="text-xs text-gray-600 mt-1">Browse the full farrier category.</p></a><a href="/services/farriers/texas" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition"><div class="text-xl mb-1">🔨</div><div class="font-semibold text-gray-900">Farriers in Texas</div><p class="text-xs text-gray-600 mt-1">DFW cutting/reining and Houston sport horse markets.</p></a><a href="/services/livestock-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition"><div class="text-xl mb-1">🐄</div><div class="font-semibold text-gray-900">Livestock Services</div><p class="text-xs text-gray-600 mt-1">Working livestock support across Oklahoma's ag corridors.</p></a></div></div></section>
+    <section class="py-10 px-4 bg-white border-t border-stone-200"><div class="max-w-4xl mx-auto"><a href="/for-providers/farriers" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition"><div><p class="font-semibold text-gray-900">Are you a farrier in Oklahoma?</p><p class="text-sm text-gray-600">List your practice on BreederHQ.</p></div><span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span></a></div></section>
+  </main>
+</BaseLayout>

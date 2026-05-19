@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Chicago, IL', url: '/services/dog-training/chicago-il' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Chicago?', answer: 'Chicago supports very active AKC obedience and conformation, agility, dock diving, scent work, and protection sport communities. The Chicagoland conformation circuit is anchored by IKC International, the largest annual all-breed dog show in the US. Multiple agility clubs run trials year-round. The North Shore and western suburbs support a deep family obedience and board-and-train market.' },
+  { question: 'What about urban dog training?', answer: 'Chicago has one of the deepest urban training markets in the country given the apartment-living population. In-home trainers, group classes for city dogs, and behavior modification for urban environments (reactivity, leash work, elevator/lobby manners) are major specialties.' }
+];
+const service = { name: 'Dog Training in Chicago, IL', description: 'Obedience, agility, conformation, dock diving, scent work, protection, and behavior training across Chicagoland.', serviceType: 'Dog Training', areaServed: 'Chicago, IL', offerDescription: 'Chicago-area dog trainer directory.', offerUrl: '/services/dog-training/chicago-il' };
+const regions = [
+  { name: 'Chicago / North Side / South Side', note: 'Urban training. In-home, group class, urban-specific behavior modification.' },
+  { name: 'North Shore / Evanston / Wilmette / Highland Park', note: 'Premium family obedience, sport, board-and-train.' },
+  { name: 'Northwest Suburbs / Schaumburg / Arlington Heights', note: 'AKC clubs, agility, conformation.' },
+  { name: 'West Suburbs / Oak Park / Naperville / Wheaton', note: 'Family obedience, sport, behavior modification.' },
+  { name: 'Southwest Suburbs / Orland Park / Tinley Park', note: 'Family obedience, retriever, and sport.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Chicago-area AKC clubs and conformation handling.' },
+  { label: 'Agility', detail: 'Trial-prep agility across multiple venues.' },
+  { label: 'Conformation Handling', detail: 'IKC International and circuit handlers.' },
+  { label: 'Dock Diving & Scent Work', detail: 'Sport-specific training across the suburbs.' },
+  { label: 'Urban Behavior', detail: 'Reactivity, leash work, urban-specific behavior modification.' },
+  { label: 'Protection Sport', detail: 'IGP and PSA training fields.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/show-handling', emoji: '🏅', title: 'Show Handling', note: 'IKC and Chicago-circuit handlers.' },
+  { href: '/services/behavioral', emoji: '🧠', title: 'Behavioral', note: 'Reactivity and behavior modification.' }
+];
+---
+<GeoPage title="Dog Training in Chicago, IL | BreederHQ Marketplace" description="Find dog trainers in Chicagoland. AKC obedience, agility, IKC conformation handling, dock diving, scent work, urban behavior modification, and protection sport across the North Shore, North/West/Southwest suburbs." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Chicago, IL" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Chicago, IL" introBody="Find dog trainers across Chicagoland on BreederHQ Marketplace. Chicago supports one of the deepest urban dog training markets in the country, anchored by AKC obedience and conformation (IKC International is the largest annual all-breed show in the US), active agility and sport communities across the suburbs, and a specialized urban behavior-modification market for apartment-living dogs." regionsHeading="Dog Training Markets Across Chicago" regionsIntro="Five corridors with very different living environments and training needs." regions={regions} specialtiesHeading="Dog Training Specialties in Chicago" specialtiesIntro="The urban core drives unique demand for apartment and city-environment training." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Chicago?" />

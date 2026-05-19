@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Kansas', url: '/services/livestock-services/kansas' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Kansas?', answer: 'Kansas is one of the top three cattle states by inventory and the third-largest beef-producing state. Kansas State University in Manhattan anchors specialist livestock services. The Flint Hills hold one of the largest tallgrass prairie cow-calf populations in the country, and Western Kansas runs major feedyard operations.' },
+  { question: 'What about Kansas State?', answer: 'K-State Veterinary Medicine and the College of Agriculture are major livestock specialist centers. Many regional breeding programs and herd health protocols originate or coordinate with K-State.' },
+  { question: 'What about the Flint Hills?', answer: 'The Flint Hills tallgrass prairie supports one of the most distinctive cow-calf landscapes in the US. Working livestock services on the Flint Hills follow a calendar built around spring branding, summer grazing, and fall gather.' }
+];
+const service = { name: 'Livestock Services in Kansas', description: 'Cattle AI/ET, branding, feedyard services, K-State specialist work, and herd health across Kansas.', serviceType: 'Livestock Services', areaServed: 'Kansas', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/kansas' };
+const regions = [
+  { name: 'Flint Hills (Manhattan, Council Grove, El Dorado)', note: 'Tallgrass prairie cow-calf country. K-State adjacent.' },
+  { name: 'Western Kansas (Dodge City, Garden City, Liberal)', note: 'Feedyard belt. Industrial-scale cattle operations.' },
+  { name: 'Central Kansas (Salina, Hutchinson, Hays)', note: 'Mixed cow-calf, feedyard, and grain operations.' },
+  { name: 'Eastern Kansas (Topeka, Lawrence, Kansas City)', note: 'Mixed cattle, dairy, and small-farm operations.' },
+  { name: 'Southeast Kansas (Pittsburg, Independence, Coffeyville)', note: 'Mixed pasture cattle, small-farm and pleasure livestock.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Embryo Transfer', detail: 'K-State coordinated and ranch breeding services.' },
+  { label: 'Branding', detail: 'Flint Hills spring branding circuit.' },
+  { label: 'Feedyard Services', detail: 'Western Kansas cattle feedyard health programs.' },
+  { label: 'Pregnancy Checking', detail: 'Fall preg-checking circuits.' },
+  { label: 'Herd Health', detail: 'Cow-calf and feedyard programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/livestock-services/nebraska', emoji: '🐄', title: 'Livestock Services in Nebraska', note: 'Adjacent cow-calf country.' },
+  { href: '/services/livestock-services/oklahoma', emoji: '🐄', title: 'Livestock Services in Oklahoma', note: 'Adjacent cattle country.' }
+];
+---
+<GeoPage title="Livestock Services in Kansas | BreederHQ Marketplace" description="Find livestock service providers in Kansas. Cattle AI and ET, Flint Hills branding, Western Kansas feedyard services, K-State specialist work, and herd health programs statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Kansas" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Kansas" introBody="Find livestock service providers across Kansas on BreederHQ Marketplace. Kansas is one of the top three cattle states in the country. The Flint Hills tallgrass prairie supports a distinctive cow-calf landscape, Western Kansas runs major feedyard operations, and K-State in Manhattan anchors specialist livestock services and research." regionsHeading="Livestock Service Markets Across Kansas" regionsIntro="Five corridors with different cattle industries." regions={regions} specialtiesHeading="Livestock Service Specialties in Kansas" specialtiesIntro="K-State and the Flint Hills produce specialty depth on both the cow-calf and feedyard side." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Kansas?" />

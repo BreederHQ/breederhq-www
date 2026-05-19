@@ -1,0 +1,32 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Texas', url: '/services/livestock-services/texas' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Texas?', answer: 'Texas is the largest cattle state in the country, the largest sheep and goat state, and a major dairy state. Cattle AI and embryo transfer concentrate around Brazos Valley breeding country and the Panhandle feeding industry. Sheep shearing runs the spring circuit across the Hill Country and West Texas Edwards Plateau. Goat services (dairy, meat, fiber) concentrate in the Hill Country and Central Texas.' },
+  { question: 'What about Texas A&M Vet School?', answer: 'TAMU College Station is one of the top livestock veterinary medicine programs in the country. Specialist livestock services (advanced repro, surgical, herd health) anchor around TAMU and the Brazos Valley.' },
+  { question: 'What about shearing season?', answer: 'Texas spring shearing runs roughly February through May depending on region and breed. Hill Country (Sonora, Junction, Rocksprings) is the densest small-ruminant shearing market. Wool sheep concentrate in the Edwards Plateau.' }
+];
+const service = { name: 'Livestock Services in Texas', description: 'Cattle AI/ET, sheep shearing, goat services, herd health, and breeding services across Texas.', serviceType: 'Livestock Services', areaServed: 'Texas', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/texas' };
+const regions = [
+  { name: 'Brazos Valley (College Station, Bryan, Brenham)', note: 'TAMU vet school. Cattle AI/ET, breeding services, specialist herd health.' },
+  { name: 'Hill Country (Fredericksburg, Kerrville, Junction, Sonora)', note: 'Sheep, goat, and Edwards Plateau wool industry. Dense shearing market.' },
+  { name: 'Panhandle (Amarillo, Plainview, Hereford)', note: 'Feeding industry, dairy, large-scale cattle work.' },
+  { name: 'South Texas (Laredo, Cotulla, Eagle Pass)', note: 'Brush country cattle, hunting and game ranching.' },
+  { name: 'East Texas (Tyler, Athens, Crockett)', note: 'Pasture cattle, dairy, goat dairy, small farm.' },
+  { name: 'West Texas (Midland, San Angelo, Big Spring)', note: 'Wool sheep, ranch cattle, working livestock.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Embryo Transfer', detail: 'Brazos Valley and Panhandle breeding services.' },
+  { label: 'Sheep Shearing', detail: 'Hill Country and Edwards Plateau spring shearing circuits.' },
+  { label: 'Goat Services', detail: 'Dairy, meat, and fiber goat care across Central and Hill Country.' },
+  { label: 'Herd Health & Vaccination', detail: 'Working herd programs.' },
+  { label: 'Hoof Trimming', detail: 'Cattle and small ruminant hoof care.' },
+  { label: 'Disbudding & Castration', detail: 'Goat, sheep, and cattle young stock work.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/farriers/texas', emoji: '🔨', title: 'Farriers in Texas', note: 'Equine farrier directory.' },
+  { href: '/facilities/livestock', emoji: '🐄', title: 'Livestock Facilities', note: 'Handling, sorting, AI/repro spaces.' }
+];
+---
+<GeoPage title="Livestock Services in Texas | BreederHQ Marketplace" description="Find livestock service providers in Texas. Cattle AI and embryo transfer, sheep shearing, goat services, herd health, and breeding work across the Brazos Valley, Hill Country, Panhandle, and statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Texas" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Texas" introBody="Find livestock service providers across Texas on BreederHQ Marketplace. Texas is the largest cattle state, the largest sheep and goat state, and a major dairy state. Brazos Valley anchors specialist breeding services around TAMU. The Hill Country runs the densest sheep and goat shearing circuits. The Panhandle handles large-scale cattle work. Every region has a working livestock service community currently held together by Facebook groups and word of mouth." regionsHeading="Livestock Service Markets Across Texas" regionsIntro="Six distinct corridors with very different livestock industries." regions={regions} specialtiesHeading="Livestock Service Specialties in Texas" specialtiesIntro="Texas covers the full range of livestock service work across species and operation scales." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Texas?" />

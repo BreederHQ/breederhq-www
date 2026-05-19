@@ -1,0 +1,29 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Wyoming', url: '/services/livestock-services/wyoming' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Wyoming?', answer: 'Wyoming is one of the largest cattle states per capita and the largest sheep state by some measures. The Big Horn Basin, Powder River Basin, and Wind River corridor support major sheep and cattle operations. Cattle work runs on a calendar of branding, fall preg-checking, and weaning. Spring sheep shearing runs late spring through early summer.' },
+  { question: 'What about high-elevation grazing?', answer: 'Wyoming sheep and cattle operations use mountain grazing allotments through summer. Livestock services serving these operations work on the spring branding and fall gather schedule. Long driving radii are the norm.' }
+];
+const service = { name: 'Livestock Services in Wyoming', description: 'Cattle AI/ET, sheep shearing, herd health, hoof trimming, branding, and ranch services across Wyoming.', serviceType: 'Livestock Services', areaServed: 'Wyoming', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/wyoming' };
+const regions = [
+  { name: 'Big Horn Basin (Worland, Cody, Greybull)', note: 'Sheep and cattle ranching. Mountain grazing allotments.' },
+  { name: 'Powder River Basin (Buffalo, Kaycee, Gillette)', note: 'Cattle ranching country.' },
+  { name: 'Wind River Corridor (Lander, Riverton, Dubois)', note: 'Mixed sheep and cattle, working ranches.' },
+  { name: 'Southeast Wyoming (Cheyenne, Laramie, Wheatland)', note: 'Cattle ranching, UW veterinary access.' },
+  { name: 'Star Valley & Jackson Hole', note: 'Smaller ranching and dude ranch country.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Breeding', detail: 'Spring breeding season AI work.' },
+  { label: 'Sheep Shearing', detail: 'Spring circuit shearing across basins.' },
+  { label: 'Branding & Working', detail: 'Spring branding circuit support.' },
+  { label: 'Pregnancy Checking', detail: 'Fall preg-checking circuit work.' },
+  { label: 'Herd Health', detail: 'Working ranch herd health programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/livestock-services/montana', emoji: '🐄', title: 'Livestock Services in Montana', note: 'Adjacent ranch country.' },
+  { href: '/services/livestock-services/colorado', emoji: '🐄', title: 'Livestock Services in Colorado', note: 'NWSS-adjacent.' }
+];
+---
+<GeoPage title="Livestock Services in Wyoming | BreederHQ Marketplace" description="Find livestock service providers in Wyoming. Cattle AI, sheep shearing, branding, preg checking, and herd health across the Big Horn Basin, Powder River Basin, Wind River corridor, and statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Wyoming" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Wyoming" introBody="Find livestock service providers across Wyoming on BreederHQ Marketplace. Wyoming is one of the largest cattle states per capita and one of the largest sheep states in the country. Working livestock services across the Big Horn Basin, Powder River Basin, and Wind River corridor operate on long driving radii and a calendar built around spring branding, summer grazing, and fall gather." regionsHeading="Livestock Service Markets Across Wyoming" regionsIntro="Five corridors with different ranching scales." regions={regions} specialtiesHeading="Livestock Service Specialties in Wyoming" specialtiesIntro="Ranch-scale work dominates; spring branding and sheep shearing run on regional circuits." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Wyoming?" />

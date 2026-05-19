@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Phoenix, AZ', url: '/services/dog-training/phoenix-az' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Phoenix?', answer: 'Phoenix supports active AKC obedience, agility, conformation, herding, and protection sport communities. The Phoenix Field Trial Club runs retriever events. The Phoenix-area conformation circuit clusters around major show weekends. The desert geography drives extensive early-morning and late-evening training schedules.' },
+  { question: 'What about training in summer heat?', answer: 'Phoenix summers exceed 110°F regularly. Reputable trainers train indoors or in early-morning and late-evening windows during summer months. Outdoor training on hot pavement is dangerous to paws — confirm summer training protocols before booking.' },
+  { question: 'What about herding training?', answer: 'Several herding training facilities operate within driving distance of Phoenix, including instinct testing and AKC herding trial preparation.' }
+];
+const service = { name: 'Dog Training in Phoenix, AZ', description: 'Obedience, agility, herding, conformation, and behavior training across the Phoenix metro.', serviceType: 'Dog Training', areaServed: 'Phoenix, AZ', offerDescription: 'Phoenix-area dog trainer directory.', offerUrl: '/services/dog-training/phoenix-az' };
+const regions = [
+  { name: 'Scottsdale / Paradise Valley', note: 'Higher-end private training, show prep, and conformation handling.' },
+  { name: 'Phoenix / Central Phoenix', note: 'Family obedience, behavior, and AKC obedience club training.' },
+  { name: 'East Valley / Mesa / Gilbert / Chandler', note: 'Suburban with larger lots. Sport, board-and-train, and family training.' },
+  { name: 'West Valley / Goodyear / Surprise', note: 'Family obedience, agility, and behavior modification.' },
+  { name: 'North Phoenix / Cave Creek / Carefree', note: 'Mixed sport, ranch dog, and trail-companion training.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Phoenix-area AKC obedience clubs and affiliates.' },
+  { label: 'Agility', detail: 'Trial-prep agility across the metro.' },
+  { label: 'Conformation Handling', detail: 'Scottsdale show prep and conformation handling.' },
+  { label: 'Herding', detail: 'Instinct testing and AKC herding trial prep.' },
+  { label: 'Protection Sport', detail: 'IGP and PSA clubs with trial fields.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/show-handling', emoji: '🏅', title: 'Show Handling', note: 'Scottsdale conformation handlers.' },
+  { href: '/services/behavioral', emoji: '🧠', title: 'Behavioral', note: 'Reactivity and aggression specialists.' }
+];
+---
+<GeoPage title="Dog Training in Phoenix, AZ | BreederHQ Marketplace" description="Find dog trainers in the Phoenix metro. AKC obedience, agility, conformation handling, herding, protection sport, and behavior modification across Scottsdale, East Valley, and West Valley." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Phoenix, AZ" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Phoenix, AZ" introBody="Find dog trainers across the Phoenix metro on BreederHQ Marketplace. Phoenix supports active AKC obedience, agility, conformation, herding, and protection sport communities, with conformation handling clustered around the Scottsdale show circuit. The desert climate drives early-morning and indoor training during summer months." regionsHeading="Dog Training Markets Across Phoenix" regionsIntro="Five corridors across the metro." regions={regions} specialtiesHeading="Dog Training Specialties in Phoenix" specialtiesIntro="The Scottsdale show industry drives conformation specialization absent from most Western metros." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Phoenix?" />

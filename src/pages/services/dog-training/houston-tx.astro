@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Houston, TX', url: '/services/dog-training/houston-tx' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Houston?', answer: 'Houston has active populations in agility (Houston-area agility clubs run trials at multiple venues), retriever and field work (the gulf and rice prairies support significant gun dog training), protection sport (IGP, PSA clubs), AKC obedience and rally, and a deep service dog and assistance dog community. Conformation also runs strong with the Houston Reliant Park show.' },
+  { question: 'What about working dog and protection sport?', answer: 'Houston is home to several IGP, PSA, and protection sport clubs with trial sites and training fields. Local German Shepherd, Malinois, and Dutch Shepherd working line communities support dedicated working dog trainers.' },
+  { question: 'What about service dog and therapy dog prep?', answer: 'The Houston Medical Center proximity, large veteran population, and major hospital systems drive demand for service dog preparation. Several reputable service dog organizations train and place dogs in the Houston area.' }
+];
+const service = { name: 'Dog Training in Houston, TX', description: 'Obedience, sport, service dog, behavior, and field training in the Houston metro.', serviceType: 'Dog Training', areaServed: 'Houston, TX', offerDescription: 'Houston-area dog trainer directory.', offerUrl: '/services/dog-training/houston-tx' };
+const regions = [
+  { name: 'Inner Loop / Heights / Montrose', note: 'Urban training. In-home, group class, and apartment-living-focused trainers.' },
+  { name: 'West Houston / Katy / Cinco Ranch', note: 'Suburban training. Dog sport, agility, and family obedience.' },
+  { name: 'North Houston / Spring / Woodlands', note: 'Suburban with larger lots. Sport, working dog, and field trainers.' },
+  { name: 'Southwest / Sugar Land / Pearland', note: 'Family obedience, board-and-train, and service dog prep.' },
+  { name: 'Northwest / Cypress / Tomball', note: 'Field and retriever country. Gun dog training.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Houston Obedience Training Club, multiple AKC affiliates.' },
+  { label: 'Agility', detail: 'Trial-prep agility trainers across multiple Houston-area venues.' },
+  { label: 'Field & Retriever', detail: 'Gun dog training across the Gulf Coast prairies.' },
+  { label: 'Protection Sport (IGP/PSA)', detail: 'Working line clubs with trial-grade training fields.' },
+  { label: 'Service Dog Prep', detail: 'Medical Center and veteran-focused service dog training.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, and separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/dog-training/dallas-tx', emoji: '🎓', title: 'Dog Training in Dallas', note: 'DFW-area trainers.' },
+  { href: '/services/behavioral', emoji: '🧠', title: 'Behavioral', note: 'Reactivity, aggression specialists.' }
+];
+---
+<GeoPage title="Dog Training in Houston, TX | BreederHQ Marketplace" description="Find dog trainers in Houston. AKC obedience, agility, field and retriever training, protection sport, service dog prep, and behavior modification specialists across the Houston metro." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Houston, TX" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Houston, TX" introBody="Find dog trainers across the Houston metro on BreederHQ Marketplace. Houston supports an unusually deep range of dog training communities — AKC obedience and rally clubs, agility training across multiple venues, field and retriever training across the Gulf Coast prairies, working dog and protection sport clubs, and a major service dog and therapy dog training community anchored by the Medical Center and veteran population." regionsHeading="Dog Training Markets Across Houston" regionsIntro="Five corridors with different discipline mixes." regions={regions} specialtiesHeading="Dog Training Specialties in Houston" specialtiesIntro="Houston's size and diversity produce specialization across the full dog sport and working dog range." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Houston?" />

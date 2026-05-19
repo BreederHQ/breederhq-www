@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Colorado', url: '/services/farriers/colorado' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Colorado?', answer: 'The Front Range (Parker, Larkspur, Castle Rock, Elizabeth, Franktown) holds the densest concentration of horses in the state — hunter/jumper, dressage, eventing, and an active cutting/reining community. The Rocky Mountain corridor (Steamboat Springs, Aspen) supports ranch, pleasure, and trail. The Western Slope (Grand Junction, Montrose) supports ranch and growing rodeo populations. Northern Colorado (Fort Collins, Loveland, Greeley) anchors the National Western Stock Show industry and CSU Veterinary Medicine.' },
+  { question: 'What about the National Western Stock Show?', answer: 'NWSS in Denver is one of the largest livestock and rodeo events in the country. The associated farrier demand spans rough stock and rodeo horses, ranch horse breeding stock, and cutting/reining show horses. Many Colorado farriers travel the rodeo circuit.' },
+  { question: 'What about high-altitude conditioning?', answer: 'Horses living at 5,000-9,000 feet have different hoof growth, traction needs, and conditioning demands. Colorado farriers who work the Rocky Mountain corridor often specialize in trail, ranch, and endurance-specific shoeing.' }
+];
+const service = { name: 'Farriers in Colorado', description: 'Front Range performance, NWSS rodeo, Western Slope ranch, and high-altitude farriers across Colorado.', serviceType: 'Farrier and Hoof Care', areaServed: 'Colorado', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/colorado' };
+const regions = [
+  { name: 'Front Range (Parker, Larkspur, Castle Rock, Elizabeth)', note: 'Hunter/jumper, dressage, cutting, reining. Densest equine market in the state.' },
+  { name: 'Northern Colorado (Fort Collins, Loveland, Greeley)', note: 'CSU Veterinary Medicine, NWSS-adjacent. Ranch horse, sport horse, and breeding populations.' },
+  { name: 'Rocky Mountain Corridor (Steamboat Springs, Aspen, Vail)', note: 'Ranch, pleasure, trail, and endurance. High-altitude conditioning.' },
+  { name: 'Western Slope (Grand Junction, Montrose)', note: 'Ranch horse country, rodeo, and growing pleasure population.' },
+  { name: 'San Luis Valley & Southern Colorado', note: 'Ranch and trail horse country.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper & Dressage', detail: 'Front Range performance shoeing.' },
+  { label: 'Cutting & Reining', detail: 'Sliding plates and discipline-specific work.' },
+  { label: 'Rodeo & Ranch', detail: 'NWSS-adjacent and Western Slope ranch shoeing.' },
+  { label: 'High-Altitude Trail', detail: 'Conditioning shoes for mountain terrain.' },
+  { label: 'Corrective & Therapeutic', detail: 'CSU Vet School-adjacent, deep therapeutic options.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/equine-boarding/denver-co', emoji: '🏇', title: 'Equine Boarding in Denver', note: 'Front Range boarding facilities.' },
+  { href: '/services/livestock-services/colorado', emoji: '🐄', title: 'Livestock Services in Colorado', note: 'Ranch and livestock support.' }
+];
+---
+<GeoPage title="Farriers in Colorado | BreederHQ Marketplace" description="Find AFA-certified farriers in Colorado. Front Range hunter/jumper specialists, NWSS rodeo and cutting farriers, Western Slope ranch farriers, and high-altitude trail specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Colorado" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Colorado" introBody="Find farriers across Colorado on BreederHQ Marketplace. Colorado spans the Front Range hunter/jumper and dressage population from Parker to Castle Rock, the cutting and reining circuit, the NWSS rodeo industry in Denver, ranch horse country across the Western Slope, and high-altitude trail conditioning in the Rocky Mountain corridor." regionsHeading="Regional Farrier Markets in Colorado" regionsIntro="Five distinct corridors with different discipline bases." regions={regions} specialtiesHeading="Farrier Specialties in Colorado" specialtiesIntro="High-altitude geography and the NWSS industry drive a wider specialty range than most Western states." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Colorado?" />

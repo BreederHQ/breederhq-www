@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Idaho', url: '/services/livestock-services/idaho' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Idaho?', answer: 'Idaho is the third-largest dairy state in the US, a major cattle state, and home to one of the largest sheep populations in the West. The Treasure Valley (Boise and Magic Valley) anchors dairy and feedyard country. Eastern Idaho holds significant cow-calf and sheep operations. Western Idaho and the Snake River Plain run mixed cattle, dairy, and small ruminants.' },
+  { question: 'What about dairy services?', answer: 'Idaho dairy (especially the Magic Valley around Twin Falls) is industrial-scale. Hoof trimming, AI/repro, and herd health services serve this concentration. Dairy hoof trimming is a major specialty.' },
+  { question: 'What about sheep grazing?', answer: 'Idaho sheep operations use Forest Service grazing permits across the central and eastern mountain ranges. Spring shearing runs on a regional circuit before sheep move to summer grazing.' }
+];
+const service = { name: 'Livestock Services in Idaho', description: 'Dairy services, cattle AI/ET, sheep shearing, hoof trimming, and herd health across Idaho.', serviceType: 'Livestock Services', areaServed: 'Idaho', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/idaho' };
+const regions = [
+  { name: 'Magic Valley (Twin Falls, Jerome, Burley)', note: 'Industrial dairy country. Hoof trimming, repro, herd health concentration.' },
+  { name: 'Treasure Valley (Boise, Caldwell, Nampa)', note: 'Mixed dairy, cattle, sheep, and small-farm operations.' },
+  { name: 'Eastern Idaho (Idaho Falls, Pocatello, Rexburg)', note: 'Cow-calf ranching, sheep operations, mountain grazing.' },
+  { name: 'Northern Idaho (Coeur d\'Alene, Moscow)', note: 'University of Idaho. Mixed cattle and small-farm operations.' },
+  { name: 'Central Idaho (Salmon, Challis, Ketchum)', note: 'Mountain cattle and sheep grazing.' }
+];
+const specialties = [
+  { label: 'Dairy Hoof Trimming', detail: 'Magic Valley industrial dairy hoof care.' },
+  { label: 'Dairy Repro', detail: 'AI, ET, and herd-health programs for dairies.' },
+  { label: 'Cattle AI & Breeding', detail: 'Cow-calf and seedstock breeding services.' },
+  { label: 'Sheep Shearing', detail: 'Spring circuit before mountain grazing.' },
+  { label: 'Herd Health', detail: 'Dairy and beef herd programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/livestock-services/montana', emoji: '🐄', title: 'Livestock Services in Montana', note: 'Adjacent ranch country.' },
+  { href: '/services/farriers/washington', emoji: '🔨', title: 'Farriers in Washington', note: 'Adjacent equine farrier directory.' }
+];
+---
+<GeoPage title="Livestock Services in Idaho | BreederHQ Marketplace" description="Find livestock service providers in Idaho. Dairy hoof trimming and repro, cattle AI, sheep shearing, and herd health across Magic Valley, Treasure Valley, Eastern Idaho, and statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Idaho" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Idaho" introBody="Find livestock service providers across Idaho on BreederHQ Marketplace. Idaho is the third-largest dairy state in the country, a major cattle state, and home to one of the largest sheep populations in the West. The Magic Valley anchors industrial dairy hoof trimming and repro; Eastern Idaho holds cow-calf and sheep operations using Forest Service grazing permits." regionsHeading="Livestock Service Markets Across Idaho" regionsIntro="Five corridors with very different livestock industries." regions={regions} specialtiesHeading="Livestock Service Specialties in Idaho" specialtiesIntro="The Magic Valley dairy concentration drives specialty depth unmatched outside California and Wisconsin." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Idaho?" />

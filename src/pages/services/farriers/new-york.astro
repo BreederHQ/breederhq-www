@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'New York', url: '/services/farriers/new-york' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in New York?', answer: 'Saratoga Springs is the historic heart of the New York equine economy — Saratoga Race Course (the oldest sporting venue in the US), Fasig-Tipton sales, the National Museum of Racing, and a deep year-round Thoroughbred training population. The Hudson Valley (Millbrook, Pawling, Old Chatham) supports hunter/jumper, eventing, and foxhunting. Long Island Hampton corridor (Bridgehampton, Wainscott) supports polo and high-performance show horses. Western NY supports Standardbred at Batavia Downs and Vernon Downs.' },
+  { question: 'What about Saratoga Race Course?', answer: 'Saratoga runs the summer Thoroughbred meet (late July through Labor Day), but the training and breeding population is year-round. Saratoga farriers handle plate work at the meet, breeze days, and yearling sale prep for Fasig-Tipton.' },
+  { question: 'What about the Hampton classic and polo?', answer: 'The Hampton Classic is one of the largest hunter/jumper events on the East Coast. Bridgehampton polo and Hampton-corridor estates support a deep high-performance and polo population. Farriers travel for the season.' }
+];
+const service = { name: 'Farriers in New York', description: 'Saratoga Thoroughbred, Hampton classic, Hudson Valley hunt, and Standardbred farriers across New York.', serviceType: 'Farrier and Hoof Care', areaServed: 'New York', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/new-york' };
+const regions = [
+  { name: 'Saratoga Springs & Saratoga County', note: 'Saratoga Race Course, Fasig-Tipton sales, year-round Thoroughbred training. Deep CJF and therapeutic representation.' },
+  { name: 'Hudson Valley (Millbrook, Pawling, Old Chatham, Rhinebeck)', note: 'Hunter/jumper, eventing, foxhunting. Historic equine country.' },
+  { name: 'Long Island (Bridgehampton, Wainscott, Old Westbury)', note: 'Hampton Classic, polo, high-performance show horses.' },
+  { name: 'Western NY (Batavia, Vernon, Buffalo, Rochester)', note: 'Standardbred harness racing, Batavia Downs and Vernon Downs.' },
+  { name: 'Central NY (Syracuse, Ithaca)', note: 'Standardbred breeding, mixed pleasure, Cornell veterinary access.' }
+];
+const specialties = [
+  { label: 'Racetrack Plate Work', detail: 'Saratoga, Belmont, Aqueduct, Finger Lakes plates.' },
+  { label: 'Saratoga Sale Prep', detail: 'Fasig-Tipton yearling sale prep.' },
+  { label: 'Hunter/Jumper & Hamptons', detail: 'Hampton Classic, Old Salem performance shoeing.' },
+  { label: 'Standardbred Harness', detail: 'Batavia, Vernon, Yonkers Raceway work.' },
+  { label: 'Hunt & Foxhunt', detail: 'Hudson Valley foxhunt and hunt-country shoeing.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes. Cornell Vet School-adjacent in central NY.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/pennsylvania', emoji: '🔨', title: 'Farriers in Pennsylvania', note: 'Chester County corridor.' },
+  { href: '/services/farriers/kentucky', emoji: '🔨', title: 'Farriers in Kentucky', note: 'Adjacent Thoroughbred market.' }
+];
+---
+<GeoPage title="Farriers in New York | BreederHQ Marketplace" description="Find AFA-certified farriers in New York. Saratoga Thoroughbred specialists, Hampton Classic performance shoers, Hudson Valley hunt country, Standardbred harness, and corrective specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="New York" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in New York" introBody="Find farriers across New York on BreederHQ Marketplace. New York spans the historic heart of American Thoroughbred racing at Saratoga, the high-performance show and polo corridor of the Hamptons, the eventing and hunt country of the Hudson Valley, and Standardbred harness racing across the western and central parts of the state." regionsHeading="Regional Farrier Markets in New York" regionsIntro="Five corridors anchored by Saratoga and the Hudson Valley." regions={regions} specialtiesHeading="Farrier Specialties in New York" specialtiesIntro="Saratoga's Thoroughbred depth and the Hudson Valley's hunt tradition drive demand across the full specialty range." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in New York?" />

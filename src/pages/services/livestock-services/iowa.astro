@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Iowa', url: '/services/livestock-services/iowa' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Iowa?', answer: 'Iowa is the largest pork-producing state and one of the largest cattle, dairy, and corn states in the country. Iowa State University in Ames is the country\'s largest land-grant agricultural research center. Livestock services span industrial-scale pork and cattle operations, dairy services, and a growing small-farm artisan livestock community.' },
+  { question: 'What about Iowa State?', answer: 'ISU College of Veterinary Medicine and Animal Science department anchor specialist services across all major livestock species. Many livestock services in Iowa operate in research-coordinated programs.' },
+  { question: 'What about show stock and 4-H?', answer: 'Iowa has one of the deepest 4-H and FFA livestock traditions in the country. The Iowa State Fair is one of the largest stock shows in the US. Show stock services (fitting, clipping, prep) cluster around the state fair calendar.' }
+];
+const service = { name: 'Livestock Services in Iowa', description: 'Cattle, swine, sheep, dairy, goat services, show stock prep, and herd health across Iowa.', serviceType: 'Livestock Services', areaServed: 'Iowa', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/iowa' };
+const regions = [
+  { name: 'Ames / Iowa State University', note: 'ISU vet school and Animal Science. Specialist breeding, herd health, research-coordinated programs.' },
+  { name: 'Northwest Iowa (Sioux Center, Le Mars, Storm Lake)', note: 'Dairy, pork production, cattle. Industrial-scale operations.' },
+  { name: 'Southwest Iowa (Council Bluffs, Atlantic, Red Oak)', note: 'Cattle, swine, mixed operations.' },
+  { name: 'Northeast Iowa (Cedar Rapids, Waterloo, Decorah)', note: 'Dairy country, mixed cattle and pork.' },
+  { name: 'Southeast Iowa (Burlington, Ottumwa)', note: 'Cattle, swine, goat, and small-farm operations.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Embryo Transfer', detail: 'ISU-coordinated and ranch breeding services.' },
+  { label: 'Swine Reproductive Services', detail: 'AI and herd-health programs for pork operations.' },
+  { label: 'Dairy Services', detail: 'Hoof trimming, repro, herd health for dairies.' },
+  { label: 'Show Stock Prep', detail: 'Iowa State Fair circuit fitting and clipping.' },
+  { label: 'Sheep & Goat', detail: 'Small ruminant care across mixed-species operations.' },
+  { label: 'Herd Health', detail: 'Industrial and family-farm herd programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/livestock-services/nebraska', emoji: '🐄', title: 'Livestock Services in Nebraska', note: 'Adjacent cattle and corn country.' },
+  { href: '/facilities/livestock', emoji: '🐄', title: 'Livestock Facilities', note: 'Handling, sorting, AI/repro spaces.' }
+];
+---
+<GeoPage title="Livestock Services in Iowa | BreederHQ Marketplace" description="Find livestock service providers in Iowa. Cattle AI/ET, swine repro, dairy services, sheep and goat care, show stock prep, and herd health across ISU-adjacent corridors and statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Iowa" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Iowa" introBody="Find livestock service providers across Iowa on BreederHQ Marketplace. Iowa is the largest pork-producing state and a major cattle and dairy state. ISU in Ames anchors specialist services across every major livestock species. Industrial-scale operations dominate northwest Iowa; mixed and family-farm operations dot the rest of the state." regionsHeading="Livestock Service Markets Across Iowa" regionsIntro="Five corridors anchored by ISU and the industrial pork belt." regions={regions} specialtiesHeading="Livestock Service Specialties in Iowa" specialtiesIntro="ISU and the pork industry produce specialty depth unmatched outside the Midwest." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Iowa?" />

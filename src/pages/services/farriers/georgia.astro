@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Georgia', url: '/services/farriers/georgia' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Georgia?', answer: 'North Atlanta and surrounding counties (Alpharetta, Milton, Cumming, Canton) anchor the hunter/jumper and dressage industry. Conyers (Georgia International Horse Park, former Olympic equestrian venue) supports eventing and hunter/jumper. The North Georgia foothills (Dahlonega, Ellijay) support trail and pleasure. South Georgia supports pleasure and rodeo populations. Aiken-adjacent border counties support Thoroughbred training.' },
+  { question: 'What about the Georgia International Horse Park?', answer: 'GIHP at Conyers hosted the 1996 Olympic equestrian events and remains a major eventing, hunter/jumper, and dressage venue. The associated farrier community is concentrated in the eastern Atlanta metro.' },
+  { question: 'What about racetrack work in Georgia?', answer: 'Georgia does not have a Thoroughbred meet, but the proximity to Aiken (winter training) and to Tampa Bay Downs in Florida means several Georgia-based farriers travel to track work seasonally.' }
+];
+const service = { name: 'Farriers in Georgia', description: 'North Atlanta hunter/jumper, GIHP eventing, North Georgia trail, and pleasure farriers across Georgia.', serviceType: 'Farrier and Hoof Care', areaServed: 'Georgia', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/georgia' };
+const regions = [
+  { name: 'North Atlanta Metro (Alpharetta, Milton, Cumming, Canton)', note: 'Hunter/jumper, dressage capital of GA. Deep CJF representation.' },
+  { name: 'Conyers / GIHP', note: 'Olympic equestrian park venue. Eventing, hunter/jumper, dressage.' },
+  { name: 'North Georgia Foothills (Dahlonega, Ellijay, Blue Ridge)', note: 'Trail, pleasure, and growing endurance population.' },
+  { name: 'Middle Georgia (Macon, Forsyth)', note: 'Mixed pleasure, trail, and pleasure-show.' },
+  { name: 'South Georgia (Albany, Thomasville, Tifton)', note: 'Quail plantation pleasure horse populations, pleasure show.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper & Dressage', detail: 'North Atlanta and GIHP performance shoeing.' },
+  { label: 'Eventing', detail: 'GIHP and Pine Top Farm circuit work.' },
+  { label: 'Trail & Endurance', detail: 'North Georgia foothills conditioning shoeing.' },
+  { label: 'Routine Trim', detail: 'Pleasure, pasture, retired cycles.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/south-carolina', emoji: '🔨', title: 'Farriers in South Carolina', note: 'Aiken-adjacent corridor.' },
+  { href: '/services/farriers/florida', emoji: '🔨', title: 'Farriers in Florida', note: 'Marion County and Wellington.' }
+];
+---
+<GeoPage title="Farriers in Georgia | BreederHQ Marketplace" description="Find AFA-certified farriers in Georgia. North Atlanta hunter/jumper and dressage specialists, GIHP eventing farriers, North Georgia trail, and pleasure farriers statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Georgia" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Georgia" introBody="Find farriers across Georgia on BreederHQ Marketplace. Georgia's farrier markets cluster around the North Atlanta hunter/jumper and dressage corridor, the Georgia International Horse Park at Conyers, and the trail and endurance population across the North Georgia foothills. South Georgia adds quail plantation pleasure horse work." regionsHeading="Regional Farrier Markets in Georgia" regionsIntro="Five corridors anchored by North Atlanta and GIHP." regions={regions} specialtiesHeading="Farrier Specialties in Georgia" specialtiesIntro="The hunter/jumper and dressage industry drives most specialization." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Georgia?" />

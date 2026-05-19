@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Dallas, TX', url: '/services/dog-training/dallas-tx' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in DFW?', answer: 'DFW supports a deep AKC obedience and conformation community (Dallas Dog Training Club, Plano AKC Obedience Club), agility clubs running multiple trial weekends a year, retriever and field clubs across rural Collin and Denton counties, working dog and protection sport, and a large herding training community given the proximity to ranch country.' },
+  { question: 'What about herding training?', answer: 'DFW\'s proximity to working ranches makes it one of the few major metros with regular herding training, instinct testing, and AKC herding trial access. Border Collie, Australian Shepherd, and Australian Cattle Dog handlers have multiple training venue options.' },
+  { question: 'What about protection sport?', answer: 'DFW has active IGP, PSA, and Mondioring clubs with trial-grade fields. Working line German Shepherd, Malinois, and Dutch Shepherd communities are well-established.' }
+];
+const service = { name: 'Dog Training in Dallas, TX', description: 'Obedience, agility, field, protection, herding, and behavior training across the DFW metro.', serviceType: 'Dog Training', areaServed: 'Dallas, TX', offerDescription: 'DFW dog trainer directory.', offerUrl: '/services/dog-training/dallas-tx' };
+const regions = [
+  { name: 'North Dallas / Plano / Frisco', note: 'AKC obedience, conformation, agility. Densest pet-owner training market.' },
+  { name: 'Fort Worth / Aledo / Weatherford', note: 'Herding country, ranch dog work, gun dog training.' },
+  { name: 'Collin County / McKinney / Allen', note: 'Suburban with larger lots. Sport, board-and-train, family obedience.' },
+  { name: 'Denton County / Krugerville / Aubrey', note: 'Sport and working dog training. Adjacent to ranch country.' },
+  { name: 'East Dallas / Garland / Rockwall', note: 'Family obedience, behavior modification.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Dallas Dog Training Club, Plano AKC Obedience Club, multiple AKC affiliates.' },
+  { label: 'Agility', detail: 'Trial-prep agility across multiple DFW venues.' },
+  { label: 'Herding', detail: 'Border Collie, Aussie, and Cattle Dog herding training and instinct testing.' },
+  { label: 'Field & Retriever', detail: 'Collin and Denton county retriever clubs.' },
+  { label: 'Protection Sport (IGP/PSA)', detail: 'Working line trial-grade training.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/dog-training/houston-tx', emoji: '🎓', title: 'Dog Training in Houston', note: 'Houston-area trainers.' },
+  { href: '/services/show-handling', emoji: '🏅', title: 'Show Handling', note: 'Professional handlers for the ring.' }
+];
+---
+<GeoPage title="Dog Training in Dallas, TX | BreederHQ Marketplace" description="Find dog trainers in the DFW metro. AKC obedience, agility, herding, field and retriever, protection sport, and behavior modification specialists across Dallas, Fort Worth, and the suburbs." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Dallas, TX" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Dallas, TX" introBody="Find dog trainers across the DFW metro on BreederHQ Marketplace. DFW supports one of the most varied dog training communities in the country — AKC obedience and conformation in Plano and North Dallas, agility across multiple venues, herding training thanks to ranch country proximity, retriever and field work in Collin and Denton counties, and active protection sport clubs across the metro." regionsHeading="Dog Training Markets Across DFW" regionsIntro="Five corridors with different discipline mixes." regions={regions} specialtiesHeading="Dog Training Specialties in DFW" specialtiesIntro="Ranch country adjacency makes herding training distinctly accessible in DFW vs other major metros." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in DFW?" />

@@ -1,0 +1,32 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Pennsylvania', url: '/services/farriers/pennsylvania' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Pennsylvania?', answer: 'Pennsylvania is one of the deepest equine states in the US. Southeast PA (Chester County, Lancaster County, Bucks County) is the heart — Devon Horse Show, Plantation Field eventing, foxhunting, Standardbred breeding, and the Amish working horse population in Lancaster. South Central PA (Adams, Cumberland, Franklin counties) supports a deep eventing community. The Pocono Downs/Mohegan Sun Pocono harness track and Penn National Race Course drive racetrack plate work.' },
+  { question: 'What about Chester County hunt country?', answer: 'Chester County is one of the deepest hunter/jumper, eventing, and foxhunting markets in the United States. Devon Horse Show, Radnor Hunt, Cheshire Hunt, and Plantation Field eventing create demand for advanced performance and therapeutic farrier work.' },
+  { question: 'What about Lancaster County?', answer: 'Lancaster County holds one of the largest Amish working horse populations in the US. Standardbred horses (often off-track), driving horses, and draft horses dominate. Farriers in this region run high-volume practices.' }
+];
+const service = { name: 'Farriers in Pennsylvania', description: 'Hunter/jumper, eventing, harness racing, and Amish-country farriers across Pennsylvania.', serviceType: 'Farrier and Hoof Care', areaServed: 'Pennsylvania', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/pennsylvania' };
+const regions = [
+  { name: 'Chester County / Brandywine Valley', note: 'Devon Horse Show, Radnor and Cheshire hunts, Plantation Field eventing. Deep CJF and therapeutic representation.' },
+  { name: 'Lancaster County', note: 'One of the largest Amish working horse populations in the US. Standardbreds, drafts, driving horses.' },
+  { name: 'South Central PA (Adams, Cumberland, Franklin)', note: 'Eventing, dressage, and growing hunter/jumper population. Gettysburg-area events.' },
+  { name: 'Bucks County & Suburban Philadelphia', note: 'Hunter/jumper, eventing, and pleasure populations.' },
+  { name: 'Northeast PA (Pocono Downs, Wilkes-Barre)', note: 'Mohegan Sun Pocono harness racing, Standardbred plate work.' },
+  { name: 'Western PA (Pittsburgh metro, Westmoreland)', note: 'Mixed pleasure, hunter/jumper, and Standardbred populations.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper Performance', detail: 'Devon, Plantation Field, and Chester County circuit shoeing.' },
+  { label: 'Eventing', detail: 'Cross-country grip, stadium, dressage balance for Plantation Field and Bromont.' },
+  { label: 'Harness & Standardbred', detail: 'Pocono Downs, Penn National, and Standardbred breeding work.' },
+  { label: 'Draft & Driving', detail: 'Lancaster County draft and driving horse work.' },
+  { label: 'Racetrack Plate Work', detail: 'Penn National, Parx Racing, Presque Isle Downs plates.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/ohio', emoji: '🔨', title: 'Farriers in Ohio', note: 'Adjacent Amish and harness market.' },
+  { href: '/services/farriers/new-york', emoji: '🔨', title: 'Farriers in New York', note: 'Saratoga and Aiken-adjacent.' }
+];
+---
+<GeoPage title="Farriers in Pennsylvania | BreederHQ Marketplace" description="Find AFA-certified farriers in Pennsylvania. Chester County hunter/jumper and eventing specialists, Lancaster Amish-country farriers, harness racing plates, and corrective specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Pennsylvania" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Pennsylvania" introBody="Find farriers across Pennsylvania on BreederHQ Marketplace. Pennsylvania is one of the deepest equine states in the US, spanning the hunter/jumper and eventing capital of Chester County, the Amish working horse population of Lancaster County, Standardbred and harness racing across the Pocono region, and racetrack plate work at Penn National and Parx." regionsHeading="Regional Farrier Markets in Pennsylvania" regionsIntro="Six distinct corridors with different horse populations." regions={regions} specialtiesHeading="Farrier Specialties in Pennsylvania" specialtiesIntro="PA's discipline mix drives demand across the full specialty range." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Pennsylvania?" />

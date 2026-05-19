@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Farriers', url: '/services/farriers' },
+  { name: 'Texas', url: '/services/farriers/texas' }
+];
+
+const faqs = [
+  {
+    question: 'What does it cost to have a farrier come out in Texas?',
+    answer: 'Texas pricing varies more than almost any other state because the geography spans full-service show barns in Houston, Dallas-Fort Worth, and Austin; working-ranch country across the Hill Country and Panhandle; the racetrack circuit at Lone Star Park and Sam Houston Race Park; and the breeding industry centered around the Brazos Valley. A routine trim on a ranch horse costs less than a four-shoe reset on a hunter/jumper in The Woodlands, and corrective work with pads or glue-ons sits higher. Every farrier on BreederHQ Marketplace sets and shows their own pricing.'
+  },
+  {
+    question: 'Where are the major equine corridors in Texas for farrier work?',
+    answer: 'Texas has four distinct equine corridors. The DFW Metroplex (Pilot Point, Aubrey, Argyle, Whitesboro) anchors the cutting and reining industry. Houston Metro (Magnolia, Tomball, The Woodlands, Brenham) holds a deep hunter/jumper, dressage, and pleasure population plus the breeding industry along the Brazos Valley. Austin/Hill Country (Dripping Springs, Bastrop, Fredericksburg) has a growing sport horse and trail population. South Texas and the Panhandle support working-ranch and quarter horse country. Each corridor has its own farrier community and specialization.'
+  },
+  {
+    question: 'Are there farriers in Texas who specialize in cutting and reining?',
+    answer: 'Yes. The North Texas cutting and reining industry centered around Pilot Point, Aubrey, and Whitesboro has produced a generation of farriers who specialize in performance shoeing for cow-horse disciplines. Sliding plates for reining, performance shoes balanced for stop and turn, and corrective work for performance soundness are core skills. NRHA and NCHA event farriers travel circuit shows.'
+  },
+  {
+    question: 'What about racetrack plate work in Texas?',
+    answer: 'Lone Star Park (Grand Prairie) and Sam Houston Race Park run thoroughbred and quarter horse meets, and Retama Park (Selma) runs quarter horse. Plate farriers at these tracks work on a tight schedule keyed to race meets and breeze days. If you have a horse in training, look for a farrier whose listed specialty includes racetrack plate work.'
+  },
+  {
+    question: 'How do AFA certifications work, and which ones matter in Texas?',
+    answer: 'The American Farriers Association (AFA) credentials are voluntary in the US: Certified Farrier (CF), Certified Tradesman Farrier (CTF), and Certified Journeyman Farrier (CJF), with Therapeutic Endorsement (TE) and Educator (E) on top. Texas has a substantial CJF population concentrated in the DFW and Houston metros where high-performance sport horse and breeding work drives demand for advanced corrective and therapeutic skill. Outside the metros, working-ranch farriers often have no formal AFA credential but extensive practical experience.'
+  },
+  {
+    question: 'How do I find a farrier near me on BreederHQ in Texas?',
+    answer: 'BreederHQ Marketplace lets you search farriers by coverage area, specialty (trim, shoe, performance, corrective, therapeutic, racetrack plate, sale prep, sliding plates), and species or breed focus. Each provider profile shows AFA certifications, regions served, and accepted work. You can message providers directly through the marketplace without sharing your phone number until you are ready.'
+  }
+];
+
+const service = {
+  name: 'Farriers in Texas',
+  description: 'Find AFA-certified farriers, performance shoers, racetrack plate specialists, corrective and therapeutic farriers, and ranch farriers across Texas on BreederHQ Marketplace.',
+  serviceType: 'Farrier and Hoof Care',
+  areaServed: 'Texas',
+  offerDescription: 'Statewide farrier directory connecting Texas horse owners and breeding operations with verified farriers across the state.',
+  offerUrl: '/services/farriers/texas'
+};
+
+const regions = [
+  { name: 'DFW Metroplex (Pilot Point, Aubrey, Argyle, Whitesboro, Fort Worth)', note: 'Cutting and reining industry capital. NRHA, NCHA, NRCHA events drive demand for performance farriers, sliding plates, and corrective work. Deep CJF representation.' },
+  { name: 'Houston Metro (Magnolia, Tomball, The Woodlands, Brenham)', note: 'Hunter/jumper, dressage, breeding, and Brazos Valley thoroughbred industry. Strong performance and therapeutic farrier community.' },
+  { name: 'Austin / Hill Country (Dripping Springs, Bastrop, Fredericksburg)', note: 'Sport horse, trail, and pleasure population. Growing eventing and dressage community.' },
+  { name: 'South Texas (San Antonio, Bandera, Hondo, Pleasanton)', note: 'Working ranch, quarter horse, and ranch rodeo country. Practical-experience farriers; lower CJF density but deep working knowledge.' },
+  { name: 'Panhandle (Amarillo, Canyon, Childress)', note: 'Cattle ranching and ranch horse work. Longer driving radii. Mix of full-time farriers and ranch-employee shoers.' },
+  { name: 'East Texas (Tyler, Longview, Nacogdoches)', note: 'Pleasure, trail, and pleasure-show horses. Mixed-breed country with growing barrel racing community.' }
+];
+
+const specialties = [
+  { label: 'Routine Trimming', detail: 'Pasture, pleasure, retired, and trim-only clients on 5 to 8 week cycles.' },
+  { label: 'Performance Shoeing', detail: 'Hunter/jumper, dressage, eventing, cutting, reining, barrel racing, ranch.' },
+  { label: 'Racetrack Plate Work', detail: 'Lone Star Park, Sam Houston Race Park, Retama Park training and racing plates.' },
+  { label: 'Sliding Plates', detail: 'NRHA and NCHA-discipline specific plate work for reining and cow horse.' },
+  { label: 'Sale Prep', detail: 'OBS, Heritage Place, and Texas Quarter Horse sale prep.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes, hospital plates for breeding stock and growing horses.' }
+];
+---
+
+<BaseLayout
+  title="Farriers in Texas | BreederHQ Marketplace"
+  description="Find AFA-certified farriers in Texas. Performance shoers, racetrack plate specialists, sliding plates for reining, corrective and therapeutic farriers, and ranch farriers across DFW, Houston, Austin, and statewide."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/farriers" class="text-amber-700 hover:underline">Farriers</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Texas</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Farriers · Texas</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Farriers in Texas</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Find farriers across Texas on BreederHQ Marketplace. From the cutting and reining barns of Pilot Point and Aubrey, to the hunter/jumper and dressage population around Houston, the racetrack circuit at Lone Star Park and Sam Houston Race Park, and the working-ranch country of South Texas and the Panhandle — Texas has one of the deepest and most diverse farrier communities in the United States.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Farriers in Texas
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Regional Farrier Markets in Texas</h2>
+        <p class="text-gray-600 mb-6">Texas isn't one farrier market — it's six. Each region has its own discipline base and farrier specialization.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {regions.map((r) => (
+            <div class="bg-stone-50 border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-2">{r.name}</h3>
+              <p class="text-sm text-gray-700 leading-relaxed">{r.note}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Farrier Specialties in Texas</h2>
+        <p class="text-gray-600 mb-6">The discipline mix in Texas creates demand across the full specialty range. Filter to the work your horse actually needs.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {specialties.map((s) => (
+            <div class="bg-white border border-stone-200 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">{s.label}</h3>
+              <p class="text-sm text-gray-700">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/farriers" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🔨</div>
+            <div class="font-semibold text-gray-900">All Farriers</div>
+            <p class="text-xs text-gray-600 mt-1">Browse the full farrier category beyond Texas.</p>
+          </a>
+          <a href="/services/farriers/kentucky" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🔨</div>
+            <div class="font-semibold text-gray-900">Farriers in Kentucky</div>
+            <p class="text-xs text-gray-600 mt-1">Bluegrass equine economy — Keeneland, breeding, and sport.</p>
+          </a>
+          <a href="/services/equine-boarding" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏇</div>
+            <div class="font-semibold text-gray-900">Equine Boarding</div>
+            <p class="text-xs text-gray-600 mt-1">Boarding facilities across the same Texas equine corridors.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/farriers" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a farrier in Texas?</p>
+            <p class="text-sm text-gray-600">List your practice on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

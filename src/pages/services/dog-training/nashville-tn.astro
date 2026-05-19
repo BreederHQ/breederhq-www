@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Nashville, TN', url: '/services/dog-training/nashville-tn' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Nashville?', answer: 'Nashville supports AKC obedience and conformation, agility, retriever and field training, and a growing protection sport community. The Williamson County suburban growth has added a strong family obedience and board-and-train market. The Cookeville area supports trail and recall training.' },
+  { question: 'What about field and retriever training?', answer: 'Middle Tennessee\'s rural counties support retriever club training and hunt test preparation. Several reputable field trainers operate within an hour of Nashville.' }
+];
+const service = { name: 'Dog Training in Nashville, TN', description: 'Obedience, agility, field, protection, board-and-train, and behavior training across the Nashville metro and Middle Tennessee.', serviceType: 'Dog Training', areaServed: 'Nashville, TN', offerDescription: 'Nashville-area dog trainer directory.', offerUrl: '/services/dog-training/nashville-tn' };
+const regions = [
+  { name: 'Central Nashville / East Nashville / Germantown', note: 'Urban training. In-home, group class, behavior.' },
+  { name: 'Franklin / Brentwood / Williamson County', note: 'Family obedience, sport, board-and-train. Growing market.' },
+  { name: 'Hendersonville / Gallatin / Sumner County', note: 'Family obedience, retriever, and pleasure-dog training.' },
+  { name: 'Murfreesboro / Rutherford County', note: 'AKC clubs, family obedience, sport.' },
+  { name: 'Cookeville / Upper Cumberland', note: 'Trail companion, field, gun dog, and pleasure training.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Nashville-area AKC clubs.' },
+  { label: 'Agility', detail: 'Trial-prep agility across Williamson and Rutherford.' },
+  { label: 'Field & Retriever', detail: 'Middle Tennessee retriever club training.' },
+  { label: 'Protection Sport', detail: 'IGP and PSA training fields.' },
+  { label: 'Board-and-Train', detail: 'Suburban board-and-train programs.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/dog-training/atlanta-ga', emoji: '🎓', title: 'Dog Training in Atlanta', note: 'Adjacent Southeast metro.' },
+  { href: '/services/equine-boarding/nashville-tn', emoji: '🏇', title: 'Equine Boarding in Nashville', note: 'Middle Tennessee equine market.' }
+];
+---
+<GeoPage title="Dog Training in Nashville, TN | BreederHQ Marketplace" description="Find dog trainers in the Nashville metro and Middle Tennessee. AKC obedience, agility, field and retriever, protection sport, board-and-train, and behavior modification across Williamson and Rutherford counties." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Nashville, TN" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Nashville, TN" introBody="Find dog trainers across the Nashville metro and Middle Tennessee on BreederHQ Marketplace. Nashville supports AKC obedience and agility, retriever and field training across the rural counties, board-and-train programs in the growing Williamson County suburbs, and a growing protection sport community." regionsHeading="Dog Training Markets Across Nashville" regionsIntro="Five corridors anchored by Williamson and Rutherford suburban growth." regions={regions} specialtiesHeading="Dog Training Specialties in Nashville" specialtiesIntro="Suburban growth has driven heavy demand for board-and-train and family obedience." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Nashville?" />

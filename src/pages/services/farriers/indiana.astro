@@ -1,0 +1,29 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Indiana', url: '/services/farriers/indiana' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Indiana?', answer: 'Indiana is one of the top three Standardbred breeding states (along with Pennsylvania and Ohio) and supports a deep harness racing population. The Indianapolis metro and surrounding counties support Standardbred breeding and Hoosier Park / Harrah\'s Hoosier Park harness racing. Northern Indiana supports the Amish working horse population (Elkhart, LaGrange counties). Southern Indiana supports pleasure and trail.' },
+  { question: 'What about Standardbred breeding and harness?', answer: 'Indiana\'s state-bred Standardbred program (Indiana Sired Stakes) makes the state one of the deepest harness markets in the US. Hoosier Park and Indiana Grand drive the racing calendar. Standardbred shoeing is its own specialty.' },
+  { question: 'What about the Amish horse population?', answer: 'Northern Indiana (Elkhart, LaGrange, Kosciusko counties) holds one of the largest Amish working horse populations in the country alongside Ohio\'s Holmes County. Standardbreds (off-track and driving), drafts, and driving horses dominate.' }
+];
+const service = { name: 'Farriers in Indiana', description: 'Standardbred harness, Amish-country working horse, Indianapolis sport horse farriers across Indiana.', serviceType: 'Farrier and Hoof Care', areaServed: 'Indiana', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/indiana' };
+const regions = [
+  { name: 'Indianapolis Metro & Central Indiana', note: 'Hoosier Park harness, Indiana Grand Thoroughbred, sport horse breeding.' },
+  { name: 'Northern Indiana (Elkhart, LaGrange, Kosciusko)', note: 'Amish working horse country. Standardbreds, drafts, driving.' },
+  { name: 'Southern Indiana (Evansville, Bedford)', note: 'Mixed pleasure, trail, and pleasure-show.' },
+  { name: 'Northwest Indiana (Lafayette, West Lafayette)', note: 'Purdue Veterinary School-adjacent. Mixed pleasure and sport horse.' }
+];
+const specialties = [
+  { label: 'Standardbred Harness', detail: 'Indiana Sired Stakes, Hoosier Park, Standardbred breeding work.' },
+  { label: 'Racetrack Plate Work', detail: 'Indiana Grand Thoroughbred, Hoosier Park harness plates.' },
+  { label: 'Draft & Working Horse', detail: 'Amish country draft and driving work.' },
+  { label: 'Purdue-Corrective', detail: 'Coordination with Purdue Vet School for orthopedic cases.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/ohio', emoji: '🔨', title: 'Farriers in Ohio', note: 'Adjacent harness and Amish markets.' },
+  { href: '/services/farriers/kentucky', emoji: '🔨', title: 'Farriers in Kentucky', note: 'Adjacent Thoroughbred market.' }
+];
+---
+<GeoPage title="Farriers in Indiana | BreederHQ Marketplace" description="Find farriers in Indiana. Standardbred harness specialists, Amish-country working horse farriers, racetrack plates at Hoosier Park and Indiana Grand, Purdue-corrective specialists." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Indiana" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Indiana" introBody="Find farriers across Indiana on BreederHQ Marketplace. Indiana is one of the top three Standardbred breeding states in the country and supports deep harness racing at Hoosier Park, a large Amish working horse population across the northern counties, and Thoroughbred racing at Indiana Grand. Purdue Veterinary Medicine anchors corrective and therapeutic case access." regionsHeading="Regional Farrier Markets in Indiana" regionsIntro="Four corridors with very different horse populations." regions={regions} specialtiesHeading="Farrier Specialties in Indiana" specialtiesIntro="Standardbred breeding and Amish working horse demand drive most of the specialty work." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Indiana?" />

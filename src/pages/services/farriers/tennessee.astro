@@ -1,0 +1,50 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Tennessee', url: '/services/farriers/tennessee' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Tennessee?', answer: 'Three corridors. Middle Tennessee (Shelbyville, Lewisburg, Franklin, Murfreesboro) is the heart of the Tennessee Walking Horse industry. East Tennessee (Knoxville, Maryville, Sevierville) supports a growing eventing and trail population. The Memphis corridor and Mid-South support Quarter Horse, pleasure, and racing.' },
+  { question: 'What about Tennessee Walking Horse shoeing?', answer: 'Shelbyville (the World Grand Championship home) and Lewisburg are the center of the Tennessee Walking Horse industry. Walking horse shoeing is its own specialty with specific build-up shoes, pads, and tradition-bound techniques. Many farriers specialize exclusively in walking horses.' },
+  { question: 'What about racetrack work?', answer: 'Tennessee no longer has a Thoroughbred meet, but training centers and breeding operations support a small population of plate farriers. Most racetrack work in this region happens at Kentucky and Arkansas tracks.' }
+];
+const service = { name: 'Farriers in Tennessee', description: 'Tennessee Walking Horse, eventing, and pleasure farriers across Tennessee.', serviceType: 'Farrier and Hoof Care', areaServed: 'Tennessee', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/tennessee' };
+const regions = [
+  { name: 'Middle Tennessee (Shelbyville, Lewisburg, Franklin, Murfreesboro)', note: 'Tennessee Walking Horse industry capital. World Grand Championship at Shelbyville. Specialized walking horse farriers.' },
+  { name: 'East Tennessee (Knoxville, Maryville, Sevierville, Tri-Cities)', note: 'Eventing, hunter/jumper, and trail country. Growing sport horse population.' },
+  { name: 'Memphis & Mid-South (Memphis, Collierville, Germantown)', note: 'Pleasure, Quarter Horse, and pleasure-show population.' },
+  { name: 'Upper Cumberland (Cookeville, Crossville, Sparta)', note: 'Trail, pleasure, and growing barrel racing community.' }
+];
+const specialties = [
+  { label: 'Routine Trimming', detail: 'Pleasure, pasture, retired cycles.' },
+  { label: 'Tennessee Walking Horse', detail: 'Build-up shoes, pads, and discipline-specific traditions.' },
+  { label: 'Eventing & Hunter/Jumper', detail: 'Performance shoeing for cross-country, stadium, and dressage.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/kentucky', emoji: '🔨', title: 'Farriers in Kentucky', note: 'Bluegrass farrier directory.' },
+  { href: '/services/equine-boarding/nashville-tn', emoji: '🏇', title: 'Equine Boarding in Nashville', note: 'Middle Tennessee boarding facilities.' }
+];
+---
+<GeoPage
+  title="Farriers in Tennessee | BreederHQ Marketplace"
+  description="Find AFA-certified farriers in Tennessee. Tennessee Walking Horse specialists in Shelbyville and Lewisburg, eventing and hunter/jumper farriers in East Tennessee, and pleasure-horse farriers statewide."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+  category="Farriers"
+  location="Tennessee"
+  categorySlug="farriers"
+  parentHref="/services/farriers"
+  parentLabel="Farriers"
+  introHeading="Farriers in Tennessee"
+  introBody="Find farriers across Tennessee on BreederHQ Marketplace. Tennessee anchors the Tennessee Walking Horse industry centered around Shelbyville and Lewisburg, supports a growing eventing and hunter/jumper community across East Tennessee, and holds a strong pleasure and trail population statewide. Walking horse shoeing is its own specialty with specific shoes, pads, and traditions."
+  regionsHeading="Regional Farrier Markets in Tennessee"
+  regionsIntro="Four distinct corridors, each with its own discipline base."
+  regions={regions}
+  specialtiesHeading="Farrier Specialties in Tennessee"
+  specialtiesIntro="The walking horse tradition drives heavy specialization."
+  specialties={specialties}
+  relatedCards={relatedCards}
+  providerHref="/for-providers/farriers"
+  providerLabel="Are you a farrier in Tennessee?"
+/>

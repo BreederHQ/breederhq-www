@@ -1,0 +1,29 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Washington', url: '/services/farriers/washington' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Washington?', answer: 'Western Washington (Snohomish, Pierce, King counties) supports hunter/jumper, dressage, and a growing eventing community. Emerald Downs (Auburn) drives racetrack plate work. Eastern Washington (Spokane, Yakima Valley, Walla Walla) supports Quarter Horse, ranch, and growing wine-country pleasure populations. The Olympic Peninsula and Cascade foothills support trail.' },
+  { question: 'What about Emerald Downs?', answer: 'Emerald Downs at Auburn runs Thoroughbred meets from spring through fall. Plate farriers work breeze days and race days on tight schedules tied to the meet.' },
+  { question: 'What about Yakima Valley and Eastern Washington?', answer: 'Eastern Washington Quarter Horse country supports ranch, rodeo, and barrel racing populations. Walla Walla wine country has added a growing pleasure horse population in recent years.' }
+];
+const service = { name: 'Farriers in Washington', description: 'Western WA sport horse, Emerald Downs racetrack, Eastern WA ranch farriers across Washington.', serviceType: 'Farrier and Hoof Care', areaServed: 'Washington', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/washington' };
+const regions = [
+  { name: 'Western Washington (Snohomish, Pierce, King)', note: 'Hunter/jumper, dressage, eventing. Densest sport horse market.' },
+  { name: 'Emerald Downs / Auburn', note: 'Thoroughbred racetrack plate work, breeze days, race days.' },
+  { name: 'Eastern Washington (Spokane, Walla Walla, Yakima Valley)', note: 'Quarter Horse, ranch, rodeo, and barrel racing.' },
+  { name: 'Olympic Peninsula & Cascade Foothills', note: 'Trail, pleasure, and growing endurance.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper & Dressage', detail: 'Western Washington circuit performance shoeing.' },
+  { label: 'Racetrack Plate Work', detail: 'Emerald Downs training and racing plates.' },
+  { label: 'Ranch & Quarter Horse', detail: 'Eastern WA working shoeing.' },
+  { label: 'Trail & Endurance', detail: 'Olympic Peninsula conditioning shoeing.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/california', emoji: '🔨', title: 'Farriers in California', note: 'West Coast circuit corridor.' },
+  { href: '/services/farriers/montana', emoji: '🔨', title: 'Farriers in Montana', note: 'Adjacent ranch country.' }
+];
+---
+<GeoPage title="Farriers in Washington | BreederHQ Marketplace" description="Find farriers in Washington. Western WA hunter/jumper specialists, Emerald Downs plate farriers, Eastern WA ranch farriers, and corrective specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Washington" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Washington" introBody="Find farriers across Washington on BreederHQ Marketplace. Washington's farrier market spans Western Washington hunter/jumper and dressage country, Emerald Downs Thoroughbred racing, and Eastern Washington Quarter Horse and ranch populations." regionsHeading="Regional Farrier Markets in Washington" regionsIntro="Four corridors with distinct discipline bases." regions={regions} specialtiesHeading="Farrier Specialties in Washington" specialtiesIntro="Sport horse work in the West, ranch and racing across the rest of the state." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Washington?" />

@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Equine Reproduction', url: '/services/equine-repro' }
+];
+---
+
+<BaseLayout
+  title="Equine Reproductive Services on BreederHQ Marketplace"
+  description="Browse equine reproductive specialists on BreederHQ Marketplace. Theriogenologists, mare reproductive vets, stallion collection and freezing, AI (fresh, cooled, frozen), embryo transfer, and foaling specialists."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Equine Reproduction</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Equine Reproductive Services</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse equine reproductive specialists on BreederHQ Marketplace. Theriogenologists (DACT), mare reproductive vets, stallion collection and freezing, AI with fresh, cooled, or frozen semen, embryo transfer, recipient mare programs, and foaling specialists. The repro vet you hire decides whether you get a foal and what that foal cost.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Equine Repro Specialists
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Category Covers</h2>
+        <p class="text-gray-600 mb-6">Equine repro is a distinct field within veterinary medicine — board-certified specialists, dedicated facilities, and breeding-season workflows that no general practice replicates.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Mare reproductive exams and ultrasound</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Cycle management, hormone protocols, and short-cycling</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> AI with fresh, cooled-shipped, or frozen semen</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Deep-horn AI and low-dose insemination for frozen</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Pregnancy diagnosis (early and serial)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Embryo transfer and recipient mare programs</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Stallion collection, evaluation, and freezing</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Frozen semen storage and shipping</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Foaling specialists and attended foalings</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Postpartum mare and neonatal foal care</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Endometritis treatment and uterine biopsy</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> ICSI and OPU (oocyte pickup) referral coordination</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter for finding the right repro specialist:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Mare side or stallion side.</strong> Mare reproductive work and stallion collection are different sub-specialties. Filter to the one your work requires.</li>
+          <li><strong class="text-gray-900">Frozen semen experience.</strong> Frozen handling, thawing protocols, deep-horn AI, and low-dose insemination separate the specialists from the generalists. Volume matters — ask how many frozen breedings a year.</li>
+          <li><strong class="text-gray-900">Embryo transfer and recipient program.</strong> ET requires synchronized recipients and a working program. Filter to clinics with their own recipient herd or established recipient sourcing.</li>
+          <li><strong class="text-gray-900">Ambulatory vs. in-clinic.</strong> Some repro vets come to your barn for serial ultrasounds; some require mares to be hauled in. Confirm before the season starts.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">DACT board certification.</strong> Diplomate of the American College of Theriogenologists is the board-certified credential for repro. Not every repro vet is DACT, but for difficult mares, frozen breedings, and ET, DACT is the gold standard.</li>
+          <li><strong class="text-gray-900">Volume in frozen semen and ET if relevant.</strong> Frozen and ET have steep learning curves. A clinic doing 5 frozen breedings a year is not the same as one doing 200.</li>
+          <li><strong class="text-gray-900">On-site imaging and lab.</strong> Ultrasound on the truck, in-clinic lab for cytology and culture, and access to ICSI/OPU referral when needed.</li>
+          <li><strong class="text-gray-900">Realistic conception expectations.</strong> Per-cycle conception rates by semen type and mare age, not marketing numbers. A repro vet who can quote their own rates is doing the work right.</li>
+          <li><strong class="text-gray-900">Breeding-season responsiveness.</strong> Repro work is calendar-driven. Confirm coverage on weekends, emergency response, and what happens if your mare ovulates Sunday afternoon.</li>
+          <li><strong class="text-gray-900">Working relationship with your stallion owner / station.</strong> Coordination across the country (or internationally) is the norm. The right repro vet has done it before.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/equine-boarding" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏇</div>
+            <div class="font-semibold text-gray-900">Equine Boarding</div>
+            <p class="text-xs text-gray-600 mt-1">Breeding-facility boarding for foaling and rebreeding.</p>
+          </a>
+          <a href="/services/veterinary-specialists" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Veterinary Specialists</div>
+            <p class="text-xs text-gray-600 mt-1">Internal medicine, sports medicine, and surgical specialists.</p>
+          </a>
+          <a href="/services/transport" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🚐</div>
+            <div class="font-semibold text-gray-900">Transport</div>
+            <p class="text-xs text-gray-600 mt-1">Mare and foal hauling, recipient mare delivery.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/equine-services" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you an equine reproductive specialist?</p>
+            <p class="text-sm text-gray-600">List your repro practice on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

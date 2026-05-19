@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Ohio', url: '/services/farriers/ohio' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Ohio?', answer: 'Ohio supports a deep Standardbred industry centered around Delaware County (the Little Brown Jug at Delaware Fairgrounds), and Thoroughbred racing at Mahoning Valley, Thistledown, and historically Belmont and River Downs. The Holmes County Amish belt holds one of the largest horse-working populations in the country. Northern Ohio (Cleveland metro, Chagrin Falls) supports hunter/jumper and dressage.' },
+  { question: 'What about Standardbred and harness racing shoeing?', answer: 'Delaware, Ohio is the harness racing capital of the United States. The Little Brown Jug brings Standardbred farriers from across the country. Standardbred shoeing is its own specialty — half rounds, swedges, and discipline-specific work.' },
+  { question: 'What about the Amish horse population?', answer: 'Holmes County and surrounding counties (Wayne, Tuscarawas, Stark) hold one of the largest working horse populations in the United States. Farriers in this region work primarily with Standardbreds (off-track and driving), Percherons and other draft horses, and pleasure horses. Many Amish farmers do their own basic trim work.' }
+];
+const service = { name: 'Farriers in Ohio', description: 'Standardbred harness racing, Thoroughbred plate, Amish-country draft, and sport horse farriers across Ohio.', serviceType: 'Farrier and Hoof Care', areaServed: 'Ohio', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/ohio' };
+const regions = [
+  { name: 'Central Ohio / Delaware County', note: 'Standardbred industry capital. Little Brown Jug. Specialized harness farriers.' },
+  { name: 'Northeast Ohio (Cleveland, Chagrin Falls, Geauga County)', note: 'Hunter/jumper, dressage, and eventing population.' },
+  { name: 'Amish Country (Holmes, Wayne, Tuscarawas, Stark)', note: 'Largest working horse population in the US. Standardbreds, drafts, pleasure.' },
+  { name: 'Mahoning Valley & Northeast Tracks', note: 'Mahoning Valley and Thistledown racetrack plate work.' },
+  { name: 'Southwest Ohio (Cincinnati, Lebanon)', note: 'Mixed pleasure, hunter/jumper, and saddlebred.' }
+];
+const specialties = [
+  { label: 'Standardbred Harness', detail: 'Half rounds, swedges, and discipline-specific work for racing and driving.' },
+  { label: 'Racetrack Plate Work', detail: 'Mahoning Valley, Thistledown training and racing plates.' },
+  { label: 'Draft & Working Horse', detail: 'Heavy horse trimming and shoeing across Amish country.' },
+  { label: 'Hunter/Jumper Performance', detail: 'Performance shoeing for Northeast Ohio sport horse population.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/pennsylvania', emoji: '🔨', title: 'Farriers in Pennsylvania', note: 'Adjacent Amish-country market.' },
+  { href: '/services/livestock-services', emoji: '🐄', title: 'Livestock Services', note: 'Livestock support across Ohio.' }
+];
+---
+<GeoPage title="Farriers in Ohio | BreederHQ Marketplace" description="Find AFA-certified farriers in Ohio. Standardbred harness specialists, Mahoning Valley plate farriers, Amish-country draft shoers, and sport horse farriers statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Ohio" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Ohio" introBody="Find farriers across Ohio on BreederHQ Marketplace. Ohio holds one of the most unusual farrier markets in the United States: the Standardbred harness industry centered in Delaware, one of the largest working-horse populations in the country across the Holmes County Amish belt, racetrack plate work at Mahoning Valley and Thistledown, and a growing sport horse community in the Cleveland metro." regionsHeading="Regional Farrier Markets in Ohio" regionsIntro="Five distinct corridors with very different horse populations." regions={regions} specialtiesHeading="Farrier Specialties in Ohio" specialtiesIntro="Ohio's discipline mix drives specialization toward harness, draft, and racetrack work." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Ohio?" />

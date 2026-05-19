@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Austin, TX', url: '/services/dog-training/austin-tx' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Austin?', answer: 'Austin\'s outdoor culture drives strong demand for recall, trail-companion training, hiking-dog conditioning, and water-sport work (dock diving, paddleboard). AKC obedience and agility clubs run trials. Hill Country herding training operates within an hour of Austin. The strong tech-worker demographic drives demand for puppy socialization, board-and-train, and force-free positive-reinforcement programs.' },
+  { question: 'What about board-and-train and day training?', answer: 'Austin has a deep board-and-train and day-train market. Tech professionals with limited time often opt for intensive trainer-led programs rather than weekly classes. Several reputable board-and-train facilities operate around the metro.' }
+];
+const service = { name: 'Dog Training in Austin, TX', description: 'Obedience, agility, water sport, board-and-train, herding, and behavior training in the Austin metro and Hill Country.', serviceType: 'Dog Training', areaServed: 'Austin, TX', offerDescription: 'Austin-area dog trainer directory.', offerUrl: '/services/dog-training/austin-tx' };
+const regions = [
+  { name: 'Central Austin / Downtown / East Austin', note: 'Urban training. In-home, group class, apartment-living focused.' },
+  { name: 'North Austin / Round Rock / Pflugerville / Cedar Park', note: 'Family obedience, sport, board-and-train.' },
+  { name: 'West Austin / Westlake / Bee Cave / Lakeway', note: 'Premium board-and-train, in-home, behavior modification.' },
+  { name: 'South Austin / Buda / Kyle / Dripping Springs', note: 'Larger lots, sport, herding, family obedience.' },
+  { name: 'Hill Country / Wimberley / Marble Falls', note: 'Trail companion, ranch dog, herding instinct testing.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Austin-area AKC clubs.' },
+  { label: 'Agility', detail: 'Trial-prep agility venues.' },
+  { label: 'Water Sport', detail: 'Dock diving and paddleboard dog work.' },
+  { label: 'Trail & Recall', detail: 'Off-leash reliability for Hill Country and Greenbelt usage.' },
+  { label: 'Board-and-Train', detail: 'Intensive trainer-led programs popular with time-limited owners.' },
+  { label: 'Herding', detail: 'Hill Country herding training and instinct testing.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/dog-training/dallas-tx', emoji: '🎓', title: 'Dog Training in Dallas', note: 'DFW-area trainers.' },
+  { href: '/services/behavioral', emoji: '🧠', title: 'Behavioral', note: 'Reactivity and aggression specialists.' }
+];
+---
+<GeoPage title="Dog Training in Austin, TX | BreederHQ Marketplace" description="Find dog trainers in the Austin metro and Hill Country. AKC obedience, agility, water sport, board-and-train, herding, trail companion, and behavior modification across central Austin, the Hill Country, and surrounding suburbs." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Austin, TX" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Austin, TX" introBody="Find dog trainers across the Austin metro and Hill Country on BreederHQ Marketplace. Austin's outdoor culture drives strong demand for trail-companion training and water sport, the tech-worker demographic drives demand for board-and-train and force-free programs, and the Hill Country supports herding instinct testing and ranch dog work within driving distance." regionsHeading="Dog Training Markets Across Austin" regionsIntro="Five corridors anchored by the urban core and the Hill Country edge." regions={regions} specialtiesHeading="Dog Training Specialties in Austin" specialtiesIntro="Austin's culture drives unusually high demand for board-and-train and trail-oriented work." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Austin?" />

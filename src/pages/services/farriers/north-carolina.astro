@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'North Carolina', url: '/services/farriers/north-carolina' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in North Carolina?', answer: 'The Tryon corridor (Polk and Henderson counties — Tryon International Equestrian Center, Foothills Equestrian Nature Center) anchors hunter/jumper and dressage. The Pinehurst sandhills support a deep eventing community and the historic Moore County hunt country. The Triangle (Raleigh-Durham-Chapel Hill) and Charlotte metro support hunter/jumper, dressage, and pleasure populations. Western NC supports trail and growing endurance.' },
+  { question: 'What about Tryon International Equestrian Center?', answer: 'TIEC opened in 2014 and quickly became one of the largest equestrian venues in North America. The Tryon Spring Series, FEI events, and year-round circuit drive demand for performance and therapeutic farrier work.' },
+  { question: 'What about the Pinehurst sandhills?', answer: 'The Pinehurst-Southern Pines area is one of the oldest American eventing communities. Carolina Horse Park, the Stoneybrook steeplechase, and the Moore County hunt drive demand for eventing, steeplechase, and hunt-country farrier work.' }
+];
+const service = { name: 'Farriers in North Carolina', description: 'TIEC hunter/jumper, Pinehurst eventing, Moore County hunt, and pleasure farriers across North Carolina.', serviceType: 'Farrier and Hoof Care', areaServed: 'North Carolina', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/north-carolina' };
+const regions = [
+  { name: 'Tryon Corridor (Polk, Henderson counties)', note: 'TIEC hub. Hunter/jumper, dressage, FEI events. Deep CJF representation.' },
+  { name: 'Pinehurst Sandhills (Moore, Hoke counties)', note: 'Eventing, steeplechase, foxhunting. Carolina Horse Park.' },
+  { name: 'Triangle (Raleigh, Durham, Chapel Hill, Wake Forest)', note: 'Hunter/jumper, dressage, eventing. Growing equine market.' },
+  { name: 'Charlotte Metro & Foothills', note: 'Mixed hunter/jumper, pleasure, and growing eventing community.' },
+  { name: 'Western NC (Asheville, Hendersonville, Brevard)', note: 'Trail, endurance, and pleasure country.' },
+  { name: 'Eastern NC (New Bern, Wilmington)', note: 'Pleasure, trail, and pleasure-show.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper & Dressage', detail: 'TIEC circuit performance shoeing.' },
+  { label: 'Eventing', detail: 'Carolina Horse Park and Pinehurst eventing work.' },
+  { label: 'Steeplechase & Hunt', detail: 'Stoneybrook and Moore County hunt-country shoeing.' },
+  { label: 'Trail & Endurance', detail: 'Western NC conditioning shoeing.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/south-carolina', emoji: '🔨', title: 'Farriers in South Carolina', note: 'Aiken and Tryon-adjacent.' },
+  { href: '/services/farriers/virginia', emoji: '🔨', title: 'Farriers in Virginia', note: 'Hunt country corridor.' }
+];
+---
+<GeoPage title="Farriers in North Carolina | BreederHQ Marketplace" description="Find AFA-certified farriers in North Carolina. TIEC hunter/jumper specialists, Pinehurst eventing farriers, Moore County hunt, and corrective specialists statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="North Carolina" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in North Carolina" introBody="Find farriers across North Carolina on BreederHQ Marketplace. NC anchors one of the most modern equestrian venues in the country (TIEC), one of the oldest American eventing communities (Pinehurst sandhills), the Moore County hunt and Stoneybrook steeplechase, and a growing hunter/jumper population across the Triangle and Charlotte metros." regionsHeading="Regional Farrier Markets in North Carolina" regionsIntro="Six corridors anchored by Tryon and Pinehurst." regions={regions} specialtiesHeading="Farrier Specialties in North Carolina" specialtiesIntro="TIEC and Pinehurst drive specialization toward FEI-level performance and eventing work." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in North Carolina?" />

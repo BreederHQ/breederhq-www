@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Denver, CO', url: '/services/dog-training/denver-co' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Denver?', answer: 'Denver supports very active agility, dock diving, Disc dog, and herding training communities. The active outdoor culture drives recall, off-leash reliability, and trail-companion training demand. AKC obedience and rally clubs run trials year-round. Working dog and protection sport clubs maintain trial fields across the Front Range.' },
+  { question: 'What about herding training?', answer: 'Front Range herding training has grown significantly. Multiple facilities offer instinct testing, herding lessons on sheep and ducks, and AKC herding trial preparation.' },
+  { question: 'What about altitude conditioning for sport dogs?', answer: 'Sport dogs at 5,000-6,000 feet need different conditioning than sea-level dogs. Many Front Range sport trainers integrate altitude-appropriate fitness work into their programs.' }
+];
+const service = { name: 'Dog Training in Denver, CO', description: 'Obedience, agility, herding, dock diving, protection, and behavior training across the Denver metro and Front Range.', serviceType: 'Dog Training', areaServed: 'Denver, CO', offerDescription: 'Denver-area dog trainer directory.', offerUrl: '/services/dog-training/denver-co' };
+const regions = [
+  { name: 'Central Denver / Highlands / Wash Park', note: 'Urban training. In-home, group class, and apartment-living-focused.' },
+  { name: 'South Denver / DTC / Highlands Ranch', note: 'Suburban family obedience, sport, and behavior modification.' },
+  { name: 'South Suburbs / Parker / Castle Rock / Larkspur', note: 'Larger lots. Herding, agility, and board-and-train.' },
+  { name: 'North Suburbs / Westminster / Broomfield / Boulder', note: 'Family obedience, sport, and behavior. Boulder dog-friendly culture.' },
+  { name: 'Foothills / Conifer / Evergreen', note: 'Trail-companion training, recall, off-leash reliability.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'Front Range AKC obedience clubs.' },
+  { label: 'Agility', detail: 'Multiple trial-prep agility venues.' },
+  { label: 'Herding', detail: 'Sheep and duck herding training, instinct testing.' },
+  { label: 'Dock Diving & Disc', detail: 'Lake and field venues for sport-specific work.' },
+  { label: 'Protection Sport', detail: 'IGP and PSA clubs with Front Range training fields.' },
+  { label: 'Trail & Recall', detail: 'Off-leash reliability for the outdoor-oriented culture.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/behavioral', emoji: '🧠', title: 'Behavioral', note: 'Reactivity and aggression specialists.' },
+  { href: '/services/dog-training/portland-or', emoji: '🎓', title: 'Dog Training in Portland', note: 'Adjacent outdoor-oriented metro.' }
+];
+---
+<GeoPage title="Dog Training in Denver, CO | BreederHQ Marketplace" description="Find dog trainers in the Denver metro and Front Range. AKC obedience, agility, herding, dock diving, protection sport, and trail-companion training across Parker, Highlands Ranch, Boulder, and the foothills." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Denver, CO" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Denver, CO" introBody="Find dog trainers across the Denver metro and Front Range on BreederHQ Marketplace. Denver's outdoor culture drives unusually strong demand for recall, off-leash reliability, and trail-companion work alongside active AKC obedience, agility, herding, dock diving, and protection sport communities. Altitude-appropriate conditioning is part of every serious sport program here." regionsHeading="Dog Training Markets Across Denver" regionsIntro="Five corridors with different discipline mixes." regions={regions} specialtiesHeading="Dog Training Specialties in Denver" specialtiesIntro="Outdoor culture and Front Range geography drive specialization toward off-leash reliability and sport dog conditioning." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Denver?" />

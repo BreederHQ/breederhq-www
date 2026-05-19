@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Equine Boarding', url: '/services/equine-boarding' }, { name: 'Wellington, FL', url: '/services/equine-boarding/wellington-fl' }];
+const faqs = [
+  { question: 'What makes Wellington different from other equine markets?', answer: 'Wellington is the winter equestrian capital of the United States. From January through March, the village hosts the Winter Equestrian Festival (WEF), Adequan Global Dressage Festival (AGDF), and the Palm Beach International Polo grounds — together drawing thousands of horses and riders from around the world. The off-season (April through December) still supports a deep year-round population of high-performance show horses, dressage horses, and polo ponies.' },
+  { question: 'What does winter-season boarding look like in Wellington?', answer: 'Winter-season boarding fills months (sometimes years) in advance. Top show barns are booked through trainer relationships. Stalls in WEF-adjacent communities (Saddle Trail, Mallet Hill, Grand Prix Village) command premium rates and often require trainer-network referrals. Pasture board is rare in Wellington proper; most facilities are stall-and-paddock with limited turnout.' },
+  { question: 'What about off-season boarding?', answer: 'April through December is the off-season. Rates drop, availability opens up, and some facilities offer summer-only arrangements for horses staying in the area year-round. The polo season runs through April, so polo facilities maintain higher year-round demand.' },
+  { question: 'What disciplines are concentrated in Wellington?', answer: 'Hunter/jumper at WEF, dressage at AGDF, polo at International Polo Club Palm Beach. Hunter derbies, Grand Prix jumping, FEI dressage, and high-goal polo. Eventing is rare; trail riding is essentially absent.' }
+];
+const service = { name: 'Equine Boarding in Wellington, FL', description: 'Hunter/jumper, dressage, and polo boarding facilities in Wellington and adjacent Palm Beach County communities.', serviceType: 'Equine Boarding', areaServed: 'Wellington, FL', offerDescription: 'Wellington-area boarding directory.', offerUrl: '/services/equine-boarding/wellington-fl' };
+const regions = [
+  { name: 'Saddle Trail Park & Grand Prix Village', note: 'WEF-adjacent show barn corridor. Premium hunter/jumper boarding. Trainer network required for top barns.' },
+  { name: 'Mallet Hill / Polo Club Communities', note: 'Polo-focused facilities. Year-round and seasonal arrangements.' },
+  { name: 'Wellington Aero Club / South Shore', note: 'Mixed discipline facilities. More accessible booking.' },
+  { name: 'Loxahatchee Groves & Western Communities', note: 'Larger lots, more turnout, lower density. Mixed hunter/jumper and dressage.' },
+  { name: 'Royal Palm Beach & Adjacent Inland', note: 'Year-round-focused boarding outside the winter-season premium zone.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper Show Barn', detail: 'WEF-week training board, ring time, lessons included.' },
+  { label: 'Dressage Training Barn', detail: 'AGDF-circuit training board with FEI-level instruction.' },
+  { label: 'Polo Facility', detail: 'String boarding, polo pony care, seasonal arrangements.' },
+  { label: 'Winter Season Stall', detail: 'January-March stall lease, often with paddock turnout.' },
+  { label: 'Layup & Rehab', detail: 'Off-season rest and post-show recovery boarding.' }
+];
+const relatedCards = [
+  { href: '/services/equine-boarding/ocala-fl', emoji: '🏇', title: 'Equine Boarding in Ocala', note: 'Marion County Thoroughbred and WEC corridor.' },
+  { href: '/services/farriers/florida', emoji: '🔨', title: 'Farriers in Florida', note: 'WEF-season farrier coverage.' },
+  { href: '/services/equine-services', emoji: '🐎', title: 'Equine Services', note: 'Trainers, vets, and bodyworkers.' }
+];
+---
+<GeoPage title="Equine Boarding in Wellington, FL | BreederHQ Marketplace" description="Find equine boarding in Wellington FL. WEF and AGDF season hunter/jumper and dressage barns, polo facilities, and year-round boarding in Saddle Trail, Grand Prix Village, and adjacent Palm Beach County communities." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Equine Boarding" location="Wellington, FL" categorySlug="equine-boarding" parentHref="/services/equine-boarding" parentLabel="Equine Boarding" introHeading="Equine Boarding in Wellington, FL" introBody="Find equine boarding in Wellington and the Palm Beach County winter equestrian corridor on BreederHQ Marketplace. From January through March, Wellington is the winter capital of American hunter/jumper, dressage, and polo. Year-round, it supports one of the deepest high-performance show horse populations in the country." regionsHeading="Boarding Markets in the Wellington Corridor" regionsIntro="Five distinct sub-markets, from premium WEF-adjacent show barns to year-round inland facilities." regions={regions} specialtiesHeading="Boarding Specialties in Wellington" specialtiesIntro="The discipline mix and winter-season calendar drive specific boarding models." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/equine" providerLabel="Operate a Wellington-area boarding facility?" />

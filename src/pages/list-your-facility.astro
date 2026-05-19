@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'List Your Facility', url: '/list-your-facility' }
+];
+
+const facilityTypes = [
+  {
+    emoji: '🌳',
+    name: 'Dog Parks & Play Spots',
+    slug: 'dog-parks',
+    href: '/for-providers/dog-parks',
+    color: 'emerald',
+    summary: 'Private fenced yards, training fields, agility areas, swim spots, and indoor play spaces booked by the hour.',
+    subtypes: ['Yard', 'Field', 'Trail', 'Swim', 'Agility', 'Indoor', 'Multi-use'],
+    bookingNote: 'Real-time slot booking with buffer and capacity rules.'
+  },
+  {
+    emoji: '🐎',
+    name: 'Equine Facilities',
+    slug: 'equine',
+    href: '/for-providers/equine',
+    color: 'amber',
+    summary: 'Riding and training spaces, boarding, and pasture rental for horses.',
+    subtypes: ['Indoor arena', 'Outdoor arena', 'Round pen', 'Boarding', 'Pasture rental', 'Wash rack', 'Trail access'],
+    bookingNote: 'Inquiry-to-book. Per hour, per night, or per month pricing.'
+  },
+  {
+    emoji: '🐄',
+    name: 'Livestock Facilities',
+    slug: 'livestock',
+    href: '/for-providers/livestock',
+    color: 'yellow',
+    summary: 'Working facilities, scales, AI/repro spaces, and pasture for cattle, goats, sheep, and other livestock.',
+    subtypes: ['Handling/sorting alley', 'Working chute', 'Pasture rental', 'Show prep area', 'Scale', 'AI/repro space', 'Loading facility'],
+    bookingNote: 'Inquiry-to-book. Per session, per head, per day, or per acre.'
+  },
+  {
+    emoji: '🏟️',
+    name: 'Indoor Training Halls',
+    slug: 'indoor-training',
+    href: '/for-providers/indoor-training',
+    color: 'sky',
+    summary: 'Indoor halls and rooms for dog sports, agility, scent work, obedience, cat play, and small-animal training.',
+    subtypes: ['Dog sport', 'Agility', 'Flyball', 'Scent work', 'Obedience', 'Multi-species', 'Cat play', 'Small animal'],
+    bookingNote: 'Inquiry-to-book. Per hour or per handler.'
+  },
+  {
+    emoji: '🏠',
+    name: 'Boarding Facilities',
+    slug: 'boarding-facilities',
+    href: '/for-providers/boarding-facilities',
+    color: 'green',
+    summary: 'Overnight and short-term boarding for dogs, cats, exotics, livestock, horses, or in-home arrangements.',
+    subtypes: ['Dog kennel', 'Cat boarding/cattery', 'Exotic boarding', 'Livestock boarding', 'Equine boarding', 'In-home boarding'],
+    bookingNote: 'Inquiry-to-book. Per night per animal.'
+  },
+  {
+    emoji: '🛁',
+    name: 'Wash & Grooming Spaces',
+    slug: 'wash-grooming',
+    href: '/for-providers/wash-grooming',
+    color: 'pink',
+    summary: 'Self-wash, pro grooming bay rentals, and dedicated wash racks for dogs, livestock, and horses.',
+    subtypes: ['Self-wash', 'Pro grooming bay rental', 'Dog wash', 'Livestock wash rack', 'Equine wash rack'],
+    bookingNote: 'Inquiry-to-book. Per session or per hour.'
+  },
+  {
+    emoji: '🏆',
+    name: 'Event & Show Spaces',
+    slug: 'events-shows',
+    href: '/for-providers/events-shows',
+    color: 'violet',
+    summary: 'Trial venues, conformation rings, agility trial sites, clinics, photo studios, and breed club meeting spaces.',
+    subtypes: ['Trial venue', 'Conformation ring', 'Agility trial site', 'Fun match', 'Education/seminar', 'Clinic', 'Photo studio', 'Breed club meeting'],
+    bookingNote: 'Per-event inquiry-to-book. Full-day and multi-day blocks.'
+  },
+  {
+    emoji: '✨',
+    name: 'Specialty Facilities',
+    slug: 'specialty',
+    href: '/for-providers/specialty-facilities',
+    color: 'fuchsia',
+    summary: 'Hydrotherapy, treadmills, rehab and PT, sensory rooms, scent work, fitness, and whelping or neonatal spaces.',
+    subtypes: ['Hydrotherapy/swim', 'Underwater treadmill', 'Land treadmill', 'Rehab/PT', 'Sensory/calming room', 'Scent work', 'Fitness/conditioning', 'Whelping/neonatal'],
+    bookingNote: 'Inquiry-to-book. Per session or per hour.'
+  }
+];
+---
+<BaseLayout
+  title="List Your Animal Facility on BreederHQ Marketplace"
+  description="List any animal facility on BreederHQ Marketplace: dog parks and play spots, equine facilities, livestock facilities, indoor training halls, boarding, wash and grooming spaces, event and show spaces, and specialty facilities. $5/month per live listing."
+  breadcrumbs={breadcrumbs}
+>
+<main>
+  <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="text-4xl mb-4">🏞️</div>
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl leading-tight mb-6">
+        Every Animal Facility, <br />
+        <span class="text-emerald-700">One Marketplace</span>
+      </h1>
+      <p class="text-2xl text-gray-700 font-medium max-w-3xl mx-auto mb-4">
+        Eight facility categories. One $5/month listing fee.
+      </p>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+        BreederHQ Marketplace is the only platform built specifically for the full range of animal facilities, from
+        private dog parks to equine arenas, livestock handling areas, and specialty rehab spaces. List once, get found.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="https://accounts.breederhq.com/register?intent=provider_marketplace"
+          class="bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-600 w-full sm:w-auto"
+        >
+          List Your Facility
+        </a>
+        <a
+          href="https://marketplace.breederhq.com/services/facilities"
+          class="text-emerald-700 px-8 py-4 text-lg font-medium hover:text-emerald-800 w-full sm:w-auto"
+        >
+          Browse Facilities &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2 text-center">All eight facility types</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        Click any facility type for the full listing details, included features, and what owners and pros are searching for.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        {facilityTypes.map((f) => (
+          <a href={f.href} class="block bg-stone-50 hover:bg-white border border-stone-200 hover:border-stone-300 rounded-xl p-6 transition-all group">
+            <div class="flex items-start gap-4 mb-3">
+              <div class="text-3xl">{f.emoji}</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 group-hover:text-emerald-700">{f.name}</h3>
+                <p class="text-sm text-gray-600 mt-1">{f.summary}</p>
+              </div>
+            </div>
+            <div class="mb-3">
+              <p class="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-2">Subtypes you can list</p>
+              <div class="flex flex-wrap gap-1.5">
+                {f.subtypes.map((s) => (
+                  <span class="text-xs bg-white border border-stone-200 text-gray-700 rounded-full px-2.5 py-1">{s}</span>
+                ))}
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 italic">{f.bookingNote}</p>
+            <div class="mt-3 text-sm font-medium text-emerald-700">
+              Learn more about {f.name.toLowerCase()} &rarr;
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">What every facility listing includes</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">📍</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Local discovery</h3>
+          <p class="text-sm text-gray-600">Buyers and pros search by location and facility type. Your listing surfaces when their search matches what you offer.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">📋</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Detail-rich profiles</h3>
+          <p class="text-sm text-gray-600">Capacity, equipment, species supported, amenities, vaccination policies, and waivers, all surfaced before the first inquiry.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">📷</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Photo galleries</h3>
+          <p class="text-sm text-gray-600">Show the space the way you'd want to see it before booking. Up to 10 photos per listing.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">⭐</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Reviews and trust badges</h3>
+          <p class="text-sm text-gray-600">Verified reviews from real customers. Trust badges for identity-verified hosts and accredited businesses.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">💬</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Inquiry-to-book workflow</h3>
+          <p class="text-sm text-gray-600">Buyers send inquiries, you confirm scheduling and payment directly. Dog Parks &amp; Play Spots also support real-time slot booking.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-stone-200">
+          <div class="text-2xl mb-3">🛡️</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Vaccination, waiver, insurance</h3>
+          <p class="text-sm text-gray-600">Set requirements once. They show on the listing so the right buyers self-qualify before contacting you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">How facility listings work on BreederHQ</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div>
+          <div class="text-2xl font-bold text-emerald-700 mb-2">1.</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Pick your facility type</h3>
+          <p class="text-sm text-gray-600">Eight categories cover the full range of animal facilities. Pick the one that matches your space.</p>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-emerald-700 mb-2">2.</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Fill in the details</h3>
+          <p class="text-sm text-gray-600">Subtype, species, capacity, amenities, photos, pricing, and policies. The wizard adapts to the facility type you picked.</p>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-emerald-700 mb-2">3.</div>
+          <h3 class="font-semibold text-gray-900 mb-2">Go live</h3>
+          <p class="text-sm text-gray-600">Your listing appears in browse, in category filters, and in location-based search. Buyers find you and inquire directly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-br from-emerald-900 to-emerald-800">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-white"><span class="line-through opacity-60 text-2xl">$5/mo</span> Free during early access</h2>
+      <p class="text-sm text-emerald-200 mb-3">No commissions. No per-booking platform fees. Cancel anytime.</p>
+      <p class="text-lg text-emerald-200 mb-8">One flat listing fee covers any of the eight facility types. Same price whether you list a back-yard play spot or a 40-stall boarding barn.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-white text-emerald-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-emerald-50">
+          List Your Facility
+        </a>
+        <a href="https://marketplace.breederhq.com/services/facilities" class="text-white px-8 py-4 text-lg font-medium hover:text-emerald-100 underline-offset-4 hover:underline">
+          Browse Facilities &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+</BaseLayout>

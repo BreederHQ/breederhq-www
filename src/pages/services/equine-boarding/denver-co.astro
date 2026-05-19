@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Equine Boarding', url: '/services/equine-boarding' }, { name: 'Denver, CO', url: '/services/equine-boarding/denver-co' }];
+const faqs = [
+  { question: 'Where do horse owners board around Denver?', answer: 'The Front Range south of Denver (Parker, Castle Rock, Elizabeth, Franktown, Larkspur) holds the densest equine boarding market in Colorado. North of Denver (Longmont, Boulder, Niwot) supports hunter/jumper and dressage. The National Western Stock Show in Denver drives a year-round rodeo and ranch horse community.' },
+  { question: 'What about altitude?', answer: 'Denver and the Front Range sit at 5,000-6,500 feet. Horses living at altitude have different conditioning, recovery, and turnout needs than sea-level horses. Most facilities are familiar with high-altitude management; haul-in horses from sea level typically need 1-2 weeks to acclimate before hard work.' },
+  { question: 'What about winter?', answer: 'Front Range winters are cold but dry with significant sunny days. Most facilities provide windbreaks and shelters; not all provide stalls. Confirm winter housing setup before booking — pasture board in a Colorado winter is different from pasture board in Florida.' }
+];
+const service = { name: 'Equine Boarding in Denver, CO', description: 'Hunter/jumper, dressage, cutting/reining, ranch, and pleasure boarding across the Denver metro and Front Range.', serviceType: 'Equine Boarding', areaServed: 'Denver, CO', offerDescription: 'Denver-area equine boarding directory.', offerUrl: '/services/equine-boarding/denver-co' };
+const regions = [
+  { name: 'Parker / Castle Rock / Franktown / Elizabeth', note: 'Densest sport horse market. Hunter/jumper, dressage, eventing training board.' },
+  { name: 'Larkspur / Black Forest', note: 'Larger lots, pasture board, mixed discipline.' },
+  { name: 'Boulder / Longmont / Niwot', note: 'Hunter/jumper, dressage, growing eventing community.' },
+  { name: 'Brighton / Hudson / Northeast Front Range', note: 'Ranch, cutting, reining, and pleasure facilities. NWSS-adjacent.' },
+  { name: 'Foothills / Bailey / Conifer', note: 'Higher-altitude trail, endurance, and pleasure.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper Training Board', detail: 'Parker and Castle Rock circuit performance.' },
+  { label: 'Dressage', detail: 'Front Range dressage training board.' },
+  { label: 'Cutting & Reining', detail: 'Brighton and Hudson NWSS-adjacent training board.' },
+  { label: 'Ranch & Trail', detail: 'Foothills and Northeast Front Range ranch boarding.' },
+  { label: 'Layup & Conditioning', detail: 'Sea-level horse acclimation and Front Range conditioning.' }
+];
+const relatedCards = [
+  { href: '/services/farriers/colorado', emoji: '🔨', title: 'Farriers in Colorado', note: 'Front Range farriers.' },
+  { href: '/services/equine-services', emoji: '🐎', title: 'Equine Services', note: 'Trainers, vets, bodyworkers.' },
+  { href: '/services/equine-boarding/scottsdale-az', emoji: '🏇', title: 'Equine Boarding in Scottsdale', note: 'Adjacent Western show market.' }
+];
+---
+<GeoPage title="Equine Boarding in Denver, CO | BreederHQ Marketplace" description="Find equine boarding in the Denver metro and Front Range. Hunter/jumper at Parker and Castle Rock, dressage and eventing, cutting and reining near NWSS, and ranch boarding across the Front Range." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Equine Boarding" location="Denver, CO" categorySlug="equine-boarding" parentHref="/services/equine-boarding" parentLabel="Equine Boarding" introHeading="Equine Boarding in Denver, CO" introBody="Find equine boarding across the Denver metro and Front Range on BreederHQ Marketplace. The Front Range south of Denver — Parker, Castle Rock, Elizabeth, Franktown — holds the densest sport horse boarding market in Colorado. North of Denver supports hunter/jumper and dressage; the Northeast Front Range supports cutting, reining, and NWSS-adjacent ranch boarding." regionsHeading="Boarding Markets Around Denver" regionsIntro="Five distinct corridors with very different discipline mixes." regions={regions} specialtiesHeading="Boarding Specialties in the Denver Area" specialtiesIntro="The Front Range supports a wider discipline range than most Western markets thanks to NWSS and the Front Range affluent suburbs." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/equine" providerLabel="Operate a Denver-area boarding facility?" />

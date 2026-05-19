@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/**
+ * Shared template for geo pages.
+ * Usage: pass category, location, breadcrumb parents, FAQs, regions, specialties, related cards, and content snippets.
+ * Each consumer page provides its own real local content — this component just renders consistently.
+ */
+interface Region { name: string; note: string; }
+interface Specialty { label: string; detail: string; }
+interface RelatedCard { href: string; emoji: string; title: string; note: string; }
+interface Faq { question: string; answer: string; }
+interface BreadcrumbItem { name: string; url: string; }
+
+const {
+  title,
+  description,
+  breadcrumbs,
+  faqs,
+  service,
+  category, // e.g. 'Farriers', 'Equine Boarding', 'Dog Training', 'Livestock Services'
+  location, // e.g. 'Kentucky', 'Lexington, KY'
+  categorySlug, // e.g. 'farriers', 'equine-boarding'
+  parentHref, // e.g. '/services/farriers'
+  parentLabel, // e.g. 'Farriers'
+  introHeading,
+  introBody,
+  regionsHeading,
+  regionsIntro,
+  regions,
+  specialtiesHeading,
+  specialtiesIntro,
+  specialties,
+  relatedCards,
+  providerHref,
+  providerLabel
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} breadcrumbs={breadcrumbs} faqs={faqs} service={service}>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href={parentHref} class="text-amber-700 hover:underline">{parentLabel}</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">{location}</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">{category} · {location}</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">{introHeading}</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6" set:html={introBody} />
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse {category} in {location}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{regionsHeading}</h2>
+        <p class="text-gray-600 mb-6">{regionsIntro}</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {regions.map((r: Region) => (
+            <div class="bg-stone-50 border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-2">{r.name}</h3>
+              <p class="text-sm text-gray-700 leading-relaxed">{r.note}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{specialtiesHeading}</h2>
+        <p class="text-gray-600 mb-6">{specialtiesIntro}</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {specialties.map((s: Specialty) => (
+            <div class="bg-white border border-stone-200 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">{s.label}</h3>
+              <p class="text-sm text-gray-700">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          {relatedCards.map((r: RelatedCard) => (
+            <a href={r.href} class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+              <div class="text-xl mb-1">{r.emoji}</div>
+              <div class="font-semibold text-gray-900">{r.title}</div>
+              <p class="text-xs text-gray-600 mt-1">{r.note}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href={providerHref} class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">{providerLabel}</p>
+            <p class="text-sm text-gray-600">List your practice on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

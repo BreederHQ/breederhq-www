@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Michigan', url: '/services/farriers/michigan' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Michigan?', answer: 'Southeast Michigan (Oakland, Washtenaw, Livingston counties — Ann Arbor, Brighton, Howell) holds the densest farrier market and supports hunter/jumper, dressage, and an active eventing community. West Michigan (Grand Rapids, Holland) and the Lansing area support mixed pleasure and pleasure-show. Northern Michigan and the Upper Peninsula support trail, pleasure, and draft.' },
+  { question: 'What about Michigan State University?', answer: 'MSU College of Veterinary Medicine in East Lansing is one of the top equine veterinary programs in the country. Farriers near East Lansing often work closely with the MSU vet teaching hospital on corrective and therapeutic cases.' },
+  { question: 'What about racetrack work?', answer: 'Northville Downs ran Standardbred harness historically; Hazel Park ran Thoroughbreds historically. Both have closed. Current Michigan farrier work focuses on sport horse, pleasure, and pleasure-show populations.' }
+];
+const service = { name: 'Farriers in Michigan', description: 'Southeast Michigan sport horse, eventing, MSU-corrective, and pleasure farriers across Michigan.', serviceType: 'Farrier and Hoof Care', areaServed: 'Michigan', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/michigan' };
+const regions = [
+  { name: 'Southeast Michigan (Ann Arbor, Brighton, Howell, Northville)', note: 'Hunter/jumper, dressage, eventing capital of the state. MSU-adjacent.' },
+  { name: 'West Michigan (Grand Rapids, Holland, Allegan)', note: 'Mixed pleasure, pleasure-show, and growing hunter/jumper.' },
+  { name: 'Lansing / Central Michigan (East Lansing, Mason)', note: 'MSU veterinary access. Mixed pleasure, sport horse, and breeding stock.' },
+  { name: 'Northern Lower Peninsula (Traverse City, Petoskey)', note: 'Trail, pleasure, and growing eventing community.' },
+  { name: 'Upper Peninsula (Marquette, Sault Ste. Marie)', note: 'Trail, draft, and working horse country. Sparse farrier coverage.' }
+];
+const specialties = [
+  { label: 'Hunter/Jumper & Dressage', detail: 'Southeast Michigan circuit performance shoeing.' },
+  { label: 'Eventing', detail: 'Brighton and Hillsdale eventing community work.' },
+  { label: 'MSU-Corrective', detail: 'Coordination with MSU Vet School for orthopedic cases.' },
+  { label: 'Draft & Working Horse', detail: 'UP and rural Michigan draft work.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/ohio', emoji: '🔨', title: 'Farriers in Ohio', note: 'Adjacent harness and draft markets.' },
+  { href: '/services/farriers/indiana', emoji: '🔨', title: 'Farriers in Indiana', note: 'Adjacent Standardbred breeding.' }
+];
+---
+<GeoPage title="Farriers in Michigan | BreederHQ Marketplace" description="Find AFA-certified farriers in Michigan. Southeast Michigan hunter/jumper and dressage specialists, MSU-corrective farriers, eventing specialists, and pleasure farriers statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Michigan" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Michigan" introBody="Find farriers across Michigan on BreederHQ Marketplace. Michigan's farrier market concentrates in Southeast Michigan around Ann Arbor and Brighton — hunter/jumper, dressage, and eventing — with MSU College of Veterinary Medicine providing one of the strongest corrective-case ecosystems in the Midwest. West Michigan and the northern lower peninsula round out the state with mixed sport horse and trail populations." regionsHeading="Regional Farrier Markets in Michigan" regionsIntro="Five corridors with very different horse populations." regions={regions} specialtiesHeading="Farrier Specialties in Michigan" specialtiesIntro="The MSU vet school anchors deep therapeutic work alongside sport horse demand." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Michigan?" />

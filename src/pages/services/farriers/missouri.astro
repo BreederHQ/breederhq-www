@@ -1,0 +1,29 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Missouri', url: '/services/farriers/missouri' }];
+const faqs = [
+  { question: 'Where does farrier demand concentrate in Missouri?', answer: 'Missouri is the home of the Missouri Fox Trotter breed (Ava, Salem) and supports a strong gaited horse population. The Kansas City metro and St. Louis metro support hunter/jumper, dressage, and pleasure. The Ozarks support trail, gaited, and pleasure populations. Springfield supports Quarter Horse and ranch populations.' },
+  { question: 'What about Fox Trotter shoeing?', answer: 'Missouri Fox Trotter shoeing emphasizes natural movement and proper trim work. The MFTHBA World Show and breed-association events drive demand for breed-specific specialists.' }
+];
+const service = { name: 'Farriers in Missouri', description: 'Missouri Fox Trotter, Ozarks trail, Kansas City and St. Louis sport horse farriers across Missouri.', serviceType: 'Farrier and Hoof Care', areaServed: 'Missouri', offerDescription: 'Statewide farrier directory.', offerUrl: '/services/farriers/missouri' };
+const regions = [
+  { name: 'Ozarks (Ava, Salem, West Plains)', note: 'Missouri Fox Trotter capital. Gaited horse country.' },
+  { name: 'Kansas City Metro', note: 'Hunter/jumper, dressage, pleasure.' },
+  { name: 'St. Louis Metro', note: 'Mixed pleasure, hunter/jumper, growing eventing.' },
+  { name: 'Springfield & Southwest MO', note: 'Quarter Horse, ranch, and pleasure populations.' },
+  { name: 'Central Missouri (Columbia, Jefferson City)', note: 'MU veterinary access. Mixed pleasure and sport horse.' }
+];
+const specialties = [
+  { label: 'Gaited Horse', detail: 'Missouri Fox Trotter natural movement shoeing.' },
+  { label: 'Hunter/Jumper & Dressage', detail: 'KC and STL metro performance shoeing.' },
+  { label: 'Trail & Pleasure', detail: 'Ozarks trail conditioning.' },
+  { label: 'Ranch & Quarter Horse', detail: 'Springfield-area working shoeing.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, pads, bar shoes.' }
+];
+const relatedCards = [
+  { href: '/services/farriers', emoji: '🔨', title: 'All Farriers', note: 'Browse the full farrier category.' },
+  { href: '/services/farriers/kentucky', emoji: '🔨', title: 'Farriers in Kentucky', note: 'Adjacent Thoroughbred market.' },
+  { href: '/services/farriers/oklahoma', emoji: '🔨', title: 'Farriers in Oklahoma', note: 'Adjacent Quarter Horse market.' }
+];
+---
+<GeoPage title="Farriers in Missouri | BreederHQ Marketplace" description="Find farriers in Missouri. Missouri Fox Trotter specialists, KC and STL metro performance farriers, Ozarks trail, and Quarter Horse farriers statewide." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Farriers" location="Missouri" categorySlug="farriers" parentHref="/services/farriers" parentLabel="Farriers" introHeading="Farriers in Missouri" introBody="Find farriers across Missouri on BreederHQ Marketplace. Missouri is the home of the Missouri Fox Trotter breed and supports a deep gaited horse population in the Ozarks, sport horse populations in the Kansas City and St. Louis metros, and Quarter Horse and ranch populations across the southwest and central parts of the state." regionsHeading="Regional Farrier Markets in Missouri" regionsIntro="Five corridors anchored by the Ozarks gaited horse country." regions={regions} specialtiesHeading="Farrier Specialties in Missouri" specialtiesIntro="The Fox Trotter breed drives a specialty layer absent from most states." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/farriers" providerLabel="Are you a farrier in Missouri?" />

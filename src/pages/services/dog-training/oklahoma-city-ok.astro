@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Oklahoma City, OK', url: '/services/dog-training/oklahoma-city-ok' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Oklahoma City?', answer: 'OKC supports AKC obedience and conformation, agility, retriever and field training, herding (close to ranch country), and protection sport. The proximity to working ranches makes OKC one of the more accessible markets for herding instinct testing and AKC herding trial training.' },
+  { question: 'What about herding and ranch dog training?', answer: 'OKC sits adjacent to working ranch country across central and western Oklahoma. Herding training, instinct testing, and ranch dog work are more accessible from OKC than from most major metros. Border Collie, Australian Shepherd, and Australian Cattle Dog handlers have multiple training options.' }
+];
+const service = { name: 'Dog Training in Oklahoma City, OK', description: 'Obedience, agility, herding, field, protection, and behavior training across the OKC metro.', serviceType: 'Dog Training', areaServed: 'Oklahoma City, OK', offerDescription: 'OKC-area dog trainer directory.', offerUrl: '/services/dog-training/oklahoma-city-ok' };
+const regions = [
+  { name: 'Central OKC / Bricktown / Midtown', note: 'Urban training. In-home, group class, behavior.' },
+  { name: 'Edmond / North OKC', note: 'Suburban family obedience, sport, board-and-train.' },
+  { name: 'Norman / South OKC', note: 'AKC clubs, family obedience, retriever.' },
+  { name: 'Yukon / Mustang / West OKC', note: 'Sport, herding-adjacent, ranch dog training.' },
+  { name: 'East OKC / Choctaw', note: 'Family obedience, behavior modification.' }
+];
+const specialties = [
+  { label: 'AKC Obedience & Rally', detail: 'OKC-area AKC clubs.' },
+  { label: 'Agility', detail: 'Trial-prep agility venues.' },
+  { label: 'Herding', detail: 'Sheep and duck herding training, instinct testing.' },
+  { label: 'Field & Retriever', detail: 'Central Oklahoma retriever club training.' },
+  { label: 'Protection Sport', detail: 'IGP and PSA training fields.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, aggression, separation anxiety specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/farriers/oklahoma', emoji: '🔨', title: 'Farriers in Oklahoma', note: 'Quarter Horse country adjacency.' },
+  { href: '/services/dog-training/dallas-tx', emoji: '🎓', title: 'Dog Training in Dallas', note: 'Adjacent metro market.' }
+];
+---
+<GeoPage title="Dog Training in Oklahoma City, OK | BreederHQ Marketplace" description="Find dog trainers in the Oklahoma City metro. AKC obedience, agility, herding training, retriever and field, protection sport, and behavior modification specialists." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Oklahoma City, OK" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Oklahoma City, OK" introBody="Find dog trainers across the Oklahoma City metro on BreederHQ Marketplace. OKC supports AKC obedience and conformation, agility, retriever and field training, and unusually accessible herding training thanks to the metro's proximity to working ranch country. Protection sport clubs maintain trial-grade training fields." regionsHeading="Dog Training Markets Across OKC" regionsIntro="Five corridors across the metro." regions={regions} specialtiesHeading="Dog Training Specialties in OKC" specialtiesIntro="Ranch country adjacency makes herding training distinctly accessible." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in OKC?" />

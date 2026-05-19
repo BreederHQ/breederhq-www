@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Equine Boarding', url: '/services/equine-boarding' }, { name: 'Nashville, TN', url: '/services/equine-boarding/nashville-tn' }];
+const faqs = [
+  { question: 'What makes Nashville a distinct equine market?', answer: 'The Nashville area sits at the northern edge of the Tennessee Walking Horse industry. Middle Tennessee (Williamson, Shelbyville, Lewisburg counties) holds the densest gaited horse and walking horse training population in the country. Beyond walking horses, the Nashville suburbs (Franklin, Brentwood, College Grove) support a growing hunter/jumper and dressage community. Cookeville and the Upper Cumberland support trail and pleasure populations.' },
+  { question: 'What about Tennessee Walking Horse boarding?', answer: 'Walking horse boarding clusters in Shelbyville (the World Grand Championship venue), Lewisburg, and Bell Buckle. These facilities specialize in walking horse training, build-up shoeing, and show preparation. The breed has its own training tradition, equipment, and culture.' },
+  { question: 'What about the growing sport horse market in Franklin and Brentwood?', answer: 'Williamson County has seen rapid growth in hunter/jumper and dressage boarding facilities as Nashville\'s population has grown. Several modern equestrian communities have built training boarding around larger lots.' }
+];
+const service = { name: 'Equine Boarding in Nashville, TN', description: 'Tennessee Walking Horse, hunter/jumper, dressage, and pleasure boarding across the Nashville metro and Middle Tennessee.', serviceType: 'Equine Boarding', areaServed: 'Nashville, TN', offerDescription: 'Nashville-area equine boarding directory.', offerUrl: '/services/equine-boarding/nashville-tn' };
+const regions = [
+  { name: 'Shelbyville / Bedford County', note: 'Tennessee Walking Horse World Grand Championship venue. Walking horse training capital.' },
+  { name: 'Lewisburg / Marshall County', note: 'Walking horse breeding and training. Bell Buckle and surrounding rural Middle TN.' },
+  { name: 'Franklin / Brentwood / Williamson County', note: 'Growing hunter/jumper and dressage market. Modern equestrian communities.' },
+  { name: 'College Grove / Spring Hill', note: 'Mixed hunter/jumper, dressage, and pleasure with larger lots.' },
+  { name: 'Cookeville / Upper Cumberland', note: 'Trail, pleasure, and growing barrel racing populations.' }
+];
+const specialties = [
+  { label: 'Tennessee Walking Horse Training Board', detail: 'Walking horse-specific training, show prep, and build-up shoeing coordination.' },
+  { label: 'Hunter/Jumper Training Board', detail: 'Williamson County growing hunter/jumper circuit.' },
+  { label: 'Dressage', detail: 'Williamson and Franklin-area dressage facilities.' },
+  { label: 'Pleasure & Trail', detail: 'Cookeville and Upper Cumberland recreational boarding.' },
+  { label: 'Breeding & Mare Care', detail: 'Walking horse and sport horse breeding facilities.' }
+];
+const relatedCards = [
+  { href: '/services/farriers/tennessee', emoji: '🔨', title: 'Farriers in Tennessee', note: 'Walking horse and sport horse farriers.' },
+  { href: '/services/equine-boarding/lexington-ky', emoji: '🏇', title: 'Equine Boarding in Lexington', note: 'Adjacent Bluegrass equine market.' },
+  { href: '/services/equine-services', emoji: '🐎', title: 'Equine Services', note: 'Trainers, vets, and clinicians.' }
+];
+---
+<GeoPage title="Equine Boarding in Nashville, TN | BreederHQ Marketplace" description="Find equine boarding in the Nashville metro and Middle Tennessee. Tennessee Walking Horse training in Shelbyville and Lewisburg, hunter/jumper and dressage in Williamson County, and trail in the Upper Cumberland." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Equine Boarding" location="Nashville, TN" categorySlug="equine-boarding" parentHref="/services/equine-boarding" parentLabel="Equine Boarding" introHeading="Equine Boarding in Nashville, TN" introBody="Find equine boarding in the Nashville metro and Middle Tennessee on BreederHQ Marketplace. Nashville sits at the heart of the Tennessee Walking Horse industry — Shelbyville and Lewisburg hold the densest walking horse training in the country. Williamson County has added a growing hunter/jumper and dressage market as Nashville has grown, and the Upper Cumberland supports trail and pleasure populations." regionsHeading="Boarding Markets in Middle Tennessee" regionsIntro="Five distinct corridors anchored by the Walking Horse industry." regions={regions} specialtiesHeading="Boarding Specialties in Middle Tennessee" specialtiesIntro="The Walking Horse tradition drives unique specialization; sport horse demand has grown rapidly." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/equine" providerLabel="Operate a Nashville-area boarding facility?" />

@@ -1,0 +1,29 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'South Dakota', url: '/services/livestock-services/south-dakota' }];
+const faqs = [
+  { question: 'What livestock services concentrate in South Dakota?', answer: 'South Dakota is one of the top cattle states by ratio of cattle to people in the country, and home to a significant sheep industry as well. Eastern South Dakota supports cattle, dairy, and grain mixed operations. Western South Dakota holds large-scale cow-calf ranching across the West River country. South Dakota State University in Brookings anchors specialist livestock services.' },
+  { question: 'What about West River ranching?', answer: 'West River SD (everything west of the Missouri River) is one of the most concentrated cow-calf landscapes in the country. Working livestock services here run on long-radius circuits across ranches that often span tens of thousands of acres.' }
+];
+const service = { name: 'Livestock Services in South Dakota', description: 'Cattle AI/ET, sheep shearing, West River ranch services, branding, and herd health across South Dakota.', serviceType: 'Livestock Services', areaServed: 'South Dakota', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/south-dakota' };
+const regions = [
+  { name: 'West River (Rapid City, Belle Fourche, Philip)', note: 'Cow-calf ranch country. Long-radius circuit work.' },
+  { name: 'Black Hills', note: 'Sheep, cattle, and mountain grazing operations.' },
+  { name: 'Brookings / SDSU', note: 'South Dakota State University. Specialist breeding, herd health, research.' },
+  { name: 'East River (Sioux Falls, Watertown, Aberdeen)', note: 'Mixed cattle, dairy, and grain operations.' },
+  { name: 'Pierre / Missouri River Corridor', note: 'Mixed pasture and irrigated cattle work.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Embryo Transfer', detail: 'SDSU-coordinated and ranch breeding services.' },
+  { label: 'Branding', detail: 'West River spring branding circuit.' },
+  { label: 'Sheep Shearing', detail: 'Spring circuit shearing.' },
+  { label: 'Pregnancy Checking', detail: 'Fall preg-checking work.' },
+  { label: 'Herd Health', detail: 'Working cow-calf herd programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/livestock-services/nebraska', emoji: '🐄', title: 'Livestock Services in Nebraska', note: 'Adjacent cow-calf country.' },
+  { href: '/services/livestock-services/montana', emoji: '🐄', title: 'Livestock Services in Montana', note: 'Adjacent ranch country.' }
+];
+---
+<GeoPage title="Livestock Services in South Dakota | BreederHQ Marketplace" description="Find livestock service providers in South Dakota. Cattle AI, West River ranch services, branding, preg checking, sheep shearing, and herd health across the West River, Black Hills, and SDSU corridors." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="South Dakota" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in South Dakota" introBody="Find livestock service providers across South Dakota on BreederHQ Marketplace. South Dakota is one of the most cattle-dense states in the country. West River supports large-scale cow-calf ranching on long-radius circuits, the Black Hills add sheep and mountain grazing, and SDSU in Brookings anchors specialist breeding and herd health work." regionsHeading="Livestock Service Markets Across South Dakota" regionsIntro="Five corridors with different operational scales." regions={regions} specialtiesHeading="Livestock Service Specialties in South Dakota" specialtiesIntro="West River ranch scale drives circuit-based service models." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in South Dakota?" />

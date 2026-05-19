@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Dog Training', url: '/services/dog-training' }, { name: 'Portland, OR', url: '/services/dog-training/portland-or' }];
+const faqs = [
+  { question: 'What are the active dog sport communities in Portland?', answer: 'Portland has unusually active sport dog and outdoor-companion training markets. AKC obedience and conformation clubs run trials year-round. Multiple agility clubs run trials across Portland-area venues. Dock diving, scent work, and trick training communities are deep. The Pacific Northwest outdoor culture drives recall and off-leash reliability demand. Force-free positive-reinforcement training dominates the market.' },
+  { question: 'What about force-free and positive training?', answer: 'Portland has one of the highest concentrations of force-free, positive-reinforcement trainers in the US. CPDT-KA, KPA, IAABC, and CCPDT credentials are common. Owners looking for balanced or e-collar trainers have fewer options here than in most metros.' }
+];
+const service = { name: 'Dog Training in Portland, OR', description: 'Obedience, agility, scent work, dock diving, recall, behavior, and force-free training across the Portland metro.', serviceType: 'Dog Training', areaServed: 'Portland, OR', offerDescription: 'Portland-area dog trainer directory.', offerUrl: '/services/dog-training/portland-or' };
+const regions = [
+  { name: 'Central Portland / NE / SE', note: 'Urban training. In-home, group class, force-free obedience.' },
+  { name: 'West Hills / Hillsdale / Multnomah Village', note: 'Premium private training, sport, behavior.' },
+  { name: 'Beaverton / Hillsboro / Washington County', note: 'Family obedience, sport, board-and-train.' },
+  { name: 'East Metro / Gresham / Troutdale', note: 'Family obedience, retriever, and pleasure-dog training.' },
+  { name: 'North Metro / Vancouver WA / Camas', note: 'Family obedience, sport, behavior.' }
+];
+const specialties = [
+  { label: 'Force-Free Obedience', detail: 'CPDT-KA, KPA, CCPDT-credentialed positive-reinforcement training.' },
+  { label: 'AKC Obedience & Rally', detail: 'Portland-area AKC clubs.' },
+  { label: 'Agility', detail: 'Trial-prep agility across multiple Portland venues.' },
+  { label: 'Scent Work & Dock Diving', detail: 'Sport-specific training communities.' },
+  { label: 'Trail & Recall', detail: 'Off-leash reliability for PNW outdoor culture.' },
+  { label: 'Behavior Modification', detail: 'Reactivity, fear, aggression, separation anxiety. CDBC and IAABC specialists.' }
+];
+const relatedCards = [
+  { href: '/services/dog-training', emoji: '🎓', title: 'All Dog Training', note: 'Browse the full dog training category.' },
+  { href: '/services/behavioral', emoji: '🧠', title: 'Behavioral', note: 'CDBC and IAABC behavior specialists.' },
+  { href: '/services/dog-training/denver-co', emoji: '🎓', title: 'Dog Training in Denver', note: 'Adjacent outdoor-culture metro.' }
+];
+---
+<GeoPage title="Dog Training in Portland, OR | BreederHQ Marketplace" description="Find dog trainers in the Portland metro. Force-free positive-reinforcement obedience, AKC obedience, agility, scent work, dock diving, trail recall, and CDBC/IAABC behavior modification specialists." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Dog Training" location="Portland, OR" categorySlug="dog-training" parentHref="/services/dog-training" parentLabel="Dog Training" introHeading="Dog Training in Portland, OR" introBody="Find dog trainers across the Portland metro on BreederHQ Marketplace. Portland has one of the highest concentrations of force-free, positive-reinforcement trainers in the United States, alongside active AKC obedience, agility, scent work, and dock diving communities. The Pacific Northwest outdoor culture drives heavy demand for recall, off-leash reliability, and trail-companion work." regionsHeading="Dog Training Markets Across Portland" regionsIntro="Five corridors anchored by the urban core and the outdoor-oriented culture." regions={regions} specialtiesHeading="Dog Training Specialties in Portland" specialtiesIntro="Force-free, positive-reinforcement methodology dominates more than in any other major US metro." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/training" providerLabel="Are you a dog trainer in Portland?" />

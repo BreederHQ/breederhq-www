@@ -1,0 +1,30 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Equine Boarding', url: '/services/equine-boarding' }, { name: 'Dallas, TX', url: '/services/equine-boarding/dallas-tx' }];
+const faqs = [
+  { question: 'What makes DFW a distinct equine market?', answer: 'The DFW Metroplex is the cutting and reining capital of the United States. Pilot Point, Aubrey, Whitesboro, Argyle, and Krugerville form a corridor that holds the densest concentration of cutting and reining barns in the country. The NCHA (National Cutting Horse Association) and NRHA (National Reining Horse Association) are headquartered nearby. Beyond cutting/reining, DFW supports hunter/jumper, dressage, and a deep ranch horse population.' },
+  { question: 'What about cutting and reining boarding?', answer: 'Cutting and reining training board is its own ecosystem. Facilities have working cattle, mechanical cows, properly-footing arenas, and trainers with NCHA/NRHA win records. Many top trainers run training programs where horses board year-round and travel the show circuit.' },
+  { question: 'What about Will Rogers and Fort Worth?', answer: 'Will Rogers Coliseum in Fort Worth hosts the NCHA World Championship Futurity and other major cutting events. The Fort Worth Stock Show & Rodeo brings additional demand. Many facilities in the Fort Worth-side suburbs (Aledo, Weatherford) support cutting, reining, and ranch populations.' }
+];
+const service = { name: 'Equine Boarding in Dallas, TX', description: 'Cutting, reining, hunter/jumper, dressage, and ranch boarding across the DFW Metroplex.', serviceType: 'Equine Boarding', areaServed: 'Dallas, TX', offerDescription: 'DFW-area equine boarding directory.', offerUrl: '/services/equine-boarding/dallas-tx' };
+const regions = [
+  { name: 'Pilot Point / Aubrey / Whitesboro Corridor', note: 'Cutting and reining capital. Top trainers, working cattle, performance arenas.' },
+  { name: 'Argyle / Krugerville / Denton County', note: 'Cutting, reining, ranch, and growing hunter/jumper.' },
+  { name: 'Fort Worth / Aledo / Weatherford', note: 'Will Rogers, NCHA Futurity. Cutting, reining, and ranch populations.' },
+  { name: 'McKinney / Frisco / Allen / Collin County', note: 'Hunter/jumper, dressage, and pleasure facilities.' },
+  { name: 'Parker County / Springtown', note: 'Working ranch, roping, and cutting facilities.' }
+];
+const specialties = [
+  { label: 'Cutting Training Board', detail: 'NCHA training programs with working cattle and arenas.' },
+  { label: 'Reining Training Board', detail: 'NRHA-discipline training board with sliding-equipped arenas.' },
+  { label: 'Hunter/Jumper Training Board', detail: 'Collin County and DFW circuit performance facilities.' },
+  { label: 'Ranch & Working', detail: 'Practical working ranch board.' },
+  { label: 'Layup & Rehab', detail: 'Post-surgical and rest-period boarding.' }
+];
+const relatedCards = [
+  { href: '/services/farriers/texas', emoji: '🔨', title: 'Farriers in Texas', note: 'DFW cutting and reining farriers.' },
+  { href: '/services/equine-boarding/houston-tx', emoji: '🏇', title: 'Equine Boarding in Houston', note: 'Brazos Valley breeding corridor.' },
+  { href: '/services/equine-services', emoji: '🐎', title: 'Equine Services', note: 'Cutting and reining trainers.' }
+];
+---
+<GeoPage title="Equine Boarding in Dallas, TX | BreederHQ Marketplace" description="Find equine boarding in the DFW Metroplex. Cutting and reining training board at Pilot Point and Aubrey, hunter/jumper in Collin County, ranch and working horse facilities across Tarrant and Parker counties." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Equine Boarding" location="Dallas, TX" categorySlug="equine-boarding" parentHref="/services/equine-boarding" parentLabel="Equine Boarding" introHeading="Equine Boarding in Dallas, TX" introBody="Find equine boarding across the Dallas-Fort Worth Metroplex on BreederHQ Marketplace. DFW is the cutting and reining capital of the United States — the Pilot Point and Aubrey corridor holds the densest concentration of NCHA and NRHA-level training board in the country. Beyond cutting/reining, DFW supports a strong hunter/jumper and dressage population in Collin County and a deep ranch horse community across the Fort Worth side." regionsHeading="Boarding Markets Across DFW" regionsIntro="Five distinct corridors anchored by the cutting and reining industry." regions={regions} specialtiesHeading="Boarding Specialties in DFW" specialtiesIntro="Cutting and reining drive the premium specialization; hunter/jumper and ranch round out the market." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/equine" providerLabel="Operate a DFW-area boarding facility?" />

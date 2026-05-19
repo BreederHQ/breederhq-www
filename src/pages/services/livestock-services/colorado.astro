@@ -1,0 +1,31 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Colorado', url: '/services/livestock-services/colorado' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Colorado?', answer: 'Colorado supports cattle ranching across the eastern plains, sheep operations across the western slope and northern mountains, and a deep small-farm goat (dairy, meat, fiber) and alpaca community across the Front Range and Western Slope. NWSS in Denver drives a major annual livestock show calendar.' },
+  { question: 'What about NWSS and show stock?', answer: 'The National Western Stock Show in Denver is one of the largest stock shows in the country. Show stock services (fitting, clipping, prep work) and cattle, sheep, and goat exhibitor support cluster around the show calendar.' },
+  { question: 'What about small-farm goat and alpaca?', answer: 'The Front Range and Western Slope support an unusual concentration of small-farm goat dairies and alpaca/llama operations. Hoof trimming, shearing (alpaca/llama spring shearing), and herd health services serve this population.' }
+];
+const service = { name: 'Livestock Services in Colorado', description: 'Cattle AI/ET, sheep shearing, goat services, alpaca shearing, show stock prep, and herd health across Colorado.', serviceType: 'Livestock Services', areaServed: 'Colorado', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/colorado' };
+const regions = [
+  { name: 'Eastern Plains (Sterling, Yuma, Burlington, Lamar)', note: 'Cattle ranching. Spring branding, fall preg-checking circuits.' },
+  { name: 'Front Range / Northern Colorado (Greeley, Fort Collins)', note: 'CSU vet school, NWSS-adjacent. Specialist breeding, dairy, show stock.' },
+  { name: 'Western Slope (Grand Junction, Montrose, Hotchkiss)', note: 'Sheep, goat, alpaca, cattle. Small-farm livestock community.' },
+  { name: 'Northern Mountains (Steamboat Springs, Craig)', note: 'Sheep grazing, cattle, mountain operations.' },
+  { name: 'San Luis Valley (Alamosa, Monte Vista)', note: 'Sheep, cattle, working ranches.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Breeding', detail: 'Eastern Plains and CSU-adjacent breeding services.' },
+  { label: 'Sheep Shearing', detail: 'Western Slope and Northern Mountains spring shearing.' },
+  { label: 'Alpaca/Llama Shearing', detail: 'Spring shearing for Front Range and Western Slope camelid herds.' },
+  { label: 'Goat Services', detail: 'Dairy, meat, fiber goat care across the Front Range.' },
+  { label: 'Show Stock Prep', detail: 'NWSS-circuit fitting, clipping, and show prep.' },
+  { label: 'Herd Health', detail: 'Working ranch and small-farm herd programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/farriers/colorado', emoji: '🔨', title: 'Farriers in Colorado', note: 'NWSS-adjacent farrier work.' },
+  { href: '/services/livestock-services/wyoming', emoji: '🐄', title: 'Livestock Services in Wyoming', note: 'Adjacent ranch country.' }
+];
+---
+<GeoPage title="Livestock Services in Colorado | BreederHQ Marketplace" description="Find livestock service providers in Colorado. Cattle AI, sheep shearing, goat services, alpaca shearing, NWSS show prep, and herd health across the Eastern Plains, Front Range, Western Slope, and northern mountains." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Colorado" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Colorado" introBody="Find livestock service providers across Colorado on BreederHQ Marketplace. Colorado spans Eastern Plains cattle ranching, sheep operations across the Western Slope and Northern Mountains, a deep small-farm goat and alpaca community along the Front Range, and the National Western Stock Show industry in Denver. CSU veterinary medicine anchors specialist breeding and herd health work." regionsHeading="Livestock Service Markets Across Colorado" regionsIntro="Five corridors with very different livestock industries." regions={regions} specialtiesHeading="Livestock Service Specialties in Colorado" specialtiesIntro="NWSS and the small-farm camelid/goat community produce unusual breadth." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Colorado?" />

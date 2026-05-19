@@ -1,0 +1,29 @@
+---
+import GeoPage from '../../../components/GeoPage.astro';
+const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Livestock Services', url: '/services/livestock-services' }, { name: 'Nebraska', url: '/services/livestock-services/nebraska' }];
+const faqs = [
+  { question: 'What livestock services concentrate in Nebraska?', answer: 'Nebraska is one of the top cattle states by both cow-calf operations (Sandhills, Panhandle) and feeding industry (Eastern Nebraska, North Platte). The University of Nebraska-Lincoln anchors specialist livestock services. The Sandhills region holds one of the largest cow-calf concentrations in the country.' },
+  { question: 'What about the Sandhills?', answer: 'The Sandhills (an area larger than Massachusetts and Connecticut combined) hold one of the most concentrated cow-calf populations in the country. Working livestock services in the Sandhills operate on a circuit model — branding, AI, preg-checking circuits cover multiple ranches across long distances.' }
+];
+const service = { name: 'Livestock Services in Nebraska', description: 'Cattle AI/ET, branding, preg checking, feedyard services, and herd health across Nebraska.', serviceType: 'Livestock Services', areaServed: 'Nebraska', offerDescription: 'Statewide livestock services directory.', offerUrl: '/services/livestock-services/nebraska' };
+const regions = [
+  { name: 'Sandhills (Valentine, Mullen, Burwell)', note: 'Densest cow-calf operations in the US. Branding, AI, preg-check circuits.' },
+  { name: 'Panhandle (Scottsbluff, Alliance, Chadron)', note: 'Cow-calf and feedyard. Mixed cattle operations.' },
+  { name: 'North Platte / Central Nebraska', note: 'Feedyard belt. Industrial-scale cattle work.' },
+  { name: 'Lincoln / UNL', note: 'University of Nebraska. Specialist breeding, repro, herd health.' },
+  { name: 'Eastern Nebraska (Omaha, Norfolk)', note: 'Mixed cattle, dairy, and pork operations.' }
+];
+const specialties = [
+  { label: 'Cattle AI & Embryo Transfer', detail: 'Sandhills and UNL-coordinated breeding services.' },
+  { label: 'Branding', detail: 'Spring branding circuit across the Sandhills and Panhandle.' },
+  { label: 'Pregnancy Checking', detail: 'Fall preg-checking circuits.' },
+  { label: 'Feedyard Services', detail: 'Cattle feedyard health and management programs.' },
+  { label: 'Herd Health', detail: 'Working cow-calf herd programs.' }
+];
+const relatedCards = [
+  { href: '/services/livestock-services', emoji: '🐄', title: 'All Livestock Services', note: 'Browse the full livestock category.' },
+  { href: '/services/livestock-services/iowa', emoji: '🐄', title: 'Livestock Services in Iowa', note: 'Adjacent corn and pork belt.' },
+  { href: '/services/livestock-services/kansas', emoji: '🐄', title: 'Livestock Services in Kansas', note: 'Adjacent cattle country.' }
+];
+---
+<GeoPage title="Livestock Services in Nebraska | BreederHQ Marketplace" description="Find livestock service providers in Nebraska. Cattle AI, Sandhills branding, preg checking, feedyard services, and herd health across the Sandhills, Panhandle, North Platte, and UNL-adjacent corridors." breadcrumbs={breadcrumbs} faqs={faqs} service={service} category="Livestock Services" location="Nebraska" categorySlug="livestock-services" parentHref="/services/livestock-services" parentLabel="Livestock Services" introHeading="Livestock Services in Nebraska" introBody="Find livestock service providers across Nebraska on BreederHQ Marketplace. Nebraska is one of the top cattle states in the country, anchored by the Sandhills cow-calf country, the Panhandle and North Platte feedyard belt, and the University of Nebraska-Lincoln. Working livestock services in the Sandhills operate on a circuit model spanning multiple ranches per trip." regionsHeading="Livestock Service Markets Across Nebraska" regionsIntro="Five corridors with very different operational scales." regions={regions} specialtiesHeading="Livestock Service Specialties in Nebraska" specialtiesIntro="The Sandhills cow-calf scale drives circuit-based service models." specialties={specialties} relatedCards={relatedCards} providerHref="/for-providers/livestock" providerLabel="Are you a livestock service provider in Nebraska?" />

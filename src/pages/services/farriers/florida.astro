@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Farriers', url: '/services/farriers' },
+  { name: 'Florida', url: '/services/farriers/florida' }
+];
+
+const faqs = [
+  {
+    question: 'Where does the farrier demand concentrate in Florida?',
+    answer: 'Florida farrier demand concentrates in three corridors. Marion County (Ocala) is the densest — home to over 1,200 Thoroughbred farms, the Ocala Breeders Sales (OBS) industry, and the World Equestrian Center winter circuit. Palm Beach County (Wellington) hosts the winter equestrian capital with WEF (Winter Equestrian Festival), Adequan Global Dressage Festival, and the Palm Beach International Polo grounds. Tampa Bay and Central Florida (Brooksville, Dade City, Plant City) hold a strong hunter/jumper, dressage, and pleasure horse population. South Florida and the Panhandle have smaller but real farrier communities.'
+  },
+  {
+    question: 'Why is the Marion County farrier market unusually deep?',
+    answer: 'Marion County is the second-densest equine economy in the United States after the Inner Bluegrass. The Ocala/Marion County area processes thousands of yearlings annually through OBS sales (February, March, April, June, August, October), supports a year-round Thoroughbred training population that ships to Gulfstream and other tracks, and now anchors the World Equestrian Center year-round multi-discipline circuit. That depth produces a large, specialized farrier community concentrated in sale prep, racetrack plate work, and corrective work for breeding stock.'
+  },
+  {
+    question: 'What about the Wellington farrier scene during WEF season?',
+    answer: 'Wellington runs the largest concentration of high-performance show horses in the country from January through March. Top-circuit farriers travel to Wellington for the season, working with riders campaigning at WEF, AGDF, and the polo grounds. Local Wellington farriers handle year-round work plus the seasonal surge. If you ship in for WEF season, book farrier service before you arrive — the calendar fills.'
+  },
+  {
+    question: 'What about Thoroughbred sales prep in Ocala?',
+    answer: 'OBS sale prep is its own farrier specialty. Yearlings going to OBS February (Selected), March (Yearling), or April (2YO in Training) need conformation-supportive work, glue-ons on thin or sensitive feet, and turn-out shoes that walk well in the ring. Sale prep farriers in Marion County are different from racetrack plate farriers, and the best ones are booked months in advance for sale season.'
+  },
+  {
+    question: 'How do AFA certifications work and which ones matter in Florida?',
+    answer: 'AFA credentials are voluntary in the US: Certified Farrier (CF), Certified Tradesman Farrier (CTF), Certified Journeyman Farrier (CJF), with Therapeutic Endorsement (TE) and Educator (E) on top. Marion County and Wellington have a high concentration of CJF and CJF-TE farriers because of the depth of the Thoroughbred and high-performance sport horse populations.'
+  },
+  {
+    question: 'How do I find a farrier near me on BreederHQ in Florida?',
+    answer: 'BreederHQ Marketplace lets you search farriers by coverage area, specialty (trim, shoe, racetrack plate, sale prep, corrective, therapeutic, performance), and species or breed focus. Each profile shows AFA certifications, regions served, and accepted work. You can message providers directly through the marketplace.'
+  }
+];
+
+const service = {
+  name: 'Farriers in Florida',
+  description: 'Find AFA-certified farriers, racetrack plate specialists, OBS sale-prep farriers, WEF-season performance shoers, corrective and therapeutic farriers across Florida on BreederHQ Marketplace.',
+  serviceType: 'Farrier and Hoof Care',
+  areaServed: 'Florida',
+  offerDescription: 'Statewide farrier directory connecting Florida horse owners with verified farriers across the Marion County, Wellington, and Tampa Bay corridors.',
+  offerUrl: '/services/farriers/florida'
+};
+
+const regions = [
+  { name: 'Marion County (Ocala, Reddick, Citra, McIntosh)', note: 'Densest equine economy outside the Inner Bluegrass. Thoroughbred breeding, OBS sales, World Equestrian Center, and year-round training. Deep CJF and therapeutic representation.' },
+  { name: 'Palm Beach County (Wellington, Loxahatchee, Royal Palm Beach)', note: 'Winter equestrian capital. WEF, AGDF, and polo. Seasonal surge January through March; year-round high-performance population.' },
+  { name: 'Tampa Bay / Central Florida (Brooksville, Dade City, Plant City, Lakeland)', note: 'Hunter/jumper, dressage, pleasure, and growing eventing community. Mid-density farrier market.' },
+  { name: 'Northeast Florida (Jacksonville, St. Augustine, Gainesville)', note: 'Mixed pleasure, trail, hunter/jumper. Gulfstream Park West-influenced racetrack work.' },
+  { name: 'South Florida (Miami, Davie)', note: 'Polo, hunter/jumper, and pleasure horse population. Tropical Park-influenced; smaller market.' },
+  { name: 'Panhandle (Tallahassee, Pensacola, Panama City)', note: 'Pleasure, trail, and stock horse country. Lower density; larger driving radii.' }
+];
+
+const specialties = [
+  { label: 'Routine Trimming', detail: 'Pleasure, pasture, retired, and trim-only clients on 5 to 8 week cycles.' },
+  { label: 'Performance Shoeing', detail: 'Hunter/jumper, dressage, polo, eventing, Western performance.' },
+  { label: 'Racetrack Plate Work', detail: 'Gulfstream Park, Tampa Bay Downs, and Ocala training-track plates.' },
+  { label: 'OBS Sale Prep', detail: 'Conformation-supportive prep for OBS February, March, April, June, August, October sales.' },
+  { label: 'WEF Season Work', detail: 'Show-circuit plate work for WEF, AGDF, and polo season in Wellington.' },
+  { label: 'Corrective & Therapeutic', detail: 'AFA-TE work, glue-ons, pads, bar shoes, hospital plates for breeding stock and growing horses.' }
+];
+---
+
+<BaseLayout
+  title="Farriers in Florida | BreederHQ Marketplace"
+  description="Find AFA-certified farriers in Florida. OBS sale-prep specialists, WEF-season performance shoers, racetrack plate farriers, corrective and therapeutic farriers across Marion County, Wellington, Tampa Bay, and statewide."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  service={service}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/farriers" class="text-amber-700 hover:underline">Farriers</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Florida</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Farriers · Florida</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Farriers in Florida</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Find farriers across Florida on BreederHQ Marketplace. Florida supports the second-densest equine economy in the United States — Marion County's Thoroughbred breeding industry and World Equestrian Center year-round circuit; Wellington's winter season at WEF, AGDF, and the polo grounds; and a deep hunter/jumper and dressage population across the Tampa Bay corridor.
+        </p>
+        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Farriers in Florida
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Regional Farrier Markets in Florida</h2>
+        <p class="text-gray-600 mb-6">Florida's farrier markets cluster around six distinct ecosystems.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {regions.map((r) => (
+            <div class="bg-stone-50 border border-stone-200 rounded-xl p-5">
+              <h3 class="font-semibold text-gray-900 mb-2">{r.name}</h3>
+              <p class="text-sm text-gray-700 leading-relaxed">{r.note}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Farrier Specialties in Florida</h2>
+        <p class="text-gray-600 mb-6">Florida's discipline mix and Thoroughbred industry drive demand across the full specialty range.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {specialties.map((s) => (
+            <div class="bg-white border border-stone-200 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">{s.label}</h3>
+              <p class="text-sm text-gray-700">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/farriers" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🔨</div>
+            <div class="font-semibold text-gray-900">All Farriers</div>
+            <p class="text-xs text-gray-600 mt-1">Browse the full farrier category.</p>
+          </a>
+          <a href="/services/equine-boarding/ocala-fl" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🏇</div>
+            <div class="font-semibold text-gray-900">Equine Boarding in Ocala</div>
+            <p class="text-xs text-gray-600 mt-1">Marion County equine boarding facilities.</p>
+          </a>
+          <a href="/services/farriers/kentucky" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🔨</div>
+            <div class="font-semibold text-gray-900">Farriers in Kentucky</div>
+            <p class="text-xs text-gray-600 mt-1">Bluegrass farrier directory.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/farriers" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a farrier in Florida?</p>
+            <p class="text-sm text-gray-600">List your practice on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
