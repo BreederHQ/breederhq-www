@@ -23,7 +23,11 @@ export interface BreederCard {
   logoUrl: string | null;
   bannerImageUrl: string | null;
   primarySpecies: string | null;
-  /** Trust + availability signals - surfaced on cards to lift CTR */
+  /**
+   * Profile Indicators (account-history facts) + provider self-attestations
+   * surfaced on cards to lift CTR. None of these are BreederHQ editorial
+   * judgments; see LEGAL-CLARITY-REMEDIATION-2026-06.
+   */
   badges?: {
     quickResponder?: boolean;
     healthTesting?: boolean;
@@ -35,7 +39,6 @@ export interface BreederCard {
     availableNowCount?: number;
     upcomingLittersCount?: number;
   };
-  verificationTier?: "IDENTITY_VERIFIED" | "VERIFIED" | "ACCREDITED" | null;
 }
 
 // CATTLE is the remaining stealth species and is intentionally excluded

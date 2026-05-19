@@ -22,7 +22,7 @@ const {
   breeders,
   speciesLabel,
   emptyHeading = `We're growing our ${speciesLabel} breeder roster`,
-  emptyBody = `${speciesLabel.charAt(0).toUpperCase() + speciesLabel.slice(1)} breeders are joining BreederHQ regularly. Check the marketplace directly for the latest verified breeders, or come back soon.`,
+  emptyBody = `${speciesLabel.charAt(0).toUpperCase() + speciesLabel.slice(1)} breeders are joining BreederHQ regularly. Check the marketplace directly for the latest listings, or come back soon.`,
 } = Astro.props;
 
 function locationLabel(b: BreederCard): string {
@@ -44,7 +44,7 @@ function breedSummary(b: BreederCard): string {
   <section class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-gray-900 mb-8">
-        {speciesLabel ? `Verified ${speciesLabel} breeders on BreederHQ` : 'Verified breeders on BreederHQ'}
+        {speciesLabel ? `${speciesLabel.charAt(0).toUpperCase() + speciesLabel.slice(1)} breeders on BreederHQ` : 'Breeders on BreederHQ'}
       </h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {breeders.map((b) => {
@@ -60,7 +60,7 @@ function breedSummary(b: BreederCard): string {
                 <div class="aspect-video bg-stone-100 overflow-hidden">
                   <img
                     src={b.bannerImageUrl}
-                    alt={`${b.businessName}, verified ${speciesLabel ? speciesLabel + ' ' : ''}breeder${loc ? ' in ' + loc : ''}`}
+                    alt={`${b.businessName}${speciesLabel ? ', ' + speciesLabel + ' breeder' : ''}${loc ? ' in ' + loc : ''}`}
                     loading="lazy"
                     class="w-full h-full object-cover"
                   />
@@ -86,20 +86,16 @@ function breedSummary(b: BreederCard): string {
                   </p>
                 )}
 
-                {/* Trust + availability signals - only render when present */}
+                {/* Profile Indicators (account-history facts) + Stripe Identity passthrough.
+                    The retired `verificationTier` field is dropped; it was a BreederHQ editorial
+                    judgment, not a passthrough indicator. See LEGAL-CLARITY-REMEDIATION-2026-06. */}
                 {(b.badges?.healthTesting ||
                   b.badges?.quickResponder ||
-                  b.badges?.experiencedBreeder ||
-                  b.verificationTier) && (
+                  b.badges?.experiencedBreeder) && (
                   <div class="flex flex-wrap gap-1.5 mb-3">
-                    {b.verificationTier && (
-                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                        ✓ Verified
-                      </span>
-                    )}
                     {b.badges?.healthTesting && (
                       <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                        Health tested
+                        Health testing attested
                       </span>
                     )}
                     {b.badges?.quickResponder && (
@@ -109,7 +105,7 @@ function breedSummary(b: BreederCard): string {
                     )}
                     {b.badges?.experiencedBreeder && (
                       <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-200">
-                        Experienced
+                        Established
                       </span>
                     )}
                   </div>
