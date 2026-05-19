@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchFacilityListings } from '../../lib/marketplaceListings';
+const listings = await fetchFacilityListings('dog-parks');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -31,12 +34,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Book private dog exercise spaces by the hour on BreederHQ Marketplace. Fenced yards, training fields, agility courses, swim spots, and indoor play spaces — booked exclusively for your dogs, one party at a time. The right answer for reactive dogs, recall training, and owners who don't want to roll the dice on a public dog park.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Dog Parks Near You
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Private Dog Parks" unit="facility" bg="white" />
 
     <section class="py-12 px-4 bg-white">
       <div class="max-w-4xl mx-auto">

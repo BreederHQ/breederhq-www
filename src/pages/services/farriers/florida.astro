@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ListingsSection from '../../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../../lib/marketplaceListings';
+const listings = await fetchServiceListings('farriers', { state: 'Florida' });
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -89,12 +92,15 @@ const specialties = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Find farriers across Florida on BreederHQ Marketplace. Florida supports the second-densest equine economy in the United States — Marion County's Thoroughbred breeding industry and World Equestrian Center year-round circuit; Wellington's winter season at WEF, AGDF, and the polo grounds; and a deep hunter/jumper and dressage population across the Tampa Bay corridor.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Farriers in Florida
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Farriers" unit="farrier" scopeLabel="in Florida" bg="white" />
 
     <section class="py-12 px-4 bg-white">
       <div class="max-w-4xl mx-auto">

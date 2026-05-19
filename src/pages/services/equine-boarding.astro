@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+
+const listings = await fetchServiceListings('equine-boarding');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -81,8 +85,8 @@ const faqs = [
           Horses are not pets in cages. They are 1,000-pound athletes with seasonal cycling, daily turnout needs, hoof-care schedules every four to six weeks, and a digestive system that does not tolerate inconsistent forage. The boarding facility you choose shapes your horse&rsquo;s soundness, behavior, and performance more than almost any other decision you will make as an owner.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="/horses" class="inline-flex items-center justify-center bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-[hsl(24,95%,47%)] transition">
-            Browse Equine Services
+          <a href={listings.browseUrl} class="inline-flex items-center justify-center bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-[hsl(24,95%,47%)] transition">
+            Browse Equine Boarding Facilities
           </a>
           <a href="/for-providers/equine-services" class="inline-flex items-center justify-center border-2 border-stone-300 text-gray-800 px-6 py-3 rounded-lg text-base font-semibold hover:border-amber-600 hover:text-amber-700 transition">
             List Your Facility
@@ -90,6 +94,8 @@ const faqs = [
         </div>
       </div>
     </section>
+
+    <ListingsSection listings={listings} noun="Equine Boarding Facilities" unit="facility" bg="white" />
 
     <!-- Section 2: Types of Equine Boarding -->
     <section class="py-16 bg-white">

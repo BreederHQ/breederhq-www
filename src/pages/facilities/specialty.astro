@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchFacilityListings } from '../../lib/marketplaceListings';
+const listings = await fetchFacilityListings('specialty');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -31,12 +34,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Book specialty animal facilities on BreederHQ Marketplace. Hydrotherapy and swim, underwater treadmills, land treadmills, rehab and PT spaces, sensory and calming rooms, scent work, fitness and conditioning, and whelping/neonatal spaces. The infrastructure that traditional facility categories don't cover.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Specialty Facilities
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Specialty Facilities" unit="facility" bg="white" />
 
     <section class="py-12 px-4 bg-white">
       <div class="max-w-4xl mx-auto">

@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+
+const listings = await fetchServiceListings('farriers');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -83,6 +87,9 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <ListingsSection listings={listings} noun="Farriers" unit="farrier" bg="white" />
+
 
   <!-- ========== 2. WHY IT MATTERS ========== -->
   <section class="py-16 bg-white border-t border-stone-200">

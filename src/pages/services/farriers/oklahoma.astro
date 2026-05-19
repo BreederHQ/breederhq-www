@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ListingsSection from '../../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../../lib/marketplaceListings';
+const listings = await fetchServiceListings('farriers', { state: 'Oklahoma' });
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -41,9 +44,12 @@ const specialties = [
         <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Farriers · Oklahoma</p>
         <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Farriers in Oklahoma</h1>
         <p class="text-lg text-gray-700 leading-relaxed mb-6">Find farriers across Oklahoma on BreederHQ Marketplace. Oklahoma is the heart of American Quarter Horse country, with deep cutting, reining, and reined cow horse industries centered around Oklahoma City and Tulsa, a working-ranch farrier community across the western half of the state, and racetrack plate work at Remington Park and Will Rogers Downs.</p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">Browse Farriers in Oklahoma <span aria-hidden="true">→</span></a>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">Browse Farriers in Oklahoma <span aria-hidden="true">→</span></a>
       </div>
     </section>
+
+    <ListingsSection listings={listings} noun="Farriers" unit="farrier" scopeLabel="in Oklahoma" bg="white" />
+
     <section class="py-12 px-4 bg-white"><div class="max-w-4xl mx-auto"><h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Regional Farrier Markets in Oklahoma</h2><p class="text-gray-600 mb-6">Oklahoma's farrier markets cluster around five distinct regions.</p><div class="grid sm:grid-cols-2 gap-4">{regions.map((r) => (<div class="bg-stone-50 border border-stone-200 rounded-xl p-5"><h3 class="font-semibold text-gray-900 mb-2">{r.name}</h3><p class="text-sm text-gray-700 leading-relaxed">{r.note}</p></div>))}</div></div></section>
     <section class="py-12 px-4 bg-stone-50"><div class="max-w-4xl mx-auto"><h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Farrier Specialties in Oklahoma</h2><p class="text-gray-600 mb-6">The quarter-horse-dominated discipline mix drives demand toward performance and ranch shoeing.</p><div class="grid sm:grid-cols-2 gap-4">{specialties.map((s) => (<div class="bg-white border border-stone-200 rounded-lg p-4"><h3 class="font-semibold text-gray-900 mb-1">{s.label}</h3><p class="text-sm text-gray-700">{s.detail}</p></div>))}</div></div></section>
     <section class="py-12 px-4 bg-white"><div class="max-w-5xl mx-auto"><h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2><div class="grid sm:grid-cols-3 gap-4"><a href="/services/farriers" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition"><div class="text-xl mb-1">🔨</div><div class="font-semibold text-gray-900">All Farriers</div><p class="text-xs text-gray-600 mt-1">Browse the full farrier category.</p></a><a href="/services/farriers/texas" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition"><div class="text-xl mb-1">🔨</div><div class="font-semibold text-gray-900">Farriers in Texas</div><p class="text-xs text-gray-600 mt-1">DFW cutting/reining and Houston sport horse markets.</p></a><a href="/services/livestock-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition"><div class="text-xl mb-1">🐄</div><div class="font-semibold text-gray-900">Livestock Services</div><p class="text-xs text-gray-600 mt-1">Working livestock support across Oklahoma's ag corridors.</p></a></div></div></section>

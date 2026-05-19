@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('boarding');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -32,12 +35,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Browse boarding providers on BreederHQ Marketplace. Filter by species, facility type, in-home vs. kennel, and coverage area. For dedicated equine boarding, see the separate Equine Boarding category.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Boarding Providers
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Boarding Providers" unit="provider" bg="white" />
 
     <!-- What this category covers -->
     <section class="py-12 px-4 bg-white">
@@ -97,7 +103,7 @@ const breadcrumbs = [
             <div class="font-semibold text-gray-900">Equine Boarding</div>
             <p class="text-xs text-gray-600 mt-1">Pasture, full care, training board, and breeding facilities.</p>
           </a>
-          <a href="/services#pet-sitting" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+          <a href="/services/pet-sitting" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
             <div class="text-xl mb-1">🐾</div>
             <div class="font-semibold text-gray-900">Pet Sitting</div>
             <p class="text-xs text-gray-600 mt-1">In-home sitters, drop-in visits, and overnight care.</p>

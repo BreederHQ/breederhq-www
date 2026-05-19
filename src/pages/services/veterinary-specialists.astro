@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('veterinary-specialists');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -32,12 +35,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           BreederHQ Marketplace surfaces veterinary specialists, not general practice. Reproductive vets, equine vets, exotic-animal vets, sports medicine, and theriogenologists. For breeders, performance owners, and cases your regular vet refers out.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Veterinary Specialists
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Veterinary Specialists" unit="specialist" bg="white" />
 
     <!-- What this category covers -->
     <section class="py-12 px-4 bg-white">
@@ -92,17 +98,17 @@ const breadcrumbs = [
       <div class="max-w-5xl mx-auto">
         <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
         <div class="grid sm:grid-cols-3 gap-4">
-          <a href="/services#health-testing" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+          <a href="/services/health-testing" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
             <div class="text-xl mb-1">🧬</div>
             <div class="font-semibold text-gray-900">Health Testing</div>
             <p class="text-xs text-gray-600 mt-1">OFA, PennHIP, CHIC, CERF, and genetic panel providers.</p>
           </a>
-          <a href="/services#rehabilitation" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+          <a href="/services/rehabilitation" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
             <div class="text-xl mb-1">💪</div>
             <div class="font-semibold text-gray-900">Rehabilitation</div>
             <p class="text-xs text-gray-600 mt-1">Canine and equine physical therapy and sports recovery.</p>
           </a>
-          <a href="/services#equine-services" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+          <a href="/services/equine-services" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
             <div class="text-xl mb-1">🐎</div>
             <div class="font-semibold text-gray-900">Equine Services</div>
             <p class="text-xs text-gray-600 mt-1">Training, lessons, and ambulatory equine support.</p>

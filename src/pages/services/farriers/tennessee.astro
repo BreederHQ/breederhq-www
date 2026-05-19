@@ -1,5 +1,7 @@
 ---
 import GeoPage from '../../../components/GeoPage.astro';
+import { fetchServiceListings } from '../../../lib/marketplaceListings';
+const listings = await fetchServiceListings('farriers', { state: 'Tennessee' });
 const breadcrumbs = [{ name: 'Home', url: '/' }, { name: 'Farriers', url: '/services/farriers' }, { name: 'Tennessee', url: '/services/farriers/tennessee' }];
 const faqs = [
   { question: 'Where does farrier demand concentrate in Tennessee?', answer: 'Three corridors. Middle Tennessee (Shelbyville, Lewisburg, Franklin, Murfreesboro) is the heart of the Tennessee Walking Horse industry. East Tennessee (Knoxville, Maryville, Sevierville) supports a growing eventing and trail population. The Memphis corridor and Mid-South support Quarter Horse, pleasure, and racing.' },
@@ -47,4 +49,6 @@ const relatedCards = [
   relatedCards={relatedCards}
   providerHref="/for-providers/farriers"
   providerLabel="Are you a farrier in Tennessee?"
+  listings={listings}
+  listingsUnit="farrier"
 />

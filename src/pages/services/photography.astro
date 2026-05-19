@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('photography');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -31,12 +34,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Browse animal photographers on BreederHQ Marketplace. Litter photography for breeders, conformation show win photos, equine portraiture and sport action, working-dog action, and breeder marketing media. Animal photographers are a specialty — the right one for newborn litters is rarely the right one for sport action.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Photographers
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Photographers" unit="photographer" bg="white" />
 
     <section class="py-12 px-4 bg-white">
       <div class="max-w-4xl mx-auto">

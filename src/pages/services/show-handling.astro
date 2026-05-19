@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('show-handling');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -31,12 +34,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Browse professional dog show handlers on BreederHQ Marketplace. AKC and UKC handlers, breed-specialist handlers by group and circuit, ring-training instructors, and show grooming specialists. For owners campaigning a special, breeders finishing a young dog, or anyone working toward a major.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Show Handlers
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Show Handlers" unit="handler" bg="white" />
 
     <section class="py-12 px-4 bg-white">
       <div class="max-w-4xl mx-auto">

@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ListingsSection from '../../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../../lib/marketplaceListings';
+const listings = await fetchServiceListings('farriers', { state: 'Kentucky' });
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -113,6 +116,9 @@ const specialties = [
         </div>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Farriers" unit="farrier" scopeLabel="in Kentucky" bg="white" />
 
     <!-- 2. Kentucky Farrier Ecosystem -->
     <section class="py-16 px-4 bg-white">

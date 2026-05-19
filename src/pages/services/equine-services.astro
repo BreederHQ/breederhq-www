@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('equine-services');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -32,12 +35,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Browse equine service providers on BreederHQ Marketplace. Trainers, instructors, equine bodywork, sports massage, equine dentistry, and discipline-specific programs. For dedicated boarding facilities and farriers, see the separate categories.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Equine Service Providers
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Equine Service Providers" unit="provider" bg="white" />
 
     <!-- What this category covers -->
     <section class="py-12 px-4 bg-white">

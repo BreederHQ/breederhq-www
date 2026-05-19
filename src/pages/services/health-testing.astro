@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('health-testing');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -32,12 +35,15 @@ const breadcrumbs = [
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
           Browse health testing providers on BreederHQ Marketplace. Veterinary geneticists, reproductive vets, and specialist clinics that run OFA, PennHIP, CHIC, CERF, and breed-specific genetic panels. Built for breeders making informed breeding decisions, not consumer DNA kits.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Health Testing Providers
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Health Testing Providers" unit="provider" bg="white" />
 
     <!-- What this category covers -->
     <section class="py-12 px-4 bg-white">

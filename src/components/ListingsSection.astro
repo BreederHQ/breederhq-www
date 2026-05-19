@@ -1,0 +1,125 @@
+---
+/**
+ * Inventory-aware listings block.
+ *
+ * Render contract (matches the dog-park city page pattern):
+ *
+ *   total === 0          → honest empty state ("Be the first to list…")
+ *   1 <= total <= 2      → honest thin state (cards + "we're still early" message)
+ *   total >= 3           → grid of listing cards
+ *   total > items.length → "See all N listings" link
+ *
+ * Never invents counts, density, or trust signals. Never lies about
+ * how much inventory exists.
+ *
+ * Designed to be dropped on:
+ *   - /services/<category> hubs
+ *   - /facilities/<type> hubs
+ *   - /services/<category>/<location> geo pages
+ *   - /facilities/<type>/<location> geo pages (when they exist)
+ */
+import type { ListingsResult } from '../lib/marketplaceListings';
+import { listingDetailUrl } from '../lib/marketplaceListings';
+
+interface Props {
+  /** Result from fetchServiceListings / fetchFacilityListings. */
+  listings: ListingsResult;
+  /** What the buyer is looking for — e.g. "Farriers", "Equine Boarding Facilities", "Dog Trainers". */
+  noun: string;
+  /** Plural noun for the listing card unit — e.g. "listing", "facility", "trainer". Defaults to 'listing'. */
+  unit?: string;
+  /** Optional scope phrase appended for context — e.g. " in Lexington, KY". */
+  scopeLabel?: string;
+  /** Heading rendered above the section. Defaults to "Featured <noun><scope>". */
+  heading?: string;
+  /** Section background — pages alternate stone-50 and white. */
+  bg?: 'white' | 'stone-50';
+  /** When true, omit the "List your business" empty-state CTA (used on geo pages where the parent hub already shows it). */
+  hideListingFlowCta?: boolean;
+}
+
+const {
+  listings,
+  noun,
+  unit = 'listing',
+  scopeLabel,
+  heading,
+  bg = 'white',
+  hideListingFlowCta = false
+} = Astro.props as Props;
+
+const { items, total, browseUrl, listingFlowUrl } = listings;
+const scope = scopeLabel ? ` ${scopeLabel}` : '';
+const effectiveHeading = heading || `Featured ${noun}${scope}`;
+const unitPlural = total === 1 ? unit : `${unit}s`;
+const bgClass = bg === 'stone-50' ? 'bg-stone-50' : 'bg-white';
+---
+
+<section class={`py-14 px-4 ${bgClass}`}>
+  <div class="max-w-6xl mx-auto">
+    <div class="flex items-baseline justify-between mb-3 flex-wrap gap-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">{effectiveHeading}</h2>
+      {total > 0 && (
+        <a href={browseUrl} class="text-sm font-semibold text-amber-700 hover:underline whitespace-nowrap">
+          See all on the Marketplace →
+        </a>
+      )}
+    </div>
+
+    {total === 0 && (
+      <p class="text-gray-600 mb-6">No live {unitPlural} yet{scope}. Provider acquisition is in progress — listings will surface here automatically as providers join.</p>
+    )}
+    {total >= 1 && total <= 2 && (
+      <p class="text-gray-600 mb-6">{total} {unitPlural} on the Marketplace{scope} so far. Coverage is still early — more providers join every week.</p>
+    )}
+    {total >= 3 && (
+      <p class="text-gray-600 mb-6">{total} {unitPlural} on the Marketplace{scope}. Showing {Math.min(items.length, total)}.</p>
+    )}
+
+    {items.length > 0 ? (
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {items.map((listing) => (
+          <a href={listingDetailUrl(listing.slug)} class="block bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200 hover:shadow-md hover:border-amber-500 transition">
+            {listing.images && listing.images.length > 0 ? (
+              <img src={listing.images[0]} alt={listing.title} class="w-full h-44 object-cover" loading="lazy" />
+            ) : (
+              <div class="w-full h-44 bg-stone-100 flex items-center justify-center text-stone-400 text-sm">No photo</div>
+            )}
+            <div class="p-4">
+              <h3 class="font-bold text-gray-900 mb-1 line-clamp-2">{listing.title}</h3>
+              {listing.cardSummary && (
+                <p class="text-sm text-gray-600 mb-2 line-clamp-2">{listing.cardSummary}</p>
+              )}
+              <p class="text-xs text-gray-500">
+                {[listing.city, listing.state].filter(Boolean).join(', ')}
+              </p>
+              {listing.priceDisplay && (
+                <p class="font-semibold text-amber-700 mt-2 text-sm">{listing.priceDisplay}</p>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      !hideListingFlowCta && (
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-lg">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Provider? Be the first {unit} on the Marketplace{scope}.</h3>
+          <p class="text-sm text-gray-700 mb-4 leading-relaxed">
+            Listing first means your business ranks first in {scope ? `${scopeLabel} ` : ''}search results, captures early inquiries, and earns the "Rising Star" badge as you build a track record.
+          </p>
+          <a href={listingFlowUrl} class="inline-block bg-amber-700 hover:bg-amber-600 text-white font-semibold py-2.5 px-5 rounded-lg text-sm transition">
+            Start a Listing →
+          </a>
+        </div>
+      )
+    )}
+
+    {items.length > 0 && total > items.length && (
+      <div class="text-center mt-8">
+        <a href={browseUrl} class="inline-block bg-amber-700 hover:bg-amber-600 text-white font-semibold py-2.5 px-6 rounded-lg transition">
+          See All {total} {unitPlural}{scope} →
+        </a>
+      </div>
+    )}
+  </div>
+</section>

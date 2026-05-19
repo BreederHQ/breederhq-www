@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchFacilityListings } from '../../lib/marketplaceListings';
+const listings = await fetchFacilityListings('boarding');
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -34,12 +37,15 @@ const breadcrumbs = [
         <p class="text-base text-gray-600 leading-relaxed mb-6">
           Looking for boarding as a service? See the <a href="/services/boarding" class="text-amber-700 hover:underline">Boarding services category</a> for in-home and provider-led options. This page is the facility-side view: physical infrastructure available for booking.
         </p>
-        <a href="https://marketplace.breederhq.com" class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
           Browse Boarding Facilities
           <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
+
+
+    <ListingsSection listings={listings} noun="Boarding Facilities" unit="facility" bg="white" />
 
     <section class="py-12 px-4 bg-white">
       <div class="max-w-4xl mx-auto">
