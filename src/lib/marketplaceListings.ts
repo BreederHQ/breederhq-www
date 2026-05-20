@@ -64,7 +64,14 @@ export interface MarketplaceListing {
   priceCents: number | null;
   priceType: string | null;
   priceDisplay?: string;
+  /** Unordered media array. Do NOT use [0] as the card image; prefer coverImageUrl. */
   images: string[];
+  /**
+   * Provider-selected cover image for the listing. This is the authoritative
+   * "card image" — the marketplace itself renders this on listing cards.
+   * Falls back to images[0] only if coverImageUrl is missing.
+   */
+  coverImageUrl?: string | null;
   cardSummary?: string | null;
 }
 
