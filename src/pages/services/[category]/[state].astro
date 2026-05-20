@@ -1,0 +1,207 @@
+---
+/**
+ * Dynamic state-page route for any service category.
+ *
+ * Generates one static page per (category, state) where:
+ *   1. The category is in DATA_DRIVEN_CATEGORIES (below)
+ *   2. The state is a real US_STATES entry
+ *   3. The category has >= 1 listing in that state
+ *   4. No literal /services/<category>/<state>.astro file already exists
+ *      (Astro routes literal files first, so curated editorial pages
+ *       always win — this dynamic route only fills the gaps)
+ *
+ * The page is intentionally generic: hero, ListingsSection rendering the
+ * actual providers, a brief "what to look for" / "how to choose" block
+ * derived from the category, and a CTA. No fake editorial copy about
+ * the state. Honest by default; promote to a standalone editorial page
+ * when a state earns the investment.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ListingsSection from '../../../components/ListingsSection.astro';
+import {
+  fetchAllListingsForCategory,
+  fetchServiceListings,
+  groupListingsByState,
+  stateBySlug,
+  type CategoryKey,
+} from '../../../lib/marketplaceListings';
+
+interface CategoryMeta {
+  displayName: string;          // 'Farriers'
+  singular: string;             // 'farrier'
+  noun: string;                 // 'Farriers' (rendered in ListingsSection heading)
+  parentHubUrl: string;         // '/services/farriers'
+  parentHubLabel: string;       // 'Farriers'
+}
+
+const CATEGORY_META: Record<CategoryKey, CategoryMeta> = {
+  'farriers':              { displayName: 'Farriers',              singular: 'farrier',              noun: 'Farriers',              parentHubUrl: '/services/farriers',              parentHubLabel: 'Farriers' },
+  'equine-boarding':       { displayName: 'Equine Boarding',       singular: 'equine boarding facility', noun: 'Equine Boarding Facilities', parentHubUrl: '/services/equine-boarding',       parentHubLabel: 'Equine Boarding' },
+  'equine-services':       { displayName: 'Equine Services',       singular: 'equine service provider',  noun: 'Equine Service Providers',   parentHubUrl: '/services/equine-services',       parentHubLabel: 'Equine Services' },
+  'equine-repro':          { displayName: 'Equine Reproduction',   singular: 'equine repro specialist',  noun: 'Equine Reproduction Specialists', parentHubUrl: '/services/equine-repro',     parentHubLabel: 'Equine Reproduction' },
+  'livestock-services':    { displayName: 'Livestock Services',    singular: 'livestock service provider', noun: 'Livestock Service Providers', parentHubUrl: '/services/livestock-services', parentHubLabel: 'Livestock Services' },
+  'dog-training':          { displayName: 'Dog Training',          singular: 'dog trainer',          noun: 'Dog Trainers',          parentHubUrl: '/services/dog-training',          parentHubLabel: 'Dog Training' },
+  'grooming':              { displayName: 'Grooming',              singular: 'groomer',              noun: 'Groomers',              parentHubUrl: '/services/grooming',              parentHubLabel: 'Grooming' },
+  'boarding':              { displayName: 'Boarding',              singular: 'boarding facility',    noun: 'Boarding Facilities',   parentHubUrl: '/services/boarding',              parentHubLabel: 'Boarding' },
+  'pet-sitting':           { displayName: 'Pet Sitting',           singular: 'pet sitter',           noun: 'Pet Sitters',           parentHubUrl: '/services/pet-sitting',           parentHubLabel: 'Pet Sitting' },
+  'health-testing':        { displayName: 'Health Testing',        singular: 'health testing provider', noun: 'Health Testing Providers', parentHubUrl: '/services/health-testing', parentHubLabel: 'Health Testing' },
+  'rehabilitation':        { displayName: 'Rehabilitation',        singular: 'rehab provider',       noun: 'Rehabilitation Providers', parentHubUrl: '/services/rehabilitation',     parentHubLabel: 'Rehabilitation' },
+  'nutrition':             { displayName: 'Nutrition',             singular: 'nutrition consultant', noun: 'Nutrition Consultants', parentHubUrl: '/services/nutrition',             parentHubLabel: 'Nutrition' },
+  'transport':             { displayName: 'Transport',             singular: 'transporter',          noun: 'Transporters',          parentHubUrl: '/services/transport',             parentHubLabel: 'Transport' },
+  'photography':           { displayName: 'Photography',           singular: 'photographer',         noun: 'Photographers',         parentHubUrl: '/services/photography',           parentHubLabel: 'Photography' },
+  'behavioral':            { displayName: 'Behavioral',            singular: 'behaviorist',          noun: 'Behaviorists',          parentHubUrl: '/services/behavioral',            parentHubLabel: 'Behavioral' },
+  'show-handling':         { displayName: 'Show Handling',         singular: 'handler',              noun: 'Handlers',              parentHubUrl: '/services/show-handling',         parentHubLabel: 'Show Handling' },
+  'veterinary-specialists':{ displayName: 'Veterinary Specialists',singular: 'vet specialist',       noun: 'Veterinary Specialists',parentHubUrl: '/services/veterinary-specialists',parentHubLabel: 'Veterinary Specialists' },
+};
+
+export async function getStaticPaths() {
+  // Inlined here because Astro evaluates getStaticPaths in an isolated
+  // scope that cannot see module-level constants defined in the same
+  // frontmatter. Keep this list in sync with CATEGORY_META below — every
+  // category here must have a CATEGORY_META entry.
+  const dataDrivenCategories: CategoryKey[] = [
+    'farriers',
+    'equine-boarding',
+    'equine-services',
+    'equine-repro',
+    'livestock-services',
+    'dog-training',
+    'grooming',
+    'boarding',
+    'pet-sitting',
+    'health-testing',
+    'rehabilitation',
+    'nutrition',
+    'transport',
+    'photography',
+    'behavioral',
+    'show-handling',
+    'veterinary-specialists',
+  ];
+
+  const paths: { params: { category: string; state: string } }[] = [];
+
+  for (const category of dataDrivenCategories) {
+    const all = await fetchAllListingsForCategory(category);
+    const grouped = groupListingsByState(all);
+    for (const { state } of grouped.values()) {
+      paths.push({ params: { category, state: state.slug } });
+    }
+  }
+
+  return paths;
+}
+
+const { category, state: stateSlug } = Astro.params;
+const cat = category as CategoryKey;
+const meta = CATEGORY_META[cat];
+const stateDesc = stateBySlug(stateSlug);
+
+// Guard: if Astro routed us here with an unknown combo (shouldn't happen
+// given getStaticPaths, but defence in depth), bail to a 404-shaped page.
+if (!meta || !stateDesc) {
+  return Astro.redirect('/services');
+}
+
+// Live data for this state. The marketplace API stores `state` as 2-letter
+// USPS codes (AL, UT, KY) and filters with ILIKE, so passing the code is
+// the only thing that reliably matches. Passing the full state name
+// returns zero results.
+const listings = await fetchServiceListings(cat, { state: stateDesc.code }, 24);
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: meta.parentHubLabel, url: meta.parentHubUrl },
+  { name: stateDesc.name, url: `/services/${cat}/${stateDesc.slug}` },
+];
+
+const title = `${meta.displayName} in ${stateDesc.name} | BreederHQ Marketplace`;
+const description = `Find ${meta.displayName.toLowerCase()} serving ${stateDesc.name} on BreederHQ Marketplace. Verified provider profiles, direct messaging, no phone number required until you choose.`;
+
+const faqs = [
+  {
+    question: `How do I find a ${meta.singular} in ${stateDesc.name}?`,
+    answer: `Browse the live listings below, or open the full marketplace search for ${meta.displayName.toLowerCase()} in ${stateDesc.name}. You can message any provider directly through their profile without sharing your phone number until you choose to.`,
+  },
+  {
+    question: `Are the providers on BreederHQ verified?`,
+    answer: `BreederHQ does not vet or vouch for providers. Profiles may show identity confirmation (Stripe Identity) and registry passthrough (e.g. AFA for farriers, OFA for breeders) where supported. Everything else is the provider's own attestation. See the Identity & Credentials page for the full posture.`,
+  },
+  {
+    question: `What if there are no ${meta.singular}s in ${stateDesc.name} yet?`,
+    answer: `BreederHQ Marketplace is in early access. New providers join every week. If you're a ${meta.singular} in ${stateDesc.name}, claiming an early listing means your business ranks first in local search results and earns the "Rising Star" badge as you build a track record.`,
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href={meta.parentHubUrl} class="text-amber-700 hover:underline">{meta.parentHubLabel}</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">{stateDesc.name}</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-16 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">{stateDesc.name}</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
+          {meta.displayName} in {stateDesc.name}
+        </h1>
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          Live directory of {meta.displayName.toLowerCase()} serving {stateDesc.name} on BreederHQ Marketplace. Providers list themselves; we surface them here as they join.
+        </p>
+        <p class="text-base text-gray-600 leading-relaxed">
+          For background on how to evaluate a {meta.singular} and what to look for in a provider profile, see the <a href={meta.parentHubUrl} class="text-amber-700 hover:underline">parent {meta.parentHubLabel} guide</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Live listings -->
+    <ListingsSection
+      listings={listings}
+      noun={meta.noun}
+      unit={meta.singular}
+      scopeLabel={`in ${stateDesc.name}`}
+      heading={`${meta.displayName} in ${stateDesc.name}`}
+      bg="white"
+    />
+
+    <!-- FAQ -->
+    <section class="bg-stone-50 py-16 border-t border-stone-200">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 mb-8">Frequently asked questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="group rounded-xl bg-white border border-stone-200 p-5">
+              <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+                <h3 class="text-lg font-semibold text-gray-900">{faq.question}</h3>
+                <span class="text-amber-700 text-2xl leading-none group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="text-gray-700 mt-4 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to parent hub -->
+    <section class="py-12 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <a href={meta.parentHubUrl} class="inline-block text-amber-700 hover:underline font-semibold">
+          ← Back to {meta.parentHubLabel}
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

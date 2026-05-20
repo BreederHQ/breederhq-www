@@ -1,0 +1,48 @@
+name: Scheduled rebuild
+
+# Triggers a fresh Vercel build every 4 hours so the static marketing
+# site picks up newly-published marketplace listings without waiting
+# for a manual deploy.
+#
+# WHY: /services/<category> hubs and /services/<category>/<state> pages
+# render listings via build-time API fetch. New providers appear only
+# on rebuild. Without this cron, the SEO surface lags arbitrarily
+# behind the live marketplace.
+#
+# SETUP REQUIRED:
+#   1. In Vercel: project → Settings → Git → Deploy Hooks → create a
+#      hook on branch `master`. Copy the URL it returns.
+#   2. In GitHub: repo → Settings → Secrets and variables → Actions →
+#      add a new repository secret named `VERCEL_DEPLOY_HOOK_URL` with
+#      the URL from step 1.
+#   3. The workflow runs immediately on next schedule fire.
+#
+# Without the secret the curl call fails silently with a 4xx; the
+# workflow run is marked failed but nothing else breaks.
+
+on:
+  schedule:
+    # Every 4 hours, on the hour. UTC.
+    - cron: '0 */4 * * *'
+  # Also allow manual trigger from the Actions tab for ad-hoc rebuilds.
+  workflow_dispatch:
+
+jobs:
+  trigger-vercel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "::error::VERCEL_DEPLOY_HOOK_URL secret is not set. See workflow file header for setup instructions."
+            exit 1
+          fi
+          response=$(curl -sS -o /tmp/resp.json -w "%{http_code}" -X POST "$DEPLOY_HOOK_URL")
+          echo "HTTP status: $response"
+          cat /tmp/resp.json
+          if [ "$response" -ge 400 ]; then
+            echo "::error::Deploy hook returned $response"
+            exit 1
+          fi

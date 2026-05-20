@@ -1,9 +1,46 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ListingsSection from '../../components/ListingsSection.astro';
-import { fetchServiceListings } from '../../lib/marketplaceListings';
+import CategoryStateGrid from '../../components/CategoryStateGrid.astro';
+import {
+  fetchServiceListings,
+  fetchAllListingsForCategory,
+  groupListingsByState,
+} from '../../lib/marketplaceListings';
 
 const listings = await fetchServiceListings('farriers');
+const allFarriers = await fetchAllListingsForCategory('farriers');
+const grouped = groupListingsByState(allFarriers);
+const populatedStates = Array.from(grouped.values()).map(({ state, items }) => ({
+  state,
+  count: items.length,
+}));
+
+// Curated farrier state list. Subtitles match the hand-written copy that
+// originally lived in the inline state grid below. Standalone editorial
+// pages already exist under /services/farriers/<slug> for each of these.
+const curatedFarrierStates = [
+  { slug: 'kentucky',        name: 'Kentucky',        subtitle: 'Bluegrass Thoroughbred, Keeneland, Churchill, Standardbred.' },
+  { slug: 'texas',           name: 'Texas',           subtitle: 'DFW cutting/reining, Houston sport, Lone Star plate.' },
+  { slug: 'florida',         name: 'Florida',         subtitle: 'Ocala Thoroughbred/WEC, WEF Wellington, Tampa Bay.' },
+  { slug: 'oklahoma',        name: 'Oklahoma',        subtitle: 'Quarter Horse cutting/reining, Remington Park plate.' },
+  { slug: 'california',      name: 'California',      subtitle: 'HITS Thermal, Santa Anita, Del Mar, statewide.' },
+  { slug: 'virginia',        name: 'Virginia',        subtitle: 'Middleburg hunt country, VHC eventing.' },
+  { slug: 'tennessee',       name: 'Tennessee',       subtitle: 'Tennessee Walking Horse capital, eventing.' },
+  { slug: 'ohio',            name: 'Ohio',            subtitle: 'Standardbred Delaware, Amish-country, plate.' },
+  { slug: 'pennsylvania',    name: 'Pennsylvania',    subtitle: 'Chester County, Lancaster, harness corridor.' },
+  { slug: 'colorado',        name: 'Colorado',        subtitle: 'Front Range sport, NWSS, Western Slope ranch.' },
+  { slug: 'montana',         name: 'Montana',         subtitle: 'Ranch, rodeo, trail and endurance.' },
+  { slug: 'arizona',         name: 'Arizona',         subtitle: 'Scottsdale Arabian, Wickenburg roping.' },
+  { slug: 'south-carolina',  name: 'South Carolina',  subtitle: 'Aiken winter training, Camden steeplechase.' },
+  { slug: 'georgia',         name: 'Georgia',         subtitle: 'North Atlanta hunter/jumper, GIHP eventing.' },
+  { slug: 'north-carolina',  name: 'North Carolina',  subtitle: 'TIEC, Pinehurst sandhills eventing.' },
+  { slug: 'new-york',        name: 'New York',        subtitle: 'Saratoga Thoroughbred, Hampton Classic.' },
+  { slug: 'michigan',        name: 'Michigan',        subtitle: 'Southeast Michigan sport, MSU corrective.' },
+  { slug: 'missouri',        name: 'Missouri',        subtitle: 'Fox Trotter capital, Ozarks gaited, sport horse.' },
+  { slug: 'indiana',         name: 'Indiana',         subtitle: 'Standardbred Hoosier Park, Amish country.' },
+  { slug: 'washington',      name: 'Washington',      subtitle: 'Western WA sport horse, Emerald Downs plate.' },
+];
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -106,42 +143,14 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ========== 3. FEATURED PROVIDERS PLACEHOLDER ========== -->
-  <section class="py-16 bg-stone-50 border-y border-stone-200">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-end justify-between mb-8 flex-wrap gap-4">
-        <div>
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">Farriers on BreederHQ</h2>
-          <p class="text-gray-600">Farriers list themselves on BreederHQ. Profiles may show identity confirmation (Stripe Identity) and AFA registry passthrough where supported; everything else is the farrier\u2019s own attestation.</p>
-        </div>
-        <a href="https://marketplace.breederhq.com/services/category/farriers" class="text-amber-700 font-semibold hover:text-amber-900">
-          See all farriers &rarr;
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white border-2 border-dashed border-stone-300 rounded-xl p-8 text-center">
-          <div class="text-3xl mb-3 opacity-40">&#9873;</div>
-          <p class="text-sm font-semibold text-gray-700 mb-1">Featured Provider</p>
-          <p class="text-xs text-gray-500">Featured farrier listings will appear here as providers join the marketplace.</p>
-        </div>
-        <div class="bg-white border-2 border-dashed border-stone-300 rounded-xl p-8 text-center">
-          <div class="text-3xl mb-3 opacity-40">&#9873;</div>
-          <p class="text-sm font-semibold text-gray-700 mb-1">Featured Provider</p>
-          <p class="text-xs text-gray-500">Featured farrier listings will appear here as providers join the marketplace.</p>
-        </div>
-        <div class="bg-white border-2 border-dashed border-stone-300 rounded-xl p-8 text-center">
-          <div class="text-3xl mb-3 opacity-40">&#9873;</div>
-          <p class="text-sm font-semibold text-gray-700 mb-1">Featured Provider</p>
-          <p class="text-xs text-gray-500">Featured farrier listings will appear here as providers join the marketplace.</p>
-        </div>
-      </div>
-
-      <p class="text-xs text-gray-500 mt-6 text-center">
-        BreederHQ Marketplace is in early access. We are building the farrier directory provider by provider, so every profile is real.
-      </p>
-    </div>
-  </section>
+  <!-- ========== 3. FEATURED PROVIDERS (data-driven) ========== -->
+  <ListingsSection
+    listings={listings}
+    noun="Farriers on BreederHQ"
+    unit="farrier"
+    heading="Farriers on BreederHQ"
+    bg="stone-50"
+  />
 
   <!-- ========== 4. WHAT TO LOOK FOR ========== -->
   <section class="py-16 bg-white">
@@ -281,39 +290,16 @@ const faqs = [
   </section>
 
   <!-- ========== 7. GEOGRAPHIC LINKS ========== -->
-  <section class="py-16 bg-stone-50 border-y border-stone-200">
+  <CategoryStateGrid
+    category="farriers"
+    heading="Browse farriers by state"
+    intro="Featured states have editorial guides covering their markets. Other states fill in automatically as farriers join."
+    curated={curatedFarrierStates}
+    populatedStates={populatedStates}
+  />
+
+  <section class="py-12 bg-white border-b border-stone-200">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-3">Browse farriers by region</h2>
-      <p class="text-lg text-gray-700 mb-8">
-        Regional directory pages are rolling out as providers join. State-level pages live below; the regional links route into the live marketplace and filter by state group.
-      </p>
-
-      <div class="mb-8">
-        <h3 class="text-sm font-semibold uppercase tracking-wide text-amber-700 mb-3">State-level directories</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <a href="/services/farriers/kentucky" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Kentucky</p><p class="text-xs text-gray-600 mt-1">Bluegrass Thoroughbred, Keeneland, Churchill, Standardbred.</p></a>
-          <a href="/services/farriers/texas" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Texas</p><p class="text-xs text-gray-600 mt-1">DFW cutting/reining, Houston sport, Lone Star plate.</p></a>
-          <a href="/services/farriers/florida" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Florida</p><p class="text-xs text-gray-600 mt-1">Ocala Thoroughbred/WEC, WEF Wellington, Tampa Bay.</p></a>
-          <a href="/services/farriers/oklahoma" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Oklahoma</p><p class="text-xs text-gray-600 mt-1">Quarter Horse cutting/reining, Remington Park plate.</p></a>
-          <a href="/services/farriers/california" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">California</p><p class="text-xs text-gray-600 mt-1">HITS Thermal, Santa Anita, Del Mar, statewide.</p></a>
-          <a href="/services/farriers/virginia" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Virginia</p><p class="text-xs text-gray-600 mt-1">Middleburg hunt country, VHC eventing.</p></a>
-          <a href="/services/farriers/tennessee" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Tennessee</p><p class="text-xs text-gray-600 mt-1">Tennessee Walking Horse capital, eventing.</p></a>
-          <a href="/services/farriers/ohio" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Ohio</p><p class="text-xs text-gray-600 mt-1">Standardbred Delaware, Amish-country, plate.</p></a>
-          <a href="/services/farriers/pennsylvania" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Pennsylvania</p><p class="text-xs text-gray-600 mt-1">Chester County, Lancaster, harness corridor.</p></a>
-          <a href="/services/farriers/colorado" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Colorado</p><p class="text-xs text-gray-600 mt-1">Front Range sport, NWSS, Western Slope ranch.</p></a>
-          <a href="/services/farriers/montana" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Montana</p><p class="text-xs text-gray-600 mt-1">Ranch, rodeo, trail and endurance.</p></a>
-          <a href="/services/farriers/arizona" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Arizona</p><p class="text-xs text-gray-600 mt-1">Scottsdale Arabian, Wickenburg roping.</p></a>
-          <a href="/services/farriers/south-carolina" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">South Carolina</p><p class="text-xs text-gray-600 mt-1">Aiken winter training, Camden steeplechase.</p></a>
-          <a href="/services/farriers/georgia" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Georgia</p><p class="text-xs text-gray-600 mt-1">North Atlanta hunter/jumper, GIHP eventing.</p></a>
-          <a href="/services/farriers/north-carolina" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">North Carolina</p><p class="text-xs text-gray-600 mt-1">TIEC, Pinehurst sandhills eventing.</p></a>
-          <a href="/services/farriers/new-york" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">New York</p><p class="text-xs text-gray-600 mt-1">Saratoga Thoroughbred, Hampton Classic.</p></a>
-          <a href="/services/farriers/michigan" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Michigan</p><p class="text-xs text-gray-600 mt-1">Southeast Michigan sport, MSU corrective.</p></a>
-          <a href="/services/farriers/missouri" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Missouri</p><p class="text-xs text-gray-600 mt-1">Fox Trotter capital, Ozarks gaited, sport horse.</p></a>
-          <a href="/services/farriers/indiana" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Indiana</p><p class="text-xs text-gray-600 mt-1">Standardbred Hoosier Park, Amish country.</p></a>
-          <a href="/services/farriers/washington" class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"><p class="font-semibold text-gray-900 text-sm">Washington</p><p class="text-xs text-gray-600 mt-1">Western WA sport horse, Emerald Downs plate.</p></a>
-        </div>
-      </div>
-
       <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-600 mb-3">By region (marketplace search)</h3>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <a href="https://marketplace.breederhq.com/services/category/farriers?region=northeast" class="bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 hover:shadow-sm">

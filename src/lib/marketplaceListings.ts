@@ -265,6 +265,40 @@ async function fetchPublicListings(
 }
 
 /**
+ * Fetch ALL listings for a service category, paginated through the public API.
+ *
+ * Used for build-time aggregation (state grids, getStaticPaths over states).
+ * Stops at MAX_PAGES to avoid runaway builds if the API misbehaves.
+ *
+ * Returns raw items array — caller does its own grouping/filtering.
+ * Empty array on any failure (build must not break when the API is down).
+ */
+export async function fetchAllListingsForCategory(
+  category: CategoryKey
+): Promise<MarketplaceListing[]> {
+  const desc = CATEGORY_MAP[category];
+  if (!desc || !desc.apiEnum) return [];
+
+  const PAGE_LIMIT = 50;
+  const MAX_PAGES = 20; // hard ceiling: 1000 listings per category
+  const all: MarketplaceListing[] = [];
+
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    const query = new URLSearchParams({
+      category: desc.apiEnum,
+      limit: String(PAGE_LIMIT),
+      page: String(page),
+      sort: '-publishedAt',
+    });
+    const { items, total } = await fetchPublicListings(query);
+    all.push(...items);
+    if (all.length >= total || items.length < PAGE_LIMIT) break;
+  }
+
+  return all;
+}
+
+/**
  * Fetch listings for a service category, optionally scoped to a city/state.
  * Returns empty result on any failure — caller renders an empty state.
  */
@@ -289,7 +323,7 @@ export async function fetchServiceListings(
     sort: '-publishedAt',
   });
   if (scope.city) query.set('city', scope.city);
-  if (scope.state) query.set('state', scope.state);
+  if (scope.state) query.set('state', normalizeStateForApi(scope.state));
   const { items, total } = await fetchPublicListings(query);
   return {
     items,
@@ -315,7 +349,7 @@ export async function fetchFacilityListings(
     sort: '-publishedAt',
   });
   if (scope.city) query.set('city', scope.city);
-  if (scope.state) query.set('state', scope.state);
+  if (scope.state) query.set('state', normalizeStateForApi(scope.state));
   const { items, total } = await fetchPublicListings(query);
   return {
     items,
@@ -326,9 +360,153 @@ export async function fetchFacilityListings(
   };
 }
 
+/**
+ * Resolve any state representation (full name, slug, or code) to the
+ * 2-letter USPS code the marketplace API expects. Falls back to the
+ * input unchanged if no descriptor matches (e.g. 'XX' or a non-state
+ * string), which lets the API return its own empty result rather than
+ * us silently corrupting the query.
+ *
+ * Examples:
+ *   normalizeStateForApi('Kentucky') -> 'KY'
+ *   normalizeStateForApi('kentucky') -> 'KY'
+ *   normalizeStateForApi('new-york') -> 'NY'
+ *   normalizeStateForApi('AL')       -> 'AL'
+ */
+function normalizeStateForApi(input: string): string {
+  if (!input) return input;
+  // 2-letter code? Already correct.
+  if (input.length === 2) {
+    const byCode = stateByCode(input);
+    if (byCode) return byCode.code;
+  }
+  // Slug form ('new-york', 'alabama')?
+  const bySlug = stateBySlug(input.toLowerCase().replace(/\s+/g, '-'));
+  if (bySlug) return bySlug.code;
+  // Full name ('Kentucky', 'New York')?
+  const normalizedName = input.trim().toLowerCase();
+  const byName = US_STATES.find((s) => s.name.toLowerCase() === normalizedName);
+  if (byName) return byName.code;
+  return input;
+}
+
 /** Public marketplace URL for a listing detail page. */
 export function listingDetailUrl(slug: string): string {
   return `${MARKETPLACE_HOST}/listings/${slug}`;
+}
+
+/**
+ * US state directory: code, full name, URL slug.
+ *
+ * The marketplace API stores `state` as 2-letter postal codes (AL, UT, KY).
+ * www URLs use lowercase hyphenated slugs (alabama, utah, kentucky, new-york).
+ * This table is the single source of truth for translating between them.
+ *
+ * Used by:
+ *   - state grids on /services/<category> hubs (group listings by state)
+ *   - dynamic /services/<category>/[state].astro route (slug → API filter)
+ *   - getStaticPaths over states that have providers
+ */
+export interface StateDescriptor {
+  /** USPS 2-letter code as stored by the marketplace API. */
+  code: string;
+  /** Full state name, Title Case. */
+  name: string;
+  /** Lowercase hyphenated slug used in www URLs. */
+  slug: string;
+}
+
+export const US_STATES: readonly StateDescriptor[] = [
+  { code: 'AL', name: 'Alabama',        slug: 'alabama' },
+  { code: 'AK', name: 'Alaska',         slug: 'alaska' },
+  { code: 'AZ', name: 'Arizona',        slug: 'arizona' },
+  { code: 'AR', name: 'Arkansas',       slug: 'arkansas' },
+  { code: 'CA', name: 'California',     slug: 'california' },
+  { code: 'CO', name: 'Colorado',       slug: 'colorado' },
+  { code: 'CT', name: 'Connecticut',    slug: 'connecticut' },
+  { code: 'DE', name: 'Delaware',       slug: 'delaware' },
+  { code: 'DC', name: 'District of Columbia', slug: 'district-of-columbia' },
+  { code: 'FL', name: 'Florida',        slug: 'florida' },
+  { code: 'GA', name: 'Georgia',        slug: 'georgia' },
+  { code: 'HI', name: 'Hawaii',         slug: 'hawaii' },
+  { code: 'ID', name: 'Idaho',          slug: 'idaho' },
+  { code: 'IL', name: 'Illinois',       slug: 'illinois' },
+  { code: 'IN', name: 'Indiana',        slug: 'indiana' },
+  { code: 'IA', name: 'Iowa',           slug: 'iowa' },
+  { code: 'KS', name: 'Kansas',         slug: 'kansas' },
+  { code: 'KY', name: 'Kentucky',       slug: 'kentucky' },
+  { code: 'LA', name: 'Louisiana',      slug: 'louisiana' },
+  { code: 'ME', name: 'Maine',          slug: 'maine' },
+  { code: 'MD', name: 'Maryland',       slug: 'maryland' },
+  { code: 'MA', name: 'Massachusetts',  slug: 'massachusetts' },
+  { code: 'MI', name: 'Michigan',       slug: 'michigan' },
+  { code: 'MN', name: 'Minnesota',      slug: 'minnesota' },
+  { code: 'MS', name: 'Mississippi',    slug: 'mississippi' },
+  { code: 'MO', name: 'Missouri',       slug: 'missouri' },
+  { code: 'MT', name: 'Montana',        slug: 'montana' },
+  { code: 'NE', name: 'Nebraska',       slug: 'nebraska' },
+  { code: 'NV', name: 'Nevada',         slug: 'nevada' },
+  { code: 'NH', name: 'New Hampshire',  slug: 'new-hampshire' },
+  { code: 'NJ', name: 'New Jersey',     slug: 'new-jersey' },
+  { code: 'NM', name: 'New Mexico',     slug: 'new-mexico' },
+  { code: 'NY', name: 'New York',       slug: 'new-york' },
+  { code: 'NC', name: 'North Carolina', slug: 'north-carolina' },
+  { code: 'ND', name: 'North Dakota',   slug: 'north-dakota' },
+  { code: 'OH', name: 'Ohio',           slug: 'ohio' },
+  { code: 'OK', name: 'Oklahoma',       slug: 'oklahoma' },
+  { code: 'OR', name: 'Oregon',         slug: 'oregon' },
+  { code: 'PA', name: 'Pennsylvania',   slug: 'pennsylvania' },
+  { code: 'RI', name: 'Rhode Island',   slug: 'rhode-island' },
+  { code: 'SC', name: 'South Carolina', slug: 'south-carolina' },
+  { code: 'SD', name: 'South Dakota',   slug: 'south-dakota' },
+  { code: 'TN', name: 'Tennessee',      slug: 'tennessee' },
+  { code: 'TX', name: 'Texas',          slug: 'texas' },
+  { code: 'UT', name: 'Utah',           slug: 'utah' },
+  { code: 'VT', name: 'Vermont',        slug: 'vermont' },
+  { code: 'VA', name: 'Virginia',       slug: 'virginia' },
+  { code: 'WA', name: 'Washington',     slug: 'washington' },
+  { code: 'WV', name: 'West Virginia',  slug: 'west-virginia' },
+  { code: 'WI', name: 'Wisconsin',      slug: 'wisconsin' },
+  { code: 'WY', name: 'Wyoming',        slug: 'wyoming' },
+];
+
+const _stateByCode = new Map<string, StateDescriptor>(US_STATES.map(s => [s.code, s]));
+const _stateBySlug = new Map<string, StateDescriptor>(US_STATES.map(s => [s.slug, s]));
+
+/** Look up a state descriptor by USPS code (e.g. 'AL'). Case-insensitive. */
+export function stateByCode(code: string | null | undefined): StateDescriptor | undefined {
+  if (!code) return undefined;
+  return _stateByCode.get(code.toUpperCase());
+}
+
+/** Look up a state descriptor by URL slug (e.g. 'alabama'). Case-insensitive. */
+export function stateBySlug(slug: string | null | undefined): StateDescriptor | undefined {
+  if (!slug) return undefined;
+  return _stateBySlug.get(slug.toLowerCase());
+}
+
+/**
+ * Group listings by state. Returns a map of state-code → listings, only
+ * including states that have ≥1 listing AND a known descriptor.
+ *
+ * Listings with null/unknown state are dropped (cannot be placed on a
+ * state page, so they don't go in the grid).
+ */
+export function groupListingsByState(
+  listings: MarketplaceListing[]
+): Map<string, { state: StateDescriptor; items: MarketplaceListing[] }> {
+  const grouped = new Map<string, { state: StateDescriptor; items: MarketplaceListing[] }>();
+  for (const listing of listings) {
+    const desc = stateByCode(listing.state);
+    if (!desc) continue;
+    let bucket = grouped.get(desc.code);
+    if (!bucket) {
+      bucket = { state: desc, items: [] };
+      grouped.set(desc.code, bucket);
+    }
+    bucket.items.push(listing);
+  }
+  return grouped;
 }
 
 /** Scoped browse URL for a service category — for hero CTAs that don't render listings. */
@@ -348,4 +526,15 @@ export function serviceListingFlowUrl(category: CategoryKey, scope: ScopedQuery 
 
 export function facilityListingFlowUrl(facility: FacilityKey, scope: ScopedQuery = {}): string {
   return buildListingFlowUrl(FACILITY_MAP[facility].intentCategory, scope);
+}
+
+/**
+ * www URL for a state-scoped page under a service category.
+ * e.g. ('farriers', 'alabama') → '/services/farriers/alabama'
+ *
+ * Used by the state-grid component and the dynamic state-page route to
+ * link to themselves. Always returns a www-relative path.
+ */
+export function servicesStatePageUrl(category: CategoryKey, stateSlug: string): string {
+  return `/services/${category}/${stateSlug}`;
 }

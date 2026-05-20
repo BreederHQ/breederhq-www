@@ -1,0 +1,36 @@
+---
+export const updateMeta = {
+  date: '2026-05-20',
+  title: 'Data-driven state grid + dynamic state-page route across service hubs',
+  tags: ['marketplace', 'seo', 'farriers', 'infrastructure', 'data-driven'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 20, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Stopped hand-coding state cards on /services/farriers and stopped throwing away the listings we already fetched at build time. The page now renders real providers in its featured section, and a two-tier state grid: 20 curated states with editorial subtitles up top, plus a data-driven row below that automatically lists every state with at least one published provider. Added a dynamic <code>/services/[category]/[state]</code> route that auto-generates a state page for any (category, state) combination with a real listing. Alabama (Crazy H Farrier Service, Hanceville) and Utah (Farrier Services You Can Count On, North Logan) are the first two state pages produced by this route. Curated state files like <a href="/services/farriers/kentucky" class="text-[hsl(24,95%,53%)] hover:underline">/services/farriers/kentucky</a> remain standalone and untouched; Astro routes literal files first.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">New files</h3>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li><code>src/components/CategoryStateGrid.astro</code> — two-tier state grid component (curated + data-driven)</li>
+    <li><code>src/pages/services/[category]/[state].astro</code> — dynamic state page with <code>getStaticPaths</code> over (category, state) pairs that have real listings</li>
+    <li><code>.github/workflows/scheduled-rebuild.yml</code> — cron workflow that fires a Vercel deploy hook every 4 hours so new providers surface on www without waiting for a manual deploy</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Changed files</h3>
+  <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1">
+    <li><code>src/lib/marketplaceListings.ts</code> — added <code>fetchAllListingsForCategory</code> (paginated bulk fetch), the canonical <code>US_STATES</code> table, <code>stateByCode</code> / <code>stateBySlug</code> lookups, <code>groupListingsByState</code> aggregator, <code>servicesStatePageUrl</code> URL builder, and <code>normalizeStateForApi</code> that auto-resolves any state name/slug/code to the 2-letter USPS code the marketplace API expects</li>
+    <li><code>src/pages/services/farriers.astro</code> — replaced three dashed "Featured Provider" placeholder cards with the existing <code>ListingsSection</code> component (the API fetch was already wired, the rendering was dead code), and replaced the 20-state hand-coded grid with <code>CategoryStateGrid</code> driven by the live listings API</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Bug fixed along the way</h3>
+  <p class="text-gray-700 mb-3">The 20 existing curated state pages (Kentucky, Texas, Florida, etc.) were calling <code>fetchServiceListings('farriers', &lbrace; state: 'Kentucky' &rbrace;)</code> with the full state name. The marketplace API filters <code>state</code> with <code>ILIKE</code> against 2-letter USPS codes, so passing 'Kentucky' returned zero results regardless of how many farriers were actually in KY. <code>normalizeStateForApi</code> now silently maps full names, slugs, and codes all to the right code, so every curated state page picks up real listings the moment a provider in that state joins.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">SEO</h3>
+  <p class="text-gray-700 mb-3">Each dynamic state page emits its own <code>title</code>, <code>description</code>, breadcrumb trail (Home → category hub → state), and FAQPage schema. State pages link back to the parent category hub and into the live marketplace category filter. The state grid on /services/farriers links every populated state to its dedicated www page (curated or dynamic), giving Google a clean internal-link path from the hub to every state's directory.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Scalability principle</h3>
+  <p class="text-gray-700 mb-3">Two scope decisions worth recording. First, the dynamic route covers 17 service categories (farriers, equine-boarding, equine-services, equine-repro, livestock-services, dog-training, grooming, boarding, pet-sitting, health-testing, rehabilitation, nutrition, transport, photography, behavioral, show-handling, veterinary-specialists), not just farriers, so the same Alabama / Utah case for any other category Just Works without code changes. Second, the scheduled rebuild workflow runs every 4 hours, which keeps Vercel build minutes low while giving providers same-day visibility on www after they publish. Webhook-triggered rebuilds (marketplace fires on listing publish, Vercel rebuilds within minutes) are the right answer eventually, but the cost/complexity is not justified at current signup volume.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Activation step required for the scheduled rebuild</h3>
+  <p class="text-gray-700 mb-3">The cron workflow ships disabled until a <code>VERCEL_DEPLOY_HOOK_URL</code> repo secret is set. Create a Deploy Hook in Vercel (project → Settings → Git → Deploy Hooks, branch <code>master</code>), then add the URL as a GitHub Actions secret with that exact name. The workflow header documents this inline.</p>
+</article>

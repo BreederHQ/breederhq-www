@@ -1,0 +1,110 @@
+---
+/**
+ * Two-tier data-driven state grid for /services/<category> hubs.
+ *
+ * Tier 1 (curated): editorial state cards. Each one is a hand-picked state
+ * with a curated subtitle (e.g. "Bluegrass Thoroughbred, Keeneland, ..."),
+ * usually backed by a standalone editorial page at /services/<category>/<state-slug>.
+ * Tier 1 cards always render, even if zero providers in that state today.
+ *
+ * Tier 2 (data-driven): every state that has >= 1 published listing in this
+ * category AND is NOT in the curated list. Subtitle is honest provider count.
+ * Card link routes to the dynamic /services/<category>/<state-slug> page,
+ * which getStaticPaths-renders for any state that ends up in this tier.
+ *
+ * Both tiers honour the existing /services/farriers.astro visual: amber
+ * hover border, stone background, hover-shadow.
+ *
+ * The grid never lies. If a curated state has zero providers, we don't
+ * fake a count. Tier 2 ALWAYS shows the real number.
+ */
+import { servicesStatePageUrl, type CategoryKey, type StateDescriptor } from '../lib/marketplaceListings';
+
+export interface CuratedStateCard {
+  /** State slug, e.g. 'kentucky'. Must match a US_STATES.slug. */
+  slug: string;
+  /** Display name, usually the state name but can be customised. */
+  name: string;
+  /** Editorial subtitle, e.g. "Bluegrass Thoroughbred, Keeneland, Churchill, Standardbred". */
+  subtitle: string;
+}
+
+interface Props {
+  /** Which service-category hub we're rendering on. */
+  category: CategoryKey;
+  /** Heading shown above the grid. */
+  heading: string;
+  /** Optional intro paragraph (rendered as a <p> below the heading). */
+  intro?: string;
+  /** Curated editorial cards. Render in the order given. */
+  curated: CuratedStateCard[];
+  /** All states (descriptor + listing count) that have >= 1 listing in this category. */
+  populatedStates: { state: StateDescriptor; count: number }[];
+  /** Optional subheading for the data-driven tier. Defaults to 'More states with providers'. */
+  dataDrivenHeading?: string;
+}
+
+const {
+  category,
+  heading,
+  intro,
+  curated,
+  populatedStates,
+  dataDrivenHeading = 'More states with providers',
+} = Astro.props as Props;
+
+const curatedSlugs = new Set(curated.map((c) => c.slug));
+const dataDriven = populatedStates
+  .filter((p) => !curatedSlugs.has(p.state.slug))
+  .sort((a, b) => {
+    if (b.count !== a.count) return b.count - a.count;
+    return a.state.name.localeCompare(b.state.name);
+  });
+---
+
+<section id="regions" class="py-16 bg-stone-50 border-y border-stone-200">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-3">{heading}</h2>
+    {intro && <p class="text-lg text-gray-700 mb-8">{intro}</p>}
+
+    {curated.length > 0 && (
+      <div class="mb-10">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-amber-700 mb-3">Featured states</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {curated.map((c) => (
+            <a
+              href={servicesStatePageUrl(category, c.slug)}
+              class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"
+            >
+              <p class="font-semibold text-gray-900 text-sm">{c.name}</p>
+              <p class="text-xs text-gray-600 mt-1">{c.subtitle}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {dataDriven.length > 0 && (
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-600 mb-3">{dataDrivenHeading}</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {dataDriven.map((d) => (
+            <a
+              href={servicesStatePageUrl(category, d.state.slug)}
+              class="bg-white border border-stone-200 rounded-lg p-3 hover:border-amber-500 hover:shadow-sm transition"
+            >
+              <p class="font-semibold text-gray-900 text-sm">{d.state.name}</p>
+              <p class="text-xs text-gray-600 mt-1">
+                {d.count} {d.count === 1 ? 'provider' : 'providers'} listed
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {curated.length === 0 && dataDriven.length === 0 && (
+      <p class="text-gray-600 italic">No state-level coverage yet. Providers join every week.</p>
+    )}
+  </div>
+</section>
