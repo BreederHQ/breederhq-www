@@ -36,7 +36,7 @@ Defined in `breederhq-api/src/routes/marketplace-listings.ts` at the route `GET 
 
 ```
 GET https://marketplace.breederhq.com/api/v1/marketplace/public/listings
-    ?category=<lowercase_enum>
+    ?category=<canonical_id | url_slug | legacy_alias>
     [&subcategory=<string>]
     [&city=<string>]
     [&state=<string>]
@@ -46,19 +46,60 @@ GET https://marketplace.breederhq.com/api/v1/marketplace/public/listings
     [&limit=<int (max 50)>]
 ```
 
-**Backend filter behavior (verified in code):**
+### Canonical category contract (updated 2026-05-19, PR 1 of vocabulary unification)
+
+The `category` param accepts any of three forms, all resolved through the canonical catalog at `breederhq-api/src/services/marketplace-service-categories.ts`:
+
+1. **Canonical id** — lowercase snake_case singular (e.g. `farrier`, `equine_boarding`, `private_dog_park`). This is what the DB stores.
+2. **URL slug** — hand-written per category in the catalog; often plural for SEO (e.g. `farriers`, `equine-boarding`, `private-dog-parks`). Slugs and ids are NOT mechanically derived from each other — never assume `slug = id.replace("_", "-")`.
+3. **Legacy alias** — uppercase singular forms from pre-2026-05 vocabulary (e.g. `FARRIER`, `EQUINE_BOARDING`). Maintained transparently by the alias resolver until PR 7 retires them after telemetry confirms zero traffic.
+
+All three forms resolve to the same canonical id and hit the same SQL filter. The response always returns the canonical id, never an alias.
+
+**Resolution behavior:**
 
 ```ts
-const category = query.category ? String(query.category).trim().toUpperCase() : undefined;
-// later:
-if (category) {
-  whereClauses.push(Prisma.sql`LOWER(l.category) = ${category.toLowerCase()}`);
+// Pseudocode of what the route does today
+const resolved = resolveCategoryWithSource(query.category);
+// resolved = { raw, canonical, isAlias }
+if (resolved.isAlias) {
+  logger.info({ raw: resolved.raw, resolved: resolved.canonical, source: "public_filter" });
+}
+if (resolved.canonical && isValidListingCategory(resolved.canonical)) {
+  // SQL: WHERE LOWER(l.category) = ${resolved.canonical}
+} else if (rawWasSupplied) {
+  // Fail closed: return empty result set, not a silent no-op filter.
+  // Prevents the previous bug shape where /services/category/farriers
+  // showed homepage results because the filter silently dropped.
 }
 ```
 
-So the `category` value is compared exactly (lowercased) against the `category` column. **Invented values match nothing.** `category=facilities` returns 0 rows because no listing carries `category='facilities'` in the DB.
+**Two notable behaviors:**
 
-`city` and `state` are ILIKE-matched (substring, case-insensitive).
+- **Slug ≠ id.** `farrier` (id) and `farriers` (URL slug) are both valid. Listings are stored under the canonical id `farrier`. The URL is `farriers`. This singular-id / plural-slug split is intentional — see [breederhq/docs/codebase/architecture/CATEGORY-VOCABULARY-UNIFICATION-2026-05.md](../../breederhq/docs/codebase/architecture/CATEGORY-VOCABULARY-UNIFICATION-2026-05.md) Decision 2.
+- **Unknown values fail closed.** `?category=invented_thing` returns an empty result set + logs the alias miss. Pre-PR-1 behavior silently dropped the filter, which is what surfaced homepage listings on broken category URLs. Today's behavior makes the failure visible.
+
+**Alias examples (current):**
+
+| URL form | Resolves to | Notes |
+|---|---|---|
+| `farrier` | `farrier` | canonical |
+| `farriers` | `farrier` | URL slug |
+| `FARRIER` | `farrier` | legacy uppercase, drained in PR 7 |
+| `equine-boarding` | `equine_boarding` | URL slug (dashed) |
+| `EQUINE_BOARDING` | `equine_boarding` | legacy uppercase |
+| `private-dog-parks` | `private_dog_park` | URL slug (pluralized) |
+| `dog_park` | `private_dog_park` | legacy alias |
+| `product` | `merchandise` | legacy alias |
+| `unknown_thing` | (null) | empty result set + logged |
+
+`city` and `state` are ILIKE-matched (substring, case-insensitive). These are unaffected by the category-catalog work.
+
+### Catalog source-of-truth (architectural note)
+
+The category catalog lives in `breederhq-api` and is the single source of truth. A codegen script emits a TS mirror to `breederhq/packages/commerce-shared/src/categories/service-categories.generated.ts`. CI gates: API drift check (regenerate + diff) and frontend hash-integrity check (SHA-256 header matches body). To add or rename a category, edit the API source, run `npm run codegen:service-categories`, and commit both regenerated snapshots in a single PR pair.
+
+Full architecture: [breederhq/docs/codebase/architecture/CATEGORY-VOCABULARY-UNIFICATION-2026-05.md](../../breederhq/docs/codebase/architecture/CATEGORY-VOCABULARY-UNIFICATION-2026-05.md).
 
 ---
 
