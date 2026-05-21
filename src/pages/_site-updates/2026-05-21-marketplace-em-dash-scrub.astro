@@ -1,0 +1,34 @@
+---
+export const updateMeta = {
+  date: '2026-05-21',
+  title: 'Marketplace prose: em dash scrub across all marketplace pages',
+  tags: ['marketplace', 'copyedit', 'style'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 21, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Removed all em dashes (—) from user-facing prose across the marketplace surface on breederhq.com per the platform-wide no-em-dash style rule. Replaced with colons, semicolons, commas, periods, or parentheses depending on local context. JS/JSX code comments were left untouched (not user-facing).</p>
+
+  <h3 class="text-base font-semibold text-gray-900 mb-2">Pages updated</h3>
+  <ul class="text-sm text-gray-700 list-disc pl-6 mb-4 space-y-1">
+    <li><a href="/facilities" class="text-[hsl(24,95%,53%)] hover:underline">/facilities</a> (hub) + all 8 subcategory pages: <code>/facilities/dog-parks</code>, <code>/facilities/equine</code>, <code>/facilities/indoor-training</code>, <code>/facilities/boarding</code>, <code>/facilities/livestock</code>, <code>/facilities/events-shows</code>, <code>/facilities/wash-grooming</code>, <code>/facilities/specialty</code>.</li>
+    <li>9 services category hubs: <code>/services/dog-training</code>, <code>/services/grooming</code>, <code>/services/behavioral</code>, <code>/services/nutrition</code>, <code>/services/pet-sitting</code>, <code>/services/show-handling</code>, <code>/services/rehabilitation</code>, <code>/services/veterinary-specialists</code>, <code>/services/photography</code>, <code>/services/livestock-services</code>.</li>
+    <li>2 equine-specific services: <code>/services/equine-services</code>, <code>/services/equine-repro</code>.</li>
+    <li>10 farrier state pages: <code>florida</code>, <code>texas</code>, <code>colorado</code>, <code>michigan</code>, <code>montana</code>, <code>new-york</code>, <code>north-carolina</code>, <code>ohio</code>, <code>oklahoma</code>, <code>pennsylvania</code>, <code>south-carolina</code>.</li>
+    <li>6 equine-boarding city/state pages: <code>aiken-sc</code>, <code>dallas-tx</code>, <code>denver-co</code>, <code>houston-tx</code>, <code>nashville-tn</code>, <code>scottsdale-az</code>, <code>wellington-fl</code>.</li>
+    <li>3 dog-training city/state pages: <code>dallas-tx</code>, <code>houston-tx</code>, <code>phoenix-az</code>.</li>
+    <li>3 livestock-services state pages: <code>montana</code>, <code>nebraska</code>, <code>oklahoma</code>.</li>
+    <li><code>/for-providers/dog-parks</code> (one prose hit in figcaption).</li>
+  </ul>
+
+  <h3 class="text-base font-semibold text-gray-900 mb-2">Replacement strategy</h3>
+  <ul class="text-sm text-gray-700 list-disc pl-6 mb-4 space-y-1">
+    <li>Definition-list pattern <code>&lt;strong&gt;Label&lt;/strong&gt; — definition</code> rewritten to <code>&lt;strong&gt;Label:&lt;/strong&gt; definition</code>.</li>
+    <li>Mid-sentence interruptions (<code>A — B — C</code>) restructured with commas, parens, or sentence splits.</li>
+    <li>Trailing clarifications (<code>X on BreederHQ — Y</code>) converted to period + new sentence, or colon when introducing a list.</li>
+    <li>JS code comments (<code>//</code>, <code>{'/*'} {'*/'}</code>) intentionally left alone — not user-facing prose.</li>
+  </ul>
+
+  <h3 class="text-base font-semibold text-gray-900 mb-2">Why this matters</h3>
+  <p class="text-sm text-gray-700">The em dash ban is a platform-wide style rule (locked 2026-05-01). Marketplace pages had drifted heavily — every facility subcategory and most services state pages used the <code>&lt;strong&gt;X&lt;/strong&gt; — Y</code> pattern in their definition lists. Total prose hits removed: ~149 across 47 files. No URL changes, no navigation changes, no semantic changes — pure copyedit.</p>
+</article>
