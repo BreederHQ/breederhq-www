@@ -1,0 +1,40 @@
+---
+export const updateMeta = {
+  date: '2026-05-22',
+  title: 'Nav relabel: "Services" → "Find Services", "Service Providers" → "For Providers"',
+  tags: ['navigation', 'ia', 'header', 'footer'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 22, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Renamed two top-nav menu labels to disambiguate the two-audience marketplace IA. URLs unchanged; no redirects.</p>
+
+  <div class="space-y-4 text-sm text-gray-700">
+    <div>
+      <div class="font-semibold text-gray-900 mb-1">Label changes</div>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Desktop + mobile header: <strong>Services</strong> → <strong>Find Services</strong> (links still to <code>/services</code>)</li>
+        <li>Desktop + mobile header: <strong>Service Providers</strong> → <strong>For Providers</strong> (links still to <code>/for-providers</code>)</li>
+        <li>Footer Resources column: <strong>For Service Providers</strong> → <strong>For Providers</strong></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-semibold text-gray-900 mb-1">Why</div>
+      <p>The two menus serve different audiences — consumers shopping for services (<code>/services/*</code>) vs providers looking to list their business (<code>/for-providers/*</code>) — but the original labels read as near-duplicates at a glance. The new labels lead with intent verbs ("Find" for consumers, "For" addressing providers directly) so a first-time visitor can tell them apart in under a second.</p>
+    </div>
+
+    <div>
+      <div class="font-semibold text-gray-900 mb-1">SEO posture</div>
+      <p>Pre-change GSC audit (90d window 2026-02-21 → 2026-05-22) confirmed zero impressions for the exact phrases "services" or "service providers" reaching breederhq.com, zero organic-search sessions to <code>/services*</code> or <code>/for-providers*</code>, and no sitelinks using either phrase. Page titles, H1s, body content, schema names, and URLs all unchanged. Pure nav-label change with no SEO exposure.</p>
+    </div>
+
+    <div>
+      <div class="font-semibold text-gray-900 mb-1">Files touched</div>
+      <ul class="list-disc list-inside space-y-1">
+        <li><code>src/components/HeaderV2.astro</code> — desktop nav button labels + mobile accordion labels</li>
+        <li><code>src/components/Footer.astro</code> — Resources column link text</li>
+      </ul>
+    </div>
+  </div>
+</article>
