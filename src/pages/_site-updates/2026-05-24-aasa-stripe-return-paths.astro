@@ -1,0 +1,23 @@
+---
+export const updateMeta = {
+  date: '2026-05-24',
+  title: 'Extended Universal Link paths for mobile provider onboarding',
+  tags: ['mobile', 'deep-links', 'infrastructure'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">May 24, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Extended the Apple App Site Association file at <code>/.well-known/apple-app-site-association</code> to cover the Stripe Connect onboarding callbacks and the listing publish payment return. The BreederHQ iOS app already declares <code>applinks:breederhq.com</code> in its entitlements, so the new paths take effect on next iOS device verification — no app rebuild required.</p>
+
+  <div class="space-y-3 text-gray-700">
+    <p><strong>Universal Link paths now covered:</strong></p>
+    <ul class="list-disc pl-6 space-y-1">
+      <li><code>/share</code> — shareable marketplace listing links (existing)</li>
+      <li><code>/provider/stripe-connect/return</code> — Stripe Connect onboarding completion (new)</li>
+      <li><code>/provider/stripe-connect/refresh</code> — Stripe Connect onboarding re-entry (new)</li>
+      <li><code>/provider/listings/*/payment/return</code> — listing publish payment return (new)</li>
+    </ul>
+    <p>Android App Links coverage for the same paths rides with the next mobile release (AndroidManifest intent-filter extension committed in <code>breederhq</code>). iOS entitlements unchanged — host is already <code>breederhq.com</code> at the apex.</p>
+    <p class="text-sm text-gray-600">Part of the mobile provider parity initiative (MOB-044), Phase 0 item 3.</p>
+  </div>
+</article>
