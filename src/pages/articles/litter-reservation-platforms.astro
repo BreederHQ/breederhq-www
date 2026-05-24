@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Litter Reservation Platforms', url: '/articles/litter-reservation-platforms' }
+];
+
+const faqs = [
+  {
+    question: 'Are litter deposits refundable when a buyer changes their mind?',
+    answer: 'Refund terms depend entirely on the breeder\'s policy, which is why written documentation matters before collecting payment. Most breeders specify conditions under which deposits are refundable (such as litter not being born) versus non-refundable (buyer simply changes their mind). The platform tracks the deposit; the contract defines the terms.'
+  },
+  {
+    question: 'What is pick order and how do breeders assign it?',
+    answer: 'Pick order is the sequence in which buyers select their specific animal from a litter. Pick order is typically assigned by deposit date, waitlist position, or breeder discretion for show or breeding placements. Some breeders reserve first pick for themselves when evaluating offspring for their own program.'
+  },
+  {
+    question: 'How is a waitlist different from a confirmed reservation?',
+    answer: 'A waitlist is a queue of interested buyers before a litter is confirmed or born. A reservation, usually secured by a deposit, guarantees a specific position once offspring are available. Waitlist position often determines reservation order, but the deposit is what locks in the commitment.'
+  },
+  {
+    question: 'Can buyers pay litter deposits online through reservation platforms?',
+    answer: 'Many purpose-built litter reservation platforms support online payment processing. Online payment allows buyers to pay deposits electronically rather than mailing checks or arranging cash payments. Electronic payments also create automatic records for both parties.'
+  },
+  {
+    question: 'What happens to a deposit if the litter is smaller than expected?',
+    answer: 'Breeders typically either transfer the deposit to a future litter, offer a refund, or follow whatever policy was documented in the original agreement. Smaller-than-expected litters are one of the most common dispute scenarios, which is why written terms matter before collecting payment.'
+  },
+  {
+    question: 'Do breeders need a separate contract if they use a reservation platform?',
+    answer: 'A reservation platform tracks logistics: deposits, waitlist position, pick order. A written purchase agreement covering health guarantees, return policies, and buyer responsibilities is still recommended for legal protection. The platform handles the workflow; the contract handles the terms.'
+  }
+];
+---
+
+<BaseLayout
+  title="Litter Reservation Platforms: 8 Tools for Managing Deposits, Waitlists, and Pick Order | BreederHQ"
+  description="A litter reservation platform centralizes deposit collection, waitlist management, and pick order assignment in one system. This guide covers what to look for and eight tools that handle the workflow differently."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Litter Reservation Platforms: 8 Tools for Managing Deposits, Waitlists, and Pick Order",
+    description: "A litter reservation platform is software that centralizes deposit collection, waitlist management, and pick order assignment in one system.",
+    datePublished: "2026-05-24",
+    author: {
+      name: "BreederHQ Editorial",
+      role: "Last Reviewed May 2026"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Litter Reservation Platforms</li>
+      </ol>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Breeder Guide</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-4">
+          Litter Reservation Platforms: 8 Tools for Managing Deposits, Waitlists, and Pick Order
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          Spreadsheets track deposits until they don't. A buyer claims they paid last month, another insists they were promised first pick, and the email thread that would settle it is buried somewhere in your inbox. This is the failure mode that litter reservation platforms exist to solve.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed May 2026</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 24, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>11 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-12">
+          A litter reservation platform is software that centralizes deposit collection, waitlist management, and pick order assignment in one system. This guide covers what to look for, how the three core functions connect, and eight tools that handle the workflow differently.
+        </p>
+
+        <!-- What is it -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Is a Litter Reservation Platform</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            A litter reservation platform is software that helps breeders manage buyer deposits, waitlist positions, and pick order for upcoming litters. Rather than tracking who paid what and who picks when across notebooks, spreadsheets, and email threads, a reservation platform centralizes the entire workflow in one place.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The core function is matching buyers to available offspring in an organized, documented way. That matching can happen before birth (through waitlist management) or after (through pick order assignment). Either way, every buyer knows where they stand, every deposit is tracked, and the breeder has a clear record of commitments.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Three functions define what litter reservation platforms do:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Deposit collection:</strong> Accepting and tracking payments that secure a buyer's place in line</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Waitlist management:</strong> Organizing buyer order and communicating status changes as litters are planned, confirmed, and born</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Pick order assignment:</strong> Determining which buyer selects their animal first, second, third, and so on</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- What to look for -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What to Look for in a Litter Reservation Platform</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Not all reservation tools work the same way. Some handle deposits but not contracts. Others manage waitlists but require manual payment tracking. The right platform depends on how your program operates and what friction you want to eliminate.
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Online deposit collection:</strong> Can buyers pay electronically, or are you still handling checks and cash manually? Electronic payments create automatic records.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Automated buyer notifications:</strong> Does the platform send updates when litter status changes, or do you compose every email yourself?</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Contract and e-signature support:</strong> Can you attach purchase agreements to reservations and collect signatures digitally? <a href="https://verdocs.com/esignature-adoption-statistics/" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">95% of businesses</a> have adopted or plan to adopt e-signature technology.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Waitlist visibility:</strong> Can buyers see their position, or do they have to ask you every time?</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Integration with breeding records:</strong> Does reservation data connect to your pedigrees, health records, and <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">litter tracking</a>, or does it live in a separate silo?</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Refund policy enforcement:</strong> Can the system handle partial refunds or deposit transfers to future litters without manual workarounds?</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- How they work together -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How Deposits, Waitlists, and Pick Order Work Together</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Deposits, waitlists, and pick order form a single workflow, not three separate tasks. A deposit secures a waitlist position. The waitlist determines pick order. Pick order determines which buyer selects which animal. When these pieces live in different spreadsheets, different tools, or different communication threads, mistakes happen. Buyers get confused. Breeders lose track.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Deposits and Refund Policy</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A deposit is a partial payment that secures a reservation. It holds the buyer's place while the breeder confirms the breeding, waits for birth, and evaluates offspring.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Refund terms vary by breeder (and in some cases, <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">by state law</a>), but written documentation before collecting any payment prevents disputes later. Here is sample contract language that covers the common scenarios:
+          </p>
+
+          <blockquote class="border-l-4 border-[hsl(24,95%,53%)] bg-gray-50 p-6 mb-4 rounded">
+            <p class="text-base text-gray-700">"Deposits are non-refundable if the buyer withdraws for any reason after placement on the waitlist. If the litter is not born or is smaller than anticipated, the deposit will transfer to the next available litter or be refunded at the breeder's discretion. Deposits are fully refundable if the breeder cannot fulfill the reservation within 18 months."</p>
+          </blockquote>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            The scenarios that cause disputes are predictable: buyer backs out, litter is smaller than expected, breeding does not take. Written terms prevent arguments later.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Waitlists and Buyer Communication</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A waitlist is the ordered queue of approved buyers before a litter is confirmed or born. Some breeders maintain a general program waitlist (interested in any upcoming litter), while others create litter-specific waitlists (interested in a particular pairing).
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Communication frequency matters more than most breeders realize. Buyers who hear nothing for weeks start to worry. Buyers who receive regular updates stay engaged and show up on pick day.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The key communications are:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Breeding confirmation</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Pregnancy confirmation</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Birth announcement with litter size</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Pick day scheduling</span>
+            </li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Platforms that automate notifications for each stage save hours of repetitive messaging.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Pick Order and Selection Rules</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Pick order is the sequence in which buyers choose their specific animal from the litter. First pick selects first. Second pick chooses from what remains.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Common methods for assigning pick order include deposit date (first to pay picks first), waitlist position, or breeder discretion for co-owns, show prospects, or breeding placements. Many breeders reserve first pick for themselves, especially when evaluating offspring for their own program.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Pick order only matters once offspring are old enough to evaluate. For most species, that means waiting until <a href="/workflows/rearing-protocols" class="text-[hsl(24,95%,53%)] hover:underline">temperament, structure, and coat</a> can be assessed. Assigning picks at birth, before evaluation, often leads to mismatches.
+          </p>
+        </section>
+
+        <!-- 8 platforms -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Eight Litter Reservation Platforms for Breeders</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            The tools below range from purpose-built breeder software to general-purpose alternatives. Each description covers what the platform does, who it suits, and key limitations.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">BreederHQ</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            BreederHQ is an end-to-end breeding program management platform with built-in waitlist tracking, deposit collection, buyer portal, and e-signature contracts. Reservation data connects directly to litter records, pedigrees, and <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">health testing documentation</a>, so buyers can see real program data rather than claims typed into a text field.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            The client portal lets buyers view their status, make payments, and sign documents without back-and-forth emails. BreederHQ is not a standalone reservation tool; it is part of a full <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">program management system</a> supporting nine species: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Good Dog</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Good Dog is a marketplace with some reservation and waitlist features for dog breeders. It functions primarily as a listing and discovery platform with basic buyer management built in. Limitation: dog-only, and visibility depends on marketplace participation.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Breeders Assistant</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Breeders Assistant is legacy desktop software focused on pedigree and record-keeping. Waitlist and reservation features are limited compared to cloud-based tools. Limitation: not cloud-based, no integrated payment collection.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">BreederCloud Pro</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            BreederCloud Pro is cloud-based breeding software with some client management features, including litter tracking and buyer communication. Limitation: evaluate current feature set for deposit handling and contract support.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">BreederBuddy</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            BreederBuddy is breeding record software with basic client tracking. Limitation: may lack integrated payment processing and buyer portal functionality.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">The Breeder's Standard</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            The Breeder's Standard is long-standing desktop kennel management software with strong pedigree and record capabilities. Limitation: desktop-only, no online buyer portal.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Breed Ledger</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Breed Ledger is a newer breeding software option. Verify current reservation and waitlist capabilities before committing. Limitation: evaluate integration depth and payment options.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Google Forms and Spreadsheets</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Google Forms and spreadsheets represent the free, manual alternative many breeders start with. The approach works for very small programs but breaks down with volume.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Limitations include:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>No automated notifications</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>No payment integration</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>No buyer portal</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Error-prone manual data entry</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Time-consuming status updates</span>
+            </li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Google Forms and spreadsheets are the baseline that purpose-built platforms improve upon.
+          </p>
+        </section>
+
+        <!-- Comparison table -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Litter Reservation Platform Comparison Table</h2>
+
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr class="border-b-2 border-gray-300">
+                  <th class="py-3 pr-4 font-semibold">Platform</th>
+                  <th class="py-3 px-4 font-semibold text-center">Online Deposits</th>
+                  <th class="py-3 px-4 font-semibold text-center">Waitlist Management</th>
+                  <th class="py-3 px-4 font-semibold text-center">Buyer Portal</th>
+                  <th class="py-3 px-4 font-semibold text-center">E-Signatures</th>
+                  <th class="py-3 px-4 font-semibold text-center">Multi-Species</th>
+                  <th class="py-3 pl-4 font-semibold text-center">Cloud-Based</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4"><strong>BreederHQ</strong></td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✓</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Good Dog</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">Limited</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 pl-4 text-center">✓</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Breeders Assistant</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">Limited</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✗</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">BreederCloud Pro</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 px-4 text-center">Limited</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✓</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">BreederBuddy</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">Limited</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✓</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">The Breeder's Standard</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">Limited</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✗</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Breed Ledger</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">Verify</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✓</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">Google Forms + Sheets</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">Manual</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✗</td>
+                  <td class="py-3 px-4 text-center">✓</td>
+                  <td class="py-3 pl-4 text-center">✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Features change over time. Verify current offerings on each platform's website before deciding.
+          </p>
+        </section>
+
+        <!-- Marketplaces vs direct -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Third-Party Marketplaces vs Direct Reservation Tools</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Choosing between a marketplace and a direct reservation tool is a business model decision, not just a feature comparison. The choice affects buyer relationships, data ownership, and long-term program control.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Third-Party Marketplace Listings</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Third-party marketplaces are platforms where buyers discover breeders through the marketplace's audience. Examples include Good Dog, PuppyFind, and AKC Marketplace. The marketplace owns the buyer relationship and often charges fees or commissions.
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-8">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Pro:</strong> Built-in buyer traffic without marketing effort</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Con:</strong> Less control over branding and communication</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Con:</strong> Ongoing dependency on marketplace policies and fee structures</span>
+            </li>
+          </ul>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Direct Reservation Tools You Control</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Direct reservation tools are software where breeders manage reservations independently, driving traffic through <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline">their own website</a> and referrals. The breeder owns the buyer relationship and all program data.
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Pro:</strong> Full control over process, branding, and communication</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Pro:</strong> No per-transaction fees to a marketplace</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Con:</strong> Requires generating your own buyer leads</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- How to choose -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How to Choose the Right Litter Reservation Platform</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The right platform depends on program size, species, and operational needs.
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Program size:</strong> A solo breeder with one or two litters per year has different needs than an active program with multiple litters and species.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Species:</strong> Confirm the platform supports your animals. Many tools are <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">dog-only</a>.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Existing tools:</strong> Consider whether you want reservations integrated with health records, pedigrees, and finances, or as a standalone system.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Buyer experience:</strong> Evaluate whether buyers get a portal, automated updates, or rely entirely on manual communication.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Budget:</strong> Compare pricing models (subscription, per-litter, marketplace commission). See each platform's website for current pricing.</span>
+            </li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you already track breeding data somewhere, a platform that connects reservations to that data reduces duplicate entry and errors.
+          </p>
+        </section>
+
+        <!-- Run reservations where data lives -->
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Run Your Reservations Where Your Program Data Already Lives</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Standalone reservation tools <a href="/articles/breeder-software-has-a-data-problem" class="text-[hsl(24,95%,53%)] hover:underline">create data silos</a>. Deposits live in one place, health records in another, pedigrees in a third. When a buyer asks about health testing or lineage, you end up copying information between systems or sending multiple documents from different sources. <a href="https://www.jpmorgan.com/kinexys/content-hub/collective-intelligence-from-data-silos" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Forrester research</a> found that workers lose 12 hours per week searching for information trapped in silos.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Connecting reservations to your breeding program (litters, health testing, genetics) lets you show buyers real documentation rather than claims. The waitlist entry links to the litter. The litter links to the dam and sire. The dam and sire link to health records and pedigrees. Everything is one step away from everything else.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            BreederHQ connects waitlists, deposits, contracts, and buyer communication to the same system where breeders manage pedigrees, health records, and litter data. Buyers see real program information through the client portal. Breeders stop copying data between tools.
+          </p>
+
+          <div class="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold mb-3">Try BreederHQ free for 14 days</h3>
+            <p class="text-stone-300 mb-6">Deposits, waitlists, and pick order connected to your real program data.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Start Free Trial
+              </a>
+              <a href="/for-breeders" class="border-2 border-stone-500 text-stone-200 px-6 py-3 rounded-lg font-semibold hover:border-white hover:text-white transition">
+                See the Full Platform
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </article>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions About Litter Reservation Platforms</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free Trial
+      </a>
+    </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
