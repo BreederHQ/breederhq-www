@@ -1,17 +1,11 @@
 ---
 // Universal-Link bridge for the BreederHQ mobile app's listing-payment
-// return path (Stripe Checkout for listing-fee publishes). Same pattern
-// as the Stripe Connect bridges; see
-// /provider/stripe-connect/return.astro for the full rationale.
+// return path. See /provider/stripe-connect/return.astro for the full
+// design rationale.
 
-// SSR — listing ids are unbounded, so this route renders on demand via
-// the Vercel adapter. The bridge logic is pure client-side JS; the only
-// reason we touch SSR is to let Astro resolve the [id] segment from the
-// URL into a template variable for the deep-link construction.
 export const prerender = false;
 
 const { id } = Astro.params;
-const noindex = true;
 ---
 <!doctype html>
 <html lang="en">
@@ -19,36 +13,25 @@ const noindex = true;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Returning to BreederHQ…</title>
+    <title>BreederHQ</title>
     <style>
       html, body { background: #0b0b0d; color: #e7e7ea; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-      .card { text-align: center; padding: 2rem 1.5rem; max-width: 22rem; }
-      .spinner { width: 1.5rem; height: 1.5rem; border: 2px solid rgba(255,255,255,0.2); border-top-color: hsl(24,95%,53%); border-radius: 999px; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      a { color: hsl(24,95%,53%); }
-      .fallback { margin-top: 1.5rem; font-size: 0.875rem; color: rgba(231,231,234,0.7); }
+      .reopen { display: none; padding: 0.75rem 1.25rem; background: hsl(24,95%,53%); color: #fff; font-weight: 600; font-size: 0.95rem; border: 0; border-radius: 0.5rem; text-decoration: none; }
+      .reopen.visible { display: inline-block; }
     </style>
   </head>
   <body>
-    <main class="card">
-      <div class="spinner" aria-hidden="true"></div>
-      <h1 style="font-size:1rem;font-weight:600;margin:0 0 0.25rem;">Returning to BreederHQ…</h1>
-      <p style="margin:0;font-size:0.875rem;color:rgba(231,231,234,0.7);">Confirming your listing payment.</p>
-      <p class="fallback" id="fallback" hidden>
-        Didn't hop back into the app? <a id="manual" href="#">Tap here</a> to open BreederHQ.
-      </p>
-    </main>
+    <a id="reopen" class="reopen" href="#">Reopen BreederHQ</a>
 
     <script is:inline define:vars={{ listingId: id }}>
       (function () {
         var search = window.location.search || "";
         var deepLink = "breederhq://provider/listings/" + listingId + "/payment/return" + search;
-        var manual = document.getElementById("manual");
-        if (manual) manual.setAttribute("href", deepLink);
+        var reopen = document.getElementById("reopen");
+        if (reopen) reopen.setAttribute("href", deepLink);
         try { window.location.replace(deepLink); } catch (e) {}
         setTimeout(function () {
-          var el = document.getElementById("fallback");
-          if (el) el.hidden = false;
+          if (reopen) reopen.classList.add("visible");
         }, 1200);
       })();
     </script>
