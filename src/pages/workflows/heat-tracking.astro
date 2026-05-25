@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     question: 'Does it work for species other than dogs?',
-    answer: 'Yes. Cycle tracking adapts to the species. Cats, rabbits, and other animals with different reproductive patterns are handled appropriately.'
+    answer: 'Yes. Cycle tracking adapts to the species. BreederHQ supports nine species: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. Each species is handled with reproductive workflows built for its specific patterns rather than forced into a generic template.'
   },
   {
     question: 'Can I record progesterone test results?',
@@ -29,6 +29,14 @@ const faqs = [
   {
     question: 'What if I work with a reproductive vet?',
     answer: 'Many breeders do. BreederHQ tracks the data they provide, keeping it organized with the rest of your records. The trend chart and Scout AI Repro Insight are designed as a second opinion you can take to the vet, not as a replacement for veterinary judgment.'
+  },
+  {
+    question: 'Does heat tracking connect to pedigree and lineage records?',
+    answer: 'Yes. In BreederHQ, the heat record, breeding record, and offspring record are all linked to the dam\'s profile. That profile also holds her pedigree, health testing results, and COI data. Everything connects in one place rather than across separate tools.'
+  },
+  {
+    question: 'Can I track lineage and inbreeding coefficients alongside cycle data?',
+    answer: 'Yes. BreederHQ calculates COI for planned pairings and maintains multi-generation pedigree records in the same platform. Heat cycle data and lineage data are not stored separately. When you plan a breeding, you can review her cycle history and her COI at the same time.'
   }
 ];
 
@@ -83,6 +91,14 @@ const howTo = {
         Heat cycles control everything in a breeding program. Miss the window and you wait months. Track it properly and you breed at the right time. This page explains how experienced breeders track heat cycles without guessing.
       </p>
 
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        Heat tracking is one part of a complete lineage and program record. When heat dates, breeding dates, and birthing records live in the same system as pedigrees, COI calculations, and health testing results, every piece of data connects. That is how breeding programs build verifiable lineage history rather than scattered notes.
+      </p>
+
+      <p class="text-base text-gray-600 leading-relaxed mt-4">
+        Reproductive workflows are available across all nine species BreederHQ supports: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits.
+      </p>
+
       <div class="mt-12">
         <Screenshot
           id="breeding-calendar"
@@ -114,7 +130,7 @@ const howTo = {
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Stud dog unavailable because you didn't plan ahead</span>
+          <span>Sire unavailable because you didn't plan ahead</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -140,7 +156,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-3">Phone calendar reminders</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Set a reminder for "6 months from now" and hope she cycles on schedule. When the reminder fires, you may not remember which dog it was for. No record of her actual patterns.
+            Set a reminder for "6 months from now" and hope she cycles on schedule. When the reminder fires, you may not remember which animal it was for. No record of her actual patterns.
           </p>
         </div>
 
@@ -191,7 +207,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-4">Patterns matter more than averages</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            The average dog cycles every 6-8 months. Your dog cycles on her schedule, not the average. A system that doesn't track her individual pattern is guessing.
+            Species averages give you a starting point. Your animal cycles on her schedule, not the average. A system that doesn't track her individual pattern is guessing.
           </p>
         </div>
 
@@ -212,7 +228,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-4">Reactive tracking is too late</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Noticing she's in heat and then recording it doesn't help you plan. You need to predict the window so you can prepare: schedule progesterone testing, confirm stud availability, clear your calendar.
+            Noticing she's in heat and then recording it doesn't help you plan. You need to predict the window so you can prepare: schedule progesterone testing, confirm sire availability, clear your calendar.
           </p>
         </div>
       </div>
@@ -316,6 +332,69 @@ const howTo = {
     </div>
   </section>
 
+  <!-- Section 5.5: Evaluation Checklist Table -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">What to look for in any heat and lineage tracking system</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Not all breeding software tracks the same things. When evaluating tools, check whether the system handles all of the following:
+      </p>
+
+      <div class="overflow-x-auto rounded-lg border border-gray-200">
+        <table class="w-full text-left text-sm md:text-base">
+          <thead class="bg-white">
+            <tr>
+              <th scope="col" class="px-4 py-3 font-semibold text-gray-900 w-1/2">Feature</th>
+              <th scope="col" class="px-4 py-3 font-semibold text-gray-900">Why it matters</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Individual cycle history per female</td>
+              <td class="px-4 py-3 text-gray-700">Averages are not predictions. Her pattern is the only reliable input.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Predictive alerts based on actual history</td>
+              <td class="px-4 py-3 text-gray-700">A reminder for "6 months from now" ignores her real interval.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Visual calendar across all females</td>
+              <td class="px-4 py-3 text-gray-700">You need to see conflicts and overlaps before they happen.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Automatic connection to breeding and birthing dates</td>
+              <td class="px-4 py-3 text-gray-700">Disconnected records force manual recalculation every time.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Pedigree and lineage records in the same system</td>
+              <td class="px-4 py-3 text-gray-700">Heat dates that don't connect to ancestry data are a dead end.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">COI calculation for planned pairings</td>
+              <td class="px-4 py-3 text-gray-700">Lineage data is only useful if you can act on it before you breed.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Health testing results linked to each animal</td>
+              <td class="px-4 py-3 text-gray-700">Buyers and registries need documented health history, not claims.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Multi-species support</td>
+              <td class="px-4 py-3 text-gray-700">If you breed more than one species, one system is better than several.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-gray-900">Cloud access and mobile capture</td>
+              <td class="px-4 py-3 text-gray-700">Records taken in the field need to sync without a second step.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-base text-gray-600 leading-relaxed mt-6">
+        If a tool handles heat tracking but stores pedigrees in a separate system, you will spend more time connecting data than analyzing it.
+      </p>
+    </div>
+  </section>
+
   <!-- Section 6: How BreederHQ Supports This -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
@@ -326,7 +405,15 @@ const howTo = {
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
-        For canine breeders running progesterone testing, the trend chart appears from your first reading and projects the breed-zone window automatically &mdash; with plain-English coaching that uses the dam's name and tells you when to test next. Pro and Enterprise plans add <a href="/workflows/scout-ai" class="text-white underline hover:no-underline font-semibold">Scout AI Repro Insight</a>, an on-demand assessment that compares the current cycle to past cycles and flags split heats or anomalies.
+        For canine breeders running progesterone testing, the trend chart appears from your first reading and projects the breed-zone window automatically, with plain-English coaching that uses the dam's name and tells you when to test next. Pro and Enterprise plans add <a href="/workflows/scout-ai" class="text-white underline hover:no-underline font-semibold">Scout AI Repro Insight</a>, an on-demand assessment that compares the current cycle to past cycles, flags split heats or anomalies, and surfaces pattern-level insights across your entire program history.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Heat tracking is one module inside BreederHQ's full breeding program platform. The same system that tracks her cycles also maintains her pedigree, calculates COI for planned pairings, stores health testing results, and records offspring data through weaning.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-8">
+        BreederHQ also connects to its marketplace, so the program data breeders maintain privately, including documented breeding history and health records, can surface as verifiable signals on their public listing. That is how operational discipline becomes visible to buyers.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
@@ -368,11 +455,15 @@ const howTo = {
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Coordinate with stud owners or reproductive vets</span>
+          <span>Coordinate with sire owners or reproductive vets</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
           <span>Need visibility across their entire program</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>Want heat and cycle data connected to pedigree, COI, and health records in one place</span>
         </li>
       </ul>
     </div>
@@ -445,7 +536,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Cycle tracking adapts to the species. Cats, rabbits, and other animals with different reproductive patterns are handled appropriately.</p>
+          <p>Yes. Cycle tracking adapts to the species. BreederHQ supports nine species: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. Each species is handled with reproductive workflows built for its specific patterns rather than forced into a generic template.</p>
         </div>
       </details>
 
@@ -469,7 +560,31 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Many breeders do. BreederHQ tracks the data they provide, keeping it organized with the rest of your records.</p>
+          <p>Many breeders do. BreederHQ tracks the data they provide, keeping it organized with the rest of your records. The trend chart and Scout AI Repro Insight are designed as a second opinion you can take to the vet, not as a replacement for veterinary judgment.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does heat tracking connect to pedigree and lineage records?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. In BreederHQ, the heat record, breeding record, and offspring record are all linked to the dam's profile. That profile also holds her pedigree, health testing results, and COI data. Everything connects in one place rather than across separate tools.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I track lineage and inbreeding coefficients alongside cycle data?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. BreederHQ calculates COI for planned pairings and maintains multi-generation pedigree records in the same platform. Heat cycle data and lineage data are not stored separately. When you plan a breeding, you can review her cycle history and her COI at the same time.</p>
         </div>
       </details>
     </div>
