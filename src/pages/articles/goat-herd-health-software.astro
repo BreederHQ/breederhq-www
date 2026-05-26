@@ -12,27 +12,27 @@ const lastReviewedISO = '2026-05-26';
 const faqs = [
   {
     question: 'What does "herd-health software" actually mean for a goat operation?',
-    answer: 'A herd-health system captures the disease-status testing, parasite-program records, vaccination history, kidding outcomes, and compliance identifiers that buyers and vets need to see, and connects them per animal and per tenant. For goats, the panel usually includes CAE, CL, and Johne's testing, FAMACHA / FEC / FECRT parasite-program entries, CDT vaccination history, and scrapie premises ID with structured tattoo placement.'
+    answer: "A herd-health system captures the disease-status testing, parasite-program records, vaccination history, kidding outcomes, and compliance identifiers that buyers and vets need to see, and connects them per animal and per tenant. For goats, the panel usually includes CAE, CL, and Johne's testing, FAMACHA / FEC / FECRT parasite-program entries, CDT vaccination history, and scrapie premises ID with structured tattoo placement."
   },
   {
-    question: 'Is BreederHQ's herd-health passport real, or is it a placeholder?',
-    answer: 'It is real and shipped. The HerdHealthStatus model is live, breeders can author per-disease status with the lab, panel, and date and bind a private certificate file, the public listing payload emits a gated breeder-attested herd-health row, the marketplace listing-detail renders the passport card, and breeder profiles surface the same passport on the hero.'
+    question: "Is BreederHQ's herd-health passport real, or is it a placeholder?",
+    answer: "It is real and shipped. The HerdHealthStatus model is live, breeders can author per-disease status with the lab, panel, and date and bind a private certificate file, the public listing payload emits a gated breeder-attested herd-health row, the marketplace listing-detail renders the passport card, and breeder profiles surface the same passport on the hero."
   },
   {
-    question: 'Does the platform handle Scrapie Eradication Program compliance?',
-    answer: 'Yes. Tenant-level premises ID and herd prefix are first-class settings; per-animal tattoo placement is structured (right ear, left ear, tail web); HealthCertificate and TransportEvent tables back CVI binding and movement logging. Marketplace listings render the structured identifier rows so buyers can see them before they inquire.'
+    question: "Does the platform handle Scrapie Eradication Program compliance?",
+    answer: "Yes. Tenant-level premises ID and herd prefix are first-class settings; per-animal tattoo placement is structured (right ear, left ear, tail web); HealthCertificate and TransportEvent tables back CVI binding and movement logging. Marketplace listings render the structured identifier rows so buyers can see them before they inquire."
   },
   {
-    question: 'Why doesn't the platform show "CHIC-equivalent" badges for goats yet?',
-    answer: 'Because no caprine registry publishes a binding CHIC-equivalent test list as of 2026-05-26. The trust-taxonomy substrate is seeded against the WSU WADDL small-ruminant biosecurity panel, but breed-binding ChicBreedRequirement rows do not ship for goats until a registry publishes an authoritative list. Inventing the list internally would violate the platform's legally-locked trust posture: BreederHQ does not vet, verify, or vouch.'
+    question: `Why doesn't the platform show "CHIC-equivalent" badges for goats yet?`,
+    answer: "Because no caprine registry publishes a binding CHIC-equivalent test list as of 2026-05-26. The trust-taxonomy substrate is seeded against the WSU WADDL small-ruminant biosecurity panel, but breed-binding ChicBreedRequirement rows do not ship for goats until a registry publishes an authoritative list. Inventing the list internally would violate the platform's legally-locked trust posture: BreederHQ does not vet, verify, or vouch."
   },
   {
-    question: 'What about CVI and across-state-line movement?',
-    answer: 'The CVI follow-up slice (TransportEvent + HealthCertificate) is code-complete and shipping pending the migration apply. Once applied, breeders can bind a vet-issued CVI to a transport event, snapshot the structured tattoo state at event time, and produce an auditable movement record, not a free-text note.'
+    question: "What about CVI and across-state-line movement?",
+    answer: "The CVI follow-up slice (TransportEvent + HealthCertificate) is code-complete and shipping pending the migration apply. Once applied, breeders can bind a vet-issued CVI to a transport event, snapshot the structured tattoo state at event time, and produce an auditable movement record, not a free-text note."
   },
   {
-    question: 'Does the herd-health surface work for meat-goat herds too?',
-    answer: 'Yes. The HerdHealthStatus model, scrapie compliance identifiers, parasite-program structured records, and biosecurity testing all apply equally to meat-goat operations. Dairy-specific surfaces (DHIA import, Linear Appraisal, production sparkline) are gated and do not appear on meat-only animals.'
+    question: "Does the herd-health surface work for meat-goat herds too?",
+    answer: "Yes. The HerdHealthStatus model, scrapie compliance identifiers, parasite-program structured records, and biosecurity testing all apply equally to meat-goat operations. Dairy-specific surfaces (DHIA import, Linear Appraisal, production sparkline) are gated and do not appear on meat-only animals."
   }
 ];
 ---
