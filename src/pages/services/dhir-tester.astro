@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('dhir-tester');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'DHIR Tester', url: '/services/dhir-tester' }
+];
+---
+
+<BaseLayout
+  title="DHIR Testers for Dairy Goat Herds on BreederHQ Marketplace"
+  description="Find sanctioned DHIA / DHIR milk-test supervisors for dairy goat herds on BreederHQ Marketplace. Verification, owner-sampler, and standard DHI testing for ADGA / AGS production records."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">DHIR Tester</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">DHIR Tester</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse sanctioned DHIA / DHIR milk-test supervisors who work dairy goat herds. Production records that count for ADGA / AGS — *M, AR, and earned-prefix programs — depend on test-day records collected and submitted by a qualified supervisor on the right plan. Find one who covers your area and your test schedule.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse DHIR Testers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="DHIR Testers" unit="supervisor" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Standard DHI test-day milk collection</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Verification testing plans</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Owner-sampler plan supervision</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Group-test coordination for nearby herds</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Component sampling (butterfat, protein, SCC)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> One-day milk competition supervision</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Coordination with ADGA / AGS performance programs</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Affiliated lab and DRMS recordkeeping</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Sanctioned status.</strong> The supervisor must be currently certified by a DHIA-affiliate to sign and submit records for ADGA / AGS programs.</li>
+          <li><strong class="text-gray-900">Goat-experienced.</strong> Dairy goat test-day work is different from cattle. Stand-and-deliver routines, milking-order sensitivity, and the rhythm of a goat parlor matter.</li>
+          <li><strong class="text-gray-900">Affiliated lab.</strong> Component analysis goes to a partnered lab. Turnaround and report format vary.</li>
+          <li><strong class="text-gray-900">Plan match.</strong> Standard, verification, and owner-sampler plans aren't interchangeable — pick the one that fits your goals.</li>
+          <li><strong class="text-gray-900">Service area or rotation.</strong> Testers run regular monthly loops. Get on a rotation that lines up with your test interval.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/linear-appraisal-scheduling" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">📐</div>
+            <div class="font-semibold text-gray-900">Linear Appraisal Scheduling</div>
+            <p class="text-xs text-gray-600 mt-1">The other half of the dairy-goat performance-records stack.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">For health-test pulls that often run alongside test day.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/dhir-tester" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a DHIA / DHIR supervisor?</p>
+            <p class="text-sm text-gray-600">List your sanctioned milk-test service for dairy goat herds on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

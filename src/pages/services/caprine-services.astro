@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('caprine-services');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' }
+];
+
+const specialists = [
+  {
+    label: 'Disbudding & Tattoo',
+    href: '/services/disbudding-tattoo',
+    summary: 'Kid disbudding (iron or paste), ear tattooing for registry compliance, and breeder-coordinated kid-processing visits.'
+  },
+  {
+    label: 'Goat Hoof Trimming',
+    href: '/services/goat-hoof-trimming',
+    summary: 'Routine and corrective hoof trimming for dairy, meat, fiber, and pet goats. Often runs a regional circuit.'
+  },
+  {
+    label: 'Fecal Egg Count Lab',
+    href: '/services/fecal-lab',
+    summary: 'Mail-in and drop-off fecal egg counts, FECRT (reduction tests), and Haemonchus-aware parasite reporting.'
+  },
+  {
+    label: 'DHIR Tester',
+    href: '/services/dhir-tester',
+    summary: 'Sanctioned DHIA / DHIR milk-test supervisors for dairy goat herds on official production records.'
+  },
+  {
+    label: 'Linear Appraisal Scheduling',
+    href: '/services/linear-appraisal-scheduling',
+    summary: 'Local hosts and circuit coordinators for ADGA / AGS linear appraisal days. Pulls herds together to meet minimums.'
+  },
+  {
+    label: 'Buck Service',
+    href: '/services/buck-service',
+    summary: 'Driveway breeding, walk-in service, and short-term lease arrangements with on-test, registered bucks.'
+  },
+  {
+    label: 'Goat AI Technician',
+    href: '/services/goat-ai-technician',
+    summary: 'On-farm artificial insemination — frozen semen handling, timed AI protocols, and laparoscopic referrals.'
+  },
+  {
+    label: 'Mobile Goat Vet',
+    href: '/services/mobile-goat-vet',
+    summary: 'Ambulatory veterinarians with real caprine experience. Herd workups, CAE / CL / Johne\'s pulls, surgical referrals.'
+  },
+  {
+    label: 'Goat Transport',
+    href: '/services/goat-transport',
+    summary: 'Ground transport for breeding stock, show goats, and sale kids — climate-conscious, biosecurity-aware.'
+  }
+];
+---
+
+<BaseLayout
+  title="Caprine Services on BreederHQ Marketplace | Goat Specialists Across Nine Disciplines"
+  description="Browse caprine service providers on BreederHQ Marketplace. Disbudding, hoof trimming, fecal labs, DHIR testers, linear appraisal hosts, buck service, AI techs, mobile goat vets, and goat transport. Goat-specific, not the same generic livestock list."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Caprine Services</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Services on BreederHQ Marketplace</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Caprine Services</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Goat breeders run a different ecosystem than cattle or sheep operations. Disbudding cadence, registry tattoo rules, FAMACHA-driven deworming, ADGA / AGS production testing, linear appraisal, and buck logistics are caprine-specific work — and they don't fit the generic livestock-services bucket. BreederHQ now models them as first-class categories.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Caprine Service Providers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Caprine Service Providers" unit="provider" bg="white" />
+
+    <!-- Nine specialist categories -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Nine Caprine Specialist Categories</h2>
+        <p class="text-gray-600 mb-6">Each one is its own marketplace category, not a tag inside a generic listing. Browse the specialist page that matches the work you need.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {specialists.map((s) => (
+            <a href={s.href} class="block bg-stone-50 border border-stone-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-sm transition">
+              <h3 class="text-base font-semibold text-gray-900 mb-1">{s.label}</h3>
+              <p class="text-sm text-gray-700 leading-relaxed">{s.summary}</p>
+              <p class="text-sm font-semibold text-amber-700 mt-3">Browse →</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How goat work differs -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Why Goat Work Has Its Own Category</h2>
+        <p class="text-gray-600 mb-6">A few reasons generic "livestock services" stops being useful the moment you actually own goats:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Registry rules are specific.</strong> ADGA, AGS, NDGA, ABGA, AKGA, NPGA, MDGA, NMGA, USBGA, MGR, AMGR, and Pygora all have their own tattoo, transfer, and identification rules. A provider who works goats every week knows them; one who works mostly cattle does not.</li>
+          <li><strong class="text-gray-900">Disease pressure is goat-flavored.</strong> CAE, CL, and Johne's are the real concerns, not BVD or BRD. Fecal-egg-count and FAMACHA logic drive parasite management. Biosecurity protocols are different.</li>
+          <li><strong class="text-gray-900">Reproduction runs on its own clock.</strong> Seasonal breeders, out-of-season protocols (CIDR, buck effect, light manipulation), and laparoscopic AI all live in the caprine specialist world.</li>
+          <li><strong class="text-gray-900">Production records use DHIR.</strong> Dairy goat herds on official records work with DHIA / DHIR supervisors and ADGA / AGS appraisal — not the generic dairy or beef supervisor.</li>
+          <li><strong class="text-gray-900">Logistics are small-package.</strong> A goat transporter or mobile vet sets up differently than someone hauling steers or running a feedyard rotation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How to browse -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Browse on the Marketplace</h2>
+        <p class="text-gray-600 mb-6">Filters that matter when finding a caprine provider:</p>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Specialty.</strong> Pick the right category up top. Disbudding is not the same job as hoof trimming, and a DHIR tester is not the same as a linear appraisal coordinator.</li>
+          <li><strong class="text-gray-900">Service area or circuit.</strong> Hoof trimmers, AI techs, and DHIR testers often run regional circuits with predictable rotation. Filter by service area or by who is passing through.</li>
+          <li><strong class="text-gray-900">Breed and herd profile.</strong> Dairy, meat, fiber, and pet operations want different things. So do a 6-doe herd and a 600-head meat operation.</li>
+          <li><strong class="text-gray-900">Biosecurity and credentials.</strong> Look for stated CAE / CL / Johne's testing posture, disinfection routine between farms, and any veterinary or AFA / DHIA / appraisal-program affiliations the provider attests.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Related on BreederHQ -->
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/livestock-services" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐄</div>
+            <div class="font-semibold text-gray-900">Livestock Services</div>
+            <p class="text-xs text-gray-600 mt-1">Cross-species working livestock support (cattle, sheep, alpaca, llama).</p>
+          </a>
+          <a href="/services/veterinary-specialists" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Veterinary Specialists</div>
+            <p class="text-xs text-gray-600 mt-1">Repro vets, theriogenologists, and ambulatory specialist clinics.</p>
+          </a>
+          <a href="/services/transport" class="block bg-white border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🚐</div>
+            <div class="font-semibold text-gray-900">Transport</div>
+            <p class="text-xs text-gray-600 mt-1">Cross-species animal transport — livestock, show stock, and breeding-stock moves.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider cross-link -->
+    <section class="py-10 px-4 bg-white border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/caprine-services" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you a caprine service provider?</p>
+            <p class="text-sm text-gray-600">List your disbudding, hoof, AI, vet, DHIR, appraisal, buck, or transport service on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

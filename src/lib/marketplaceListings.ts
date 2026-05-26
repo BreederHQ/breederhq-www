@@ -111,6 +111,16 @@ export type CategoryKey =
   | 'equine-services'
   | 'equine-repro'
   | 'livestock-services'
+  | 'caprine-services'
+  | 'disbudding-tattoo'
+  | 'goat-hoof-trimming'
+  | 'fecal-lab'
+  | 'dhir-tester'
+  | 'linear-appraisal-scheduling'
+  | 'buck-service'
+  | 'goat-ai-technician'
+  | 'mobile-goat-vet'
+  | 'goat-transport'
   | 'dog-training'
   | 'behavioral'
   | 'show-handling'
@@ -153,6 +163,21 @@ const CATEGORY_MAP: Record<CategoryKey, CategoryDescriptor> = {
   'equine-services':      { apiEnum: 'equine_services',    browseSlug: 'equine-services',    intentCategory: 'equine_services' },
   'equine-repro':         { apiEnum: 'equine_repro',       browseSlug: 'equine-repro',       intentCategory: 'equine_repro' },
   'livestock-services':   { apiEnum: 'livestock_services', browseSlug: 'livestock-services', intentCategory: 'livestock_services' },
+  // Caprine specialist categories. apiEnum matches the lowercase form the
+  // public listings API expects (CATEGORY_OPTIONS uppercased); browseSlug is
+  // the canonical urlSlug hand-written in marketplace-service-categories.ts
+  // (caprine_hoof_trimming -> goat-hoof-trimming, caprine_ai_tech ->
+  // goat-ai-technician — the catalog id and url slug intentionally diverge).
+  'caprine-services':            { apiEnum: 'caprine_services',            browseSlug: 'caprine-services',            intentCategory: 'caprine_services' },
+  'disbudding-tattoo':           { apiEnum: 'disbudding_tattoo',           browseSlug: 'disbudding-tattoo',           intentCategory: 'disbudding_tattoo' },
+  'goat-hoof-trimming':          { apiEnum: 'caprine_hoof_trimming',       browseSlug: 'goat-hoof-trimming',          intentCategory: 'caprine_hoof_trimming' },
+  'fecal-lab':                   { apiEnum: 'fecal_lab',                   browseSlug: 'fecal-lab',                   intentCategory: 'fecal_lab' },
+  'dhir-tester':                 { apiEnum: 'dhir_tester',                 browseSlug: 'dhir-tester',                 intentCategory: 'dhir_tester' },
+  'linear-appraisal-scheduling': { apiEnum: 'linear_appraisal_scheduling', browseSlug: 'linear-appraisal-scheduling', intentCategory: 'linear_appraisal_scheduling' },
+  'buck-service':                { apiEnum: 'buck_service',                browseSlug: 'buck-service',                intentCategory: 'buck_service' },
+  'goat-ai-technician':          { apiEnum: 'caprine_ai_tech',             browseSlug: 'goat-ai-technician',          intentCategory: 'caprine_ai_tech' },
+  'mobile-goat-vet':             { apiEnum: 'mobile_goat_vet',             browseSlug: 'mobile-goat-vet',             intentCategory: 'mobile_goat_vet' },
+  'goat-transport':              { apiEnum: 'goat_transport',              browseSlug: 'goat-transport',              intentCategory: 'goat_transport' },
   'dog-training':         { apiEnum: 'training',           browseSlug: 'training',           intentCategory: 'training' },
   behavioral:             { apiEnum: 'behavioral',         browseSlug: 'behavioral',         intentCategory: 'behavioral' },
   // show-handling on www → HANDLING in the marketplace (no specialist sub-route exists).

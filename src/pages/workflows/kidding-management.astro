@@ -1,0 +1,607 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Kidding Management', url: '/workflows/kidding-management' }
+];
+
+const faqs = [
+  {
+    question: 'When are the pregnancy milestones generated?',
+    answer: 'Milestones are auto-generated when you confirm a pregnancy or when an exposure date is recorded in a group breeding plan. The system calculates dates from the confirmed exposure or breeding date using a 150-day caprine gestation length (147-155 days depending on breed and parity).'
+  },
+  {
+    question: 'Does this work for both does and ewes?',
+    answer: 'Yes. The same workflow covers both kidding (goats) and lambing (sheep) since the biology is similar (multi-fetus species, 145-155 day gestation, comparable pre-birth signs). The system uses the species-aware verb on render: "kidding" for does and "lambing" for ewes.'
+  },
+  {
+    question: 'Can I customize the milestone schedule?',
+    answer: 'Yes. Default milestones follow standard caprine and ovine pregnancy checkpoints (45-day confirmation, 100-day mid-gestation, 140-day pre-birth prep, BoSe/CDT booster scheduling), but you can add custom milestones or adjust dates based on your veterinarian\'s recommendations.'
+  },
+  {
+    question: 'How does the kidding countdown work?',
+    answer: 'The kidding countdown shows days remaining until expected birth for each pregnant doe or ewe. Expected dates are calculated from confirmed exposure or breeding date (adding ~150 days). Countdowns appear on dashboards and the kidding calendar alongside FAMACHA-due, deworming-due, and hoof-trim-due signals from your herd-health workflows.'
+  },
+  {
+    question: 'Can I track does on a pasture-exposure window instead of a single breeding date?',
+    answer: 'Yes. Group breeding plans (sheep + goats) accept an exposure window (buck-in / buck-out dates) instead of a single observed breeding. The kidding window is calculated as the exposure-start + 145 days through exposure-end + 155 days, so you can prep the kidding stall and start checking udders without a precise single date.'
+  },
+  {
+    question: 'What pre-kidding signs can I track?',
+    answer: 'The pre-kidding checklist includes udder development, ligament softening (the "tail-head test"), vulvar swelling and discharge, restlessness and isolation, off-feed behavior, and any custom signs you want to monitor. Each sign can be dated as it appears so you build a per-doe pattern over multiple kiddings.'
+  },
+  {
+    question: 'How do I record kidding outcomes?',
+    answer: 'When a doe or ewe kids, you record the actual date/time, each kid\'s details (sex, color/markings, birth weight, presentation), delivery notes (normal vs. assisted, single vs. multiple), complications, vet involvement, placenta passage timing, and dam post-kidding condition. Multiple kids per doe are tracked individually, including which kids were bottle-raised vs. dam-raised.'
+  },
+  {
+    question: 'Does it remind me about CDT, BoSe, and CAE-prevention?',
+    answer: 'Yes. CDT booster 30 days pre-kidding, BoSe in selenium-deficient regions, and CAE-prevention pasteurization protocols (heat-treated colostrum + pasteurized milk) can be scheduled per-doe with reminders. These are part of the broader medication-tracking and rearing-protocols workflows you can layer on top.'
+  }
+];
+---
+
+<BaseLayout
+  title="Kidding & Lambing Management Workflow | BreederHQ"
+  description="Manage caprine and ovine pregnancy from confirmation to birth. Auto-generated 150-day gestation milestones, kidding calendar, pre-kidding checklists, multi-kid outcome recording, and CDT/BoSe/CAE-prevention scheduling for goat and sheep breeders."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Kidding Management</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Kidding & Lambing Management for Goat and Sheep Breeders</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+        <p class="text-gray-700 leading-relaxed">
+          150 days is a tight window when you have multiple does or ewes running together. BreederHQ auto-generates pregnancy milestones (45-day confirmation, 100-day mid-gestation, 140-day pre-birth prep, CDT booster, BoSe), provides a visual kidding calendar across your herd, includes pre-kidding sign checklists (udder, ligaments, behavior), and records complete multi-kid birth outcomes per doe. Built for group breeding plans where the exposure date is a window, not a single observation.
+        </p>
+      </aside>
+
+      <p class="text-xl text-gray-700 leading-relaxed mb-4">
+        Caprine and ovine pregnancy is a five-month journey with critical checkpoints along the way. CDT and BoSe timing wrong puts kids and lambs at risk. Missing the pre-kidding window on a doe with triplets coming can end badly fast. And when does and ewes are bred on a pasture-exposure window rather than a single observed breeding, your "due date" is itself a range.
+      </p>
+
+      <p class="text-xl text-gray-700 leading-relaxed">
+        BreederHQ tracks it all so you can focus on the care, not the calendar math.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why kidding management matters</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The stakes in caprine and ovine pregnancy are real:
+      </p>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Multiple-kid births</strong> - Twins are the rule in dairy goats, triplets and quads happen, and presentation problems compound when more than one kid is trying to come through. You need to know who's expecting how many before they're in active labor.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Group breeding windows</strong> - When a buck runs with a group of does, the "breeding date" is an exposure window (buck-in / buck-out). The kidding window calculates forward as a range, not a single date.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>CDT timing</strong> - CDT booster 30 days pre-kidding gives kids protection through colostrum. Miss the window and the kids are unprotected against enterotoxemia until their own vaccines kick in.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>BoSe in deficient regions</strong> - White muscle disease is a selenium-deficiency killer. Pre-kidding BoSe injection (and follow-up on kids at birth) is timed work, not a general herd-health task.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>CAE prevention</strong> - Dairy operations that pull kids and feed heat-treated colostrum + pasteurized milk need that decision documented before the doe kids, not improvised in the moment.</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span><strong>Pre-kidding signs vary</strong> - Udder development, ligament softening, vulvar swelling, and behavior changes all signal imminent kidding but appear in different orders by doe.</span>
+        </li>
+      </ul>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-6 font-semibold">
+        When you're managing a barn full of pregnant does and ewes through a tight 10-day kidding window, a wall calendar and memory aren't enough.
+      </p>
+    </div>
+  </section>
+
+  <!-- Milestone Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Auto-Generated Pregnancy Milestones</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        When you record a confirmed breeding, exposure window, or pregnancy confirmation, BreederHQ automatically generates a milestone schedule for each pregnancy.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-6">Standard Caprine & Ovine Pregnancy Milestones</h3>
+
+        <div class="space-y-6">
+          <div class="flex items-start border-l-4 border-blue-500 pl-4">
+            <div class="flex-shrink-0 mr-4">
+              <div class="bg-blue-500 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center">45</div>
+            </div>
+            <div>
+              <p class="font-bold text-lg">Day 45 - Pregnancy Confirmation</p>
+              <p class="text-gray-600">Ultrasound or blood test (BioPRYN) confirms pregnancy. First reliable window for confirmation in does and ewes.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start border-l-4 border-green-500 pl-4">
+            <div class="flex-shrink-0 mr-4">
+              <div class="bg-green-500 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center">75</div>
+            </div>
+            <div>
+              <p class="font-bold text-lg">Day 75 - Fetal Count (Optional)</p>
+              <p class="text-gray-600">Ultrasound can give a fetal count in this window. Knowing singles vs. twins vs. triplets changes feeding plans for the last six weeks.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start border-l-4 border-yellow-500 pl-4">
+            <div class="flex-shrink-0 mr-4">
+              <div class="bg-yellow-500 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center">100</div>
+            </div>
+            <div>
+              <p class="font-bold text-lg">Day 100 - Mid-Gestation Check</p>
+              <p class="text-gray-600">Body condition score check. Adjust feeding for last 50 days when fetal growth accelerates. Flag does/ewes carrying multiples for higher-energy ration.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start border-l-4 border-orange-500 pl-4">
+            <div class="flex-shrink-0 mr-4">
+              <div class="bg-orange-500 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center">120</div>
+            </div>
+            <div>
+              <p class="font-bold text-lg">Day 120 - CDT Booster</p>
+              <p class="text-gray-600">CDT (Clostridium perfringens C+D, tetanus) booster ~30 days pre-kidding. Antibodies pass through colostrum and protect kids/lambs until their own vaccines.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start border-l-4 border-purple-500 pl-4">
+            <div class="flex-shrink-0 mr-4">
+              <div class="bg-purple-500 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center">135</div>
+            </div>
+            <div>
+              <p class="font-bold text-lg">Day 135 - BoSe + Pre-Kidding Prep</p>
+              <p class="text-gray-600">BoSe injection in selenium-deficient regions. Move to kidding stall. Stage CAE-prevention supplies (pasteurizer, heat-treatment thermometer) if pulling kids.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start border-l-4 border-red-500 pl-4">
+            <div class="flex-shrink-0 mr-4">
+              <div class="bg-red-500 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center">⚡</div>
+            </div>
+            <div>
+              <p class="font-bold text-lg">Day 145+ - Pre-Kidding Signs Watch</p>
+              <p class="text-gray-600">Checklist for udder fill, ligament softening, vulvar changes, restlessness, and off-feed behavior. Triplet does often go a few days earlier than singles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-gray-700 leading-relaxed">
+        Each milestone shows as upcoming, due, or completed. You'll never wonder "when was her CDT supposed to be?" again.
+      </p>
+    </div>
+  </section>
+
+  <!-- Kidding Calendar -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Kidding Calendar</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        See your entire herd's kidding schedule at a glance, including group-exposure windows where the due date is a range, not a single point.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Expected Dates</h3>
+          <p class="text-gray-700">
+            Calculated from confirmed breeding (single date + 150 days) or from an exposure window (buck-in + 145 to buck-out + 155).
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Visual Timeline</h3>
+          <p class="text-gray-700">
+            Color-coded by status: confirmed pregnancy, mid-gestation, pre-kidding prep, due window, overdue. Multiple does in the same window cluster visually.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Countdown Display</h3>
+          <p class="text-gray-700">
+            Days until expected kidding for each doe or ewe. Sort by soonest-due to see who needs the next stall, the next BoSe, the next CDT.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">Milestone Overlay</h3>
+          <p class="text-gray-700">
+            See CDT, BoSe, hoof trim, and FAMACHA-due signals overlaid on the kidding calendar. Schedule barn work efficiently when multiple does need the same task.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-gray-700 leading-relaxed">
+        Whether you have 5 pregnant does or 50, the kidding calendar keeps you organized without spreadsheet gymnastics.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pre-Kidding Signs -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Pre-Kidding Sign Tracking</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Every doe is different. Some bag up two weeks early, others fill the udder hours before kidding. Tracking pre-kidding signs helps you learn each doe's pattern and predict when kidding is imminent.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+        <h3 class="text-2xl font-bold mb-4">Pre-Kidding Checklist</h3>
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-4 flex-shrink-0"></div>
+            <div>
+              <p class="font-semibold">Udder Development</p>
+              <p class="text-gray-600 text-sm">Progressive filling, typically begins 2-4 weeks before kidding. Tight, shiny udder often signals within 24-48 hours.</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-4 flex-shrink-0"></div>
+            <div>
+              <p class="font-semibold">Ligament Softening (Tail-Head Test)</p>
+              <p class="text-gray-600 text-sm">Pelvic ligaments on either side of the tail head soften and "disappear" in the final 12-24 hours. The classic kidding predictor.</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-4 flex-shrink-0"></div>
+            <div>
+              <p class="font-semibold">Vulvar Swelling and Discharge</p>
+              <p class="text-gray-600 text-sm">Vulva elongates and reddens. Clear or amber discharge in the final hours; thick mucus plug passes near labor.</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-4 flex-shrink-0"></div>
+            <div>
+              <p class="font-semibold">Restlessness and Isolation</p>
+              <p class="text-gray-600 text-sm">Pawing, pacing, lying down and getting up. Separating from the herd. Nesting in the corner of the stall.</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-4 flex-shrink-0"></div>
+            <div>
+              <p class="font-semibold">Off-Feed Behavior</p>
+              <p class="text-gray-600 text-sm">Sudden disinterest in grain or hay in the last 12-24 hours, especially in does that normally eat aggressively.</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-4 flex-shrink-0"></div>
+            <div>
+              <p class="font-semibold">Vocalization Changes</p>
+              <p class="text-gray-600 text-sm">Talking to her sides, low calls, or atypical bleating. Often the last sign before active labor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-gray-700 leading-relaxed">
+        Each sign can be dated when first observed. Over time, you'll build a history of each doe's pre-kidding patterns, which is genuinely useful by her third or fourth freshening.
+      </p>
+    </div>
+  </section>
+
+  <!-- Kidding Outcome Recording -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Kidding Outcome Recording</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        When the kids or lambs arrive, complete documentation ensures you have records for registration (ADGA, AGS, ABGA, USBGR, NSIP), veterinary follow-up, and future breeding decisions. Multiple kids per doe are recorded individually.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Kidding Details</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Actual kidding date and time per kid</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Normal vs. assisted delivery</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Presentation (anterior, posterior, breech, malpresentation)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Total kids born vs. born alive vs. weak-at-birth</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Veterinarian involvement</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Placenta passage timing (one set per kid in shared chorion)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Complications (dystocia, retained placenta, ringwomb)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Per-Kid Information</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Sex (doeling, buckling, wether-bound)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Color, markings, and pattern</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Birth weight</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Time to stand and time to first nurse</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Dam-raised vs. bottle-raised vs. CAE-prevention pulled</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Disbudding scheduled date</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tattoo (left ear breeder ID, right ear individual ID)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Dam Post-Kidding</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Dam condition and behavior</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Colostrum quality and quantity</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Heat-treatment record (if CAE-prevention)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>First milking date and production</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Hypocalcemia / ketosis flags</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Rebreed notes (if planned)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Documentation</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Photos at birth (each kid)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Veterinary notes attachment</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Free-form notes</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Registration application prep (ADGA, AGS, ABGA, USBGR, NSIP)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Never Miss a Milestone</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Auto-generated 150-day pregnancy milestones. Visual kidding calendar with exposure-window support. Pre-kidding sign tracking per doe. Complete multi-kid outcome documentation. CDT, BoSe, and CAE-prevention scheduling. Everything you need to manage caprine and ovine pregnancies professionally.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Started Free
+        </a>
+        <a href="/goats" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See all goat features →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Related workflows</h2>
+      <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/breeding-cycles" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Cycles & Heat Tracking
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Plans
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/offspring-care" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Offspring Care
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/foaling-management" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Foaling Management (Equine equivalent)
+          </a>
+        </div>
+        <div>
+          <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Goat Breeding Software Overview
+          </a>
+        </div>
+        <div>
+          <a href="/compare/best-goat-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Best Goat Breeding Software Comparison
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Started Free
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Breeding Cycles", description: "Heat tracking and species-aware due-date math for does and ewes.", url: "/workflows/breeding-cycles" },
+      { title: "Breeding Plans", description: "Group breeding plan lifecycle with exposure-window support.", url: "/workflows/breeding-plans" },
+      { title: "Offspring Care", description: "Per-kid weight tracking, milestones, neonatal dashboard.", url: "/workflows/offspring-care" },
+      { title: "Foaling Management", description: "Equine equivalent: 11-month pregnancy milestones and foaling calendar.", url: "/workflows/foaling-management" },
+      { title: "Goat Breeding Software", description: "Full goat features: dairy production, parasite management, registry support.", url: "/goats" },
+      { title: "Best Goat Breeding Software", description: "How BreederHQ compares for goat breeders.", url: "/compare/best-goat-breeding-software" }
+    ]}
+  />
+
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('buck-service');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Buck Service', url: '/services/buck-service' }
+];
+---
+
+<BaseLayout
+  title="Buck Service for Goat Breeders on BreederHQ Marketplace"
+  description="Find buck service providers on BreederHQ Marketplace. Driveway breeding, walk-in service, and short-term lease arrangements with on-test, registered bucks for dairy and meat goat operations."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Buck Service</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Buck Service</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse buck service providers — breeders offering driveway breeding, walk-in service, and short-term lease arrangements. For a small dairy or meat goat operation, the right outside buck means access to better genetics without the year-round expense, biosecurity, and fencing realities of keeping your own.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Buck Service Providers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Buck Service Providers" unit="buck" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Driveway breeding (one-day pen visit)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Walk-in service (multi-cycle stay at the buck owner's farm)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Short-term buck lease for breeding season</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Registered bucks with documented pedigree</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Stated CAE / CL / Johne's testing posture</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Linear-appraisal and DHIR-tested dams behind the buck</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Live-cover and natural service workflows</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Service memo / breeding letter for registry transfer</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Health-testing posture, stated and recent.</strong> CAE, CL, and Johne's are the real concerns. Ask for dates, not vibes.</li>
+          <li><strong class="text-gray-900">Biosecurity expectations on your side.</strong> Most buck owners want a recent CAE-negative or stated-posture doe before she steps off the trailer. Know what they require.</li>
+          <li><strong class="text-gray-900">Documentation.</strong> A signed service memo / breeding letter is the only way ADGA / AGS / ABGA registries can record the kids correctly.</li>
+          <li><strong class="text-gray-900">Genetics behind the buck.</strong> Sire stack, dam's appraisal score, dam's lactation record, full-sister and half-sister production — these are the data points that matter for dairy.</li>
+          <li><strong class="text-gray-900">Refund / re-service policy.</strong> Live kid guarantees and re-service policies vary widely. Get it in writing.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/goat-ai-technician" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🧬</div>
+            <div class="font-semibold text-gray-900">Goat AI Technician</div>
+            <p class="text-xs text-gray-600 mt-1">When the genetics you want only ship as frozen semen.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">For pre-breeding workups and pregnancy confirmation.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/buck-service" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Do you offer outside buck service?</p>
+            <p class="text-sm text-gray-600">List your driveway, walk-in, or short-lease service on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

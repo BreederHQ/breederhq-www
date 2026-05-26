@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('goat-ai-technician');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Goat AI Technician', url: '/services/goat-ai-technician' }
+];
+---
+
+<BaseLayout
+  title="Goat AI Technicians on BreederHQ Marketplace"
+  description="Find on-farm goat AI technicians on BreederHQ Marketplace. Frozen-semen handling, timed-AI protocols (CIDR, buck effect), and laparoscopic AI referrals for dairy and meat goat breeders."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Goat AI Technician</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Goat AI Technician</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse on-farm goat AI providers — technicians who handle frozen semen, run timed-AI protocols, and refer to surgical / laparoscopic AI when the genetics demand it. AI is how a small breeder reaches the genetics a buck pen alone can't, and an experienced caprine hand makes the difference between a settled doe and a wasted straw.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Goat AI Technicians
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Goat AI Technicians" unit="technician" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> On-farm cervical AI with frozen semen</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Heat detection and natural-cycle AI</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> CIDR-based synchronization protocols</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Buck-effect synchronization for out-of-season breeding</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Semen tank handling and straw thawing</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Service memo / breeding letter for registry transfer</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Laparoscopic AI referrals (typically veterinarian-only)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Pregnancy-check coordination with mobile goat vets</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Conception-rate honesty.</strong> Per-doe, per-attempt rates on the kind of does and protocols you're running. Ask, and ask for context.</li>
+          <li><strong class="text-gray-900">Scope and state veterinary law.</strong> Cervical AI is usually a lay-tech procedure; laparoscopic AI is veterinarian-only in most states. Confirm what they can actually do for you.</li>
+          <li><strong class="text-gray-900">Semen tank handling.</strong> A botched thaw is the most common silent failure. Look for documented handling protocol.</li>
+          <li><strong class="text-gray-900">Protocol literacy.</strong> CIDR, buck effect, and light manipulation each have prescription, timing, and welfare considerations. Your tech should know the trade-offs.</li>
+          <li><strong class="text-gray-900">Documentation.</strong> A clear service memo per doe — sire, straw lot, date, time — is what makes registry transfer possible later.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/buck-service" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">♂️</div>
+            <div class="font-semibold text-gray-900">Buck Service</div>
+            <p class="text-xs text-gray-600 mt-1">Driveway, walk-in, and short-lease natural service options.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">For pregnancy ultrasound and surgical-AI referrals.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/goat-ai-technician" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Do you run goat AI on farms?</p>
+            <p class="text-sm text-gray-600">List your AI tech service, protocols offered, and service area on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

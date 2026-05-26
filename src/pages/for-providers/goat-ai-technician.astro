@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Goat AI Technician', url: '/for-providers/goat-ai-technician' }
+];
+
+const faqs = [
+  {
+    question: 'Who is the goat AI technician category for?',
+    answer: 'Lay technicians and veterinarians who perform on-farm cervical AI on does, run timed-AI synchronization protocols, and either perform or refer laparoscopic AI. State veterinary practice law dictates which scope can be performed by whom.'
+  },
+  {
+    question: 'How much does it cost to list?',
+    answer: 'Flat $5 per month per provider account during general availability. No commissions, no per-inquiry fees. Early access listings are free.'
+  },
+  {
+    question: 'Do I have to offer laparoscopic AI?',
+    answer: 'No. Most caprine AI providers offer cervical AI only and refer laparoscopic AI to a veterinarian. State whatever scope you actually perform.'
+  }
+];
+---
+
+<BaseLayout
+  title="List Your Goat AI Technician Service on BreederHQ Marketplace"
+  description="Provider acquisition page for on-farm goat AI technicians. Cervical AI, timed-AI protocols, frozen-semen handling. Flat $5/month. No commissions."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main>
+    <section class="bg-gradient-to-b from-amber-50 to-white py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-4">For Goat AI Technicians</div>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">List Your Goat AI Service</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">AI demand swings hard with breeding season. A real listing puts you in front of breeders weeks before they need you, not the day they realize their doe is cycling.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600">List Your AI Service</a>
+          <a href="/services/goat-ai-technician" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold border border-amber-200 hover:bg-amber-50">See the Browse Page</a>
+        </div>
+        <p class="text-xs text-gray-500 mt-6">Flat $5/month per account. No commissions. No per-booking fees.</p>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What Your Listing Surfaces</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Scope.</strong> Cervical AI, laparoscopic AI (vet-only), surgical referral.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Protocols offered.</strong> Natural cycle, CIDR-based sync, buck-effect, out-of-season programs.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Service area.</strong> Counties, states, or radius you actually drive.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Semen tank handling.</strong> Pickup, storage, transport posture.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Documentation.</strong> Service memo / breeding letter format provided.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Identity passthrough.</strong> Optional Stripe Identity confirmation surfaced on your profile.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-white rounded-xl p-6 border border-stone-200">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-sm text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Provider Categories</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <a href="/for-providers/caprine-services" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition"><h3 class="font-semibold text-gray-900 mb-1">All Caprine Services</h3><p class="text-sm text-gray-600">Umbrella page for goat-specific providers.</p></a>
+          <a href="/for-providers/buck-service" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition"><h3 class="font-semibold text-gray-900 mb-1">Buck Service</h3><p class="text-sm text-gray-600">Sibling reproductive-service category.</p></a>
+          <a href="/for-providers/mobile-goat-vet" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition"><h3 class="font-semibold text-gray-900 mb-1">Mobile Goat Vet</h3><p class="text-sm text-gray-600">For pregnancy ultrasound and laparoscopic-AI referrals.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gradient-to-br from-amber-900 to-amber-800">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">List Your Goat AI Service</h2>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-50">Claim Your Listing</a>
+          <a href="/trust" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold border border-amber-600 hover:bg-amber-600">Identity &amp; Credentials Policy</a>
+        </div>
+        <p class="text-xs text-amber-200 mt-6">Flat $5/month. No commissions. Cancel anytime.</p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

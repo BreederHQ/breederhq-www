@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Goat Kid Health Guarantee: What It Actually Covers', url: '/articles/goat-kid-health-guarantee-what-it-covers' }
+];
+
+const lastReviewedISO = '2026-05-26';
+
+const faqs = [
+  {
+    question: 'What does a goat-kid health guarantee usually cover?',
+    answer: 'Most goat-kid health guarantees cover a defined list of congenital and disease-status conditions confirmed within a specific window after pickup. Common scope includes failure-to-thrive in the first 48 to 72 hours, disqualifying conformation defects, and a small set of named hereditary conditions appropriate to the breed. Disease-status assurances (CAE-negative, CL-negative, Johne's-negative herd posture) are usually framed at the herd level rather than per kid, and rely on dated test results from a named lab. Buyer's remedies are usually a replacement kid, a partial refund, or a capped contribution toward vet costs, not open-ended cost coverage.'
+  },
+  {
+    question: 'How does a goat-kid guarantee differ from a puppy guarantee?',
+    answer: 'Three big differences. First, scrapie compliance is federal: any goat moving across premises has to be identified per USDA Scrapie Eradication Program rules, and the contract usually includes the premises ID and the tattoo placement. Second, disease-status testing (CAE, CL, Johne's) is herd-level and time-bound, a buyer should ask for the herd test date and the lab. Third, dam-raised vs bottle-raised matters for the kid's downstream health; the contract should say which, and what colostrum protocol was used.'
+  },
+  {
+    question: 'What disease-status assurances should the contract include?',
+    answer: 'For a serious breeder, the contract typically attests that the herd is CAE-negative, CL-negative, and Johne's-negative as of a stated test date, with the lab named (most often WSU WADDL, UC Davis, or a state diagnostic lab). It should also state whether the dam was tested individually within a reasonable window and the kid's status if known. Per ADR 0024 and the platform's legally-locked trust posture, none of these are platform-verified, the breeder attests, and the buyer verifies against the lab certificate.'
+  },
+  {
+    question: 'How long should a goat-kid health guarantee last?',
+    answer: 'Coverage windows vary by condition class. Typical patterns: 72 hours from pickup for failure-to-thrive and acute illness, 6 to 12 months for disqualifying conformation defects, and 1 to 2 years for a defined list of breed-specific hereditary conditions where they exist. Disease-status assurances are time-bound to the herd-test date, not the sale date, and should be re-tested on a known cadence. A guarantee with no end date and no condition list is usually a marketing claim, not a contractual one.'
+  },
+  {
+    question: 'What voids a goat-kid health guarantee?',
+    answer: 'Common voiding triggers include: failing to schedule a vet check within a stated window after pickup; allowing exposure to non-tested goats before the kid is tested; not following the breeder's coccidiosis-prevention protocol during the first 90 days; rehoming or transferring the kid without notice; failing to maintain CDT vaccination on the contract's schedule; and failing to submit lab work from a named lab if a disease-status issue is alleged. The contract usually lists every trigger explicitly. Read them before signing, because many are unrelated to the disease itself.'
+  },
+  {
+    question: 'Is the scrapie premises ID required on the bill of sale?',
+    answer: 'For interstate movement and for any goat that may later move to a sale barn or auction, yes, the seller's scrapie premises ID has to accompany the animal. The platform treats the premises ID as a first-class tenant-level field, and surfaces it on the public listing alongside structured tattoo placement (right ear, left ear, tail web) so buyers can see it before they inquire. Contract language should reference it explicitly.'
+  },
+  {
+    question: 'What about Linear Appraisal or production guarantees on dairy goats?',
+    answer: 'Linear Appraisal scores and 305-day production records are factual records, not promises about the future. A reasonable contract will attest that the dam's LA and DHIA records are accurate as published; it will not promise that the kid will reach a particular LA score or production level. Earned-classification badges (★M, +B, Superior Genetics) are issued by the breed registry under their own rules, not by the breeder, a contract that promises them is either confused or overselling.'
+  },
+  {
+    question: 'Can I negotiate the terms of a goat-kid health guarantee?',
+    answer: 'Sometimes. Smaller breeders or breeders earlier in their program may be more open to negotiation than established show-herd breeders with a waitlist. The most negotiable terms are usually: the per-condition coverage window, the specific list of named conditions, the vet-of-choice or lab-of-choice requirement, the post-pickup protocol obligations, and the remedy menu. Make any agreed change in writing as a signed amendment to the original contract, not as a text-message addendum.'
+  }
+];
+---
+
+<BaseLayout
+  title="Goat Kid Health Guarantee: What It Actually Covers (and What It Doesn't) | BreederHQ"
+  description="A teardown of what a goat-kid health guarantee typically covers, what it excludes, how disease-status testing (CAE / CL / Johne's) and scrapie compliance affect the contract, and what to read before you buy."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Goat Kid Health Guarantee: What It Actually Covers (and What It Doesn't)",
+    description: "A teardown of goat-kid health guarantees: typical scope, disease-status assurances, scrapie compliance, voiding triggers, and the difference between a real guarantee and marketing language.",
+    datePublished: lastReviewedISO,
+    dateModified: lastReviewedISO,
+    author: {
+      name: "BreederHQ Editorial",
+      role: "BreederHQ"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Goat Kid Health Guarantee</li>
+      </ol>
+    </nav>
+
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Buyer Guide · Goats</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-4">
+          Goat Kid Health Guarantee: What It Actually Covers (and What It Doesn't)
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          A goat-kid health guarantee is not a puppy guarantee with the species swapped. Disease-status testing is herd-level. Scrapie compliance is federal. Dam-raised vs bottle-raised matters. This guide breaks down what a real goat-kid guarantee covers, what it excludes, and what to read before you buy.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed May 2026</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 26, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>12 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Four Clause Types You Will See</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Most goat-kid contracts use some combination of four clause types. Knowing which one you are reading is the first step to understanding what you actually have.
+          </p>
+
+          <ol class="space-y-4 text-lg text-gray-700 mb-6 list-decimal pl-6">
+            <li><strong>Live-kid / first-48-hours clause.</strong> Covers failure-to-thrive and acute illness in the first 48 to 72 hours after pickup, usually requiring a vet check and notification within a stated window. Remedy is typically a replacement kid from a future kidding or a refund. This is the most common clause and the easiest to enforce.</li>
+            <li><strong>Disqualifying-defect clause.</strong> Covers conformation defects that would disqualify the kid from registration or from the intended use (dairy, show, breeding), confirmed within 6 to 12 months. The defect list is usually breed-specific and references the breed registry's standards.</li>
+            <li><strong>Hereditary-condition clause.</strong> Covers a named list of breed-specific hereditary conditions for 1 to 2 years, requiring diagnosis by a board-certified specialist or a named diagnostic lab. The list is short for goats compared to dogs, the goat genetics literature simply has fewer named hereditary conditions with verified mode of inheritance.</li>
+            <li><strong>Herd-disease-status assurance.</strong> Attests that the herd is CAE-negative, CL-negative, and Johne's-negative as of a stated lab-test date. This is not a clause about the kid, it is an attestation about the herd. The buyer's remedy if the assurance is false is usually a refund plus the diagnostic costs, but the contract has to say that.</li>
+          </ol>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Disease-Status Testing: The Part Buyers Underweight</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            CAE, CL, and Johne's are the three diseases serious US goat herds test for. Each one has implications a buyer should understand before signing.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            <strong>CAE (Caprine Arthritis Encephalitis)</strong> is a lifelong retroviral disease that affects joints, the udder, and (in kids) the central nervous system. It is transmitted dam-to-kid primarily through colostrum and milk. CAE-negative herds typically pull kids at birth and feed heat-treated colostrum and pasteurized milk to break transmission, the contract should state which colostrum protocol was used.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            <strong>CL (Caseous Lymphadenitis)</strong> is a bacterial disease that causes abscesses, primarily in lymph nodes. CL-negative herd status is harder to verify than CAE because abscesses can be present internally without external signs. A serious breeder will have a documented CL-monitoring program in addition to a single test result.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Johne's disease</strong> is a chronic wasting disease that takes years to manifest. A negative herd test is meaningful but not absolute, the disease has a long latent period. Serious herds run Johne's testing on a multi-year cycle and disclose any positive history honestly.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Scrapie Compliance: Not Optional, Not Negotiable</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The US Scrapie Eradication Program requires any goat moving across premises to be officially identified, typically by tattoo carrying the seller's scrapie premises ID. The seller's premises ID is not a private number, it is a regulatory identifier, and it has to accompany the animal's paperwork.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Any contract that does not include the seller's premises ID, the kid's tattoo placement (right ear, left ear, or tail web), and the tattoo characters as recorded is incomplete. If the seller cannot produce the premises ID, that is a meaningful warning sign, it usually means the seller is operating outside the scrapie program, and the buyer may struggle to register, sell, or move the kid later.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            CVI (Certificate of Veterinary Inspection) is also required for most cross-state-line movement. The vet-issued certificate should be in the buyer's hands at pickup, not promised for later.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Dam-Raised vs Bottle-Raised: Why the Contract Should Say</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Dam-raised and bottle-raised (heat-treated colostrum + pasteurized milk, or milk replacer) are different rearing decisions with different downstream implications. Dam-raised kids generally have stronger early-life resilience and easier socialization; bottle-raised kids are essential in CAE-prevention programs but require disciplined feeding cadence.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The contract should state which approach the kid was raised with, what colostrum protocol was used, and what the disbudding and tattoo timing was. These are factual records that a serious breeder can produce from their kidding log.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Questions to Ask Before You Sign</h2>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>What is the herd's most recent CAE, CL, and Johne's test date, what lab ran it, and can I see the certificate?</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>What is the scrapie premises ID, and what is the kid's tattoo placement and tattoo characters?</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Was the kid dam-raised or bottle-raised, and what colostrum protocol was used?</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Will you provide a CVI at pickup, or do I need to arrange one?</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>What is the herd's parasite-program protocol, FAMACHA cadence, FEC frequency, FECRT date?</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>What CDT vaccination schedule was used, and what is the schedule going forward?</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>For dairy goats: what are the dam's Linear Appraisal score and best 305-day production, and can you point me to the public listing surface where I can verify?</span></li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A serious breeder will answer all of these without hesitation, in writing if asked. A seller who cannot, or who treats the questions as an imposition, is telling you something useful.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Where BreederHQ Fits for Goat Buyers</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            BreederHQ's public marketplace surfaces the structured data behind a goat-kid sale: scrapie premises ID, tattoo placement, herd-health passport (CAE, CL, Johne's status with dates), parasite-program rollup, and, for dairy does, Linear Appraisal and production records. Buyers see the breeder's attestations in one place, with deep links to public registries where applicable.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            For breeders building these records, see <a href="/articles/goat-herd-health-software" class="text-[hsl(24,95%,53%)] hover:underline">Goat Herd-Health Software</a> and <a href="/articles/dairy-goat-record-keeping-software" class="text-[hsl(24,95%,53%)] hover:underline">Dairy Goat Record-Keeping Software</a>. For the goat product surface, see <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">/goats</a>.
+          </p>
+
+          <p class="text-sm text-gray-500 leading-relaxed italic">
+            This article is informational, not legal advice. Goat purchase contracts are governed by state contract law and, where applicable, state pet-purchaser-protection statutes, most of which do not extend to livestock. Consult a local attorney for legal questions about a specific contract.
+          </p>
+        </section>
+
+      </div>
+    </article>
+
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>

@@ -13,16 +13,24 @@ const faqs = [
     answer: 'Breeding management software is a digital system that centralizes animal records, breeding plans, health data, pedigrees, and buyer management for breeders running structured programs. It differs from simple record-keeping by connecting all of this data so it can be queried and used together.'
   },
   {
+    question: 'What software do goat breeders use to manage their programs?',
+    answer: 'Goat breeders use breeding management platforms like BreederHQ that support caprine-specific workflows including kidding records, FAMACHA and fecal egg count tracking, structured per-ear tattoo fields, scrapie premises ID, sale-to-registry transfer packets, and registry deep links for ADGA, AGS, NDGA, Kiko, and other goat registries.'
+  },
+  {
     question: 'What software do dog breeders use to manage their programs?',
-    answer: 'Dog breeders use breeding management platforms like BreederHQ, BreederCloud Pro, and others that support canine-specific workflows including heat tracking, whelping records, and AKC registry links.'
+    answer: 'Dog breeders use breeding management platforms like BreederHQ that support canine-specific workflows including heat tracking, whelping records, neonatal weight alerts, rearing protocol logging, and AKC registry links.'
   },
   {
     question: 'How is breeding management software different from pedigree software?',
-    answer: 'Pedigree software only builds family trees. Breeding management software includes pedigrees plus health records, genetics tools, breeding planning, buyer pipelines, and financials in one connected system.'
+    answer: 'Pedigree software only builds family trees. Breeding management software includes pedigrees plus health records, herd-health passport sharing, genetics tools, breeding planning across species cycles (litters, kiddings, lambings, foalings), buyer pipelines, and financials in one connected system.'
   },
   {
     question: 'Does breeding management software support species beyond dogs?',
-    answer: 'Some platforms support multiple species such as dogs, cats, horses, goats, rabbits, sheep, alpacas, and llamas with species-specific workflows rather than a generic database. BreederHQ supports nine species with purpose-built tools for each.'
+    answer: 'Some platforms support multiple species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle) with species-specific workflows rather than a generic database. BreederHQ supports all nine with purpose-built tools for each: kidding records and FAMACHA / FEC parasite-program entries on the goat side, foaling and lambing cycles on the horse and sheep sides, structured tattoo and scrapie premises ID fields for small ruminants, Linear Appraisal and DHIR for dairy goats, plus registry deep links for ADGA, AGS, NDGA, AQHA, ARBA, AKC, and other species-relevant bodies.'
+  },
+  {
+    question: 'What does breeding management software look like for goat and sheep breeders specifically?',
+    answer: 'On the small-ruminant side, a complete breeding management platform handles kidding or lambing records (date, time, kids born live versus stillborn, dam attendance, complications), structured per-ear and tail-web tattoo fields, tenant-level scrapie premises ID and herd prefix, CAE / CL / Johne\'s herd-health-status testing rolled up into a buyer-facing passport, FAMACHA scoring and fecal egg counts captured as structured trait entries, Linear Appraisal scoring for dairy goats, and a sale-to-registry transfer packet that bundles the cover sheet, signed contracts, paid invoices, and registration paperwork into a single PDF at pickup. Breeding-only software that lacks these surfaces will leave small-ruminant breeders maintaining parallel spreadsheets and clipboards.'
   },
   {
     question: 'Can breeders export their data from breeding management software?',
@@ -110,19 +118,19 @@ const faqs = [
           <ul class="space-y-3 text-lg text-gray-700 mb-6">
             <li class="flex items-start">
               <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
-              <span><strong>Animal profiles:</strong> Individual records covering lineage, health history, and ownership</span>
+              <span><strong>Animal profiles:</strong> Individual records covering lineage, health history, and ownership, including species-specific identifiers like microchip on the dog side and structured per-ear tattoos plus tenant scrapie premises ID on the small-ruminant side</span>
             </li>
             <li class="flex items-start">
               <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
-              <span><strong>Breeding plans:</strong> Pairing decisions, cycle tracking, and projected litters</span>
+              <span><strong>Breeding plans:</strong> Pairing decisions, cycle tracking, and projected litters or kiddings, lambings, or foalings</span>
             </li>
             <li class="flex items-start">
               <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
-              <span><strong>Health records:</strong> Testing results, vaccinations, <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">medications</a>, and veterinary notes</span>
+              <span><strong>Health records:</strong> Testing results, vaccinations, <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">medications</a>, veterinary notes, and species-specific disease-status work like OFA/CHIC for dogs and CAE / CL / Johne's panels for goats and sheep</span>
             </li>
             <li class="flex items-start">
               <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
-              <span><strong>Client and buyer data:</strong> Applications, contracts, deposits, payments, and ongoing communication</span>
+              <span><strong>Client and buyer data:</strong> Applications, contracts, deposits, payments, ongoing communication, and the registration transfer paperwork that follows the animal at sale</span>
             </li>
           </ul>
 
@@ -140,7 +148,7 @@ const faqs = [
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-6">
-            If you have one or two animals and breed occasionally, a full platform may be more than you need. But anyone running a structured program with waitlists, health testing protocols, and multiple breeding animals will feel the friction of disconnected tools almost immediately. You know the feeling: pedigrees in one app, health tests in a PDF from the vet, finances in a spreadsheet, buyer applications in a Google Form, and contracts in a folder you hope you can find later.
+            If you have one or two animals and breed occasionally, a full platform may be more than you need. But anyone running a structured program with waitlists, health testing protocols, and multiple breeding animals will feel the friction of disconnected tools almost immediately. You know the feeling: pedigrees in one app, health tests in a PDF from the vet, FAMACHA or weight notes scribbled on a clipboard in the barn, finances in a spreadsheet, buyer applications in a Google Form, and contracts in a folder you hope you can find later.
           </p>
 
           <ul class="space-y-3 text-lg text-gray-700 mb-6">
@@ -169,11 +177,11 @@ const faqs = [
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Breeding Cycles and Lifecycle Tracking</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            This module handles heat tracking, progesterone logging, breeding dates, and the phases from estrus through whelping, kidding, or foaling. Estrus is the fertile period when breeding can occur. Progesterone testing helps pinpoint the optimal breeding window, which is the short timeframe when conception is most likely.
+            This module handles heat or estrus tracking, progesterone logging (where used), breeding dates, and the phases from estrus through whelping, kidding, lambing, or foaling. Estrus is the fertile period when breeding can occur. For dog programs, progesterone testing helps pinpoint the optimal breeding window. For goat and sheep programs, this module also handles out-of-season protocols (CIDR, buck or ram effect, light manipulation), so you can plan kidding or lambing around your fair, dairy show, or market calendar.
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            A typical workflow looks like this:
+            A dog-side workflow looks like this:
           </p>
 
           <ul class="space-y-3 text-lg text-gray-700 mb-6">
@@ -199,13 +207,40 @@ const faqs = [
             </li>
           </ul>
 
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A goat-side workflow looks similar but anchored on different observations:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Heat detection:</strong> Standing heat, flagging, vocal behavior, or buck-rag response logged on the doe</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Out-of-season triggers (optional):</strong> CIDR insertion/removal dates, buck-exposure dates, or supplemental-lighting program entries</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Service date:</strong> Date of pen breeding or hand breeding to a specific buck, with the buck's record linked automatically</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Confirmation:</strong> Ultrasound (around day 30–45) or palpation date logged</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Expected kidding date:</strong> Auto-calculated from service date using species gestation length</span>
+            </li>
+          </ul>
+
           <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            BreederHQ uses an 8-phase breeding lifecycle model that maps the entire process from pre-breeding planning through placement. Each phase has its own data points and milestones, so nothing falls through the cracks.
+            BreederHQ uses an 8-phase breeding lifecycle model that maps the entire process from pre-breeding planning through placement. Each phase has its own data points and milestones, so nothing falls through the cracks. The same lifecycle structure carries horse foaling cycles, sheep lambing cycles, rabbit kindling cycles, and cattle calving cycles. The gestation lengths and exposure patterns differ, but the underlying event structure is shared.
           </p>
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Genetics and Health Records</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            This module stores health test results (such as <a href="https://ofa.org/" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">OFA certifications</a> and genetic panels) and links them to individual animals. COI tracking typically belongs here as well. COI stands for coefficient of inbreeding, which measures how closely related two animals are based on their shared ancestors.
+            This module stores health test results (such as <a href="https://ofa.org/" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">OFA certifications</a> and genetic panels for dogs, CAE / CL / Johne's disease-status panels for goats and sheep, and equivalent species-specific tests for other livestock) and links them to individual animals. It also covers herd-level health-status work, including the herd-health passport on the livestock side that buyers care about when they ask "is your herd CAE-negative?". COI tracking typically belongs here as well. COI stands for coefficient of inbreeding, which measures how closely related two animals are based on their shared ancestors.
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-8">
@@ -214,7 +249,7 @@ const faqs = [
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Pedigrees and Registry Links</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            Digital pedigree building creates multi-generation family trees for each animal. Some platforms also link to public registries like AKC, OFA, and AFA, allowing buyers to verify records at the source rather than relying on the breeder's word alone.
+            Digital pedigree building creates multi-generation family trees for each animal. Some platforms also link to the registries that matter for each species: AKC, UKC, and OFA on the dog side; ADGA, AGS, NDGA, Kiko, MDGA on the goat side; AQHA, the Jockey Club, and breed-specific bodies on the horse side; ARBA on the rabbit side. These deep links let buyers verify records at the source rather than relying on the breeder's word alone.
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-8">
@@ -223,11 +258,11 @@ const faqs = [
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Offspring and Rearing Records</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            This module covers litter records, individual offspring profiles, weight tracking, and developmental milestones. Some platforms also capture data from protocols like ENS (Early Neurological Stimulation) and temperament testing.
+            This module covers litter or kidding records, individual offspring profiles, weight tracking, and developmental milestones. The protocols differ by species: dog programs capture ENS (Early Neurological Stimulation), ESI (Early Scent Introduction), and temperament testing; goat and sheep programs capture CD&amp;T vaccination, disbudding (where chosen), tattoo placement, weaning weight, and the first FAMACHA scores once kids start grazing; horse programs capture imprinting, halter training, and farrier visits.
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            The goal is to document each offspring's development from birth through placement, creating a complete record that follows the animal throughout its life.
+            The goal is to document each offspring's development from birth through placement, creating a complete record that follows the animal throughout its life. On the livestock side, that record can roll up into the sale-to-registry transfer packet at pickup.
           </p>
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Buyers, Waitlists, and Client Portals</h3>
@@ -254,7 +289,7 @@ const faqs = [
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed">
-            What makes this different from a spreadsheet is the connection. The breeding cycle links to the dam's profile, which links to her health records, which links to the sire you selected, which links to the resulting litter, which links to individual offspring, which link to the buyers who reserved them. One entry flows into everything else.
+            What makes this different from a spreadsheet is the connection. The breeding cycle links to the dam's profile (the bitch on the dog side, the doe on the goat side, the ewe on the sheep side, the mare on the horse side), which links to her health records, which links to the sire you selected (dog stud, buck, ram, stallion), which links to the resulting litter or kidding or foaling, which links to individual offspring, which link to the buyers who reserved them. One entry flows into everything else.
           </p>
         </section>
 
@@ -268,11 +303,11 @@ const faqs = [
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Multi-Locus Coat Color Analysis</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            Multi-locus means multiple gene locations affecting a trait. For coat color, software analyzes the known genetics of both parents and predicts the possible color outcomes in offspring.
+            Multi-locus means multiple gene locations affecting a trait. For coat color, software analyzes the known genetics of both parents and predicts the possible color outcomes in offspring. This is most mature in dogs (where lab panels for locus combinations like A, E, K, B, D, S, M, and T are widely available) and increasingly available in horses and goats, where pattern and base-color loci can also be tested.
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            A few terms to know: a locus is a specific location on a chromosome, an allele is a variant of a gene at that locus, and a genotype is the combination of alleles an animal carries. When you enter both parents' genotypes, the software calculates the probability of each color appearing in the litter.
+            A few terms to know: a locus is a specific location on a chromosome, an allele is a variant of a gene at that locus, and a genotype is the combination of alleles an animal carries. When you enter both parents' genotypes, the software calculates the probability of each color appearing in the litter, kidding, or foaling.
           </p>
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Coefficient of Inbreeding Calculation</h3>
@@ -356,7 +391,7 @@ const faqs = [
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Weight Tracking and Anomaly Alerts</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            Daily or weekly <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">weight logging</a> creates a growth curve for each offspring. Software flags concerning patterns, such as failure to gain weight or sudden loss, so you can intervene before a problem becomes serious. A fading newborn shows up as a trend line, not a tragedy you only catch in hindsight.
+            Daily or weekly weight logging creates a growth curve for each offspring. Software flags concerning patterns, such as failure to gain weight or sudden loss, so you can intervene before a problem becomes serious. A fading newborn shows up as a trend line, not a tragedy you only catch in hindsight. Dog breeders can use the <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">puppy weight tracker</a>; the same weight-tracking and anomaly-alert pattern works for kid, lamb, foal, and calf weights against species-appropriate growth expectations.
           </p>
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Neonatal Dashboard</h3>
@@ -364,9 +399,9 @@ const faqs = [
             A centralized view shows all current litters, individual offspring status, and upcoming milestones. For breeders managing multiple litters simultaneously, this prevents anything from slipping through the cracks. You can see at a glance which offspring are on track and which need attention.
           </p>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Rearing and Temperament Protocols</h3>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Rearing and Species-Specific Protocols</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
-            Common protocols include:
+            Common dog-side rearing and temperament protocols include:
           </p>
 
           <ul class="space-y-3 text-lg text-gray-700 mb-6">
@@ -388,8 +423,35 @@ const faqs = [
             </li>
           </ul>
 
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Common goat-side rearing protocols look different, and a complete platform tracks them too:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>CD&amp;T vaccination:</strong> First and booster doses against Clostridium and Tetanus, logged against each kid's age window</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Disbudding:</strong> Date, technique, and operator captured when the breeder chooses to disbud</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Tattoo placement:</strong> Structured per-ear and tail-web fields (right ear is typically the herd prefix, left ear typically the year letter and individual ID)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Parasite-program entries:</strong> FAMACHA scores, fecal egg counts, and FECRT results once kids start grazing, captured as structured trait entries rather than free text in a deworming log</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Weaning weight:</strong> Captured at the breeder's chosen weaning date, often informing the kid's sale readiness</span>
+            </li>
+          </ul>
+
           <p class="text-lg text-gray-700 leading-relaxed">
-            Software <a href="/workflows/rearing-protocols" class="text-[hsl(24,95%,53%)] hover:underline">tracks completion and scores</a>, creating documentation that follows each animal and can be shared with buyers.
+            Software <a href="/workflows/rearing-protocols" class="text-[hsl(24,95%,53%)] hover:underline">tracks completion and scores</a> across whichever protocols apply to your species, creating documentation that follows each animal and can be shared with buyers.
           </p>
         </section>
 
@@ -446,7 +508,7 @@ const faqs = [
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed mb-6">
-            On BreederHQ, <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">buyers can see signals</a> including identity confirmation through Stripe Identity (operated by Stripe, Inc.), links to public registry records they can verify themselves, and calculated profile facts like joined date, typical response time, and completed transactions.
+            On BreederHQ, <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">buyers can see signals</a> including identity confirmation through Stripe Identity (operated by Stripe, Inc.), links to public registry records they can verify themselves (OFA, AKC, ADGA Genetics, AQHA, and similar bodies depending on species), and calculated profile facts like joined date, typical response time, and completed transactions. Where the data exists, listings also surface dam Linear Appraisal scores, herd-health passport status, and parasite-program rollups, all attested by the breeder and all backed by the platform's underlying records.
           </p>
 
           <p class="text-lg text-gray-700 leading-relaxed">
@@ -520,12 +582,12 @@ const faqs = [
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Step 1. Confirm Species Coverage</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-6">
-            Not all platforms support all species. Some are dog-only, while others support horses, goats, cats, rabbits, sheep, alpacas, llamas, and more. The question to ask: does the platform have species-specific workflows, or just a generic database with a species field?
+            Not all platforms support all species. Some are dog-only, while others support horses, goats, cats, rabbits, sheep, alpacas, llamas, and cattle. The question to ask: does the platform have species-specific workflows, or just a generic database with a species field? For livestock specifically, look for explicit kidding / lambing / foaling cycles, structured tattoo placement fields, tenant-level scrapie premises ID, FAMACHA / FEC / FECRT parasite-program entries, herd-health passport sharing, Linear Appraisal or DHIR support where relevant, and registry deep links for the bodies you actually use.
           </p>
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Step 2. Audit the Genetics and Health Toolset</h3>
           <p class="text-lg text-gray-700 leading-relaxed mb-6">
-            Does it calculate COI? Does it support your breed's relevant genetic tests? Can you link to OFA or breed-specific registries? Does it warn about lethal gene pairings? If genetics matter to your program, the toolset matters.
+            Does it calculate COI? Does it support your breed's relevant genetic tests? Can you link to the registries you use, like OFA for dogs, ADGA Genetics for dairy goats, AQHA for horses, or ARBA for rabbits? Does it warn about lethal gene pairings? On the livestock side, does it support herd-level CAE / CL / Johne's disease-status tracking and a buyer-facing herd-health passport? If genetics and disease status matter to your program, the toolset matters.
           </p>
 
           <h3 class="text-2xl font-bold text-gray-900 mb-3">Step 3. Map the Buyer and Client Workflow</h3>

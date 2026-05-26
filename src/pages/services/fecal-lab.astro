@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('fecal-lab');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Fecal Egg Count Lab', url: '/services/fecal-lab' }
+];
+---
+
+<BaseLayout
+  title="Fecal Egg Count Labs for Goats on BreederHQ Marketplace"
+  description="Find fecal egg count labs serving goat herds on BreederHQ Marketplace. Mail-in and drop-off McMaster counts, FECRT reduction tests, and Haemonchus-aware parasite reporting for targeted-selective deworming programs."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Fecal Egg Count Lab</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Fecal Egg Count Lab</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse labs that run goat fecal egg counts — the foundation of targeted-selective deworming. Blanket-dewormed herds are running out of working dewormers, and the only way to push back is real numbers on a real schedule: routine McMaster counts, periodic FECRT (reduction tests), and Haemonchus-aware reporting that doesn't lump all strongyle eggs together.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Fecal Egg Count Labs
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Fecal Egg Count Labs" unit="lab" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> McMaster fecal egg counts (eggs per gram)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Modified Wisconsin / sugar-flotation methods</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> FECRT (Fecal Egg Count Reduction Tests)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Coccidia oocyst counts</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Mail-in and drop-off intake</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Per-animal vs pooled-sample reporting</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Larval culture and species identification (referral)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Result turnaround in business days, not weeks</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">How to Use Fecal Egg Counts</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Baseline before deworming.</strong> Pull samples before treatment to know what you're treating.</li>
+          <li><strong class="text-gray-900">FECRT 10 to 14 days post-treatment.</strong> Same animals, same lab. Less than 95% reduction is a red flag for resistance to that dewormer class.</li>
+          <li><strong class="text-gray-900">Pair with FAMACHA.</strong> Eyelid color score plus EPG is the small-ruminant standard. Both, not either.</li>
+          <li><strong class="text-gray-900">Selective treatment.</strong> Treat the animals carrying the load, not the whole herd. Refugia matters.</li>
+          <li><strong class="text-gray-900">Confirm with the lab's method.</strong> Sensitivity varies. Stay with one lab for trend continuity.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">For sample collection, herd workups, and parasite-program design.</p>
+          </a>
+          <a href="/services/health-testing" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🧬</div>
+            <div class="font-semibold text-gray-900">Health Testing</div>
+            <p class="text-xs text-gray-600 mt-1">Cross-species health and disease testing labs.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/fecal-lab" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Do you run fecal egg counts?</p>
+            <p class="text-sm text-gray-600">List your mail-in or drop-off goat fecal lab on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

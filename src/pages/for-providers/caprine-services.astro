@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Caprine Services', url: '/for-providers/caprine-services' }
+];
+
+const faqs = [
+  {
+    question: 'Who is the caprine services marketplace for?',
+    answer: 'Goat-specific service providers: disbudders, hoof trimmers, fecal egg count labs, DHIA / DHIR supervisors, linear appraisal hosts and coordinators, buck-service breeders, AI techs, ambulatory goat veterinarians, and goat transporters. If most of your billable work involves goats, this is the right category.'
+  },
+  {
+    question: 'How much does it cost to list?',
+    answer: 'Listings are a flat $5 per month per provider account during general availability. There are no commissions, no per-inquiry fees, and no per-booking fees. Early access listings are free while the caprine category builds out.'
+  },
+  {
+    question: 'Why is "caprine services" separate from "livestock services"?',
+    answer: 'Goat work is its own ecosystem — registry rules, disease pressure (CAE, CL, Johne\'s), reproductive protocols (CIDR, buck effect, laparoscopic AI), and production records (DHIR, linear appraisal) are caprine-specific. Generic livestock-services listings get buried under cattle and sheep work and stop being useful for goat-only providers.'
+  },
+  {
+    question: 'Do I list under the umbrella or under a specialist category?',
+    answer: 'If you only do one specialty, pick that specialty (Goat Hoof Trimming, Buck Service, Mobile Goat Vet, etc.). If you do several, the umbrella "Caprine Services" listing lets you describe your range. You can list under more than one specialist category if you genuinely do the work.'
+  },
+  {
+    question: 'How does identity and credential display work?',
+    answer: 'You can complete identity verification through Stripe Identity (operated by Stripe, Inc.), which adds an "Identity confirmed via Stripe Identity" indicator to your profile. Business address, insurance, registry affiliations, and DHIA / appraisal-program supervisor status are your own attestation on your profile. BreederHQ does not verify those independently. For credentials issued by organizations with a public registry, BreederHQ may display a passthrough indicator linking back to the registry. See /trust for the full policy.'
+  },
+  {
+    question: 'Will my listing show up in Google search?',
+    answer: 'Listings are indexed pages on the BreederHQ Marketplace and are eligible for search-engine indexing. Each listing gets a stable URL you can share, link from your own site, and put on business cards.'
+  }
+];
+---
+
+<BaseLayout
+  title="Caprine Services Marketplace for Goat Specialists"
+  description="A structured marketplace for goat-specific service providers — disbudders, hoof trimmers, fecal labs, DHIR testers, appraisal hosts, buck owners, AI techs, mobile goat vets, and goat transporters. Flat $5/month. No commissions."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main>
+    <section class="bg-gradient-to-b from-amber-50 to-white py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-4">
+          For Caprine Service Providers
+        </div>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          A Real Marketplace for Goat Specialists
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+          Goat breeders need providers who actually do goat work, not generalists who treat goats like small cattle.
+          BreederHQ Marketplace now models caprine services as first-class categories — disbudding, hoof, fecal,
+          DHIR, appraisal, buck, AI, vet, and transport — so the right specialist surfaces for the right job.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600">
+            List Your Caprine Service
+          </a>
+          <a href="#pricing" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold border border-amber-200 hover:bg-amber-50">
+            See Pricing
+          </a>
+        </div>
+        <p class="text-xs text-gray-500 mt-6">
+          Flat $5/month per account. No commissions. No per-booking fees.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Goat Discovery Is Broken</h2>
+        <p class="text-gray-600 mb-10">
+          Goat breeders find providers through Facebook groups, regional breed clubs, and word-of-mouth chains.
+          That works until it doesn't.
+        </p>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Buried Under Livestock Generalists</h3>
+            <p class="text-sm text-gray-600">
+              A search for "livestock services" returns cattle and sheep providers who don't do goats often,
+              don't know registry tattoo rules, and don't run the right disease panels.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">Facebook Recommendations Have a Half-Life</h3>
+            <p class="text-sm text-gray-600">
+              The good buck-service breeder, the right disbudder, the active DHIR supervisor — every one of them
+              is one Facebook scroll away from being forgotten the next time you need them.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">No Discovery Across Breed-Club Lines</h3>
+            <p class="text-sm text-gray-600">
+              ADGA, AGS, NDGA, ABGA, AKGA, NPGA, MDGA, NMGA, USBGA, MGR, AMGR, and Pygora breeders all want
+              the same recurring services. They rarely find the same providers.
+            </p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+            <h3 class="font-semibold text-gray-900 mb-2">No Trust Surface</h3>
+            <p class="text-sm text-gray-600">
+              CAE / CL / Johne's testing posture, biosecurity routine, sanctioned supervisor status, registry
+              affiliations — there's no consistent place to compare providers on what actually matters.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What You Get</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">
+              <strong class="text-gray-900">Specialist category.</strong> List under the right caprine specialty (or umbrella) — disbudding, hoof, fecal lab, DHIR, appraisal, buck, AI, vet, or transport.
+            </span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">
+              <strong class="text-gray-900">Caprine-aware filters.</strong> Service area, herd size match, breed and registry focus, biosecurity posture, sanctioned supervisor status, and AI scope.
+            </span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">
+              <strong class="text-gray-900">Inquiry workflow.</strong> Breeders contact you with intent, herd context, and timeline — not "do you do goats?" cold calls.
+            </span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-lg border border-stone-200">
+            <span class="text-amber-700 font-bold mt-0.5">&#10003;</span>
+            <span class="text-sm text-gray-700">
+              <strong class="text-gray-900">Stable, linkable URL.</strong> Share your listing in breed-club Facebook groups, on business cards, and from your own site.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="py-16 bg-white">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Flat-Fee Pricing</h2>
+        <p class="text-gray-600 mb-10 text-center">
+          One simple price per provider account. No commissions on the work you book. No per-inquiry surcharge.
+        </p>
+        <div class="bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl p-8 border border-amber-200">
+          <div class="text-center mb-6">
+            <div class="text-sm font-semibold text-amber-800 uppercase tracking-wide mb-2">Provider Listing</div>
+            <div class="text-5xl font-bold text-gray-900 mb-1">
+              <span class="line-through opacity-40 text-2xl mr-2">$5</span>Free
+            </div>
+            <p class="text-sm text-gray-600">During early access. $5/month when general availability opens.</p>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-700 mb-8">
+            <li class="flex items-start gap-3"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span>Full listing with caprine-specific scope and credentials</span></li>
+            <li class="flex items-start gap-3"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span>Unlimited inquiries through the built-in contact workflow</span></li>
+            <li class="flex items-start gap-3"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span>List under more than one caprine specialist category if you do the work</span></li>
+            <li class="flex items-start gap-3"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span>Identity confirmation passthrough via Stripe Identity</span></li>
+            <li class="flex items-start gap-3"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span>Indexed listing URL for search-engine and social sharing</span></li>
+            <li class="flex items-start gap-3"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span>No commission on bookings. No per-inquiry fee. Cancel anytime.</span></li>
+          </ul>
+          <div class="text-center">
+            <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="inline-block bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600">
+              Claim Your Listing
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-white rounded-xl p-6 border border-stone-200">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-sm text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Where Goat Breeders Are Searching</h2>
+        <p class="text-gray-600 mb-8">
+          The public BreederHQ Marketplace caprine pages your listing surfaces on.
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Caprine Services (Umbrella)</h3>
+            <p class="text-sm text-gray-600">Top-of-funnel discovery for goat breeders who don't yet know which specialist they need.</p>
+          </a>
+          <a href="/services/disbudding-tattoo" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Disbudding &amp; Tattoo</h3>
+            <p class="text-sm text-gray-600">Kid-processing work timed to the registry calendar.</p>
+          </a>
+          <a href="/services/goat-hoof-trimming" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Goat Hoof Trimming</h3>
+            <p class="text-sm text-gray-600">Routine and corrective work on a regional rotation.</p>
+          </a>
+          <a href="/services/fecal-lab" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Fecal Egg Count Lab</h3>
+            <p class="text-sm text-gray-600">Mail-in and drop-off McMaster + FECRT.</p>
+          </a>
+          <a href="/services/dhir-tester" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">DHIR Tester</h3>
+            <p class="text-sm text-gray-600">Sanctioned milk-test supervisors for dairy goat herds.</p>
+          </a>
+          <a href="/services/linear-appraisal-scheduling" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Linear Appraisal Scheduling</h3>
+            <p class="text-sm text-gray-600">Hosts and regional coordinators.</p>
+          </a>
+          <a href="/services/buck-service" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Buck Service</h3>
+            <p class="text-sm text-gray-600">Driveway, walk-in, and short-lease options.</p>
+          </a>
+          <a href="/services/goat-ai-technician" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Goat AI Technician</h3>
+            <p class="text-sm text-gray-600">Cervical AI, synchronization protocols, surgical referrals.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Mobile Goat Vet</h3>
+            <p class="text-sm text-gray-600">Ambulatory veterinarians who actually work goats.</p>
+          </a>
+          <a href="/services/goat-transport" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition">
+            <h3 class="font-semibold text-gray-900 mb-1">Goat Transport</h3>
+            <p class="text-sm text-gray-600">Climate-conscious, biosecurity-aware ground transport.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/trust" class="block bg-white border border-stone-200 rounded-lg p-5 hover:border-amber-400 transition">
+          <p class="font-semibold text-gray-900 mb-1">Identity &amp; Credentials</p>
+          <p class="text-sm text-gray-600">How BreederHQ handles verification, registry passthroughs, and what we don't claim to vet. See /trust for the full policy.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gradient-to-br from-amber-900 to-amber-800">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">List Your Caprine Service in Minutes</h2>
+        <p class="text-lg text-amber-200 mb-8 max-w-2xl mx-auto">
+          Whether you disbud 600 kids a season, run a regional hoof-trim circuit, supervise DHIR routes,
+          host appraisal days, stand a buck, AI for a dozen breeders, or run goats up and down the I-95 corridor,
+          your listing surfaces to the right clients.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-50">
+            List Your Caprine Service
+          </a>
+          <a href="/for-providers" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold border border-amber-600 hover:bg-amber-600">
+            Browse All Provider Categories
+          </a>
+        </div>
+        <p class="text-xs text-amber-200 mt-6">
+          Flat $5/month. No commissions. No per-booking fees. Cancel anytime.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

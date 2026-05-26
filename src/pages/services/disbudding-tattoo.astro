@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('disbudding-tattoo');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Disbudding & Tattoo', url: '/services/disbudding-tattoo' }
+];
+---
+
+<BaseLayout
+  title="Goat Disbudding & Tattoo Services on BreederHQ Marketplace"
+  description="Find goat disbudding and registry tattoo providers on BreederHQ Marketplace. Iron and paste disbudding, ear and tail-web tattooing for ADGA, AGS, ABGA, and other registries. For breeders coordinating kid-processing visits."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Disbudding &amp; Tattoo</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Goat Disbudding &amp; Tattoo</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse providers who disbud kids and apply registry tattoos. Disbudding is a narrow time window — usually 4 to 14 days — and a botched job leaves scurs, sinus damage, or worse. Tattoo work is the registry permanent ID that travels with the goat for life. Both deserve someone who does the work weekly, not someone learning on yours.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Disbudding &amp; Tattoo Providers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Disbudding & Tattoo Providers" unit="provider" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Iron disbudding at the breeder-preferred age</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Paste disbudding for breeders who prefer it</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Local anesthesia / sedation per provider scope</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Ear tattooing for ADGA, AGS, NDGA, ABGA, and others</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Tail-web tattooing for LaMancha</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Year-letter coordination and herd-prefix consistency</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Coordinated kid-processing visits for multi-kid runs</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Scur correction referrals when appropriate</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Volume.</strong> A provider who disbuds 200+ kids a season is faster, gentler, and gets cleaner results than someone doing 5.</li>
+          <li><strong class="text-gray-900">Pain management posture.</strong> Local anesthesia, NSAIDs, or sedation — providers vary, and so do state veterinary practice rules. Know what the visit includes.</li>
+          <li><strong class="text-gray-900">Tattoo registry knowledge.</strong> ADGA's right-ear / left-ear convention, AGS year letters, and breed-specific quirks should be second nature.</li>
+          <li><strong class="text-gray-900">Disinfection routine.</strong> Equipment moves farm to farm. Ask what happens between visits.</li>
+          <li><strong class="text-gray-900">Schedule discipline.</strong> Disbudding has a real window. A provider who says "I'll get to you next week" when the kids are 6 days old is not the right hire.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">For sedation, anesthesia, and scur-correction referrals.</p>
+          </a>
+          <a href="/services/goat-hoof-trimming" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🔨</div>
+            <div class="font-semibold text-gray-900">Goat Hoof Trimming</div>
+            <p class="text-xs text-gray-600 mt-1">The other recurring kid-and-adult work on the farm calendar.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/disbudding-tattoo" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Do you disbud kids or tattoo for registries?</p>
+            <p class="text-sm text-gray-600">List your disbudding and tattoo service on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

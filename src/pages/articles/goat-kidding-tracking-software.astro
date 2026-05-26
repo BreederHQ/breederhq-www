@@ -1,0 +1,589 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Goat Kidding Tracking Software', url: '/articles/goat-kidding-tracking-software' }
+];
+
+const faqs = [
+  {
+    question: 'Is there a goat kidding app that handles dairy and meat operations in one place?',
+    answer: 'Yes. BreederHQ models dairy and meat goats in the same tenant, with shared kidding records, separate intended-use tagging on each kid (replacement doeling, market wether, breeding buck, pet), and species-aware workflows so dairy production records and meat growth records do not collide.'
+  },
+  {
+    question: 'Does the software record FAMACHA and FEC the same way as deworming?',
+    answer: 'No, and that distinction matters. FAMACHA scores and fecal egg counts are structured trait entries on each animal, not just notes on a deworming log. That structure is what powers the credibility chips on the public listing and the parasite-program rollup on the breeder profile.'
+  },
+  {
+    question: 'Can I record disbudding, tattooing, and tetanus on each kid as the kidding season unfolds?',
+    answer: 'Yes. Each kid carries its own record from birth, so disbudding date, tattoo (right ear, left ear, tail web), CD&T doses, and any banding or castration entries land on the individual animal, not a litter-wide note.'
+  },
+  {
+    question: 'Does the software handle scrapie premises ID and the official tattoo prefix on kid records?',
+    answer: 'Yes. Tenant-level premises ID and herd tattoo prefix are first-class settings, and each kid gets structured tattoo fields per ear plus the optional tail-web entry rather than a single free-text string.'
+  },
+  {
+    question: 'Can buyers see the kidding records before pickup day?',
+    answer: 'Yes. BreederHQ includes a client portal where buyers can view the kid record, health entries, contracts, and payments. The transfer packet bundles cover sheet, signed contracts, paid invoices, and CVI/transport paperwork into a single PDF at sale.'
+  },
+  {
+    question: 'How does the software connect to ADGA, AGS, NDGA, or Kiko registries?',
+    answer: 'BreederHQ does not impersonate registry portals. It stores registration numbers, deep-links to the registry application, member portal, and transfer form, and validates entries against each registry’s known format so the breeder can verify the source record directly.'
+  }
+];
+---
+
+<BaseLayout
+  title="Goat Kidding Tracking Software: How Goat Breeders Record Kidding Dates, Weights, FAMACHA, and Tattoos | BreederHQ"
+  description="A goat kidding tracker records every data point about kids from birth through placement: kidding dates, daily weights, FAMACHA and FEC scores on the dam, disbudding and tattoo records, and buyer assignments. This guide covers what the software does and how it compares to spreadsheets and whelping-app retrofits."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Goat Kidding Tracking Software: How Goat Breeders Record Kidding Dates, Weights, FAMACHA, and Tattoos",
+    description: "Goat kidding software records every data point about kids from birth through placement: kidding dates, daily weights, FAMACHA and FEC on the dam, disbudding and tattoo records, and buyer assignments. Purpose-built for goats, not retrofitted from a puppy app.",
+    datePublished: "2026-05-26",
+    author: {
+      name: "BreederHQ Editorial",
+      role: "Last Reviewed May 2026"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Goat Kidding Tracking Software</li>
+      </ol>
+    </nav>
+
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Breeder Guide</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-4">
+          Goat Kidding Tracking Software: How Goat Breeders Record Kidding Dates, Weights, FAMACHA, and Tattoos
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          Goat kidding software records every data point about kids from birth through placement: kidding dates, daily weights, FAMACHA and FEC on the dam, disbudding and tattoo records, and buyer assignments. The software replaces paper kidding journals and whelping-app retrofits with a single connected record tied to the doe, buck, and waitlist.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed May 2026</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 26, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>13 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-12">
+          This article covers what a goat kidding tracker actually captures, the records that matter most through kidding season, the goat-specific paperwork that does not exist on the dog side, and how purpose-built goat software compares to spreadsheets and whelping apps retrofitted for goats.
+        </p>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Goat Kidding Software Actually Does for Breeders</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Goat kidding software is a digital system that replaces paper kidding journals, herd notebooks, and spreadsheets with a single connected record for every kid from birth through placement. It captures kidding dates, individual kid weights, dam-side health entries (FAMACHA, FEC, body condition), disbudding and tattoo records, CD&T doses, and buyer assignments, then links all of that to the doe, buck, pedigree, and waitlist.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The core function is straightforward. You record what happens during kidding season, and the software organizes it so you can find it later, spot problems early, and hand off complete documentation when the kid leaves. Here is what a goat kidding tracker typically handles:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Kidding records:</strong> Date, time, birth order, sex, presentation, vigor, assistance notes</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Kid weights:</strong> Birth weight, 24-hour, weekly, weaning, and sale-weight entries with growth curves</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Dam health entries:</strong> FAMACHA, fecal egg counts (FEC), FECRT, body condition score, parasite-program rollup</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Kid health and identity:</strong> Disbudding, structured tattoos (right ear, left ear, tail web), CD&T doses, banding or castration, intended use</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Compliance identifiers:</strong> Scrapie premises ID, herd tattoo prefix, CVI and TransportEvent rows when the kid leaves the farm</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span><strong>Buyer and placement management:</strong> Pick order, deposits, sale-to-registry transfer packet, and pickup-day handoff</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Whelping Apps and Spreadsheets Fall Short for Goats</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Most goat breeders start in a spreadsheet, a kidding notebook, or a dog-built app that calls a kid a puppy. That can work for a season. It rarely holds up to a real herd.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The problem with a whelping-app retrofit is that the data model is wrong. A doe is not a bitch. A kidding is not a whelping. FAMACHA and fecal egg counts are not just notes on a deworming log. The dam-side parasite program is the single biggest day-to-day operational record on most small-ruminant farms, and it does not appear anywhere in a puppy app.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Spreadsheets have a different problem: isolation. A spreadsheet holds data, but it does not connect that data to pedigrees, buyer records, or compliance paperwork. There are no alerts when a kid’s weight curve flattens or when a doe’s FAMACHA score climbs into the red. The records do not follow the kid after sale, so you re-create documentation for every buyer inquiry.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You can make either approach work. You will spend hours doing it, and you will still miss things that purpose-built goat software catches automatically.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Five Core Records Every Goat Kidding Tracker Captures</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            A complete goat kidding tracker handles five categories of information. Each one matters on its own, and each one connects to the others.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">1. Kidding date, kidding order, and identifying marks</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Kidding date anchors every downstream age calculation, from disbudding window to weaning to go-home day. Kidding order matters because the first kid born is not always the largest or healthiest, and knowing the sequence helps you spot the one that needs intervention.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Identifying marks (collar color, ear notch, natural markings, tattoo, microchip) distinguish kids in the same kid pen before individual records exist. Without a reliable way to tell siblings apart in the first 48 hours, weight logs and health notes become guesswork. Goat kid coats often shift dramatically in the first two weeks, so a color-only ID is rarely sufficient on its own.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">2. Birth weight, weekly weights, and weaning weights</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Weight is the leading indicator of kid health in the first weeks. A steady gain means colostrum, dam milk, and gut function are all working. A flat or declining curve means something is wrong, often well before any other symptom appears.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Goat kid average daily gain (ADG) is a real metric, used both for kid health screening and for buyer-facing claims on meat-goat sales. Birth weight, 24-hour weight, weekly weights, weaning weight, and sale weight should all live on the individual kid record so the growth curve is reconstructable later.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">3. Dam parasite program: FAMACHA, FEC, FECRT</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            On small ruminants, parasite management is not a side note. FAMACHA scoring (the conjunctival color score from 1 to 5), fecal egg counts (FEC, eggs per gram), and fecal egg count reduction tests (FECRT, used to detect dewormer resistance) are the daily, weekly, and seasonal records that drive almost every dewormer decision.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            A goat tracker that treats those as structured trait entries (and not just notes inside a deworming log) is the difference between a credible parasite-program claim on a sales listing and a free-text claim a buyer cannot verify. BreederHQ’s public listings emit a breeder-attested parasite-program rollup that is gated on canonical recent entries, not on a checkbox.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">4. Kid identity work: disbudding, tattoos, CD&T, castration</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The first three to six weeks of a kid’s life involve more identity and health entries than any other species the platform supports. Disbudding date, tattoo (right ear, left ear, tail web), CD&T doses, optional tetanus antitoxin, and any banding or castration entry all belong on the individual kid, not in a season-wide note.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Scrapie compliance specifically requires structured tattoo data tied to the tenant’s herd prefix and premises ID. A single free-text "tattoo" field is not enough, both because the field is hard to validate and because a buyer or registry transfer cannot reliably reconstruct the official ID from a single string. Per-ear plus tail-web fields are the difference between "I tattooed the kid" and "the kid is identifiable on a scrapie movement document."
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">5. Buyer assignment, transfer packet, and pickup</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Pick order is the sequence in which buyers on the waitlist choose their kid. A deposit reserves a slot. The assignment links a specific kid to a specific buyer, and the transfer packet is the merged PDF the buyer takes home: cover sheet, signed contracts, paid invoices, and any required CVI/transport paperwork.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            When a buyer drops out, the next person moves up. Software handles the cascade automatically. Spreadsheets require manual re-shuffling and a lot of follow-up texts to people who already changed their mind.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How to Record Kidding Dates and Birth Notes in Software</h2>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Step 1. Open the kidding and set the date</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            The kidding record is created against the doe and buck. The kidding date anchors every age-based calculation, so every milestone (eyes open, first hay, weaning, disbudding window, sale-ready) is computed from that single entry.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Step 2. Add each kid as it arrives</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Add individual kid records in real time on the phone in the kidding stall, or shortly after the dam is settled. Each entry captures sex, time of birth, kidding order, and immediate notes (assisted delivery, presentation, vigor, any chilled-kid warming intervention).
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            Outdoor mode and large touch targets matter here. A kidding stall at midnight in February is not a desk environment. Use a tracker that does not require a hairline tap.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Step 3. Capture sex, color, markings, and IDs</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Collar bands, ear notches, or temporary livestock-marking sticks distinguish kids visually until the tattoo is placed. Microchip numbers can be added once implanted and linked to the kid permanently, so the identification follows the animal for life.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How to Track Kid Weights and Spot a Failing Kid</h2>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Birth weight and 24-hour weight as the baseline</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            The first weight is recorded at birth and becomes the reference point. The 24-hour weight tells you whether colostrum and milk transfer are working, which is the single most important survival predictor for goat kids. A kid that loses ground in the first 24 hours needs attention, not another 24 hours.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Weekly weights and growth alerts</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Goat kid average daily gain (ADG) is the operational metric most goat breeders watch from week one through weaning. Software plots weights over time and can flag anomalies. A flat or dropping curve gets surfaced as an alert, not buried as a row in a spreadsheet you only check on Sundays.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            BreederHQ’s neonatal weight tracking applies across species. The alert does not diagnose the problem, but it tells you which kid to check, which is the only thing software can honestly promise in the kidding stall.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Weaning weight and sale weight</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Breeders typically record milestone weights at weaning and at sale. For meat goats, the sale weight pairs with ADG to support the claim a buyer cares about. For dairy goats, weaning weight matters less than the doeling’s structural and udder evaluation as she grows out. Tracking both lets the same record serve both audiences.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Logging FAMACHA, FEC, and the Parasite Program</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            On goats, parasite management is the workflow buyers ask about most. A serious goat program logs FAMACHA scores, fecal egg counts, and dewormer choices on the dam (and, post-weaning, on the kids) as a structured trait record, not as a checkbox or a note.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            What "structured" means in practice: each entry is a canonical trait record on the animal, with a date, a value, the source, and (where applicable) a documentation link. That structure is what lets a public marketplace listing show a credibility chip the buyer can actually trust. A free-text "we deworm regularly" claim is unverifiable. A structured FAMACHA history is.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            BreederHQ’s <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">medication tracking</a> distinguishes the dewormer treatment record from the underlying FAMACHA/FEC trait entry, and the parasite-program rollup on the breeder profile and public listings pulls from canonical entries only. The chip on the listing exists because the data exists, not because the breeder typed it into a description.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For the data model and rollup surface, see the dedicated <a href="/workflows/kidding-management" class="text-[hsl(24,95%,53%)] hover:underline">kidding management workflow</a> page.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Structured Tattoos, Disbudding, and the Scrapie Compliance Layer</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Federal scrapie compliance and registry transfer paperwork both depend on identifiable kids. On dogs, "the microchip number" is usually sufficient. On goats, the official ID is the tattoo, and the tattoo is structured by location: typically right ear and left ear, or in some breeds the tail web.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Goat kidding software that treats the tattoo as a single free-text field will eventually misrepresent a kid. Per-ear and tail-web fields, paired with the tenant’s herd prefix and premises ID, are what makes the kid record usable on a CVI, a transport event, a scrapie movement document, and a registry transfer form. BreederHQ stores tenant-level premises ID and herd prefix as first-class settings, and each kid carries structured tattoo entries tied to that prefix.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Disbudding date and method, CD&T doses, and any tetanus antitoxin entry live on the individual kid alongside the tattoo work. When a buyer asks "what shots has the kid had," the answer is one record, not one breeder trying to remember three weeks of work.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Pick Order, Deposits, and the Sale-to-Registry Transfer Packet</h2>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Reserving a slot with a deposit</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            A deposit secures a position in the pick order. The software links the deposit payment to the buyer’s waitlist position, so you always know who has paid and who has not, and you can sort by paid-and-screened versus paid-only when assigning kids.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Reassigning pick order when a buyer drops out</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            When a buyer cancels, the next person moves up. In software, this is a single action. In a spreadsheet, it is a manual re-shuffle with room for error and a lot of follow-up texts.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">The transfer packet at pickup</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            On dogs, the buyer leaves with health records, a contract, and a printed pedigree. On goats, the same bundle has to include compliance paperwork. The merged transfer packet PDF typically includes:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Cover sheet with the kid’s ID, tattoo, sex, and date of birth</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Signed sale contract and any health-guarantee addendum</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Paid invoices for purchase price, deposits, and any add-on services</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Health record (CD&T doses, FAMACHA, deworming history, any vet visit notes)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>CVI (Certificate of Veterinary Inspection) and TransportEvent paperwork when the kid is crossing state lines</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Pedigree and any registry deep link or transfer form</span>
+            </li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            BreederHQ’s transfer-packet builder generates this from the kid record automatically. The breeder confirms readiness, the buyer receives the merged PDF, and the same artifact handles the registry submission when one is required.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Running Multiple Kiddings, Multiple Breeds, and Multiple Species in One Platform</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Goat breeders rarely run a single doe. A real kidding season covers concurrent kiddings, mixed dairy and meat genetics, and (very often) sheep or cattle in the same operation. The platform has to handle all of it without forcing one workflow to imitate another.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            BreederHQ supports nine species with <a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">purpose-built workflows</a> for each: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. Each species has its own terminology, timelines, compliance layer, and credibility surfaces. A platform <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">built for dogs</a> alone will not handle kidding season for goats, foaling for horses, or lambing for sheep.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Goat Kidding Software Compared to Spreadsheets, Whelping Apps, and Generic Livestock CRMs</h2>
+
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr class="border-b-2 border-gray-300">
+                  <th class="py-3 pr-4 font-semibold">Feature</th>
+                  <th class="py-3 px-4 font-semibold text-center">Spreadsheet</th>
+                  <th class="py-3 px-4 font-semibold text-center">Whelping App (Retrofit)</th>
+                  <th class="py-3 px-4 font-semibold text-center">Generic Livestock CRM</th>
+                  <th class="py-3 pl-4 font-semibold text-center">Purpose-Built Goat Tracker</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Kidding date and birth-order logging</td>
+                  <td class="py-3 px-4 text-center">Manual</td>
+                  <td class="py-3 px-4 text-center">Mislabeled as "litter"</td>
+                  <td class="py-3 px-4 text-center">Partial</td>
+                  <td class="py-3 pl-4 text-center">Yes</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Per-kid weight curve and ADG</td>
+                  <td class="py-3 px-4 text-center">Manual</td>
+                  <td class="py-3 px-4 text-center">Some</td>
+                  <td class="py-3 px-4 text-center">Rare</td>
+                  <td class="py-3 pl-4 text-center">Yes</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">FAMACHA / FEC / FECRT as structured records</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 pl-4 text-center">Yes</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Structured per-ear tattoo + herd prefix + premises ID</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 pl-4 text-center">Yes</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Sale-to-registry transfer packet (PDF)</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">Dog-only</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 pl-4 text-center">Yes</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">CVI / TransportEvent rows on the kid</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">Some</td>
+                  <td class="py-3 pl-4 text-center">Yes</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">Multi-species in one tenant</td>
+                  <td class="py-3 px-4 text-center">Manual</td>
+                  <td class="py-3 px-4 text-center">No</td>
+                  <td class="py-3 px-4 text-center">Generic</td>
+                  <td class="py-3 pl-4 text-center">Yes (BreederHQ supports nine)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What BreederHQ Ships Today on the Goat Side and What Is Still Roadmap</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            One of the most common questions from goat breeders evaluating breeder software is which goat features are actually live versus which are described in marketing copy. The honest answer for BreederHQ as of May 2026:
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Live today on the goat side:
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Kidding records, per-kid profile, weight curves, and growth alerts</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Structured FAMACHA, FEC, and FECRT trait entries plus a parasite-program rollup on the breeder profile and public listings</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Per-ear and tail-web tattoo fields, tenant-level scrapie premises ID and herd prefix</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Public Caprine Identifiers card on listings and a herd-health passport with attested dates</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Sale-to-registry transfer packet (cover sheet + signed contracts + paid invoices + CVI/transport when applicable) as a single merged PDF</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Dairy production records, DHIA CSV importer, breeder-profile production rollup, listing-detail production card, sparkline, and herd-wide entry surfaces</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Linear Appraisal authoring, doe-detail table and trend chart, CSV importer, animal-card chip, breeder-profile appraisal hero, and listing-detail card</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Goat marketplace catalog entries, /animals credibility filters, registry metadata for goat registries (ADGA, AGS, NDGA, Kiko, and more), and intended-use roles for 4-H/FFA project animals and wethers</span>
+            </li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            On the 2026 roadmap (not yet shipped or behind a pending migration apply at the time of writing):
+          </p>
+
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Breeder-facing CVI and TransportEvent UI (data model is shipped, frontend authoring surface is the active follow-up)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Earned classification badges (★M, +B, Superior Genetics) gated on authoritative breed-club rule sources</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>CHIC-equivalent breed-binding requirement rows for goat breeds (blocked until a caprine registry publishes a binding test list)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Out-of-season / CIDR / buck-effect scheduling automation beyond the current reference-card surface</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Adult weight log, structured cull-reason and cause-of-death, pen/group/location as first-class entities, and a recurring care-task engine (currently planned, not shipped)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span>
+              <span>Pickup/handoff workflow (ProspectStatus intermediate states, buyer-facing portal handoff page, pickup checklist)</span>
+            </li>
+          </ul>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            This is a working list as of May 2026 and will move. The goal is that the breeder evaluating BreederHQ knows what is real on the goat side today, not a polished marketing claim.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Where BreederHQ Fits for Tracking Goat Kiddings End to End</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            BreederHQ connects goat kidding tracking to the rest of the <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">breeding operation</a>. The kidding record is not a standalone file; it is part of a <a href="/articles/breeder-software-has-a-data-problem" class="text-[hsl(24,95%,53%)] hover:underline">unified data layer</a> that includes pedigrees, genetics, <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">health testing</a>, the parasite program, dairy production, Linear Appraisal, waitlists, invoicing, and buyer communications.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Specific surfaces for goat breeders include the <a href="/workflows/kidding-management" class="text-[hsl(24,95%,53%)] hover:underline">kidding management workflow</a> page, the <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">goat platform overview</a>, FAMACHA/FEC trait entries with parasite-program rollups, Linear Appraisal capture, structured per-ear tattoo fields, scrapie premises ID and herd prefix, the sale-to-registry transfer packet, and the public goat <a href="https://marketplace.breederhq.com/" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">marketplace</a> with credibility filters. Scout AI lets you ask questions about kidding-season data in plain English.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            See breederhq.com for current pricing and plan details.
+          </p>
+
+          <div class="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold mb-3">Try BreederHQ Free for 14 Days</h3>
+            <p class="text-stone-300 mb-6">Track kiddings end to end. Catch failing kids early. Hand off cleaner records at pickup.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Start Free Trial
+              </a>
+              <a href="/goats" class="border-2 border-stone-500 text-stone-200 px-6 py-3 rounded-lg font-semibold hover:border-white hover:text-white transition">
+                See the Goat Platform
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </article>
+
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white border-t border-gray-200">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Articles</h2>
+        <ul class="space-y-3 text-lg">
+          <li><a href="/articles/goat-kid-deposit-and-sale-terms" class="text-[hsl(24,95%,53%)] hover:underline">Goat Kid Deposit and Sale Terms: Deposits, Registration Transfer, Hold-Back Arrangements, and Pickup Documentation</a></li>
+          <li><a href="/articles/goat-kid-health-guarantee-what-it-covers" class="text-[hsl(24,95%,53%)] hover:underline">Goat Kid Health Guarantee: What It Actually Covers (and What It Doesn’t)</a></li>
+          <li><a href="/articles/goat-herd-health-software" class="text-[hsl(24,95%,53%)] hover:underline">Goat Herd-Health Software: Disease Status, Parasite Programs, Scrapie Compliance, and Buyer-Facing Herd Records</a></li>
+          <li><a href="/articles/dairy-goat-record-keeping-software" class="text-[hsl(24,95%,53%)] hover:underline">Dairy Goat Record-Keeping Software: DHIA, Linear Appraisal, Parasite Programs, and Buyer-Facing Production Records</a></li>
+          <li><a href="/articles/litter-tracking-software" class="text-[hsl(24,95%,53%)] hover:underline">Litter Tracking Software (the dog-side peer to this article)</a></li>
+          <li><a href="/articles/breeder-software-has-a-data-problem" class="text-[hsl(24,95%,53%)] hover:underline">Breeder Software Has a Data Problem (founder perspective)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free Trial
+      </a>
+    </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('linear-appraisal-scheduling');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Linear Appraisal Scheduling', url: '/services/linear-appraisal-scheduling' }
+];
+---
+
+<BaseLayout
+  title="Linear Appraisal Scheduling for Dairy Goats on BreederHQ Marketplace"
+  description="Find linear appraisal hosts and circuit coordinators for ADGA / AGS dairy goat appraisal days on BreederHQ Marketplace. Pull herds together to meet appraisal minimums."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Linear Appraisal Scheduling</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Linear Appraisal Scheduling</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse linear appraisal hosts and regional circuit coordinators. ADGA and AGS linear appraisal is the structural and dairy-character record that drives prefix earned classifications, marketing strength, and breeding decisions for serious dairy goat operations — but it only happens when someone pulls neighboring herds together to meet the minimums. This page is for finding that person.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Linear Appraisal Hosts
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Linear Appraisal Hosts" unit="host" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Host farm offering facilities and chute for visiting herds</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Regional circuit coordination across multiple host farms</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> ADGA / AGS scheduling and appraiser-request logistics</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Roster-building to meet program animal minimums</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Date coordination across breeders and breed-club schedules</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Biosecurity intake (CAE / CL / Johne's posture documentation)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Day-of logistics (lineup, stanchions, milking, results capture)</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Post-appraisal scoresheet distribution coordination</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring or Hosting</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Track record.</strong> A coordinator who has successfully run multiple seasons knows the breed-club, appraiser-availability, and weather realities you'll otherwise learn the hard way.</li>
+          <li><strong class="text-gray-900">Biosecurity posture.</strong> Visiting herds need a documented intake. CAE / CL / Johne's expectations should be clear before anyone agrees to come.</li>
+          <li><strong class="text-gray-900">Facility match.</strong> Stanchions, footing, water, shade, and milking access on appraisal day.</li>
+          <li><strong class="text-gray-900">Roster discipline.</strong> Programs have minimum animal counts. Honest commitment-gathering ahead of the date avoids cancellations.</li>
+          <li><strong class="text-gray-900">Cost-share clarity.</strong> Appraiser travel, mileage, and host-facility cost-share should be transparent before signup.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/dhir-tester" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🥛</div>
+            <div class="font-semibold text-gray-900">DHIR Tester</div>
+            <p class="text-xs text-gray-600 mt-1">The production-records half of the dairy-goat performance stack.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">Health-test pulls that often happen ahead of appraisal day.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/linear-appraisal-scheduling" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Do you host or coordinate linear appraisal days?</p>
+            <p class="text-sm text-gray-600">List your host farm or regional circuit on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

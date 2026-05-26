@@ -1,0 +1,260 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Dairy Goat Record-Keeping Software', url: '/articles/dairy-goat-record-keeping-software' }
+];
+
+const lastReviewedISO = '2026-05-26';
+
+const faqs = [
+  {
+    question: 'What records does a dairy-goat program actually need to keep?',
+    answer: 'At minimum: kidding dates and outcomes, daily or test-day milk weights per doe, somatic cell count (SCC) and milk urea nitrogen (MUN) when on official test, Linear Appraisal scores when scored, parasite-program entries (FAMACHA, fecal egg counts, FECRT results), CAE / CL / Johne's test history, scrapie premises ID and tattoo placement per animal, and a kid sales record linked to the dam. A spreadsheet can hold the columns; what it cannot do is connect them so a buyer can verify the dam's production, health, and appraisal in one place.'
+  },
+  {
+    question: 'Does BreederHQ handle DHIA / DHIR records?',
+    answer: 'Yes. Dairy programs can import official DHIA test-day data via a typed bulk-import endpoint (CSV) with per-row outcome reporting, a header-name-keyed mapping preset so subsequent imports auto-match columns, and a herd-wide entry point. Once imported, the platform computes 305-day standardized lactations, butterfat and protein percentages, peak production, and lifetime per-doe totals.'
+  },
+  {
+    question: 'Can buyers see Linear Appraisal scores on a public listing?',
+    answer: 'Yes, when the breeder publishes them. Each scored doe carries a `publicVisible` row-level toggle. When on, the public listing payload surfaces the LA score, classification, and the last scoring date, and the marketplace listing-detail card renders that data as a breeder-attested entry. Earned-classification badges (★M, +B, Superior Genetics) remain blocked on authoritative breed-club rule sources per ADR 0024, the platform does not invent them.'
+  },
+  {
+    question: 'What about parasite records, FAMACHA, fecal egg counts, FECRT?',
+    answer: 'Parasite-program records are first-class. FAMACHA scores, fecal egg count (FEC) results, and fecal egg count reduction test (FECRT) results are captured as canonical TraitDefinition + AnimalTraitEntry rows. Credibility chips on public listings require recent canonical entries, they are non-fakeable in the sense that a breeder cannot toggle them on without underlying data. Each doe gets a trend chart at /herd-health/parasite-program, and the public /breeders/:tenantSlug/parasite-program destination page rolls up the herd-wide picture for a tenant.'
+  },
+  {
+    question: 'Does the platform support ADGA, AGS, NDGA, MDGA, or other goat registries?',
+    answer: 'ADGA Genetics has a manual claim flow today: breeders enter the registration number, the platform stores it, and the public listing exposes a breeder-attested ADGA Genetics deep-link so buyers can verify on the registry side. AGS, NDGA, and MDGA work the same way, store the registration number, link to the registry record. There is no programmatic ADGA API pull as of 2026-05-26; that remains external or later-phase work.'
+  },
+  {
+    question: 'Can the system price-difference between meat goats and dairy goats?',
+    answer: 'The data model already separates dairy-production-bearing animals (doe-side milk records, Linear Appraisal, DHIA) from generic goat workflows. A meat-only herd will not see the dairy production card on listings; a dairy herd will, gated on `enableHealthSharing` and per-row visibility toggles.'
+  }
+];
+---
+
+<BaseLayout
+  title="Dairy Goat Record-Keeping Software: DHIA, Linear Appraisal, Parasite Programs, and Buyer-Facing Production Records | BreederHQ"
+  description="What dairy-goat programs actually need to record, DHIA test-day data, Linear Appraisal scores, FAMACHA / FEC / FECRT parasite-program entries, CAE / CL / Johne's testing, and how purpose-built software surfaces them on public listings."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Dairy Goat Record-Keeping Software: DHIA, Linear Appraisal, Parasite Programs, and Buyer-Facing Production Records",
+    description: "A working dairy-goat record system captures test-day milk data, Linear Appraisal, parasite-program entries, and disease-status testing, and surfaces the parts buyers actually want to see on the public listing.",
+    datePublished: lastReviewedISO,
+    dateModified: lastReviewedISO,
+    author: {
+      name: "BreederHQ Editorial",
+      role: "BreederHQ"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Dairy Goat Record-Keeping Software</li>
+      </ol>
+    </nav>
+
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Breeder Guide · Goats</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-4">
+          Dairy Goat Record-Keeping Software: DHIA, Linear Appraisal, Parasite Programs, and Buyer-Facing Production Records
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          A working dairy-goat record system needs to do more than store test-day milk weights. It has to connect production data, Linear Appraisal, parasite-program entries, and disease-status testing, and surface the parts buyers actually want to see on the public listing. This guide covers what those records look like, how they are captured, and what a purpose-built dairy-goat workflow gets right that a spreadsheet cannot.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed May 2026</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 26, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>13 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Six Record Types a Dairy-Goat Program Has to Get Right</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Dairy goats are not dairy cattle scaled down, and they are not meat goats with a milk pail. The record set is its own thing. A working system has to capture six categories cleanly, and connect them so the same doe shows up everywhere her data matters.
+          </p>
+
+          <ol class="space-y-4 text-lg text-gray-700 mb-6 list-decimal pl-6">
+            <li><strong>Kidding and reproductive history.</strong> Breeding date, kidding date, kid count and sexes, dystocia notes, retained-placenta or metritis follow-up, and the link from kid back to dam and sire.</li>
+            <li><strong>Production records.</strong> Daily or test-day milk weights, somatic cell count (SCC), milk urea nitrogen (MUN), butterfat and protein percentages when on DHIA, and computed 305-day standardized lactations.</li>
+            <li><strong>Linear Appraisal.</strong> Score, classification, and date of last scoring, per the ADGA Linear Appraisal program or equivalent.</li>
+            <li><strong>Parasite program.</strong> FAMACHA score, fecal egg count (FEC) results, fecal egg count reduction test (FECRT) outcomes, dewormer used, and the doe-level history of all of the above.</li>
+            <li><strong>Disease status.</strong> CAE, CL, and Johne's test results with the lab, the panel, the date, and a private certificate binding when applicable.</li>
+            <li><strong>Compliance identifiers.</strong> Scrapie premises ID at the tenant level; structured tattoo placement (right ear, left ear, tail web) at the animal level; herd prefix where the breeder uses one.</li>
+          </ol>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Each record category is a column you can put on a spreadsheet. What a spreadsheet cannot do is connect them, the FAMACHA score on the same doe whose 305-day lactation is sitting next to her LA score, all linked back to the sire and forward to her kids.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">DHIA and DHIR Imports: What Actually Works</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            For dairy-goat herds on official DHIA test, the platform supports CSV bulk import of test-day data via a typed endpoint. The importer auto-detects the file's column layout, lets the breeder confirm mapping, and reports per-row outcomes (matched, ambiguous match, animal not found). Mapping preferences are stored per-tenant by header name, so the next import from the same source auto-maps without re-confirming.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Imported data feeds into completed-lactations-only computations: best-305-day, peak production, butterfat and protein, and a sparkline on the public listing once a doe has two or more completed lactations. The animals-index list view surfaces a server-attested dairy chip, and the breeder profile shows a tenant-level production summary rollup on the hero, the same data, expressed at the herd level rather than per doe.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Programmatic ADGA pulls are not part of the platform as of 2026-05-26. That remains external or later-phase work. The shipping today is honest: the breeder owns the data, the platform reads it, and the listing surfaces it.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Linear Appraisal as a Buyer-Facing Signal</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Linear Appraisal is a structural-evaluation system for dairy goats that scores eight to ten linear traits plus a final classification. ADGA Linear Appraisal is the most common in US dairy-goat herds; other registries publish equivalents. A serious dairy-goat program scores its top does on cycle and publishes the results because LA differentiates animals in a way that production records alone cannot.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The platform supports authoring LA results per doe, computing classification from the score, surfacing the current score as a chip on doe detail, importing back-history from CSV, and rendering a trend chart over time. The pedigree view hydrates a `latestAppraisal` field so does carry their last LA into pedigree displays.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            On the public side, when the breeder turns on the per-doe visibility toggle, the public listing emits an honest `laBadge` and the marketplace listing-detail card renders a breeder-attested Linear Appraisal section. Earned-classification badges, ★M (Star Milker), +B, and "Superior Genetics", are not synthesized by the platform. Those require authoritative rule sources from the issuing registry, and per ADR 0024 the platform will not invent them.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Parasite Program: The Differentiator That Spreadsheets Miss</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Parasitism is the limiting factor in most dairy-goat herds in the US southeast and a meaningful factor everywhere else. A breeder who is running a real parasite program, FAMACHA scoring every two to four weeks during worm season, fecal egg counts on the high-shedders, and a FECRT to confirm dewormer efficacy, is making decisions a buyer should be able to see.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            BreederHQ captures FAMACHA, FEC, and FECRT as structured records on the canonical trait-entry foundation. The credibility chip on a public listing requires recent canonical entries, which means a breeder cannot toggle "parasite program active" without underlying data. The chip is non-fakeable in that sense.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Two surfaces are worth knowing about. <a href="/breeders" class="text-[hsl(24,95%,53%)] hover:underline">Breeder profiles</a> roll up the parasite-program data to the tenant level so a buyer can see herd-wide history. The public <code>/breeders/:tenantSlug/parasite-program</code> destination page exposes the same rollup with a deeper FAMACHA distribution and a recent-entries timeline. Internally, breeders get a <code>/herd-health/parasite-program</code> dashboard and a per-animal trend chart for drill-down.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Herd-Health Passport and Disease-Status Testing</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johne's disease are the three diseases serious dairy-goat herds test for and publish status on. The platform models per-animal CAE, CL, and Johne's test history as TraitDefinition rows on the small-ruminant biosecurity panel (the same substrate used for sheep OPP, CL, and Johne's).
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            At the tenant level, the HerdHealthStatus model lets the breeder attest the herd-wide status with the lab, the panel, and the date, then bind a private certificate file so the data carries provenance. Public listings expose a gated breeder-attested herd-health row, and the listing detail renders the passport card with attested dates. Breeder profiles surface the same passport on the hero.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Breed-binding requirements (the CHIC-equivalent for goats) remain unshipped because no caprine registry publishes a binding CHIC-equivalent test list as of 2026-05-26. The widget substrate exists. When a registry publishes binding requirements, the surface lights up.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Scrapie Compliance: Identifiers, CVI, and Movement</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            US dairy-goat sales involve federal Scrapie Eradication Program compliance for breeders moving animals across premises. The platform treats scrapie compliance as first-class: a tenant-level premises ID and herd prefix, structured per-animal tattoo placement (right ear, left ear, tail web), and a HealthCertificate + TransportEvent substrate for CVI binding and movement logging.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Marketplace listings render the structured identifier rows so buyers can see premises ID, herd prefix, and tattoo placement before they inquire. Transport events snapshot the structured tattoo state at event time, so the movement log is an auditable record, not a free-text note.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Where BreederHQ Fits for Dairy-Goat Programs</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            BreederHQ's dairy-goat surface is the most-shipped of the goat-domain features as of 2026-05-26. The public listing surface, breeder-profile rollups, DHIA importer, Linear Appraisal authoring, parasite-program rollup, herd-health passport, and scrapie compliance identifiers are all live. The remaining work, ADGA Phase 1 migration apply, polish on listing-detail and importer mapping presets, is tracked in the goat-audit ledger and shipping in slices.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            For a deeper view of the goat-specific product surface, see <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">/goats</a>. For how the same data layer connects across the rest of the program, see <a href="/articles/breeder-software-has-a-data-problem" class="text-[hsl(24,95%,53%)] hover:underline">Breeder Software Has a Data Problem</a>.
+          </p>
+
+          <div class="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold mb-3">Try BreederHQ free for 14 days</h3>
+            <p class="text-stone-300 mb-6">DHIA imports, Linear Appraisal, parasite-program, herd-health passport, and scrapie compliance, connected.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Start Free Trial
+              </a>
+              <a href="/goats" class="border-2 border-stone-500 text-stone-200 px-6 py-3 rounded-lg font-semibold hover:border-white hover:text-white transition">
+                See the Goat Surface
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </article>
+
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free Trial
+      </a>
+    </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>

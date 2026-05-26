@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('mobile-goat-vet');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Mobile Goat Vet', url: '/services/mobile-goat-vet' }
+];
+---
+
+<BaseLayout
+  title="Mobile Goat Vets on BreederHQ Marketplace"
+  description="Find ambulatory veterinarians with real caprine experience on BreederHQ Marketplace. Herd workups, CAE / CL / Johne's pulls, pregnancy ultrasound, disbudding sedation, and surgical referrals."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Mobile Goat Vet</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Mobile Goat Vet</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse ambulatory veterinarians who actually work goats. Generic large-animal vets can handle the basics, but a herd that's running a real biosecurity, breeding, and production program needs a vet who knows caprine disease pressure, dosing realities, surgical referrals, and what a goat is supposed to look like off-feed at 9pm.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Mobile Goat Vets
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Mobile Goat Vets" unit="practice" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Herd workups and biosecurity consults</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> CAE, CL, and Johne's testing pulls</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Pregnancy ultrasound and fetal counts</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Disbudding sedation and analgesia</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Castration and surgical referrals</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Kidding emergencies and dystocia</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Parasite-program design with FEC and FAMACHA</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> CVI / health certificates for movement</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Goat caseload, not just livestock caseload.</strong> A vet who sees goats weekly is a different resource than one who sees them quarterly.</li>
+          <li><strong class="text-gray-900">VCPR posture.</strong> A valid veterinarian-client-patient relationship is what makes off-label dosing, extra-label drug use, and prescription products possible. Establish it before the emergency.</li>
+          <li><strong class="text-gray-900">After-hours coverage.</strong> Kidding doesn't keep business hours. Know the on-call reality.</li>
+          <li><strong class="text-gray-900">Trip fee, mileage, and minimums.</strong> Mobile economics depend on volume. Ask what a single-doe call actually costs.</li>
+          <li><strong class="text-gray-900">CVI issuance.</strong> Health certificates for sale and movement are a regular ask. Confirm they're set up to issue them.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/veterinary-specialists" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Veterinary Specialists</div>
+            <p class="text-xs text-gray-600 mt-1">Cross-species repro, theriogenology, and ambulatory clinics.</p>
+          </a>
+          <a href="/services/fecal-lab" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🔬</div>
+            <div class="font-semibold text-gray-900">Fecal Egg Count Lab</div>
+            <p class="text-xs text-gray-600 mt-1">The parasite-program data your vet will want to see.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/mobile-goat-vet" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Are you an ambulatory goat-experienced veterinarian?</p>
+            <p class="text-sm text-gray-600">List your mobile practice and service area on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

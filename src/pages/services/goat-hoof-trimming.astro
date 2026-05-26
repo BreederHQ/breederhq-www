@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingsSection from '../../components/ListingsSection.astro';
+import { fetchServiceListings } from '../../lib/marketplaceListings';
+const listings = await fetchServiceListings('goat-hoof-trimming');
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services' },
+  { name: 'Caprine Services', url: '/services/caprine-services' },
+  { name: 'Goat Hoof Trimming', url: '/services/goat-hoof-trimming' }
+];
+---
+
+<BaseLayout
+  title="Goat Hoof Trimming Services on BreederHQ Marketplace"
+  description="Find goat hoof trimmers on BreederHQ Marketplace. Routine and corrective trimming for dairy, meat, fiber, and pet goats. Regional-circuit providers and on-farm visits, with biosecurity and herd-size awareness."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <nav class="breadcrumb py-4 px-4 bg-stone-50 border-b border-stone-200" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-5xl mx-auto text-sm">
+        <li><a href="/" class="text-amber-700 hover:underline">Home</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services" class="text-amber-700 hover:underline">Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li><a href="/services/caprine-services" class="text-amber-700 hover:underline">Caprine Services</a></li>
+        <li class="text-gray-400" aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-600">Goat Hoof Trimming</li>
+      </ol>
+    </nav>
+
+    <section class="py-14 px-4 bg-gradient-to-b from-amber-50 to-white">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide mb-3">Caprine Services</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">Goat Hoof Trimming</h1>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Browse goat-specific hoof trimmers — providers who do feet weekly and know what a dairy doe in milk, a fiber-coated angora, a Boer market kid, and a pet wether each need. Generic livestock trimmers can do the work, but the right hand for goats is faster, gentler, and catches early hoof rot, scald, and laminitis before they become a herd issue.
+        </p>
+        <a href={listings.browseUrl} class="inline-flex items-center gap-2 bg-amber-700 text-white px-5 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
+          Browse Goat Hoof Trimmers
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <ListingsSection listings={listings} noun="Goat Hoof Trimmers" unit="provider" bg="white" />
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What This Covers</h2>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Routine 8 to 12 week trim cycles</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Dairy doe trimming around freshening</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Buck trimming with safe restraint</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Kid and replacement-doeling trim work</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Corrective trims for overgrown, neglected feet</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Hoof rot, scald, and abscess identification</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Footbath protocol consultation</li>
+          <li class="flex gap-2"><span class="text-amber-700">●</span> Show-prep trim coordination</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What to Look For When Hiring</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li><strong class="text-gray-900">Goats per year, not livestock per year.</strong> A trimmer who does 2,000 cattle a year may not be the right hand for a 30-doe dairy. Volume on goats specifically is what matters.</li>
+          <li><strong class="text-gray-900">Service area and circuit.</strong> Many goat trimmers run a tight regional loop on a predictable rotation. Get on the rotation early.</li>
+          <li><strong class="text-gray-900">Restraint approach.</strong> Stanchion, tilt table, or hand-held — match it to your facility. A trimmer who fights with your setup is a bad day for everyone.</li>
+          <li><strong class="text-gray-900">Biosecurity routine.</strong> Hoof rot moves on tools and boots. Ask what happens between farms.</li>
+          <li><strong class="text-gray-900">Honest pricing.</strong> Per head, trip-fee plus per head, or by-the-hour. Get it in writing before the first visit.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-5">Related on BreederHQ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="/services/caprine-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐐</div>
+            <div class="font-semibold text-gray-900">All Caprine Services</div>
+            <p class="text-xs text-gray-600 mt-1">Nine first-class goat specialist categories.</p>
+          </a>
+          <a href="/services/mobile-goat-vet" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🩺</div>
+            <div class="font-semibold text-gray-900">Mobile Goat Vet</div>
+            <p class="text-xs text-gray-600 mt-1">For abscess workups, deep corrective cases, and laminitis.</p>
+          </a>
+          <a href="/services/livestock-services" class="block bg-stone-50 border border-stone-200 rounded-lg p-4 hover:border-amber-400 transition">
+            <div class="text-xl mb-1">🐄</div>
+            <div class="font-semibold text-gray-900">Livestock Services</div>
+            <p class="text-xs text-gray-600 mt-1">Cross-species trimmers and shearers across small ruminants.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 px-4 bg-stone-50 border-t border-stone-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/for-providers/goat-hoof-trimming" class="flex items-center justify-between gap-4 bg-emerald-50 border border-emerald-200 rounded-lg p-5 hover:border-emerald-400 transition">
+          <div>
+            <p class="font-semibold text-gray-900">Do you trim goat feet?</p>
+            <p class="text-sm text-gray-600">List your routine and corrective trimming service on BreederHQ.</p>
+          </div>
+          <span class="text-emerald-700 font-semibold whitespace-nowrap">For Providers →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

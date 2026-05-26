@@ -15,8 +15,8 @@ const faqs = [
     answer: 'Yes. The BreederHQ Mobile Companion app is built for exactly this kind of in-the-moment capture: weigh each newborn, tap the weight in, done. The Mobile Companion is the on-the-go partner to the BreederHQ web app, scoped to quick capture and quick lookup tasks like this one.'
   },
   {
-    question: 'Does it track multiple litters or foaling groups at once?',
-    answer: 'Yes. Each litter or birth group has its own record with individual offspring tracking. Whether it is a litter of eight or a single foal, the workflow is the same.'
+    question: 'Does it track multiple offspring groups at once?',
+    answer: 'Yes. Each group has its own record with individual offspring tracking. Whether it is a litter of eight puppies, a doe with triplet kids, twin lambs, a single foal, or a herd of calves born across a calving window, the workflow is the same.'
   },
   {
     question: 'Can I attach photos to each offspring?',
@@ -34,7 +34,7 @@ const faqs = [
 
 const howTo = {
   name: 'How to Manage Birthing and Offspring Records',
-  description: 'A step-by-step guide to tracking births, recording offspring data, and managing milestones for litters, singles, and everything in between.',
+  description: 'A step-by-step guide to tracking births, recording offspring data, and managing milestones for litters, foals, kids, lambs, kits, calves, and everything in between.',
   steps: [
     { name: 'Calculate due date', text: 'Enter the breeding date and the system calculates the expected birth date based on species-specific gestation periods.' },
     { name: 'Prepare for birth', text: 'Use the countdown to due date to prepare supplies, schedule time off, and set up the birthing area.' },
@@ -80,16 +80,16 @@ const howTo = {
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
-        You already know how intense birth season gets. Monitoring the mother, tracking individual offspring, documenting weights, watching for problems. Whether you're managing a litter of ten or watching over a single foal or kid, BreederHQ keeps everything organized so you can focus on the animals, even at 3am.
+        You already know how intense birth season gets. Monitoring the dam, tracking individual offspring, documenting weights, watching for problems. Whether you're managing a litter of ten puppies, a doe with triplet kids, twin lambs, or a single foal, BreederHQ keeps everything organized so you can focus on the animals, even at 3am.
       </p>
 
       <div class="mt-12">
         <Screenshot
           id="offspring-list"
-          alt="Litter view showing each puppy with collar color, sex, placement state, and assigned buyer"
+          alt="Offspring group view showing each newborn with identifier, sex, placement state, and assigned buyer"
         />
         <p class="text-sm text-gray-500 mt-3 text-center italic">
-          Every puppy in the litter: collar color, placement state, paperwork status, and which buyer they're going to.
+          Every newborn in the group: identifier, placement state, paperwork status, and which buyer they're going to.
         </p>
       </div>
     </div>
@@ -150,7 +150,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-3">Spreadsheets</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            A sheet per litter or birth. Columns for each offspring. Rows for each day. Data entry after weighing. It works until your laptop isn't nearby. Or until you need to see the chart on your phone.
+            A sheet per offspring group. Columns for each newborn. Rows for each day. Data entry after weighing. It works until your laptop isn't nearby. Or until you need to see the chart on your phone.
           </p>
         </div>
 
@@ -187,7 +187,7 @@ const howTo = {
         <div>
           <h3 class="text-2xl font-bold mb-4">The data adds up fast</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            A large litter, twins, or even a single foal you're monitoring closely. Twice daily weighing. That's dozens of data points per day. Over weeks, that's hundreds of weights. You're doing the weighing. The hard part is keeping it all organized.
+            A large litter, triplet kids, twin lambs, or even a single foal you're monitoring closely. Twice daily weighing. That's dozens of data points per day. Over weeks, that's hundreds of weights. You're doing the weighing. The hard part is keeping it all organized.
           </p>
         </div>
 
@@ -374,7 +374,7 @@ const howTo = {
         <div class="bg-white p-6 rounded-lg border border-gray-200">
           <h3 class="text-xl font-bold mb-3">⚡ Batch Weight Entry</h3>
           <p class="text-gray-700 mb-3">
-            Weighing multiple offspring twice a day? Batch entry lets you log all weights quickly. Enter weights in order, tab to next, done. Works just as well for a litter of ten as for twin kids or a single foal.
+            Weighing multiple offspring twice a day? Batch entry lets you log all weights quickly. Enter weights in order, tab to next, done. Works just as well for a litter of ten puppies as for triplet kids, twin lambs, or a single foal.
           </p>
           <p class="text-sm text-gray-600">
             No navigating between individual records. One screen, all offspring, fast logging.
@@ -464,8 +464,8 @@ const howTo = {
         <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
           Get Started Free
         </a>
-        <a href="/litter-management" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
-          See offspring management →
+        <a href="/workflows" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
+          See all breeding workflows →
         </a>
       </div>
     </div>
@@ -479,7 +479,7 @@ const howTo = {
       <ul class="space-y-3 text-lg text-gray-700">
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Have multiple births per year, whether litters, singles, or twins</span>
+          <span>Have multiple births per year, whether litters, twins, triplets, or singles</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -554,13 +554,13 @@ const howTo = {
 
       <details class="faq-item">
         <summary class="faq-question">
-          <span>Does it track multiple litters or foaling groups at once?</span>
+          <span>Does it track multiple offspring groups at once?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Each litter or birth group has its own record with individual offspring tracking. Whether it is a litter of eight or a single foal, the workflow is the same.</p>
+          <p>Yes. Each group has its own record with individual offspring tracking. Whether it is a litter of eight puppies, a doe with triplet kids, twin lambs, a single foal, or a herd of calves born across a calving window, the workflow is the same.</p>
         </div>
       </details>
 
@@ -643,9 +643,9 @@ const howTo = {
       { title: "Rearing Protocols", description: "ENS, ESI, Volhard PAT, Gun Dog Aptitude testing.", url: "/workflows/rearing-protocols" },
       { title: "Medication Tracking", description: "Treatment courses, dose logging, withdrawal countdowns.", url: "/workflows/medication-tracking" },
       { title: "Nutrition Tracking", description: "Daily feeding, supplement protocols, weight monitoring.", url: "/workflows/nutrition-tracking" },
-      { title: "Free Puppy Weight Tracker", description: "Log daily weights and see growth curves vs. breed averages.", url: "/tools/puppy-weight-tracker" },
-      { title: "Free Whelping Date Calculator", description: "Predict whelping windows from breeding date.", url: "/tools/whelping-date-calculator" },
-      { title: "Free Puppy Vaccination Schedule Generator", description: "Generate species-specific puppy vaccination schedules.", url: "/tools/puppy-vaccination-schedule-generator" }
+      { title: "Foaling Management", description: "Equine pregnancy milestones, foaling calendar, pre-foaling signs, and outcome recording.", url: "/workflows/foaling-management" },
+      { title: "Kidding Management", description: "Goat and sheep pregnancy milestones, kidding calendar, pre-kidding signs, and outcome recording.", url: "/workflows/kidding-management" },
+      { title: "Free Puppy Weight Tracker", description: "Log daily weights and see growth curves vs. breed averages (works for any species).", url: "/tools/puppy-weight-tracker" }
     ]}
   />
 

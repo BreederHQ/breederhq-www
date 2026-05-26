@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Goat Herd-Health Software', url: '/articles/goat-herd-health-software' }
+];
+
+const lastReviewedISO = '2026-05-26';
+
+const faqs = [
+  {
+    question: 'What does "herd-health software" actually mean for a goat operation?',
+    answer: 'A herd-health system captures the disease-status testing, parasite-program records, vaccination history, kidding outcomes, and compliance identifiers that buyers and vets need to see, and connects them per animal and per tenant. For goats, the panel usually includes CAE, CL, and Johne's testing, FAMACHA / FEC / FECRT parasite-program entries, CDT vaccination history, and scrapie premises ID with structured tattoo placement.'
+  },
+  {
+    question: 'Is BreederHQ's herd-health passport real, or is it a placeholder?',
+    answer: 'It is real and shipped. The HerdHealthStatus model is live, breeders can author per-disease status with the lab, panel, and date and bind a private certificate file, the public listing payload emits a gated breeder-attested herd-health row, the marketplace listing-detail renders the passport card, and breeder profiles surface the same passport on the hero.'
+  },
+  {
+    question: 'Does the platform handle Scrapie Eradication Program compliance?',
+    answer: 'Yes. Tenant-level premises ID and herd prefix are first-class settings; per-animal tattoo placement is structured (right ear, left ear, tail web); HealthCertificate and TransportEvent tables back CVI binding and movement logging. Marketplace listings render the structured identifier rows so buyers can see them before they inquire.'
+  },
+  {
+    question: 'Why doesn't the platform show "CHIC-equivalent" badges for goats yet?',
+    answer: 'Because no caprine registry publishes a binding CHIC-equivalent test list as of 2026-05-26. The trust-taxonomy substrate is seeded against the WSU WADDL small-ruminant biosecurity panel, but breed-binding ChicBreedRequirement rows do not ship for goats until a registry publishes an authoritative list. Inventing the list internally would violate the platform's legally-locked trust posture: BreederHQ does not vet, verify, or vouch.'
+  },
+  {
+    question: 'What about CVI and across-state-line movement?',
+    answer: 'The CVI follow-up slice (TransportEvent + HealthCertificate) is code-complete and shipping pending the migration apply. Once applied, breeders can bind a vet-issued CVI to a transport event, snapshot the structured tattoo state at event time, and produce an auditable movement record, not a free-text note.'
+  },
+  {
+    question: 'Does the herd-health surface work for meat-goat herds too?',
+    answer: 'Yes. The HerdHealthStatus model, scrapie compliance identifiers, parasite-program structured records, and biosecurity testing all apply equally to meat-goat operations. Dairy-specific surfaces (DHIA import, Linear Appraisal, production sparkline) are gated and do not appear on meat-only animals.'
+  }
+];
+---
+
+<BaseLayout
+  title="Goat Herd-Health Software: Disease Status, Parasite Programs, Scrapie Compliance, and Buyer-Facing Herd Records | BreederHQ"
+  description="What a working goat herd-health system has to capture, CAE / CL / Johne's testing, FAMACHA / FEC / FECRT parasite programs, scrapie premises ID, structured tattoo placement, and the herd-health passport that surfaces all of it on public listings."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Goat Herd-Health Software: Disease Status, Parasite Programs, Scrapie Compliance, and Buyer-Facing Herd Records",
+    description: "A goat herd-health system connects disease-status testing, parasite-program records, kidding outcomes, and scrapie compliance, then surfaces the pieces buyers and vets actually need.",
+    datePublished: lastReviewedISO,
+    dateModified: lastReviewedISO,
+    author: {
+      name: "BreederHQ Editorial",
+      role: "BreederHQ"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Goat Herd-Health Software</li>
+      </ol>
+    </nav>
+
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Breeder Guide · Goats</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-4">
+          Goat Herd-Health Software: Disease Status, Parasite Programs, Scrapie Compliance, and Buyer-Facing Herd Records
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          A working goat herd-health system is not a single screen. It is a connected set of records, disease-status testing, parasite-program entries, kidding outcomes, vaccination history, scrapie compliance identifiers, captured per animal and per tenant, and surfaced where buyers and vets need to see them. This guide covers what that record set looks like in practice and where each piece lives.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Last Reviewed May 2026</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>May 26, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>11 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">The Four Layers of a Goat Herd-Health Record</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            A herd-health system that actually helps a goat operation has to work at four layers at once. Each layer answers a different question.
+          </p>
+
+          <ol class="space-y-4 text-lg text-gray-700 mb-6 list-decimal pl-6">
+            <li><strong>Disease status at the herd level.</strong> Is this herd negative for CAE? CL? Johne's? What lab, what panel, what date? Where is the certificate? This is what a buyer wants to see before they drive out for a viewing.</li>
+            <li><strong>Disease status at the animal level.</strong> Has this specific doe been tested? When? What was the result? This is what a vet wants to see during a pre-purchase exam.</li>
+            <li><strong>Active programs.</strong> Is the herd running a real parasite program (FAMACHA, FEC, FECRT)? Is CDT vaccination current? Are kidding outcomes being recorded? These are operational, not point-in-time.</li>
+            <li><strong>Compliance identifiers.</strong> Scrapie premises ID, herd prefix, structured tattoo placement, CVI for cross-state movement. These are regulatory, and they have to be tied to the animal and the event.</li>
+          </ol>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A spreadsheet can store any one of these. What it cannot do is connect them, the doe whose herd is CAE-negative, who herself was tested in March, who is on a real parasite program, and whose scrapie tattoo is on her right ear. That connection is what a buyer actually wants to verify, and it is what a herd-health system has to deliver.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">CAE, CL, and Johne's: What the Data Model Looks Like</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The three diseases serious US goat herds test for are CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johne's disease (Mycobacterium avium subsp. paratuberculosis). The platform models each as a canonical TraitDefinition with a structured AnimalTraitEntry per test result, against the WSU WADDL small-ruminant biosecurity panel. The same substrate carries the sheep-side equivalents (OPP, CL, Johne's).
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Per-animal entries capture the lab, the panel name, the sample type, the date drawn, the date resulted, the result value, and the canonical positive/negative/inconclusive interpretation. The breeder can bind a private certificate file to the entry, so the result carries provenance.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            At the tenant level, the HerdHealthStatus model lets the breeder attest the herd-wide status for each disease with the lab, the panel, the date, and a notes field. The two layers are linked: a herd-status attestation that contradicts per-animal results is a discoverable inconsistency, not a hidden one.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Parasite Program as a First-Class Surface</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Parasitism is the limiting factor in most US goat herds. A breeder running a real program scores FAMACHA every two to four weeks during worm season, runs fecal egg counts on the high-shedders, and runs a FECRT once a year to confirm their dewormers still work. The platform treats each of those as structured records.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            FAMACHA, FEC, and FECRT entries are canonical TraitDefinitions with structured AnimalTraitEntry rows. The public listing surfaces a parasite-program rollup card when a breeder has recent canonical entries. The credibility chip is non-fakeable, it requires data underneath. Internally, breeders see a tenant-level dashboard at <code>/herd-health/parasite-program</code> with a per-animal trend chart for drill-down.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The public destination page at <code>/breeders/:tenantSlug/parasite-program</code> rolls up the herd-wide picture for a tenant: FAMACHA distribution, recent FEC results, FECRT outcomes, and a link back to the listing-detail surface so a buyer can pivot between herd-level and individual animal views.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Herd-Health Passport: The Buyer-Facing Artifact</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The HerdHealthStatus model produces what the audit calls a herd-health passport. The breeder authors per-disease status in platform Settings, optionally binds a private certificate file, and the public listing payload emits a gated breeder-attested herd-health row. The marketplace listing-detail page renders the passport card with attested dates; the breeder profile surfaces the same passport on the hero so a buyer can see the herd posture before they even click into an individual animal.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The passport is gated on <code>enableHealthSharing</code> at the tenant level and per-record visibility at the animal level. Breeders control what is public. The platform does not push private testing data into the marketplace by default.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Scrapie Compliance Without the Paperwork Friction</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            US goat sales involve federal Scrapie Eradication Program compliance for any animal moving across premises. The platform handles the data side of compliance: tenant-level premises ID and herd prefix, structured per-animal tattoo placement (right ear, left ear, tail web), and a HealthCertificate + TransportEvent substrate for CVI binding and movement logging.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Marketplace listings render the structured identifier rows so a buyer can see premises ID, herd prefix, and tattoo placement on the listing detail page before they inquire. The structured tattoo state is snapshotted into TransportEvent rows at event time, so the movement log is auditable rather than free-text.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The shipped scope as of 2026-05-26 covers Phase 2 of the scrapie compliance work: migration SQL, compliance-identifiers endpoints, structured tattoo fields, marketplace identifier rows, and the Compliance Settings tab. The CVI follow-up (Phase 2A) is code-complete pending the migration apply. The breeder-facing certificates and movement-log UI plus the reminder cron are tracked as next-up follow-ons.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Is Honest, What Is Deferred</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The platform's trust posture is legally locked. BreederHQ does not vet, verify, or vouch. Every herd-health surface is either (a) Stripe Identity passthrough, (b) public-registry passthrough, or (c) breeder self-attestation, nothing else. There is no "BreederHQ Verified Herd" tier, and there will not be one. That is a posture decision, not a roadmap item.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Breed-binding ChicBreedRequirement rows for goats remain unshipped because no caprine registry publishes a binding CHIC-equivalent test list as of 2026-05-26. When one publishes a binding list, the widget surface and marketplace badge chain light up. Until then, the substrate is inert by construction, not because the work is missing, but because the source of authority is missing.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Where BreederHQ Fits for Goat Herd-Health Work</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The goat herd-health surface is one of the most-shipped of the goat-domain features as of 2026-05-26. Disease-status testing, parasite-program rollups, herd-health passport, scrapie compliance identifiers, and structured tattoo placement are all live. The remaining work, reminder cron, breeder-facing certificates and movement-log UI, mobile FAMACHA capture polish, is tracked in the goat-audit ledger.
+          </p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            For the full goat-specific product surface, see <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">/goats</a>. For dairy-specific record-keeping, see <a href="/articles/dairy-goat-record-keeping-software" class="text-[hsl(24,95%,53%)] hover:underline">Dairy Goat Record-Keeping Software</a>.
+          </p>
+
+          <div class="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold mb-3">Try BreederHQ free for 14 days</h3>
+            <p class="text-stone-300 mb-6">Disease-status testing, parasite-program records, herd-health passport, and scrapie compliance, connected.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Start Free Trial
+              </a>
+              <a href="/goats" class="border-2 border-stone-500 text-stone-200 px-6 py-3 rounded-lg font-semibold hover:border-white hover:text-white transition">
+                See the Goat Surface
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </article>
+
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free Trial
+      </a>
+    </div>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>

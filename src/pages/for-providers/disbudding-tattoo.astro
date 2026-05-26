@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Providers', url: '/for-providers' },
+  { name: 'Disbudding & Tattoo', url: '/for-providers/disbudding-tattoo' }
+];
+
+const faqs = [
+  {
+    question: 'Who is the disbudding & tattoo category for?',
+    answer: 'Providers who disbud kids with iron or paste and apply registry tattoos. Most listings are individual experienced breeders, hands-on technicians who run a regional circuit, and ambulatory veterinarians who include disbudding in kid-processing visits.'
+  },
+  {
+    question: 'How much does it cost to list?',
+    answer: 'Flat $5 per month per provider account during general availability. No commissions, no per-inquiry fees. Early access listings are free.'
+  },
+  {
+    question: 'Do I need to be a veterinarian to list?',
+    answer: 'No. Disbudding scope varies by state veterinary practice law, but the work is widely performed by experienced breeders and lay technicians. State whatever scope and pain-management posture you actually offer; breeders self-qualify before they reach out.'
+  },
+  {
+    question: 'Can I list more than one caprine specialty?',
+    answer: 'Yes. If you also trim feet, give CDT shots, or pull blood for CAE / CL / Johne\'s, list under each specialist category that matches the work you genuinely do.'
+  }
+];
+---
+
+<BaseLayout
+  title="List Your Goat Disbudding & Tattoo Service on BreederHQ Marketplace"
+  description="Provider acquisition page for goat disbudding and registry tattoo providers. Iron and paste disbudding, ear and tail-web tattooing. Flat $5/month. No commissions."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main>
+    <section class="bg-gradient-to-b from-amber-50 to-white py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-4">
+          For Disbudding &amp; Tattoo Providers
+        </div>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 mb-6">List Your Goat Disbudding &amp; Tattoo Service</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+          Goat breeders book kid-processing visits weeks in advance. A real, indexed listing in the right caprine specialist category means new breeders find you the first time they need the work, not the third.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-600">List Your Service</a>
+          <a href="/services/disbudding-tattoo" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold border border-amber-200 hover:bg-amber-50">See the Browse Page</a>
+        </div>
+        <p class="text-xs text-gray-500 mt-6">Flat $5/month per account. No commissions. No per-booking fees.</p>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What Your Listing Surfaces</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Disbudding method.</strong> Iron, paste, or both. Pain-management posture stated.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Tattoo registries.</strong> ADGA, AGS, NDGA, ABGA, MDGA, NMGA, and others you regularly work with.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Service area.</strong> Counties, states, or radius you actually drive.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Volume and scheduling.</strong> Trip-fee, per-kid pricing, and how far ahead breeders should book.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Biosecurity routine.</strong> Disinfection between farms.</span></div>
+          <div class="flex items-start gap-3 p-4 bg-stone-50 rounded-lg"><span class="text-amber-700 font-bold mt-0.5">&#10003;</span><span class="text-sm text-gray-700"><strong class="text-gray-900">Identity passthrough.</strong> Optional Stripe Identity confirmation surfaced on your profile.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-stone-50">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-white rounded-xl p-6 border border-stone-200">
+              <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-sm text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Provider Categories</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <a href="/for-providers/caprine-services" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition"><h3 class="font-semibold text-gray-900 mb-1">All Caprine Services</h3><p class="text-sm text-gray-600">Umbrella page for goat-specific providers.</p></a>
+          <a href="/for-providers/goat-hoof-trimming" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition"><h3 class="font-semibold text-gray-900 mb-1">Goat Hoof Trimming</h3><p class="text-sm text-gray-600">The other recurring kid-and-adult work.</p></a>
+          <a href="/for-providers/mobile-goat-vet" class="block bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-amber-300 hover:shadow-sm transition"><h3 class="font-semibold text-gray-900 mb-1">Mobile Goat Vet</h3><p class="text-sm text-gray-600">For sedation, scur correction, and surgical referrals.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gradient-to-br from-amber-900 to-amber-800">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-white">List Your Disbudding &amp; Tattoo Service</h2>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="https://accounts.breederhq.com/register?intent=provider_marketplace" class="bg-white text-amber-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-50">Claim Your Listing</a>
+          <a href="/trust" class="bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold border border-amber-600 hover:bg-amber-600">Identity &amp; Credentials Policy</a>
+        </div>
+        <p class="text-xs text-amber-200 mt-6">Flat $5/month. No commissions. Cancel anytime.</p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
