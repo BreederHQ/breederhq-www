@@ -11,7 +11,7 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What makes goat breeding software different from other livestock software?',
-    answer: 'Goat breeding software needs to handle dairy production tracking (305-day lactations, butterfat and protein percentages, DHIA records), breeding groups where bucks run with multiple does, seasonal cycling tied to photoperiod, and breed-specific health concerns like CAE, CL, and Johne\'s disease. Generic livestock software doesn\'t cover these goat-specific workflows.'
+    answer: 'Goat breeding software needs to handle dairy production tracking (305-day lactations, butterfat and protein percentages, DHIA records), breeding groups where bucks run with multiple does, seasonal cycling tied to photoperiod, parasite records, scrapie compliance, wether and youth-project roles, and breed-specific health concerns like CAE, CL, and Johne\'s disease. Generic livestock software does not cover these goat-specific workflows.'
   },
   {
     question: 'Can goat breeding software track milk production and DHIA records?',
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: 'Does it track CAE, CL, and Johne\'s testing?',
-    answer: 'Yes. Goat breeding software should track CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johne\'s disease test results. These should link to individual goats and pedigrees so buyers can verify herd-health status, not just read marketing claims.'
+    answer: 'Yes. Goat breeding software should track CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johne\'s disease test results. These should link to individual goats and pedigrees so buyers can evaluate dated breeder-attested herd-health status, not just read marketing claims.'
   },
   {
     question: 'Can it help document a responsible parasite-management program?',
@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     question: 'Does it work with ADGA and AGS registries?',
-    answer: 'Yes. BreederHQ tracks registration numbers, linear appraisal scores, milk star designations, and show records for ADGA, AGS, and other goat registries. It generates the information you need for kid registration applications.'
+    answer: 'Yes. BreederHQ tracks registration numbers, Linear Appraisal records, production data, show records, registry metadata, and breeder-attested ADGA Genetics links. It does not invent earned milk-star or Superior Genetics badges without authoritative registry rules.'
   },
   {
     question: 'How does kidding management work?',
@@ -81,11 +81,11 @@ const faqs = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Good goat breeding software needs dairy production tracking (305-day lactations, DHIA, butterfat/protein), breeding group management for buck exposure, seasonal cycling awareness, CAE/CL/Johne's tracking, parasite-management credibility like FAMACHA/FEC documentation, and buyer-facing website workflows. Avoid dog-focused or generic farm software. Always test with your actual herd data.
+          Good goat breeding software needs dairy production tracking (305-day lactations, DHIA, butterfat/protein), breeding group management for buck exposure, seasonal cycling awareness, CAE/CL/Johne's tracking, structured parasite records, scrapie compliance, wether and 4-H/FFA project roles, barn-grade mobile capture, and buyer-facing website workflows. Avoid dog-focused or generic farm software. Always test with your actual herd data.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
-        Goat breeding-whether dairy or meat-has unique requirements. Milk production records, breeding groups, seasonal cycling, documented herd-health practices, and a professional buyer experience all need purpose-built tools. This page explains what to look for-whether you choose BreederHQ or another platform.
+        Goat breeding, whether dairy or meat, has unique requirements. Milk production records, breeding groups, seasonal cycling, documented herd-health practices, scrapie compliance, role tracking for wethers and project animals, and a professional buyer experience all need purpose-built tools. This page explains what to look for, whether you choose BreederHQ or another platform.
       </p>
     </div>
   </section>
@@ -132,6 +132,13 @@ const faqs = [
         </div>
 
         <div>
+          <h3 class="text-2xl font-bold mb-4">Scrapie compliance and movement records</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Goat software should handle premises ID, herd prefix, structured tattoo placement, CVI certificates, and movement logs as records, not buried notes. These records should stay private by default, with buyer-facing identifier summaries only where the breeder deliberately shares them.
+          </p>
+        </div>
+
+        <div>
           <h3 class="text-2xl font-bold mb-4">Linear appraisal scores</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
             For dairy breeders, ADGA linear appraisal scores on the 1-9 scale are critical for selecting structural correctness and udder quality. Your software should track scores across all body categories and show them on individual animal records and pedigrees.
@@ -142,6 +149,20 @@ const faqs = [
           <h3 class="text-2xl font-bold mb-4">Kidding management</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
             Goats commonly have twins and triplets. Your software should track each kid as an individual record from birth through placement-weights, colors, markings, dam behavior, nursing status. If it treats a kidding as a single record, it's not built for goats.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Barn-grade mobile capture</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The phone workflow matters because goats are worked in barns, pens, and pastures, not at a desk. Look for offline queueing, tag and RFID identifier lookup, quick-add from scanned identifiers, batch weigh-in, batch FAMACHA, and retry handling when the connection drops.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Buck-side planning and commerce</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Serious goat operations need more than doe records. Buck isolation, semen inventory, CIDR, buck-effect, and light-manipulation protocol anchors all affect breeding outcomes. If buck-side services and semen records live somewhere else, your breeding plan is incomplete.
           </p>
         </div>
 
@@ -162,7 +183,7 @@ const faqs = [
         <div>
           <h3 class="text-2xl font-bold mb-4">Breeder website and waitlist workflow</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            Many breeders already have a website. Good software should help you keep that site current with live listings, planned breedings, and waitlist status without re-entering the same goat data in three places. Buyer inquiries should flow back into one organized system.
+            Many breeders already have a website. Good software should help you keep that site current with live listings, planned breedings, and waitlist status without re-entering the same goat data in three places. Buyer inquiries, pickup handoff, transfer packets, and buyer-gated breeder reviews should flow back into one organized system.
           </p>
         </div>
       </div>
@@ -211,6 +232,13 @@ const faqs = [
         </div>
 
         <div>
+          <h3 class="text-2xl font-bold mb-4">No scrapie or CVI workflow</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A goat sale can require official identification and movement documentation. If the software cannot store premises ID, structured tattoos, CVIs, and transport events, you are still running compliance out of a binder.
+          </p>
+        </div>
+
+        <div>
           <h3 class="text-2xl font-bold mb-4">Treats kiddings as single records</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
             Goats commonly have multiples. Software that records "3 kids born" without tracking each kid individually isn't useful for pedigree records, buyer placement, or production analysis.
@@ -233,7 +261,7 @@ const faqs = [
       <h2 class="text-4xl font-bold mb-8">What BreederHQ offers goat breeders</h2>
 
       <p class="text-xl leading-relaxed mb-6">
-        BreederHQ was built with goat breeding in mind. Dairy production tracking with daily milk weights, butterfat and protein percentages, somatic cell counts, and 305-day standardized lactation records using ADGA formulas. Monthly DHIA test day data and linear appraisal scores.
+        BreederHQ was built with goat breeding in mind. Dairy production tracking with daily milk weights, butterfat and protein percentages, somatic cell counts, and 305-day standardized lactation records using ADGA formulas. Monthly DHIA test day import, Linear Appraisal capture, trend charts, and breeder-attested public listing cards.
       </p>
 
       <p class="text-xl leading-relaxed mb-6">
@@ -241,11 +269,15 @@ const faqs = [
       </p>
 
       <p class="text-xl leading-relaxed mb-6">
-        Kidding management that treats each kid as an individual. Weight tracking with growth curves and anomaly alerts. CAE, CL, and Johne's test tracking linked to pedigrees. FAMACHA and fecal egg count (FEC) monitoring credentials for breeders who want to document a real parasite-management program.
+        Kidding management that treats each kid as an individual. Weight tracking with growth curves and anomaly alerts. CAE, CL, and Johne's herd-health attestations linked to listings. FAMACHA, fecal egg count (FEC), and FECRT records for breeders who want to document a real parasite-management program.
       </p>
 
       <p class="text-xl leading-relaxed mb-6">
-        Breeder website workflows that matter in the real world-live listings, planned breedings, waitlists, and buyer communication without double-updating a separate website. BreederHQ helps you run the operational side of a professional goat program, not just store pedigree data.
+        Scrapie compliance surfaces for premises ID, herd prefix, structured tattoos, CVI certificates, and transport events. Mobile field tools for scanner lookup, quick-add, batch weigh-in, batch FAMACHA, outdoor mode, and offline queued writes. Buck-side planning for isolation, semen inventory, CIDR, buck-effect, and light-manipulation protocols.
+      </p>
+
+      <p class="text-xl leading-relaxed mb-6">
+        Breeder website workflows that matter in the real world: live listings, planned breedings, waitlists, pickup handoff, transfer packets, buyer-gated breeder reviews, and buyer communication without double-updating a separate website. BreederHQ helps you run the operational side of a professional goat program, not just store pedigree data.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
@@ -283,7 +315,7 @@ const faqs = [
         <div>
           <h3 class="text-xl font-bold mb-3">What health tests can you track?</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
-            CAE, CL, Johne's, brucellosis, and breed-specific tests. Can you store results? Do they show on pedigrees? Can buyers verify herd health status? This is non-negotiable for responsible goat breeders.
+            CAE, CL, Johne's, brucellosis, and breed-specific tests. Can you store results? Do they show on pedigrees? Can buyers evaluate dated breeder-attested herd-health status? This is non-negotiable for responsible goat breeders.
           </p>
         </div>
 
@@ -291,6 +323,13 @@ const faqs = [
           <h3 class="text-xl font-bold mb-3">How do you document parasite management?</h3>
           <p class="text-lg text-gray-700 leading-relaxed">
             Ask whether the software can document FAMACHA scores, fecal egg count monitoring, and treatment records in a way that supports targeted decisions. A checkbox that says "dewormed" is not enough for serious goat breeders.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-3">How does it handle scrapie compliance and CVI records?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Ask where premises ID, herd prefix, structured tattoos, CVI certificates, and transport events live. If the answer is a notes field, the software is not ready for goat movement paperwork.
           </p>
         </div>
 
@@ -409,12 +448,12 @@ const faqs = [
       <div class="space-y-3 text-lg">
         <div>
           <a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">
-            → See verified goat breeders using BreederHQ on the marketplace
+            → See goat breeders using BreederHQ on the marketplace
           </a>
         </div>
         <div>
           <a href="/find-breeders/goats" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">
-            → Find verified goat breeders by breed
+            → Find goat breeders by breed
           </a>
         </div>
         <div>

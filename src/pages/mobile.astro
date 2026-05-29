@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: 'Does the Mobile Companion work offline?',
-    answer: 'The companion needs an internet connection to sync. It is built to work well on slower connections at the barn or vet office, but it is not a fully offline tool.'
+    answer: 'Yes for supported field writes. The Mobile Companion queues barn-critical mutations when connectivity drops, then drains them when the connection returns. Lookup and sync still need the network, but weight, offspring, parasite, and other supported capture flows no longer depend on perfect service in the barn.'
   },
   {
     question: 'What devices are supported?',
@@ -42,10 +42,10 @@ const faqs = [
 ];
 
 const featureCards = [
-  { id: 'animals', icon: '🐾', title: 'Animal Management', desc: 'Browse profiles, upload photos, check health records' },
+  { id: 'animals', icon: '🐾', title: 'Animal Management', desc: 'Browse profiles, scan identifiers, quick-add animals' },
   { id: 'health', icon: '💊', title: 'Health & Medications', desc: 'Vaccinations, health tests, medication tracking' },
   { id: 'breeding', icon: '📅', title: 'Breeding Plans & Cycles', desc: 'Track plans, record births, monitor heat cycles' },
-  { id: 'offspring', icon: '🍼', title: 'Offspring & Weights', desc: 'Add offspring, record daily weights, track development' },
+  { id: 'offspring', icon: '🍼', title: 'Offspring & Weights', desc: 'Add offspring, batch weigh, track development' },
   { id: 'messaging', icon: '💬', title: 'Messages', desc: 'Unified inbox for buyer and client conversations' },
   { id: 'tasks', icon: '📋', title: 'Tasks & Calendar', desc: 'Daily tasks, upcoming events, and reminders' },
   { id: 'expenses', icon: '💰', title: 'Expense Tracking', desc: 'Log expenses with receipt photos on the go' },
@@ -84,7 +84,7 @@ const featureCards = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          The BreederHQ Mobile Companion is an iOS and Android app designed for quick capture and quick lookup when you are away from your desk. Record newborn weights right after a birth, snap a receipt at the vet, pull up an animal's pedigree at a show, reply to a buyer message, mark a task done. Everything syncs instantly with the BreederHQ web app, where you do the deeper work — setting up breeding plans, managing your storefront, running reports, configuring contracts, and everything else that needs a real screen.
+          The BreederHQ Mobile Companion is an iOS and Android app designed for quick capture and quick lookup when you are away from your desk. Record newborn weights right after a birth, scan or enter an ear tag, scrapie tag, RFID, microchip, or tattoo identifier, run a batch weigh-in or FAMACHA session, snap a receipt at the vet, reply to a buyer message, and keep working through spotty barn service with the offline queue. Everything syncs with the BreederHQ web app, where you do the deeper work: setting up breeding plans, managing your storefront, running reports, configuring contracts, and everything else that needs a real screen.
         </p>
       </aside>
     </div>
@@ -250,6 +250,8 @@ const featureCards = [
           <p class="text-sm text-gray-600 mb-4 italic">For quick capture and quick lookup, away from your desk.</p>
           <ul class="space-y-2 text-gray-700 text-sm">
             <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Record newborn weights at the moment of birth</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Scan or type ear tag, scrapie, RFID, microchip, and tattoo identifiers</li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Run batch weigh-in and batch FAMACHA sessions in the barn</li>
             <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Log a vaccination or medication dose at the vet</li>
             <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Snap an expense receipt before you lose it</li>
             <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-2">✓</span>Pull up an animal's profile or pedigree at a show</li>
@@ -338,6 +340,8 @@ const featureCards = [
               <h4 class="font-bold text-lg mb-3">Browse & Search</h4>
               <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start"><span class="mr-2">•</span>Full animal list with search and filters</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Scanner lookup for ear tag, scrapie tag, RFID, microchip, and tattoo identifiers</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Quick-add new animals from scanned or entered identifiers</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Profile photos and cover images</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Registration numbers and microchip IDs</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Pedigree information</li>
@@ -357,7 +361,7 @@ const featureCards = [
             </div>
           </div>
           <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
-            <p class="text-gray-700 text-sm"><strong>At the show ring:</strong> Pull up any animal's profile, titles, and pedigree instantly. Share profiles with other breeders by scanning a QR code, with no need to exchange business cards or emails.</p>
+            <p class="text-gray-700 text-sm"><strong>At the show ring or chute:</strong> Pull up an animal by tag, RFID, microchip, tattoo, or name. If the identifier is not found, start a new animal record with that value prefilled instead of writing it on paper for later.</p>
           </div>
         </div>
       </details>
@@ -480,6 +484,7 @@ const featureCards = [
               <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start"><span class="mr-2">•</span>Quick weight entry with increment buttons</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Record weights for a whole group fast (litter, foals, kids, lambs, or kits)</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Batch weigh-in session for herd work days</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Inline weight trend chart on every newborn row</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Automatic anomaly detection</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Metric and imperial toggle</li>
@@ -487,7 +492,7 @@ const featureCards = [
             </div>
           </div>
           <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
-            <p class="text-gray-700 text-sm"><strong>At the barn or kennel:</strong> Weigh each newborn, tap the weight, done. Quick increment buttons mean you can record an entire litter or group in under a minute. No laptop, no spreadsheet, no paper to transcribe later.</p>
+            <p class="text-gray-700 text-sm"><strong>At the barn or kennel:</strong> Weigh each newborn, tap the weight, done. For goat and sheep work days, use the batch weigh-in and batch FAMACHA entry points from the animal list. No laptop, no spreadsheet, no paper to transcribe later.</p>
           </div>
         </div>
       </details>

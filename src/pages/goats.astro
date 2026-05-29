@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     question: 'What about milk production records?',
-    answer: 'Daily/session milk weights, butterfat and protein percentages, 305-day standardized lactation records using the ADGA formula, peak production tracking, monthly DHIA test day recording (including SCC and MUN), and lifetime production analytics per doe. Structured Linear Appraisal capture and DHIA bulk import are on the 2026 roadmap, not shipped today.'
+    answer: 'Daily/session milk weights, butterfat and protein percentages, 305-day standardized lactation records using the ADGA formula, peak production tracking, monthly DHIA test day recording (including SCC and MUN), DHIA CSV import, Linear Appraisal capture, and lifetime production analytics per doe.'
   },
   {
     question: 'Can I manage breeding groups?',
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: 'Can it help me document a responsible parasite-management program?',
-    answer: 'In part, today. Breeders can publish FAMACHA and fecal egg count (FEC) monitoring as credibility chips on their storefront and breeder profile, and keep deworming and medication records per animal or group. Structured FAMACHA / FEC / FECRT records that buyers can audit are on the 2026 roadmap, not shipped today.'
+    answer: 'Yes. FAMACHA, fecal egg count (FEC), and FECRT results are structured records, not free-text claims. BreederHQ rolls them into breeder-attested parasite-program cards on public listings and breeder profiles when the underlying data exists.'
   },
   {
     question: 'Can I put my BreederHQ listings on my own breeder website?',
@@ -46,18 +46,19 @@ const faqs = [
 const featureCards = [
   { id: 'goat-records', icon: '🐐', title: 'Goat Records', desc: 'Complete profiles, pedigrees, registration info' },
   { id: 'breeding', icon: '📅', title: 'Breeding', desc: 'Seasonal cycles, breeding groups, kidding dates' },
-  { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'CAE, CL, Johne\'s, parasite credibility, hoof care' },
+  { id: 'health', icon: '🏥', title: 'Health & Compliance', desc: 'CAE, CL, Johne\'s, parasite records, scrapie, CVI' },
   { id: 'dairy', icon: '🥛', title: 'Dairy Production', desc: 'Milk records, DHIA data, 305-day lactations, analytics' },
   { id: 'breeding-groups', icon: '🐐', title: 'Breeding Groups', desc: 'Buck exposure groups, pregnancy confirmation' },
-  { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Sales pipeline, lead scoring, waitlists, contracts' },
+  { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Sales pipeline, pickup handoff, transfer packets, reviews' },
   { id: 'buyer-portal', icon: '🌐', title: 'Website & Buyers', desc: 'Live listings, waitlists, website embeds' },
+  { id: 'field-mobile', icon: '📱', title: 'Barn Mobile', desc: 'Offline queue, scanner lookup, batch weigh, FAMACHA' },
   { id: 'medications', icon: '💊', title: 'Medications', desc: 'Selective treatment records, batch logging, health reports' }
 ];
 ---
 
 <BaseLayout
   title="Goat Breeding Software | BreederHQ"
-  description="Goat breeding software for dairy and meat operations. DHIA records, breeding groups, kidding records, FAMACHA/FEC credibility chips, breeder websites, and ADGA-compatible tracking."
+  description="Goat breeding software for dairy and meat operations. DHIA records, Linear Appraisal, breeding groups, kidding records, FAMACHA/FEC/FECRT parasite records, scrapie compliance, breeder websites, and ADGA-compatible tracking."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -84,7 +85,7 @@ const featureCards = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">TL;DR</h2>
         <p class="text-gray-700 leading-relaxed">
-          Goat breeding software for dairy and meat operations with seasonal breeding, disease testing tracking (CAE, CL, Johne's), FAMACHA/FEC credibility chips on breeder profiles, ADGA registration support, breeder-website embeds, and multiple kid management. Built for herds that need organized kidding records, documented health practices, and a more professional buyer experience. Structured FAMACHA / FEC / FECRT records and Linear Appraisal capture are on the 2026 roadmap.
+          Goat breeding software for dairy and meat operations with seasonal breeding, disease testing tracking (CAE, CL, Johne's), structured FAMACHA/FEC/FECRT parasite records, DHIA import, Linear Appraisal, scrapie compliance, ADGA registration support, breeder-website embeds, and multiple kid management. Built for herds that need organized kidding records, documented health practices, and a more professional buyer experience.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
@@ -214,8 +215,8 @@ const featureCards = [
           <div class="flex items-center gap-4">
             <span class="text-3xl">🏥</span>
             <div>
-              <h3 class="text-2xl font-bold">Health & Genetics</h3>
-              <p class="text-gray-600">CAE, CL, Johne's, parasite credibility, vaccinations, hoof care</p>
+              <h3 class="text-2xl font-bold">Health & Compliance</h3>
+              <p class="text-gray-600">CAE, CL, Johne's, parasite records, vaccinations, scrapie, CVI</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,8 +239,9 @@ const featureCards = [
               <h4 class="font-bold text-lg mb-3">Routine Care</h4>
               <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start"><span class="mr-2">•</span>Vaccination schedules</li>
-                <li class="flex items-start"><span class="mr-2">•</span>FAMACHA and fecal egg count (FEC) monitoring credentials on breeder profiles</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Structured FAMACHA, fecal egg count (FEC), and FECRT records</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Targeted deworming and medication records by animal or group</li>
+                <li class="flex items-start"><span class="mr-2">•</span>CVI certificates and movement logs kept private by default</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Hoof trimming records</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Veterinary visits and notes</li>
                 <li class="flex items-start"><span class="mr-2">•</span><a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication tracking</a> with batch deworming support</li>
@@ -248,7 +250,7 @@ const featureCards = [
           </div>
           <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
             <h4 class="font-bold text-lg mb-2">Health credibility buyers can actually evaluate</h4>
-            <p class="text-gray-700 text-sm">Responsible goat breeders need more than vague claims about being "tested" or "clean." BreederHQ helps you document CAE, CL, Johne's-related herd-health evidence, plus FAMACHA and FEC monitoring as credibility chips on your storefront, so buyers can see a real program instead of generic promises. Structured FAMACHA / FEC / FECRT records that buyers can audit are on the 2026 roadmap.</p>
+            <p class="text-gray-700 text-sm">Responsible goat breeders need more than vague claims about being "tested" or "clean." BreederHQ helps you document CAE, CL, Johne's-related herd-health evidence, plus FAMACHA, FEC, and FECRT entries as structured records. Public cards are breeder-attested and only render when the underlying data exists, so buyers see a real program instead of generic promises.</p>
           </div>
         </div>
       </details>
@@ -284,8 +286,10 @@ const featureCards = [
               <h4 class="font-bold text-lg mb-3">DHIA & Show Data</h4>
               <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start"><span class="mr-2">•</span>Monthly DHIA test day recording</li>
+                <li class="flex items-start"><span class="mr-2">•</span>DHIA CSV importer with saved mapping presets</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Somatic Cell Count (SCC) tracking</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Milk Urea Nitrogen (MUN) values</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Linear Appraisal score history and trend chart</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Production awards tracking</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Show results and champion titles</li>
               </ul>
@@ -294,6 +298,48 @@ const featureCards = [
           <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
             <h4 class="font-bold text-lg mb-2">Dairy Production Analytics</h4>
             <p class="text-gray-700 text-sm">Lifetime production statistics per doe, lactation history across all freshening cycles, and herd-level production trends. Compare does side-by-side, identify your highest producers, and make data-driven breeding decisions for your dairy program.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Barn Mobile -->
+      <details id="field-mobile" class="accordion-section border border-gray-200 rounded-lg">
+        <summary class="accordion-header flex items-center justify-between p-6 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-lg">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">📱</span>
+            <div>
+              <h3 class="text-2xl font-bold">Barn-Grade Mobile Field Tools</h3>
+              <p class="text-gray-600">Offline queue, identifier lookup, batch sessions, field capture</p>
+            </div>
+          </div>
+          <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="accordion-content p-6 border-t border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">Field Capture</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Offline mutation queue for barn and pasture work</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Scanner lookup for ear tag, scrapie tag, RFID, microchip, and tattoo identifiers</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Quick-add new animals from scanned or entered identifiers</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Outdoor mode for high-contrast field use</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">Batch Sessions</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="mr-2">•</span>Batch weigh-in sessions from the mobile animal list</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Batch FAMACHA sessions for goat and sheep parasite checks</li>
+                <li class="flex items-start"><span class="mr-2">•</span>FECRT pre/post capture from antiparasitic medication courses</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Retry queue with return-to-screen links when a save fails</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
+            <h4 class="font-bold text-lg mb-2">Built for the chute, not just the office</h4>
+            <p class="text-gray-700 text-sm">The mobile app supports barcode and camera-based identifier lookup today. Dedicated Bluetooth wand and scale integrations are later hardware work, but the operational path for quick lookup, quick add, batch weigh, and parasite scoring is already in the mobile workflow.</p>
           </div>
         </div>
       </details>
@@ -348,7 +394,7 @@ const featureCards = [
             <span class="text-3xl">👥</span>
             <div>
               <h3 class="text-2xl font-bold">Clients & Sales</h3>
-              <p class="text-gray-600">Sales pipeline, lead scoring, waitlists, contracts</p>
+              <p class="text-gray-600">Sales pipeline, pickup handoff, transfer packets, reviews</p>
             </div>
           </div>
           <svg class="accordion-icon w-6 h-6 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,6 +411,7 @@ const featureCards = [
                 <li class="flex items-start"><span class="mr-2">•</span>Breed/color/sex preferences</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Communication history</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Deposit tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Pickup scheduling and buyer handoff checklist</li>
               </ul>
             </div>
             <div>
@@ -374,6 +421,8 @@ const featureCards = [
                 <li class="flex items-start"><span class="mr-2">•</span>Contract generation</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Bill of sale records</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Health certificate tracking</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Sale-to-registry transfer packet PDF</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Buyer-gated breeder reviews after eligible sales</li>
                 <li class="flex items-start"><span class="mr-2">•</span>Revenue reporting</li>
               </ul>
             </div>
@@ -504,7 +553,7 @@ const featureCards = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Track CAE, CL, and scrapie status as genetic health markers on each animal's genetics tab.</p>
+          <p>Yes. Track CAE, CL, Johne's-related herd-health evidence, scrapie premises ID, herd prefix, structured tattoos, CVI certificates, and private movement logs. Public health surfaces are breeder-attested and gated by sharing controls.</p>
         </div>
       </details>
 
@@ -552,7 +601,7 @@ const featureCards = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>In part, today. Breeders can publish FAMACHA and fecal egg count (FEC) monitoring as credibility chips on their storefront and breeder profile, and keep deworming and medication records per animal or group. Structured FAMACHA / FEC / FECRT records that buyers can audit are on the 2026 roadmap, not shipped today.</p>
+          <p>Yes. BreederHQ stores FAMACHA, fecal egg count (FEC), and FECRT as structured records, then rolls them up into breeder-attested parasite-program cards on public listings and breeder profiles when the underlying data exists.</p>
         </div>
       </details>
 
@@ -594,7 +643,7 @@ const featureCards = [
         </div>
         <div>
           <a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">
-            → Browse verified goat breeders on the BreederHQ Marketplace
+            → Browse goat breeders on the BreederHQ Marketplace
           </a>
         </div>
         <div>
