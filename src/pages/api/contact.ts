@@ -8,41 +8,62 @@ import { processLead, type LeadData } from '../../lib/server/leadCapture';
 
 export const prerender = false; // This endpoint requires SSR
 
+const EMAIL_RE = /^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/;
+
+function badRequest(error: string) {
+  return new Response(JSON.stringify({ success: false, error }), {
+    status: 400,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+function clampString(value: unknown, max: number): string | undefined {
+  if (typeof value !== 'string') return undefined;
+  const trimmed = value.trim();
+  if (!trimmed) return undefined;
+  return trimmed.slice(0, max);
+}
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     // Parse form data
     const body = await request.json();
 
-    // Validate required fields
-    if (!body.email) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: 'Email is required',
-        }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+    // Server-side validation (mirrors client + acts as the source of truth)
+    const email = clampString(body.email, 254)?.toLowerCase();
+    if (!email) return badRequest('Email is required.');
+    if (!EMAIL_RE.test(email)) return badRequest('Please enter a valid email address.');
+
+    const name = clampString(body.name, 100);
+    if (!name || name.length < 2 || !/\p{L}/u.test(name)) {
+      return badRequest('Please enter your name.');
+    }
+
+    // Phone is optional but if provided must be plausible
+    const phoneRaw = clampString(body.phone, 25);
+    if (phoneRaw) {
+      const digits = phoneRaw.replace(/\D/g, '');
+      const isIntl = phoneRaw.startsWith('+');
+      const valid = isIntl
+        ? digits.length >= 7 && digits.length <= 15
+        : digits.length === 10;
+      if (!valid) return badRequest('Please enter a valid phone number.');
     }
 
     // Extract lead data
     const leadData: LeadData = {
-      email: body.email,
-      name: body.name,
-      phone: body.phone,
-      company: body.company,
-      message: body.message,
-      interest: body.interest,
-      source: body.source || 'website_form',
-      utm_source: body.utm_source,
-      utm_medium: body.utm_medium,
-      utm_campaign: body.utm_campaign,
-      utm_term: body.utm_term,
-      utm_content: body.utm_content,
+      email,
+      name,
+      phone: phoneRaw,
+      company: clampString(body.company, 120),
+      message: clampString(body.message, 2000),
+      interest: clampString(body.interest, 50),
+      source: clampString(body.source, 50) || 'website_form',
+      utm_source: clampString(body.utm_source, 100),
+      utm_medium: clampString(body.utm_medium, 100),
+      utm_campaign: clampString(body.utm_campaign, 100),
+      utm_term: clampString(body.utm_term, 100),
+      utm_content: clampString(body.utm_content, 100),
     };
 
     // Capture metadata from request

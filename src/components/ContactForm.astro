@@ -1,7 +1,7 @@
 ---
 /**
  * ContactForm Component
- * Reusable contact form with validation, tracking, and submission to API
+ * Reusable contact form with validation, formatting, tracking, and submission to API.
  */
 
 interface InterestOption {
@@ -45,10 +45,14 @@ const {
   phonePlaceholder = '(555) 123-4567',
   companyLabel = 'Company / Breeding Program',
 } = Astro.props;
+
+const inputBaseClass =
+  'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent';
+const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
 ---
 
 <div class="contact-form-container">
-  <form id={formId} class="space-y-4" data-source={source}>
+  <form id={formId} class="space-y-4" data-source={source} novalidate>
     <!-- Name Field -->
     <div>
       <label for={`${formId}-name`} class="block text-sm font-medium text-gray-700 mb-1">
@@ -59,9 +63,14 @@ const {
         id={`${formId}-name`}
         name="name"
         required
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-        placeholder="John Doe"
+        autocomplete="name"
+        autocapitalize="words"
+        maxlength="100"
+        class={inputBaseClass}
+        placeholder="Jane Smith"
+        data-validate="name"
       />
+      <p class={errorTextClass} data-error-for="name">Please enter your name.</p>
     </div>
 
     <!-- Email Field -->
@@ -74,9 +83,16 @@ const {
         id={`${formId}-email`}
         name="email"
         required
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-        placeholder="john@example.com"
+        autocomplete="email"
+        autocapitalize="none"
+        inputmode="email"
+        spellcheck="false"
+        maxlength="254"
+        class={inputBaseClass}
+        placeholder="jane@example.com"
+        data-validate="email"
       />
+      <p class={errorTextClass} data-error-for="email">Please enter a valid email address.</p>
     </div>
 
     <!-- Phone Field (optional) -->
@@ -89,9 +105,14 @@ const {
           type="tel"
           id={`${formId}-phone`}
           name="phone"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          autocomplete="tel"
+          inputmode="tel"
+          maxlength="25"
+          class={inputBaseClass}
           placeholder={phonePlaceholder}
+          data-validate="phone"
         />
+        <p class={errorTextClass} data-error-for="phone">Please enter a valid phone number (use + for international).</p>
       </div>
     )}
 
@@ -105,7 +126,9 @@ const {
           type="text"
           id={`${formId}-company`}
           name="company"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          autocomplete="organization"
+          maxlength="120"
+          class={inputBaseClass}
           placeholder="Acme Kennels"
         />
       </div>
@@ -113,7 +136,7 @@ const {
 
     <!-- Interest Radio Group (optional) -->
     {includeInterest && interestOptions.length > 0 && (
-      <fieldset>
+      <fieldset data-validate="interest" data-required={interestRequired ? 'true' : 'false'}>
         <legend class="block text-sm font-medium text-gray-700 mb-2">
           {interestLabel} {interestRequired && '*'}
         </legend>
@@ -138,6 +161,7 @@ const {
             </label>
           ))}
         </div>
+        <p class={errorTextClass} data-error-for="interest">Please pick one.</p>
       </fieldset>
     )}
 
@@ -151,7 +175,8 @@ const {
           id={`${formId}-message`}
           name="message"
           rows="4"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          maxlength="2000"
+          class={inputBaseClass}
           placeholder={messagePlaceholder}
         ></textarea>
       </div>
@@ -176,7 +201,7 @@ const {
       </div>
       <div class="error-message hidden p-4 bg-red-50 border border-red-200 rounded-lg">
         <p class="text-red-800">
-          ❌ Something went wrong. Please try again.
+          ❌ Something went wrong. Please check the fields above and try again.
         </p>
       </div>
     </div>
@@ -186,13 +211,152 @@ const {
 <script>
   import { trackFormStart, trackFormSubmit, getUTMParams } from '../lib/tracking';
 
-  // Handle all contact forms on the page
+  // -- Formatters --------------------------------------------------------------
+
+  function titleCaseName(raw: string): string {
+    return raw
+      .trim()
+      .replace(/\s+/g, ' ')
+      .split(' ')
+      .map((part) => {
+        if (!part) return part;
+        // Preserve common particles in lowercase ("de", "van", "del") unless first word
+        return part
+          .split('-')
+          .map((seg) => seg.charAt(0).toUpperCase() + seg.slice(1).toLowerCase())
+          .join('-');
+      })
+      .join(' ');
+  }
+
+  /**
+   * Format a phone number as the user types.
+   * - Strips everything except digits and a leading "+"
+   * - Plain digits ≤10 → US-style: (555) 123-4567
+   * - With leading "+" or >10 digits → grouped intl: +1 555 123 4567
+   */
+  function formatPhone(raw: string): string {
+    if (!raw) return '';
+    const trimmed = raw.trim();
+    const hasPlus = trimmed.startsWith('+');
+    const digits = trimmed.replace(/\D/g, '').slice(0, 15);
+    if (!digits) return hasPlus ? '+' : '';
+
+    if (!hasPlus && digits.length <= 10) {
+      // US-style progressive formatting
+      const a = digits.slice(0, 3);
+      const b = digits.slice(3, 6);
+      const c = digits.slice(6, 10);
+      if (digits.length <= 3) return `(${a}`;
+      if (digits.length <= 6) return `(${a}) ${b}`;
+      return `(${a}) ${b}-${c}`;
+    }
+
+    // International: "+" + groups of 3 (best-effort, doesn't need to be E.164-perfect)
+    const groups: string[] = [];
+    let i = 0;
+    // First group: country code 1-3 digits
+    const cc = digits.slice(0, Math.min(3, Math.max(1, digits.length))).replace(/^0+/, '') || digits.charAt(0);
+    groups.push(cc);
+    i = cc.length;
+    while (i < digits.length) {
+      groups.push(digits.slice(i, i + 3));
+      i += 3;
+    }
+    return '+' + groups.join(' ');
+  }
+
+  function extractPhoneDigits(value: string): string {
+    return value.replace(/\D/g, '');
+  }
+
+  function isValidEmail(email: string): boolean {
+    // Pragmatic email regex (RFC 5322 simplified)
+    return /^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/.test(email);
+  }
+
+  function isValidName(name: string): boolean {
+    const trimmed = name.trim();
+    if (trimmed.length < 2) return false;
+    // Must contain at least one letter (rejects "123", "...", etc.)
+    return /\p{L}/u.test(trimmed);
+  }
+
+  function isValidPhone(value: string): boolean {
+    if (!value.trim()) return true; // optional field
+    const digits = extractPhoneDigits(value);
+    // E.164: 7-15 digits. US without "+" needs exactly 10.
+    if (value.trim().startsWith('+')) {
+      return digits.length >= 7 && digits.length <= 15;
+    }
+    return digits.length === 10;
+  }
+
+  // -- Per-form wiring ---------------------------------------------------------
+
   document.querySelectorAll('form[id$="-form"]').forEach((form) => {
     if (!(form instanceof HTMLFormElement)) return;
 
     const formId = form.id;
     const source = form.dataset.source || 'contact_form';
     let formStarted = false;
+
+    const nameInput = form.querySelector<HTMLInputElement>('input[data-validate="name"]');
+    const emailInput = form.querySelector<HTMLInputElement>('input[data-validate="email"]');
+    const phoneInput = form.querySelector<HTMLInputElement>('input[data-validate="phone"]');
+    const interestFieldset = form.querySelector<HTMLFieldSetElement>('fieldset[data-validate="interest"]');
+
+    const fieldTouched: Record<string, boolean> = {};
+
+    function showFieldError(field: string, show: boolean) {
+      const errorEl = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+      if (!errorEl) return;
+      errorEl.classList.toggle('hidden', !show);
+
+      // Toggle red border on the input
+      const input = form.querySelector<HTMLElement>(
+        field === 'interest'
+          ? `fieldset[data-validate="${field}"]`
+          : `[data-validate="${field}"]`
+      );
+      if (input && field !== 'interest') {
+        input.classList.toggle('border-red-500', show);
+        input.classList.toggle('focus:ring-red-500', show);
+        input.classList.toggle('border-gray-300', !show);
+      }
+    }
+
+    function validateName(silent = false): boolean {
+      if (!nameInput) return true;
+      const ok = isValidName(nameInput.value);
+      if (!silent && fieldTouched.name) showFieldError('name', !ok);
+      return ok;
+    }
+
+    function validateEmail(silent = false): boolean {
+      if (!emailInput) return true;
+      const value = emailInput.value.trim();
+      const ok = value.length > 0 && isValidEmail(value);
+      if (!silent && fieldTouched.email) showFieldError('email', !ok);
+      return ok;
+    }
+
+    function validatePhone(silent = false): boolean {
+      if (!phoneInput) return true;
+      const ok = isValidPhone(phoneInput.value);
+      if (!silent && fieldTouched.phone) showFieldError('phone', !ok);
+      return ok;
+    }
+
+    function validateInterest(silent = false): boolean {
+      if (!interestFieldset) return true;
+      const required = interestFieldset.dataset.required === 'true';
+      if (!required) return true;
+      const checked = interestFieldset.querySelector('input[type="radio"]:checked');
+      const ok = !!checked;
+      if (!silent && fieldTouched.interest) showFieldError('interest', !ok);
+      return ok;
+    }
 
     // Track form start on first interaction
     form.addEventListener('input', () => {
@@ -202,39 +366,126 @@ const {
       }
     }, { once: true });
 
+    // Name: live trim + Title Case on blur
+    if (nameInput) {
+      nameInput.addEventListener('blur', () => {
+        fieldTouched.name = true;
+        const formatted = titleCaseName(nameInput.value);
+        if (formatted !== nameInput.value) nameInput.value = formatted;
+        validateName();
+      });
+      nameInput.addEventListener('input', () => {
+        if (fieldTouched.name) validateName();
+      });
+    }
+
+    // Email: lowercase + trim on blur
+    if (emailInput) {
+      emailInput.addEventListener('blur', () => {
+        fieldTouched.email = true;
+        const cleaned = emailInput.value.trim().toLowerCase();
+        if (cleaned !== emailInput.value) emailInput.value = cleaned;
+        validateEmail();
+      });
+      emailInput.addEventListener('input', () => {
+        if (fieldTouched.email) validateEmail();
+      });
+    }
+
+    // Phone: live format as user types
+    if (phoneInput) {
+      phoneInput.addEventListener('input', () => {
+        const cursorAtEnd = phoneInput.selectionStart === phoneInput.value.length;
+        const formatted = formatPhone(phoneInput.value);
+        if (formatted !== phoneInput.value) {
+          phoneInput.value = formatted;
+          if (cursorAtEnd) {
+            phoneInput.setSelectionRange(formatted.length, formatted.length);
+          }
+        }
+        if (fieldTouched.phone) validatePhone();
+      });
+      phoneInput.addEventListener('blur', () => {
+        fieldTouched.phone = true;
+        validatePhone();
+      });
+    }
+
+    // Interest: validate on change
+    if (interestFieldset) {
+      interestFieldset.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+          fieldTouched.interest = true;
+          validateInterest();
+        });
+      });
+    }
+
     // Handle form submission
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Mark all required fields as touched so errors surface
+      fieldTouched.name = true;
+      fieldTouched.email = true;
+      fieldTouched.phone = true;
+      fieldTouched.interest = true;
+
+      const nameOk = validateName();
+      const emailOk = validateEmail();
+      const phoneOk = validatePhone();
+      const interestOk = validateInterest();
+
+      if (!nameOk || !emailOk || !phoneOk || !interestOk) {
+        // Scroll first error into view
+        const firstError = form.querySelector<HTMLElement>(
+          '[data-error-for]:not(.hidden)'
+        );
+        firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
 
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       const statusContainer = document.getElementById(`${formId}-status`);
       const successMessage = statusContainer?.querySelector('.success-message');
       const errorMessage = statusContainer?.querySelector('.error-message');
 
-      // Disable submit button
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting...';
       }
 
-      // Hide previous messages
       successMessage?.classList.add('hidden');
       errorMessage?.classList.add('hidden');
       statusContainer?.classList.add('hidden');
 
-      // Get form data
       const formData = new FormData(form);
+
+      // Final cleanup pass on payload
+      const nameValue = String(formData.get('name') || '').trim();
+      const emailValue = String(formData.get('email') || '').trim().toLowerCase();
+      const rawPhone = String(formData.get('phone') || '').trim();
+      const phoneDigits = extractPhoneDigits(rawPhone);
+      // Send a normalized E.164-ish version alongside the display value
+      const phoneNormalized = rawPhone
+        ? rawPhone.startsWith('+')
+          ? '+' + phoneDigits
+          : phoneDigits.length === 10
+            ? '+1' + phoneDigits
+            : phoneDigits
+        : '';
+
       const data: any = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        company: formData.get('company'),
-        message: formData.get('message'),
-        interest: formData.get('interest'),
+        name: nameValue,
+        email: emailValue,
+        phone: rawPhone,
+        phone_e164: phoneNormalized,
+        company: String(formData.get('company') || '').trim() || undefined,
+        message: String(formData.get('message') || '').trim() || undefined,
+        interest: formData.get('interest') || undefined,
         source,
       };
 
-      // Add UTM parameters
       const utmParams = getUTMParams();
       if (utmParams.source) data.utm_source = utmParams.source;
       if (utmParams.medium) data.utm_medium = utmParams.medium;
@@ -243,42 +494,42 @@ const {
       if (utmParams.content) data.utm_content = utmParams.content;
 
       try {
-        // Submit to API
         const response = await fetch('/api/contact', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
 
         const result = await response.json();
 
         if (result.success) {
-          // Track successful submission
           trackFormSubmit(formId);
 
-          // Show success message
           if (statusContainer && successMessage) {
             statusContainer.classList.remove('hidden');
             successMessage.classList.remove('hidden');
           }
 
-          // Reset form
           form.reset();
+          // Reset touched + error states
+          Object.keys(fieldTouched).forEach((k) => (fieldTouched[k] = false));
+          form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((el) => el.classList.add('hidden'));
+          form
+            .querySelectorAll<HTMLElement>('[data-validate]')
+            .forEach((el) => {
+              el.classList.remove('border-red-500', 'focus:ring-red-500');
+              el.classList.add('border-gray-300');
+            });
         } else {
           throw new Error(result.error || 'Submission failed');
         }
       } catch (error) {
         console.error('Form submission error:', error);
-
-        // Show error message
         if (statusContainer && errorMessage) {
           statusContainer.classList.remove('hidden');
           errorMessage.classList.remove('hidden');
         }
       } finally {
-        // Re-enable submit button
         if (submitButton) {
           submitButton.disabled = false;
           submitButton.textContent = submitButton.getAttribute('data-original-text') || 'Submit';
@@ -286,7 +537,6 @@ const {
       }
     });
 
-    // Store original button text
     const submitButton = form.querySelector('button[type="submit"]');
     if (submitButton) {
       submitButton.setAttribute('data-original-text', submitButton.textContent || 'Submit');

@@ -505,7 +505,7 @@ interface InterestFollowUp {
 const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
   manage_breeding: {
     headline: 'Running a breeding operation',
-    body: "We built BreederHQ for the day-to-day reality of managing a serious breeding program — heat cycles, pedigrees, health records, contracts, waitlists, and everything in between. While we get back to you, feel free to poke around the workflows below.",
+    body: "We built BreederHQ for the day-to-day reality of managing a serious breeding program: heat cycles, pedigrees, health records, contracts, waitlists, and everything in between. While we get back to you, feel free to poke around the workflows below.",
     nextSteps: [
       { label: 'See all workflows', url: 'https://breederhq.com/workflows' },
       { label: 'Pricing', url: 'https://breederhq.com/pricing' },
@@ -538,7 +538,7 @@ const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
   },
   list_animals: {
     headline: 'Listing animals for sale',
-    body: "BreederHQ gives you a public storefront, waitlists, applications, and contracts that all stay connected to your breeding records — no spreadsheets, no double-entry.",
+    body: "BreederHQ gives you a public storefront, waitlists, applications, and contracts that all stay connected to your breeding records. No spreadsheets, no double-entry.",
     nextSteps: [
       { label: 'See the breeder workflows', url: 'https://breederhq.com/workflows' },
       { label: 'Pricing', url: 'https://breederhq.com/pricing' },
@@ -618,7 +618,7 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
             <td style="padding:32px;">
               <h2 style="margin:0 0 12px;font-size:20px;font-weight:600;color:#111827;">Hi ${firstName},</h2>
               <p style="margin:0 0 16px;font-size:16px;color:#374151;">
-                Thanks for reaching out through BreederHQ — we got it, and a real person (not a bot) will read it and respond, usually within one business day.
+                Thanks for reaching out through BreederHQ. We got it, and a real person (not a bot) will read it and respond, usually within one business day.
               </p>
               <div style="margin:24px 0;padding:20px;background-color:#fff7ed;border-left:4px solid hsl(24,95%,53%);border-radius:6px;">
                 <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">You told us you're interested in</p>
@@ -628,7 +628,7 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
               <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">A few good places to start</h3>
               <div style="margin:0 0 8px;">${linksHtml}</div>
               <p style="margin:32px 0 0;font-size:15px;color:#374151;">
-                If you have anything else you'd like to share before we get back to you, just reply to this email — it goes straight to our inbox.
+                If you have anything else you'd like to share before we get back to you, just reply to this email. It goes straight to our inbox.
               </p>
               <p style="margin:16px 0 0;font-size:15px;color:#374151;">
                 Talk soon,<br />
@@ -642,7 +642,7 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
                 BreederHQ &middot; <a href="https://breederhq.com" style="color:#6b7280;text-decoration:underline;">breederhq.com</a> &middot; <a href="mailto:info@breederhq.com" style="color:#6b7280;text-decoration:underline;">info@breederhq.com</a>
               </p>
               <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;">
-                You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it — we won't add you to any list.
+                You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it. We won't add you to any list.
               </p>
             </td>
           </tr>
@@ -682,7 +682,7 @@ BreederHQ - https://breederhq.com - info@breederhq.com`;
         from: 'BreederHQ <hello@mail.breederhq.com>',
         to: lead.email,
         reply_to: 'info@breederhq.com',
-        subject: `Thanks for connecting, ${firstName} — we got your note`,
+        subject: `Thanks for connecting, ${firstName}. We got your note.`,
         html: emailHtml,
         text: emailText,
       }),
