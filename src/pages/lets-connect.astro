@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: "Let's Connect", url: '/lets-connect' },
+];
+
+const interestOptions = [
+  {
+    value: 'manage_breeding',
+    label: 'Managing my breeding operation',
+    description: 'Heat cycles, pedigrees, health records, contracts, waitlists.',
+  },
+  {
+    value: 'offer_services',
+    label: 'Offering my services to breeders',
+    description: 'Vet, farrier, trainer, transporter, photographer, etc.',
+  },
+  {
+    value: 'org_membership',
+    label: 'Helping my organization or club manage membership & records',
+    description: 'Breed clubs, registries, breed associations.',
+  },
+  {
+    value: 'find_breeder',
+    label: 'Finding a breeder or available animal',
+    description: 'Browsing the marketplace as a future buyer.',
+  },
+  {
+    value: 'list_animals',
+    label: 'Listing animals for sale',
+    description: 'Public storefront, waitlists, applications, contracts.',
+  },
+  {
+    value: 'genetic_health',
+    label: 'Genetic testing & health records',
+    description: 'OFA sync, CHIC readiness, lab results, breed-ready checks.',
+  },
+  {
+    value: 'just_browsing',
+    label: 'Just browsing / tell me more',
+    description: "No pressure — we'll send a friendly overview.",
+  },
+];
+---
+
+<BaseLayout
+  title="Let's Connect | BreederHQ"
+  description="Tell us a little about you and what brought you to BreederHQ. A real person will follow up — usually within one business day."
+  breadcrumbs={breadcrumbs}
+>
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-16 sm:py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
+          Let's Connect
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+          Tell us a little about you and what brought you here. A real person will follow up — usually within one business day, and you'll get a thoughtful note from us right away.
+        </p>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="py-12 sm:py-16 bg-white">
+      <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-10">
+          <ContactForm
+            formId="lets-connect-form"
+            submitText="Send Me More Info"
+            source="lets_connect"
+            includePhone={true}
+            includeCompany={false}
+            includeMessage={true}
+            includeInterest={true}
+            interestRequired={true}
+            interestOptions={interestOptions}
+            messageLabel="Anything else you'd like to share? (optional)"
+            messagePlaceholder="Questions, what you're working on, what brought you to us, where you found us..."
+            phoneLabel="Phone or WhatsApp (optional)"
+            phonePlaceholder="(555) 123-4567"
+          />
+          <p class="text-xs text-gray-500 mt-6 text-center">
+            We'll never share your info or add you to a list without asking. Reply to any email from us to reach a real person at <a href="mailto:info@breederhq.com" class="text-primary hover:underline">info@breederhq.com</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Happens Next -->
+    <section class="py-12 sm:py-16 bg-gray-50">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-10">What happens next</h2>
+        <div class="grid sm:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-xl border border-gray-200">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-primary font-bold">1</span>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">Instant confirmation</h3>
+            <p class="text-sm text-gray-600">
+              You'll get an email from us right away with a few tailored links based on what you're interested in.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-xl border border-gray-200">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-primary font-bold">2</span>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">A real reply</h3>
+            <p class="text-sm text-gray-600">
+              Usually within one business day, a member of our team will write back personally — no bots, no auto-flows.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-xl border border-gray-200">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-primary font-bold">3</span>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">You stay in control</h3>
+            <p class="text-sm text-gray-600">
+              We won't add you to a list, send a drip campaign, or pass your info along. Just an honest conversation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

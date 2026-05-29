@@ -9,12 +9,28 @@ export interface LeadData {
   phone?: string;
   company?: string;
   message?: string;
+  interest?: string;
   source?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
   utm_term?: string;
   utm_content?: string;
+}
+
+const INTEREST_LABELS: Record<string, string> = {
+  manage_breeding: 'Managing my breeding operation',
+  offer_services: 'Offering my services to breeders',
+  org_membership: 'Helping my organization or club manage membership & records',
+  find_breeder: 'Finding a breeder or available animal',
+  list_animals: 'Listing animals for sale',
+  genetic_health: 'Genetic testing & health records',
+  just_browsing: 'Just browsing / tell me more',
+};
+
+function formatInterest(interest?: string): string | undefined {
+  if (!interest) return undefined;
+  return INTEREST_LABELS[interest] || interest;
 }
 
 export interface EnrichedLead extends LeadData {
@@ -225,6 +241,18 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
     },
   ];
 
+  // Add interest if provided
+  const interestLabel = formatInterest(lead.interest);
+  if (interestLabel) {
+    blocks.push({
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*Interested in:*\n${interestLabel}`,
+      },
+    });
+  }
+
   // Add message if provided
   if (lead.message) {
     blocks.push({
@@ -327,6 +355,7 @@ export async function sendToResend(lead: EnrichedLead): Promise<boolean> {
       <li><strong>Email:</strong> ${lead.email}</li>
       <li><strong>Phone:</strong> ${lead.phone || 'Not provided'}</li>
       <li><strong>Company:</strong> ${lead.company || lead.enrichment?.company?.name || 'Not provided'}</li>
+      ${formatInterest(lead.interest) ? `<li><strong>Interested in:</strong> ${formatInterest(lead.interest)}</li>` : ''}
     </ul>
 
     ${lead.message ? `
@@ -422,6 +451,7 @@ export async function sendToHubSpot(lead: EnrichedLead): Promise<boolean> {
       message: lead.message || '',
       hs_lead_status: 'NEW',
       leadsource: lead.source || 'website',
+      ...(formatInterest(lead.interest) && { bhq_interest: formatInterest(lead.interest) }),
       ...(lead.utm?.source && { utm_source: lead.utm.source }),
       ...(lead.utm?.campaign && { utm_campaign: lead.utm.campaign }),
       ...(lead.utm?.medium && { utm_medium: lead.utm.medium }),
@@ -451,6 +481,222 @@ export async function sendToHubSpot(lead: EnrichedLead): Promise<boolean> {
     return true;
   } catch (error) {
     console.error('Failed to send to HubSpot:', error);
+    return false;
+  }
+}
+
+/**
+ * Send a thoughtful auto-reply to the lead's email address.
+ * Only fires for sources we explicitly opt-in (avoids surprise emails on the
+ * legacy /contact form). Tailors the body to the chosen "interest" if present.
+ */
+const AUTO_REPLY_SOURCES = new Set([
+  'lets_connect',
+  'lets_connect_form',
+  'lets_connect_page',
+]);
+
+interface InterestFollowUp {
+  headline: string;
+  body: string;
+  nextSteps: { label: string; url: string }[];
+}
+
+const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
+  manage_breeding: {
+    headline: 'Running a breeding operation',
+    body: "We built BreederHQ for the day-to-day reality of managing a serious breeding program — heat cycles, pedigrees, health records, contracts, waitlists, and everything in between. While we get back to you, feel free to poke around the workflows below.",
+    nextSteps: [
+      { label: 'See all workflows', url: 'https://breederhq.com/workflows' },
+      { label: 'Pricing', url: 'https://breederhq.com/pricing' },
+      { label: 'Create a free account', url: 'https://accounts.breederhq.com/register?intent=breeder_dashboard' },
+    ],
+  },
+  offer_services: {
+    headline: 'Offering services to breeders',
+    body: "BreederHQ has a growing marketplace where vets, farriers, trainers, transporters, photographers, and other professionals connect with serious breeders. We'd love to learn more about what you do and see if there's a good fit.",
+    nextSteps: [
+      { label: 'For service providers', url: 'https://breederhq.com/for-providers' },
+      { label: 'Browse service categories', url: 'https://breederhq.com/services' },
+    ],
+  },
+  org_membership: {
+    headline: 'Helping your organization or club',
+    body: "Breed clubs, registries, and breed associations have unique needs around membership, records, events, and verification. We're actively building tooling for organizations like yours and would love to compare notes.",
+    nextSteps: [
+      { label: 'For breed clubs', url: 'https://breederhq.com/for-breed-clubs' },
+      { label: 'Identity & credentials', url: 'https://breederhq.com/trust' },
+    ],
+  },
+  find_breeder: {
+    headline: 'Finding a breeder or available animal',
+    body: "The BreederHQ marketplace connects you with breeders across nine species. While we follow up personally, you're welcome to start browsing.",
+    nextSteps: [
+      { label: 'Find breeders', url: 'https://breederhq.com/find-breeders' },
+      { label: 'For buyers', url: 'https://breederhq.com/buyers' },
+    ],
+  },
+  list_animals: {
+    headline: 'Listing animals for sale',
+    body: "BreederHQ gives you a public storefront, waitlists, applications, and contracts that all stay connected to your breeding records — no spreadsheets, no double-entry.",
+    nextSteps: [
+      { label: 'See the breeder workflows', url: 'https://breederhq.com/workflows' },
+      { label: 'Pricing', url: 'https://breederhq.com/pricing' },
+      { label: 'Create a free account', url: 'https://accounts.breederhq.com/register?intent=breeder_dashboard' },
+    ],
+  },
+  genetic_health: {
+    headline: 'Genetic testing & health records',
+    body: "We sync OFA, track CHIC readiness, store lab results, and surface what's missing before you breed. It's one of the parts of the platform we're proudest of.",
+    nextSteps: [
+      { label: 'Genetics & health testing', url: 'https://breederhq.com/workflows/genetics-and-health-testing' },
+      { label: 'Identity & credentials', url: 'https://breederhq.com/trust' },
+    ],
+  },
+  just_browsing: {
+    headline: 'Just looking around',
+    body: "No pressure at all. Here are a few good places to start if you want to get a feel for what BreederHQ is.",
+    nextSteps: [
+      { label: 'About BreederHQ', url: 'https://breederhq.com/about' },
+      { label: 'All workflows', url: 'https://breederhq.com/workflows' },
+      { label: 'Free tools', url: 'https://breederhq.com/tools' },
+    ],
+  },
+};
+
+const DEFAULT_FOLLOWUP: InterestFollowUp = {
+  headline: 'Thanks for reaching out',
+  body: "We received your note and a real person will read it. While you wait, feel free to look around.",
+  nextSteps: [
+    { label: 'See all workflows', url: 'https://breederhq.com/workflows' },
+    { label: 'Browse the marketplace', url: 'https://breederhq.com/find-breeders' },
+    { label: 'About BreederHQ', url: 'https://breederhq.com/about' },
+  ],
+};
+
+export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> {
+  const resendApiKey = import.meta.env.RESEND_API_KEY;
+
+  if (!resendApiKey) {
+    console.log('⚠️ Resend not configured, skipping auto-reply');
+    return false;
+  }
+
+  if (!lead.source || !AUTO_REPLY_SOURCES.has(lead.source)) {
+    return false;
+  }
+
+  const followUp = (lead.interest && INTEREST_FOLLOWUPS[lead.interest]) || DEFAULT_FOLLOWUP;
+  const firstName = (lead.name || '').split(' ')[0] || 'there';
+
+  const linksHtml = followUp.nextSteps
+    .map(
+      (s) =>
+        `<a href="${s.url}" style="display:inline-block;margin:4px 8px 4px 0;padding:10px 16px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;color:#1f2937;text-decoration:none;font-weight:500;font-size:14px;">${s.label}</a>`
+    )
+    .join('');
+
+  const emailHtml = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thanks for connecting with BreederHQ</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#1f2937;line-height:1.6;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9fafb;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+          <tr>
+            <td style="background:linear-gradient(135deg,hsl(24,95%,53%) 0%,hsl(24,95%,45%) 100%);padding:32px 32px 28px;text-align:center;">
+              <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.01em;">BreederHQ</h1>
+              <p style="margin:8px 0 0;color:#fff7ed;font-size:14px;">Modern breeding management software</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <h2 style="margin:0 0 12px;font-size:20px;font-weight:600;color:#111827;">Hi ${firstName},</h2>
+              <p style="margin:0 0 16px;font-size:16px;color:#374151;">
+                Thanks for reaching out through BreederHQ — we got it, and a real person (not a bot) will read it and respond, usually within one business day.
+              </p>
+              <div style="margin:24px 0;padding:20px;background-color:#fff7ed;border-left:4px solid hsl(24,95%,53%);border-radius:6px;">
+                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">You told us you're interested in</p>
+                <p style="margin:0;font-size:17px;font-weight:600;color:#111827;">${followUp.headline}</p>
+                <p style="margin:12px 0 0;font-size:15px;color:#374151;">${followUp.body}</p>
+              </div>
+              <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">A few good places to start</h3>
+              <div style="margin:0 0 8px;">${linksHtml}</div>
+              <p style="margin:32px 0 0;font-size:15px;color:#374151;">
+                If you have anything else you'd like to share before we get back to you, just reply to this email — it goes straight to our inbox.
+              </p>
+              <p style="margin:16px 0 0;font-size:15px;color:#374151;">
+                Talk soon,<br />
+                <strong>The BreederHQ Team</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px 32px;background-color:#f9fafb;border-top:1px solid #e5e7eb;text-align:center;">
+              <p style="margin:0;font-size:12px;color:#6b7280;">
+                BreederHQ &middot; <a href="https://breederhq.com" style="color:#6b7280;text-decoration:underline;">breederhq.com</a> &middot; <a href="mailto:info@breederhq.com" style="color:#6b7280;text-decoration:underline;">info@breederhq.com</a>
+              </p>
+              <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;">
+                You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it — we won't add you to any list.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const emailText = `Hi ${firstName},
+
+Thanks for reaching out through BreederHQ. We got your note, and a real person will read it and respond, usually within one business day.
+
+You told us you're interested in: ${followUp.headline}
+${followUp.body}
+
+A few good places to start:
+${followUp.nextSteps.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
+
+If you have anything else to share, just reply to this email.
+
+Talk soon,
+The BreederHQ Team
+
+---
+BreederHQ - https://breederhq.com - info@breederhq.com`;
+
+  try {
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${resendApiKey}`,
+      },
+      body: JSON.stringify({
+        from: 'BreederHQ <hello@mail.breederhq.com>',
+        to: lead.email,
+        reply_to: 'info@breederhq.com',
+        subject: `Thanks for connecting, ${firstName} — we got your note`,
+        html: emailHtml,
+        text: emailText,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error('Auto-reply email failed:', response.status, await response.text());
+      return false;
+    }
+
+    console.log('✅ Auto-reply sent to lead:', lead.email);
+    return true;
+  } catch (error) {
+    console.error('Failed to send auto-reply:', error);
     return false;
   }
 }
@@ -555,6 +801,7 @@ export async function processLead(
     sendToResend(enrichedLead),
     sendToHubSpot(enrichedLead),
     sendToZapier(enrichedLead),
+    sendAutoReplyToLead(enrichedLead),
   ];
 
   const results = await Promise.allSettled(distributionPromises);

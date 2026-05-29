@@ -36,6 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
       phone: body.phone,
       company: body.company,
       message: body.message,
+      interest: body.interest,
       source: body.source || 'website_form',
       utm_source: body.utm_source,
       utm_medium: body.utm_medium,

@@ -4,6 +4,12 @@
  * Reusable contact form with validation, tracking, and submission to API
  */
 
+interface InterestOption {
+  value: string;
+  label: string;
+  description?: string;
+}
+
 interface Props {
   formId?: string;
   submitText?: string;
@@ -11,6 +17,15 @@ interface Props {
   includePhone?: boolean;
   includeCompany?: boolean;
   includeMessage?: boolean;
+  includeInterest?: boolean;
+  interestLabel?: string;
+  interestOptions?: InterestOption[];
+  interestRequired?: boolean;
+  messageLabel?: string;
+  messagePlaceholder?: string;
+  phoneLabel?: string;
+  phonePlaceholder?: string;
+  companyLabel?: string;
 }
 
 const {
@@ -20,6 +35,15 @@ const {
   includePhone = true,
   includeCompany = true,
   includeMessage = true,
+  includeInterest = false,
+  interestLabel = "I'm interested in...",
+  interestOptions = [],
+  interestRequired = false,
+  messageLabel = 'Message',
+  messagePlaceholder = 'Tell us about your breeding program...',
+  phoneLabel = 'Phone',
+  phonePlaceholder = '(555) 123-4567',
+  companyLabel = 'Company / Breeding Program',
 } = Astro.props;
 ---
 
@@ -59,14 +83,14 @@ const {
     {includePhone && (
       <div>
         <label for={`${formId}-phone`} class="block text-sm font-medium text-gray-700 mb-1">
-          Phone
+          {phoneLabel}
         </label>
         <input
           type="tel"
           id={`${formId}-phone`}
           name="phone"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-          placeholder="(555) 123-4567"
+          placeholder={phonePlaceholder}
         />
       </div>
     )}
@@ -75,7 +99,7 @@ const {
     {includeCompany && (
       <div>
         <label for={`${formId}-company`} class="block text-sm font-medium text-gray-700 mb-1">
-          Company / Breeding Program
+          {companyLabel}
         </label>
         <input
           type="text"
@@ -87,18 +111,48 @@ const {
       </div>
     )}
 
+    <!-- Interest Radio Group (optional) -->
+    {includeInterest && interestOptions.length > 0 && (
+      <fieldset>
+        <legend class="block text-sm font-medium text-gray-700 mb-2">
+          {interestLabel} {interestRequired && '*'}
+        </legend>
+        <div class="space-y-2">
+          {interestOptions.map((opt) => (
+            <label
+              class="flex items-start gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+            >
+              <input
+                type="radio"
+                name="interest"
+                value={opt.value}
+                required={interestRequired}
+                class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary"
+              />
+              <span class="flex-1">
+                <span class="block font-medium text-gray-900 text-sm">{opt.label}</span>
+                {opt.description && (
+                  <span class="block text-xs text-gray-500 mt-0.5">{opt.description}</span>
+                )}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    )}
+
     <!-- Message Field (optional) -->
     {includeMessage && (
       <div>
         <label for={`${formId}-message`} class="block text-sm font-medium text-gray-700 mb-1">
-          Message
+          {messageLabel}
         </label>
         <textarea
           id={`${formId}-message`}
           name="message"
           rows="4"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-          placeholder="Tell us about your breeding program..."
+          placeholder={messagePlaceholder}
         ></textarea>
       </div>
     )}
@@ -176,6 +230,7 @@ const {
         phone: formData.get('phone'),
         company: formData.get('company'),
         message: formData.get('message'),
+        interest: formData.get('interest'),
         source,
       };
 
