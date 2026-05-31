@@ -7,9 +7,11 @@ export interface LeadData {
   email: string;
   name?: string;
   phone?: string;
+  phone_e164?: string;
   company?: string;
   message?: string;
   interest?: string;
+  interests?: string[];
   source?: string;
   utm_source?: string;
   utm_medium?: string;
@@ -31,6 +33,17 @@ const INTEREST_LABELS: Record<string, string> = {
 function formatInterest(interest?: string): string | undefined {
   if (!interest) return undefined;
   return INTEREST_LABELS[interest] || interest;
+}
+
+function formatInterests(lead: { interests?: string[]; interest?: string }): string[] {
+  const list = lead.interests && lead.interests.length > 0
+    ? lead.interests
+    : lead.interest ? [lead.interest] : [];
+  return list.map((v) => INTEREST_LABELS[v] || v);
+}
+
+function formatPhoneDisplay(lead: { phone?: string; phone_e164?: string }): string {
+  return lead.phone || lead.phone_e164 || 'Not provided';
 }
 
 export interface EnrichedLead extends LeadData {
@@ -241,14 +254,14 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
     },
   ];
 
-  // Add interest if provided
-  const interestLabel = formatInterest(lead.interest);
-  if (interestLabel) {
+  // Add interests if provided (multi-select supported)
+  const interestList = formatInterests(lead);
+  if (interestList.length > 0) {
     blocks.push({
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Interested in:*\n${interestLabel}`,
+        text: `*Interested in:*\n${interestList.map((i) => `• ${i}`).join('\n')}`,
       },
     });
   }
@@ -353,9 +366,12 @@ export async function sendToResend(lead: EnrichedLead): Promise<boolean> {
     <ul>
       <li><strong>Name:</strong> ${lead.name || 'Not provided'}</li>
       <li><strong>Email:</strong> ${lead.email}</li>
-      <li><strong>Phone:</strong> ${lead.phone || 'Not provided'}</li>
+      <li><strong>Phone:</strong> ${formatPhoneDisplay(lead)}${lead.phone_e164 && lead.phone && lead.phone !== lead.phone_e164 ? ` <em>(${lead.phone_e164})</em>` : ''}</li>
       <li><strong>Company:</strong> ${lead.company || lead.enrichment?.company?.name || 'Not provided'}</li>
-      ${formatInterest(lead.interest) ? `<li><strong>Interested in:</strong> ${formatInterest(lead.interest)}</li>` : ''}
+      ${(() => {
+        const list = formatInterests(lead);
+        return list.length > 0 ? `<li><strong>Interested in:</strong><ul>${list.map((i) => `<li>${i}</li>`).join('')}</ul></li>` : '';
+      })()}
     </ul>
 
     ${lead.message ? `
@@ -451,7 +467,11 @@ export async function sendToHubSpot(lead: EnrichedLead): Promise<boolean> {
       message: lead.message || '',
       hs_lead_status: 'NEW',
       leadsource: lead.source || 'website',
-      ...(formatInterest(lead.interest) && { bhq_interest: formatInterest(lead.interest) }),
+      ...((() => {
+        const list = formatInterests(lead);
+        return list.length > 0 ? { bhq_interest: list.join('; ') } : {};
+      })()),
+      ...(lead.phone_e164 ? { phone: lead.phone_e164 } : {}),
       ...(lead.utm?.source && { utm_source: lead.utm.source }),
       ...(lead.utm?.campaign && { utm_campaign: lead.utm.campaign }),
       ...(lead.utm?.medium && { utm_medium: lead.utm.medium }),
@@ -586,15 +606,59 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
     return false;
   }
 
-  const followUp = (lead.interest && INTEREST_FOLLOWUPS[lead.interest]) || DEFAULT_FOLLOWUP;
+  // Build the picked-interest list (canonical order from input)
+  const pickedKeys = lead.interests && lead.interests.length > 0
+    ? lead.interests
+    : lead.interest ? [lead.interest] : [];
+  const primaryKey = pickedKeys[0];
+  const secondaryKeys = pickedKeys.slice(1);
+
+  const followUp = (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
   const firstName = (lead.name || '').split(' ')[0] || 'there';
 
-  const linksHtml = followUp.nextSteps
+  // De-dupe next-step links across primary + secondary follow-ups
+  const seenUrls = new Set<string>();
+  const allNextSteps: { label: string; url: string }[] = [];
+  for (const step of followUp.nextSteps) {
+    if (!seenUrls.has(step.url)) {
+      seenUrls.add(step.url);
+      allNextSteps.push(step);
+    }
+  }
+  for (const key of secondaryKeys) {
+    const fu = INTEREST_FOLLOWUPS[key];
+    if (!fu) continue;
+    for (const step of fu.nextSteps) {
+      if (!seenUrls.has(step.url)) {
+        seenUrls.add(step.url);
+        allNextSteps.push(step);
+      }
+    }
+  }
+  // Cap at 8 buttons to keep the email visually tidy
+  const linksToRender = allNextSteps.slice(0, 8);
+
+  const linksHtml = linksToRender
     .map(
       (s) =>
         `<a href="${s.url}" style="display:inline-block;margin:4px 8px 4px 0;padding:10px 16px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;color:#1f2937;text-decoration:none;font-weight:500;font-size:14px;">${s.label}</a>`
     )
     .join('');
+
+  const secondaryHeadlinesHtml = secondaryKeys
+    .map((k) => INTEREST_FOLLOWUPS[k]?.headline)
+    .filter((h): h is string => !!h)
+    .map((h) => `<li style="margin:2px 0;">${h}</li>`)
+    .join('');
+
+  const secondaryBlockHtml = secondaryHeadlinesHtml
+    ? `<p style="margin:14px 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">Also interested in</p>
+                <ul style="margin:0;padding-left:20px;font-size:15px;color:#374151;">${secondaryHeadlinesHtml}</ul>`
+    : '';
+
+  const secondaryTextLines = secondaryKeys
+    .map((k) => INTEREST_FOLLOWUPS[k]?.headline)
+    .filter((h): h is string => !!h);
 
   const emailHtml = `<!doctype html>
 <html lang="en">
@@ -624,6 +688,7 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
                 <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">You told us you're interested in</p>
                 <p style="margin:0;font-size:17px;font-weight:600;color:#111827;">${followUp.headline}</p>
                 <p style="margin:12px 0 0;font-size:15px;color:#374151;">${followUp.body}</p>
+                ${secondaryBlockHtml}
               </div>
               <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">A few good places to start</h3>
               <div style="margin:0 0 8px;">${linksHtml}</div>
@@ -659,9 +724,9 @@ Thanks for reaching out through BreederHQ. We got your note, and a real person w
 
 You told us you're interested in: ${followUp.headline}
 ${followUp.body}
-
+${secondaryTextLines.length > 0 ? `\nAlso interested in:\n${secondaryTextLines.map((h) => `- ${h}`).join('\n')}\n` : ''}
 A few good places to start:
-${followUp.nextSteps.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
+${linksToRender.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
 
 If you have anything else to share, just reply to this email.
 

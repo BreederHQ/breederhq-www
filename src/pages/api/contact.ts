@@ -4,11 +4,13 @@
  */
 
 import type { APIRoute } from 'astro';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { processLead, type LeadData } from '../../lib/server/leadCapture';
 
 export const prerender = false; // This endpoint requires SSR
 
 const EMAIL_RE = /^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/;
+const MAX_INTERESTS = 10;
 
 function badRequest(error: string) {
   return new Response(JSON.stringify({ success: false, error }), {
@@ -22,6 +24,21 @@ function clampString(value: unknown, max: number): string | undefined {
   const trimmed = value.trim();
   if (!trimmed) return undefined;
   return trimmed.slice(0, max);
+}
+
+function clampStringArray(value: unknown, maxItems: number, maxLen: number): string[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+  const result: string[] = [];
+  const seen = new Set<string>();
+  for (const item of value) {
+    if (typeof item !== 'string') continue;
+    const trimmed = item.trim().slice(0, maxLen);
+    if (!trimmed || seen.has(trimmed)) continue;
+    seen.add(trimmed);
+    result.push(trimmed);
+    if (result.length >= maxItems) break;
+  }
+  return result.length > 0 ? result : undefined;
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -39,25 +56,35 @@ export const POST: APIRoute = async ({ request }) => {
       return badRequest('Please enter your name.');
     }
 
-    // Phone is optional but if provided must be plausible
+    // Phone is optional but if provided must be a real, valid number per libphonenumber
     const phoneRaw = clampString(body.phone, 25);
+    let phoneE164: string | undefined;
     if (phoneRaw) {
-      const digits = phoneRaw.replace(/\D/g, '');
-      const isIntl = phoneRaw.startsWith('+');
-      const valid = isIntl
-        ? digits.length >= 7 && digits.length <= 15
-        : digits.length === 10;
-      if (!valid) return badRequest('Please enter a valid phone number.');
+      const parsed = parsePhoneNumberFromString(
+        phoneRaw,
+        phoneRaw.startsWith('+') ? undefined : 'US'
+      );
+      if (!parsed || !parsed.isValid()) {
+        return badRequest('Please enter a valid phone number.');
+      }
+      phoneE164 = parsed.number;
     }
+
+    // Interests: prefer the array form; fall back to scalar `interest` for back-compat
+    const interests =
+      clampStringArray(body.interests, MAX_INTERESTS, 50) ||
+      (clampString(body.interest, 50) ? [clampString(body.interest, 50)!] : undefined);
 
     // Extract lead data
     const leadData: LeadData = {
       email,
       name,
       phone: phoneRaw,
+      phone_e164: phoneE164,
       company: clampString(body.company, 120),
       message: clampString(body.message, 2000),
-      interest: clampString(body.interest, 50),
+      interest: interests?.[0],
+      interests,
       source: clampString(body.source, 50) || 'website_form',
       utm_source: clampString(body.utm_source, 100),
       utm_medium: clampString(body.utm_medium, 100),

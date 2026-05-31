@@ -21,6 +21,7 @@ interface Props {
   interestLabel?: string;
   interestOptions?: InterestOption[];
   interestRequired?: boolean;
+  interestMulti?: boolean;
   messageLabel?: string;
   messagePlaceholder?: string;
   phoneLabel?: string;
@@ -39,6 +40,7 @@ const {
   interestLabel = "I'm interested in...",
   interestOptions = [],
   interestRequired = false,
+  interestMulti = false,
   messageLabel = 'Message',
   messagePlaceholder = 'Tell us about your breeding program...',
   phoneLabel = 'Phone',
@@ -49,6 +51,10 @@ const {
 const inputBaseClass =
   'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent';
 const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
+
+const interestInputType = interestMulti ? 'checkbox' : 'radio';
+const interestErrorMsg = interestMulti ? 'Please pick at least one.' : 'Please pick one.';
+const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
 ---
 
 <div class="contact-form-container">
@@ -56,13 +62,14 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
     <!-- Name Field -->
     <div>
       <label for={`${formId}-name`} class="block text-sm font-medium text-gray-700 mb-1">
-        Name *
+        Name <span class="text-red-500" aria-hidden="true">*</span>
       </label>
       <input
         type="text"
         id={`${formId}-name`}
         name="name"
         required
+        aria-required="true"
         autocomplete="name"
         autocapitalize="words"
         maxlength="100"
@@ -76,13 +83,14 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
     <!-- Email Field -->
     <div>
       <label for={`${formId}-email`} class="block text-sm font-medium text-gray-700 mb-1">
-        Email *
+        Email <span class="text-red-500" aria-hidden="true">*</span>
       </label>
       <input
         type="email"
         id={`${formId}-email`}
         name="email"
         required
+        aria-required="true"
         autocomplete="email"
         autocapitalize="none"
         inputmode="email"
@@ -112,7 +120,10 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
           placeholder={phonePlaceholder}
           data-validate="phone"
         />
-        <p class={errorTextClass} data-error-for="phone">Please enter a valid phone number (use + for international).</p>
+        <p class="mt-1 text-xs text-gray-500" data-hint-for="phone">
+          We default to US format. Start with <code class="font-mono">+</code> and your country code for international (e.g. <code class="font-mono">+44</code>, <code class="font-mono">+91</code>).
+        </p>
+        <p class={errorTextClass} data-error-for="phone">That doesn't look like a valid phone number. For international, start with <code class="font-mono">+</code> and the country code.</p>
       </div>
     )}
 
@@ -134,23 +145,33 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
       </div>
     )}
 
-    <!-- Interest Radio Group (optional) -->
+    <!-- Interest Group (optional, single or multi-select) -->
     {includeInterest && interestOptions.length > 0 && (
-      <fieldset data-validate="interest" data-required={interestRequired ? 'true' : 'false'}>
-        <legend class="block text-sm font-medium text-gray-700 mb-2">
-          {interestLabel} {interestRequired && '*'}
+      <fieldset
+        data-validate="interest"
+        data-required={interestRequired ? 'true' : 'false'}
+        data-multi={interestMulti ? 'true' : 'false'}
+      >
+        <legend class="block text-sm font-medium text-gray-700 mb-1">
+          {interestLabel} {interestRequired && (<span class="text-red-500" aria-hidden="true">*</span>)}
         </legend>
+        {interestHelperHint && (
+          <p class="text-xs text-gray-500 mb-2">{interestHelperHint}</p>
+        )}
         <div class="space-y-2">
           {interestOptions.map((opt) => (
             <label
               class="flex items-start gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition has-[:checked]:border-primary has-[:checked]:bg-primary/5"
             >
               <input
-                type="radio"
+                type={interestInputType}
                 name="interest"
                 value={opt.value}
-                required={interestRequired}
-                class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary"
+                class={
+                  interestMulti
+                    ? 'mt-1 h-4 w-4 rounded text-primary border-gray-300 focus:ring-primary'
+                    : 'mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary'
+                }
               />
               <span class="flex-1">
                 <span class="block font-medium text-gray-900 text-sm">{opt.label}</span>
@@ -161,7 +182,7 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
             </label>
           ))}
         </div>
-        <p class={errorTextClass} data-error-for="interest">Please pick one.</p>
+        <p class={errorTextClass} data-error-for="interest">{interestErrorMsg}</p>
       </fieldset>
     )}
 
@@ -210,6 +231,14 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
 
 <script>
   import { trackFormStart, trackFormSubmit, getUTMParams } from '../lib/tracking';
+  import {
+    AsYouType,
+    parsePhoneNumberFromString,
+    isValidPhoneNumber,
+    type CountryCode,
+  } from 'libphonenumber-js';
+
+  const DEFAULT_COUNTRY: CountryCode = 'US';
 
   // -- Formatters --------------------------------------------------------------
 
@@ -218,67 +247,55 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
       .trim()
       .replace(/\s+/g, ' ')
       .split(' ')
-      .map((part) => {
-        if (!part) return part;
-        // Preserve common particles in lowercase ("de", "van", "del") unless first word
-        return part
+      .map((part) =>
+        part
           .split('-')
-          .map((seg) => seg.charAt(0).toUpperCase() + seg.slice(1).toLowerCase())
-          .join('-');
-      })
+          .map((seg) => (seg ? seg.charAt(0).toUpperCase() + seg.slice(1).toLowerCase() : seg))
+          .join('-')
+      )
       .join(' ');
   }
 
   /**
-   * Format a phone number as the user types.
-   * - No leading "+": format US-style (555) 123-4567, max 10 digits
-   * - Leading "+": preserve as "+" followed by raw digits (no fake country grouping)
-   * We don't try to be clever about international grouping — without a proper
-   * libphonenumber, any guess is wrong as often as it's right.
+   * Live format phone number using libphonenumber-js AsYouType.
+   * - No leading "+": treat as US number, format as the user types.
+   * - Leading "+": let the lib detect the country from the dial code and format
+   *   per that country's national convention.
    */
   function formatPhone(raw: string): string {
     if (!raw) return '';
-    const trimmed = raw.trimStart();
-    const hasPlus = trimmed.startsWith('+');
-    const digits = trimmed.replace(/\D/g, '').slice(0, 15);
+    const trimmed = raw.replace(/^\s+/, '');
+    if (!trimmed) return '';
 
-    if (hasPlus) {
-      return '+' + digits;
+    if (trimmed.startsWith('+')) {
+      // International — AsYouType with no default country reads from the dial code.
+      const formatter = new AsYouType();
+      return formatter.input(trimmed);
     }
-    if (!digits) return '';
-
-    const a = digits.slice(0, 3);
-    const b = digits.slice(3, 6);
-    const c = digits.slice(6, 10);
-    if (digits.length <= 3) return `(${a}`;
-    if (digits.length <= 6) return `(${a}) ${b}`;
-    return `(${a}) ${b}-${c}`;
-  }
-
-  function extractPhoneDigits(value: string): string {
-    return value.replace(/\D/g, '');
+    // No "+" — assume US/Canada (NANP). User can switch by typing "+" first.
+    const formatter = new AsYouType(DEFAULT_COUNTRY);
+    return formatter.input(trimmed);
   }
 
   function isValidEmail(email: string): boolean {
-    // Pragmatic email regex (RFC 5322 simplified)
     return /^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/.test(email);
   }
 
   function isValidName(name: string): boolean {
     const trimmed = name.trim();
     if (trimmed.length < 2) return false;
-    // Must contain at least one letter (rejects "123", "...", etc.)
     return /\p{L}/u.test(trimmed);
   }
 
-  function isValidPhone(value: string): boolean {
-    if (!value.trim()) return true; // optional field
-    const digits = extractPhoneDigits(value);
-    // E.164: 7-15 digits. US without "+" needs exactly 10.
-    if (value.trim().startsWith('+')) {
-      return digits.length >= 7 && digits.length <= 15;
-    }
-    return digits.length === 10;
+  function validatePhoneValue(value: string): { ok: boolean; e164: string } {
+    if (!value.trim()) return { ok: true, e164: '' };
+    const parsed = parsePhoneNumberFromString(
+      value,
+      value.trim().startsWith('+') ? undefined : DEFAULT_COUNTRY
+    );
+    if (!parsed) return { ok: false, e164: '' };
+    const ok = parsed.isValid();
+    return { ok, e164: ok ? parsed.number : '' };
   }
 
   // -- Per-form wiring ---------------------------------------------------------
@@ -302,52 +319,54 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
       if (!errorEl) return;
       errorEl.classList.toggle('hidden', !show);
 
-      // Toggle red border on the input
-      const input = form.querySelector<HTMLElement>(
-        field === 'interest'
-          ? `fieldset[data-validate="${field}"]`
-          : `[data-validate="${field}"]`
-      );
-      if (input && field !== 'interest') {
-        input.classList.toggle('border-red-500', show);
-        input.classList.toggle('focus:ring-red-500', show);
-        input.classList.toggle('border-gray-300', !show);
+      if (field !== 'interest') {
+        const input = form.querySelector<HTMLElement>(`[data-validate="${field}"]`);
+        if (input) {
+          input.classList.toggle('border-red-500', show);
+          input.classList.toggle('focus:ring-red-500', show);
+          input.classList.toggle('border-gray-300', !show);
+        }
       }
     }
 
-    function validateName(silent = false): boolean {
+    function validateName(): boolean {
       if (!nameInput) return true;
       const ok = isValidName(nameInput.value);
-      if (!silent && fieldTouched.name) showFieldError('name', !ok);
+      if (fieldTouched.name) showFieldError('name', !ok);
       return ok;
     }
 
-    function validateEmail(silent = false): boolean {
+    function validateEmail(): boolean {
       if (!emailInput) return true;
       const value = emailInput.value.trim();
       const ok = value.length > 0 && isValidEmail(value);
-      if (!silent && fieldTouched.email) showFieldError('email', !ok);
+      if (fieldTouched.email) showFieldError('email', !ok);
       return ok;
     }
 
-    function validatePhone(silent = false): boolean {
+    function validatePhone(): boolean {
       if (!phoneInput) return true;
-      const ok = isValidPhone(phoneInput.value);
-      if (!silent && fieldTouched.phone) showFieldError('phone', !ok);
+      const { ok } = validatePhoneValue(phoneInput.value);
+      if (fieldTouched.phone) showFieldError('phone', !ok);
       return ok;
     }
 
-    function validateInterest(silent = false): boolean {
+    function getCheckedInterests(): string[] {
+      if (!interestFieldset) return [];
+      return Array.from(
+        interestFieldset.querySelectorAll<HTMLInputElement>('input[name="interest"]:checked')
+      ).map((el) => el.value);
+    }
+
+    function validateInterest(): boolean {
       if (!interestFieldset) return true;
       const required = interestFieldset.dataset.required === 'true';
       if (!required) return true;
-      const checked = interestFieldset.querySelector('input[type="radio"]:checked');
-      const ok = !!checked;
-      if (!silent && fieldTouched.interest) showFieldError('interest', !ok);
+      const ok = getCheckedInterests().length > 0;
+      if (fieldTouched.interest) showFieldError('interest', !ok);
       return ok;
     }
 
-    // Track form start on first interaction
     form.addEventListener('input', () => {
       if (!formStarted) {
         formStarted = true;
@@ -381,10 +400,11 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
       });
     }
 
-    // Phone: live format as user types
+    // Phone: live format with libphonenumber-js AsYouType
     if (phoneInput) {
       phoneInput.addEventListener('input', () => {
-        const cursorAtEnd = phoneInput.selectionStart === phoneInput.value.length;
+        const cursorAtEnd =
+          phoneInput.selectionStart === phoneInput.value.length;
         const formatted = formatPhone(phoneInput.value);
         if (formatted !== phoneInput.value) {
           phoneInput.value = formatted;
@@ -402,19 +422,17 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
 
     // Interest: validate on change
     if (interestFieldset) {
-      interestFieldset.querySelectorAll('input[type="radio"]').forEach((radio) => {
-        radio.addEventListener('change', () => {
+      interestFieldset.querySelectorAll('input[name="interest"]').forEach((input) => {
+        input.addEventListener('change', () => {
           fieldTouched.interest = true;
           validateInterest();
         });
       });
     }
 
-    // Handle form submission
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Mark all required fields as touched so errors surface
       fieldTouched.name = true;
       fieldTouched.email = true;
       fieldTouched.phone = true;
@@ -426,7 +444,6 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
       const interestOk = validateInterest();
 
       if (!nameOk || !emailOk || !phoneOk || !interestOk) {
-        // Scroll first error into view
         const firstError = form.querySelector<HTMLElement>(
           '[data-error-for]:not(.hidden)'
         );
@@ -450,28 +467,22 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
 
       const formData = new FormData(form);
 
-      // Final cleanup pass on payload
       const nameValue = String(formData.get('name') || '').trim();
       const emailValue = String(formData.get('email') || '').trim().toLowerCase();
       const rawPhone = String(formData.get('phone') || '').trim();
-      const phoneDigits = extractPhoneDigits(rawPhone);
-      // Send a normalized E.164-ish version alongside the display value
-      const phoneNormalized = rawPhone
-        ? rawPhone.startsWith('+')
-          ? '+' + phoneDigits
-          : phoneDigits.length === 10
-            ? '+1' + phoneDigits
-            : phoneDigits
-        : '';
+      const phoneCheck = validatePhoneValue(rawPhone);
+      const interests = getCheckedInterests();
 
       const data: any = {
         name: nameValue,
         email: emailValue,
-        phone: rawPhone,
-        phone_e164: phoneNormalized,
+        phone: rawPhone || undefined,
+        phone_e164: phoneCheck.e164 || undefined,
         company: String(formData.get('company') || '').trim() || undefined,
         message: String(formData.get('message') || '').trim() || undefined,
-        interest: formData.get('interest') || undefined,
+        interests: interests.length > 0 ? interests : undefined,
+        // Back-compat: also send first interest as scalar `interest`
+        interest: interests[0] || undefined,
         source,
       };
 
@@ -500,7 +511,6 @@ const errorTextClass = 'mt-1 text-xs text-red-600 hidden';
           }
 
           form.reset();
-          // Reset touched + error states
           Object.keys(fieldTouched).forEach((k) => (fieldTouched[k] = false));
           form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((el) => el.classList.add('hidden'));
           form
