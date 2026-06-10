@@ -1,0 +1,463 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Pyometra in Breeding Females', url: '/articles/pyometra-in-breeding-females' }
+];
+
+const publishedISO = '2026-06-10';
+
+// This array feeds BOTH the FAQPage JSON-LD (via BaseLayout) and the visible
+// FAQ list rendered below, so the structured data always mirrors on-page content.
+const faqs = [
+  {
+    question: "What causes pyometra?",
+    answer: "Pyometra is generally understood to result from a bacterial infection of the uterus that takes hold under the influence of the hormonal changes following a heat cycle. Elevated progesterone during diestrus causes changes in the uterine lining (often described as cystic endometrial hyperplasia) that can make it more susceptible to infection, and bacteria (E. coli is commonly implicated) that ascend into the uterus can then establish an infection. It is primarily a condition of intact, unspayed females. Your veterinarian is the right source for understanding any individual case."
+  },
+  {
+    question: "How quickly can pyometra become fatal?",
+    answer: "Pyometra is treated as an emergency precisely because it can progress rapidly and become life-threatening, particularly in closed cases where infected material accumulates with no outlet. The exact timeline varies by individual, species, and circumstance, which is why prompt veterinary evaluation, rather than a wait-and-see approach, is so widely emphasized. If you suspect pyometra, contact a veterinarian immediately."
+  },
+  {
+    question: "Can pyometra happen after a normal heat cycle?",
+    answer: "Yes. One of the most important points for breeders to understand is that pyometra can develop in the weeks following a completely normal heat cycle, even in an animal that appears healthy and has bred successfully in the past. A normal cycle and a clean reproductive history do not rule it out."
+  },
+  {
+    question: "Can pyometra return?",
+    answer: "If the uterus has been surgically removed, pyometra cannot recur because the affected organ is gone. In cases managed medically, where the uterus is preserved, the possibility of recurrence in future cycles is a frequently discussed concern. Whether and how to manage future cycles is a decision to make with your veterinarian."
+  },
+  {
+    question: "Can a female still breed after pyometra?",
+    answer: "It depends on the case. After surgical removal of the uterus, she cannot be bred. After successful medical management that preserves the uterus, future breeding may be possible in some situations, though it involves important considerations, including the risk of recurrence, that only a veterinarian can properly weigh for an individual animal."
+  },
+  {
+    question: "Is pyometra genetic?",
+    answer: "Pyometra is primarily understood as a condition driven by hormonal cycling and infection rather than a directly inherited disease, and it is generally associated with intact females as they age and accumulate cycles. That said, reproductive health and reproductive soundness are reasonable things to consider in a breeding program, and tracking reproductive history across related animals helps you make informed decisions. Discuss any concerns about reproductive health in your lines with your veterinarian."
+  },
+  {
+    question: "Does spaying prevent pyometra?",
+    answer: "A complete spay that removes the uterus and ovaries removes the organ in which pyometra develops, which is why spaying is widely described as preventive. (Rarely, a retained uterine stump or ovarian remnant can be involved in a related problem, which is one reason complete removal matters.) Spaying is, of course, incompatible with using an animal for breeding, which is the central tension breeders navigate, and part of why understanding the condition and monitoring intact females carefully is so important."
+  },
+  {
+    question: "What is the difference between open and closed pyometra?",
+    answer: "In open pyometra, the cervix is open and infected material can drain, often producing a visible vaginal discharge. In closed pyometra, the cervix is closed, the infected material is trapped and accumulates inside the uterus, and there is no discharge to serve as an external warning sign. Closed pyometra is widely regarded as the more dangerous form because it can be harder to recognize early and carries the risk of uterine rupture."
+  },
+  {
+    question: "How is pyometra diagnosed?",
+    answer: "A veterinarian typically diagnoses pyometra using a combination of history (including the timing of the last heat cycle), physical examination, bloodwork, and imaging such as ultrasound or radiographs. Imaging is particularly useful in closed cases where there is no discharge to observe. Only a veterinarian can diagnose the condition in a specific animal."
+  },
+  {
+    question: "Can pyometra be treated without surgery?",
+    answer: "Sometimes. In carefully selected cases, often open pyometra in a stable patient, or a valuable breeding animal, a veterinarian may discuss medical management with medications and supportive care instead of, or before, surgery. In dogs it is generally approached cautiously or avoided for closed pyometra or critically ill patients, where it carries serious risk, and it can involve the possibility of recurrence. It is not appropriate for every case, and whether it is an option is a clinical decision made by your veterinarian. Approaches also vary by species."
+  },
+  {
+    question: "What is the difference between pyometra and normal post-heat discharge?",
+    answer: "Some normal discharge can occur around a heat cycle, while the discharge associated with open pyometra is more often described as purulent, bloody, or foul-smelling and may be accompanied by other signs of illness such as lethargy, increased drinking, or loss of appetite. Because the two can be difficult to tell apart, and because closed pyometra produces no discharge at all, any concern warrants veterinary evaluation. This article cannot tell you which one you are seeing. Only a veterinarian can."
+  },
+  {
+    question: "What age are intact females most at risk for pyometra?",
+    answer: "Risk is commonly described as increasing with age and with the number of heat cycles an animal has experienced, so older intact females are often discussed as a higher-risk group. This is one reason longitudinal records are valuable: knowing an animal's age, cycle count, and reproductive history over time helps you and your veterinarian understand her individual risk picture."
+  },
+  {
+    question: "What should I do if I think my breeding female has pyometra?",
+    answer: "Contact a licensed veterinarian immediately and describe what you are seeing, including the timing of her last heat cycle. Pyometra is treated as an emergency. Having her reproductive and health history readily available (last cycle date, breeding history, any medications, and recent observations) helps your veterinary team act quickly. This article cannot diagnose your animal; only a veterinarian can."
+  }
+];
+---
+
+<BaseLayout
+  title="Pyometra in Breeding Females: Signs, Treatment & Risks | BreederHQ"
+  description="Pyometra is a life-threatening uterine infection in intact breeding females. Learn the signs, open vs. closed forms, treatment, and breeding implications."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "Pyometra in Breeding Females: The Emergency Every Breeder Should Know About",
+    description: "An educational guide to pyometra for dog, cat, goat, sheep, and horse breeders: the signs, open vs. closed forms, diagnosis, treatment, breeding implications, and the records that help in an emergency.",
+    datePublished: publishedISO,
+    dateModified: publishedISO,
+    author: {
+      name: "BreederHQ Editorial",
+      role: "BreederHQ"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Pyometra in Breeding Females</li>
+      </ol>
+    </nav>
+
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Reproductive Health · All Species</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-4">
+          Pyometra in Breeding Females: The Emergency Every Breeder Should Know About
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          Pyometra is common, it moves fast, and it can be fatal. The breeders who handle it best are the ones who understood it before they ever encountered it. Here is what the condition is, how to recognize it early, and what it teaches about managing reproductive health across an animal's whole life.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Informed by veterinary literature</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>June 10, 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>13 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <!-- Top disclaimer -->
+        <div class="mb-10 rounded-lg border border-amber-300 bg-amber-50 p-5">
+          <p class="text-sm text-amber-900 leading-relaxed">
+            <strong>Disclaimer:</strong> This article is provided for educational and informational purposes only and is not intended as veterinary medical advice. Animal health conditions can vary significantly by species, breed, age, and individual circumstances. If you suspect an animal may be experiencing pyometra or any other medical emergency, seek immediate evaluation from a licensed veterinarian. BreederHQ does not provide veterinary services, diagnoses, treatment recommendations, or medical advice.
+          </p>
+          <p class="text-sm text-amber-900 leading-relaxed mt-3">
+            Published June 2026 by the BreederHQ team. This article is informed by general veterinary literature (see Sources Consulted) and is intended as breeder education. It is not a substitute for guidance from your own veterinarian.
+          </p>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          If you breed animals long enough, you will eventually face a reproductive emergency. Pyometra is one of the most important to understand. It is not rare; it is common (especially in dogs, where it is best documented), it can move fast, and the breeders who recognize it early are the ones who give their animals the best chance.
+        </p>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          This guide is written for working breeders and serious hobbyists across species: dogs, cats, goats, sheep, horses, and other livestock. It explains what pyometra is, how to recognize the signs of pyometra, why it is treated as a true emergency, and what it teaches us about managing reproductive health in breeding animals over an entire lifetime. It is not a substitute for your veterinarian. It is a framework for thinking clearly before, during, and after a crisis.
+        </p>
+
+        <section class="mb-12 mt-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Every Breeder Should Understand Pyometra</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Pyometra in breeding females is a serious infection of the uterus that primarily affects intact, unspayed females. It is generally considered one of the more frequently encountered reproductive emergencies in companion-animal medicine, best documented in dogs, and it can become life-threatening within a short window of time. For a breeder, that combination, common, fast-moving, and potentially fatal, is exactly why it deserves your attention before you ever encounter it.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Public awareness of the condition rose noticeably in late 2024 when Jeremy Clarkson, of <em>Clarkson's Farm</em>, <a href="https://www.ladbible.com/news/health/jeremy-clarkson-dog-surgery-sansa-pyometra-039911-20241021" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">shared that one of his fox-red Labradors, Sansa, had been rushed in for emergency pyometra surgery</a>. Sansa recovered, though the episode put a name to a condition that many pet owners and even some newer breeders had never heard of. For those of us responsible for intact breeding females, it was a useful reminder: the animals in our care that make breeding possible are also the animals most exposed to this particular risk.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Reproductive emergencies are not isolated events. A pyometra diagnosis can change an animal's breeding future, alter the trajectory of a breeding program, and reshape the decisions you make for years afterward. Understanding the condition, and keeping the kind of reproductive and health records that help you and your veterinarian act quickly, is part of responsible breeding.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Is Pyometra?</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            <strong>Pyometra is an accumulation of pus within the uterus caused by a bacterial infection of the uterine lining, occurring mainly in intact females in the weeks after a heat cycle. It is widely regarded as a medical emergency because it can progress to life-threatening illness.</strong> It is sometimes described as a uterine infection in dogs, though the same underlying concept applies, to varying degrees, across many intact female mammals.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            In simplified terms, the timing hinges on two phases of the cycle. During <strong>estrus</strong> (heat), the cervix relaxes, and an open cervix is the window through which bacteria from the lower reproductive tract can ascend into the uterus. During the <strong>diestrus</strong> phase that follows, progesterone levels remain elevated for a period of time, often roughly one to two months depending on the species and individual, thickening the uterine lining and quieting uterine activity in preparation for a possible pregnancy. Over repeated cycles where pregnancy does not occur, the lining can undergo changes commonly described in veterinary literature as cystic endometrial hyperplasia (CEH), which make the uterus more hospitable to infection. When bacteria (<em>E. coli</em> is among the organisms most commonly implicated) establish themselves in that environment, the uterus can fill with infected material. Because of this typical sequence, the condition is often described as part of a "CEH-pyometra complex."
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">Several themes appear consistently in discussions of the condition:</p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>It is most associated with <strong>intact females</strong>, because the hormonal cycling that sets the stage requires functioning ovaries and a uterus.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Risk is generally described as increasing <strong>with age and with the number of cycles</strong> an animal has experienced.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>It typically develops in the <strong>weeks following a heat cycle</strong> (during or after diestrus), though the exact timing varies.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Administration of <strong>reproductive hormones</strong>, for example estrogen or progesterone treatments sometimes used for mismating or estrus suppression, is commonly described as a risk factor, which is particularly relevant for breeders who use hormonal interventions.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            It is worth emphasizing a point that surprises many breeders: pyometra can occur in an otherwise healthy-looking female who recently had a completely normal heat cycle, and even in females who have successfully carried litters in the past. A clean reproductive history does not make an animal immune.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Why understand it even if you never encounter it?</strong> Because breeding programs are built on intact females, and the cost of <em>not</em> recognizing pyometra early is far higher than the cost of learning the signs. Breeders who handle this condition well tend to be the ones who understood it before it ever appeared in their barn or whelping room.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Open vs. Closed Pyometra</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Veterinarians commonly describe pyometra in two forms, and the distinction matters enormously for how a case presents and how quickly it must be addressed.
+          </p>
+          <div class="overflow-x-auto mb-8">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b-2 border-gray-300">
+                  <th class="py-3 pr-4 text-sm font-semibold text-gray-900"></th>
+                  <th class="py-3 px-4 text-sm font-semibold text-gray-900">Open pyometra</th>
+                  <th class="py-3 pl-4 text-sm font-semibold text-gray-900">Closed pyometra</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4 font-semibold">Cervix</td>
+                  <td class="py-3 px-4">Open</td>
+                  <td class="py-3 pl-4">Closed</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4 font-semibold">Discharge</td>
+                  <td class="py-3 px-4">Often present (pus-like, sometimes bloody, frequently foul-smelling)</td>
+                  <td class="py-3 pl-4">Typically absent, no external warning sign</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4 font-semibold">Recognition</td>
+                  <td class="py-3 px-4">Sometimes noticed sooner because of visible discharge</td>
+                  <td class="py-3 pl-4">Often harder to catch early</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4 font-semibold">Relative danger</td>
+                  <td class="py-3 px-4">Serious</td>
+                  <td class="py-3 pl-4">Generally regarded as more dangerous; risk of uterine rupture as material accumulates</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Open Pyometra</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            In an <strong>open pyometra</strong>, the cervix remains open, which allows the infected uterine contents to drain out of the body. The most visible sign is often an abnormal vaginal discharge, frequently described as purulent (pus-like), sometimes bloody, and often foul-smelling. Because there is an outlet, open cases are sometimes recognized sooner, simply because the discharge is something an attentive owner can see. The discharge is a warning sign, not a sign that the problem is minor.
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Closed Pyometra</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            In a <strong>closed pyometra</strong>, the cervix is closed, and the infected material has no way to escape. It accumulates inside the uterus, which can enlarge significantly. Closed cases are widely regarded as more dangerous, and for a specific reason: there is no discharge to alert you. The external warning sign that often prompts an owner to call the vet in an open case is simply absent. Instead, the animal may show more generalized signs of serious illness, and because the infection is contained and building, the situation can deteriorate rapidly. The pressure of accumulating material also raises the concern of uterine rupture, a catastrophic complication.
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Why Early Recognition Matters</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The practical takeaway for breeders is this: <strong>you cannot rely on discharge alone to tell you something is wrong.</strong> A closed pyometra can be advancing dangerously while producing no discharge at all. That is why the broader pattern of signs, and your baseline knowledge of what is normal for each individual animal, is so important. An intact female who is "just a little off" several weeks after a heat cycle deserves close attention rather than a wait-and-see approach.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Signs and Symptoms of Pyometra</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The signs of pyometra can be subtle at first and then escalate. They also overlap with many other conditions, which is one reason a veterinary evaluation is essential rather than optional. The list below describes commonly reported pyometra symptoms; it is not a diagnostic checklist, and no single sign confirms or rules out the condition.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">Commonly reported signs include:</p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Lethargy</strong>, reduced energy, reluctance to move, sleeping more than usual.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Loss of appetite</strong>, eating less, or refusing food entirely.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Increased drinking (polydipsia)</strong>, noticeably more water consumption than normal.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Increased urination (polyuria)</strong>, often paired with increased drinking.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Vaginal discharge</strong>, purulent, bloody, or foul-smelling, primarily in open cases.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Fever</strong>, though body temperature can also be normal or, in advanced illness, low.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Vomiting</strong>, a sign of systemic illness.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Abdominal enlargement or distension</strong>, particularly relevant in closed cases as the uterus fills.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Signs of dehydration</strong>, sometimes accompanying the increased drinking and urination.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>A drop in overall condition</strong>, a generally unwell animal that "isn't herself."</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Timing is a critical clue. Many cases develop in the <strong>weeks following a heat cycle</strong>. An intact female who becomes lethargic, drinks excessively, or goes off her food a few weeks after a season is a pattern that veterinarians generally treat seriously.
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Why Documenting Observations Matters</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Here is where day-to-day record keeping quietly becomes valuable. The earliest signs of pyometra, drinking a bit more, eating a bit less, lower energy, are exactly the kind of small changes that are easy to dismiss in the moment and hard to remember accurately later. Consistent <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">heat-cycle tracking</a> gives every later observation a timeline to sit against.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">A few baselines worth tracking for every intact female make these changes far easier to catch:</p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Normal water intake</strong>, so a sudden increase stands out against a known baseline rather than a vague impression.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Last heat-cycle date</strong>, so you can immediately place any new sign on the post-estrus timeline.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Normal post-season behavior and energy</strong>, so "isn't herself" becomes a comparison to something concrete.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you can answer your veterinarian's questions precisely (<em>When was her last heat? Has her water intake changed? When did the lethargy start? Is there any discharge, and when did it begin?</em>) you give the clinical team a far clearer picture, faster. A note that an animal's water bowl needed refilling twice as often this week, recorded against a known heat-cycle date, can be the difference between catching a problem early and catching it late.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Pyometra Is a Medical Emergency</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            It is worth being direct about why veterinarians treat pyometra as urgent rather than something to monitor over the coming days.
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Systemic infection and sepsis.</strong> The uterus is not an isolated pocket. Bacteria and the toxins they produce can affect the entire body, and overwhelming infection can progress to sepsis, a life-threatening systemic response.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Organ stress and damage.</strong> The toxins associated with the condition can place serious strain on organ systems, including the kidneys. This is part of why increased drinking and urination appear: the infection's effects can extend well beyond the reproductive tract.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Uterine rupture.</strong> In closed cases especially, an infected, distended uterus can rupture, releasing its contents into the abdomen and dramatically worsening the prognosis.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Rapid deterioration.</strong> A patient who seems "a bit off" can decline quickly. The window for the most favorable outcomes is generally widest when the condition is caught and treated early.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Mortality risk.</strong> Pyometra can be fatal, particularly when recognition or treatment is delayed.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            This is the core reason the condition belongs in every breeder's working knowledge. The animals that anchor a breeding program are intact females, and they carry this risk by virtue of being intact and cycling. When a problem arises, the speed and quality of the response matter, and that response is meaningfully improved when complete, accurate history is available to the veterinary team at the moment of crisis rather than reconstructed from memory in a waiting room.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How Veterinarians May Diagnose Pyometra</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Diagnosis is the veterinarian's domain. The tools described below are commonly used to evaluate a suspected case; how they are applied depends entirely on the individual patient and the clinician's judgment.
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>History and physical examination.</strong> A veterinarian will typically begin with the animal's history, including reproductive history and the timing of the last heat, and a hands-on examination that may detect signs such as fever, abdominal changes, or discharge.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Bloodwork.</strong> Blood tests can reveal markers consistent with infection and inflammation and help assess the animal's overall systemic condition, including organ function.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Ultrasound.</strong> Imaging the uterus can help confirm fluid accumulation and assess the uterine wall, which is particularly valuable in closed cases where there is no external discharge to observe.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Radiographs (X-rays).</strong> Imaging can help reveal an enlarged uterus and assist in distinguishing pyometra from other conditions, including pregnancy.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Notice how many of these steps depend on history. <em>When was her last cycle? How many cycles has she had? Has she been bred? Any prior reproductive issues? What medications or hormonal treatments has she received?</em> These questions shape the clinical picture and can influence both diagnosis and treatment planning. A breeder who arrives with a complete, organized reproductive and health history hands the veterinary team a head start at exactly the moment it matters most.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Pyometra Treatment Options</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Treatment decisions belong to the veterinarian and the animal's owner, made together based on the specific case. The overview below is general and educational; it is not a recommendation for any particular animal.
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Ovariohysterectomy (Emergency Spay)</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Surgical removal of the ovaries and uterus, an ovariohysterectomy (the same fundamental procedure as a routine spay but performed as an emergency spay on an infected, often fragile patient) is widely described as the most definitive approach to pyometra. By removing the infected uterus, it addresses the source of the problem directly. Because it is performed on a sick patient rather than a healthy one, it is generally considered higher-risk than a routine spay, and supportive care before, during, and after surgery is often part of the picture. The significant implication for breeders is that this approach ends the animal's reproductive career, part of why pyometra can have lasting consequences for a breeding program, not just for an individual animal.
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Medical Management</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            In certain cases, often discussed in the context of open pyometra in a stable patient, or a valuable breeding animal, a veterinarian may discuss medical management, which can involve medications intended to help the uterus expel its contents, along with antibiotics and supportive care. For dogs specifically, veterinary sources generally describe medical management as an option only for carefully selected, stable cases, and as something to be approached cautiously or avoided in closed pyometra or critically ill patients, where it carries serious risk. It also carries the possibility that the condition can recur in future cycles. How treatment is approached varies by species, and whether medical management is appropriate at all is a case-by-case clinical decision made by the veterinarian.
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Follow-Up Care</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Regardless of approach, follow-up care is an important part of recovery. This may include monitoring, recheck examinations, and, particularly in medically managed cases, attention to future heat cycles and breeding decisions. The course of follow-up is determined by the veterinarian based on how the individual animal responds. The breeder's role throughout is to provide accurate information, follow the veterinary team's guidance, and document what happens, because a pyometra event and its treatment become a permanent and important part of that animal's health record.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Can a Female Be Bred After Pyometra?</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            This is one of the most common questions breeders ask, and the honest answer is: <strong>it depends entirely on the case, and it is a decision to make with your veterinarian.</strong>
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Surgical cases.</strong> If the animal underwent an ovariohysterectomy with complete removal of the uterus and ovaries, she can no longer be bred, because the reproductive organs have been removed. For a breeding program, this means a planned breeding female may be lost, with downstream effects on breeding plans, genetic goals, and timelines.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Medically managed cases.</strong> If the case was managed medically and the uterus preserved, breeding may be possible in some situations, though this comes with important considerations that only a veterinarian can weigh. The possibility of recurrence in future cycles is a frequently discussed concern, and the timing and advisability of any future breeding is a clinical decision.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Long-term reproductive implications.</strong> Even where future breeding is possible, a history of pyometra is a meaningful part of an animal's reproductive record. It may influence how closely she is monitored, how future cycles are managed, and how breeding decisions are made.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            For breeders, the hard part is rarely the medicine; it is the decision. When a valued dam develops pyometra, the choice between a definitive emergency spay and attempting medical management often involves weighing factors that go beyond the clinical: the genetic value of her line, whether frozen genetics or existing offspring already preserve that line, her age relative to her remaining productive years, and how the risk of recurrence might consume part of a narrow breeding window. None of these factors is a medical decision you make alone. They are considerations you bring <em>to</em> your veterinarian so the two of you can decide together, with the full history in front of you.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The unifying principle is that <strong>every case is different.</strong> Age, species, breed, the form of pyometra, the treatment pursued, the animal's response, and the goals of the breeding program all factor in. What every case shares is that the decision should be documented, well-informed, and made in partnership with a veterinarian.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Species Considerations</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Pyometra is best known in dogs, though the underlying concept, a hormonally influenced uterine infection in intact females, is relevant to varying degrees across species, and reproductive management practices vary considerably. The notes below are general; species-specific reproductive medicine is an area where your veterinarian's expertise is irreplaceable.
+          </p>
+          <ul class="space-y-4 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Dogs.</strong> Dogs are the species most associated with pyometra in companion-animal medicine, and much of the available awareness and literature centers on them. Intact bitches, particularly as they age and accumulate cycles, are a primary focus of reproductive monitoring, and "uterine infection in dogs" is one of the most common ways the condition is searched and discussed.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Cats.</strong> Cats are also affected, though their physiology differs in an important way: cats are induced ovulators, meaning ovulation is typically triggered by mating. As a result, the sustained progesterone exposure that drives the classic canine pattern is less consistently produced, though pyometra still occurs in queens and remains a reason intact females are monitored.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Goats.</strong> In goats and other small ruminants, reproductive infections are part of the broader herd-health picture. Breeding management, kidding history, and reproductive observations all feed into how a herd is monitored, and uterine infections are among the reproductive concerns a veterinarian helps manage. In production animals generally, presentation can differ from the classic canine picture, and an affected female may not always show obvious systemic illness, which is part of why routine reproductive monitoring matters.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Sheep.</strong> As with goats, reproductive and uterine infections fall within flock reproductive health. Lambing history and breeding records are part of how producers and veterinarians track reproductive soundness.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span><strong>Horses.</strong> In mares, uterine health is a central, well-studied aspect of reproductive management, though the dominant concern in equine breeding is often endometritis and post-breeding fluid accumulation, which is mechanistically different from the progesterone-driven pyometra seen in dogs. Classic pyometra is comparatively uncommon in mares, and affected mares do not always show obvious systemic illness, so the condition may be found during routine reproductive evaluation rather than because the animal appears acutely sick. Either way, reproductive tract health is closely monitored in breeding mares, and records of cycles, breedings, and findings are a normal part of equine breeding management.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Across all of these species, one theme holds: reproductive health is managed best when it is <em>tracked</em>, when cycles, breedings, outcomes, and health events are recorded over time rather than recalled from memory. The specifics differ by species; the value of good records does not.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">What Every Breeder Should Learn From Pyometra</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Step back from the clinical details, because pyometra teaches a lesson that extends far beyond this one condition.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            A reproductive emergency is a stress test for your records. When an animal is acutely ill, the questions come fast: <em>When was her last heat? How many litters has she had? What's her cycle history? Has she had reproductive issues before? What medications is she on? When was her last vet visit, and what was found?</em> In that moment, you discover exactly how good your records really are, and whether the information your veterinarian needs is at your fingertips or scattered across your memory, a barn whiteboard, three notebooks, and a texting thread.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Serious reproductive events reveal the importance of complete, continuous animal histories: reproductive cycle tracking that establishes the timeline against which new signs become interpretable, breeding records, health-event and procedure history (including events like a pyometra and its resolution), medication records that capture any hormonal treatments relevant to reproductive risk, and accessible veterinary documentation, all in a form you can actually use when making long-term decisions across an animal's life and the histories of her relatives.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Breeders who navigate emergencies well tend to be the ones who already had this information organized before the emergency began. They are not better at predicting the future; they are better at preserving the past in a form they can use. That is why many professional breeding programs increasingly rely on <strong>centralized records</strong> rather than memory, loose notebooks, scattered spreadsheets, or a patchwork of disconnected apps. Memory fades under stress, notebooks get lost, and spreadsheets rarely connect a health event to a breeding decision to a reproductive timeline. The information a breeder needs most in a crisis is precisely the information that is hardest to reconstruct from those tools.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">A Record-Keeping Checklist for Breeders</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The clearest practical lesson from a reproductive emergency is that the information you need most is the information that is hardest to reconstruct under pressure. For every intact breeding female, a useful baseline to maintain:
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Reproductive timeline</strong>, heat-cycle dates, intervals, and breedings, so any new sign can be placed against the cycle.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Behavioral and intake baselines</strong>, normal water consumption, appetite, and energy, so deviations stand out instead of getting rationalized away.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Health events</strong>, illnesses, emergencies, and conditions, recorded as they happen rather than reconstructed later.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Procedures</strong>, surgeries and interventions, including any pyometra and its resolution.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Medications</strong>, what was given, when, and why, including hormonal treatments relevant to reproductive risk.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Veterinary records</strong>, exam findings, diagnostics, and recommendations, stored where you can retrieve them quickly, including in an emergency.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">✓</span><span><strong>Breeding-eligibility status</strong>, because events like a pyometra can change an animal's reproductive future.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            We built BreederHQ because breeders carry an enormous amount of exactly this information in their heads and in tools that were never designed to connect it. A pedigree tells you about ancestry; it tells you nothing about whether a female drank twice as much water the week after her last season, whether she's had a reproductive procedure, or how her last three cycles compare. The records that drive <em>decisions</em> are reproductive, health, and procedural, and they become more valuable the longer you keep them, because patterns only emerge over time. Keeping them connected, in one place, across the full life of each animal is what turns scattered observations into institutional knowledge that compounds rather than fading when a notebook is lost or a key person moves on. Pyometra is one reason among many that this matters.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you are thinking about how this fits together, see how breeders use <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">heat-cycle tracking</a> to build the reproductive timeline, how an <a href="/articles/animal-genetic-history-software" class="text-[hsl(24,95%,53%)] hover:underline">animal genetic history</a> connects records across generations, and how <a href="/articles/breeding-management-software" class="text-[hsl(24,95%,53%)] hover:underline">breeding management software</a> keeps health, reproductive, and procedure records in one connected system.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Conclusion</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Pyometra earns its reputation as an emergency. It is common among intact dogs and an important reproductive concern across intact females more broadly; it can move quickly, and it can be fatal, though presentation varies by species. It is also a condition that rewards knowledge and attention. The breeders who handle it best are the ones who understood it in advance, recognized the early signs, and acted without delay.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Keep the warning signs in mind: lethargy, loss of appetite, increased drinking and urination, abnormal vaginal discharge, fever, vomiting, abdominal enlargement, and a general sense that an animal "isn't herself," particularly in the weeks following a heat cycle. Remember that closed pyometra may show no discharge at all, so you cannot rely on that single sign. And remember that early recognition depends on knowing what is normal for each individual animal, which depends, in turn, on records.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Above all, when you suspect a reproductive emergency, seek veterinary evaluation immediately. No article can diagnose or treat an animal; that is the work of a licensed veterinarian who can examine your specific patient.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The broader lesson outlasts the emergency itself. Reproductive health in breeding animals is managed best over a lifetime, with complete histories, accurate reproductive and health records, and the kind of long-term visibility that turns scattered observations into informed decisions, whether you breed dogs, cats, goats, sheep, horses, or other livestock. Strong veterinary partnerships, careful observation, and durable records are the foundation of a breeding program that can weather the emergencies it will inevitably face.
+          </p>
+        </section>
+
+        <section class="mb-4">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Sources Consulted</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            This article was informed by general, publicly available veterinary references. It is educational and does not replace advice from your own veterinarian. For deeper reading:
+          </p>
+          <ul class="space-y-3 text-lg text-gray-700 mb-6">
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Cornell University College of Veterinary Medicine, Riney Canine Health Center, <a href="https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/canine-health-topics/pyometra" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Pyometra</a>.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Merck Veterinary Manual, <a href="https://www.merckvetmanual.com/reproductive-system/reproductive-diseases-of-the-female-small-animal/cystic-endometrial-hyperplasia-pyometra-complex-in-small-animals" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Cystic Endometrial Hyperplasia-Pyometra Complex in Small Animals</a>.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>MSD/Merck Veterinary Manual, <a href="https://www.msdvetmanual.com/reproductive-system/uterine-diseases-in-production-animals/pyometra-in-production-animals" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Pyometra in Production Animals</a>.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>Merck Veterinary Manual (Horse Owner version), <a href="https://www.merckvetmanual.com/horse-owners/reproductive-disorders-of-horses/pyometra-in-horses" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Pyometra in Horses</a>.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>American College of Veterinary Surgeons (ACVS), <a href="https://www.acvs.org/small-animal/pyometra/" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Pyometra</a>.</span></li>
+            <li class="flex items-start"><span class="text-[hsl(24,95%,53%)] mr-3 font-bold mt-1">•</span><span>VCA Animal Hospitals, <a href="https://vcahospitals.com/know-your-pet/pyometra-in-dogs" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Pyometra in Dogs</a> and <a href="https://vcahospitals.com/know-your-pet/pyometra-in-cats" target="_blank" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">Pyometra in Cats</a>.</span></li>
+          </ul>
+          <p class="text-sm text-gray-500 leading-relaxed italic">
+            Disclaimer: This article is provided for educational and informational purposes only and is not intended as veterinary medical advice. Animal health conditions can vary significantly by species, breed, age, and individual circumstances. If you suspect an animal may be experiencing pyometra or any other medical emergency, seek immediate evaluation from a licensed veterinarian. BreederHQ does not provide veterinary services, diagnoses, treatment recommendations, or medical advice.
+          </p>
+        </section>
+
+      </div>
+    </article>
+
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white rounded-lg border border-gray-200 p-6 group">
+              <summary class="font-semibold text-lg text-gray-900 cursor-pointer flex items-center justify-between">
+                <span>{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
