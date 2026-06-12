@@ -14,6 +14,8 @@ const excludedPages = [
   'https://breederhq.com/demo',
   'https://breederhq.com/demo/login',
   'https://breederhq.com/search', // Client-side search UI — no content to index
+  'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex
+  'https://breederhq.com/provider/stripe-connect/refresh', // Mobile deep-link bridge page — noindex
 ];
 
 // https://astro.build/config
