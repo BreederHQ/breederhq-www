@@ -87,7 +87,7 @@ const bgClass = bg === 'stone-50' ? 'bg-stone-50' : 'bg-white';
           return (
           <a href={listingDetailUrl(listing.slug)} class="block bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200 hover:shadow-md hover:border-amber-500 transition">
             {cardImage ? (
-              <img src={cardImage} alt={listing.title} class="w-full h-44 object-cover" loading="lazy" />
+              <img src={cardImage} alt={listing.title} class="w-full h-44 object-cover" loading="lazy" data-bhq-listing-img data-slug={listing.slug} />
             ) : (
               <div class="w-full h-44 bg-stone-100 flex items-center justify-center text-stone-400 text-sm">No photo</div>
             )}
@@ -135,3 +135,47 @@ const bgClass = bg === 'stone-50' ? 'bg-stone-50' : 'bg-white';
     )}
   </div>
 </section>
+
+<script>
+  // Listing card images are signed CloudFront URLs that EXPIRE (~24h). This
+  // page is statically built, so a baked URL goes stale and 403s once the
+  // marketplace API has signed-URL enforcement on. These provider images are
+  // NOT public-visibility, so /media/access can't resolve them — the only
+  // authorized source of a FRESH signed URL is the public listing-by-slug
+  // endpoint. On load we re-resolve each card image from there, so a static
+  // page never shows an expired image regardless of how old the build is.
+  // (Fresh builds paint the correct image immediately; this just keeps stale
+  // builds correct.) CORS allows breederhq.com on this endpoint.
+  (async () => {
+    const API = "https://marketplace.breederhq.com";
+    const imgs = Array.from(
+      document.querySelectorAll("img[data-bhq-listing-img][data-slug]"),
+    ) as HTMLImageElement[];
+    const bySlug = new Map<string, HTMLImageElement[]>();
+    for (const img of imgs) {
+      const slug = img.getAttribute("data-slug");
+      if (!slug) continue;
+      const arr = bySlug.get(slug) ?? [];
+      arr.push(img);
+      bySlug.set(slug, arr);
+    }
+    await Promise.all(
+      [...bySlug.entries()].map(async ([slug, els]) => {
+        try {
+          const res = await fetch(
+            `${API}/api/v1/marketplace/public/listings/${encodeURIComponent(slug)}`,
+            { headers: { accept: "application/json" } },
+          );
+          if (!res.ok) return;
+          const l = await res.json();
+          const fresh =
+            l.coverImageUrl ||
+            (Array.isArray(l.images) ? l.images[0] : null);
+          if (fresh) for (const el of els) el.src = fresh;
+        } catch {
+          /* keep the build-time src */
+        }
+      }),
+    );
+  })();
+</script>
