@@ -155,10 +155,19 @@ const bgClass = bg === 'stone-50' ? 'bg-stone-50' : 'bg-white';
     for (const img of imgs) {
       const slug = img.getAttribute("data-slug");
       if (!slug) continue;
+      // Provider/advertising images live on the CloudFront `providers/*` path,
+      // which is exempt from signed-URL enforcement — those URLs carry no
+      // signature and never expire, so they never need refreshing. Only
+      // ENFORCED-path covers (e.g. a breeder-sourced service listing whose
+      // cover is under m/) can go stale on a static page; refresh just those.
+      // Today every service listing is provider-sourced, so this is a no-op —
+      // but it stays correct the moment a breeder service listing appears.
+      if ((img.getAttribute("src") || "").includes("/providers/")) continue;
       const arr = bySlug.get(slug) ?? [];
       arr.push(img);
       bySlug.set(slug, arr);
     }
+    if (bySlug.size === 0) return;
     await Promise.all(
       [...bySlug.entries()].map(async ([slug, els]) => {
         try {
