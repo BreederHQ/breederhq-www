@@ -1,0 +1,28 @@
+---
+export const updateMeta = {
+  date: '2026-06-16',
+  title: 'Broken inlinks cleanup (Ahrefs 404 audit)',
+  tags: ['seo', 'cleanup', 'broken-links'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 16, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Fixed six broken internal links on breederhq.com surfaced by an Ahrefs 404 audit. No new pages created; all fixes either retargeted the link to an existing page, redirected to the marketplace subdomain, or removed the link entirely.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Link retargets</h3>
+  <ul class="list-disc pl-6 space-y-1 text-gray-700">
+    <li><code>/client-management</code> → <code>/workflows/client-management</code> (in <code>workflows/waitlists-and-placement.astro</code>)</li>
+    <li><code>/buyer-portal</code> → <code>/workflows/client-portal</code> (two occurrences in <code>workflows/client-management.astro</code>; CTA label "Buyer Portal Features" updated to "Client Portal Features" to match the canonical workflow name)</li>
+    <li><code>/animal-records</code> → <code>/workflows/pedigrees</code> (in <code>workflows/genetics-and-health-testing.astro</code> and <code>workflows/pedigrees.astro</code>; closest semantic match — no dedicated animal-records page exists and creating one solely to satisfy a broken link would be content debt)</li>
+    <li><code>/breeders</code> → <code>https://marketplace.breederhq.com/breeders</code> (in <code>articles/dairy-goat-record-keeping-software.astro</code>; the breeder directory lives on the marketplace subdomain, not the www site)</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Link removals</h3>
+  <ul class="list-disc pl-6 space-y-1 text-gray-700">
+    <li><code>/acceptable-use</code> reference removed from <code>ai-privacy.astro</code> and the surrounding sentence rewritten to point only at the existing <code>/privacy</code> and <code>/terms</code> pages. No Acceptable Use Policy currently exists; creating a placeholder legal page would be inappropriate.</li>
+    <li><code>/services/farriers/wyoming</code> removed from the Montana farrier page's relatedCards. Wyoming has no farrier page (only a livestock-services page). Replaced the entry with a link to <code>/services/farriers/kentucky</code> — a real, established farrier metro that fits Montana's "adjacent working horse country" framing.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Why no new pages</h3>
+  <p class="text-gray-700">The Ahrefs audit asks "what's broken," not "what's missing." Each broken link was answered by routing to an existing page where the intent matched, or by removing the link where no real target exists. Creating placeholder pages to satisfy broken inlinks is content debt; legal pages in particular cannot be drafted as 404-cleanup side effects.</p>
+</article>
