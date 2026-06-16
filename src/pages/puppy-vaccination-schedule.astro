@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Puppy Vaccination Schedule', url: '/puppy-vaccination-schedule' }
+];
+
+const canonical = 'https://breederhq.com/tools/puppy-vaccination-schedule-generator';
+
+const faqs = [
+  {
+    question: 'What is the standard puppy vaccination schedule?',
+    answer: 'Most US protocols vaccinate puppies at 6 to 8 weeks, 10 to 12 weeks, and 14 to 16 weeks of age with a core DAPP series (distemper, adenovirus, parvovirus, parainfluenza). Rabies is typically given between 12 and 16 weeks depending on state law. Bordetella, leptospirosis, Lyme, and canine influenza are non-core and added based on regional risk and lifestyle.'
+  },
+  {
+    question: 'When can puppies safely go outside?',
+    answer: 'Most vets clear puppies for full public exposure one to two weeks after the final puppy series, typically around 16 weeks. Socialization in controlled environments (other vaccinated dogs, sanitized surfaces) starts earlier and matters more than people realize. The schedule the generator produces flags both windows.'
+  },
+  {
+    question: 'How does the breeder hand off the vaccination record?',
+    answer: 'A written record listing date, vaccine name, manufacturer, lot number, and vet (if administered by one) becomes part of the buyer\'s permanent record. The schedule generator outputs this format so the handoff to the new family\'s vet is unambiguous.'
+  },
+  {
+    question: 'What if I administer some vaccines myself?',
+    answer: 'Self-administered vaccines are legal in most US states for non-rabies cores but the record needs to capture the vaccine source and lot number. Rabies generally requires a licensed veterinarian. The generator separates the two so the record is accurate for both regulatory and buyer-transparency purposes.'
+  },
+  {
+    question: 'Does the schedule work for litters of different sizes?',
+    answer: 'Yes. The generator outputs a per-puppy schedule keyed to the litter\'s date of birth, with checkboxes for each puppy. For larger litters this becomes a single-page tracker that fits the whelping room wall.'
+  },
+  {
+    question: 'Is the generator free?',
+    answer: 'Yes. The standalone schedule generator at /tools/puppy-vaccination-schedule-generator is free and prints a wall-mountable per-litter schedule. The integrated vaccination tracking with expiration alerts and per-puppy buyer handoff lives in the BreederHQ platform.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Puppy Vaccination Schedule: Per-Litter, Printable, Buyer-Ready"
+  description="A free puppy vaccination schedule generator. Enter the litter birth date and get a per-puppy schedule covering the core DAPP series, rabies, and optional non-cores, formatted for the whelping room and the buyer handoff."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Vaccination Schedule</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">A Puppy Vaccination Schedule That Goes on the Wall</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Educational tool. Confirm protocol with your veterinarian.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Core puppy vaccines (DAPP) are given at 6 to 8, 10 to 12, and 14 to 16 weeks. Rabies typically lands between 12 and 16 weeks. Non-cores depend on regional risk. The schedule generator produces a per-litter, per-puppy printable that covers the whelping room wall and the buyer handoff record in one document.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Most vaccination mistakes are not protocol errors. They are tracking errors: which puppy got which shot on which date, with what lot number. A printable per-litter schedule on the wall solves it before it becomes a problem.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the generator?</strong> The interactive scheduler lives one click away.
+          </p>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Schedule Generator →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">The Standard Core Schedule</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">6 to 8 Weeks: First DAPP</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The first round of the distemper, adenovirus, parvovirus, parainfluenza combo. Most breeders administer (or have administered) this dose before the puppies go to their new homes. The schedule keys to date of birth so the window is right whether the litter is precocious or behind.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">10 to 12 Weeks: Booster One</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The second DAPP. Usually administered by the new family\'s vet. The handoff record makes the date and lot of the first round unambiguous so the booster lands in the right window.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">12 to 16 Weeks: Rabies</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              State law usually requires a licensed veterinarian for rabies. Timing varies by state minimum age (typically 12 or 16 weeks). The schedule flags state-specific minimums where they differ from the default.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">14 to 16 Weeks: Final Puppy DAPP</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Closes the puppy series. One to two weeks after this round, most vets clear puppies for full public exposure. Annual boosters or three-year titer-based protocols pick up from here.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Non-Core Vaccines</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Bordetella for boarding and group settings. Leptospirosis where the disease is regionally present. Lyme in tick-endemic areas. Canine influenza for show or boarding lifestyles. The generator includes optional rows for each so the schedule reflects the actual lifestyle, not the textbook default.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What the Generator Cannot Do</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Replace Your Vet\'s Protocol</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Regional disease risk and individual puppy health affect the schedule. The generator outputs a defensible default; your vet decides whether to modify it for your puppies.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Track Compliance for You</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The printed schedule is a paper record. Checking boxes still requires checking boxes. The integrated tracker in the BreederHQ platform handles compliance reminders and per-puppy handoff automatically.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Schedule Generator
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-deworming-schedule" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Deworming Schedule
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-weight-chart" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Weight Chart
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Builder
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/puppy-vaccination-schedule-generator" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Generator
+      </a>
+    </div>
+  </main>
+</BaseLayout>

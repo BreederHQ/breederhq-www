@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Puppy Deworming Schedule', url: '/puppy-deworming-schedule' }
+];
+
+const canonical = 'https://breederhq.com/tools/puppy-deworming-schedule-generator';
+
+const faqs = [
+  {
+    question: 'When should puppies be dewormed?',
+    answer: 'Most US protocols deworm puppies at 2, 4, 6, 8, 10, and 12 weeks of age, then move to a monthly schedule until 6 months. The dam is typically dewormed during late pregnancy and again at whelping. The exact dewormer and dose depend on the parasite risk in your area and the puppy\'s weight.'
+  },
+  {
+    question: 'What parasites does the standard schedule cover?',
+    answer: 'Roundworms (Toxocara canis) and hookworms (Ancylostoma caninum) are the primary targets in the early schedule. Tapeworms, whipworms, giardia, and coccidia require different drugs and different timing. The generator separates the core round-and-hook schedule from optional add-ons.'
+  },
+  {
+    question: 'Why deworm so often?',
+    answer: 'Puppies are born with roundworms transmitted from the dam through the placenta and through milk. Even a clean dam can shed parasites into the whelping environment. Frequent deworming early in life is the only reliable way to control the load before it causes weight loss, gut damage, or anemia.'
+  },
+  {
+    question: 'Does the schedule change for litters of different sizes?',
+    answer: 'The protocol does not, but the dosing does. Dewormers are weight-based and puppies in a large litter often grow at slightly different rates. The generator outputs a per-puppy schedule with checkboxes so the dose at each round reflects each puppy\'s actual weight, not the litter average.'
+  },
+  {
+    question: 'What about prescription vs. over-the-counter dewormers?',
+    answer: 'Pyrantel pamoate, the most common puppy dewormer for roundworms and hookworms, is over-the-counter in the US. Drugs for tapeworms (praziquantel), whipworms, and giardia (fenbendazole, metronidazole) are sometimes OTC and sometimes prescription depending on the formulation. The generator notes which drug class each row uses; your vet confirms the choice.'
+  },
+  {
+    question: 'Is the generator free?',
+    answer: 'Yes. The standalone deworming schedule generator at /tools/puppy-deworming-schedule-generator is free and prints a per-puppy weekly tracker. The integrated medication tracking with withdrawal periods, dose history, and buyer handoff lives in the BreederHQ platform.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Puppy Deworming Schedule: 2 to 12 Weeks, Per-Puppy, Printable"
+  description="A free puppy deworming schedule generator. Per-litter, per-puppy, weight-based dosing for roundworms and hookworms from 2 weeks through 12 weeks, with optional add-ons for tapeworms, giardia, and coccidia."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Deworming Schedule</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">A Puppy Deworming Schedule That Tracks Per Puppy</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Educational tool. Confirm protocol with your veterinarian.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Core puppy deworming runs every two weeks from 2 weeks through 12 weeks of age, covering roundworms and hookworms with pyrantel pamoate. Tapeworms, whipworms, giardia, and coccidia are handled separately as needed. The generator outputs a per-puppy printable for the whelping room wall.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          The frequency exists because puppies inherit a parasite load at birth. The per-puppy tracking exists because dosing is weight-based and puppies in the same litter do not weigh the same. Skipping either makes the schedule less effective.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the generator?</strong> The interactive scheduler lives one click away.
+          </p>
+          <a href="/tools/puppy-deworming-schedule-generator" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Schedule Generator →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">The Standard Core Schedule</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">2 Weeks: First Deworming</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Pyrantel pamoate covers the inherited roundworm and hookworm load. Puppies tolerate it well at this age. The dam is often dewormed simultaneously to break the environmental cycle.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">4, 6, 8, 10, 12 Weeks: Repeat Doses</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Every two weeks. Same drug, weight-adjusted dose. The cumulative effect is what controls the parasite load through the period when puppies are most vulnerable to weight loss and anemia.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Monthly Through 6 Months</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              After 12 weeks, the schedule moves to monthly until 6 months of age. Many monthly heartworm preventatives include a roundworm and hookworm dewormer in the same dose, which simplifies the schedule once the puppy goes home.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Tapeworm Add-On</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Tapeworms are not covered by pyrantel. If fleas are present in the environment or if proglottids are visible in stool, add praziquantel as a single dose. The generator includes an optional tapeworm row.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Coccidia and Giardia Add-Ons</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Both require different drugs (often metronidazole or fenbendazole) and are triggered by fecal-test findings, not by calendar. The generator includes a row for each so the schedule reflects the litter\'s actual situation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What the Generator Cannot Do</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Diagnose a Parasite Problem</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Fecal testing diagnoses. The schedule treats. If puppies are showing weight loss, persistent diarrhea, or visible parasites despite being on schedule, the vet runs a fecal and adjusts the drug.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Replace the Buyer Handoff Record</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The new family\'s vet needs to see what was given, when, and at what dose. The printed schedule covers the whelping room. The buyer handoff record is a separate document. The BreederHQ platform produces both from the same data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Schedule Generator
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-vaccination-schedule" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Vaccination Schedule
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-weight-chart" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Weight Chart
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Builder
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/puppy-deworming-schedule-generator" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Generator
+      </a>
+    </div>
+  </main>
+</BaseLayout>

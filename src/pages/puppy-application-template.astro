@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Puppy Application Template', url: '/puppy-application-template' }
+];
+
+const canonical = 'https://breederhq.com/tools/puppy-application-builder';
+
+const faqs = [
+  {
+    question: 'What should a puppy application actually ask?',
+    answer: 'The questions that protect both the puppy and the placement: living situation, other pets, daily routine, prior dog experience, intended activities, training plans, willingness to spay or neuter on the breeder\'s schedule, vet history, references, and a frank conversation about return and rehoming policy. Beyond those, breeders add breed-specific questions that screen for fit.'
+  },
+  {
+    question: 'How long should a puppy application be?',
+    answer: 'Long enough to surface the deal-breakers, short enough that serious buyers actually complete it. Most working applications run 15 to 25 questions. Anything under 10 is screening for nothing. Anything over 35 starts losing applicants who would have been good homes.'
+  },
+  {
+    question: 'Should I include a deposit on the application?',
+    answer: 'Generally no. The application is for screening; the deposit is for placement intent. Tying them together discourages serious-but-careful buyers and lets impulsive ones jump the line by paying first. Two separate stages with two separate decisions work better.'
+  },
+  {
+    question: 'Do I need a written application or is a phone call enough?',
+    answer: 'Both. The written application makes buyers think before they answer and gives you a permanent record. The phone or video call lets you read between the lines on the answers. Skipping either step usually means worse placements.'
+  },
+  {
+    question: 'How do I handle applicants who are not a good fit?',
+    answer: 'Decline early, kindly, in writing, and offer a redirect when you can. "Your situation does not match this breed\'s needs, but I think a [different breed] would suit you. Here is how to find a reputable [breed] breeder." A clear no is more respectful than a vague maybe that drags out.'
+  },
+  {
+    question: 'Is the application builder free?',
+    answer: 'Yes. The standalone builder at /tools/puppy-application-builder is free and exports the application as a fillable document. The integrated application workflow with auto-scoring, waitlist position, and Stripe-collected deposits lives in the BreederHQ platform.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Puppy Application Template: 22 Questions That Actually Screen Buyers"
+  description="A free puppy application template with 22 questions that surface deal-breakers without losing serious buyers. Built by breeders, used across nine species, exports as a fillable document."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Application Template</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">A Puppy Application Template That Actually Screens</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Written and reviewed by the BreederHQ Operations Team, working with active breeders.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            A good puppy application asks 15 to 25 questions across living situation, prior experience, intended use, vet history, and references. The free template here builds one in minutes and exports it as a fillable document. The point is to surface deal-breakers without losing the careful, serious applicants who actually make good homes.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          The default "tell me about yourself" approach to puppy applications produces vague answers from everyone. A structured application produces answers you can actually evaluate. The template here is the questions a working breeder asks; the builder lets you pick which ones apply, add breed-specific questions, and export.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the builder?</strong> The interactive template builder lives one click away.
+          </p>
+          <a href="/tools/puppy-application-builder" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Application Builder →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">The 22 Questions Worth Asking</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Living Situation (4 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Own or rent. If renting, landlord policy on dogs and breed-specific restrictions. Fenced yard or not, and if so, type and height. Household size and ages of children.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Other Pets (3 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Current pets: species, breeds, ages, intact or altered, temperament. How they react to new dogs. Past pets and what happened to them.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Daily Routine (3 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Hours alone per day. Who handles the daily care. Crate, free roam, or in-between when the household is out.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Experience (3 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Prior dog ownership in general. Prior experience with this breed or one similar. What worked and what they would do differently.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Intent and Training (4 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Intended activities: companion, sport, work, show, breeding. Training plans: classes, board-and-train, owner-trained. Crate training plan. Socialization plan for the first 12 weeks.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Health and Vet (3 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Current vet and how long with them. Comfort with the breeder\'s required health-testing schedule. Spay or neuter timing and willingness to follow the breeder\'s guidance.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">References and Honesty (2 questions)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Two references (vet plus one personal is the working standard). One open-ended "anything else we should know" question to surface what the structured questions missed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What a Good Application Does Not Do</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Replace a Conversation</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The application gets the applicant on paper. The phone or video call gets them in voice. Both matter. Skipping the conversation because the application looked good is how mismatched placements happen.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Guarantee a Good Placement</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Applications surface intent and current state. They cannot predict life events that change either one. The contract is what handles the long-term piece; the application is what handles the start.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Replace Your Judgment</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Two applicants with similar answers can be very different fits. The application gives you the data; you make the call. Auto-scoring helps sort the obviously-not-a-fit from the worth-a-call, not the worth-a-call from the perfect home.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Application Builder
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Application Management (Full Guide)
+            </a>
+          </div>
+          <div>
+            <a href="/articles/breeder-communication-platforms" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Breeder Communication Platforms
+            </a>
+          </div>
+          <div>
+            <a href="/articles/litter-reservation-platforms" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Litter Reservation Platforms
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/puppy-application-builder" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Builder
+      </a>
+    </div>
+  </main>
+</BaseLayout>

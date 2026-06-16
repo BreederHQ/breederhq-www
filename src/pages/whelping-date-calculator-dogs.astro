@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Whelping Date Calculator for Dogs', url: '/whelping-date-calculator-dogs' }
+];
+
+const canonical = 'https://breederhq.com/tools/whelping-date-calculator';
+
+const faqs = [
+  {
+    question: 'How accurate is a whelping date calculator?',
+    answer: 'It depends on which date you enter. From an ovulation date confirmed by progesterone testing, gestation is 63 days plus or minus a day. From a breeding date alone, the actual whelping range widens to about 58 to 68 days because dogs can store viable semen for several days. From a first-day-of-heat estimate, the range widens further to roughly 60 to 70 days.'
+  },
+  {
+    question: 'When should I start preparing for whelping?',
+    answer: 'Most breeders set up the whelping area and start temperature monitoring at day 56 to day 58 from breeding. Drop in body temperature below 99 degrees Fahrenheit typically signals labor within 24 hours. Vet contact information, an emergency clinic phone number, and a stocked supply kit should be in place by day 55.'
+  },
+  {
+    question: 'What is the dog gestation period exactly?',
+    answer: 'About 63 days from ovulation, which is roughly 65 days from the LH surge. Counting from breeding is less precise because sperm survive for several days inside the dam. Counting from the first day of heat is the least precise because ovulation timing varies by 4 or more days.'
+  },
+  {
+    question: 'How does the calculator handle natural cover vs. AI?',
+    answer: 'It treats them the same from a date-math perspective. Both work backwards or forwards from the breeding date. The accuracy improvement comes from progesterone testing, not from the breeding method itself. Frozen AI is usually the most precisely timed because it requires confirmed ovulation.'
+  },
+  {
+    question: 'When should I do prenatal x-rays or ultrasounds?',
+    answer: 'Ultrasound is most useful around day 28 to day 30 for pregnancy confirmation and rough litter count. X-ray is most useful from day 55 onward for accurate puppy count and head size. The calculator surfaces these dates if you ask it to. Defer to your vet on actual scheduling.'
+  },
+  {
+    question: 'Is the calculator free?',
+    answer: 'Yes. The standalone whelping calculator at /tools/whelping-date-calculator is free, anonymous, and supports dogs, horses, goats, sheep, and cattle. The full pregnancy tracker with per-dam history, ultrasound and x-ray scheduling, and labor monitoring lives in the BreederHQ platform.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Whelping Date Calculator for Dogs: Due Date, Prep Window, and Vet Milestones"
+  description="A free whelping date calculator for dogs. Enter the breeding date or progesterone-confirmed ovulation date to estimate the due date, the normal due window, and the prep and vet-scheduling milestones."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Whelping Date Calculator for Dogs</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">A Whelping Date Calculator That Earns Its Estimate</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Written and reviewed by the BreederHQ Operations Team, working with active dog breeders.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Canine gestation is 63 days from ovulation, plus or minus a day. From an unconfirmed breeding date, the window widens to about 58 to 68 days. The calculator shows the due date, the normal window, and the prep and vet-scheduling milestones. Progesterone-confirmed ovulation is what tightens the prediction.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Every breeder eventually learns that "63 days from breeding" is wrong more often than it is right. Canine gestation is 63 days from ovulation, not from breeding, and the gap between those two dates can be anywhere from a few hours to nearly a week. That is why progesterone testing matters and why a whelping calculator that asks for the right input matters too.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the actual tool?</strong> The interactive calculator lives one click away.
+          </p>
+          <a href="/tools/whelping-date-calculator" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Whelping Date Calculator →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What the Calculator Projects</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Estimated Due Date</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              From a confirmed ovulation date: 63 days out, give or take a day. From a breeding date alone: 60 to 65 days out as the most likely window. From a first-day-of-heat estimate: a wider 60 to 70 day window. The calculator picks the appropriate confidence interval based on which date you enter.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Normal Due Window</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Most healthy dams whelp between day 58 and day 68 measured from breeding. Inside that range, a few days early or late is not an emergency. Outside it, vet contact is warranted. The calculator shows the window so you know when to stay calm and when to call.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Prenatal Vet Milestones</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Ultrasound around day 28 to day 30 confirms pregnancy and gives a rough count. X-ray from day 55 onward gives an accurate puppy count and head-size assessment. The calculator surfaces these dates so they go on the calendar instead of getting forgotten.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Whelping-Prep Timeline</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Whelping box ready by day 55. Supply kit ready by day 55. Temperature monitoring twice daily from day 56. Vet emergency number on the fridge by day 55. The calculator places these on the same timeline as the due date so prep is not last-minute.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Post-Whelping Milestones</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              First puppy weights at birth. Eyes opening around day 10 to day 14. Deworming starting around day 14 and continuing on schedule. First vaccinations around day 42 to day 49. Go-home week around day 56 to day 70 depending on breed and program. All on the same timeline as the due date.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What a Whelping Calculator Cannot Tell You</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">The Exact Due Date Without Progesterone</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Without confirmed ovulation, the due date is a window, not a point. That is the biology, not a limitation of the tool. Progesterone testing during the breeding cycle is what turns a five-day window into a one-day estimate.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Whether the Dam Will Need a C-Section</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              That comes from x-ray puppy count and head-size assessment, breed-typical labor patterns, and observed labor progression. The calculator surfaces the dates to do those assessments; the vet makes the call.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Litter Size</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Calendar math does not produce a litter count. Ultrasound at day 28 gives a rough estimate; x-ray after day 55 gives an accurate one. The calculator schedules both.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Whelping Date Calculator
+            </a>
+          </div>
+          <div>
+            <a href="/dog-heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Heat Cycle Calculator
+            </a>
+          </div>
+          <div>
+            <a href="/dog-progesterone-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Progesterone Calculator
+            </a>
+          </div>
+          <div>
+            <a href="/dog-breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Planner
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Builder
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/whelping-date-calculator" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Calculator
+      </a>
+    </div>
+  </main>
+</BaseLayout>

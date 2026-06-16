@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Dog Progesterone Calculator', url: '/dog-progesterone-calculator' }
+];
+
+const canonical = 'https://breederhq.com/tools/progesterone-timing-tracker';
+
+const faqs = [
+  {
+    question: 'What does a dog progesterone calculator do?',
+    answer: 'A progesterone calculator (more accurately, a tracker) logs each P4 test result in cycle order, shows the trend across readings, and helps identify where in the cycle the dam is: pre-LH-surge, LH surge, ovulation, fertilization window, or past peak. The output is organized data to bring to your reproductive vet, not a breeding decision.'
+  },
+  {
+    question: 'What P4 numbers actually matter?',
+    answer: 'The textbook benchmarks are roughly: under 2 ng/mL the dam is in pre-LH proestrus; 2 to 3 ng/mL signals the LH surge is imminent; 5 ng/mL marks ovulation; 8 to 30 ng/mL is the fertilization window; over 30 ng/mL is post-peak. These are averages; individual dams vary and lab assays vary. Defer to your vet on actual breeding timing.'
+  },
+  {
+    question: 'When should I start testing?',
+    answer: 'Most breeders start P4 testing on day 5 to day 7 of proestrus and continue every 24 to 48 hours through the surge. Earlier testing is fine but rarely changes the answer. The first useful test result is usually the one that catches the dam in mid-proestrus, around 1 to 2 ng/mL.'
+  },
+  {
+    question: 'Can I use this to skip working with a reproductive vet?',
+    answer: 'No. The tracker organizes data; it does not replace clinical judgment. Most lab-grade P4 testing still happens at a vet clinic with calibrated equipment. Even with in-house testing, breeding decisions for chilled or frozen semen should involve your repro vet.'
+  },
+  {
+    question: 'Does it work for chilled and frozen semen breedings?',
+    answer: 'It supports them by giving you organized readings to share with the vet planning the ship. For chilled, you typically inseminate roughly 48 hours post-ovulation. For frozen, the window is even tighter and requires surgical or transcervical placement timed to the LH surge plus a vet-determined offset. The tracker helps; the vet decides.'
+  },
+  {
+    question: 'Is the calculator free?',
+    answer: 'Yes. The standalone tracker at /tools/progesterone-timing-tracker is free, anonymous, and saves nothing between sessions. The full progesterone history with per-cycle logging, trend graphs across cycles, and per-dam ovulation pattern recognition lives in the BreederHQ platform.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Dog Progesterone Calculator: Log P4 Tests and See the Trend"
+  description="A free dog progesterone calculator that logs P4 test results in cycle order, shows the trend, and helps identify the LH surge, ovulation, and the fertilization window. Built by breeders, for your repro vet conversation."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Dog Progesterone Calculator</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">What a Dog Progesterone Calculator Actually Does</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Educational tool. Not veterinary advice.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            A progesterone calculator is really a tracker. It logs each P4 result in cycle order, shows the trend, and helps identify where the dam is: pre-LH, surge, ovulation, fertilization window, or past peak. It gives your reproductive vet organized data to time the breeding. It does not replace clinical judgment.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Most "progesterone calculator" searches come from breeders staring at one number and trying to figure out what it means in context. The honest answer is that one number means little. The trend across two or three readings means almost everything.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the actual tool?</strong> The interactive tracker lives one click away.
+          </p>
+          <a href="/tools/progesterone-timing-tracker" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Progesterone Tracker →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">The P4 Benchmarks Every Breeder Hears</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are textbook averages. Individual dams vary. Lab assays vary. Always confirm calibration against the lab running the test and defer to your reproductive vet on what each number means for your specific dam.
+        </p>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Under 2 ng/mL — Pre-LH Proestrus</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Visible heat is underway but the LH surge has not happened yet. Eggs are not mature. Breeding here will not produce a pregnancy. Useful for confirming you are in the cycle but not at the window.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">2 to 3 ng/mL — LH Surge Imminent</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The LH surge typically happens around 2 ng/mL. Some labs and some dams trigger the surge slightly earlier or later. This is the "test daily now" zone. Missing the surge is the difference between a confirmed and a guessed ovulation date.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Around 5 ng/mL — Ovulation</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Ovulation occurs roughly 48 hours after the LH surge, when progesterone reaches about 5 ng/mL. This is the reference point for breeding date math. Whelping is 63 days from ovulation, give or take a day.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">8 to 30 ng/mL — Fertilization Window</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Eggs mature for about 48 hours after ovulation, then remain viable for another 48 to 72 hours. Natural cover and chilled breedings target this window. Frozen breedings target the tighter end of it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Over 30 ng/mL — Past Peak</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The fertilization window has closed. If you missed it this cycle, the next opportunity is the next heat. Logging this end-of-window number is useful for refining timing on the next cycle.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What a Progesterone Calculator Cannot Do</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Tell You When to Actually Breed</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The tracker shows where the dam is. Your reproductive vet decides when to breed based on the breeding method (natural, chilled, frozen), the stud's semen quality, and how the dam's surge is progressing. The tool gives the vet organized data, not the answer.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Run the Test</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Lab-grade quantitative P4 testing still happens at a vet clinic. Cage-side semi-quantitative tests exist but accuracy varies. The tracker handles whatever number you put in; the test happens upstream of it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Compensate for Bad Timing on Earlier Readings</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              If you tested every four days through the surge instead of every 24 to 48 hours, the trend is going to skip over the LH surge entirely. The tracker shows what happened; it cannot reconstruct what was missed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Progesterone Tracker
+            </a>
+          </div>
+          <div>
+            <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Progesterone Testing in Dogs (Full Guide)
+            </a>
+          </div>
+          <div>
+            <a href="/dog-heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Heat Cycle Calculator
+            </a>
+          </div>
+          <div>
+            <a href="/dog-breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Planner
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Builder
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/progesterone-timing-tracker" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Tracker
+      </a>
+    </div>
+  </main>
+</BaseLayout>

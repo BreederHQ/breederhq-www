@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Puppy Weight Chart', url: '/puppy-weight-chart' }
+];
+
+const canonical = 'https://breederhq.com/tools/puppy-weight-tracker';
+
+const faqs = [
+  {
+    question: 'How often should I weigh puppies?',
+    answer: 'Twice daily for the first 72 hours, then daily through week 2, then every two to three days through week 4, then twice weekly until go-home. The early frequency matters because failure to gain in the first 72 hours is the strongest predictor of fading neonatal syndrome. After 4 weeks the chart is for tracking growth, not survival.'
+  },
+  {
+    question: 'What is a healthy puppy weight gain?',
+    answer: 'Puppies should gain roughly 5 to 10 percent of body weight per day in the first two weeks. Most puppies double their birth weight by 10 to 12 days. Failure to double by day 14, or any 24-hour weight loss after the first day, warrants a vet check.'
+  },
+  {
+    question: 'What is fading puppy syndrome and how does the chart help?',
+    answer: 'Fading puppy syndrome is the term for puppies that decline and die in the first two weeks despite appearing healthy at birth. The earliest reliable warning sign is weight loss or failure to gain. A frequent weight chart catches it 12 to 24 hours before behavioral signs do, which is sometimes the difference between a save and a loss.'
+  },
+  {
+    question: 'How does birth-weight vary by breed?',
+    answer: 'Toy and small breeds: 3 to 10 ounces. Medium breeds: 8 to 16 ounces. Large breeds: 16 to 24 ounces. Giant breeds: 20 to 32 ounces. Within a litter, more than 30 percent variation from the litter average warrants closer monitoring of the smaller puppies.'
+  },
+  {
+    question: 'Do I need a digital scale or is a kitchen scale enough?',
+    answer: 'A kitchen scale to 5,000 grams (about 11 pounds) covers most puppies through 6 to 8 weeks for all but giant breeds. Beyond that, a small postal or pet scale to about 22 pounds covers the rest of the go-home window. Accuracy matters more than features.'
+  },
+  {
+    question: 'Is the tracker free?',
+    answer: 'Yes. The standalone puppy weight tracker at /tools/puppy-weight-tracker is free, supports unlimited puppies per litter, and exports the chart. The integrated litter tracker with auto-graphed weight curves, gain-rate alerts, and buyer handoff lives in the BreederHQ platform.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Puppy Weight Chart: Track Birth Weight, Daily Gain, and Fading Risk"
+  description="A free puppy weight chart and tracker. Log birth weights, twice-daily weights for the first week, and weight-gain percentage per puppy. Catches fading puppy syndrome 12 to 24 hours before behavioral signs."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Puppy Weight Chart</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">A Puppy Weight Chart That Catches Fading Early</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Educational tool. Failure to gain or any weight loss warrants a veterinarian.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Weight is the earliest reliable signal of a puppy in trouble. Healthy puppies gain 5 to 10 percent of body weight per day in the first two weeks. Failure to gain in 24 hours, or any loss after day one, is a vet call. The chart turns the frequent-weighing routine into a per-puppy curve with gain-rate visible.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          The frequent-weighing protocol exists because the alternative (waiting for behavioral signs) catches fading puppies 12 to 24 hours too late. The chart exists because a 6-puppy litter weighed twice daily for two weeks produces 168 data points, and that does not fit in the brain.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the tracker?</strong> The interactive weight chart lives one click away.
+          </p>
+          <a href="/tools/puppy-weight-tracker" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Weight Tracker →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">The Standard Weighing Cadence</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Birth Weight Per Puppy</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Within the first 4 hours. This is the baseline every later weight is measured against. Identify each puppy by collar color or a non-toxic marker so the weights stay attached to the right puppy.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Twice Daily for the First 72 Hours</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Morning and evening. Any 24-hour period without gain is a flag. Loss is an emergency. This is the highest-risk window and the highest-frequency tracking window for that reason.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Daily Through Week 2</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Once daily, same time of day. Most puppies double birth weight by day 10 to 12. The chart shows the doubling line so it is visible at a glance.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Every Two to Three Days Through Week 4</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Growth rates slow and stabilize. The chart still surfaces stragglers, but daily resolution is overkill at this stage.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Twice Weekly Until Go-Home</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Through the rest of the litter\'s time with the breeder. By this point the chart is documenting healthy growth for the buyer handoff, not screening for fading risk.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What the Chart Cannot Do</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Diagnose Why a Puppy is Failing to Gain</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Cleft palate, congenital defect, infection, hypothermia, and dam-rejection all show up the same way on the chart: flat or declining line. The chart flags the problem; the vet identifies the cause.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Replace Hands-On Observation</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A puppy can be gaining and still be in trouble (overheating, dehydration, latching problem the rest of the litter is masking). The chart is one signal; the daily hands-on check is the rest of it.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Predict Adult Size with High Accuracy</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The chart documents growth. Adult-size prediction from 8-week weight is a rough estimate at best and varies by breed. The chart is not the right tool for that question.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Weight Tracker
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-vaccination-schedule" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Vaccination Schedule
+            </a>
+          </div>
+          <div>
+            <a href="/puppy-deworming-schedule" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Puppy Deworming Schedule
+            </a>
+          </div>
+          <div>
+            <a href="/articles/litter-tracking-software" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Litter Tracking Software
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Builder
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/puppy-weight-tracker" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Tracker
+      </a>
+    </div>
+  </main>
+</BaseLayout>

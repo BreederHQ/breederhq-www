@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Dog Breeding Planner', url: '/dog-breeding-planner' }
+];
+
+// Species-anchored landing for the "dog breeding planner" search intent.
+// The interactive tool lives at /tools/breeding-planner. Canonical to the
+// tool URL to consolidate ranking signals.
+const canonical = 'https://breederhq.com/tools/breeding-planner';
+
+const faqs = [
+  {
+    question: 'What does a dog breeding planner actually do?',
+    answer: 'A breeding planner projects upcoming heat cycles for multiple dams, identifies overlapping breeding windows, and shows the open weeks between cycles so a breeder can plan stud bookings, semen shipments, and whelping schedules without juggling spreadsheets. Good ones support multiple dams in one view; great ones also predict the next cycle from past intervals.'
+  },
+  {
+    question: 'How far in advance can I plan a breeding?',
+    answer: 'For a dam with at least one recorded cycle, six to twelve months out is realistic. For a first-cycle dam, anything beyond the current heat is a guess. The planner shows ranges, not exact dates, until enough cycle history is recorded to tighten the prediction.'
+  },
+  {
+    question: 'Can it handle multiple dams in one program?',
+    answer: 'Yes. The free planner here handles up to three dams in one view. The full BreederHQ platform handles unlimited dams across nine species with cycle prediction, stud booking, semen-inventory linkage, and program-level scheduling.'
+  },
+  {
+    question: 'Does it work for natural cover, chilled, and frozen breedings?',
+    answer: 'The planner handles all three from a scheduling perspective. The actual breeding-window timing for chilled and frozen requires progesterone testing, which is a separate tool. The planner shows when to schedule the P4 test, not the test result itself.'
+  },
+  {
+    question: 'How is this different from a heat cycle calculator?',
+    answer: 'A heat calculator works on one dam, one cycle: enter Day 1, get phase estimates. A breeding planner works on multiple dams across multiple upcoming cycles: when does each dam come back into heat, when do the breeding windows overlap, when is the program open. Different problem.'
+  },
+  {
+    question: 'Is the planner free?',
+    answer: 'Yes. The standalone planner at /tools/breeding-planner is free, anonymous, and saves nothing. The full multi-dam, multi-cycle, cross-program planner lives in the BreederHQ platform, which has a free tier.'
+  }
+];
+---
+
+<BaseLayout
+  title="Free Dog Breeding Planner: Project Heat Cycles, Windows, and Open Weeks"
+  description="A free dog breeding planner that projects upcoming heat cycles for up to three dams, finds overlapping breeding windows, and shows the open weeks between cycles. Built by breeders."
+  breadcrumbs={breadcrumbs}
+  canonicalOverride={canonical}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Dog Breeding Planner</li>
+      </ol>
+    </nav>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold mb-6">A Dog Breeding Planner That Handles More Than One Dam</h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: June 19, 2026.</strong> Written and reviewed by the BreederHQ Operations Team, working with active dog breeders.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <p class="text-gray-700 leading-relaxed">
+            A dog breeding planner projects upcoming heat cycles across multiple dams, surfaces overlapping breeding windows, and shows the open weeks between cycles. The free planner here covers up to three dams. The full BreederHQ platform extends it to unlimited dams, stud booking, semen inventory, and program-level scheduling.
+          </p>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed">
+          If you breed one dam, a calendar reminder works. If you breed two or more, you start losing track of which dam is due back into heat, when their windows might collide, and which weeks are actually open for a planned breeding. That is what a breeding planner is for.
+        </p>
+
+        <div class="mt-10 p-6 bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            <strong>Looking for the actual tool?</strong> The interactive planner lives one click away.
+          </p>
+          <a href="/tools/breeding-planner" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Open the Free Breeding Planner →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What a Dog Breeding Planner Projects</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Next Heat Date Per Dam</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              For each dam, the planner takes the last recorded heat date and projects the next one using either her recorded interval history (preferred) or the textbook six-month average (fallback for first-cycle or under-recorded dams). The output is a date range, not a single date, because that is what the underlying biology actually supports.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Estimated Breeding Window</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Around day 10 to day 15 of each projected cycle. The planner shows this as a shaded band, not a single date, because actual ovulation is determined by the LH surge and only progesterone testing can pinpoint it. The band is when to start testing, not when to breed.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Estimated Whelping Window</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Sixty-three days from the estimated ovulation date, with a buffer for ovulation-timing uncertainty. If breedings are confirmed by progesterone, the actual whelping date is far tighter. The planner shows the range; the breeder fills in the actual date once it is known.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Open Weeks Between Cycles</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The space between the end of one whelping window and the start of the next breeding window for the same dam. This is the time available for go-home weeks, travel, shows, or simply program rest. Seeing this on a calendar instead of in your head is the whole point.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-3">Overlapping Windows Across Dams</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              When you have multiple dams, two or more breeding windows can land on the same week. That can be exactly what you want (one stud trip, two breedings) or exactly what you do not want (two whelping windows the same week). The planner surfaces the overlaps so the decision is intentional.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8">What This Planner Cannot Do</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Pinpoint Ovulation</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The breeding window the planner shows is a textbook approximation. Real ovulation is determined by the LH surge. For natural cover with multiple ties, the approximation usually works. For chilled or frozen, you need progesterone testing.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Predict First Cycles</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A dam with no recorded cycle history gets the textbook six-month interval. That is a starting guess, not a prediction. The planner becomes meaningfully accurate after two or three recorded cycles.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Manage Unlimited Dams</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The free planner handles three dams in one view. That covers most small programs. Programs with four or more active dams need the full platform, where dams, cycles, breedings, and litters are tracked together and predictions improve with every recorded event.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Replace Progesterone Testing</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              No planner can. The planner tells you when to schedule the first P4 test. The vet tells you when to breed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Resources</h2>
+        <div class="space-y-3 text-lg">
+          <div>
+            <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Open the Free Breeding Planner
+            </a>
+          </div>
+          <div>
+            <a href="/dog-heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Heat Cycle Calculator
+            </a>
+          </div>
+          <div>
+            <a href="/heat-cycle-tracking" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Heat Cycle Tracking Software for Breeders
+            </a>
+          </div>
+          <div>
+            <a href="/progesterone-testing-dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Progesterone Testing in Dogs
+            </a>
+          </div>
+          <div>
+            <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">
+              → Dog Breeding Software Overview
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Other Free Breeder Tools</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-application-builder" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Application Builder
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="/tools/breeding-planner" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Open the Planner
+      </a>
+    </div>
+  </main>
+</BaseLayout>
