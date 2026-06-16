@@ -1,0 +1,38 @@
+---
+export const updateMeta = {
+  date: '2026-06-19',
+  title: 'Marketplace provider acquisition: reroute logged-out providers to /for-providers',
+  tags: ['marketplace', 'providers', 'conversion'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 19, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Structural fix for the marketplace provider acquisition funnel.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      A 2026-06-16 audit of the marketplace provider funnel surfaced that <strong>every provider CTA on <code>marketplace.breederhq.com</code> routed logged-out users into auth or legal pages</strong> (<code>/provider/start</code> or <code>/provider/terms</code>) before showing any proof, pricing, or examples. The strongest seller landing already exists at <a href="/for-providers" class="text-[hsl(24,95%,53%)] hover:underline">breederhq.com/for-providers</a>, but the marketplace front door barely linked to it.
+    </p>
+
+    <p>Phase 1 changes shipped today in the marketplace app:</p>
+
+    <ul class="list-disc list-inside space-y-1 ml-2">
+      <li><strong>Logged-out provider entry now routes to <code>breederhq.com/for-providers</code>.</strong> Logged-in users continue to enter via <code>/provider</code> and let the existing guard route to dashboard, terms, or registration.</li>
+      <li><strong>Above-the-fold provider band on marketplace homepage.</strong> A single brand-orange pill below the hero subtitle, before the species and service tiles, asking "Are you a service provider?" and pointing at the seller landing.</li>
+      <li><strong>Top-nav rerouting.</strong> Three previously-hardcoded <code>/provider/terms</code> entries in the Services megamenu, user dropdown, and megamenu promo block all now route through the entry helper. No more "show me a Terms of Service before you tell me what this is."</li>
+      <li><strong>Bottom orange bar still works.</strong> The existing "Have an animal-related service you provide?" bar at the bottom of the homepage already used the entry helper, so it picked up the new routing automatically.</li>
+    </ul>
+
+    <p>
+      Cross-domain navigation works correctly via standard <code>&lt;a&gt;</code> tags inside the marketplace HubNavMenu, DropdownMenu, and ProviderEntryLink components, all of which now detect <code>http(s)://</code> hrefs and skip react-router for those entries.
+    </p>
+
+    <p>
+      <strong>Success criteria, measured at 4 weeks:</strong> at least 1 completed provider profile per week for two consecutive weeks. Baseline is effectively zero. Leading indicators: provider band CTR on marketplace homepage, GSC impressions on <code>/for-providers*</code> URLs trending up from current zero, registration-start to registration-complete conversion in the provider onboarding flow. If discovery rises but completions stay flat, the next bottleneck is onboarding rather than the front door.
+    </p>
+
+    <p>
+      Phase 2 (deferred): consider mirroring <code>breederhq.com/for-providers</code> onto <code>marketplace.breederhq.com/for-providers</code> for subdomain consolidation, and add provider testimonials / live profile screenshots to the existing landing once we have 2-3 active providers to feature.
+    </p>
+  </div>
+</article>
