@@ -10,16 +10,28 @@ const breadcrumbs = [
 
 const faqs = [
   {
+    question: 'What is the best dog breeding software in 2026?',
+    answer: 'There is no single "best" tool, because the right tool depends on what you actually do every day. For a working program that needs heat tracking, progesterone timing, litters, waitlists, deposits, contracts, a buyer portal, and a public listing presence in one system, BreederHQ is the most complete option and has a free tier. For dog and cat programs that want a clean records system at a flat price, BreederBuddy at $29.99/mo is a reasonable pick. For multi-species record-keeping at the lowest price, Breeder Cloud Pro starts at $6.99/mo. Pedigree-driven clubs are better served by ZooEasy, Kintraks, or PedFast. The comparison table below maps the trade-offs.'
+  },
+  {
+    question: 'How does BreederHQ compare to BreederBuddy?',
+    answer: 'BreederBuddy is dog or cat (one toggle, one species per account) at $29.99/mo with no free tier. BreederHQ is nine species under one account (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle) with a free tier. BreederHQ includes a built-in marketplace at marketplace.breederhq.com, OFA Sync that pulls test results automatically from the Orthopedic Foundation for Animals, and a CHIC Readiness Widget for breed-specific health-test planning. BreederBuddy does not publicly offer those. BreederBuddy has a cleaner, simpler interface if all you want is records-plus-buyers for a single-species dog or cat program.'
+  },
+  {
+    question: 'How does BreederHQ compare to Breeder Cloud Pro?',
+    answer: 'Breeder Cloud Pro starts at $6.99/mo (Standard) or $13.99/mo (Pro) and supports multiple species. It publicly claims 17,000+ breeders and 110,000+ animals tracked. BreederHQ has a free tier and adds an integrated marketplace, OFA Sync, CHIC Readiness, Volhard PAT and Gun Dog Aptitude temperament testing, and Scout AI document extraction that reads genetics PDFs and vet invoices. Breeder Cloud Pro is the more mature records-and-pedigree option at a lower entry price. BreederHQ is the more complete operations system with marketplace exposure included.'
+  },
+  {
     question: 'Is BreederHQ really free?',
-    answer: 'The starter tier is genuinely free. Paid tiers unlock advanced operational features such as expanded marketing, multi-staff workflows, and expanded marketplace tooling. Verify current pricing on the pricing page.'
+    answer: 'The starter tier is genuinely free, with no time limit and no credit card. Paid tiers unlock advanced operational features such as expanded marketing automation, multi-staff workflows, and expanded marketplace tooling. Verify current pricing on the pricing page.'
   },
   {
     question: 'What is the difference between dog breeding software and a dog breeding marketplace?',
-    answer: 'A marketplace helps buyers find you. Breeding software runs your program: heats, breedings, litters, waitlists, contracts, buyer portal. Most breeders need both. BreederHQ includes both in one system.'
+    answer: 'A marketplace helps buyers find you. Breeding software runs your program: heats, breedings, litters, waitlists, contracts, buyer portal. Most breeders need both. BreederHQ includes both in one system. BreederBuddy, Breeder Cloud Pro, and Dog Breeder Pro do not include a marketplace; you would pair them with a third-party listing site.'
   },
   {
     question: 'Will dog breeding software work for multiple breeds?',
-    answer: 'Good operational dog breeding software should. Different breeds have different cycle patterns and different health-testing requirements. BreederHQ handles one breed or many, and applies breed-specific health-testing expectations.'
+    answer: 'Good operational dog breeding software should. Different breeds have different cycle patterns and different health-testing requirements. BreederHQ handles one breed or many, and applies breed-specific health-testing expectations through its CHIC Readiness Widget.'
   },
   {
     question: 'Does dog breeding software calculate COI?',
@@ -77,8 +89,8 @@ const workflowStages = [
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The Best Dog Breeding Software in 2026: A Working Breeder's Comparison",
-  "description": "A working breeder's comparison of dog breeding software in 2026. Heat cycles, progesterone, litters, waitlists, contracts, and buyer portals. See where each tool fits.",
+  "headline": "The Best Dog Breeding Software in 2026 (Compared by a Real Breeder)",
+  "description": "An honest, working-breeder comparison of dog breeding software in 2026. BreederHQ vs. BreederBuddy, Breeder Cloud Pro, Dog Breeder Pro, Breedera, ZooEasy, Kintraks, and PedFast on heats, progesterone, litters, waitlists, contracts, buyer portals, pricing, and marketplace presence.",
   "author": {
     "@type": "Organization",
     "name": "BreederHQ",
@@ -94,7 +106,7 @@ const articleSchema = {
     }
   },
   "datePublished": "2026-05-16",
-  "dateModified": "2026-05-16",
+  "dateModified": "2026-06-19",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://breederhq.com/compare/best-dog-breeding-software"
@@ -108,16 +120,59 @@ const itemListSchema = {
   "name": "Dog Breeding Software Compared",
   "description": "Operational comparison of dog breeding software products in 2026.",
   "itemListOrder": "https://schema.org/ItemListOrderDescending",
-  "numberOfItems": 7,
+  "numberOfItems": 8,
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "BreederHQ" },
-    { "@type": "ListItem", "position": 2, "name": "DogBreederPro" },
-    { "@type": "ListItem", "position": 3, "name": "Breedera" },
-    { "@type": "ListItem", "position": 4, "name": "ZooEasy" },
-    { "@type": "ListItem", "position": 5, "name": "Kintraks" },
-    { "@type": "ListItem", "position": 6, "name": "PedFast" },
-    { "@type": "ListItem", "position": 7, "name": "Breeder Cloud Pro" }
+    { "@type": "ListItem", "position": 2, "name": "BreederBuddy" },
+    { "@type": "ListItem", "position": 3, "name": "Breeder Cloud Pro" },
+    { "@type": "ListItem", "position": 4, "name": "Dog Breeder Pro" },
+    { "@type": "ListItem", "position": 5, "name": "Breedera" },
+    { "@type": "ListItem", "position": 6, "name": "ZooEasy" },
+    { "@type": "ListItem", "position": 7, "name": "Kintraks" },
+    { "@type": "ListItem", "position": 8, "name": "PedFast" }
   ]
+};
+
+// Page-specific SoftwareApplication schema: BreederHQ is the answer this comparison recommends
+// for working dog programs that want operations + marketplace in one system.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Dog Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com",
+  "description": "Dog breeding software with heat-cycle tracking, multi-point progesterone timing, individual puppy records, waitlists, deposits, contracts, buyer portal, OFA Sync, CHIC Readiness Widget, COI calculation, Volhard PAT and Gun Dog Aptitude temperament testing, and a built-in public marketplace at marketplace.breederhq.com. Supports nine species in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle.",
+  "featureList": [
+    "Heat cycle tracking",
+    "Multi-point progesterone timing",
+    "63-day gestation tracking with whelping countdown",
+    "AI and frozen-semen breeding documentation",
+    "Individual puppy records",
+    "Litter management with weights, photos, microchips",
+    "Pedigree generation",
+    "COI calculation",
+    "OFA Sync (Orthopedic Foundation for Animals)",
+    "CHIC Readiness Widget",
+    "Volhard Puppy Aptitude Test scoring",
+    "Gun Dog Aptitude Test scoring",
+    "Working-dog role suitability analysis",
+    "Rearing protocols (ENS, ESI, Rule of 7s)",
+    "Scout AI document extraction (genetics PDFs, vet invoices)",
+    "Waitlist management",
+    "Deposit and contract tracking",
+    "Buyer portal",
+    "Built-in marketplace presence",
+    "Mobile-first design (iOS, Android, web)",
+    "Multi-species support (9 species: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "Free tier",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
 };
 ---
 
@@ -127,9 +182,11 @@ const itemListSchema = {
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
-  <!-- Page-scoped JSON-LD: Article + ItemList -->
+  <!-- Page-scoped JSON-LD: Article + ItemList + SoftwareApplication (page-specific)
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
 
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
@@ -149,12 +206,19 @@ const itemListSchema = {
   <!-- Hero -->
   <section class="py-20 px-4">
     <div class="max-w-5xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">The Best Dog Breeding Software in 2026: A Working Breeder's Comparison</h1>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">The Best Dog Breeding Software in 2026 (Compared by a Real Breeder)</h1>
 
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
-        <h2 class="text-xl font-bold mb-3">TL;DR</h2>
-        <p class="text-gray-700 leading-relaxed">
-          Most dog breeding software falls into one of three categories: pedigree databases, kennel record systems, or breeder marketplaces. Very few tools actually run the operational side of a breeding program: heat cycles, progesterone timing, litters, waitlists, deposits, contracts, and buyer communication in one connected workflow. This guide compares the major options so you can pick the right tool for the way you actually run your program.
+        <h2 class="text-xl font-bold mb-3">TL;DR: the verdict by program size</h2>
+        <ul class="text-gray-700 leading-relaxed space-y-2 list-disc pl-5">
+          <li><strong>Working program (2+ breeding girls, active waitlist, real contracts):</strong> <a href="#breederhq" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">BreederHQ</a>. Nine species in one account, free tier, integrated marketplace, OFA Sync, multi-point progesterone, buyer portal. Built around the working program.</li>
+          <li><strong>Single-species dog or cat program that wants records-plus-buyers at one flat price:</strong> <a href="#breederbuddy" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">BreederBuddy</a> at $29.99/mo. Clean interface, no free tier, no marketplace, no horses/goats/rabbits.</li>
+          <li><strong>Multi-species records at the lowest entry price:</strong> <a href="#breeder-cloud-pro" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Breeder Cloud Pro</a> from $6.99/mo. Mature, established, no marketplace.</li>
+          <li><strong>Hobby breeder upgrading from a notebook:</strong> <a href="#breedera" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Breedera</a>. Phone-first heat and litter tracker. You will outgrow it once deposits and contracts enter the picture.</li>
+          <li><strong>Pedigree-driven club or registry work:</strong> <a href="#zooeasy" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">ZooEasy</a>, <a href="#kintraks" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Kintraks</a>, or <a href="#pedfast" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">PedFast</a> depending on whether you need a multi-species database, mature records, or pedigree printing.</li>
+        </ul>
+        <p class="text-sm text-gray-600 mt-4">
+          Below: the pricing comparison most other "best of" lists won&apos;t put on one page, the operational workflow matrix, and the honest case for each tool, including where BreederHQ is not the answer.
         </p>
       </aside>
 
@@ -193,92 +257,101 @@ const itemListSchema = {
   <!-- Quick comparison table -->
   <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Quick comparison: dog breeding software at a glance</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Side-by-side: pricing, species support, and what you actually get</h2>
       <p class="text-gray-700 mb-6">
-        The table below is a positioning summary, not a feature audit. It reflects how each tool publicly markets itself. Verify with a trial against your own data before you commit.
+        This is the table most "best of" pages won&apos;t put on one screen. Pricing in the column below is each vendor&apos;s publicly listed entry-level price as of June 2026. Species column is what the vendor publicly markets as supported. Marketplace column means a buyer-facing public listing site operated by the vendor, not a third-party integration. Verify everything with a trial.
       </p>
       <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
         <table class="w-full text-sm">
           <thead class="bg-gray-100 text-left">
             <tr>
-              <th scope="col" class="px-4 py-3 font-semibold">Software</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Best suited for</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Primary focus</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Mobile-first</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Buyer portal</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Marketplace</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Software</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Entry price</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Free tier</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Species</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Buyer portal</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Marketplace</th>
+              <th scope="col" class="px-3 py-3 font-semibold">Mobile-first</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr class="bg-[hsl(24,95%,97%)]">
-              <th scope="row" class="px-4 py-3 font-bold text-left">BreederHQ</th>
-              <td class="px-4 py-3">Operational breeders running a program end-to-end</td>
-              <td class="px-4 py-3">Operations + records + clients + marketplace</td>
-              <td class="px-4 py-3">Yes</td>
-              <td class="px-4 py-3">Yes</td>
-              <td class="px-4 py-3">Yes</td>
+              <th scope="row" class="px-3 py-3 font-bold text-left">BreederHQ</th>
+              <td class="px-3 py-3 font-semibold">Free, paid from listed pricing</td>
+              <td class="px-3 py-3">Yes</td>
+              <td class="px-3 py-3">9 (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)</td>
+              <td class="px-3 py-3">Yes</td>
+              <td class="px-3 py-3">Yes (marketplace.breederhq.com)</td>
+              <td class="px-3 py-3">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="px-4 py-3 font-semibold text-left">DogBreederPro</th>
-              <td class="px-4 py-3">Breeders who primarily need kennel records</td>
-              <td class="px-4 py-3">Kennel record-keeping</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">No</td>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">BreederBuddy</th>
+              <td class="px-3 py-3">$29.99/mo</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">2 (dog or cat, one per account)</td>
+              <td class="px-3 py-3">Yes</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Limited</td>
             </tr>
             <tr>
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Breedera</th>
-              <td class="px-4 py-3">Hobby breeders who want a phone-first cycle and litter tracker</td>
-              <td class="px-4 py-3">Heat, litter, and whelping logs</td>
-              <td class="px-4 py-3">Yes</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">No</td>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">Breeder Cloud Pro</th>
+              <td class="px-3 py-3">$6.99/mo (Standard) / $13.99/mo (Pro)</td>
+              <td class="px-3 py-3">No (30-day trial)</td>
+              <td class="px-3 py-3">7 (dog, cat, horse, goat, rabbit, sheep, small animal per vendor)</td>
+              <td class="px-3 py-3">Partial</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Limited</td>
             </tr>
             <tr>
-              <th scope="row" class="px-4 py-3 font-semibold text-left">ZooEasy</th>
-              <td class="px-4 py-3">Multi-species clubs and pedigree-driven breeders</td>
-              <td class="px-4 py-3">Pedigree database and records</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">No</td>
-              <td class="px-4 py-3">No</td>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">Dog Breeder Pro</th>
+              <td class="px-3 py-3">Unpublished (gated)</td>
+              <td class="px-3 py-3">Trial only</td>
+              <td class="px-3 py-3">Dog (separate Cat Breeder Pro product)</td>
+              <td class="px-3 py-3">Limited</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">iOS / Android app</td>
             </tr>
             <tr>
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Kintraks</th>
-              <td class="px-4 py-3">Long-running breeders who want a traditional records tool</td>
-              <td class="px-4 py-3">Pedigree, records, registry exports</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">No</td>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">Breedera</th>
+              <td class="px-3 py-3">Freemium tiers</td>
+              <td class="px-3 py-3">Yes (limited)</td>
+              <td class="px-3 py-3">Dog (primary)</td>
+              <td class="px-3 py-3">Limited</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="px-4 py-3 font-semibold text-left">PedFast</th>
-              <td class="px-4 py-3">Pedigree printing and breed club work</td>
-              <td class="px-4 py-3">Pedigree generation</td>
-              <td class="px-4 py-3">No (desktop-leaning)</td>
-              <td class="px-4 py-3">No</td>
-              <td class="px-4 py-3">No</td>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">ZooEasy</th>
+              <td class="px-3 py-3">Subscription (multi-tier)</td>
+              <td class="px-3 py-3">Trial only</td>
+              <td class="px-3 py-3">Multi-species (dog, cat, horse, rabbit, others)</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Limited</td>
             </tr>
             <tr>
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Breeder Cloud Pro</th>
-              <td class="px-4 py-3">Kennel-style breeders who want records and contracts in one place</td>
-              <td class="px-4 py-3">Records and contracts</td>
-              <td class="px-4 py-3">Limited</td>
-              <td class="px-4 py-3">Partial</td>
-              <td class="px-4 py-3">No</td>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">Kintraks</th>
+              <td class="px-3 py-3">Annual license</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Multi-species</td>
+              <td class="px-3 py-3">Limited</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Limited</td>
             </tr>
-            <tr class="bg-gray-50">
-              <th scope="row" class="px-4 py-3 font-semibold text-left">GoodDog <span class="font-normal text-gray-500">(marketplace context only)</span></th>
-              <td class="px-4 py-3">Breeders who want a buyer-facing listing channel</td>
-              <td class="px-4 py-3">Buyer-facing marketplace and directory</td>
-              <td class="px-4 py-3">Yes (buyer side)</td>
-              <td class="px-4 py-3">N/A</td>
-              <td class="px-4 py-3">Is a marketplace</td>
+            <tr>
+              <th scope="row" class="px-3 py-3 font-semibold text-left">PedFast</th>
+              <td class="px-3 py-3">One-time license (desktop)</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">Multi-species</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">No</td>
+              <td class="px-3 py-3">No (desktop)</td>
             </tr>
           </tbody>
         </table>
       </div>
       <p class="text-sm text-gray-600 mt-4">
-        <strong>How to read this table.</strong> "Best suited for" describes the breeder type each tool's public positioning targets. "Primary focus" describes the center of gravity of the product. A "Limited" rating means the capability exists in some form but is not the product's strength based on public positioning. None of this replaces a trial.
+        <strong>How to read this table.</strong> Vendors change pricing and feature scope. Numbers reflect each vendor&apos;s public site as of June 2026. "Unpublished" means the vendor requires a form fill or trial signup to see pricing. "Limited" means the capability exists in some form but is not the product&apos;s strength based on public positioning. None of this replaces a free trial against your own program.
       </p>
     </div>
   </section>
@@ -358,34 +431,37 @@ const itemListSchema = {
             <tr>
               <th scope="col" class="px-3 py-3 font-semibold">Workflow</th>
               <th scope="col" class="px-3 py-3 font-semibold text-center">BreederHQ</th>
-              <th scope="col" class="px-3 py-3 font-semibold text-center">DogBreederPro</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">BreederBuddy</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">Breeder Cloud Pro</th>
+              <th scope="col" class="px-3 py-3 font-semibold text-center">Dog Breeder Pro</th>
               <th scope="col" class="px-3 py-3 font-semibold text-center">Breedera</th>
               <th scope="col" class="px-3 py-3 font-semibold text-center">ZooEasy</th>
               <th scope="col" class="px-3 py-3 font-semibold text-center">Kintraks</th>
               <th scope="col" class="px-3 py-3 font-semibold text-center">PedFast</th>
-              <th scope="col" class="px-3 py-3 font-semibold text-center">Breeder Cloud Pro</th>
-              <th scope="col" class="px-3 py-3 font-semibold text-center">GoodDog</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
             {[
-              ['Heat cycle tracking',           ['✓','–','✓','–','–','–','–','N/A']],
-              ['Progesterone timing workflow',  ['✓','–','–','–','–','–','–','N/A']],
-              ['AI / frozen semen documentation',['✓','–','–','–','–','–','–','N/A']],
-              ['Whelping & litter records',     ['✓','✓','✓','–','✓','–','✓','N/A']],
-              ['Individual puppy tracking',     ['✓','✓','✓','–','✓','–','✓','N/A']],
-              ['Pedigree generation',           ['✓','✓','–','✓','✓','✓','✓','N/A']],
-              ['COI calculation',               ['✓','–','–','✓','✓','✓','–','N/A']],
-              ['OFA / health test tracking',    ['✓','–','–','✓','✓','–','–','N/A']],
-              ['Puppy applications / intake',   ['✓','–','–','–','–','–','–','–']],
-              ['Waitlist management',           ['✓','–','–','–','–','–','–','–']],
-              ['Deposits & payments',           ['✓','–','–','–','–','–','✓','–']],
-              ['Contracts & e-signatures',      ['✓','–','–','–','–','–','✓','–']],
-              ['Buyer portal',                  ['✓','–','–','–','–','–','–','N/A']],
-              ['In-app breeder ↔ buyer messaging',['✓','–','–','–','–','–','–','✓ (buyer-side)']],
-              ['Public storefront / listings',  ['✓','–','–','–','–','–','–','✓']],
-              ['Marketplace exposure',          ['✓','–','–','–','–','–','–','✓']],
-              ['Mobile-first usage',            ['✓','–','✓','–','–','–','–','✓ (buyer-side)']]
+              ['Heat cycle tracking',                ['✓','✓','✓','✓','✓','–','–','–']],
+              ['Multi-point progesterone timing',    ['✓','–','–','✓','–','–','–','–']],
+              ['AI / frozen semen documentation',    ['✓','–','–','✓','–','–','–','–']],
+              ['Whelping & litter records',          ['✓','✓','✓','✓','✓','–','✓','–']],
+              ['Individual puppy tracking',          ['✓','✓','✓','✓','✓','–','✓','–']],
+              ['Pedigree generation',                ['✓','–','✓','✓','–','✓','✓','✓']],
+              ['COI calculation',                    ['✓','–','✓','✓','–','✓','✓','✓']],
+              ['OFA / health test tracking',         ['✓','–','–','✓','–','✓','✓','–']],
+              ['OFA auto-sync (registry pull)',      ['✓','–','–','–','–','–','–','–']],
+              ['CHIC readiness by breed',            ['✓','–','–','–','–','–','–','–']],
+              ['Temperament testing (PAT / Gun Dog)',['✓','–','–','–','–','–','–','–']],
+              ['Puppy applications / intake',        ['✓','✓','✓','✓','–','–','–','–']],
+              ['Waitlist management',                ['✓','✓','✓','✓','–','–','–','–']],
+              ['Deposits & payments',                ['✓','✓','✓','✓','–','–','–','–']],
+              ['Contracts & e-signatures',           ['✓','✓','✓','✓','–','–','–','–']],
+              ['Buyer portal',                       ['✓','✓','Partial','–','–','–','–','–']],
+              ['Multi-species (one account)',        ['9 species','Dog OR cat','Multi','Dog only','Dog','Multi','Multi','Multi']],
+              ['Built-in marketplace presence',      ['✓','–','–','–','–','–','–','–']],
+              ['Free tier',                          ['✓','–','Trial','Trial','✓','Trial','–','–']],
+              ['Mobile-first usage',                 ['✓','–','–','iOS / Android','✓','–','–','–']]
             ].map(([workflow, marks]) => (
               <tr>
                 <th scope="row" class="px-3 py-2 font-medium text-left">{workflow}</th>
@@ -401,6 +477,9 @@ const itemListSchema = {
       <p class="text-base text-gray-700 leading-relaxed mt-6">
         <strong>The honest read on this matrix.</strong> Most tools were built for one slice of the work (pedigrees, or records, or marketing) and grew sideways from there. BreederHQ was built the other direction: starting from the operational program and pulling pedigrees, records, clients, and marketplace into one place. That is why this matrix looks the way it does. If your program only needs one slice, a focused tool is fine. If you are running an end-to-end program, the seams between tools are where most breeders lose time.
       </p>
+      <p class="text-base text-gray-700 leading-relaxed mt-4">
+        <strong>Where BreederBuddy sits.</strong> BreederBuddy gets the records-plus-buyers core right at $29.99/mo, and the interface is clean. The three rows where it does not check are the same three rows that separate a single-species records system from a working operations system: multi-point progesterone, a built-in marketplace, and OFA auto-sync. If your program needs those, BreederBuddy will leave you with a second tool open. If you only need clean records and a buyer portal for one species, the gaps may not matter.
+      </p>
     </div>
   </section>
 
@@ -410,20 +489,22 @@ const itemListSchema = {
       <h2 class="text-3xl md:text-4xl font-bold mb-10">Individual breakdowns</h2>
 
       <!-- BreederHQ -->
-      <div class="mb-12">
+      <div id="breederhq" class="mb-12 scroll-mt-24">
         <h3 class="text-2xl font-bold mb-3">BreederHQ</h3>
-        <p class="text-lg text-gray-700 leading-relaxed mb-4"><strong>Best suited for:</strong> Working breeders running a full program: heat cycles, breedings, litters, waitlists, deposits, contracts, buyer portal, and a marketplace presence, in one connected system.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4"><strong>Best suited for:</strong> Working breeders running a full program: heat cycles, breedings, litters, waitlists, deposits, contracts, buyer portal, and a marketplace presence, in one connected system. Especially valuable if you breed more than one species (or expect to).</p>
         <p class="text-lg font-semibold text-gray-900 mb-2">What it does well.</p>
         <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-4 space-y-2">
           <li>Treats the program as one connected system: dogs, heats, breedings, litters, puppies, applications, waitlist, contracts, deposits, buyers, marketplace, all linked.</li>
           <li>Heat cycle tracking with multi-point progesterone logging and breeding-window guidance.</li>
           <li>Individual puppy records, not litter-as-a-row.</li>
-          <li>OFA, PennHIP, and DNA test results that live on the dog and surface on the pedigree.</li>
+          <li>OFA, PennHIP, and DNA test results that live on the dog and surface on the pedigree. OFA Sync pulls public results from the Orthopedic Foundation for Animals into your animal records automatically. The CHIC Readiness Widget tracks which CHIC requirements your dogs have completed based on the test panels recommended for each breed.</li>
           <li>COI calculation from pedigree data.</li>
-          <li>Built-in buyer portal so puppy buyers self-serve their puppy records, photos, pedigree, contracts, and documents.</li>
-          <li>Built-in marketplace presence at marketplace.breederhq.com. Listings, breeder profile, and inquiries flow into the same system as your operations.</li>
+          <li>Volhard Puppy Aptitude Test and Gun Dog Aptitude Test scoring with working-dog role suitability analysis (K9, military, guide dog, therapy, search and rescue, detection).</li>
+          <li>Scout AI document extraction: upload a genetics PDF from Embark, GenSol, Paw Print, Wisdom Panel, UC Davis, or any other lab, and it pulls every result with confidence scores. Same for vet invoices and medication details.</li>
+          <li>Built-in buyer portal so puppy buyers self-serve their puppy records, photos, pedigree, contracts, and documents. The 40 "any updates?" emails per litter go away.</li>
+          <li>Built-in marketplace presence at marketplace.breederhq.com. Listings, breeder profile, and inquiries flow into the same system as your operations. BreederBuddy, Breeder Cloud Pro, and Dog Breeder Pro do not have one.</li>
           <li>Mobile-first design for whelping nights, shows, and on-the-go updates.</li>
-          <li>Built around dogs first, because dog breeding workflows are operationally the most complex: short, time-critical breeding windows, progesterone-driven timing, individual puppy records, and high-touch buyer programs. The product is shaped by those constraints.</li>
+          <li>Nine species in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle. If you breed dogs and goats, or horses and dogs, you do not need two subscriptions.</li>
         </ul>
         <p class="text-lg font-semibold text-gray-900 mb-2">Where it may not fit.</p>
         <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-4 space-y-2">
@@ -431,25 +512,80 @@ const itemListSchema = {
           <li>If you do not want a buyer-facing marketplace presence, you will leave features on the table.</li>
           <li>Active development means the product is moving. Breeders who prefer "set it and forget it" software that has not changed in a decade should know that is not us.</li>
         </ul>
-        <p class="text-lg text-gray-700 leading-relaxed"><strong>Pricing model.</strong> Free tier available. Paid tiers unlock advanced operational features. Verify current pricing on the pricing page.</p>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Pricing model.</strong> Free tier available with no time limit and no credit card. Paid tiers unlock advanced operational features. <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">See current pricing</a>.</p>
       </div>
 
-      <!-- DogBreederPro -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">DogBreederPro</h3>
-        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Breeders whose primary need is kennel-style records and litter logs in a focused, no-frills tool.</p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> DogBreederPro positions itself around kennel record-keeping for dog breeders. The product appears focused on the records side of the program (dogs, litters, basic documents) rather than the operational planning side.</p>
-        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
+      <!-- BreederBuddy -->
+      <div id="breederbuddy" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
+        <h3 class="text-2xl font-bold mb-3">BreederBuddy</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Single-species dog or cat programs that want a clean, all-in-one records and buyer-management tool at one flat price, without needing a marketplace or multi-species support.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> BreederBuddy markets itself as "the all-in-one software built for serious dog breeders" at $29.99/mo (or $300/year), with an optional website add-on at +$29.99/mo. The product supports dogs OR cats per account (switchable in Settings), but not both simultaneously and not other species.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it shines.</p>
         <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
-          <li>Public positioning does not emphasize modern progesterone-timing workflows.</li>
-          <li>Buyer-facing portal and integrated waitlist, deposit, and contract flows do not appear to be the product's center of gravity.</li>
-          <li>A breeder running an active program will likely still need separate tools for waitlist management, contracts, and buyer communication.</li>
+          <li>Clean, modern interface focused on the records-plus-buyers core.</li>
+          <li>One flat price covers the operational features most single-species programs need.</li>
+          <li>Heat tracking, litter management, customer management, and reminders all in one tool.</li>
+          <li>Optional website add-on if you do not have one already.</li>
         </ul>
-        <p class="text-lg text-gray-700 leading-relaxed"><strong>Verify before deciding.</strong> Run a free trial with one of your actual breeding cycles end to end. Pay attention to where you have to leave the tool to get something done.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where BreederHQ pulls ahead.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li><strong>No free tier.</strong> BreederHQ has one, with no time limit.</li>
+          <li><strong>Single-species per account.</strong> If you breed dogs and goats, dogs and cats together, or anything other than one of two species, you need a different tool or a second subscription. BreederHQ runs nine species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle) in one account.</li>
+          <li><strong>No integrated marketplace.</strong> BreederBuddy&apos;s website add-on is a private storefront, not a public buyer-facing marketplace. BreederHQ&apos;s marketplace at marketplace.breederhq.com is a discovery channel buyers actively search.</li>
+          <li><strong>No OFA Sync.</strong> BreederHQ pulls public OFA results automatically; in BreederBuddy you log them by hand.</li>
+          <li><strong>No CHIC readiness, no Volhard PAT or Gun Dog Aptitude scoring, no Scout AI document extraction.</strong> BreederBuddy is focused on the records-and-buyers core; BreederHQ extends into testing, scoring, and document automation.</li>
+          <li><strong>Multi-point progesterone timing is not a public emphasis.</strong> If your timing matters because you are shipping semen or booking stud trips, verify the workflow with a trial before committing.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Honest verdict.</strong> If you breed dogs only (or cats only), the website add-on is irrelevant to you, your timing is straightforward natural breedings, and you want a clean records and buyer-management system at a predictable price, BreederBuddy is a reasonable pick. If you want a free tier, multi-species support, OFA Sync, or a marketplace presence, BreederHQ covers more ground.</p>
+      </div>
+
+      <!-- Breeder Cloud Pro (pricing-competitive multi-species records) -->
+      <div id="breeder-cloud-pro" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
+        <h3 class="text-2xl font-bold mb-3">Breeder Cloud Pro</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Established multi-species kennel operations that want mature records, pedigrees, contracts, and a pet portal at the lowest entry price in the category.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breeder Cloud Pro markets itself as "the all-in-one breeding software for serious breeders" with Standard at $6.99/mo and Pro at $13.99/mo or $130/year. The vendor publicly claims 17,000+ breeders on the platform, 110,000+ animals tracked, and supports dog, cat, horse, goat, rabbit, sheep, and small-animal breeders.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it shines.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Bundles records with contracts and integrated payments. Fewer separate apps to wire together.</li>
+          <li>Multi-species at a sub-$15/mo price point is genuinely hard to beat on cost.</li>
+          <li>Pedigree builder with genetics calculator. COI and inbreeding analysis present.</li>
+          <li>Established product with a large publicly-claimed install base.</li>
+        </ul>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where BreederHQ pulls ahead.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>No public marketplace exposure. Breeder Cloud Pro&apos;s "pet portal" is a private buyer-facing slice of records, not a discovery channel.</li>
+          <li>No OFA Sync or CHIC Readiness Widget for breed-specific health-test planning.</li>
+          <li>No Volhard PAT, Gun Dog Aptitude, or working-dog role suitability scoring.</li>
+          <li>No Scout AI document extraction.</li>
+          <li>Two more species supported in BreederHQ (alpacas and llamas, plus cattle).</li>
+          <li>BreederHQ has a free tier; Breeder Cloud Pro has a 30-day trial.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Honest verdict.</strong> If your priority is mature multi-species records-and-pedigree at the lowest price in the category and you do not care about marketplace exposure or modern health-registry automation, Breeder Cloud Pro is the cheapest serious option. If you want the marketplace, OFA Sync, temperament testing, and Scout AI on the same workflow, BreederHQ does more for a different cost profile.</p>
+      </div>
+
+      <!-- Dog Breeder Pro -->
+      <div id="dog-breeder-pro" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
+        <h3 class="text-2xl font-bold mb-3">Dog Breeder Pro</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Dog-only kennel operations that want a comprehensive feature set with mobile apps and are willing to inquire about pricing.</p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Dog Breeder Pro markets a comprehensive feature set covering health records, DNA tracking, pedigree, COI and ancestor-loss reports, color forecasting, heat and progesterone, applications, waitlists, contracts with e-signing, and finance tracking. iOS and Android apps are available. A separate "Cat Breeder Pro" product exists for cat programs. Pricing is not posted publicly and requires a trial or form fill.</p>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where it shines.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Broad feature coverage across the breeding lifecycle.</li>
+          <li>Dedicated iOS and Android apps.</li>
+          <li>Public testimonials from breeders who passed AKC kennel inspections using the records.</li>
+        </ul>
+        <p class="text-lg font-semibold text-gray-900 mb-2">Where BreederHQ pulls ahead.</p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
+          <li>Pricing is not posted. You cannot compare cost without filling out a form. BreederHQ&apos;s pricing is on the pricing page.</li>
+          <li>Dog-only. If you also breed cats, you need a second product. If you breed any of the other seven species BreederHQ supports, Dog Breeder Pro is not for you.</li>
+          <li>No built-in marketplace.</li>
+          <li>No OFA Sync (manual health-test entry only).</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed"><strong>Honest verdict.</strong> Worth a trial if you are dog-only, want a feature-complete tool with mobile apps, and do not need a marketplace or multi-species support. Compare total cost after the trial since pricing is gated.</p>
       </div>
 
       <!-- Breedera -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
+      <div id="breedera" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
         <h3 class="text-2xl font-bold mb-3">Breedera</h3>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Hobby and smaller-program breeders who want a phone-first tool focused on heat cycles, breedings, and litter logs.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breedera publicly markets itself as a mobile-first breeding tracker focused on heats, breedings, whelping, and litter records, designed to be used on the phone day to day.</p>
@@ -463,7 +599,7 @@ const itemListSchema = {
       </div>
 
       <!-- ZooEasy -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
+      <div id="zooeasy" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
         <h3 class="text-2xl font-bold mb-3">ZooEasy</h3>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Multi-species clubs, pedigree-driven breeders, and breeders whose primary daily work is keeping a clean breeding-records database.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> ZooEasy publicly positions itself as a multi-species pedigree and breeding records database. It is not dog-specific. It serves dog, cat, horse, rabbit, and other animal breeders with a strong emphasis on pedigree management, inbreeding analysis, and structured records.</p>
@@ -478,7 +614,7 @@ const itemListSchema = {
       </div>
 
       <!-- Kintraks -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
+      <div id="kintraks" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
         <h3 class="text-2xl font-bold mb-3">Kintraks</h3>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Established breeders who want a long-running, traditional records-and-pedigree tool with registry export features.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Kintraks is a long-established breeder records product with pedigree, breeding records, and registration support. It targets breeders who want a comprehensive records system from a vendor that has been in the category for a long time.</p>
@@ -492,7 +628,7 @@ const itemListSchema = {
       </div>
 
       <!-- PedFast -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
+      <div id="pedfast" class="mb-12 pt-8 border-t border-gray-200 scroll-mt-24">
         <h3 class="text-2xl font-bold mb-3">PedFast</h3>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Breed clubs, pedigree-heavy breeders, and anyone whose primary deliverable is a printed or digital pedigree.</p>
         <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> PedFast publicly positions itself around pedigree generation: building, formatting, and printing pedigrees, primarily on a Windows desktop workflow.</p>
@@ -503,21 +639,6 @@ const itemListSchema = {
           <li>A desktop-leaning workflow is at odds with how most breeders actually run their day (phone in hand, in the whelping area or at a show).</li>
         </ul>
         <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Breeders whose biggest job is pedigree production, not program operations.</p>
-      </div>
-
-      <!-- Breeder Cloud Pro -->
-      <div class="mb-12 pt-8 border-t border-gray-200">
-        <h3 class="text-2xl font-bold mb-3">Breeder Cloud Pro</h3>
-        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Best suited for:</strong> Kennel-style operations that need records plus contracts and basic client tooling in one place.</p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Public positioning.</strong> Breeder Cloud Pro publicly positions itself as a kennel and breeder records platform with support for contracts, payments, and customer records.</p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong>Where it shines.</strong> Bundling records with contracts and payments in one tool is genuinely useful. Fewer separate apps to wire together than the records-only competitors.</p>
-        <p class="text-lg font-semibold text-gray-900 mb-2">Where it may fall short for operational breeders.</p>
-        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed mb-3 space-y-2">
-          <li>Public positioning does not emphasize modern progesterone-timing workflows or deep heat-cycle planning.</li>
-          <li>A breeder-grade public storefront and dedicated buyer portal where puppy buyers self-serve their records do not appear to be primary emphases.</li>
-          <li>Integrated marketplace exposure is not part of the product.</li>
-        </ul>
-        <p class="text-lg text-gray-700 leading-relaxed"><strong>Who should look here first.</strong> Established kennel operations whose biggest gap is "I have records, but my contracts and payments are scattered." Breeder Cloud Pro is built around closing that specific gap.</p>
       </div>
 
       <!-- GoodDog -->
@@ -540,7 +661,15 @@ const itemListSchema = {
       <div class="space-y-6">
         <div>
           <h3 class="text-xl font-bold mb-2">Best for the working program running everything in one place: BreederHQ.</h3>
-          <p class="text-lg text-gray-700 leading-relaxed">You want one system for heats, breedings, litters, puppies, applications, waitlists, deposits, contracts, the buyer portal, and a public marketplace presence. The cost of jumping between tools is the cost you are trying to eliminate.</p>
+          <p class="text-lg text-gray-700 leading-relaxed">You want one system for heats, breedings, litters, puppies, applications, waitlists, deposits, contracts, the buyer portal, and a public marketplace presence. The cost of jumping between tools is the cost you are trying to eliminate. Especially the right pick if you also breed (or are thinking about breeding) a second species — BreederHQ is the only tool in this comparison that runs nine species under one account.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for a single-species dog or cat program at a predictable flat price: BreederBuddy.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">$29.99/mo, clean interface, records and buyer management in one. No free tier, no marketplace, one species per account. Good fit if you only breed dogs or only cats, do not need automated OFA pulls, and want a tool that has narrowed to its core on purpose.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Best for multi-species records at the lowest entry price: Breeder Cloud Pro.</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">Starting at $6.99/mo, mature, established, with a publicly claimed install base of 17,000+ breeders. Good fit if cost is the deciding factor and you do not need a marketplace, OFA Sync, or temperament testing.</p>
         </div>
         <div>
           <h3 class="text-xl font-bold mb-2">Best for a hobby breeder who just wants to stop tracking heats in a notebook: Breedera.</h3>
@@ -615,11 +744,12 @@ const itemListSchema = {
           <tbody class="divide-y divide-gray-200">
             <tr class="bg-[hsl(24,95%,97%)]"><th scope="row" class="px-4 py-3 font-bold text-left">BreederHQ</th><td class="px-4 py-3">Mobile-first. The product is designed to be used on the phone in the whelping area, at shows, and on the go.</td></tr>
             <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breedera</th><td class="px-4 py-3">Mobile-first phone-centric tracker.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">DogBreederPro</th><td class="px-4 py-3">Appears to be desktop-leaning with mobile access. Not the product's primary emphasis.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Dog Breeder Pro</th><td class="px-4 py-3">Dedicated iOS and Android apps. Mobile is a real channel for the product.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">BreederBuddy</th><td class="px-4 py-3">Web-based, responsive. Mobile is not publicly emphasized as the primary use mode.</td></tr>
+            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breeder Cloud Pro</th><td class="px-4 py-3">Web-accessible. Mobile is not publicly emphasized as the primary use mode.</td></tr>
             <tr><th scope="row" class="px-4 py-3 font-semibold text-left">ZooEasy</th><td class="px-4 py-3">Records-database heritage. Not publicly positioned as a mobile-first product.</td></tr>
             <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Kintraks</th><td class="px-4 py-3">Long-running records tool. Mobile is not the primary emphasis.</td></tr>
             <tr><th scope="row" class="px-4 py-3 font-semibold text-left">PedFast</th><td class="px-4 py-3">Desktop-leaning pedigree production workflow.</td></tr>
-            <tr><th scope="row" class="px-4 py-3 font-semibold text-left">Breeder Cloud Pro</th><td class="px-4 py-3">Web-accessible. Mobile is not publicly emphasized as the primary use mode.</td></tr>
           </tbody>
         </table>
       </div>
@@ -636,13 +766,23 @@ const itemListSchema = {
       <div class="space-y-8">
         <div>
           <h3 class="text-2xl font-bold mb-2">BreederHQ</h3>
-          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> End-to-end operations in one system. Built around dogs natively because dog breeding is operationally the most complex. Mobile-first. Buyer portal. Built-in marketplace presence. Active development. Free tier.</p>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> End-to-end operations in one system. Nine species in one account. Mobile-first. Built-in buyer portal. Integrated public marketplace at marketplace.breederhq.com. OFA Sync, CHIC Readiness Widget, Volhard PAT and Gun Dog Aptitude scoring, Scout AI document extraction. Free tier with no time limit.</p>
           <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Newer than legacy tools. If you want decade-old, unchanging software, this is not it. If your only need is pedigree printing, a focused pedigree tool will feel lighter.</p>
         </div>
         <div>
-          <h3 class="text-2xl font-bold mb-2">DogBreederPro</h3>
-          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Focused on dog kennel records. Familiar to breeders who want a records-first tool.</p>
-          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Public positioning suggests it is not built around modern progesterone timing, integrated waitlist and contract flows, or a dedicated buyer portal. Operational breeders may still need separate tools.</p>
+          <h3 class="text-2xl font-bold mb-2">BreederBuddy</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Clean, modern interface. $29.99/mo flat. Records and buyer management in one. Optional website add-on. Dog or cat support.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> No free tier. One species per account. No public marketplace. No OFA Sync, CHIC Readiness, or temperament scoring. Multi-point progesterone timing is not a public emphasis.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Breeder Cloud Pro</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Lowest entry price in the category at $6.99/mo Standard or $13.99/mo Pro. Multi-species. Mature, established product with a publicly claimed 17,000+ breeders. Bundles records with contracts and payments.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> No public marketplace. No OFA Sync, no CHIC Readiness Widget, no temperament scoring, no Scout AI. Mobile is not the primary emphasis. 30-day trial, no permanent free tier.</p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Dog Breeder Pro</h3>
+          <p class="text-lg text-gray-700 leading-relaxed"><strong>Pros.</strong> Broad feature coverage including health, DNA, COI, ancestor-loss, color forecasting, applications, waitlists, contracts, finance. Dedicated iOS and Android apps.</p>
+          <p class="text-lg text-gray-700 leading-relaxed mt-2"><strong>Cons.</strong> Pricing not posted publicly. Dog-only (separate Cat Breeder Pro product). No built-in marketplace. No OFA Sync.</p>
         </div>
         <div>
           <h3 class="text-2xl font-bold mb-2">Breedera</h3>
