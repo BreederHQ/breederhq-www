@@ -16,6 +16,16 @@ const excludedPages = [
   'https://breederhq.com/search', // Client-side search UI — no content to index
   'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex
   'https://breederhq.com/provider/stripe-connect/refresh', // Mobile deep-link bridge page — noindex
+  // Species-anchored landing pages — canonical points to /tools/* equivalent; exclude from sitemap
+  // so only the canonical URL appears (Google should not see both in sitemap).
+  'https://breederhq.com/dog-heat-cycle-calculator',
+  'https://breederhq.com/dog-progesterone-calculator',
+  'https://breederhq.com/dog-breeding-planner',
+  'https://breederhq.com/puppy-deworming-schedule',
+  'https://breederhq.com/puppy-application-template',
+  'https://breederhq.com/whelping-date-calculator-dogs',
+  'https://breederhq.com/puppy-weight-chart',
+  'https://breederhq.com/puppy-vaccination-schedule',
 ];
 
 // https://astro.build/config
@@ -50,7 +60,7 @@ export default defineConfig({
           item.priority = 0.8;
         }
         // Cornerstone SEO pages — top-level commercial / authority / funnel content
-        else if (/^https:\/\/breederhq\.com\/(heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|dog-heat-cycle-calculator|tools\/heat-cycle-calculator|tools\/progesterone-timing-tracker|tools\/breeding-planner|tools\/whelping-date-calculator|tools\/puppy-vaccination-schedule-generator|tools\/puppy-deworming-schedule-generator|tools\/puppy-weight-tracker|tools\/puppy-application-builder)$/.test(item.url)) {
+        else if (/^https:\/\/breederhq\.com\/(heat-cycle-tracking|progesterone-testing-dogs|puppy-application-management|tools\/heat-cycle-calculator|tools\/progesterone-timing-tracker|tools\/breeding-planner|tools\/whelping-date-calculator|tools\/puppy-vaccination-schedule-generator|tools\/puppy-deworming-schedule-generator|tools\/puppy-weight-tracker|tools\/puppy-application-builder)$/.test(item.url)) {
           item.changefreq = 'monthly';
           item.priority = 0.9;
         }
