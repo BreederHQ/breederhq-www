@@ -32,7 +32,23 @@ const isProduction = import.meta.env.PROD;
           gtag('js', new Date());
           gtag('config', measurementId, {
             anonymize_ip: true,
-            cookie_flags: 'SameSite=None;Secure'
+            cookie_flags: 'SameSite=None;Secure',
+            // Cross-domain linker: GA4 appends `_gl=...` to every outbound
+            // link/form pointing at one of these hosts so the visitor's
+            // client_id (and gclid) survives the hand-off from www → accounts
+            // → app → marketplace. Without this, each subdomain starts a
+            // fresh session and Google Ads cannot attribute the
+            // free_trial_started conversion back to the originating ad click.
+            linker: {
+              domains: [
+                'breederhq.com',
+                'www.breederhq.com',
+                'accounts.breederhq.com',
+                'app.breederhq.com',
+                'marketplace.breederhq.com'
+              ],
+              accept_incoming: true
+            }
           });
         </script>
       </>
