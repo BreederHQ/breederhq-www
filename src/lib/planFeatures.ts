@@ -188,12 +188,18 @@ export const planCategories: FeatureCategory[] = [
     ]
   },
   {
-    name: 'AI & Help',
+    name: 'Scout AI & Help',
     features: [
+      { name: 'Ask Scout AI anything about your program', standard: false, pro: true, enterprise: true, note: 'Plain-English Q&A across animals, plans, finances, contacts, offspring, medications, and waitlist' },
+      { name: 'Sourced answers', standard: false, pro: true, enterprise: true, note: 'Every Scout AI response cites the actual records it pulled from' },
+      { name: 'Scout AI Repro Insight', standard: false, pro: true, enterprise: true, note: 'Dogs' },
+      { name: 'Health report generator', standard: false, pro: true, enterprise: true, note: 'Scout AI builds PIN-protected PDF reports for vets and buyers; 72-hour expiring share links, no account needed' },
+      { name: 'CSV & print export from any answer', standard: false, pro: true, enterprise: true, note: 'Download or print anything Scout AI returns' },
+      { name: 'Context-aware question suggestions', standard: false, pro: true, enterprise: true, note: 'Scout AI suggests relevant questions based on the page you are on' },
+      { name: 'Conversation memory', standard: false, pro: true, enterprise: true, note: 'Resume across sessions, browse history, build on past threads' },
+      { name: 'Help Assistant (Knowledge-Base AI)', standard: true, pro: true, enterprise: true, note: 'General breeding and platform questions answered from the help center, on every plan' },
       { name: 'Help Center (Article Search)', standard: true, pro: true, enterprise: true },
       { name: 'Interactive Feature Tours', standard: true, pro: true, enterprise: true },
-      { name: 'Help Assistant (Knowledge Base AI)', standard: false, pro: true, enterprise: true },
-      { name: 'Scout AI (Data-Aware Breeder Assistant)', standard: false, pro: true, enterprise: true },
     ]
   },
   {
@@ -250,7 +256,7 @@ export const featuresTaglines: Record<string, string> = {
   'Marketing & Communications': 'Outreach that hits email, portal, marketplace, and socials.',
   'Dashboard': 'A configurable home page for your whole operation.',
   'Bloodlines & Pedigrees': 'Multi-generation pedigrees with real COI math.',
-  'AI & Help': 'A data-aware assistant that knows your program.',
+  'Scout AI & Help': 'A data-aware assistant that actually knows your program.',
   'Admin & Settings': 'Security, staff, audit, API. The boring critical stuff.',
   'Limits': 'What scales with each plan.',
 };
