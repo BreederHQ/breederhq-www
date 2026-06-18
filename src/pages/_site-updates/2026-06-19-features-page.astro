@@ -1,0 +1,32 @@
+---
+export const updateMeta = {
+  date: '2026-06-19',
+  title: 'New /features page replaces the old "features → workflows" redirect',
+  tags: ['marketing-site', 'navigation', 'pricing'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 19, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">A real /features page now exists. Browse what BreederHQ does without thinking about tier.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      Typing <code>breederhq.com/features</code> used to 308 to <code>/workflows</code>, which felt wrong: workflows are <em>how you string features together</em>, not the features themselves. Buyers asking "does this thing do X" want a feature inventory, not a narrative.
+    </p>
+
+    <p>
+      The new page is a complete map of the platform. 13 categories, 135 features, every card badged with the earliest tier that unlocks it (Standard / Pro / Enterprise) and tagged with species when relevant (Horses, Goats, Sheep & Goats, Dogs). Real-time search and tier filtering at the top. Plan Limits render as a separate side-by-side table at the bottom so you can see how each tier scales (animals, contacts, plans: unlimited everywhere; storage, SMS, marketplace listings: scaling).
+    </p>
+
+    <p>
+      Underneath, <code>/features</code> and <code>/pricing/compare</code> now read from the same TypeScript source (<code>src/lib/planFeatures.ts</code>), so badging can never drift between the two pages. Add a feature once, it shows up in both.
+    </p>
+
+    <ul class="list-disc list-inside space-y-1 ml-2">
+      <li><a href="/features" class="text-orange-600 hover:underline">/features</a> — the new discovery hub</li>
+      <li>Linked from the Breeders mega-dropdown (desktop + mobile), above Pricing and Compare Plans</li>
+      <li>Old <code>/features → /workflows</code> Vercel redirect removed</li>
+      <li><code>/workflows</code> stays put as the workflow-narrative hub it always was</li>
+    </ul>
+  </div>
+</article>

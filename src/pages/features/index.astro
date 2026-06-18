@@ -1,0 +1,345 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { planCategories, earliestTier, featuresTaglines } from '../../lib/planFeatures';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Features', url: '/features' }
+];
+
+const faqs = [
+  { question: 'Are all of these features available on every plan?', answer: 'Every feature shown is unlocked during the 14-day free trial. After that, features are organized by plan. Standard is for breeders managing records and selling. Pro unlocks genetics, automation, and the Communications Hub. Enterprise adds team management, audit trails, API access, and advanced analytics.' },
+  { question: 'Which species are supported?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Alpacas, Llamas, Rabbits, Sheep, and Cattle with species-specific workflows for each. Where a feature is species-specific (foaling, dairy production, gun dog aptitude), the species is called out on the card.' },
+  { question: 'Do I have to pay for the marketplace separately?', answer: 'No. Every subscription tier can list and sell on the marketplace. Marketplace listing fees are separate from the subscription. Standard includes 5 active marketplace listings, Pro includes 50, Enterprise is unlimited.' },
+  { question: 'How is this different from the Compare Plans page?', answer: 'This page is for browsing what BreederHQ does without worrying about tier. The Compare Plans page is the side-by-side decision tool when you are ready to pick a tier.' },
+];
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+// Split out Limits so we can render it differently.
+const featureCategories = planCategories.filter(c => c.name !== 'Limits');
+const limitsCategory = planCategories.find(c => c.name === 'Limits');
+
+const totalFeatures = featureCategories.reduce((sum, c) => sum + c.features.length, 0);
+
+const tierLabel = { standard: 'Standard', pro: 'Pro', enterprise: 'Enterprise' } as const;
+const tierBadgeClass = {
+  standard: 'bg-blue-100 text-blue-800 border-blue-200',
+  pro: 'bg-amber-100 text-amber-800 border-amber-300',
+  enterprise: 'bg-violet-100 text-violet-800 border-violet-200',
+} as const;
+
+// Helpers to keep comparison operators OUT of inline JSX (Astro's parser
+// interprets `<=` / `>` as tag tokens even inside expression braces).
+const SHORT_NOTE_MAX = 30;
+const hasShortNote = (note?: string) => !!note && note.length <= SHORT_NOTE_MAX;
+const hasLongNote = (note?: string) => !!note && note.length > SHORT_NOTE_MAX;
+---
+
+<BaseLayout
+  title="Features | BreederHQ"
+  description="Every feature BreederHQ ships, organized by what you do. Animal records, breeding plans, offspring care, CRM, marketplace, finance, contracts, dashboard, and more across nine species."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <main class="bg-stone-50">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-amber-50 via-stone-50 to-stone-50 py-20">
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-orange-200/30 blur-3xl"></div>
+        <div class="absolute -top-20 right-0 w-[420px] h-[420px] rounded-full bg-amber-200/30 blur-3xl"></div>
+      </div>
+      <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <span class="inline-block bg-white border border-stone-200 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5 shadow-sm">
+          The Complete Platform
+        </span>
+        <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight text-stone-900 leading-none mb-5">
+          Everything that's
+          <span class="bg-gradient-to-br from-primary to-amber-600 bg-clip-text text-transparent">included.</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-stone-600 max-w-2xl mb-8 leading-relaxed">
+          Browse what BreederHQ does. Organized by what you do, not by what you pay. Every feature shown below works during the 14-day free trial.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-700 transition">
+            Start 14-Day Free Trial
+          </a>
+          <a href="/pricing/compare" class="inline-block bg-white border border-stone-300 text-stone-700 font-semibold px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition">
+            Compare Plans &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter + search controls -->
+    <section class="sticky top-20 z-20 bg-stone-50/95 backdrop-blur border-b border-stone-200 py-3">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-3">
+        <div class="relative flex-1 min-w-[240px] max-w-[380px]">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" aria-hidden="true">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z" />
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="featuresSearch"
+            placeholder="Search features..."
+            class="w-full bg-white border border-stone-200 rounded-lg pl-9 pr-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            aria-label="Search features"
+          />
+        </div>
+        <div class="flex flex-wrap gap-1.5" id="tierFilters" role="group" aria-label="Filter by plan tier">
+          <button type="button" class="features-tier-btn tier-active" data-tier="all">All Tiers</button>
+          <button type="button" class="features-tier-btn" data-tier="standard">Standard</button>
+          <button type="button" class="features-tier-btn" data-tier="pro">Pro</button>
+          <button type="button" class="features-tier-btn" data-tier="enterprise">Enterprise</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jump nav -->
+    <nav class="bg-white border-b border-stone-200 py-3" aria-label="Feature categories">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-wrap gap-1">
+        {featureCategories.map((cat) => (
+          <a
+            href={`#cat-${slug(cat.name)}`}
+            class="inline-flex items-center gap-1.5 text-sm text-stone-600 hover:text-primary hover:bg-stone-50 px-3 py-1.5 rounded font-medium"
+          >
+            {cat.name}
+            <span class="bg-stone-100 text-stone-500 text-[11px] font-bold px-1.5 py-0.5 rounded-full">
+              {cat.features.length}
+            </span>
+          </a>
+        ))}
+        {limitsCategory && (
+          <a
+            href="#cat-limits"
+            class="inline-flex items-center gap-1.5 text-sm text-stone-600 hover:text-primary hover:bg-stone-50 px-3 py-1.5 rounded font-medium"
+          >
+            Plan Limits
+          </a>
+        )}
+      </div>
+    </nav>
+
+    <!-- Category sections -->
+    {featureCategories.map((cat, i) => {
+      const idx = String(i + 1).padStart(2, '0');
+      const tagline = featuresTaglines[cat.name] || '';
+      const isOdd = i % 2 === 0;
+      return (
+        <section
+          id={`cat-${slug(cat.name)}`}
+          data-category={cat.name}
+          class={`py-16 sm:py-20 border-b border-stone-100 ${isOdd ? 'bg-gradient-to-b from-orange-50/30 to-stone-50' : 'bg-stone-50'}`}
+          style="scroll-margin-top: 220px;"
+        >
+          <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-end justify-between gap-6 mb-8">
+              <div class="max-w-2xl">
+                <div class="flex items-center gap-2.5 mb-3">
+                  <span class="inline-flex items-center justify-center min-w-[32px] h-8 px-2 rounded-lg bg-primary text-white text-sm font-extrabold">
+                    {idx}
+                  </span>
+                  <span class="text-xs sm:text-sm uppercase tracking-widest text-primary font-extrabold">
+                    {cat.name}
+                  </span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900 leading-tight">
+                  {tagline}
+                </h2>
+              </div>
+              <span
+                class="features-count text-sm text-stone-500 bg-white border border-stone-200 px-4 py-2 rounded-full font-semibold shadow-sm whitespace-nowrap"
+                data-base-count={cat.features.length}
+              >
+                <strong class="text-primary text-base font-extrabold">{cat.features.length}</strong> features
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-grid>
+              {cat.features.map((f) => {
+                const tier = earliestTier(f);
+                const isShortNote = hasShortNote(f.note);
+                const isLongNote = hasLongNote(f.note);
+                return (
+                  <article
+                    class="features-card group relative bg-white border border-stone-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-orange-300 transition overflow-hidden"
+                    data-tier={tier}
+                    data-name={(f.name + ' ' + (f.note || '')).toLowerCase()}
+                  >
+                    <span class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary to-amber-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
+                    <div class="flex items-start justify-between gap-3 mb-1">
+                      <h3 class="text-base font-bold text-stone-900 leading-snug tracking-tight">
+                        {f.name}
+                      </h3>
+                      <div class="flex flex-col gap-1 items-end shrink-0">
+                        <span class={`text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full border ${tierBadgeClass[tier]} whitespace-nowrap`}>
+                          {tierLabel[tier]}
+                        </span>
+                        {isShortNote && (
+                          <span class="text-[10px] font-semibold text-stone-500 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded-full whitespace-nowrap">
+                            {f.note}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {isLongNote && (
+                      <p class="text-sm text-stone-600 mt-2 leading-relaxed">{f.note}</p>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    })}
+
+    <!-- Plan Limits -->
+    {limitsCategory && (
+      <section id="cat-limits" class="py-16 sm:py-20 border-b border-stone-100 bg-white" style="scroll-margin-top: 220px;">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="max-w-2xl mb-8">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="inline-flex items-center justify-center min-w-[32px] h-8 px-2 rounded-lg bg-primary text-white text-sm font-extrabold">
+                {String(featureCategories.length + 1).padStart(2, '0')}
+              </span>
+              <span class="text-xs sm:text-sm uppercase tracking-widest text-primary font-extrabold">
+                Plan Limits
+              </span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900 leading-tight">
+              {featuresTaglines['Limits']}
+            </h2>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-2xl p-6 sm:p-8">
+            <div class="grid grid-cols-[1fr_90px_90px_110px] gap-3 pb-3 border-b-2 border-stone-200 text-[11px] font-extrabold uppercase tracking-widest text-stone-500">
+              <span></span>
+              <span class="text-right text-blue-700">Standard</span>
+              <span class="text-right text-amber-700">Pro</span>
+              <span class="text-right text-violet-700">Enterprise</span>
+            </div>
+            {limitsCategory.features.map((row) => (
+              <div class="grid grid-cols-[1fr_90px_90px_110px] gap-3 py-3 border-b border-stone-200 last:border-b-0 text-sm">
+                <span class="font-semibold text-stone-900">{row.name}</span>
+                <span class="text-right font-bold text-blue-700">{row.standard}</span>
+                <span class="text-right font-bold text-amber-700">{row.pro}</span>
+                <span class="text-right font-bold text-violet-700">{row.enterprise}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Footer CTA -->
+    <section class="py-20 text-center bg-stone-50 border-t border-stone-200">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900 mb-3">
+          Try it on your own animals for 14 days.
+        </h2>
+        <p class="text-stone-600 mb-7 text-base sm:text-lg">
+          Every feature shown above is unlocked during the trial. Cancel anytime.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-700 transition">
+            Start 14-Day Free Trial
+          </a>
+          <a href="/pricing/compare" class="inline-block bg-white border border-stone-300 text-stone-700 font-semibold px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition">
+            Compare Plans
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .features-tier-btn {
+      background: white;
+      border: 1px solid #e7e5e4;
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: #374151;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+    }
+    .features-tier-btn:hover {
+      border-color: #d97706;
+    }
+    .features-tier-btn.tier-active {
+      background: hsl(24 95% 53%);
+      color: white;
+      border-color: hsl(24 95% 53%);
+    }
+    .features-empty {
+      grid-column: 1 / -1;
+      padding: 32px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      background: white;
+      border: 1px dashed #e7e5e4;
+      border-radius: 12px;
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      const search = document.getElementById('featuresSearch');
+      const tierBtns = document.querySelectorAll('.features-tier-btn');
+      let activeTier = 'all';
+      let query = '';
+
+      function applyFilters() {
+        document.querySelectorAll('[data-category]').forEach(function (section) {
+          let visibleCount = 0;
+          section.querySelectorAll('.features-card').forEach(function (card) {
+            const tierOk = activeTier === 'all' || card.getAttribute('data-tier') === activeTier;
+            const name = card.getAttribute('data-name') || '';
+            const searchOk = !query || name.indexOf(query) !== -1;
+            const show = tierOk && searchOk;
+            card.style.display = show ? '' : 'none';
+            if (show) visibleCount++;
+          });
+          const grid = section.querySelector('[data-grid]');
+          if (!grid) return;
+          let empty = grid.querySelector('.features-empty');
+          if (visibleCount === 0) {
+            if (!empty) {
+              empty = document.createElement('div');
+              empty.className = 'features-empty';
+              empty.textContent = 'Nothing matches in this category.';
+              grid.appendChild(empty);
+            }
+          } else if (empty) {
+            empty.remove();
+          }
+          const countEl = section.querySelector('.features-count strong');
+          if (countEl) countEl.textContent = String(visibleCount);
+        });
+      }
+
+      tierBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          tierBtns.forEach(function (b) { b.classList.remove('tier-active'); });
+          btn.classList.add('tier-active');
+          activeTier = btn.getAttribute('data-tier') || 'all';
+          applyFilters();
+        });
+      });
+
+      if (search) {
+        search.addEventListener('input', function (e) {
+          const target = e.target;
+          query = (target && target.value ? String(target.value) : '').toLowerCase().trim();
+          applyFilters();
+        });
+      }
+    })();
+  </script>
+</BaseLayout>
