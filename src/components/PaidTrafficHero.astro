@@ -81,17 +81,11 @@ const {
 
 <script is:inline>
   (function () {
-    // Read the inbound query from the early-mounted snapshot
-    // (PaidQuerySnapshot.astro). Falling back to window.location.search
-    // covers pages that forget to mount the snapshot component, but
-    // gclid will likely already be stripped by gtag.js in that case —
-    // so any page that needs full Ads attribution MUST mount
-    // <PaidQuerySnapshot /> in <head> or at the very top of <body>
-    // before <Analytics />.
-    var inboundQuery =
-      (typeof window.__BHQ_INBOUND_QUERY__ === "string"
-        ? window.__BHQ_INBOUND_QUERY__
-        : window.location.search) || "";
+    // Snapshot the inbound query at parse time so that even if gtag /
+    // Clarity / GTM rewrites window.location.search later (gclid is
+    // consumed-and-stripped by GA4 by design), we still forward the
+    // original values onto every signup anchor on the page.
+    var inboundQuery = window.location.search;
 
     function run() {
       try {
