@@ -1,0 +1,45 @@
+---
+// src/components/PaidQuerySnapshot.astro
+//
+// Tiny inline script that snapshots window.location.search into a global
+// (window.__BHQ_INBOUND_QUERY__) the instant the parser hits it. Mount
+// inside <head>, IMMEDIATELY BEFORE the <Analytics /> component, so this
+// script runs before the async gtag.js loader has a chance to consume
+// gclid via the GA4 "URL parameter management" feature.
+//
+// Why this exists (deeply, after three failed attempts):
+//
+// Google Analytics 4 ships with a feature that strips gclid (and other
+// auto-attribution params) from the visible URL via history.replaceState()
+// shortly after gtag.js finishes loading. The stripping serves two
+// purposes for Google: it prevents gclid from polluting bookmarks /
+// shared links, and it migrates the click-id into a first-party cookie
+// for cross-session attribution. The behavior is configurable in
+// GA4 Admin → Data Streams → Configure tag settings → Adjust GCLID URL
+// parameter behavior, but it's ON BY DEFAULT.
+//
+// Critically, the strip ALSO mutates the entry returned by
+// `performance.getEntriesByType("navigation")[0].name`. The Performance
+// Navigation Timing spec says `name` is the page's current document URL,
+// which is updated on history.replaceState(). So our earlier "read from
+// Navigation Timing entry to win the race" approach failed because the
+// entry itself is mutated by GA4's strip, not just the URL bar.
+//
+// The only reliable fix is to capture the URL into a JS variable BEFORE
+// gtag has a chance to run, and have downstream consumers read from
+// that variable. This component is the capture; PaidTrafficHero.astro
+// is the consumer.
+//
+// Mounting position matters: must be inside <head>, immediately before
+// <Analytics />. That way the HTML parser executes this inline script
+// synchronously before it even reaches the `<script async src="gtag/js">`
+// tag, guaranteeing our snapshot writes the global before gtag could
+// possibly start.
+---
+
+<script is:inline>
+  // Snapshot the inbound URL query string the instant the parser hits
+  // this script. Runs synchronously, blocks the parser for ~0.01ms,
+  // completes long before gtag.js can load and strip gclid.
+  window.__BHQ_INBOUND_QUERY__ = window.location.search || "";
+</script>

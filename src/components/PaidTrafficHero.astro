@@ -81,42 +81,29 @@ const {
 
 <script is:inline>
   (function () {
-    // Get the inbound query from the URL the browser was originally
-    // told to load. We try three sources in priority order:
+    // Read the inbound query from the early-mounted snapshot
+    // (PaidQuerySnapshot.astro, mounted in BaseLayout's <head>
+    // immediately before <Analytics />). That snapshot runs
+    // synchronously the instant the parser hits it, BEFORE the async
+    // gtag.js can load and strip gclid via history.replaceState. The
+    // snapshot writes window.__BHQ_INBOUND_QUERY__ which is frozen
+    // from that point on — nothing else on the page reads or writes
+    // it.
     //
-    //   1. performance.getEntriesByType("navigation")[0].name — the
-    //      authoritative original navigation URL. Preserved regardless
-    //      of any later history.replaceState() calls from gtag / Clarity
-    //      / GTM. Available in all modern browsers (Performance API
-    //      Level 2). This is what wins the race.
+    // Earlier attempts tried to recover gclid from
+    // performance.getEntriesByType("navigation")[0].name, but GA4's
+    // history.replaceState() ALSO mutates the Navigation Timing
+    // entry's name property. Only a JS variable captured before gtag
+    // runs survives.
     //
-    //   2. document.referrer if it's empty AND we just landed (no good
-    //      signal, skip).
-    //
-    //   3. window.location.search as a last-resort fallback for very
-    //      old browsers without the Performance Navigation Timing API.
-    //
-    // The "snapshot at parse time" approach failed in practice because
-    // gtag's async preload-and-execute can win the race even when our
-    // inline script is positioned earlier in source order. Reading from
-    // the Navigation Timing entry sidesteps the race entirely because
-    // that value is set by the browser at navigation time, before any
-    // page script runs.
-    var inboundQuery = "";
-    try {
-      var navEntries = performance.getEntriesByType("navigation");
-      if (navEntries && navEntries.length > 0 && navEntries[0].name) {
-        var qIdx = navEntries[0].name.indexOf("?");
-        if (qIdx !== -1) {
-          inboundQuery = navEntries[0].name.substring(qIdx);
-        }
-      }
-    } catch (e) {
-      // Performance API missing — fall through to window.location.search
-    }
-    if (!inboundQuery) {
-      inboundQuery = window.location.search || "";
-    }
+    // Falls back to window.location.search if the snapshot global is
+    // somehow missing (page doesn't use BaseLayout, BaseLayout was
+    // refactored to remove the snapshot mount, etc.) — in that case
+    // gclid is likely already gone but UTMs will still flow.
+    var inboundQuery =
+      (typeof window.__BHQ_INBOUND_QUERY__ === "string"
+        ? window.__BHQ_INBOUND_QUERY__
+        : window.location.search) || "";
 
     function run() {
       try {
