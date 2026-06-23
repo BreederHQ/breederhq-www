@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/HeaderV2.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
+import PaidQuerySnapshot from '../components/PaidQuerySnapshot.astro';
 import TrackingInit from '../components/TrackingInit.astro';
 
 interface Props {
@@ -391,6 +392,15 @@ if (article) {
     {articleSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
     )}
+
+    <!--
+      Paid-traffic query snapshot. Must render IMMEDIATELY BEFORE <Analytics />
+      so it executes before the async gtag.js loader has a chance to consume
+      and strip gclid from window.location.search. Writes a single global
+      window.__BHQ_INBOUND_QUERY__ that PaidTrafficHero.astro reads to
+      forward the original gclid + utm_* onto signup links.
+    -->
+    <PaidQuerySnapshot />
 
     <!-- Analytics Scripts -->
     <Analytics />
