@@ -81,11 +81,42 @@ const {
 
 <script is:inline>
   (function () {
-    // Snapshot the inbound query at parse time so that even if gtag /
-    // Clarity / GTM rewrites window.location.search later (gclid is
-    // consumed-and-stripped by GA4 by design), we still forward the
-    // original values onto every signup anchor on the page.
-    var inboundQuery = window.location.search;
+    // Get the inbound query from the URL the browser was originally
+    // told to load. We try three sources in priority order:
+    //
+    //   1. performance.getEntriesByType("navigation")[0].name — the
+    //      authoritative original navigation URL. Preserved regardless
+    //      of any later history.replaceState() calls from gtag / Clarity
+    //      / GTM. Available in all modern browsers (Performance API
+    //      Level 2). This is what wins the race.
+    //
+    //   2. document.referrer if it's empty AND we just landed (no good
+    //      signal, skip).
+    //
+    //   3. window.location.search as a last-resort fallback for very
+    //      old browsers without the Performance Navigation Timing API.
+    //
+    // The "snapshot at parse time" approach failed in practice because
+    // gtag's async preload-and-execute can win the race even when our
+    // inline script is positioned earlier in source order. Reading from
+    // the Navigation Timing entry sidesteps the race entirely because
+    // that value is set by the browser at navigation time, before any
+    // page script runs.
+    var inboundQuery = "";
+    try {
+      var navEntries = performance.getEntriesByType("navigation");
+      if (navEntries && navEntries.length > 0 && navEntries[0].name) {
+        var qIdx = navEntries[0].name.indexOf("?");
+        if (qIdx !== -1) {
+          inboundQuery = navEntries[0].name.substring(qIdx);
+        }
+      }
+    } catch (e) {
+      // Performance API missing — fall through to window.location.search
+    }
+    if (!inboundQuery) {
+      inboundQuery = window.location.search || "";
+    }
 
     function run() {
       try {
