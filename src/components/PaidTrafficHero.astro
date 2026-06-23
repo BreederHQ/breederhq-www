@@ -1,0 +1,118 @@
+---
+// src/components/PaidTrafficHero.astro
+//
+// Conditional above-the-fold hero CTA shown only to paid-traffic visitors
+// (anyone arriving with gclid / gbraid / wbraid / utm_source / utm_campaign
+// in the query string). Organic visitors see the page unchanged — keeps the
+// existing SEO scroll-depth / time-on-page signals intact while giving
+// Google Ads traffic a single, prominent trial CTA that doesn't require
+// scrolling past the TL;DR + 7 feature accordions to reach.
+//
+// Also runs a tiny inline script that rewrites every
+// accounts.breederhq.com/register anchor on the page to preserve the
+// inbound query string (gclid + utm_*). Without this, the cross-domain GA4
+// _gl linker still carries the client_id (so account_created attributes in
+// GA4), but Google Ads loses its direct gclid → conversion linkage, and
+// keyword-level conversion reporting in Ads breaks.
+//
+// Usage (in a species page after the H1, before the TL;DR aside):
+//
+//   <PaidTrafficHero
+//     headline="Start Your 14-Day Free Trial"
+//     subhead="Built for serious dog breeders. No credit card pressure for the trial period."
+//   />
+//
+// The script block uses is:inline per breederhq-www's tracking-script
+// convention (CLAUDE.md). It is not an analytics integration — it's a
+// link-rewriter that supports analytics — but the same is:inline pattern
+// applies because it manipulates DOM at runtime against env-provided URLs.
+
+interface Props {
+  headline?: string;
+  subhead?: string;
+  /** Optional override for the primary CTA destination. Defaults to
+   *  /register?intent=breeder_dashboard so account_created fires for the
+   *  breeder funnel. */
+  registerHref?: string;
+}
+
+const {
+  headline = "Start Your 14-Day Free Trial",
+  subhead = "No card required to start. Cancel anytime during the trial.",
+  registerHref = "https://accounts.breederhq.com/register?intent=breeder_dashboard",
+} = Astro.props;
+---
+
+<!-- Hidden by default; revealed by the inline script below ONLY when the
+     visitor arrives with paid-traffic markers in the URL. Organic visitors
+     see no extra hero. data-paid-hero is the script's hook. -->
+<aside
+  data-paid-hero
+  hidden
+  class="my-8 rounded-lg border-2 border-[hsl(24,95%,53%)] bg-orange-50 p-6 md:p-8"
+  aria-label="Start a free trial"
+>
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{headline}</h2>
+      <p class="text-gray-700">{subhead}</p>
+    </div>
+    <a
+      data-paid-hero-cta
+      href={registerHref}
+      class="inline-block whitespace-nowrap rounded-lg bg-[hsl(24,95%,53%)] px-8 py-4 text-lg font-bold text-white transition hover:bg-[hsl(24,95%,47%)]"
+      style="min-height: 44px;"
+    >
+      Start 14-Day Free Trial →
+    </a>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      // Paid-traffic markers we care about: Google Ads click id (gclid),
+      // app+web variants (gbraid/wbraid), and standard UTM source/campaign.
+      // Presence of ANY of these flips the page into paid-traffic mode.
+      var isPaid =
+        params.has("gclid") ||
+        params.has("gbraid") ||
+        params.has("wbraid") ||
+        params.has("utm_source") ||
+        params.has("utm_campaign");
+
+      if (isPaid) {
+        var hero = document.querySelector("[data-paid-hero]");
+        if (hero) {
+          hero.hidden = false;
+        }
+      }
+
+      // ALWAYS rewrite every accounts.breederhq.com/register anchor on the
+      // page to preserve the inbound query string, regardless of whether
+      // the visitor is paid traffic. Organic visitors with no query string
+      // get an unchanged href; paid visitors get gclid + utm_* forwarded
+      // to the signup flow so Ads can attribute the conversion to the
+      // exact campaign + keyword that drove the click.
+      var inboundQuery = window.location.search;
+      if (inboundQuery && inboundQuery.length > 1) {
+        var anchors = document.querySelectorAll(
+          'a[href^="https://accounts.breederhq.com/register"]'
+        );
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (!href) continue;
+          var sep = href.indexOf("?") === -1 ? "?" : "&";
+          // Strip the leading "?" from inboundQuery; href's own separator
+          // (sep) handles the join.
+          a.setAttribute("href", href + sep + inboundQuery.substring(1));
+        }
+      }
+    } catch (e) {
+      // Best-effort. If anything throws (very old browser, document not
+      // ready, etc.) the page still renders with its default state.
+    }
+  })();
+</script>

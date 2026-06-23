@@ -1,0 +1,36 @@
+---
+// src/pages/_site-updates/2026-06-23-paid-traffic-hero-cta-on-species-pages.astro
+export const updateMeta = {
+  date: '2026-06-23',
+  title: 'Paid-traffic hero CTA on /dogs and /cats + UTM/gclid pass-through',
+  tags: ['paid-search', 'conversion', 'ads', 'dogs', 'cats'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 23, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Prepared <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">/dogs</a> and <a href="/cats" class="text-[hsl(24,95%,53%)] hover:underline">/cats</a> as Google Ads landing destinations for the upcoming campaign restructure.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-800 mt-4 mb-2">What changed</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li>New shared component <code>src/components/PaidTrafficHero.astro</code> — an above-the-fold orange-bordered CTA block ("Start Your 14-Day Free Trial" + prominent button) that is hidden by default and revealed by an inline script only when the visitor arrives with paid-traffic markers (<code>gclid</code>, <code>gbraid</code>, <code>wbraid</code>, <code>utm_source</code>, or <code>utm_campaign</code>). Organic visitors see the page unchanged so existing SEO engagement signals (scroll depth, time on page, bounce rate) are preserved.</li>
+    <li>The same inline script also rewrites every <code>accounts.breederhq.com/register</code> anchor on the page to append the inbound query string, so <code>gclid</code> and <code>utm_*</code> are forwarded to the signup flow. Without this, Google Ads' direct gclid → conversion attribution loses the keyword linkage even though the cross-domain GA4 <code>_gl</code> linker still carries the client_id.</li>
+    <li>Component wired into <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">/dogs</a> directly after the H1 and before the TL;DR aside, with species-specific subhead copy.</li>
+    <li>Component wired into <a href="/cats" class="text-[hsl(24,95%,53%)] hover:underline">/cats</a> with cattery-first subhead.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Why</h3>
+  <p class="text-gray-700 mb-2">
+    Existing organic landing pages had only two trial CTAs, both below the feature accordions. Google Ads visitors arriving on a high-intent keyword like "dog breeding software" had to scroll past a TL;DR + seven collapsed feature cards before reaching a button. The two pages keep their organic structure for SEO and gain a paid-search-grade hero only when paid traffic is detected.
+  </p>
+  <p class="text-gray-700">
+    Pairs with the conversion-event work shipped 2026-06-22 (<code>account_created</code> + <code>free_trial_started</code> GA4 events on accounts.breederhq.com). The query-string forwarding ensures Google Ads sees the conversion attributed to the correct campaign and keyword.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Next</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li>Apply the same component to the remaining species pages (<code>horses</code>, <code>goats</code>, <code>sheep</code>, <code>rabbits</code>, <code>alpacas</code>, <code>llamas</code>, <code>cattle</code>) once the dog and cat ad groups have produced enough click data to validate the pattern.</li>
+    <li>Consider also wiring it into <code>/for-breeders</code> as the generic-software ad group's destination.</li>
+  </ul>
+</article>
