@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Screenshot from '../components/Screenshot.astro';
+import PaidTrafficHero from '../components/PaidTrafficHero.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -15,6 +16,17 @@ const breadcrumbs = [
 >
 
   <main>
+
+    {/*
+      Mounts the paid-search query-string forwarder in script-only mode.
+      This page already has a strong above-the-fold hero CTA, so we do NOT
+      render the reveal-block — we only install the inline script that
+      appends gclid + utm_* from window.location.search onto every
+      accounts.breederhq.com/register anchor on the page. Without this,
+      Google Ads loses keyword-level attribution even though GA4's _gl
+      linker still carries the client_id.
+    */}
+    <PaidTrafficHero scriptOnly />
 
     <!-- ============================================ -->
     <!-- HERO                                         -->

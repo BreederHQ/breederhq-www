@@ -34,39 +34,50 @@ interface Props {
    *  /register?intent=breeder_dashboard so account_created fires for the
    *  breeder funnel. */
   registerHref?: string;
+  /** When true, the visible reveal-block is suppressed entirely and only
+   *  the query-string-rewrite script is mounted. Use this on pages whose
+   *  existing organic hero is already strong enough for paid traffic
+   *  (e.g. /for-breeders, where a prominent trial CTA already sits below
+   *  the H1) — the page stays visually identical, but every signup link
+   *  silently gains gclid + utm_* forwarding so Google Ads keeps its
+   *  campaign + keyword attribution intact. */
+  scriptOnly?: boolean;
 }
 
 const {
   headline = "Start Your 14-Day Free Trial",
   subhead = "No card required to start. Cancel anytime during the trial.",
   registerHref = "https://accounts.breederhq.com/register?intent=breeder_dashboard",
+  scriptOnly = false,
 } = Astro.props;
 ---
 
-<!-- Hidden by default; revealed by the inline script below ONLY when the
-     visitor arrives with paid-traffic markers in the URL. Organic visitors
-     see no extra hero. data-paid-hero is the script's hook. -->
-<aside
-  data-paid-hero
-  hidden
-  class="my-8 rounded-lg border-2 border-[hsl(24,95%,53%)] bg-orange-50 p-6 md:p-8"
-  aria-label="Start a free trial"
->
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-    <div>
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{headline}</h2>
-      <p class="text-gray-700">{subhead}</p>
+{!scriptOnly && (
+  <!-- Hidden by default; revealed by the inline script below ONLY when
+       the visitor arrives with paid-traffic markers in the URL. Organic
+       visitors see no extra hero. data-paid-hero is the script's hook. -->
+  <aside
+    data-paid-hero
+    hidden
+    class="my-8 rounded-lg border-2 border-[hsl(24,95%,53%)] bg-orange-50 p-6 md:p-8"
+    aria-label="Start a free trial"
+  >
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{headline}</h2>
+        <p class="text-gray-700">{subhead}</p>
+      </div>
+      <a
+        data-paid-hero-cta
+        href={registerHref}
+        class="inline-block whitespace-nowrap rounded-lg bg-[hsl(24,95%,53%)] px-8 py-4 text-lg font-bold text-white transition hover:bg-[hsl(24,95%,47%)]"
+        style="min-height: 44px;"
+      >
+        Start 14-Day Free Trial →
+      </a>
     </div>
-    <a
-      data-paid-hero-cta
-      href={registerHref}
-      class="inline-block whitespace-nowrap rounded-lg bg-[hsl(24,95%,53%)] px-8 py-4 text-lg font-bold text-white transition hover:bg-[hsl(24,95%,47%)]"
-      style="min-height: 44px;"
-    >
-      Start 14-Day Free Trial →
-    </a>
-  </div>
-</aside>
+  </aside>
+)}
 
 <script is:inline>
   (function () {

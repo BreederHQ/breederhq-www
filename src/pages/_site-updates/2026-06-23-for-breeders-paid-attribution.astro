@@ -1,0 +1,34 @@
+---
+// src/pages/_site-updates/2026-06-23-for-breeders-paid-attribution.astro
+export const updateMeta = {
+  date: '2026-06-23',
+  title: 'For Breeders: paid-search attribution preserved (UTM/gclid pass-through)',
+  tags: ['paid-search', 'conversion', 'ads', 'for-breeders'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 23, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Made <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">/for-breeders</a> a paid-ready Google Ads landing destination for the generic-software ad group, without altering its visual structure.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-800 mt-4 mb-2">What changed</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li>Extended <code>src/components/PaidTrafficHero.astro</code> with a <code>scriptOnly</code> prop that suppresses the reveal-block and mounts only the inline query-string-rewrite script.</li>
+    <li>Mounted <code>&lt;PaidTrafficHero scriptOnly /&gt;</code> at the top of <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">/for-breeders</a>. The page renders byte-for-byte identical to before — same hero copy, same primary CTA, same screenshot.</li>
+    <li>Every <code>accounts.breederhq.com/register</code> anchor on the page now silently gains <code>gclid</code> and <code>utm_*</code> forwarding so Google Ads keeps its campaign + keyword attribution intact when a paid visitor clicks through to signup.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Why no visible reveal-block</h3>
+  <p class="text-gray-700">
+    Unlike <code>/dogs</code> and <code>/cats</code> (which had trial CTAs buried below the feature accordions), <code>/for-breeders</code> already has a strong above-the-fold hero with the primary CTA directly under the H1. Adding the reveal-block would duplicate the CTA and clutter the hero. The page only needed the attribution fix.
+  </p>
+
+  <h3 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Campaign destinations now ready</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li><strong>Generic-software ad group</strong> → <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">/for-breeders</a></li>
+    <li><strong>Dog-vertical ad group</strong> → <a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">/dogs</a></li>
+    <li><strong>Cat-vertical ad group</strong> → <a href="/cats" class="text-[hsl(24,95%,53%)] hover:underline">/cats</a></li>
+    <li><strong>Brand-defense campaign</strong> → <a href="/" class="text-[hsl(24,95%,53%)] hover:underline">/</a> (no change needed)</li>
+  </ul>
+</article>
