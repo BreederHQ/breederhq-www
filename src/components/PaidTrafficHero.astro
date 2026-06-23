@@ -81,49 +81,66 @@ const {
 
 <script is:inline>
   (function () {
-    try {
-      var params = new URLSearchParams(window.location.search);
-      // Paid-traffic markers we care about: Google Ads click id (gclid),
-      // app+web variants (gbraid/wbraid), and standard UTM source/campaign.
-      // Presence of ANY of these flips the page into paid-traffic mode.
-      var isPaid =
-        params.has("gclid") ||
-        params.has("gbraid") ||
-        params.has("wbraid") ||
-        params.has("utm_source") ||
-        params.has("utm_campaign");
+    // Snapshot the inbound query at parse time so that even if gtag /
+    // Clarity / GTM rewrites window.location.search later (gclid is
+    // consumed-and-stripped by GA4 by design), we still forward the
+    // original values onto every signup anchor on the page.
+    var inboundQuery = window.location.search;
 
-      if (isPaid) {
-        var hero = document.querySelector("[data-paid-hero]");
-        if (hero) {
-          hero.hidden = false;
-        }
-      }
+    function run() {
+      try {
+        var params = new URLSearchParams(inboundQuery);
+        // Paid-traffic markers: Google Ads click id (gclid), app+web
+        // variants (gbraid/wbraid), and standard UTM source/campaign.
+        // Presence of ANY of these flips the page into paid-traffic mode.
+        var isPaid =
+          params.has("gclid") ||
+          params.has("gbraid") ||
+          params.has("wbraid") ||
+          params.has("utm_source") ||
+          params.has("utm_campaign");
 
-      // ALWAYS rewrite every accounts.breederhq.com/register anchor on the
-      // page to preserve the inbound query string, regardless of whether
-      // the visitor is paid traffic. Organic visitors with no query string
-      // get an unchanged href; paid visitors get gclid + utm_* forwarded
-      // to the signup flow so Ads can attribute the conversion to the
-      // exact campaign + keyword that drove the click.
-      var inboundQuery = window.location.search;
-      if (inboundQuery && inboundQuery.length > 1) {
-        var anchors = document.querySelectorAll(
-          'a[href^="https://accounts.breederhq.com/register"]'
-        );
-        for (var i = 0; i < anchors.length; i++) {
-          var a = anchors[i];
-          var href = a.getAttribute("href");
-          if (!href) continue;
-          var sep = href.indexOf("?") === -1 ? "?" : "&";
-          // Strip the leading "?" from inboundQuery; href's own separator
-          // (sep) handles the join.
-          a.setAttribute("href", href + sep + inboundQuery.substring(1));
+        if (isPaid) {
+          var hero = document.querySelector("[data-paid-hero]");
+          if (hero) {
+            hero.hidden = false;
+          }
         }
+
+        // ALWAYS rewrite every accounts.breederhq.com/register anchor on
+        // the page to preserve the inbound query string, regardless of
+        // whether the visitor is paid traffic. Organic visitors with no
+        // query string get an unchanged href; paid visitors get gclid +
+        // utm_* forwarded to the signup flow so Ads can attribute the
+        // conversion to the exact campaign + keyword that drove the click.
+        if (inboundQuery && inboundQuery.length > 1) {
+          var anchors = document.querySelectorAll(
+            'a[href^="https://accounts.breederhq.com/register"]'
+          );
+          for (var i = 0; i < anchors.length; i++) {
+            var a = anchors[i];
+            var href = a.getAttribute("href");
+            if (!href) continue;
+            var sep = href.indexOf("?") === -1 ? "?" : "&";
+            // Strip the leading "?" from inboundQuery; href's own
+            // separator (sep) handles the join.
+            a.setAttribute("href", href + sep + inboundQuery.substring(1));
+          }
+        }
+      } catch (e) {
+        // Best-effort. If anything throws (very old browser, etc.) the
+        // page still renders with its default state.
       }
-    } catch (e) {
-      // Best-effort. If anything throws (very old browser, document not
-      // ready, etc.) the page still renders with its default state.
+    }
+
+    // The component is positioned near the top of <main>, which means
+    // most signup anchors are parsed AFTER this script tag. If we ran
+    // synchronously here, querySelectorAll would find zero anchors. Wait
+    // for the full DOM to parse before scanning.
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", run);
+    } else {
+      run();
     }
   })();
 </script>
