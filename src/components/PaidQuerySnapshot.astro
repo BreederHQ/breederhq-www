@@ -1,45 +1,99 @@
 ---
 // src/components/PaidQuerySnapshot.astro
 //
-// Tiny inline script that snapshots window.location.search into a global
-// (window.__BHQ_INBOUND_QUERY__) the instant the parser hits it. Mount
-// inside <head>, IMMEDIATELY BEFORE the <Analytics /> component, so this
-// script runs before the async gtag.js loader has a chance to consume
-// gclid via the GA4 "URL parameter management" feature.
+// Tiny inline script that captures the inbound URL query string (gclid,
+// utm_*, etc) at the earliest possible moment and persists it across
+// every subsequent page navigation within the same browsing session.
 //
-// Why this exists (deeply, after three failed attempts):
+// Mount inside <head>, IMMEDIATELY BEFORE the <Analytics /> component,
+// so this script runs before the async gtag.js loader has a chance to
+// consume gclid via the GA4 "URL parameter management" feature.
 //
-// Google Analytics 4 ships with a feature that strips gclid (and other
-// auto-attribution params) from the visible URL via history.replaceState()
-// shortly after gtag.js finishes loading. The stripping serves two
-// purposes for Google: it prevents gclid from polluting bookmarks /
-// shared links, and it migrates the click-id into a first-party cookie
-// for cross-session attribution. The behavior is configurable in
-// GA4 Admin → Data Streams → Configure tag settings → Adjust GCLID URL
-// parameter behavior, but it's ON BY DEFAULT.
+// Why both global AND sessionStorage:
 //
-// Critically, the strip ALSO mutates the entry returned by
-// `performance.getEntriesByType("navigation")[0].name`. The Performance
-// Navigation Timing spec says `name` is the page's current document URL,
-// which is updated on history.replaceState(). So our earlier "read from
-// Navigation Timing entry to win the race" approach failed because the
-// entry itself is mutated by GA4's strip, not just the URL bar.
+// 1. window.__BHQ_INBOUND_QUERY__ — the global is the source PaidTrafficHero
+//    reads from on the current page. It's reset on every page navigation
+//    (it's just a JS variable in the new page's window).
 //
-// The only reliable fix is to capture the URL into a JS variable BEFORE
-// gtag has a chance to run, and have downstream consumers read from
-// that variable. This component is the capture; PaidTrafficHero.astro
-// is the consumer.
+// 2. sessionStorage 'bhq_inbound_query' — persisted across page loads
+//    within the same browser session. Required because Astro is statically
+//    rendered: every internal nav click is a full page load, and the new
+//    page's URL doesn't carry the original query string. Without sessionStorage,
+//    a visitor who lands on / from a Google Ad and then clicks "Dog Breeding"
+//    in the nav before clicking a trial CTA loses gclid completely.
 //
-// Mounting position matters: must be inside <head>, immediately before
-// <Analytics />. That way the HTML parser executes this inline script
-// synchronously before it even reaches the `<script async src="gtag/js">`
-// tag, guaranteeing our snapshot writes the global before gtag could
-// possibly start.
+// On every page load this script:
+//   - If the current URL has paid-traffic params, capture them and BOTH
+//     write them to the global and persist them to sessionStorage.
+//   - If the current URL has NO paid-traffic params, fall back to whatever
+//     sessionStorage already has (carrying forward the original attribution).
+//
+// First-touch within the session wins. We only OVERWRITE sessionStorage
+// when the current URL has new paid-traffic markers — otherwise we
+// preserve what we captured on the first paid landing.
+//
+// Why this exists at all (deep background):
+//
+// GA4 ships with URL parameter management ON by default — gtag.js strips
+// gclid from the URL via history.replaceState() shortly after it loads.
+// The strip ALSO mutates performance.getEntriesByType("navigation")[0].name
+// because per the spec that entry reflects the document's current URL,
+// not the original navigation URL. The only reliable way to keep gclid
+// alive for downstream link rewriting is to capture it before gtag runs
+// AND persist it before the next page navigation wipes the global.
 ---
 
 <script is:inline>
-  // Snapshot the inbound URL query string the instant the parser hits
-  // this script. Runs synchronously, blocks the parser for ~0.01ms,
-  // completes long before gtag.js can load and strip gclid.
-  window.__BHQ_INBOUND_QUERY__ = window.location.search || "";
+  (function () {
+    var STORAGE_KEY = "bhq_inbound_query";
+
+    function hasPaidMarkers(qs) {
+      if (!qs || qs.length < 2) return false;
+      var p = new URLSearchParams(qs);
+      return (
+        p.has("gclid") ||
+        p.has("gbraid") ||
+        p.has("wbraid") ||
+        p.has("utm_source") ||
+        p.has("utm_medium") ||
+        p.has("utm_campaign") ||
+        p.has("utm_term") ||
+        p.has("utm_content")
+      );
+    }
+
+    var currentQuery = window.location.search || "";
+    var resolvedQuery = "";
+
+    try {
+      // Always prefer the CURRENT URL's params if they're paid-traffic
+      // markers — that represents a fresh landing (or a fresh ad click
+      // overriding a stale stored value).
+      if (hasPaidMarkers(currentQuery)) {
+        resolvedQuery = currentQuery;
+        try {
+          sessionStorage.setItem(STORAGE_KEY, currentQuery);
+        } catch (e) {
+          // sessionStorage may be unavailable (private mode quirks, etc).
+          // The global still works for THIS page; cross-page persistence
+          // is best-effort.
+        }
+      } else {
+        // No paid markers on the current URL — carry forward whatever
+        // we captured earlier in this session.
+        try {
+          var stored = sessionStorage.getItem(STORAGE_KEY);
+          if (stored) resolvedQuery = stored;
+        } catch (e) {
+          // sessionStorage unavailable; fall through with empty string.
+        }
+      }
+    } catch (e) {
+      // Defensive — if any of the above throws (URLSearchParams missing
+      // in very old browsers, etc), the page still works without paid
+      // attribution forwarding.
+    }
+
+    window.__BHQ_INBOUND_QUERY__ = resolvedQuery;
+  })();
 </script>
