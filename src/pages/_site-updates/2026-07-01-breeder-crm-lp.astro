@@ -1,0 +1,49 @@
+---
+export const updateMeta = {
+  date: '2026-07-01',
+  title: 'Shipped /breeder-crm (Cluster A4 LP)',
+  tags: ['seo', 'landing-page', 'cluster-a', 'crm'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 1, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Shipped <code>/breeder-crm</code> as page A4 of the 12-page LP cluster plan (<code>docs/marketing/LP-CLUSTER-PLAN-2026-06.md</code>). Closes out Cluster A on the species/role axis alongside <code>/breeder-management-software</code> (A1), <code>/cat-cattery-software</code> (A2), and <code>/horse-breeding-software</code> (A3).</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>Why.</strong> The strategy doc and cluster brief flagged "breeder CRM" as a distinct intent from "breeder management software" — same buyer, different frame. Breeders frustrated with HubSpot, Pipedrive, or a spreadsheet for their buyer pipeline are searching for a CRM that fits the work, not a general-purpose operations system. No existing page targeted that query.
+    </p>
+
+    <p>
+      <strong>What the page is.</strong> A CRM-framed product LP that centers the buyer relationship, not the animal. H1: <em>A CRM Built for Breeders, Not Salespeople</em>. Eight-section outline per the brief: hero + dual CTA, "why a generic CRM fails breeders" (three concrete failure modes), the eight-stage breeder pipeline (inquiry → screening → waitlist → deposit → match → contract → handoff → after-sale) with each stage mapped to a BreederHQ surface, comms hub band, Prospect/Contact split explainer, pricing teaser, four CRM-specific FAQs, related links, final CTA.
+    </p>
+
+    <p>
+      <strong>Data-model accuracy.</strong> The Prospect/Contact split is documented honestly because it is a load-bearing product decision: Prospect = pre-approval, Contact = breeder-curated post-approval, buyers are NOT auto-created as Contacts on inquiry/waitlist. WaitlistEntry is correctly described as an optional downstream state of a Prospect with at-most-one-active, not the source of truth. This matches the canonical data model and the buyer-pipeline planning doc — the page does not invent a model that does not exist.
+    </p>
+
+    <p>
+      <strong>Anti-cannibalization.</strong> H1 deliberately does not use "best CRM" or "best breeding software" — those are owned by the existing <code>/compare/best-X-software</code> pages. CRM framing is a distinct angle from A1's "management software" framing, so the two pages address overlapping buyers from different intents rather than competing for the same query. Page links OUT to A1 for buyers who want the full operations system.
+    </p>
+
+    <p>
+      <strong>Schema.</strong> One JSON-LD block — <code>SoftwareApplication</code> with <code>applicationCategory: BusinessApplication</code> and <code>applicationSubCategory: CRM</code>, 11-item <code>featureList</code> scoped to CRM surfaces (not the full platform feature list), and an <code>Offer</code> pointing to <code>/pricing</code> with the 14-day trial. <code>FAQPage</code> and <code>BreadcrumbList</code> auto-emit through BaseLayout props.
+    </p>
+
+    <p>
+      <strong>Outbound links from the new page</strong> satisfy the per-page contract from the brief: <code>/pricing</code> (primary CTA, repeated), <code>/puppy-application-management</code>, <code>/puppy-application-template</code>, <code>/breeder-management-software</code> (A1 sibling), <code>/litter-management</code> (B1, not yet shipped), and <code>/trust</code>. The link to <code>/litter-management</code> is broken-link debt that resolves when B1 ships per the daily execution sequence.
+    </p>
+
+    <p>
+      <strong>Honesty constraints honored.</strong> Trial language is "14-day free trial" — never "free tier," never "no time limit." FOUNDER50 framed as "first 100 founding subscribers" for 50% off Pro/Enterprise for 12 months. No "tenant" / "tenant-wide" anywhere in user-facing copy — uses "operation," "account," and "buyer relationship." Trust posture link present. Pricing claims kept to "see pricing page" rather than inventing numbers.
+    </p>
+
+    <p>
+      <strong>Reciprocal inbound-link sweep is still deferred</strong> per the cluster-plan rule that batches it after Week 1 ships in full. With A4 now live alongside A1 and A2, the only remaining Cluster A page is A3 (<code>/horse-breeding-software</code>). Once A3 lands, the cross-link pass updates <code>/</code>, <code>/for-breeders</code>, <code>/pricing</code>, and the existing <code>/compare/best-X-software</code> pages to point at the four new Cluster A LPs in a single atomic commit.
+    </p>
+
+    <p>
+      <strong>Next.</strong> Day 5 of the execution sequence is B1 (<code>/litter-management</code>), then B2 (<code>/tools/coefficient-of-inbreeding-calculator</code>), then Cluster C comparison pages. A3 (<code>/horse-breeding-software</code>) is the remaining Cluster A page and should ship before the Week 1 reciprocal-link sweep.
+    </p>
+  </div>
+</article>
