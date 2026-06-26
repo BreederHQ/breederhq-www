@@ -1,0 +1,151 @@
+---
+// Sticky bottom CTA for top-of-funnel articles (e.g. valais-blacknose-sheep).
+// Appears after 25% scroll, dismissible for 7 days. Tracks impressions and clicks
+// to GA4 via gtag so we can measure variant performance.
+//
+// Props:
+//   variant       — copy variant id, used for A/B testing + GA event labels
+//   headline      — main headline shown in the bar
+//   subline       — supporting line under the headline (mobile-collapsed)
+//   ctaLabel      — button copy
+//   ctaHref       — link target (default: /register with intent + FOUNDER50 ref)
+//   articleSlug   — used in GA event labels (e.g. "valais-blacknose-sheep")
+//
+// Behavior:
+//   - Hidden until reader has scrolled past 25% of the page
+//   - Dismiss button writes a cookie (bhq_sticky_cta_dismissed_<slug>) for 7 days
+//   - GA4 events: sticky_cta_impression, sticky_cta_click, sticky_cta_dismiss
+//   - Respects reduced motion (no slide-up animation)
+
+export interface Props {
+  variant: string;
+  headline: string;
+  subline: string;
+  ctaLabel: string;
+  ctaHref?: string;
+  articleSlug: string;
+}
+
+const {
+  variant,
+  headline,
+  subline,
+  ctaLabel,
+  ctaHref = 'https://accounts.breederhq.com/register?intent=breeder_dashboard&ref=valais_article',
+  articleSlug,
+} = Astro.props;
+---
+
+<div
+  id="article-sticky-cta"
+  data-variant={variant}
+  data-article-slug={articleSlug}
+  class="fixed bottom-0 left-0 right-0 z-40 translate-y-full opacity-0 pointer-events-none transition-transform transition-opacity duration-300 ease-out motion-reduce:transition-none"
+  role="complementary"
+  aria-label="Track your own breeding program"
+  hidden
+>
+  <div class="border-t-2 border-amber-400 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+    <div class="max-w-4xl mx-auto px-4 py-3 sm:py-4 flex items-center gap-3 sm:gap-4">
+      <div class="flex-1 min-w-0">
+        <p class="text-sm sm:text-base font-bold text-gray-900 leading-snug">
+          {headline}
+        </p>
+        <p class="hidden sm:block text-sm text-gray-600 leading-snug mt-0.5">
+          {subline}
+        </p>
+      </div>
+      <a
+        href={ctaHref}
+        data-cta-link
+        class="flex-shrink-0 inline-block bg-[hsl(24,95%,53%)] text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg font-bold text-sm sm:text-base hover:bg-[hsl(24,95%,48%)] transition whitespace-nowrap"
+        style="min-height: 44px;"
+      >
+        {ctaLabel}
+      </a>
+      <button
+        type="button"
+        data-cta-dismiss
+        class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+        aria-label="Dismiss"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ variant, articleSlug }}>
+  (function () {
+    const bar = document.getElementById('article-sticky-cta');
+    if (!bar) return;
+
+    const cookieName = 'bhq_sticky_cta_dismissed_' + articleSlug;
+    const eventLabel = articleSlug + ':' + variant;
+
+    function hasCookie(name) {
+      return document.cookie.split('; ').some(function (c) { return c.indexOf(name + '=') === 0; });
+    }
+
+    function setCookie(name, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = name + '=1; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+    }
+
+    function track(event) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', event, {
+          event_category: 'article_sticky_cta',
+          event_label: eventLabel,
+          article_slug: articleSlug,
+          variant: variant,
+        });
+      }
+    }
+
+    if (hasCookie(cookieName)) return;
+
+    let shown = false;
+    function show() {
+      if (shown) return;
+      shown = true;
+      bar.hidden = false;
+      // Next frame so the transition fires from the hidden state.
+      requestAnimationFrame(function () {
+        bar.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+      });
+      track('sticky_cta_impression');
+      window.removeEventListener('scroll', onScroll);
+    }
+
+    function onScroll() {
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = document.documentElement.scrollHeight;
+      if (total <= 0) return;
+      if (scrolled / total >= 0.25) show();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // In case the page is already short / already scrolled.
+    onScroll();
+
+    const link = bar.querySelector('[data-cta-link]');
+    if (link) {
+      link.addEventListener('click', function () { track('sticky_cta_click'); });
+    }
+
+    const dismiss = bar.querySelector('[data-cta-dismiss]');
+    if (dismiss) {
+      dismiss.addEventListener('click', function () {
+        setCookie(cookieName, 7);
+        bar.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+        track('sticky_cta_dismiss');
+        window.setTimeout(function () { bar.hidden = true; }, 300);
+      });
+    }
+  })();
+</script>

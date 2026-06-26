@@ -1,0 +1,73 @@
+---
+// In-content soft CTA card. Designed to sit ONCE inside an article body
+// at a natural emotional peak (e.g. after "Why records matter"), not at
+// the bottom. Editorial tone, low visual weight, clickthroughs tracked.
+//
+// Props mirror ArticleStickyCTA for A/B testing parity.
+
+export interface Props {
+  variant: string;
+  headline: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref?: string;
+  articleSlug: string;
+}
+
+const {
+  variant,
+  headline,
+  body,
+  ctaLabel,
+  ctaHref = 'https://accounts.breederhq.com/register?intent=breeder_dashboard&ref=valais_article_inline',
+  articleSlug,
+} = Astro.props;
+---
+
+<aside
+  class="my-10 rounded-lg border border-stone-200 bg-stone-50 p-6 sm:p-7"
+  data-inline-cta
+  data-variant={variant}
+  data-article-slug={articleSlug}
+  aria-label="Try BreederHQ"
+>
+  <h3 class="text-xl font-bold text-gray-900 mb-2 leading-snug">
+    {headline}
+  </h3>
+  <p class="text-gray-700 leading-relaxed mb-4">
+    {body}
+  </p>
+  <a
+    href={ctaHref}
+    data-inline-cta-link
+    class="inline-flex items-center gap-2 text-[hsl(24,95%,53%)] font-semibold hover:underline"
+  >
+    {ctaLabel}
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </a>
+  <p class="text-xs text-gray-500 mt-3">
+    14-day free trial. First 100 founders: code <strong>FOUNDER50</strong> for 50% off Pro or Enterprise for 12 months.
+  </p>
+</aside>
+
+<script is:inline define:vars={{ variant, articleSlug }}>
+  (function () {
+    const card = document.querySelector('[data-inline-cta][data-article-slug="' + articleSlug + '"]');
+    if (!card) return;
+    const link = card.querySelector('[data-inline-cta-link]');
+    if (!link) return;
+    link.addEventListener('click', function () {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'inline_cta_click', {
+          event_category: 'article_inline_cta',
+          event_label: articleSlug + ':' + variant,
+          article_slug: articleSlug,
+          variant: variant,
+        });
+      }
+    });
+  })();
+</script>

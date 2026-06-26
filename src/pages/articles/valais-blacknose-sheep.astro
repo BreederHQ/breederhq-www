@@ -1,5 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleInlineCTA from '../../components/ArticleInlineCTA.astro';
+import ArticleStickyCTA from '../../components/ArticleStickyCTA.astro';
+
+// A/B variant for the CTA copy. Flip this string to rotate variants in
+// production. The variant id is sent to GA4 with every impression / click
+// so we can compare CTR per variant.
+//   "A_records" — leads with the records pain (matches article spine)
+//   "B_serious" — leads with "more than a hobby" identity framing
+//   "C_pedigree" — leads with the buyer-trust frame
+const ctaVariant = 'A_records';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -318,6 +328,14 @@ const faqs = [
           <p class="text-lg text-gray-700 leading-relaxed">
             That is the practical case for keeping them connected. A platform built for <a href="/sheep" class="text-[hsl(24,95%,53%)] hover:underline">sheep breeding management</a>, such as BreederHQ, treats each animal as a single record that links its <a href="/workflows/pedigrees" class="text-[hsl(24,95%,53%)] hover:underline">pedigree</a>, <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">health and testing records</a>, and breeding and <a href="/workflows/kidding-management" class="text-[hsl(24,95%,53%)] hover:underline">lambing history</a>, so the documentation a buyer or registry asks for is already assembled rather than reconstructed from memory. It is one example of the approach, not a requirement; the point is that the records belong together.
           </p>
+
+          <ArticleInlineCTA
+            variant={ctaVariant}
+            articleSlug="valais-blacknose-sheep"
+            headline="Keeping it all in one place is the whole point."
+            body="BreederHQ gives every animal a single, continuous record — pedigree, registration, breeding and lambing history, health events, and offspring — so the documentation a buyer or registry asks for is already there. Works for Valais Blacknose breed-up programs and 8 other species."
+            ctaLabel="Try BreederHQ free for 14 days"
+          />
         </section>
 
         <section class="mb-12">
@@ -410,4 +428,12 @@ const faqs = [
       </div>
     </article>
   </main>
+
+  <ArticleStickyCTA
+    variant={ctaVariant}
+    articleSlug="valais-blacknose-sheep"
+    headline="Run your own program? Keep every animal's records in one place."
+    subline="14-day free trial. First 100 founders get 50% off with code FOUNDER50."
+    ctaLabel="Try BreederHQ"
+  />
 </BaseLayout>
