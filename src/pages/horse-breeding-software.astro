@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Horse Breeding Software', url: '/horse-breeding-software' }
+];
+
+const faqs = [
+  {
+    question: 'What is horse breeding software, and how is it different from generic equine record-keeping?',
+    answer: 'Horse breeding software is built around the operational reality of equine reproduction — mare cycles, teasing notes, breeding session logs (live cover, AI with cooled or frozen semen, embryo transfer), pregnancy checks, foaling records, registration paperwork, and the handoff to a buyer or new owner. Generic equine record-keeping treats horses as line items in a barn database. BreederHQ treats your breeding program as a connected operation, with mare and stallion records, breeding bookings, semen inventory, foals as individuals from day one, and a buyer pipeline that stays in the same account as the records.'
+  },
+  {
+    question: 'Does BreederHQ support AI, frozen semen, and embryo transfer cycles?',
+    answer: 'Yes. Each breeding session is logged with the method — live cover, AI with cooled semen, AI with frozen semen, or embryo transfer recipient mare — along with the stallion, collection or shipment date, insemination date, and any reproductive vet notes. Multiple sessions per cycle are supported. BreederHQ does not perform the procedure itself and does not replace your reproductive veterinarian; it tracks what happened and when, so the records are complete when you need them for registry paperwork or a future planning decision.'
+  },
+  {
+    question: 'How does the stallion side work — bookings, contracts, semen inventory?',
+    answer: 'Stallion owners can record stud bookings against each mare, track contracts and stud fees, and manage semen inventory by collection batch — straws or doses on hand, location, shipment history, and what has been used on which mare in which season. The same buyer pipeline that handles foal sales also handles stud bookings, so you are not running a separate spreadsheet for stallion-side commerce.'
+  },
+  {
+    question: 'Will it work for sport horse, ranch, and hobby breeders the same way?',
+    answer: 'Yes, with the caveat that BreederHQ does not impose a workflow. A small hobby breeder running one mare can use the same product as a Warmblood breeder running ten mares with live cover and AI, or a ranch program running a stallion battery on natural service. Field names are the same; how much of the system you use is yours to decide. There is no separate "lite" version that you outgrow when the operation gets bigger.'
+  },
+  {
+    question: 'Can I run a waitlist and take foal deposits in BreederHQ?',
+    answer: 'Yes. Buyers apply through your storefront, approved applicants land on your waitlist tied to a specific mare or upcoming foal, deposits settle through Stripe directly into your bank account, contracts are signed in the same workflow, and once a foal is matched the buyer gets a portal with the foal\'s records, photos, pedigree, and documents. No PayPal screenshots, no "did you get my deposit?" texts at 9 p.m.'
+  },
+  {
+    question: 'What about registry submissions — AQHA, Jockey Club, USEF, Warmblood registries?',
+    answer: 'BreederHQ tracks registration numbers, titles, performance records, DNA test results, and the paperwork you need for registry submissions. It does not file the paperwork on your behalf — you still submit through AQHA, the Jockey Club, your Warmblood registry, or wherever your foals are registered. The point is that when you sit down to fill out the forms, the data is already organized, exportable, and in one place.'
+  },
+  {
+    question: 'Is BreederHQ really free?',
+    answer: 'BreederHQ offers a 14-day free trial of the full platform — not a permanent free tier. The first 100 founding subscribers can use code FOUNDER50 at checkout for 50% off Pro or Enterprise for 12 months. See the pricing page for current tier details.'
+  }
+];
+
+// Equine workflow stages: visual content only, not structured data
+const workflowStages = [
+  'Mare Cycle',
+  'Breeding Session',
+  'Pregnancy Check',
+  'Foaling',
+  'Foal Records',
+  'Registration',
+  'Applications',
+  'Deposits',
+  'Buyer Portal'
+];
+
+// Page-scoped JSON-LD: SoftwareApplication for the product LP.
+// FAQPage is emitted automatically by BaseLayout from the `faqs` prop.
+// BreadcrumbList is emitted automatically by BaseLayout from the `breadcrumbs` prop.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ — Horse Breeding Software",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Horse Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com/horse-breeding-software",
+  "description": "Horse breeding software for working farms. Track mares, stallions, foals, breeding bookings, AI and embryo transfer cycles, semen inventory, registrations, waitlists, deposits, contracts, and a buyer portal in one account. Supports nine species including horses.",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Horse Breeders"
+  },
+  "featureList": [
+    "Mare cycle tracking with teasing and ultrasound notes",
+    "Breeding session log — live cover, AI cooled, AI frozen, embryo transfer",
+    "Pregnancy confirmation and gestation tracking",
+    "Foaling records with foal-side individual records from day one",
+    "Stallion bookings and stud fee contracts",
+    "Semen inventory by collection batch and location",
+    "Pedigree generation with COI calculation",
+    "Registry-aware records — AQHA, Jockey Club, USEF, Warmblood registries",
+    "Performance and titling records on the horse",
+    "Waitlist management",
+    "Deposit and contract tracking (Stripe)",
+    "Per-buyer portal with foal records, photos, pedigree, documents",
+    "Built-in marketplace presence at marketplace.breederhq.com",
+    "Mobile-first design (iOS, Android, web)",
+    "Multi-species support (9 species: horses, dogs, cats, goats, rabbits, sheep, alpacas, llamas, cattle)"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "14-day free trial",
+    "priceCurrency": "USD",
+    "description": "14-day free trial of the BreederHQ platform. See pricing page for paid tier details."
+  }
+};
+---
+
+<BaseLayout
+  title="Horse Breeding Software — Mares, Stallions, Foals | BreederHQ"
+  description="Equine breeding software for working farms. Track mares, stallions, foals, breeding bookings, AI/ET cycles, registrations, and buyer records in one place."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Horse Breeding Software</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Horse Breeding Software for Working Farms</h1>
+      <p class="text-xl text-gray-700 mb-6 leading-relaxed">Mares, stallions, foals, breeding bookings, registrations, buyer records — built for the operational reality of equine reproduction. Nine species in one account, 14-day free trial.</p>
+
+      <div class="flex flex-col sm:flex-row gap-4 mb-10">
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition text-center" style="min-height: 44px;">
+          Start Free Trial
+        </a>
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] border-2 border-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-50 transition text-center" style="min-height: 44px;">
+          See Pricing
+        </a>
+      </div>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR for working farms</h2>
+        <p class="text-gray-700 leading-relaxed mb-3">
+          Equine breeding is operational work on 1,000-pound athletes, with a vet schedule, a breeding shed, a foaling stall, and a registry deadline all running in parallel. Most "breeder software" is dog-first; horse support is a label change and a longer gestation field. That mismatch shows up on every screen.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          BreederHQ is one of nine species in the same account. Equine surfaces use equine vocabulary — mare, stallion, foal, in-foal, live cover, AI, embryo transfer, breeding session, covering — and the workflow tracks the things a working farm actually records: cycles, breeding sessions across methods, pregnancy checks, foaling, registrations, stud bookings, semen inventory, and a buyer pipeline for both foals and stud services. The trial is 14 days. <a href="/compare/best-horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Comparing equine breeding tools? Read the buyer's guide.</a>
+        </p>
+      </aside>
+
+      <!-- Workflow visual: pill strip (visual content, not schema) -->
+      <div class="my-10">
+        <h2 class="text-2xl font-bold mb-4">The equine breeding workflow, one connected system</h2>
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-3" aria-label="Stages of a working equine breeding program">
+          {workflowStages.map((stage, i) => (
+            <>
+              <li class="inline-flex items-center px-4 py-2 rounded-full border-2 border-[hsl(24,95%,53%)] bg-white text-sm font-semibold text-gray-900 whitespace-nowrap shadow-sm">
+                {stage}
+              </li>
+              {i < workflowStages.length - 1 && (
+                <li aria-hidden="true" class="text-[hsl(24,95%,53%)] font-bold text-lg">→</li>
+              )}
+            </>
+          ))}
+        </ol>
+        <p class="mt-4 text-lg text-gray-700">
+          <strong>Most horse breeders run this on five different surfaces.</strong> A whiteboard in the barn for cycles, a notebook for the breeding shed, a binder for vet records, PayPal or paper checks for deposits, and email for buyer questions. Horse breeding software collapses that into one operation.
+        </p>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-8">
+        Equine reproduction is operational work. Between teasing notes, ultrasounds, breeding sessions across live cover and AI and embryo transfer, pregnancy checks at 14 / 28 / 60 days, foaling, IgG, foal weights, registrations, and the steady drip of buyer and stud-client questions — the software you choose either makes that easier or quietly makes it harder.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        The hard part is that most software in this category is dog-first. Horse support is usually a checkbox added later, with field names borrowed from another species and a workflow that assumes a one-litter-a-year cadence. For a working farm with a breeding shed, a stallion roster, and a registration deadline coming up, that mismatch shows up everywhere.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        This page is about what changes when you move equine reproduction off the whiteboard and into a system built for it.
+      </p>
+    </div>
+  </section>
+
+  <!-- What changes when you go from spreadsheet to system -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">What changes when you go from spreadsheet to system</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-10">
+        The honest version of the upgrade: here is what stops living in your head, your phone, and three separate notebooks.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">1. Mare cycle tracking, not a date field</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Each mare has her own cycle history — teasing notes, follicle scans, ovulation calls, the cycles she missed, and the seasonal pattern across years. Open the mare and the picture is already there, instead of paging through a notebook.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">2. Breeding sessions across every method</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Live cover, AI with cooled semen, AI with frozen semen, embryo transfer with a recipient mare — each session is logged with stallion, date, semen source, insemination notes, and the reproductive vet's call. Multiple sessions per cycle is the default, not a workaround.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">3. Pregnancy confirmation and tracking</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            14-day, 28-day, 60-day checks are logged on the mare, gestation runs in the background, and the expected foaling window is in front of you — not in the back of a planner that may or may not be in the truck.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">4. Foaling records you can actually find</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Foaling notes, presentation, IgG, foal heat, the parts of the night you want to remember and the parts you would rather not. The record stays with the mare, and the foal becomes their own record from day one.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">5. Foals as individuals, not a line item</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every foal gets a record from the night they are on the ground. Color and markings, registration number, microchip, growth records, vaccinations, deworming, performance notes later. Not a "Mare X had a foal this year" row.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">6. Registration paperwork that is already organized</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Registration numbers across AQHA, Jockey Club, USEF, and the Warmblood registries — plus titles, DNA tests, color, markings, and parents — live on the horse. When the registration form is due, the data is already in one place to export or copy across, not scattered across three apps.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">7. Buyer handoff stops being a 30-email loop</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A serious tool treats waitlists, deposits, and contracts as core objects tied to the mare and the upcoming foal. The buyer gets a portal with their foal's records, photos, pedigree, and documents. The single biggest time win in modern equine breeding software is letting buyers see their own foal without asking you.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">8. It works on the phone, in the barn aisle</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Half the actual work happens away from a desk. Ultrasound notes in the breeding shed, a foal weight in the stall, a stud-client question answered from the truck. The tool should be usable one-handed on a phone — not just "mobile-friendly enough."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stallion-side coverage -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Stallion side: bookings, contracts, and semen inventory in the same account</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        If you stand a stallion — or several — the commerce side is its own operation. Stud bookings against each mare, contracts and stud fees, season-by-season bookings, refund and live-foal guarantees, and the buyer (mare owner) communications that go with it. In BreederHQ that lives in the same buyer pipeline that handles foal sales, so you are not running a second spreadsheet for stallion-side work.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Semen inventory is tracked by collection batch — straws or doses on hand, frozen or cooled, where they are stored, what has been shipped, and which mare and cycle each shipment was used on. When a stud client calls asking how many straws are left from a particular collection, the answer is in front of you.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        For single-stallion hobby programs the semen-inventory module is optional. For a stallion battery with frozen and cooled programs across multiple disciplines, it earns its keep on the first season.
+      </p>
+    </div>
+  </section>
+
+  <!-- Multi-discipline -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Sport horse, ranch, hobby — the tool does not impose a workflow</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        BreederHQ does not assume you are a particular kind of breeder. A Warmblood program running ten mares with embryo transfer recipients, an AQHA ranch standing a stallion on natural service, a small Thoroughbred hobby operation with one in-foal mare a year, a Friesian breeder importing frozen semen from Europe — all use the same field names and the same screens. How much of the system you use is up to you.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        There is no separate "lite" version that you outgrow when the operation gets bigger, and no separate "enterprise" version that condescends to small programs. The trial is the full thing.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        If your program runs horses plus another species — a sport horse breeder who also runs a small kennel, a ranch with cattle and quarter horses, a goat dairy with a couple of riding horses on the side — all of it lives in the same account. One login, one buyer pipeline, one set of records.
+      </p>
+    </div>
+  </section>
+
+  <!-- Honest scope -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">What BreederHQ does not do for horses</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Honest scope, because it matters on this side of the industry.
+      </p>
+      <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-3">
+        <li><strong>We do not perform embryo transfer, AI, or any reproductive procedure.</strong> Your reproductive veterinarian does the work. BreederHQ records what was done and when, so the paperwork is complete.</li>
+        <li><strong>We do not provide veterinary services or treatment recommendations.</strong> The tool tracks vet visits, ultrasounds, IgG, vaccinations, and notes; clinical decisions are between you and your vet.</li>
+        <li><strong>We do not file registry submissions on your behalf.</strong> AQHA, the Jockey Club, USEF, the Warmblood registries — you still submit through them directly. BreederHQ keeps the data you need to submit organized in one place.</li>
+        <li><strong>We do not verify, vet, or vouch for breeders.</strong> No "verified breeder" badges, no curated tiers. Identity and credentials on BreederHQ are handled through third-party passthroughs (Stripe Identity, public registries) and provider self-attestation — not platform endorsement.</li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        For the full posture on what verification means (and does not mean) on BreederHQ, see <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Identity and Credentials</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing teaser -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing built for working farms, not enterprise SaaS</h2>
+      <p class="text-lg leading-relaxed mb-6">
+        14-day free trial of the full platform. The first 100 founding subscribers can use code <code class="bg-white/20 px-2 py-1 rounded">FOUNDER50</code> at checkout for 50% off Pro or Enterprise for 12 months.
+      </p>
+      <p class="text-lg leading-relaxed mb-8">
+        Same product whether you run one in-foal mare or a stallion battery and ten broodmares. The trial is the full thing — no "lite" version you outgrow.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          See Pricing
+        </a>
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition text-center" style="min-height: 44px;">
+          Start Free Trial
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">Frequently asked questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">{faq.question}</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related resources -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">→ Horse breeding software features</a></div>
+        <div><a href="/compare/best-horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Compare horse breeding software (buyer's guide)</a></div>
+        <div><a href="/breeder-management-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeder management software (multi-species overview)</a></div>
+        <div><a href="/tools/coefficient-of-inbreeding-calculator" class="text-[hsl(24,95%,53%)] hover:underline">→ Coefficient of inbreeding (COI) calculator</a></div>
+        <div><a href="/services/equine-boarding/lexington-ky" class="text-[hsl(24,95%,53%)] hover:underline">→ Equine boarding in Lexington, KY</a></div>
+        <div><a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">→ Identity and Credentials</a></div>
+        <div><a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">→ Horse breeders on the marketplace</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Run your whole breeding program in one system</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Mares, stallions, foals, bookings, registrations, waitlists, deposits, contracts, buyer portal — connected, on your phone, in 14 days free.
+      </p>
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-[hsl(24,95%,53%)] text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free Trial
+      </a>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Start Free Trial
+    </a>
+  </div>
+
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Horse Breeding Software", description: "Mares, stallions, foals, and breeding bookings in one account.", url: "/horses" },
+      { title: "Compare Horse Breeding Software", description: "Honest buyer's guide for working equine breeders.", url: "/compare/best-horse-breeding-software" },
+      { title: "Breeder Management Software", description: "Nine species, one account, every record from heat to handoff.", url: "/breeder-management-software" },
+      { title: "COI Calculator", description: "Coefficient of inbreeding for any planned mating.", url: "/tools/coefficient-of-inbreeding-calculator" },
+      { title: "Equine Boarding in Lexington, KY", description: "Find boarding near the heart of the horse industry.", url: "/services/equine-boarding/lexington-ky" },
+      { title: "Identity and Credentials", description: "How identity and verification actually work on BreederHQ.", url: "/trust" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
