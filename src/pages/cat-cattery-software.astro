@@ -1,0 +1,372 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Cattery Software', url: '/cat-cattery-software' }
+];
+
+const faqs = [
+  {
+    question: 'What is cattery software, and how is it different from generic pet software?',
+    answer: 'Cattery software is built around the workflow of a working cat breeder: queens and their heat patterns, planned matings, kitten records from birth through placement, registration paperwork for TICA or CFA, waitlists, deposits, contracts, and a per-buyer portal. Generic pet software treats cats as line items in a database. Cattery software treats your program as a connected operation. BreederHQ was built natively for nine species, including cats, with cattery-specific vocabulary (queen, tom, kitten, litter) rather than a dog tool with a "cat mode" toggle.'
+  },
+  {
+    question: 'Does BreederHQ support TICA and CFA registration tracking?',
+    answer: 'Yes. You can track registration numbers, titles, color and pattern codes, EMS notation, and DNA test results on each cat, and the data carries through to the kitten records and pedigrees. BreederHQ does not file registration paperwork directly with TICA or CFA on your behalf; you still submit through the registry, but the records you need are organized and exportable.'
+  },
+  {
+    question: 'How does kitten weight tracking and milestone logging work?',
+    answer: 'Each kitten is an individual record from birth. You log birth weight, daily or weekly weights, color and pattern, microchip, eye-open date, vaccinations, deworming, and vet visits on the kitten — not on the litter row. The whelping area (or queening area, in cat-speak) is designed mobile-first so you can update from the nursery without a laptop. Weights chart automatically so you can spot a fader early.'
+  },
+  {
+    question: 'Can I run a waitlist and take kitten deposits in BreederHQ?',
+    answer: 'Yes. Buyers apply through your storefront, approved applicants land on your waitlist tied to a specific queen or upcoming litter, deposits are settled through Stripe directly into your bank account, contracts are signed in the same workflow, and once a kitten is matched the buyer gets a portal with their kitten\'s records, photos, pedigree, and documents. No PayPal screenshots, no "did I get your deposit?" emails.'
+  },
+  {
+    question: 'Is there a public marketplace where buyers can find my cattery?',
+    answer: 'Yes. Your cattery shows up at marketplace.breederhq.com with your cattery profile, available kittens, and an inquiry channel that lands back in the same system as your operations. Inquiries do not auto-create Contacts — you decide who becomes a curated contact and who stays a prospect.'
+  },
+  {
+    question: 'Why not just use dog breeding software with a "cat mode"?',
+    answer: 'Because the biology and the buyer flow are different. Queens cycle differently than bitches (induced ovulation, seasonal estrus, polyestrous patterns). Litter cadence is different. The registries are different (TICA, CFA, ACFA, FIFe instead of AKC, UKC). Color and pattern genetics use a different notation. Health-testing panels are different (HCM, PKD, FeLV/FIV protocols instead of OFA hips and elbows). A dog tool retrofitted for cats forces you to translate every screen in your head. BreederHQ uses cat vocabulary on cat surfaces.'
+  },
+  {
+    question: 'Will BreederHQ work for a small one-queen hobby cattery?',
+    answer: 'Yes, and it will scale with you when you add a second queen, a stud, or a second breed. The 14-day free trial is the same product the multi-queen catteries use. There is no "lite" version that you outgrow.'
+  },
+  {
+    question: 'Is BreederHQ really free?',
+    answer: 'BreederHQ offers a 14-day free trial of the full platform — not a permanent free tier. The first 100 founding subscribers can use code FOUNDER50 at checkout for 50% off Pro or Enterprise for 12 months. See the pricing page for current tier details.'
+  }
+];
+
+// Cattery workflow stages: visual content only, not structured data
+const workflowStages = [
+  'Heat & Mating',
+  'Pregnancy',
+  'Queening',
+  'Kitten Records',
+  'Weights & Vax',
+  'Applications',
+  'Deposits',
+  'Contracts',
+  'Buyer Portal'
+];
+
+// Page-scoped JSON-LD: WebPage only.
+// FAQPage is emitted automatically by BaseLayout from the `faqs` prop.
+// BreadcrumbList is emitted automatically by BaseLayout from the `breadcrumbs` prop.
+// We intentionally do NOT emit Article (this is a product LP, not editorial)
+// and do NOT emit Service.provider=BreederHQ (Stage 3.5 schema swap pending).
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Cattery Software for Working Cat Breeders",
+  "description": "Cattery software built for working cat breeders. Track queens, kittens, waitlists, deposits, contracts, and buyer portals in one system. 14-day free trial.",
+  "url": "https://breederhq.com/cat-cattery-software",
+  "inLanguage": "en-US",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://breederhq.com/og-image.jpg"
+  },
+  "datePublished": "2026-06-26",
+  "dateModified": "2026-06-26"
+};
+---
+
+<BaseLayout
+  title="Cattery Software — Queens, Kittens, Waitlists, Buyers | BreederHQ"
+  description="Cattery software built for working cat breeders. Track queens, kittens, waitlists, deposits, contracts, and buyer portals in one system. 14-day free trial."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Cattery Software</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Cattery Software for Working Cat Breeders</h1>
+      <p class="text-xl text-gray-700 mb-6 leading-relaxed">Queens, kittens, waitlists, deposits, buyer portal — built natively for catteries, not bolted onto a dog tool. Nine species in one account, 14-day free trial.</p>
+
+      <div class="flex flex-col sm:flex-row gap-4 mb-10">
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition text-center" style="min-height: 44px;">
+          Start Free Trial
+        </a>
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] border-2 border-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-50 transition text-center" style="min-height: 44px;">
+          See Pricing
+        </a>
+      </div>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">TL;DR for working catteries</h2>
+        <p class="text-gray-700 leading-relaxed mb-3">
+          Most "breeder software" is dog-first, with cat support added as a secondary toggle. Cat reproduction, registries, color genetics, and litter cadence are different enough that the translation overhead eats your time.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          BreederHQ is one of nine species in the same account. Cat surfaces use cat vocabulary — queen, tom, kitten, litter — and the workflow is built around how TICA and CFA catteries actually operate: planned matings, kitten weights, color and pattern, vaccination and deworming schedules, applications, deposits, contracts, and a per-buyer portal. The trial is 14 days. <a href="/compare/best-cat-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Comparing cat breeding tools? Read the buyer's guide.</a>
+        </p>
+      </aside>
+
+      <!-- Workflow visual: pill strip (visual content, not schema) -->
+      <div class="my-10">
+        <h2 class="text-2xl font-bold mb-4">The cattery workflow, one connected system</h2>
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-3" aria-label="Stages of a working cattery program">
+          {workflowStages.map((stage, i) => (
+            <>
+              <li class="inline-flex items-center px-4 py-2 rounded-full border-2 border-[hsl(24,95%,53%)] bg-white text-sm font-semibold text-gray-900 whitespace-nowrap shadow-sm">
+                {stage}
+              </li>
+              {i < workflowStages.length - 1 && (
+                <li aria-hidden="true" class="text-[hsl(24,95%,53%)] font-bold text-lg">→</li>
+              )}
+            </>
+          ))}
+        </ol>
+        <p class="mt-4 text-lg text-gray-700">
+          <strong>Most cat breeders run this on three or four different tools.</strong> Spreadsheet for the queens, Notes app for kitten weights, PayPal for deposits, email for the buyer questions. Cattery software collapses that into one workflow.
+        </p>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-8">
+        Cat breeding is operational work. Between heat patterns that do not look like dog cycles, planned matings, queening nights, kitten weight checks, color and pattern recording, registration paperwork, waitlists, deposits, contracts, and the steady stream of "any updates on her kittens?" emails — the software you choose either makes that easier or quietly makes it harder.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        The hard part is that most software in the category is dog-first. Cat support is usually a checkbox added later, with screens that still use "puppy" copy or workflows that assume dog cycle patterns. For a working TICA or CFA cattery, that mismatch shows up on every page.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+        This page is about what a cattery actually needs from software, and how BreederHQ is built for it.
+      </p>
+    </div>
+  </section>
+
+  <!-- What a cattery needs -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">What a cattery actually needs from software</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-10">
+        Here is the rubric that matters once you are running a real cattery. If a tool fails on more than two of these, it is the wrong tool, no matter how slick the marketing is.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">1. It understands feline reproduction</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Queens are induced ovulators on seasonal, polyestrous cycles. That is not a dog cycle and it is not a livestock cycle. A real cattery tool models heat patterns specific to cats, planned matings (live cover and AI both supported), confirmed pregnancy at 21–28 days, the ~63–67 day gestation window, and queening notes. If "breeding" is one date field, the tool was not built for cats.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">2. Kittens are individuals, not a row</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every kitten gets a record from the night they are born. Birth weight, daily weights, color, pattern, microchip, vaccinations, deworming, eye-open date, the buyer they go to. A "Litter A had 5 kittens" row is not enough — the part that matters is the part that lives on the individual.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">3. Color and pattern genetics, not "color: gray"</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Cat color is a genetic system, not a label. EMS notation, dilute, agouti, colorpoint, white spotting, breed-specific patterns. The tool should let you record what you actually see on the kitten and what you expect from a planned mating, and surface results on the pedigree.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">4. Registry-aware records</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            TICA, CFA, ACFA, FIFe — registry numbers, titles, championship status, and DNA tests need to live on the cat and surface on the pedigree. So you do not look them up manually every time you plan a mating or fill out paperwork.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">5. Waitlists, deposits, and contracts</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Your real pain is not pedigrees, it is the waitlist that is six months old, the deposit you cannot remember collecting, and the contract you sent on email and cannot find. A serious tool treats waitlists, deposits, and contracts as core objects tied to the queen and the upcoming litter.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">6. Buyers can self-serve</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The single biggest time win in modern cattery software is letting buyers see their own kitten records, photos, pedigree, and documents without emailing you. A buyer portal is the difference between answering the same five questions 30 times per litter and answering them zero times.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">7. It works on the phone, in the nursery</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Half the actual work happens away from a desk. Kitten weights at the queening box. A quick photo when eyes open. A buyer question answered from the couch. The tool should be usable one-handed on a phone, not "mobile-friendly enough."
+          </p>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-3">8. The data is yours</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Export. CSV, PDF, your pedigrees in a usable format. If you cannot get your data out, you do not own your program, you rent it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pedigree depth -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Pedigree depth that matches how cat people actually think</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        BreederHQ tracks the whole picture on each cat — registration numbers across TICA, CFA, ACFA, and FIFe, titles and championship status, DNA test results (HCM, PKD, PRA, breed-specific panels), color and pattern with EMS notation, and the pedigree itself.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        When you plan a mating, the COI is calculated from your pedigree data. When the kittens are born, those parent records are already linked to the kitten records — you are not retyping anything.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        If your program runs more than one breed or more than one species, all of it lives in the same account. Maine Coons and Ragdolls, or Siamese and a couple of Bengals, or cats plus the family's horses or dogs — one login, one buyer pipeline, one set of records.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why a dog tool with cat mode doesn't work -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Why a dog tool with "cat mode" does not work for a working cattery</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        It is fair to be specific about this, because every cat breeder has tried it.
+      </p>
+      <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-3">
+        <li><strong>Cycle vocabulary is wrong.</strong> The screens say "heat" the way dogs experience it — a discrete window with progesterone-driven timing. Queens are induced ovulators with seasonal polyestrous patterns. The interface keeps asking you to plot a single ovulation date, and you keep skipping the field.</li>
+        <li><strong>Litter cadence is wrong.</strong> Cats commonly have two or three litters per year per queen, often back to back during the breeding season. Tools built around a one-litter-per-year dog pattern force awkward workarounds.</li>
+        <li><strong>Registries are wrong.</strong> The fields say "AKC number" and "UKC title." Your records use TICA or CFA. Field names that do not match your registry create friction on every record.</li>
+        <li><strong>Color genetics is wrong.</strong> "Color: brown" is enough for a dog tool. For a cattery, you need pattern + color + dilute + agouti + breed-specific markers, often in EMS notation. Single-field "color" loses information you need.</li>
+        <li><strong>Health panels are wrong.</strong> A dog tool's health-testing module emphasizes OFA hips, elbows, eyes, and cardiac. A cattery needs HCM, PKD, PRA, FeLV/FIV, and breed-specific genetic screens. Same idea, different panels.</li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        BreederHQ uses cat vocabulary on cat surfaces. That is the whole point of building it nine-species-native from day one.
+      </p>
+    </div>
+  </section>
+
+  <!-- Honest scope -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">What BreederHQ does not do</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        BreederHQ does not verify, vet, or vouch for catteries. We do not run health tests, file registry paperwork on your behalf, or provide veterinary services. We track the records you need so the submissions you make to TICA, CFA, or your vet are clean and exportable, but the submission is yours.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        For the full posture on what verification means (and does not mean) on BreederHQ, see <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Identity and Credentials</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing teaser -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing built for working programs, not enterprise SaaS</h2>
+      <p class="text-lg leading-relaxed mb-6">
+        14-day free trial of the full platform. The first 100 founding subscribers can use code <code class="bg-white/20 px-2 py-1 rounded">FOUNDER50</code> at checkout for 50% off Pro or Enterprise for 12 months.
+      </p>
+      <p class="text-lg leading-relaxed mb-8">
+        Same product whether you run one queen or twenty, one breed or three. The trial is the full thing — no "lite" version you outgrow.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          See Pricing
+        </a>
+        <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition text-center" style="min-height: 44px;">
+          Start Free Trial
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">Frequently asked questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">{faq.question}</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related resources -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn more</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/cats" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">→ Cat breeding software features</a></div>
+        <div><a href="/compare/best-cat-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Compare cat breeding software (buyer's guide)</a></div>
+        <div><a href="/breeder-management-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeder management software (multi-species overview)</a></div>
+        <div><a href="/breeder-crm" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeder CRM (buyer pipeline and waitlists)</a></div>
+        <div><a href="/horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Horse breeding software</a></div>
+        <div><a href="/tools/coefficient-of-inbreeding-calculator" class="text-[hsl(24,95%,53%)] hover:underline">→ Coefficient of inbreeding (COI) calculator</a></div>
+        <div><a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">→ Identity and Credentials</a></div>
+        <div><a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">→ Catteries on the marketplace</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Run your whole cattery in one system</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Queens, kittens, waitlists, deposits, contracts, buyer portal — connected, on your phone, in 14 days free.
+      </p>
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block bg-[hsl(24,95%,53%)] text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Start Free Trial
+      </a>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Start Free Trial
+    </a>
+  </div>
+
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Cat Breeding Software", description: "Queens, kittens, waitlists, and buyer portal — all in one system.", url: "/cats" },
+      { title: "Compare Cat Breeding Software", description: "Honest buyer's guide for working cat breeders.", url: "/compare/best-cat-breeding-software" },
+      { title: "Breeder Management Software", description: "Nine species, one account, every record from heat to handoff.", url: "/breeder-management-software" },
+      { title: "Breeder CRM", description: "Inquiries, waitlists, deposits, contracts, and a per-buyer portal.", url: "/breeder-crm" },
+      { title: "Horse Breeding Software", description: "Mares, stallions, foals, and breeding bookings.", url: "/horse-breeding-software" },
+      { title: "COI Calculator", description: "Coefficient of inbreeding for any planned mating.", url: "/tools/coefficient-of-inbreeding-calculator" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
