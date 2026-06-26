@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Breeder Management Software', url: '/breeder-management-software' }
+];
+
+const faqs = [
+  {
+    question: 'What is breeder management software?',
+    answer: 'Breeder management software is the system you use to run a breeding program end to end: animal records and pedigrees, heat cycles and breedings, litters and individual offspring records, waitlists and deposits, contracts and buyer portals, and public listings. The category exists because spreadsheets, Google Drive, Stripe links, and a separate marketplace listing eventually fall apart once you have more than a handful of buyers in motion at once. BreederHQ does all of that in one account across nine species.'
+  },
+  {
+    question: 'Is BreederHQ only for dog breeders?',
+    answer: 'No. BreederHQ supports nine species in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. Each species has its own cycle model, gestation length, and record fields. You do not need a separate account, a separate subscription, or a "cattle mode" toggle. The buyer portal, waitlist, contracts, and marketplace work the same way across all of them.'
+  },
+  {
+    question: 'How much does BreederHQ cost?',
+    answer: 'Current pricing lives on the pricing page. BreederHQ offers a 14-day free trial of the full platform. The first 100 founding subscribers can use code FOUNDER50 at checkout for 50% off Pro or Enterprise for 12 months.'
+  },
+  {
+    question: 'What does BreederHQ not do?',
+    answer: 'BreederHQ does not provide veterinary care, does not run genetic testing, does not verify or vet breeders, and does not submit registrations to AKC, TICA, Jockey Club, or any other registry on your behalf. It tracks the records you need to make those submissions yourself and it stores the documents you receive back. Trust posture is documented on the trust page.'
+  }
+];
+
+const featureList = [
+  'Animal records and pedigree',
+  'Heat cycle and ovulation tracking',
+  'Breeding session log (live cover, AI, ET, frozen, surgical)',
+  'Pregnancy confirmation and gestation countdown',
+  'Litter management with individual offspring records',
+  'Weights, photos, milestones, and health events per offspring',
+  'Waitlist management with deposits and contracts',
+  'Per-buyer portal',
+  'Built-in public marketplace listings',
+  'Comms hub for prospects and buyers',
+  'Mobile-first whelping and birthing area',
+  'Multi-species support (9 species in one account)'
+];
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  'name': 'BreederHQ',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Breeder Management Software',
+  'operatingSystem': 'Web, iOS, Android',
+  'url': 'https://breederhq.com/breeder-management-software',
+  'description': 'Breeder management software for working programs. One account, nine species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle), every record from heat through breeding, whelping, waitlist, deposits, contracts, buyer portal, and marketplace listing. 14-day free trial.',
+  'featureList': featureList,
+  'offers': {
+    '@type': 'Offer',
+    'name': '14-day free trial',
+    'priceCurrency': 'USD',
+    'description': '14-day free trial of the BreederHQ platform. See pricing page for paid tier details.',
+    'url': 'https://breederhq.com/pricing'
+  }
+};
+---
+
+<BaseLayout
+  title="Breeder Management Software — 9 Species, One Account | BreederHQ"
+  description="Manage your entire breeding operation in one place — animals, heats, litters, waitlists, deposits, contracts, buyer portal. 9 species. 14-day free trial."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Breeder Management Software</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Breeder Management Software for Working Programs</h1>
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          One account, nine species, every record from heat to handoff. 14-day free trial.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-10">
+          <a href="https://accounts.breederhq.com/signup" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-[hsl(24,95%,53%)] text-white font-semibold text-lg shadow-sm hover:bg-[hsl(24,95%,48%)] transition">
+            Start free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-gray-900 text-gray-900 font-semibold text-lg hover:bg-gray-900 hover:text-white transition">
+            See pricing
+          </a>
+        </div>
+
+        <p class="text-base text-gray-600 leading-relaxed">
+          BreederHQ is the operations system for working breeding programs. It replaces the stack most breeders accumulate over time — a spreadsheet for animals, a folder for pedigrees, Stripe links for deposits, email threads for buyers, a separate listing on a third-party marketplace — with a single account that handles the whole program. Nine species are live and supported: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle.
+        </p>
+      </div>
+    </section>
+
+    <!-- Six-card grid: what management actually means -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What "management" actually means in a breeding program</h2>
+        <p class="text-lg text-gray-700 mb-10 max-w-3xl leading-relaxed">
+          Six surfaces, one account. Each one is built around how the work actually happens, not how a generic CRM thinks the work should happen.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Animals and pedigree</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Every animal in your program in one place. Registration numbers, titles, DNA profiles, health testing, photos, and a pedigree that surfaces clearances at a glance. Add ancestors back as far as you have data; planned breedings calculate COI from what you have entered.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Cycles and breeding</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Species-aware cycle tracking, multi-point progesterone where it applies, breeding session log for live cover and AI (fresh, chilled, frozen, surgical), pregnancy confirmation, and a gestation countdown that lands on the actual species gestation length — not a single 63-day default.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Litters and offspring</h3>
+            <p class="text-gray-700 leading-relaxed">
+              A litter is not a single row. Each offspring is its own record from birth — weights, milestones, photos, health events, microchip and registration numbers. The birthing area is built mobile-first because that is where the work happens.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Waitlists and deposits</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Applications, screening questionnaires, qualified prospects, deposits collected through Stripe directly into your bank account, and a clear pipeline from inquiry to match. No PayPal screenshots, no "did I get your deposit?" emails.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Contracts and buyer portal</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Send a contract, get it signed, hand off the buyer to their own portal. Each buyer sees their animal's records, pedigree, photos, vaccination history, and the documents that matter — without you forwarding email attachments for the next two years.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Marketplace listings</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Listings on marketplace.breederhq.com built from the same animal and litter records you already maintain. One source of truth, two surfaces — your operations data and your public-facing listing — without double entry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Species row: 9 species, operational notes -->
+    <section class="py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Built for nine species, not retrofitted for one</h2>
+        <p class="text-lg text-gray-700 mb-10 max-w-3xl leading-relaxed">
+          Most breeder software is a dog tool with a cat mode bolted on. BreederHQ was built multi-species from the start. Each species has its own reproductive model and its own vocabulary — the platform speaks all of them.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Dogs</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Heat cycles, multi-point progesterone, AI methods, 63-day gestation, whelping mobile-first.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Cats</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Queen and kitten records, queening workflow, color genetics, TICA and CFA registration tracking.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Horses</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Mare cycles, stallion bookings, AI and embryo transfer, foaling records, semen inventory.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Goats</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Heat tracking on cyclic does, kidding records, individual kid weights, milk and meat program fields.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Rabbits</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Doe and buck records, kindling workflow, fast-turn litter cadence, pedigree depth for show stock.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Sheep</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Ewe cycle and lambing records, ram bookings, individual lamb tracking, registry fields for wool and meat breeds.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Alpacas</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Induced-ovulation breeding model, ~11-month gestation, cria records, fiber program fields.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Llamas</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Induced-ovulation breeding model, long gestation, cria records, packing and guard-stock program fields.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-5 border border-gray-200">
+            <h3 class="text-lg font-bold mb-1">Cattle</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Cow cycle and calving records, AI and ET workflow, calf records, disposition step after weaning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What you replace -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What you replace</h2>
+        <p class="text-lg text-gray-700 mb-10 leading-relaxed">
+          Most working programs land here from a stack of disconnected tools that worked fine for one litter and stopped working at three. If any of these sound familiar, you are the audience.
+        </p>
+
+        <ul class="space-y-5">
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold">1</span>
+            <div>
+              <h3 class="text-lg font-bold mb-1">A spreadsheet for animals and litters</h3>
+              <p class="text-gray-700 leading-relaxed">
+                One tab per litter, formulas that break when you add a column, no pedigree view, no way to share with a co-breeder without exposing everything. Worked for the first program. Stops working by the third.
+              </p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold">2</span>
+            <div>
+              <h3 class="text-lg font-bold mb-1">A Google Drive folder for pedigrees, registrations, and health tests</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Documents named "Lassie health.pdf" sitting next to "Lassie health (1).pdf" and "Lassie health final.pdf." Nobody can find the one that matters when a buyer asks.
+              </p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold">3</span>
+            <div>
+              <h3 class="text-lg font-bold mb-1">Stripe payment links pasted into texts and emails</h3>
+              <p class="text-gray-700 leading-relaxed">
+                The payment goes through. Reconciling it back to the right applicant on the right waitlist for the right litter is manual every time.
+              </p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold">4</span>
+            <div>
+              <h3 class="text-lg font-bold mb-1">A separate buyer-comms thread for every applicant</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Texts on your phone, DMs on Instagram, emails on Gmail, an old Facebook Messenger thread. The history of the buyer relationship is scattered across four apps and zero searchable archives.
+              </p>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold">5</span>
+            <div>
+              <h3 class="text-lg font-bold mb-1">A separate marketplace listing maintained by hand</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Your program data lives in one place, your public listing lives somewhere else. Photos and write-ups get out of sync within a week of any new litter.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What BreederHQ does not do</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          A short list, because honesty about scope saves you a trial day. BreederHQ does not provide veterinary care, does not run genetic tests in-house, does not submit registry paperwork on your behalf, and does not verify, vet, or vouch for the breeders or providers on the platform. It tracks the records you need to do those things yourself and gives you a public surface where buyers can find you. The full trust posture lives on the <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">trust page</a>.
+        </p>
+        <p class="text-base text-gray-600 leading-relaxed">
+          If you are looking for a tool that vets buyers for you, certifies your program, or runs your veterinary care — BreederHQ is not that tool, and neither is any other software in this category.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing teaser -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Pricing</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          BreederHQ is a 14-day free trial of the full platform — not a free tier with locked features. Pick a plan when the trial ends or let it lapse. The first 100 founding subscribers can use code <strong>FOUNDER50</strong> at checkout for 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/pricing" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-[hsl(24,95%,53%)] text-white font-semibold text-lg shadow-sm hover:bg-[hsl(24,95%,48%)] transition">
+            See pricing
+          </a>
+          <a href="https://accounts.breederhq.com/signup" class="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-gray-900 text-gray-900 font-semibold text-lg hover:bg-gray-900 hover:text-white transition">
+            Start free trial
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-10">Frequently asked questions</h2>
+        <div class="space-y-8">
+          {faqs.map((faq) => (
+            <div>
+              <h3 class="text-xl font-bold mb-3">{faq.question}</h3>
+              <p class="text-gray-700 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Related and deeper reading -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">Looking for something more specific?</h2>
+        <ul class="space-y-3 text-lg">
+          <li>
+            <strong>Comparing dog-breeding tools?</strong> Read the <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">buyer's guide for dog breeding software</a> — pricing, species support, and trade-offs across eight tools.
+          </li>
+          <li>
+            <strong>Running a cattery?</strong> See <a href="/cat-cattery-software" class="text-[hsl(24,95%,53%)] hover:underline">cattery software</a> for the cat-specific version of this page.
+          </li>
+          <li>
+            <strong>Equine program?</strong> See <a href="/horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">horse breeding software</a> for the equine-specific version.
+          </li>
+          <li>
+            <strong>Pipeline and buyer relationships are your biggest pain?</strong> See <a href="/breeder-crm" class="text-[hsl(24,95%,53%)] hover:underline">breeder CRM</a>.
+          </li>
+          <li>
+            <strong>Mid-litter and need a system right now?</strong> See <a href="/litter-management" class="text-[hsl(24,95%,53%)] hover:underline">litter management</a>.
+          </li>
+          <li>
+            <strong>Free planning tools.</strong> Browse the <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">tools directory</a> — calculators and schedule generators, no signup required.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Run your whole program from one account</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          14-day free trial of the full platform. Nine species. Every record from heat to handoff. Founders code <strong>FOUNDER50</strong> for 50% off Pro or Enterprise for 12 months — first 100 only.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://accounts.breederhq.com/signup" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-[hsl(24,95%,53%)] text-white font-semibold text-lg shadow-sm hover:bg-[hsl(24,95%,48%)] transition">
+            Start free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-gray-900 text-gray-900 font-semibold text-lg hover:bg-gray-900 hover:text-white transition">
+            See pricing
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

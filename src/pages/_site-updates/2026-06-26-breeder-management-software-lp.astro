@@ -1,0 +1,55 @@
+---
+export const updateMeta = {
+  date: '2026-06-26',
+  title: 'Shipped /breeder-management-software (Cluster A anchor LP)',
+  tags: ['seo', 'landing-page', 'cluster-a', 'multi-species'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 26, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Shipped <code>/breeder-management-software</code> as page A1 of the 12-page LP cluster plan (<code>docs/marketing/LP-CLUSTER-PLAN-2026-06.md</code>). This is the Cluster A anchor — every other Cluster A and B LP links into it, so it ships first.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>Why.</strong> Strategy doc (<code>UNIFIED-STRATEGY-2026-06.md</code>, Section B "Content gaps to fill") called out "breeder management software" as a head term with GSC impressions but no dedicated landing page. <code>/compare/best-dog-breeding-software</code> proved the format works for commercial intent (134s avg session, 9 striking-distance rankings), but it is dog-only and comparison-shaped. Generic, species-neutral, product-shaped intent had no home.
+    </p>
+
+    <p>
+      <strong>What the page is.</strong> A species-neutral product LP targeting the "breeder management software" query family. H1: <em>Breeder Management Software for Working Programs</em>. Subhead: <em>One account, nine species, every record from heat to handoff. 14-day free trial.</em> Eight-section outline per the plan brief: hero + dual CTA, six-card grid (animals/cycles/litters/waitlists/contracts/marketplace), nine-species row with one operational note each, "what you replace" (spreadsheet / Drive / Stripe links / scattered comms / separate marketplace), honest-scope band linking to <code>/trust</code>, pricing teaser, FAQ, final CTA.
+    </p>
+
+    <p>
+      <strong>Anti-cannibalization.</strong> H1 deliberately does NOT use "best X software" or "dog breeding software" — those are owned by <code>/compare/best-dog-breeding-software</code>. Page links OUT to that comparison page as the buyer's-guide destination, never competes with it. Species-neutral throughout: no dog-specific vocabulary in shared sections, species-specific terminology only inside the nine-species cards.
+    </p>
+
+    <p>
+      <strong>Schema.</strong> One JSON-LD block — <code>SoftwareApplication</code> with <code>applicationCategory: BusinessApplication</code>, <code>applicationSubCategory: Breeder Management Software</code>, 12-item <code>featureList</code>, and an <code>Offer</code> pointing to <code>/pricing</code> with the 14-day trial. <code>FAQPage</code> and <code>BreadcrumbList</code> ride through BaseLayout's <code>faqs</code> and <code>breadcrumbs</code> props (auto-emitted). No <code>Article</code> — this is a product LP, not editorial.
+    </p>
+
+    <p>
+      <strong>Outbound links from the new page</strong> satisfy the per-page contract: <code>/pricing</code> (primary CTA, repeated), <code>/compare/best-dog-breeding-software</code> (buyer's-guide handoff), <code>/breeder-crm</code> (A4 sibling, not yet shipped), <code>/cat-cattery-software</code> (A2 sibling, shipped earlier today), <code>/horse-breeding-software</code> (A3 sibling, not yet shipped), <code>/litter-management</code> (B1, not yet shipped), <code>/trust</code>, and <code>/tools</code>. The four sibling LPs are broken-link debt that resolves as Cluster A and B ship through the daily execution sequence in the plan.
+    </p>
+
+    <p>
+      <strong>Honesty constraints honored.</strong> Trial language is "14-day free trial" — never "free tier," never "no time limit." FOUNDER50 framed as "first 100 founding subscribers" for 50% off Pro/Enterprise for 12 months. Trust posture explicit: "does not verify, vet, or vouch" with link to <code>/trust</code>. Nine species presented as live and public (no stealth tier on cattle / alpaca / llama). No "tenant" / "tenant-wide" anywhere in user-facing copy — uses "operation" and "account."
+    </p>
+
+    <p>
+      <strong>Reciprocal inbound-link sweep is deferred.</strong> The cluster plan calls for a post-Week-1 sweep updating <code>/</code>, <code>/for-breeders</code>, <code>/pricing</code>, and the existing <code>/compare/best-X-software</code> pages to point at the new Cluster A LPs. That sweep should happen after A2/A3/A4 ship so it can be a single atomic cross-link pass rather than four separate ones. Pages that need inbound links added to <code>/breeder-management-software</code>:
+    </p>
+
+    <ul class="list-disc list-inside space-y-1 ml-2">
+      <li><code>/</code> homepage — add to feature grid or species row as the multi-species anchor link.</li>
+      <li><code>/for-breeders</code> — add to the in-depth guides list.</li>
+      <li><code>/pricing</code> — add to "What's included" sidebar pointing here as the operations overview.</li>
+      <li><code>/compare/best-dog-breeding-software</code> — sidebar "Run multiple species? See breeder management software."</li>
+      <li><code>/compare/best-cat-breeding-software</code> — same sidebar treatment.</li>
+      <li><code>/compare/best-horse-breeding-software</code> — same sidebar treatment.</li>
+      <li><code>/cat-cattery-software</code> (already shipped) — its outbound link to <code>/breeder-management-software</code> now resolves to a live page (was broken-link debt before this commit).</li>
+    </ul>
+
+    <p>
+      <strong>Next.</strong> Day 4 of the execution sequence is <code>/breeder-crm</code> (A4). Day 2 (<code>/cat-cattery-software</code>) shipped earlier today out of order — the anchor was deferred to give the cat page a working internal link. With A1 now live, A2's outbound link to A1 is no longer debt.
+    </p>
+  </div>
+</article>
