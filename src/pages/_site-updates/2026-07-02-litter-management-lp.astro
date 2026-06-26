@@ -1,0 +1,49 @@
+---
+export const updateMeta = {
+  date: '2026-07-02',
+  title: 'Shipped /litter-management (Cluster B1 JTBD LP)',
+  tags: ['seo', 'landing-page', 'cluster-b', 'litter-management', 'whelping'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 2, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Shipped <code>/litter-management</code> as page B1 of the 12-page LP cluster plan (<code>docs/marketing/LP-CLUSTER-PLAN-2026-06.md</code>). First Cluster B (jobs-to-be-done) page. High-intent operational target — breeders mid-litter, searching for a tool right now.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>Why.</strong> "Litter management software" is a JTBD query — the audience is not shopping a category, they are solving a problem. Strategy doc (<code>UNIFIED-STRATEGY-2026-06.md</code>, Section B "Content gaps to fill") flagged the whelping-through-placement window as the highest-intent moment for breeder software conversion. Cluster A pages target product-shaped intent ("breeder management software"). This page targets operational-shaped intent ("I am mid-litter and need this fixed").
+    </p>
+
+    <p>
+      <strong>What the page is.</strong> A jobs-to-be-done LP for the litter window. H1: <em>Litter Management Software — From Whelp to Placement</em>. Subhead: <em>Whelping records, individual weights, deworming and vaccination schedules, photos, applications, deposits, and handoff — every part of a litter in one place.</em> Nine-section outline per the brief: hero + dual CTA, five-phase litter model (pre-whelp / whelp / newborn / wean and wellness / placement), mobile-first whelping area band, individual-offspring-record explainer, free schedule tools sidebar (4 existing <code>/tools/*</code> linked), species coverage callout, pricing teaser, FAQ, final CTA.
+    </p>
+
+    <p>
+      <strong>Anti-cannibalization.</strong> JTBD framing, not "best dog breeding software" framing. H1 says "litter management," not "dog breeding software." Page links OUT once to <code>/breeder-management-software</code> (the broader Cluster A anchor) and OUT once to <code>/breeder-crm</code> (sibling for buyer-pipeline intent) but does not compete with the comparison page at <code>/compare/best-dog-breeding-software</code>. Species-aware vocabulary throughout — "whelp / queening / foaling / kidding / lambing / calving / kindling / cria" — so the page reads correctly for any of the nine species.
+    </p>
+
+    <p>
+      <strong>Schema.</strong> One <code>SoftwareApplication</code> JSON-LD block with <code>applicationSubCategory: Litter Management Software</code>, 14-item <code>featureList</code> covering all five phases plus the schedule generators and species coverage, and an <code>Offer</code> pointing to <code>/pricing</code> with the 14-day trial. <code>FAQPage</code> and <code>BreadcrumbList</code> ride through BaseLayout's <code>faqs</code> and <code>breadcrumbs</code> props (auto-emitted). Brief allowed two schema blocks here because the FAQ resolves common search intents — BaseLayout already provides FAQPage via the prop, so the effective count is two (SoftwareApplication + FAQPage) without manual duplication.
+    </p>
+
+    <p>
+      <strong>FAQ honesty.</strong> Question 2 ("Is there a free whelping app?") gives the honest answer per the brief: free or freemium whelping trackers exist, they cover weight logging only, they stop working once deposits and contracts enter the picture. No bait-and-switch — names the limitation, then explains why a paid tool with applications, deposits, contracts, and a buyer portal is a different category of product. Other four FAQs cover what litter management is, mobile usability, species coverage, and post-placement handoff.
+    </p>
+
+    <p>
+      <strong>Outbound links from the new page</strong> satisfy the per-page contract: <code>/pricing</code> (primary CTA, repeated four times across hero, pricing teaser, and final CTA), <code>/tools/puppy-deworming-schedule-generator</code>, <code>/tools/puppy-vaccination-schedule-generator</code>, <code>/tools/puppy-weight-tracker</code>, <code>/whelping-date-calculator-dogs</code> (the four schedule tools called out in the brief), <code>/breeder-management-software</code> (A1), <code>/breeder-crm</code> (A4), <code>/cat-cattery-software</code> (A2), <code>/horse-breeding-software</code> (A3), <code>/goats</code>, and <code>/sheep</code>. All link targets verified to exist before commit — no broken-link debt from this page.
+    </p>
+
+    <p>
+      <strong>Honesty constraints honored.</strong> Trial language is "14-day free trial" — never "free tier," never "no time limit." FOUNDER50 framed as "first 100 founding subscribers" for 50% off Pro or Enterprise for 12 months. Nine species presented as live and public (no stealth tier on cattle / alpaca / llama). No "tenant" / "tenant-wide" anywhere in user-facing copy — uses "operation," "account," "program." No human-baby emojis. No stopwatch / timer / clock / hourglass icons. Brand-orange reserved for primary CTAs only (the orange step-number circles in the five-phase list are a structural pattern reused from <code>/breeder-management-software</code> and approved by precedent).
+    </p>
+
+    <p>
+      <strong>Next.</strong> Day 6 of the execution sequence is <code>/tools/coefficient-of-inbreeding-calculator</code> (B2). Aaron's decision required first on Option 1 (real working calculator) vs Option 2 (educational page that links to the in-app COI) — see plan brief. After B2, execution moves into Cluster C (<code>[competitor]-alternative</code> pages, paid-ads conquesting targets).
+    </p>
+
+    <p>
+      <strong>Reciprocal inbound-link sweep is deferred</strong> per the plan to the post-Week-2 sweep. Pages that need inbound links added to <code>/litter-management</code> once Week 2 closes: <code>/</code> homepage (feature grid), <code>/for-breeders</code>, the four existing <code>/tools/*</code> generator pages this LP points at (reciprocal), <code>/puppy-vaccination-schedule</code>, <code>/puppy-deworming-schedule</code>, <code>/puppy-weight-chart</code>, and <code>/whelping-date-calculator-dogs</code>. That sweep happens as a single atomic cross-link pass after the COI calculator ships, not now.
+    </p>
+  </div>
+</article>

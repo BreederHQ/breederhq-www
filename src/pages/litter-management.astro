@@ -1,0 +1,380 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Litter Management', url: '/litter-management' }
+];
+
+const faqs = [
+  {
+    question: 'What is litter management software?',
+    answer: 'Litter management software is the system you use to run a litter from whelping or queening through placement: whelping records, individual offspring records with weights and milestones, deworming and vaccination schedules, photos, applications, deposits, contracts, and the handoff to a buyer portal. It replaces a stack of disconnected tools — a notebook in the whelping box, a folder of photos on your phone, a Google Sheet for weights, a Stripe link for deposits, a Word document for contracts. BreederHQ handles all of that in one account across dogs, cats, horses, goats, and the rest of the nine species the platform supports.'
+  },
+  {
+    question: 'Is there a free whelping app?',
+    answer: 'There are a handful of free or freemium whelping trackers — most are mobile-only weight loggers without applications, deposits, contracts, or a buyer portal. They work for a single litter if all you need is a weight chart. They stop working the moment buyer deposits, contracts, and registration paperwork enter the picture, because that data has to live somewhere connected to the puppy or kitten record. BreederHQ is not free, but the 14-day trial covers a full whelping-through-placement cycle for a fast-turn species, and the founder code FOUNDER50 gives the first 100 founding subscribers 50% off Pro or Enterprise for 12 months.'
+  },
+  {
+    question: 'Does litter management work on the phone, in the whelping area, at 3 a.m.?',
+    answer: 'Yes. The whelping area is mobile-first. You log a birth, weigh an offspring, snap a photo, or note a milestone one-handed on a phone in low light with the other hand on the litter. Individual offspring records sync to the desktop view in real time, so anything you enter in the whelping box is on the buyer portal and the marketplace listing without retyping.'
+  },
+  {
+    question: 'Can I use this for a species other than dogs?',
+    answer: 'Yes. The same litter management workflow applies across the nine species BreederHQ supports — dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. Vocabulary changes by species: "whelping" for dogs, "queening" for cats, "foaling" for horses, "kidding" for goats, "lambing" for sheep, "calving" for cattle, "kindling" for rabbits, "cria" records for alpacas and llamas. Gestation lengths, milestone schedules, and registration-number fields adjust per species automatically.'
+  },
+  {
+    question: 'What happens after placement?',
+    answer: 'Each buyer is handed off to their own portal — pedigree, photos, weight history, vaccination and deworming records, health-test results, contract, and any documents you have attached to the offspring. The buyer can self-serve answers to the questions you would otherwise field by text for the next two years. The offspring record stays in your program so you can run litter retrospectives, track buyer follow-up, and build pedigree depth for future planned breedings.'
+  }
+];
+
+const featureList = [
+  'Pre-whelp prep checklist (whelping area, supplies, vet contacts)',
+  'Whelping and queening records (timing, presentation, complications)',
+  'Individual offspring record per puppy, kitten, foal, kid, lamb, calf, or cria',
+  'Mobile-first weight logging in the whelping area',
+  'Photo capture per offspring with growth timeline',
+  'Deworming schedule generator',
+  'Vaccination schedule generator',
+  'Temperament testing (Volhard PAT, Gun Dog Aptitude, ENS, Rule of 7s)',
+  'Applications, screening questionnaires, and waitlist management',
+  'Deposits collected through Stripe',
+  'Contract sending and e-signature',
+  'Per-buyer portal at handoff',
+  'Built-in marketplace listing built from the same litter record',
+  'Species-aware gestation and milestone schedules across nine species'
+];
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  'name': 'BreederHQ',
+  'applicationCategory': 'BusinessApplication',
+  'applicationSubCategory': 'Litter Management Software',
+  'operatingSystem': 'Web, iOS, Android',
+  'url': 'https://breederhq.com/litter-management',
+  'description': 'Litter management software for working breeders. Whelping and queening records, individual offspring records with weights and milestones, deworming and vaccination schedules, photos, applications, deposits, contracts, and per-buyer portal at handoff. Mobile-first whelping area. Nine species supported in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle. 14-day free trial.',
+  'featureList': featureList,
+  'offers': {
+    '@type': 'Offer',
+    'name': '14-day free trial',
+    'priceCurrency': 'USD',
+    'description': '14-day free trial of the BreederHQ platform. See pricing page for paid tier details.',
+    'url': 'https://breederhq.com/pricing'
+  }
+};
+---
+
+<BaseLayout
+  title="Litter Management Software — Whelping to Placement | BreederHQ"
+  description="Whelping records, individual weights, deworming and vaccination schedules, applications, deposits, contracts, and handoff. Litter management in one app."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Litter Management</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Litter Management Software — From Whelp to Placement</h1>
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Whelping records, individual weights, deworming and vaccination schedules, photos, applications, deposits, and handoff — every part of a litter in one place.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-10">
+          <a href="https://accounts.breederhq.com/signup" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-[hsl(24,95%,53%)] text-white font-semibold text-lg shadow-sm hover:bg-[hsl(24,95%,48%)] transition">
+            Start free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-gray-900 text-gray-900 font-semibold text-lg hover:bg-gray-900 hover:text-white transition">
+            See pricing
+          </a>
+        </div>
+
+        <p class="text-base text-gray-600 leading-relaxed">
+          If you are reading this mid-litter, you already know the problem. The weight chart is on a sticky note. The deworming dates are in your head. The applications you collected three months ago are in an inbox. The deposits are in Stripe, but you cannot remember which deposit belongs to which family on which puppy. BreederHQ runs the whole litter — from the pre-whelp prep checklist to the moment the last buyer gets their portal — in one account.
+        </p>
+      </div>
+    </section>
+
+    <!-- Five phases -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">The five phases of a litter</h2>
+        <p class="text-lg text-gray-700 mb-10 max-w-3xl leading-relaxed">
+          Every litter walks the same five phases, regardless of species. The work changes; the structure does not. BreederHQ models each phase as a connected step in the same record — not five separate apps stitched together.
+        </p>
+
+        <ol class="space-y-6">
+          <li class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <div class="flex gap-4 items-start">
+              <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold text-lg">1</span>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Pre-whelp prep</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Confirmed breeding, gestation countdown set to the species-correct length, due-date alerts, supply checklist, vet contacts on the record. The whelping area exists before the first contraction, not after.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <div class="flex gap-4 items-start">
+              <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold text-lg">2</span>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Whelp or queening</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Birth times, presentations, weights at birth, complications, vet contacts pulled up one tap away. Each newborn becomes its own record the moment it is logged — not a row in a single "Litter A" entry that you have to break apart later.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <div class="flex gap-4 items-start">
+              <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold text-lg">3</span>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Newborn period</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Daily weights, photos, milestones (eyes opening, first solid food, microchip placement), ENS sessions if you run them, and a growth timeline per individual. The chart that used to live on a clipboard now lives on the offspring record and on the buyer's future portal.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <div class="flex gap-4 items-start">
+              <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold text-lg">4</span>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Wean and wellness</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Deworming schedule generated from date of birth. Vaccination schedule the same. Temperament testing — Volhard PAT, Gun Dog Aptitude, or your own protocol — recorded per offspring. Health events attached to the individual record, not lost in a shared note.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+            <div class="flex gap-4 items-start">
+              <span class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(24,95%,53%)] text-white font-bold text-lg">5</span>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Placement</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Applications already in the system. Deposits already reconciled to the right applicant. Match made, contract sent and signed, buyer handed off to a portal with the full record — pedigree, photos, weights, vaccinations, dewormings, microchip number, registration paperwork. The handoff is one click, not a week of email forwards.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Mobile-first whelping area -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Mobile-first whelping area</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          Half the actual work of a litter happens away from a desk. You are in the whelping box, at a show, on the porch with a buyer, in the barn aisle, or up at 3 a.m. with a hand on a newborn. The tool has to work where the work is.
+        </p>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          BreederHQ is built mobile-first for that reason. The whelping area on a phone lets you log a birth, weigh an offspring, snap a photo, and note a milestone one-handed. Everything you enter on the phone is on the desktop, the buyer portal, and the marketplace listing within the same second — no retyping, no "I will update the spreadsheet later," no sticky note that disappears under a coffee cup.
+        </p>
+        <p class="text-base text-gray-600 leading-relaxed">
+          The desktop is for planning. The phone is for the litter. Both look at the same record.
+        </p>
+      </div>
+    </section>
+
+    <!-- Individual record per offspring -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Every offspring is its own record</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          A litter is not a single row. Each puppy, kitten, foal, kid, lamb, calf, or cria gets its own record from the moment it is logged — and that record stays with the offspring through the rest of its life on the platform, whether it goes to a buyer, stays in your program, or comes back to your pedigree as a future planned breeding.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg p-6 border border-gray-200">
+            <h3 class="text-lg font-bold mb-2">Pedigree on the record</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Dam and sire pedigree depth surfaces on the offspring record automatically. Clearances visible at a glance for buyers and for your own planning.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 border border-gray-200">
+            <h3 class="text-lg font-bold mb-2">Photos and growth timeline</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Photos attach to the offspring, not the litter. Newborn through eight-week shot lives on one timeline that buyers see in their portal.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 border border-gray-200">
+            <h3 class="text-lg font-bold mb-2">Weights and milestones</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Daily weights chart per offspring. Milestones (eyes open, first solid food, microchip placement) timestamped and visible on the same record.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 border border-gray-200">
+            <h3 class="text-lg font-bold mb-2">Health events and registration</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Deworming dates, vaccination dates, vet visits, registration numbers (AKC, TICA, CFA, the relevant horse and livestock registries) — all attached to the individual.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule generators sidebar -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Free schedule tools while you decide</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Not ready for the trial? These free tools cover the schedule and chart pieces of litter management with no signup. They are the same generators that run inside the platform — used here as standalone calculators.
+        </p>
+
+        <ul class="space-y-4">
+          <li class="bg-white rounded-lg p-5 border border-gray-200 shadow-sm">
+            <h3 class="text-lg font-bold mb-1">
+              <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">Puppy deworming schedule generator</a>
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+              Enter a date of birth, get a deworming schedule from week 2 through placement. Print or share.
+            </p>
+          </li>
+          <li class="bg-white rounded-lg p-5 border border-gray-200 shadow-sm">
+            <h3 class="text-lg font-bold mb-1">
+              <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">Puppy vaccination schedule generator</a>
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+              Generate the standard puppy vaccination schedule from date of birth, including the booster cadence buyers ask about.
+            </p>
+          </li>
+          <li class="bg-white rounded-lg p-5 border border-gray-200 shadow-sm">
+            <h3 class="text-lg font-bold mb-1">
+              <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">Puppy weight tracker</a>
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+              Log daily weights and plot the curve. A standalone version of the weight tool that lives on the offspring record inside BreederHQ.
+            </p>
+          </li>
+          <li class="bg-white rounded-lg p-5 border border-gray-200 shadow-sm">
+            <h3 class="text-lg font-bold mb-1">
+              <a href="/whelping-date-calculator-dogs" class="text-[hsl(24,95%,53%)] hover:underline">Whelping date calculator</a>
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+              Estimate a whelping date from breeding date for the 63-day canine gestation window. Useful before you sign up to plan the prep phase.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What about other species -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What about cats, horses, goats, and the rest?</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          Same workflow, species-aware vocabulary. The five phases apply to every species BreederHQ supports — the platform changes the language and the schedule defaults so the records read correctly for your program.
+        </p>
+
+        <ul class="space-y-3 text-lg">
+          <li>
+            <strong>Cats:</strong> queening, kitten records, color genetics, TICA and CFA registration numbers. See <a href="/cat-cattery-software" class="text-[hsl(24,95%,53%)] hover:underline">cattery software</a> for the cat-specific overview.
+          </li>
+          <li>
+            <strong>Horses:</strong> foaling, foal records, mare and stallion lineage, registration paperwork. See <a href="/horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">horse breeding software</a>.
+          </li>
+          <li>
+            <strong>Goats:</strong> kidding, individual kid weights, milk and meat program fields. See the <a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">goats hub</a>.
+          </li>
+          <li>
+            <strong>Sheep:</strong> lambing, individual lamb tracking, registry fields for wool and meat breeds. See the <a href="/sheep" class="text-[hsl(24,95%,53%)] hover:underline">sheep hub</a>.
+          </li>
+        </ul>
+
+        <p class="text-base text-gray-600 leading-relaxed mt-8">
+          Rabbits, alpacas, llamas, and cattle work the same way with their own vocabulary — kindling for rabbits, cria records for alpacas and llamas, calving for cattle. The five-phase litter model holds across all of them.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing teaser -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Pricing</h2>
+        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+          BreederHQ is a 14-day free trial of the full platform — long enough to cover a full whelping-through-placement cycle on a fast-turn species, and long enough on a longer-gestation species to set up the program and load your existing records before the first deposit comes in. The first 100 founding subscribers can use code <strong>FOUNDER50</strong> at checkout for 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/pricing" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-[hsl(24,95%,53%)] text-white font-semibold text-lg shadow-sm hover:bg-[hsl(24,95%,48%)] transition">
+            See pricing
+          </a>
+          <a href="https://accounts.breederhq.com/signup" class="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-gray-900 text-gray-900 font-semibold text-lg hover:bg-gray-900 hover:text-white transition">
+            Start free trial
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-10">Frequently asked questions</h2>
+        <div class="space-y-8">
+          {faqs.map((faq) => (
+            <div>
+              <h3 class="text-xl font-bold mb-3">{faq.question}</h3>
+              <p class="text-gray-700 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">Looking for something more specific?</h2>
+        <ul class="space-y-3 text-lg">
+          <li>
+            <strong>Want the full program overview?</strong> See <a href="/breeder-management-software" class="text-[hsl(24,95%,53%)] hover:underline">breeder management software</a> — heat through handoff, nine species.
+          </li>
+          <li>
+            <strong>Pipeline and buyer relationships are your biggest pain?</strong> See <a href="/breeder-crm" class="text-[hsl(24,95%,53%)] hover:underline">breeder CRM</a>.
+          </li>
+          <li>
+            <strong>Running a cattery?</strong> See <a href="/cat-cattery-software" class="text-[hsl(24,95%,53%)] hover:underline">cattery software</a>.
+          </li>
+          <li>
+            <strong>Equine program?</strong> See <a href="/horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">horse breeding software</a>.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Run the whole litter from one account</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          14-day free trial of the full platform. Whelping through placement, every offspring on its own record, every buyer on a portal. Founders code <strong>FOUNDER50</strong> for 50% off Pro or Enterprise for 12 months — first 100 only.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://accounts.breederhq.com/signup" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-[hsl(24,95%,53%)] text-white font-semibold text-lg shadow-sm hover:bg-[hsl(24,95%,48%)] transition">
+            Start free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-gray-900 text-gray-900 font-semibold text-lg hover:bg-gray-900 hover:text-white transition">
+            See pricing
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
