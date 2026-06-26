@@ -7,12 +7,49 @@ const breadcrumbs = [
   { name: 'Home', url: '/' },
   { name: 'For Breeders', url: '/for-breeders' }
 ];
+
+// FAQ block: drives FAQPage schema via BaseLayout, gives AI engines extractable Q&A.
+const faqs = [
+  {
+    question: 'What is BreederHQ?',
+    answer: 'BreederHQ is breeding-program management software for dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. It combines herd records, pedigree and genetics tools, a phase-based breeding planner, offspring tracking, finances, an e-signature buyer portal, waitlist management, and a public marketplace in one platform with a 14-day free trial.',
+  },
+  {
+    question: 'What species does BreederHQ support?',
+    answer: 'Nine species, all available on every plan: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. Each species has species-specific workflows for breeding cycles, gestation, offspring stages, and registry support (AKC, ADGA, AOBA, AQHA, Jockey Club, APHA, AHA, USEF, NSIP, and more).',
+  },
+  {
+    question: 'How much does BreederHQ cost?',
+    answer: 'BreederHQ pricing is $29/mo Standard, $79/mo Pro, or $159/mo Enterprise. Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans. Founders get 50% off Pro and Enterprise for 12 months with code FOUNDER50 (first 100 subscribers).',
+  },
+  {
+    question: 'Is there a free trial?',
+    answer: 'Yes. Every plan includes a 14-day free trial. You enter payment details to start the trial and can cancel anytime before it ends at no charge.',
+  },
+  {
+    question: 'Does BreederHQ replace my spreadsheets?',
+    answer: 'Yes. BreederHQ replaces scattered spreadsheets, drive folders, and single-purpose apps with one connected system: health records, pedigrees, breeding plans, finances, client communications, and your marketplace listings all share the same underlying program data.',
+  },
+  {
+    question: 'Does BreederHQ include a buyer-facing marketplace?',
+    answer: 'Yes. Every subscription tier includes a public marketplace presence at marketplace.breederhq.com. Listings are powered by your real program data — health testing, pedigrees, and identity confirmation surface automatically without re-entry. We never take a percentage of your sales.',
+  },
+  {
+    question: 'How does BreederHQ compare to dog-only breeder software?',
+    answer: 'BreederHQ supports nine species under one account, while most breeder software (BreederBuddy, Dog Breeder Pro) supports one or two species. BreederHQ also includes an integrated public marketplace, OFA Sync, CHIC Readiness, and Scout AI document extraction. See our full comparison at /compare/best-dog-breeding-software.',
+  },
+  {
+    question: 'Who built BreederHQ?',
+    answer: 'BreederHQ was founded in 2024 by Aaron Payne and Carie Chapman Barber. The company is independent and not owned by a registry, breed club, or marketplace operator.',
+  },
+];
 ---
 
 <BaseLayout
   title="BreederHQ for Breeders - Professional Breeding Management Software"
-  description="The all-in-one platform for professional breeders. Manage breeding cycles, genetics, health records, waitlists, client portals, and marketplace listings."
+  description="Breeding-program management software for nine species: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, rabbits. Health records, breeding planner, finances, buyer portal, and a public marketplace in one platform. 14-day free trial from $29/mo."
   breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
 
   <main>
@@ -38,6 +75,12 @@ const breadcrumbs = [
             Your Entire Breeding Operation.<br />
             <span class="text-primary">One Platform.</span>
           </h1>
+
+          <!-- Quick answer block: optimized for AI extraction (40-60 word self-contained answer). -->
+          <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6 leading-relaxed">
+            <strong>BreederHQ is breeding-program management software for nine species</strong> — dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. One account combines herd records, breeding planner, offspring tracking, finances, e-signature buyer portal, waitlist management, and a public marketplace, with a 14-day free trial from $29/month.
+          </p>
+
           <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
             BreederHQ replaces the spreadsheets, scattered tools, and disconnected apps
             you've been stitching together. Health records, genetics, breeding plans, finances,
@@ -711,6 +754,34 @@ const breadcrumbs = [
       </div>
     </section>
 
+
+    <!-- ============================================ -->
+    <!-- FAQ                                          -->
+    <!-- ============================================ -->
+    <!--
+      Visible FAQ section. Same questions are passed to BaseLayout as `faqs` so
+      FAQPage JSON-LD is emitted automatically. This is the single biggest
+      AI-citation pattern for product pages — Q&A blocks are the unit AI engines
+      extract and cite.
+    -->
+    <section class="py-16 bg-stone-50 border-y border-stone-200">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-10">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-white border border-stone-200 rounded-xl p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
+              <p class="text-gray-700 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-stone-400 text-center mt-8">
+          Last updated: June 26, 2026
+        </p>
+      </div>
+    </section>
 
     <!-- ============================================ -->
     <!-- FINAL CTA                                    -->

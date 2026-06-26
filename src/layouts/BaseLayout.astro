@@ -59,6 +59,29 @@ interface Props {
     /** Optional URL where buyers can take action on the offer */
     offerUrl?: string;
   };
+  /**
+   * Optional Product / Offer structured data for subscription-tier pricing
+   * pages. When provided, BaseLayout emits Schema.org Product JSON-LD with
+   * a nested AggregateOffer covering the listed tier prices. This is what
+   * lets ChatGPT, Claude, Perplexity and Google Merchant Listings extract
+   * "BreederHQ costs $X-$Y / month" as a structured fact instead of having
+   * to scrape the rendered HTML cards.
+   */
+  product?: {
+    name: string;
+    description: string;
+    brand?: string;
+    image?: string;
+    offers: Array<{
+      name: string;
+      price: number;
+      priceCurrency?: string;
+      billingPeriod?: 'MONTH' | 'YEAR';
+      description?: string;
+      url?: string;
+      availability?: 'InStock' | 'PreOrder';
+    }>;
+  };
   noindex?: boolean;
   hideLogo?: boolean;
   /**
@@ -78,7 +101,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, breadcrumbs, faqs, howTo, article, service, noindex, hideLogo, ogImage: ogImageProp, canonicalOverride } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, article, service, product, noindex, hideLogo, ogImage: ogImageProp, canonicalOverride } = Astro.props;
 // Astro is configured with `trailingSlash: 'never'`, so every page's canonical
 // URL must be slash-free - including the homepage. Without this normalization
 // the homepage canonical was `https://breederhq.com/` (with slash) while every
@@ -308,6 +331,52 @@ if (service) {
   };
 }
 
+// Product / AggregateOffer schema for subscription pricing pages. Lets AI
+// engines and Merchant Listings extract "BreederHQ pricing is $X/mo" as a
+// structured fact instead of scraping the rendered cards.
+let productSchema;
+if (product && product.offers && product.offers.length > 0) {
+  const prices = product.offers.map(o => o.price);
+  const lowPrice = Math.min(...prices);
+  const highPrice = Math.max(...prices);
+  productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.description,
+    "brand": {
+      "@type": "Brand",
+      "name": product.brand || "BreederHQ"
+    },
+    ...(product.image ? { "image": product.image } : {}),
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": lowPrice.toFixed(2),
+      "highPrice": highPrice.toFixed(2),
+      "offerCount": product.offers.length,
+      "offers": product.offers.map(offer => ({
+        "@type": "Offer",
+        "name": offer.name,
+        "price": offer.price.toFixed(2),
+        "priceCurrency": offer.priceCurrency || "USD",
+        "availability": `https://schema.org/${offer.availability || "InStock"}`,
+        ...(offer.description ? { "description": offer.description } : {}),
+        ...(offer.url ? { "url": offer.url } : {}),
+        ...(offer.billingPeriod ? {
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": offer.price.toFixed(2),
+            "priceCurrency": offer.priceCurrency || "USD",
+            "unitCode": offer.billingPeriod,
+            "billingDuration": 1
+          }
+        } : {})
+      }))
+    }
+  };
+}
+
 // BlogPosting schema for /articles/* and similar long-form editorial pages.
 // Strong SEO signal for Google News, Discover, and AI agent citations.
 let articleSchema;
@@ -348,6 +417,14 @@ if (article) {
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <!--
+      AI/LLM context discovery. Matches the pattern used by
+      marketplace.breederhq.com so ChatGPT, Claude, Perplexity, and other
+      AI engines can find our llms.txt and machine-readable pricing without
+      crawling the JS-rendered pricing page.
+    -->
+    <link rel="alternate" type="text/plain" title="LLM Context" href="/llms.txt" />
+    <link rel="alternate" type="text/markdown" title="Pricing (machine-readable)" href="/pricing.md" />
     {fbDomainVerification && (
       <meta name="facebook-domain-verification" content={fbDomainVerification} />
     )}
@@ -391,6 +468,9 @@ if (article) {
     )}
     {articleSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    )}
+    {productSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
     )}
 
     <!--

@@ -84,6 +84,25 @@ const faqs = [
   { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Alpacas, Llamas, Rabbits, Sheep, and Cattle with species-specific workflows for each.' },
   { question: 'What is the Founders discount?', answer: 'The first 100 subscribers who use code FOUNDER50 at checkout get 50% off Pro or Enterprise for 12 months. One redemption per customer.' },
 ];
+
+// Product / AggregateOffer schema: lets AI engines and Google Merchant
+// Listings extract "BreederHQ pricing is $29-$159/mo" as a structured fact.
+const product = {
+  name: 'BreederHQ Breeding Management Software',
+  description: 'Professional breeding-program management software for nine species (dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, rabbits). 14-day free trial on every plan. Unlimited animals, contacts, and breeding plans included at every tier.',
+  brand: 'BreederHQ',
+  offers: plans.map((plan) => ({
+    name: `BreederHQ ${plan.name}`,
+    price: plan.price,
+    priceCurrency: 'USD' as const,
+    billingPeriod: 'MONTH' as const,
+    description: plan.description,
+    url: registerUrl,
+    availability: 'InStock' as const,
+  })),
+};
+
+const pageLastUpdated = '2026-06-26';
 ---
 
 <BaseLayout
@@ -91,6 +110,7 @@ const faqs = [
   description="Simple, transparent pricing for professional breeders. Start your 14-day free trial today. Plans from $29/month. Founders get 50% off Pro & Enterprise."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
+  product={product}
 >
   <main>
     <!-- Hero -->
@@ -99,11 +119,14 @@ const faqs = [
         <h1 class="text-5xl font-bold tracking-tight text-stone-800 mb-4">
           Simple, transparent pricing
         </h1>
-        <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-3">
-          Start your 14-day free trial today.
+        <p class="text-xl text-stone-600 max-w-3xl mx-auto mb-3 leading-relaxed">
+          BreederHQ pricing is <strong>$29/mo Standard</strong>, <strong>$79/mo Pro</strong>, or <strong>$159/mo Enterprise</strong>. Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans across nine species. Founders get 50% off Pro and Enterprise for 12 months with code FOUNDER50.
         </p>
         <p class="text-sm text-stone-500">
           All plans include unlimited animals, contacts, and breeding plans.
+        </p>
+        <p class="text-xs text-stone-400 mt-2">
+          Last updated: {pageLastUpdated}. Machine-readable version at <a href="/pricing.md" class="underline hover:text-amber-600">/pricing.md</a>.
         </p>
         <a href="/pricing/compare" class="inline-block mt-4 text-amber-600 hover:text-amber-700 font-medium text-sm">
           See full feature comparison &rarr;
@@ -328,4 +351,52 @@ const faqs = [
       </div>
     </section>
   </main>
+
+  <!--
+    pricing_view GA4 event. Custom event distinct from the auto-fired
+    page_view so the marketing scorecard can compute the
+    free_trial_started / pricing_view ratio without page_view noise
+    from every other page on the site.
+
+    Why inline + define:vars: Analytics.astro is PROTECTED and already
+    loads gtag.js with the prod-only gate. We piggyback on that here.
+    isProduction mirrors the gate in Analytics.astro so dev / preview /
+    localhost never fire pricing_view either. Gated on hostname too in
+    case PROD ever fires on a non-prod surface (Vercel preview, etc).
+
+    Retry loop: gtag.js is async, so on a fast paint pricing_view can
+    race ahead of the gtag stub being defined. We poll for up to 3s
+    (15 x 200ms) and bail silently if it never arrives. An ad-blocker
+    or a network failure simply produces a missing event, never an
+    error in the user's console.
+  -->
+  <script is:inline define:vars={{ isProduction: import.meta.env.PROD }}>
+    (function () {
+      if (!isProduction) return;
+      var host = window.location.hostname;
+      if (host !== 'breederhq.com' && host !== 'www.breederhq.com') return;
+
+      var fired = false;
+      function fire() {
+        if (fired) return;
+        if (typeof window.gtag !== 'function') return;
+        fired = true;
+        window.gtag('event', 'pricing_view', {
+          page_path: '/pricing',
+          page_location: window.location.href,
+        });
+      }
+
+      var attempts = 0;
+      var maxAttempts = 15;
+      var poll = setInterval(function () {
+        attempts++;
+        if (typeof window.gtag === 'function' || attempts >= maxAttempts) {
+          clearInterval(poll);
+          fire();
+        }
+      }, 200);
+      fire();
+    })();
+  </script>
 </BaseLayout>
