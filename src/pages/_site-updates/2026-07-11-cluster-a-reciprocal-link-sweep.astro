@@ -1,0 +1,38 @@
+---
+export const updateMeta = {
+  date: '2026-07-11',
+  title: 'Cluster A reciprocal inbound-link sweep (A1, A3, A4)',
+  tags: ['seo', 'internal-linking', 'cluster-a', 'sweep'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 11, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Ran the Cluster A leg of the reciprocal inbound-link sweep called for in <code>docs/marketing/LP-CLUSTER-PLAN-2026-06.md</code>. Cluster A is fully deployed (A1–A4); A2 had inbound links wired the day it shipped, so this commit adds inbound links for <strong>A1</strong> (<code>/breeder-management-software</code>), <strong>A3</strong> (<code>/horse-breeding-software</code>), and <strong>A4</strong> (<code>/breeder-crm</code>) across the high-authority surfaces that should send them traffic and ranking signal.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>Why.</strong> Geographic-page experience taught us the metro-island failure mode — pages without incoming internal links don't get crawled often, don't pass authority, and don't compound. The LP cluster plan extends the geo reciprocal-backlink rule to LP clusters. Doing the sweep atomically per cluster (rather than per page) keeps the diff reviewable and avoids multi-agent contention on the same files.
+    </p>
+
+    <p>
+      <strong>What changed.</strong>
+    </p>
+
+    <ul class="list-disc list-inside space-y-1 ml-2">
+      <li><code>/</code> homepage species row — added "Horse breeding software →" sublink under the Horses card (mirroring the Cats card's cattery-software sublink). Added a new "Explore by job" deep-link row below the species grid pointing to A1, A4, and B1.</li>
+      <li><code>/for-breeders</code> in-depth guides list — added bullets for A1, A4, B1, and A3, in addition to the existing A2 bullet.</li>
+      <li><code>/horses</code> learn-more section — added A3 link plus a sibling buyer's-guide link to <code>/compare/best-horse-breeding-software</code> (mirroring the cats hub treatment).</li>
+      <li><code>/compare/best-dog-breeding-software</code> TL;DR aside — added "Run multiple species? → A1" and "Just need a CRM? → A4" sentences per the plan brief.</li>
+      <li><code>/compare/best-horse-breeding-software</code> TL;DR aside — added "Looking for an equine-specific landing page? → A3" sentence.</li>
+      <li><code>/pricing</code> — added a "What's included" sentence pointing to A1, A4, and B1 directly below the existing dog-comparison link.</li>
+    </ul>
+
+    <p>
+      <strong>Not in this commit.</strong> Cluster B sweep (B1, B2) and Cluster C sweep (C1–C5) are separate commits per the per-cluster atomicity rule. The B sweep targets the species hubs and <code>/tools/*</code> pages; the C sweep targets <code>/compare</code> index and <code>/pricing</code>.
+    </p>
+
+    <p>
+      <strong>Build verified.</strong> 277 pages indexed, no broken-link errors, no Astro warnings.
+    </p>
+  </div>
+</article>
