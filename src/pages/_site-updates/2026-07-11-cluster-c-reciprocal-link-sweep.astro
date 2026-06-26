@@ -1,0 +1,38 @@
+---
+export const updateMeta = {
+  date: '2026-07-11',
+  title: 'Cluster C reciprocal inbound-link sweep (5 [competitor]-alternative pages)',
+  tags: ['seo', 'internal-linking', 'cluster-c', 'sweep', 'competitor-comparisons'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 11, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Ran the Cluster C leg of the LP cluster reciprocal inbound-link sweep. Adds inbound links for all five <code>/compare/[competitor]-alternative</code> pages from the <code>/compare</code> index and the <code>/pricing</code> page.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>What changed.</strong>
+    </p>
+
+    <ul class="list-disc list-inside space-y-1 ml-2">
+      <li><code>/compare</code> index — added cards for all five alternative pages: <code>/compare/breedercloudpro-alternative</code> (C1), <code>/compare/breederbuddy-alternative</code> (C2), <code>/compare/dogbreederpro-alternative</code> (C3, the swap from the brief footnote), <code>/compare/breeders-assistant-alternative</code> (C4), <code>/compare/zooeasy-alternative</code> (C5). Cards use the same shape as the existing <code>best-[species]-software</code> entries so they appear consistent in the directory.</li>
+      <li><code>/pricing</code> — added a "Switching from another tool? Honest comparisons:" sentence linking all five C pages inline. Sits below the existing "What's included" sentence so the page now has three discoverability lines: feature comparison, multi-species + CRM + litter LPs, and competitor alternatives.</li>
+    </ul>
+
+    <p>
+      <strong>Conquesting Ads campaign.</strong> The five C pages exist primarily to capture the conquesting Ads campaign budgeted at $10/day in <code>UNIFIED-STRATEGY-2026-06.md</code>. The reciprocal inbound links matter less for cold paid traffic (which lands directly on each page) and more for organic crawl + the "Compare" hub authority. <code>/pricing</code> in particular is one of the most-trafficked pages on the site; sending its link equity to the conquesting pages is the right play.
+    </p>
+
+    <p>
+      <strong>Sweep complete.</strong> All three cluster sweeps (A, B, C) shipped today across three atomic commits. 12 of 12 LP cluster pages are live, all have inbound links from at least 2 high-authority surfaces. The 2-week validation pause called for in <code>UNIFIED-STRATEGY-2026-06.md</code> can now begin.
+    </p>
+
+    <p>
+      <strong>Pre-existing TypeScript error noted.</strong> <code>pricing/index.astro</code> line 187 has a longstanding TS error (<code>plan.foundersPrice possibly undefined</code>) inside a <code>plan.foundersEligible</code> conditional. Out of scope for this commit; logging here so it doesn't get attributed to the sweep.
+    </p>
+
+    <p>
+      <strong>Build verified.</strong> 277 pages indexed, no new errors.
+    </p>
+  </div>
+</article>
