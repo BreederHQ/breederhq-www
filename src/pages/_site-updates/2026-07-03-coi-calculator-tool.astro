@@ -1,0 +1,49 @@
+---
+export const updateMeta = {
+  date: '2026-07-03',
+  title: 'Shipped /tools/coefficient-of-inbreeding-calculator (Cluster B2)',
+  tags: ['seo', 'tool', 'cluster-b', 'genetics', 'ai-citation'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 3, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Shipped <code>/tools/coefficient-of-inbreeding-calculator</code> as page B2 of the 12-page LP cluster plan (<code>docs/marketing/LP-CLUSTER-PLAN-2026-06.md</code>). Closes the genetics gap in the <code>/tools</code> directory and seeds the &quot;coefficient of inbreeding calculator&quot; query that has no current ranking page.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>Why.</strong> The strategy doc flagged &quot;coefficient of inbreeding calculator&quot; as a content gap with real intent but no dedicated page. The keyword feeds two channels at once \u2014 conventional Google organic and AI-citation traffic to ChatGPT, Perplexity, and Claude when users ask &quot;how do I calculate COI.&quot; The cluster brief offered three options; we picked Option 1 (build a real working calculator) over Option 2 (educational page only) and Option 3 (redirect to <code>/tools/breeding-planner</code>) because a working tool earns clicks and citations that a stub page does not.
+    </p>
+
+    <p>
+      <strong>What the page is.</strong> A genetics tool page in the <code>/tools</code> directory with the calculator immediately below the hero (no scroll required). Implements Wright\u2019s path method for up to five generations of manual ancestor entry (30 named ancestors at fixed positions + free-form generation-4/5 textareas for both sides). H1: <em>Coefficient of Inbreeding (COI) Calculator</em>. Eight-section outline per the brief: hero, the calculator itself, &quot;what COI tells you (and what it doesn\u2019t),&quot; how to read the result, &quot;stop calculating one breeding at a time&quot; (in-app pitch), FAQ (7 questions), related tools and reading, sticky mobile CTA.
+    </p>
+
+    <p>
+      <strong>How the math works.</strong> The calculator scans every entered ancestor name and finds matches between the sire subtree and the dam subtree. For each common ancestor it sums (1/2)^(n_sire + n_dam + 1) over every sire-side path \u00d7 dam-side path pair, where n_sire and n_dam are the generation distances from each parent. F of each ancestor defaults to 0 (standard assumption when ancestor F is unknown). A &quot;Load example (full siblings)&quot; button populates the form with a Pup A \u00d7 Pup B mating sharing both parents and produces the expected 25%. A &quot;Clear all&quot; button resets the form.
+    </p>
+
+    <p>
+      <strong>Schema.</strong> Two JSON-LD blocks per the brief: <code>SoftwareApplication</code> with <code>applicationCategory: GeneticsApplication</code> and a 7-item <code>featureList</code> describing what the tool does, plus <code>HowTo</code> describing the five steps for using the calculator. The <code>HowTo</code> block is the lever for AI-citation visibility \u2014 AI engines pull structured how-to answers more often than free prose. <code>FAQPage</code> and <code>BreadcrumbList</code> auto-emit through BaseLayout props.
+    </p>
+
+    <p>
+      <strong>Anti-cannibalization.</strong> Lives under <code>/tools/</code> (canonical directory per memory), not as a top-level URL. Does not target &quot;best dog breeding software&quot; or any head term owned by <code>/compare/best-dog-breeding-software</code>. Distinct from <code>/tools/breeding-planner</code>, which is a multi-species cycle/timeline planner \u2014 the COI calculator is a pure pedigree-genetics tool.
+    </p>
+
+    <p>
+      <strong>Outbound links from the new page</strong> satisfy the per-page contract from the brief: <code>/pricing</code> (primary CTA, repeated three times), <code>/tools</code> (parent), <code>/tools/breeding-planner</code> (sibling), and all seven other <code>/tools/*</code> pages. Also links laterally to Cluster A siblings <code>/breeder-management-software</code>, <code>/cat-cattery-software</code>, and <code>/horse-breeding-software</code> to feed genetics-curious traffic into the species/role LPs.
+    </p>
+
+    <p>
+      <strong>Honesty constraints honored.</strong> Trial language is &quot;14-day free trial&quot; \u2014 never &quot;free tier,&quot; never &quot;no time limit.&quot; FOUNDER50 framed as &quot;first 100 founding subscribers&quot; for 50% off Pro or Enterprise for 12 months. Threshold guidance in the FAQ and disclaimer is general (parent-offspring = 25%, full-sib = 25%, first-cousin = 6.25%) and explicitly defers breed-specific thresholds to the user\u2019s breed club. No &quot;tenant&quot; / &quot;tenant-wide&quot; anywhere in user-facing copy \u2014 uses &quot;account,&quot; &quot;program,&quot; and &quot;pedigree library.&quot; Trust posture preserved: the tool does not verify or vouch for the entered pedigree; the disclaimer says so plainly.
+    </p>
+
+    <p>
+      <strong>One inbound link shipped in the same commit:</strong> the <code>/tools</code> directory index now lists the COI calculator (all nine species; placed between the puppy weight tracker and the puppy application builder), so the tool is reachable from the directory the moment it lands. The rest of the reciprocal inbound-link sweep is still deferred per the cluster-plan rule that batches it after each week ships \u2014 the species hubs <code>/dogs</code>, <code>/cats</code>, and <code>/horses</code> still need a sidebar link in their genetics sections, and the three Cluster A pages (A1, A2, A3) that name the COI calculator in their cross-link plans need their inbound links activated (some currently point at the URL on the assumption B2 was shipped, so those will resolve automatically when the deploy lands).
+    </p>
+
+    <p>
+      <strong>Next.</strong> Per the execution sequence, the remaining work in this run is Cluster C: <code>/compare/breedercloudpro-alternative</code> (C1), <code>/compare/breederbuddy-alternative</code> (C2), and <code>/compare/zooeasy-alternative</code> (C5) before the Week 2 reciprocal-link sweep. B1 (<code>/litter-management</code>) has not yet shipped \u2014 the cross-link from B2 to B1 in adjacent Cluster A pages should land when B1 is built.
+    </p>
+  </div>
+</article>

@@ -1,0 +1,1179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: 'Coefficient of Inbreeding (COI) Calculator', url: '/tools/coefficient-of-inbreeding-calculator' }
+];
+
+const lastReviewedISO = '2026-07-03';
+
+const faqs = [
+  {
+    question: 'What is the coefficient of inbreeding (COI)?',
+    answer: 'COI is the probability that the two alleles an animal carries at any random locus are identical by descent — that is, both came from the same ancestor. A COI of 0% means no detectable shared ancestry in the pedigree you supplied. A COI of 25% is the result of a parent-to-offspring or full-sibling mating. COI is a pedigree statistic, not a genetic test, and it only sees as far back as the pedigree you give it.'
+  },
+  {
+    question: 'How does this calculator work?',
+    answer: 'It uses Wright’s path method. For each ancestor that appears on both the sire side and the dam side, it adds (1/2)^(n1 + n2 + 1) × (1 + F of that ancestor), where n1 and n2 are the number of generations from the sire and dam back to the common ancestor. The result is the planned offspring’s estimated COI. Up to five generations are supported. If you do not supply an ancestor’s own inbreeding (F) value, it is treated as zero, which is the standard assumption when ancestor F is unknown.'
+  },
+  {
+    question: 'How many generations of pedigree should I enter?',
+    answer: 'Five generations is the depth most breed clubs and pedigree databases use for reported COI, and it is the depth this calculator supports. Three generations will catch obvious doubling on grandparents and great-grandparents. Five generations will catch line-breeding that hides deeper in the pedigree. Anything beyond five generations adds diminishing weight per ancestor (each additional generation halves the contribution) and is rarely worth manual entry. Inside BreederHQ, planned-breeding COI is calculated from your full pedigree library, not just the five generations you can fit on screen.'
+  },
+  {
+    question: 'What is a high COI?',
+    answer: 'There is no single answer because the right threshold varies by species, breed, and population. Many working dog breed clubs treat a COI above the breed average as a yellow flag and above twice the breed average as a red flag. Livestock breeds tolerate different ranges depending on selection history. The single useful rule across species: a single planned mating that lifts COI well above your breed’s baseline gives away genetic diversity that the next generation cannot get back. Treat this number as one input into a breeding decision, alongside health testing, temperament, and population-level breed advice.'
+  },
+  {
+    question: 'Does the calculator save anything?',
+    answer: 'No. Everything runs in your browser. Nothing is sent to a server, nothing is logged, no signup is required. Refreshing the page clears the form. If you want COI to live on every planned breeding alongside health testing, contracts, and waitlists, that is what BreederHQ does in-app.'
+  },
+  {
+    question: 'How is this different from the COI in BreederHQ?',
+    answer: 'This public calculator asks you to enter up to 30 ancestors by hand and computes COI from what you typed. The in-app COI runs against your full pedigree library, automatically — every breeding you plan gets a live COI based on every dog, cat, horse, goat, sheep, rabbit, alpaca, llama, or cattle pedigree you have on record, with no manual entry. It also sits alongside COI history for previous matings, breed-specific reference ranges where we have them, and the health-testing and temperament data tied to each animal.'
+  },
+  {
+    question: 'Will this give me the same answer as my breed registry’s COI?',
+    answer: 'Not necessarily. Registry COI numbers are usually computed against the full registered pedigree going back many generations — sometimes to a breed’s founding population. A five-generation hand-entered calculation only sees five generations, so it will typically read lower than a deep registry calculation on the same animal. Use this tool to compare two planned matings on the same depth of pedigree; use your registry’s number for absolute baseline reporting.'
+  }
+];
+
+// Tool-page SoftwareApplication schema. Mirrors the working pattern used by
+// /tools/heat-cycle-calculator. applicationCategory uses Schema.org's
+// "GeneticsApplication" subtype, with applicationSubCategory naming the tool
+// specifically so AI engines can pull "free COI calculator from BreederHQ"
+// as a structured fact.
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://breederhq.com/tools/coefficient-of-inbreeding-calculator#tool',
+  'name': 'Coefficient of Inbreeding (COI) Calculator',
+  'description': 'Free coefficient of inbreeding (COI) calculator. Enter sire, dam, and up to five generations of ancestors by hand to estimate Wright\u2019s coefficient of inbreeding for a planned mating. Anonymous, no signup, runs in the browser. Educational planning tool. For pedigree-library-wide automatic COI on every planned breeding, use BreederHQ.',
+  'url': 'https://breederhq.com/tools/coefficient-of-inbreeding-calculator',
+  'applicationCategory': 'GeneticsApplication',
+  'applicationSubCategory': 'Coefficient of Inbreeding Calculator',
+  'operatingSystem': 'Any (web browser)',
+  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'publisher': {
+    '@id': 'https://breederhq.com/#organization'
+  },
+  'datePublished': lastReviewedISO,
+  'dateModified': lastReviewedISO,
+  'featureList': [
+    'Wright\u2019s path-method COI calculation',
+    'Manual ancestor entry up to five generations (30 ancestors)',
+    'Optional per-ancestor F value (defaults to zero when unknown)',
+    'Identifies common ancestors automatically by name match',
+    'Shows the contribution of each common ancestor',
+    'Returns COI as a percentage and a one-sentence interpretation',
+    'Anonymous, no signup, nothing saved'
+  ]
+};
+
+// HowTo schema. AI search engines (ChatGPT, Perplexity, Google AI Overviews)
+// cite HowTo-structured answers more often than plain prose. Keep steps
+// terse and imperative.
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  'name': 'How to calculate coefficient of inbreeding (COI) from a pedigree',
+  'description': 'Step-by-step instructions for estimating Wright\u2019s coefficient of inbreeding from a hand-entered five-generation pedigree.',
+  'step': [
+    {
+      '@type': 'HowToStep',
+      'position': 1,
+      'name': 'Enter the planned sire and dam',
+      'text': 'Type a unique name or registration ID for the sire and the dam. The names only have to be unique within this pedigree \u2014 the calculator uses them to detect common ancestors.'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 2,
+      'name': 'Fill in as many ancestors as you know',
+      'text': 'Add the sire and dam of each parent, grandparent, and great-grandparent that you have. The calculator handles missing branches \u2014 unknown ancestors do not contribute to COI.'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 3,
+      'name': 'Reuse the same name for the same animal on both sides',
+      'text': 'If a single animal appears on both the sire side and the dam side of the pedigree, type the exact same name in both places. Identical names are how the calculator finds common ancestors.'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 4,
+      'name': 'Calculate',
+      'text': 'Press Calculate. The tool returns the estimated COI as a percentage and lists every common ancestor with its contribution. A COI of 0% means no detectable shared ancestry within the pedigree you supplied.'
+    },
+    {
+      '@type': 'HowToStep',
+      'position': 5,
+      'name': 'Use it for planning, not as a single decision',
+      'text': 'Compare the COI of two or three planned matings at the same pedigree depth. Combine the result with health testing, temperament, breed-specific guidance, and your registry\u2019s own deep-pedigree COI before committing to a breeding.'
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="Coefficient of Inbreeding (COI) Calculator — Free, No Signup | BreederHQ"
+  description="Free Wright’s coefficient of inbreeding (COI) calculator. Enter sire, dam, and up to 5 generations of ancestors to estimate a planned mating’s COI. Use in-app for automatic COI on every planned breeding."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline">Tools</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Coefficient of Inbreeding (COI) Calculator</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-12 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Coefficient of Inbreeding (COI) Calculator</h1>
+        <p class="text-sm text-gray-500 mb-6">
+          <strong class="text-gray-700">Last reviewed: July 3, 2026.</strong> Built and reviewed by the BreederHQ Operations Team, working with active breeders across nine species.
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed mb-2">
+          Estimate Wright’s coefficient of inbreeding from a pedigree. Free, no signup, runs in your browser.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          Enter the planned sire and dam, then fill in as many ancestors as you know up to five generations. The tool finds common ancestors automatically and shows each one’s contribution. For automatic COI on every planned breeding from your full pedigree library, use it inside BreederHQ.
+        </p>
+      </div>
+    </section>
+
+    <!-- The Calculator -->
+    <section class="px-4 pb-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="coi-card">
+          <form id="coi-form" class="coi-form" novalidate>
+            <p class="coi-instructions">
+              Type a unique name or registration ID for each ancestor. Use the <strong>same name</strong> in both columns when the same animal appears on the sire side and the dam side — that is how the calculator finds common ancestors. Leave a field blank if you do not know that ancestor.
+            </p>
+
+            <!-- Planned offspring: sire + dam -->
+            <fieldset class="coi-fieldset coi-fieldset--planned">
+              <legend class="coi-legend">Planned Mating</legend>
+              <div class="coi-grid-2">
+                <div class="coi-field">
+                  <label for="coi-sire" class="coi-label">Sire <span class="coi-required" aria-hidden="true">*</span></label>
+                  <input type="text" id="coi-sire" name="sire" class="coi-input" maxlength="80" required autocomplete="off" placeholder="e.g. Champion Apollo" />
+                </div>
+                <div class="coi-field">
+                  <label for="coi-dam" class="coi-label">Dam <span class="coi-required" aria-hidden="true">*</span></label>
+                  <input type="text" id="coi-dam" name="dam" class="coi-input" maxlength="80" required autocomplete="off" placeholder="e.g. Lady Brisa" />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Sire side -->
+            <fieldset class="coi-fieldset">
+              <legend class="coi-legend">Sire’s Ancestors</legend>
+
+              <h4 class="coi-subhead">Generation 1 (parents of sire)</h4>
+              <div class="coi-grid-2">
+                <div class="coi-field"><label for="s-s" class="coi-label">Sire of sire</label><input type="text" id="s-s" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="s-d" class="coi-label">Dam of sire</label><input type="text" id="s-d" class="coi-input" maxlength="80" autocomplete="off" /></div>
+              </div>
+
+              <h4 class="coi-subhead">Generation 2 (grandparents of sire)</h4>
+              <div class="coi-grid-2">
+                <div class="coi-field"><label for="s-ss" class="coi-label">Sire of sire of sire</label><input type="text" id="s-ss" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="s-sd" class="coi-label">Dam of sire of sire</label><input type="text" id="s-sd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="s-ds" class="coi-label">Sire of dam of sire</label><input type="text" id="s-ds" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="s-dd" class="coi-label">Dam of dam of sire</label><input type="text" id="s-dd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+              </div>
+
+              <details class="coi-deeper">
+                <summary class="coi-deeper-summary">Add generations 3 to 5 on the sire side (optional)</summary>
+                <h4 class="coi-subhead">Generation 3 (great-grandparents of sire)</h4>
+                <div class="coi-grid-2">
+                  <div class="coi-field"><label for="s-sss" class="coi-label">Sire of grandsire of sire</label><input type="text" id="s-sss" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-ssd" class="coi-label">Dam of grandsire of sire</label><input type="text" id="s-ssd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-sds" class="coi-label">Sire of granddam of sire (sire side)</label><input type="text" id="s-sds" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-sdd" class="coi-label">Dam of granddam of sire (sire side)</label><input type="text" id="s-sdd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-dss" class="coi-label">Sire of grandsire of dam (sire side)</label><input type="text" id="s-dss" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-dsd" class="coi-label">Dam of grandsire of dam (sire side)</label><input type="text" id="s-dsd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-dds" class="coi-label">Sire of granddam of dam (sire side)</label><input type="text" id="s-dds" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="s-ddd" class="coi-label">Dam of granddam of dam (sire side)</label><input type="text" id="s-ddd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                </div>
+
+                <h4 class="coi-subhead">Generations 4 and 5 (sire side, paste any names you can identify)</h4>
+                <p class="coi-help">
+                  Generations 4 and 5 add precision but rarely change the COI for a typical pedigree. Add only ancestors you can name confidently — unknown entries are treated as zero contribution.
+                </p>
+                <textarea id="s-deep" class="coi-textarea" rows="3" placeholder="One name per line. Names listed here are checked against the dam side for common ancestors; their generational depth is treated as generation 4."></textarea>
+              </details>
+            </fieldset>
+
+            <!-- Dam side -->
+            <fieldset class="coi-fieldset">
+              <legend class="coi-legend">Dam’s Ancestors</legend>
+
+              <h4 class="coi-subhead">Generation 1 (parents of dam)</h4>
+              <div class="coi-grid-2">
+                <div class="coi-field"><label for="d-s" class="coi-label">Sire of dam</label><input type="text" id="d-s" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="d-d" class="coi-label">Dam of dam</label><input type="text" id="d-d" class="coi-input" maxlength="80" autocomplete="off" /></div>
+              </div>
+
+              <h4 class="coi-subhead">Generation 2 (grandparents of dam)</h4>
+              <div class="coi-grid-2">
+                <div class="coi-field"><label for="d-ss" class="coi-label">Sire of sire of dam</label><input type="text" id="d-ss" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="d-sd" class="coi-label">Dam of sire of dam</label><input type="text" id="d-sd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="d-ds" class="coi-label">Sire of dam of dam</label><input type="text" id="d-ds" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                <div class="coi-field"><label for="d-dd" class="coi-label">Dam of dam of dam</label><input type="text" id="d-dd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+              </div>
+
+              <details class="coi-deeper">
+                <summary class="coi-deeper-summary">Add generations 3 to 5 on the dam side (optional)</summary>
+                <h4 class="coi-subhead">Generation 3 (great-grandparents of dam)</h4>
+                <div class="coi-grid-2">
+                  <div class="coi-field"><label for="d-sss" class="coi-label">Sire of grandsire of sire (dam side)</label><input type="text" id="d-sss" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-ssd" class="coi-label">Dam of grandsire of sire (dam side)</label><input type="text" id="d-ssd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-sds" class="coi-label">Sire of granddam of sire (dam side)</label><input type="text" id="d-sds" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-sdd" class="coi-label">Dam of granddam of sire (dam side)</label><input type="text" id="d-sdd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-dss" class="coi-label">Sire of grandsire of dam (dam side)</label><input type="text" id="d-dss" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-dsd" class="coi-label">Dam of grandsire of dam (dam side)</label><input type="text" id="d-dsd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-dds" class="coi-label">Sire of granddam of dam (dam side)</label><input type="text" id="d-dds" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                  <div class="coi-field"><label for="d-ddd" class="coi-label">Dam of granddam of dam (dam side)</label><input type="text" id="d-ddd" class="coi-input" maxlength="80" autocomplete="off" /></div>
+                </div>
+
+                <h4 class="coi-subhead">Generations 4 and 5 (dam side)</h4>
+                <p class="coi-help">
+                  One name per line. Names listed here are checked against the sire side for common ancestors; their generational depth is treated as generation 4.
+                </p>
+                <textarea id="d-deep" class="coi-textarea" rows="3"></textarea>
+              </details>
+            </fieldset>
+
+            <div class="coi-actions">
+              <button type="submit" class="coi-button">Calculate COI</button>
+              <button type="button" id="coi-reset" class="coi-button-secondary">Clear all</button>
+              <button type="button" id="coi-example" class="coi-button-secondary">Load example (full siblings)</button>
+            </div>
+            <p id="coi-error" class="coi-error" role="alert" hidden></p>
+          </form>
+
+          <div id="coi-results" class="coi-results" hidden aria-live="polite">
+            <h2 class="coi-results-title">Estimated Coefficient of Inbreeding</h2>
+
+            <div class="coi-headline">
+              <span class="coi-headline-value" id="coi-percent">0.00%</span>
+              <span class="coi-headline-label">Wright’s COI from the pedigree you entered</span>
+            </div>
+
+            <p class="coi-interpretation" id="coi-interpretation"></p>
+
+            <h3 class="coi-section-title">Common ancestors found</h3>
+            <div id="coi-common-list" class="coi-common-list">
+              <p class="coi-common-empty">No common ancestors detected in the pedigree you entered. COI is 0% at this pedigree depth. If you know there is shared ancestry further back, your registry’s deep-pedigree COI may read higher.</p>
+            </div>
+
+            <div class="coi-disclaimer">
+              <strong>Important.</strong> COI is a pedigree statistic, not a genetic test. It only sees as far back as the pedigree you supplied. Use this number as one input into a breeding decision — alongside health testing, temperament, breed-specific guidance, and your registry’s deep-pedigree COI. Threshold guidance varies by species and breed; consult your breed club for breed-specific ranges.
+            </div>
+
+            <div class="coi-cta">
+              <p class="coi-cta-text">
+                Hand-entering 30 ancestors per mating gets old fast. In BreederHQ, every planned breeding gets a live COI from your full pedigree library — dogs, cats, horses, goats, sheep, rabbits, alpacas, llamas, and cattle — with no manual entry. The number sits next to health testing, contracts, deposits, and waitlists for the same planned mating.
+              </p>
+              <div class="coi-cta-buttons">
+                <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="coi-cta-primary">
+                  Start a 14-day free trial
+                </a>
+                <a href="/pricing" class="coi-cta-secondary">
+                  See pricing
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What COI tells you (and what it doesn't) -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">What COI Tells You (and What It Doesn’t)</h2>
+
+        <div class="space-y-6 text-lg text-gray-700 leading-relaxed">
+          <p>
+            COI estimates the probability that the two alleles at any random locus in the planned offspring are identical by descent — inherited from the same ancestor on both sides. It is a population-genetics shorthand for "how related are these two animals through their pedigree."
+          </p>
+          <p>
+            <strong class="text-gray-900">What COI does tell you.</strong> Whether a planned mating is going to compound shared ancestry that already exists in the line. Whether two candidate matings would differ in their genetic-diversity cost. Whether the line-breeding you are planning is mild, moderate, or close.
+          </p>
+          <p>
+            <strong class="text-gray-900">What COI does not tell you.</strong> Whether either animal carries a specific disease allele — that is what genetic testing is for. Whether the offspring will inherit a particular trait. Whether the breed average for COI is reasonable in absolute terms (some closed registries have arithmetically high baselines). Whether a low COI from a five-generation calculation is actually low when computed against a deep pedigree.
+          </p>
+          <p>
+            <strong class="text-gray-900">Reference points.</strong> A parent-to-offspring mating produces a COI of 25%. A full-sibling mating also produces 25%. A first-cousin mating produces 6.25%. An unrelated mating with no shared ancestors in the pedigree produces 0%. Most breed clubs publish a breed-average COI that gives you a baseline to compare against; check your registry or breed club for the breed-specific number.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to read the result -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">How to Read the Result</h2>
+        <ol class="space-y-4 text-lg text-gray-700">
+          <li class="flex items-start">
+            <span class="coi-ol-num">1</span>
+            <span><strong>Look at the common ancestors first.</strong> The list under the headline number shows every ancestor that appears on both sides of the pedigree you entered, with its generation depth and its contribution to the total. If the list is empty, the COI is 0% at this depth.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="coi-ol-num">2</span>
+            <span><strong>Compare two matings at the same depth.</strong> The most useful thing this tool does is let you compare two planned matings of the same animal against different mates. Run both, see which produces lower COI, and you have a real input into the decision.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="coi-ol-num">3</span>
+            <span><strong>Cross-check against your registry’s number.</strong> A five-generation hand-entered COI will usually read lower than a deep-pedigree registry COI on the same animal. Use the registry’s number for absolute reporting and this tool for quick what-if comparisons.</span>
+          </li>
+          <li class="flex items-start">
+            <span class="coi-ol-num">4</span>
+            <span><strong>Decide alongside everything else.</strong> COI is one variable. Health testing, temperament, working ability, breed standard, and your buyer pipeline all matter too. A low COI on a mating that ignores everything else is not a good breeding.</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Stop calculating one breeding at a time -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Stop Calculating One Breeding at a Time</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          A free hand-entered calculator is fine for a one-off question. It is a slog for an active breeding program with a deep pedigree library, multiple planned matings, and a waitlist that needs to know which litters are actually going to happen.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Inside BreederHQ, every animal in your pedigree library carries its own subtree forward. When you plan a breeding, COI is calculated against the full depth of pedigree you have on record — not just the five generations you can fit on screen — and it updates in real time as you add new ancestors. The number sits on the breeding plan alongside health testing, contracts, deposits, and waitlist matches for that planned mating. Across nine species: dogs, cats, horses, goats, sheep, rabbits, alpacas, llamas, and cattle.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          A 14-day free trial gets you the full platform. The first 100 founding subscribers can use code <code>FOUNDER50</code> at checkout for 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="inline-block px-6 py-3 bg-[hsl(24,95%,53%)] text-white rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+            Start a 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-block px-6 py-3 bg-white text-[hsl(24,95%,40%)] border border-gray-300 rounded-lg font-bold hover:border-[hsl(24,95%,53%)] transition" style="min-height: 44px;">
+            See pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4 faq-section">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Other Free Breeder Tools</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base">
+          <a href="/tools/breeding-planner" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Breeding Planner (Multi-Species)
+          </a>
+          <a href="/tools/heat-cycle-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Heat Cycle Calculator
+          </a>
+          <a href="/tools/progesterone-timing-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Progesterone Timing Tracker
+          </a>
+          <a href="/tools/whelping-date-calculator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Whelping Date Calculator
+          </a>
+          <a href="/tools/puppy-vaccination-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Vaccination Schedule Generator
+          </a>
+          <a href="/tools/puppy-deworming-schedule-generator" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Deworming Schedule Generator
+          </a>
+          <a href="/tools/puppy-weight-tracker" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Puppy Weight Tracker
+          </a>
+          <a href="/tools" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+            → All Free Tools →
+          </a>
+        </div>
+
+        <h3 class="text-xl font-bold mt-10 mb-4">Related Reading</h3>
+        <div class="space-y-3 text-lg">
+          <div><a href="/breeder-management-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeder Management Software for Working Programs</a></div>
+          <div><a href="/cat-cattery-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Cattery Software for Working Cat Breeders</a></div>
+          <div><a href="/horse-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">→ Horse Breeding Software for Working Farms</a></div>
+        </div>
+      </div>
+    </section>
+
+    <RelatedWorkflows
+      heading="Related Workflows"
+      links={[
+        { title: "Genetics and Health Testing", description: "OFA, PennHIP, Embark, COI calculation, multi-locus color.", url: "/workflows/genetics-and-health-testing" },
+        { title: "Breeding Plans", description: "8-phase breeding plan lifecycle from goal to placement.", url: "/workflows/breeding-plans" },
+        { title: "Heat Cycle Tracking", description: "Log heats, track ovulation windows, plan breeding timing.", url: "/workflows/heat-tracking" },
+        { title: "Dog Breeding Software", description: "Run your entire dog breeding program in one connected system.", url: "/dogs" }
+      ]}
+    />
+
+    <!-- Sticky Mobile CTA -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+      <a href="https://accounts.breederhq.com/register?intent=breeder_dashboard" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+        Try Live COI on Every Planned Breeding
+      </a>
+    </div>
+  </main>
+
+  <!--
+    COI calculator logic. Wright's path method.
+    For each ancestor that appears on both the sire's subtree and the dam's
+    subtree, contribution = (1/2)^(n_sire + n_dam + 1) * (1 + F_ancestor).
+    F_ancestor defaults to 0 when not supplied (standard assumption).
+
+    Pedigree positions are encoded as strings of S/D characters describing
+    the path from the planned offspring down to that ancestor:
+      "S"   = sire of planned offspring
+      "SD"  = dam of sire
+      "DSS" = sire of sire of dam
+    Generation = length of the path. Sire-side = starts with "S".
+    Dam-side  = starts with "D".
+
+    Same-name match across the sire subtree and dam subtree = common ancestor.
+  -->
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('coi-form');
+      if (!form) return;
+      var resultsEl = document.getElementById('coi-results');
+      var errorEl = document.getElementById('coi-error');
+
+      // Mapping: input element id -> pedigree path string (S/D from planned offspring).
+      // Generation 1 = parents (path length 1). Generation 2 = grandparents (length 2). etc.
+      // Generation-3 fields are intentionally named in plain English in the UI
+      // but encoded here as their canonical SSS/SSD/... path. The label text
+      // doesn't need to match the path encoding (the calculator reads the id).
+      var positions = [
+        // Sire side - gen 1
+        { id: 'coi-sire', path: 'S' },
+        { id: 'coi-dam',  path: 'D' },
+        // Sire's parents (gen 2 from offspring)
+        { id: 's-s', path: 'SS' },
+        { id: 's-d', path: 'SD' },
+        // Dam's parents (gen 2 from offspring)
+        { id: 'd-s', path: 'DS' },
+        { id: 'd-d', path: 'DD' },
+        // Sire's grandparents (gen 3 from offspring)
+        { id: 's-ss', path: 'SSS' },
+        { id: 's-sd', path: 'SSD' },
+        { id: 's-ds', path: 'SDS' },
+        { id: 's-dd', path: 'SDD' },
+        // Dam's grandparents (gen 3 from offspring)
+        { id: 'd-ss', path: 'DSS' },
+        { id: 'd-sd', path: 'DSD' },
+        { id: 'd-ds', path: 'DDS' },
+        { id: 'd-dd', path: 'DDD' },
+        // Sire's great-grandparents (gen 4 from offspring)
+        { id: 's-sss', path: 'SSSS' },
+        { id: 's-ssd', path: 'SSSD' },
+        { id: 's-sds', path: 'SSDS' },
+        { id: 's-sdd', path: 'SSDD' },
+        { id: 's-dss', path: 'SDSS' },
+        { id: 's-dsd', path: 'SDSD' },
+        { id: 's-dds', path: 'SDDS' },
+        { id: 's-ddd', path: 'SDDD' },
+        // Dam's great-grandparents (gen 4 from offspring)
+        { id: 'd-sss', path: 'DSSS' },
+        { id: 'd-ssd', path: 'DSSD' },
+        { id: 'd-sds', path: 'DSDS' },
+        { id: 'd-sdd', path: 'DSDD' },
+        { id: 'd-dss', path: 'DDSS' },
+        { id: 'd-dsd', path: 'DDSD' },
+        { id: 'd-dds', path: 'DDDS' },
+        { id: 'd-ddd', path: 'DDDD' }
+      ];
+
+      function normalize(name) {
+        if (!name) return '';
+        return String(name).trim().toLowerCase().replace(/\s+/g, ' ');
+      }
+
+      function readForm() {
+        // Build map: normalized name -> array of { path, displayName }
+        // (one ancestor name can appear at multiple pedigree positions)
+        var map = Object.create(null);
+        var sireName = '';
+        var damName = '';
+
+        for (var i = 0; i < positions.length; i++) {
+          var pos = positions[i];
+          var el = document.getElementById(pos.id);
+          if (!el) continue;
+          var raw = el.value || '';
+          var norm = normalize(raw);
+          if (!norm) continue;
+          if (pos.path === 'S') sireName = raw.trim();
+          if (pos.path === 'D') damName = raw.trim();
+          if (!map[norm]) map[norm] = { displayName: raw.trim(), occurrences: [] };
+          map[norm].occurrences.push(pos.path);
+        }
+
+        // Generation 4/5 textareas (one name per line, treated as gen-4 depth).
+        // Lines listed in s-deep are placed on the sire side at path "SXXXX",
+        // and on d-deep on the dam side at path "DXXXX". The exact branch
+        // beyond that doesn't matter for Wright's formula \u2014 only the
+        // generational distance to the common ancestor matters. We pick a
+        // stable, distinct placeholder path so a name appearing in both
+        // textareas registers as a common ancestor at gen-4-from-offspring.
+        var sDeep = document.getElementById('s-deep');
+        var dDeep = document.getElementById('d-deep');
+
+        function appendDeep(textareaEl, sideChar) {
+          if (!textareaEl) return;
+          var lines = (textareaEl.value || '').split(/\r?\n/);
+          for (var j = 0; j < lines.length; j++) {
+            var raw = lines[j];
+            var norm = normalize(raw);
+            if (!norm) continue;
+            // Fabricate a unique gen-4 path on the right side. The path string
+            // length is what the algorithm uses for generation distance; the
+            // specific branch is irrelevant for the formula.
+            var path = sideChar + 'XXX'; // length 4 = generation 4
+            if (!map[norm]) map[norm] = { displayName: raw.trim(), occurrences: [] };
+            map[norm].occurrences.push(path);
+          }
+        }
+        appendDeep(sDeep, 'S');
+        appendDeep(dDeep, 'D');
+
+        return { map: map, sireName: sireName, damName: damName };
+      }
+
+      // For each ancestor, find every (sire-side path, dam-side path) pair
+      // and compute its contribution to F(planned offspring) per Wright's
+      // formula.
+      function computeCOI(state) {
+        var map = state.map;
+        var common = [];
+        var totalF = 0;
+
+        // Walk every ancestor that appears at least once on each side.
+        for (var name in map) {
+          var entry = map[name];
+          // Skip the planned sire and dam themselves \u2014 they are the parents,
+          // not ancestors of the offspring. (But: if the SAME name appears as
+          // both the sire AND something on the dam side, that IS a common
+          // ancestor \u2014 we cover that by including the "S" path below.)
+          var siresidePaths = [];
+          var damsidePaths = [];
+          for (var k = 0; k < entry.occurrences.length; k++) {
+            var p = entry.occurrences[k];
+            if (p.charAt(0) === 'S') siresidePaths.push(p);
+            else if (p.charAt(0) === 'D') damsidePaths.push(p);
+          }
+          if (!siresidePaths.length || !damsidePaths.length) continue;
+
+          // Wright's formula: sum over all (sire-path, dam-path) pairs
+          // of (1/2)^(g_sire + g_dam - 1), where g_sire is the generation
+          // distance from the PLANNED SIRE to the ancestor, g_dam is from
+          // the PLANNED DAM. With path notation rooted at the planned
+          // offspring, g_sire = path.length - 1 (the leading "S" is the
+          // step from offspring to sire), same for dam side.
+          //
+          // Equivalent: contribution per pair = (1/2)^(n1 + n2 + 1) using
+          // n1, n2 = generations from each PARENT to the ancestor.
+          //
+          // F_ancestor default = 0 (no F input supported in this UI).
+          var ancestorContribution = 0;
+          for (var a = 0; a < siresidePaths.length; a++) {
+            for (var b = 0; b < damsidePaths.length; b++) {
+              var n1 = siresidePaths[a].length - 1; // gens from sire to ancestor
+              var n2 = damsidePaths[b].length - 1;  // gens from dam to ancestor
+              var pairContribution = Math.pow(0.5, n1 + n2 + 1);
+              ancestorContribution += pairContribution;
+            }
+          }
+          totalF += ancestorContribution;
+
+          // Pick a representative depth for display: shortest sire-side gen + shortest dam-side gen.
+          var minSireGen = Infinity, minDamGen = Infinity;
+          for (var s2 = 0; s2 < siresidePaths.length; s2++) {
+            var g = siresidePaths[s2].length - 1;
+            if (g < minSireGen) minSireGen = g;
+          }
+          for (var d2 = 0; d2 < damsidePaths.length; d2++) {
+            var g2 = damsidePaths[d2].length - 1;
+            if (g2 < minDamGen) minDamGen = g2;
+          }
+
+          common.push({
+            name: entry.displayName,
+            sireGen: minSireGen,
+            damGen: minDamGen,
+            contribution: ancestorContribution,
+            occurrences: siresidePaths.length * damsidePaths.length
+          });
+        }
+
+        common.sort(function (a, b) { return b.contribution - a.contribution; });
+        return { coi: totalF, common: common };
+      }
+
+      function interpret(coi) {
+        var pct = coi * 100;
+        if (pct === 0) {
+          return 'No shared ancestry detected in the pedigree you entered. The COI is 0% at this depth. If your registry uses a deeper pedigree, its number may read higher.';
+        }
+        if (pct < 3.125) {
+          return 'Mild line-breeding or distant shared ancestry. Roughly equivalent to a second-cousin mating or weaker.';
+        }
+        if (pct < 6.25) {
+          return 'Moderate line-breeding. Roughly equivalent to a first-cousin-once-removed mating.';
+        }
+        if (pct < 12.5) {
+          return 'First-cousin range. Many breed clubs treat this as a meaningful diversity cost; check your breed-specific guidance.';
+        }
+        if (pct < 25) {
+          return 'Close line-breeding. Comparable to a half-sibling mating. Most breed clubs flag this depth.';
+        }
+        return 'Very close mating, comparable to a parent-to-offspring or full-sibling pairing (25%). Treat any value at or above 25% as requiring serious justification.';
+      }
+
+      function renderCommonList(common) {
+        var listEl = document.getElementById('coi-common-list');
+        if (!listEl) return;
+        if (!common.length) {
+          listEl.innerHTML = '<p class="coi-common-empty">No common ancestors detected in the pedigree you entered. COI is 0% at this pedigree depth. If you know there is shared ancestry further back, your registry\u2019s deep-pedigree COI may read higher.</p>';
+          return;
+        }
+        var html = '<ul class="coi-common-ul">';
+        for (var i = 0; i < common.length; i++) {
+          var c = common[i];
+          var contribPct = (c.contribution * 100).toFixed(2);
+          var occLabel = c.occurrences === 1
+            ? '1 sire\u00d7dam path'
+            : c.occurrences + ' sire\u00d7dam paths';
+          // Escape the display name minimally to avoid HTML injection from input
+          var safeName = String(c.name).replace(/[&<>"]/g, function (ch) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch];
+          });
+          html += '<li class="coi-common-item">' +
+            '<div class="coi-common-name">' + safeName + '</div>' +
+            '<div class="coi-common-meta">' +
+              'Closest path: gen ' + c.sireGen + ' (sire side) \u00d7 gen ' + c.damGen + ' (dam side). ' +
+              occLabel + '.' +
+            '</div>' +
+            '<div class="coi-common-contrib">Contributes <strong>' + contribPct + '%</strong> to total COI.</div>' +
+          '</li>';
+        }
+        html += '</ul>';
+        listEl.innerHTML = html;
+      }
+
+      function render(state) {
+        var result = computeCOI(state);
+        var pct = (result.coi * 100).toFixed(2);
+        var pctEl = document.getElementById('coi-percent');
+        if (pctEl) pctEl.textContent = pct + '%';
+        var interpEl = document.getElementById('coi-interpretation');
+        if (interpEl) interpEl.textContent = interpret(result.coi);
+        renderCommonList(result.common);
+        resultsEl.hidden = false;
+        try { resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { /* noop */ }
+      }
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        errorEl.hidden = true;
+        errorEl.textContent = '';
+        var sireEl = document.getElementById('coi-sire');
+        var damEl = document.getElementById('coi-dam');
+        if (!sireEl.value.trim() || !damEl.value.trim()) {
+          errorEl.textContent = 'Enter a name for the planned sire and the planned dam.';
+          errorEl.hidden = false;
+          (sireEl.value.trim() ? damEl : sireEl).focus();
+          return;
+        }
+        var state = readForm();
+        render(state);
+      });
+
+      // Clear all fields and hide results.
+      var resetBtn = document.getElementById('coi-reset');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          form.reset();
+          if (resultsEl) resultsEl.hidden = true;
+          errorEl.hidden = true;
+        });
+      }
+
+      // Load a worked example: full-sibling mating (same sire AND dam as parents).
+      // Expected result: COI = 25%, common ancestors = both parents at gen 1 x gen 1.
+      var exampleBtn = document.getElementById('coi-example');
+      if (exampleBtn) {
+        exampleBtn.addEventListener('click', function () {
+          form.reset();
+          // Two full siblings being mated to each other. Their shared parents
+          // are "Apollo" (sire) and "Brisa" (dam). The planned mating is
+          // therefore Apollo+Brisa pup x Apollo+Brisa pup, with both pups
+          // having the same parents.
+          document.getElementById('coi-sire').value = 'Pup A';
+          document.getElementById('coi-dam').value = 'Pup B';
+          document.getElementById('s-s').value = 'Apollo';
+          document.getElementById('s-d').value = 'Brisa';
+          document.getElementById('d-s').value = 'Apollo';
+          document.getElementById('d-d').value = 'Brisa';
+          var state = readForm();
+          render(state);
+        });
+      }
+    })();
+  </script>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .coi-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .coi-instructions {
+      font-size: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding: 0.875rem 1rem;
+      background: #f9fafb;
+      border-left: 3px solid hsl(24, 95%, 53%);
+      border-radius: 6px;
+    }
+
+    .coi-fieldset {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 1.25rem 1.25rem 1.5rem;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .coi-fieldset--planned {
+      background: hsl(24, 95%, 97%);
+      border-color: hsl(24, 95%, 80%);
+    }
+
+    .coi-legend {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #111827;
+      padding: 0 0.5rem;
+    }
+
+    .coi-subhead {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #374151;
+      margin: 1.25rem 0 0.5rem 0;
+    }
+
+    .coi-subhead:first-of-type {
+      margin-top: 0.25rem;
+    }
+
+    .coi-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .coi-grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .coi-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .coi-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.25rem;
+    }
+
+    .coi-required {
+      color: hsl(0, 72%, 51%);
+      font-weight: 700;
+    }
+
+    .coi-input,
+    .coi-textarea {
+      padding: 0.625rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: #111827;
+      background: #ffffff;
+      min-height: 38px;
+      font-family: inherit;
+      width: 100%;
+    }
+
+    .coi-input:focus,
+    .coi-textarea:focus {
+      outline: 2px solid hsl(24, 95%, 53%);
+      outline-offset: 1px;
+      border-color: hsl(24, 95%, 53%);
+    }
+
+    .coi-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .coi-help {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin: 0.25rem 0 0.5rem;
+      line-height: 1.5;
+    }
+
+    .coi-deeper {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #e5e7eb;
+    }
+
+    .coi-deeper-summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: hsl(24, 95%, 40%);
+      padding: 0.5rem 0;
+      list-style: none;
+    }
+
+    .coi-deeper-summary::-webkit-details-marker { display: none; }
+    .coi-deeper-summary::before {
+      content: '▶';
+      display: inline-block;
+      margin-right: 0.5rem;
+      transition: transform 200ms ease;
+    }
+    details[open] .coi-deeper-summary::before {
+      transform: rotate(90deg);
+    }
+
+    .coi-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .coi-button {
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 150ms ease;
+    }
+
+    .coi-button:hover { background: hsl(24, 95%, 48%); }
+
+    .coi-button-secondary {
+      padding: 0.75rem 1.25rem;
+      background: #ffffff;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+    }
+
+    .coi-button-secondary:hover {
+      border-color: hsl(24, 95%, 53%);
+      color: hsl(24, 95%, 40%);
+    }
+
+    .coi-error {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #b91c1c;
+      font-size: 0.95rem;
+    }
+
+    .coi-results {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+    }
+
+    .coi-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .coi-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      background: hsl(24, 95%, 97%);
+      border: 1px solid hsl(24, 95%, 80%);
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .coi-headline-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: hsl(24, 95%, 35%);
+      line-height: 1;
+    }
+
+    .coi-headline-label {
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    .coi-interpretation {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .coi-section-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .coi-common-list {
+      margin-bottom: 1.5rem;
+    }
+
+    .coi-common-empty {
+      font-size: 0.95rem;
+      color: #4b5563;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 0.875rem 1rem;
+      line-height: 1.6;
+    }
+
+    .coi-common-ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.625rem;
+    }
+
+    .coi-common-item {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .coi-common-name {
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.2rem;
+    }
+
+    .coi-common-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+
+    .coi-common-contrib {
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    .coi-disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #78350f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .coi-cta {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .coi-cta-text {
+      font-size: 1.05rem;
+      color: #1f2937;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .coi-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .coi-cta-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+      transition: background 150ms ease;
+    }
+
+    .coi-cta-primary:hover { background: hsl(24, 95%, 48%); }
+
+    .coi-cta-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: hsl(24, 95%, 40%);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+
+    .coi-cta-secondary:hover { background: #ffffff; }
+
+    .coi-ol-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: hsl(24, 95%, 53%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* FAQ styles (match other tool pages) */
+    .faq-section { background: #ffffff; }
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    details[open] .faq-icon { transform: rotate(180deg); }
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+    .faq-answer p {
+      font-size: 1.125rem;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .coi-card { padding: 1.25rem; }
+      .coi-fieldset { padding: 1rem; }
+      .coi-headline-value { font-size: 2rem; }
+      /* Add bottom padding so sticky mobile CTA doesn't cover content */
+      main { padding-bottom: 96px; }
+    }
+  </style>
+</BaseLayout>
