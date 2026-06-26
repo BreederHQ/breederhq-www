@@ -1,0 +1,417 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: "Breeder's Assistant Alternative", url: '/compare/breeders-assistant-alternative' }
+];
+
+const faqs = [
+  {
+    question: "Is Breeder's Assistant still available?",
+    answer: "No. Tenset Technologies has retired its software products, including Breeder's Assistant, and they are no longer supported. The notice on tenset.co.uk states that Tenset has retired its software products and existing licensees can access legacy downloads, but no new licenses are being sold and there are no further updates. If your current install still runs, it will continue to run; if it stops working after a Windows update or you need a new install, there is no vendor support to call. That is the practical reason searches for a Breeder's Assistant alternative have climbed in 2026."
+  },
+  {
+    question: "Is BreederHQ a good Breeder's Assistant alternative?",
+    answer: "It depends on what you used Breeder's Assistant for. If you bought it for deep pedigree work and printed pedigree certificates, BreederHQ covers pedigree generation and COI calculation but is not a desktop pedigree-printing specialist — visiting print specialists or a tool like PedFast may better match that single workflow. If you used Breeder's Assistant to run an actual breeding program — heats, breedings, litters, applications, deposits, contracts, buyer handoff — BreederHQ is a closer fit because it was built around that operational workflow rather than around the pedigree document."
+  },
+  {
+    question: "What is the difference between a desktop program and a cloud platform?",
+    answer: "Breeder's Assistant was Windows desktop software: a one-time purchase, your data lived on your PC, no monthly fee, no internet required to use it. BreederHQ is a cloud platform: data lives on our servers, accessed from any browser plus native iOS and Android apps, with a monthly or annual subscription. The cost models are not directly comparable. Desktop is cheaper over a five-year horizon if you only need pedigree-and-records and your PC keeps running. Cloud is more expensive over time but adds mobile access, automatic backups, a buyer portal, OFA Sync, and a marketplace presence."
+  },
+  {
+    question: "Can I import my Breeder's Assistant data into BreederHQ?",
+    answer: "BreederHQ supports CSV import for animals, pedigrees, and contacts. Breeder's Assistant can export to CSV, GEDCOM, and other formats — that export needs to happen on a machine that still has the program installed and licensed. Photos, scanned documents, and any custom-printed pedigree templates need to be re-uploaded separately. There is no one-click migration; plan a few hours of cleanup. If your Breeder's Assistant install no longer launches, recover the underlying database file from a backup before doing anything else."
+  },
+  {
+    question: "What does BreederHQ cost?",
+    answer: "See breederhq.com/pricing for current tier details. BreederHQ offers a 14-day free trial of the full platform. The first 100 founding subscribers can use code FOUNDER50 at checkout for 50% off Pro or Enterprise for 12 months. The subscription model is structurally different from the one-time Breeder's Assistant license — if monthly subscription is a non-starter, a desktop alternative like PedFast (one-time license, still actively maintained) may be the right replacement instead of BreederHQ."
+  },
+  {
+    question: "Does BreederHQ run on Mac?",
+    answer: "Yes. BreederHQ runs in any modern browser (macOS Safari, Chrome, Firefox, Edge), plus native iOS and Android apps. There is no Windows-only requirement — that was a Breeder's Assistant constraint, not a category constraint."
+  },
+  {
+    question: "What about my pedigree printing templates?",
+    answer: "Breeder's Assistant users often built up years of custom pedigree certificate templates. Those do not migrate to BreederHQ — they were specific to the Breeder's Assistant printing engine. BreederHQ generates pedigree views that are intended for screen and PDF, not custom-printed certificates with breeder-designed layouts. If physical printed certificates are central to your program, this is a real gap to know about before switching."
+  }
+];
+
+// Editorial Article schema — comparison/buyer's guide page, not a product page.
+// Do NOT use SoftwareApplication schema here. BaseLayout already emits a global
+// SoftwareApplication block for BreederHQ; using one here would misrepresent the
+// page as a vendor page for BreederHQ alone.
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Looking for a Breeder's Assistant Alternative? An Honest Comparison",
+  "description": "Honest comparison of Breeder's Assistant (Tenset, now retired) and BreederHQ for working breeders. Desktop vs cloud, one-time license vs subscription, pedigree vs full operations, on publicly verifiable facts.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-10",
+  "dateModified": "2026-07-10",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/breeders-assistant-alternative"
+  }
+};
+---
+
+<BaseLayout
+  title="Breeder's Assistant Alternative — Honest Comparison | BreederHQ"
+  description="Breeder's Assistant vs BreederHQ — honest comparison of desktop vs cloud, pedigree depth, buyer pipeline, mobile, and marketplace. Pick the right tool."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Breeder's Assistant Alternative</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Looking for a Breeder's Assistant Alternative? An Honest Comparison</h1>
+
+        <p class="text-sm text-gray-500 mb-6">Published: July 10, 2026 &middot; Last verified against tenset.co.uk: July 10, 2026</p>
+
+        <!-- Retirement-status callout — material context that changes the search intent. -->
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-5 mb-6 rounded">
+          <p class="text-lg text-gray-800 leading-relaxed">
+            <strong>Status note.</strong> Tenset Technologies has retired its software products, including Breeder's Assistant, and they are no longer supported. Existing licensees can still access legacy downloads, but new licenses are not being sold and there are no further updates. If you are searching for an alternative, you are almost certainly looking for a replacement — that is what this page is about.
+          </p>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Breeder's Assistant was Tenset's long-standing Windows desktop pedigree program: one-time purchase, your data on your PC, deep pedigree tooling. BreederHQ is a cloud platform with a different cost model — subscription, multi-device, with buyer pipeline and marketplace built in. These are different shapes of tool. Here is the honest version of when each one is the right call.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See BreederHQ pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <aside class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded shadow-sm" role="complementary" aria-label="Page summary">
+          <h2 class="text-2xl font-bold mb-4">TL;DR</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Keep using your Breeder's Assistant license if</strong> it still launches, you only need pedigrees and records, and you do not want to move to a subscription. Tenset has retired the product, so there will be no new features, no new bug fixes, and no vendor support if a future Windows update breaks it. It is a "ride it until it stops" position.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Pick another desktop tool if</strong> the one-time-purchase model matters more than anything else. PedFast is still actively sold as a desktop pedigree program with a one-time license. It will feel closest to Breeder's Assistant in shape.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Pick BreederHQ if</strong> you need to run a working breeding program — heats, breedings, litters, applications, waitlists, deposits, contracts, buyer portal, marketplace, mobile-first whelping — and you are willing to move to a subscription cloud model in exchange for those capabilities. Nine species in one account, 14-day free trial, FOUNDER50 code for the first 100 founders.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Side-by-side: Breeder's Assistant vs BreederHQ</h2>
+        <p class="text-gray-700 mb-6">
+          Publicly verifiable facts only — sourced from tenset.co.uk and breederhq.com. Where Breeder's Assistant is shown as "n/a (retired)" the underlying capability existed in the last shipped version but is no longer available to new buyers.
+        </p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Field</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Breeder's Assistant</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederHQ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Current status</th>
+                <td class="px-4 py-3">Retired by Tenset. Existing licenses keep running; no new licenses sold.</td>
+                <td class="px-4 py-3">Actively developed and supported.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Cost model</th>
+                <td class="px-4 py-3">One-time desktop license (historical)</td>
+                <td class="px-4 py-3">Subscription. See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a>. FOUNDER50 code: 50% off Pro/Enterprise 12mo for first 100 founders.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Platform</th>
+                <td class="px-4 py-3">Windows desktop only</td>
+                <td class="px-4 py-3">Web (any browser, Mac/Windows/Linux) + native iOS and Android apps</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Free trial</th>
+                <td class="px-4 py-3">n/a (retired)</td>
+                <td class="px-4 py-3">14 days</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Species supported</th>
+                <td class="px-4 py-3">Multi-species (dogs primary, cat &amp; horse editions historically)</td>
+                <td class="px-4 py-3">9 (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle) in one account</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Pedigree depth</th>
+                <td class="px-4 py-3">Deep — multi-generation pedigree tooling and custom printed certificate templates were a core strength</td>
+                <td class="px-4 py-3">Multi-generation pedigree with COI calculation; pedigree views for screen and PDF, not custom-printed certificates</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Buyer pipeline</th>
+                <td class="px-4 py-3">Not a focus</td>
+                <td class="px-4 py-3">Applications, screening, waitlists, deposits, contracts, per-buyer portal</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public marketplace</th>
+                <td class="px-4 py-3">No</td>
+                <td class="px-4 py-3">Transactional marketplace at marketplace.breederhq.com</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">OFA Sync</th>
+                <td class="px-4 py-3">No</td>
+                <td class="px-4 py-3">Pulls public OFA results automatically from a registration number</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Data ownership</th>
+                <td class="px-4 py-3">On your PC — full local control, full local backup responsibility</td>
+                <td class="px-4 py-3">On our servers — automatic backups, CSV export available, you can leave with your data</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Internet required to use</th>
+                <td class="px-4 py-3">No</td>
+                <td class="px-4 py-3">Yes</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Last publicly updated</th>
+                <td class="px-4 py-3">Verified retired status on tenset.co.uk: July 10, 2026</td>
+                <td class="px-4 py-3">Verified July 10, 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray-600 mt-4">
+          <strong>Last verified:</strong> July 10, 2026 against tenset.co.uk and breederhq.com/pricing. The retirement notice on tenset.co.uk is the load-bearing fact for this page — if Tenset reverses course, this page needs an update.
+        </p>
+      </div>
+    </section>
+
+    <!-- Where Breeder's Assistant was genuinely strong -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where Breeder's Assistant was genuinely strong</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          A comparison page that does not credit the other tool is not honest. Breeder's Assistant had a long run for good reasons. Here are three that mattered.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. One-time license, no ongoing subscription</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              You bought it once. The cost showed up in one line on one year's expenses, then it was your tool. Over a five- or ten-year horizon, the total cost was hard to beat — especially for a small program that only needed pedigrees and records. Cloud platforms, BreederHQ included, do not match that math.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Deep pedigree tooling and printable certificates</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Breeder's Assistant was built around the pedigree document. Multi-generation views, custom certificate templates, the ability to print pedigrees that buyers framed and hung on the wall. If your program centers on the pedigree as an artifact, the desktop model was a closer fit than any cloud platform is today.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Local data ownership</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Your data lived in a file on your PC. No vendor could lose access, no subscription cancellation could lock you out, no internet outage could stop a whelping-night entry. That control was real, even if the responsibility for backups was yours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is different -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is different</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are capability differences, not opinion. Each one is a structural difference between a desktop pedigree program and a cloud breeding-operations platform.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Operations, not just records</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ tracks heats with multi-point progesterone timing, breeding sessions (live, AI, frozen, embryo transfer), pregnancy confirmation, whelping or birthing records, individual offspring records, and the full handoff chain from applications through waitlist, deposit, contract, buyer portal, and after-sale follow-up. Breeder's Assistant was built around the pedigree; BreederHQ is built around the program.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Buyer pipeline and a buyer portal</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Applications come in, get screened, sit on a waitlist, take a deposit, sign a contract, and end up in a per-buyer portal where the buyer sees their puppy's records, photos, pedigree, and documents without emailing you. That entire workflow lives in the same account as the animals. Desktop pedigree programs do not address it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Public marketplace</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ runs a transactional marketplace at marketplace.breederhq.com where prospective buyers find breeders and individual animals through structured listings. Your operational records and your public-facing listings live in the same account. Breeder's Assistant had no marketplace surface.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Mobile-first whelping and field use</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Native iOS and Android apps plus responsive web. The whelping area at 3 a.m., the show grounds, the porch with a buyer — all places where a desktop-only program could not go without you re-typing notes later. Cloud sync removes that step.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. OFA Sync and CHIC Readiness</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Enter a dog's OFA registration number and BreederHQ pulls the public OFA results automatically, surfaces them on the record, and propagates them to pedigrees. The CHIC Readiness Widget shows, by breed, which tests are required and which are still missing. Desktop pedigree tools required manual data entry for each result.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">6. Active development</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The most material difference today. Breeder's Assistant is retired — no new features, no new fixes. BreederHQ is in active development. If you value the safety of "set it and forget it" desktop software, that is a real reason to look at PedFast or a similar still-sold desktop tool. If you value a vendor that is still shipping, that is a reason to look at cloud.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing detail -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing detail</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Breeder's Assistant</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Status:</strong> Retired by Tenset Technologies</li>
+              <li><strong>New licenses:</strong> No longer sold</li>
+              <li><strong>Existing licenses:</strong> Continue to run; legacy downloads available to current licensees</li>
+              <li><strong>Support:</strong> No longer offered</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="https://www.tenset.co.uk" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">tenset.co.uk</a>.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">BreederHQ</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Tiers and prices:</strong> See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></li>
+              <li><strong>Free trial:</strong> 14 days</li>
+              <li><strong>Founder discount:</strong> Code <code class="bg-gray-100 px-2 py-0.5 rounded">FOUNDER50</code> — first 100 founders, 50% off Pro or Enterprise for 12 months</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">breederhq.com/pricing</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Migration guidance -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">If you are moving off Breeder's Assistant</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          A short, practical sequence — written for breeders who actually need to migrate, not as a sales funnel.
+        </p>
+
+        <ol class="list-decimal pl-6 space-y-4 text-lg text-gray-700 leading-relaxed">
+          <li>
+            <strong>Back up the underlying data file first.</strong> Before doing anything else, find the Breeder's Assistant database file on your PC and copy it to two separate places — an external drive and a cloud storage folder. If the program stops launching on a future Windows update, the data file is what you need to recover from.
+          </li>
+          <li>
+            <strong>Export to CSV and PDF while the program still runs.</strong> Export animals, pedigrees, and any printed pedigree certificates you want as PDF artifacts. Do this on a working install — do not assume you can come back to it later.
+          </li>
+          <li>
+            <strong>Decide between desktop and cloud as a replacement.</strong> Honestly: if you only need pedigrees and records and the one-time-license model is the reason you used Breeder's Assistant for a decade, look at PedFast or a similar still-supported desktop tool before looking at any cloud platform. Cloud is a different cost shape — only worth it if the operational and buyer-facing capabilities are also what you need.
+          </li>
+          <li>
+            <strong>If you choose BreederHQ:</strong> import animals and contacts via CSV, re-attach photos, re-upload any documents, and start using the heat / breeding / litter / waitlist / buyer-portal flow from your next breeding forward. Older breedings can be backfilled or left in the Breeder's Assistant exports.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this page is not</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          This is not a hit piece on Breeder's Assistant or on Tenset. Breeder's Assistant ran for a long time and earned its place in a lot of breeding programs. The retirement notice on tenset.co.uk is a public fact, and "Tenset retired the product" is the honest reason searches for an alternative have grown. Every claim above is sourced to a public page on either vendor's site as of July 10, 2026. If you find a claim that has gone stale, please tell us at <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will verify and update.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ does not verify, vet, or vouch for any breeder or buyer. We confirm identity through Stripe Identity passthrough, surface credentials from public registries (OFA, AKC, AFA), and accept provider self-attestation where applicable. We do not earn or assign trust on anyone's behalf. See <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">our trust posture</a> for the long version.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          If you want a wider buyer's guide that compares more tools (BreederBuddy, Breeder Cloud Pro, Dog Breeder Pro, Breedera, ZooEasy, Kintraks, PedFast), read <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">our dog breeding software comparison</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Try BreederHQ free for 14 days</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Nine species in one account, OFA Sync, CHIC Readiness, a transactional marketplace, native mobile apps, and a buyer portal. Founder discount: code <code class="bg-white px-2 py-0.5 rounded border border-gray-200">FOUNDER50</code> gives the first 100 founders 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See pricing
+          </a>
+          <a href="/breeder-management-software" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            Breeder management software overview
+          </a>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">
+          BreederHQ is not affiliated with, endorsed by, or sponsored by Tenset Technologies. "Breeder's Assistant" is a registered trademark of Tenset Technologies Ltd in the United Kingdom, referenced here only to describe the same category of software so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed Tenset information verified July 10, 2026.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
