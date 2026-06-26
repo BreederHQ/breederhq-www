@@ -1,0 +1,32 @@
+---
+export const updateMeta = {
+  date: '2026-07-11',
+  title: 'Cluster B reciprocal inbound-link sweep (B1 litter-management, B2 COI calculator)',
+  tags: ['seo', 'internal-linking', 'cluster-b', 'sweep'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 11, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Ran the Cluster B leg of the LP cluster reciprocal inbound-link sweep. Adds inbound links for <strong>B1</strong> (<code>/litter-management</code>) and <strong>B2</strong> (<code>/tools/coefficient-of-inbreeding-calculator</code>) from the species hubs and the <code>/tools</code> directory hub. The <code>/</code>, <code>/for-breeders</code>, and <code>/pricing</code> inbound links for B1 already landed in the Cluster A sweep commit earlier today.</p>
+
+  <div class="space-y-4 text-gray-700 leading-relaxed">
+    <p>
+      <strong>What changed.</strong>
+    </p>
+
+    <ul class="list-disc list-inside space-y-1 ml-2">
+      <li><code>/dogs</code> learn-more section — added B1 link and B2 link alongside the existing puppy/whelping tool callouts. Species-specific framing ("from whelp to placement," "COI calculator").</li>
+      <li><code>/cats</code> learn-more section — added B1 link (queening through placement) and B2 link.</li>
+      <li><code>/horses</code> learn-more section — added B1 (foaling-framed) and B2 link, alongside the A3 link added in the A sweep.</li>
+      <li><code>/tools</code> directory hub — added B1 (<code>/litter-management</code>) to the RelatedWorkflows row so the tools hub sends signal back to the LP for breeders who outgrow the calculators. B2 was already in the tool catalog from when it shipped.</li>
+    </ul>
+
+    <p>
+      <strong>Deliberately not touched.</strong> Individual tool pages (<code>/tools/puppy-weight-tracker</code>, <code>/tools/puppy-vaccination-schedule-generator</code>, <code>/tools/puppy-deworming-schedule-generator</code>, <code>/tools/whelping-date-calculator</code>) were built by other agents and have their own structure. Adding B1 callouts inside each would be scope creep with parallel-agent contamination risk. The <code>/tools</code> directory hub picks up that responsibility for now; per-tool callouts can be added in a follow-up if Search Console signal shows the directory link is insufficient.
+    </p>
+
+    <p>
+      <strong>Build verified.</strong> 277 pages indexed, no errors.
+    </p>
+  </div>
+</article>
