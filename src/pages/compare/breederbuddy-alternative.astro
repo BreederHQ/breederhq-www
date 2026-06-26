@@ -1,0 +1,369 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'BreederBuddy Alternative', url: '/compare/breederbuddy-alternative' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ a BreederBuddy alternative?',
+    answer: 'Yes. Both are breeding management platforms used by working breeders. BreederBuddy supports dogs OR cats (one species per account) at $29.99/mo or $300/year, with a 30-day free trial that requires no credit card. BreederHQ supports nine species in one account (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle), runs a public transactional marketplace at marketplace.breederhq.com, adds OFA Sync and a CHIC Readiness Widget, and offers a 14-day free trial. The two products overlap on records, waitlist, deposits, and buyer portal; they diverge on species coverage, marketplace surface, and a handful of breeder-specific automations.'
+  },
+  {
+    question: 'How does BreederHQ pricing compare to BreederBuddy?',
+    answer: 'BreederBuddy is a single flat price: $29.99/mo or $300/year (save two months on annual), per breederbuddy.com/pricing. An optional website add-on is +$29.99/mo. BreederHQ pricing is published at breederhq.com/pricing. Verify both on each vendor\'s site before deciding — pricing changes. The first 100 founding subscribers of BreederHQ can use code FOUNDER50 at checkout for 50% off Pro or Enterprise for 12 months.'
+  },
+  {
+    question: 'What about the free trial?',
+    answer: 'BreederBuddy publicly advertises a 30-day free trial with no credit card required. BreederHQ offers a 14-day free trial. If trial length and the no-credit-card start are the deciding factors, BreederBuddy wins on that dimension.'
+  },
+  {
+    question: 'How many species does each support?',
+    answer: 'BreederBuddy supports dogs OR cats — one species per account, switchable in Settings, but not both simultaneously and not other species. BreederHQ supports nine species in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. If you breed dogs and cats together, dogs and goats, or anything outside that two-species toggle, BreederBuddy means a second account or a different tool.'
+  },
+  {
+    question: 'Does BreederBuddy have a marketplace?',
+    answer: 'BreederBuddy includes a buyer portal and an optional website add-on (a private storefront on a domain you choose) at +$29.99/mo. It does not operate a public, buyer-facing marketplace where prospective buyers search across breeders. BreederHQ runs a transactional marketplace at marketplace.breederhq.com where breeders publish listings for individual animals and programs, and buyers find and contact them through structured listings.'
+  },
+  {
+    question: 'Can I move my data from BreederBuddy to BreederHQ?',
+    answer: 'BreederHQ supports CSV import for animals, pedigrees, and contacts. Health-test records, photos, and contracts typically need to be re-attached or re-uploaded. There is no automated one-click migration between the two products — plan for a few hours of cleanup. If your data lives in BreederBuddy and you cannot export it cleanly, that is worth raising with their support before you commit either direction.'
+  },
+  {
+    question: 'Is BreederBuddy a good tool?',
+    answer: 'Yes. BreederBuddy is a clean, well-built records-and-buyer-management system at a single predictable price, with one of the longer trials in the category and no credit card required to start. For a single-species dog or cat program that wants a simple operations tool without a marketplace or multi-species coverage, it is a reasonable pick. The honest answer to "which is better" is "for which program," not a star rating.'
+  }
+];
+
+// Editorial Article schema — this is a comparison/buyer's guide page, not a product page.
+// Do NOT use SoftwareApplication schema here. BaseLayout already emits a global
+// SoftwareApplication block for BreederHQ; using one here would misrepresent the
+// page as a vendor page for BreederHQ alone.
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Looking for a BreederBuddy Alternative? An Honest Comparison",
+  "description": "Honest comparison of BreederBuddy and BreederHQ for working breeders. Species coverage, marketplace, buyer portal, pricing, and trial length compared on publicly verifiable facts.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-07",
+  "dateModified": "2026-07-07",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/breederbuddy-alternative"
+  }
+};
+---
+
+<BaseLayout
+  title="BreederBuddy Alternative — Honest Comparison | BreederHQ"
+  description="BreederBuddy vs BreederHQ — honest comparison of species support, marketplace, buyer portal, pricing, and trial length. Pick the right tool for your program."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">BreederBuddy Alternative</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Looking for a BreederBuddy Alternative? An Honest Comparison</h1>
+
+        <p class="text-sm text-gray-500 mb-6">Published: July 7, 2026 &middot; Last verified against breederbuddy.com: July 7, 2026</p>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          BreederBuddy is one species per account (dogs OR cats) at $29.99/mo, with a 30-day free trial and no credit card required to start. BreederHQ is nine species in one account, with a transactional public marketplace and a 14-day trial. Both are real tools used by real breeders. Here is the honest version of when each one is the right call.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See BreederHQ pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <aside class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded shadow-sm" role="complementary" aria-label="Page summary">
+          <h2 class="text-2xl font-bold mb-4">TL;DR</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Pick BreederBuddy if</strong> you run a single-species dog or cat program, you want a clean records-and-buyer-management tool at one flat price, and you do not need a public marketplace, multi-species coverage, or OFA Sync. The 30-day trial with no credit card is the friendliest start in the category.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Pick BreederHQ if</strong> you run more than one species, you want a transactional public marketplace at marketplace.breederhq.com built into the same account as your operations, or you want OFA Sync, a CHIC Readiness Widget, multi-point progesterone tracking, and Scout AI document extraction. The 14-day trial is shorter and the entry price is higher. The trade is feature scope and species coverage for cost and trial length.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Side-by-side: BreederBuddy vs BreederHQ</h2>
+        <p class="text-gray-700 mb-6">
+          Publicly verifiable facts only — sourced from breederbuddy.com and breederhq.com. No private trial findings, no screenshots, no inferred customer counts. Verify on each vendor&apos;s site before deciding; pricing and feature scope change.
+        </p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Field</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederBuddy</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederHQ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Entry price</th>
+                <td class="px-4 py-3">$29.99/mo or $300/year (save two months on annual). Optional website add-on +$29.99/mo.</td>
+                <td class="px-4 py-3">See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a>. FOUNDER50 code: 50% off Pro/Enterprise 12mo for first 100 founders.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Free trial length</th>
+                <td class="px-4 py-3">30 days, no credit card required</td>
+                <td class="px-4 py-3">14 days</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Species supported</th>
+                <td class="px-4 py-3">1 per account (dog OR cat, switchable in Settings)</td>
+                <td class="px-4 py-3">9 in one account (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public marketplace</th>
+                <td class="px-4 py-3">No public marketplace. Optional website add-on is a private storefront on a domain you choose (+$29.99/mo).</td>
+                <td class="px-4 py-3">Transactional marketplace at marketplace.breederhq.com</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Buyer portal</th>
+                <td class="px-4 py-3">Buyer portal included</td>
+                <td class="px-4 py-3">Per-buyer portal with records, photos, pedigree, contracts, and documents</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">OFA Sync</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Pulls public OFA results automatically from a registration number</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Mobile</th>
+                <td class="px-4 py-3">Responsive web</td>
+                <td class="px-4 py-3">Native iOS and Android apps + responsive web</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Last publicly updated</th>
+                <td class="px-4 py-3">Verified July 7, 2026</td>
+                <td class="px-4 py-3">Verified July 7, 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray-600 mt-4">
+          <strong>Last verified:</strong> July 7, 2026 against breederbuddy.com/pricing, breederbuddy.com/features, and breederhq.com/pricing. Vendors change pricing and feature scope — verify before you commit.
+        </p>
+      </div>
+    </section>
+
+    <!-- Where BreederBuddy is genuinely strong -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederBuddy is genuinely strong</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          A comparison page that only lists where the other tool falls short is not honest. Here is where BreederBuddy is the better pick on its own terms.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Longer free trial, no credit card</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              30 days versus BreederHQ&apos;s 14 days, and BreederBuddy does not ask for a credit card to start. If you want a full heat cycle or a complete litter milestone to land inside the trial window before any payment commitment, that is real.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Simpler scope, simpler interface</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederBuddy focuses on records, waitlist, deposits, contracts, and a buyer portal for one species. There is less surface area to learn and less to ignore. For a breeder who wants the core operations covered cleanly without a marketplace, multi-species toggle, or document-AI features in the way, that focus is a feature.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Flat, predictable pricing</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              $29.99/mo or $300/year for the platform, with the website add-on at +$29.99/mo if you want it. One number to plan around. For a single-species program that does not need tiered features, that predictability is easier to budget than a multi-tier price card.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is different -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is different</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are capability differences, not opinion. Each is sourced from publicly listed features on both vendors&apos; sites.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Nine species in one account, not one</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederBuddy supports dogs OR cats per account — switchable in Settings, but not both at once and not any other species. BreederHQ runs dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle in the same account. If you breed more than one species, or you expect to, that gap stops being theoretical.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Transactional public marketplace</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederBuddy&apos;s optional website add-on is a private storefront on a domain you choose. It works as your own site; it is not a buyer-facing public listing site where prospective buyers search across breeders and animals. BreederHQ runs a transactional marketplace at marketplace.breederhq.com where breeders publish listings for individual animals and programs, and buyers find and contact them through structured listings. Both surface breeders to buyers; the discovery model is different.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. OFA Sync</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ pulls public OFA results automatically once you enter a registration number, surfaces them on the dog&apos;s record, and propagates them to pedigrees. BreederBuddy&apos;s public materials do not advertise this; you log OFA results manually.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. CHIC Readiness Widget</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              For breeds with a CHIC (Canine Health Information Center) profile, BreederHQ shows breed-specific required tests, what is on file, and what is still missing for CHIC eligibility. This is a planning surface, not a checkbox. BreederBuddy does not publicly advertise an equivalent.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Multi-point progesterone timing</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ lets you log multiple progesterone tests across a heat, plot the trend, and surface the breeding window. If you ship semen, book stud trips, or use frozen, the difference between a single date field and a trended series is the difference between hitting and missing the cycle. BreederBuddy&apos;s public materials do not emphasize multi-point timing.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">6. Scout AI document extraction</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Upload a lab PDF — Embark, Wisdom Panel, OFA, vet invoices — and Scout extracts the results into the right fields on the right record. BreederBuddy&apos;s public materials do not advertise document extraction.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">7. Native iOS and Android apps</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ ships native mobile apps for iOS and Android in addition to the web app. BreederBuddy is responsive web. If your real working surface is the birthing area at 3 a.m., native matters.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing detail -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing detail</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">BreederBuddy</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Monthly:</strong> $29.99/mo</li>
+              <li><strong>Annual:</strong> $300/year (save two months)</li>
+              <li><strong>Website add-on:</strong> +$29.99/mo</li>
+              <li><strong>Free trial:</strong> 30 days, no credit card required</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="https://breederbuddy.com/pricing" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">breederbuddy.com/pricing</a>.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">BreederHQ</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Tiers and prices:</strong> See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></li>
+              <li><strong>Free trial:</strong> 14 days</li>
+              <li><strong>Founder discount:</strong> Code <code class="bg-gray-100 px-2 py-0.5 rounded">FOUNDER50</code> — first 100 founders, 50% off Pro or Enterprise for 12 months</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">breederhq.com/pricing</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this page is not</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          This is not a hit piece on BreederBuddy. It is also not a "we are better at everything" page. Every claim above is sourced to a public page on either vendor&apos;s site as of July 7, 2026. If you find a claim that has gone stale, please tell us at <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will verify and update.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ does not verify, vet, or vouch for any breeder or buyer. We confirm identity through Stripe Identity passthrough, surface credentials from public registries (OFA, AKC, AFA), and accept provider self-attestation where applicable. We do not earn or assign trust on anyone&apos;s behalf. See <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">our trust posture</a> for the long version.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          If you want a deeper buyer&apos;s guide that compares more than these two tools, read <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">our dog breeding software comparison</a>, which evaluates eight options across pricing, workflow, and trade-offs. For a species-neutral overview of the platform, see <a href="/breeder-management-software" class="text-[hsl(24,95%,53%)] hover:underline">breeder management software</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Try BreederHQ free for 14 days</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Nine species in one account, OFA Sync, CHIC Readiness, a transactional marketplace, and native mobile apps. Founder discount: code <code class="bg-white px-2 py-0.5 rounded border border-gray-200">FOUNDER50</code> gives the first 100 founders 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See pricing
+          </a>
+          <a href="/breeder-management-software" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            Breeder management software overview
+          </a>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">
+          BreederHQ is not affiliated with, endorsed by, or sponsored by BreederBuddy. "BreederBuddy" is referenced here only to describe the same category of software so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed BreederBuddy information verified July 7, 2026.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
