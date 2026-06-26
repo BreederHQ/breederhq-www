@@ -1,0 +1,443 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'ZooEasy Alternative', url: '/compare/zooeasy-alternative' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ a ZooEasy alternative?',
+    answer: 'Only if you are using ZooEasy for something it was not really designed for. ZooEasy is built around a multi-user, admin-controlled, communal pedigree database that admins, breeders, and reader-accounts share — the natural fit for a breed club, breed registry, or species-wide pedigree organisation. BreederHQ is built around an individual breeding program: your heats, your breedings, your litters, your waitlist, your deposits, your contracts, your buyer portal, your marketplace listings. If your job is to run your own operation, BreederHQ is the better fit. If your job is to maintain a shared stud book that members contribute to, ZooEasy is closer to the right shape.'
+  },
+  {
+    question: 'How much does ZooEasy cost?',
+    answer: 'ZooEasy lists three subscription tiers on its public pricing page: Single (€5.04/month, designed for 1 user), Multi (€16.96/month, designed for 2+ users), and Unlimited (€270.08/month, designed for large organisations). A 30-day free trial is offered. Pricing is in euros by default with toggles to USD and GBP. Additional management accounts in the Multi tier are €10/month, additional breeder accounts are €1/month, and additional reader accounts are €0. Verify current pricing on zooeasy.com/pricing.'
+  },
+  {
+    question: 'How much does BreederHQ cost?',
+    answer: 'BreederHQ offers a 14-day free trial of the full platform. The first 100 founding subscribers can use code FOUNDER50 at checkout for 50% off Pro or Enterprise for 12 months. See the BreederHQ pricing page for current tier details.'
+  },
+  {
+    question: 'Does ZooEasy support multiple species?',
+    answer: 'Yes. ZooEasy publicly positions itself as "pedigree software for all animals" and is used by breed clubs and organisations across dogs, cats, horses, rabbits, and other species. The underlying data model is species-flexible because a breed club registry needs to handle whatever species the club is built around.'
+  },
+  {
+    question: 'What does BreederHQ do that ZooEasy does not?',
+    answer: 'Based on public materials, BreederHQ adds the operational layer that sits on top of a pedigree: heat cycle tracking with multi-point progesterone, individual offspring records, applications and screening, waitlists with deposits, contracts with e-signatures, a per-buyer portal, OFA Sync, CHIC Readiness, Scout AI document extraction, and a public buyer-facing marketplace at marketplace.breederhq.com. ZooEasy is primarily a pedigree, animal-records, and breeding-results system with admin-managed access for member accounts; it is not designed as a buyer-facing operations platform.'
+  },
+  {
+    question: 'What does ZooEasy do that BreederHQ does not?',
+    answer: 'Communal pedigree management. ZooEasy is built around a database that an administrator owns and that breeders and reader-accounts log into with permissions the admin grants. Members can compile trial pedigrees and calculate inbreeding coefficients within the shared database. That admin-and-member structure is exactly what a breed club, registry, or species-wide pedigree organisation needs, and BreederHQ does not replicate it. BreederHQ is a per-operation account model — your data is yours, not a shared registry.'
+  },
+  {
+    question: 'I run a breed club AND a breeding program. Do I have to pick?',
+    answer: 'No. The two tools can coexist — your club\'s shared stud book lives on ZooEasy (or whatever registry tool fits), and your own operation lives on BreederHQ. If you would like one platform that handles both — your breeding program AND the club side (member directory, dues, registrations, shows, health compliance) — that is exactly what BreederHQ is building for breed clubs. See the For Breed Clubs page for details.'
+  },
+  {
+    question: 'Can I migrate my data from ZooEasy to BreederHQ?',
+    answer: 'ZooEasy supports data export from its database, and BreederHQ supports importing pedigree and animal data during onboarding. The shape of the import depends on what you export. If you are moving an individual program (your animals, your records) it is straightforward. If you are trying to move a club stud book that members contribute to, that is a registry migration, not a program migration — talk to us first so we can scope it properly.'
+  },
+  {
+    question: 'Is BreederHQ available outside the United States?',
+    answer: 'BreederHQ is US-based and currently optimised for US breeders. ZooEasy is based in the Netherlands and supports euros, dollars, and pounds out of the box, with a larger European install base. If your operation is European and you need euro billing on the operations side, that is a real difference worth weighing.'
+  },
+  {
+    question: 'Does using "ZooEasy" in this URL mean BreederHQ is affiliated with ZooEasy?',
+    answer: 'No. ZooEasy is a registered trademark of its respective owner. BreederHQ is not affiliated with, endorsed by, or sponsored by ZooEasy. We reference the ZooEasy name only to describe a category of software so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed ZooEasy information as of June 2026.'
+  }
+];
+
+// Article schema — this is editorial comparison content, NOT a product page.
+// Per LP-CLUSTER-PLAN universal schema rule for Cluster C: Article + FAQPage only.
+// FAQPage is auto-emitted by BaseLayout from the `faqs` prop.
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Looking for a ZooEasy Alternative? An Honest Comparison",
+  "description": "ZooEasy is built for breed clubs and registries — communal pedigree, admin-controlled member access. BreederHQ is built for individual breeding programs — heats, litters, waitlists, deposits, contracts, buyer portal, marketplace. Different tools for different jobs.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-08",
+  "dateModified": "2026-07-08",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/zooeasy-alternative"
+  }
+};
+---
+
+<BaseLayout
+  title="ZooEasy Alternative — Honest Comparison | BreederHQ"
+  description="ZooEasy vs BreederHQ — honest comparison of breed-club registry vs working-breeder operations. Different tools for different jobs. Pick the right one."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <!-- Page-scoped JSON-LD: Article only. FAQPage is auto-emitted by BaseLayout. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">ZooEasy Alternative</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Looking for a ZooEasy Alternative? An Honest Comparison</h1>
+
+        <!-- Quick answer: optimised for AI extraction (40-60 word self-contained answer). -->
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-5 mb-6 rounded">
+          <p class="text-lg text-gray-800 leading-relaxed">
+            <strong>Quick answer:</strong> ZooEasy and BreederHQ are different tools for different jobs. ZooEasy is purpose-built for breed clubs and registries — multi-user, admin-controlled, communal pedigree. BreederHQ is purpose-built for individual breeding programs — heats, litters, waitlists, deposits, contracts, buyer portal, marketplace. Pick the one that matches your job.
+          </p>
+        </div>
+
+        <p class="text-sm text-gray-500 mb-4">Last verified: June 26, 2026 &middot; Published: July 8, 2026</p>
+
+        <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+          If you have been evaluating ZooEasy, you have probably noticed that the product is built around three account types — admin, breeder, reader — that an administrator grants permissions to. That is not a quirk. That is the shape of the product. It tells you exactly who ZooEasy was designed for: a breed club, breed registry, or species-wide pedigree organisation where many people contribute to a shared database one administrator owns.
+        </p>
+        <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+          BreederHQ is shaped differently. It is built around a single breeding program: <em>your</em> animals, <em>your</em> heats, <em>your</em> waitlist, <em>your</em> buyers. If that is what you are running, BreederHQ fits. If you are running a club registry, ZooEasy probably already fits you better than this page can talk you out of.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR: pick by job, not by feature checklist</h2>
+          <ul class="text-gray-700 leading-relaxed space-y-2 list-disc pl-5">
+            <li><strong>Breed club, breed registry, or species-wide pedigree organisation:</strong> ZooEasy. The admin-plus-members model is exactly what you need, and it has a long track record in that space.</li>
+            <li><strong>Individual breeding program — your operation, your buyers, your marketplace presence:</strong> BreederHQ. Heats, litters, waitlists, deposits, contracts, buyer portal, marketplace, all in one account.</li>
+            <li><strong>You run a breed club AND a breeding program:</strong> Run both tools, or talk to us — see <a href="/for-breed-clubs" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">For Breed Clubs</a> for the version of BreederHQ that handles the club side too.</li>
+          </ul>
+          <p class="text-sm text-gray-600 mt-4">Below: the side-by-side comparison, where ZooEasy is genuinely the right call, where BreederHQ is the right call, and the breed-club hybrid case.</p>
+        </aside>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+          <a
+            href="/pricing"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            See BreederHQ Pricing
+          </a>
+          <a
+            href="/for-breed-clubs"
+            class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,53%)] hover:text-white font-bold py-4 px-8 rounded-lg text-lg text-center transition"
+          >
+            I Run a Breed Club →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side-by-side comparison -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">BreederHQ vs ZooEasy: side-by-side</h2>
+        <p class="text-gray-700 mb-6">
+          All ZooEasy facts below are taken from zooeasy.com and zooeasy.com/pricing as of June 26, 2026. Pricing is in euros on the ZooEasy site by default; USD and GBP toggles are available. Numbers reflect each vendor&apos;s public materials, not private trial findings.
+        </p>
+
+        <div class="overflow-x-auto bg-white rounded-lg shadow border border-gray-200">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">What you are buying</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-[hsl(24,95%,53%)]">BreederHQ</th>
+                <th scope="col" class="px-4 py-3 font-semibold text-gray-700">ZooEasy</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 text-gray-800">
+              <tr class="bg-[hsl(24,95%,97%)]">
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Primary use case</th>
+                <td class="px-4 py-3">Run an individual breeding program (operations + buyers + marketplace)</td>
+                <td class="px-4 py-3">Maintain a shared pedigree database for a breed club, registry, or organisation</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Account model</th>
+                <td class="px-4 py-3">Single operation per account (your data, your animals, your buyers)</td>
+                <td class="px-4 py-3">Admin-owned database with breeder and reader accounts the admin grants access to</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Entry price</th>
+                <td class="px-4 py-3">See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></td>
+                <td class="px-4 py-3">€5.04/mo Single &middot; €16.96/mo Multi &middot; €270.08/mo Unlimited</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Free trial</th>
+                <td class="px-4 py-3">14 days</td>
+                <td class="px-4 py-3">30 days</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Species supported</th>
+                <td class="px-4 py-3">9 species in one account (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)</td>
+                <td class="px-4 py-3">"Pedigree software for all animals" — species-flexible by design</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Pedigree depth &amp; COI</th>
+                <td class="px-4 py-3">Yes — COI on every planned breeding, surfaced from pedigree</td>
+                <td class="px-4 py-3">Yes — trial pedigrees and inbreeding coefficients are a core feature; admins can let breeder and reader accounts compile their own</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Heat cycle / progesterone tracking</th>
+                <td class="px-4 py-3">Yes — multi-point progesterone with breeding-window guidance</td>
+                <td class="px-4 py-3">Not a publicly-emphasised workflow (pedigree-and-records system, not an operations system)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Waitlist + deposits + contracts</th>
+                <td class="px-4 py-3">Yes — applications, waitlist, Stripe deposits, e-signature contracts in one workflow</td>
+                <td class="px-4 py-3">Not publicly part of the product</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Buyer portal</th>
+                <td class="px-4 py-3">Yes — per-buyer portal with records, photos, pedigree, contracts</td>
+                <td class="px-4 py-3">No public buyer portal; reader accounts are for organisation members, not buyers</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public marketplace</th>
+                <td class="px-4 py-3">Yes — marketplace.breederhq.com (buyer-facing listing platform)</td>
+                <td class="px-4 py-3">No</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">OFA Sync &amp; CHIC Readiness</th>
+                <td class="px-4 py-3">Yes — automatic pull from the Orthopedic Foundation for Animals; CHIC Readiness Widget</td>
+                <td class="px-4 py-3">No (manual entry of health-test data)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Multi-user / member accounts</th>
+                <td class="px-4 py-3">Operation-level seats — designed for one operator and their staff</td>
+                <td class="px-4 py-3">First-class — admin grants breeder and reader accounts to club members</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Mobile experience</th>
+                <td class="px-4 py-3">Mobile-first (iOS / Android, designed for whelping area + show grounds)</td>
+                <td class="px-4 py-3">Web</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Currency &amp; primary geography</th>
+                <td class="px-4 py-3">USD &middot; United States primary</td>
+                <td class="px-4 py-3">EUR primary, USD and GBP toggle &middot; Netherlands-based, strong European install base</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-sm text-gray-600 mt-4">
+          Sources: <a href="https://zooeasy.com/" rel="nofollow noopener" class="underline">zooeasy.com</a>, <a href="https://zooeasy.com/pricing/" rel="nofollow noopener" class="underline">zooeasy.com/pricing</a>. Last verified June 26, 2026. Vendors change pricing and feature scope; verify with a trial against your own program.
+        </p>
+      </div>
+    </section>
+
+    <!-- Where ZooEasy is genuinely the right call -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where ZooEasy is genuinely the right call</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          We are not going to pretend ZooEasy is a worse version of BreederHQ. It is a different product, and there is a real audience for it. If any of the following describe your job, ZooEasy is probably a better fit than BreederHQ.
+        </p>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You run, or you serve, a breed club or breed registry</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              ZooEasy&apos;s admin-plus-members model is the natural shape of a club registry. One administrator owns the database. Member-breeders log in with breeder accounts and edit only their own animals. Reader-accounts can browse and run trial pedigrees within the limits the admin sets. That is exactly what a breed-club workflow looks like — and a per-operation product like BreederHQ does not replicate it.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You are based in Europe and want a Europe-native product</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              ZooEasy is based in the Netherlands, prices in euros by default, and has a deeper European install base across multiple species. If euro billing and European hosting matter, that is a real reason to prefer ZooEasy on the registry side.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You want a long, established track record on the pedigree-and-records side</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              ZooEasy has been in the breeder-software market for a long time, and the pedigree-and-inbreeding tooling is mature. If your bottleneck is pedigree depth and you do not need a buyer-facing operations layer, that maturity is worth something.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You explicitly do <em>not</em> want a buyer-facing marketplace</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Some clubs and some breeders deliberately keep buyer-finding off-platform. ZooEasy honours that — it is a back-of-house tool, not a buyer-facing surface. BreederHQ leans the other direction.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is the right call -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is the right call</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Same posture in the other direction. If any of the following describe your job, BreederHQ fits in places ZooEasy was not built to fit.
+        </p>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You are running your own breeding program, not a registry</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Your data is yours. It is not a shared resource an administrator decides who can see. BreederHQ is one account per operation, with seats for the people who work in your operation. That posture matters when the data is your livelihood, not a communal asset.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You need the operational layer on top of the pedigree</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Heat cycle tracking. Multi-point progesterone. Litter records with individual offspring. Applications, screening, waitlists. Deposits via Stripe. E-signature contracts. A per-buyer portal so buyers self-serve their own offspring records. Marketplace listings powered by your real program data. That is the layer ZooEasy was not designed to provide.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You want OFA Sync and CHIC Readiness without manual entry</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ pulls public OFA results into your animal records automatically. CHIC Readiness tracks which breed-specific health-test requirements your dogs have completed. That cuts a real chunk of manual data-entry that you would otherwise be doing yourself, even on a strong pedigree tool.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You want a public marketplace presence built in</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              <a href="https://marketplace.breederhq.com" rel="noopener" class="text-[hsl(24,95%,53%)] hover:underline">marketplace.breederhq.com</a> is a buyer-facing listing site where prospective buyers search by available animal, not just by breeder profile. Your operations data powers your marketplace presence — listings are not a separate system you maintain by hand. ZooEasy does not include a buyer-facing marketplace.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">You work on the phone, in the whelping area, at 3 a.m.</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ is mobile-first. iOS and Android apps. ZooEasy is web. If half the actual work happens away from a desk — which it does, in a working program — mobile-first is a real difference.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breed-club hybrid case -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">The breed-club hybrid case</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          The honest version of this comparison surfaces a third option many people in the ZooEasy audience are actually in: you run a breed club <em>and</em> you run a breeding program. The club needs registry tooling. Your program needs operations tooling. ZooEasy covers the first, BreederHQ covers the second, and historically people have run both.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          The thing we are building toward is one platform that covers both — a member directory with Stripe-powered dues and renewals, stud book and registration workflows, breed-specific health compliance, and a live connection to the breeders already on BreederHQ — without giving up the operational layer your own program needs.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          If you are responsible for both jobs, that page is the better starting point than this one.
+        </p>
+        <div class="mt-8">
+          <a
+            href="/for-breed-clubs"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
+          >
+            See BreederHQ for Breed Clubs →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing detail -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing detail</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          ZooEasy publishes three subscription tiers on <a href="https://zooeasy.com/pricing/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">zooeasy.com/pricing</a>. As of June 26, 2026 the listed monthly prices, in euros, are:
+        </p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-2 mb-6">
+          <li><strong>Single</strong> — €5.04/month. Designed for 1 user. Unlimited animals, 1 admin, 0 breeder accounts, 0 reader accounts.</li>
+          <li><strong>Multi</strong> — €16.96/month. Designed for 2+ users. Unlimited animals, 2 admin accounts. Additional admin €10/month, additional breeder €1/month, additional reader €0/month.</li>
+          <li><strong>Unlimited</strong> — €270.08/month. Designed for large organisations and provides unlimited access.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          ZooEasy offers a 30-day free trial and saves 20% with a yearly subscription. USD and GBP toggles are available on the pricing page.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ&apos;s entry price and tier details are listed on the BreederHQ pricing page. A 14-day free trial of the full platform is available. The first 100 founding subscribers can use code <code>FOUNDER50</code> at checkout for 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="mt-8">
+          <a
+            href="/pricing"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white font-bold py-3 px-6 rounded-lg transition"
+          >
+            See BreederHQ Pricing →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ section is auto-rendered by BaseLayout via the faqs prop and emitted as FAQPage JSON-LD. -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 group">
+              <summary class="font-semibold text-lg cursor-pointer text-gray-900 group-open:text-[hsl(24,95%,53%)]">
+                {faq.question}
+              </summary>
+              <p class="mt-4 text-gray-700 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Related reading -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related reading</h2>
+        <ul class="space-y-3 text-lg text-gray-700">
+          <li>→ <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">Best dog breeding software in 2026 — the full buyer&apos;s guide</a> covering BreederHQ, BreederBuddy, Breeder Cloud Pro, Dog Breeder Pro, Breedera, ZooEasy, Kintraks, and PedFast on one page.</li>
+          <li>→ <a href="/breeder-management-software" class="text-[hsl(24,95%,53%)] hover:underline">Breeder management software</a> — what an operations-layer tool actually does across 9 species in one account.</li>
+          <li>→ <a href="/for-breed-clubs" class="text-[hsl(24,95%,53%)] hover:underline">For Breed Clubs</a> — the BreederHQ side of the breed-club hybrid case.</li>
+          <li>→ <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">Identity &amp; Credentials</a> — how BreederHQ handles identity, credentials, and what we deliberately do not do.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4 bg-gradient-to-br from-amber-900 to-orange-800 text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-4">Pick the tool that matches your job</h2>
+        <p class="text-xl text-amber-100 mb-10">
+          Running your own breeding program? Start the 14-day BreederHQ trial. Running a breed club? Start at the For Breed Clubs page. Doing both? Talk to us.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/pricing"
+            class="inline-block bg-white text-amber-900 hover:bg-amber-50 font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            See BreederHQ Pricing
+          </a>
+          <a
+            href="/for-breed-clubs"
+            class="inline-block border-2 border-white text-white hover:bg-white hover:text-amber-900 font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            For Breed Clubs →
+          </a>
+        </div>
+        <p class="text-sm text-amber-200 mt-8 max-w-2xl mx-auto">
+          ZooEasy is a registered trademark of its respective owner. BreederHQ is not affiliated with, endorsed by, or sponsored by ZooEasy. Comparison facts on this page reflect publicly disclosed ZooEasy information as of June 26, 2026.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
