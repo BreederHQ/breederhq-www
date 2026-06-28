@@ -1,0 +1,60 @@
+---
+// src/pages/_site-updates/2026-06-28-international-marketing-copy.astro
+export const updateMeta = {
+  date: '2026-06-28',
+  title: 'ADR-0037 Slice 3: international marketing copy',
+  tags: ['pricing', 'footer', 'international', 'adr-0037'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">June 28, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Shipped ADR-0037 Slice 3 (international parity, marketing copy). Two
+    user-visible copy additions on <code>breederhq-www</code> close the
+    last remaining slice of the International Parity Sprint, paired with
+    Slices 1A.3 + 1D + 2A + 2B that shipped in the <code>breederhq</code>
+    monorepo over the preceding sprint window.
+  </p>
+
+  <h3 class="text-base font-semibold text-gray-900 mt-4 mb-1">Footer</h3>
+  <p class="text-sm text-gray-700 mb-3">
+    Added under the brand-column tagline:
+    "Serving breeders in the US, UK, Canada, Australia, and Europe."
+    Site-wide footprint statement; appears on every page that mounts
+    <code>Footer.astro</code> (i.e. every public marketing page).
+  </p>
+
+  <h3 class="text-base font-semibold text-gray-900 mt-4 mb-1">Pricing page</h3>
+  <p class="text-sm text-gray-700 mb-3">
+    Added under each plan's price block on <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a>:
+    "Billed in USD. International cards accepted." Renders in both the
+    founders-promo branch (Pro + Enterprise with FOUNDER50) and the
+    standard branch (Standard plan). Schema.org structured data already
+    declared <code>priceCurrency: "USD"</code>; this surfaces the same
+    fact in the user-visible UI alongside the new international
+    statement of fact.
+  </p>
+
+  <h3 class="text-base font-semibold text-gray-900 mt-4 mb-1">ContactForm (no-op disposition)</h3>
+  <p class="text-sm text-gray-700 mb-3">
+    ADR-0037 §176 named <code>ContactForm.astro</code> as a target to
+    "ensure the international + prefix copy is accurate." Pre-flight
+    confirmed it already is: the hint at line 124 reads "We default to
+    US format. Start with + and your country code for international
+    (e.g. +44, +91)." The error copy at line 126 explains the
+    international convention symmetrically. US default behavior
+    (<code>DEFAULT_COUNTRY: CountryCode = 'US'</code>) is preserved per
+    the ADR + the standing "don't gratuitously change defaults" memory.
+    No edits to <code>ContactForm.astro</code> in this slice.
+  </p>
+
+  <h3 class="text-base font-semibold text-gray-900 mt-4 mb-1">Slice 3 scope discipline</h3>
+  <p class="text-sm text-gray-700 mb-3">
+    Per ADR-0037, no language-switcher / multilingual-UI claims were
+    added. No schema, API, or backend coupling. No help-article or FAQ
+    surfaces touched (hidden-sibling audit found no contradictory
+    US-only or international-footprint claims that would have made the
+    narrow scope dishonest). Single coherent commit on
+    <code>master</code> per the cross-repo / master-branch rule.
+  </p>
+</article>

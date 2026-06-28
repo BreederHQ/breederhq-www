@@ -184,7 +184,7 @@ const pageLastUpdated = '2026-06-26';
                   <div class="mb-2">
                     <div class="flex items-baseline justify-center gap-2 mb-1">
                       <span class="text-2xl text-stone-400 line-through">${plan.price}</span>
-                      <span class="text-5xl font-bold text-amber-600">${plan.foundersPrice.toFixed(2)}</span>
+                      <span class="text-5xl font-bold text-amber-600">${(plan.foundersPrice ?? 0).toFixed(2)}</span>
                       <span class="text-stone-500 text-lg">/mo</span>
                     </div>
                     <p class="text-xs text-amber-600 font-semibold mb-1">
@@ -193,6 +193,9 @@ const pageLastUpdated = '2026-06-26';
                     <p class="text-sm text-stone-500">
                       or ${plan.foundersYearlyPrice}/yr (normally ${plan.yearlyPrice}/yr)
                     </p>
+                    <p class="text-xs text-stone-400 mt-2">
+                      Billed in USD. International cards accepted.
+                    </p>
                   </div>
                 ) : (
                   <div class="mb-2">
@@ -200,6 +203,9 @@ const pageLastUpdated = '2026-06-26';
                     <span class="text-stone-500 text-lg">/mo</span>
                     <p class="text-sm text-stone-500 mt-1">
                       or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
+                    </p>
+                    <p class="text-xs text-stone-400 mt-2">
+                      Billed in USD. International cards accepted.
                     </p>
                   </div>
                 )}
