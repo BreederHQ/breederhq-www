@@ -29,6 +29,7 @@ const isProduction = import.meta.env.PROD;
         <script is:inline define:vars={{ measurementId: PUBLIC_GA4_MEASUREMENT_ID }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
           gtag('js', new Date());
           gtag('config', measurementId, {
             anonymize_ip: true,
