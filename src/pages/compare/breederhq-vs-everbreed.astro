@@ -73,6 +73,124 @@ const articleSchema = {
     "@id": "https://breederhq.com/compare/breederhq-vs-everbreed"
   }
 };
+
+// Competitor SoftwareApplication + Review nodes. Named reviewers where the
+// source names them (Shawna Adams from Google Play, Lydia H. from the Farmkeep
+// comparison); anonymized where the source is anonymous. Aggregated positive-
+// review-theme quotes are excluded from the Review graph because they are not
+// attributable to a single review under schema.org's Review model.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://everbreed.com/#software",
+      "name": "Everbreed",
+      "alternateName": "Everbreed - Rabbit Records",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Rabbit Management Software",
+      "operatingSystem": "iOS, Android, Web",
+      "url": "https://everbreed.com",
+      "description": "Rabbit-only breeding management platform with native iOS and Android apps, per-rabbit-count tiered pricing, and an intra-platform rabbit-to-rabbit-breeder marketplace.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Start",
+          "price": "4.99",
+          "priceCurrency": "USD",
+          "description": "Up to 5 breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "4.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Grow",
+          "price": "9.99",
+          "priceCurrency": "USD",
+          "description": "Up to 20 breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "9.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Plus",
+          "price": "14.99",
+          "priceCurrency": "USD",
+          "description": "Up to 50 breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "14.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Max",
+          "price": "19.99",
+          "priceCurrency": "USD",
+          "description": "Unlimited breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "19.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Shawna Adams" },
+      "datePublished": "2026-01-16",
+      "reviewBody": "The app is glitch-y and oddly particular about movement. For example, you can't touch the actual phone back button or it kicks you out of the app... It also takes a while to sync changes, leading you to think that the changes didn't 'take' resulting in multiple entries.",
+      "publisher": { "@type": "Organization", "name": "Google Play", "url": "https://play.google.com/store/apps/details?id=com.barntrax.hutch" },
+      "url": "https://play.google.com/store/apps/details?id=com.barntrax.hutch"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous Apple App Store reviewer" },
+      "datePublished": "2021-12-23",
+      "reviewBody": "I love this app but it's so difficult to put my information in because it constantly crashes",
+      "publisher": { "@type": "Organization", "name": "Apple App Store", "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544" },
+      "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous user" },
+      "reviewBody": "When you hit the 10+ breeders it doubles in price and you can't use the finance features unless you use the top tier",
+      "publisher": { "@type": "Organization", "name": "Everbreed blog", "url": "https://everbreed.com/blog/farmkeep-vs-everbreed-which-rabbitry-tool-is-best/" },
+      "url": "https://everbreed.com/blog/farmkeep-vs-everbreed-which-rabbitry-tool-is-best/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Lydia H." },
+      "reviewBody": "I used to use Everbreed for my rabbits, but as my farm grew, it became too expensive and couldn't track everything I wanted... I needed something that worked for rabbits, ducks, goats, chickens, and my market stand",
+      "publisher": { "@type": "Organization", "name": "Farmkeep", "url": "https://www.farmkeep.com/farm-guides/reviews/farmkeep-vs-everbreed" },
+      "url": "https://www.farmkeep.com/farm-guides/reviews/farmkeep-vs-everbreed"
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -82,6 +200,7 @@ const articleSchema = {
   faqs={faqs}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
 
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

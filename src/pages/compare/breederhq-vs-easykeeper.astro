@@ -77,6 +77,132 @@ const articleSchema = {
     "@id": "https://breederhq.com/compare/breederhq-vs-easykeeper"
   }
 };
+
+// Competitor SoftwareApplication + Review nodes. Verbatim quotes from publicly
+// filed Capterra reviews of EasyKeeper. Named reviewers where the source names
+// them; anonymized where the source is anonymous. BreederHQ is NOT the author.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://easykeeper.com/#software",
+      "name": "EasyKeeper",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Goat Herd Management Software",
+      "operatingSystem": "Web",
+      "url": "https://easykeeper.com",
+      "description": "Goat-only herd management platform covering dairy, meat, fiber, and hobby operations with kidding, milk production, lactation, DHIR integration, and health surfaces.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Essentials (monthly)",
+          "price": "19.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "19.00",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Essentials (annual)",
+          "price": "209.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "209.00",
+            "priceCurrency": "USD",
+            "unitCode": "ANN"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Performance (monthly)",
+          "price": "27.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "27.00",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Performance (annual)",
+          "price": "297.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "297.00",
+            "priceCurrency": "USD",
+            "unitCode": "ANN"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Dennis E." },
+      "datePublished": "2018-12-05",
+      "reviewBody": "Not able to tie into dairy record processing centers yet",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Jennifer A." },
+      "datePublished": "2016-10-19",
+      "reviewBody": "No bulk entries for vaccination and worming but they are working on it!!",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Sherry C." },
+      "datePublished": "2019-03-28",
+      "reviewBody": "I would like to track more financial aspects of feed and supplies.",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous Capterra reviewer" },
+      "reviewBody": "The price may be cost-prohibitive for smaller farms",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous Capterra reviewer" },
+      "reviewBody": "To be able to see a goat's entire medical history at a glace is incredibly helpful.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -86,6 +212,7 @@ const articleSchema = {
   faqs={faqs}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
 
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content

@@ -77,6 +77,132 @@ const articleSchema = {
     "@id": "https://breederhq.com/compare/breederhq-vs-breedercloudpro"
   }
 };
+
+// Competitor SoftwareApplication + Review nodes. Reviews are verbatim quotes
+// from publicly-filed reviews on Capterra and SoftwareAdvice, each attributed
+// to a named reviewer with a link to the source. BreederHQ is NOT the author.
+// No AggregateRating: we don't have full review-set stats and imputing one
+// would fabricate structured data.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://breedercloudpro.com/#software",
+      "name": "Breeder Cloud Pro",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Animal Breeding Management Software",
+      "operatingSystem": "Web",
+      "url": "https://breedercloudpro.com",
+      "description": "Multi-species breeding management software with pedigree tracking, records, Pet Portal, and a public Find a Breeder directory.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Standard (monthly)",
+          "price": "6.99",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "6.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://breedercloudpro.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro (monthly)",
+          "price": "13.99",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "13.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://breedercloudpro.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro (annual)",
+          "price": "130.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "130.00",
+            "priceCurrency": "USD",
+            "unitCode": "ANN"
+          },
+          "url": "https://breedercloudpro.com/pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Amanda D." },
+      "datePublished": "2026-01-01",
+      "reviewBody": "makes it difficult to see comparison of expenses vs income",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Kira M." },
+      "datePublished": "2026-05-04",
+      "reviewBody": "quarterly tax reports are really difficult",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Kalisha B." },
+      "datePublished": "2026-05-14",
+      "reviewBody": "wish you could track expenses by litter, or dog",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Jena S." },
+      "datePublished": "2026-04-27",
+      "reviewBody": "wish there was a way to upload or put in OFA testing results",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Chelsea L." },
+      "reviewBody": "to much data entry that could be streamlined but is not... Redundant time consuming data entry that could be streamlined with connection to major registrys",
+      "publisher": { "@type": "Organization", "name": "SoftwareAdvice", "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/" },
+      "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Roy H." },
+      "datePublished": "2026-04-28",
+      "reviewBody": "does not currently integrate well with personal websites",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Amy J." },
+      "reviewBody": "Wld also be nice if I cld download my existing shot records from PDF vet rcpt vs manually typing it in",
+      "publisher": { "@type": "Organization", "name": "SoftwareAdvice", "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/" },
+      "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/"
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -86,6 +212,7 @@ const articleSchema = {
   faqs={faqs}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
 
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
