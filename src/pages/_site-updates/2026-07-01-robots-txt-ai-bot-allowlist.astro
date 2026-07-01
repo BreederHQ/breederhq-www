@@ -1,0 +1,35 @@
+---
+export const updateMeta = {
+  date: '2026-07-01',
+  title: 'AI SEO: robots.txt explicit allow-list for AI search bots, block CCBot training crawler',
+  tags: ['ai-seo', 'robots-txt', 'llm-citation', 'gptbot', 'claudebot', 'perplexitybot', 'ccbot'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 1, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Updated <a href="/robots.txt" class="text-[hsl(24,95%,53%)] hover:underline">/robots.txt</a> to explicitly allow the major AI search bots that cite sources, and to block Common Crawl's training-only crawler. Being explicit rather than relying on the <code>User-agent: *</code> default is a small but real citation-optimization signal.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">AI bots explicitly allowed</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li><strong>GPTBot</strong>, <strong>ChatGPT-User</strong> — OpenAI (ChatGPT with web search).</li>
+    <li><strong>ClaudeBot</strong>, <strong>anthropic-ai</strong>, <strong>Claude-Web</strong> — Anthropic (Claude with web search). Three names because the crawler has been renamed over time; explicit allow on all three future-proofs against Claude changing which UA string it uses.</li>
+    <li><strong>PerplexityBot</strong> — Perplexity.</li>
+    <li><strong>Google-Extended</strong> — Google Gemini and AI Overviews (opt-in flag). Allowing this lets Google use content for AI-features training, which is the standard pattern because blocking it does not stop Google from citing us via regular Googlebot for AI Overviews.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Blocked</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li><strong>CCBot</strong> (Common Crawl). Trains foundation models without citing sources back. Standard "block training-only, allow cite-and-link" middle ground: blocking CCBot does NOT prevent citation from ChatGPT / Claude / Perplexity / Copilot because they use their own crawlers listed above.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">Why this matters</h3>
+  <p class="text-gray-700 mb-3">Ahrefs baseline as of 2026-06-30 shows 6 ChatGPT citations, 5 Copilot, 2 Perplexity, 2 Gemini, 0 AI Overviews, 0 Grok. Claude is not measured by Ahrefs' free-trial report but does drive real recommendations. Explicit allow entries plus the machine-readable context files (<a href="/llms.txt" class="text-[hsl(24,95%,53%)] hover:underline">/llms.txt</a>, <a href="/pricing.md" class="text-[hsl(24,95%,53%)] hover:underline">/pricing.md</a>, and the new <a href="/okf/" class="text-[hsl(24,95%,53%)] hover:underline">/okf/</a> bundle, all shipped 2026-07-01) give these crawlers accurate ground-truth context.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-2">What did not change</h3>
+  <ul class="list-disc pl-6 text-gray-700 space-y-1">
+    <li><code>User-agent: *</code> default remains Allow: /. Behavior unchanged for everything not explicitly listed.</li>
+    <li>Traditional search bots (Googlebot, Bingbot, Slurp, DuckDuckBot) untouched.</li>
+    <li>Sitemap directive unchanged.</li>
+    <li>No Crawl-delay directives (Google and Bing ignore them; other crawlers can be throttled via Search Console).</li>
+  </ul>
+</article>
