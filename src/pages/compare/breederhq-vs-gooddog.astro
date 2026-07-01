@@ -1,0 +1,682 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'BreederHQ vs Good Dog', url: '/compare/breederhq-vs-gooddog' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ an alternative to Good Dog?',
+    answer: 'BreederHQ and Good Dog are different categories of product, and understanding that difference is important before choosing either. Good Dog (gooddog.com) is a consumer-facing dog marketplace where buyers browse breeder-posted listings and complete transactions through the platform. Public reporting indicates Good Dog charges buyers a platform fee of 5% to 10% of the puppy price at checkout, and takes a commission from breeders on completed sales (approximately 10% per third-party reporting). Good Dog does not provide breeder operations software: no health-record system, no pedigree management, no contract templates and e-signature workflow, no breeding-cycle tracking, no offspring rearing protocols, no per-litter financial rollups. BreederHQ is a breeder operations platform (records, pedigrees, health, breeding lifecycle, offspring, contracts, invoicing, buyer portal) with a public marketplace built on top. Different scope. Different revenue model. Many breeders use both today; if you want to end the Good Dog dependency (or reduce it), BreederHQ is designed to be your primary system with its own marketplace surface as an alternative buyer channel.'
+  },
+  {
+    question: 'What does Good Dog cost breeders vs BreederHQ?',
+    answer: 'Good Dog does not publicly advertise a subscription fee for breeders. Their revenue on the breeder side is transaction-based: reporting from third-party sources indicates a commission of approximately 10% deducted from breeder proceeds on completed sales through the platform, and a buyer-facing platform fee of 5% to 10% of the puppy price collected at checkout. BreederHQ charges a subscription (see pricing page) with a 14-day free trial and a founder discount (FOUNDER50 for 50% off Pro or Enterprise for 12 months, first 100 founders). BreederHQ takes zero commission on transactions, zero per-lead fees, and zero per-booking cuts. For a breeder placing a $3,500 puppy, Good Dog\'s reported 10% commission is $350 out of the breeder\'s payout on that single transaction. BreederHQ\'s subscription cost per year is typically a fraction of that single-transaction fee.'
+  },
+  {
+    question: 'Does Good Dog do what BreederHQ does?',
+    answer: 'No, they are complementary products with a small overlap. Good Dog is a marketplace with buyer-side inquiry management, deposit collection, and messaging. It does not manage breeding cycles, health records, pedigrees, offspring rearing protocols, per-litter financials, or the operational side of a breeding program. BreederHQ covers all of that AND has its own public marketplace. The overlap is "public buyer discovery for available puppies," which both do (Good Dog as the whole product, BreederHQ as one feature of a broader operations platform).'
+  },
+  {
+    question: 'Can I use BreederHQ to replace Good Dog?',
+    answer: 'Many breeders use both today. If your goal is to replace Good Dog specifically for buyer discovery, BreederHQ\'s public marketplace at marketplace.breederhq.com is the equivalent buyer-facing surface, plus you own the breeder-buyer relationship end to end (no percentage cut on transactions, direct payment flow through Stripe to your bank account, per-buyer client portal, contracts, waitlist, deposits). Whether that fully replaces Good Dog for you depends on where your buyer traffic currently comes from. Some breeders keep a Good Dog listing during transition, use BreederHQ as their operational and primary marketplace platform, and reduce or drop the Good Dog channel over time as their own storefront gains traction (embed widget helps here). Both approaches are legitimate.'
+  },
+  {
+    question: 'How does the Good Dog Promise / buyer protection compare to BreederHQ?',
+    answer: 'Good Dog markets a "Good Dog Promise" that promises buyer protection under certain conditions. Public complaint records (Better Business Bureau, ComplaintsBoard) include buyers alleging the platform did not deliver on protection promises in disputed cases (see the What Buyers Say section below). BreederHQ takes a fundamentally different posture: we do NOT vet, vouch for, or promise anything on behalf of any breeder. We confirm identity through Stripe Identity passthrough, surface credentials from public registries (OFA, AKC, AFA), and accept breeder self-attestation. Buyers see the receipts (health testing, pedigrees, contracts, credentials) directly and evaluate on facts, not on our promise. See /trust for the full policy.'
+  },
+  {
+    question: 'Is Good Dog a marketplace or a broker?',
+    answer: 'That framing is disputed. Good Dog markets itself as a curated marketplace for responsible breeders. Public reviews on Better Business Bureau and ComplaintsBoard include buyers using the word "broker" (see cited quotes in the What Buyers Say section below). We are not going to characterize Good Dog with that language ourselves; we cite the direct customer quotes and let readers reach their own conclusion. Structurally, Good Dog operates as an intermediated marketplace that takes a percentage of transaction value on both sides (buyer platform fee at checkout, breeder commission on payout). BreederHQ does not take a percentage of transaction value from either side, which is a real structural difference in the revenue model, not a marketing claim.'
+  },
+  {
+    question: 'Can I move my Good Dog listings to BreederHQ?',
+    answer: 'You can build equivalent listings on BreederHQ Marketplace from your existing program data. If your animals and litters are already tracked in another system, CSV import brings them into BreederHQ; if you are starting from a spreadsheet or from Good Dog data directly, our support team can help scope the migration (support@breederhq.com). BreederHQ listings are powered by your live program records, so once your animals, litters, and health testing are in the system, listings can be auto-generated rather than typed in from scratch.'
+  },
+  {
+    question: 'Is Good Dog a legitimate business?',
+    answer: 'Good Dog is a real, funded company (approximately $6.7M raised per public reporting) with a real product and a real user base. Public reviews range from satisfied buyers who successfully purchased puppies to formal complaints filed with the Better Business Bureau and ComplaintsBoard. Both categories of experience exist and both are worth reading before you engage with the platform as either buyer or seller. This page cites publicly-filed complaints as directly-attributed customer quotes so prospective users can evaluate for themselves.'
+  },
+  {
+    question: 'What does BreederHQ offer breeders that Good Dog does not?',
+    answer: 'Breeder operations. Health record management. Pedigree management with automatic COI. Breeding-cycle tracking. Structured multi-phase breeding plan lifecycle. Offspring rearing protocol library with 9 shipped system protocols (Early Neurological Stimulation and Early Scent Introduction based on US Military neonatal-development research, Handling Habituation, Volhard Puppy Aptitude Test, Crate Introduction, Rule of 7s Socialization, Sound Desensitization, Gun Conditioning, plus the BreederHQ Gun Dog Development Program which is a Day 3 through Day 364 curriculum with 64 activities) plus custom breeder-authored protocols plus an opt-in community library where breeders share protocols with other subscribers. Contract templates with e-signature and audit trail. Per-litter and per-animal financial attribution with quarterly tax reporting. Per-buyer client portal with records, photos, and messaging. OFA Sync that pulls public results automatically. CHIC Readiness Widget. Scout AI natural-language queries against your program data using 21 specialized tools. Camera-based receipt-to-expense on the mobile app. Rules-based automation across the offspring lifecycle. Website embed widget. Native iOS and Android apps. Nine species in one account. Species-aware printable ID card generator (cage cards, stall cards, kennel cards, pen cards). Zero commission on transactions.'
+  }
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "BreederHQ vs Good Dog: The Honest 2026 Comparison",
+  "description": "BreederHQ vs Good Dog compared on fee structure, breeder operations, buyer experience, marketplace model, and buyer trust posture. Publicly verifiable facts and directly-cited customer quotes. Verified July 2026.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/breederhq-vs-gooddog"
+  }
+};
+
+// Good Dog is a consumer-facing marketplace / company, not a SaaS tool that
+// breeders install. Modeled as Organization + Service (marketplace facilitation)
+// rather than SoftwareApplication. Reviews are verbatim quotes from publicly
+// filed complaints on ComplaintsBoard and the Better Business Bureau, each
+// attributed to the complainant name that appears on the public filing and
+// linked to the source. BreederHQ is NOT the author and does NOT characterize
+// Good Dog in our own voice within the structured data. No AggregateRating:
+// we do not have full review-set statistics and imputing one would fabricate
+// structured data with legal exposure.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://gooddog.com/#organization",
+      "name": "Good Dog",
+      "url": "https://gooddog.com",
+      "description": "Consumer-facing dog marketplace where buyers browse breeder-posted listings and transact through the platform. Public reporting indicates a buyer platform fee of 5% to 10% at checkout and a breeder commission of approximately 10% on completed sales."
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "N. Grimes" },
+      "datePublished": "2023-04-25",
+      "reviewBody": "Good Dog is nothing more than a sham, with a sole purpose of making money by acting as a puppy broker.",
+      "publisher": { "@type": "Organization", "name": "ComplaintsBoard", "url": "https://www.complaintsboard.com/good-dog-b135952" },
+      "url": "https://www.complaintsboard.com/good-dog-b135952"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "L. O'Reilly" },
+      "datePublished": "2023-04-19",
+      "reviewBody": "I cannot in good faith recommend Good Dog as a reliable source for finding reputable breeders.",
+      "publisher": { "@type": "Organization", "name": "ComplaintsBoard", "url": "https://www.complaintsboard.com/good-dog-b135952" },
+      "url": "https://www.complaintsboard.com/good-dog-b135952"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "DigyCommunique" },
+      "datePublished": "2024-03-22",
+      "reviewBody": "the minute there was a way to get out of paying the reimbursement on their end, they took it.",
+      "publisher": { "@type": "Organization", "name": "ComplaintsBoard", "url": "https://www.complaintsboard.com/good-dog-b135952" },
+      "url": "https://www.complaintsboard.com/good-dog-b135952"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "Duders" },
+      "datePublished": "2024-03-24",
+      "reviewBody": "I lost $2400, that is so not fair!",
+      "publisher": { "@type": "Organization", "name": "ComplaintsBoard", "url": "https://www.complaintsboard.com/good-dog-b135952" },
+      "url": "https://www.complaintsboard.com/good-dog-b135952"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "Better Business Bureau complainant" },
+      "datePublished": "2026-03-25",
+      "reviewBody": "I question what kind of vetting process is actually being done for breeders on your platform.",
+      "publisher": { "@type": "Organization", "name": "Better Business Bureau", "url": "https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints" },
+      "url": "https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "Better Business Bureau complainant" },
+      "datePublished": "2026-05-21",
+      "reviewBody": "I do not believe this is a real breeder. I believe I was conned.",
+      "publisher": { "@type": "Organization", "name": "Better Business Bureau", "url": "https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints" },
+      "url": "https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://gooddog.com/#organization" },
+      "author": { "@type": "Person", "name": "Better Business Bureau complainant" },
+      "datePublished": "2026-05-29",
+      "reviewBody": "Good Dog didn't even care about refund or helping me. I guess I made it up.",
+      "publisher": { "@type": "Organization", "name": "Better Business Bureau", "url": "https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints" },
+      "url": "https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints"
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="BreederHQ vs Good Dog: The Honest 2026 Comparison"
+  description="BreederHQ vs Good Dog compared on fees, breeder operations, buyer experience, marketplace model, and trust posture. Verified July 2026 with directly-cited customer quotes."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">BreederHQ vs Good Dog</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">BreederHQ vs Good Dog: The Honest 2026 Comparison</h1>
+
+        <p class="text-sm text-gray-500 mb-6">Published: July 1, 2026 &middot; Last verified against public Good Dog and BreederHQ sources: July 1, 2026</p>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Good Dog is a consumer-facing dog marketplace that takes a percentage of transaction value from both buyer and breeder. BreederHQ is a breeder operations platform (records, pedigrees, health, breeding, offspring, contracts, buyer portal) with a public marketplace built on top and zero commission on transactions. Different products, different revenue models, one important overlap. Here is the honest version of when each applies.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See BreederHQ pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <aside class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded shadow-sm" role="complementary" aria-label="Page summary">
+          <h2 class="text-2xl font-bold mb-4">TL;DR</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Good Dog is a marketplace-only product.</strong> They do not manage your health records, your pedigrees, your breeding cycles, your rearing protocols, your contracts, or your financials. They surface listings to buyers, collect a platform fee of 5% to 10% from the buyer at checkout, and take a reported commission (approximately 10% per third-party sources) from the breeder\'s payout on completed sales. If your only goal is a listing on their platform, Good Dog is a distribution channel.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>BreederHQ is a breeder operations platform with its own marketplace.</strong> Records, pedigrees with COI, health testing with OFA Sync and CHIC Readiness, breeding cycle tracking, offspring rearing protocols, contracts with e-signature, per-litter financial rollups, per-buyer client portal, public transactional marketplace at marketplace.breederhq.com, embed widget for your own website, native iOS and Android apps, and Scout AI. Zero commission on transactions, zero per-lead fees, zero per-booking cuts. Flat subscription (see pricing page). Nine species in one account. Many breeders use both today; BreederHQ is designed to be your primary operational system and primary buyer surface, with Good Dog as an optional supplementary distribution channel if you keep it.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Screenshot placeholder -->
+    <section class="py-8 px-4">
+      <div class="max-w-4xl mx-auto">
+        <figure class="border border-gray-200 rounded-lg p-8 bg-gray-50 text-center">
+          <div class="text-sm text-gray-500 mb-2">Illustration</div>
+          <div class="text-lg text-gray-700 font-medium">BreederHQ Marketplace puppy listing showing health testing, pedigree, COI, and rearing protocols inline</div>
+          <figcaption class="text-sm text-gray-600 mt-3">A BreederHQ Marketplace Individual Animal listing surfacing the underlying program record based on breeder-toggled per-record visibility: OFA hip and elbow clearances with lab source, Embark genetic panel results per locus category, multi-generation pedigree with automatic COI, titles, and competition placements. Every record on the listing is opt-in per animal and per record.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Fee comparison, front and center -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Fee structure: the math on a $3,500 puppy</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Understanding the fee stack is the single most important thing to do before choosing between Good Dog and BreederHQ, because it determines what actually hits your bank account. This example uses a $3,500 puppy and publicly reported Good Dog fees. Verify current Good Dog fee schedule directly with Good Dog before making commercial decisions.
+        </p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Line item</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Good Dog (reported)</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederHQ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Advertised puppy price</th>
+                <td class="px-4 py-3">$3,500</td>
+                <td class="px-4 py-3">$3,500</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Buyer platform fee at checkout</th>
+                <td class="px-4 py-3">$175 to $350 (5% to 10%, per third-party reporting)</td>
+                <td class="px-4 py-3">$0</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Total buyer pays</th>
+                <td class="px-4 py-3">$3,675 to $3,850</td>
+                <td class="px-4 py-3">$3,500 (plus Stripe processing)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Breeder commission on payout</th>
+                <td class="px-4 py-3">-$350 (approximately 10%, per third-party reporting)</td>
+                <td class="px-4 py-3">$0</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Payment processing (Stripe est.)</th>
+                <td class="px-4 py-3">Varies</td>
+                <td class="px-4 py-3">Approx. 2.9% + $0.30 = ~$102 on $3,500</td>
+              </tr>
+              <tr class="bg-yellow-50">
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Breeder receives</th>
+                <td class="px-4 py-3">Approximately $3,150 (after 10% commission)</td>
+                <td class="px-4 py-3">Approximately $3,398 (after Stripe processing)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">BreederHQ subscription cost</th>
+                <td class="px-4 py-3">N/A</td>
+                <td class="px-4 py-3">See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a> (typically a fraction of a single transaction fee)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-sm text-gray-600 mt-4">
+          <strong>Sources:</strong> Good Dog buyer platform fee range (5% to 10%) per third-party reporting at <a href="https://www.petscare.com/news/faq/how-much-is-the-gooddog-fee" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">petscare.com</a>. Breeder commission (approximately 10%) referenced in aggregated public reviews. Good Dog does not publicly publish a fee schedule; verify current fees directly with Good Dog before making commercial decisions. BreederHQ fees: zero commission, zero per-lead, zero per-booking. Stripe processing is a separate cost that both platforms incur. Verified July 1, 2026.
+        </p>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-8">
+          One $3,500 transaction: Good Dog is reported to deduct approximately $350 from the breeder&apos;s payout. The equivalent transaction on BreederHQ returns approximately $250 more to the breeder (before subscription, which is a flat annual line item). Five puppies at $3,500 each on Good Dog loses approximately $1,750 in reported commissions per litter cycle. That is more than a year of a typical BreederHQ subscription for most operations. The gap compounds across every subsequent litter.
+        </p>
+      </div>
+    </section>
+
+    <!-- Category difference -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Different categories of product</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Before comparing feature lists, understand that Good Dog and BreederHQ solve different problems. Both products can be part of a breeder&apos;s stack. They overlap in one area (public buyer discovery) and diverge everywhere else.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Good Dog: marketplace-only</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>Public buyer discovery for dogs</li>
+              <li>Buyer-side inquiry management</li>
+              <li>Deposit collection through the platform</li>
+              <li>Buyer-breeder messaging</li>
+              <li>Buyer platform fee at checkout (5-10%)</li>
+              <li>Reported commission on breeder payout (~10%)</li>
+              <li>No breeder operations software</li>
+              <li>No health record system</li>
+              <li>No pedigree/COI management</li>
+              <li>No breeding-cycle tracking</li>
+              <li>No offspring rearing protocols</li>
+              <li>No per-litter financial rollups</li>
+              <li>No contract templates</li>
+              <li>Dogs only</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">BreederHQ: breeder operations + marketplace</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>Full breeder operations software</li>
+              <li>Health records + OFA Sync + CHIC Readiness</li>
+              <li>Pedigree management with automatic COI</li>
+              <li>Breeding-cycle tracking (all supported species)</li>
+              <li>Structured multi-phase breeding plan lifecycle (11 happy-path states: Planning, Committed, Cycle Expected, Hormone Testing, Bred, Pregnant, Birthed, Born, Weaned, Placement, Plan Complete, plus off-happy-path states tracked separately)</li>
+              <li>Offspring rearing protocol library (ENS, ESI, Handling Habituation, Volhard PAT, Crate Introduction, Rule of 7s, Sound Desensitization, Gun Conditioning, BreederHQ Gun Dog Development Program, plus custom, plus community library)</li>
+              <li>Per-litter and per-animal financial attribution</li>
+              <li>Contract templates with e-signature</li>
+              <li>Per-buyer client portal (records, photos, contracts, messaging)</li>
+              <li>Public transactional marketplace (marketplace.breederhq.com)</li>
+              <li>Embed widget for your own website</li>
+              <li>Native iOS and Android apps (<a href="https://apps.apple.com/us/app/breederhq/id6761625868" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.breederhq.mobile" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Google Play</a>)</li>
+              <li>Scout AI (natural-language queries + document extraction)</li>
+              <li>Nine species in one account</li>
+              <li>Zero commission on transactions</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-8">
+          The one thing both products do is public buyer discovery for available offspring. Everything else is on BreederHQ&apos;s side of the ledger. If you use Good Dog for buyer discovery only, and something else (or nothing) for the operational side of your program, BreederHQ is the more complete platform. Whether you keep the Good Dog listing as a distribution channel is a separate question.
+        </p>
+      </div>
+    </section>
+
+    <!-- What buyers say about Good Dog -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What buyers say about Good Dog</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Direct quotes from publicly-filed complaints on the Better Business Bureau and ComplaintsBoard.com. These are cited verbatim so prospective users can evaluate the concerns for themselves. Both satisfied buyers and complainants exist; this section covers the formally-filed complaints because they represent documented buyer concerns that a prospective user should read before engaging with the platform.
+        </p>
+
+        <p class="text-sm text-gray-600 mb-8 italic">
+          The quotes below are attributed to publicly named complainants and linked to the original sources. BreederHQ is not endorsing or opposing these characterizations. We are surfacing publicly-filed customer voice so prospective users can read the record.
+        </p>
+
+        <div class="space-y-6">
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"Good Dog is nothing more than a sham, with a sole purpose of making money by acting as a puppy broker."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              N. Grimes, ComplaintsBoard, April 25, 2023 &middot; <a href="https://www.complaintsboard.com/good-dog-b135952" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I cannot in good faith recommend Good Dog as a reliable source for finding reputable breeders."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              L. O&apos;Reilly, ComplaintsBoard, April 19, 2023 &middot; <a href="https://www.complaintsboard.com/good-dog-b135952" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"the minute there was a way to get out of paying the reimbursement on their end, they took it."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              DigyCommunique, ComplaintsBoard, March 22, 2024 &middot; <a href="https://www.complaintsboard.com/good-dog-b135952" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I lost $2400, that is so not fair!"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Duders, ComplaintsBoard, March 24, 2024 &middot; <a href="https://www.complaintsboard.com/good-dog-b135952" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I question what kind of vetting process is actually being done for breeders on your platform."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              BBB complainant, March 25, 2026 &middot; <a href="https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I do not believe this is a real breeder. I believe I was conned."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              BBB complainant, May 21, 2026 &middot; <a href="https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"Good Dog didn't even care about refund or helping me. I guess I made it up."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              BBB complainant, May 29, 2026 &middot; <a href="https://www.bbb.org/us/ny/new-york/profile/pet-services/good-dog-inc-0121-184247/complaints" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+        </div>
+
+        <p class="text-base text-gray-700 leading-relaxed mt-8">
+          The pattern in the publicly-filed complaints above is one class of concern: buyers paid the platform fee (5-10% of the puppy price at checkout), had a transaction go wrong, and reported difficulty getting the platform to intervene meaningfully. Complaints span 2023 through 2026, so the pattern is not a single incident. Neither this page nor BreederHQ is characterizing whether individual complaints are well-founded. We surface the publicly-filed record.
+        </p>
+        <p class="text-base text-gray-700 leading-relaxed mt-4">
+          BreederHQ takes a categorically different posture toward buyer protection: we do NOT promise verification or protection. We are legally clear on this at <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">/trust</a>. We confirm identity (Stripe Identity passthrough), surface credentials from public registries (OFA, AKC, AFA), and accept breeder self-attestation. The trust signal that matters comes from the breeder&apos;s substantive records (health testing with lab source, pedigree with COI, contracts, credentials) that buyers can evaluate directly. Not a competitive claim. A policy difference. Where Good Dog markets a "Promise," we surface receipts.
+        </p>
+      </div>
+    </section>
+
+    <!-- What this means for breeders -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this means for breeders</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Breeders using Good Dog today are, in most cases, using it AS a distribution channel because their buyers came from Good Dog. The trade: reach in exchange for a percentage of each transaction and dependency on the platform&apos;s protection promise (which the complaints above suggest is contested at times).
+        </p>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. The revenue math changes over time</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Each transaction on Good Dog loses approximately 10% (per third-party reporting on the commission) to the platform. A five-puppy litter at $3,500 per puppy: approximately $1,750 in reported commissions. Ten litters: $17,500. A BreederHQ subscription typically costs a small fraction of even one of those transaction commissions annually.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              The counter-argument is that Good Dog delivers buyers you would not otherwise reach. True for some breeders and less true for others. If your buyer traffic comes largely from your own reputation, your website, referrals, and breed-club channels, the "reach" premium is less compelling. If you rely on Good Dog for the majority of your buyer volume, the transition off is a real business decision that needs its own plan.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. You do not own the buyer relationship</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              On Good Dog, the platform sits between you and the buyer during the transaction. Messaging, payment, dispute resolution all flow through Good Dog. On BreederHQ, the relationship is direct: your buyer has a client portal on your operation, you own the messaging thread, deposits flow through your Stripe account to your bank, contracts are between you and the buyer. A structural difference in who controls the relationship.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. The listing does not power the rest of your operation</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A Good Dog listing is a marketing surface. It does not manage dam and sire records, track the breeding cycle, calculate COI on the planned breeding, track the pregnancy, manage the whelping and puppy weights, run the rearing protocols, manage the waitlist, attach contracts, or calculate per-litter financials. All of that lives elsewhere in your stack (or in a spreadsheet). BreederHQ handles all of it, and the marketplace listing is powered by that operational data.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. You can transition gradually, not all at once</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Many breeders start with BreederHQ as their operational platform and supplemental marketplace, and keep Good Dog as an additional distribution channel during the transition. Over time, as their own storefront gains traction (embed widget on their website, marketplace.breederhq.com listings, growing direct-referral flow), they reduce or drop the Good Dog channel. A legitimate transition path, not an abrupt switch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where Good Dog wins -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where Good Dog wins today</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          A comparison page that only lists where a competitor falls short is not honest. Here is where Good Dog is genuinely stronger today than any alternative, BreederHQ included.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Buyer-side scale and brand awareness</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Good Dog is one of the largest consumer-facing dog marketplaces in the US. Buyers shopping for a puppy know the name, and that inbound traffic is not something a newer platform can match instantly on organic search. If your primary need is inbound traffic from consumers already typing "buy a puppy" into Google, Good Dog is a plausible channel.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. No breeder subscription cost</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Good Dog does not publicly charge breeders a subscription. The cost is transactional (per-sale commission). For a breeder placing 1 or 2 puppies per year, this is a low-fixed-cost model that avoids paying an annual subscription with no guaranteed sales. If you place occasionally and prefer "pay when you sell," that is Good Dog&apos;s structural pricing advantage. BreederHQ has a subscription regardless of sales volume.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Buyer protection promise (as marketed)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Good Dog markets a "Good Dog Promise" of buyer protection under certain conditions. For buyers who value the concept of platform-provided protection, this is a legitimate feature. Whether the Promise delivers as marketed in disputed cases is a matter of public complaint record (see previous section). BreederHQ does not offer platform-provided buyer protection and does not claim to. We are honest that we do not verify, vet, or vouch for anyone.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Purpose-built buyer shopping experience</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Good Dog&apos;s search, filter, and browse experience is designed for consumer buyers shopping across breeders. Filters by breed, breed group, location. Comparison views. Consumer-facing UX polish. BreederHQ Marketplace has these surfaces too, but Good Dog has been iterating on consumer-shopping-first for years.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is different -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is structurally different</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are structural product and revenue-model differences, not opinion.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Zero commission on transactions</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ does not take a percentage of any transaction. Not from the buyer, not from the breeder. The revenue model is subscription-based on the breeder side; buyers pay zero to browse, message, waitlist, favorite, or transact. Same anti-commission posture applies to service-provider listings ($5/mo flat, no cut on bookings) and facility bookings (no per-booking cut). This is the direct opposite of the Good Dog revenue model.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Full breeder operations, not a listing surface</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ manages records, pedigrees, health, breeding cycles, offspring, protocols, contracts, financials, and buyer relationships as a single system. Good Dog manages listings and buyer inquiries. Every operational surface is on BreederHQ&apos;s side of the ledger. If you use Good Dog today, your operational surface is somewhere else (or in a spreadsheet); BreederHQ consolidates it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Substantive transparency instead of "verified" claims</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ does not verify or vet breeders. We are legally clear on this at <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">/trust</a>. Instead, every Individual Animal listing lets the breeder toggle per-record public visibility on the underlying evidence the buyer needs to evaluate the breeder: health test results per trait with lab source (OFA hip / elbow / cardiac / patella / thyroid / DNA, PennHIP, Embark, Wisdom Panel, UC Davis, and any registry-issued clearances the breeder has recorded), allele-level genetics across five loci categories (coat color, coat type, physical traits, eye color, health genetics), titles per title, competition entries and placements per entry, multi-generation pedigree with automatic COI (the sire and dam of the listing have their own per-record privacy panels), CHIC readiness (only CERTIFIED state is exposed, no partial states), registrations, and photos. The breeder chooses what shows, at record granularity, per animal. This is a genuinely different transparency posture from a marketplace that hosts a listing and asks buyers to trust the platform&apos;s vetting. Buyers evaluate on facts, not on our promise. This is a categorically different posture from Good Dog&apos;s "Promise" model, and it avoids the exact class of failure the BBB and ComplaintsBoard record describes ("I question what kind of vetting process is actually being done for breeders on your platform").
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Nine species, not dogs-only</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Good Dog is dogs-only. BreederHQ supports dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle in the same account. If you also run a cattery, or a small goat herd, or a horse operation on the side, BreederHQ is one system.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Direct buyer relationship and Stripe-native payments</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Payments on BreederHQ flow through Stripe directly to your bank account. You own the buyer relationship end to end: per-buyer client portal, direct messaging, contracts, deposits, invoices, photo updates, document library. No intermediary. No dispute-resolution dependency on a third party&apos;s discretion.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">6. Embed widget: keep your own website in sync</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Paste one snippet into your Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain HTML site. Your live BreederHQ marketplace listings render on your own domain and update in real time. Available puppies appear when listed. Sold puppies disappear when sold. This structurally reduces your dependence on any single third-party marketplace (Good Dog included) for buyer traffic. Your own domain becomes a live, self-updating storefront.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">7. OFA Sync, CHIC Readiness, Scout AI</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Enter a dog&apos;s registration number, OFA results appear automatically on the record and propagate to pedigrees and marketplace listings. CHIC Readiness Widget shows breed-specific required tests and gaps. Scout AI reads any lab PDF (Embark, Wisdom Panel, UC Davis, GenSol, Paw Print, OFA), vet invoice, or photo receipt and files the data into the right record. Good Dog has none of this because Good Dog is not a program-management platform.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">8. Rules-based automation and structured breeding plan lifecycle</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Puppy born, BreederHQ auto-generates the marketplace listing. Listing goes live, waitlist opens. Buyer approved, contract auto-sends. Contract signed, deposit invoice generates. Deposit paid, buyer portal auto-provisions. Every breeding is modeled as a multi-phase project threading through eleven happy-path states (Planning, Committed, Cycle Expected, Hormone Testing, Bred, Pregnant, Birthed, Born, Weaned, Placement, Plan Complete). Off-happy-path states (Canceled, Unsuccessful, On Hold, Dissolved) are tracked separately so a paused or canceled plan does not pollute the active pipeline. Financial rollups per plan, per litter, per year.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">9. Rearing protocol library (a third capability with no equivalent in the market)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Nine shipped system protocols across neonatal (Day 0-21) and socialization (Week 3-12) stages: Early Neurological Stimulation and Early Scent Introduction (based on US Military neonatal-development research), Handling Habituation, Volhard Puppy Aptitude Test (attributed to Joachim and Wendy Volhard with a References link back to volhard.com), Crate Introduction, Rule of 7s Socialization, Sound Desensitization, and Gun Conditioning. Plus the BreederHQ Gun Dog Development Program, a Day 3 through Day 364 upland and waterfowl curriculum with 64 activities and 53 checklist items authored by BreederHQ specifically for gun dog breeders. Plus a Custom Protocols tab where breeders author their own from scratch. Plus an opt-in community library where breeders share protocols with other subscribers, searchable across shared submissions. Every protocol carries a liability acknowledgment positioning the platform as guidance based on established animal-development research, not veterinary advice.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              Good Dog is a marketplace and has no rearing protocol infrastructure at all. Alongside Scout AI and native mobile, this is the third capability in the breeder software category with no equivalent in the market today. It matters here because the buyer-side transparency posture goes deeper than "we surface the records": the records include the breeder&apos;s completion of established, science-based, publicly-documented developmental protocols, which is the exact kind of substantive-signal buyers keep asking Good Dog to provide about the breeders on the platform.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">10. Species-aware printable identification cards</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A shipped card generator that prints kennel cards, cage cards, stall cards, and pen cards with species-appropriate field templates. For dogs: name, ear number if tattooed, breed, DOB, dam, sire, kennel run, last vaccination, last heartworm, feeding schedule. For horses: farrier date, coggins, feed program. For rabbits: ear number, breed, variety, kindling history. And so on for the other supported species. Good Dog has nothing like this, because Good Dog is not an operational platform.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who each is for -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Who each product is for</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Use Good Dog if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You want a distribution channel only, and something else handles operations</li>
+              <li>You place occasionally and prefer per-transaction commission over subscription</li>
+              <li>Your buyers already come from Good Dog and moving them off is expensive</li>
+              <li>You are comfortable with the reported ~10% commission on each sale</li>
+              <li>You are comfortable your buyers will pay a 5-10% platform fee at checkout</li>
+              <li>You do not need integrated breeder operations software</li>
+              <li>Dogs only, no other species</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">Use BreederHQ if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You want full breeder operations software (records, pedigrees, health, breeding, offspring, contracts, financials)</li>
+              <li>You want a marketplace with zero commission and zero buyer fee</li>
+              <li>You want the buyer relationship direct (portal, messaging, Stripe deposits to your bank)</li>
+              <li>You want your own website to auto-update from your program (embed widget)</li>
+              <li>You want OFA Sync, CHIC Readiness, Scout AI, native mobile apps</li>
+              <li>You run more than dogs (nine species supported)</li>
+              <li>You would rather pay a flat subscription than a percentage of each sale</li>
+              <li>Substantive transparency is your buyer-trust posture, not platform "verification"</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-8">
+          "Use both" is a legitimate answer during a transition period. Many breeders run BreederHQ as their primary operational and marketplace platform and keep a Good Dog listing as a secondary distribution channel. Over time, as their own storefront and referral network compound, the Good Dog dependency reduces.
+        </p>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this page is not</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          This is not a hit piece on Good Dog. Good Dog is a real, funded business with a real user base and real satisfied buyers. Every fact above is sourced to a public page or a directly-attributed public complaint, verified July 1, 2026. The customer quotes cited from the Better Business Bureau and ComplaintsBoard are publicly-filed complaints with named complainants and links to the sources. BreederHQ is not characterizing whether individual complaints are well-founded; we surface the publicly-filed record so prospective users can evaluate for themselves.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Fee figures for Good Dog (5-10% buyer platform fee, approximately 10% breeder commission) are from third-party reporting, not from Good Dog&apos;s own public materials, which do not publish a fee schedule. Verify current fees directly with Good Dog before making commercial decisions. If a claim on this page has gone stale or was misread, please tell us at <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will verify and update.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ does not verify, vet, or vouch for any breeder or buyer. We confirm identity through Stripe Identity passthrough, surface credentials from public registries (OFA, AKC, AFA), and accept provider self-attestation where applicable. See <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">our Identity & Credentials page</a> for the long version.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          For a deeper multi-vendor guide for dog breeders specifically, read <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">our dog breeding software comparison</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Try BreederHQ free for 14 days</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Full breeder operations plus a public marketplace with zero commission on transactions and zero fees to buyers. Nine species in one account. Native iOS and Android apps. OFA Sync, CHIC Readiness, Scout AI. Embed widget for your own website. Founder discount: code <code class="bg-white px-2 py-0.5 rounded border border-gray-200">FOUNDER50</code> gives the first 100 founders 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See pricing
+          </a>
+          <a href="/trust" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            Our trust posture
+          </a>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">
+          BreederHQ is not affiliated with, endorsed by, or sponsored by Good Dog Inc. or gooddog.com. "Good Dog" is referenced here only to describe adjacent products so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed Good Dog information and directly-attributed public customer complaints, verified July 1, 2026. Fee figures are from third-party reporting; verify current Good Dog fees directly with Good Dog. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

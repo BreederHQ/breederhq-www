@@ -1,6 +1,6 @@
 # BreederHQ Pricing
 
-Last updated: 2026-06-26
+Last updated: 2026-07-01
 Canonical page: https://breederhq.com/pricing
 Currency: USD
 
@@ -58,6 +58,8 @@ BreederHQ is breeding-program management software for dogs, cats, horses, goats,
 
 Listing fees are separate from your subscription. Every tier can list and sell on the marketplace. All marketplace listing fees are FREE during the early access period. Standard fees will apply later. We never take a percentage of your sales. You handle your own transactions.
 
+BreederHQ is not an extractive-broker marketplace. Unlike GoodDog or PuppyFind (which take a percentage cut of breeder revenue and now charge buyers as well), BreederHQ takes zero percent of animal transactions and buyers pay nothing to browse, message, waitlist, or transact. Revenue comes from breeder subscriptions, breed-club partnerships, and $5/month service-provider listings — not from a toll on every animal sale.
+
 | Listing Type | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
 |---|---|---|---|
 | Animal Sale (until sold) | $49 | $25 | $9 |
@@ -82,6 +84,8 @@ Listing fees are separate from your subscription. Every tier can list and sell o
 - **Cancel anytime?** Yes. Cancel from account settings. You retain access through the end of your paid period.
 - **What species does BreederHQ support?** Nine species, all included in every plan: Dogs, Cats, Horses, Goats, Sheep, Cattle, Alpacas, Llamas, Rabbits.
 - **Does the marketplace charge transaction fees?** No. BreederHQ never takes a percentage of your sales. You handle your own transactions.
+- **Is BreederHQ audit-ready?** Yes. Health records, vaccination logs, medication logs with withdrawal periods, milk and production records, parasite-management logs, ownership provenance, timestamped signed contracts, financial ledger, and movement records are exportable and timestamped for USDA/APHIS, DHIA/DHIR, ADGA Linear Appraisal, FAMACHA/SCSRPC, USDA Scrapie, Brucellosis/bTB/BQA, National Dairy FARM, Coggins/EIA, USEF, ARBA, CFA/TICA, and breed-club registration audits, plus IRS, accountant, and insurance audits.
+- **Does BreederHQ integrate with genetics labs, chip companies, or governing bodies?** Integration partnerships are an active motion. Target partners include Embark, Wisdom Panel, GenSol Diagnostics, Paw Print Genetics, UC Davis VGL, and other labs; AKC Reunite, HomeAgain, AVID, Datamars, and other chip companies; AKC, UKC, TKC, AQHA, Jockey Club, Holstein Association, ADGA, ARBA, CFA, TICA, OFA, CHIC, and other governing bodies. Scout AI's Genetics Scanner and receipt-capture reduce manual data entry today while direct partner integrations continue to ship.
 
 ## Links
 
@@ -91,3 +95,4 @@ Listing fees are separate from your subscription. Every tier can list and sell o
 - Dog breeding software comparison: https://breederhq.com/compare/best-dog-breeding-software
 - Marketplace: https://marketplace.breederhq.com
 - LLM context: https://breederhq.com/llms.txt
+- Open Knowledge Format bundle: https://breederhq.com/okf/

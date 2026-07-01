@@ -1,0 +1,733 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'BreederHQ vs Everbreed', url: '/compare/breederhq-vs-everbreed' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ a good alternative to Everbreed for rabbit breeders?',
+    answer: 'It depends on operation shape. Everbreed is rabbits-only, has native iOS and Android apps, and is priced per-rabbit-count from $4.99/month (Start, up to 5 breeders) to $19.99/month (Max, unlimited). Everbreed has approximately 10,000 users per public reports and is the largest rabbit-specific tool in the market. BreederHQ is a multi-species platform (rabbits plus 8 more species) with a transactional public marketplace, per-buyer client portal, per-litter and per-animal financial attribution, rules-based automation across the offspring lifecycle, an embed widget that keeps your own website in sync, printable cage cards for rabbits (plus stall / pen / kennel cards for the other 8 supported species from the same species-aware card generator), a rearing protocol library with shipped system templates and a community sharing surface, and Scout AI that reads lab PDFs and vet invoices. If Everbreed-native workflows (48 ARBA breeds already loaded on their side, per-rabbit-count tiered pricing, or the intra-platform rabbit-to-rabbit-breeder marketplace) matter most, Everbreed is a legitimate rabbits-only pick. If you run rabbits plus another species, or you sell kits to buyers with a professional buyer flow, or you want financial visibility, website integration, and rearing protocols, BreederHQ carries more of the operation.'
+  },
+  {
+    question: 'What does Everbreed cost vs BreederHQ?',
+    answer: 'Everbreed has four rabbit-count tiers per apps.apple.com listing verified July 1, 2026: Start at $4.99/month (up to 5 breeding rabbits), Grow at $9.99/month or $95.99/year (up to 20), Plus at $14.99/month or $144.99/year (up to 50), and Max at $19.99/month (unlimited). Trial is 30 days, no credit card. Custom pricing for larger rabbitries or multi-farm accounts. BreederHQ pricing is on our pricing page. Founder discount: FOUNDER50 for 50% off Pro or Enterprise for 12 months (first 100 founders). Everbreed can be cheaper on entry for small rabbitries; BreederHQ is the more comprehensive platform for operations that need marketplace, buyer portal, financial attribution, or multi-species coverage.'
+  },
+  {
+    question: 'Does Everbreed support species other than rabbits?',
+    answer: 'No. Everbreed is explicitly a rabbit management platform. The website markets to rabbit breeders, the app is called "Everbreed - Rabbit Records," and the pricing tiers count breeding rabbits. If you run rabbits plus other species (goats, chickens, ducks, horses, dogs, cats), Everbreed is not the tool for the other side of your operation. BreederHQ supports nine species in one account.'
+  },
+  {
+    question: 'Does BreederHQ have a mobile app?',
+    answer: 'Yes. Native iOS and Android apps built on Capacitor, plus responsive web. The mobile app is specifically scoped for on-the-go capture (rabbitry aisle, kindling nest box, feed room, feed store, vet visit, show). Mobile execution matters in this category (see the What Everbreed Users Say section below), and reliability of capture is treated as core infrastructure, not a bonus feature.'
+  },
+  {
+    question: 'Does Everbreed have a marketplace or a way to sell kits to buyers?',
+    answer: 'Everbreed includes a built-in rabbit marketplace for transfers between Everbreed users, per public product materials. It is intra-platform (rabbit-to-rabbit-breeder). BreederHQ runs a transactional public marketplace at marketplace.breederhq.com that surfaces to any buyer (breeder or pet buyer or working-home buyer or homesteader), with structured listings, waitlist management, deposits, contracts, and a per-buyer client portal. Different scope, different audience reach.'
+  },
+  {
+    question: 'Can I move my Everbreed records to BreederHQ?',
+    answer: 'BreederHQ supports CSV import for animals, pedigrees, and contacts. Rabbit records, pedigrees, and buyer contacts can be imported if Everbreed provides CSV export. Photos and documents need re-upload. There is no one-click migration. Plan a few hours of setup or contact support@breederhq.com for scoping help. If Everbreed\'s export options are limited, raise that with their support before committing either direction.'
+  },
+  {
+    question: 'Is Everbreed a good product?',
+    answer: 'For a rabbits-only operation of any size, Everbreed is the most rabbit-specific platform available today, with ~10,000 users and native mobile apps. The product has been in the market for years, has a dedicated rabbit-breeder user base, and continues to iterate. Public reviews reflect both loyal users and users experiencing app-reliability frustration; that is common for mobile-first products, and reliability is a real thing to evaluate during the trial period. This page is not a "we are better at everything" argument. It is the honest version of when each tool is the right pick.'
+  },
+  {
+    question: 'Which is better for a small rabbitry with 10 or fewer breeding rabbits?',
+    answer: 'If rabbits are the only species and monthly cost is the primary constraint, Everbreed Grow at $9.99/month or $95.99/year is aggressive pricing. If you also want a public marketplace listing that reaches buyers outside the rabbit-breeder community, or per-buyer client portals for kit buyers, or financial attribution per litter, BreederHQ carries more of the workflow but starts at a higher price. Both are legitimate for that scale.'
+  },
+  {
+    question: 'Which is better for a mixed farm (rabbits + goats + chickens)?',
+    answer: 'BreederHQ. One account, one subscription, one login, one mental model. Rabbits, goats, and other supported species (dogs, cats, horses, sheep, alpacas, llamas, cattle) all live in the same account. Everbreed is rabbits-only.'
+  }
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "BreederHQ vs Everbreed: The Honest 2026 Comparison for Rabbit Breeders",
+  "description": "BreederHQ vs Everbreed compared on pricing, species coverage, mobile apps, marketplace, buyer portal, financial tracking, and automation for rabbit breeders. Publicly verifiable facts, verified July 2026.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/breederhq-vs-everbreed"
+  }
+};
+
+// Competitor SoftwareApplication + Review nodes. Named reviewers where the
+// source names them (Shawna Adams from Google Play, Lydia H. from the Farmkeep
+// comparison); anonymized where the source is anonymous. Aggregated positive-
+// review-theme quotes are excluded from the Review graph because they are not
+// attributable to a single review under schema.org's Review model.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://everbreed.com/#software",
+      "name": "Everbreed",
+      "alternateName": "Everbreed - Rabbit Records",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Rabbit Management Software",
+      "operatingSystem": "iOS, Android, Web",
+      "url": "https://everbreed.com",
+      "description": "Rabbit-only breeding management platform with native iOS and Android apps, per-rabbit-count tiered pricing, and an intra-platform rabbit-to-rabbit-breeder marketplace.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Start",
+          "price": "4.99",
+          "priceCurrency": "USD",
+          "description": "Up to 5 breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "4.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Grow",
+          "price": "9.99",
+          "priceCurrency": "USD",
+          "description": "Up to 20 breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "9.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Plus",
+          "price": "14.99",
+          "priceCurrency": "USD",
+          "description": "Up to 50 breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "14.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Max",
+          "price": "19.99",
+          "priceCurrency": "USD",
+          "description": "Unlimited breeding rabbits",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "19.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Shawna Adams" },
+      "datePublished": "2026-01-16",
+      "reviewBody": "The app is glitch-y and oddly particular about movement. For example, you can't touch the actual phone back button or it kicks you out of the app... It also takes a while to sync changes, leading you to think that the changes didn't 'take' resulting in multiple entries.",
+      "publisher": { "@type": "Organization", "name": "Google Play", "url": "https://play.google.com/store/apps/details?id=com.barntrax.hutch" },
+      "url": "https://play.google.com/store/apps/details?id=com.barntrax.hutch"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous Apple App Store reviewer" },
+      "datePublished": "2021-12-23",
+      "reviewBody": "I love this app but it's so difficult to put my information in because it constantly crashes",
+      "publisher": { "@type": "Organization", "name": "Apple App Store", "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544" },
+      "url": "https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous user" },
+      "reviewBody": "When you hit the 10+ breeders it doubles in price and you can't use the finance features unless you use the top tier",
+      "publisher": { "@type": "Organization", "name": "Everbreed blog", "url": "https://everbreed.com/blog/farmkeep-vs-everbreed-which-rabbitry-tool-is-best/" },
+      "url": "https://everbreed.com/blog/farmkeep-vs-everbreed-which-rabbitry-tool-is-best/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://everbreed.com/#software" },
+      "author": { "@type": "Person", "name": "Lydia H." },
+      "reviewBody": "I used to use Everbreed for my rabbits, but as my farm grew, it became too expensive and couldn't track everything I wanted... I needed something that worked for rabbits, ducks, goats, chickens, and my market stand",
+      "publisher": { "@type": "Organization", "name": "Farmkeep", "url": "https://www.farmkeep.com/farm-guides/reviews/farmkeep-vs-everbreed" },
+      "url": "https://www.farmkeep.com/farm-guides/reviews/farmkeep-vs-everbreed"
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="BreederHQ vs Everbreed: The Honest 2026 Comparison"
+  description="BreederHQ vs Everbreed compared on pricing, species, mobile apps, marketplace, buyer portal, financial tracking, and automation for rabbit breeders. Verified July 2026."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">BreederHQ vs Everbreed</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">BreederHQ vs Everbreed: The Honest 2026 Comparison for Rabbit Breeders</h1>
+
+        <p class="text-sm text-gray-500 mb-6">Published: July 1, 2026 &middot; Last verified against everbreed.com and app store listings: July 1, 2026</p>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Everbreed is the rabbit specialist with native mobile apps and tiered pricing from $4.99 to $19.99 per month. BreederHQ is a multi-species platform (rabbits plus 8 more) with a transactional marketplace, per-buyer client portal, financial attribution, and rules-based automation. Both are used by real rabbit breeders. Here is the honest version of when each wins.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See BreederHQ pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <aside class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded shadow-sm" role="complementary" aria-label="Page summary">
+          <h2 class="text-2xl font-bold mb-4">TL;DR</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Pick Everbreed if</strong> you run a rabbits-only operation, per-rabbit-count tiered pricing works with the shape of your rabbitry, and you do not need a public marketplace, per-buyer client portal, embed widget, per-litter financial attribution, rearing protocol library, or multi-species coverage. Everbreed is the largest rabbit-specific product available, has approximately 10,000 users, and ships native iOS and Android apps with an intra-platform rabbit-to-rabbit-breeder transfer marketplace. Pricing starts at $4.99/month for up to 5 breeding rabbits.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Pick BreederHQ if</strong> you run rabbits plus another species, or you want a public marketplace that reaches buyers outside the rabbit-breeder community, or you want per-buyer client portals with contracts and deposits, or you want per-litter and per-kit financial attribution with quarterly tax export, or you want your own website to auto-update from your program records. BreederHQ trades Everbreed&apos;s rabbit-only depth for platform breadth: nine species, marketplace, client portal, embed widget, automation, Scout AI, and mobile.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Screenshot placeholder -->
+    <section class="py-8 px-4">
+      <div class="max-w-4xl mx-auto">
+        <figure class="border border-gray-200 rounded-lg p-8 bg-gray-50 text-center">
+          <div class="text-sm text-gray-500 mb-2">Illustration</div>
+          <div class="text-lg text-gray-700 font-medium">BreederHQ marketplace listing: rabbit kit with lineage, health, and grow-out data</div>
+          <figcaption class="text-sm text-gray-600 mt-3">A rabbit kit listing on BreederHQ Marketplace showing dam and sire records, ARBA registration status, weight-and-growth data, and photo timeline, all pulled from the program record.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Side-by-side: BreederHQ vs Everbreed</h2>
+        <p class="text-gray-700 mb-6">
+          Publicly verifiable facts only, sourced from everbreed.com, apps.apple.com, play.google.com, and breederhq.com. Verified July 1, 2026. Vendors change pricing and feature scope. Confirm on each source before committing.
+        </p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Capability</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Everbreed</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederHQ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Entry price</th>
+                <td class="px-4 py-3">Start $4.99/mo (up to 5 breeders); Grow $9.99/mo or $95.99/yr (up to 20); Plus $14.99/mo or $144.99/yr (up to 50); Max $19.99/mo (unlimited)</td>
+                <td class="px-4 py-3">See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a>. FOUNDER50: 50% off Pro or Enterprise for 12 months.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Free trial length</th>
+                <td class="px-4 py-3">30 days, no credit card</td>
+                <td class="px-4 py-3">14 days</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Species supported</th>
+                <td class="px-4 py-3">Rabbits only</td>
+                <td class="px-4 py-3">9 (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Native mobile apps</th>
+                <td class="px-4 py-3">Yes: iOS and Android + offline read mode</td>
+                <td class="px-4 py-3">Yes: <a href="https://apps.apple.com/us/app/breederhq/id6761625868" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">iOS</a> and <a href="https://play.google.com/store/apps/details?id=com.breederhq.mobile" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Android</a> + responsive web</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rabbit-specific depth</th>
+                <td class="px-4 py-3">Yes, purpose-built for rabbits</td>
+                <td class="px-4 py-3">Yes: 48 ARBA-recognized breeds preloaded, 31-day kindling calendar with rabbit-native biology, Grand Champion tracking with ARBA leg counts, color genetics with genotype prediction, medication and treatment tracking, and buyer portal for kit placements</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Printable identification cards</th>
+                <td class="px-4 py-3">Cage cards for rabbits</td>
+                <td class="px-4 py-3">Species-aware card generator across all 9 species (cage cards for rabbits, stall cards for horses / goats / cattle, kennel cards for dogs, pen cards for sheep / alpacas / llamas), with species-appropriate field templates</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rearing protocol library</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: shipped system protocols across neonatal and socialization stages, custom breeder-authored protocols, and opt-in community library (see dedicated section below)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public marketplace / buyer discovery</th>
+                <td class="px-4 py-3">Built-in rabbit marketplace for transfers between Everbreed users</td>
+                <td class="px-4 py-3">Public transactional marketplace at marketplace.breederhq.com (any buyer, not just breeders on the platform)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Per-buyer client portal</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: records, photos, pedigree, contracts, invoices, messaging, documents</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Per-litter / per-kit financial attribution</th>
+                <td class="px-4 py-3">Basic financial tracking; per-litter attribution not publicly advertised</td>
+                <td class="px-4 py-3">Yes: per-litter and per-kit cost + revenue rollups; quarterly tax export</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Camera receipt-to-expense (mobile)</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: Scout AI reads receipts, files vendor/date/amount/category to ledger</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">AI document extraction</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: Scout AI reads lab PDFs, vet invoices, photos</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rules-based automation (kindling lifecycle)</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: kit-born to listing-live to waitlist-opens to deposit-collected</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Website embed widget</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: live listings syndicate to Squarespace, Wix, WordPress, Shopify, GoDaddy, HTML</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public app store rating</th>
+                <td class="px-4 py-3">4.2 stars, 495 ratings (Apple App Store, verified July 1, 2026)</td>
+                <td class="px-4 py-3">In-app + web reviews; verify current on App Store and Play Store</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Scale (self-reported)</th>
+                <td class="px-4 py-3">~10,000 users</td>
+                <td class="px-4 py-3">Growing; founder-led; not disclosed publicly</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray-600 mt-4">
+          <strong>Last verified:</strong> July 1, 2026 against everbreed.com, apps.apple.com/us/app/everbreed-rabbit-records, play.google.com/store/apps/details?id=com.barntrax.hutch, and breederhq.com/pricing. Vendors change pricing and feature scope. Verify before committing. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- What Everbreed users say -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What Everbreed users actually say</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Direct quotes from public Apple App Store, Google Play, and comparison-post reviews of Everbreed. Not our characterization. Cited to the source. Everbreed has both loyal users and users experiencing app-reliability frustration; both perspectives appear below because both are the honest picture of what a prospective buyer will encounter when they search reviews.
+        </p>
+
+        <h3 class="text-xl font-bold mb-3">Positive perspectives</h3>
+        <div class="space-y-6 mb-8">
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-green-400">
+            <p class="text-lg text-gray-800 italic mb-3">"very user-friendly" &middot; "keeps everything organized and easy to access"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Aggregated positive-review themes, Apple App Store &middot; <a href="https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-green-400">
+            <p class="text-lg text-gray-800 italic mb-3">"MUST HAVE for my business" &middot; "I would be completely lost"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Aggregated positive-review themes, Apple App Store &middot; <a href="https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+        </div>
+
+        <h3 class="text-xl font-bold mb-3">Reliability and pricing critiques (direct quotes)</h3>
+        <div class="space-y-6 mb-8">
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"The app is glitch-y and oddly particular about movement. For example, you can't touch the actual phone back button or it kicks you out of the app... It also takes a while to sync changes, leading you to think that the changes didn't 'take' resulting in multiple entries."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Shawna Adams, Google Play review, January 16, 2026 &middot; <a href="https://play.google.com/store/apps/details?id=com.barntrax.hutch" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I love this app but it's so difficult to put my information in because it constantly crashes"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Anonymous reviewer, Apple App Store, December 23, 2021 &middot; <a href="https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"When you hit the 10+ breeders it doubles in price and you can't use the finance features unless you use the top tier"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              User quoted in Everbreed pricing comparison &middot; also referenced in <a href="https://everbreed.com/blog/farmkeep-vs-everbreed-which-rabbitry-tool-is-best/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Everbreed blog</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I used to use Everbreed for my rabbits, but as my farm grew, it became too expensive and couldn't track everything I wanted... I needed something that worked for rabbits, ducks, goats, chickens, and my market stand"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Lydia H., Michigan Homesteader &middot; quoted in <a href="https://www.farmkeep.com/farm-guides/reviews/farmkeep-vs-everbreed" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Farmkeep vs Everbreed comparison</a>
+            </cite>
+          </blockquote>
+        </div>
+
+        <p class="text-base text-gray-700 leading-relaxed">
+          Reliability of capture is table stakes for a mobile-first breeder tool. The reviews above are a reminder to any prospective adopter (of Everbreed OR BreederHQ) to trial the mobile app during a real capture session (kindling day, weight day, medication day) before committing. On the BreederHQ side, we treat sync reliability, offline-first capture behavior, and crash-free operation as core infrastructure, not features. If mobile capture is unreliable, everything else on this page is decoration.
+        </p>
+        <p class="text-base text-gray-700 leading-relaxed mt-4">
+          The pricing scaling critique (Lydia H., who moved off Everbreed because it "became too expensive and couldn&apos;t track everything I wanted") is the second most common structural reason breeders reach for BreederHQ from Everbreed: they added species and the per-rabbit-count tiered pricing stopped fitting the operation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Where Everbreed wins -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where Everbreed genuinely wins</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          A comparison page that only lists where the other tool falls short is not honest. Here is where Everbreed is the better pick on its own terms, and why we recommend it in those cases.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Rabbit-first mental model</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Every field, workflow, and default in Everbreed is calibrated for rabbits. Nothing in the UI asks you to route through species selection or generic-livestock defaults. For a rabbits-only operation planning to stay that way, this focus is genuine value. BreederHQ is not species-agnostic (48 ARBA-recognized rabbit breeds preloaded, 31-day kindling calendar, ARBA Grand Champion tracking, cage-card printing, rabbit-native color-genetics prediction), but Everbreed does not have to accommodate other species at any layer, and that consistency shows.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Aggressive entry pricing for small rabbitries</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              $4.99/month for up to 5 breeding rabbits is aggressive at the low end. For a small rabbitry that fits in the Start tier, Everbreed is hard to beat on monthly cost. Grow at $9.99/month or $95.99/year (up to 20 breeders) is still low. Pricing scales with the rabbitry, which is a legitimate design choice for a single-species tool.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Native mobile apps with offline read mode</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              iOS and Android apps with offline read mode for viewing records without a signal. For rural rabbitries with spotty connectivity, offline capability matters. BreederHQ ships native apps too; offline behavior on both is worth testing during the trial.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Intra-platform rabbit-transfer marketplace</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Everbreed includes a built-in marketplace for transfers between Everbreed users. For rabbit-to-rabbit-breeder transactions specifically, this is a direct workflow. BreederHQ&apos;s marketplace is broader (any buyer, not just breeders on the platform), which is a different value proposition. If your buyer base is other rabbit breeders on Everbreed, Everbreed is a real fit.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Longer free trial</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              30 days versus BreederHQ&apos;s 14. If you want a full kindling milestone or a full grow-out cycle inside your evaluation window, those extra 16 days matter.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is different -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is a categorically different product</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are capability differences, not opinion. Each is sourced from publicly listed features on both vendors&apos; sites as of July 1, 2026.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Nine species in one account</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Rabbits plus another species (goats, chickens, dogs, cats, horses, sheep, alpacas, llamas, cattle): one BreederHQ account, one subscription. Everbreed is rabbits-only, so the other species live somewhere else. For homesteader-scale mixed farms, this is the single most consequential difference on the page, and it is exactly why Lydia H. left Everbreed for a multi-species tool.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Public transactional marketplace (not intra-platform)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Everbreed&apos;s marketplace is rabbit-breeder-to-rabbit-breeder inside the Everbreed user base. BreederHQ&apos;s marketplace at marketplace.breederhq.com is public: pet buyers, working-home buyers, other breeders, homesteaders, meat rabbit customers, show-rabbit buyers. Different reach, different intent. If your goal is to reach buyers outside the rabbit-breeder community, BreederHQ&apos;s surface is designed for that.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Per-buyer client portal</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Each buyer gets their own login and their own view of the kit or breeding rabbit they bought. Records, photos, pedigree, contracts, invoices, direct messaging, documents. Turns the transaction into a professional relationship instead of a text message thread. Everbreed does not publicly advertise a per-buyer portal.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Per-litter and per-kit financial attribution</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              How much did that kindling actually cost? What did you spend on that specific breeding rabbit last year? What was net revenue per kit placed? BreederHQ rolls up expenses and revenue per litter, per animal, per breeding plan, per quarter, with Schedule C-mapped categories and quarterly tax export. Everbreed advertises basic financial tracking; per-litter attribution is not publicly advertised, and one anonymous user note captured in Everbreed&apos;s own pricing-comparison content is worth verifying against your rabbitry size: "you can&apos;t use the finance features unless you use the top tier."
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Camera-based receipt-to-expense on mobile</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Point the mobile camera at any receipt (feed store, vet, supplies, breeding fees, registration, travel). Scout AI reads it and files the expense record (vendor, date, amount, category, tax, notes) into the ledger. Same pattern used for lab PDFs and vet invoices, extended to expenses. Everbreed does not publicly advertise this.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">6. Scout AI document extraction and natural-language queries</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Upload a lab PDF or a vet invoice. Scout AI extracts the results and files them into the right record. Ask Scout a plain-English question about your program ("Which does have the most surviving kits per litter?" "What did I spend on feed per rabbit last quarter?" "Which buyers on my waitlist are looking for a Netherland Dwarf?") and Scout queries your live records and returns real answers with real citations. No competitor in the rabbit software space has anything close per publicly available product materials.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">7. Website embed widget (auto-updating site sync)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Paste one snippet into your Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain HTML site and your live BreederHQ listings render on your own domain. Kits appear when listed, disappear when sold. Everbreed does not publicly advertise this. Solves the exact "manually copying litter pages from the software to the website" problem peer-breeder blogs have written about at length.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">8. Rules-based automation across the kindling lifecycle</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Kit registered as born, BreederHQ auto-generates the listing. Listing goes live, waitlist opens. Buyer approved, contract auto-sends. Contract signed, deposit invoice generates. Deposit paid, buyer portal provisions. None of this requires manual intervention unless you override.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">9. Contracts, e-signatures, and Stripe-integrated deposits</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ has e-signature contracts and Stripe-powered deposit collection built in. Buyer signs, deposit hits your bank account. Everbreed&apos;s public materials do not advertise integrated e-signature or Stripe-native deposits.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">10. Flat per-account pricing, no per-animal tier scaling</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ&apos;s paid tiers do not scale by animal count. Your rabbitry can grow (or you can add species) without hitting a per-count pricing wall. Real design trade-off: Everbreed&apos;s per-count model is efficient for tiny rabbitries, and BreederHQ&apos;s flat-per-account model is efficient for growing or multi-species operations.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">11. Rearing protocol library (a third capability with no equivalent in the market)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Nine shipped system protocols across neonatal (Day 0-21) and socialization (Week 3-12) stages: Early Neurological Stimulation and Early Scent Introduction (based on US Military neonatal-development research), Handling Habituation, Volhard Puppy Aptitude Test (attributed to Joachim and Wendy Volhard), Crate Introduction, Rule of 7s Socialization, Sound Desensitization, and Gun Conditioning. Plus the BreederHQ Gun Dog Development Program, a Day 3 through Day 364 curriculum with 64 activities. Plus a Custom Protocols tab where breeders author their own from scratch. Plus an opt-in community library where breeders share protocols with other subscribers, searchable across shared submissions. Every protocol carries a liability acknowledgment positioning the platform as guidance based on established animal-development research, not veterinary advice.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              The current system protocols ship for dogs and are being extended to species-appropriate templates across the other supported species (including rabbits, where the socialization and handling windows map cleanly to kit socialization). Everbreed does not publicly advertise a rearing protocol library. Alongside Scout AI and native mobile, this is the third capability with no equivalent in the market today.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing detail -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing detail</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Everbreed (per Apple App Store)</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Start:</strong> $4.99/month (up to 5 breeding rabbits)</li>
+              <li><strong>Grow:</strong> $9.99/month or $95.99/year (up to 20 breeders)</li>
+              <li><strong>Plus:</strong> $14.99/month or $144.99/year (up to 50 breeders)</li>
+              <li><strong>Max:</strong> $19.99/month (unlimited breeders)</li>
+              <li><strong>Custom:</strong> Contact for large rabbitries or multi-farm accounts</li>
+              <li><strong>Free trial:</strong> 30 days, no credit card</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="https://apps.apple.com/us/app/everbreed-rabbit-records/id1506912544" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Apple App Store listing</a>. Verified July 1, 2026.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">BreederHQ</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Tiers and prices:</strong> See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></li>
+              <li><strong>Free trial:</strong> 14 days</li>
+              <li><strong>Founder discount:</strong> Code <code class="bg-gray-100 px-2 py-0.5 rounded">FOUNDER50</code>, first 100 founders, 50% off Pro or Enterprise for 12 months</li>
+              <li><strong>Species:</strong> All 9 in one account, no per-species tiering</li>
+              <li><strong>No per-animal scaling</strong></li>
+              <li><strong>Marketplace listing:</strong> Included with subscription</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">breederhq.com/pricing</a>.
+            </p>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-8">
+          For a small rabbits-only operation that fits in Everbreed Start ($4.99/mo) or Grow ($9.99/mo), Everbreed wins on entry price. For any operation that needs multi-species coverage, per-buyer client portals, marketplace reach beyond the rabbit-breeder community, per-litter financial attribution, or an embed widget for a personal website, BreederHQ carries more of the workflow at its higher price. Which wins for you depends on which trade-off matches how you run your operation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Migration -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Moving from Everbreed to BreederHQ</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          If you are moving from Everbreed to BreederHQ, here is the honest scope of the migration.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-3">What imports cleanly (CSV)</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>Rabbit records: name, ear number, breed, variety, DOB, sex, dam, sire</li>
+          <li>Pedigrees (multi-generation, from CSV or existing ARBA / registry papers)</li>
+          <li>Contacts (buyers, waitlist, other breeders)</li>
+          <li>Weight history (if Everbreed exports as CSV)</li>
+          <li>Kindling/litter history (if exportable)</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">What needs re-attachment or setup</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>Photos and media, re-upload to Media Vault</li>
+          <li>Contract templates, re-set-up in BreederHQ</li>
+          <li>ARBA registration numbers, re-enter or CSV-import</li>
+          <li>Cage-card layouts: BreederHQ ships its own cage-card generator with species-appropriate fields for rabbits (ear number, breed and variety, DOB, dam, sire, last kindling, ARBA registration number). If you have a custom Everbreed layout you want to preserve exactly, plan to reproduce the field selection once in BreederHQ&apos;s card template.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">Realistic time estimate</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          For a rabbitry with 20 to 50 breeding rabbits and 2 to 4 years of records, plan 3 to 6 hours of hands-on setup, spread across the first two weeks. Most breeders start with animals and one active kindling cycle, and expand the imported dataset once the daily workflow is settled.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          If Everbreed&apos;s export options are limited, raise that with their support before committing either direction. Data portability is a right, not a favor. BreederHQ commits to full CSV export at any time; you should expect the same from any vendor you evaluate.
+        </p>
+      </div>
+    </section>
+
+    <!-- Who each is for -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Who each product is for</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Pick Everbreed if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You run rabbits only and have no plans to add other species</li>
+              <li>Your rabbitry fits in the Start ($4.99) or Grow ($9.99) tier</li>
+              <li>Rabbits-only mental model matters more than the specific fields (BreederHQ ships 48 ARBA breeds, cage cards, 31-day kindling, and color genetics for rabbits)</li>
+              <li>Intra-platform rabbit-breeder-to-rabbit-breeder marketplace is your core buyer flow</li>
+              <li>You do not need per-buyer client portals with contracts and Stripe deposits</li>
+              <li>You do not need website embed / auto-updating site sync</li>
+              <li>You want a longer trial (30 days) and native mobile with offline read mode</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">Pick BreederHQ if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You run rabbits plus another species (goats, chickens, dogs, cats, more)</li>
+              <li>You want a public marketplace that reaches buyers outside the rabbit-breeder community</li>
+              <li>You want per-buyer client portals with contracts, deposits, and messaging</li>
+              <li>You want per-litter and per-kit financial attribution with quarterly tax export</li>
+              <li>You want your own rabbitry website to auto-update from your program records</li>
+              <li>You want camera-based receipt-to-expense on the mobile app</li>
+              <li>You want Scout AI natural-language queries against your live rabbitry data</li>
+              <li>You want flat per-account pricing that does not scale with rabbit count</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this page is not</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          This is not a hit piece on Everbreed. Everbreed is the most rabbit-specific product on the market and has served rabbit breeders for years. Every fact above is sourced to a public page (everbreed.com, apps.apple.com, play.google.com, or breederhq.com) verified July 1, 2026, or to a directly-attributed public customer review with a link to the source. If a claim has gone stale or was misread, please tell us at <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will verify and update.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ does not verify, vet, or vouch for any breeder or buyer. We confirm identity through Stripe Identity passthrough, surface credentials from public registries, and accept provider self-attestation where applicable. See <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">our Identity & Credentials page</a> for the long version.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          For a deeper multi-vendor guide for rabbit breeders specifically, read <a href="/compare/best-rabbit-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">our rabbit breeding software comparison</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Try BreederHQ free for 14 days</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Nine species in one account, native mobile apps built for the rabbitry, a public transactional marketplace that reaches buyers outside your existing circle, per-buyer client portals with contracts and deposits, and the embed widget for your own website. Founder discount: code <code class="bg-white px-2 py-0.5 rounded border border-gray-200">FOUNDER50</code> gives the first 100 founders 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See pricing
+          </a>
+          <a href="/compare/best-rabbit-breeding-software" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            Rabbit breeding software comparison
+          </a>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">
+          BreederHQ is not affiliated with, endorsed by, or sponsored by Everbreed or Barntrax LLC. "Everbreed" is referenced here only to describe the same category of software so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed Everbreed information verified July 1, 2026, and directly-attributed public customer reviews. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

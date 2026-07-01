@@ -18,21 +18,38 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# Block AI training crawlers (optional - uncomment if desired)
-# User-agent: GPTBot
-# Disallow: /
-#
-# User-agent: ChatGPT-User
-# Disallow: /
-#
-# User-agent: CCBot
-# Disallow: /
-#
-# User-agent: anthropic-ai
-# Disallow: /
-#
-# User-agent: Claude-Web
-# Disallow: /
+# AI search bots: explicit allow (all major AI search engines that cite sources).
+# Being explicit rather than relying on the User-agent: * default is a small but
+# real citation-optimization signal. See public/llms.txt and public/okf/ for the
+# machine-readable context these bots will find.
 
-# Note: Crawl-delay removed — Google/Bing ignore it and it can throttle
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# AI training-only crawler: keep blocked. Common Crawl trains models without
+# citing sources back, so allowing it is worst-of-both-worlds. Blocking CCBot
+# does NOT prevent citation from ChatGPT / Claude / Perplexity / Copilot, they
+# use their own crawlers listed above.
+User-agent: CCBot
+Disallow: /
+
+# Note: Crawl-delay removed. Google/Bing ignore it and it can throttle
 # lesser crawlers unnecessarily. Use Google Search Console to control crawl rate.

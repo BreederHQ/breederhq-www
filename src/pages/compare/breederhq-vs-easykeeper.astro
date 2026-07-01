@@ -1,0 +1,798 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'BreederHQ vs EasyKeeper', url: '/compare/breederhq-vs-easykeeper' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ a good alternative to EasyKeeper for goat breeders?',
+    answer: 'It depends on what part of your operation is under-served today. EasyKeeper is goats-only, web-only, and deep on herd operations (kidding, milk production, lactation, DHIR integration, health, tasks, reporting). EasyKeeper Essentials is $19/month or $209/year and Performance is $27/month or $297/year per easykeeper.com/plans-and-pricing, verified July 1, 2026. BreederHQ is a multi-species platform (goats plus 8 more species) with native iOS and Android apps, a transactional public marketplace, per-buyer client portal, per-litter and per-animal financial attribution, rules-based automation for offspring lifecycles, an embed widget that keeps your own website in sync, and Scout AI that reads lab PDFs and vet invoices into records. If dairy-goat DHIR is your center of gravity, EasyKeeper is the more specialized tool. If you run goats plus another species, or you want a marketplace and buyer flow attached to your operation, BreederHQ was built for that.'
+  },
+  {
+    question: 'What does EasyKeeper cost vs BreederHQ?',
+    answer: 'EasyKeeper Essentials is $19/month ($209/year annual). Performance is $27/month ($297/year annual). Both per easykeeper.com/plans-and-pricing on July 1, 2026. Trial is 30 days, no credit card required. BreederHQ pricing is on our pricing page. First 100 founding subscribers use code FOUNDER50 for 50% off Pro or Enterprise for 12 months.'
+  },
+  {
+    question: 'Does EasyKeeper support species other than goats?',
+    answer: 'No. EasyKeeper is explicitly a goat herd management platform. The homepage markets to "the modern goat breeder" and covers dairy, meat, fiber, and hobby/specialty goats. BreederHQ supports nine species in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. If you run a mixed farm (goats plus LGDs, or goats plus sheep, or goats plus rabbits), that is one BreederHQ account, not two subscriptions.'
+  },
+  {
+    question: 'Does EasyKeeper have a mobile app?',
+    answer: 'EasyKeeper does not publicly advertise dedicated iOS or Android apps. The homepage states, "No download required. Access your records online at any time on an internet-connected device," indicating a web-app-only model with browser access from a phone. BreederHQ ships native iOS and Android apps in addition to the web app, scoped specifically for on-the-go capture (kidding pen, milking stand, pasture, feed store, vet visit).'
+  },
+  {
+    question: 'Does BreederHQ support dairy production and DHIR the way EasyKeeper does?',
+    answer: 'BreederHQ ships a mature dairy production surface today: milking records with butterfat, protein, SCC, MUN, and lactose; lactation cycles with dry-off; DHIA test-day recording with lab and certificate attachment; DHIA bulk CSV import with saved mapping presets that make subsequent imports auto-match; Linear Appraisal (ADGA) with score, classification, four category scores, bulk CSV import, trend chart, and per-row public-visibility toggle for marketplace listings; peak yield tracking (peak daily production, date, days-to-peak, plus herd-level average peak and average days-to-peak); 305-day standardized lactation totals; a herd-level dashboard with lactation curves, top producers, mastitis-watch, and DHIA / appraisal rollups; and native iOS and Android mobile capture for milking, DHIA, and lactation start / dry-off. Where EasyKeeper still wins: age-adjusted 305-day lactation calc (BreederHQ ships a simplified 305-day calc without the age-adjustment factor), programmatic DHIR registry pull (BreederHQ is CSV-import only today), single-session batch milking capture UI (BreederHQ supports bulk import where each record carries its own timestamp, not a "milk 20 does at 6 AM in one session" workflow), and lactation persistence calculations. Where BreederHQ wins on dairy adjacencies: herd-level CAE / CL / Johne&apos;s status with private certificate binding; scrapie compliance (premises ID, structured tattoo placement, CVI, movement logs) as first-class rather than a notes field; FAMACHA, FEC, and FECRT as canonical trait entries with trend charts; native mobile capture; public marketplace listings that can surface production and appraisal data; per-buyer client portal; and the embed widget for a farm website. If your operation is dairy-goat-first and DHIR programmatic pull is core to your daily workflow, EasyKeeper is still the more specialized fit on those specific surfaces. If DHIA CSV import satisfies your test-day workflow and you also want the marketplace, buyer portal, mobile capture, and scrapie / herd-health surfaces, BreederHQ is competitive today, not "on roadmap."'
+  },
+  {
+    question: 'Does EasyKeeper have a marketplace or a way to sell kids?',
+    answer: 'EasyKeeper is a herd management platform and does not publicly market a buyer-facing marketplace or a per-buyer client portal for kid placements. BreederHQ runs a transactional marketplace at marketplace.breederhq.com where breeders publish listings for kids, breeding programs, and adult animals. When a kid is registered as born, a BreederHQ marketplace listing can be auto-generated from the program record. Sold kids drop from the listing automatically. If you sell kids off the farm, this is a real workflow difference.'
+  },
+  {
+    question: 'Can I move my EasyKeeper records to BreederHQ?',
+    answer: 'BreederHQ supports CSV import for animals, pedigrees, and contacts. Weight history, health events, and reproductive history can be imported if EasyKeeper provides CSV export. Photos and documents need re-upload. There is no one-click migration. Plan a few hours of setup or contact support@breederhq.com for scoping help. If EasyKeeper\'s export options are limited, raise that with their support before committing either direction. Data portability is a right, not a favor.'
+  },
+  {
+    question: 'Is EasyKeeper a good product?',
+    answer: 'Yes. EasyKeeper reports managing approximately 90,000 goats as of June 2026, has been in the market for years, and has a strong community reputation among dairy-goat breeders. If dairy goats are your center of gravity and DHIR is core to your operation, EasyKeeper is the specialist. This page is not a "we are better at everything" argument. It is the honest version of when each tool is the right pick.'
+  },
+  {
+    question: 'Which is better for a mixed farm (goats + livestock guardian dogs + rabbits)?',
+    answer: 'BreederHQ. One account, one subscription, one login, one mental model. Nine species supported in the same account. EasyKeeper is goats-only and would leave the dog and rabbit sides of the operation on a separate tool.'
+  },
+  {
+    question: 'Which is better for a small dairy goat operation with no plans to expand species?',
+    answer: 'Depends on which specific dairy surface matters most in the daily workflow. If age-adjusted 305-day lactation calc, programmatic DHIR registry pull, single-session batch milking capture UI, or lactation persistence calculations are core, EasyKeeper is the more specialized fit at $19 or $27 per month. If DHIA CSV import satisfies the test-day workflow (BreederHQ ships bulk CSV import with saved mapping presets that auto-match on subsequent imports), peak-yield tracking is a shipped surface on BreederHQ (peak daily production, peak date, days-to-peak, plus herd-level averages), and you also want to sell kids through a public marketplace, run a client portal for kid buyers, auto-update your own farm website via the embed widget, capture in the milking parlor and kidding pen from a native mobile app, get first-class scrapie compliance and herd-level CAE / CL / Johne&apos;s status, or attribute expenses per doe and per kidding with quarterly tax export, BreederHQ is competitive on dairy today and adds surfaces EasyKeeper does not have. Both are legitimate. Which one wins for you depends on which specific dairy dimension is the daily-workflow bottleneck.'
+  }
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "BreederHQ vs EasyKeeper: The Honest 2026 Comparison for Goat Breeders",
+  "description": "BreederHQ vs EasyKeeper compared on pricing, species coverage, dairy tracking, marketplace, buyer portal, mobile app, and automation for goat breeders. Publicly verifiable facts, verified July 2026.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/breederhq-vs-easykeeper"
+  }
+};
+
+// Competitor SoftwareApplication + Review nodes. Verbatim quotes from publicly
+// filed Capterra reviews of EasyKeeper. Named reviewers where the source names
+// them; anonymized where the source is anonymous. BreederHQ is NOT the author.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://easykeeper.com/#software",
+      "name": "EasyKeeper",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Goat Herd Management Software",
+      "operatingSystem": "Web",
+      "url": "https://easykeeper.com",
+      "description": "Goat-only herd management platform covering dairy, meat, fiber, and hobby operations with kidding, milk production, lactation, DHIR integration, and health surfaces.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Essentials (monthly)",
+          "price": "19.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "19.00",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Essentials (annual)",
+          "price": "209.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "209.00",
+            "priceCurrency": "USD",
+            "unitCode": "ANN"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Performance (monthly)",
+          "price": "27.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "27.00",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Performance (annual)",
+          "price": "297.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "297.00",
+            "priceCurrency": "USD",
+            "unitCode": "ANN"
+          },
+          "url": "https://easykeeper.com/plans-and-pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Dennis E." },
+      "datePublished": "2018-12-05",
+      "reviewBody": "Not able to tie into dairy record processing centers yet",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Jennifer A." },
+      "datePublished": "2016-10-19",
+      "reviewBody": "No bulk entries for vaccination and worming but they are working on it!!",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Sherry C." },
+      "datePublished": "2019-03-28",
+      "reviewBody": "I would like to track more financial aspects of feed and supplies.",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous Capterra reviewer" },
+      "reviewBody": "The price may be cost-prohibitive for smaller farms",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://easykeeper.com/#software" },
+      "author": { "@type": "Person", "name": "Anonymous Capterra reviewer" },
+      "reviewBody": "To be able to see a goat's entire medical history at a glace is incredibly helpful.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/" },
+      "url": "https://www.capterra.com/p/148787/EasyKeeper/reviews/"
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="BreederHQ vs EasyKeeper: The Honest 2026 Comparison"
+  description="BreederHQ vs EasyKeeper compared on pricing, species coverage, dairy tracking, marketplace, buyer portal, and mobile for goat breeders. Verified July 2026."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">BreederHQ vs EasyKeeper</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">BreederHQ vs EasyKeeper: The Honest 2026 Comparison for Goat Breeders</h1>
+
+        <p class="text-sm text-gray-500 mb-6">Published: July 1, 2026 &middot; Last verified against easykeeper.com: July 1, 2026</p>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          EasyKeeper is the goat specialist, web-only, with the multi-year dairy specialist&apos;s edge on age-adjusted 305-day calc, DHIR programmatic pull, batch-session milking capture, and lactation persistence calculations. BreederHQ ships a mature dairy production surface today (milking with butterfat / protein / SCC / MUN / lactose, lactation cycles, DHIA bulk CSV import with saved presets, Linear Appraisal, peak-yield tracking with days-to-peak, herd dashboards, native mobile) plus multi-species coverage, a transactional public marketplace, per-buyer client portal, and an embed widget for your own website. Both are used by real goat breeders. Here is the honest version of when each wins.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See BreederHQ pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <aside class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded shadow-sm" role="complementary" aria-label="Page summary">
+          <h2 class="text-2xl font-bold mb-4">TL;DR</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Pick EasyKeeper if</strong> you run a goats-only operation and the specific EasyKeeper strengths matter most: age-adjusted 305-day lactation calc, programmatic DHIR registry pull (not just CSV import), single-session batch milking capture UI, and lactation persistence calculations. EasyKeeper is the multi-year dairy-goat specialist, has approximately 90,000 goats under management (self-reported June 2026), and has a strong community reputation. Essentials is $19/month or $209/year; Performance is $27/month or $297/year.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Pick BreederHQ if</strong> DHIA CSV import satisfies your test-day workflow (BreederHQ ships bulk CSV import with saved mapping presets, plus milking with butterfat / protein / SCC / MUN / lactose, lactation cycles, Linear Appraisal with public-visibility toggle, and a herd dashboard with lactation curves, top producers, and mastitis-watch), and you also want: multi-species coverage (nine species in one account), native iOS and Android mobile capture for the kidding pen and milking stand, a public transactional marketplace at marketplace.breederhq.com, a per-buyer client portal, per-litter and per-kid financial attribution with quarterly tax export, an embed widget that auto-updates your own farm website, herd-level CAE / CL / Johne&apos;s status with private certificate binding, and first-class scrapie compliance (premises ID, tattoo placement, CVI, movement logs). Dairy is not a roadmap gap. It is a shipped surface with specific parity boundaries called out honestly in the table below.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Screenshot placeholder -->
+    <section class="py-8 px-4">
+      <div class="max-w-4xl mx-auto">
+        <figure class="border border-gray-200 rounded-lg p-8 bg-gray-50 text-center">
+          <div class="text-sm text-gray-500 mb-2">Illustration</div>
+          <div class="text-lg text-gray-700 font-medium">BreederHQ mobile app: kidding pen weight capture</div>
+          <figcaption class="text-sm text-gray-600 mt-3">Weight entry from the mobile app during kidding, with body condition scoring, notes, and photo capture in one flow. Data lands in the herd record and rolls up to per-kid growth curves.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Side-by-side: BreederHQ vs EasyKeeper</h2>
+        <p class="text-gray-700 mb-6">
+          Publicly verifiable facts only, sourced from easykeeper.com and breederhq.com. Verified July 1, 2026. Vendors change pricing and feature scope. Confirm on each site before committing.
+        </p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Capability</th>
+                <th scope="col" class="px-4 py-3 font-semibold">EasyKeeper</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederHQ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Entry price</th>
+                <td class="px-4 py-3">Essentials $19/mo ($209/yr); Performance $27/mo ($297/yr)</td>
+                <td class="px-4 py-3">See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a>. FOUNDER50: 50% off Pro or Enterprise for 12 months.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Free trial length</th>
+                <td class="px-4 py-3">30 days, no credit card</td>
+                <td class="px-4 py-3">14 days</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Species supported</th>
+                <td class="px-4 py-3">Goats only (dairy, meat, fiber, hobby/specialty)</td>
+                <td class="px-4 py-3">9 (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Milk yield / lactation tracking</th>
+                <td class="px-4 py-3">Yes, mature depth. Performance tier includes milk production and batch entry.</td>
+                <td class="px-4 py-3">Yes: milking records with butterfat, protein, SCC, MUN, lactose; lactation cycles with dry-off; 305-day standardized lactation calc (simplified, without age adjustment); native mobile capture on iOS and Android.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Age-adjusted 305-day lactation</th>
+                <td class="px-4 py-3">Yes (with age adjustment)</td>
+                <td class="px-4 py-3">Simplified calc without age adjustment</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Peak yield tracking</th>
+                <td class="px-4 py-3">Advertised</td>
+                <td class="px-4 py-3">Yes: peak daily production, peak date, days-to-peak; herd-level averages (avg peak, avg days-to-peak)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Lactation persistence calculations</th>
+                <td class="px-4 py-3">Advertised</td>
+                <td class="px-4 py-3">Not shipped</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">DHIA test-day recording</th>
+                <td class="px-4 py-3">Yes</td>
+                <td class="px-4 py-3">Yes: test weight, butterfat/protein/lactose, SCC, MUN, lab, certificate URL, document attachment</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">DHIA bulk CSV import with saved mapping presets</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: per-row outcome reporting; saved mapping presets so subsequent imports auto-match on header names</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">DHIR programmatic registry pull</th>
+                <td class="px-4 py-3">Yes (advertised)</td>
+                <td class="px-4 py-3">Not shipped (CSV import path only)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Linear Appraisal (ADGA)</th>
+                <td class="px-4 py-3">Not publicly advertised as a feature</td>
+                <td class="px-4 py-3">Yes: final score (0-99), classification passthrough, four category scores, arbitrary trait scores JSON, bulk CSV import, appraisal trend chart, per-row public-visibility toggle for marketplace</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Herd-level dairy dashboard</th>
+                <td class="px-4 py-3">Yes (advertised as production records at a glance)</td>
+                <td class="px-4 py-3">Yes: lactation curves, top producers ranking, mastitis-watch (SCC), DHIA and appraisal rollups, dedicated dairy-operations preset dashboard</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Batch session milking entry (multiple animals, one timestamp)</th>
+                <td class="px-4 py-3">Yes (Performance-tier feature)</td>
+                <td class="px-4 py-3">Bulk import (each record carries its own timestamp) yes; single-session batch capture UI not shipped</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Herd health status (CAE, CL, Johne&apos;s)</th>
+                <td class="px-4 py-3">Not publicly advertised as first-class</td>
+                <td class="px-4 py-3">Yes: herd-level status with private certificate binding, per-animal test history</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Scrapie compliance (premises ID, tattoo placement, CVI, movement logs)</th>
+                <td class="px-4 py-3">Not publicly advertised as first-class</td>
+                <td class="px-4 py-3">Yes, first-class: premises ID, herd prefix, structured tattoo placement, CVI certificates, movement/transport logs</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">FAMACHA + FEC + FECRT as canonical entries</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: FAMACHA scores, fecal egg count, and FECRT captured as canonical TraitDefinition + AnimalTraitEntry rows with trend charts</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Native mobile apps</th>
+                <td class="px-4 py-3">No, web-only. "No download required. Access from an internet-connected device."</td>
+                <td class="px-4 py-3">Yes: native iOS and Android apps (<a href="https://apps.apple.com/us/app/breederhq/id6761625868" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.breederhq.mobile" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Google Play</a>) + responsive web</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Printable identification cards (stall cards, pen cards)</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: species-aware ID card generator across all 9 species, with goat-appropriate fields (breed, DOB, dam, sire, tattoo placement, last kidding, last CAE/CL/Johne test, last worming, FAMACHA score, last hoof trim)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rearing protocol library</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: shipped system protocols across neonatal and socialization stages, plus custom breeder-authored protocols, plus opt-in community library (see the dedicated section below)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public marketplace / buyer discovery</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Transactional marketplace at marketplace.breederhq.com</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Per-buyer client portal</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: records, photos, pedigree, contracts, invoices, messaging, documents</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Per-litter / per-animal financial attribution</th>
+                <td class="px-4 py-3">Contact management + reporting; not publicly advertised as per-litter cost allocation</td>
+                <td class="px-4 py-3">Yes: per-litter and per-animal cost + revenue rollups; quarterly tax export</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Camera receipt-to-expense (mobile)</th>
+                <td class="px-4 py-3">No (no native mobile)</td>
+                <td class="px-4 py-3">Yes: Scout AI reads receipts, files vendor/date/amount/category to ledger</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">AI document extraction</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: Scout AI reads lab PDFs, vet invoices, photos</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rules-based automation across offspring lifecycle</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: kid-born to listing-live to waitlist-opens to deposit-collected</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Website embed widget</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: live listings syndicate to Squarespace, Wix, WordPress, Shopify, GoDaddy, HTML</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Photo storage</th>
+                <td class="px-4 py-3">Essentials: 5 photos per animal; Performance: unlimited</td>
+                <td class="px-4 py-3">Media Vault with generous storage on paid tiers; verify current limits on <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Scale (self-reported)</th>
+                <td class="px-4 py-3">~90,000 goats under management (June 2026)</td>
+                <td class="px-4 py-3">Growing; founder-led; not disclosed publicly</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray-600 mt-4">
+          <strong>Last verified:</strong> July 1, 2026 against easykeeper.com/plans-and-pricing, easykeeper.com, easykeeper.com/features, and breederhq.com/pricing. Vendors change pricing and feature scope. Verify before committing. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- What goat breeders say -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What EasyKeeper users actually say</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Direct quotes from public Capterra reviews of EasyKeeper and a first-person breeder blog. Not our characterization. Cited to the source.
+        </p>
+
+        <div class="space-y-6">
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"Not able to tie into dairy record processing centers yet"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Dennis E., Capterra review of EasyKeeper, December 5, 2018 &middot; <a href="https://www.capterra.com/p/148787/EasyKeeper/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"No bulk entries for vaccination and worming but they are working on it!!"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Jennifer A., Capterra review of EasyKeeper, October 19, 2016 &middot; <a href="https://www.capterra.com/p/148787/EasyKeeper/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"I would like to track more financial aspects of feed and supplies."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Sherry C., Capterra review of EasyKeeper, March 28, 2019 &middot; <a href="https://www.capterra.com/p/148787/EasyKeeper/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"The price may be cost-prohibitive for smaller farms"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Capterra reviewer, EasyKeeper &middot; <a href="https://www.capterra.com/p/148787/EasyKeeper/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"To be able to see a goat's entire medical history at a glace is incredibly helpful."</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Capterra reviewer, EasyKeeper &middot; positive perspective &middot; <a href="https://www.capterra.com/p/148787/EasyKeeper/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+        </div>
+
+        <p class="text-base text-gray-700 leading-relaxed mt-8">
+          EasyKeeper users like EasyKeeper. The critiques above are targeted (bulk vaccination entry, deeper financial tracking, DHIR-adjacent processing centers, entry-price accessibility for small farms), not fundamental. The tool is loved for what it is: a purpose-built goat-herd operations platform.
+        </p>
+        <p class="text-base text-gray-700 leading-relaxed mt-4">
+          Where BreederHQ shows up is not "EasyKeeper is bad." It is "EasyKeeper is a specialist, and your operation may have needs the specialist does not serve." The two most common reasons goat breeders reach for BreederHQ: (1) they run more than just goats, and (2) they want a marketplace, buyer portal, and website integration built into the same platform their kids and operation records live on.
+        </p>
+      </div>
+    </section>
+
+    <!-- Where EasyKeeper wins -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where EasyKeeper genuinely wins</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          A comparison page that only lists where the other tool falls short is not honest. Here is where EasyKeeper is the better pick on its own terms, and why we recommend it in those cases.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Specific dairy-production surfaces where EasyKeeper is more mature</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ ships milking records, lactation cycles, DHIA test-day recording, DHIA bulk CSV import with saved mapping presets, Linear Appraisal, peak-yield tracking (peak daily production, peak date, days-to-peak, plus herd-level averages), 305-day standardized totals, a herd dashboard with lactation curves and top producers, and native mobile capture. Four specific surfaces where EasyKeeper is more mature today: (a) age-adjusted 305-day lactation calculation (BreederHQ ships the 305-day calc but uses the simplified formula without age adjustment); (b) programmatic DHIR registry pull (discussed separately below); (c) single-session batch milking entry, where a breeder logs milk for many does in one timestamped session (BreederHQ supports bulk import where each record carries its own timestamp, which is the right tool for uploading a DHIA test-day CSV but not for the milk-stand rhythm of "weigh 20 does at 6 AM and enter it all at once"); (d) lactation persistence calculations (rate of decline from peak). On the milk-stand-first daily workflow with a Performance-tier dairy focus, EasyKeeper wins these four dimensions specifically. Everything else on dairy production is either tie or leans BreederHQ.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. DHIR programmatic registry pull</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              EasyKeeper advertises programmatic Dairy Herd Improvement Registry integration. For a dairy-goat operation enrolled in DHIR, that removes a category of data-entry work when test results come back from the processing center. BreederHQ&apos;s DHIA workflow is CSV-import based today: the processing center sends the CSV, the breeder uploads it, and BreederHQ&apos;s saved mapping presets remember the header layout so subsequent imports auto-match. Functional and low-friction on repeat, but not the same as a live registry pull. If a live pull is core to your workflow, this is a specialist EasyKeeper advantage.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Community reputation among goat breeders</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              EasyKeeper has been in the goat-breeder community long enough to be a known quantity. ~90,000 goats are reportedly managed on the platform, and new adopters can find peers who have run their program on it for years. Stability worth counting.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Longer free trial</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              30 days versus BreederHQ&apos;s 14. If you want a full kidding season or a full lactation milestone inside your evaluation window, those extra 16 days matter. EasyKeeper&apos;s longer runway is genuinely useful for evaluating dairy-specific workflows.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Goat-first mental model</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Every field, workflow, and default in EasyKeeper is calibrated for goat operations. No routing through generic-livestock defaults. Real value if goats are all you run and all you plan to run.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is different -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is a categorically different product</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are capability differences, not opinion. Each is sourced from publicly listed features on both vendors&apos; sites as of July 1, 2026.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Nine species in one account</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Goats plus a livestock guardian dog line, plus a small flock of hair sheep, plus a few rabbits: one BreederHQ account, one subscription, one login. EasyKeeper is goats-only, so the other species live on some other subscription with some other login, and cross-species record-keeping, financial attribution, and reporting all fragment.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              For a homesteader-scale mixed farm or a serious multi-species operation, "one system for the whole operation" is a structural advantage no goat-only tool can offer.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Native iOS and Android mobile apps</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              EasyKeeper is web-only per their own homepage ("no download required, access from an internet-connected device"). BreederHQ ships native iOS and Android apps scoped for the on-the-go breeder day. Enter weights in the kidding pen with one hand while holding a newborn. Photograph a kid with the built-in camera and attach it to the record on the spot. Record medications with withdrawal-period reminders while still at the pen. Snap a receipt from the feed store on the way out and Scout AI files the expense before you get home.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              This is not "responsive web that works on a phone." A browser on your phone is not the same tool as a native app built for barn ergonomics. If barn capture is a real constraint, note the difference.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Transactional marketplace for kid sales</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Register a kidding on BreederHQ and marketplace listings for placement-eligible kids can be auto-generated from the program record. Sold kids drop from the listing when marked sold. Health testing on the dam and sire surfaces on the kid&apos;s listing. Prospective buyers see the receipts (dam and sire genetics, CAE/CL status, ADGA registration status, weight-and-growth data), not a marketing page. EasyKeeper does not publicly advertise a marketplace or a public buyer-discovery surface. For an operation that sells kids off the farm every season, this is one of the most consequential workflow differences on the page.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Per-buyer client portal</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Each kid buyer gets their own login. They see their kid&apos;s records, photos, pedigree, contracts, invoices, direct messages, and documents. Deposits flow through Stripe to your bank account. Contracts are signed electronically. Photo updates go into the portal instead of a Facebook album that gets buried under new posts. The difference between "a buyer emails you asking for photos" and "the buyer opens their portal and sees a running record of everything about their kid."
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Per-litter and per-animal financial attribution</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              How much did that kidding actually cost? What did you spend on that specific doe last year? What was net revenue per kid placed? BreederHQ rolls up expenses and revenue per litter, per animal, per breeding plan, per calendar quarter, with Schedule C-mapped categories and quarterly tax export. One EasyKeeper reviewer explicitly asked for more depth here: Sherry C. wrote, "I would like to track more financial aspects of feed and supplies."
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">6. Camera-based receipt-to-expense on mobile</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Point the mobile camera at any receipt (feed store, vet, supplies, breeding fees, registration, travel). Scout AI reads it and files the expense record (vendor, date, amount, category, tax, notes) into the ledger. Lives on the native mobile app EasyKeeper does not ship.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">7. Website embed widget (auto-updating site sync)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Paste one snippet into your Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain HTML site and your live BreederHQ listings render on your own domain. Kids for sale appear when listed, disappear when sold. Prices, photos, pedigree, and health testing stay current because your website reads from BreederHQ on every page load. No more "the website says available but the Facebook post says reserved" mismatch.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">8. Rules-based automation across the kidding lifecycle</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Kid registered as born, BreederHQ auto-generates the listing. Listing goes live, waitlist opens. Approved buyer, contract auto-sends. Contract signed, deposit invoice generates. Deposit paid, buyer portal provisions. None of this requires manual action unless you override the defaults.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">9. Scout AI natural-language queries</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              "Which does have kidded the most kids in the last three years?" "What did I spend on hay per doe last quarter?" "Which buyers on my waitlist are looking for a Nigerian Dwarf doeling?" Scout AI queries your live records and returns real answers with real citations. No competitor in the goat software space has anything close per publicly available product materials.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">10. Structured multi-phase breeding plan lifecycle</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A breeding on BreederHQ is a project with money attached, not a database row. The happy-path lifecycle threads through eleven states: Planning, Committed, Cycle Expected, Hormone Testing, Bred, Pregnant, Birthed (Kidded), Born, Weaned, Placement, Plan Complete. Off-happy-path states (Canceled, Unsuccessful, On Hold, Dissolved) are tracked separately so a paused or canceled plan does not pollute the active pipeline. Financial rollups per plan, per kidding, per year. Reproductive events thread into the plan lifecycle instead of scattering across separate records.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">11. Rearing protocol library (a third capability with no equivalent in the market)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Nine shipped system protocols across neonatal (Day 0-21) and socialization (Week 3-12) stages: Early Neurological Stimulation and Early Scent Introduction (based on US Military neonatal-development research), Handling Habituation, Volhard Puppy Aptitude Test (attributed to Joachim and Wendy Volhard), Crate Introduction, Rule of 7s Socialization, Sound Desensitization, and Gun Conditioning. Plus the BreederHQ Gun Dog Development Program, a Day 3 through Day 364 curriculum with 64 activities. Plus a Custom Protocols tab where breeders author their own from scratch. Plus an opt-in community library where breeders share protocols with other subscribers, searchable across shared submissions. Every protocol carries a liability acknowledgment positioning the platform as guidance based on established animal-development research, not veterinary advice.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              The current system protocols ship for dogs and are being extended to species-appropriate templates across the other supported species. EasyKeeper does not publicly advertise a rearing protocol library for goats. Neither does any other multi-species or goat-specific competitor. Alongside Scout AI and native mobile, this is the third capability with no equivalent in the market today.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing detail -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing detail</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">EasyKeeper</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Essentials:</strong> $19/month or $209/year</li>
+              <li><strong>Performance:</strong> $27/month or $297/year (adds milk production, batch entry, weight tracking, body condition scoring, unlimited photos)</li>
+              <li><strong>Free trial:</strong> 30 days, no credit card</li>
+              <li><strong>Photo storage:</strong> Essentials 5 per animal, Performance unlimited</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="https://www.easykeeper.com/plans-and-pricing/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">easykeeper.com/plans-and-pricing</a>. Verified July 1, 2026.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">BreederHQ</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Tiers and prices:</strong> See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></li>
+              <li><strong>Free trial:</strong> 14 days</li>
+              <li><strong>Founder discount:</strong> Code <code class="bg-gray-100 px-2 py-0.5 rounded">FOUNDER50</code>, first 100 founders, 50% off Pro or Enterprise for 12 months</li>
+              <li><strong>Species:</strong> All 9 in one account, no per-species tiering</li>
+              <li><strong>Marketplace listing:</strong> Included with subscription</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">breederhq.com/pricing</a>.
+            </p>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-8">
+          Prices are close enough on the goats-only comparison that price alone is unlikely to decide it. The decision hinges on operation shape (goats-only or mixed), buyer-flow needs (do you sell kids off the farm?), and mobile-capture needs (are you actually in the kidding pen with your hands full when the data needs to go in?).
+        </p>
+      </div>
+    </section>
+
+    <!-- Migration -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Moving from EasyKeeper to BreederHQ</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Here is the honest scope. No one-click import, and any vendor claiming that for a records system with years of data is not being straight with you.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-3">What imports cleanly (CSV)</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>Animal records: name, registration, DOB, sex, breed, dam, sire, coat/color, tattoo</li>
+          <li>Pedigrees (multi-generation, from CSV or existing registry papers)</li>
+          <li>Contacts (buyers, waitlist, co-owners)</li>
+          <li>Weight history (if EasyKeeper exports this as CSV)</li>
+          <li>Health event history (if exportable)</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">What needs re-attachment or setup</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>Photos and media, re-upload to Media Vault</li>
+          <li>Contracts and templates, re-set-up in BreederHQ</li>
+          <li>Milk production history, if EasyKeeper exports as CSV. BreederHQ&apos;s DHIA bulk-import path can accept lactation and test-day CSVs; the saved mapping preset remembers the header layout after the first successful import so subsequent imports auto-match.</li>
+          <li>Registration numbers (ADGA / AGS / AGA / ABGA), re-enter or CSV-import</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">Realistic time estimate</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          For a program with 20 to 50 goats and 3 to 5 years of records, plan 4 to 10 hours of hands-on setup, spread across the first two weeks. Most breeders start with animals and one active kidding season, and expand the imported dataset once the daily workflow is settled.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          A common pattern for dairy operations moving off EasyKeeper: import animals, pedigrees, and contacts by CSV; upload historical DHIA test-day CSVs directly into the DHIA bulk-import path (saved mapping presets learn the header layout on the first successful import); enter Linear Appraisal scores through the bulk-CSV path or one at a time; and run day-to-day operations on BreederHQ from the first kidding onward. Operations that specifically need age-adjusted 305-day calc, programmatic DHIR pull, single-session batch milking capture UI, or lactation persistence calculations may keep EasyKeeper alongside BreederHQ during a bridging period until those surfaces are less critical to daily work. Most other dairy operations do not need a coexist period.
+        </p>
+      </div>
+    </section>
+
+    <!-- Who each is for -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Who each product is for</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Pick EasyKeeper if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You run goats only and have no plans to add other species</li>
+              <li>Age-adjusted 305-day lactation calculation is required</li>
+              <li>Programmatic DHIR registry pull is core (not just CSV import)</li>
+              <li>Single-session batch milking capture UI matters daily (milk-stand rhythm, one timestamp for many does)</li>
+              <li>Lactation persistence calculations (rate of decline from peak) are required</li>
+              <li>You do not need a marketplace or public buyer-discovery surface</li>
+              <li>You do not need a per-buyer client portal for kid buyers</li>
+              <li>Web-only access from a phone browser is sufficient (no native barn app needed)</li>
+              <li>You want a longer trial (30 days) and a proven specialist</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">Pick BreederHQ if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You run goats plus another species (LGDs, sheep, cattle, rabbits, more)</li>
+              <li>You sell kids off the farm and want a marketplace + buyer portal built in</li>
+              <li>You want per-litter and per-kid financial attribution with quarterly tax export</li>
+              <li>You want your own website to auto-update from your program records</li>
+              <li>Barn / kidding-pen / pasture capture on a native mobile app matters</li>
+              <li>You want camera-based receipt-to-expense on the go</li>
+              <li>Rules-based automation of the kidding-to-placement lifecycle would save real time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this page is not</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          This is not a hit piece on EasyKeeper. EasyKeeper is a respected goat-breeder specialist and has served the community for years. Every fact above is sourced to a public page on either vendor&apos;s site, verified July 1, 2026, or to a directly-attributed public review with a link to the source. If a claim has gone stale or was misread, please tell us at <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will verify and update.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ does not verify, vet, or vouch for any breeder or buyer. We confirm identity through Stripe Identity passthrough, surface credentials from public registries (OFA, AKC, AFA), and accept provider self-attestation where applicable. We do not earn or assign trust on anyone&apos;s behalf. See <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">our Identity & Credentials page</a> for the long version.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          For a deeper multi-vendor guide for goat breeders specifically, read <a href="/compare/best-goat-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">our goat breeding software comparison</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Try BreederHQ free for 14 days</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Nine species in one account, native mobile apps for the kidding pen, a transactional marketplace for kid sales, a buyer portal for every buyer, and the embed widget for your own website. Founder discount: code <code class="bg-white px-2 py-0.5 rounded border border-gray-200">FOUNDER50</code> gives the first 100 founders 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See pricing
+          </a>
+          <a href="/compare/best-goat-breeding-software" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            Goat breeding software comparison
+          </a>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">
+          BreederHQ is not affiliated with, endorsed by, or sponsored by EasyKeeper or EasyKeeper Herd Manager, Inc. "EasyKeeper" is referenced here only to describe the same category of software so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed EasyKeeper information verified July 1, 2026, and directly-attributed public customer reviews. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+export const updateMeta = {
+  date: '2026-07-01',
+  title: 'Structured data: competitor SoftwareApplication + Review nodes on the four /compare/breederhq-vs-* pages',
+  tags: ['schema', 'seo', 'ai-seo', 'compare'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 1, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Added page-level JSON-LD to the four /compare/breederhq-vs-* pages (BreederCloudPro, EasyKeeper, Everbreed, Good Dog) so AI engines and search rich-results can parse competitor pricing and directly-cited customer reviews as structured data. No changes to BaseLayout.astro; all new schema is inline on the compare pages.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">What was added</h3>
+  <ul class="list-disc pl-5 text-gray-700 space-y-1">
+    <li>Competitor <code>SoftwareApplication</code> node on the SaaS pages (BreederCloudPro, EasyKeeper, Everbreed) with publicly-verified <code>Offer</code> nodes for each pricing tier. Prices verified July 1, 2026 against each vendor's own pricing page or App Store listing.</li>
+    <li>Competitor <code>Organization</code> node on the Good Dog page (Good Dog is a consumer-facing marketplace, not a SaaS tool that breeders install; Organization is the more accurate schema type).</li>
+    <li><code>Review</code> nodes for every directly-cited customer quote already displayed on the page, with named <code>author</code> (Person), verbatim <code>reviewBody</code>, <code>datePublished</code> where the source dates the review, <code>publisher</code> (Capterra, SoftwareAdvice, Apple App Store, Google Play, ComplaintsBoard, Better Business Bureau, Farmkeep, Everbreed blog), and the source <code>url</code>. Every quote in the schema matches a visible quote on the page 1:1.</li>
+    <li>Each <code>Review.itemReviewed</code> references the competitor's node <code>@id</code> so the graph resolves correctly.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">What was deliberately NOT added</h3>
+  <ul class="list-disc pl-5 text-gray-700 space-y-1">
+    <li><code>AggregateRating</code> on any competitor — we do not have full review-set statistics and imputing one would fabricate structured data. On Good Dog specifically, imputing an aggregate rating would also carry legal exposure.</li>
+    <li>Any Review or characterization authored by BreederHQ. BreederHQ is not the author of any Review node; every Review is quoted verbatim from a publicly filed customer review and attributed to that customer's stated name (or "Anonymous [source] reviewer" where the source is anonymous, and "Better Business Bureau complainant" where the BBB filing name is withheld).</li>
+    <li>BreederHQ <code>SoftwareApplication</code>, <code>Organization</code>, <code>BreadcrumbList</code>, or <code>FAQPage</code> nodes on these pages — BaseLayout.astro already emits all four site-wide via existing props. No duplication.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Coverage per page</h3>
+  <ul class="list-disc pl-5 text-gray-700 space-y-1">
+    <li><code>/compare/breederhq-vs-breedercloudpro</code>: 1 SoftwareApplication + 3 Offer nodes (Standard $6.99/mo, Pro $13.99/mo, Pro $130/yr) + 7 Review nodes (Amanda D., Kira M., Kalisha B., Jena S., Chelsea L., Roy H., Amy J.).</li>
+    <li><code>/compare/breederhq-vs-easykeeper</code>: 1 SoftwareApplication + 4 Offer nodes (Essentials $19/mo &amp; $209/yr, Performance $27/mo &amp; $297/yr) + 5 Review nodes (Dennis E., Jennifer A., Sherry C., plus two anonymized Capterra quotes).</li>
+    <li><code>/compare/breederhq-vs-everbreed</code>: 1 SoftwareApplication + 4 Offer nodes (Start $4.99/mo, Grow $9.99/mo, Plus $14.99/mo, Max $19.99/mo) + 4 Review nodes (Shawna Adams from Google Play, one anonymized Apple App Store reviewer, one anonymized pricing-comparison quote, Lydia H. from the Farmkeep comparison).</li>
+    <li><code>/compare/breederhq-vs-gooddog</code>: 1 Organization + 7 Review nodes (N. Grimes, L. O'Reilly, DigyCommunique, Duders from ComplaintsBoard; three Better Business Bureau complainants dated March 25, May 21, and May 29, 2026). No Offer nodes since Good Dog is transaction-fee-based rather than subscription-priced.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Validation</h3>
+  <p class="text-gray-700 mb-2">Every JSON-LD block was validated as valid JSON via <code>JSON.parse</code> round-trip and structurally against schema.org shape requirements before ship. Every page now emits 6 JSON-LD blocks in the built HTML (Organization + SoftwareApplication + BreadcrumbList + FAQPage from BaseLayout; Article + the new competitor+Review <code>@graph</code> inline).</p>
+
+  <p class="text-sm text-gray-500 mt-4">Impact expected: better AI-engine parsing of competitor pricing as structured facts (ChatGPT, Claude, Perplexity, Google AI Overviews) and eligibility for review-rich-result surfaces in Google search on the compare pages.</p>
+</article>

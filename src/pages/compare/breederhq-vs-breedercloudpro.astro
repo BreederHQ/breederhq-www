@@ -1,0 +1,763 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Compare', url: '/compare' },
+  { name: 'BreederHQ vs Breeder Cloud Pro', url: '/compare/breederhq-vs-breedercloudpro' }
+];
+
+const faqs = [
+  {
+    question: 'Is BreederHQ a good alternative to Breeder Cloud Pro?',
+    answer: 'Both are multi-species breeding management platforms used by working breeders. Breeder Cloud Pro is more mature and cheaper on entry ($6.99 Standard, $13.99 Pro monthly, per breedercloudpro.com/pricing, verified July 1, 2026), publicly claims 17,000+ breeders and 110,000+ animals tracked, and operates a "Find a Breeder" directory. BreederHQ supports nine species in one account (adds alpacas, llamas, cattle), runs a transactional public marketplace at marketplace.breederhq.com, and adds capabilities Breeder Cloud Pro does not advertise: OFA Sync, CHIC Readiness Widget, Scout AI document extraction, rules-based automation across the offspring lifecycle, and an embed widget that keeps a breeder\'s own website in sync with their BreederHQ listings. If you need a low-cost records-plus-directory tool, Breeder Cloud Pro is a legitimate pick. If you want records-plus-storefront-plus-buyer-flow-plus-automation in one system, BreederHQ is built for that.'
+  },
+  {
+    question: 'What does Breeder Cloud Pro cost vs BreederHQ?',
+    answer: 'Breeder Cloud Pro Standard is $6.99/month, Pro is $13.99/month, and Pro annual is $130/year, per breedercloudpro.com/pricing on July 1, 2026. Verify before you commit; vendors change pricing. BreederHQ pricing lives on our pricing page. First 100 founding subscribers can use code FOUNDER50 for 50% off Pro or Enterprise for 12 months. If monthly cost alone is the decision, Breeder Cloud Pro is the lower number.'
+  },
+  {
+    question: 'How long is each free trial?',
+    answer: 'Breeder Cloud Pro publicly advertises a 30-day free trial with no credit card required. BreederHQ offers a 14-day free trial. On trial length alone, Breeder Cloud Pro wins by 16 days.'
+  },
+  {
+    question: 'How many species does each support?',
+    answer: 'Breeder Cloud Pro publicly markets seven species: dog, cat, horse, goat, rabbit, sheep, and "small animals." BreederHQ supports nine in one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. If you run alpacas, llamas, or cattle, that is a real coverage gap in Breeder Cloud Pro.'
+  },
+  {
+    question: 'Does Breeder Cloud Pro have a marketplace like BreederHQ?',
+    answer: 'Breeder Cloud Pro operates a public "Find a Breeder" directory (a list of breeders that prospective buyers can browse) at breedercloudpro.com/breeders. BreederHQ runs a transactional marketplace at marketplace.breederhq.com where breeders publish listings for individual animals and programs, and buyers browse, inquire, and transact through structured listings. Both surface breeders to buyers. The intent and workflow are different: a directory lists you, a marketplace transacts on your behalf.'
+  },
+  {
+    question: 'Does BreederHQ have a buyer portal like Breeder Cloud Pro Pet Portal?',
+    answer: 'Yes. Breeder Cloud Pro Pet Portal lets a buyer see pet details, sign contracts, view invoices, and receive payments. BreederHQ has a per-buyer client portal with the same core surfaces (records, pedigree, contracts, invoices, photos, direct messaging, documents). Both products treat the buyer-facing experience as first class; the specific feature stack differs and the marketplace context differs.'
+  },
+  {
+    question: 'What does OFA Sync do that Breeder Cloud Pro does not offer?',
+    answer: 'OFA Sync pulls public Orthopedic Foundation for Animals test results into BreederHQ automatically once you enter a registration number. Hip, elbow, patella, cardiac, thyroid, DNA, and eye clearances (where OFA publishes them) land on the dog record with the OFA number, date, and grade, and propagate to pedigrees. Breeder Cloud Pro does not publicly advertise this on their features page. You log OFA results manually into Breeder Cloud Pro.'
+  },
+  {
+    question: 'Can I move my data from Breeder Cloud Pro to BreederHQ?',
+    answer: 'BreederHQ supports CSV import for animals, pedigrees, and contacts. Health-test records, photos, and contracts typically need to be re-attached or re-uploaded. There is no one-click migration between the two products. Plan a few hours of cleanup, or contact support@breederhq.com and we will help scope the move. If your data lives in Breeder Cloud Pro and their export options are limited, that is worth raising with their support before you commit to either product.'
+  },
+  {
+    question: 'Is Breeder Cloud Pro still a good product?',
+    answer: 'Yes. Breeder Cloud Pro publicly claims 17,000+ breeders, 110,000+ animals tracked, 95,000+ Pet Portals, and 48,000+ litters and breedings logged. That is a real, mature product with a real user base. For a records-and-pedigree-first program at the lowest possible entry price, Breeder Cloud Pro is a legitimate pick. This page is not a "we are better at everything" argument. It is the honest version of when each tool is the right call.'
+  },
+  {
+    question: 'Which is better for a solo breeder with 1 to 3 litters per year?',
+    answer: 'It depends on what hurts most today. If the constraint is monthly cost and the workflow is records + a directory listing, Breeder Cloud Pro at $6.99 or $13.99/month is hard to beat. If the constraint is time (writing the same data into three tools, keeping the website in sync with Facebook and the listing site, chasing deposits by DM, scrambling for OFA papers at contract time), BreederHQ automates the layers that eat solo-operator hours, at a higher entry price.'
+  }
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "BreederHQ vs Breeder Cloud Pro: The Honest 2026 Comparison",
+  "description": "BreederHQ vs Breeder Cloud Pro compared on pricing, species coverage, marketplace, buyer portal, OFA Sync, CHIC Readiness, Scout AI, mobile app, and automation. Publicly verifiable facts as of July 2026.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/breederhq-vs-breedercloudpro"
+  }
+};
+
+// Competitor SoftwareApplication + Review nodes. Reviews are verbatim quotes
+// from publicly-filed reviews on Capterra and SoftwareAdvice, each attributed
+// to a named reviewer with a link to the source. BreederHQ is NOT the author.
+// No AggregateRating: we don't have full review-set stats and imputing one
+// would fabricate structured data.
+const competitorReviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://breedercloudpro.com/#software",
+      "name": "Breeder Cloud Pro",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Animal Breeding Management Software",
+      "operatingSystem": "Web",
+      "url": "https://breedercloudpro.com",
+      "description": "Multi-species breeding management software with pedigree tracking, records, Pet Portal, and a public Find a Breeder directory.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Standard (monthly)",
+          "price": "6.99",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "6.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://breedercloudpro.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro (monthly)",
+          "price": "13.99",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "13.99",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "url": "https://breedercloudpro.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro (annual)",
+          "price": "130.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "130.00",
+            "priceCurrency": "USD",
+            "unitCode": "ANN"
+          },
+          "url": "https://breedercloudpro.com/pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Amanda D." },
+      "datePublished": "2026-01-01",
+      "reviewBody": "makes it difficult to see comparison of expenses vs income",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Kira M." },
+      "datePublished": "2026-05-04",
+      "reviewBody": "quarterly tax reports are really difficult",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Kalisha B." },
+      "datePublished": "2026-05-14",
+      "reviewBody": "wish you could track expenses by litter, or dog",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Jena S." },
+      "datePublished": "2026-04-27",
+      "reviewBody": "wish there was a way to upload or put in OFA testing results",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Chelsea L." },
+      "reviewBody": "to much data entry that could be streamlined but is not... Redundant time consuming data entry that could be streamlined with connection to major registrys",
+      "publisher": { "@type": "Organization", "name": "SoftwareAdvice", "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/" },
+      "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Roy H." },
+      "datePublished": "2026-04-28",
+      "reviewBody": "does not currently integrate well with personal websites",
+      "publisher": { "@type": "Organization", "name": "Capterra", "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" },
+      "url": "https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/"
+    },
+    {
+      "@type": "Review",
+      "itemReviewed": { "@id": "https://breedercloudpro.com/#software" },
+      "author": { "@type": "Person", "name": "Amy J." },
+      "reviewBody": "Wld also be nice if I cld download my existing shot records from PDF vet rcpt vs manually typing it in",
+      "publisher": { "@type": "Organization", "name": "SoftwareAdvice", "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/" },
+      "url": "https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/"
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="BreederHQ vs Breeder Cloud Pro: The Honest 2026 Comparison"
+  description="BreederHQ vs Breeder Cloud Pro compared on pricing, species, marketplace, buyer portal, OFA Sync, CHIC Readiness, Scout AI, and mobile. Publicly verifiable facts, verified July 2026."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(competitorReviewGraph)} />
+
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/compare" class="text-[hsl(24,95%,53%)] hover:underline">Compare</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">BreederHQ vs Breeder Cloud Pro</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">BreederHQ vs Breeder Cloud Pro: The Honest 2026 Comparison</h1>
+
+        <p class="text-sm text-gray-500 mb-6">Published: July 1, 2026 &middot; Last verified against breedercloudpro.com: July 1, 2026</p>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Breeder Cloud Pro is the mature multi-species records tool at a low monthly price. BreederHQ is a broader platform (records, marketplace, buyer flow, automation, native mobile) at a higher price. Both are used by real breeders. Here is the honest version of when each wins.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See BreederHQ pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <aside class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-6 rounded shadow-sm" role="complementary" aria-label="Page summary">
+          <h2 class="text-2xl font-bold mb-4">TL;DR</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            <strong>Pick Breeder Cloud Pro if</strong> monthly cost is the primary constraint, you want a 30-day trial that spans a full breeding milestone, and a "Find a Breeder" directory listing meets your buyer-side goal. It is mature, established, and cheap. It is the right tool for a records-and-pedigree-first program that does not need automation, a transactional marketplace, or built-in OFA and CHIC workflow.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            <strong>Pick BreederHQ if</strong> you want to run the program AND present it to buyers from one system: nine species in one account, a transactional marketplace at marketplace.breederhq.com, OFA Sync (automatic pull of public results), CHIC Readiness Widget, Scout AI that reads lab PDFs into records, rules-based automation across the offspring lifecycle (born to listing-live to waitlist-opens to deposit-collected), and an embed widget that keeps your own website in sync with your listings. The 14-day trial is shorter and the entry price is higher. The trade is feature scope for cost.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Screenshot placeholder callout -->
+    <section class="py-8 px-4">
+      <div class="max-w-4xl mx-auto">
+        <figure class="border border-gray-200 rounded-lg p-8 bg-gray-50 text-center">
+          <div class="text-sm text-gray-500 mb-2">Illustration</div>
+          <div class="text-lg text-gray-700 font-medium">BreederHQ dog record with OFA Sync results displayed inline</div>
+          <figcaption class="text-sm text-gray-600 mt-3">A dog record in BreederHQ showing hip, elbow, cardiac, patella, and DNA results pulled automatically from OFA once the registration number is entered. Same data propagates to pedigrees.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Side-by-side: BreederHQ vs Breeder Cloud Pro</h2>
+        <p class="text-gray-700 mb-6">
+          Publicly verifiable facts only, sourced from breedercloudpro.com and breederhq.com. Verified July 1, 2026. Vendors change pricing and feature scope. Confirm on each site before committing.
+        </p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Capability</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Breeder Cloud Pro</th>
+                <th scope="col" class="px-4 py-3 font-semibold">BreederHQ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Entry price</th>
+                <td class="px-4 py-3">$6.99/mo Standard, $13.99/mo Pro, $130/yr Pro annual</td>
+                <td class="px-4 py-3">See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a>. FOUNDER50 code: 50% off Pro or Enterprise for 12 months (first 100 founders).</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Free trial length</th>
+                <td class="px-4 py-3">30 days</td>
+                <td class="px-4 py-3">14 days</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Species supported</th>
+                <td class="px-4 py-3">7 (dog, cat, horse, goat, rabbit, sheep, small animals)</td>
+                <td class="px-4 py-3">9 (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public buyer-facing surface</th>
+                <td class="px-4 py-3">"Find a Breeder" directory at breedercloudpro.com/breeders</td>
+                <td class="px-4 py-3">Transactional marketplace at marketplace.breederhq.com</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Buyer portal</th>
+                <td class="px-4 py-3">Pet Portal: pet details, contracts, invoices, payments</td>
+                <td class="px-4 py-3">Per-buyer client portal: records, photos, pedigree, contracts, invoices, direct messaging, documents</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">OFA Sync (automatic)</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: enter reg #, results appear on the record and pedigree</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">CHIC Readiness Widget</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: breed-specific required tests, on-file status, missing gaps</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">AI document extraction</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: Scout AI has dedicated parsers for Embark and OFA, plus generic vet-invoice and lab-PDF extraction that handles other providers (Wisdom Panel, UC Davis, GenSol, Paw Print, and unlisted labs) through Claude-based document reading</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Camera receipt-to-expense</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: point mobile camera at receipt, Scout files vendor/date/amount/category to ledger</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rules-based automation</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: offspring-born to listing-live to waitlist-opens to deposit-collected</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Website embed widget</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: live listings syndicate to Squarespace, Wix, WordPress, Shopify, GoDaddy, HTML</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Printable identification cards (kennel cards, cage cards, stall cards, pen cards)</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: species-aware ID card generator across all 9 species with species-appropriate fields (last vaccination and heartworm for dogs, last farrier and coggins for horses, last kindling for rabbits, and so on)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rearing protocol library</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: 9 shipped system protocols across neonatal and socialization stages (ENS, ESI, Handling Habituation, Volhard Puppy Aptitude Test, Crate Introduction, Rule of 7s Socialization, Sound Desensitization, Gun Conditioning) plus the BreederHQ Gun Dog Development Program (Day 3 through Day 364, 64 activities), plus custom breeder-authored protocols, plus an opt-in community library. Every protocol carries a liability acknowledgment.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Mobile</th>
+                <td class="px-4 py-3">iOS and Android apps + web</td>
+                <td class="px-4 py-3">Native iOS and Android apps + responsive web (<a href="https://apps.apple.com/us/app/breederhq/id6761625868" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.breederhq.mobile" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Google Play</a>)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Public scale claims</th>
+                <td class="px-4 py-3">17,000+ breeders, 110,000+ animals, 95,000+ Pet Portals, 48,000+ litters/breedings (self-reported)</td>
+                <td class="px-4 py-3">Growing; founder-led; not disclosed publicly</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Founded</th>
+                <td class="px-4 py-3">2015</td>
+                <td class="px-4 py-3">2026</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Founder-led</th>
+                <td class="px-4 py-3">Yes</td>
+                <td class="px-4 py-3">Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray-600 mt-4">
+          <strong>Last verified:</strong> July 1, 2026 against breedercloudpro.com/pricing, breedercloudpro.com/features, and breederhq.com/pricing. Vendors change pricing and feature scope. Verify before you commit. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- What breeders say -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What Breeder Cloud Pro users actually say</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Direct quotes from Capterra and SoftwareAdvice reviews of Breeder Cloud Pro. Not our characterization. Cited to the reviewer with a link to the source.
+        </p>
+
+        <div class="space-y-6">
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"makes it difficult to see comparison of expenses vs income"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Amanda D., Capterra review of Breeder Cloud Pro, 2026 &middot; <a href="https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"quarterly tax reports are really difficult"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Kira M., Capterra review of Breeder Cloud Pro, May 4, 2026 &middot; <a href="https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"wish you could track expenses by litter, or dog"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Kalisha B., Capterra review of Breeder Cloud Pro, May 14, 2026 &middot; <a href="https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"wish there was a way to upload or put in OFA testing results"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Jena S., Capterra review of Breeder Cloud Pro, April 27, 2026 &middot; <a href="https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"to much data entry that could be streamlined but is not... Redundant time consuming data entry that could be streamlined with connection to major registrys"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Chelsea L., SoftwareAdvice review of Breeder Cloud Pro &middot; <a href="https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"does not currently integrate well with personal websites"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Roy H., Capterra review of Breeder Cloud Pro, April 28, 2026 &middot; <a href="https://www.capterra.com/p/176356/Breeder-Cloud-Pro/reviews/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+
+          <blockquote class="bg-white p-6 rounded-lg border-l-4 border-gray-300">
+            <p class="text-lg text-gray-800 italic mb-3">"Wld also be nice if I cld download my existing shot records from PDF vet rcpt vs manually typing it in"</p>
+            <cite class="text-sm text-gray-600 not-italic">
+              Amy J., SoftwareAdvice review of Breeder Cloud Pro &middot; <a href="https://www.softwareadvice.com/kennel/breeder-cloud-pro-profile/" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">source</a>
+            </cite>
+          </blockquote>
+        </div>
+
+        <p class="text-base text-gray-700 leading-relaxed mt-8">
+          Each concern above maps to a real capability gap Breeder Cloud Pro users are asking their vendor to build. Every one is shipped in BreederHQ today: per-litter and per-dog expense attribution, quarterly tax export, OFA Sync (Jena&apos;s specific ask), embed widget for personal-website integration, and Scout AI extraction of vet PDFs and shot records. Not marketing claims. The exact requests Breeder Cloud Pro customers are making. That surface area is why BreederHQ&apos;s price sits higher.
+        </p>
+      </div>
+    </section>
+
+    <!-- Where Breeder Cloud Pro wins -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where Breeder Cloud Pro genuinely wins</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          A comparison page that only lists where the other tool falls short is not honest. Here is where Breeder Cloud Pro is the better pick on its own terms, and why we recommend it in those cases.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Lower entry price</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              $6.99/month for Standard and $13.99/month for Pro is a meaningful gap below most operations-focused breeder tools, BreederHQ included. If the monthly line item on your bank statement is the number that matters most, Breeder Cloud Pro wins that comparison. For a program that clears one or two litters a year and mostly needs records-plus-directory, the extra spend on BreederHQ is unlikely to pay back inside the first year.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Longer free trial</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              30 days versus BreederHQ&apos;s 14. If you want a full heat cycle, a full litter milestone, or a full buyer-inquiry-to-deposit round to land inside your trial window, those extra 16 days matter. Both approaches are legitimate; some breeders prefer the longer runway.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. Mature, established user base</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Breeder Cloud Pro publicly claims 17,000+ breeders and 110,000+ animals tracked. Real, settled product with years of breeder-in-production use. BreederHQ is 4 months post-launch (as of July 2026) and does not pretend otherwise. If "still around in three years" is your #1 risk, longevity favors Breeder Cloud Pro, though BreederHQ&apos;s full CSV export at any time (no lock-in) mitigates that risk regardless of which vendor you pick.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. Pet Portal maturity</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              95,000+ Pet Portals in the field, per Breeder Cloud Pro&apos;s public number. If your buyers are already used to that specific workflow and you have written it into your buyer communications, switching costs are real on that dimension.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Phone support reputation</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Breeder Cloud Pro has a well-noted reputation for accessible phone support. BreederHQ&apos;s support model is email + in-app AI Help Assistant + Zoom walkthroughs on request. Different model, not obviously better or worse. If phone-first support is a strict requirement, note that difference before you sign up.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where BreederHQ is different -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Where BreederHQ is a categorically different product</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          These are capability differences, not opinion. Each is sourced from publicly listed features on both vendors&apos; sites as of July 1, 2026.
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">1. Nine species in one account</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ supports dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle under one subscription. Breeder Cloud Pro publicly markets seven (dog, cat, horse, goat, rabbit, sheep, small animals). If you run alpacas, llamas, or cattle, that is a real coverage gap.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              More important, if you run more than one species (goats plus livestock guardian dogs plus rabbits, for example), one BreederHQ account runs the whole operation. Every direct competitor either forces two subscriptions and two logins, or does not support the second species at all.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">2. Transactional marketplace, not just a directory</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Breeder Cloud Pro operates a "Find a Breeder" directory: a buyer browses a list and reaches out. BreederHQ runs a transactional marketplace at marketplace.breederhq.com where buyers browse structured listings, message, join waitlists, and complete transactions through the platform.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              Why that matters: a directory listing looks the same regardless of what the breeder&apos;s program is doing. A BreederHQ listing is powered by the breeder&apos;s live records: health testing with lab source, allele-level genetics, multi-generation lineage with COI, titles and competition results, rearing protocols completed, weight and growth per offspring. Buyers see the receipts, not the marketing. Nothing needs to be manually kept in sync with a separate listing site.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">3. OFA Sync</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Enter a dog&apos;s registration number in BreederHQ. Public Orthopedic Foundation for Animals results arrive on the record: hip, elbow, patella, cardiac, thyroid, eye, and DNA clearances where OFA publishes them. The data propagates to pedigrees, powers CHIC Readiness (below), and shows on marketplace listings without any manual entry. Breeder Cloud Pro reviewer Jena S. asked for exactly this on Capterra in April 2026: "wish there was a way to upload or put in OFA testing results." BreederHQ has shipped it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">4. CHIC Readiness Widget</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              For breeds with a Canine Health Information Center profile, BreederHQ shows the breed-specific required tests, what is on file for the dog, and what is still missing. A planning surface, not a checkbox. When you are deciding whether to breed a dam next season, you can see her CHIC-track status at a glance and know which tests to book before the breeding. Breeder Cloud Pro does not publicly advertise an equivalent.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">5. Scout AI document extraction</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Upload a lab PDF, a vet invoice with vaccine records, or a photo of a paper receipt. Scout AI extracts the results and files them into the right fields on the right record. Dedicated parsers ship for Embark and OFA. Wisdom Panel, UC Davis, GenSol, Paw Print, and unlisted labs are handled through Claude-based generic PDF extraction with confidence scores per field. Amy J.&apos;s SoftwareAdvice review of Breeder Cloud Pro asked for exactly this: "wld also be nice if I cld download my existing shot records from PDF vet rcpt vs manually typing it in." BreederHQ has shipped it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">6. Camera-based receipt-to-expense</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              On the mobile app, point the camera at any receipt (vet, feed store, supplies, breeding fees, registration, travel). Scout reads it and files the expense record (vendor, date, amount, category, tax, notes) into the financial ledger. Direct answer to three Breeder Cloud Pro reviewer asks: Kalisha B. ("wish you could track expenses by litter, or dog"), Kira M. ("quarterly tax reports are really difficult"), and Amanda D. ("makes it difficult to see comparison of expenses vs income"). Financial visibility is the most-requested feature gap in Breeder Cloud Pro reviews. BreederHQ answers it with per-litter and per-animal attribution plus quarterly tax export plus receipt capture at the point of purchase.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">7. Rules-based automation across the offspring lifecycle</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Offspring registered as born, BreederHQ auto-generates the marketplace listing. Listing goes live, waitlist opens. Buyer approved, contract auto-sends. Contract signed, deposit invoice generates. Deposit paid, buyer portal provisions. None of these steps require manual intervention unless you override the defaults. Breeder Cloud Pro does not publicly advertise rules-based automation of this chain. Every step there is a manual action.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">8. Website embed widget (auto-updating site sync)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Paste one snippet into your Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain HTML site. Your live BreederHQ listings render on your own domain and update in real time. Available offspring appear when listed. Sold animals disappear when marked sold. Prices, photos, health testing, pedigree, and program details stay current because your website reads from BreederHQ on every page load.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              Direct answer to Roy H.&apos;s Capterra review: "does not currently integrate well with personal websites." And to the wider industry pattern one peer-breeder blog writes about plainly: "Most breeders end up manually copying litter pages from the software to the website" (<a href="https://www.builtbydusty.com/blog/best-kennel-management-software-2026" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Built By Dusty, 2026</a>). The embed widget kills that busywork entirely.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">9. Structured multi-phase breeding plan lifecycle</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              BreederHQ models a breeding as a project with money attached, not a database row. The happy-path lifecycle threads through eleven states: Planning, Committed, Cycle Expected, Hormone Testing, Bred, Pregnant, Birthed, Born, Weaned, Placement, Plan Complete. Off-happy-path states (Canceled, Unsuccessful, On Hold, Dissolved) are tracked separately so a paused or canceled plan does not pollute the active pipeline. Financial rollups per plan, per litter, per year. Most competitors, Breeder Cloud Pro included, treat "the breeding" as a single record you edit. The lifecycle model surfaces what is coming up, what is late, and what each plan actually made.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">10. Scout AI natural-language queries against your program</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              "Which dams have the strongest COI-adjusted health profiles for a spring 2027 litter?" "What did I spend on vet care per animal last quarter?" "Which buyers on my waitlist are the best fit for a merle-carrier puppy?" Scout uses 21 specialized tools to search, filter, and aggregate across your live records and returns real answers with real citations. No competitor in the breeder software market has anything close per publicly available product materials.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">11. Rearing protocol library (a third capability with no equivalent in the market)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Nine shipped system protocols across neonatal (Day 0-21) and socialization (Week 3-12) stages: Early Neurological Stimulation and Early Scent Introduction (based on US Military neonatal-development research), Handling Habituation, Volhard Puppy Aptitude Test (attributed to Joachim and Wendy Volhard with a References link back to volhard.com), Crate Introduction, Rule of 7s Socialization, Sound Desensitization, and Gun Conditioning for Hunting Dogs. Plus the BreederHQ Gun Dog Development Program: a Day 3 through Day 364 upland and waterfowl curriculum with 64 activities and 53 checklist items, authored by BreederHQ specifically for gun dog breeders. Plus a Custom Protocols tab where breeders author their own. Plus an opt-in community library where breeders share protocols with other subscribers. Every protocol carries a liability acknowledgment positioning the platform as guidance based on established animal-development research, not veterinary advice.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              Breeder Cloud Pro does not publicly advertise a rearing-protocol library. Neither does any other competitor in the multi-species breeder software category. Alongside Scout AI and native mobile, this is the third capability with no equivalent product in the market.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing detail -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pricing detail</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Breeder Cloud Pro</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Standard:</strong> $6.99/month</li>
+              <li><strong>Pro:</strong> $13.99/month</li>
+              <li><strong>Pro annual:</strong> $130/year</li>
+              <li><strong>Free trial:</strong> 30 days, no credit card</li>
+              <li><strong>Species limits:</strong> Standard tier caps active breeding dams (10 for dogs), Pro removes the cap</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="https://www.breedercloudpro.com/pricing" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">breedercloudpro.com/pricing</a>. Verified July 1, 2026.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">BreederHQ</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Tiers and prices:</strong> See <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing page</a></li>
+              <li><strong>Free trial:</strong> 14 days</li>
+              <li><strong>Founder discount:</strong> Code <code class="bg-gray-100 px-2 py-0.5 rounded">FOUNDER50</code>, first 100 founders, 50% off Pro or Enterprise for 12 months</li>
+              <li><strong>Species:</strong> All 9 in one account, no per-species tiering</li>
+              <li><strong>Marketplace listing:</strong> Included with subscription</li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4">
+              Verify at <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">breederhq.com/pricing</a>.
+            </p>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-8">
+          The price gap is real, and the value gap on the other side of that price is also real. Breeder Cloud Pro is optimized for the lowest monthly line item. BreederHQ is optimized for the operator who wants records, marketplace, buyer flow, automation, and mobile capture in one system. If either optimization matches how you run your program, the other tool is not a strict upgrade at any price.
+        </p>
+      </div>
+    </section>
+
+    <!-- Migration section -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Moving from Breeder Cloud Pro to BreederHQ</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Here is the honest scope. Not a one-click import, and any vendor claiming that for a records system running for years is not being straight with you.
+        </p>
+
+        <h3 class="text-2xl font-bold mb-3">What imports cleanly (CSV)</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>Animal records: name, registration, DOB, sex, color, breed, dam, sire</li>
+          <li>Pedigrees (multi-generation, from CSV or from your existing registry papers)</li>
+          <li>Contacts (buyers, waitlist applicants, co-owners, guardian homes)</li>
+          <li>Waitlist entries with status</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">What needs re-attachment</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>Health-test documents (PDFs): re-upload, and Scout AI extracts the results as it reads them</li>
+          <li>Photos and media: re-upload to Media Vault</li>
+          <li>Contracts: re-attach signed PDFs or set up new contract templates</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">What is automatic once imported</h3>
+        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700 mb-6">
+          <li>OFA results pull automatically for any dog with an OFA-registered number</li>
+          <li>COI recalculates across the imported pedigree</li>
+          <li>CHIC Readiness populates for CHIC-track breeds</li>
+          <li>Marketplace listings can be auto-generated from imported program data</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold mb-3">Realistic time estimate</h3>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          For a program with under 30 active animals and 3 to 5 years of records, plan 4 to 8 hours of hands-on cleanup, spread across the first two weeks. Larger programs, longer. Most breeders start with animals and one active litter cycle and expand the imported dataset once the daily workflow is settled.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          If your data is trapped in Breeder Cloud Pro and their export options are limited, raise that with their support before committing to either product. Data portability is a right, not a favor. BreederHQ commits to full CSV export at any time; you should expect the same from any vendor.
+        </p>
+      </div>
+    </section>
+
+    <!-- Who each is for -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Who each product is for</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-bold mb-3">Pick Breeder Cloud Pro if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>Monthly cost is the primary constraint</li>
+              <li>You want a 30-day trial that spans a full breeding milestone</li>
+              <li>Your buyer-side goal is a directory listing, not a transactional marketplace</li>
+              <li>You are comfortable with manual OFA entry and manual website updates</li>
+              <li>Phone-first support is a strict requirement</li>
+              <li>Your program is stable and does not need per-litter or per-animal financial attribution</li>
+              <li>You do not run alpacas, llamas, or cattle</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg border-2 border-[hsl(24,95%,53%)]">
+            <h3 class="text-xl font-bold mb-3">Pick BreederHQ if</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+              <li>You want records and buyer-facing surfaces from one system</li>
+              <li>You run more than one species (or plan to)</li>
+              <li>OFA Sync, CHIC Readiness, or Scout AI extraction would save real time</li>
+              <li>You want per-litter and per-animal financial attribution with quarterly tax export</li>
+              <li>You want a transactional marketplace listing included with the subscription</li>
+              <li>You want your own website to auto-update from your program data (embed widget)</li>
+              <li>You value rules-based automation across the offspring lifecycle</li>
+              <li>You want a native mobile app scoped for the on-the-go breeder day (barn, whelping box, kidding pen, feed store, truck at 2am)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Honest scope -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">What this page is not</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          This is not a hit piece on Breeder Cloud Pro. It is also not a "we are better at everything" page. Every fact above is sourced to a public page on either vendor&apos;s site, verified July 1, 2026, or to a directly-attributed public review with a link to the source. If you find a claim that has gone stale or was misread, please tell us at <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a> and we will verify and update.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          BreederHQ does not verify, vet, or vouch for any breeder or buyer. We confirm identity through Stripe Identity passthrough, surface credentials from public registries (OFA, AKC, AFA), and accept provider self-attestation where applicable. We do not earn or assign trust on anyone&apos;s behalf. See <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">our Identity & Credentials page</a> for the long version.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          For a deeper multi-vendor buyer&apos;s guide that compares eight tools across pricing, workflow, and trade-offs, read <a href="/compare/best-dog-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">our dog breeding software comparison</a> or the <a href="/compare/best-breeding-software" class="text-[hsl(24,95%,53%)] hover:underline">general breeding software comparison</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Try BreederHQ free for 14 days</h2>
+        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+          Nine species in one account, OFA Sync, CHIC Readiness, Scout AI, a transactional marketplace, the embed widget for your own website, and native mobile apps. Founder discount: code <code class="bg-white px-2 py-0.5 rounded border border-gray-200">FOUNDER50</code> gives the first 100 founders 50% off Pro or Enterprise for 12 months.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="https://accounts.breederhq.com/register" class="inline-flex items-center px-6 py-3 rounded-md bg-[hsl(24,95%,53%)] text-white font-semibold hover:bg-[hsl(24,95%,48%)] transition">
+            Start 14-day free trial
+          </a>
+          <a href="/pricing" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            See pricing
+          </a>
+          <a href="/compare/best-dog-breeding-software" class="inline-flex items-center px-6 py-3 rounded-md border-2 border-gray-300 text-gray-900 font-semibold hover:border-gray-400 transition">
+            Dog breeding software comparison
+          </a>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">
+          BreederHQ is not affiliated with, endorsed by, or sponsored by Breeder Cloud Pro or BreederCloudPro.com. "Breeder Cloud Pro" is referenced here only to describe the same category of software so prospective buyers can compare options. Comparison facts on this page reflect publicly disclosed Breeder Cloud Pro information verified July 1, 2026, and directly-attributed public customer reviews. Corrections: <a href="mailto:support@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline">support@breederhq.com</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
