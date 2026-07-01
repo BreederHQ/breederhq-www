@@ -206,7 +206,7 @@ const articleSchema = {
               <tr>
                 <th scope="row" class="px-4 py-3 font-semibold text-left">AI document extraction</th>
                 <td class="px-4 py-3">Not publicly advertised</td>
-                <td class="px-4 py-3">Yes: Scout AI reads Embark, Wisdom, OFA, UC Davis, GenSol, Paw Print, vet invoices</td>
+                <td class="px-4 py-3">Yes: Scout AI has dedicated parsers for Embark and OFA, plus generic vet-invoice and lab-PDF extraction that handles other providers (Wisdom Panel, UC Davis, GenSol, Paw Print, and unlisted labs) through Claude-based document reading</td>
               </tr>
               <tr>
                 <th scope="row" class="px-4 py-3 font-semibold text-left">Camera receipt-to-expense</th>
@@ -224,9 +224,19 @@ const articleSchema = {
                 <td class="px-4 py-3">Yes: live listings syndicate to Squarespace, Wix, WordPress, Shopify, GoDaddy, HTML</td>
               </tr>
               <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Printable identification cards (kennel cards, cage cards, stall cards, pen cards)</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: species-aware ID card generator across all 9 species with species-appropriate fields (last vaccination and heartworm for dogs, last farrier and coggins for horses, last kindling for rabbits, and so on)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-3 font-semibold text-left">Rearing protocol library</th>
+                <td class="px-4 py-3">Not publicly advertised</td>
+                <td class="px-4 py-3">Yes: 9 shipped system protocols across neonatal and socialization stages (ENS, ESI, Handling Habituation, Volhard Puppy Aptitude Test, Crate Introduction, Rule of 7s Socialization, Sound Desensitization, Gun Conditioning) plus the BreederHQ Gun Dog Development Program (Day 3 through Day 364, 64 activities), plus custom breeder-authored protocols, plus an opt-in community library. Every protocol carries a liability acknowledgment.</td>
+              </tr>
+              <tr>
                 <th scope="row" class="px-4 py-3 font-semibold text-left">Mobile</th>
                 <td class="px-4 py-3">iOS and Android apps + web</td>
-                <td class="px-4 py-3">Native iOS and Android apps + responsive web</td>
+                <td class="px-4 py-3">Native iOS and Android apps + responsive web (<a href="https://apps.apple.com/us/app/breederhq/id6761625868" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.breederhq.mobile" rel="nofollow noopener" class="text-[hsl(24,95%,53%)] hover:underline">Google Play</a>)</td>
               </tr>
               <tr>
                 <th scope="row" class="px-4 py-3 font-semibold text-left">Public scale claims</th>
@@ -410,7 +420,7 @@ const articleSchema = {
           <div>
             <h3 class="text-2xl font-bold mb-2">5. Scout AI document extraction</h3>
             <p class="text-lg text-gray-700 leading-relaxed">
-              Upload a lab PDF (Embark, Wisdom Panel, UC Davis, GenSol, Paw Print, OFA), or a vet invoice with vaccine records, or a photo of a paper receipt. Scout AI extracts the results and files them into the right fields on the right record. Amy J.&apos;s SoftwareAdvice review of Breeder Cloud Pro asked for exactly this: "wld also be nice if I cld download my existing shot records from PDF vet rcpt vs manually typing it in." BreederHQ has shipped it.
+              Upload a lab PDF, a vet invoice with vaccine records, or a photo of a paper receipt. Scout AI extracts the results and files them into the right fields on the right record. Dedicated parsers ship for Embark and OFA. Wisdom Panel, UC Davis, GenSol, Paw Print, and unlisted labs are handled through Claude-based generic PDF extraction, which reads the document, identifies the tests, and populates the record with confidence scores per field. Amy J.&apos;s SoftwareAdvice review of Breeder Cloud Pro asked for exactly this: "wld also be nice if I cld download my existing shot records from PDF vet rcpt vs manually typing it in." BreederHQ has shipped it.
             </p>
           </div>
 
@@ -439,16 +449,26 @@ const articleSchema = {
           </div>
 
           <div>
-            <h3 class="text-2xl font-bold mb-2">9. 8-phase breeding plan lifecycle</h3>
+            <h3 class="text-2xl font-bold mb-2">9. Structured multi-phase breeding plan lifecycle</h3>
             <p class="text-lg text-gray-700 leading-relaxed">
-              BreederHQ models a breeding as a project with money attached, not a database row. Planning to Committed to Bred to Birthed to Weaned to Placement Started to Placement Completed to Complete. Financial rollups per plan, per litter, per year. Most competitors, Breeder Cloud Pro included, treat "the breeding" as a single record you edit. The lifecycle model surfaces what is coming up, what is late, and what each plan actually made.
+              BreederHQ models a breeding as a project with money attached, not a database row. The happy-path lifecycle threads through eleven distinct states: Planning, Committed, Cycle Expected, Hormone Testing, Bred, Pregnant, Birthed, Born, Weaned, Placement, and Plan Complete. Off-happy-path states (Canceled, Unsuccessful, On Hold, Dissolved) are tracked separately so a canceled or paused plan does not pollute the active pipeline. Financial rollups per plan, per litter, per year. Most competitors, Breeder Cloud Pro included, treat "the breeding" as a single record you edit. The lifecycle model surfaces what is coming up, what is late, and what each plan actually made.
             </p>
           </div>
 
           <div>
             <h3 class="text-2xl font-bold mb-2">10. Scout AI natural-language queries against your program</h3>
             <p class="text-lg text-gray-700 leading-relaxed">
-              "Which dams have the strongest COI-adjusted health profiles for a spring 2027 litter?" "What did I spend on vet care per animal last quarter?" "Which buyers on my waitlist are the best fit for a merle-carrier puppy?" Scout uses 13 specialized tools to search, filter, and aggregate across your live records and returns real answers with real citations. No competitor in the breeder software market has anything close, per publicly available product materials. This is a category-differentiating capability, not a feature comparison.
+              "Which dams have the strongest COI-adjusted health profiles for a spring 2027 litter?" "What did I spend on vet care per animal last quarter?" "Which buyers on my waitlist are the best fit for a merle-carrier puppy?" Scout uses 21 specialized tools to search, filter, and aggregate across your live records and returns real answers with real citations. No competitor in the breeder software market has anything close, per publicly available product materials. This is a category-differentiating capability, not a feature comparison.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold mb-2">11. Rearing protocol library (a third capability with no equivalent in the market)</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Nine shipped system protocols across neonatal (Day 0-21) and socialization (Week 3-12) stages: Early Neurological Stimulation and Early Scent Introduction (based on US Military neonatal-development research), Handling Habituation, Volhard Puppy Aptitude Test (attributed to Joachim and Wendy Volhard with a References link back to volhard.com), Crate Introduction, Rule of 7s Socialization, Sound Desensitization, and Gun Conditioning for Hunting Dogs. Plus two comprehensive programs, including the BreederHQ Gun Dog Development Program (a Day 3 through Day 364 upland and waterfowl curriculum with 64 activities and 53 checklist items, authored by BreederHQ specifically for gun dog breeders). Plus a Custom Protocols tab where breeders author their own. Plus an opt-in community library where breeders share protocols with other subscribers. Every protocol carries a liability acknowledgment positioning the platform as guidance based on established animal-development research, not veterinary advice.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mt-3">
+              Breeder Cloud Pro does not publicly advertise a rearing-protocol library. Neither does any other competitor in the multi-species breeder software category. This is the third capability, alongside Scout AI and native mobile, where there is no equivalent product in the market.
             </p>
           </div>
         </div>
