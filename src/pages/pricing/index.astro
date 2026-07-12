@@ -78,7 +78,7 @@ const plans = [
 
 const faqs = [
   { question: 'Can I change plans later?', answer: 'Yes. You can upgrade or downgrade your plan at any time from your account settings. Changes take effect at the start of your next billing cycle.' },
-  { question: 'Is there a free trial?', answer: 'Yes! Every plan includes a 14-day free trial. You will enter payment details when you start your trial.' },
+  { question: 'Is there a free trial?', answer: 'Yes. Every plan includes a 14-day free trial with full access. You enter card details to start, and you are not charged if you cancel before day 14.' },
   { question: 'What happens when my trial ends?', answer: 'Your data is saved. Simply choose a plan and subscribe to pick up right where you left off.' },
   { question: 'Can I cancel anytime?', answer: 'Absolutely. Cancel from your account settings at any time. You will retain access through the end of your paid period.' },
   { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Alpacas, Llamas, Rabbits, Sheep, and Cattle with species-specific workflows for each.' },
@@ -120,7 +120,7 @@ const pageLastUpdated = '2026-06-26';
           Simple, transparent pricing
         </h1>
         <p class="text-xl text-stone-600 max-w-3xl mx-auto mb-3 leading-relaxed">
-          BreederHQ pricing is <strong>$29/mo Standard</strong>, <strong>$79/mo Pro</strong>, or <strong>$159/mo Enterprise</strong>. Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans across nine species. Founders get 50% off Pro and Enterprise for 12 months with code FOUNDER50.
+          BreederHQ pricing is <strong>$29/mo Standard</strong>, <strong>$79/mo Pro</strong>, or <strong>$159/mo Enterprise</strong>. Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans across nine species. The first 100 founders get 50% off Pro and Enterprise for 12 months with code FOUNDER50.
         </p>
         <p class="text-sm text-stone-500">
           All plans include unlimited animals, contacts, and breeding plans.
@@ -189,7 +189,7 @@ const pageLastUpdated = '2026-06-26';
                       <span class="text-stone-500 text-lg">/mo</span>
                     </div>
                     <p class="text-xs text-amber-600 font-semibold mb-1">
-                      with FOUNDER50 for 12 months
+                      Founders price with code FOUNDER50, first 100 only
                     </p>
                     <p class="text-sm text-stone-500">
                       or ${plan.foundersYearlyPrice}/yr (normally ${plan.yearlyPrice}/yr)
@@ -214,14 +214,17 @@ const pageLastUpdated = '2026-06-26';
 
               <a
                 href={registerUrl}
-                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold mb-8 transition ${
+                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold mb-2 transition ${
                   plan.popular
                     ? 'bg-amber-500 text-white hover:bg-amber-600'
                     : 'bg-stone-800 text-white hover:bg-stone-900'
                 }`}
               >
-                Start Free Trial
+                Start your 14-day free trial
               </a>
+              <p class="text-xs text-stone-500 text-center mb-8">
+                Card required to start. Cancel anytime before day 14 and you are not charged.
+              </p>
 
               <ul class="space-y-3 flex-1">
                 {plan.features.map((feature) => (
@@ -364,14 +367,17 @@ const pageLastUpdated = '2026-06-26';
           Ready to get started?
         </h2>
         <p class="text-lg text-stone-300 mb-8">
-          Join breeders who trust BreederHQ to manage their programs. Start your free trial today.
+          Set up your program in minutes. Full access for 14 days, cancel anytime before day 14 and you are not charged.
         </p>
         <a
           href={registerUrl}
           class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition"
         >
-          Start Free Trial
+          Start your 14-day free trial
         </a>
+        <p class="text-sm text-stone-400 mt-4">
+          No percentage of your sales, ever. You keep every dollar of your deals.
+        </p>
       </div>
     </section>
   </main>
