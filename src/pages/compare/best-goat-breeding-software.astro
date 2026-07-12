@@ -50,6 +50,62 @@ const faqs = [
     answer: 'The best platforms should help you keep your own breeder website updated with live listings, planned breedings, and waitlist status instead of forcing you to duplicate everything across your website, social posts, and marketplace listings.'
   }
 ];
+
+// Article schema: page-level "buyer's guide" intent signal
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Choose Goat Breeding Software in 2026",
+  "description": "What to look for in goat breeding software. Dairy production tracking, breeding groups, DHIA records, CAE/CL/Johne's tracking, FAMACHA/FEC credibility, and breeder-website workflows.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-02-25",
+  "dateModified": "2026-07-12",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/best-goat-breeding-software"
+  }
+};
+
+// Page-specific SoftwareApplication schema: BreederHQ as goat breeding software.
+// Organization and site-wide SoftwareApplication nodes are emitted by BaseLayout.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Goat Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com",
+  "description": "Goat breeding software with dairy production tracking (daily milk weights, butterfat and protein, 305-day standardized lactations using ADGA formulas, DHIA test day import), breeding group management with buck exposure tracking, CAE/CL/Johne's herd-health attestations, FAMACHA and fecal egg count records, scrapie compliance surfaces, kidding management with individual kid records, and Linear Appraisal capture. Works for dairy and meat breeds.",
+  "featureList": [
+    "Dairy production tracking (305-day lactations, DHIA test day import, butterfat and protein)",
+    "Breeding group management with buck exposure tracking",
+    "CAE, CL, and Johne's health tracking",
+    "FAMACHA and fecal egg count (FEC) parasite-management records",
+    "Kidding management with individual kid records",
+    "ADGA Linear Appraisal score tracking"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "14-day free trial",
+    "priceCurrency": "USD",
+    "description": "14-day free trial of the BreederHQ platform. See pricing page for paid tier details."
+  }
+};
 ---
 
 <BaseLayout
@@ -58,6 +114,11 @@ const faqs = [
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: Article + SoftwareApplication (page-specific).
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
   </a>

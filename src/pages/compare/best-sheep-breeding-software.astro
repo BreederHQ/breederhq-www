@@ -42,6 +42,62 @@ const faqs = [
     answer: 'Yes. For breeders participating in performance recording programs like NSIP, the software should track Estimated Breeding Values, growth rates, maternal traits, and wool/fiber measurements. This performance data drives genetic improvement in commercial flocks.'
   }
 ];
+
+// Article schema: page-level "buyer's guide" intent signal
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Choose Sheep Breeding Software in 2026",
+  "description": "What to look for in sheep breeding software. Fiber production tracking, tupping groups, fleece analysis, scrapie genotyping, and features that matter for professional sheep breeders.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-02-25",
+  "dateModified": "2026-07-12",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/best-sheep-breeding-software"
+  }
+};
+
+// Page-specific SoftwareApplication schema: BreederHQ as sheep breeding software.
+// Organization and site-wide SoftwareApplication nodes are emitted by BaseLayout.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Sheep Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com",
+  "description": "Sheep breeding software with fiber and wool production tracking (fleece weights, micron analysis, staple measurements, fleece grading), tupping group management with ram rotation, scrapie genotype tracking, OPP and CL health tracking, lambing management with individual lamb records, and EBV performance recording support. Works for fiber, meat, hair, and dual-purpose flocks.",
+  "featureList": [
+    "Fiber and wool production tracking (fleece weights, micron analysis, grading)",
+    "Tupping group management with ram rotation",
+    "Scrapie genotype tracking",
+    "OPP and CL health tracking",
+    "Lambing management with individual lamb records",
+    "EBV and performance recording support (NSIP)"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "14-day free trial",
+    "priceCurrency": "USD",
+    "description": "14-day free trial of the BreederHQ platform. See pricing page for paid tier details."
+  }
+};
 ---
 
 <BaseLayout
@@ -50,6 +106,11 @@ const faqs = [
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: Article + SoftwareApplication (page-specific).
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
   </a>

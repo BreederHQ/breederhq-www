@@ -42,6 +42,62 @@ const faqs = [
     answer: 'No. Dog breeding software that assumes spontaneous ovulation (like dogs) will calculate dates incorrectly for cats. You need software specifically built to understand feline reproduction.'
   }
 ];
+
+// Article schema: page-level "buyer's guide" intent signal
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Choose Cat Breeding Software in 2026",
+  "description": "What to look for in cat breeding software. Induced ovulation tracking, HCM/PKD/PRA screening, blood type compatibility, and features that matter for responsible cat breeders.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-01-14",
+  "dateModified": "2026-07-12",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/best-cat-breeding-software"
+  }
+};
+
+// Page-specific SoftwareApplication schema: BreederHQ as cat breeding software.
+// Organization and site-wide SoftwareApplication nodes are emitted by BaseLayout.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Cat Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com",
+  "description": "Cat breeding software with induced ovulation tracking and proper feline date calculations, blood type compatibility warnings, HCM/PKD/PRA health test tracking, queen cycling patterns, color genetics, litter management with individual kitten records, buyer portals, and TICA and CFA registry support.",
+  "featureList": [
+    "Induced ovulation tracking with feline date calculations",
+    "Blood type compatibility warnings",
+    "HCM, PKD, and PRA health test tracking",
+    "Queen cycling pattern tracking (seasonal and year-round)",
+    "Color genetics tracking",
+    "TICA and CFA registry support"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "14-day free trial",
+    "priceCurrency": "USD",
+    "description": "14-day free trial of the BreederHQ platform. See pricing page for paid tier details."
+  }
+};
 ---
 
 <BaseLayout
@@ -50,6 +106,11 @@ const faqs = [
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: Article + SoftwareApplication (page-specific).
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
   </a>

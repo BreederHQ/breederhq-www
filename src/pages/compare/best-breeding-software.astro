@@ -38,6 +38,62 @@ const faqs = [
     answer: 'You should be able to export your data. If it\'s trapped in their system, you don\'t really own it. BreederHQ allows you to export your data at any time.'
   }
 ];
+
+// Article schema: page-level "buyer's guide" intent signal
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Choose Breeding Software in 2026",
+  "description": "What to look for in breeding software. Species-appropriate design, connected records, and features that actually matter.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-01-14",
+  "dateModified": "2026-07-12",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/best-breeding-software"
+  }
+};
+
+// Page-specific SoftwareApplication schema: BreederHQ as multi-species breeding software.
+// Organization and site-wide SoftwareApplication nodes are emitted by BaseLayout.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com",
+  "description": "Breeding software with species-appropriate logic for dogs, cats, horses, goats, alpacas, llamas, rabbits, sheep, and cattle. Animal records with pedigrees, health testing, and genetics; breeding management with cycle tracking and calendars; client management with waitlists; invoicing connected to animals; and buyer portals.",
+  "featureList": [
+    "Multi-species support (9 species: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle)",
+    "Animal records with pedigrees, health testing, and genetics",
+    "Breeding management with cycle tracking and calendars",
+    "Client management with waitlists and communication",
+    "Invoicing connected to animal records",
+    "Buyer portals"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "14-day free trial",
+    "priceCurrency": "USD",
+    "description": "14-day free trial of the BreederHQ platform. See pricing page for paid tier details."
+  }
+};
 ---
 
 <BaseLayout
@@ -46,6 +102,11 @@ const faqs = [
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: Article + SoftwareApplication (page-specific).
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
   </a>

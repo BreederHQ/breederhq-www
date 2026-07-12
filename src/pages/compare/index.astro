@@ -98,13 +98,66 @@ const comparisons = [
     url: '/compare/zooeasy-alternative'
   }
 ];
+
+const faqs = [
+  {
+    question: 'What is the best breeder software?',
+    answer: 'There is no single "best" breeder software, because the right tool depends on your species and daily workflow. For a working program that needs cycle tracking, litters, waitlists, deposits, contracts, a buyer portal, and a public marketplace presence in one system, BreederHQ is the most complete option and offers a 14-day free trial. Species-specific guides on this page compare the options for dogs, cats, horses, goats, sheep, and rabbits.'
+  },
+  {
+    question: 'How much does breeder software cost?',
+    answer: 'Pricing varies widely. Budget record-keeping tools like Breeder Cloud Pro start around $6.99/month, mid-range options like BreederBuddy run $29.99/month, and BreederHQ starts at $29/month with a 14-day free trial. The real cost question is time: software that connects records, waitlists, deposits, and buyer communication in one place saves hours every week compared to spreadsheets.'
+  },
+  {
+    question: 'What species does BreederHQ support?',
+    answer: 'BreederHQ supports nine species under one account: dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, and cattle. Each species has its own breeding biology built in, including cycle patterns, gestation lengths, and species-specific health testing.'
+  },
+  {
+    question: 'Should breeding software be species-specific?',
+    answer: 'Yes. Software built for dogs assumes spontaneous ovulation and 63-day gestation, which is wrong for cats (induced ovulators), horses (340-day gestation with seasonal cycling), and rabbits (31-day gestation). Choose software that understands the breeding biology of your species, whether that is a species-specific tool or a multi-species platform with species-appropriate logic.'
+  }
+];
+
+// CollectionPage schema: identifies this hub and enumerates the comparison guides it links to.
+// Organization and site-wide SoftwareApplication nodes are emitted by BaseLayout; FAQPage comes
+// from the `faqs` prop above.
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Compare Breeding Software",
+  "description": "Comparison guides and head-to-head reviews of breeding management software for dog, cat, horse, goat, sheep, and rabbit breeders.",
+  "url": "https://breederhq.com/compare",
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Breeding Software Comparison Guides",
+    "numberOfItems": 11,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Best Breeding Software", "url": "https://breederhq.com/compare/best-breeding-software" },
+      { "@type": "ListItem", "position": 2, "name": "Best Dog Breeding Software", "url": "https://breederhq.com/compare/best-dog-breeding-software" },
+      { "@type": "ListItem", "position": 3, "name": "Best Cat Breeding Software", "url": "https://breederhq.com/compare/best-cat-breeding-software" },
+      { "@type": "ListItem", "position": 4, "name": "Best Horse Breeding Software", "url": "https://breederhq.com/compare/best-horse-breeding-software" },
+      { "@type": "ListItem", "position": 5, "name": "Best Goat Breeding Software", "url": "https://breederhq.com/compare/best-goat-breeding-software" },
+      { "@type": "ListItem", "position": 6, "name": "Best Sheep Breeding Software", "url": "https://breederhq.com/compare/best-sheep-breeding-software" },
+      { "@type": "ListItem", "position": 7, "name": "Best Rabbit Breeding Software", "url": "https://breederhq.com/compare/best-rabbit-breeding-software" },
+      { "@type": "ListItem", "position": 8, "name": "BreederHQ vs Breeder Cloud Pro", "url": "https://breederhq.com/compare/breederhq-vs-breedercloudpro" },
+      { "@type": "ListItem", "position": 9, "name": "BreederHQ vs EasyKeeper", "url": "https://breederhq.com/compare/breederhq-vs-easykeeper" },
+      { "@type": "ListItem", "position": 10, "name": "BreederHQ vs Everbreed", "url": "https://breederhq.com/compare/breederhq-vs-everbreed" },
+      { "@type": "ListItem", "position": 11, "name": "BreederHQ vs Good Dog", "url": "https://breederhq.com/compare/breederhq-vs-gooddog" }
+    ]
+  }
+};
 ---
 
 <BaseLayout
   title="Compare Breeding Software | BreederHQ"
   description="Compare BreederHQ with other breeding management solutions. See why professional breeders choose purpose-built software over spreadsheets."
   breadcrumbs={breadcrumbs}
+  faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: CollectionPage with ItemList of comparison guides.
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionPageSchema)} />
+
   <main>
     <section class="py-20 px-4">
       <div class="max-w-4xl mx-auto">

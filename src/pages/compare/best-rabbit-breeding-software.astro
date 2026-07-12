@@ -42,6 +42,62 @@ const faqs = [
     answer: 'Yes. BreederHQ includes buyer portals where clients can see their rabbit\'s pedigree, photos, show records, and health information. This is especially valuable for show rabbit buyers evaluating bloodlines.'
   }
 ];
+
+// Article schema: page-level "buyer's guide" intent signal
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Choose Rabbit Breeding Software in 2026",
+  "description": "What to look for in rabbit breeding software. ARBA pedigrees, kindling management, show tracking, variety genetics, and features that matter for professional rabbit breeders.",
+  "author": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BreederHQ",
+    "url": "https://breederhq.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://breederhq.com/logo.svg"
+    }
+  },
+  "image": "https://breederhq.com/og-image.jpg",
+  "datePublished": "2026-02-25",
+  "dateModified": "2026-07-12",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://breederhq.com/compare/best-rabbit-breeding-software"
+  }
+};
+
+// Page-specific SoftwareApplication schema: BreederHQ as rabbit breeding software.
+// Organization and site-wide SoftwareApplication nodes are emitted by BaseLayout.
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BreederHQ",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Rabbit Breeding Software",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://breederhq.com",
+  "description": "Rabbit breeding software with ARBA-style pedigree management (ear numbers, varieties, weights, grand champion designations), kindling management with individual kit records, show tracking with BOB/BOS/BOV placements and automatic Grand Champion leg counting, variety-specific color genetics, breeding schedules built for 31-day gestation, buyer waitlist matching, and COI calculation. Works for show, meat, and pet breeders.",
+  "featureList": [
+    "ARBA pedigree management with ear numbers, varieties, and weights",
+    "Kindling management with individual kit records",
+    "Show tracking with automatic Grand Champion leg counting",
+    "Variety-specific color genetics",
+    "Rapid breeding cycle scheduling (31-day gestation)",
+    "Buyer waitlist and placement matching"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "14-day free trial",
+    "priceCurrency": "USD",
+    "description": "14-day free trial of the BreederHQ platform. See pricing page for paid tier details."
+  }
+};
 ---
 
 <BaseLayout
@@ -50,6 +106,11 @@ const faqs = [
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
+  <!-- Page-scoped JSON-LD: Article + SoftwareApplication (page-specific).
+       FAQPage schema is emitted automatically by BaseLayout from the `faqs` prop above. -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to content
   </a>
