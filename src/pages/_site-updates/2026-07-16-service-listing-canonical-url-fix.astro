@@ -1,0 +1,27 @@
+---
+// src/pages/_site-updates/2026-07-16-service-listing-canonical-url-fix.astro
+export const updateMeta = {
+  date: '2026-07-16',
+  title: 'Service listing cards now link to canonical /services/<slug> (bot-404 fix)',
+  tags: ['marketplace', 'seo', 'services', 'bugfix'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">July 16, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Fixed outbound marketplace links on <a href="/services/farriers" class="text-[hsl(24,95%,53%)] hover:underline">/services/*</a> hubs and the
+    <a href="/dog-parks" class="text-[hsl(24,95%,53%)] hover:underline">dog-parks</a> city pages. Service listing cards were linking to
+    <code>marketplace.breederhq.com/listings/&lt;slug&gt;</code>, which is the canonical route for INDIVIDUAL-ANIMAL listings, not services.
+    For crawlers that path 404'd (the bot-prerender edge layer only prerenders <code>/services/&lt;slug&gt;</code> for service listings), and for
+    humans it loaded the wrong page type. The listings themselves were live the whole time; only the link URL form was wrong.
+  </p>
+  <p class="text-sm text-gray-500 mb-2"><strong>What changed:</strong></p>
+  <ul class="text-sm text-gray-500 list-disc pl-5 space-y-1 mb-4">
+    <li><code>listingDetailUrl()</code> in <code>src/lib/marketplaceListings.ts</code> now returns <code>/services/&lt;slug&gt;</code> (the API's <code>canonicalPath</code>).</li>
+    <li><code>src/pages/dog-parks/[city].astro</code> hard-coded service-listing link switched from <code>/listings/</code> to <code>/services/</code>.</li>
+  </ul>
+  <p class="text-sm text-gray-500">
+    Verified against the live bot-prerender edge: <code>/services/&lt;slug&gt;</code> returns 200 for Googlebot on every affected listing,
+    where <code>/listings/&lt;slug&gt;</code> returned 404.
+  </p>
+</article>

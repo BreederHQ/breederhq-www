@@ -422,9 +422,20 @@ function normalizeStateForApi(input: string): string {
   return input;
 }
 
-/** Public marketplace URL for a listing detail page. */
+/**
+ * Public marketplace URL for a SERVICE listing detail page.
+ *
+ * Uses the canonical `/services/<slug>` route, NOT the `/listings/<slug>` path.
+ * `/listings/:slug` is the canonical route for INDIVIDUAL-ANIMAL listings, a
+ * different entity type — linking a service listing there loads the wrong page
+ * (the SPA fetches an animal record and fails), and the bot-prerender edge layer
+ * only prerenders `/services/<slug>` for service listings, so `/listings/<service-slug>`
+ * 404s for crawlers. The public service-listings API returns this exact form as
+ * its `canonicalPath`. This helper is fed ONLY by the service-listings endpoint;
+ * do NOT reuse it for animal (`/listings/`) or breeding (`/breeding-services/`) URLs.
+ */
 export function listingDetailUrl(slug: string): string {
-  return `${MARKETPLACE_HOST}/listings/${slug}`;
+  return `${MARKETPLACE_HOST}/services/${slug}`;
 }
 
 /**
