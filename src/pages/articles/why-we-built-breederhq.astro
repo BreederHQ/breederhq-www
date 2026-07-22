@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'Why We Built BreederHQ', url: '/articles/why-we-built-breederhq' }
+];
+---
+
+<BaseLayout
+  title="Why We Built BreederHQ (And What It Has to Do With Facebook)"
+  description="Before we wrote a single line of code, I spent months talking to breeders. The version I kept hearing was always some variation of: I need somewhere that isn't Facebook."
+  breadcrumbs={breadcrumbs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm flex-wrap gap-y-1">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Why We Built BreederHQ</li>
+      </ol>
+    </nav>
+
+    <article class="py-16 px-4">
+      <div class="max-w-2xl mx-auto">
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          Why We Built BreederHQ (And What It Has to Do With Facebook)
+        </h1>
+
+        <div class="flex items-center gap-3 mb-10 text-sm text-gray-500">
+          <img
+            src="/images/team/aaron-payne.jpg"
+            alt="Aaron Payne"
+            class="w-10 h-10 rounded-full object-cover bg-gray-200"
+            onerror="this.style.display='none'"
+          />
+          <div>
+            <p class="font-semibold text-gray-700">Aaron Payne</p>
+            <p>Founder, BreederHQ &middot; July 2026</p>
+          </div>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-gray-700 space-y-6">
+
+          <p class="text-xl leading-relaxed text-gray-800">
+            Before we wrote a single line of code, I spent months talking to breeders. Not about software. About frustration. The version I kept hearing was always some variation of: <em>"I need somewhere that isn't Facebook."</em>
+          </p>
+
+          <p class="leading-relaxed">
+            That kept coming up. The details differed. The core problem didn't. They had built their entire sales pipeline on a platform that may never really have wanted them there. Why? Because nothing better existed for them. And they knew, somewhere in the back of their mind, that it was only a matter of time before that caught up with them.
+          </p>
+
+          <p class="leading-relaxed">
+            For a lot of breeders, that time has arrived.
+          </p>
+
+          <h2 class="text-2xl font-bold text-gray-900 pt-4">The problem was never really about Facebook</h2>
+
+          <p class="leading-relaxed">
+            Facebook is a community tool. It is genuinely good at helping breeders build an audience, share litter updates, post health test results, and stay connected with past buyers. Nobody is taking that away.
+          </p>
+
+          <p class="leading-relaxed">
+            The problem is that breeders felt compelled to use it as a sales tool, in the absence of anything better: inquiry management, waitlist tracking, buyer screening, deposit coordination, public listings. That work ended up in Facebook Messenger and Facebook posts because the alternative either didn't exist or meant handing their buyer relationships to a sales site that charges both sides a commission and owns the conversation.
+          </p>
+
+          <p class="leading-relaxed">
+            That was always a fragile arrangement. A platform with no obligation to breeders, no stable policy on animal sales, and no functional appeals process that works at human speed was holding the most important part of a breeder's business. The enforcement wave that started in 2024 didn't create the problem. It just made it impossible to ignore.
+          </p>
+
+          <p class="leading-relaxed">
+            If you want the full picture of what the policy actually says and what is triggering removals, we covered that in detail: <a href="/articles/selling-animals-on-facebook-instagram" class="text-[hsl(24,95%,53%)] hover:underline">Selling Animals on Facebook and Instagram in 2026</a>.
+          </p>
+
+          <h2 class="text-2xl font-bold text-gray-900 pt-4">What we built instead</h2>
+
+          <p class="leading-relaxed">
+            BreederHQ is not a Facebook replacement. It does not have two billion users. If you want to share daily kennel life, post videos of newborns, and build a following, Facebook and Instagram still do that better than anything else. Keep using them for that.
+          </p>
+
+          <p class="leading-relaxed">
+            What BreederHQ replaces is the part you should never have trusted to Facebook in the first place.
+          </p>
+
+          <div class="bg-gray-50 border-l-4 border-[hsl(24,95%,53%)] rounded-r-lg p-6 space-y-5 my-8">
+            <div>
+              <p class="font-bold text-gray-900 mb-1">Your Storefront</p>
+              <p class="leading-relaxed">A public, searchable presence at your own marketplace URL. Buyers can find it, browse your programs, and submit an inquiry without you needing to maintain a Facebook post or worry about whether a caption triggered a classifier. It doesn't go anywhere because a policy changed.</p>
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 mb-1">Your listings stay current without double entry</p>
+              <p class="leading-relaxed">When you update availability in BreederHQ, it reflects everywhere your listings appear, including on your own website if you use the embed widget. One update. Done.</p>
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 mb-1">Your buyer pipeline lives somewhere you control</p>
+              <p class="leading-relaxed">Inquiries come in through your Storefront. <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">Waitlists, screening, deposit tracking, buyer communications</a>. None of it lives in a Messenger thread that can be restricted without warning. You own the record of every conversation and every commitment.</p>
+            </div>
+          </div>
+
+          <h2 class="text-2xl font-bold text-gray-900 pt-4">What this is not</h2>
+
+          <p class="leading-relaxed">
+            BreederHQ is early. We are not the largest platform in this space and we are not going to pretend otherwise. What we are is a platform built specifically for professional breeders, by people who talked to professional breeders before building anything.
+          </p>
+
+          <p class="leading-relaxed">
+            We are also not going to tell you to abandon Facebook entirely. Use it for what it's good at. Build your community there. Share your story there. Just stop letting it be the only path between your breeding program and the buyers looking for you.
+          </p>
+
+          <p class="leading-relaxed">
+            The breeders who feel this policy shift the least are the ones who already had somewhere else for buyers to find them. A Storefront. A website. An email list. Infrastructure they own.
+          </p>
+
+          <div class="bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg p-6 my-8">
+            <p class="text-lg text-gray-800 leading-relaxed mb-4">
+              If you want to see what that looks like for your program, setting up your Storefront takes about 15 minutes. It's the first thing worth doing. We'll even set up your Storefront for you if you'd like.
+            </p>
+            <a href="/for-breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-6 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+              See How It Works →
+            </a>
+          </div>
+
+          <p class="leading-relaxed">
+            If you have questions or something doesn't feel right, reply directly. I read every one.
+          </p>
+
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-gray-200 flex items-center gap-4">
+          <img
+            src="/images/team/aaron-payne.jpg"
+            alt="Aaron Payne"
+            class="w-14 h-14 rounded-full object-cover bg-gray-200"
+            onerror="this.style.display='none'"
+          />
+          <div>
+            <p class="font-bold text-gray-900">Aaron Payne</p>
+            <p class="text-gray-500 text-sm">Founder, BreederHQ</p>
+            <a href="mailto:aaron@breederhq.com" class="text-[hsl(24,95%,53%)] hover:underline text-sm">aaron@breederhq.com</a>
+          </div>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Related reading</p>
+          <div class="space-y-3">
+            <div>
+              <a href="/articles/selling-animals-on-facebook-instagram" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+                Selling Animals on Facebook and Instagram in 2026: What the Policy Actually Says
+              </a>
+              <p class="text-sm text-gray-500 mt-1">The full breakdown of Meta's three-policy framework and what's triggering removals.</p>
+            </div>
+            <div>
+              <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+                How the BreederHQ Marketplace Works
+              </a>
+              <p class="text-sm text-gray-500 mt-1">Your Storefront, listings, and buyer discovery outside social media.</p>
+            </div>
+            <div>
+              <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline font-medium">
+                Waitlists and Placement
+              </a>
+              <p class="text-sm text-gray-500 mt-1">Inquiry management, screening, and deposit coordination on infrastructure you control.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+  </main>
+</BaseLayout>
