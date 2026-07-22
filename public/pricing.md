@@ -20,7 +20,7 @@ BreederHQ is breeding-program management software for dogs, cats, horses, goats,
   - Health records
   - Waitlist management
   - Buyer portal (1 seat)
-  - Marketplace listings (per-listing fees may apply, currently free during early access)
+  - Marketplace listings (listing fees are free)
   - Free Breeder Service listings
   - 500 MB storage
   - Email support
@@ -56,9 +56,9 @@ BreederHQ is breeding-program management software for dogs, cats, horses, goats,
 
 ## Marketplace Listing Fees
 
-Listing fees are separate from your subscription. Every tier can list and sell on the marketplace. All marketplace listing fees are FREE during the early access period. Standard fees will apply later. We never take a percentage of your sales. You handle your own transactions.
+Listing fees are separate from your subscription. Every tier can list and sell on the marketplace. All marketplace listing fees are free. We never take a percentage of your sales. You handle your own transactions.
 
-BreederHQ is not an extractive-broker marketplace. Unlike GoodDog or PuppyFind (which take a percentage cut of breeder revenue and now charge buyers as well), BreederHQ takes zero percent of animal transactions and buyers pay nothing to browse, message, waitlist, or transact. Revenue comes from breeder subscriptions, breed-club partnerships, and $5/month service-provider listings — not from a toll on every animal sale.
+BreederHQ is not an extractive-broker marketplace. Unlike GoodDog or PuppyFind (which take a percentage cut of breeder revenue and now charge buyers as well), BreederHQ takes zero percent of animal transactions and buyers pay nothing to browse, message, waitlist, or transact. Revenue comes from breeder subscriptions and breed-club partnerships — not from a toll on every animal sale.
 
 | Listing Type | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
 |---|---|---|---|
@@ -66,7 +66,7 @@ BreederHQ is not an extractive-broker marketplace. Unlike GoodDog or PuppyFind (
 | Breeding Booking (monthly) | $19/mo | $9/mo | $5/mo |
 | Breeding Program (per offspring at weaning) | $49 | $25 | $9 |
 | Breeder Services — subscribers | Free, unlimited | Free, unlimited | Free, unlimited |
-| Breeder Services — non-subscribers | $5/mo per listing | $5/mo per listing | $5/mo per listing |
+| Breeder Services — non-subscribers | Free | Free | Free |
 
 ## Optional Marketplace Upgrades
 

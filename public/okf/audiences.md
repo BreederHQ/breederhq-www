@@ -57,7 +57,7 @@ Landing page: [/for-providers](https://breederhq.com/for-providers).
 
 **Commercial structure:**
 
-- Flat $5/month per listing across the entire marketplace surface (services AND facilities). Currently free during early access.
+- Free to list across the entire marketplace surface (services AND facilities). No listing fees.
 - No commissions, no per-lead charges, no per-booking cut, no hidden fees.
 - Completely decoupled from breeder subscriptions. A vet or trainer does not need to be a breeder to list.
 - Pause and resume anytime; listing data is preserved while paused.

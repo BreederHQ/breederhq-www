@@ -69,7 +69,7 @@ Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, 
 
 ## Marketplace Listing Fees
 
-Listing fees are separate from subscription. Every tier can list and sell on the marketplace. All marketplace listing fees are currently FREE during the early access period. BreederHQ never takes a percentage of your sales. Breeders handle their own transactions.
+Listing fees are separate from subscription. Every tier can list and sell on the marketplace. All marketplace listing fees are free. BreederHQ never takes a percentage of your sales. Breeders handle their own transactions.
 
 | Listing Type | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
 |---|---|---|---|
@@ -77,7 +77,7 @@ Listing fees are separate from subscription. Every tier can list and sell on the
 | Breeding Booking (monthly) | $19/mo | $9/mo | $5/mo |
 | Breeding Program (per offspring at weaning) | $49 | $25 | $9 |
 | Breeder Services (subscribers) | Free, unlimited | Free, unlimited | Free, unlimited |
-| Breeder Services (non-subscribers) | $5/mo per listing | $5/mo per listing | $5/mo per listing |
+| Breeder Services (non-subscribers) | Free | Free | Free |
 
 ## Currency
 

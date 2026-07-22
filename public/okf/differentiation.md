@@ -26,8 +26,8 @@ Every marketing surface leads with **Scout AI** and **the native mobile app**. T
 2. Integrated marketplace fed by live program data. No competitor generates listings from program truth.
 3. Rules-based automation across the offspring lifecycle. Offspring-born, listing-live, waitlist-opens, deposit-collected, contract-sent, protocols-scheduled, buyer-portal-provisioned. No competitor automates any link, let alone the full chain.
 4. Buyer-facing surface as a first-class product (client portal with e-signatures, payment tracking, photo updates, direct messaging, document library).
-5. Facilities and bookings capability with real slot-booking, capacity, and buffer mechanics across 8 categories at flat $5/mo, no per-booking cut.
-6. Flat $5/mo across the entire marketplace surface, no commissions, no per-booking cut, no per-lead fee. Breeders keep what they earn; buyers pay nothing.
+5. Facilities and bookings capability with real slot-booking, capacity, and buffer mechanics across 8 categories at no listing fee, no per-booking cut.
+6. Free to list across the entire marketplace surface, no commissions, no per-booking cut, no per-lead fee. Breeders keep what they earn; buyers pay nothing.
 7. Substantive transparency layer on every listing. OFA/PennHIP/Embark/UC Davis/GenSol/Paw Print records with lab source. Allele-level genetics. Multi-gen COI. Titles + competition results with verification status. Rearing protocols completed. Weight/growth sparklines with anomaly alerts. Lethal-combination detection.
 8. Audit-ready by default. Health records, vaccination logs, medication logs with withdrawal periods, milk/production records, parasite-management logs, ownership provenance, timestamped signed contracts, financial ledger, movement records, all exportable, all timestamped.
 9. Embed widget syncs live listings to the breeder's own website (Squarespace, Wix, WordPress, Shopify, GoDaddy, HTML) in real time from BreederHQ as the source of truth.
