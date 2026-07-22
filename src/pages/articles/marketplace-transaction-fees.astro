@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'What Marketplace Transaction Fees Are Actually Costing You', url: '/articles/marketplace-transaction-fees' }
+];
+
+const faqs = [
+  {
+    question: 'Do animal marketplaces charge transaction fees?',
+    answer: 'Some do, and they charge both sides. The breeder pays a percentage fee deducted from their payout. The buyer pays a separate platform fee added on top of the listed price at checkout. Many buyers do not see this fee until they are already in the payment flow.'
+  },
+  {
+    question: 'How much do marketplace transaction fees cost per litter?',
+    answer: 'On a platform charging 7% on each side, a litter of six puppies at $2,000 each generates $840 in fees taken from the breeder and $840 in fees charged to buyers — $1,680 extracted from a single litter. Across three litters per year, that totals $5,040.'
+  },
+  {
+    question: 'Can breeders avoid platform transaction fees by taking payment off-platform?',
+    answer: 'Platforms that charge transaction fees typically prohibit off-platform payments in their terms of service. Routing a transaction outside their system risks account suspension, losing all reviews and followers built on the platform.'
+  },
+  {
+    question: 'Does BreederHQ charge transaction fees?',
+    answer: 'No. BreederHQ charges no transaction fees on deposits, sales, or anything else. Buyers are not charged a platform fee at checkout. Marketplace listings are included in every subscription tier. The price a breeder sets is the price the buyer pays.'
+  },
+  {
+    question: 'How does BreederHQ pricing compare to transaction-fee marketplaces?',
+    answer: 'BreederHQ Professional costs $948 per year for the full platform. On a platform charging 7% per side, a breeder running three litters of six puppies at $2,000 each pays $2,520 per year in breeder-side fees alone — more than twice the full BreederHQ annual subscription, before accounting for the $2,520 charged to their buyers on top.'
+  }
+];
+---
+
+<BaseLayout
+  title="What Marketplace Transaction Fees Are Actually Costing You (And Your Buyers)"
+  description="Some marketplaces charge breeders a transaction fee on every sale — and charge buyers a separate fee at checkout. Here is what that costs per litter and per year."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm flex-wrap gap-y-1">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">What Marketplace Transaction Fees Are Actually Costing You</li>
+      </ol>
+    </nav>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          What Marketplace Transaction Fees Are Actually Costing You (And Your Buyers)
+        </h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: July 2026.</strong> Written and reviewed by the BreederHQ Operations Team.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">TL;DR</h2>
+          <ul class="text-gray-700 leading-relaxed space-y-2">
+            <li>Some marketplaces charge the breeder a transaction fee <em>and</em> charge the buyer a separate fee at checkout.</li>
+            <li>On a platform charging 7% each side: one litter of six at $2,000 per puppy costs <strong>$1,680</strong> — split evenly between you and your buyers.</li>
+            <li>Three litters a year: <strong>$5,040</strong> extracted from your program and your buyers combined.</li>
+            <li>BreederHQ charges no transaction fees. Not on deposits, not on sales. Buyers pay nothing at checkout on top of your price.</li>
+          </ul>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed mb-4">
+          You list for free. That part is true. But free to list is not the same as free to sell, and the difference is where serious breeders are quietly losing hundreds, sometimes thousands, of dollars per litter.
+        </p>
+
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Some of the most widely used marketplaces now charge breeders a transaction fee on every sale processed through their platform. On top of that, they also charge the buyer a separate platform fee at checkout. Many buyers have no idea the fee is coming until they are already in the payment flow. Many breeders have no idea their buyers are being charged at all.
+        </p>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-4">
+          This is not a hidden policy. It is a deliberate business model. And once you run the math on a single litter, it is hard to unsee.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">How the Double Fee Works</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Here is how a typical transaction plays out on a marketplace that charges both sides.
+        </p>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+          <div class="space-y-4 text-gray-700">
+            <div class="flex items-start gap-4">
+              <span class="bg-[hsl(24,95%,53%)] text-white text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">Step 1</span>
+              <p class="leading-relaxed">You list a puppy at <strong>$2,000</strong>. A buyer finds it, applies, gets approved, and goes to pay.</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="bg-[hsl(24,95%,53%)] text-white text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">Step 2</span>
+              <p class="leading-relaxed">At checkout, the platform adds its own fee on top of your price. Based on breeder reports, that buyer-side fee typically runs around 7%. Your buyer, who budgeted $2,000, now owes <strong>$2,140</strong>. The extra $140 goes to the platform, not to you. The buyer you worked to build trust with is now confused and frustrated — and may walk away.</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="bg-[hsl(24,95%,53%)] text-white text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">Step 3</span>
+              <p class="leading-relaxed">When the sale closes, the platform also deducts its own fee from your payout. Also around 7%. On a $2,000 sale, you receive <strong>$1,860</strong>. The platform keeps $140.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+          <p class="text-lg font-semibold text-gray-900 mb-2">One puppy. One buyer. One transaction.</p>
+          <p class="text-gray-700 leading-relaxed">The platform collected <strong>$280</strong> from a $2,000 transaction. Your buyer paid more than they expected. You received less than your listed price.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">The Litter Math</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Six puppies at $2,000 each. $12,000 in total sales.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+          <div class="bg-white border-2 border-red-200 rounded-lg p-6 text-center">
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Platform takes from you</p>
+            <p class="text-4xl font-bold text-red-600 mb-1">$840</p>
+            <p class="text-sm text-gray-500">7% of $12,000</p>
+          </div>
+          <div class="bg-white border-2 border-red-200 rounded-lg p-6 text-center">
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Platform charges your buyers</p>
+            <p class="text-4xl font-bold text-red-600 mb-1">$840</p>
+            <p class="text-sm text-gray-500">7% added at checkout × 6 buyers</p>
+          </div>
+          <div class="bg-red-600 border-2 border-red-600 rounded-lg p-6 text-center">
+            <p class="text-sm font-semibold text-red-100 uppercase tracking-wide mb-2">Total extracted per litter</p>
+            <p class="text-4xl font-bold text-white mb-1">$1,680</p>
+            <p class="text-sm text-red-100">From one litter</p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            You cannot opt out. Platforms that operate this way typically prohibit off-platform payments entirely. Route a transaction outside their system and you risk losing your account, along with every review, every follower, and every inquiry you have built there.
+          </p>
+          <p class="text-lg font-semibold text-gray-900">
+            The choice they are offering is not really free. It is: list for free, sell on our terms, and hand over $1,680 per litter every time you do.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Scaled to a Year</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Three litters a year. Six puppies each. $2,000 per puppy.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="py-3 px-4 font-semibold text-gray-700">Fee</th>
+                <th class="py-3 px-4 font-semibold text-gray-700 text-right">Per litter</th>
+                <th class="py-3 px-4 font-semibold text-gray-700 text-right">Per year (3 litters)</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="py-3 px-4 text-gray-700">Platform fee taken from breeder (7%)</td>
+                <td class="py-3 px-4 text-right font-medium text-red-600">$840</td>
+                <td class="py-3 px-4 text-right font-medium text-red-600">$2,520</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 text-gray-700">Platform fee charged to buyers (7%)</td>
+                <td class="py-3 px-4 text-right font-medium text-red-600">$840</td>
+                <td class="py-3 px-4 text-right font-medium text-red-600">$2,520</td>
+              </tr>
+              <tr class="bg-red-50">
+                <td class="py-3 px-4 font-bold text-gray-900">Total extracted from your program and buyers</td>
+                <td class="py-3 px-4 text-right font-bold text-red-700">$1,680</td>
+                <td class="py-3 px-4 text-right font-bold text-red-700">$5,040</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-6">
+          That $5,040 did not go toward your health testing, your stud fees, your whelping supplies, or your buyers. It went to a platform that introduced you to a buyer and then charged both of you for the privilege.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">What BreederHQ Charges Instead</h2>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-white border-2 border-green-200 rounded-lg p-6">
+            <p class="text-sm font-semibold text-green-700 uppercase tracking-wide mb-3">Transaction fees</p>
+            <p class="text-4xl font-bold text-green-700 mb-2">$0</p>
+            <p class="text-gray-600">No fee on deposits, sales, or anything else. Not from you, not from your buyers.</p>
+          </div>
+          <div class="bg-white border-2 border-green-200 rounded-lg p-6">
+            <p class="text-sm font-semibold text-green-700 uppercase tracking-wide mb-3">Buyer checkout fee</p>
+            <p class="text-4xl font-bold text-green-700 mb-2">$0</p>
+            <p class="text-gray-600">The price you set is the price they pay. No surprise at checkout.</p>
+          </div>
+        </div>
+
+        <div class="bg-[hsl(24,95%,97%)] border border-[hsl(24,95%,80%)] rounded-lg p-6 mb-8">
+          <p class="text-lg text-gray-800 leading-relaxed mb-4">
+            Marketplace listings are included in every subscription tier. You pay one flat monthly fee for the entire platform. Everything you list, every inquiry you receive, every sale you close costs nothing on top of that.
+          </p>
+          <p class="text-lg text-gray-800 leading-relaxed">
+            <strong>BreederHQ Professional costs $948 for a full year</strong> — unlimited listings, Breeding Programs, your Storefront, the Marketplace Embed Widget, and your full Sales Pipeline.
+          </p>
+        </div>
+
+        <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">The comparison for three litters of six at $2,000 per puppy</h3>
+          <div class="space-y-3 text-gray-700">
+            <div class="flex items-start gap-3">
+              <span class="text-red-500 font-bold mt-1">✗</span>
+              <p>Commission marketplace: <strong>$2,520/year in breeder-side fees</strong> — more than twice the full BreederHQ annual subscription — plus $2,520 charged to your buyers on top.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-green-600 font-bold mt-1">✓</span>
+              <p>BreederHQ Professional: <strong>$948/year, flat</strong>. No transaction fees. No buyer fees. $1,572 stays in your program. Your buyers save $2,520 that would have gone to the platform.</p>
+            </div>
+          </div>
+          <div class="mt-6 pt-6 border-t border-green-200">
+            <p class="text-2xl font-bold text-gray-900">One year. One switch. $5,040 that stays where it belongs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">The Question Worth Asking</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Before you list on any marketplace, ask two questions.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+          <div class="bg-white border-2 border-gray-300 rounded-lg p-6">
+            <p class="text-lg font-bold text-gray-900 mb-2">Question 1</p>
+            <p class="text-gray-700">What does this platform charge <em>me</em> per sale?</p>
+          </div>
+          <div class="bg-white border-2 border-gray-300 rounded-lg p-6">
+            <p class="text-lg font-bold text-gray-900 mb-2">Question 2</p>
+            <p class="text-gray-700">What does it charge <em>my buyer</em> on top of that?</p>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          If the answer to either question is not zero, run the math on your last litter. Then run it on a full year. The number you get is what that platform is extracting from your program and your buyers combined, every single year.
+        </p>
+
+        <div class="bg-white border-2 border-[hsl(24,95%,53%)] rounded-lg p-8 text-center">
+          <p class="text-xl font-bold text-gray-900 mb-2">BreederHQ charges no transaction fees and no buyer fees.</p>
+          <p class="text-gray-600 mb-6">Marketplace listings are included in all subscription tiers. Plans start at $29/month.</p>
+          <a href="/pricing" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,48%)] transition mr-4" style="min-height: 44px;">
+            See Pricing →
+          </a>
+          <a href="/for-breeders" class="inline-block border-2 border-[hsl(24,95%,53%)] text-[hsl(24,95%,53%)] px-8 py-3 rounded-lg font-bold hover:bg-[hsl(24,95%,97%)] transition" style="min-height: 44px;">
+            How It Works →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Reading</h2>
+        <div class="grid md:grid-cols-2 gap-3 text-base">
+          <a href="/articles/why-we-built-breederhq" class="text-[hsl(24,95%,53%)] hover:underline">→ Why We Built BreederHQ</a>
+          <a href="/articles/selling-animals-on-facebook-instagram" class="text-[hsl(24,95%,53%)] hover:underline">→ Selling Animals on Facebook and Instagram in 2026</a>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">→ How the BreederHQ Marketplace Works</a>
+          <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">→ BreederHQ Pricing</a>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists and Placement</a>
+          <a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">→ BreederHQ for Breeders</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
