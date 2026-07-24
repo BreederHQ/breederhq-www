@@ -488,9 +488,10 @@ const articleSchema = {
         var wrap = document.createElement('div');
         wrap.className = 'ptt-row';
         wrap.setAttribute('data-row-id', id);
+        var isDark = document.body.classList.contains('bhq-dark-shell');
         wrap.setAttribute('style',
           'display:flex;flex-direction:row;align-items:flex-end;gap:0.75rem;' +
-          'background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;' +
+          'background:' + (isDark ? '#0F1826' : '#ffffff') + ';border:1px solid ' + (isDark ? 'rgba(255,255,255,0.08)' : '#e5e7eb') + ';border-radius:10px;' +
           'padding:0.85rem 0.9rem;flex-wrap:nowrap;'
         );
 
@@ -503,18 +504,18 @@ const articleSchema = {
         var fieldStyle = 'display:flex;flex-direction:column;flex:1 1 0;min-width:0;margin:0;';
 
         var labelStyle =
-          'display:block;font-size:0.7rem;font-weight:700;color:#6b7280;' +
+          'display:block;font-size:0.7rem;font-weight:700;color:' + (isDark ? '#A9BAD4' : '#6b7280') + ';' +
           'margin:0 0 0.3rem 0;text-transform:uppercase;letter-spacing:0.05em;line-height:1.2;';
 
         var inputStyle =
-          'display:block;width:100%;padding:0.55rem 0.7rem;border:1px solid #d1d5db;' +
-          'border-radius:8px;font-size:0.95rem;color:#111827;background:#ffffff;' +
+          'display:block;width:100%;padding:0.55rem 0.7rem;border:1px solid ' + (isDark ? 'rgba(255,255,255,0.08)' : '#d1d5db') + ';' +
+          'border-radius:8px;font-size:0.95rem;color:' + (isDark ? '#EAF1FC' : '#111827') + ';background:' + (isDark ? '#0F1826' : '#ffffff') + ';' +
           'min-height:40px;box-sizing:border-box;font-family:inherit;';
 
         var trashStyle =
           'display:inline-flex;align-items:center;justify-content:center;' +
-          'width:36px;height:36px;padding:0;background:#ffffff;color:#b91c1c;' +
-          'border:1px solid #fecaca;border-radius:8px;cursor:pointer;' +
+          'width:36px;height:36px;padding:0;background:' + (isDark ? '#0F1826' : '#ffffff') + ';color:' + (isDark ? '#FCA5A5' : '#b91c1c') + ';' +
+          'border:1px solid ' + (isDark ? 'rgba(239,68,68,0.30)' : '#fecaca') + ';border-radius:8px;cursor:pointer;' +
           'flex-shrink:0;margin:0 0 2px 0;';
 
         wrap.innerHTML =
@@ -655,9 +656,10 @@ const articleSchema = {
           trendNote = 'P4 has been relatively flat across readings. May still be early. Discuss cadence with your vet.';
         }
 
+        var isDarkSummary = document.body.classList.contains('bhq-dark-shell');
         var headingStyle =
           'display:flex;align-items:center;gap:0.6rem;' +
-          'font-size:1.15rem;font-weight:800;color:#111827;' +
+          'font-size:1.15rem;font-weight:800;color:' + (isDarkSummary ? '#EAF1FC' : '#111827') + ';' +
           'letter-spacing:-0.01em;margin:0 0 0.85rem 0;padding:0;line-height:1.2;';
 
         var accentStyle =
@@ -665,10 +667,10 @@ const articleSchema = {
           'background:hsl(24,95%,53%);flex-shrink:0;';
 
         var paraStyle =
-          'display:block;color:#1f2937;line-height:1.6;font-size:1rem;' +
+          'display:block;color:' + (isDarkSummary ? '#C8D8EE' : '#1f2937') + ';line-height:1.6;font-size:1rem;' +
           'margin:0 0 0.6rem 0;padding:0;';
 
-        var vetParaStyle = paraStyle + 'padding-top:0.6rem;border-top:1px solid #e5e7eb;margin-bottom:0;';
+        var vetParaStyle = paraStyle + 'padding-top:0.6rem;border-top:1px solid ' + (isDarkSummary ? 'rgba(255,255,255,0.08)' : '#e5e7eb') + ';margin-bottom:0;';
 
         return (
           '<h3 style="' + headingStyle + '"><span style="' + accentStyle + '" aria-hidden="true"></span>Trend Summary</h3>' +
@@ -719,8 +721,9 @@ const articleSchema = {
       }
 
       function buildProjection(readings, method) {
+        var isDarkProj = document.body.classList.contains('bhq-dark-shell');
         if (readings.length === 0) {
-          return '<div style="padding:1rem;background:#f9fafb;border:1px dashed #e5e7eb;border-radius:8px;color:#6b7280;text-align:center;">Add at least one P4 reading to see a projection.</div>';
+          return '<div style="padding:1rem;background:' + (isDarkProj ? '#111D2E' : '#f9fafb') + ';border:1px dashed ' + (isDarkProj ? 'rgba(255,255,255,0.08)' : '#e5e7eb') + ';border-radius:8px;color:' + (isDarkProj ? '#A9BAD4' : '#6b7280') + ';text-align:center;">Add at least one P4 reading to see a projection.</div>';
         }
 
         var lhEst = crossingDate(readings, 2);
@@ -731,7 +734,7 @@ const articleSchema = {
         var cardBase =
           'display:flex;flex-direction:column;gap:0.4rem;' +
           'padding:1rem 1.15rem 1rem 1.4rem;border-radius:12px;' +
-          'border-width:1px;border-style:solid;background:#ffffff;' +
+          'border-width:1px;border-style:solid;background:' + (isDarkProj ? '#0F1826' : '#ffffff') + ';' +
           'box-shadow:0 1px 3px rgba(17,24,39,0.05);' +
           'position:relative;overflow:hidden;';
 
@@ -739,36 +742,36 @@ const articleSchema = {
           'position:absolute;top:0;left:0;bottom:0;width:5px;display:block;';
 
         var labelStyle =
-          'display:block;font-size:0.72rem;font-weight:800;color:#6b7280;' +
+          'display:block;font-size:0.72rem;font-weight:800;color:' + (isDarkProj ? '#A9BAD4' : '#6b7280') + ';' +
           'text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.2rem 0;' +
           'padding:0;line-height:1.2;';
 
         var valueStyle =
-          'display:block;font-size:1.2rem;font-weight:800;color:#111827;' +
+          'display:block;font-size:1.2rem;font-weight:800;color:' + (isDarkProj ? '#EAF1FC' : '#111827') + ';' +
           'line-height:1.25;letter-spacing:-0.01em;margin:0 0 0.25rem 0;padding:0;';
 
         var noteStyle =
-          'display:block;font-size:0.875rem;color:#4b5563;line-height:1.5;' +
+          'display:block;font-size:0.875rem;color:' + (isDarkProj ? '#C8D8EE' : '#4b5563') + ';line-height:1.5;' +
           'margin:0;padding:0;';
 
         function card(variant, labelText, valueText, noteText) {
           var bg, border, accent;
           if (variant === 'lh') {
-            bg = 'linear-gradient(180deg,#fffbeb 0%,#ffffff 70%)';
-            border = '#fde68a';
+            bg = isDarkProj ? 'linear-gradient(180deg,rgba(234,179,8,0.10) 0%,#0F1826 70%)' : 'linear-gradient(180deg,#fffbeb 0%,#ffffff 70%)';
+            border = isDarkProj ? 'rgba(234,179,8,0.30)' : '#fde68a';
             accent = '#f59e0b';
           } else if (variant === 'ovulation') {
-            bg = 'linear-gradient(180deg,#f0fdf4 0%,#ffffff 70%)';
-            border = '#bbf7d0';
-            accent = '#16a34a';
+            bg = isDarkProj ? 'linear-gradient(180deg,rgba(34,197,94,0.10) 0%,#0F1826 70%)' : 'linear-gradient(180deg,#f0fdf4 0%,#ffffff 70%)';
+            border = isDarkProj ? 'rgba(34,197,94,0.25)' : '#bbf7d0';
+            accent = isDarkProj ? '#34D399' : '#16a34a';
           } else if (variant === 'window') {
-            bg = 'linear-gradient(180deg,hsl(24,95%,96%) 0%,#ffffff 70%)';
-            border = 'hsl(24,95%,80%)';
+            bg = isDarkProj ? 'linear-gradient(180deg,rgba(234,88,12,0.10) 0%,#0F1826 70%)' : 'linear-gradient(180deg,hsl(24,95%,96%) 0%,#ffffff 70%)';
+            border = isDarkProj ? 'rgba(234,88,12,0.30)' : 'hsl(24,95%,80%)';
             accent = 'hsl(24,95%,53%)';
           } else {
-            bg = '#f9fafb';
-            border = '#e5e7eb';
-            accent = '#d1d5db';
+            bg = isDarkProj ? '#111D2E' : '#f9fafb';
+            border = isDarkProj ? 'rgba(255,255,255,0.08)' : '#e5e7eb';
+            accent = isDarkProj ? '#4A5F7A' : '#d1d5db';
           }
           var cardStyle = cardBase + 'background:' + bg + ';border-color:' + border + ';' +
             (variant === 'pending' ? 'border-style:dashed;' : '');
@@ -830,9 +833,9 @@ const articleSchema = {
 
         var caveatStyle =
           'display:block;width:100%;box-sizing:border-box;' +
-          'padding:1rem 1.15rem;background:#fffbeb;' +
-          'border:1px solid #fde68a;border-radius:10px;' +
-          'color:#78350f;font-size:0.875rem;line-height:1.55;margin:0;';
+          'padding:1rem 1.15rem;background:' + (isDarkProj ? 'rgba(234,179,8,0.10)' : '#fffbeb') + ';' +
+          'border:1px solid ' + (isDarkProj ? 'rgba(234,179,8,0.30)' : '#fde68a') + ';border-radius:10px;' +
+          'color:' + (isDarkProj ? '#FDE68A' : '#78350f') + ';font-size:0.875rem;line-height:1.55;margin:0;';
 
         var caveat =
           '<div style="' + caveatStyle + '">' +
@@ -852,6 +855,7 @@ const articleSchema = {
       function buildChart(readings) {
         if (readings.length === 0) return '';
 
+        var isDark = document.body.classList.contains('bhq-dark-shell');
         var w = 720;
         var h = 280;
         var padL = 44;
@@ -890,16 +894,20 @@ const articleSchema = {
         svg += '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" class="ptt-chart-svg">';
 
         // Bands (under 1, 1-2.5, 2.5-10, 10+)
-        svg += bandRect(yFor(0), yFor(1), '#f3f4f6');
-        svg += bandRect(yFor(1), yFor(2.5), '#fef3c7');
-        svg += bandRect(yFor(2.5), yFor(10), '#dcfce7');
-        svg += bandRect(yFor(10), yFor(maxV), '#dbeafe');
+        svg += bandRect(yFor(0), yFor(1), isDark ? '#111D2E' : '#f3f4f6');
+        svg += bandRect(yFor(1), yFor(2.5), isDark ? 'rgba(234,179,8,0.10)' : '#fef3c7');
+        svg += bandRect(yFor(2.5), yFor(10), isDark ? 'rgba(34,197,94,0.10)' : '#dcfce7');
+        svg += bandRect(yFor(10), yFor(maxV), isDark ? 'rgba(59,130,246,0.10)' : '#dbeafe');
 
         // Threshold lines at 2 and 5
         svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + yFor(2) + '" y2="' + yFor(2) + '" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4"/>';
-        svg += '<text x="' + (padL + innerW - 4) + '" y="' + (yFor(2) - 4) + '" text-anchor="end" font-size="11" fill="#92400e" font-family="system-ui, sans-serif">LH surge ~2</text>';
+        svg += '<text x="' + (padL + innerW - 4) + '" y="' + (yFor(2) - 4) + '" text-anchor="end" font-size="11" fill="' + (isDark ? '#FDE68A' : '#92400e') + '" font-family="system-ui, sans-serif">LH surge ~2</text>';
         svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + yFor(5) + '" y2="' + yFor(5) + '" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 4"/>';
-        svg += '<text x="' + (padL + innerW - 4) + '" y="' + (yFor(5) - 4) + '" text-anchor="end" font-size="11" fill="#166534" font-family="system-ui, sans-serif">Ovulation ~5</text>';
+        svg += '<text x="' + (padL + innerW - 4) + '" y="' + (yFor(5) - 4) + '" text-anchor="end" font-size="11" fill="' + (isDark ? '#6EE7B7' : '#166534') + '" font-family="system-ui, sans-serif">Ovulation ~5</text>';
+
+        var axisMuted = isDark ? '#6B82A0' : '#6b7280';
+        var axisLine = isDark ? 'rgba(255,255,255,0.10)' : '#d1d5db';
+        var tickLine = isDark ? '#4A5F7A' : '#9ca3af';
 
         // Y-axis ticks
         var ticks = [0, 2, 5, 10];
@@ -907,9 +915,9 @@ const articleSchema = {
         for (var t = 0; t < ticks.length; t++) {
           if (ticks[t] > maxV) continue;
           var yy = yFor(ticks[t]);
-          svg += '<text x="' + (padL - 8) + '" y="' + (yy + 4) + '" text-anchor="end" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif">' + ticks[t] + '</text>';
+          svg += '<text x="' + (padL - 8) + '" y="' + (yy + 4) + '" text-anchor="end" font-size="11" fill="' + axisMuted + '" font-family="system-ui, sans-serif">' + ticks[t] + '</text>';
         }
-        svg += '<text x="10" y="' + (padT + innerH / 2) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif" transform="rotate(-90 10 ' + (padT + innerH / 2) + ')">ng/mL</text>';
+        svg += '<text x="10" y="' + (padT + innerH / 2) + '" text-anchor="middle" font-size="11" fill="' + axisMuted + '" font-family="system-ui, sans-serif" transform="rotate(-90 10 ' + (padT + innerH / 2) + ')">ng/mL</text>';
 
         // X-axis ticks (every ~3 days)
         var dayRange = maxDay - minDay;
@@ -917,14 +925,14 @@ const articleSchema = {
         for (var d = Math.ceil(minDay); d <= maxDay; d++) {
           if ((d - Math.ceil(minDay)) % step !== 0) continue;
           var xx = xFor(d);
-          svg += '<line x1="' + xx + '" x2="' + xx + '" y1="' + (padT + innerH) + '" y2="' + (padT + innerH + 4) + '" stroke="#9ca3af" stroke-width="1"/>';
-          svg += '<text x="' + xx + '" y="' + (padT + innerH + 18) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif">D' + d + '</text>';
+          svg += '<line x1="' + xx + '" x2="' + xx + '" y1="' + (padT + innerH) + '" y2="' + (padT + innerH + 4) + '" stroke="' + tickLine + '" stroke-width="1"/>';
+          svg += '<text x="' + xx + '" y="' + (padT + innerH + 18) + '" text-anchor="middle" font-size="11" fill="' + axisMuted + '" font-family="system-ui, sans-serif">D' + d + '</text>';
         }
-        svg += '<text x="' + (padL + innerW / 2) + '" y="' + (h - 4) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="system-ui, sans-serif">Day of cycle</text>';
+        svg += '<text x="' + (padL + innerW / 2) + '" y="' + (h - 4) + '" text-anchor="middle" font-size="11" fill="' + axisMuted + '" font-family="system-ui, sans-serif">Day of cycle</text>';
 
         // Axis lines
-        svg += '<line x1="' + padL + '" x2="' + padL + '" y1="' + padT + '" y2="' + (padT + innerH) + '" stroke="#d1d5db" stroke-width="1"/>';
-        svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + (padT + innerH) + '" y2="' + (padT + innerH) + '" stroke="#d1d5db" stroke-width="1"/>';
+        svg += '<line x1="' + padL + '" x2="' + padL + '" y1="' + padT + '" y2="' + (padT + innerH) + '" stroke="' + axisLine + '" stroke-width="1"/>';
+        svg += '<line x1="' + padL + '" x2="' + (padL + innerW) + '" y1="' + (padT + innerH) + '" y2="' + (padT + innerH) + '" stroke="' + axisLine + '" stroke-width="1"/>';
 
         // Trend line
         if (readings.length >= 2) {
@@ -940,15 +948,17 @@ const articleSchema = {
         // Data points
         for (var k = 0; k < readings.length; k++) {
           var c = classifyValue(readings[k].value);
-          var fill = '#6b7280';
-          if (c.band === 'baseline') fill = '#9ca3af';
+          var fill = isDark ? '#6B82A0' : '#6b7280';
+          if (c.band === 'baseline') fill = isDark ? '#6B82A0' : '#9ca3af';
           else if (c.band === 'lh') fill = '#f59e0b';
-          else if (c.band === 'ovulation') fill = '#16a34a';
-          else if (c.band === 'maturation') fill = '#2563eb';
+          else if (c.band === 'ovulation') fill = isDark ? '#34D399' : '#16a34a';
+          else if (c.band === 'maturation') fill = isDark ? '#60A5FA' : '#2563eb';
+          var dotStroke = isDark ? '#0F1826' : '#ffffff';
+          var labelFill = isDark ? '#EAF1FC' : '#111827';
           var cx = xFor(readings[k].day);
           var cy = yFor(readings[k].value);
-          svg += '<circle cx="' + cx + '" cy="' + cy + '" r="5.5" fill="' + fill + '" stroke="#ffffff" stroke-width="2"/>';
-          svg += '<text x="' + cx + '" y="' + (cy - 10) + '" text-anchor="middle" font-size="11" font-weight="600" fill="#111827" font-family="system-ui, sans-serif">' + readings[k].value.toFixed(1) + '</text>';
+          svg += '<circle cx="' + cx + '" cy="' + cy + '" r="5.5" fill="' + fill + '" stroke="' + dotStroke + '" stroke-width="2"/>';
+          svg += '<text x="' + cx + '" y="' + (cy - 10) + '" text-anchor="middle" font-size="11" font-weight="600" fill="' + labelFill + '" font-family="system-ui, sans-serif">' + readings[k].value.toFixed(1) + '</text>';
         }
 
         svg += '</svg>';
@@ -956,15 +966,16 @@ const articleSchema = {
       }
 
       function buildTimeline(readings) {
+        var isDarkTl = document.body.classList.contains('bhq-dark-shell');
         if (readings.length === 0) {
-          return '<div style="padding:1rem;background:#f9fafb;border:1px dashed #e5e7eb;border-radius:8px;color:#6b7280;text-align:center;">No test rows with both a date and a value yet.</div>';
+          return '<div style="padding:1rem;background:' + (isDarkTl ? '#111D2E' : '#f9fafb') + ';border:1px dashed ' + (isDarkTl ? 'rgba(255,255,255,0.08)' : '#e5e7eb') + ';border-radius:8px;color:' + (isDarkTl ? '#A9BAD4' : '#6b7280') + ';text-align:center;">No test rows with both a date and a value yet.</div>';
         }
 
         var bandAccent = {
-          baseline: '#9ca3af',
+          baseline: isDarkTl ? '#6B82A0' : '#9ca3af',
           lh: '#f59e0b',
-          ovulation: '#16a34a',
-          maturation: '#2563eb'
+          ovulation: isDarkTl ? '#34D399' : '#16a34a',
+          maturation: isDarkTl ? '#60A5FA' : '#2563eb'
         };
 
         var html = '<div style="display:flex;flex-direction:column;gap:0.55rem;">';
@@ -972,28 +983,28 @@ const articleSchema = {
         for (var i = 0; i < readings.length; i++) {
           var r = readings[i];
           var c = classifyValue(r.value);
-          var accent = bandAccent[c.band] || '#9ca3af';
+          var accent = bandAccent[c.band] || (isDarkTl ? '#6B82A0' : '#9ca3af');
 
           var rowStyle =
             'display:grid;grid-template-columns:74px 160px 110px 1fr;' +
             'align-items:center;column-gap:1rem;row-gap:0.35rem;' +
-            'padding:0.85rem 1rem;background:#ffffff;' +
-            'border:1px solid #e5e7eb;border-left:4px solid ' + accent + ';' +
+            'padding:0.85rem 1rem;background:' + (isDarkTl ? '#0F1826' : '#ffffff') + ';' +
+            'border:1px solid ' + (isDarkTl ? 'rgba(255,255,255,0.08)' : '#e5e7eb') + ';border-left:4px solid ' + accent + ';' +
             'border-radius:10px;box-shadow:0 1px 2px rgba(17,24,39,0.03);';
 
           var dayStyle =
             'display:inline-flex;align-items:center;justify-content:center;' +
-            'padding:0.2rem 0.6rem;background:#f3f4f6;color:#111827;' +
+            'padding:0.2rem 0.6rem;background:' + (isDarkTl ? '#162035' : '#f3f4f6') + ';color:' + (isDarkTl ? '#EAF1FC' : '#111827') + ';' +
             'font-weight:700;font-size:0.8rem;border-radius:999px;' +
             'width:fit-content;line-height:1.2;letter-spacing:0.02em;';
 
-          var dateStyle = 'color:#4b5563;font-size:0.9rem;';
-          var valueStyle = 'font-weight:700;color:#111827;font-size:1.05rem;';
+          var dateStyle = 'color:' + (isDarkTl ? '#A9BAD4' : '#4b5563') + ';font-size:0.9rem;';
+          var valueStyle = 'font-weight:700;color:' + (isDarkTl ? '#EAF1FC' : '#111827') + ';font-size:1.05rem;';
           var bandStyle =
             'display:flex;flex-direction:column;gap:0.15rem;' +
-            'color:#1f2937;font-size:0.9rem;font-weight:600;';
+            'color:' + (isDarkTl ? '#C8D8EE' : '#1f2937') + ';font-size:0.9rem;font-weight:600;';
           var noteStyle =
-            'display:block;color:#6b7280;font-size:0.8rem;font-weight:400;' +
+            'display:block;color:' + (isDarkTl ? '#6B82A0' : '#6b7280') + ';font-size:0.8rem;font-weight:400;' +
             'line-height:1.4;';
 
           html +=
@@ -1943,6 +1954,201 @@ const articleSchema = {
 
     .faq-answer p {
       font-size: 1.125rem;
+    }
+
+    /* ── Dark theme overrides ── */
+    :global(body.bhq-dark-shell) .ptt-banner-disclaimer {
+      background: rgba(234,179,8,0.10);
+      border-color: rgba(234,179,8,0.30);
+      color: #FDE68A;
+    }
+    :global(body.bhq-dark-shell) .ptt-card {
+      background: #0F1826;
+      border-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .ptt-label {
+      color: #EAF1FC;
+    }
+    :global(body.bhq-dark-shell) .ptt-optional {
+      color: #A9BAD4;
+    }
+    :global(body.bhq-dark-shell) .ptt-help {
+      color: #A9BAD4;
+    }
+    :global(body.bhq-dark-shell) .ptt-input {
+      border-color: rgba(255,255,255,0.08);
+      color: #EAF1FC;
+      background: #0F1826;
+    }
+    :global(body.bhq-dark-shell) .ptt-rows-fieldset {
+      border-color: rgba(255,255,255,0.08);
+      background: #0A1120;
+    }
+    :global(body.bhq-dark-shell) .ptt-rows .ptt-row {
+      background: #0F1826 !important;
+      border-color: rgba(255,255,255,0.08) !important;
+    }
+    :global(body.bhq-dark-shell) .ptt-rows .ptt-row-label {
+      color: #A9BAD4 !important;
+    }
+    :global(body.bhq-dark-shell) .ptt-rows .ptt-row-remove {
+      background: #0F1826 !important;
+      color: #FCA5A5 !important;
+      border-color: rgba(239,68,68,0.30) !important;
+    }
+    :global(body.bhq-dark-shell) .ptt-rows .ptt-row-remove:hover {
+      background: rgba(239,68,68,0.10) !important;
+    }
+    :global(body.bhq-dark-shell) .ptt-button-secondary {
+      background: #0F1826;
+      border-color: rgba(255,255,255,0.08);
+      color: #C8D8EE;
+    }
+    :global(body.bhq-dark-shell) .ptt-button-secondary:hover {
+      background: #111D2E;
+    }
+    :global(body.bhq-dark-shell) .ptt-error {
+      background: rgba(239,68,68,0.10);
+      border-color: rgba(239,68,68,0.30);
+      color: #FCA5A5;
+    }
+    :global(body.bhq-dark-shell) .ptt-results {
+      border-top-color: rgba(255,255,255,0.08);
+      background: #111D2E;
+    }
+    :global(body.bhq-dark-shell) .ptt-results-title {
+      color: #EAF1FC;
+    }
+    :global(body.bhq-dark-shell) .ptt-results-subtitle {
+      color: #A9BAD4;
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .ptt-section-title {
+      color: #EAF1FC;
+    }
+    :global(body.bhq-dark-shell) .ptt-chart-wrap,
+    :global(body.bhq-dark-shell) .ptt-projection-wrap,
+    :global(body.bhq-dark-shell) .ptt-timeline-wrap {
+      background: #0F1826;
+      border-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .ptt-chart-legend {
+      color: #A9BAD4;
+    }
+    :global(body.bhq-dark-shell) .ptt-proj-empty {
+      background: #111D2E;
+      border-color: rgba(255,255,255,0.08);
+      color: #A9BAD4;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-card {
+      background: #0F1826 !important;
+      border-color: rgba(255,255,255,0.08) !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-lh {
+      background: linear-gradient(180deg,rgba(234,179,8,0.10) 0%,#0F1826 70%) !important;
+      border-color: rgba(234,179,8,0.30) !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-ovulation {
+      background: linear-gradient(180deg,rgba(34,197,94,0.10) 0%,#0F1826 70%) !important;
+      border-color: rgba(34,197,94,0.25) !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-window {
+      background: linear-gradient(180deg,rgba(234,88,12,0.10) 0%,#0F1826 70%) !important;
+      border-color: rgba(234,88,12,0.30) !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-pending {
+      background: #111D2E !important;
+      border-color: rgba(255,255,255,0.08) !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection h4.ptt-proj-label,
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-label {
+      color: #A9BAD4 !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-value {
+      color: #EAF1FC !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-note {
+      color: #C8D8EE !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-projection .ptt-proj-caveat {
+      background: rgba(234,179,8,0.10) !important;
+      border-color: rgba(234,179,8,0.30) !important;
+      color: #FDE68A !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-timeline .ptt-tl-row {
+      background: #0F1826 !important;
+      border-color: rgba(255,255,255,0.08) !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-timeline .ptt-tl-day {
+      background: #162035 !important;
+      color: #EAF1FC !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-timeline .ptt-tl-date {
+      color: #A9BAD4 !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-timeline .ptt-tl-value {
+      color: #EAF1FC !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-timeline .ptt-tl-band {
+      color: #C8D8EE !important;
+    }
+    :global(body.bhq-dark-shell) #ptt-timeline .ptt-tl-note {
+      color: #6B82A0 !important;
+    }
+    :global(body.bhq-dark-shell) .ptt-empty {
+      background: #111D2E;
+      border-color: rgba(255,255,255,0.08);
+      color: #A9BAD4;
+    }
+    :global(body.bhq-dark-shell) .ptt-summary {
+      background: #162035;
+      border-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .ptt-summary-title {
+      color: #EAF1FC;
+    }
+    :global(body.bhq-dark-shell) .ptt-summary-text {
+      color: #C8D8EE;
+    }
+    :global(body.bhq-dark-shell) .ptt-summary-vet {
+      border-top-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .ptt-bands {
+      background: #0F1826;
+      border-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .ptt-bands-title {
+      color: #EAF1FC;
+    }
+    :global(body.bhq-dark-shell) .ptt-bands-list {
+      color: #C8D8EE;
+    }
+    :global(body.bhq-dark-shell) .ptt-bands-note {
+      color: #A9BAD4;
+    }
+    :global(body.bhq-dark-shell) .ptt-disclaimer {
+      background: rgba(234,179,8,0.10);
+      border-color: rgba(234,179,8,0.30);
+      color: #FDE68A;
+    }
+    :global(body.bhq-dark-shell) .ptt-cta {
+      background: #162035;
+    }
+    :global(body.bhq-dark-shell) .ptt-cta-text {
+      color: #C8D8EE;
+    }
+    :global(body.bhq-dark-shell) .ptt-cta-secondary {
+      border-color: rgba(255,255,255,0.08);
+      color: #C8D8EE;
+    }
+    :global(body.bhq-dark-shell) .ptt-cta-secondary:hover {
+      background: #111D2E;
+    }
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #C8D8EE;
     }
   </style>
 </BaseLayout>
