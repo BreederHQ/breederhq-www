@@ -85,13 +85,6 @@ interface Props {
   noindex?: boolean;
   hideLogo?: boolean;
   /**
-   * Set to true on the homepage to render the slot without any wrapper card.
-   * Inner pages do NOT get a white card wrapper automatically — the card is
-   * opt-in. The homepage must pass isHomepage=true to bypass any future wrapper.
-   * For now the slot is always rendered bare; inner pages keep their own bg-white.
-   */
-  isHomepage?: boolean;
-  /**
    * Optional canonical URL override. When provided, the page declares this URL
    * as its canonical instead of its own path. Use for funnel/landing pages that
    * exist primarily for SEO keyword targeting but should consolidate ranking
@@ -108,7 +101,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, breadcrumbs, faqs, howTo, article, service, product, noindex, hideLogo, isHomepage, ogImage: ogImageProp, canonicalOverride } = Astro.props;
+const { title, description, breadcrumbs, faqs, howTo, article, service, product, noindex, hideLogo, ogImage: ogImageProp, canonicalOverride } = Astro.props;
 // Astro is configured with `trailingSlash: 'never'`, so every page's canonical
 // URL must be slash-free - including the homepage. Without this normalization
 // the homepage canonical was `https://breederhq.com/` (with slash) while every
@@ -499,7 +492,7 @@ if (article) {
     <!-- Analytics Scripts -->
     <Analytics />
   </head>
-  <body class={isHomepage ? 'bhq-dark-shell' : undefined}>
+  <body class="bhq-dark-shell">
     <Header hideLogo={hideLogo} />
     <!--
       Pagefind site search (free, static, client-side, no external service).

@@ -57,6 +57,111 @@ body {
 
 body.bhq-dark-shell {
   background-color: #070C16;
+  color: #EAF1FC;
+}
+
+/*
+ * Dark-shell overrides for pre-existing pages that were written with
+ * light-theme Tailwind classes (bg-white, text-gray-700, etc.).
+ * These selectors are intentionally more specific than the utility classes
+ * so they win without needing !important. Pages written natively for the
+ * dark theme (index.astro, HeaderV3, Footer) use inline styles and are
+ * unaffected.
+ */
+
+/* Backgrounds */
+body.bhq-dark-shell .bg-white,
+body.bhq-dark-shell section.bg-white,
+body.bhq-dark-shell nav.bg-white,
+body.bhq-dark-shell div.bg-white {
+  background-color: #0F1826 !important;
+}
+body.bhq-dark-shell .bg-gray-50,
+body.bhq-dark-shell section.bg-gray-50,
+body.bhq-dark-shell nav.bg-gray-50 {
+  background-color: #111D2E !important;
+}
+body.bhq-dark-shell .bg-gray-100 {
+  background-color: #162035 !important;
+}
+body.bhq-dark-shell .bg-gray-200 {
+  background-color: #1C2A40 !important;
+}
+
+/* Text colors */
+body.bhq-dark-shell .text-gray-900,
+body.bhq-dark-shell .text-gray-800 {
+  color: #EAF1FC !important;
+}
+body.bhq-dark-shell .text-gray-700 {
+  color: #C8D8EE !important;
+}
+body.bhq-dark-shell .text-gray-600 {
+  color: #A9BAD4 !important;
+}
+body.bhq-dark-shell .text-gray-500 {
+  color: #8DA0BD !important;
+}
+body.bhq-dark-shell .text-gray-400 {
+  color: #6B82A0 !important;
+}
+
+/* Borders */
+body.bhq-dark-shell .border-gray-200,
+body.bhq-dark-shell .border-gray-300 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+body.bhq-dark-shell .border-gray-100 {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+body.bhq-dark-shell .divide-gray-200 > * + * {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Table rows */
+body.bhq-dark-shell .border-b.border-gray-200 {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Breadcrumb and inline nav backgrounds */
+body.bhq-dark-shell nav.breadcrumb {
+  background-color: transparent !important;
+}
+
+/* Cards and panels with explicit white/light bg + border */
+body.bhq-dark-shell .bg-white.border.border-gray-200,
+body.bhq-dark-shell .bg-white.border-2 {
+  background-color: #0F1826 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Hover states */
+body.bhq-dark-shell .hover\:bg-gray-50:hover {
+  background-color: #162035 !important;
+}
+body.bhq-dark-shell .hover\:bg-gray-100:hover {
+  background-color: #1C2A40 !important;
+}
+
+/* Input fields */
+body.bhq-dark-shell input:not([type="checkbox"]):not([type="radio"]),
+body.bhq-dark-shell textarea,
+body.bhq-dark-shell select {
+  background-color: #0F1826;
+  color: #EAF1FC;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+body.bhq-dark-shell input::placeholder,
+body.bhq-dark-shell textarea::placeholder {
+  color: #6B82A0;
+}
+
+/* CTA/primary bg (already orange, keep as-is) */
+body.bhq-dark-shell .bg-primary {
+  background-color: hsl(var(--primary)) !important;
+}
+body.bhq-dark-shell .text-primary {
+  color: hsl(var(--primary)) !important;
 }
 
 /* ---- BHQ Keyframe Animations ---- */
