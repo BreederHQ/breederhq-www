@@ -15,24 +15,55 @@ const { heading = "Related Workflows", intro, links } = Astro.props;
 ---
 
 {links && links.length > 0 && (
-  <section class="py-12 bg-stone-50 border-t border-stone-200">
+  <section style="padding:3rem 0;border-top:1px solid rgba(255,255,255,.07)">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">{heading}</h2>
-        {intro && <p class="text-base text-gray-600">{intro}</p>}
+        <h2 style="font-size:1.5rem;font-weight:700;color:#EAF1FC;margin-bottom:.5rem">{heading}</h2>
+        {intro && <p style="font-size:1rem;color:#A9BAD4">{intro}</p>}
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {links.map(link => (
           <a
             href={link.url}
-            class="group block p-4 rounded-lg border border-stone-200 bg-white hover:border-amber-400 hover:shadow-sm transition-all"
+            class="related-wf-card"
           >
-            <h3 class="font-semibold text-gray-900 text-base mb-1 group-hover:text-amber-700 transition-colors">{link.title}</h3>
-            <p class="text-sm text-gray-600 mb-2">{link.description}</p>
-            <span class="text-amber-600 text-sm font-medium" aria-hidden="true">&rarr;</span>
+            <h3 class="related-wf-title">{link.title}</h3>
+            <p class="related-wf-desc">{link.description}</p>
+            <span style="color:#FF6A2C;font-size:.875rem;font-weight:500" aria-hidden="true">&rarr;</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 )}
+
+<style>
+  .related-wf-card {
+    display: block;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #0F1826;
+    text-decoration: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .related-wf-card:hover {
+    border-color: rgba(255,106,44,.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  .related-wf-title {
+    font-weight: 600;
+    color: #EAF1FC;
+    font-size: 1rem;
+    margin-bottom: .25rem;
+    transition: color 0.15s;
+  }
+  .related-wf-card:hover .related-wf-title {
+    color: #FF6A2C;
+  }
+  .related-wf-desc {
+    font-size: .875rem;
+    color: #A9BAD4;
+    margin-bottom: .5rem;
+  }
+</style>
