@@ -14,22 +14,30 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What rabbit breeds and operations are on BreederHQ?',
-    answer: 'ARBA-recognized show breeds (Holland Lop, Netherland Dwarf, Mini Rex, Lionhead, Flemish Giant, and many more), meat operations (New Zealand, Californian, Florida White), pet/companion rabbit breeders, and fiber breeders (Angora). Coverage depends on which rabbitries have joined.',
+    answer: 'ARBA-recognized show breeds (Holland Lop, Netherland Dwarf, Mini Rex, Lionhead, Flemish Giant, Rex, Mini Lop, English Angora, French Angora, and many more), meat operations (New Zealand, Californian, Florida White, Champagne d\'Argent), fiber breeds (English, French, and Satin Angora), and pet and companion rabbit breeders are all welcome. Coverage depends on which breeders have joined.',
   },
   {
-    question: 'What rabbit health and quality data can I see on profiles?',
-    answer: 'Rabbit breeders can publish pedigrees with show wins on ancestors, parent rabbits with photos, available kits, biosecurity practices, and breeding history. Show breeders often include leg counts, Best in Show wins, and ARBA registration numbers.',
+    question: 'What quality data can I see on show rabbit profiles?',
+    answer: 'Show breeders can publish ARBA registration numbers, leg counts (the 3 legs needed to earn a Grand Champion certificate), Best in Show and Best Opposite Sex wins, Senior and Junior Best of Breed results, and judge comments. Pedigrees can include multiple generations of titled ancestors. This is far more useful than seeing one win on a social media post without breed context.',
   },
   {
-    question: 'Can I find rabbits for show, meat, fiber, and pet?',
-    answer: 'Yes. Browse the breeders or animals pages and use the breed and intent filters. Different breeders specialize in different markets (show, meat, fiber, or pet), and that intent is on each listing.',
+    question: 'What health concerns should I ask rabbit breeders about?',
+    answer: 'RHDV2 (Rabbit Hemorrhagic Disease Virus 2) is a highly contagious and often fatal disease spreading across North America. Ask whether the breeder vaccinates for RHDV2 (vaccine availability varies by state), their quarantine practices for new animals, and whether they attend shows frequently (shows increase exposure risk). Pasteurella (snuffles), GI stasis susceptibility in the line, and E. cuniculi neurological disease are also worth asking about for breeding-quality purchases.',
+  },
+  {
+    question: 'What is the difference between show-quality, pet-quality, and breeding-quality rabbits?',
+    answer: 'Show-quality rabbits meet the ARBA breed standard closely enough to be competitive in sanctioned shows. Breeding-quality animals have strong genetics and health history even if they have a minor fault that prevents showing. Pet-quality rabbits are healthy animals with faults (wrong color, slightly off type) that make them unsuitable for showing or breeding programs but excellent companions. Responsible breeders identify which category each animal falls into before sale.',
+  },
+  {
+    question: 'Does BreederHQ list rabbit rescues or classified ads?',
+    answer: 'No. BreederHQ is purpose-built for breeders running structured programs with documented pedigrees and health records. For rabbit rescues, check the House Rabbit Society or local shelters. For rabbits from programs that maintain real breeding records and pedigrees, BreederHQ is the right place.',
   },
 ];
 ---
 
 <BaseLayout
   title="Find Responsible Rabbit Breeders | BreederHQ"
-  description="Find responsible rabbit breeders for show, meat, fiber, and pet rabbits. ARBA pedigrees, breeding history, and active operations on the BreederHQ Marketplace."
+  description="Find responsible rabbit breeders for show, meat, fiber, and pet rabbits. ARBA pedigrees, leg counts, RHDV2 vaccination status, and breeding history on BreederHQ."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -40,8 +48,8 @@ const faqs = [
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find responsible rabbit breeders</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          ARBA pedigrees with show records on ancestors. Real breeding history. Show, meat, fiber,
-          and pet rabbit breeders all in one place, with the documentation to back up their claims.
+          ARBA pedigrees with leg counts and show wins. RHDV2 vaccination status and biosecurity practices.
+          Show, meat, fiber, and pet rabbit breeders with documentation to back their programs.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Rabbit Breeders</a>
@@ -52,17 +60,66 @@ const faqs = [
 
     <MarketplaceBreedersList breeders={breeders} speciesLabel="rabbit" />
 
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+          What the indicators on a breeder profile mean
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity confirmation</h3>
+            <p class="text-gray-700 text-sm">"Identity confirmed via Stripe Identity" means Stripe (not BreederHQ) confirmed the breeder's government-issued ID matched the legal name on file. BreederHQ does not perform the verification itself.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">ARBA registry passthrough</h3>
+            <p class="text-gray-700 text-sm">"Confirmed via ARBA registry" means BreederHQ queried the American Rabbit Breeders Association database and found a matching record. Click the source link to verify current membership and registration status directly with ARBA.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breeder's own attestation</h3>
+            <p class="text-gray-700 text-sm">Pedigrees, leg counts, show wins, RHDV2 vaccination status, and health records are the breeder's own attestation. BreederHQ does not open, read, or vouch for uploaded documents. Verify directly with the breeder.</p>
+          </div>
+        </div>
+        <p class="text-center mt-6">
+          <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
+        </p>
+      </div>
+    </section>
+
     <section class="py-16 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a rabbit breeder profile</h2>
         <ul class="space-y-3 text-lg text-gray-700">
-          <li><strong>Pedigrees</strong>: multi-generation pedigrees with leg counts and Best in Show wins on ancestors.</li>
-          <li><strong>Breeding history</strong>: past litters, current pregnancies, expected kits, and waitlist status.</li>
-          <li><strong>Available kits and adults</strong>: what is available now, with breed standard color and pattern details.</li>
-          <li><strong>Show records</strong>: parent rabbits' show wins and ARBA registration status.</li>
-          <li><strong>Biosecurity and health</strong>: RHDV2 vaccination, quarantine practices, herd health.</li>
-          <li><strong>Photos and program story</strong>: gallery, what makes the rabbitry distinctive.</li>
+          <li><strong>Pedigrees with show titles:</strong> multi-generation pedigrees with leg counts, Grand Champion certificates, Best in Show wins, and ARBA registration numbers on ancestors.</li>
+          <li><strong>Breeding and litter history:</strong> past litters, current pregnancies, expected kits, color genetics, and waitlist status.</li>
+          <li><strong>Available kits and adults:</strong> current animals with breed standard color, pattern, and type details.</li>
+          <li><strong>Biosecurity and RHDV2 status:</strong> vaccination practices, quarantine protocols, show attendance frequency, and herd health documentation.</li>
+          <li><strong>Show records:</strong> parent rabbits' competition wins, ARBA membership status, and sanctioned show participation history.</li>
+          <li><strong>Photos and program story:</strong> rabbitry gallery, what the breeder is working to produce, and what makes the program distinctive.</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">How to evaluate the rabbit breeders you find</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/buyers/evaluate-breeders" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">How to Evaluate Breeders</h3>
+            <p class="text-sm text-gray-600">The questions to ask any breeder, and what separates serious programs from the rest.</p>
+          </a>
+          <a href="/buyers/health-tests" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Understanding Health Testing</h3>
+            <p class="text-sm text-gray-600">Why RHDV2 status, biosecurity protocols, and herd health documentation matter before you buy.</p>
+          </a>
+          <a href="/buyers/red-flags" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Red Flags to Avoid</h3>
+            <p class="text-sm text-gray-600">Warning signs of irresponsible breeding practices and how to protect yourself before you commit.</p>
+          </a>
+          <a href="/buyers/contracts-and-agreements" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contracts and Agreements</h3>
+            <p class="text-sm text-gray-600">What a responsible purchase agreement should cover, and what to watch out for.</p>
+          </a>
+        </div>
       </div>
     </section>
 

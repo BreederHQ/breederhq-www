@@ -14,26 +14,30 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What kinds of alpaca breeders are on BreederHQ?',
-    answer: 'BreederHQ supports Huacaya and Suri alpaca programs, from seedstock and fiber-focused herds to smaller companion and hobby operations. Coverage depends on which breeders have joined, but the marketplace is built for programs that want to publish real records instead of generic ad copy.',
+    answer: 'BreederHQ supports Huacaya and Suri alpaca programs focused on fiber production, show competition, breeding-stock sales, and companion or therapy animals. This includes small farm-based operations, larger fiber-production herds, and breeders who specialize in producing high-EPD genetics for the commercial alpaca industry.',
   },
   {
-    question: 'Can I see fiber and health credentials on alpaca profiles?',
-    answer: 'Yes. Alpaca breeders can publish the records they actually maintain in BreederHQ, including pedigrees, health testing, cria history, and fiber-related notes such as fleece quality, micron information, or show results where relevant to the program.',
+    question: 'Can I see EPDs and fiber testing data on alpaca profiles?',
+    answer: 'Yes, where breeders publish them. ARI (Alpaca Registry, Inc.) maintains EPDs for Huacaya alpacas covering fiber traits. Independent fiber analysis labs such as Yocom-McColl or OFDA testing provide objective micron, standard deviation, comfort factor, and staple length data. Look for both when evaluating a breeding-quality animal: EPDs predict genetic merit across offspring, while fleece test data reflects the individual animal.',
   },
   {
-    question: 'Can I contact an alpaca breeder directly through BreederHQ?',
-    answer: 'Yes. Buyers can contact breeders through the marketplace profile and keep the conversation organized inside the platform instead of moving immediately to scattered texts and emails.',
+    question: 'What registries and organizations should I look for?',
+    answer: 'ARI (Alpaca Registry, Inc.) is the primary registry for Huacaya and Suri alpacas in the US. AOA (Alpaca Owners Association) runs the major show circuit including the National Alpaca Show and regional AOBA (Alpaca Owners and Breeders Association) shows. Ask whether the animal you are considering is ARI-registered and whether the breeder participates in AOA shows or fiber quality programs.',
+  },
+  {
+    question: 'What health testing matters for alpaca buyers?',
+    answer: 'Key health concerns in alpacas include Bovine Viral Diarrhea (BVD), which can cause Persistently Infected (PI) animals that silently spread disease, Johne\'s disease, and proper vaccination protocols (CDT at minimum). Reputable breeders test incoming animals for BVD/PI before integrating them into the herd. Ask for the herd\'s BVD/PI testing history and biosecurity protocol, not just the individual animal\'s records.',
   },
   {
     question: 'Is BreederHQ only for large alpaca farms?',
-    answer: 'No. The platform works for larger breeding programs and for smaller alpaca herds that still want organized records, professional buyer communication, and a more credible public profile.',
+    answer: 'No. The platform works for larger breeding programs and smaller alpaca herds alike, especially those that maintain individual animal records and want a more credible public profile than a generic classified listing or social media post.',
   },
 ];
 ---
 
 <BaseLayout
   title="Find Responsible Alpaca Breeders | BreederHQ"
-  description="Find responsible alpaca breeders with pedigrees, cria records, health documentation, and fiber-focused program details on the BreederHQ Marketplace."
+  description="Find responsible alpaca breeders with ARI registration, EPDs, fiber testing data, and health records. Browse Huacaya and Suri programs on BreederHQ."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -44,8 +48,8 @@ const faqs = [
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find responsible alpaca breeders</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          Pedigrees, cria records, health documentation, and fiber-focused program details, published
-          from the same software breeders use to run their alpaca program day to day.
+          ARI registration, EPDs, independent fiber analysis, and health records for Huacaya and Suri programs,
+          published from the same platform breeders use to manage their herd.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Alpaca Breeders</a>
@@ -56,25 +60,73 @@ const faqs = [
 
     <MarketplaceBreedersList breeders={breeders} speciesLabel="alpaca" />
 
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+          What the indicators on a breeder profile mean
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity confirmation</h3>
+            <p class="text-gray-700 text-sm">"Identity confirmed via Stripe Identity" means Stripe (not BreederHQ) confirmed the breeder's government-issued ID matched the legal name on file. BreederHQ does not perform the verification itself.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Registry passthrough</h3>
+            <p class="text-gray-700 text-sm">"Confirmed via ARI registry" means BreederHQ queried the Alpaca Registry, Inc. database and found a matching record. Click the source link to verify current registration status directly with ARI.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breeder's own attestation</h3>
+            <p class="text-gray-700 text-sm">Fiber test results, EPDs, BVD/PI testing, and health records are the breeder's own attestation. BreederHQ does not open, read, or vouch for uploaded documents. Request original lab reports and verify with the testing provider.</p>
+          </div>
+        </div>
+        <p class="text-center mt-6">
+          <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
+        </p>
+      </div>
+    </section>
+
     <section class="py-16 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on an alpaca breeder profile</h2>
         <ul class="space-y-3 text-lg text-gray-700">
-          <li><strong>Pedigrees and lineage</strong>: documented sire and dam records instead of vague breeding claims.</li>
-          <li><strong>Cria history</strong>: past breedings, cria outcomes, and herd-development context when breeders choose to publish it.</li>
-          <li><strong>Fiber and fleece detail</strong>: micron, handle, color, show or fiber notes, and the program priorities that matter to the breeder.</li>
-          <li><strong>Health documentation</strong>: the records and testing the breeder actually keeps inside BreederHQ.</li>
-          <li><strong>Program story</strong>: herd goals, photos, and the kind of alpacas the breeder is trying to produce.</li>
+          <li><strong>ARI registration and pedigrees:</strong> registration numbers and documented sire and dam records — not just "registered" as a claim in an ad.</li>
+          <li><strong>EPDs and fiber analysis:</strong> Estimated Progeny Differences for fiber traits (where published) alongside independent micron, SD, CF, and staple length data from labs like Yocom-McColl or OFDA testing.</li>
+          <li><strong>Show history and AOA results:</strong> AOBA ribbon history, National Alpaca Show placements, and judge evaluation notes when the breeder chooses to publish them.</li>
+          <li><strong>Health documentation:</strong> BVD/PI testing status, Johne's disease records, CDT vaccination history, and herd biosecurity protocols.</li>
+          <li><strong>Cria and offspring history:</strong> past offspring records, fiber performance over multiple shearings, and breeding history.</li>
+          <li><strong>Program type and goals:</strong> whether the program breeds for elite fiber genetics, the show ring, companion placement, or a combination.</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">How to evaluate the alpaca breeders you find</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/buyers/evaluate-breeders" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">How to Evaluate Breeders</h3>
+            <p class="text-sm text-gray-600">The questions to ask any livestock breeder, and what distinguishes a serious program.</p>
+          </a>
+          <a href="/buyers/health-tests" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Understanding Health Testing</h3>
+            <p class="text-sm text-gray-600">Why BVD/PI testing and herd biosecurity documentation matter before you buy.</p>
+          </a>
+          <a href="/buyers/red-flags" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Red Flags to Avoid</h3>
+            <p class="text-sm text-gray-600">Warning signs of irresponsible practices and how to protect yourself before you commit.</p>
+          </a>
+          <a href="/buyers/contracts-and-agreements" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contracts and Agreements</h3>
+            <p class="text-sm text-gray-600">What a responsible livestock purchase agreement should include before you transfer ownership.</p>
+          </a>
+        </div>
       </div>
     </section>
 
     <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your alpaca breeder?</h2>
-        <p class="text-lg text-stone-300 mb-8">
-          Browse responsible alpaca breeders on the BreederHQ Marketplace.
-        </p>
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your alpaca?</h2>
+        <p class="text-lg text-stone-300 mb-8">Browse responsible alpaca breeders on the BreederHQ Marketplace.</p>
         <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Alpaca Breeders</a>
       </div>
     </section>

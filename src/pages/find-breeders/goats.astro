@@ -14,30 +14,30 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What goat breeds and operations are on BreederHQ?',
-    answer: 'Dairy operations (Nigerian Dwarf, Nubian, LaMancha, Saanen, Alpine, Toggenburg, Oberhasli) and meat operations (Boer, Kiko, Spanish, Myotonic) are all welcome. ADGA, AGS, NPGA, ABGA, and other registries are supported. Pet/companion goat breeders are also welcome.',
+    answer: 'Dairy operations (Nigerian Dwarf, Nubian, LaMancha, Saanen, Alpine, Toggenburg, Oberhasli), meat operations (Boer, Kiko, Spanish, Myotonic), fiber breeds (Angora, Cashmere), heritage and rare breeds, and companion goat breeders are all welcome. ADGA, AGS, NPGA, ABGA, and other registries are supported.',
   },
   {
     question: 'Can I see DHIA milk records on dairy goat profiles?',
-    answer: 'Yes. Dairy goat breeders on BreederHQ can publish DHIA records: 305-day lactation totals, butterfat and protein percentages, peak production. This is the kind of documented production data you cannot get from a self-written profile.',
+    answer: 'Yes. Dairy goat breeders can publish DHIA records: 305-day lactation totals, butterfat and protein percentages, and peak production. This is documented production data tied to real DHI testing, not a self-written claim about how much a doe "typically milks."',
   },
   {
-    question: 'What about disease testing, CAE, CL, Johnes?',
-    answer: 'Health Tested badge requires real documentation. Goat breeders can publish CAE (Caprine Arthritis Encephalitis), CL (Caseous Lymphadenitis), and Johnes (Mycobacterium avium paratuberculosis) test results, biosecurity practices, and herd health history.',
+    question: 'What disease testing should I ask about — CAE, CL, Johne\'s?',
+    answer: 'All three are significant herd-health concerns. CAE (Caprine Arthritis Encephalitis) is a viral disease spread through colostrum and milk; CL (Caseous Lymphadenitis) causes internal and external abscesses that spread easily at contact. Johne\'s is a chronic intestinal disease. Responsible breeders test for all three and maintain CAE-prevention protocols (heat-treated or pasteurized colostrum). Ask to see the most recent whole-herd test results, not just the dam of the animal you are buying.',
   },
   {
-    question: 'Can I see parasite-management practices or FAMACHA/FEC monitoring?',
-    answer: 'Some goat breeders use profile credentials to show parasite-management credibility, including FAMACHA monitoring and fecal egg count (FEC) monitoring. That gives buyers more context than a generic statement that animals were "wormed."',
+    question: 'Can I see parasite-management practices on breeder profiles?',
+    answer: 'Yes. Parasite resistance is one of the most economically significant traits in small ruminants. Some breeders publish FAMACHA monitoring practices, fecal egg count (FEC) data, and selective treatment protocols. Breeders who track this data are selecting for parasite resistance and will give you more context than a generic statement that animals were "wormed."',
   },
   {
-    question: 'Can I find registered breeding stock or just kids?',
-    answer: 'Both. Browse for registered does, bucks, and breeding-quality kids. Breeders publish what is currently available, what is upcoming, and waitlist status.',
+    question: 'Can I find registered breeding stock or just pet-quality kids?',
+    answer: 'Both. Browse for registered does, bucks, and breeding-quality kids with ADGA or ABGA papers. Many breeders also offer disbudded pet kids for companion or small-farm placement. Use the intent filters on the animals page to narrow by purpose.',
   },
 ];
 ---
 
 <BaseLayout
   title="Find Responsible Goat Breeders | BreederHQ"
-  description="Find goat breeders for dairy, meat, and pet herds on BreederHQ Marketplace: DHIA records, disease testing, and ADGA pedigrees. Browse breeders now."
+  description="Find goat breeders for dairy, meat, and pet herds on BreederHQ Marketplace: DHIA records, CAE/CL/Johne's testing, and ADGA pedigrees. Browse breeders now."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -46,10 +46,10 @@ const faqs = [
 
     <section id="main" class="py-16 px-4 bg-gradient-to-b from-stone-50 to-white">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find goat breeders</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find responsible goat breeders</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          DHIA milk records. Documented disease testing (CAE, CL, Johnes). FAMACHA and fecal egg count credibility where breeders publish it.
-          Registered ADGA, AGS, and ABGA pedigrees for dairy and meat operations on the same trustworthy platform.
+          DHIA milk records. Documented CAE, CL, and Johne's testing. FAMACHA and fecal egg count
+          data where breeders publish it. Registered ADGA, AGS, and ABGA pedigrees for dairy and meat programs.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Goat Breeders</a>
@@ -60,25 +60,74 @@ const faqs = [
 
     <MarketplaceBreedersList breeders={breeders} speciesLabel="goat" />
 
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+          What the indicators on a breeder profile mean
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity confirmation</h3>
+            <p class="text-gray-700 text-sm">"Identity confirmed via Stripe Identity" means Stripe (not BreederHQ) confirmed the breeder's government-issued ID matched the legal name on file. BreederHQ does not perform the verification itself.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Registry passthrough</h3>
+            <p class="text-gray-700 text-sm">"Confirmed via ADGA registry" (or AGS, ABGA, etc.) means BreederHQ queried the public registry and found a matching record. Click the source-record link to confirm current registration status directly with the association.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breeder's own attestation</h3>
+            <p class="text-gray-700 text-sm">DHIA records, disease test results, FAMACHA practices, and herd health history are the breeder's own attestation. BreederHQ does not open, read, or vouch for uploaded documents. Request originals and verify directly.</p>
+          </div>
+        </div>
+        <p class="text-center mt-6">
+          <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
+        </p>
+      </div>
+    </section>
+
     <section class="py-16 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a goat breeder profile</h2>
         <ul class="space-y-3 text-lg text-gray-700">
-          <li><strong>DHIA milk records</strong>: 305-day lactation totals, butterfat and protein percentages, peak production for dairy operations.</li>
-          <li><strong>Disease testing</strong>: CAE, CL, Johnes test results and biosecurity protocols.</li>
-          <li><strong>Parasite-management credibility</strong>: FAMACHA monitoring, fecal egg count (FEC) monitoring, and other documented herd-health practices when breeders choose to publish them.</li>
-          <li><strong>Registered pedigrees</strong>: ADGA, AGS, NPGA, ABGA, and breed-specific registries.</li>
-          <li><strong>Kidding history</strong>: past kidding records, current pregnancies, expected kids, waitlist status.</li>
-          <li><strong>Performance data</strong>: linear appraisal scores, show records, weaning weights for meat goats.</li>
-          <li><strong>Photos and program story</strong>: herd photos, breeding philosophy, what makes the operation distinctive.</li>
+          <li><strong>DHIA milk records:</strong> 305-day lactation totals, butterfat and protein percentages, and peak production for dairy operations.</li>
+          <li><strong>Disease testing:</strong> CAE, CL, and Johne's test results, CAE-prevention protocols, and biosecurity practices.</li>
+          <li><strong>Parasite-management data:</strong> FAMACHA monitoring, fecal egg count (FEC) testing, and selective treatment protocols where breeders choose to publish them.</li>
+          <li><strong>Registered pedigrees:</strong> ADGA, AGS, NPGA, ABGA, and breed-specific registry numbers with documented lineage.</li>
+          <li><strong>Kidding and production history:</strong> past kidding records, current pregnancies, expected kids, linear appraisal scores, and waitlist status.</li>
+          <li><strong>Performance data:</strong> show records, weaning weights for meat breeds, linear appraisal scores for dairy animals.</li>
+          <li><strong>Photos and program story:</strong> herd photos, breeding philosophy, and what makes the operation distinctive.</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">How to evaluate the goat breeders you find</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/buyers/evaluate-breeders" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">How to Evaluate Breeders</h3>
+            <p class="text-sm text-gray-600">The questions to ask any livestock breeder, and what separates responsible programs from the rest.</p>
+          </a>
+          <a href="/buyers/health-tests" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Understanding Health Testing</h3>
+            <p class="text-sm text-gray-600">Why CAE, CL, Johne's testing, and biosecurity documentation matter before you bring new animals home.</p>
+          </a>
+          <a href="/buyers/red-flags" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Red Flags to Avoid</h3>
+            <p class="text-sm text-gray-600">Warning signs of irresponsible livestock practices and how to protect your herd before you buy.</p>
+          </a>
+          <a href="/buyers/contracts-and-agreements" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contracts and Agreements</h3>
+            <p class="text-sm text-gray-600">What a responsible livestock purchase agreement should cover before you commit.</p>
+          </a>
+        </div>
       </div>
     </section>
 
     <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-white mb-4">Ready to find your goat?</h2>
-        <p class="text-lg text-stone-300 mb-8">Browse goat breeders on the BreederHQ Marketplace.</p>
+        <p class="text-lg text-stone-300 mb-8">Browse responsible goat breeders on the BreederHQ Marketplace.</p>
         <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Goat Breeders</a>
       </div>
     </section>

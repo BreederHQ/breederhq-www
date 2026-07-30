@@ -14,26 +14,30 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What kinds of llama breeders are on BreederHQ?',
-    answer: 'BreederHQ supports llama breeding programs focused on companion, guard, fiber, performance, and breeding-stock goals. The marketplace is built for breeders who want a profile grounded in real records rather than a simple classified ad.',
+    answer: 'BreederHQ supports llama breeding programs focused on fiber, guard livestock duty, companion and therapy animals, performance events, and breeding-stock production. This includes both Classic and Suri llama programs, as well as operations that breed specifically for the livestock-guardian market where llamas protect sheep, goats, and poultry herds.',
   },
   {
-    question: 'Can I see breeding and offspring records on llama profiles?',
-    answer: 'Yes. Llama breeders can publish the real data they keep in BreederHQ, including pedigrees, offspring history, health documentation, and program details that help buyers understand what the breeder is actually producing.',
+    question: 'Can I see fiber data and health testing on llama profiles?',
+    answer: 'Yes. Llama breeders can publish EPDs (Estimated Progeny Differences through ARI or other registries), fiber quality data including micron, staple length, and fleece weight, BVD/leptospirosis/tuberculosis testing results, vaccination records, and herd health documentation. What appears on a profile is what the breeder actually maintains in BreederHQ.',
   },
   {
-    question: 'Does BreederHQ only fit large ranches?',
-    answer: 'No. It works for larger herds and smaller breeder-run operations alike, especially when the goal is to keep organized breeding records and present a more professional buyer experience.',
+    question: 'What registries and organizations should I look for?',
+    answer: 'Key organizations for llama buyers include ILR (International Lama Registry), LANA (Llama Association of North America), and CLAA (Canadian Llama and Alpaca Association). Performance breeders may reference ALSA (Alpaca Llama Show Association) results. Ask any breeder whether their animals are registered and which registry their pedigrees live in.',
   },
   {
-    question: 'How do I contact a llama breeder?',
-    answer: 'Use the breeder profile on the marketplace. Messages stay organized inside the platform instead of getting lost across email, social media, and text chains.',
+    question: 'What should I know about buying a llama for livestock guarding?',
+    answer: 'Guardian llamas are typically gelded males or females — intact males can become aggressive with livestock. A good guardian breeder will help you match the right animal temperament to your herd species (sheep, goats, or poultry all have different dynamics). Ask about the llama\'s prior experience with livestock, whether it was raised with small animals, and how it reacts to dogs. A profile that lists a llama\'s guarding background or farm exposure is a good sign.',
+  },
+  {
+    question: 'Does BreederHQ list llamas from rescue organizations or classifieds?',
+    answer: 'No. BreederHQ is purpose-built for breeders running structured programs with documented pedigrees and health records. For rescue llamas, contact LANA or regional llama rescue networks. For llamas from programs that maintain real herd records, BreederHQ is the right place to look.',
   },
 ];
 ---
 
 <BaseLayout
   title="Find Responsible Llama Breeders | BreederHQ"
-  description="Find responsible llama breeders with pedigrees, cria records, health documentation, and program details on the BreederHQ Marketplace."
+  description="Find responsible llama breeders with pedigrees, EPDs, fiber data, and health documentation. Browse fiber, guardian, and companion llama programs on BreederHQ."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -44,8 +48,8 @@ const faqs = [
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find responsible llama breeders</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          Pedigrees, cria records, health documentation, and real program context for llama breeders,
-          all published from the same platform they use to manage their herd.
+          Pedigrees, fiber data, EPDs, and health records for Classic and Suri llama programs,
+          published from the same software breeders use to run their operation.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Llama Breeders</a>
@@ -56,25 +60,73 @@ const faqs = [
 
     <MarketplaceBreedersList breeders={breeders} speciesLabel="llama" />
 
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+          What the indicators on a breeder profile mean
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity confirmation</h3>
+            <p class="text-gray-700 text-sm">"Identity confirmed via Stripe Identity" means Stripe (not BreederHQ) confirmed the breeder's government-issued ID matched the legal name on file. BreederHQ does not perform the verification itself.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Registry passthrough</h3>
+            <p class="text-gray-700 text-sm">"Confirmed via ILR registry" (or LANA, CLAA, etc.) means BreederHQ queried the public registry and found a matching record. Click the source-record link to confirm current registration status directly with the registry.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breeder's own attestation</h3>
+            <p class="text-gray-700 text-sm">Fiber test results, health records, EPDs, and program history are the breeder's own attestation. BreederHQ does not open, read, or vouch for uploaded documents. Review them directly and ask for source records.</p>
+          </div>
+        </div>
+        <p class="text-center mt-6">
+          <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
+        </p>
+      </div>
+    </section>
+
     <section class="py-16 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a llama breeder profile</h2>
         <ul class="space-y-3 text-lg text-gray-700">
-          <li><strong>Pedigrees and breeding history</strong>: real sire and dam records instead of generic lineage claims.</li>
-          <li><strong>Cria and herd records</strong>: offspring history, herd-development notes, and breeder priorities where published.</li>
-          <li><strong>Health documentation</strong>: the records the breeder actually maintains inside BreederHQ.</li>
-          <li><strong>Program focus</strong>: companion, guard, fiber, show, or breeding-stock goals explained in the breeder's own profile.</li>
-          <li><strong>Photos and buyer context</strong>: current animals, breeder story, and what makes the operation distinctive.</li>
+          <li><strong>Pedigrees and registration:</strong> ILR, LANA, or CLAA registration numbers with documented sire and dam records — not just "registered lineage" claimed in an ad.</li>
+          <li><strong>EPDs and fiber quality data:</strong> Estimated Progeny Differences where available, plus micron, staple length, fleece weight, and color data for fiber programs.</li>
+          <li><strong>Health documentation:</strong> BVD/leptospirosis/tuberculosis testing, vaccination records, and the herd health program the breeder maintains.</li>
+          <li><strong>Program type and breeding goals:</strong> whether the program breeds for guard duty, fiber production, performance showing (ALSA), companions, or breeding stock — in the breeder's own words.</li>
+          <li><strong>Cria and offspring history:</strong> past offspring, herd-development notes, and what the breeder has produced over time.</li>
+          <li><strong>Photos and buyer context:</strong> current animals, facilities, and what makes the operation distinctive.</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">How to evaluate the llama breeders you find</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/buyers/evaluate-breeders" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">How to Evaluate Breeders</h3>
+            <p class="text-sm text-gray-600">The questions to ask any livestock breeder, and what separates responsible programs from the rest.</p>
+          </a>
+          <a href="/buyers/health-tests" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Understanding Health Testing</h3>
+            <p class="text-sm text-gray-600">Why health records matter, which tests are meaningful, and how to read what a breeder publishes.</p>
+          </a>
+          <a href="/buyers/red-flags" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Red Flags to Avoid</h3>
+            <p class="text-sm text-gray-600">Warning signs of irresponsible breeding practices and how to protect yourself before you buy.</p>
+          </a>
+          <a href="/buyers/contracts-and-agreements" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contracts and Agreements</h3>
+            <p class="text-sm text-gray-600">What a responsible livestock purchase contract should cover, and what to watch out for.</p>
+          </a>
+        </div>
       </div>
     </section>
 
     <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your llama breeder?</h2>
-        <p class="text-lg text-stone-300 mb-8">
-          Browse responsible llama breeders on the BreederHQ Marketplace.
-        </p>
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to find your llama?</h2>
+        <p class="text-lg text-stone-300 mb-8">Browse responsible llama breeders on the BreederHQ Marketplace.</p>
         <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Llama Breeders</a>
       </div>
     </section>

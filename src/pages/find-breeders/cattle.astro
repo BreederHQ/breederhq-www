@@ -14,26 +14,30 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What kinds of cattle breeders are on BreederHQ?',
-    answer: 'BreederHQ supports seedstock and registered cattle programs, Highland and miniature breed operations, show programs, and pet-placement breeders. These are programs that maintain individual animal records (pedigrees, health testing, breeding history) and want to connect with buyers through a more credible platform than generic listing sites.',
+    answer: 'BreederHQ supports seedstock and registered cattle programs (Angus, Hereford, Simmental, Charolais, Limousin, Red Angus, Shorthorn, Brahman), heritage and miniature breed operations (Highland, Dexter, Belted Galloway, Miniature Hereford), show programs, and commercial cow-calf operations that maintain individual animal records and want a more credible buyer-facing presence than a generic classified listing.',
   },
   {
-    question: 'Can I see pedigrees and health records on cattle breeder profiles?',
-    answer: 'Yes. Cattle breeders can publish the records they actually maintain in BreederHQ: pedigrees, health testing documentation, vaccination records, and breeding history. What you see on a profile is grounded in the data the breeder uses to run their program.',
+    question: 'Can I see EPDs on cattle profiles?',
+    answer: 'Yes, where breeders publish them. EPDs (Expected Progeny Differences) are the most important genetic metric in the beef cattle industry — they predict a bull\'s ability to transmit specific traits like birth weight, weaning weight, yearling weight, milk, and marbling to his offspring. Look for EPDs from AHA (American Hereford Association), AAA (American Angus Association), ABBA (American Brahman Breeders Association), or the relevant breed registry. Always compare EPDs within the same breed and same evaluation date.',
   },
   {
-    question: 'What breeds can I find on BreederHQ?',
-    answer: 'BreederHQ supports all registered and heritage cattle breeds, including Angus, Hereford, Simmental, Charolais, Limousin, Highland, Dexter, miniature breeds, and more. Coverage depends on which breeders have joined, but the platform is open to any registered cattle program.',
+    question: 'What health documentation should I expect to see?',
+    answer: 'Responsible cattle programs document BVD/PI testing (Bovine Viral Diarrhea persistently infected status — a major herd-health risk), Johne\'s disease status, brucellosis vaccination (required for interstate movement), and vaccination histories. Bulls should have a current Breeding Soundness Examination (BSE) including semen analysis and physical evaluation. Heifers and cows bought for breeding should have pregnancy check documentation if sold open (not pregnant).',
   },
   {
-    question: 'Can I contact a cattle breeder directly through BreederHQ?',
-    answer: 'Yes. Buyers can contact breeders through the marketplace profile and manage the conversation inside the platform instead of moving immediately to scattered texts and emails.',
+    question: 'Does BreederHQ support AI and embryo transfer programs?',
+    answer: 'Yes. Cattle breeders can publish semen and embryo inventory alongside bull records. Profiles can include AI and natural service records, calving history, and herd-development notes for breeders running ET programs. This gives buyers the full context on a herd\'s genetics rather than a single ad for one animal.',
+  },
+  {
+    question: 'Does BreederHQ list commercial feeder cattle or stockers?',
+    answer: 'No. BreederHQ is built for breeders who maintain individual animal records, pedigrees, and health documentation. It is the right place for registered seedstock, breeding-quality heifers and bulls, and heritage breed programs. For commercial feeder or stocker cattle, look to regional livestock auctions and sale barns.',
   },
 ];
 ---
 
 <BaseLayout
   title="Find Responsible Cattle Breeders | BreederHQ"
-  description="Find responsible cattle breeders with pedigrees, health records, and breeding history: seedstock, Highland, and Dexter programs. Browse BreederHQ."
+  description="Find responsible cattle breeders with EPDs, pedigrees, BVD/PI testing, and BSE documentation. Browse seedstock, Highland, and Dexter programs on BreederHQ."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -44,8 +48,8 @@ const faqs = [
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Find responsible cattle breeders</h1>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          Pedigrees, health documentation, and breeding records, published from the same software
-          breeders use to run their cattle program day to day.
+          EPDs, pedigrees, health records, and breeding history for registered seedstock, heritage breeds,
+          and show programs, published from the same software breeders use to run their operation.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://marketplace.breederhq.com/breeders" class="bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition w-full sm:w-auto">Browse Cattle Breeders</a>
@@ -56,25 +60,72 @@ const faqs = [
 
     <MarketplaceBreedersList breeders={breeders} speciesLabel="cattle" />
 
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+          What the indicators on a breeder profile mean
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Identity confirmation</h3>
+            <p class="text-gray-700 text-sm">"Identity confirmed via Stripe Identity" means Stripe (not BreederHQ) confirmed the breeder's government-issued ID matched the legal name on file. BreederHQ does not perform the verification itself.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Registry passthrough</h3>
+            <p class="text-gray-700 text-sm">"Confirmed via AHA registry" (or AAA, ABBA, etc.) means BreederHQ queried the public breed registry and found a matching record. Click the source-record link to confirm current registration status directly with the association.</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breeder's own attestation</h3>
+            <p class="text-gray-700 text-sm">EPDs, BSE results, BVD/PI testing, health records, and program history are the breeder's own attestation. BreederHQ does not open, read, or vouch for uploaded documents. Request original records and verify directly.</p>
+          </div>
+        </div>
+        <p class="text-center mt-6">
+          <a href="/trust" class="text-emerald-700 hover:underline text-sm font-medium">Read the full Identity &amp; Credentials policy &rarr;</a>
+        </p>
+      </div>
+    </section>
+
     <section class="py-16 px-4 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">What you can see on a cattle breeder profile</h2>
         <ul class="space-y-3 text-lg text-gray-700">
-          <li><strong>Pedigrees and lineage:</strong> documented sire and dam records with registration numbers from AHA, AAA, ABBA, and other associations instead of vague breeding claims.</li>
-          <li><strong>Health documentation:</strong> BVD (PI testing), Johne's, vaccination records, and the health testing the breeder actually keeps inside BreederHQ.</li>
-          <li><strong>Breeding history:</strong> AI and natural service records, calving history, and herd-development context when breeders choose to publish it.</li>
-          <li><strong>Program story:</strong> herd goals, breed focus, photos, and the kind of cattle the breeder is working to produce.</li>
-          <li><strong>Available animals:</strong> for-sale calves, heifers, cows, and bulls with pedigree and health details linked directly to the listing.</li>
+          <li><strong>EPDs and genetic merit:</strong> Expected Progeny Differences for birth weight, weaning weight, yearling weight, milk, marbling, and REA — the data that tells you what a bull is actually producing, not just what he looks like.</li>
+          <li><strong>Pedigrees and registration numbers:</strong> documented sire and dam records with AHA, AAA, ABBA, AHCA (Highland), or breed-specific association numbers.</li>
+          <li><strong>Health documentation:</strong> BVD/PI testing, Johne's status, brucellosis vaccination, and comprehensive vaccination and deworming records.</li>
+          <li><strong>BSE and reproductive records:</strong> Breeding Soundness Exam results for bulls, pregnancy check documentation for heifers and cows, AI and natural service records, and calving history.</li>
+          <li><strong>Program story and breeding goals:</strong> what the breeder is selecting for, herd development history, show results, and photos of current animals.</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">How to evaluate the cattle breeders you find</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/buyers/evaluate-breeders" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">How to Evaluate Breeders</h3>
+            <p class="text-sm text-gray-600">The questions to ask any livestock breeder, and what separates serious programs from the rest.</p>
+          </a>
+          <a href="/buyers/health-tests" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Understanding Health Testing</h3>
+            <p class="text-sm text-gray-600">Why BVD/PI testing, BSE documentation, and vaccination histories matter before you buy.</p>
+          </a>
+          <a href="/buyers/red-flags" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Red Flags to Avoid</h3>
+            <p class="text-sm text-gray-600">Warning signs of irresponsible practices and how to protect yourself before a purchase.</p>
+          </a>
+          <a href="/buyers/contracts-and-agreements" class="block bg-white border border-stone-200 rounded-xl p-6 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contracts and Agreements</h3>
+            <p class="text-sm text-gray-600">What a responsible livestock purchase agreement should cover before you commit.</p>
+          </a>
+        </div>
       </div>
     </section>
 
     <section class="py-16 px-4 bg-gradient-to-br from-stone-900 to-stone-800">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-white mb-4">Ready to find your cattle breeder?</h2>
-        <p class="text-lg text-stone-300 mb-8">
-          Browse responsible cattle breeders on the BreederHQ Marketplace.
-        </p>
+        <p class="text-lg text-stone-300 mb-8">Browse responsible cattle breeders on the BreederHQ Marketplace.</p>
         <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Cattle Breeders</a>
       </div>
     </section>
