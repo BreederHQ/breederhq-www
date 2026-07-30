@@ -245,7 +245,11 @@ const trustLayers = [
     <div>
       <!-- Logo lockup -->
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
-        <img src="/logo-icon.png" alt="" aria-hidden="true" width="64" height="64" style="object-contain;filter:drop-shadow(0 0 16px rgba(255,106,44,.60))" />
+        <!-- width/height are the asset's INTRINSIC ratio (147x128) so the browser
+             reserves the right box and the mark does not shift as it loads. The CSS
+             pins the height and lets width follow, matching the header's h-10 w-auto
+             pattern - forcing a square on this 1.15:1 mark squashed the horse ~13%. -->
+        <img src="/logo-icon.png" alt="" aria-hidden="true" width="147" height="128" style="display:block;height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 0 16px rgba(255,106,44,.60))" />
         <span style="font-family:'Sora',system-ui,sans-serif;font-size:38px;font-weight:700;letter-spacing:-.025em;color:#EAF1FC">Breeder<span style="color:#FF6A2C">HQ</span></span>
       </div>
       <div style="display:inline-flex;align-items:center;gap:9px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,138,76,.28);background:rgba(255,106,44,.07);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:#FFB98C">
