@@ -20,7 +20,10 @@ const featured = {
   tag: featuredData.tag,
 };
 
-const articles = allArticles.filter(a => !a.featured);
+const nonFeatured = allArticles.filter(a => !a.featured);
+
+// Unique tags in order of first appearance, for filter chips
+const allTags = Array.from(new Set(nonFeatured.map(a => a.tag)));
 ---
 
 <BaseLayout
@@ -156,12 +159,47 @@ const articles = allArticles.filter(a => !a.featured);
       }
     </style>
 
+    <!-- Search + Filter -->
+    <section class="px-4 bg-white pt-6 pb-2">
+      <div class="max-w-4xl mx-auto">
+        <!-- Search input -->
+        <div class="relative mb-4">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+          </svg>
+          <input
+            id="article-search"
+            type="search"
+            placeholder="Search articles..."
+            autocomplete="off"
+            class="w-full pl-9 pr-4 py-2.5 rounded-lg border border-gray-300 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[hsl(24,95%,53%)] focus:border-transparent bg-white"
+            aria-label="Search articles"
+          />
+        </div>
+        <!-- Tag chips -->
+        <div class="flex flex-wrap gap-2 pb-2" id="tag-chips" role="group" aria-label="Filter by topic">
+          <button
+            class="tag-chip active text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors"
+            data-tag="all"
+            aria-pressed="true"
+          >All</button>
+          {allTags.map(tag => (
+            <button
+              class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors"
+              data-tag={tag}
+              aria-pressed="false"
+            >{tag}</button>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- Section divider -->
     <section class="px-4 bg-white">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center gap-4 py-4">
           <div class="flex-1 h-px bg-gray-200"></div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">More Articles</p>
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500" id="articles-count-label">More Articles</p>
           <div class="flex-1 h-px bg-gray-200"></div>
         </div>
       </div>
@@ -170,9 +208,15 @@ const articles = allArticles.filter(a => !a.featured);
     <!-- Articles List -->
     <section class="pt-2 pb-16 px-4 bg-white">
       <div class="max-w-4xl mx-auto">
-        <div class="space-y-6">
-          {articles.map(article => (
-            <a href={`/articles/${article.slug}`} class="block bg-white rounded-xl border border-gray-300 shadow-sm hover:shadow-lg hover:border-[hsl(24,95%,53%)] hover:-translate-y-0.5 transition-all duration-200 p-8 group">
+        <div class="space-y-6" id="articles-list">
+          {nonFeatured.map(article => (
+            <a
+              href={`/articles/${article.slug}`}
+              class="article-card block bg-white rounded-xl border border-gray-300 shadow-sm hover:shadow-lg hover:border-[hsl(24,95%,53%)] hover:-translate-y-0.5 transition-all duration-200 p-8 group"
+              data-tag={article.tag}
+              data-title={article.title.toLowerCase()}
+              data-excerpt={article.excerpt.toLowerCase()}
+            >
               <p class="text-xs font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">{article.tag}</p>
               <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-[hsl(24,95%,53%)] transition">
                 {article.title}
@@ -194,11 +238,110 @@ const articles = allArticles.filter(a => !a.featured);
           ))}
         </div>
 
-        <!-- Coming soon teaser -->
-        <div class="mt-12 text-center text-gray-500 text-sm">
+        <!-- Empty state -->
+        <div id="articles-empty" class="hidden text-center py-16 text-gray-400">
+          <p class="text-lg font-medium mb-1">No articles match that search.</p>
+          <p class="text-sm">Try a different term or <button class="text-[hsl(24,95%,53%)] hover:underline" onclick="document.getElementById('article-search').value='';window.__articleFilter()">clear the search</button>.</p>
+        </div>
+
+        <div class="mt-12 text-center text-gray-500 text-sm" id="articles-coming-soon">
           More articles coming soon.
         </div>
       </div>
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  .tag-chip {
+    background: white;
+    color: #6b7280;
+    border-color: #d1d5db;
+  }
+  .tag-chip:hover {
+    border-color: hsl(24, 95%, 53%);
+    color: hsl(24, 95%, 53%);
+  }
+  .tag-chip.active {
+    background: hsl(24, 95%, 53%);
+    color: white;
+    border-color: hsl(24, 95%, 53%);
+  }
+
+  :global(body.bhq-dark-shell) .tag-chip {
+    background: transparent;
+    color: #9ca3af;
+    border-color: #374151;
+  }
+  :global(body.bhq-dark-shell) .tag-chip:hover {
+    border-color: hsl(24, 95%, 53%);
+    color: hsl(24, 95%, 53%);
+  }
+  :global(body.bhq-dark-shell) .tag-chip.active {
+    background: hsl(24, 95%, 53%);
+    color: white;
+    border-color: hsl(24, 95%, 53%);
+  }
+</style>
+
+<script>
+  (function () {
+    const searchInput = document.getElementById('article-search') as HTMLInputElement | null;
+    const chips = document.querySelectorAll<HTMLButtonElement>('.tag-chip');
+    const cards = document.querySelectorAll<HTMLElement>('.article-card');
+    const emptyState = document.getElementById('articles-empty');
+    const countLabel = document.getElementById('articles-count-label');
+    const comingSoon = document.getElementById('articles-coming-soon');
+
+    let activeTag = 'all';
+    let searchQuery = '';
+
+    function filter() {
+      let visible = 0;
+
+      cards.forEach(card => {
+        const tagMatch = activeTag === 'all' || card.dataset.tag === activeTag;
+        const q = searchQuery.trim().toLowerCase();
+        const textMatch = !q
+          || (card.dataset.title ?? '').includes(q)
+          || (card.dataset.excerpt ?? '').includes(q)
+          || (card.dataset.tag ?? '').toLowerCase().includes(q);
+
+        const show = tagMatch && textMatch;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (emptyState) emptyState.classList.toggle('hidden', visible > 0);
+      if (comingSoon) comingSoon.style.display = visible === 0 ? 'none' : '';
+      if (countLabel) {
+        if (activeTag !== 'all' || searchQuery.trim()) {
+          countLabel.textContent = visible === 1 ? '1 article' : `${visible} articles`;
+        } else {
+          countLabel.textContent = 'More Articles';
+        }
+      }
+    }
+
+    // Expose for the empty-state inline onclick
+    (window as any).__articleFilter = filter;
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        activeTag = chip.dataset.tag ?? 'all';
+        chips.forEach(c => {
+          c.classList.toggle('active', c === chip);
+          c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
+        });
+        filter();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        filter();
+      });
+    }
+  })();
+</script>

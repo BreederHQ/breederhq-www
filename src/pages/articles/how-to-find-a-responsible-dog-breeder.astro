@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'How to Find a Responsible Dog Breeder', url: '/articles/how-to-find-a-responsible-dog-breeder' }
+];
+
+const lastReviewedISO = '2026-07-30';
+const lastReviewedDate = new Date(lastReviewedISO + 'T00:00:00Z');
+const lastReviewedMonthYear = lastReviewedDate.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC'
+});
+
+const faqs = [
+  {
+    question: 'How do I find a responsible dog breeder?',
+    answer: 'Start with breed club breeder referral lists (AKC parent clubs, UKC affiliated clubs), then cross-reference any breeder you find against OFA health test results and registry records. Look for breeders who health-test breeding pairs before every litter, belong to a breed-specific club, have waiting lists rather than always-available puppies, are willing to take a dog back at any point in its life, and can show you the living conditions for their dogs. Avoid any breeder selling multiple breeds from the same facility, always having puppies available, or refusing to let you meet the dam.'
+  },
+  {
+    question: 'What is the difference between a responsible breeder and a puppy mill?',
+    answer: 'A responsible breeder health-tests their dogs before breeding, raises puppies in a home or small-scale kennel environment where they get human socialization, maintains a waiting list rather than constant inventory, screens buyers carefully, provides a multi-year health guarantee, and takes their dogs back at any age if a buyer can no longer keep them. A puppy mill operates at commercial scale, breeds for volume and availability rather than health and temperament, often does little or no health testing, and treats dogs as inventory. The key visual difference: a responsible breeder usually has one or two breeds, has a real waiting list, and will always let you visit.'
+  },
+  {
+    question: 'What health tests should a responsible dog breeder do?',
+    answer: 'It depends entirely on the breed, because each breed has specific genetic risks. For most large breeds, OFA hip and elbow evaluations (or PennHIP for hips) are standard. For many breeds, cardiac evaluation by a board-certified cardiologist, eye certification by a board-certified ophthalmologist (CAER/CERF exam), and breed-specific genetic panel testing (through Embark, Wisdom Panel, or breed club protocols) are required by health programs. Look up your specific breed on the OFA Canine Health Information Center (CHIC) website to see what that breed\'s parent club recommends. A responsible breeder tests for all CHIC requirements for their breed before every litter.'
+  },
+  {
+    question: 'How long should I expect to wait for a puppy from a responsible breeder?',
+    answer: 'Commonly 6 to 18 months, sometimes longer for popular breeds. A responsible breeder does not breed on demand or to fill orders. They breed when they have an appropriate pairing, a health-tested dam who is in the right cycle, and a waiting list of screened buyers. If a breeder always has puppies available with no wait, that is a sign they are breeding for volume rather than quality. A real wait list is a feature, not a bug: it tells you the breeder is not producing more litters than demand requires.'
+  },
+  {
+    question: 'Should I buy a dog from a breeder I can only find online?',
+    answer: 'Only if you can verify them independently. Anyone can build a professional-looking website. Cross-check any online breeder against their breed club membership, OFA database results under their kennel name or their dogs\' registered names, and any AKC/UKC registration records. Ask to video call and see the dam and the living environment. If a breeder refuses video, insists on shipping without meeting, or pushes you to pay without answering substantive questions, walk away. Distance is not a disqualifier, but unverifiable claims are.'
+  },
+  {
+    question: 'Is it OK to buy a dog without meeting the breeder in person?',
+    answer: 'For buyers in different regions or for rare breeds, purchasing without an in-person visit is common and acceptable if you do your verification work. Ask for a live video of the dam, the litter, and the facility. Request to speak to the breeder by phone or video, not just email. Ask for references from previous buyers and call them. Verify health test results in the OFA database yourself, using the dog\'s registered name or the breeder\'s kennel name. A trustworthy breeder understands that a serious buyer from out of state still needs to do due diligence, and they will accommodate that.'
+  },
+  {
+    question: 'What questions should I ask a dog breeder before buying a puppy?',
+    answer: 'Ask: What health tests do you do on the sire and dam before breeding? Can I see the OFA results? What does your health guarantee cover, and what voids it? Will you take the dog back at any age if I can no longer keep them? How do you socialize your puppies before they go home? What is your contract\'s spay/neuter policy and timeline? Can I visit and meet the dam? Who do you refer me to if I have questions after I bring the puppy home? How do you choose which buyers to place puppies with? A good breeder will welcome every one of these questions without hesitation.'
+  },
+  {
+    question: 'How can I tell if health test results are real?',
+    answer: 'Go to the OFA website (ofa.org) and search under OFA Database using the dog\'s registered name, registration number, or the breeder\'s kennel name. OFA results are publicly searchable and will show you the date, the evaluator, and the result. If a breeder shows you a paper certificate but the dog does not appear in the OFA database, the test may be from a private vet evaluation (which does not carry the same validation) or the certificate may be fabricated. PennHIP results are not publicly searchable, so ask for the numerical distraction index score and which percentile for the breed. Embark and Wisdom Panel genetic results can be shared via link directly from the provider.'
+  }
+];
+---
+
+<BaseLayout
+  title="How to Find a Responsible Dog Breeder | BreederHQ"
+  description="A practical guide to finding a responsible dog breeder: what health tests to require, how to read OFA results, what questions to ask, and the red flags that should make you walk away."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={{
+    headline: "How to Find a Responsible Dog Breeder",
+    description: "A practical guide to finding a responsible dog breeder: what health tests to require, how to read OFA results, what questions to ask, and the red flags that should make you walk away.",
+    datePublished: lastReviewedISO,
+    dateModified: lastReviewedISO,
+    author: {
+      name: "BreederHQ Editorial"
+    }
+  }}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">How to Find a Responsible Dog Breeder</li>
+      </ol>
+    </nav>
+
+    <header class="pt-16 pb-8 px-4 bg-gradient-to-b from-stone-50 to-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[hsl(24,95%,53%)] mb-3">Buyer Guide</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-3">
+          How to Find a Responsible Dog Breeder
+        </h1>
+        <p class="text-sm text-gray-500 mb-6">Last updated: {lastReviewedMonthYear}</p>
+        <p class="text-xl text-gray-600 leading-relaxed mb-8">
+          A practical guide to what separates a responsible breeder from a problem one, what health tests to require, how to verify what breeders tell you, and the questions that reveal who you are really dealing with.
+        </p>
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-stone-200 pt-6">
+          <div>
+            <p class="font-semibold text-gray-900">BreederHQ Editorial</p>
+            <p>Updated {lastReviewedMonthYear}</p>
+          </div>
+          <span class="text-gray-300">·</span>
+          <p>July 2026</p>
+          <span class="text-gray-300">·</span>
+          <p>15 min read</p>
+        </div>
+      </div>
+    </header>
+
+    <article class="pt-4 pb-12 px-4">
+      <div class="max-w-3xl mx-auto">
+
+        <section class="mb-12">
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Most people looking for a dog have the right instincts: they want to avoid puppy mills, they want a healthy dog, they want a breeder who cares. The problem is that bad actors know this and have gotten very good at looking like responsible breeders. Professional websites, staged photos, and scripted answers about "health testing" are all easy to manufacture.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            This guide is about the parts that cannot be faked: public health databases, verifiable registry records, and the specific questions that separate someone who understands their breed from someone reading from a script. It is written for buyers who want to do this right.
+          </p>
+
+          <!-- TOC -->
+          <nav class="bg-stone-50 rounded-xl p-6 mb-8" aria-label="Table of contents">
+            <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">In This Article</p>
+            <ol class="space-y-1.5 text-sm text-gray-700">
+              <li><a href="#where-to-start" class="text-[hsl(24,95%,53%)] hover:underline">1. Where to start your search</a></li>
+              <li><a href="#health-testing" class="text-[hsl(24,95%,53%)] hover:underline">2. Understanding health testing</a></li>
+              <li><a href="#verify" class="text-[hsl(24,95%,53%)] hover:underline">3. How to verify what a breeder claims</a></li>
+              <li><a href="#visit" class="text-[hsl(24,95%,53%)] hover:underline">4. What to look for when you visit (or video call)</a></li>
+              <li><a href="#questions" class="text-[hsl(24,95%,53%)] hover:underline">5. Questions to ask any breeder</a></li>
+              <li><a href="#red-flags" class="text-[hsl(24,95%,53%)] hover:underline">6. Red flags that should make you walk away</a></li>
+              <li><a href="#contract" class="text-[hsl(24,95%,53%)] hover:underline">7. Before you sign anything</a></li>
+              <li><a href="#wait" class="text-[hsl(24,95%,53%)] hover:underline">8. What a real wait means</a></li>
+            </ol>
+          </nav>
+        </section>
+
+        <section class="mb-12" id="where-to-start">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">1. Where to Start Your Search</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The most reliable starting point is your breed's national parent club. Every AKC-recognized breed has a parent club (the Golden Retriever Club of America, the Labrador Retriever Club, the German Shepherd Dog Club of America, and so on), and most maintain a breeder referral list of members who have signed a code of ethics. These breeders have committed, at minimum, to following the club's health testing guidelines and not selling to pet stores or brokers. That is not a guarantee of quality, but it screens out the worst actors.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Start at the AKC parent club website for your breed. If you are looking at a UKC-recognized breed or a breed outside AKC recognition, find the primary breed club in the US. Search for "your breed + parent club" or go directly to akc.org and navigate to the breed page, which will link you to the parent club.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            From the breeder referral list, identify breeders within reasonable distance or who ship to your region, and then do your own verification work. A club membership is a starting point, not an endorsement.
+          </p>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-6">
+            <p class="font-semibold text-gray-900 mb-2">Searching on BreederHQ</p>
+            <p class="text-gray-700 leading-relaxed text-sm">
+              BreederHQ is a marketplace built specifically for breeders who maintain documented records. You can filter by breed and see profiles backed by actual health test data, pedigrees, and breeding history, not just a self-written ad. <a href="https://marketplace.breederhq.com/breeders" class="text-[hsl(24,95%,53%)] hover:underline">Browse dog breeders on BreederHQ</a> alongside your breed club search.
+            </p>
+          </div>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Other reasonable sources include word of mouth from local dog training clubs, breed-specific Facebook groups (with the caveat that these require verification work), and platforms that publish breeder health testing records directly. Avoid Craigslist, general classified sites, and any marketplace where breeders do not post documented health records.
+          </p>
+        </section>
+
+        <section class="mb-12" id="health-testing">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">2. Understanding Health Testing</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            "Health tested" and "vet checked" are not the same thing. A vet check is a routine physical examination. Health testing means having specific diagnostic evaluations performed to assess genetic risk for heritable diseases in that breed, usually before breeding, and reporting those results to a public database.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The Orthopedic Foundation for Animals (OFA) maintains the most comprehensive public database of dog health test results in the United States. Results are searchable at ofa.org. The OFA also runs the Canine Health Information Center (CHIC), which defines the minimum health testing requirements the parent club recommends for each breed.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">What the common tests mean</h3>
+
+          <div class="space-y-6 mb-8">
+            <div class="border-l-4 border-stone-300 pl-6">
+              <h4 class="font-bold text-gray-900 mb-2">OFA Hip Evaluation</h4>
+              <p class="text-gray-700 leading-relaxed text-sm">
+                Hip dysplasia is one of the most common heritable orthopedic problems in dogs. OFA hip evaluations involve radiographs submitted to three OFA-approved veterinary radiologists who grade the hip conformation. Results are Excellent, Good, Fair (all passing), Borderline, Mild, Moderate, or Severe. Responsible breeders use only dogs with Excellent or Good hips, and sometimes Fair, depending on the breed. A dog used for breeding should have OFA-certified hips, not just a normal-looking x-ray from a local vet that was never submitted to OFA.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-stone-300 pl-6">
+              <h4 class="font-bold text-gray-900 mb-2">PennHIP</h4>
+              <p class="text-gray-700 leading-relaxed text-sm">
+                PennHIP is an alternative hip evaluation method that measures hip laxity using a distraction index (DI). A lower DI is better. PennHIP evaluations can be done as early as 16 weeks of age and are considered by many specialists to be more predictive of later dysplasia than OFA. Results are not publicly searchable the way OFA results are, but the breeder can show you the report and the DI number. Ask what the breed's average DI is and how the parents compare.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-stone-300 pl-6">
+              <h4 class="font-bold text-gray-900 mb-2">OFA Elbow Evaluation</h4>
+              <p class="text-gray-700 leading-relaxed text-sm">
+                Elbow dysplasia covers several developmental conditions affecting the elbow joint. OFA elbow evaluations are graded Normal (passing), Grade I, Grade II, or Grade III. For large breeds prone to elbow dysplasia (Labradors, Golden Retrievers, German Shepherds, Rottweilers, and many others), responsible breeders test both parents. OFA elbow results are publicly searchable.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-stone-300 pl-6">
+              <h4 class="font-bold text-gray-900 mb-2">OFA Cardiac Evaluation</h4>
+              <p class="text-gray-700 leading-relaxed text-sm">
+                Heritable cardiac disease is significant in breeds like Cavalier King Charles Spaniels (Mitral Valve Disease), Boxers (Arrhythmogenic Right Ventricular Cardiomyopathy), Dobermans (DCM), and many others. An OFA cardiac evaluation requires examination by a board-certified cardiologist. A general vet listening to the heart is not an OFA cardiac evaluation.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-stone-300 pl-6">
+              <h4 class="font-bold text-gray-900 mb-2">CAER Eye Certification</h4>
+              <p class="text-gray-700 leading-relaxed text-sm">
+                Previously called CERF, the CAER (Companion Animal Eye Registry) exam is performed by a board-certified veterinary ophthalmologist and screens for heritable eye diseases. Results must be renewed annually because some conditions develop with age. Breeds with significant eye disease history include Collies (Collie Eye Anomaly), Cocker Spaniels (progressive retinal atrophy), and many others.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-stone-300 pl-6">
+              <h4 class="font-bold text-gray-900 mb-2">Genetic Panel Testing</h4>
+              <p class="text-gray-700 leading-relaxed text-sm">
+                DNA-based genetic tests identify carriers and affected dogs for specific mutations. Embark Vet and Wisdom Panel are the most common providers. Parent clubs define which tests are required for CHIC compliance. Examples: MDR1 (drug sensitivity gene in herding breeds), DM (degenerative myelopathy in many breeds), Exercise-Induced Collapse in Labradors, Hereditary Nasal Parakeratosis in Labradors, Progressive Retinal Atrophy in many breeds. The results identify whether each dog is Clear (no copies of the mutation), Carrier (one copy, unaffected but can pass on), or Affected (two copies). Carrier-to-Clear pairings are acceptable; Carrier-to-Carrier are not, because they risk producing Affected offspring.
+              </p>
+            </div>
+          </div>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            To find the specific tests recommended for your breed, go to the OFA CHIC website and search for your breed. The CHIC page will list each required and recommended test. Any breeder claiming to "health test" without doing the tests on the CHIC list for their breed is using the phrase loosely.
+          </p>
+        </section>
+
+        <section class="mb-12" id="verify">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">3. How to Verify What a Breeder Claims</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The most important verification step is searching the OFA database directly. Go to ofa.org and search by the dog's registered name or the breeder's kennel name. OFA results are public and searchable. If a breeder tells you they OFA-tested their dogs but the dogs do not appear in the database, either the tests were not submitted to OFA (meaning you have no independent validation) or the breeder is misrepresenting the testing. Ask for the dog's registered AKC or UKC name and search it yourself.
+          </p>
+
+          <div class="bg-stone-50 rounded-xl p-6 mb-6 border border-stone-200">
+            <p class="font-semibold text-gray-900 mb-3">How to search OFA</p>
+            <ol class="space-y-2 text-sm text-gray-700">
+              <li>1. Go to <span class="font-mono bg-stone-100 px-1 rounded">ofa.org</span></li>
+              <li>2. Click "OFA Database" in the top navigation</li>
+              <li>3. Search by the dog's registered name, registration number, or breeder/kennel name</li>
+              <li>4. Look at the results column: Excellent/Good/Fair for hips, Normal for elbows and cardiac</li>
+              <li>5. Check the date — results should be recent (most valid for breeding-age dogs)</li>
+            </ol>
+          </div>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            For genetic panel testing, Embark results can be shared via a direct link from Embark's platform. Ask the breeder to share the Embark profile link for both the sire and dam. You can view the results directly on Embark's website without creating an account. If a breeder offers only a screenshot of results rather than a shareable link, be more cautious.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            AKC registration can be verified by searching AKC.org for the dog's registered name or registration number. For breeders on BreederHQ, the platform performs registry passthrough checks that confirm the registration number matches the OFA or breed registry database, and links you to the source record directly.
+          </p>
+        </section>
+
+        <section class="mb-12" id="visit">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">4. What to Look for When You Visit (or Video Call)</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Any responsible breeder should be willing to let you visit or, for out-of-state buyers, do a live video call that shows you the dam and the environment where the puppies are being raised. If a breeder refuses both, that is a significant red flag.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">What to look for in person or on video</h3>
+
+          <ul class="space-y-4 mb-8">
+            <li class="flex gap-3">
+              <span class="text-green-600 font-bold mt-0.5">+</span>
+              <div>
+                <p class="font-semibold text-gray-900">The dam is present and accessible</p>
+                <p class="text-gray-700 text-sm">You should be able to see the mother of the litter. If the breeder says she is unavailable, at the vet, or otherwise absent every time you try to visit, be very cautious. Seeing the dam's temperament and physical condition is one of the most useful pieces of information you can gather.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-green-600 font-bold mt-0.5">+</span>
+              <div>
+                <p class="font-semibold text-gray-900">Puppies are raised in the home or a clean, enriched kennel</p>
+                <p class="text-gray-700 text-sm">Early socialization happens in the environment where the puppy is raised. Puppies in a home grow up with normal household sounds and human contact. Puppies raised in an isolated outdoor kennel or barn with no human interaction develop differently. Ask where the puppies sleep and spend their time.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-green-600 font-bold mt-0.5">+</span>
+              <div>
+                <p class="font-semibold text-gray-900">The environment is clean but not sterile</p>
+                <p class="text-gray-700 text-sm">A clean environment shows care for the animals. But some mess and play is normal and healthy. A facility that looks like a showroom may have puppies that are kept away from normal contact for presentation purposes.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-green-600 font-bold mt-0.5">+</span>
+              <div>
+                <p class="font-semibold text-gray-900">The breeder asks you questions too</p>
+                <p class="text-gray-700 text-sm">A responsible breeder is placing a puppy they care about. They will want to know where you live, your lifestyle, whether you have other pets or children, your experience with dogs, and whether you have a plan for training and veterinary care. A breeder who takes any buyer without screening is not protecting the dogs.</p>
+              </div>
+            </li>
+          </ul>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">What to be cautious about</h3>
+          <ul class="space-y-4 mb-6">
+            <li class="flex gap-3">
+              <span class="text-red-500 font-bold mt-0.5">-</span>
+              <p class="text-gray-700 text-sm">The breeder meets you in a parking lot rather than their home or facility</p>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-red-500 font-bold mt-0.5">-</span>
+              <p class="text-gray-700 text-sm">They cannot produce the dam and say she is "at another location"</p>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-red-500 font-bold mt-0.5">-</span>
+              <p class="text-gray-700 text-sm">Multiple different breeds are visible, especially with large numbers of dogs</p>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-red-500 font-bold mt-0.5">-</span>
+              <p class="text-gray-700 text-sm">The puppies show signs of poor socialization: extreme fear responses, cowering from normal sounds or movement, unusual aggression for their age</p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="mb-12" id="questions">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">5. Questions to Ask Any Breeder</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            These questions are not a gotcha exercise. They are a genuine filter for knowledge and commitment. A responsible breeder will not be offended by any of them. They will answer enthusiastically, because this is the conversation they want to have.
+          </p>
+
+          <div class="space-y-6">
+            <div class="border border-stone-200 rounded-xl p-6">
+              <p class="font-bold text-gray-900 mb-2">"What health tests do you do on the sire and dam before breeding, and can you show me the results?"</p>
+              <p class="text-gray-700 text-sm leading-relaxed">The answer should name specific tests (OFA hips, OFA elbows, cardiac, CAER, specific genetic panels) and they should either give you the dog's registered name to look up in OFA yourself, or show you the OFA certificate and an Embark/genetic test link. "We do a vet check before every litter" is not health testing.</p>
+            </div>
+
+            <div class="border border-stone-200 rounded-xl p-6">
+              <p class="font-bold text-gray-900 mb-2">"Will you take this dog back at any age if I can no longer keep them?"</p>
+              <p class="text-gray-700 text-sm leading-relaxed">A responsible breeder's answer is always yes, without hesitation. This is the single clearest indicator of whether a breeder takes responsibility for the animals they produce. A breeder who qualifies this, hedges on it, or says "it depends" is telling you something important about their priorities.</p>
+            </div>
+
+            <div class="border border-stone-200 rounded-xl p-6">
+              <p class="font-bold text-gray-900 mb-2">"How many litters do you breed per year, and how many breeds do you work with?"</p>
+              <p class="text-gray-700 text-sm leading-relaxed">There is no universal right number, but the answer tells you about scale and focus. One or two breeds, a small number of litters per year, and a real waiting list is the pattern of someone breeding because they care about the breed. A high number of litters, multiple breeds, and always-available puppies points toward volume production.</p>
+            </div>
+
+            <div class="border border-stone-200 rounded-xl p-6">
+              <p class="font-bold text-gray-900 mb-2">"What does your contract cover, and what are the conditions that void the health guarantee?"</p>
+              <p class="text-gray-700 text-sm leading-relaxed">Ask for a copy of the contract before you pay any deposit. Read the voiding conditions carefully: some contracts are voided by using a food not approved by the breeder, by spaying or neutering outside a specific age window, or by missing a vet visit within a short window after pickup. Know what you are signing. See our <a href="/articles/puppy-health-guarantee-what-it-covers" class="text-[hsl(24,95%,53%)] hover:underline">guide to puppy health guarantees</a> for a full teardown of what these contracts usually say.</p>
+            </div>
+
+            <div class="border border-stone-200 rounded-xl p-6">
+              <p class="font-bold text-gray-900 mb-2">"Are you involved with your breed club, and do you show or compete with your dogs?"</p>
+              <p class="text-gray-700 text-sm leading-relaxed">Not every responsible breeder shows, but breed club participation and competition are meaningful signals of engagement with the breed community. Breeders who show or compete get external evaluation of their dogs against the breed standard, which is a form of accountability that backyard breeders and commercial producers typically do not have.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12" id="red-flags">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">6. Red Flags That Should Make You Walk Away</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Most of these are not ambiguous. A breeder who hits several of these is almost certainly not someone you want to buy from, no matter how good the puppies look in the photos.
+          </p>
+
+          <div class="space-y-3 mb-6">
+            {[
+              { flag: 'Puppies always available', detail: 'A responsible breeder has a waiting list. If there are always puppies ready to go, the breeder is producing more litters than their waiting list requires, which is a sign of commercial-scale production.' },
+              { flag: 'No health tests, or only "vet checked"', detail: 'A vet check is not health testing. If the breeder cannot name the OFA evaluation, the cardiologist who did the cardiac exam, or the specific genetic panel results, they are not health testing to the standard their breed requires.' },
+              { flag: 'Cannot or will not show you the dam', detail: 'The mother of the litter should be present and accessible. A breeder who cannot produce her, says she is "with another family" or "at a different location," is likely a broker or a farm that acquired her from elsewhere.' },
+              { flag: 'Pressure to decide immediately or lose the puppy', detail: 'A responsible breeder has a waiting list and a screening process. They are not going to push you to commit before you are ready. Urgency is a sales tactic.' },
+              { flag: 'Will not answer questions about health testing', detail: 'If a breeder deflects, changes the subject, or gives vague answers when you ask for specific test results, take that seriously. A breeder who does proper health testing wants to talk about it.' },
+              { flag: 'Multiple breeds, many litters, professional-looking shipping operation', detail: 'This is the commercial model. Some large operations produce quality dogs, but the pattern of many breeds, continuous availability, and broker-style shipping is the signature of volume production rather than a breeding program focused on a single breed\'s health and improvement.' },
+              { flag: 'No contract, or a contract that only goes one way', detail: 'No written agreement means no protection for you. A one-sided contract that protects only the breeder\'s interests (no refunds, no returns, buyer assumes all risk) is worse than no contract because it formalizes a bad deal.' },
+              { flag: 'Insists you must visit before the litter is whelped to "get in line"', detail: 'Legitimate breeders take applications on a rolling basis and place buyers when appropriate. Some breeders have early application lists, which is fine. "Visit now or lose your spot" before any puppies exist is a sales tactic, not a breeding program policy.' },
+            ].map(item => (
+              <div class="flex gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
+                <span class="text-red-500 font-bold text-lg mt-0.5 shrink-0">!</span>
+                <div>
+                  <p class="font-semibold text-gray-900 mb-1">{item.flag}</p>
+                  <p class="text-gray-700 text-sm leading-relaxed">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="mb-12" id="contract">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">7. Before You Sign Anything</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Read the entire contract before paying a deposit. This sounds obvious but most buyers skim it. The sections that matter most are the health guarantee coverage and exclusions, the voiding conditions, the remedy (replacement puppy vs. partial refund vs. vet-cost contribution, and whether return of the dog is required), and the spay/neuter requirements.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Pay specific attention to voiding conditions. Common ones include: failing the initial vet check within 72 hours, missing required vaccinations on a specific schedule, feeding a protein or brand not approved by the breeder, allowing the dog to become overweight, spaying or neutering outside a defined window, and transferring the dog to another person. Any of these can end your coverage regardless of whether the condition they are supposed to cover has anything to do with food, weight, or transfer.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            For a detailed teardown of what these contracts usually contain and what they usually exclude, see our guide: <a href="/articles/puppy-health-guarantee-what-it-covers" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Health Guarantee: What It Actually Covers</a>.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Also see: <a href="/articles/puppy-deposit-refund-rules-by-state" class="text-[hsl(24,95%,53%)] hover:underline">Puppy Deposit Refund Rules by State</a> -- before you pay a non-refundable deposit, know what your state's law says about it.
+          </p>
+        </section>
+
+        <section class="mb-12" id="wait">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">8. What a Real Wait Means</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The most common frustration buyers have with responsible breeders is the waiting list. Six to eighteen months is a common range. Some breeds from highly regarded breeders have waits measured in years.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The wait exists because a responsible breeder does not breed more often than their waiting list requires. They breed when they have the right pairing, a dam who is physically ready and not being over-bred, and a list of buyers they have screened and approved. They are not producing puppies on a schedule and then finding buyers for them. The puppies come first in the breeding decision, and the list fills from there.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            If you are not willing to wait, you are going to end up buying from someone who can produce a puppy on demand, and the reason they can do that is almost always that they are producing more than their waiting list requires. That is not a responsible breeding operation.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            The wait is worth it. The dog you bring home will be with you for 10 to 15 years. Six months on a waiting list is a very small fraction of that.
+          </p>
+
+          <!-- CTA -->
+          <div class="bg-stone-900 rounded-xl p-8 text-center mt-8">
+            <h3 class="text-2xl font-bold text-white mb-3">Find dog breeders with real health records</h3>
+            <p class="text-stone-300 mb-6 text-lg leading-relaxed">Browse responsible dog breeders on BreederHQ. Every profile is published from the same software breeders use to run their program, so what you see is grounded in their actual records.</p>
+            <a href="https://marketplace.breederhq.com/breeders" class="inline-block bg-[hsl(24,95%,53%)] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[hsl(24,95%,48%)] transition">Browse Dog Breeders</a>
+          </div>
+        </section>
+
+        <!-- Related Articles -->
+        <section class="mb-4">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Reading</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            <a href="/buyers/evaluate-breeders" class="block border border-stone-200 rounded-xl p-5 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+              <p class="font-bold text-gray-900 mb-1">How to Evaluate Breeders</p>
+              <p class="text-sm text-gray-600">A step-by-step process for evaluating any breeder you find.</p>
+            </a>
+            <a href="/buyers/health-tests" class="block border border-stone-200 rounded-xl p-5 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+              <p class="font-bold text-gray-900 mb-1">Understanding Health Testing</p>
+              <p class="text-sm text-gray-600">A deeper look at what health tests actually mean and how to read them.</p>
+            </a>
+            <a href="/buyers/red-flags" class="block border border-stone-200 rounded-xl p-5 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+              <p class="font-bold text-gray-900 mb-1">Red Flags to Avoid</p>
+              <p class="text-sm text-gray-600">Warning signs that should stop you from buying from a breeder.</p>
+            </a>
+            <a href="/articles/puppy-health-guarantee-what-it-covers" class="block border border-stone-200 rounded-xl p-5 hover:border-[hsl(24,95%,53%)] hover:shadow-sm transition">
+              <p class="font-bold text-gray-900 mb-1">Puppy Health Guarantee: What It Covers</p>
+              <p class="text-sm text-gray-600">A teardown of what these contracts actually protect and what they exclude.</p>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </article>
+  </main>
+</BaseLayout>

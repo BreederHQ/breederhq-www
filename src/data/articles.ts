@@ -17,6 +17,16 @@ export interface ArticleMeta {
 // Most-recent first.
 export const articles: ArticleMeta[] = [
   {
+    slug: 'how-to-find-a-responsible-dog-breeder',
+    title: 'How to Find a Responsible Dog Breeder',
+    excerpt: 'A practical guide to what separates a responsible breeder from a problem one: what health tests to require, how to read OFA results and verify what breeders claim, what questions to ask, and the red flags that should make you walk away.',
+    author: 'BreederHQ Editorial',
+    role: 'July 2026',
+    date: 'July 2026',
+    readTime: '15 min read',
+    tag: 'Buyer Guide',
+  },
+  {
     slug: 'marketplace-transaction-fees',
     title: 'What Marketplace Transaction Fees Are Actually Costing You (And Your Buyers)',
     excerpt: 'Some marketplaces charge the breeder a transaction fee on every sale and charge the buyer a separate fee at checkout. On a platform charging 7% each side, a litter of six at $2,000 costs $1,680 in combined fees. Run the numbers on your program with our live calculator.',
