@@ -1,4 +1,6 @@
 ---
+import VercelAnalytics from '@vercel/analytics/astro';
+
 /**
  * Analytics Component
  * Loads all tracking scripts asynchronously (non-blocking)
@@ -175,6 +177,9 @@ const isProduction = import.meta.env.PROD;
     )}
     <!-- Ahrefs Web Analytics -->
     <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="ZBYYm0DE5zd5kH0+5L1vdw" async></script>
+
+    <!-- Vercel Analytics -->
+    <VercelAnalytics />
   </>
 )}
 
