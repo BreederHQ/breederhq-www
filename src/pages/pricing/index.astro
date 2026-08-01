@@ -119,93 +119,102 @@ const pageLastUpdated = '2026-06-26';
         <h1 class="text-5xl font-bold tracking-tight text-stone-800 mb-4">
           Simple, transparent pricing
         </h1>
-        <p class="text-xl text-stone-600 max-w-3xl mx-auto mb-3 leading-relaxed">
-          BreederHQ pricing is <strong>$29/mo Standard</strong>, <strong>$79/mo Pro</strong>, or <strong>$159/mo Enterprise</strong>. Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans across nine species. The first 100 founders get 50% off Pro and Enterprise for 12 months with code FOUNDER50.
+        <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-6 leading-relaxed">
+          Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans.
+          The first 100 founders get 50% off Pro and Enterprise with code <strong class="text-amber-700">FOUNDER50</strong>.
         </p>
-        <p class="text-sm text-stone-500">
-          All plans include unlimited animals, contacts, and breeding plans.
-        </p>
-        <p class="text-xs text-stone-400 mt-2">
-          Last updated: {pageLastUpdated}. Machine-readable version at <a href="/pricing.md" class="underline hover:text-amber-600">/pricing.md</a>.
-        </p>
-        <a href="/pricing/compare" class="inline-block mt-4 text-amber-600 hover:text-amber-700 font-medium text-sm">
-          See full feature comparison &rarr;
-        </a>
-        <p class="text-sm text-stone-500 mt-3">
-          Shopping around? See how we stack up in our
-          <a href="/compare/best-dog-breeding-software" class="text-amber-600 hover:text-amber-700 font-medium underline">dog breeding software</a>
-          comparison.
-        </p>
-        <p class="text-sm text-stone-500 mt-3">
-          What's included:
-          <a href="/breeder-management-software" class="text-amber-600 hover:text-amber-700 font-medium underline">breeder management software</a>
-          (operations + 9 species),
-          <a href="/breeder-crm" class="text-amber-600 hover:text-amber-700 font-medium underline">breeder CRM</a>
-          (inquiries → buyer portal), and
-          <a href="/litter-management" class="text-amber-600 hover:text-amber-700 font-medium underline">litter management</a>
-          (whelp to placement).
-        </p>
-        <p class="text-sm text-stone-500 mt-3">
-          Switching from another tool? Honest comparisons:
-          <a href="/compare/breedercloudpro-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Breeder Cloud Pro</a>,
-          <a href="/compare/breederbuddy-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">BreederBuddy</a>,
-          <a href="/compare/dogbreederpro-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Dog Breeder Pro</a>,
-          <a href="/compare/breeders-assistant-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Breeder's Assistant</a>,
-          <a href="/compare/zooeasy-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">ZooEasy</a>,
-          or browse <a href="/compare" class="text-amber-600 hover:text-amber-700 font-medium underline">all comparisons</a>.
-        </p>
+        <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-stone-500 mb-4">
+          <a href="/pricing/compare" class="text-amber-600 hover:text-amber-700 font-medium">
+            Full feature comparison &rarr;
+          </a>
+          <span class="text-stone-300">|</span>
+          <a href="/compare/best-dog-breeding-software" class="text-amber-600 hover:text-amber-700 font-medium">
+            Compare vs. alternatives &rarr;
+          </a>
+        </div>
+        <details class="mt-4 text-left max-w-2xl mx-auto">
+          <summary class="cursor-pointer text-xs text-stone-400 hover:text-stone-600 text-center list-none">
+            More details &amp; comparisons &#9662;
+          </summary>
+          <div class="mt-3 space-y-2 text-sm text-stone-500 text-center">
+            <p>
+              What's included:
+              <a href="/breeder-management-software" class="text-amber-600 hover:text-amber-700 font-medium underline">breeder management software</a>
+              (operations + 9 species),
+              <a href="/breeder-crm" class="text-amber-600 hover:text-amber-700 font-medium underline">breeder CRM</a>
+              (inquiries + buyer portal), and
+              <a href="/litter-management" class="text-amber-600 hover:text-amber-700 font-medium underline">litter management</a>
+              (whelp to placement).
+            </p>
+            <p>
+              Switching from another tool?
+              <a href="/compare/breedercloudpro-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Breeder Cloud Pro</a>,
+              <a href="/compare/breederbuddy-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">BreederBuddy</a>,
+              <a href="/compare/dogbreederpro-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Dog Breeder Pro</a>,
+              <a href="/compare/breeders-assistant-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Breeder's Assistant</a>,
+              <a href="/compare/zooeasy-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">ZooEasy</a>,
+              or <a href="/compare" class="text-amber-600 hover:text-amber-700 font-medium underline">all comparisons</a>.
+            </p>
+            <p class="text-xs text-stone-400">
+              Last updated: {pageLastUpdated}. Machine-readable: <a href="/pricing.md" class="underline hover:text-amber-600">/pricing.md</a>.
+            </p>
+          </div>
+        </details>
       </div>
     </section>
 
     <!-- Pricing Cards -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-stone-100">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {plans.map((plan) => (
             <div
               class={`relative rounded-2xl border p-8 flex flex-col ${
                 plan.popular
-                  ? 'border-amber-500 bg-amber-50/30 shadow-xl shadow-amber-500/15 ring-1 ring-amber-500/20'
-                  : 'border-stone-300 bg-white shadow-md shadow-stone-900/8'
+                  ? 'border-amber-400 bg-white shadow-2xl shadow-amber-500/20 ring-2 ring-amber-400/30 md:-mt-4 md:-mb-4'
+                  : 'border-stone-200 bg-white shadow-lg shadow-stone-900/10'
               }`}
             >
               {plan.popular && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span class="bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2">
+                  <span class="bg-amber-500 text-white text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest shadow-md">
                     Most Popular
                   </span>
                 </div>
               )}
 
               <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-stone-800 mb-2">{plan.name}</h3>
+                <h3 class="text-2xl font-bold text-stone-800 mb-1">{plan.name}</h3>
                 <p class="text-stone-500 text-sm mb-6">{plan.description}</p>
 
                 {plan.foundersEligible ? (
                   <div class="mb-2">
-                    <div class="flex items-baseline justify-center gap-2 mb-1">
-                      <span class="text-2xl text-stone-400 line-through">${plan.price}</span>
-                      <span class="text-5xl font-bold text-amber-600">${(plan.foundersPrice ?? 0).toFixed(2)}</span>
-                      <span class="text-stone-500 text-lg">/mo</span>
+                    <div class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1 mb-3">
+                      <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">FOUNDER50</span>
+                      <span class="text-xs text-amber-600">50% off, first 100 only</span>
                     </div>
-                    <p class="text-xs text-amber-600 font-semibold mb-1">
-                      Founders price with code FOUNDER50, first 100 only
+                    <div class="flex items-baseline justify-center gap-2 mb-1">
+                      <span class="text-xl text-stone-400 line-through">${plan.price}/mo</span>
+                      <span class="text-5xl font-bold text-amber-600">${(plan.foundersPrice ?? 0).toFixed(2)}</span>
+                      <span class="text-stone-500 text-lg font-medium">/mo</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-1">
+                      or ${plan.foundersYearlyPrice}/yr <span class="text-stone-400 line-through text-xs">(was ${plan.yearlyPrice}/yr)</span>
                     </p>
-                    <p class="text-sm text-stone-500">
-                      or ${plan.foundersYearlyPrice}/yr (normally ${plan.yearlyPrice}/yr)
-                    </p>
-                    <p class="text-xs text-stone-400 mt-2">
+                    <p class="text-xs text-stone-400 mt-1.5">
                       Billed in USD. International cards accepted.
                     </p>
                   </div>
                 ) : (
                   <div class="mb-2">
-                    <span class="text-5xl font-bold text-stone-800">${plan.price}</span>
-                    <span class="text-stone-500 text-lg">/mo</span>
+                    <div class="flex items-baseline justify-center gap-1">
+                      <span class="text-5xl font-bold text-stone-800">${plan.price}</span>
+                      <span class="text-stone-500 text-lg font-medium">/mo</span>
+                    </div>
                     <p class="text-sm text-stone-500 mt-1">
-                      or ${plan.yearlyPrice}/yr (save ${plan.price * 12 - plan.yearlyPrice}/yr)
+                      or ${plan.yearlyPrice}/yr — save ${plan.price * 12 - plan.yearlyPrice}/yr
                     </p>
-                    <p class="text-xs text-stone-400 mt-2">
+                    <p class="text-xs text-stone-400 mt-1.5">
                       Billed in USD. International cards accepted.
                     </p>
                   </div>
@@ -214,21 +223,21 @@ const pageLastUpdated = '2026-06-26';
 
               <a
                 href={registerUrl}
-                class={`block w-full text-center py-3 px-6 rounded-lg font-semibold mb-2 transition ${
+                class={`block w-full text-center py-3.5 px-6 rounded-xl font-semibold mb-2 transition text-base ${
                   plan.popular
-                    ? 'bg-amber-500 text-white hover:bg-amber-600'
+                    ? 'bg-amber-500 text-white hover:bg-amber-600 shadow-md shadow-amber-500/30'
                     : 'bg-stone-800 text-white hover:bg-stone-900'
                 }`}
               >
                 Start your 14-day free trial
               </a>
-              <p class="text-xs text-stone-500 text-center mb-8">
-                Card required to start. Cancel anytime before day 14 and you are not charged.
+              <p class="text-xs text-stone-400 text-center mb-8">
+                Cancel before day 14 and you are not charged.
               </p>
 
               <ul class="space-y-3 flex-1">
                 {plan.features.map((feature) => (
-                  <li class="flex items-start gap-2.5 text-sm text-stone-600">
+                  <li class="flex items-start gap-2.5 text-sm text-stone-700">
                     <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                     </svg>
@@ -246,11 +255,14 @@ const pageLastUpdated = '2026-06-26';
     <section class="py-16 bg-stone-50">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-center text-stone-800 mb-4">Marketplace Listing Fees</h2>
-        <p class="text-center text-stone-700 mb-3 max-w-2xl mx-auto text-lg font-semibold">
+        <p class="text-center text-stone-800 mb-3 max-w-2xl mx-auto text-xl font-bold">
           No percentage of your sales. No commission. No broker in the middle.
         </p>
-        <p class="text-center text-stone-500 mb-8 max-w-2xl mx-auto">
-          You run your own transactions and keep every dollar of your deals. All marketplace listing fees are free.
+        <p class="text-center text-stone-600 mb-3 max-w-2xl mx-auto text-base">
+          You run your own transactions and keep every dollar of your deals.
+        </p>
+        <p class="text-center text-stone-500 mb-8 max-w-2xl mx-auto text-sm">
+          Listing fees are separate from your subscription and free during early access. Standard per-listing fees will start later, and they are flat -- never a cut of what you sell.
         </p>
 
         <details class="group bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
