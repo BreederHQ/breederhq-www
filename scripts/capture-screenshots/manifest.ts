@@ -225,7 +225,7 @@ export const MANIFEST: ScreenshotEntry[] = [
   },
   {
     id: "comms-hub-inbox",
-    url: "/marketing/hub",
+    url: "/communications/hub",
     viewport: "desktop",
     waitFor: "main",
     description: "Comms hub — buyer message threads (Sarah, Olivia conversations)",
