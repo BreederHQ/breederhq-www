@@ -85,7 +85,26 @@ const stack = [
       justify-content: space-between;
       gap: 20px;
       flex-wrap: wrap;
-      margin-bottom: clamp(28px, 5vh, 52px);
+      margin-bottom: clamp(20px, 3vh, 32px);
+    }
+
+    .offer-hero-row {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(20px, 3vw, 36px);
+      margin-bottom: clamp(16px, 2.5vh, 28px);
+    }
+
+    .offer-hero-logo {
+      flex-shrink: 0;
+      width: clamp(80px, 10vw, 130px);
+      height: auto;
+      display: block;
+      margin-top: .08em;
+    }
+
+    .offer-hero-text {
+      min-width: 0;
     }
 
     .show-badge {
@@ -130,8 +149,7 @@ const stack = [
       line-height: 1.0;
       letter-spacing: -.025em;
       font-weight: 700;
-      margin: 0 0 22px;
-      max-width: 900px;
+      margin: 0 0 16px;
     }
 
     .hero-body {
@@ -664,19 +682,23 @@ const stack = [
   <div style="max-width:1120px;margin:0 auto;padding:clamp(24px,4vw,56px) clamp(20px,4vw,48px) 40px;animation:bhqRise .4s ease both">
 
     <div class="offer-header">
-      <img src="/images/dogshow/logo-lockup.png" alt="BreederHQ" style="height:clamp(88px,11vw,124px);width:auto;display:block" />
+      <div class="eyebrow" style="margin-bottom:0">Show-weekend offer for breeders</div>
       <div class="show-badge">
         <span class="show-badge-dot"></span>
         <span class="show-badge-label">{showName}</span>
       </div>
     </div>
 
-    <div style="max-width:900px">
-      <div class="eyebrow">Show-weekend offer for breeders</div>
-      <h1 class="hero">One Free Year of Breeder<span style="color:hsl(var(--brand-orange))">HQ</span>.</h1>
-      <p class="hero-body">
-        Sign up at the booth this weekend and you get&nbsp;<span class="pro-pill">BreederHQ Launch Pro</span>&nbsp;entirely free for 12 months, your operational records moved in by hand, and three live sessions with the founder. You launch with your program fully up and running, ready to launch your breeding business to the next level.
-      </p>
+    <div style="max-width:1000px">
+      <div class="offer-hero-row">
+        <img src="/images/dogshow/logo-lockup.png" alt="BreederHQ" class="offer-hero-logo" />
+        <div class="offer-hero-text">
+          <h1 class="hero">One Free Year of Breeder<span style="color:hsl(var(--brand-orange))">HQ</span>.</h1>
+          <p class="hero-body">
+            Sign up at the booth this weekend and you get&nbsp;<span class="pro-pill">BreederHQ Launch Pro</span>&nbsp;entirely free for 12 months, your operational records moved in by hand, and three live sessions with the founder. You launch with your program fully up and running, ready to launch your breeding business to the next level.
+          </p>
+        </div>
+      </div>
       <div class="value-row">
         <div>
           <div class="value-col-label">Software and setup included</div>
