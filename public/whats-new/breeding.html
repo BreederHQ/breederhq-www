@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Click, Everything Moves | BreederHQ</title>
+<meta name="description" content="Record one thing in the new BreederHQ Breeding module and eight others update themselves. A look at what sits behind the screen.">
+<link rel="icon" href="/favicon.png">
+<!-- Semi-private preview: reachable by anyone with the link (the announcement
+     email sends breeders here) but deliberately kept out of search results. A
+     canonical tag is omitted on purpose - it would contradict noindex. -->
+<meta name="robots" content="noindex, nofollow">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="One Click, Everything Moves">
+<meta property="og:description" content="Record one thing in the new BreederHQ Breeding module and eight others update themselves.">
+<meta property="og:url" content="https://breederhq.com/whats-new/breeding">
+<meta property="og:image" content="https://breederhq.com/whats-new/breeding-hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://breederhq.com/whats-new/breeding-hero.png">
+
+<style>
+  /* The artifact host applies a CSS reset; standalone needs its own baseline. */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+</style>
+</head>
+<body>
+<style>
+  /* ============================================================
+     TOKENS — light is the bare :root; dark redefines tokens only.
+     Neutrals are biased green (barn-at-night), never pure grey.
+     ============================================================ */
+  :root {
+    --ground:        #F2EDE3;
+    --ground-2:      #E8E1D3;
+    --surface:       #FBF8F2;
+    --surface-2:     #EFE9DC;
+    --ink:           #14201B;
+    --ink-2:         #3D4A43;
+    --ink-3:         #6B776E;
+    --hairline:      #D6CDBB;
+    --hairline-2:    #C3B79F;
+
+    --brass:         #9A6E14;
+    --brass-bright:  #C8952F;
+    --living:        #2F7A4C;
+    --living-soft:   rgba(47,122,76,.12);
+    --clay:          #A6462F;
+    --clay-soft:     rgba(166,70,47,.12);
+
+    --thread:        rgba(61,74,67,.22);
+    --thread-live:   #C8952F;
+
+    --shadow:        0 1px 2px rgba(20,32,27,.06), 0 8px 24px rgba(20,32,27,.07);
+    --shadow-lift:   0 2px 6px rgba(20,32,27,.10), 0 18px 44px rgba(20,32,27,.13);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:       #0E1A16;
+      --ground-2:     #0A1310;
+      --surface:      #16241F;
+      --surface-2:    #1E2F28;
+      --ink:          #EDE7DA;
+      --ink-2:        #B4C0B7;
+      --ink-3:        #7F8D84;
+      --hairline:     #2A3B33;
+      --hairline-2:   #3A4E44;
+
+      --brass:        #C8952F;
+      --brass-bright: #E8B851;
+      --living:       #5BBE84;
+      --living-soft:  rgba(91,190,132,.14);
+      --clay:         #D97256;
+      --clay-soft:    rgba(217,114,86,.14);
+
+      --thread:       rgba(180,192,183,.20);
+      --thread-live:  #E8B851;
+
+      --shadow:       0 1px 2px rgba(0,0,0,.34), 0 8px 24px rgba(0,0,0,.30);
+      --shadow-lift:  0 2px 6px rgba(0,0,0,.40), 0 18px 44px rgba(0,0,0,.44);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:       #0E1A16;
+    --ground-2:     #0A1310;
+    --surface:      #16241F;
+    --surface-2:    #1E2F28;
+    --ink:          #EDE7DA;
+    --ink-2:        #B4C0B7;
+    --ink-3:        #7F8D84;
+    --hairline:     #2A3B33;
+    --hairline-2:   #3A4E44;
+
+    --brass:        #C8952F;
+    --brass-bright: #E8B851;
+    --living:       #5BBE84;
+    --living-soft:  rgba(91,190,132,.14);
+    --clay:         #D97256;
+    --clay-soft:    rgba(217,114,86,.14);
+
+    --thread:       rgba(180,192,183,.20);
+    --thread-live:  #E8B851;
+
+    --shadow:       0 1px 2px rgba(0,0,0,.34), 0 8px 24px rgba(0,0,0,.30);
+    --shadow-lift:  0 2px 6px rgba(0,0,0,.40), 0 18px 44px rgba(0,0,0,.44);
+  }
+
+  /* ============================================================
+     BASE
+     ============================================================ */
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px 96px;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+    margin: 0;
+    letter-spacing: -0.021em;
+    line-height: 1.1;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    padding: 84px 0 40px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 6.6vw, 76px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    margin: 20px 0 0;
+  }
+
+  .hero h1 .quiet {
+    display: block;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .hero p.lede {
+    font-size: clamp(17px, 2vw, 21px);
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 26px 0 0;
+  }
+
+  /* ============================================================
+     SECTIONS
+     ============================================================ */
+  .section { padding-top: 76px; }
+
+  .section-head { margin-bottom: 30px; }
+
+  .section-head h2 {
+    font-size: clamp(25px, 3.4vw, 35px);
+    font-weight: 750;
+    margin-top: 12px;
+  }
+
+  .section-head p {
+    color: var(--ink-2);
+    max-width: 64ch;
+    margin: 14px 0 0;
+    font-size: 16.5px;
+  }
+
+  /* ============================================================
+     THE SPINE — mirrors the product's real 7-phase spine
+     ============================================================ */
+  .spine-scroll { overflow-x: auto; padding: 4px 0 12px; }
+
+  .spine {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(116px, 1fr));
+    gap: 10px;
+    min-width: 940px;
+    position: relative;
+  }
+
+  .spine::before {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px; top: 33px;
+    height: 2px;
+    background: linear-gradient(to right, var(--hairline-2), var(--brass), var(--hairline-2));
+    opacity: .55;
+  }
+
+  .node {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    padding: 14px 12px 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .node.closeout {
+    border-style: dashed;
+    border-color: var(--hairline-2);
+    background: transparent;
+  }
+
+  .node .glyph {
+    font-size: 26px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .node .name {
+    font-size: 13.5px;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    display: block;
+  }
+
+  .node .tools {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    margin-top: 5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .spine-note {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-3);
+    max-width: 70ch;
+  }
+
+  /* ============================================================
+     RIPPLE BOARD — the centerpiece
+     ============================================================ */
+  .board {
+    margin-top: 8px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .board-top {
+    padding: 20px 22px 18px;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--surface-2);
+  }
+
+  .board-top .label {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 13px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .act {
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 650;
+    letter-spacing: -0.008em;
+    padding: 9px 15px;
+    border-radius: 3px;
+    border: 1px solid var(--hairline-2);
+    background: var(--surface);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background .16s ease, color .16s ease, border-color .16s ease, transform .16s ease;
+  }
+
+  .act:hover {
+    border-color: var(--brass);
+    color: var(--ink);
+    transform: translateY(-1px);
+  }
+
+  .act[aria-pressed="true"] {
+    background: var(--brass);
+    border-color: var(--brass);
+    color: var(--ground);
+    box-shadow: var(--shadow);
+  }
+
+  :root[data-theme="dark"] .act[aria-pressed="true"],
+  .act[aria-pressed="true"] { color: #14201B; }
+
+  .act:focus-visible {
+    outline: 2px solid var(--brass-bright);
+    outline-offset: 2px;
+  }
+
+  /* ---- the wiring stage ---- */
+  .stage {
+    position: relative;
+    padding: 28px 22px 26px;
+    min-height: 300px;
+  }
+
+  #wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .origin {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 17px;
+    border-radius: 3px;
+    background: var(--brass);
+    color: #14201B;
+    font-weight: 750;
+    font-size: 15.5px;
+    box-shadow: var(--shadow-lift);
+    max-width: 100%;
+  }
+
+  .origin .dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: #14201B;
+    flex: none;
+  }
+
+  .targets {
+    position: relative;
+    z-index: 1;
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+    gap: 12px;
+  }
+
+  .tgt {
+    background: var(--ground);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--living);
+    border-radius: 3px;
+    padding: 13px 15px;
+    opacity: 0;
+    transform: translateY(9px);
+    animation: rise .42s cubic-bezier(.2,.7,.3,1) forwards;
+  }
+
+  .tgt.gated { border-left-color: var(--clay); }
+
+  @keyframes rise {
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tgt { animation: none; opacity: 1; transform: none; }
+    .act { transition: none; }
+  }
+
+  .tgt .where {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--living);
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .tgt.gated .where { color: var(--clay); }
+
+  .tgt .what {
+    font-size: 14.5px;
+    color: var(--ink);
+    font-weight: 550;
+    line-height: 1.45;
+  }
+
+  .stage-foot {
+    position: relative;
+    z-index: 1;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    flex-wrap: wrap;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+
+  .stage-foot strong {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--brass);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  /* ============================================================
+     SCALE STRIP
+     ============================================================ */
+  .scale {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .stat {
+    background: var(--surface);
+    padding: 22px 20px 20px;
+  }
+
+  .stat .v {
+    font-size: clamp(29px, 4.2vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .stat .k {
+    margin-top: 9px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+
+  /* ============================================================
+     WEB — the "everything touches everything" proof
+     ============================================================ */
+  .web-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 26px 22px 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .web-holder { overflow-x: auto; }
+
+  #web { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hairline);
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+
+  .swatch { width: 13px; height: 3px; border-radius: 2px; flex: none; }
+
+  /* ============================================================
+     CLOSING
+     ============================================================ */
+  .close-card {
+    margin-top: 76px;
+    padding: 40px 34px;
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--brass);
+    border-radius: 4px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  .close-card h2 {
+    font-size: clamp(23px, 3.1vw, 31px);
+    font-weight: 750;
+  }
+
+  .close-card p {
+    color: var(--ink-2);
+    max-width: 66ch;
+    margin: 16px 0 0;
+  }
+
+  .close-card p.last {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 620px) {
+    .wrap { padding: 0 18px 72px; }
+    .hero { padding-top: 56px; }
+    .stage { padding: 22px 16px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero">
+    <div class="eyebrow">Breeding v2 &middot; What's Underneath</div>
+    <h1>
+      One click.
+      <span class="quiet">Everything moves.</span>
+    </h1>
+    <p class="lede">
+      A breeding plan isn't a checklist. Record one heartbeat and your dates, your buyers,
+      your invoices and your listings all have to agree about what just happened. Here is
+      what the new Breeding module is doing every time you touch it.
+    </p>
+  </header>
+
+  <!-- ============================ SPINE ============================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="eyebrow">The Shape of a Plan</div>
+      <h2>Seven kinds of work, and one final check</h2>
+      <p>
+        Every plan moves through the same seven categories. They're always open, so you can
+        work the way your animals actually behave, not the way software wishes they would.
+      </p>
+    </div>
+
+    <div class="spine-scroll">
+      <div class="spine" id="spine"></div>
+    </div>
+
+    <p class="spine-note">
+      Those numbers are the tools living inside each category: 38 in total, each one a real
+      thing you do. Close Out isn't work, it's the validator that refuses to let a plan finish
+      while something is still unresolved.
+    </p>
+  </section>
+
+  <!-- ============================ RIPPLE BOARD ============================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="eyebrow">Pick Something You'd Actually Do</div>
+      <h2>Watch what one action sets off</h2>
+      <p>
+        Choose an action below. Everything that lights up is a place the system updates on its
+        own, without you going and telling it. That's the part that took the longest to build.
+      </p>
+    </div>
+
+    <div class="board">
+      <div class="board-top">
+        <div class="label">Your Action</div>
+        <div class="actions" id="actions" role="group" aria-label="Choose a breeder action"></div>
+      </div>
+
+      <div class="stage">
+        <svg id="wires" aria-hidden="true"></svg>
+        <div class="origin" id="origin">
+          <span class="dot"></span>
+          <span id="origin-text">Record Breeding</span>
+        </div>
+        <div class="targets" id="targets"></div>
+        <div class="stage-foot">
+          <strong id="count" class="num">0</strong>
+          <span id="count-text">places update themselves from that one entry.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SCALE ============================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="eyebrow">By the Numbers</div>
+      <h2>What sits behind the screen you see</h2>
+      <p>
+        These are counted from the Breeding workspace itself, not estimated.
+      </p>
+    </div>
+
+    <div class="scale">
+      <div class="stat"><div class="v num">394</div><div class="k">Working parts in the plan workspace alone</div></div>
+      <div class="stat"><div class="v num">173,557</div><div class="k">Lines of code holding it together</div></div>
+      <div class="stat"><div class="v num">170</div><div class="k">Automated test files guarding the behavior</div></div>
+      <div class="stat"><div class="v num">38</div><div class="k">Tools across the seven categories</div></div>
+      <div class="stat"><div class="v num">25</div><div class="k">Separate data systems the workspace talks to</div></div>
+      <div class="stat"><div class="v num">16</div><div class="k">Modules that had to agree with each other</div></div>
+    </div>
+  </section>
+
+  <!-- ============================ WEB ============================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="eyebrow">Why It Took So Long</div>
+      <h2>None of it stands alone</h2>
+      <p>
+        If these seven categories were independent, this would have been seven small projects.
+        They aren't. Each line below is a real dependency where one category's information
+        changes what another one is allowed to show or do.
+      </p>
+    </div>
+
+    <div class="web-card">
+      <div class="web-holder">
+        <svg id="web" viewBox="0 0 720 500" role="img"
+             aria-label="A web of connections between the seven work categories, showing that each one depends on several others.">
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--brass)"></i> Information flows between these</span>
+        <span><i class="swatch" style="background:var(--clay)"></i> This one can block the other</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CLOSE ============================ -->
+  <section class="close-card">
+    <h2>You should never have to think about any of this.</h2>
+    <p>
+      That was the whole point. Every dependency in that web is a question the software now
+      answers for you: whether a buyer can be sent home, whether a price can still change,
+      whether a plan is truly finished, whether the offspring you just recorded belongs on
+      an invoice yet.
+    </p>
+    <p class="last">
+      When the new Breeding module feels simple, that's the work showing.
+    </p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------------------------------------------------
+     THE SPINE — real phases, real tool counts
+     --------------------------------------------------------- */
+  var PHASES = [
+    { glyph: "📋", name: "Planning",    tools: 5 },
+    { glyph: "🧬", name: "Breeding",    tools: 4 },
+    { glyph: "🐣", name: "Birth",       tools: 5 },
+    { glyph: "🌱", name: "Rearing",     tools: 7 },
+    { glyph: "🏡", name: "Placement",   tools: 8 },
+    { glyph: "💰", name: "Money",       tools: 4 },
+    { glyph: "🛒", name: "Marketplace", tools: 3 },
+    { glyph: "✅",       name: "Close Out",   tools: 2, closeout: true }
+  ];
+
+  var spine = document.getElementById("spine");
+  PHASES.forEach(function (p) {
+    var d = document.createElement("div");
+    d.className = "node" + (p.closeout ? " closeout" : "");
+    var g = document.createElement("span");
+    g.className = "glyph";
+    g.textContent = p.glyph;
+    var n = document.createElement("span");
+    n.className = "name";
+    n.textContent = p.name;
+    var t = document.createElement("span");
+    t.className = "tools";
+    t.textContent = p.tools + (p.tools === 1 ? " tool" : " tools");
+    d.appendChild(g); d.appendChild(n); d.appendChild(t);
+    spine.appendChild(d);
+  });
+
+  /* ---------------------------------------------------------
+     RIPPLE DATA — each entry is a real cross-surface effect
+     --------------------------------------------------------- */
+  var RIPPLES = [
+    {
+      action: "Record Breeding",
+      targets: [
+        { where: "Breeding",    what: "The breeding is logged against the pair you planned." },
+        { where: "Birth",       what: "Every expected date recalculates from this day forward." },
+        { where: "The Spine",   what: "The plan advances, and Birth becomes the live category." },
+        { where: "Calendar",    what: "Milestones reschedule themselves across your calendar." },
+        { where: "Female",      what: "Her record shows an active breeding and won't be double-booked." },
+        { where: "Marketplace", what: "The plan becomes eligible to list once dates exist.", gated: true },
+        { where: "Tasks",       what: "Care and check tasks generate on the new timeline." },
+        { where: "Activity",    what: "The entry is written to the plan's permanent history." }
+      ]
+    },
+    {
+      action: "Add Offspring",
+      targets: [
+        { where: "Birth",       what: "The offspring joins this plan's recorded birth." },
+        { where: "Rearing",     what: "Weights, health and care logs open for the new arrival." },
+        { where: "Placement",   what: "It becomes available to match to a waiting buyer." },
+        { where: "Money",       what: "It can now carry a price, a deposit and an invoice." },
+        { where: "Marketplace", what: "It can be listed publicly once you choose to." },
+        { where: "Lineage",     what: "Its parents, and their parents, are recorded permanently." },
+        { where: "Selection",   what: "Your buyers' pick order updates to include it." },
+        { where: "Close Out",   what: "The plan can't finish until this one is resolved.", gated: true }
+      ]
+    },
+    {
+      action: "Take a Deposit",
+      targets: [
+        { where: "Money",       what: "The deposit posts against this buyer's balance." },
+        { where: "Placement",   what: "The buyer moves forward in their journey with you." },
+        { where: "Buyers",      what: "Their readiness reflects money actually received." },
+        { where: "Invoices",    what: "The balance owed recalculates on the spot." },
+        { where: "Contacts",    what: "The payment appears on their timeline outside this plan." },
+        { where: "Contracts",   what: "Agreements tied to a deposit become available." },
+        { where: "Close Out",   what: "An unsettled balance will hold the plan open.", gated: true }
+      ]
+    },
+    {
+      action: "Send An Offspring Home",
+      targets: [
+        { where: "Placement",   what: "The go-home is recorded and the buyer is notified." },
+        { where: "Money",       what: "The balance is checked before the door will open.", gated: true },
+        { where: "Marketplace", what: "The listing comes down so nobody enquires again." },
+        { where: "Animals",     what: "The offspring becomes an animal record with its own history." },
+        { where: "Contacts",    what: "Your buyer becomes an owner in your address book." },
+        { where: "Documents",   what: "Contracts and paperwork travel with the animal." },
+        { where: "Rearing",     what: "Care schedules for that offspring wind down." },
+        { where: "Close Out",   what: "The plan moves one animal closer to finished." }
+      ]
+    },
+    {
+      action: "Change a Price",
+      targets: [
+        { where: "Money",       what: "Pricing updates without locking anything you've placed." },
+        { where: "Marketplace", what: "Public listings show the new price." },
+        { where: "Invoices",    what: "Unsent invoices pick it up; sent ones stay honest." },
+        { where: "Buyers",      what: "Anyone already quoted keeps what they were told." },
+        { where: "Storefront",  what: "Your own site reflects it wherever the plan appears." },
+        { where: "Activity",    what: "The change is logged with who made it and when." }
+      ]
+    },
+    {
+      action: "Finish The Plan",
+      targets: [
+        { where: "Close Out",   what: "Every offspring must be placed or accounted for.", gated: true },
+        { where: "Money",       what: "Outstanding balances are surfaced before you can close.", gated: true },
+        { where: "Marketplace", what: "Any live listing must come down first.", gated: true },
+        { where: "Birth",       what: "The dam's post-birth assessment is checked." },
+        { where: "Programs",    what: "The plan's results roll into your program's history." },
+        { where: "Historical",  what: "It becomes part of your permanent breeding record." }
+      ]
+    }
+  ];
+
+  var actionsEl = document.getElementById("actions");
+  var targetsEl = document.getElementById("targets");
+  var originText = document.getElementById("origin-text");
+  var countEl = document.getElementById("count");
+  var countText = document.getElementById("count-text");
+  var svg = document.getElementById("wires");
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var current = 0;
+
+  var reduced = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function render(i) {
+    current = i;
+    var r = RIPPLES[i];
+
+    Array.prototype.forEach.call(actionsEl.children, function (b, n) {
+      b.setAttribute("aria-pressed", n === i ? "true" : "false");
+    });
+
+    originText.textContent = r.action;
+    targetsEl.textContent = "";
+
+    r.targets.forEach(function (t, n) {
+      var d = document.createElement("div");
+      d.className = "tgt" + (t.gated ? " gated" : "");
+      if (!reduced) { d.style.animationDelay = (n * 46) + "ms"; }
+      var w = document.createElement("span");
+      w.className = "where";
+      w.textContent = t.where;
+      var s = document.createElement("span");
+      s.className = "what";
+      s.textContent = t.what;
+      d.appendChild(w); d.appendChild(s);
+      targetsEl.appendChild(d);
+    });
+
+    countEl.textContent = String(r.targets.length);
+    countText.textContent = r.targets.length === 1
+      ? "place updates itself from that one entry."
+      : "places update themselves from that one entry.";
+
+    requestAnimationFrame(drawWires);
+  }
+
+  /* ---- connector lines from the origin chip to each card ---- */
+  function drawWires() {
+    svg.textContent = "";
+    var stage = svg.parentNode;
+    var sb = stage.getBoundingClientRect();
+    if (!sb.width) { return; }
+
+    svg.setAttribute("viewBox", "0 0 " + sb.width + " " + sb.height);
+
+    var ob = document.getElementById("origin").getBoundingClientRect();
+    var ox = ob.left - sb.left + ob.width / 2;
+    var oy = ob.bottom - sb.top;
+
+    Array.prototype.forEach.call(targetsEl.children, function (card, n) {
+      var cb = card.getBoundingClientRect();
+      var tx = cb.left - sb.left + 16;
+      var ty = cb.top - sb.top;
+
+      var midY = oy + (ty - oy) * 0.55;
+      var p = document.createElementNS(SVGNS, "path");
+      p.setAttribute("d",
+        "M " + ox + " " + oy +
+        " C " + ox + " " + midY +
+        " " + tx + " " + (ty - (ty - oy) * 0.45) +
+        " " + tx + " " + ty);
+      p.setAttribute("fill", "none");
+      p.setAttribute("stroke", "var(--thread-live)");
+      p.setAttribute("stroke-width", "1.5");
+      p.setAttribute("stroke-linecap", "round");
+      p.setAttribute("opacity", ".42");
+
+      if (!reduced) {
+        var len = 0;
+        try { len = p.getTotalLength(); } catch (e) { len = 0; }
+        if (len) {
+          p.style.strokeDasharray = len;
+          p.style.strokeDashoffset = len;
+          p.style.transition = "stroke-dashoffset .5s ease " + (n * 46) + "ms";
+          requestAnimationFrame(function () { p.style.strokeDashoffset = "0"; });
+        }
+      }
+      svg.appendChild(p);
+    });
+  }
+
+  RIPPLES.forEach(function (r, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "act";
+    b.textContent = r.action;
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", function () { render(i); });
+    actionsEl.appendChild(b);
+  });
+
+  var rt;
+  window.addEventListener("resize", function () {
+    clearTimeout(rt);
+    rt = setTimeout(drawWires, 130);
+  });
+
+  render(0);
+
+  /* ---------------------------------------------------------
+     THE WEB — categories as nodes, real dependencies as edges
+     --------------------------------------------------------- */
+  var web = document.getElementById("web");
+  var W = 720, H = 500, CX = 360, CY = 238, R = 168;
+
+  var NODES = [
+    "Planning", "Breeding", "Birth", "Rearing",
+    "Placement", "Money", "Marketplace", "Close Out"
+  ];
+
+  /* [from, to, blocking?] — each is a dependency that exists in the product */
+  var EDGES = [
+    [0,1,false],[0,5,false],[0,6,false],[0,3,false],
+    [1,2,false],[1,6,false],[1,7,false],
+    [2,3,false],[2,4,false],[2,5,false],[2,7,true],
+    [3,4,false],[3,7,false],
+    [4,5,true],[4,6,true],[4,7,true],
+    [5,6,false],[5,7,true],
+    [6,7,true],
+    [0,4,false],[1,5,false],[3,5,false],[2,6,false]
+  ];
+
+  var pts = NODES.map(function (_, i) {
+    var a = (-Math.PI / 2) + (i * 2 * Math.PI / NODES.length);
+    return { x: CX + R * Math.cos(a), y: CY + R * Math.sin(a) };
+  });
+
+  function el(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+    return e;
+  }
+
+  EDGES.forEach(function (e) {
+    var a = pts[e[0]], b = pts[e[1]];
+    var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    var cx = mx + (CX - mx) * 0.34, cy = my + (CY - my) * 0.34;
+    web.appendChild(el("path", {
+      d: "M " + a.x + " " + a.y + " Q " + cx + " " + cy + " " + b.x + " " + b.y,
+      fill: "none",
+      stroke: e[2] ? "var(--clay)" : "var(--brass)",
+      "stroke-width": e[2] ? 1.6 : 1.1,
+      opacity: e[2] ? .5 : .33,
+      "stroke-linecap": "round"
+    }));
+  });
+
+  pts.forEach(function (p, i) {
+    web.appendChild(el("circle", {
+      cx: p.x, cy: p.y, r: 7,
+      fill: "var(--ground)",
+      stroke: "var(--brass)",
+      "stroke-width": 2
+    }));
+
+    var out = p.x > CX + 6 ? "start" : (p.x < CX - 6 ? "end" : "middle");
+    var dx = out === "start" ? 14 : (out === "end" ? -14 : 0);
+    var dy = p.y < CY - 60 ? -14 : (p.y > CY + 60 ? 22 : 5);
+
+    var t = el("text", {
+      x: p.x + dx, y: p.y + dy,
+      "text-anchor": out,
+      fill: "var(--ink)",
+      "font-size": "14.5",
+      "font-weight": "700",
+      "font-family": "inherit"
+    });
+    t.textContent = NODES[i];
+    web.appendChild(t);
+  });
+
+  var c = el("text", {
+    x: CX, y: CY - 4, "text-anchor": "middle",
+    fill: "var(--ink-3)", "font-size": "13", "font-weight": "700",
+    "letter-spacing": "1.6", "font-family": "inherit"
+  });
+  c.textContent = "ONE PLAN";
+  web.appendChild(c);
+
+  var c2 = el("text", {
+    x: CX, y: CY + 17, "text-anchor": "middle",
+    fill: "var(--ink-3)", "font-size": "12.5", "font-family": "inherit"
+  });
+  c2.textContent = EDGES.length + " connections";
+  web.appendChild(c2);
+})();
+</script>
+
+</body>
+</html>
