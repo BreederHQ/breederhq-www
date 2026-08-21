@@ -179,8 +179,8 @@ const stack = [
 
     .value-row {
       display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
+      flex-wrap: wrap;
+      align-items: flex-start;
       gap: clamp(14px, 2.4vw, 32px);
       margin-top: clamp(24px, 3.5vh, 34px);
     }
@@ -201,6 +201,10 @@ const stack = [
       line-height: 1;
       font-weight: 700;
       letter-spacing: -.03em;
+    }
+
+    @media (max-width: 540px) {
+      .value-divider { display: none; }
     }
 
     .value-divider {
@@ -710,7 +714,7 @@ const stack = [
           <div class="value-big" style="color:hsl(var(--brand-orange-light))">Nothing</div>
         </div>
         <div class="value-divider"></div>
-        <div style="flex:1 1 200px;min-width:0">
+        <div style="flex:1 1 100%;min-width:0;padding-top:clamp(12px,2vh,18px)">
           <div class="value-col-label">Six pieces, all included</div>
           <div style="font-size:clamp(13px,1.4vw,15px);line-height:1.35;color:hsl(var(--secondary))">Migration, three live sessions, marketplace widget installation, 1 mo. check-in call, a full year, priority support</div>
         </div>
