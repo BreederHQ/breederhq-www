@@ -26,11 +26,17 @@ export const prerender = true;
 </head>
 <body>
   <video
-    src="https://d21ngqll2l9ylo.cloudfront.net/videos/booth-loop.mp4"
+    src="/videos/booth-loop.mp4"
     autoplay
     loop
     muted
     playsinline
   ></video>
+<script is:inline>
+  var v = document.querySelector('video');
+  v.play().catch(function() {
+    document.addEventListener('click', function() { v.play(); }, { once: true });
+  });
+</script>
 </body>
 </html>
