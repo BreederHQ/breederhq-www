@@ -22,20 +22,45 @@ export const prerender = true;
       height: 100%;
       object-fit: cover;
     }
+    #tap {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+    #tap svg {
+      width: 80px;
+      height: 80px;
+      opacity: 0.7;
+    }
+    #tap.hidden { display: none; }
   </style>
 </head>
 <body>
-  <video
-    src="/videos/booth-loop.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-  ></video>
+  <video id="v" src="/videos/booth-loop.mp4" loop muted playsinline></video>
+  <div id="tap">
+    <svg viewBox="0 0 80 80" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.15)"/>
+      <polygon points="32,24 32,56 60,40" fill="white"/>
+    </svg>
+  </div>
 <script is:inline>
-  var v = document.querySelector('video');
-  v.play().catch(function() {
-    document.addEventListener('click', function() { v.play(); }, { once: true });
+  var v = document.getElementById('v');
+  var tap = document.getElementById('tap');
+
+  function startPlay() {
+    v.play().then(function() {
+      tap.classList.add('hidden');
+    }).catch(function() {});
+  }
+
+  tap.addEventListener('click', startPlay);
+
+  v.addEventListener('canplay', function() {
+    startPlay();
   });
 </script>
 </body>
