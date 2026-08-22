@@ -591,7 +591,6 @@ const DOG_SHOW_FOLLOWUP: InterestFollowUp = {
   nextSteps: [
     { label: 'aaron@breederhq.com', url: 'mailto:aaron@breederhq.com' },
     { label: 'carie@breederhq.com', url: 'mailto:carie@breederhq.com' },
-    { label: 'See what\'s included', url: 'https://breederhq.com/pricing' },
   ],
 };
 
