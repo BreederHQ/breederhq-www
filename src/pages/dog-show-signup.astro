@@ -22,6 +22,8 @@ const stack = [
   <title>Free Year of BreederHQ: Booth Signup</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="manifest" href="/dog-show-signup.webmanifest" />
+  <meta name="theme-color" content="#0a0a0a" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -964,6 +966,12 @@ const stack = [
       submitBtn.textContent = 'Sign Me Up!';
     }
   });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' });
+    });
+  }
 </script>
 
 </body>

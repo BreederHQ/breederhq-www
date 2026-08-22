@@ -6,8 +6,10 @@ export const prerender = true;
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BreederHQ</title>
+  <title>BreederHQ Booth</title>
   <meta name="robots" content="noindex, nofollow" />
+  <link rel="manifest" href="/videos/booth-loop.webmanifest" />
+  <meta name="theme-color" content="#000000" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -48,6 +50,12 @@ export const prerender = true;
     </svg>
   </div>
 <script is:inline>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' });
+    });
+  }
+
   var v = document.getElementById('v');
   var tap = document.getElementById('tap');
 
