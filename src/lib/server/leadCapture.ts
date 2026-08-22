@@ -686,9 +686,8 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
       <td align="center">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <tr>
-            <td style="background:linear-gradient(135deg,hsl(24,95%,53%) 0%,hsl(24,95%,45%) 100%);padding:32px 32px 28px;text-align:center;">
-              <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;letter-spacing:-0.01em;">BreederHQ</h1>
-              <p style="margin:8px 0 0;color:#fff7ed;font-size:14px;">Modern breeding management software</p>
+            <td style="background:linear-gradient(135deg,hsl(24,95%,53%) 0%,hsl(24,95%,45%) 100%);padding:28px 32px;text-align:center;">
+              <img src="https://breederhq.com/logo.png" alt="BreederHQ" width="160" style="display:block;margin:0 auto;height:auto;" />
             </td>
           </tr>
           <tr>
@@ -698,7 +697,7 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
                 Thanks for reaching out through BreederHQ. We got it, and a real person (not a bot) will read it and respond, usually within one business day.
               </p>
               <div style="margin:24px 0;padding:20px;background-color:#fff7ed;border-left:4px solid hsl(24,95%,53%);border-radius:6px;">
-                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">You told us you're interested in</p>
+                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">${lead.source === 'dog_show_booth' ? 'BreederHQ Promo Offer' : "You told us you're interested in"}</p>
                 <p style="margin:0;font-size:17px;font-weight:600;color:#111827;">${followUp.headline}</p>
                 <p style="margin:12px 0 0;font-size:15px;color:#374151;">${followUp.body}</p>
                 ${secondaryBlockHtml}
