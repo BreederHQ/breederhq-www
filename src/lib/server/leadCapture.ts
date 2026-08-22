@@ -514,6 +514,7 @@ const AUTO_REPLY_SOURCES = new Set([
   'lets_connect',
   'lets_connect_form',
   'lets_connect_page',
+  'dog_show_booth',
 ]);
 
 interface InterestFollowUp {
@@ -584,6 +585,16 @@ const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
   },
 };
 
+const DOG_SHOW_FOLLOWUP: InterestFollowUp = {
+  headline: 'Thanks for signing up at the booth',
+  body: "We're so glad you stopped by. Your free year of BreederHQ Launch Pro is on its way, and we'll be in touch personally to get you set up. In the meantime, feel free to reach out to Aaron or Carie directly at any time.",
+  nextSteps: [
+    { label: 'aaron@breederhq.com', url: 'mailto:aaron@breederhq.com' },
+    { label: 'carie@breederhq.com', url: 'mailto:carie@breederhq.com' },
+    { label: 'See what\'s included', url: 'https://breederhq.com/pricing' },
+  ],
+};
+
 const DEFAULT_FOLLOWUP: InterestFollowUp = {
   headline: 'Thanks for reaching out',
   body: "We received your note and a real person will read it. While you wait, feel free to look around.",
@@ -613,7 +624,9 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
   const primaryKey = pickedKeys[0];
   const secondaryKeys = pickedKeys.slice(1);
 
-  const followUp = (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
+  const followUp = lead.source === 'dog_show_booth'
+    ? DOG_SHOW_FOLLOWUP
+    : (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
   const firstName = (lead.name || '').split(' ')[0] || 'there';
 
   // De-dupe next-step links across primary + secondary follow-ups
@@ -746,8 +759,10 @@ BreederHQ - https://breederhq.com - info@breederhq.com`;
       body: JSON.stringify({
         from: 'BreederHQ <hello@mail.breederhq.com>',
         to: lead.email,
-        reply_to: 'info@breederhq.com',
-        subject: `Thanks for connecting, ${firstName}. We got your note.`,
+        reply_to: lead.source === 'dog_show_booth' ? 'aaron@breederhq.com' : 'info@breederhq.com',
+        subject: lead.source === 'dog_show_booth'
+          ? `Thanks for stopping by, ${firstName}. We'll be in touch soon.`
+          : `Thanks for connecting, ${firstName}. We got your note.`,
         html: emailHtml,
         text: emailText,
       }),
