@@ -76,7 +76,21 @@ const labelClass =
   <meta name="twitter:description" content={description} />
 
   <style is:global>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /*
+      NO `*{margin:0;padding:0}` reset here, deliberately.
+
+      Tailwind's utilities live in `@layer utilities`, and an unlayered rule
+      beats a layered one no matter how weak its selector. A universal reset
+      declared in this block therefore overrode EVERY spacing utility on the
+      page: `px-6`, `pt-6`, `pb-20` and `mx-auto` all computed to 0 while
+      `max-w-6xl` and `gap-12` survived, because the reset does not name those
+      properties. The result rendered as a styled page laid out flush against
+      the viewport edge, which reads as "CSS partly loaded" rather than as a
+      specificity problem, and it survived a build, a deploy and a review.
+
+      Tailwind's preflight already normalises box-sizing and margins, in the
+      right layer. It does not need help.
+    */
     html { -webkit-text-size-adjust: 100%; }
     body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     .font-serif { font-family: Georgia, "Times New Roman", serif; }
@@ -136,7 +150,7 @@ const labelClass =
         <hr class="mt-9 max-w-md border-stone-200" />
 
         <p class="mt-5 max-w-[44ch] text-sm leading-relaxed text-stone-500">
-          Running a large-scale operation or managing a breed registry?
+          Running a large-scale operation or managing a breed registry?{" "}
           <a
             href="/contact"
             class="text-amber-700 underline decoration-amber-700/30 underline-offset-2 hover:text-amber-800 hover:decoration-amber-800"
