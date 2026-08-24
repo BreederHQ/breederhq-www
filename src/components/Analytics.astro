@@ -36,6 +36,15 @@ const isProduction = import.meta.env.PROD;
           gtag('config', measurementId, {
             anonymize_ip: true,
             cookie_flags: 'SameSite=None;Secure',
+            // GA4's config call sends an automatic page_view by default, and
+            // tracking.ts sends its own gtag('event', 'page_view', ...) from
+            // TrackingInit. page_view is a reserved event name, so both landed
+            // in the same metric and GA4 does not deduplicate: every page was
+            // counted twice. Suppressing the automatic one leaves the manual
+            // event as the single source, which is the right side to keep
+            // because it also re-fires on popstate, something the config-time
+            // page view does not do.
+            send_page_view: false,
             // Cross-domain linker: GA4 appends `_gl=...` to every outbound
             // link/form pointing at one of these hosts so the visitor's
             // client_id (and gclid) survives the hand-off from www → accounts
