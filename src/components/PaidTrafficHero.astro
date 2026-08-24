@@ -18,7 +18,7 @@
 // Usage (in a species page after the H1, before the TL;DR aside):
 //
 //   <PaidTrafficHero
-//     headline="Start Your 14-Day Free Trial"
+//     headline="Join The Waitlist"
 //     subhead="Built for serious dog breeders. No credit card pressure for the trial period."
 //   />
 //
@@ -45,9 +45,9 @@ interface Props {
 }
 
 const {
-  headline = "Start Your 14-Day Free Trial",
-  subhead = "No card required to start. Cancel anytime during the trial.",
-  registerHref = "https://accounts.breederhq.com/register?intent=breeder_dashboard",
+  headline = "Join The Waitlist",
+  subhead = "Access is invitation only. We onboard breeders one at a time.",
+  registerHref = "/pricing",
   scriptOnly = false,
 } = Astro.props;
 ---
@@ -73,7 +73,7 @@ const {
         class="inline-block whitespace-nowrap rounded-lg bg-[hsl(24,95%,53%)] px-8 py-4 text-lg font-bold text-white transition hover:bg-[hsl(24,95%,47%)]"
         style="min-height: 44px;"
       >
-        Start 14-Day Free Trial →
+        Join The Waitlist →
       </a>
     </div>
   </aside>
@@ -125,15 +125,21 @@ const {
           }
         }
 
-        // ALWAYS rewrite every accounts.breederhq.com/register anchor on
-        // the page to preserve the inbound query string, regardless of
-        // whether the visitor is paid traffic. Organic visitors with no
-        // query string get an unchanged href; paid visitors get gclid +
-        // utm_* forwarded to the signup flow so Ads can attribute the
-        // conversion to the exact campaign + keyword that drove the click.
+        // ALWAYS rewrite every signup anchor on the page to preserve the
+        // inbound query string, regardless of whether the visitor is paid
+        // traffic. Organic visitors with no query string get an unchanged
+        // href; paid visitors get gclid + utm_* forwarded so Ads can
+        // attribute the conversion to the exact campaign + keyword that
+        // drove the click.
+        //
+        // /pricing is included because breeder access is invitation only:
+        // the waitlist application, not registration, is now the breeder
+        // conversion. Matching only the register host would have dropped
+        // gclid on every breeder CTA on the site. The provider register
+        // links still match and still forward.
         if (inboundQuery && inboundQuery.length > 1) {
           var anchors = document.querySelectorAll(
-            'a[href^="https://accounts.breederhq.com/register"]'
+            'a[href^="https://accounts.breederhq.com/register"], a[href^="/pricing"], a[href^="https://www.breederhq.com/pricing"], a[href^="https://breederhq.com/pricing"]'
           );
           for (var i = 0; i < anchors.length; i++) {
             var a = anchors[i];

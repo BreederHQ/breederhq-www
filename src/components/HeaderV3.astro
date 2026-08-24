@@ -8,9 +8,9 @@ const { hideLogo = false } = Astro.props;
 <!-- Founders Banner -->
 <div data-pagefind-ignore="all" style="position:relative;z-index:60;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 16px;padding:11px 20px;font-size:13.5px;background:linear-gradient(90deg,#FF6A2C,#FF9A3C 55%,#FFB020);text-align:center">
   <span style="position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:bhqSweep 4.5s linear infinite;pointer-events:none"></span>
-  <span style="position:relative;display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.16em;color:#3A1602">&#9733; FOUNDING MEMBER</span>
-  <span style="position:relative;font-weight:700;color:#241004">50% off Pro &amp; Enterprise for your first 12 months</span>
-  <a href="/founders" style="position:relative;display:inline-flex;align-items:center;gap:6px;padding:6px 15px;border-radius:999px;font-weight:700;font-size:12.5px;color:#FFFFFF;background:#151E30;box-shadow:0 3px 12px rgba(20,15,10,.35)">Claim yours <span style="font-size:14px">&#8594;</span></a>
+  <span style="position:relative;display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.16em;color:#3A1602">&#9733; INVITATION ONLY</span>
+  <span style="position:relative;font-weight:700;color:#241004">We are onboarding founding members one at a time</span>
+  <a href="/pricing" style="position:relative;display:inline-flex;align-items:center;gap:6px;padding:6px 15px;border-radius:999px;font-weight:700;font-size:12.5px;color:#FFFFFF;background:#151E30;box-shadow:0 3px 12px rgba(20,15,10,.35)">Join the waitlist <span style="font-size:14px">&#8594;</span></a>
 </div>
 
 <!-- Sticky Nav Shell -->
@@ -61,7 +61,7 @@ const { hideLogo = false } = Astro.props;
           >
             <!-- CTA card -->
             <a
-              href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+              href="/pricing"
               class="flex gap-3 items-center p-3 rounded-lg mb-5 transition-colors"
               style="background:rgba(255,106,44,.1);border:1px solid rgba(255,138,76,.25)"
               onmouseover="this.style.background='rgba(255,106,44,.15)'"
@@ -69,8 +69,8 @@ const { hideLogo = false } = Astro.props;
             >
               <img src="/logo.png" alt="BreederHQ" class="h-10 w-10 object-contain shrink-0" />
               <div>
-                <div class="text-sm font-semibold text-white">Start Your Free Trial</div>
-                <div class="text-xs" style="color:#A9BAD4">14 days free — cancel anytime</div>
+                <div class="text-sm font-semibold text-white">Join The Waitlist</div>
+                <div class="text-xs" style="color:#A9BAD4">Invitation only — we onboard one at a time</div>
               </div>
             </a>
 
@@ -140,7 +140,6 @@ const { hideLogo = false } = Astro.props;
                   {[
                     ['Features', '/features'],
                     ['Pricing', '/pricing'],
-                    ['Compare Plans', '/pricing/compare'],
                     ['Free Tools', '/tools'],
                   ].map(([label, href]) => (
                     <a href={href} class="dd-link block py-1 px-2 rounded-md text-sm transition-colors" style="color:#A9BAD4">{label}</a>
@@ -296,10 +295,10 @@ const { hideLogo = false } = Astro.props;
                   <li><a href="/for-breeders" class="dd-link block py-1 px-2 rounded-md text-sm transition-colors" style="color:#A9BAD4">Why BreederHQ</a></li>
                   <li>
                     <a
-                      href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+                      href="/pricing"
                       class="dd-link block py-1 px-2 rounded-md text-sm font-medium transition-colors"
                       style="color:#FF9A3C"
-                    >Start Free Trial →</a>
+                    >Join The Waitlist →</a>
                   </li>
                 </ul>
               </div>
@@ -343,7 +342,6 @@ const { hideLogo = false } = Astro.props;
             <ul class="space-y-1">
               {[
                 ['Pricing', '/pricing'],
-                ['Compare Plans', '/pricing/compare'],
                 ['Features', '/features'],
                 ['Breed Clubs', '/for-breed-clubs'],
               ].map(([label, href]) => (
@@ -374,10 +372,10 @@ const { hideLogo = false } = Astro.props;
           style="color:#A9BAD4;font-family:'Sora',system-ui,sans-serif"
         >Sign in</a>
         <a
-          href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+          href="/pricing"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-[9px] text-sm font-semibold transition-opacity hover:opacity-90"
           style="background:linear-gradient(150deg,#FF6A2C,#FF9A3C);box-shadow:0 6px 22px rgba(255,106,44,.35);color:#0A0F1A;font-family:'Sora',system-ui,sans-serif"
-        >Start free trial →</a>
+        >Join the waitlist →</a>
       </div>
 
       <!-- Mobile hamburger -->
@@ -432,7 +430,6 @@ const { hideLogo = false } = Astro.props;
             ['Marketplace Listings', '/workflows/marketplace'],
             ['Features', '/features'],
             ['Pricing', '/pricing'],
-            ['Compare Plans', '/pricing/compare'],
             ['Free Tools', '/tools'],
           ].map(([label, href]) => (
             <a href={href} class="mobile-link block py-2 px-3 rounded-lg text-sm" style="color:#A9BAD4">{label}</a>
@@ -501,7 +498,6 @@ const { hideLogo = false } = Astro.props;
         <div class="mobile-acc-body hidden pl-3 pb-2 space-y-1">
           {[
             ['Pricing', '/pricing'],
-            ['Compare Plans', '/pricing/compare'],
             ['Features', '/features'],
             ['Breed Clubs', '/for-breed-clubs'],
           ].map(([label, href]) => (
@@ -524,10 +520,10 @@ const { hideLogo = false } = Astro.props;
           style="color:#A9BAD4;border:1px solid rgba(255,255,255,.12)"
         >Sign in</a>
         <a
-          href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+          href="/pricing"
           class="block py-2.5 px-4 rounded-[9px] text-sm text-center font-semibold transition-opacity hover:opacity-90"
           style="background:linear-gradient(150deg,#FF6A2C,#FF9A3C);color:#0A0F1A"
-        >Start free trial →</a>
+        >Join the waitlist →</a>
       </div>
 
     </div>

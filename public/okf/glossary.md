@@ -44,10 +44,9 @@ Terms breeders and buyers use, with BreederHQ-specific meanings where relevant.
 | Offspring | Species-neutral term for newborns (puppies, kittens, foals, kids, lambs, calves, crias, kits). Used on shared species-neutral pages. |
 | Birthing | Species-neutral term for whelping, foaling, kidding, lambing, calving, queening, kindling. Used on shared species-neutral pages. |
 | Trust page | The Identity and Credentials policy page at /trust. Legally reviewed. |
-| FOUNDER50 | Promo code for 50% off Pro or Enterprise for 12 months. First 100 subscribers only. One redemption per customer. |
-| Pro | Middle subscription tier ($79/mo). Includes Scout AI, Help Assistant, Genetics Lab, Auto-replies. |
-| Enterprise | Top subscription tier ($159/mo). Everything in Pro plus team management, multi-location, automated follow-ups, unlimited marketplace listings. |
-| Standard | Entry subscription tier ($29/mo). Full program-management foundation without Scout AI or Genetics Lab. |
+| BreederHQ Launch | The founding-member offer. A founder-led setup covering record migration and live onboarding sessions, plus platform access. Invitation only; scope and pricing are discussed directly with each applicant. |
+| Founding member | A breeder onboarded during the invitation-only period. A permanent identity, shown as an optional storefront badge. |
+| Waitlist | The application at /pricing. The only route to BreederHQ access; reviewed in the order applications arrive. |
 
 ## Cross-References
 

@@ -46,6 +46,22 @@ function formatPhoneDisplay(lead: { phone?: string; phone_e164?: string }): stri
   return lead.phone || lead.phone_e164 || 'Not provided';
 }
 
+/**
+ * Escape a value before interpolating it into an HTML email body.
+ *
+ * Every field here originates from a public, unauthenticated form, so a name
+ * or kennel containing markup would otherwise be injected verbatim into both
+ * the applicant's auto-reply and the internal notification.
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export interface EnrichedLead extends LeadData {
   enrichment?: {
     person?: {
@@ -364,54 +380,54 @@ export async function sendToResend(lead: EnrichedLead): Promise<boolean> {
 
     <h3>Contact Information:</h3>
     <ul>
-      <li><strong>Name:</strong> ${lead.name || 'Not provided'}</li>
-      <li><strong>Email:</strong> ${lead.email}</li>
-      <li><strong>Phone:</strong> ${formatPhoneDisplay(lead)}${lead.phone_e164 && lead.phone && lead.phone !== lead.phone_e164 ? ` <em>(${lead.phone_e164})</em>` : ''}</li>
-      <li><strong>Company:</strong> ${lead.company || lead.enrichment?.company?.name || 'Not provided'}</li>
+      <li><strong>Name:</strong> ${escapeHtml(lead.name || 'Not provided')}</li>
+      <li><strong>Email:</strong> ${escapeHtml(lead.email)}</li>
+      <li><strong>Phone:</strong> ${escapeHtml(formatPhoneDisplay(lead))}${lead.phone_e164 && lead.phone && lead.phone !== lead.phone_e164 ? ` <em>(${escapeHtml(lead.phone_e164)})</em>` : ''}</li>
+      <li><strong>Company:</strong> ${escapeHtml(lead.company || lead.enrichment?.company?.name || 'Not provided')}</li>
       ${(() => {
         const list = formatInterests(lead);
-        return list.length > 0 ? `<li><strong>Interested in:</strong><ul>${list.map((i) => `<li>${i}</li>`).join('')}</ul></li>` : '';
+        return list.length > 0 ? `<li><strong>Interested in:</strong><ul>${list.map((i) => `<li>${escapeHtml(i)}</li>`).join('')}</ul></li>` : '';
       })()}
     </ul>
 
     ${lead.message ? `
       <h3>Message:</h3>
-      <p>${lead.message}</p>
+      <p>${escapeHtml(lead.message)}</p>
     ` : ''}
 
     ${lead.enrichment?.person ? `
       <h3>Person Intelligence:</h3>
       <ul>
-        ${lead.enrichment.person.jobTitle ? `<li><strong>Job Title:</strong> ${lead.enrichment.person.jobTitle}</li>` : ''}
-        ${lead.enrichment.person.location ? `<li><strong>Location:</strong> ${lead.enrichment.person.location}</li>` : ''}
-        ${lead.enrichment.person.linkedIn ? `<li><strong>LinkedIn:</strong> ${lead.enrichment.person.linkedIn}</li>` : ''}
+        ${lead.enrichment.person.jobTitle ? `<li><strong>Job Title:</strong> ${escapeHtml(lead.enrichment.person.jobTitle)}</li>` : ''}
+        ${lead.enrichment.person.location ? `<li><strong>Location:</strong> ${escapeHtml(lead.enrichment.person.location)}</li>` : ''}
+        ${lead.enrichment.person.linkedIn ? `<li><strong>LinkedIn:</strong> ${escapeHtml(lead.enrichment.person.linkedIn)}</li>` : ''}
       </ul>
     ` : ''}
 
     ${lead.enrichment?.company ? `
       <h3>Company Intelligence:</h3>
       <ul>
-        ${lead.enrichment.company.name ? `<li><strong>Company:</strong> ${lead.enrichment.company.name}</li>` : ''}
-        ${lead.enrichment.company.industry ? `<li><strong>Industry:</strong> ${lead.enrichment.company.industry}</li>` : ''}
-        ${lead.enrichment.company.employees ? `<li><strong>Employees:</strong> ${lead.enrichment.company.employees}</li>` : ''}
-        ${lead.enrichment.company.location ? `<li><strong>Location:</strong> ${lead.enrichment.company.location}</li>` : ''}
-        ${lead.enrichment.company.domain ? `<li><strong>Website:</strong> ${lead.enrichment.company.domain}</li>` : ''}
+        ${lead.enrichment.company.name ? `<li><strong>Company:</strong> ${escapeHtml(lead.enrichment.company.name)}</li>` : ''}
+        ${lead.enrichment.company.industry ? `<li><strong>Industry:</strong> ${escapeHtml(lead.enrichment.company.industry)}</li>` : ''}
+        ${lead.enrichment.company.employees ? `<li><strong>Employees:</strong> ${escapeHtml(String(lead.enrichment.company.employees))}</li>` : ''}
+        ${lead.enrichment.company.location ? `<li><strong>Location:</strong> ${escapeHtml(lead.enrichment.company.location)}</li>` : ''}
+        ${lead.enrichment.company.domain ? `<li><strong>Website:</strong> ${escapeHtml(lead.enrichment.company.domain)}</li>` : ''}
       </ul>
     ` : ''}
 
     ${lead.utm?.source || lead.source ? `
       <h3>Source Information:</h3>
       <ul>
-        <li><strong>Source:</strong> ${lead.source || 'Direct'}</li>
-        ${lead.utm?.source ? `<li><strong>UTM Source:</strong> ${lead.utm.source}</li>` : ''}
-        ${lead.utm?.campaign ? `<li><strong>UTM Campaign:</strong> ${lead.utm.campaign}</li>` : ''}
-        ${lead.utm?.medium ? `<li><strong>UTM Medium:</strong> ${lead.utm.medium}</li>` : ''}
-        ${lead.utm?.term ? `<li><strong>UTM Term:</strong> ${lead.utm.term}</li>` : ''}
-        ${lead.utm?.content ? `<li><strong>UTM Content:</strong> ${lead.utm.content}</li>` : ''}
+        <li><strong>Source:</strong> ${escapeHtml(lead.source || 'Direct')}</li>
+        ${lead.utm?.source ? `<li><strong>UTM Source:</strong> ${escapeHtml(lead.utm.source)}</li>` : ''}
+        ${lead.utm?.campaign ? `<li><strong>UTM Campaign:</strong> ${escapeHtml(lead.utm.campaign)}</li>` : ''}
+        ${lead.utm?.medium ? `<li><strong>UTM Medium:</strong> ${escapeHtml(lead.utm.medium)}</li>` : ''}
+        ${lead.utm?.term ? `<li><strong>UTM Term:</strong> ${escapeHtml(lead.utm.term)}</li>` : ''}
+        ${lead.utm?.content ? `<li><strong>UTM Content:</strong> ${escapeHtml(lead.utm.content)}</li>` : ''}
       </ul>
     ` : ''}
 
-    <p><em>Received: ${lead.metadata?.timestamp || new Date().toISOString()}</em></p>
+    <p><em>Received: ${escapeHtml(lead.metadata?.timestamp || new Date().toISOString())}</em></p>
   `;
 
   try {
@@ -515,6 +531,7 @@ const AUTO_REPLY_SOURCES = new Set([
   'lets_connect_form',
   'lets_connect_page',
   'dog_show_booth',
+  'launch_waitlist',
 ]);
 
 interface InterestFollowUp {
@@ -530,7 +547,7 @@ const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
     nextSteps: [
       { label: 'See all workflows', url: 'https://breederhq.com/workflows' },
       { label: 'Pricing', url: 'https://breederhq.com/pricing' },
-      { label: 'Create a free account', url: 'https://accounts.breederhq.com/register?intent=breeder_dashboard' },
+      { label: 'Join the waitlist', url: 'https://breederhq.com/pricing' },
     ],
   },
   offer_services: {
@@ -563,7 +580,7 @@ const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
     nextSteps: [
       { label: 'See the breeder workflows', url: 'https://breederhq.com/workflows' },
       { label: 'Pricing', url: 'https://breederhq.com/pricing' },
-      { label: 'Create a free account', url: 'https://accounts.breederhq.com/register?intent=breeder_dashboard' },
+      { label: 'Join the waitlist', url: 'https://breederhq.com/pricing' },
     ],
   },
   genetic_health: {
@@ -587,7 +604,20 @@ const INTEREST_FOLLOWUPS: Record<string, InterestFollowUp> = {
 
 const DOG_SHOW_FOLLOWUP: InterestFollowUp = {
   headline: 'Thanks for signing up at the booth',
-  body: "We're so glad you stopped by. Your free year of BreederHQ Launch Pro is on its way, and we'll be in touch personally to get you set up. In the meantime, feel free to reach out to Aaron or Carie directly at any time.",
+  body: "We're so glad you stopped by. We'll be in touch personally to get you set up. In the meantime, feel free to reach out to Aaron or Carie directly at any time.",
+  nextSteps: [
+    { label: 'aaron@breederhq.com', url: 'mailto:aaron@breederhq.com' },
+    { label: 'carie@breederhq.com', url: 'mailto:carie@breederhq.com' },
+  ],
+};
+
+// The waitlist reply is deliberately personal rather than transactional. Access
+// is invitation only, so this email is the first real contact of a relationship
+// that continues one-to-one, and it should read that way: two names, two real
+// inboxes, and no marketing funnel underneath it.
+const LAUNCH_WAITLIST_FOLLOWUP: InterestFollowUp = {
+  headline: "You're on the BreederHQ waitlist",
+  body: "Thank you for applying. We are bringing breeders onboard one at a time so every setup gets our full attention, and we will reach out personally as soon as a spot opens. If you have questions before then, or you just want to tell us about your program, write to either of us directly. We read and answer our own email.",
   nextSteps: [
     { label: 'aaron@breederhq.com', url: 'mailto:aaron@breederhq.com' },
     { label: 'carie@breederhq.com', url: 'mailto:carie@breederhq.com' },
@@ -623,9 +653,14 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
   const primaryKey = pickedKeys[0];
   const secondaryKeys = pickedKeys.slice(1);
 
+  // Source-specific replies win over interest-derived ones: the waitlist form
+  // sends a species in `interest`, which would otherwise select a generic
+  // follow-up and bury the personal note this email exists to deliver.
   const followUp = lead.source === 'dog_show_booth'
     ? DOG_SHOW_FOLLOWUP
-    : (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
+    : lead.source === 'launch_waitlist'
+      ? LAUNCH_WAITLIST_FOLLOWUP
+      : (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
   const firstName = (lead.name || '').split(' ')[0] || 'there';
 
   // De-dupe next-step links across primary + secondary follow-ups
@@ -691,24 +726,26 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
           </tr>
           <tr>
             <td style="padding:32px;">
-              <h2 style="margin:0 0 12px;font-size:20px;font-weight:600;color:#111827;">Hi ${firstName},</h2>
+              <h2 style="margin:0 0 12px;font-size:20px;font-weight:600;color:#111827;">Hi ${escapeHtml(firstName)},</h2>
               <p style="margin:0 0 16px;font-size:16px;color:#374151;">
-                Thanks for reaching out through BreederHQ. We got it, and a real person (not a bot) will read it and respond, usually within one business day.
+                ${lead.source === 'launch_waitlist'
+                  ? 'Thank you for applying to join BreederHQ. Your application is in, and it is read by a person, not a bot.'
+                  : 'Thanks for reaching out through BreederHQ. We got it, and a real person (not a bot) will read it and respond, usually within one business day.'}
               </p>
               <div style="margin:24px 0;padding:20px;background-color:#fff7ed;border-left:4px solid hsl(24,95%,53%);border-radius:6px;">
-                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">${lead.source === 'dog_show_booth' ? 'BreederHQ Promo Offer' : "You told us you're interested in"}</p>
+                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">${lead.source === 'dog_show_booth' ? 'BreederHQ Promo Offer' : lead.source === 'launch_waitlist' ? 'Your Application' : "You told us you're interested in"}</p>
                 <p style="margin:0;font-size:17px;font-weight:600;color:#111827;">${followUp.headline}</p>
                 <p style="margin:12px 0 0;font-size:15px;color:#374151;">${followUp.body}</p>
                 ${secondaryBlockHtml}
               </div>
-              <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">A few good places to start</h3>
+              <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">${lead.source === 'launch_waitlist' ? 'Reach us directly' : 'A few good places to start'}</h3>
               <div style="margin:0 0 8px;">${linksHtml}</div>
               <p style="margin:32px 0 0;font-size:15px;color:#374151;">
                 If you have anything else you'd like to share before we get back to you, just reply to this email. It goes straight to our inbox.
               </p>
               <p style="margin:16px 0 0;font-size:15px;color:#374151;">
                 Talk soon,<br />
-                <strong>The BreederHQ Team</strong>
+                <strong>${lead.source === 'launch_waitlist' ? 'Aaron and Carie' : 'The BreederHQ Team'}</strong>
               </p>
             </td>
           </tr>
@@ -718,7 +755,9 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
                 BreederHQ &middot; <a href="https://breederhq.com" style="color:#6b7280;text-decoration:underline;">breederhq.com</a> &middot; <a href="mailto:info@breederhq.com" style="color:#6b7280;text-decoration:underline;">info@breederhq.com</a>
               </p>
               <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;">
-                You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it. We won't add you to any list.
+                ${lead.source === 'launch_waitlist'
+                  ? "You're receiving this because you applied to join BreederHQ at breederhq.com. We'll only contact you about your application. No newsletter, no marketing list."
+                  : "You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it. We won't add you to any list."}
               </p>
             </td>
           </tr>
@@ -729,14 +768,18 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
 </body>
 </html>`;
 
+  const isWaitlist = lead.source === 'launch_waitlist';
+
   const emailText = `Hi ${firstName},
 
-Thanks for reaching out through BreederHQ. We got your note, and a real person will read it and respond, usually within one business day.
+${isWaitlist
+  ? 'Thank you for applying to join BreederHQ.'
+  : 'Thanks for reaching out through BreederHQ. We got your note, and a real person will read it and respond, usually within one business day.'}
 
-You told us you're interested in: ${followUp.headline}
+${isWaitlist ? followUp.headline : `You told us you're interested in: ${followUp.headline}`}
 ${followUp.body}
 ${secondaryTextLines.length > 0 ? `\nAlso interested in:\n${secondaryTextLines.map((h) => `- ${h}`).join('\n')}\n` : ''}
-A few good places to start:
+${isWaitlist ? 'Reach us directly:' : 'A few good places to start:'}
 ${linksToRender.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
 
 If you have anything else to share, just reply to this email.
@@ -757,10 +800,16 @@ BreederHQ - https://breederhq.com - info@breederhq.com`;
       body: JSON.stringify({
         from: 'BreederHQ <hello@mail.breederhq.com>',
         to: lead.email,
-        reply_to: lead.source === 'dog_show_booth' ? 'aaron@breederhq.com' : 'info@breederhq.com',
+        // Waitlist replies come from a person, so a reply lands with a person.
+        reply_to:
+          lead.source === 'dog_show_booth' || lead.source === 'launch_waitlist'
+            ? 'aaron@breederhq.com'
+            : 'info@breederhq.com',
         subject: lead.source === 'dog_show_booth'
           ? `Thanks for stopping by, ${firstName}. We'll be in touch soon.`
-          : `Thanks for connecting, ${firstName}. We got your note.`,
+          : lead.source === 'launch_waitlist'
+            ? `You're on the list, ${firstName}. Here's what happens next.`
+            : `Thanks for connecting, ${firstName}. We got your note.`,
         html: emailHtml,
         text: emailText,
       }),
@@ -887,6 +936,15 @@ export async function processLead(
   // Log results
   const successCount = results.filter(r => r.status === 'fulfilled' && r.value === true).length;
   console.log(`✅ Lead distributed to ${successCount}/${results.length} channels`);
+
+  // A channel returns false when it is simply not configured, so a low count is
+  // normal and not an error. Zero is different: nothing recorded the lead
+  // anywhere, and reporting success would tell the person their application
+  // was received while it was in fact lost. Throwing surfaces it as a failure
+  // they can retry.
+  if (successCount === 0) {
+    throw new Error('Lead was not delivered to any channel');
+  }
 
   return enrichedLead;
 }

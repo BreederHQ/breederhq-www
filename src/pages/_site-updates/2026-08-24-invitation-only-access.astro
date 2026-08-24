@@ -1,0 +1,88 @@
+---
+// src/pages/_site-updates/2026-08-24-invitation-only-access.astro
+export const updateMeta = {
+  date: '2026-08-24',
+  title: 'Public pricing replaced by an invitation-only waitlist',
+  tags: ['pricing', 'access', 'waitlist', 'seo'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">August 24, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Public pricing is retired across the site. The three published tiers, the 14-day free trial,
+    and the FOUNDER50 founding-member discount no longer appear anywhere on breederhq.com.
+    Access to BreederHQ is invitation only: breeders apply through a waitlist and are onboarded
+    one at a time with a founder-led setup.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      Onboarding capacity, not software licences, is what limits how many breeders can start at
+      once. Every founding member receives a personal setup, so the site now asks for an
+      application rather than a purchase. Publishing a price list alongside that would promise a
+      self-serve path that does not exist.
+    </p>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Replaced</h3>
+    <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+      <li>
+        <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a> is now a
+        waitlist application: name, email, kennel or business name, species, and an optional
+        phone or WhatsApp number. The URL is unchanged, so every existing inbound link still
+        resolves. Submitting swaps the page for a confirmation screen rather than navigating away.
+      </li>
+      <li>
+        <code>/pricing/compare</code> is removed. Its three-column Standard / Pro / Enterprise
+        matrix described products that can no longer be bought. It redirects to /pricing.
+      </li>
+      <li>
+        <a href="/features" class="text-[hsl(24,95%,53%)] hover:underline">/features</a> keeps all
+        132 capabilities but drops the tier filter, the per-card tier badges, and the plan-limits
+        table. It reads as one capability list rather than a tier decision tool. Search still works.
+      </li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Site-wide</h3>
+    <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+      <li>The header banner now reads "Invitation only" and points at the waitlist.</li>
+      <li>
+        Every breeder call to action across roughly 90 pages now targets /pricing instead of
+        self-serve registration. Buyer and service-provider signup are unaffected: both remain
+        open, and their "free account" copy is accurate.
+      </li>
+      <li>
+        Comparison, species, and landing pages had their pricing and discount arguments rewritten
+        around limited access and founder-led setup. Competitor pricing and competitor trial
+        lengths are factual research and were left exactly as they were.
+      </li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Machine-readable surfaces</h3>
+    <p class="text-sm text-gray-600">
+      <code>/pricing.md</code>, <code>/okf/pricing.md</code>, <code>/okf/product.md</code>,
+      <code>/okf/glossary.md</code> and <code>/llms.txt</code> were rewritten to state that access
+      is invitation only. These files are how AI assistants answer "how much does BreederHQ cost",
+      so leaving them stale would have kept a retired price list in circulation regardless of what
+      the site itself said. They each explicitly note that the trial is retired, which stops an
+      older cached answer being repeated as current. The marketplace listing-fee schedule moved
+      here from the old pricing page: still answerable, no longer competing with the application.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">Retired</h3>
+    <p class="text-sm text-gray-600">
+      <code>/founders</code> (the FOUNDER50 offer page) and <code>/dog-show-signup</code> with its
+      booth loop video and manifests are removed; both redirect to /pricing so printed QR codes and
+      existing links do not 404. <code>/coming-soon</code> now points straight at /pricing rather
+      than chaining through /founders.
+    </p>
+  </div>
+</article>

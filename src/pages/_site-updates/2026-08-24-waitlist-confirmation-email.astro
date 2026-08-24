@@ -1,0 +1,49 @@
+---
+// src/pages/_site-updates/2026-08-24-waitlist-confirmation-email.astro
+export const updateMeta = {
+  date: '2026-08-24',
+  title: 'Waitlist applicants receive a personal confirmation email',
+  tags: ['email', 'waitlist', 'lead-capture'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">August 24, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Submitting the waitlist application at
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a> now sends the
+    applicant a branded confirmation email carrying both founders' direct addresses.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      Under invitation-only access this email is the first real contact in a relationship that
+      continues one to one, so it reads as a note from two people rather than a transactional
+      receipt. It says the application was received, that breeders are onboarded one at a time,
+      and that either founder can be written to directly in the meantime.
+    </p>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">How it works</h3>
+    <p class="text-sm text-gray-600">
+      The <code>launch_waitlist</code> source was added to the existing auto-reply opt-in set in
+      <code>leadCapture.ts</code>, reusing the branded template already used for other opted-in
+      sources: BreederHQ logo, brand-orange header, and a highlighted panel. Source-specific
+      replies take precedence over interest-derived ones, because the waitlist form sends a species
+      in the interest field and would otherwise have selected a generic follow-up and buried the
+      personal note. The subject line, intro, panel heading, and the label above the contact
+      buttons all branch on source, in both the HTML and the plain-text alternative. Replies route
+      to a founder rather than the shared inbox.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">Also corrected</h3>
+    <p class="text-sm text-gray-600">
+      Two auto-reply follow-ups still offered a "Create a free account" link into self-serve
+      registration, which no longer exists for breeders; both now point at the waitlist. The dog
+      show reply no longer references a free year, since that booth offer has ended.
+    </p>
+  </div>
+</article>

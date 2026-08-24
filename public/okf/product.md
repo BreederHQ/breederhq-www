@@ -33,7 +33,7 @@ BreederHQ is a program-management platform with a marketplace as a byproduct, no
 - Business tools: invoicing, expense tracking, financial dashboards, deposit management, per-litter and per-plan and per-year profit and loss, and CSV export.
 - Marketplace listings: powered directly by live program data (health testing, allele-level genetics, multi-generation lineage with COI, titles and competition results, rearing protocols completed, weight and growth tracking for offspring). Buyers evaluate breeders on facts, not on the polish of a Facebook page.
 - Embed widget: a snippet that renders live BreederHQ marketplace listings on the breeder's own Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain-HTML site. Available offspring appear the moment they are listed. Sold animals disappear the moment they are marked sold. Prices, photos, health testing, pedigree, and program details update in real time from BreederHQ as the source of truth.
-- Communications Hub: unified email and direct messaging with rule-based auto-replies on Pro and Enterprise. Templates, document bundles, business-hours scheduling, keyword triggers, away messages, and Quick Responder tracking.
+- Communications Hub: unified email and direct messaging with rule-based auto-replies. Templates, document bundles, business-hours scheduling, keyword triggers, away messages, and Quick Responder tracking.
 - Cross-tenant animal identity (GAID and Exchange Code): a stud owned by one breeder can be linked as the sire of a litter on another breeder's account only with the stud owner's approval. Real provenance across the breeder network, not a name typed into a form.
 - Facilities and bookings: 8 categories (dog parks, equine, livestock, indoor training, boarding, wash and grooming, events and shows, specialty), real slot-booking mechanics with capacity and buffer rules, flat $5/month per listing across the entire marketplace (currently free during early access), no per-booking cut.
 
@@ -61,11 +61,11 @@ BreederHQ is the only breeder platform on the market with a serious native mobil
 
 ## Business Model
 
-- 14-day free trial on every plan. Not a free tier.
-- Two paid tiers: Pro ($79/mo) and Enterprise ($159/mo), plus Standard ($29/mo) entry-level tier. Live prices at /pricing.
-- FOUNDER50 promo: 50% off 12 months of Pro or Enterprise for the first 100 subscribers.
+- Access is invitation only. No public price list, no self-serve signup, no free trial, no free tier.
+- BreederHQ Launch is available to a limited number of founding members, onboarded one at a time, each receiving a founder-led setup. Scope and pricing are discussed directly with each applicant. Waitlist at /pricing.
+- Large-scale operations and breed registries are handled as a direct conversation at /contact.
 - Billed in USD. International cards accepted.
-- Marketplace listing currencies: USD, GBP, EUR, CAD, AUD. Subscription billing stays USD-only.
+- Marketplace listing currencies: USD, GBP, EUR, CAD, AUD. Platform billing stays USD-only.
 - No commissions on marketplace transactions. Breeders keep what they earn; buyers pay nothing.
 
 ## Stage

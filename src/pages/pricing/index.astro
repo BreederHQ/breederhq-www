@@ -1,446 +1,416 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+// Public access page. Replaces the former three-tier pricing page.
+//
+// Public pricing is invite-only: there is no price list and no self-serve
+// signup, because onboarding capacity is the real constraint. The page's one
+// job is to explain that and capture an application. Anything that gives a
+// visitor somewhere else to go — nav, footer links, a feature grid — competes
+// with that single decision, so this page is a standalone document rather
+// than a BaseLayout page.
+//
+// Kept at /pricing rather than a new /waitlist URL: ~180 internal links and
+// an unknown number of external ones already point here, and a visitor
+// arriving from a link labelled "Pricing" is exactly who the second paragraph
+// is written for.
+//
+// The marketplace listing-fee schedule that used to live on this page now
+// lives only in /pricing.md and /okf/pricing.md — still answerable, no longer
+// competing with the application.
+export const prerender = true;
 
-const breadcrumbs = [
-  { name: 'Home', url: '/' },
-  { name: 'Pricing', url: '/pricing' }
+// This page does not use BaseLayout (it deliberately carries no nav or footer),
+// so everything BaseLayout would have brought has to be imported explicitly.
+// Without the stylesheet every Tailwind class here resolves to nothing and the
+// page ships as unstyled HTML; without Analytics there is no gtag, so the form's
+// own conversion events fire into nothing and every application goes uncounted.
+import '../../styles/global.css';
+import PaidQuerySnapshot from '../../components/PaidQuerySnapshot.astro';
+import Analytics from '../../components/Analytics.astro';
+import TrackingInit from '../../components/TrackingInit.astro';
+
+// All nine supported species. Cattle is excluded from the public marketplace
+// buyer directory (see marketplaceData.ts SpeciesKey) but is supported and
+// belongs here: this field asks a breeder what they breed, not what a buyer
+// can browse.
+const SPECIES = [
+  { value: 'dogs', label: 'Dogs' },
+  { value: 'cats', label: 'Cats' },
+  { value: 'horses', label: 'Horses' },
+  { value: 'goats', label: 'Goats' },
+  { value: 'sheep', label: 'Sheep' },
+  { value: 'cattle', label: 'Cattle' },
+  { value: 'alpacas', label: 'Alpacas' },
+  { value: 'llamas', label: 'Llamas' },
+  { value: 'rabbits', label: 'Rabbits' },
+  { value: 'multiple', label: 'Multiple species' },
+  { value: 'other', label: 'Other' },
 ];
 
-const registerUrl = 'https://accounts.breederhq.com/register?intent=breeder_dashboard';
+const title = 'Join The BreederHQ Waitlist';
+const description =
+  'BreederHQ Launch is available to a limited number of founding members. Join the waitlist and we will reach out when a spot opens.';
+const canonical = 'https://www.breederhq.com/pricing';
 
-const plans = [
-  {
-    name: 'Standard',
-    slug: 'standard',
-    price: 29,
-    yearlyPrice: 290,
-    description: 'Everything you need to manage your breeding program',
-    popular: false,
-    foundersEligible: false,
-    features: [
-      'Unlimited animals & contacts',
-      'Breeding plans & calendar',
-      'Financial suite (invoices, expenses)',
-      'Document management',
-      'Health records',
-      'Waitlist management',
-      'Buyer portal (1 seat)',
-      'Marketplace listings',
-      'Free Breeder Service listings',
-      '500 MB storage',
-      'Email support',
-    ],
-  },
-  {
-    name: 'Pro',
-    slug: 'pro',
-    price: 79,
-    yearlyPrice: 790,
-    description: 'Advanced tools for growing breeding operations',
-    popular: true,
-    foundersEligible: true,
-    foundersPrice: 39.50,
-    foundersYearlyPrice: 395,
-    features: [
-      'Everything in Standard',
-      'Full Genetics Lab (incl. Goal-Based Breeding & Offspring Simulator)',
-      'E-signatures for contracts',
-      'AI Contract Import (upload your existing PDF)',
-      'Advanced reporting & analytics',
-      'Auto-replies (rule-based automation)',
-      'Help Assistant',
-      'Scout AI',
-      '5 GB storage',
-      'Priority support',
-    ],
-  },
-  {
-    name: 'Enterprise',
-    slug: 'enterprise',
-    price: 159,
-    yearlyPrice: 1590,
-    description: 'Full-scale breeding management with AI and automation',
-    popular: false,
-    foundersEligible: true,
-    foundersPrice: 79.50,
-    foundersYearlyPrice: 795,
-    features: [
-      'Everything in Pro',
-      'Automated follow-ups',
-      'Team management with role-based access',
-      'Unlimited marketplace listings',
-      'Multi-location management',
-      '25 GB storage',
-      'Dedicated support',
-    ],
-  },
-];
-
-const faqs = [
-  { question: 'Can I change plans later?', answer: 'Yes. You can upgrade or downgrade your plan at any time from your account settings. Changes take effect at the start of your next billing cycle.' },
-  { question: 'Is there a free trial?', answer: 'Yes. Every plan includes a 14-day free trial with full access. You enter card details to start, and you are not charged if you cancel before day 14.' },
-  { question: 'What happens when my trial ends?', answer: 'Your data is saved. Simply choose a plan and subscribe to pick up right where you left off.' },
-  { question: 'Can I cancel anytime?', answer: 'Absolutely. Cancel from your account settings at any time. You will retain access through the end of your paid period.' },
-  { question: 'What species does BreederHQ support?', answer: 'BreederHQ supports Dogs, Cats, Horses, Goats, Alpacas, Llamas, Rabbits, Sheep, and Cattle with species-specific workflows for each.' },
-  { question: 'What is the Founders discount?', answer: 'The first 100 subscribers who use code FOUNDER50 at checkout get 50% off Pro or Enterprise for 12 months. One redemption per customer.' },
-];
-
-// Product / AggregateOffer schema: lets AI engines and Google Merchant
-// Listings extract "BreederHQ pricing is $29-$159/mo" as a structured fact.
-const product = {
-  name: 'BreederHQ Breeding Management Software',
-  description: 'Professional breeding-program management software for nine species (dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, rabbits). 14-day free trial on every plan. Unlimited animals, contacts, and breeding plans included at every tier.',
-  brand: 'BreederHQ',
-  offers: plans.map((plan) => ({
-    name: `BreederHQ ${plan.name}`,
-    price: plan.price,
-    priceCurrency: 'USD' as const,
-    billingPeriod: 'MONTH' as const,
-    description: plan.description,
-    url: registerUrl,
-    availability: 'InStock' as const,
-  })),
-};
-
-const pageLastUpdated = '2026-06-26';
+const inputClass =
+  'min-h-[52px] w-full rounded-lg border border-stone-300 bg-stone-50 px-4 py-3.5 text-base text-stone-900 placeholder:text-stone-400 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-amber-500/20';
+const labelClass =
+  'text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600';
 ---
 
-<BaseLayout
-  title="Breeder Software Pricing | Plans From $29/mo, 14-Day Free Trial | BreederHQ"
-  description="Simple, transparent pricing for professional breeders. Start your 14-day free trial today. Plans from $29/month. Founders get 50% off Pro & Enterprise."
-  breadcrumbs={breadcrumbs}
-  faqs={faqs}
-  product={product}
->
-  <main>
-    <!-- Hero -->
-    <section class="bg-gradient-to-b from-amber-50 to-white py-20">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl font-bold tracking-tight text-stone-800 mb-4">
-          Simple, transparent pricing
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .font-serif { font-family: Georgia, "Times New Roman", serif; }
+
+    /*
+      Required-field asterisk. Mirrors the platform's .text-edit-required
+      token rather than a raw red: no single red shade clears AA on both a
+      light and a dark ground, and this page is light-only but shares its
+      copy conventions with surfaces that are not.
+    */
+    .text-edit-required { color: hsl(0 72% 38%); }
+  </style>
+
+  {/* Ordering is load-bearing and mirrors BaseLayout: the paid-query snapshot
+      must run before Analytics, because gtag.js strips gclid from the URL via
+      history.replaceState as soon as it loads. */}
+  <PaidQuerySnapshot />
+  <Analytics />
+</head>
+<body class="antialiased">
+  <div class="min-h-screen flex flex-col bg-stone-50 text-stone-900 [background-image:radial-gradient(120%_80%_at_88%_-10%,rgba(245,158,11,0.10),transparent_60%)]">
+
+    <header class="mx-auto w-full max-w-6xl flex items-center justify-between gap-4 px-6 py-6 sm:px-8">
+      <a href="/" class="text-[19px] font-semibold tracking-tight no-underline">
+        <span class="text-stone-900">Breeder</span><span class="text-amber-700">HQ</span>
+      </a>
+      <span class="hidden text-[13px] uppercase tracking-[0.14em] text-stone-400 sm:block">Founding Members</span>
+    </header>
+
+    <!-- Application screen -->
+    <main
+      id="waitlist-screen"
+      class="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-start gap-12 px-6 pb-20 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-10"
+    >
+      <section class="max-w-xl">
+        <div class="mb-6 flex items-center gap-2.5">
+          <span class="h-1.5 w-1.5 rounded-full bg-amber-500 ring-4 ring-amber-500/15"></span>
+          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-stone-500">Invitation Only</span>
+        </div>
+
+        <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-stone-900 [text-wrap:pretty] sm:text-5xl lg:text-[3.75rem]">
+          We are onboarding breeders<br class="hidden sm:block" />
+          <em class="text-amber-700 underline decoration-amber-600/40 underline-offset-[6px]">one at a time.</em>
         </h1>
-        <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-6 leading-relaxed">
-          Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans.
-          The first 100 founders get 50% off Pro and Enterprise with code <strong class="text-amber-700">FOUNDER50</strong>.
+
+        <p class="mt-7 max-w-[50ch] text-lg leading-relaxed text-stone-700 [text-wrap:pretty]">
+          BreederHQ Launch is currently available to a limited number of founding
+          members. We are bringing breeders onboard one at a time, so your setup is
+          personal, founder-led and done properly.
         </p>
-        <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-stone-500 mb-4">
-          <a href="/pricing/compare" class="text-amber-600 hover:text-amber-700 font-medium">
-            Full feature comparison &rarr;
-          </a>
-          <span class="text-stone-300">|</span>
-          <a href="/compare/best-dog-breeding-software" class="text-amber-600 hover:text-amber-700 font-medium">
-            Compare vs. alternatives &rarr;
-          </a>
+        <p class="mt-4 max-w-[50ch] text-lg leading-relaxed text-stone-700 [text-wrap:pretty]">
+          Spots are limited and this round is close to full. That is why there is no
+          price list on this page and no way to sign yourself up. Join the waitlist and
+          we will reach out when a spot opens.
+        </p>
+
+        <hr class="mt-9 max-w-md border-stone-200" />
+
+        <p class="mt-5 max-w-[44ch] text-sm leading-relaxed text-stone-500">
+          Running a large-scale operation or managing a breed registry?
+          <a
+            href="/contact"
+            class="text-amber-700 underline decoration-amber-700/30 underline-offset-2 hover:text-amber-800 hover:decoration-amber-800"
+          >Let&rsquo;s talk</a>.
+        </p>
+      </section>
+
+      <section class="w-full max-w-md rounded-2xl border border-stone-200 bg-white p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8">
+        <h2 class="text-base font-semibold tracking-tight text-stone-900">Join The Waitlist</h2>
+        <p class="mt-1 text-sm leading-relaxed text-stone-500">A person reads every one.</p>
+
+        <div class="mt-4 flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/[0.06] px-3.5 py-3">
+          <svg class="mt-0.5 h-4 w-4 flex-none text-amber-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />
+          </svg>
+          <p class="text-[13.5px] leading-relaxed text-amber-800">
+            Applications are reviewed in the order they arrive.
+          </p>
         </div>
-        <details class="mt-4 text-left max-w-2xl mx-auto">
-          <summary class="cursor-pointer text-xs text-stone-400 hover:text-stone-600 text-center list-none">
-            More details &amp; comparisons &#9662;
-          </summary>
-          <div class="mt-3 space-y-2 text-sm text-stone-500 text-center">
-            <p>
-              What's included:
-              <a href="/breeder-management-software" class="text-amber-600 hover:text-amber-700 font-medium underline">breeder management software</a>
-              (operations + 9 species),
-              <a href="/breeder-crm" class="text-amber-600 hover:text-amber-700 font-medium underline">breeder CRM</a>
-              (inquiries + buyer portal), and
-              <a href="/litter-management" class="text-amber-600 hover:text-amber-700 font-medium underline">litter management</a>
-              (whelp to placement).
-            </p>
-            <p>
-              Switching from another tool?
-              <a href="/compare/breedercloudpro-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Breeder Cloud Pro</a>,
-              <a href="/compare/breederbuddy-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">BreederBuddy</a>,
-              <a href="/compare/dogbreederpro-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Dog Breeder Pro</a>,
-              <a href="/compare/breeders-assistant-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">Breeder's Assistant</a>,
-              <a href="/compare/zooeasy-alternative" class="text-amber-600 hover:text-amber-700 font-medium underline">ZooEasy</a>,
-              or <a href="/compare" class="text-amber-600 hover:text-amber-700 font-medium underline">all comparisons</a>.
-            </p>
-            <p class="text-xs text-stone-400">
-              Last updated: {pageLastUpdated}. Machine-readable: <a href="/pricing.md" class="underline hover:text-amber-600">/pricing.md</a>.
-            </p>
-          </div>
-        </details>
-      </div>
-    </section>
 
-    <!-- Pricing Cards -->
-    <section class="py-16 bg-stone-100">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          {plans.map((plan) => (
-            <div
-              class={`relative rounded-2xl border p-8 flex flex-col ${
-                plan.popular
-                  ? 'border-amber-400 bg-white shadow-2xl shadow-amber-500/20 ring-2 ring-amber-400/30 md:-mt-4 md:-mb-4'
-                  : 'border-stone-200 bg-white shadow-lg shadow-stone-900/10'
-              }`}
-            >
-              {plan.popular && (
-                <div class="absolute -top-5 left-1/2 -translate-x-1/2">
-                  <span class="bg-amber-500 text-white text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest shadow-md">
-                    Most Popular
-                  </span>
-                </div>
-              )}
+        <form id="waitlist-form" novalidate class="mt-6 flex flex-col gap-[18px]">
+          <label class="flex flex-col gap-2">
+            <span class={labelClass}>
+              Name<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+            <input
+              type="text" name="name" required aria-required="true" autocomplete="name"
+              autocapitalize="words" maxlength="100" placeholder="Sarah Whitfield"
+              class={inputClass}
+            />
+          </label>
 
-              <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-stone-800 mb-1">{plan.name}</h3>
-                <p class="text-stone-500 text-sm mb-6">{plan.description}</p>
+          <label class="flex flex-col gap-2">
+            <span class={labelClass}>
+              Email<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+            <input
+              type="email" name="email" required aria-required="true" autocomplete="email"
+              inputmode="email" autocapitalize="none" spellcheck="false" maxlength="254"
+              placeholder="you@kennelname.com"
+              class={inputClass}
+            />
+          </label>
 
-                {plan.foundersEligible ? (
-                  <div class="mb-2">
-                    <div class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1 mb-3">
-                      <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">FOUNDER50</span>
-                      <span class="text-xs text-amber-600">50% off, first 100 only</span>
-                    </div>
-                    <div class="flex items-baseline justify-center gap-2 mb-1">
-                      <span class="text-xl text-stone-400 line-through">${plan.price}/mo</span>
-                      <span class="text-5xl font-bold text-amber-600">${(plan.foundersPrice ?? 0).toFixed(2)}</span>
-                      <span class="text-stone-500 text-lg font-medium">/mo</span>
-                    </div>
-                    <p class="text-sm text-stone-500 mt-1">
-                      or ${plan.foundersYearlyPrice}/yr <span class="text-stone-400 line-through text-xs">(was ${plan.yearlyPrice}/yr)</span>
-                    </p>
-                    <p class="text-xs text-stone-400 mt-1.5">
-                      Billed in USD. International cards accepted.
-                    </p>
-                  </div>
-                ) : (
-                  <div class="mb-2">
-                    <div class="flex items-baseline justify-center gap-1">
-                      <span class="text-5xl font-bold text-stone-800">${plan.price}</span>
-                      <span class="text-stone-500 text-lg font-medium">/mo</span>
-                    </div>
-                    <p class="text-sm text-stone-500 mt-1">
-                      or ${plan.yearlyPrice}/yr — save ${plan.price * 12 - plan.yearlyPrice}/yr
-                    </p>
-                    <p class="text-xs text-stone-400 mt-1.5">
-                      Billed in USD. International cards accepted.
-                    </p>
-                  </div>
-                )}
-              </div>
+          <label class="flex flex-col gap-2">
+            <span class={labelClass}>
+              Kennel / Business Name<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+            <input
+              type="text" name="kennel" required aria-required="true" autocomplete="organization"
+              maxlength="120" placeholder="Whitfield Retrievers"
+              class={inputClass}
+            />
+          </label>
 
-              <a
-                href={registerUrl}
-                class={`block w-full text-center py-3.5 px-6 rounded-xl font-semibold mb-2 transition text-base ${
-                  plan.popular
-                    ? 'bg-amber-500 text-white hover:bg-amber-600 shadow-md shadow-amber-500/30'
-                    : 'bg-stone-800 text-white hover:bg-stone-900'
-                }`}
-              >
-                Start your 14-day free trial
-              </a>
-              <p class="text-xs text-stone-400 text-center mb-8">
-                Cancel before day 14 and you are not charged.
-              </p>
-
-              <ul class="space-y-3 flex-1">
-                {plan.features.map((feature) => (
-                  <li class="flex items-start gap-2.5 text-sm text-stone-700">
-                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+          <label class="flex flex-col gap-2">
+            <span class={labelClass}>
+              Species<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+            <div class="relative">
+              <select name="species" required aria-required="true" class={`appearance-none pr-11 ${inputClass}`}>
+                <option value="" disabled selected>Select a species</option>
+                {SPECIES.map((s) => <option value={s.value}>{s.label}</option>)}
+              </select>
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </div>
-          ))}
-        </div>
+          </label>
+
+          <label class="flex flex-col gap-2">
+            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
+              Phone / WhatsApp
+              <span class="font-medium normal-case tracking-normal text-stone-400">Optional</span>
+            </span>
+            <input
+              type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25"
+              placeholder="+1 555 0134"
+              class={inputClass}
+            />
+            <span class="text-xs leading-relaxed text-stone-400">
+              We default to US format. Start with <code class="font-mono">+</code> and your
+              country code for international.
+            </span>
+          </label>
+
+          <button
+            type="submit" id="waitlist-submit"
+            class="mt-1.5 min-h-[54px] w-full rounded-lg border border-amber-700 bg-gradient-to-b from-amber-400 via-amber-500 to-orange-700 px-5 py-4 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_1px_2px_rgba(28,25,23,0.18)] transition hover:-translate-y-px hover:brightness-105 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_6px_16px_-6px_rgba(245,158,11,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
+          >Join The Waitlist</button>
+
+          <p id="waitlist-error" class="hidden text-[13.5px] leading-relaxed text-red-700" role="alert"></p>
+
+          <p class="mt-0.5 text-xs leading-relaxed text-stone-400">
+            We use your details only to contact you about access. No newsletter, no sharing.
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <!-- Confirmation screen. Swapped in place rather than navigated to, so a
+         failed submit never costs the visitor what they typed. -->
+    <main id="waitlist-done" hidden class="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center sm:px-8">
+      <div class="mb-8 flex h-[52px] w-[52px] items-center justify-center rounded-full border border-amber-500/35 bg-amber-500/10">
+        <svg class="h-5 w-5 text-amber-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
       </div>
-    </section>
+      <h1 id="waitlist-done-heading" class="font-serif text-[2.6rem] font-normal leading-[1.05] tracking-tight text-stone-900 sm:text-5xl lg:text-[4.25rem]">You&rsquo;re in</h1>
+      <p class="mt-6 max-w-[34ch] text-lg leading-relaxed text-stone-700">
+        You are on the waitlist. We will email you when a spot opens and set up your
+        program with you personally.
+      </p>
+      <p class="mt-3.5 max-w-[38ch] text-sm leading-relaxed text-stone-400">
+        Nothing else to do for now. You can close this page.
+      </p>
+    </main>
 
-    <!-- Marketplace Listing Fees -->
-    <section class="py-16 bg-stone-50">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center text-stone-800 mb-4">Marketplace Listing Fees</h2>
-        <p class="text-center text-stone-800 mb-3 max-w-2xl mx-auto text-xl font-bold">
-          No percentage of your sales. No commission. No broker in the middle.
-        </p>
-        <p class="text-center text-stone-600 mb-3 max-w-2xl mx-auto text-base">
-          You run your own transactions and keep every dollar of your deals.
-        </p>
-        <p class="text-center text-stone-500 mb-8 max-w-2xl mx-auto text-sm">
-          Listing fees are separate from your subscription and free during early access. Standard per-listing fees will start later, and they are flat -- never a cut of what you sell.
-        </p>
+    <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-stone-400 sm:px-8">
+      &copy; 2026 BreederHQ
+    </footer>
+  </div>
 
-        <details class="group bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
-          <summary class="cursor-pointer list-none px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-stone-50 flex items-center justify-between">
-            <span>See the full fee schedule</span>
-            <span class="text-stone-400 group-open:rotate-180 transition-transform" aria-hidden="true">&#9662;</span>
-          </summary>
-          <table class="w-full text-sm border-t border-stone-200">
-            <thead>
-              <tr class="border-b border-stone-200 bg-stone-50">
-                <th class="py-3 px-4 text-left text-stone-700 font-semibold">Listing Type</th>
-                <th class="py-3 px-4 text-center text-stone-700 font-semibold">Horses</th>
-                <th class="py-3 px-4 text-center text-stone-700 font-semibold">Dogs & Cats</th>
-                <th class="py-3 px-4 text-center text-stone-700 font-semibold">Goats, Sheep & Rabbits</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-stone-100">
-                <td class="py-3 px-4 text-stone-600">Animal Sale (until sold)</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$49</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$25</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$9</td>
-              </tr>
-              <tr class="border-b border-stone-100">
-                <td class="py-3 px-4 text-stone-600">Breeding Booking (monthly)</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$19/mo</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$9/mo</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$5/mo</td>
-              </tr>
-              <tr class="border-b border-stone-100">
-                <td class="py-3 px-4 text-stone-600">Breeding Program (per offspring at weaning)</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$49</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$25</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$9</td>
-              </tr>
-              <tr class="border-b border-stone-100">
-                <td class="py-3 px-4 text-stone-600">Breeder Services (subscribers)</td>
-                <td class="py-3 px-4 text-center font-medium text-amber-600" colspan="3">Free - unlimited</td>
-              </tr>
-              <tr>
-                <td class="py-3 px-4 text-stone-600">Breeder Services (non-subscribers)</td>
-                <td class="py-3 px-4 text-center font-medium text-amber-600" colspan="3">Free</td>
-              </tr>
-            </tbody>
-          </table>
-        </details>
-      </div>
-    </section>
+  {/* Stores UTM parameters into sessionStorage. The submit handler reads them
+      back from there, so without this an applicant arriving on a campaign link
+      such as /pricing?utm_source=... would submit with no attribution. */}
+  <TrackingInit />
 
-    <!-- Marketplace Upgrades -->
-    <section class="py-16 bg-white">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center text-stone-800 mb-4">Optional Marketplace Upgrades</h2>
-        <p class="text-center text-stone-500 mb-8">
-          Boost your visibility when it matters. Never required.
-        </p>
+  <script>
+    import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/tracking';
+    import { AsYouType, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js';
 
-        <details class="group bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
-          <summary class="cursor-pointer list-none px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-stone-50 flex items-center justify-between">
-            <span>See optional upgrade pricing</span>
-            <span class="text-stone-400 group-open:rotate-180 transition-transform" aria-hidden="true">&#9662;</span>
-          </summary>
-          <table class="w-full text-sm border-t border-stone-200">
-            <thead>
-              <tr class="border-b border-stone-200 bg-stone-50">
-                <th class="py-3 px-4 text-left text-stone-700 font-semibold">Upgrade</th>
-                <th class="py-3 px-4 text-center text-stone-700 font-semibold">Horses</th>
-                <th class="py-3 px-4 text-center text-stone-700 font-semibold">Dogs & Cats</th>
-                <th class="py-3 px-4 text-center text-stone-700 font-semibold">Goats, Sheep & Rabbits</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-stone-100">
-                <td class="py-3 px-4 text-stone-600">Boost (7-day)</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$10</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$5</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$3</td>
-              </tr>
-              <tr class="border-b border-stone-100">
-                <td class="py-3 px-4 text-stone-600">Boost (30-day)</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$25</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$15</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$5</td>
-              </tr>
-              <tr>
-                <td class="py-3 px-4 text-stone-600">Featured Listing (monthly)</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$39/mo</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$19/mo</td>
-                <td class="py-3 px-4 text-center font-medium text-stone-400 line-through">$9/mo</td>
-              </tr>
-            </tbody>
-          </table>
-        </details>
-      </div>
-    </section>
+    const DEFAULT_COUNTRY: CountryCode = 'US';
+    const FORM_ID = 'launch-waitlist';
 
-    <!-- FAQ -->
-    <section class="py-16 bg-stone-50">
-      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center text-stone-800 mb-12">Frequently Asked Questions</h2>
-        <div class="space-y-8">
-          {faqs.map((faq) => (
-            <div class="border-b border-stone-200 pb-6">
-              <h3 class="text-lg font-semibold text-stone-800 mb-2">{faq.question}</h3>
-              <p class="text-stone-600 leading-relaxed">{faq.answer}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
+    if (form) {
+      const screenEl = document.getElementById('waitlist-screen')!;
+      const doneEl = document.getElementById('waitlist-done')!;
+      const headingEl = document.getElementById('waitlist-done-heading')!;
+      const btn = document.getElementById('waitlist-submit') as HTMLButtonElement;
+      const errEl = document.getElementById('waitlist-error')!;
+      const phoneInput = form.querySelector<HTMLInputElement>('input[name="phone"]');
 
-    <!-- CTA -->
-    <section class="py-20 bg-stone-800">
-      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">
-          Ready to get started?
-        </h2>
-        <p class="text-lg text-stone-300 mb-8">
-          Set up your program in minutes. Full access for 14 days, cancel anytime before day 14 and you are not charged.
-        </p>
-        <a
-          href={registerUrl}
-          class="inline-block bg-amber-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-amber-600 transition"
-        >
-          Start your 14-day free trial
-        </a>
-        <p class="text-sm text-stone-400 mt-4">
-          No percentage of your sales, ever. You keep every dollar of your deals.
-        </p>
-      </div>
-    </section>
-  </main>
+      let formStarted = false;
+      form.addEventListener('input', () => {
+        if (formStarted) return;
+        formStarted = true;
+        trackFormStart(FORM_ID);
+      }, { once: true });
 
-  <!--
-    pricing_view GA4 event. Custom event distinct from the auto-fired
-    page_view so the marketing scorecard can compute the
-    free_trial_started / pricing_view ratio without page_view noise
-    from every other page on the site.
+      // Live phone formatting, matching ContactForm.astro. No "+" means US;
+      // a leading "+" lets the library pick the country from the dial code.
+      phoneInput?.addEventListener('input', () => {
+        const raw = phoneInput.value.replace(/^\s+/, '');
+        if (!raw) return;
+        const atEnd = phoneInput.selectionStart === phoneInput.value.length;
+        const formatted = raw.startsWith('+')
+          ? new AsYouType().input(raw)
+          : new AsYouType(DEFAULT_COUNTRY).input(raw);
+        if (formatted !== phoneInput.value) {
+          phoneInput.value = formatted;
+          if (atEnd) phoneInput.setSelectionRange(formatted.length, formatted.length);
+        }
+      });
 
-    Why inline + define:vars: Analytics.astro is PROTECTED and already
-    loads gtag.js with the prod-only gate. We piggyback on that here.
-    isProduction mirrors the gate in Analytics.astro so dev / preview /
-    localhost never fire pricing_view either. Gated on hostname too in
-    case PROD ever fires on a non-prod surface (Vercel preview, etc).
-
-    Retry loop: gtag.js is async, so on a fast paint pricing_view can
-    race ahead of the gtag stub being defined. We poll for up to 3s
-    (15 x 200ms) and bail silently if it never arrives. An ad-blocker
-    or a network failure simply produces a missing event, never an
-    error in the user's console.
-  -->
-  <script is:inline define:vars={{ isProduction: import.meta.env.PROD }}>
-    (function () {
-      if (!isProduction) return;
-      var host = window.location.hostname;
-      if (host !== 'breederhq.com' && host !== 'www.breederhq.com') return;
-
-      var fired = false;
-      function fire() {
-        if (fired) return;
-        if (typeof window.gtag !== 'function') return;
-        fired = true;
-        window.gtag('event', 'pricing_view', {
-          page_path: '/pricing',
-          page_location: window.location.href,
-        });
+      function showError(msg: string) {
+        errEl.textContent = msg;
+        errEl.classList.remove('hidden');
       }
 
-      var attempts = 0;
-      var maxAttempts = 15;
-      var poll = setInterval(function () {
-        attempts++;
-        if (typeof window.gtag === 'function' || attempts >= maxAttempts) {
-          clearInterval(poll);
-          fire();
+      function firstName(full: string): string {
+        const t = full.trim().replace(/\s+/g, ' ').split(' ')[0] || '';
+        if (!t || !/\p{L}/u.test(t) || t.length > 18) return '';
+        return t.charAt(0).toUpperCase() + t.slice(1);
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const els = form.elements as any;
+        const name = String(els.name.value || '').trim();
+        const email = String(els.email.value || '').trim().toLowerCase();
+        const kennel = String(els.kennel.value || '').trim();
+        const species = String(els.species.value || '');
+        const phoneRaw = String(els.phone.value || '').trim();
+
+        errEl.classList.add('hidden');
+        if (!name) return showError('Please add your name.');
+        if (!/^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/.test(email)) {
+          return showError('Please check your email address.');
         }
-      }, 200);
-      fire();
-    })();
+        if (!kennel) return showError('Please add your kennel or business name.');
+        if (!species) return showError('Please choose a species.');
+
+        // Phone is optional, but a provided one must be real — the API
+        // rejects an invalid number outright, so catch it here with a
+        // message that says what to fix.
+        let phoneE164: string | undefined;
+        if (phoneRaw) {
+          const parsed = parsePhoneNumberFromString(
+            phoneRaw,
+            phoneRaw.startsWith('+') ? undefined : DEFAULT_COUNTRY
+          );
+          if (!parsed || !parsed.isValid()) {
+            return showError(
+              'That does not look like a valid phone number. For international, start with + and your country code.'
+            );
+          }
+          phoneE164 = parsed.number;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        // `kennel` maps to `company` and `species` to `interest`: /api/contact
+        // builds its payload from a fixed field whitelist and silently drops
+        // anything else, so a bespoke key here would lose the answer.
+        const speciesLabel =
+          form.querySelector<HTMLSelectElement>('select[name="species"]')
+            ?.selectedOptions[0]?.textContent?.trim() || species;
+
+        const payload: Record<string, unknown> = {
+          name,
+          email,
+          company: kennel,
+          interest: species,
+          message: `Launch waitlist application. Species: ${speciesLabel}. Kennel: ${kennel}.`,
+          source: 'launch_waitlist',
+        };
+        if (phoneRaw) {
+          payload.phone = phoneRaw;
+          payload.phone_e164 = phoneE164;
+        }
+
+        const utm = getUTMParams();
+        if (utm.source) payload.utm_source = utm.source;
+        if (utm.medium) payload.utm_medium = utm.medium;
+        if (utm.campaign) payload.utm_campaign = utm.campaign;
+        if (utm.term) payload.utm_term = utm.term;
+        if (utm.content) payload.utm_content = utm.content;
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          // A rejected submission comes back 200 with { success: false }, so
+          // res.ok alone would show the confirmation for a lead that was
+          // never recorded.
+          let data: { success?: boolean; error?: string } = {};
+          try { data = await res.json(); } catch { /* empty or non-JSON body */ }
+
+          if (!data.success) throw new Error(data.error || 'Submission failed');
+
+          trackFormSubmit(FORM_ID);
+
+          const fn = firstName(name);
+          headingEl.textContent = fn ? `You’re in, ${fn}` : 'You’re in';
+          screenEl.hidden = true;
+          doneEl.hidden = false;
+          window.scrollTo(0, 0);
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Join The Waitlist';
+          showError(
+            err instanceof Error && err.message && err.message !== 'Submission failed'
+              ? err.message
+              : 'Something went wrong sending that. Please try again, or email us at support@breederhq.com.'
+          );
+        }
+      });
+    }
   </script>
-</BaseLayout>
+</body>
+</html>

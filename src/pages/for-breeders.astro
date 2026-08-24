@@ -12,19 +12,19 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What is BreederHQ?',
-    answer: 'BreederHQ is breeding-program management software for dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. It combines herd records, pedigree and genetics tools, a phase-based breeding planner, offspring tracking, finances, an e-signature buyer portal, waitlist management, and a public marketplace in one platform with a 14-day free trial.',
+    answer: 'BreederHQ is breeding-program management software for dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. It combines herd records, pedigree and genetics tools, a phase-based breeding planner, offspring tracking, finances, an e-signature buyer portal, waitlist management, and a public marketplace in one platform. Access is currently invitation only.',
   },
   {
     question: 'What species does BreederHQ support?',
-    answer: 'Nine species, all available on every plan: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. Each species has species-specific workflows for breeding cycles, gestation, offspring stages, and registry support (AKC, ADGA, AOBA, AQHA, Jockey Club, APHA, AHA, USEF, NSIP, and more).',
+    answer: 'Nine species, all available to every member: dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. Each species has species-specific workflows for breeding cycles, gestation, offspring stages, and registry support (AKC, ADGA, AOBA, AQHA, Jockey Club, APHA, AHA, USEF, NSIP, and more).',
   },
   {
-    question: 'How much does BreederHQ cost?',
-    answer: 'BreederHQ pricing is $29/mo Standard, $79/mo Pro, or $159/mo Enterprise. Every plan includes a 14-day free trial, unlimited animals, unlimited contacts, and unlimited breeding plans. Founders get 50% off Pro and Enterprise for 12 months with code FOUNDER50 (first 100 subscribers).',
+    question: 'How do I get access to BreederHQ?',
+    answer: 'Access is currently invitation only, and there is no self-serve signup or public price list. BreederHQ onboards founding members one at a time, each with a founder-led setup, so the species, programs, and existing records are in place before anyone starts working in the platform. Join the waitlist on the pricing page and we will reach out when a spot opens.',
   },
   {
-    question: 'Is there a free trial?',
-    answer: 'Yes. Every plan includes a 14-day free trial. You enter payment details to start the trial and can cancel anytime before it ends at no charge.',
+    question: 'What does the founder-led setup involve?',
+    answer: 'When a spot opens, we walk through the operation together: which species and programs you run, what records need importing, how your waitlist and buyer handoff work today, and what should be configured before your first breeding plan goes in. The point is that the account fits the way you already work on day one rather than after months of trial and error.',
   },
   {
     question: 'Does BreederHQ replace my spreadsheets?',
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: 'Does BreederHQ include a buyer-facing marketplace?',
-    answer: 'Yes. Every subscription tier includes a public marketplace presence at marketplace.breederhq.com. Listings are powered by your real program data — health testing, pedigrees, and identity confirmation surface automatically without re-entry. We never take a percentage of your sales.',
+    answer: 'Yes. Every member gets a public marketplace presence at marketplace.breederhq.com. Listings are powered by your real program data — health testing, pedigrees, and identity confirmation surface automatically without re-entry. We never take a percentage of your sales.',
   },
   {
     question: 'How does BreederHQ compare to dog-only breeder software?',
@@ -47,7 +47,7 @@ const faqs = [
 
 <BaseLayout
   title="Breeding Program Software for Breeders | Herd to Marketplace | BreederHQ"
-  description="Breeding-program software for nine species: health records, breeding planner, finances, and a public marketplace. 14-day free trial from $29/mo."
+  description="Breeding-program software for nine species: health records, breeding planner, finances, and a public marketplace. Invitation only."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
@@ -78,7 +78,7 @@ const faqs = [
 
           <!-- Quick answer block: optimized for AI extraction (40-60 word self-contained answer). -->
           <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6 leading-relaxed">
-            <strong>BreederHQ is breeding-program management software for nine species</strong> — dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. One account combines herd records, breeding planner, offspring tracking, finances, e-signature buyer portal, waitlist management, and a public marketplace, with a 14-day free trial from $29/month.
+            <strong>BreederHQ is breeding-program management software for nine species</strong> — dogs, cats, horses, goats, sheep, cattle, alpacas, llamas, and rabbits. One account combines herd records, breeding planner, offspring tracking, finances, e-signature buyer portal, waitlist management, and a public marketplace. Access is currently invitation only.
           </p>
 
           <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
@@ -88,10 +88,10 @@ const faqs = [
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+              href="/pricing"
               class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 w-full sm:w-auto"
             >
-              Start Your Free Trial
+              Join The Waitlist
             </a>
             <a
               href="https://accounts.breederhq.com/login"
@@ -100,7 +100,7 @@ const faqs = [
               Already a member? Sign In &rarr;
             </a>
           </div>
-          <p class="mt-4 text-sm text-gray-400">14-day free trial. Cancel anytime.</p>
+          <p class="mt-4 text-sm text-gray-400">Invitation only. Founding members are onboarded one at a time.</p>
 
           <!-- Hero screenshot: real platform dashboard -->
           <div class="mt-14">
@@ -591,110 +591,35 @@ const faqs = [
       </div>
     </section>
 
-
     <!-- ============================================ -->
-    <!-- PRICING TEASER                               -->
+    <!-- ACCESS TEASER                                -->
     <!-- ============================================ -->
     <section class="py-20 bg-white">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
           <h2 class="text-3xl font-bold text-gray-900 mb-4">
-            Simple, Transparent Pricing
+            Access Is Invitation Only
           </h2>
           <p class="text-gray-600">
-            All plans include unlimited animals, contacts, and breeding plans.
+            There is no self-serve signup and no public price list right now.
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
-
-          <!-- Standard -->
-          <div class="bg-white rounded-xl border border-stone-200 p-8">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">Standard</h3>
-            <div class="flex items-baseline gap-1 mb-4">
-              <span class="text-3xl font-bold text-gray-900">$29</span>
-              <span class="text-gray-500 text-sm">/month</span>
-            </div>
-            <p class="text-sm text-gray-600 mb-6">
-              Everything you need to manage your breeding operation.
-            </p>
-            <a
-              href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
-              class="block w-full text-center py-3 rounded-lg border border-stone-300 text-gray-700 font-medium hover:border-primary hover:text-primary transition"
-            >
-              Start Free Trial
-            </a>
-          </div>
-
-          <!-- Pro -->
-          <div class="relative">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-              MOST POPULAR
-            </div>
-          <div class="bg-white rounded-xl border-2 border-primary p-8 relative overflow-hidden">
-            <!-- SAVE 50% ribbon -->
-            <div class="absolute -right-8 top-6 rotate-45 bg-emerald-500 text-white text-xs font-bold px-10 py-1 shadow-md">
-              SAVE 50%
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Pro</h3>
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="text-lg text-gray-400 line-through font-medium">$79</span>
-              <span class="text-4xl font-extrabold text-primary">$39.50</span>
-              <span class="text-gray-500 text-sm">/mo</span>
-            </div>
-            <div class="inline-block mt-2 mb-4 border-2 border-dashed border-primary/40 bg-primary/5 rounded-md px-3 py-1.5">
-              <span class="text-xs text-gray-500">Use code</span>
-              <span class="text-sm font-bold text-primary tracking-wide ml-1">FOUNDER50</span>
-            </div>
-            <p class="text-xs text-emerald-600 font-medium mb-3">
-              &#9733; Founders pricing &mdash; limited time offer
-            </p>
-            <p class="text-sm text-gray-600 mb-6">
-              Genetics Lab, Scout AI, e-signatures, advanced reporting.
-            </p>
-            <a
-              href="https://accounts.breederhq.com/register?intent=breeder_dashboard&promo=FOUNDER50"
-              class="block w-full text-center py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90"
-            >
-              Start Free Trial
-            </a>
-          </div>
-          </div>
-
-          <!-- Enterprise -->
-          <div class="bg-white rounded-xl border border-stone-200 p-8 relative overflow-hidden">
-            <!-- SAVE 50% ribbon -->
-            <div class="absolute -right-8 top-6 rotate-45 bg-emerald-500 text-white text-xs font-bold px-10 py-1 shadow-md">
-              SAVE 50%
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Enterprise</h3>
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="text-lg text-gray-400 line-through font-medium">$159</span>
-              <span class="text-4xl font-extrabold text-primary">$79.50</span>
-              <span class="text-gray-500 text-sm">/mo</span>
-            </div>
-            <div class="inline-block mt-2 mb-4 border-2 border-dashed border-primary/40 bg-primary/5 rounded-md px-3 py-1.5">
-              <span class="text-xs text-gray-500">Use code</span>
-              <span class="text-sm font-bold text-primary tracking-wide ml-1">FOUNDER50</span>
-            </div>
-            <p class="text-xs text-emerald-600 font-medium mb-3">
-              &#9733; Founders pricing &mdash; limited time offer
-            </p>
-            <p class="text-sm text-gray-600 mb-6">
-              AI breeding goals, offspring predictions, automated follow-ups, and team management.
-            </p>
-            <a
-              href="https://accounts.breederhq.com/register?intent=breeder_dashboard&promo=FOUNDER50"
-              class="block w-full text-center py-3 rounded-lg border border-stone-300 text-gray-700 font-medium hover:border-primary hover:text-primary transition"
-            >
-              Start Free Trial
-            </a>
-          </div>
-
-        </div>
-
-        <div class="text-center mt-8">
-          <a href="/pricing" class="text-primary font-medium hover:underline">See full feature comparison &rarr;</a>
+        <div class="bg-white rounded-xl border-2 border-primary p-8 text-center">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Founder-Led Onboarding</h3>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            BreederHQ onboards founding members one at a time. When a spot opens we
+            walk through the operation together, import what you already have, and
+            configure your species, programs, and buyer handoff before you start
+            working in the platform. Every member gets the whole system: unlimited
+            animals, unlimited contacts, and unlimited breeding plans.
+          </p>
+          <a
+            href="/pricing"
+            class="inline-block px-8 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90"
+          >
+            Join The Waitlist
+          </a>
         </div>
       </div>
     </section>
@@ -707,7 +632,7 @@ const faqs = [
     <section class="py-12 bg-white border-y border-stone-200">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-xl font-bold text-gray-900 mb-2">
-          Want to try us before you sign up?
+          Want to try us while you wait?
         </h2>
         <p class="text-sm text-gray-700 max-w-2xl mx-auto mb-4">
           The Free Breeding Planner projects upcoming heat cycles, breeding windows,
@@ -797,15 +722,15 @@ const faqs = [
         </h2>
         <p class="text-lg text-stone-300 mb-10 max-w-2xl mx-auto">
           Your breeding operation deserves a real platform, not a spreadsheet,
-          not a listing site, and not five disconnected apps. Try BreederHQ free for 14 days.
+          not a listing site, and not five disconnected apps. Access is invitation only, so join the waitlist and we will reach out when a spot opens.
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://accounts.breederhq.com/register?intent=breeder_dashboard"
+            href="/pricing"
             class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 w-full sm:w-auto"
           >
-            Start Your Free Trial
+            Join The Waitlist
           </a>
           <a
             href="https://marketplace.breederhq.com/breeders"
