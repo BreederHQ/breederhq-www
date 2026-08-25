@@ -13,6 +13,30 @@ export interface LeadData {
   interest?: string;
   interests?: string[];
   source?: string;
+  /**
+   * Idempotency key minted by the browser and reused across retries of a single
+   * submission attempt. Generating it server-side would produce a fresh value on
+   * every request and so would not survive the retry it exists to absorb.
+   */
+  submission_key?: string;
+  /** The applicant's own website. Not the honeypot, which is `website`. */
+  website_url?: string;
+  /**
+   * Self-reported attribution. Distinct from `utm_source`, which only sees
+   * arrivals through a tagged link and is therefore blind to the two answers
+   * that matter most: another breeder, and an AI assistant.
+   */
+  referral_source?: string;
+  referral_detail?: string;
+  /**
+   * Qualification answers, sent as structured values as well as inside the
+   * message text. The message is what a person reads in Slack; these are what
+   * the triage screen sorts on, and prose cannot be sorted.
+   */
+  breeding_volume?: string;
+  placement_modes?: string[];
+  record_sources?: string[];
+  website_ownership?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -863,6 +887,178 @@ export async function sendToZapier(lead: EnrichedLead): Promise<boolean> {
 }
 
 /**
+ * The four values the platform's CHECK constraint accepts. A value outside this
+ * set is rejected by the API with a 400, so it is resolved here rather than
+ * sent and refused.
+ */
+const PLATFORM_SOURCES = new Set([
+  'launch_waitlist',
+  'lets_connect',
+  'breed_club_landing',
+  'website_form',
+  // Added by 20260825145832_add_trade_show_lead_source: a lead met in person
+  // did not fill in a form, and recording that as 'launch_waitlist' would
+  // assert something untrue.
+  'trade_show',
+]);
+
+/**
+ * What the FORMS actually send, mapped onto those four.
+ *
+ * The site's own source values are finer-grained than the platform's on
+ * purpose: `contact_page` and `support_page` tell the Slack notification which
+ * page someone was on, which is useful to whoever answers it. The database
+ * records how we MET them, and all three of those are the same answer.
+ *
+ * Without this map every one of them was rejected. `ContactForm.astro` defaults
+ * to `contact_form` and only one of its four call sites passes `lets_connect`,
+ * so the "Let's Connect" leads — the ones with a real message attached — would
+ * have logged PLATFORM_LEAD_CAPTURE_REJECTED and reached Slack only. That is
+ * exactly the silent loss the marker exists to make loud, and it would have
+ * been loud in a log nobody was reading yet.
+ *
+ * Adding a form means adding its value here, NOT widening the database
+ * constraint: a new page is a new place we met someone, not a new kind of
+ * meeting.
+ */
+const SOURCE_TO_PLATFORM: Record<string, string> = {
+  contact_form: 'lets_connect',
+  contact_page: 'lets_connect',
+  support_page: 'lets_connect',
+  lets_connect_form: 'lets_connect',
+  lets_connect_page: 'lets_connect',
+  dog_show_booth: 'trade_show',
+};
+
+/**
+ * Split a referrer into origin and path, discarding the query string.
+ *
+ * The query is where search terms, session identifiers and one-time tokens
+ * live. Attribution needs the page, not the parameters, so the parameters are
+ * never sent and cannot be stored.
+ */
+function splitReferrer(referrer?: string): { origin?: string; path?: string } {
+  if (!referrer) return {};
+  try {
+    const u = new URL(referrer);
+    return { origin: u.origin, path: u.pathname };
+  } catch {
+    // A malformed referrer is not worth failing a lead over.
+    return {};
+  }
+}
+
+/**
+ * Take the first hop off an x-forwarded-for chain, which accumulates one
+ * address per proxy. Only the first is the client.
+ *
+ * Deliberately does NOT judge whether the result is a valid address. An earlier
+ * version did, and the check was wrong: permissive enough to accept real IPv6,
+ * it also accepted "::::". Validity is decided by PostgreSQL's own parser at
+ * the insert, which cannot disagree with itself; a second opinion here would
+ * only add a way to be wrong.
+ */
+function firstForwardedHop(raw?: string): string | undefined {
+  if (!raw) return undefined;
+  const first = raw.split(',')[0]?.trim();
+  return first || undefined;
+}
+
+/**
+ * Record the lead in the BreederHQ platform database.
+ *
+ * This is the only channel that produces a queryable, durable record; the other
+ * five are notifications. It is deliberately NOT a gate: a failure here still
+ * leaves the applicant captured in Slack and email, and refusing a real
+ * applicant over a transient database problem is the worse outcome.
+ */
+export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
+  const apiUrl = import.meta.env.PLATFORM_API_URL;
+  const secret = import.meta.env.MARKETING_LEAD_SECRET;
+
+  if (!apiUrl || !secret) {
+    console.log('⚠️ Platform lead capture not configured, skipping');
+    return false;
+  }
+
+  // Resolved through the map first: the site's source values are finer-grained
+  // than the database's, and several of them mean the same thing to it.
+  const rawSource = lead.source || 'website_form';
+  const source = SOURCE_TO_PLATFORM[rawSource] ?? rawSource;
+  if (!PLATFORM_SOURCES.has(source)) {
+    console.error(
+      `❌ PLATFORM_LEAD_CAPTURE_REJECTED: unknown source "${rawSource}" — map it in SOURCE_TO_PLATFORM, or add it to the DB CHECK constraint and PLATFORM_SOURCES together`
+    );
+    return false;
+  }
+
+  const { origin, path } = splitReferrer(lead.metadata?.referrer);
+
+  try {
+    // Bounded so a hanging API cannot stall the applicant's response:
+    // processLead awaits every channel, so the slowest one sets the floor.
+    const response = await fetch(`${apiUrl}/marketing-leads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-bhq-lead-secret': secret,
+      },
+      signal: AbortSignal.timeout(3000),
+      body: JSON.stringify({
+        email: lead.email,
+        submissionKey: lead.submission_key,
+        source,
+        name: lead.name,
+        company: lead.company,
+        phone: lead.phone,
+        phoneE164: lead.phone_e164,
+        interest: lead.interest,
+        message: lead.message,
+        utmSource: lead.utm_source,
+        utmMedium: lead.utm_medium,
+        utmCampaign: lead.utm_campaign,
+        utmTerm: lead.utm_term,
+        utmContent: lead.utm_content,
+        websiteUrl: lead.website_url,
+        referralSource: lead.referral_source,
+        referralDetail: lead.referral_detail,
+        breedingVolume: lead.breeding_volume,
+        placementModes: lead.placement_modes,
+        recordSources: lead.record_sources,
+        websiteOwnership: lead.website_ownership,
+        referrerOrigin: origin,
+        referrerPath: path,
+        userAgent: lead.metadata?.userAgent?.slice(0, 512),
+        ipAddress: firstForwardedHop(lead.metadata?.ip),
+        enrichment: lead.enrichment,
+      }),
+    });
+
+    if (!response.ok) {
+      // A 4xx is a configuration or contract defect that will never self-heal:
+      // a wrong secret, a rejected payload, a source the database does not know.
+      // It must be loud, because Slack keeps succeeding and the form keeps
+      // looking healthy while nothing is being recorded.
+      if (response.status >= 400 && response.status < 500) {
+        console.error(
+          `❌ PLATFORM_LEAD_CAPTURE_MISCONFIGURED: ${response.status} — lead NOT persisted. Check MARKETING_LEAD_SECRET and payload contract.`
+        );
+      } else {
+        console.error(`Platform lead capture failed (transient): ${response.status}`);
+      }
+      return false;
+    }
+
+    console.log('✅ Lead recorded in platform database');
+    return true;
+  } catch (error) {
+    // Timeout and network failures are transient by nature.
+    console.error('Failed to record lead in platform:', error);
+    return false;
+  }
+}
+
+/**
  * Main function to process lead: enrich and distribute to all channels
  */
 export async function processLead(
@@ -929,6 +1125,7 @@ export async function processLead(
     sendToHubSpot(enrichedLead),
     sendToZapier(enrichedLead),
     sendAutoReplyToLead(enrichedLead),
+    sendToPlatform(enrichedLead),
   ];
 
   const results = await Promise.allSettled(distributionPromises);

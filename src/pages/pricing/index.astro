@@ -46,6 +46,102 @@ const SPECIES = [
   { value: 'other', label: 'Other' },
 ];
 
+// ── Qualification fields ────────────────────────────────────────────────────
+//
+// What is being granted here is a complimentary lifetime subscription plus
+// founder-led onboarding — a real cost, given to a small number of people. These
+// questions exist to answer one thing: does this breeder justify that grant.
+//
+// Bands, never free numbers. A breeder answers a band instantly and accurately;
+// an exact count invites hesitation and a guess, and a guess cannot be ranked
+// against anyone else's guess. Bands also stay comparable when someone rounds
+// generously.
+//
+// Every value is stored and shown to a human. Nothing here auto-rejects: a
+// surprising answer is often a good breeder with an unusual operation, and the
+// cost of wrongly turning one away is far higher than the cost of reading their
+// application.
+
+// Scale. Below two is the stated soft disqualifier — not enough operation to
+// need the platform, or to produce a case study worth the onboarding hours.
+const BREEDING_VOLUME = [
+  { value: 'none_yet', label: 'None yet, planning my first' },
+  { value: 'one_or_fewer', label: '1 or fewer per year' },
+  { value: 'two_to_three', label: '2–3 per year' },
+  { value: 'four_to_six', label: '4–6 per year' },
+  { value: 'seven_plus', label: '7 or more per year' },
+];
+
+// WHO they place animals with, not whether they sell.
+//
+// A yes/no answer collapsed three genuinely different operations into one, and
+// they need different halves of the product:
+//
+//   - Selling to the public is where the storefront, buyer waitlist, inquiries
+//     and contracts all land. The fullest fit.
+//   - Selling to other breeders is a real transaction with a real marketplace
+//     listing; the audience is narrower, not absent.
+//   - Keeping everything for show, competition or the farm is not a lesser fit,
+//     it is a different one. Those breeders exercise the records, pedigrees and
+//     title tracking that most operations never touch — which is exactly the
+//     part of the system that benefits from someone using it in anger.
+//
+// Multi-select because most real operations are more than one of these, and
+// forcing a single choice would throw away the distinction being asked for.
+const PLACEMENT_MODES = [
+  { value: 'public_pets', label: 'Pet or companion homes' },
+  { value: 'other_breeders', label: 'Other breeders' },
+  { value: 'working_sport', label: 'Working or sport homes' },
+  { value: 'own_use', label: 'I keep them for show, competition or my own farm' },
+  { value: 'not_yet', label: 'Not placing any yet' },
+];
+
+// The highest-signal question on the form. Someone already keeping records in a
+// spreadsheet or a competitor's tool has proven two things at once: there is
+// something real to migrate, and they are willing to use software. "Paper" or
+// "in my head" is the profile that struggles most with a platform like this.
+const RECORD_SOURCES = [
+  { value: 'spreadsheet', label: 'Spreadsheets (Excel, Google Sheets)' },
+  { value: 'breeding_software', label: 'Breeding software (another platform)' },
+  { value: 'registry', label: 'A registry or studbook' },
+  { value: 'notes_app', label: 'Notes app or documents' },
+  { value: 'paper', label: 'Paper records or binders' },
+  { value: 'memory', label: 'Mostly in my head' },
+];
+
+// Business maturity, and separately a practical fit signal: the embed widget
+// only means something to a breeder who has a site to embed it in.
+const WEBSITE_STATUS = [
+  { value: 'yes_live', label: 'Yes, live now' },
+  { value: 'building', label: 'Building one' },
+  { value: 'social_only', label: 'Just social media' },
+  { value: 'none', label: 'No' },
+];
+
+// How they found us, asked rather than inferred.
+//
+// UTM parameters only see people who arrived through a link we tagged. They are
+// blind to the two channels that matter most here: a breeder who asked an
+// assistant and was told about us, and a breeder another breeder told. Both are
+// invisible in analytics and both are the ones worth knowing about.
+//
+// "An AI assistant" is broken out on its own rather than folded into search
+// because the two behave nothing alike: one is a result you rank in, the other
+// is an answer you are quoted in, and the work to earn each is different.
+//
+// Deliberately optional. It is the least important question on the form and the
+// easiest to resent, and an answer given grudgingly is worse than no answer.
+const REFERRAL_SOURCES = [
+  { value: 'another_breeder', label: 'Another breeder told me' },
+  { value: 'ai_assistant', label: 'An AI assistant (ChatGPT, Claude, Copilot)' },
+  { value: 'web_search', label: 'A web search (Google, Bing)' },
+  { value: 'show_or_event', label: 'At a show or event' },
+  { value: 'facebook_group', label: 'A Facebook group' },
+  { value: 'social', label: 'Instagram, YouTube or TikTok' },
+  { value: 'breed_club', label: 'My breed club or registry' },
+  { value: 'other', label: 'Somewhere else' },
+];
+
 const title = 'Join The BreederHQ Waitlist';
 const description =
   'BreederHQ Launch is available to a limited number of founding members. Join the waitlist and we will reach out when a spot opens.';
@@ -167,7 +263,8 @@ const labelClass =
             <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />
           </svg>
           <p class="text-[13.5px] leading-relaxed text-amber-800">
-            Applications are reviewed in the order they arrive.
+            We set each breeder up personally, so we can only take a few at a time.
+            The questions below tell us about your program.
           </p>
         </div>
 
@@ -248,6 +345,132 @@ const labelClass =
             </div>
           </label>
 
+          {/*
+            Qualification block. Six short answers, all banded except the last,
+            so the whole form still reads as under a minute. These are what a
+            person actually triages on; without them every applicant looks
+            identical and the review is a coin toss.
+          */}
+          <hr class="my-1 border-stone-200" />
+
+          <label class="flex flex-col gap-2">
+            <span class={labelClass}>
+              Litters Or Breedings Per Year<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+            <div class="relative">
+              <select name="breeding_volume" required aria-required="true" class={`appearance-none pr-11 ${inputClass}`}>
+                <option value="" disabled selected>Select a range</option>
+                {BREEDING_VOLUME.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+          </label>
+
+          <fieldset class="flex flex-col gap-2">
+            <legend class={labelClass}>
+              Where Your Animals Go<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </legend>
+            <p class="text-xs leading-relaxed text-stone-400">Select all that apply.</p>
+            <div class="mt-0.5 grid grid-cols-1 gap-1.5">
+              {PLACEMENT_MODES.map((o) => (
+                <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-[15px] text-stone-800 transition hover:border-stone-300 hover:bg-white has-[:checked]:border-amber-500 has-[:checked]:bg-amber-500/[0.06]">
+                  <input
+                    type="checkbox" name="placement_modes" value={o.value}
+                    class="h-4 w-4 flex-none rounded border-stone-400 text-amber-600 focus:ring-2 focus:ring-amber-500/40"
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset class="flex flex-col gap-2">
+            <legend class={labelClass}>
+              Where Your Records Live Today<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </legend>
+            <p class="text-xs leading-relaxed text-stone-400">Select all that apply.</p>
+            <div class="mt-0.5 grid grid-cols-1 gap-1.5">
+              {RECORD_SOURCES.map((o) => (
+                <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-[15px] text-stone-800 transition hover:border-stone-300 hover:bg-white has-[:checked]:border-amber-500 has-[:checked]:bg-amber-500/[0.06]">
+                  <input
+                    type="checkbox" name="record_sources" value={o.value}
+                    class="h-4 w-4 flex-none rounded border-stone-400 text-amber-600 focus:ring-2 focus:ring-amber-500/40"
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <label class="flex flex-col gap-2">
+            <span class={labelClass}>
+              Do You Have A Business Website?<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+            <div class="relative">
+              <select name="website_status" required aria-required="true" class={`appearance-none pr-11 ${inputClass}`}>
+                <option value="" disabled selected>Select one</option>
+                {WEBSITE_STATUS.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            {/*
+              type="text", not type="url", deliberately.
+              A breeder types "yourkennel.com" — which is what the placeholder
+              asks for — and the browser's native url validation refuses it
+              before any script runs, so the submit handler that adds the
+              https:// never gets the chance. The field would simply refuse to
+              submit with no useful explanation. inputmode keeps the right
+              keyboard on a phone; normalizeUrl in the handler does the work.
+            */}
+            <input
+              type="text" name="website_url" inputmode="url" autocapitalize="none"
+              spellcheck="false" maxlength="200" placeholder="yourkennel.com"
+              class={`mt-1 hidden ${inputClass}`} data-website-url
+            />
+            <span class="hidden text-xs leading-relaxed text-stone-400" data-website-hint>
+              We will take a look before we talk.
+            </span>
+          </label>
+
+          <label class="flex flex-col gap-2">
+            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
+              What Made You Look For This Now?
+              <span class="font-medium normal-case tracking-normal text-stone-400">Optional</span>
+            </span>
+            <textarea
+              name="motivation" rows="3" maxlength="600"
+              placeholder="Tell us what is taking up your time right now."
+              class={`min-h-[92px] resize-y py-3 ${inputClass}`}
+            ></textarea>
+          </label>
+
+          <hr class="my-1 border-stone-200" />
+
+          <label class="flex flex-col gap-2">
+            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
+              How Did You Hear About Us?
+              <span class="font-medium normal-case tracking-normal text-stone-400">Optional</span>
+            </span>
+            <div class="relative">
+              <select name="referral_source" class={`appearance-none pr-11 ${inputClass}`}>
+                <option value="" selected>Select one</option>
+                {REFERRAL_SOURCES.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+            <input
+              type="text" name="referral_detail" maxlength="120"
+              placeholder="Who, or where?"
+              class={`mt-1 hidden ${inputClass}`} data-referral-detail
+            />
+          </label>
+
           <label class="flex flex-col gap-2">
             <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
               Phone / WhatsApp
@@ -308,6 +531,7 @@ const labelClass =
 
   <script>
     import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/tracking';
+    import { createSubmissionKeyHolder } from '../../lib/submissionKey';
     import { AsYouType, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js';
 
     const DEFAULT_COUNTRY: CountryCode = 'US';
@@ -355,6 +579,64 @@ const labelClass =
         errEl.classList.remove('hidden');
       }
 
+      // Idempotency key for the platform's durable record. Held outside the
+      // submit handler so a retry after a network failure replays the SAME key
+      // and is recorded once; cleared only after a successful send, so a
+      // deliberate second application correctly becomes a second submission.
+      const submissionKeyHolder = createSubmissionKeyHolder();
+
+      // The URL box only appears once a site actually exists. Asking for it
+      // unconditionally makes four of every ten applicants stare at a field they
+      // have to skip, which is exactly the friction this form cannot afford.
+      const websiteSelect = form.querySelector<HTMLSelectElement>('select[name="website_status"]');
+      const websiteUrl = form.querySelector<HTMLInputElement>('input[data-website-url]');
+      const websiteHint = form.querySelector<HTMLElement>('[data-website-hint]');
+      websiteSelect?.addEventListener('change', () => {
+        const show = websiteSelect.value === 'yes_live' || websiteSelect.value === 'building';
+        websiteUrl?.classList.toggle('hidden', !show);
+        websiteHint?.classList.toggle('hidden', !show);
+        if (!show && websiteUrl) websiteUrl.value = '';
+      });
+
+      // Only three answers have a useful follow-up. A referring breeder is worth
+      // thanking and worth asking again; a show is worth knowing which one, since
+      // that decides whether to go back. The rest need no second question and
+      // asking one anyway would be friction for nothing.
+      const REFERRAL_DETAIL_PROMPT: Record<string, string> = {
+        another_breeder: 'Who should we thank?',
+        show_or_event: 'Which show?',
+        facebook_group: 'Which group?',
+      };
+      const referralSelect = form.querySelector<HTMLSelectElement>('select[name="referral_source"]');
+      const referralDetail = form.querySelector<HTMLInputElement>('input[data-referral-detail]');
+      referralSelect?.addEventListener('change', () => {
+        const prompt = REFERRAL_DETAIL_PROMPT[referralSelect.value];
+        referralDetail?.classList.toggle('hidden', !prompt);
+        if (referralDetail) {
+          if (prompt) referralDetail.placeholder = prompt;
+          else referralDetail.value = '';
+        }
+      });
+
+      /**
+       * Accept what a breeder actually types. "yourkennel.com" is the normal
+       * answer and `type="url"` rejects it outright, so the scheme is added
+       * here rather than making someone guess why their own address is invalid.
+       */
+      function normalizeUrl(raw: string): string {
+        const t = raw.trim();
+        if (!t) return '';
+        if (/^https?:\/\//i.test(t)) return t;
+        // Anything already carrying a scheme is dropped rather than prefixed.
+        // Prepending to `javascript:alert(1)` yields `https://javascript:...`,
+        // which is harmless — it parses as nothing and the admin panel's
+        // safeHref refuses it — but storing unparseable junk against an
+        // applicant helps nobody. A real website address has no scheme here or
+        // an http(s) one.
+        if (/^[a-z][a-z0-9+-]*:(?!\d)/i.test(t)) return '';
+        return `https://${t}`;
+      }
+
       function firstName(full: string): string {
         const t = full.trim().replace(/\s+/g, ' ').split(' ')[0] || '';
         if (!t || !/\p{L}/u.test(t) || t.length > 18) return '';
@@ -377,6 +659,19 @@ const labelClass =
         const species = String(els.species.value || '');
         const phoneRaw = String(els.phone.value || '').trim();
 
+        const breedingVolume = String(els.breeding_volume?.value || '');
+        const placementModes = Array.from(
+          form.querySelectorAll<HTMLInputElement>('input[name="placement_modes"]:checked')
+        ).map((el) => el.value);
+        const websiteStatus = String(els.website_status?.value || '');
+        const websiteUrlValue = normalizeUrl(String(websiteUrl?.value || ''));
+        const motivation = String(els.motivation?.value || '').trim();
+        const referralSource = String(els.referral_source?.value || '');
+        const referralDetailValue = String(referralDetail?.value || '').trim();
+        const recordSources = Array.from(
+          form.querySelectorAll<HTMLInputElement>('input[name="record_sources"]:checked')
+        ).map((el) => el.value);
+
         errEl.classList.add('hidden');
         if (!name) return showError('Please add your name.');
         if (!/^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/.test(email)) {
@@ -384,6 +679,25 @@ const labelClass =
         }
         if (!kennel) return showError('Please add your kennel or business name.');
         if (!species) return showError('Please choose a species.');
+        if (!breedingVolume) return showError('Please choose how many litters or breedings you average per year.');
+        if (placementModes.length === 0) {
+          return showError('Please tell us where your animals go. Choose "I keep them" if you are not placing any.');
+        }
+        if (recordSources.length === 0) {
+          return showError('Please tell us where your records live today. "Mostly in my head" is a perfectly good answer.');
+        }
+        if (!websiteStatus) return showError('Please let us know whether you have a business website.');
+        if (websiteStatus === 'yes_live' && !websiteUrlValue) {
+          return showError('Please add your website address so we can take a look.');
+        }
+        if (websiteUrlValue) {
+          try {
+            const u = new URL(websiteUrlValue);
+            if (!u.hostname.includes('.')) throw new Error('no tld');
+          } catch {
+            return showError('That website address does not look right. Try something like yourkennel.com');
+          }
+        }
 
         // Phone is optional, but a provided one must be real — the API
         // rejects an invalid number outright, so catch it here with a
@@ -412,13 +726,54 @@ const labelClass =
           form.querySelector<HTMLSelectElement>('select[name="species"]')
             ?.selectedOptions[0]?.textContent?.trim() || species;
 
+        // Read the visible labels rather than the stored values: this text is
+        // what a person reads in Slack and in the admin view, and "2–3 per year"
+        // is answerable at a glance where "two_to_three" is not.
+        function labelOf(selector: string, fallback: string): string {
+          return (
+            form.querySelector<HTMLSelectElement>(selector)?.selectedOptions[0]
+              ?.textContent?.trim() || fallback
+          );
+        }
+        function checkedLabels(name: string): string[] {
+          return Array.from(
+            form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]:checked`)
+          ).map((el) => el.closest('label')?.textContent?.trim() || el.value);
+        }
+        const recordLabels = checkedLabels('record_sources');
+        const placementLabels = checkedLabels('placement_modes');
+
+        // Composed into `message` because /api/contact carries a fixed field
+        // whitelist and silently drops anything outside it. Until the platform
+        // grows real columns for these, the transcript IS the record — so it is
+        // written to be read by a person, not parsed.
+        const qualification = [
+          `Breedings/year: ${labelOf('select[name="breeding_volume"]', breedingVolume)}.`,
+          `Animals go to: ${placementLabels.join('; ')}.`,
+          `Records live in: ${recordLabels.join('; ')}.`,
+          `Website: ${labelOf('select[name="website_status"]', websiteStatus)}${
+            websiteUrlValue ? ` (${websiteUrlValue})` : ''
+          }.`,
+          referralSource
+            ? `Heard about us: ${labelOf('select[name="referral_source"]', referralSource)}${
+                referralDetailValue ? ` (${referralDetailValue})` : ''
+              }.`
+            : '',
+          motivation ? `Why now: ${motivation}` : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+
         const payload: Record<string, unknown> = {
           name,
           email,
           company: kennel,
           interest: species,
-          message: `Launch waitlist application. Species: ${speciesLabel}. Kennel: ${kennel}.`,
+          message:
+            `Launch waitlist application. Species: ${speciesLabel}. Kennel: ${kennel}. ` +
+            qualification,
           source: 'launch_waitlist',
+          submission_key: submissionKeyHolder.get(),
           // Bot checks. Both are read server-side; see /api/contact.
           website: honeypot,
           rendered_at: RENDERED_AT,
@@ -427,6 +782,24 @@ const labelClass =
           payload.phone = phoneRaw;
           payload.phone_e164 = phoneE164;
         }
+        // Sent as its own field, not only inside the message text: the platform
+        // resolves what the site is built on after the lead is saved, and that
+        // needs a URL it can parse rather than one it has to find in prose.
+        if (websiteUrlValue) payload.website_url = websiteUrlValue;
+        // Its own field as well as the message text: attribution is something
+        // you count, and counting means a column rather than prose. UTM params
+        // cannot see a breeder who was told about us by another breeder or by an
+        // assistant, which are the two answers most worth having.
+        if (referralSource) {
+          payload.referral_source = referralSource;
+          if (referralDetailValue) payload.referral_detail = referralDetailValue;
+        }
+        // Structured as well as prose. The message text is what a person reads
+        // in Slack; these are what the triage screen ranks on.
+        payload.breeding_volume = breedingVolume;
+        payload.placement_modes = placementModes;
+        payload.record_sources = recordSources;
+        payload.website_ownership = websiteStatus;
 
         const utm = getUTMParams();
         if (utm.source) payload.utm_source = utm.source;
@@ -449,6 +822,10 @@ const labelClass =
           try { data = await res.json(); } catch { /* empty or non-JSON body */ }
 
           if (!data.success) throw new Error(data.error || 'Submission failed');
+
+          // Recorded. A later application from this page is a genuinely new
+          // submission and must not replay this key.
+          submissionKeyHolder.clear();
 
           trackFormSubmit(FORM_ID);
 

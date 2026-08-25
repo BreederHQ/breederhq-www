@@ -259,6 +259,7 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
 
 <script>
   import { trackFormStart, trackFormSubmit, getUTMParams } from '../lib/tracking';
+  import { createSubmissionKeyHolder } from '../lib/submissionKey';
   import {
     AsYouType,
     parsePhoneNumberFromString,
@@ -464,6 +465,9 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
       });
     }
 
+    // Outside the handler so it survives a retry of the same attempt.
+    const submissionKeyHolder = createSubmissionKeyHolder();
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -518,6 +522,9 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
         // Back-compat: also send first interest as scalar `interest`
         interest: interests[0] || undefined,
         source,
+        // Stable across retries of this attempt so a lost response cannot be
+        // recorded as a second enquiry. Cleared only on confirmed success.
+        submission_key: submissionKeyHolder.get(),
         // Bot checks. Both are read server-side; see /api/contact.
         website: String(formData.get('nickname') || ''),
         rendered_at: renderedAt,
@@ -540,6 +547,10 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
         const result = await response.json();
 
         if (result.success) {
+          // Recorded. A later enquiry from this page is genuinely new and must
+          // not replay this key.
+          submissionKeyHolder.clear();
+
           trackFormSubmit(formId);
 
           if (statusContainer && successMessage) {

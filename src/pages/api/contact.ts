@@ -245,6 +245,23 @@ export const POST: APIRoute = async ({ request }) => {
       interest: interests?.[0],
       interests,
       source: clampString(body.source, 50) || 'website_form',
+      // Minted by the browser so it survives a client retry of the same attempt.
+      // Absent for an older cached page; the platform then mints its own and the
+      // submission degrades to per-request behaviour rather than being rejected.
+      submission_key: clampString(body.submission_key, 128),
+      // The applicant's own site. Distinct from `website`, which is the honeypot
+      // checked above — do not merge these two names.
+      website_url: clampString(body.website_url, 300),
+      // Self-reported attribution. Distinct from utm_source, which only sees
+      // people who arrived through a link we tagged.
+      referral_source: clampString(body.referral_source, 40),
+      referral_detail: clampString(body.referral_detail, 120),
+      // Structured qualification answers. Also composed into `message` for the
+      // Slack notification, but sent separately so the platform can sort on them.
+      breeding_volume: clampString(body.breeding_volume, 30),
+      placement_modes: clampStringArray(body.placement_modes, 10, 30),
+      record_sources: clampStringArray(body.record_sources, 10, 30),
+      website_ownership: clampString(body.website_ownership, 20),
       utm_source: clampString(body.utm_source, 100),
       utm_medium: clampString(body.utm_medium, 100),
       utm_campaign: clampString(body.utm_campaign, 100),
@@ -252,8 +269,16 @@ export const POST: APIRoute = async ({ request }) => {
       utm_content: clampString(body.utm_content, 100),
     };
 
-    // Capture metadata from request
-    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip');
+    // Capture metadata from request.
+    //
+    // `clientIp` is already the FIRST address split off x-forwarded-for. The raw
+    // header accumulates one address per proxy hop ("client, proxy1, proxy2"),
+    // and the platform stores this as PostgreSQL `inet`, which rejects a
+    // multi-address string — forwarding the raw header would fail the durable
+    // write on exactly the deployments that sit behind more than one proxy. Its
+    // 'unknown' sentinel is likewise not an address, so it is dropped rather
+    // than sent.
+    const ip = clientIp !== 'unknown' ? clientIp : undefined;
     const userAgent = request.headers.get('user-agent');
     const referrer = request.headers.get('referer');
 

@@ -1004,6 +1004,23 @@ const faqs = [
           var successBox = document.getElementById('bcf-success');
           var submitBtn = document.getElementById('bcf-submit');
 
+          // Idempotency key for the platform's durable record, held OUTSIDE the
+          // handler so a retry after a lost response replays the same value and
+          // is recorded once rather than as a second enquiry. Cleared only on
+          // confirmed success, so a genuinely new request gets its own row.
+          // Mirrors src/lib/submissionKey.ts, inlined because this is an
+          // is:inline script and cannot import.
+          var submissionKey = null;
+          function currentSubmissionKey() {
+            if (!submissionKey) {
+              submissionKey =
+                typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+                  ? crypto.randomUUID()
+                  : 'k-' + Date.now() + '-' + Math.random().toString(36).slice(2, 11);
+            }
+            return submissionKey;
+          }
+
           form.addEventListener('submit', async function (e) {
             e.preventDefault();
             errorBox.classList.add('hidden');
@@ -1044,6 +1061,7 @@ const faqs = [
               company: clubName,
               message: messageParts.join('\n'),
               source: 'breed_club_landing',
+              submission_key: currentSubmissionKey(),
               utm_source: qs.get('utm_source') || undefined,
               utm_medium: qs.get('utm_medium') || undefined,
               utm_campaign: qs.get('utm_campaign') || undefined,
@@ -1061,6 +1079,9 @@ const faqs = [
                 var body = await res.json().catch(function () { return {}; });
                 throw new Error(body.error || 'Submit failed');
               }
+              // Recorded. A later request from this page is genuinely new.
+              submissionKey = null;
+
               form.classList.add('hidden');
               successBox.classList.remove('hidden');
               successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
