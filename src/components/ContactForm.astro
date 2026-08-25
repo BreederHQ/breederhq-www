@@ -59,6 +59,34 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
 
 <div class="contact-form-container">
   <form id={formId} class="space-y-4" data-source={source} novalidate>
+    <!--
+      Honeypot. Off-screen rather than `display:none`, because some bots skip
+      hidden inputs but fill everything else.
+
+      `hidden` (not aria-hidden) because a focusable control must never sit
+      inside an aria-hidden subtree: that hides it from assistive tech while
+      leaving it programmatically reachable, which is the trap the rule exists
+      to prevent. `hidden` removes it from the accessibility tree AND from
+      focus, and the positioning keeps it in the layout for bots that check
+      visibility.
+
+      `name="nickname"` and `autocomplete="new-password"` keep password managers
+      away: a field named "website" with a visible label is something Chrome and
+      1Password will happily autofill with a saved URL, and that autofill would
+      look exactly like a bot. Any value means the submission was not typed by a
+      person; the server drops it silently. See /api/contact.
+    -->
+    <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" hidden>
+      <input
+        type="text"
+        id={`${formId}-nickname`}
+        name="nickname"
+        tabindex="-1"
+        autocomplete="new-password"
+        aria-label="Leave this field empty"
+      />
+    </div>
+
     <!-- Name Field -->
     <div>
       <label for={`${formId}-name`} class="block text-sm font-medium text-gray-700 mb-1">
@@ -307,6 +335,12 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
     const source = form.dataset.source || 'contact_form';
     let formStarted = false;
 
+    // Stamped when this form is wired up so the server can reject a submission
+    // that arrived faster than a person could type one. Client-supplied and so
+    // forgeable, which is fine: one cheap layer beside the honeypot and the
+    // rate limit, not a gate on its own.
+    const renderedAt = Date.now();
+
     const nameInput = form.querySelector<HTMLInputElement>('input[data-validate="name"]');
     const emailInput = form.querySelector<HTMLInputElement>('input[data-validate="email"]');
     const phoneInput = form.querySelector<HTMLInputElement>('input[data-validate="phone"]');
@@ -484,6 +518,9 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
         // Back-compat: also send first interest as scalar `interest`
         interest: interests[0] || undefined,
         source,
+        // Bot checks. Both are read server-side; see /api/contact.
+        website: String(formData.get('nickname') || ''),
+        rendered_at: renderedAt,
       };
 
       const utmParams = getUTMParams();

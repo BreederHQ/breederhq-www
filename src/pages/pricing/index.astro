@@ -172,6 +172,33 @@ const labelClass =
         </div>
 
         <form id="waitlist-form" novalidate class="mt-6 flex flex-col gap-[18px]">
+          {/*
+            Honeypot. Off-screen rather than `display:none`, because some bots
+            skip hidden inputs but fill everything else.
+
+            `hidden` (not aria-hidden) because a focusable control must never sit
+            inside an aria-hidden subtree: that hides it from assistive tech
+            while leaving it programmatically reachable, which is exactly the
+            trap the rule exists to prevent. `hidden` removes it from the
+            accessibility tree AND from focus, and the positioning keeps it in
+            the layout for bots that check visibility.
+
+            `name="nickname"` and `autocomplete="new-password"` keep password
+            managers away: a field named "website" with a visible label is
+            something Chrome and 1Password will happily autofill with a saved
+            URL, and that autofill would look exactly like a bot.
+          */}
+          <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" hidden>
+            <input
+              type="text"
+              id="waitlist-nickname"
+              name="nickname"
+              tabindex="-1"
+              autocomplete="new-password"
+              aria-label="Leave this field empty"
+            />
+          </div>
+
           <label class="flex flex-col gap-2">
             <span class={labelClass}>
               Name<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
@@ -286,6 +313,12 @@ const labelClass =
     const DEFAULT_COUNTRY: CountryCode = 'US';
     const FORM_ID = 'launch-waitlist';
 
+    // Stamped when the script runs so the server can reject a submission that
+    // arrived faster than a person could type one. Client-supplied and
+    // therefore forgeable, which is fine: it is one cheap layer beside the
+    // honeypot and the rate limit, not a gate on its own.
+    const RENDERED_AT = Date.now();
+
     const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
     if (form) {
       const screenEl = document.getElementById('waitlist-screen')!;
@@ -331,6 +364,13 @@ const labelClass =
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const els = form.elements as any;
+        // Read the honeypot by query rather than through the untyped `els`
+        // collection: a typo there would silently yield undefined and disable
+        // the check without any error. `hidden` on an ancestor does not remove
+        // a control from form.elements (verified in-browser), but this way a
+        // rename cannot quietly turn the honeypot off.
+        const honeypot =
+          form.querySelector<HTMLInputElement>('input[name="nickname"]')?.value ?? '';
         const name = String(els.name.value || '').trim();
         const email = String(els.email.value || '').trim().toLowerCase();
         const kennel = String(els.kennel.value || '').trim();
@@ -379,6 +419,9 @@ const labelClass =
           interest: species,
           message: `Launch waitlist application. Species: ${speciesLabel}. Kennel: ${kennel}.`,
           source: 'launch_waitlist',
+          // Bot checks. Both are read server-side; see /api/contact.
+          website: honeypot,
+          rendered_at: RENDERED_AT,
         };
         if (phoneRaw) {
           payload.phone = phoneRaw;
