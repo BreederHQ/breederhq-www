@@ -1,0 +1,65 @@
+---
+export const updateMeta = {
+  date: '2026-08-26',
+  title: 'The waitlist application becomes a three-step form on the site palette',
+  tags: ['pricing', 'waitlist', 'conversion', 'design'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">August 26, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Reworked the founding-member application at
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a>.
+    The qualification questions added earlier this month had turned it into one
+    long column, and the page was rendering in a cream and amber palette that
+    looked nothing like the site linking to it.
+  </p>
+
+  <h3 class="font-semibold text-gray-900 mt-4 mb-1">Three steps instead of one column</h3>
+  <p class="text-sm text-gray-600 mb-3">
+    Step 1 asks who you are (name, email, kennel, species). Step 2 asks about the
+    program (volume, where animals go, where records live today). Step 3 covers
+    the website, what prompted the search, how they heard about us, and a phone
+    number. A dot tracker shows progress; forward validates the visible step and
+    back is always available, so nothing typed is lost by reviewing it.
+  </p>
+  <p class="text-sm text-gray-600 mb-3">
+    Progressive enhancement, verified rather than assumed: the steps ship
+    visible and the script hides them on first run, so with JavaScript
+    unavailable the form renders as one column with every field reachable and
+    still submits. The Continue button is the reverse — hidden in the markup and
+    revealed by the script, because a paging control that cannot page is worse
+    than no control at all.
+  </p>
+
+  <h3 class="font-semibold text-gray-900 mt-4 mb-1">Now on the site's palette</h3>
+  <p class="text-sm text-gray-600 mb-3">
+    This page skips BaseLayout deliberately, to carry no nav or footer that would
+    compete with the one decision. It had silently skipped
+    <code class="text-xs bg-gray-100 px-1 py-0.5 rounded">bhq-dark-shell</code>
+    along with it, which is the class that maps the shared utility classes onto
+    the dark navy ground. The class is now applied directly, and the accent
+    switched from Tailwind amber to the site's own
+    <code class="text-xs bg-gray-100 px-1 py-0.5 rounded">--color-accent</code>,
+    which is a visibly different hue against navy.
+  </p>
+
+  <h3 class="font-semibold text-gray-900 mt-4 mb-1">Verified in a browser</h3>
+  <p class="text-sm text-gray-600 mb-3">
+    Driven in Chrome against the built page, with JavaScript on and off: step
+    visibility, refusal of an incomplete step, the two multi-selects that have no
+    native required state, back preserving what was typed, and the ground
+    computing to the site's own background colour.
+  </p>
+  <p class="text-sm text-gray-600">
+    Those runs caught what a class list cannot show. The shared stylesheet
+    flattens every
+    <code class="text-xs bg-gray-100 px-1 py-0.5 rounded">bg-gradient-to-b</code>
+    under the dark shell, so both buttons rendered as invisible dark rectangles.
+    The native checkboxes rendered white and read as pre-checked. Keyboard focus
+    stayed on Continue after advancing, so the next Tab left the form instead of
+    entering the step just revealed, and Enter on Back advanced instead of going
+    back. The required-field asterisk measured 2.6:1 against the new dark ground,
+    below the 4.5:1 bar; it now measures 5.2:1.
+  </p>
+</article>

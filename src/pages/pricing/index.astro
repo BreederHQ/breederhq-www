@@ -147,10 +147,18 @@ const description =
   'BreederHQ Launch is available to a limited number of founding members. Join the waitlist and we will reach out when a spot opens.';
 const canonical = 'https://www.breederhq.com/pricing';
 
+// Dark surfaces, matching the rest of the site rather than the cream this page
+// used to render. hsl(24 95% 53%) is --color-accent from global.css, used
+// literally so the focus ring is the site's orange and not Tailwind's amber,
+// which is a visibly different hue against navy.
 const inputClass =
-  'min-h-[52px] w-full rounded-lg border border-stone-300 bg-stone-50 px-4 py-3.5 text-base text-stone-900 placeholder:text-stone-400 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-amber-500/20';
+  'min-h-[52px] w-full rounded-lg border border-white/12 bg-white/[0.04] px-4 py-3.5 text-base text-slate-100 placeholder:text-slate-400 focus:border-[hsl(24,95%,53%)] focus:bg-white/[0.07] focus:outline-none focus:ring-[3px] focus:ring-[hsl(24,95%,53%)]/25';
 const labelClass =
-  'text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600';
+  'text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400';
+// One option row in a multi-select. Checked state carries the brand orange as
+// an EDGE and a tint, never as a fill behind text.
+const optionClass =
+  'flex cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-[15px] text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[hsl(24,95%,53%)]/10';
 ---
 
 <!DOCTYPE html>
@@ -192,12 +200,15 @@ const labelClass =
     .font-serif { font-family: Georgia, "Times New Roman", serif; }
 
     /*
-      Required-field asterisk. Mirrors the platform's .text-edit-required
-      token rather than a raw red: no single red shade clears AA on both a
-      light and a dark ground, and this page is light-only but shares its
-      copy conventions with surfaces that are not.
+      Required-field asterisk, on the DARK ground this page now renders on.
+
+      hsl(0 72% 38%) was chosen when the page was cream, where it reads fine.
+      Measured against #070C16 it is 2.62:1 — below the 4.5:1 AA bar for text,
+      and the exact trap the platform's own styling rule warns about: no single
+      red shade clears AA on both a light and a dark ground. This value measures
+      5.17:1 on the same ground.
     */
-    .text-edit-required { color: hsl(0 72% 38%); }
+    .text-edit-required { color: hsl(0 84% 60%); }
   </style>
 
   {/* Ordering is load-bearing and mirrors BaseLayout: the paid-query snapshot
@@ -206,14 +217,23 @@ const labelClass =
   <PaidQuerySnapshot />
   <Analytics />
 </head>
-<body class="antialiased">
-  <div class="min-h-screen flex flex-col bg-stone-50 text-stone-900 [background-image:radial-gradient(120%_80%_at_88%_-10%,rgba(245,158,11,0.10),transparent_60%)]">
+<body class="antialiased bhq-dark-shell" style="color-scheme: dark;">
+  <!--
+    bhq-dark-shell is what every other page gets from BaseLayout. This page
+    skips BaseLayout to drop the nav and footer, and had silently dropped the
+    shell with it - so the same utility classes that render dark navy
+    everywhere else rendered cream here, and the waitlist looked like a
+    different product from the site linking to it. Applied directly rather than
+    by adopting BaseLayout, because the reason for skipping the layout still
+    holds: nothing on this page should compete with the one decision.
+  -->
+  <div class="min-h-screen flex flex-col bg-[#070C16] text-slate-100 [background-image:radial-gradient(120%_80%_at_88%_-10%,rgba(249,115,22,0.14),transparent_60%)]">
 
     <header class="mx-auto w-full max-w-6xl flex items-center justify-between gap-4 px-6 py-6 sm:px-8">
       <a href="/" class="text-[19px] font-semibold tracking-tight no-underline">
-        <span class="text-stone-900">Breeder</span><span class="text-amber-700">HQ</span>
+        <span class="text-white">Breeder</span><span class="text-[hsl(24,95%,53%)]">HQ</span>
       </a>
-      <span class="hidden text-[13px] uppercase tracking-[0.14em] text-stone-400 sm:block">Founding Members</span>
+      <span class="hidden text-[13px] uppercase tracking-[0.14em] text-slate-400 sm:block">Founding Members</span>
     </header>
 
     <!-- Application screen -->
@@ -223,46 +243,46 @@ const labelClass =
     >
       <section class="max-w-xl">
         <div class="mb-6 flex items-center gap-2.5">
-          <span class="h-1.5 w-1.5 rounded-full bg-amber-500 ring-4 ring-amber-500/15"></span>
-          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-stone-500">Invitation Only</span>
+          <span class="h-1.5 w-1.5 rounded-full bg-[hsl(24,95%,53%)] ring-4 ring-[hsl(24,95%,53%)]/20"></span>
+          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">Invitation Only</span>
         </div>
 
-        <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-stone-900 [text-wrap:pretty] sm:text-5xl lg:text-[3.75rem]">
+        <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-white [text-wrap:pretty] sm:text-5xl lg:text-[3.75rem]">
           We are onboarding breeders<br class="hidden sm:block" />
-          <em class="text-amber-700 underline decoration-amber-600/40 underline-offset-[6px]">one at a time.</em>
+          <em class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/45 underline-offset-[6px]">one at a time.</em>
         </h1>
 
-        <p class="mt-7 max-w-[50ch] text-lg leading-relaxed text-stone-700 [text-wrap:pretty]">
+        <p class="mt-7 max-w-[50ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
           BreederHQ Launch is currently available to a limited number of founding
           members. We are bringing breeders onboard one at a time, so your setup is
           personal, founder-led and done properly.
         </p>
-        <p class="mt-4 max-w-[50ch] text-lg leading-relaxed text-stone-700 [text-wrap:pretty]">
+        <p class="mt-4 max-w-[50ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
           Spots are limited and this round is close to full. That is why there is no
           price list on this page and no way to sign yourself up. Join the waitlist and
           we will reach out when a spot opens.
         </p>
 
-        <hr class="mt-9 max-w-md border-stone-200" />
+        <hr class="mt-9 max-w-md border-white/10" />
 
-        <p class="mt-5 max-w-[44ch] text-sm leading-relaxed text-stone-500">
+        <p class="mt-5 max-w-[44ch] text-sm leading-relaxed text-slate-400">
           Running a large-scale operation or managing a breed registry?{" "}
           <a
             href="/contact"
-            class="text-amber-700 underline decoration-amber-700/30 underline-offset-2 hover:text-amber-800 hover:decoration-amber-800"
+            class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/35 underline-offset-2 hover:text-[hsl(24,95%,62%)] hover:decoration-[hsl(24,95%,53%)]/60"
           >Let&rsquo;s talk</a>.
         </p>
       </section>
 
-      <section class="w-full max-w-md rounded-2xl border border-stone-200 bg-white p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8">
-        <h2 class="text-base font-semibold tracking-tight text-stone-900">Join The Waitlist</h2>
-        <p class="mt-1 text-sm leading-relaxed text-stone-500">A person reads every one.</p>
+      <section class="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8">
+        <h2 class="text-base font-semibold tracking-tight text-white">Join The Waitlist</h2>
+        <p class="mt-1 text-sm leading-relaxed text-slate-400">A person reads every one.</p>
 
-        <div class="mt-4 flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/[0.06] px-3.5 py-3">
-          <svg class="mt-0.5 h-4 w-4 flex-none text-amber-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <div class="mt-4 flex items-start gap-3 rounded-xl border border-[hsl(24,95%,53%)]/30 bg-[hsl(24,95%,53%)]/[0.08] px-3.5 py-3">
+          <svg class="mt-0.5 h-4 w-4 flex-none text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />
           </svg>
-          <p class="text-[13.5px] leading-relaxed text-amber-800">
+          <p class="text-[13.5px] leading-relaxed text-[hsl(24,95%,62%)]">
             We set each breeder up personally, so we can only take a few at a time.
             The questions below tell us about your program.
           </p>
@@ -295,6 +315,30 @@ const labelClass =
               aria-label="Leave this field empty"
             />
           </div>
+
+          {/*
+            Three steps rather than one column. The questions did not get
+            shorter, but a breeder can see the end of the one in front of her,
+            which is the difference between answering and abandoning.
+
+            The dots are a progress READOUT, not navigation: forward is gated on
+            the visible step validating, so letting someone jump to step 3 would
+            either skip that check or bounce them straight back. Back is always
+            free — rereading what you already typed costs nothing.
+          */}
+          <div class="mb-1 flex items-center gap-2.5">
+            <div class="flex items-center gap-1.5" id="waitlist-dots" role="presentation">
+              <span data-dot="1" class="h-2 w-2 rounded-full bg-[hsl(24,95%,53%)] transition-all"></span>
+              <span data-dot="2" class="h-2 w-2 rounded-full bg-white/20 transition-all"></span>
+              <span data-dot="3" class="h-2 w-2 rounded-full bg-white/20 transition-all"></span>
+            </div>
+            <span class="text-[11.5px] font-medium uppercase tracking-[0.08em] text-slate-400" id="waitlist-step-label" aria-live="polite">
+              Step 1 of 3 &middot; About You
+            </span>
+          </div>
+
+          <fieldset data-step="1" tabindex="-1" class="m-0 flex flex-col gap-[18px] border-0 p-0">
+            <legend class="sr-only">Step 1 of 3: About you</legend>
 
           <label class="flex flex-col gap-2">
             <span class={labelClass}>
@@ -339,7 +383,7 @@ const labelClass =
                 <option value="" disabled selected>Select a species</option>
                 {SPECIES.map((s) => <option value={s.value}>{s.label}</option>)}
               </select>
-              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </div>
@@ -351,8 +395,12 @@ const labelClass =
             person actually triages on; without them every applicant looks
             identical and the review is a coin toss.
           */}
-          <hr class="my-1 border-stone-200" />
+          <hr class="my-1 border-white/10" />
 
+          </fieldset>
+
+          <fieldset data-step="2" tabindex="-1" class="m-0 flex flex-col gap-[18px] border-0 p-0">
+            <legend class="sr-only">Step 2 of 3: Your program</legend>
           <label class="flex flex-col gap-2">
             <span class={labelClass}>
               Litters Or Breedings Per Year<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
@@ -362,7 +410,7 @@ const labelClass =
                 <option value="" disabled selected>Select a range</option>
                 {BREEDING_VOLUME.map((o) => <option value={o.value}>{o.label}</option>)}
               </select>
-              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </div>
@@ -372,13 +420,13 @@ const labelClass =
             <legend class={labelClass}>
               Where Your Animals Go<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
             </legend>
-            <p class="text-xs leading-relaxed text-stone-400">Select all that apply.</p>
+            <p class="text-xs leading-relaxed text-slate-400">Select all that apply.</p>
             <div class="mt-0.5 grid grid-cols-1 gap-1.5">
               {PLACEMENT_MODES.map((o) => (
-                <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-[15px] text-stone-800 transition hover:border-stone-300 hover:bg-white has-[:checked]:border-amber-500 has-[:checked]:bg-amber-500/[0.06]">
+                <label class={optionClass}>
                   <input
                     type="checkbox" name="placement_modes" value={o.value}
-                    class="h-4 w-4 flex-none rounded border-stone-400 text-amber-600 focus:ring-2 focus:ring-amber-500/40"
+                    class="h-4 w-4 flex-none rounded accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
                   />
                   <span>{o.label}</span>
                 </label>
@@ -390,13 +438,13 @@ const labelClass =
             <legend class={labelClass}>
               Where Your Records Live Today<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
             </legend>
-            <p class="text-xs leading-relaxed text-stone-400">Select all that apply.</p>
+            <p class="text-xs leading-relaxed text-slate-400">Select all that apply.</p>
             <div class="mt-0.5 grid grid-cols-1 gap-1.5">
               {RECORD_SOURCES.map((o) => (
-                <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-[15px] text-stone-800 transition hover:border-stone-300 hover:bg-white has-[:checked]:border-amber-500 has-[:checked]:bg-amber-500/[0.06]">
+                <label class={optionClass}>
                   <input
                     type="checkbox" name="record_sources" value={o.value}
-                    class="h-4 w-4 flex-none rounded border-stone-400 text-amber-600 focus:ring-2 focus:ring-amber-500/40"
+                    class="h-4 w-4 flex-none rounded accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
                   />
                   <span>{o.label}</span>
                 </label>
@@ -404,6 +452,10 @@ const labelClass =
             </div>
           </fieldset>
 
+          </fieldset>
+
+          <fieldset data-step="3" tabindex="-1" class="m-0 flex flex-col gap-[18px] border-0 p-0">
+            <legend class="sr-only">Step 3 of 3: A few last things</legend>
           <label class="flex flex-col gap-2">
             <span class={labelClass}>
               Do You Have A Business Website?<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
@@ -413,7 +465,7 @@ const labelClass =
                 <option value="" disabled selected>Select one</option>
                 {WEBSITE_STATUS.map((o) => <option value={o.value}>{o.label}</option>)}
               </select>
-              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </div>
@@ -431,15 +483,15 @@ const labelClass =
               spellcheck="false" maxlength="200" placeholder="yourkennel.com"
               class={`mt-1 hidden ${inputClass}`} data-website-url
             />
-            <span class="hidden text-xs leading-relaxed text-stone-400" data-website-hint>
+            <span class="hidden text-xs leading-relaxed text-slate-400" data-website-hint>
               We will take a look before we talk.
             </span>
           </label>
 
           <label class="flex flex-col gap-2">
-            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
+            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400">
               What Made You Look For This Now?
-              <span class="font-medium normal-case tracking-normal text-stone-400">Optional</span>
+              <span class="font-medium normal-case tracking-normal text-slate-400">Optional</span>
             </span>
             <textarea
               name="motivation" rows="3" maxlength="600"
@@ -448,19 +500,19 @@ const labelClass =
             ></textarea>
           </label>
 
-          <hr class="my-1 border-stone-200" />
+          <hr class="my-1 border-white/10" />
 
           <label class="flex flex-col gap-2">
-            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
+            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400">
               How Did You Hear About Us?
-              <span class="font-medium normal-case tracking-normal text-stone-400">Optional</span>
+              <span class="font-medium normal-case tracking-normal text-slate-400">Optional</span>
             </span>
             <div class="relative">
               <select name="referral_source" class={`appearance-none pr-11 ${inputClass}`}>
                 <option value="" selected>Select one</option>
                 {REFERRAL_SOURCES.map((o) => <option value={o.value}>{o.label}</option>)}
               </select>
-              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </div>
@@ -472,29 +524,55 @@ const labelClass =
           </label>
 
           <label class="flex flex-col gap-2">
-            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-stone-600">
+            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400">
               Phone / WhatsApp
-              <span class="font-medium normal-case tracking-normal text-stone-400">Optional</span>
+              <span class="font-medium normal-case tracking-normal text-slate-400">Optional</span>
             </span>
             <input
               type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25"
               placeholder="+1 555 0134"
               class={inputClass}
             />
-            <span class="text-xs leading-relaxed text-stone-400">
+            <span class="text-xs leading-relaxed text-slate-400">
               We default to US format. Start with <code class="font-mono">+</code> and your
               country code for international.
             </span>
           </label>
 
+          </fieldset>
+
+          {/* Back is always available; forward validates the visible step. */}
+          <div class="mt-1.5 flex items-center gap-3">
+            <button
+              type="button" id="waitlist-back" hidden
+              class="min-h-[54px] shrink-0 rounded-lg border border-white/15 bg-white/[0.04] px-5 py-4 text-base font-medium text-slate-300 transition hover:border-white/25 hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+            >Back</button>
+            {/*
+              Hidden in the MARKUP, revealed by renderStep(). Paging is the
+              enhancement, so its control must not exist without the script that
+              makes it work: without JavaScript this would sit beside the real
+              submit button and do nothing when pressed.
+
+              The reverse — the STEPS carrying `hidden` in the markup — is the
+              bug this pairing exists to avoid. Measured on the built page with
+              JavaScript disabled: steps 2 and 3 were unreachable and 9 of the 13
+              fields were invisible, so a breeder in that state could not apply
+              at all. The steps now ship visible and renderStep() hides them on
+              first run.
+            */}
+            <button
+              type="button" id="waitlist-next" hidden
+              class="min-h-[54px] w-full rounded-lg border border-[hsl(24,95%,42%)] bg-[hsl(24,95%,53%)] px-5 py-4 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.22)] transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16] active:translate-y-0"
+            >Continue</button>
           <button
             type="submit" id="waitlist-submit"
-            class="mt-1.5 min-h-[54px] w-full rounded-lg border border-amber-700 bg-gradient-to-b from-amber-400 via-amber-500 to-orange-700 px-5 py-4 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_1px_2px_rgba(28,25,23,0.18)] transition hover:-translate-y-px hover:brightness-105 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_6px_16px_-6px_rgba(245,158,11,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2 active:translate-y-0 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
+            class="min-h-[54px] w-full rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-5 py-4 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_1px_2px_rgba(28,25,23,0.18)] transition hover:-translate-y-px hover:brightness-105 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_6px_16px_-6px_rgba(245,158,11,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16] active:translate-y-0 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
           >Join The Waitlist</button>
+          </div>
 
-          <p id="waitlist-error" class="hidden text-[13.5px] leading-relaxed text-red-700" role="alert"></p>
+          <p id="waitlist-error" class="hidden text-[13.5px] leading-relaxed text-red-400" role="alert"></p>
 
-          <p class="mt-0.5 text-xs leading-relaxed text-stone-400">
+          <p class="mt-0.5 text-xs leading-relaxed text-slate-400">
             We use your details only to contact you about access. No newsletter, no sharing.
           </p>
         </form>
@@ -504,22 +582,22 @@ const labelClass =
     <!-- Confirmation screen. Swapped in place rather than navigated to, so a
          failed submit never costs the visitor what they typed. -->
     <main id="waitlist-done" hidden class="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center sm:px-8">
-      <div class="mb-8 flex h-[52px] w-[52px] items-center justify-center rounded-full border border-amber-500/35 bg-amber-500/10">
-        <svg class="h-5 w-5 text-amber-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <div class="mb-8 flex h-[52px] w-[52px] items-center justify-center rounded-full border border-[hsl(24,95%,53%)]/35 bg-[hsl(24,95%,53%)]/12">
+        <svg class="h-5 w-5 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M20 6 9 17l-5-5" />
         </svg>
       </div>
-      <h1 id="waitlist-done-heading" class="font-serif text-[2.6rem] font-normal leading-[1.05] tracking-tight text-stone-900 sm:text-5xl lg:text-[4.25rem]">You&rsquo;re in</h1>
-      <p class="mt-6 max-w-[34ch] text-lg leading-relaxed text-stone-700">
+      <h1 id="waitlist-done-heading" class="font-serif text-[2.6rem] font-normal leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[4.25rem]">You&rsquo;re in</h1>
+      <p class="mt-6 max-w-[34ch] text-lg leading-relaxed text-slate-300">
         You are on the waitlist. We will email you when a spot opens and set up your
         program with you personally.
       </p>
-      <p class="mt-3.5 max-w-[38ch] text-sm leading-relaxed text-stone-400">
+      <p class="mt-3.5 max-w-[38ch] text-sm leading-relaxed text-slate-400">
         Nothing else to do for now. You can close this page.
       </p>
     </main>
 
-    <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-stone-400 sm:px-8">
+    <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-slate-400 sm:px-8">
       &copy; 2026 BreederHQ
     </footer>
   </div>
@@ -578,6 +656,144 @@ const labelClass =
         errEl.textContent = msg;
         errEl.classList.remove('hidden');
       }
+
+      // ── Paging ───────────────────────────────────────────────────────────
+      //
+      // Progressive enhancement, deliberately: every field is in the DOM from
+      // first paint and `hidden` only hides the steps not being answered. With
+      // JavaScript off the whole form renders as one column and still submits,
+      // which is the behaviour it had before paging existed.
+      const steps = Array.from(
+        form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-step]'),
+      );
+      const dots = Array.from(
+        document.querySelectorAll<HTMLElement>('#waitlist-dots [data-dot]'),
+      );
+      const stepLabel = document.getElementById('waitlist-step-label')!;
+      const backBtn = document.getElementById('waitlist-back') as HTMLButtonElement;
+      const nextBtn = document.getElementById('waitlist-next') as HTMLButtonElement;
+      const STEP_NAMES = ['About You', 'Your Program', 'A Few Last Things'];
+      let step = 0;
+
+      function renderStep() {
+        steps.forEach((f, i) => {
+          f.hidden = i !== step;
+        });
+        dots.forEach((d, i) => {
+          // Passed and current both read as filled; ahead stays dim. A dot is a
+          // readout, so it carries no click target and no focus stop.
+          d.className =
+            'h-2 w-2 rounded-full transition-all ' +
+            (i <= step ? 'bg-[hsl(24,95%,53%)]' : 'bg-white/20');
+        });
+        stepLabel.textContent = `Step ${step + 1} of ${steps.length} · ${STEP_NAMES[step]}`;
+        backBtn.hidden = step === 0;
+        // The last step submits; the others advance. Swapping which button is
+        // visible keeps one primary action on screen at a time.
+        const last = step === steps.length - 1;
+        nextBtn.hidden = last;
+        btn.hidden = !last;
+        errEl.classList.add('hidden');
+      }
+
+      /**
+       * Is every required control on the VISIBLE step answered?
+       *
+       * Uses the browser's own validity plus an explicit check for the two
+       * multi-selects, which are groups of checkboxes and so have no native
+       * required state. Returns the message rather than throwing, so the caller
+       * decides where it goes.
+       */
+      function validateStep(): string | null {
+        const fs = steps[step];
+        for (const el of Array.from(
+          fs.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
+            'input, select, textarea',
+          ),
+        )) {
+          if (el.type === 'checkbox') continue;
+          if (!el.checkValidity()) {
+            el.focus();
+            const label = el.closest('label')?.querySelector('span')?.textContent ?? 'this field';
+            return `Please complete ${label.replace('*', '').trim().toLowerCase()}.`;
+          }
+        }
+        if (step === 1) {
+          // A checkbox group has no native validity, so focus has to be moved
+          // by hand — otherwise the message appears while focus is still on the
+          // Continue button, past the group being complained about, and a
+          // keyboard user has no way to reach what is wrong.
+          const focusGroup = (name: string) =>
+            fs.querySelector<HTMLInputElement>(`input[name="${name}"]`)?.focus();
+          if (!fs.querySelector('input[name="placement_modes"]:checked')) {
+            focusGroup('placement_modes');
+            return 'Please tell us where your animals go. Choose "I keep them" if you are not placing any.';
+          }
+          if (!fs.querySelector('input[name="record_sources"]:checked')) {
+            focusGroup('record_sources');
+            return 'Please tell us where your records live today. "Mostly in my head" is a perfectly good answer.';
+          }
+        }
+        return null;
+      }
+
+      /**
+       * Put focus at the TOP of the step that just became visible.
+       *
+       * Without this, advancing leaves focus on Continue — which sits after
+       * every control in the step it just revealed — so the next Tab leaves the
+       * form entirely and a keyboard user never reaches the questions. The
+       * fieldset takes a -1 tabindex so it can receive focus programmatically
+       * without becoming a tab stop of its own.
+       */
+      function focusStep() {
+        const fs = steps[step];
+        const first = fs.querySelector<HTMLElement>(
+          'input:not([type="hidden"]), select, textarea',
+        );
+        (first ?? fs).focus({ preventScroll: true });
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const problem = validateStep();
+        if (problem) return showError(problem);
+        step = Math.min(step + 1, steps.length - 1);
+        renderStep();
+        // Bring the top of the card into view. A breeder who has just filled
+        // the bottom of a step would otherwise land mid-way down the next one.
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        focusStep();
+      });
+
+      backBtn.addEventListener('click', () => {
+        step = Math.max(step - 1, 0);
+        renderStep();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        focusStep();
+      });
+
+      // Enter should advance rather than submit while a middle step is showing,
+      // or a breeder answering step 1 would post a half-empty application.
+      form.addEventListener('keydown', (e) => {
+        const ke = e as KeyboardEvent;
+        if (ke.key !== 'Enter') return;
+        const target = ke.target as HTMLElement;
+        // Only a TEXT ENTRY control. A textarea needs Enter for newlines, and a
+        // BUTTON needs Enter to mean "press me" — intercepting it there made
+        // Enter on Back advance the form instead of going back, which is the
+        // opposite of what the control says it does. A select is left alone
+        // too: Enter commits its open dropdown.
+        const isTextEntry =
+          target instanceof HTMLInputElement &&
+          !['checkbox', 'radio', 'button', 'submit'].includes(target.type);
+        if (!isTextEntry) return;
+        if (step < steps.length - 1) {
+          ke.preventDefault();
+          nextBtn.click();
+        }
+      });
+
+      renderStep();
 
       // Idempotency key for the platform's durable record. Held outside the
       // submit handler so a retry after a network failure replays the SAME key
