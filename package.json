@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npm run search:index && node scripts/copy-pagefind-to-vercel.mjs",
+    "legal:sync": "node scripts/sync-legal-documents.mjs",
+    "legal:check": "node scripts/sync-legal-documents.mjs --check",
+    "build": "npm run legal:check && astro build && npm run search:index && node scripts/copy-pagefind-to-vercel.mjs",
     "search:index": "pagefind --site dist/client --output-subdir pagefind",
     "preview": "astro preview",
     "astro": "astro",
