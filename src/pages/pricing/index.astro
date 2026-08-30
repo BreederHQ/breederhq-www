@@ -159,6 +159,27 @@ const labelClass =
 // an EDGE and a tint, never as a fill behind text.
 const optionClass =
   'flex cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-[15px] text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[hsl(24,95%,53%)]/10';
+
+// The SMS consent statement, identified by a VERSION rather than carried as a
+// string the browser submits.
+//
+// This page renders the wording; it does not report it. The platform holds the
+// canonical text for this ID (api: src/services/sms-consent-versions.ts) and
+// records the consent from its OWN copy. Anything the browser sends is a claim,
+// and a claim about what a page displayed is not evidence of it — DevTools can
+// edit the DOM, and a direct POST never renders the page at all.
+//
+// So the two must stay in step, and the ID is what keeps them honest: changing
+// the sentence below WITHOUT minting a new ID on both sides means the record
+// will say something different from what a breeder actually read. Change the
+// wording and the ID together, or not at all.
+//
+// Scope is deliberately narrow. It names the Founders program and nothing else,
+// so it cannot be read as authorising general marketing; widening what is sent
+// later means a new version and asking again, not reinterpreting this one.
+const SMS_CONSENT_VERSION = 'founders-sms-v1';
+const SMS_CONSENT_TEXT =
+  'I agree to receive text messages from BreederHQ about my Founders program application. Message and data rates may apply. Reply STOP to opt out at any time.';
 ---
 
 <!DOCTYPE html>
@@ -537,6 +558,34 @@ const optionClass =
               We default to US format. Start with <code class="font-mono">+</code> and your
               country code for international.
             </span>
+          </label>
+
+          {/*
+            Unchecked by default and never required to submit.
+
+            Both properties are the point rather than a style choice: agreement
+            that was pre-ticked was never given, and agreement demanded as the
+            price of joining the waitlist is not freely given either. A breeder
+            who leaves this alone still applies normally and simply is not
+            texted, which is why nothing in the submit path validates it.
+
+            Rendered from SMS_CONSENT_TEXT so the words on screen and the words
+            recorded are the same words.
+          */}
+          <label class="mt-1 flex cursor-pointer items-start gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-3 text-[13px] leading-relaxed text-slate-300 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[hsl(24,95%,53%)]/10">
+            {/*
+              The version rides on the element itself so the submit handler can
+              read it without the frontmatter constant being in its scope. It is
+              an identifier, not the agreement: the platform resolves the wording
+              from it, so a tampered value names an unknown version and records
+              nothing rather than recording false terms.
+            */}
+            <input
+              type="checkbox" name="sms_consent" value="yes"
+              data-consent-version={SMS_CONSENT_VERSION}
+              class="mt-0.5 h-4 w-4 flex-none rounded accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
+            />
+            <span>{SMS_CONSENT_TEXT}</span>
           </label>
 
           </fieldset>
@@ -997,6 +1046,28 @@ const optionClass =
         if (phoneRaw) {
           payload.phone = phoneRaw;
           payload.phone_e164 = phoneE164;
+          // Consent travels WITH the number and only with it. Agreement to be
+          // texted at a number nobody gave is not a permission, it is a claim
+          // about nothing, and storing it would put a consent record on a lead
+          // that can never be contacted anyway.
+          //
+          // Only the VERSION travels, never the sentence.
+          //
+          // An earlier draft read the wording out of the rendered label, on the
+          // reasoning that doing so guaranteed "stored equals shown". It does
+          // not: anything the browser sends is a claim, and the platform cannot
+          // tell a claim about the rendered page apart from one typed into
+          // DevTools or posted directly at the API. Sending the ID instead lets
+          // the platform record from its own published copy, so the stored terms
+          // can only ever be terms the product actually shipped.
+          const consentBox = document.querySelector<HTMLInputElement>(
+            'input[name="sms_consent"]'
+          );
+          const consentVersion = consentBox?.dataset.consentVersion;
+          if (consentBox?.checked && consentVersion) {
+            payload.sms_consent = true;
+            payload.sms_consent_version = consentVersion;
+          }
         }
         // Sent as its own field, not only inside the message text: the platform
         // resolves what the site is built on after the lead is saved, and that

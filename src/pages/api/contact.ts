@@ -267,6 +267,23 @@ export const POST: APIRoute = async ({ request }) => {
       utm_campaign: clampString(body.utm_campaign, 100),
       utm_term: clampString(body.utm_term, 100),
       utm_content: clampString(body.utm_content, 100),
+      // Agreement to be texted, carried as a version ID. The wording is never
+      // taken from the client: the platform resolves it from its own published
+      // catalogue, so a consent record can only ever state terms the product
+      // actually shipped.
+      //
+      // Gated on a phone being supplied, because permission to be reached at a
+      // number nobody gave authorises nothing. The platform re-checks this
+      // against the CANONICAL number, which is the check that actually counts;
+      // this one just avoids forwarding an obviously empty claim.
+      sms_consent:
+        body.sms_consent === true && !!phoneRaw && !!clampString(body.sms_consent_version, 40)
+          ? true
+          : undefined,
+      sms_consent_version:
+        body.sms_consent === true && !!phoneRaw
+          ? clampString(body.sms_consent_version, 40)
+          : undefined,
     };
 
     // Capture metadata from request.

@@ -37,6 +37,15 @@ export interface LeadData {
   placement_modes?: string[];
   record_sources?: string[];
   website_ownership?: string;
+  /**
+   * Agreement to receive text messages, identified by the version of the
+   * statement that was shown. The wording itself is NOT carried here: the
+   * platform holds the canonical text for each version and records from its own
+   * copy, because a sentence supplied by the client is a claim about what a page
+   * displayed rather than evidence of it.
+   */
+  sms_consent?: boolean;
+  sms_consent_version?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -1026,6 +1035,8 @@ export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
         placementModes: lead.placement_modes,
         recordSources: lead.record_sources,
         websiteOwnership: lead.website_ownership,
+        smsConsent: lead.sms_consent,
+        smsConsentVersion: lead.sms_consent_version,
         referrerOrigin: origin,
         referrerPath: path,
         userAgent: lead.metadata?.userAgent?.slice(0, 512),
