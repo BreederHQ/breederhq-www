@@ -31,6 +31,9 @@ const excludedPages = [
 // https://astro.build/config
 export default defineConfig({
   site: 'https://breederhq.com',
+  redirects: {
+    '/puppy-weight-tracker': '/tools/puppy-weight-tracker',
+  },
   output: 'static', // Static pages by default; SSR opt-in via `export const prerender = false`
   trailingSlash: 'never', // Canonical URLs without trailing slash (e.g. /about not /about/)
   adapter: vercel(),
