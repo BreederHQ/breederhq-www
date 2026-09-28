@@ -46,6 +46,8 @@ export interface LeadData {
    */
   sms_consent?: boolean;
   sms_consent_version?: string;
+  /** Applicant's stated preference for follow-up contact. One of: email | phone | sms. */
+  contact_preference?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -650,10 +652,11 @@ const DOG_SHOW_FOLLOWUP: InterestFollowUp = {
 // inboxes, and no marketing funnel underneath it.
 const LAUNCH_WAITLIST_FOLLOWUP: InterestFollowUp = {
   headline: "You're on the BreederHQ waitlist",
-  body: "Thank you for applying. We are bringing breeders onboard one at a time so every setup gets our full attention, and we will reach out personally as soon as a spot opens. If you have questions before then, or you just want to tell us about your program, write to either of us directly. We read and answer our own email.",
+  body: "Thank you for applying. We are bringing breeders onboard one at a time so every setup gets our full attention, and we will reach out personally within 72 hours. If you do not hear from us within that window, or if you have questions in the meantime, email us at support@breederhq.com — a real person reads it. You can also write to either of us directly.",
   nextSteps: [
     { label: 'aaron@breederhq.com', url: 'mailto:aaron@breederhq.com' },
     { label: 'carie@breederhq.com', url: 'mailto:carie@breederhq.com' },
+    { label: 'support@breederhq.com', url: 'mailto:support@breederhq.com' },
   ],
 };
 
@@ -1037,6 +1040,7 @@ export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
         websiteOwnership: lead.website_ownership,
         smsConsent: lead.sms_consent,
         smsConsentVersion: lead.sms_consent_version,
+        contactPreference: lead.contact_preference,
         referrerOrigin: origin,
         referrerPath: path,
         userAgent: lead.metadata?.userAgent?.slice(0, 512),

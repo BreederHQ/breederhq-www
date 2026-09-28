@@ -382,6 +382,9 @@ const SMS_CONSENT_TEXT =
               placeholder="you@kennelname.com"
               class={inputClass}
             />
+            <span class="text-xs leading-relaxed text-slate-400">
+              We will reach out personally within 72 hours. Check your spam or junk folder if you do not see our confirmation email.
+            </span>
           </label>
 
           <label class="flex flex-col gap-2">
@@ -545,12 +548,11 @@ const SMS_CONSENT_TEXT =
           </label>
 
           <label class="flex flex-col gap-2">
-            <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400">
-              Phone / WhatsApp
-              <span class="font-medium normal-case tracking-normal text-slate-400">Optional</span>
+            <span class={labelClass}>
+              Phone / WhatsApp<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
             </span>
             <input
-              type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25"
+              type="tel" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" maxlength="25"
               placeholder="+1 555 0134"
               class={inputClass}
             />
@@ -559,6 +561,28 @@ const SMS_CONSENT_TEXT =
               country code for international.
             </span>
           </label>
+
+          <fieldset class="flex flex-col gap-2">
+            <legend class={labelClass}>
+              Best Way To Reach You<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </legend>
+            <div class="mt-0.5 grid grid-cols-1 gap-1.5">
+              {[
+                { value: 'email', label: 'Email' },
+                { value: 'phone', label: 'Phone call' },
+                { value: 'sms', label: 'Text / SMS' },
+              ].map((o, i) => (
+                <label class={optionClass}>
+                  <input
+                    type="radio" name="contact_preference" value={o.value}
+                    required={i === 0 ? true : undefined}
+                    class="h-4 w-4 flex-none rounded-full accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
           {/*
             Unchecked by default and never required to submit.
@@ -638,11 +662,10 @@ const SMS_CONSENT_TEXT =
       </div>
       <h1 id="waitlist-done-heading" class="font-serif text-[2.6rem] font-normal leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[4.25rem]">You&rsquo;re in</h1>
       <p class="mt-6 max-w-[34ch] text-lg leading-relaxed text-slate-300">
-        You are on the waitlist. We will email you when a spot opens and set up your
-        program with you personally.
+        You are on the waitlist. A real person will reach out to you personally within 72 hours.
       </p>
-      <p class="mt-3.5 max-w-[38ch] text-sm leading-relaxed text-slate-400">
-        Nothing else to do for now. You can close this page.
+      <p class="mt-3.5 max-w-[42ch] text-sm leading-relaxed text-slate-400">
+        Check your spam or junk folder — a confirmation email is on its way. If you have not heard from us within 72 hours, email us at <a href="mailto:support@breederhq.com" class="text-slate-300 underline underline-offset-2">support@breederhq.com</a>.
       </p>
     </main>
 
@@ -781,6 +804,13 @@ const SMS_CONSENT_TEXT =
           if (!fs.querySelector('input[name="record_sources"]:checked')) {
             focusGroup('record_sources');
             return 'Please tell us where your records live today. "Mostly in my head" is a perfectly good answer.';
+          }
+        }
+        if (step === 2) {
+          // Radio group has no native required validity when none is pre-selected.
+          if (!fs.querySelector('input[name="contact_preference"]:checked')) {
+            fs.querySelector<HTMLInputElement>('input[name="contact_preference"]')?.focus();
+            return 'Please tell us the best way to reach you.';
           }
         }
         return null;
@@ -964,11 +994,12 @@ const SMS_CONSENT_TEXT =
           }
         }
 
-        // Phone is optional, but a provided one must be real — the API
-        // rejects an invalid number outright, so catch it here with a
+        // Phone is required. Validate that the provided number is real — the
+        // API rejects an invalid number outright, so catch it here with a
         // message that says what to fix.
+        if (!phoneRaw) return showError('Please add a phone number so we can reach you.');
         let phoneE164: string | undefined;
-        if (phoneRaw) {
+        {
           const parsed = parsePhoneNumberFromString(
             phoneRaw,
             phoneRaw.startsWith('+') ? undefined : DEFAULT_COUNTRY
@@ -981,8 +1012,12 @@ const SMS_CONSENT_TEXT =
           phoneE164 = parsed.number;
         }
 
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
+        const CONTACT_PREF_ALLOWED = new Set(['email', 'phone', 'sms']);
+        const contactPreferenceRaw = (
+          form.querySelector<HTMLInputElement>('input[name="contact_preference"]:checked')?.value || ''
+        );
+        const contactPreference = CONTACT_PREF_ALLOWED.has(contactPreferenceRaw) ? contactPreferenceRaw : '';
+        if (!contactPreference) return showError('Please tell us the best way to reach you.');
 
         // `kennel` maps to `company` and `species` to `interest`: /api/contact
         // builds its payload from a fixed field whitelist and silently drops
@@ -1012,6 +1047,11 @@ const SMS_CONSENT_TEXT =
         // whitelist and silently drops anything outside it. Until the platform
         // grows real columns for these, the transcript IS the record — so it is
         // written to be read by a person, not parsed.
+        const contactPrefLabel: Record<string, string> = {
+          email: 'Email',
+          phone: 'Phone call',
+          sms: 'Text / SMS',
+        };
         const qualification = [
           `Breedings/year: ${labelOf('select[name="breeding_volume"]', breedingVolume)}.`,
           `Animals go to: ${placementLabels.join('; ')}.`,
@@ -1019,6 +1059,7 @@ const SMS_CONSENT_TEXT =
           `Website: ${labelOf('select[name="website_status"]', websiteStatus)}${
             websiteUrlValue ? ` (${websiteUrlValue})` : ''
           }.`,
+          contactPreference ? `Preferred contact: ${contactPrefLabel[contactPreference] || contactPreference}.` : '',
           referralSource
             ? `Heard about us: ${labelOf('select[name="referral_source"]', referralSource)}${
                 referralDetailValue ? ` (${referralDetailValue})` : ''
@@ -1064,6 +1105,11 @@ const SMS_CONSENT_TEXT =
             'input[name="sms_consent"]'
           );
           const consentVersion = consentBox?.dataset.consentVersion;
+          // Selecting SMS as a contact preference requires explicit consent, because
+          // the preference only has meaning if we can act on it.
+          if (contactPreference === 'sms' && (!consentBox?.checked || !consentVersion)) {
+            return showError('Please check the text message consent box to receive updates by SMS.');
+          }
           if (consentBox?.checked && consentVersion) {
             payload.sms_consent = true;
             payload.sms_consent_version = consentVersion;
@@ -1087,6 +1133,7 @@ const SMS_CONSENT_TEXT =
         payload.placement_modes = placementModes;
         payload.record_sources = recordSources;
         payload.website_ownership = websiteStatus;
+        payload.contact_preference = contactPreference;
 
         const utm = getUTMParams();
         if (utm.source) payload.utm_source = utm.source;
@@ -1094,6 +1141,9 @@ const SMS_CONSENT_TEXT =
         if (utm.campaign) payload.utm_campaign = utm.campaign;
         if (utm.term) payload.utm_term = utm.term;
         if (utm.content) payload.utm_content = utm.content;
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
 
         try {
           const res = await fetch('/api/contact', {

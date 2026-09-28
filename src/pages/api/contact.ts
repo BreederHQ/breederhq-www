@@ -215,6 +215,24 @@ export const POST: APIRoute = async ({ request }) => {
       phoneE164 = parsed.number;
     }
 
+    // Source-specific required fields. launch_waitlist always requires phone and
+    // a contact preference — these are the fields added specifically for that form.
+    const source = clampString(body.source, 50) || 'website_form';
+    if (source === 'launch_waitlist') {
+      if (!phoneRaw) return badRequest('Phone number is required for the waitlist.');
+      const prefRaw = clampString(body.contact_preference, 10);
+      const ALLOWED_PREFS = new Set(['email', 'phone', 'sms']);
+      if (!prefRaw || !ALLOWED_PREFS.has(prefRaw)) {
+        return badRequest('Please select a contact preference.');
+      }
+      // Selecting SMS as a preference without recorded consent is an incomplete
+      // submission: the preference cannot be honoured and must not be stored as if
+      // it could. The client enforces this too; this is the server-side mirror.
+      if (prefRaw === 'sms' && !(body.sms_consent === true && clampString(body.sms_consent_version, 40))) {
+        return badRequest('SMS consent is required when SMS is selected as your contact preference.');
+      }
+    }
+
     // Interests: prefer the array form; fall back to scalar `interest` for back-compat
     const interests =
       clampStringArray(body.interests, MAX_INTERESTS, 50) ||
@@ -244,7 +262,7 @@ export const POST: APIRoute = async ({ request }) => {
       message: clampString(body.message, 2000),
       interest: interests?.[0],
       interests,
-      source: clampString(body.source, 50) || 'website_form',
+      source,
       // Minted by the browser so it survives a client retry of the same attempt.
       // Absent for an older cached page; the platform then mints its own and the
       // submission degrades to per-request behaviour rather than being rejected.
@@ -262,6 +280,11 @@ export const POST: APIRoute = async ({ request }) => {
       placement_modes: clampStringArray(body.placement_modes, 10, 30),
       record_sources: clampStringArray(body.record_sources, 10, 30),
       website_ownership: clampString(body.website_ownership, 20),
+      // Allowlisted server-side: only the three declared values are forwarded.
+      contact_preference: (() => {
+        const pref = clampString(body.contact_preference, 10);
+        return pref && ['email', 'phone', 'sms'].includes(pref) ? pref : undefined;
+      })(),
       utm_source: clampString(body.utm_source, 100),
       utm_medium: clampString(body.utm_medium, 100),
       utm_campaign: clampString(body.utm_campaign, 100),
