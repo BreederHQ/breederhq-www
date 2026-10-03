@@ -104,6 +104,20 @@ const DOCUMENTS = [
   },
 ];
 
+/**
+ * Pages under /legal that are written by hand because they have no canonical
+ * markdown in the breederhq repository. They are listed on the index only; the
+ * generator never writes or checks the pages themselves.
+ */
+const STANDALONE_PAGES = [
+  {
+    slug: 'sms-terms',
+    title: 'SMS Terms',
+    description:
+      'The terms for BreederHQ Founders Program text messages: what is sent, how often, how to opt out, and how to get help.',
+  },
+];
+
 /** Escape a value being interpolated into an Astro frontmatter string. */
 function jsString(value) {
   return JSON.stringify(String(value));
@@ -396,7 +410,7 @@ async function main() {
     generated.push(doc);
   }
 
-  const indexPage = renderIndex(DOCUMENTS);
+  const indexPage = renderIndex([...DOCUMENTS, ...STANDALONE_PAGES]);
   const indexPath = resolve(OUT_DIR, 'index.astro');
   const existingIndex = existsSync(indexPath) ? await readFile(indexPath, 'utf8') : null;
   if (existingIndex !== indexPage) {
