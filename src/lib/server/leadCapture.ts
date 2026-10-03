@@ -48,6 +48,16 @@ export interface LeadData {
   sms_consent_version?: string;
   /** Applicant's stated preference for follow-up contact. One of: email | phone | sms. */
   contact_preference?: string;
+  /** Where the program is based. One of: US | CA | OTHER (allowlisted in /api/contact). */
+  country?: string;
+  /** How soon they would start. One of: asap | within_month | few_months | exploring. */
+  start_timing?: string;
+  /**
+   * The Founders' Program partnership acknowledgment version, set by
+   * /api/contact from its own constant when the applicant ticked the box.
+   * Never a value the browser supplied.
+   */
+  partnership_ack_version?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -646,19 +656,94 @@ const DOG_SHOW_FOLLOWUP: InterestFollowUp = {
   ],
 };
 
-// The waitlist reply is deliberately personal rather than transactional. Access
-// is invitation only, so this email is the first real contact of a relationship
-// that continues one-to-one, and it should read that way: two names, two real
-// inboxes, and no marketing funnel underneath it.
-const LAUNCH_WAITLIST_FOLLOWUP: InterestFollowUp = {
-  headline: "You're on the BreederHQ waitlist",
-  body: "Thank you for applying. We are bringing breeders onboard one at a time so every setup gets our full attention, and we will reach out personally within 72 hours. If you do not hear from us within that window, or if you have questions in the meantime, email us at support@breederhq.com — a real person reads it. You can also write to either of us directly.",
-  nextSteps: [
-    { label: 'aaron@breederhq.com', url: 'mailto:aaron@breederhq.com' },
-    { label: 'carie@breederhq.com', url: 'mailto:carie@breederhq.com' },
-    { label: 'support@breederhq.com', url: 'mailto:support@breederhq.com' },
-  ],
-};
+/**
+ * The Founders' Program tour booking page. Reclaim copies every `data-` query
+ * parameter on this URL into its webhook's `custom_data`, which is how a
+ * booking made from the email finds its application.
+ */
+const TOUR_BOOKING_URL = 'https://app.reclaim.ai/m/breederhq/founders-program-tour';
+const TOUR_BOOKING_DISPLAY = 'app.reclaim.ai/m/breederhq/founders-program-tour';
+
+/**
+ * The booking link for one application: the page URL plus
+ * `?data-submission=<URL-encoded submission key>`. The key is the one
+ * /api/contact forwarded to the platform for this submission, so the booking
+ * and the application share it. Without a key (an older cached form) the link
+ * is the bare page, and the booking is matched by email instead.
+ */
+function tourBookingUrl(submissionKey?: string): string {
+  return submissionKey
+    ? `${TOUR_BOOKING_URL}?data-submission=${encodeURIComponent(submissionKey)}`
+    : TOUR_BOOKING_URL;
+}
+
+/**
+ * The Founders' Program application reply.
+ *
+ * Deliberately plain: no header image, no logo, no buttons, two real names.
+ * A branded HTML layout reads as marketing, which is what lands in a Promotions
+ * tab, and this is the first personal note of a relationship that continues one
+ * to one. Its one job is the next step: booking the tour, through a link that
+ * carries this application's submission key.
+ *
+ * The HTML and text parts carry the same words, the same signature and the same
+ * booking URL.
+ */
+function buildWaitlistReply(lead: EnrichedLead): { subject: string; html: string; text: string } {
+  const first = (lead.name || '').trim().split(/\s+/)[0] || '';
+  const bookingUrl = tourBookingUrl(lead.submission_key);
+
+  const paragraphs: { html: string; text: string }[] = [
+    {
+      html: `Hi ${escapeHtml(first || 'there')},`,
+      text: `Hi ${first || 'there'},`,
+    },
+    {
+      html: 'Thanks for applying to the BreederHQ Founders&#39; Program. We read every application ourselves.',
+      text: "Thanks for applying to the BreederHQ Founders' Program. We read every application ourselves.",
+    },
+    {
+      html: 'The next step is a 90-minute live Zoom tour with the two of us. If you already picked a time on our website, you are all set. Your calendar invite comes from BreederHQ Founders (admin@breederhq.com).',
+      text: 'The next step is a 90-minute live Zoom tour with the two of us. If you already picked a time on our website, you are all set. Your calendar invite comes from BreederHQ Founders (admin@breederhq.com).',
+    },
+    {
+      html: `If you have not picked a time yet, choose one here:<br /><a href="${escapeHtml(bookingUrl)}" style="color:#1d4ed8;">${TOUR_BOOKING_DISPLAY}</a>`,
+      text: `If you have not picked a time yet, choose one here:\n${bookingUrl}`,
+    },
+    {
+      html: 'We will also write to you from aaron@breederhq.com and carie@breederhq.com. Please add both to your contacts, and check your Promotions and spam folders so our notes do not get lost.',
+      text: 'We will also write to you from aaron@breederhq.com and carie@breederhq.com. Please add both to your contacts, and check your Promotions and spam folders so our notes do not get lost.',
+    },
+    {
+      html: 'One small favor: reply to this email with the breed you work with, so we know this reached you.',
+      text: 'One small favor: reply to this email with the breed you work with, so we know this reached you.',
+    },
+    {
+      html: 'Aaron and Carie<br /><span style="color:#6b7280;">Founders, BreederHQ</span>',
+      text: 'Aaron and Carie\nFounders, BreederHQ',
+    },
+  ];
+
+  const html = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Next step: pick your tour time</title>
+</head>
+<body style="margin:0;padding:16px;background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f2937;">
+${paragraphs.map((p) => `  <p style="margin:0 0 14px;">${p.html}</p>`).join('\n')}
+</body>
+</html>`;
+
+  const text = paragraphs.map((p) => p.text).join('\n\n');
+
+  const subject = first
+    ? `Next step: pick your tour time, ${first}`
+    : 'Next step: pick your tour time';
+
+  return { subject, html, text };
+}
 
 const DEFAULT_FOLLOWUP: InterestFollowUp = {
   headline: 'Thanks for reaching out',
@@ -682,6 +767,17 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
     return false;
   }
 
+  if (lead.source === 'launch_waitlist') {
+    const reply = buildWaitlistReply(lead);
+    return deliverAutoReply(lead.email, {
+      // A person's name on the From line: this is a note from two people,
+      // not a system notice. Replies land with a person.
+      from: 'Aaron and Carie at BreederHQ <hello@mail.breederhq.com>',
+      replyTo: 'aaron@breederhq.com',
+      ...reply,
+    });
+  }
+
   // Build the picked-interest list (canonical order from input)
   const pickedKeys = lead.interests && lead.interests.length > 0
     ? lead.interests
@@ -689,14 +785,11 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
   const primaryKey = pickedKeys[0];
   const secondaryKeys = pickedKeys.slice(1);
 
-  // Source-specific replies win over interest-derived ones: the waitlist form
-  // sends a species in `interest`, which would otherwise select a generic
-  // follow-up and bury the personal note this email exists to deliver.
+  // Source-specific replies win over interest-derived ones. (The waitlist,
+  // which sends a species in `interest`, has its own reply above.)
   const followUp = lead.source === 'dog_show_booth'
     ? DOG_SHOW_FOLLOWUP
-    : lead.source === 'launch_waitlist'
-      ? LAUNCH_WAITLIST_FOLLOWUP
-      : (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
+    : (primaryKey && INTEREST_FOLLOWUPS[primaryKey]) || DEFAULT_FOLLOWUP;
   const firstName = (lead.name || '').split(' ')[0] || 'there';
 
   // De-dupe next-step links across primary + secondary follow-ups
@@ -764,24 +857,22 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
             <td style="padding:32px;">
               <h2 style="margin:0 0 12px;font-size:20px;font-weight:600;color:#111827;">Hi ${escapeHtml(firstName)},</h2>
               <p style="margin:0 0 16px;font-size:16px;color:#374151;">
-                ${lead.source === 'launch_waitlist'
-                  ? 'Thank you for applying to join BreederHQ. Your application is in, and it is read by a person, not a bot.'
-                  : 'Thanks for reaching out through BreederHQ. We got it, and a real person (not a bot) will read it and respond, usually within one business day.'}
+                Thanks for reaching out through BreederHQ. We got it, and a real person (not a bot) will read it and respond, usually within one business day.
               </p>
               <div style="margin:24px 0;padding:20px;background-color:#fff7ed;border-left:4px solid hsl(24,95%,53%);border-radius:6px;">
-                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">${lead.source === 'dog_show_booth' ? 'BreederHQ Promo Offer' : lead.source === 'launch_waitlist' ? 'Your Application' : "You told us you're interested in"}</p>
+                <p style="margin:0 0 8px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:hsl(24,95%,40%);">${lead.source === 'dog_show_booth' ? 'BreederHQ Promo Offer' : "You told us you're interested in"}</p>
                 <p style="margin:0;font-size:17px;font-weight:600;color:#111827;">${followUp.headline}</p>
                 <p style="margin:12px 0 0;font-size:15px;color:#374151;">${followUp.body}</p>
                 ${secondaryBlockHtml}
               </div>
-              <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">${lead.source === 'launch_waitlist' ? 'Reach us directly' : 'A few good places to start'}</h3>
+              <h3 style="margin:24px 0 12px;font-size:15px;font-weight:600;color:#111827;">A few good places to start</h3>
               <div style="margin:0 0 8px;">${linksHtml}</div>
               <p style="margin:32px 0 0;font-size:15px;color:#374151;">
                 If you have anything else you'd like to share before we get back to you, just reply to this email. It goes straight to our inbox.
               </p>
               <p style="margin:16px 0 0;font-size:15px;color:#374151;">
                 Talk soon,<br />
-                <strong>${lead.source === 'launch_waitlist' ? 'Aaron and Carie' : 'The BreederHQ Team'}</strong>
+                <strong>The BreederHQ Team</strong>
               </p>
             </td>
           </tr>
@@ -791,9 +882,7 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
                 BreederHQ &middot; <a href="https://breederhq.com" style="color:#6b7280;text-decoration:underline;">breederhq.com</a> &middot; <a href="mailto:info@breederhq.com" style="color:#6b7280;text-decoration:underline;">info@breederhq.com</a>
               </p>
               <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;">
-                ${lead.source === 'launch_waitlist'
-                  ? "You're receiving this because you applied to join BreederHQ at breederhq.com. We'll only contact you about your application. No newsletter, no marketing list."
-                  : "You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it. We won't add you to any list."}
+                You're receiving this because you submitted the Let's Connect form on breederhq.com. If this wasn't you, just ignore it. We won't add you to any list.
               </p>
             </td>
           </tr>
@@ -804,18 +893,14 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
 </body>
 </html>`;
 
-  const isWaitlist = lead.source === 'launch_waitlist';
-
   const emailText = `Hi ${firstName},
 
-${isWaitlist
-  ? 'Thank you for applying to join BreederHQ.'
-  : 'Thanks for reaching out through BreederHQ. We got your note, and a real person will read it and respond, usually within one business day.'}
+Thanks for reaching out through BreederHQ. We got your note, and a real person will read it and respond, usually within one business day.
 
-${isWaitlist ? followUp.headline : `You told us you're interested in: ${followUp.headline}`}
+You told us you're interested in: ${followUp.headline}
 ${followUp.body}
 ${secondaryTextLines.length > 0 ? `\nAlso interested in:\n${secondaryTextLines.map((h) => `- ${h}`).join('\n')}\n` : ''}
-${isWaitlist ? 'Reach us directly:' : 'A few good places to start:'}
+A few good places to start:
 ${linksToRender.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
 
 If you have anything else to share, just reply to this email.
@@ -826,6 +911,29 @@ The BreederHQ Team
 ---
 BreederHQ - https://breederhq.com - info@breederhq.com`;
 
+  return deliverAutoReply(lead.email, {
+    from: 'BreederHQ <hello@mail.breederhq.com>',
+    // Booth signups were met by a person, so a reply lands with a person.
+    replyTo: lead.source === 'dog_show_booth' ? 'aaron@breederhq.com' : 'info@breederhq.com',
+    subject: lead.source === 'dog_show_booth'
+      ? `Thanks for stopping by, ${firstName}. We'll be in touch soon.`
+      : `Thanks for connecting, ${firstName}. We got your note.`,
+    html: emailHtml,
+    text: emailText,
+  });
+}
+
+/** Send one auto-reply through Resend. Never throws: a failed reply is logged and reported as false. */
+async function deliverAutoReply(
+  to: string,
+  message: { from: string; replyTo: string; subject: string; html: string; text: string }
+): Promise<boolean> {
+  const resendApiKey = import.meta.env.RESEND_API_KEY;
+  if (!resendApiKey) {
+    console.log('⚠️ Resend not configured, skipping auto-reply');
+    return false;
+  }
+
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -834,20 +942,12 @@ BreederHQ - https://breederhq.com - info@breederhq.com`;
         Authorization: `Bearer ${resendApiKey}`,
       },
       body: JSON.stringify({
-        from: 'BreederHQ <hello@mail.breederhq.com>',
-        to: lead.email,
-        // Waitlist replies come from a person, so a reply lands with a person.
-        reply_to:
-          lead.source === 'dog_show_booth' || lead.source === 'launch_waitlist'
-            ? 'aaron@breederhq.com'
-            : 'info@breederhq.com',
-        subject: lead.source === 'dog_show_booth'
-          ? `Thanks for stopping by, ${firstName}. We'll be in touch soon.`
-          : lead.source === 'launch_waitlist'
-            ? `You're on the list, ${firstName}. Here's what happens next.`
-            : `Thanks for connecting, ${firstName}. We got your note.`,
-        html: emailHtml,
-        text: emailText,
+        from: message.from,
+        to,
+        reply_to: message.replyTo,
+        subject: message.subject,
+        html: message.html,
+        text: message.text,
       }),
     });
 
@@ -856,7 +956,7 @@ BreederHQ - https://breederhq.com - info@breederhq.com`;
       return false;
     }
 
-    console.log('✅ Auto-reply sent to lead:', lead.email);
+    console.log('✅ Auto-reply sent to lead:', to);
     return true;
   } catch (error) {
     console.error('Failed to send auto-reply:', error);
@@ -1041,6 +1141,9 @@ export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
         smsConsent: lead.sms_consent,
         smsConsentVersion: lead.sms_consent_version,
         contactPreference: lead.contact_preference,
+        country: lead.country,
+        startTiming: lead.start_timing,
+        partnershipAckVersion: lead.partnership_ack_version,
         referrerOrigin: origin,
         referrerPath: path,
         userAgent: lead.metadata?.userAgent?.slice(0, 512),

@@ -142,9 +142,45 @@ const REFERRAL_SOURCES = [
   { value: 'other', label: 'Somewhere else' },
 ];
 
-const title = 'Join The BreederHQ Waitlist';
+// Where the program is based. Onboarding is US and Canada only for now, and the
+// page says so in its fit list. "Somewhere else" is still a valid answer rather
+// than a refusal: nothing on this form auto-rejects, and a person reads it.
+// The values are the platform's own enum (US | CA | OTHER); /api/contact
+// refuses anything else.
+const COUNTRIES = [
+  { value: 'US', label: 'United States' },
+  { value: 'CA', label: 'Canada' },
+  { value: 'OTHER', label: 'Somewhere else' },
+];
+
+// How soon they would start. Required. Values are the platform's enum;
+// /api/contact refuses anything else.
+const START_TIMING = [
+  { value: 'asap', label: 'As soon as possible' },
+  { value: 'within_month', label: 'Within the next month' },
+  { value: 'few_months', label: 'In a few months' },
+  { value: 'exploring', label: 'Just exploring for now' },
+];
+
+// The tour booking page. Reclaim copies every `data-` query parameter on a
+// booking URL into the webhook's `custom_data`, which is how a booking finds
+// its application: the success screen and the confirmation email both append
+// `?data-submission=<the submission key that was sent>`.
+const TOUR_BOOKING_URL = 'https://app.reclaim.ai/m/breederhq/founders-program-tour';
+
+// The embeddable form of the same link. Reclaim serves its booking pages at
+// /m/<page>/<meeting> with X-Frame-Options DENY, so they cannot be framed; the
+// embeddable page is /e/<scheduling link id> (it sends `frame-ancestors *`),
+// and it too reads `data-` query parameters into the booking's custom data.
+// The id is not derivable from the slug, so it comes from the build
+// environment. Unset or malformed, the success screen shows the booking link
+// on its own, which still carries the key.
+const RECLAIM_EMBED_ID_RAW = String(import.meta.env.PUBLIC_RECLAIM_TOUR_LINK_ID ?? '').trim();
+const RECLAIM_EMBED_ID = /^[A-Za-z0-9-]{1,64}$/.test(RECLAIM_EMBED_ID_RAW) ? RECLAIM_EMBED_ID_RAW : '';
+
+const title = "Apply To The BreederHQ Founders' Program";
 const description =
-  'BreederHQ Launch is available to a limited number of founding members. Join the waitlist and we will reach out when a spot opens.';
+  "BreederHQ is choosing its founding breeders one at a time. Apply to the Founders' Program and book a live tour with the founders.";
 const canonical = 'https://www.breederhq.com/pricing';
 
 // Dark surfaces, matching the rest of the site rather than the cream this page
@@ -156,9 +192,18 @@ const inputClass =
 const labelClass =
   'text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400';
 // One option row in a multi-select. Checked state carries the brand orange as
-// an EDGE and a tint, never as a fill behind text.
+// an EDGE only. The fill is a lifted navy, never translucent orange: orange at
+// low alpha over this navy renders as brown.
 const optionClass =
-  'flex cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-[15px] text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[hsl(24,95%,53%)]/10';
+  'flex cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-[15px] text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[#0F1B33]';
+
+// The partnership acknowledgment. Required to apply, and recorded server-side
+// as a version string /api/contact owns, never one the browser supplies. The
+// wording below and that version move together: change one, change both.
+// (SMS consent below is a separate statement with its own version.)
+const PARTNERSHIP_ACK_LEAD = "I understand the Founders' Program is a working partnership.";
+const PARTNERSHIP_ACK_BODY =
+  'If I am invited, I am ready to run my program on BreederHQ, join the working sessions and share honest feedback.';
 
 // The SMS consent statement, identified by a VERSION rather than carried as a
 // string the browser submits.
@@ -248,66 +293,97 @@ const SMS_CONSENT_TEXT =
     by adopting BaseLayout, because the reason for skipping the layout still
     holds: nothing on this page should compete with the one decision.
   -->
-  <div class="min-h-screen flex flex-col bg-[#070C16] text-slate-100 [background-image:radial-gradient(120%_80%_at_88%_-10%,rgba(249,115,22,0.14),transparent_60%)]">
+  {/*
+    Plain navy, no orange glow. Orange at low alpha over this navy renders as
+    brown, so orange on this page is an edge or a solid accent, never a
+    translucent fill; a raised surface is the lifted navy #0F1B33.
+  */}
+  <div class="min-h-screen flex flex-col bg-[#070C16] text-slate-100">
 
     <header class="mx-auto w-full max-w-6xl flex items-center justify-between gap-4 px-6 py-6 sm:px-8">
       <a href="/" class="text-[19px] font-semibold tracking-tight no-underline">
         <span class="text-white">Breeder</span><span class="text-[hsl(24,95%,53%)]">HQ</span>
       </a>
-      <span class="hidden text-[13px] uppercase tracking-[0.14em] text-slate-400 sm:block">Founding Members</span>
+      <span class="hidden text-[13px] uppercase tracking-[0.14em] text-slate-400 lg:block">Founders&rsquo; Program</span>
+      {/* Below lg the form sits under the explainer, so a phone gets a way straight to it. */}
+      <a
+        href="#apply" id="apply-jump"
+        class="inline-flex min-h-[40px] items-center rounded-full border border-[hsl(24,95%,53%)]/60 px-3.5 text-sm font-semibold text-[hsl(24,95%,72%)] no-underline transition hover:border-[hsl(24,95%,53%)] lg:hidden"
+      >Apply</a>
     </header>
 
     <!-- Application screen -->
+    {/*
+      Layout. One DOM order serves both widths:
+        phone:   hero, short summary, the form, then the full detail sections
+        desktop: hero and the detail sections down the left, the form on the
+                 right spanning both rows; the short summary is hidden
+      so a breeder on a phone reaches the form without scrolling past four
+      sections, and can still read every detail after it.
+    */}
     <main
       id="waitlist-screen"
-      class="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-start gap-12 px-6 pb-20 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-10"
+      class="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-start gap-10 px-6 pb-20 pt-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-x-16 lg:gap-y-14 lg:pt-10"
     >
-      <section class="max-w-xl">
+      <section class="max-w-xl lg:col-start-1 lg:row-start-1">
         <div class="mb-6 flex items-center gap-2.5">
           <span class="h-1.5 w-1.5 rounded-full bg-[hsl(24,95%,53%)] ring-4 ring-[hsl(24,95%,53%)]/20"></span>
-          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">Invitation Only</span>
+          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">By Invitation &middot; Limited Spots</span>
         </div>
 
-        <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-white [text-wrap:pretty] sm:text-5xl lg:text-[3.75rem]">
-          We are onboarding breeders<br class="hidden sm:block" />
-          <em class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/45 underline-offset-[6px]">one at a time.</em>
+        <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-white [text-wrap:pretty] sm:text-5xl lg:text-[3.6rem]">
+          We are choosing our founding breeders{" "}
+          <em class="text-[hsl(24,95%,58%)]">one at a time.</em>
         </h1>
 
-        <p class="mt-7 max-w-[50ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
-          BreederHQ Launch is currently available to a limited number of founding
-          members. We are bringing breeders onboard one at a time, so your setup is
-          personal, founder-led and done properly.
+        <p class="mt-7 max-w-[52ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
+          Before BreederHQ opens to everyone, we are working closely with a small group
+          of breeders. We set up each program with you ourselves. In return, our founding
+          breeders help shape what we build.
         </p>
-        <p class="mt-4 max-w-[50ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
-          Spots are limited and this round is close to full. That is why there is no
-          price list on this page and no way to sign yourself up. Join the waitlist and
-          we will reach out when a spot opens.
-        </p>
-
-        <hr class="mt-9 max-w-md border-white/10" />
-
-        <p class="mt-5 max-w-[44ch] text-sm leading-relaxed text-slate-400">
-          Running a large-scale operation or managing a breed registry?{" "}
-          <a
-            href="/contact"
-            class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/35 underline-offset-2 hover:text-[hsl(24,95%,62%)] hover:decoration-[hsl(24,95%,53%)]/60"
-          >Let&rsquo;s talk</a>.
+        <p class="mt-4 hidden max-w-[52ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty] lg:block">
+          Founding spots are limited, because we set up every founding breeder ourselves
+          and give each one our full attention. That is why there is no price list on this
+          page and no way to sign yourself up.
         </p>
       </section>
 
-      <section class="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8">
-        <h2 class="text-base font-semibold tracking-tight text-white">Join The Waitlist</h2>
-        <p class="mt-1 text-sm leading-relaxed text-slate-400">A person reads every one.</p>
-
-        <div class="mt-4 flex items-start gap-3 rounded-xl border border-[hsl(24,95%,53%)]/30 bg-[hsl(24,95%,53%)]/[0.08] px-3.5 py-3">
-          <svg class="mt-0.5 h-4 w-4 flex-none text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />
-          </svg>
-          <p class="text-[13.5px] leading-relaxed text-[hsl(24,95%,62%)]">
-            We set each breeder up personally, so we can only take a few at a time.
-            The questions below tell us about your program.
-          </p>
+      {/* Phone and tablet only: the two things to know before applying, in brief. */}
+      <div class="flex flex-col gap-4 lg:hidden">
+        <div class="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">How It Works</span>
+          <div class="flex gap-3">
+            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">1</span>
+            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Apply.</strong> About three minutes.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">2</span>
+            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Book your tour.</strong> A live 90-minute Zoom with Aaron and Carie.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">3</span>
+            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Take the tour.</strong> We walk through your program and BreederHQ, then we both decide on fit.</span>
+          </div>
+          <div class="flex gap-3">
+            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">4</span>
+            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Earn lifetime Founders status.</strong> We set you up, you run your program for 90 days and share your feedback along the way.</span>
+          </div>
         </div>
+
+        <div class="flex flex-col gap-2.5 rounded-2xl border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-4">
+          <span class="text-base font-semibold text-white">A Partnership, Not A Free Trial</span>
+          <p class="text-[14.5px] leading-relaxed text-slate-200"><strong>We commit to:</strong> moving your records and building your storefront with you, live working sessions, no credit cards or payment details at all, and a founding rate that is yours for as long as you stay.</p>
+          <p class="text-[14.5px] leading-relaxed text-slate-200"><strong>We ask you to:</strong> run your program on BreederHQ, join three working sessions, give honest feedback, and share your experience publicly if we earn it.</p>
+          <a href="#partnership" class="text-sm text-[hsl(24,95%,62%)] underline underline-offset-2 hover:text-[hsl(24,95%,72%)]">See the full details</a>
+        </div>
+      </div>
+
+      <section
+        id="apply"
+        class="w-full max-w-md scroll-mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:justify-self-end"
+      >
+        <h2 class="text-lg font-semibold tracking-tight text-white">Apply For A Founding Spot</h2>
+        <p class="mt-1 text-sm leading-relaxed text-slate-400">Aaron or Carie reads every application.</p>
 
         <form id="waitlist-form" novalidate class="mt-6 flex flex-col gap-[18px]">
           {/*
@@ -383,7 +459,7 @@ const SMS_CONSENT_TEXT =
               class={inputClass}
             />
             <span class="text-xs leading-relaxed text-slate-400">
-              We will reach out personally within 72 hours. Check your spam or junk folder if you do not see our confirmation email.
+              Use the email you check most. Your tour invite goes here.
             </span>
           </label>
 
@@ -412,6 +488,30 @@ const SMS_CONSENT_TEXT =
               </svg>
             </div>
           </label>
+
+          {/*
+            Preselected because almost every applicant is in the US, so the
+            common answer costs nothing. A radio group with one option always
+            checked has no empty state to validate; /api/contact still refuses
+            a value outside the three.
+          */}
+          <fieldset class="flex flex-col gap-2">
+            <legend class={labelClass}>
+              Where Is Your Program Based?<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </legend>
+            <div class="mt-0.5 grid grid-cols-1 gap-1.5">
+              {COUNTRIES.map((o, i) => (
+                <label class={optionClass}>
+                  <input
+                    type="radio" name="country" value={o.value}
+                    checked={i === 0 ? true : undefined}
+                    class="h-4 w-4 flex-none rounded-full accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
           {/*
             Qualification block. Six short answers, all banded except the last,
@@ -462,7 +562,7 @@ const SMS_CONSENT_TEXT =
             <legend class={labelClass}>
               Where Your Records Live Today<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
             </legend>
-            <p class="text-xs leading-relaxed text-slate-400">Select all that apply.</p>
+            <p class="text-xs leading-relaxed text-slate-400">Select all that apply. We will help move them over.</p>
             <div class="mt-0.5 grid grid-cols-1 gap-1.5">
               {RECORD_SOURCES.map((o) => (
                 <label class={optionClass}>
@@ -511,6 +611,23 @@ const SMS_CONSENT_TEXT =
               We will take a look before we talk.
             </span>
           </label>
+
+          <fieldset class="flex flex-col gap-2">
+            <legend class={labelClass}>
+              When Would You Want To Start?<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </legend>
+            <div class="mt-0.5 grid grid-cols-1 gap-1.5">
+              {START_TIMING.map((o) => (
+                <label class={optionClass}>
+                  <input
+                    type="radio" name="start_timing" value={o.value}
+                    class="h-4 w-4 flex-none rounded-full accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
+                  />
+                  <span>{o.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
           <label class="flex flex-col gap-2">
             <span class="flex items-baseline gap-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-slate-400">
@@ -608,7 +725,7 @@ const SMS_CONSENT_TEXT =
             Rendered from SMS_CONSENT_TEXT so the words on screen and the words
             recorded are the same words.
           */}
-          <label class="mt-1 flex cursor-pointer items-start gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-3 text-[13px] leading-relaxed text-slate-300 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[hsl(24,95%,53%)]/10">
+          <label class="mt-1 flex cursor-pointer items-start gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-3 text-[13px] leading-relaxed text-slate-300 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[#0F1B33]">
             {/*
               The version rides on the element itself so the submit handler can
               read it without the frontmatter constant being in its scope. It is
@@ -623,6 +740,33 @@ const SMS_CONSENT_TEXT =
             />
             <span>{SMS_CONSENT_TEXT}</span>
           </label>
+
+          {/*
+            Required, unlike the SMS box above. This is not consent to be
+            contacted; it is the applicant confirming they read what the
+            program asks of them, which is the condition of applying at all.
+            It carries no version: /api/contact maps a ticked box to the one
+            version it owns, so the browser cannot claim any other wording.
+          */}
+          <label class="flex cursor-pointer items-start gap-3 rounded-[10px] border border-[hsl(24,95%,53%)]/55 bg-[#0F1B33] p-3.5 text-[15px] leading-relaxed text-slate-100 transition hover:border-[hsl(24,95%,53%)]">
+            <input
+              type="checkbox" name="partnership_ack" value="yes" aria-required="true"
+              class="mt-1 h-4 w-4 flex-none rounded accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
+            />
+            <span>
+              <strong>{PARTNERSHIP_ACK_LEAD}</strong> {PARTNERSHIP_ACK_BODY}<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            </span>
+          </label>
+
+          <div class="flex flex-col gap-1.5 rounded-xl border border-white/12 bg-white/[0.03] p-3.5">
+            <span class="text-xs font-bold uppercase tracking-[0.1em] text-[hsl(24,95%,72%)]">What Happens Next</span>
+            <p class="text-[14.5px] leading-relaxed text-slate-200">
+              Right after you submit, you will pick a time for your live 90-minute Zoom tour with Aaron and Carie.
+            </p>
+            <p class="text-[13.5px] leading-relaxed text-slate-300">
+              We are working with a small group of breeders ahead of our general platform launch. The tour is where we will walk you through BreederHQ together and talk about whether the Founders&rsquo; Program is a good fit for you and for us.
+            </p>
+          </div>
 
           </fieldset>
 
@@ -652,32 +796,169 @@ const SMS_CONSENT_TEXT =
           <button
             type="submit" id="waitlist-submit"
             class="min-h-[54px] w-full rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-5 py-4 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_1px_2px_rgba(28,25,23,0.18)] transition hover:-translate-y-px hover:brightness-105 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_6px_16px_-6px_rgba(245,158,11,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16] active:translate-y-0 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
-          >Join The Waitlist</button>
+          >Apply And Pick A Time</button>
           </div>
 
           <p id="waitlist-error" class="hidden text-[13.5px] leading-relaxed text-red-400" role="alert"></p>
 
           <p class="mt-0.5 text-xs leading-relaxed text-slate-400">
-            We use your details only to contact you about access. No newsletter, no sharing.
+            We use your details only to contact you about the Founders&rsquo; Program. No newsletter, no sharing.
           </p>
         </form>
       </section>
+
+      {/* The full detail. Left column on desktop; after the form on a phone. */}
+      <div class="flex max-w-2xl flex-col gap-14 lg:col-start-1 lg:row-start-2">
+        <section class="hidden flex-col gap-5 lg:flex">
+          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">How It Works</span>
+          <h2 class="font-serif text-[2.1rem] font-normal leading-tight text-white">From Application To Founding Member</h2>
+          <ol class="m-0 grid list-none grid-cols-2 gap-3.5 p-0">
+            {[
+              {
+                n: 1,
+                title: 'Apply',
+                body: 'Three short steps about you and your program. It takes about three minutes.',
+              },
+              {
+                n: 2,
+                title: 'Book Your Tour',
+                body: 'Right after you apply, pick a time for a live 90-minute Zoom with Aaron and Carie, the founders of BreederHQ.',
+              },
+              {
+                n: 3,
+                title: 'Take The Tour',
+                body: "We walk through your program with you, show you BreederHQ in action and go over every Founders' Program benefit. Afterward, we both decide whether it is a good fit.",
+              },
+              {
+                n: 4,
+                title: 'Earn Lifetime Founders Status',
+                body: 'We set up your program for you. You run it on BreederHQ for 90 days and share your feedback along the way. Then your Founders status is yours for life.',
+              },
+            ].map((s) => (
+              <li class="flex flex-col gap-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-5">
+                <span class="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[hsl(24,95%,53%)] font-bold text-white">{s.n}</span>
+                <span class="text-[17px] font-semibold text-white">{s.title}</span>
+                <span class="text-[15px] leading-normal text-slate-300">{s.body}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="partnership" class="flex scroll-mt-6 flex-col gap-5">
+          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">A Two-Way Commitment</span>
+          <h2 class="font-serif text-[1.9rem] font-normal leading-tight text-white sm:text-[2.1rem]">This Is A Partnership, Not A Free Trial</h2>
+          <p class="max-w-[56ch] text-[17px] leading-relaxed text-slate-300">
+            Founding members get a level of help and value we will not offer after launch. It asks something of both of us, and we would rather you know that before you apply.
+          </p>
+          <div class="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+            <div class="flex flex-col gap-3.5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-[22px]">
+              <span class="text-lg font-semibold text-white">What We Commit To</span>
+              <ul class="m-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15.5px] leading-normal text-slate-200">
+                <li>We move your records over and build your storefront with you. You do not start from a blank screen.</li>
+                <li>Live working sessions with Aaron and Carie, scheduled around your program.</li>
+                <li>No credit cards or payment details at all.</li>
+                <li>A founding member rate that is not offered again after launch, and is yours for as long as you stay.</li>
+                <li>Your feedback goes straight to the Founders and the development team. You directly influence and shape the product for future breeders.</li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-3.5 rounded-[14px] border border-white/14 bg-white/[0.03] p-[22px]">
+              <span class="text-lg font-semibold text-white">What We Ask Of You</span>
+              <ul class="m-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15.5px] leading-normal text-slate-200">
+                <li>Run your program on BreederHQ during your founding period, not just look around.</li>
+                <li>Join three live working sessions with us in your first 45 days.</li>
+                <li>Share honest feedback on what is working for you.</li>
+                <li>If BreederHQ earns it, share your experience publicly with other breeders.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-[15px] text-slate-400">We go through every detail, including pricing, on your tour. Nothing is decided until you have seen it all.</p>
+        </section>
+
+        <section class="flex flex-col gap-5">
+          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">Is This Right For You?</span>
+          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-3.5">
+            <div class="flex flex-col gap-2.5">
+              <h3 class="text-[17px] font-semibold text-green-300">A Great Fit If Any Of These Sound Like You</h3>
+              <ul class="m-0 flex list-none flex-col gap-2.5 p-0 text-[15.5px] leading-normal text-slate-300">
+                <li>You breed regularly and run your program like a business.</li>
+                <li>You are ready to move your records over in the next few weeks.</li>
+                <li>You want one place to run your whole breeding operation, instead of spreadsheets, notes and group chats.</li>
+                <li>You breed more than one species and want them all managed together.</li>
+                <li>You want a better way to sell your animals and keep track of every buyer, from first inquiry to pickup day.</li>
+                <li>You want a real say in how the platform grows.</li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-2.5">
+              <h3 class="text-[17px] font-semibold text-slate-300">Probably Not The Right Time If</h3>
+              <ul class="m-0 flex list-none flex-col gap-2.5 p-0 text-[15.5px] leading-normal text-slate-400">
+                <li>A 90-minute live tour feels like more time than you want to give right now.</li>
+                <li>You cannot set aside a few hours over the next 90 days.</li>
+                <li>You are interested in breeding but not running a breeding program yet.</li>
+                <li>Learning a new system is not something you want to take on right now.</li>
+                <li>Your current setup already works well for you.</li>
+                <li>You are outside the US or Canada. For now, we are only onboarding breeders there.</li>
+                <li>You would rather wait for general launch. That is fine too.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <p class="max-w-[44ch] text-sm leading-relaxed text-slate-400">
+          Running a large-scale operation or managing a breed registry?{" "}
+          <a
+            href="/contact"
+            class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/35 underline-offset-2 hover:text-[hsl(24,95%,62%)] hover:decoration-[hsl(24,95%,53%)]/60"
+          >Let&rsquo;s talk</a>.
+        </p>
+      </div>
     </main>
 
     <!-- Confirmation screen. Swapped in place rather than navigated to, so a
          failed submit never costs the visitor what they typed. -->
-    <main id="waitlist-done" hidden class="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center sm:px-8">
-      <div class="mb-8 flex h-[52px] w-[52px] items-center justify-center rounded-full border border-[hsl(24,95%,53%)]/35 bg-[hsl(24,95%,53%)]/12">
+    {/*
+      The booking step. The applicant books the tour here, before leaving the
+      page, rather than waiting on an email. The submit handler builds the
+      embed and both links from the EXACT submission key it sent, so a booking
+      made from any of them carries the key that matches this application.
+    */}
+    <main
+      id="waitlist-done" hidden
+      data-booking-url={TOUR_BOOKING_URL}
+      data-embed-id={RECLAIM_EMBED_ID}
+      class="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center px-6 pb-16 pt-8 text-center sm:px-8"
+    >
+      <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[hsl(24,95%,53%)]/55 bg-[#0F1B33]">
         <svg class="h-5 w-5 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M20 6 9 17l-5-5" />
         </svg>
       </div>
-      <h1 id="waitlist-done-heading" class="font-serif text-[2.6rem] font-normal leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[4.25rem]">You&rsquo;re in</h1>
-      <p class="mt-6 max-w-[34ch] text-lg leading-relaxed text-slate-300">
-        You are on the waitlist. A real person will reach out to you personally within 72 hours.
+      <h1 id="waitlist-done-heading" tabindex="-1" class="font-serif text-[2.2rem] font-normal leading-[1.1] tracking-tight text-white focus:outline-none sm:text-5xl">One Last Step</h1>
+      <p id="waitlist-done-subhead" class="mt-4 max-w-[40ch] text-lg leading-relaxed text-slate-300">
+        Your application is in. Pick a time for your live Zoom tour with Aaron and Carie.
       </p>
-      <p class="mt-3.5 max-w-[42ch] text-sm leading-relaxed text-slate-400">
-        Check your spam or junk folder — a confirmation email is on its way. If you have not heard from us within 72 hours, email us at <a href="mailto:support@breederhq.com" class="text-slate-300 underline underline-offset-2">support@breederhq.com</a>.
+
+      {/* White card: Reclaim's widget is styled for a light ground. */}
+      <section
+        id="tour-embed-card" hidden aria-label="Book your tour"
+        class="mt-8 w-full overflow-hidden rounded-[14px] bg-white"
+      ></section>
+
+      {/* Shown instead of the embed when the build has no embed id. */}
+      <a
+        id="tour-book-button" hidden target="_blank" rel="noopener"
+        class="mt-8 inline-flex min-h-[54px] items-center justify-center rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-4 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+      >Pick Your Tour Time</a>
+
+      <p id="tour-booked-note" hidden class="mt-6 max-w-[48ch] text-[15px] leading-relaxed text-slate-300">
+        A calendar invite with your Zoom link is on its way from <strong class="text-white">BreederHQ Founders</strong> (admin@breederhq.com). Aaron and Carie will both be on the invite.
+      </p>
+
+      <p id="tour-link-fallback" hidden class="mt-5 text-sm leading-relaxed text-slate-400">
+        Calendar not showing?{" "}
+        <a id="tour-fallback-link" target="_blank" rel="noopener" class="text-[hsl(24,95%,62%)] underline underline-offset-2 hover:text-[hsl(24,95%,72%)]">Open the booking page</a>.
+      </p>
+      <p class="mt-3 max-w-[44ch] text-[13.5px] leading-relaxed text-slate-400">
+        No time that works? Reply to your confirmation email and we will find one together.
       </p>
     </main>
 
@@ -793,8 +1074,10 @@ const SMS_CONSENT_TEXT =
         dots.forEach((d, i) => {
           // Passed and current both read as filled; ahead stays dim. A dot is a
           // readout, so it carries no click target and no focus stop.
+          // The current step is a short pill so it reads apart from the passed ones.
           d.className =
-            'h-2 w-2 rounded-full transition-all ' +
+            'h-2 rounded-full transition-all ' +
+            (i === step ? 'w-[22px] ' : 'w-2 ') +
             (i <= step ? 'bg-[hsl(24,95%,53%)]' : 'bg-white/20');
         });
         stepLabel.textContent = `Step ${step + 1} of ${steps.length} · ${STEP_NAMES[step]}`;
@@ -822,7 +1105,10 @@ const SMS_CONSENT_TEXT =
             'input, select, textarea',
           ),
         )) {
-          if (el.type === 'checkbox') continue;
+          // Checkbox and radio GROUPS are checked by name below. A required
+          // radio's own validity would name the first option's label ("Please
+          // complete email.") instead of the question being asked.
+          if (el.type === 'checkbox' || el.type === 'radio') continue;
           if (!el.checkValidity()) {
             el.focus();
             const label = el.closest('label')?.querySelector('span')?.textContent ?? 'this field';
@@ -845,11 +1131,27 @@ const SMS_CONSENT_TEXT =
             return 'Please tell us where your records live today. "Mostly in my head" is a perfectly good answer.';
           }
         }
+        if (step === 0) {
+          // Preselected, so this only fires if the markup loses its default.
+          if (!fs.querySelector('input[name="country"]:checked')) {
+            fs.querySelector<HTMLInputElement>('input[name="country"]')?.focus();
+            return 'Please tell us where your program is based.';
+          }
+        }
         if (step === 2) {
-          // Radio group has no native required validity when none is pre-selected.
+          // Radio groups have no native required validity when none is pre-selected.
+          if (!fs.querySelector('input[name="start_timing"]:checked')) {
+            fs.querySelector<HTMLInputElement>('input[name="start_timing"]')?.focus();
+            return 'Please tell us when you would want to start.';
+          }
           if (!fs.querySelector('input[name="contact_preference"]:checked')) {
             fs.querySelector<HTMLInputElement>('input[name="contact_preference"]')?.focus();
             return 'Please tell us the best way to reach you.';
+          }
+          const ack = fs.querySelector<HTMLInputElement>('input[name="partnership_ack"]');
+          if (!ack?.checked) {
+            ack?.focus();
+            return "Please confirm you understand the Founders' Program is a working partnership.";
           }
         }
         return null;
@@ -977,6 +1279,79 @@ const SMS_CONSENT_TEXT =
         return t.charAt(0).toUpperCase() + t.slice(1);
       }
 
+      // ── Booking step ─────────────────────────────────────────────────────
+      //
+      // Reclaim copies every `data-` query parameter on a booking URL into the
+      // webhook's custom_data, so `data-submission` is what ties a booking to
+      // this application. Both the embed and the plain link carry it.
+      const RECLAIM_ORIGIN = 'https://app.reclaim.ai';
+      const bookingBase = doneEl.dataset.bookingUrl || '';
+      const embedId = doneEl.dataset.embedId || '';
+      const doneSubheadEl = document.getElementById('waitlist-done-subhead');
+      const embedCard = document.getElementById('tour-embed-card');
+      const bookButton = document.getElementById('tour-book-button') as HTMLAnchorElement | null;
+      const bookedNote = document.getElementById('tour-booked-note');
+      const linkFallback = document.getElementById('tour-link-fallback');
+      const fallbackLink = document.getElementById('tour-fallback-link') as HTMLAnchorElement | null;
+      const applyJump = document.getElementById('apply-jump');
+      let embedFrame: HTMLIFrameElement | null = null;
+      let bookedFirstName = '';
+
+      function bookingUrlsFor(key: string): { link: string; embed: string } {
+        const param = `data-submission=${encodeURIComponent(key)}`;
+        return {
+          link: bookingBase ? `${bookingBase}?${param}` : '',
+          embed: embedId ? `${RECLAIM_ORIGIN}/e/${encodeURIComponent(embedId)}?${param}` : '',
+        };
+      }
+
+      function showBookingStep(fn: string, urls: { link: string; embed: string }) {
+        bookedFirstName = fn;
+        headingEl.textContent = fn ? `One Last Step, ${fn}` : 'One Last Step';
+        screenEl.hidden = true;
+        doneEl.hidden = false;
+        if (applyJump) applyJump.hidden = true;
+
+        if (urls.embed && embedCard) {
+          const frame = document.createElement('iframe');
+          frame.src = urls.embed;
+          frame.title = "Book your Founders' Program tour";
+          frame.width = '100%';
+          // Reclaim's own embed script sizes its frame to 700px.
+          frame.height = '700';
+          frame.style.border = '0';
+          frame.style.display = 'block';
+          embedCard.replaceChildren(frame);
+          embedCard.hidden = false;
+          embedFrame = frame;
+          if (urls.link && fallbackLink && linkFallback) {
+            fallbackLink.href = urls.link;
+            linkFallback.hidden = false;
+          }
+        } else if (urls.link && bookButton) {
+          bookButton.href = urls.link;
+          bookButton.hidden = false;
+        }
+
+        window.scrollTo(0, 0);
+        headingEl.focus({ preventScroll: true });
+      }
+
+      // Reclaim's embed posts MEETING_BOOKED to its parent when a time is
+      // confirmed. Only a message from Reclaim's origin AND from the frame this
+      // page created is believed; it changes the wording and nothing else.
+      window.addEventListener('message', (e) => {
+        if (e.origin !== RECLAIM_ORIGIN) return;
+        if (!embedFrame || e.source !== embedFrame.contentWindow) return;
+        const type = (e.data as { type?: unknown } | null)?.type;
+        if (type !== 'MEETING_BOOKED') return;
+        headingEl.textContent = bookedFirstName ? `See You Soon, ${bookedFirstName}` : 'See You Soon';
+        if (doneSubheadEl) {
+          doneSubheadEl.textContent = 'Your application is in and your tour is on the calendar.';
+        }
+        if (bookedNote) bookedNote.hidden = false;
+      });
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const els = form.elements as any;
@@ -1005,6 +1380,16 @@ const SMS_CONSENT_TEXT =
         const recordSources = Array.from(
           form.querySelectorAll<HTMLInputElement>('input[name="record_sources"]:checked')
         ).map((el) => el.value);
+        const COUNTRY_ALLOWED = new Set(['US', 'CA', 'OTHER']);
+        const countryRaw =
+          form.querySelector<HTMLInputElement>('input[name="country"]:checked')?.value || '';
+        const country = COUNTRY_ALLOWED.has(countryRaw) ? countryRaw : '';
+        const START_TIMING_ALLOWED = new Set(['asap', 'within_month', 'few_months', 'exploring']);
+        const startTimingRaw =
+          form.querySelector<HTMLInputElement>('input[name="start_timing"]:checked')?.value || '';
+        const startTiming = START_TIMING_ALLOWED.has(startTimingRaw) ? startTimingRaw : '';
+        const partnershipAck =
+          form.querySelector<HTMLInputElement>('input[name="partnership_ack"]')?.checked === true;
 
         errEl.classList.add('hidden');
         if (!name) return showError('Please add your name.');
@@ -1013,6 +1398,7 @@ const SMS_CONSENT_TEXT =
         }
         if (!kennel) return showError('Please add your kennel or business name.');
         if (!species) return showError('Please choose a species.');
+        if (!country) return showError('Please tell us where your program is based.');
         if (!breedingVolume) return showError('Please choose how many litters or breedings you average per year.');
         if (placementModes.length === 0) {
           return showError('Please tell us where your animals go. Choose "I keep them" if you are not placing any.');
@@ -1032,6 +1418,7 @@ const SMS_CONSENT_TEXT =
             return showError('That website address does not look right. Try something like yourkennel.com');
           }
         }
+        if (!startTiming) return showError('Please tell us when you would want to start.');
 
         const CONTACT_PREF_ALLOWED = new Set(['email', 'phone', 'sms']);
         const contactPreferenceRaw = (
@@ -1104,7 +1491,12 @@ const SMS_CONSENT_TEXT =
           phone: 'Phone call',
           sms: 'Text / SMS',
         };
+        const checkedRadioLabel = (name: string, fallback: string): string =>
+          form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)
+            ?.closest('label')?.textContent?.trim() || fallback;
         const qualification = [
+          `Based in: ${checkedRadioLabel('country', country)}.`,
+          `Start: ${checkedRadioLabel('start_timing', startTiming)}.`,
           `Breedings/year: ${labelOf('select[name="breeding_volume"]', breedingVolume)}.`,
           `Animals go to: ${placementLabels.join('; ')}.`,
           `Records live in: ${recordLabels.join('; ')}.`,
@@ -1122,6 +1514,10 @@ const SMS_CONSENT_TEXT =
           .filter(Boolean)
           .join(' ');
 
+        // The EXACT key this attempt sends. The booking links on the success
+        // screen are built from this value, never from the holder again:
+        // after clear() the holder mints a new key that matches nothing.
+        const submissionKey = submissionKeyHolder.get();
         const payload: Record<string, unknown> = {
           name,
           email,
@@ -1131,7 +1527,7 @@ const SMS_CONSENT_TEXT =
             `Launch waitlist application. Species: ${speciesLabel}. Kennel: ${kennel}. ` +
             qualification,
           source: 'launch_waitlist',
-          submission_key: submissionKeyHolder.get(),
+          submission_key: submissionKey,
           // Bot checks. Both are read server-side; see /api/contact.
           website: honeypot,
           rendered_at: RENDERED_AT,
@@ -1186,6 +1582,16 @@ const SMS_CONSENT_TEXT =
         payload.record_sources = recordSources;
         payload.website_ownership = websiteStatus;
         payload.contact_preference = contactPreference;
+        payload.country = country;
+        payload.start_timing = startTiming;
+
+        // Required to apply. Only the fact that it was ticked travels: the
+        // server maps it to the one acknowledgment version it owns.
+        if (!partnershipAck) {
+          form.querySelector<HTMLInputElement>('input[name="partnership_ack"]')?.focus();
+          return showError("Please confirm you understand the Founders' Program is a working partnership.");
+        }
+        payload.partnership_ack = true;
 
         const utm = getUTMParams();
         if (utm.source) payload.utm_source = utm.source;
@@ -1212,20 +1618,27 @@ const SMS_CONSENT_TEXT =
 
           if (!data.success) throw new Error(data.error || 'Submission failed');
 
+          // Both booking URLs come from the key this attempt SENT, and are
+          // built before the holder is cleared below.
+          const bookingUrls = bookingUrlsFor(submissionKey);
+
           // Recorded. A later application from this page is a genuinely new
           // submission and must not replay this key.
           submissionKeyHolder.clear();
 
           trackFormSubmit(FORM_ID);
 
-          const fn = firstName(name);
-          headingEl.textContent = fn ? `You’re in, ${fn}` : 'You’re in';
-          screenEl.hidden = true;
-          doneEl.hidden = false;
-          window.scrollTo(0, 0);
+          // The application is recorded at this point, so a fault drawing the
+          // booking step must not land in the catch below: that would tell the
+          // applicant it failed and invite a duplicate application.
+          try {
+            showBookingStep(firstName(name), bookingUrls);
+          } catch (renderErr) {
+            console.error('Booking step failed to render:', renderErr);
+          }
         } catch (err) {
           btn.disabled = false;
-          btn.textContent = 'Join The Waitlist';
+          btn.textContent = 'Apply And Pick A Time';
           showError(
             err instanceof Error && err.message && err.message !== 'Submission failed'
               ? err.message

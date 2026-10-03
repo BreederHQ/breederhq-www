@@ -1,0 +1,56 @@
+---
+// src/pages/_site-updates/2026-10-03-founders-program-tour.astro
+export const updateMeta = {
+  date: '2026-10-03',
+  title: "Founders' Program application: apply, then book the tour",
+  tags: ['founders-program', 'lead-capture', 'pricing', 'email'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">October 3, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    The application at
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a> is now the
+    Founders' Program application, and the step after applying is booking a live 90-minute Zoom
+    tour with the founders on the success screen, before the applicant leaves the page.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      Applicants were not reaching a call. The only next step was an email and a personal
+      follow-up that could arrive days later from an address they did not know. Booking on the
+      spot removes that gap.
+    </p>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Page content</h3>
+    <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1">
+      <li>New hero ("We are choosing our founding breeders one at a time"); "apply" replaces "waitlist" throughout.</li>
+      <li>New sections: How It Works (Apply, Book Your Tour, Take The Tour, Earn Lifetime Founders Status), This Is A Partnership, Not A Free Trial (what we commit to and what we ask), and Is This Right For You? (fit and not-fit lists, including that onboarding is US and Canada only for now).</li>
+      <li>On a phone, a short summary sits above the form and the full sections follow it.</li>
+      <li>No prices and no spot counts on the page.</li>
+      <li>Translucent orange fills on navy, which rendered brown, are replaced by a lifted navy fill with an orange border.</li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Form</h3>
+    <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1">
+      <li>Step 1 asks where the program is based (United States, preselected; Canada; somewhere else).</li>
+      <li>Step 3 asks when the applicant would want to start (required) and adds a required partnership acknowledgment. <code>/api/contact</code> enforces both and records the acknowledgment as a version it owns (<code>founders-partnership-v1</code>), never one the browser sends.</li>
+      <li>The submit button reads Apply And Pick A Time. The text message consent box and its wording are unchanged.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">Booking and confirmation email</h3>
+    <p class="text-sm text-gray-600">
+      The success screen embeds the Founders' Program Tour booking calendar, with a plain link to
+      the same booking page beside it. Both carry the application's submission key so a booking
+      can be matched to its application. The confirmation email is now a plain personal note from
+      Aaron and Carie whose booking link carries the same key.
+    </p>
+  </div>
+</article>

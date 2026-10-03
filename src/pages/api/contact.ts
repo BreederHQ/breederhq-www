@@ -12,6 +12,22 @@ export const prerender = false; // This endpoint requires SSR
 const EMAIL_RE = /^[^\s@]+@[^\s@.]+\.[^\s@]{2,}$/;
 const MAX_INTERESTS = 10;
 
+/** Where the applicant's program is based. The platform's enum, exactly. */
+const COUNTRIES = new Set(['US', 'CA', 'OTHER']);
+/** How soon the applicant would start. The platform's enum, exactly. */
+const START_TIMINGS = new Set(['asap', 'within_month', 'few_months', 'exploring']);
+
+/**
+ * The Founders' Program partnership acknowledgment, identified by a version
+ * this endpoint owns.
+ *
+ * The browser sends only whether the box was ticked, never a version or the
+ * wording: anything the browser sends is a claim, so the version recorded is
+ * always the one for the statement this site currently renders. Changing the
+ * wording on /pricing means minting a new version here in the same change.
+ */
+const PARTNERSHIP_ACK_VERSION = 'founders-partnership-v1';
+
 /**
  * Bot defences.
  *
@@ -221,7 +237,32 @@ export const POST: APIRoute = async ({ request }) => {
     // required otherwise: agreement to be texted must be freely given, so a
     // number cannot be the price of applying.
     const source = clampString(body.source, 50) || 'website_form';
+    const countryRaw = clampString(body.country, 10);
+    const country = countryRaw && COUNTRIES.has(countryRaw) ? countryRaw : undefined;
+    const startTimingRaw = clampString(body.start_timing, 20);
+    const startTiming =
+      startTimingRaw && START_TIMINGS.has(startTimingRaw) ? startTimingRaw : undefined;
     if (source === 'launch_waitlist') {
+      // A page rendered before these questions existed sends none of them,
+      // and its applicant cannot answer what they cannot see. Tell them to
+      // reload rather than naming a field that is not on their screen.
+      if (
+        body.country === undefined &&
+        body.start_timing === undefined &&
+        body.partnership_ack === undefined
+      ) {
+        return badRequest(
+          'This form was updated while you had it open. Please refresh the page and apply again.'
+        );
+      }
+      if (!country) return badRequest('Please tell us where your program is based.');
+      if (!startTiming) return badRequest('Please tell us when you would want to start.');
+      // Strictly boolean true: a string "false" or "yes" is not a ticked box.
+      if (body.partnership_ack !== true) {
+        return badRequest(
+          "Please confirm you understand the Founders' Program is a working partnership."
+        );
+      }
       const prefRaw = clampString(body.contact_preference, 10);
       const ALLOWED_PREFS = new Set(['email', 'phone', 'sms']);
       if (!prefRaw || !ALLOWED_PREFS.has(prefRaw)) {
@@ -292,6 +333,16 @@ export const POST: APIRoute = async ({ request }) => {
         const pref = clampString(body.contact_preference, 10);
         return pref && ['email', 'phone', 'sms'].includes(pref) ? pref : undefined;
       })(),
+      // Allowlisted above; anything outside the platform's enums is dropped.
+      country,
+      start_timing: startTiming,
+      // Recorded only for the form that shows the statement, and only as the
+      // version this endpoint owns. Required above for launch_waitlist, so
+      // reaching here on that source means the box was ticked.
+      partnership_ack_version:
+        source === 'launch_waitlist' && body.partnership_ack === true
+          ? PARTNERSHIP_ACK_VERSION
+          : undefined,
       utm_source: clampString(body.utm_source, 100),
       utm_medium: clampString(body.utm_medium, 100),
       utm_campaign: clampString(body.utm_campaign, 100),
