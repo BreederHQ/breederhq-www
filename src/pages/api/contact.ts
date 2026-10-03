@@ -215,15 +215,22 @@ export const POST: APIRoute = async ({ request }) => {
       phoneE164 = parsed.number;
     }
 
-    // Source-specific required fields. launch_waitlist always requires phone and
-    // a contact preference — these are the fields added specifically for that form.
+    // Source-specific required fields. launch_waitlist always requires a contact
+    // preference. A phone is required only when that preference is a call or a
+    // text, because those cannot be honored without a number. It is never
+    // required otherwise: agreement to be texted must be freely given, so a
+    // number cannot be the price of applying.
     const source = clampString(body.source, 50) || 'website_form';
     if (source === 'launch_waitlist') {
-      if (!phoneRaw) return badRequest('Phone number is required for the waitlist.');
       const prefRaw = clampString(body.contact_preference, 10);
       const ALLOWED_PREFS = new Set(['email', 'phone', 'sms']);
       if (!prefRaw || !ALLOWED_PREFS.has(prefRaw)) {
         return badRequest('Please select a contact preference.');
+      }
+      if (!phoneRaw && (prefRaw === 'phone' || prefRaw === 'sms')) {
+        return badRequest(
+          'Please add a phone number to be reached by phone or text, or choose email instead.'
+        );
       }
       // Selecting SMS as a preference without recorded consent is an incomplete
       // submission: the preference cannot be honoured and must not be stored as if

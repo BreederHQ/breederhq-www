@@ -547,18 +547,30 @@ const SMS_CONSENT_TEXT =
             />
           </label>
 
+          {/*
+            Optional unless the applicant asks to be called or texted.
+
+            Agreement to be texted has to be freely given, so a number cannot be
+            the price of applying: a breeder who wants email only applies without
+            one. Picking "Phone call" or "Text / SMS" below is the one case where
+            a number is needed, because that preference cannot be honored
+            without it. The submit handler and /api/contact both enforce that;
+            the script below only swaps the Optional tag for the asterisk so the
+            label says what the rule is.
+          */}
           <label class="flex flex-col gap-2">
-            <span class={labelClass}>
-              Phone / WhatsApp<span class="ml-px font-semibold text-edit-required" aria-hidden="true">*</span>
+            <span class={`flex items-baseline gap-2 ${labelClass}`}>
+              <span>Phone / WhatsApp<span class="ml-px hidden font-semibold text-edit-required" aria-hidden="true" data-phone-required>*</span></span>
+              <span class="font-medium normal-case tracking-normal text-slate-400" data-phone-optional>Optional</span>
             </span>
             <input
-              type="tel" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" maxlength="25"
+              type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25"
               placeholder="+1 555 0134"
               class={inputClass}
             />
             <span class="text-xs leading-relaxed text-slate-400">
-              We default to US format. Start with <code class="font-mono">+</code> and your
-              country code for international.
+              Needed only if you would like a call or a text. We default to US format. Start
+              with <code class="font-mono">+</code> and your country code for international.
             </span>
           </label>
 
@@ -728,6 +740,33 @@ const SMS_CONSENT_TEXT =
         errEl.textContent = msg;
         errEl.classList.remove('hidden');
       }
+
+      // A number is needed only when the chosen way to reach the applicant is
+      // a call or a text. The label follows the choice so it never claims a
+      // field is optional when submitting would refuse it, or required when it
+      // is not.
+      const phoneRequiredMark = form.querySelector<HTMLElement>('[data-phone-required]');
+      const phoneOptionalTag = form.querySelector<HTMLElement>('[data-phone-optional]');
+      const preferenceNeedsPhone = (pref: string) => pref === 'phone' || pref === 'sms';
+      function syncPhoneRequirement() {
+        const pref =
+          form!.querySelector<HTMLInputElement>('input[name="contact_preference"]:checked')?.value || '';
+        const needed = preferenceNeedsPhone(pref);
+        phoneRequiredMark?.classList.toggle('hidden', !needed);
+        phoneOptionalTag?.classList.toggle('hidden', needed);
+        if (needed) phoneInput?.setAttribute('aria-required', 'true');
+        else {
+          phoneInput?.removeAttribute('aria-required');
+          phoneInput?.removeAttribute('aria-invalid');
+        }
+      }
+      form.querySelectorAll<HTMLInputElement>('input[name="contact_preference"]').forEach((el) =>
+        el.addEventListener('change', syncPhoneRequirement),
+      );
+      phoneInput?.addEventListener('input', () => phoneInput.removeAttribute('aria-invalid'));
+      // A restored form (back/forward cache, autofill) can arrive with a
+      // preference already checked.
+      syncPhoneRequirement();
 
       // ── Paging ───────────────────────────────────────────────────────────
       //
@@ -994,30 +1033,43 @@ const SMS_CONSENT_TEXT =
           }
         }
 
-        // Phone is required. Validate that the provided number is real — the
-        // API rejects an invalid number outright, so catch it here with a
-        // message that says what to fix.
-        if (!phoneRaw) return showError('Please add a phone number so we can reach you.');
-        let phoneE164: string | undefined;
-        {
-          const parsed = parsePhoneNumberFromString(
-            phoneRaw,
-            phoneRaw.startsWith('+') ? undefined : DEFAULT_COUNTRY
-          );
-          if (!parsed || !parsed.isValid()) {
-            return showError(
-              'That does not look like a valid phone number. For international, start with + and your country code.'
-            );
-          }
-          phoneE164 = parsed.number;
-        }
-
         const CONTACT_PREF_ALLOWED = new Set(['email', 'phone', 'sms']);
         const contactPreferenceRaw = (
           form.querySelector<HTMLInputElement>('input[name="contact_preference"]:checked')?.value || ''
         );
         const contactPreference = CONTACT_PREF_ALLOWED.has(contactPreferenceRaw) ? contactPreferenceRaw : '';
         if (!contactPreference) return showError('Please tell us the best way to reach you.');
+
+        // Phone is optional unless the applicant chose a call or a text, which
+        // cannot be honored without a number. /api/contact enforces the same
+        // rule. A number that IS supplied must be real — the API rejects an
+        // invalid one outright — so it is checked here with a message that
+        // says what to fix.
+        const flagPhone = (msg: string) => {
+          phoneInput?.setAttribute('aria-invalid', 'true');
+          phoneInput?.focus();
+          return showError(msg);
+        };
+        if (!phoneRaw && preferenceNeedsPhone(contactPreference)) {
+          return flagPhone(
+            contactPreference === 'sms'
+              ? 'Please add a phone number so we can text you, or choose email instead.'
+              : 'Please add a phone number so we can call you, or choose email instead.'
+          );
+        }
+        let phoneE164: string | undefined;
+        if (phoneRaw) {
+          const parsed = parsePhoneNumberFromString(
+            phoneRaw,
+            phoneRaw.startsWith('+') ? undefined : DEFAULT_COUNTRY
+          );
+          if (!parsed || !parsed.isValid()) {
+            return flagPhone(
+              'That does not look like a valid phone number. For international, start with + and your country code.'
+            );
+          }
+          phoneE164 = parsed.number;
+        }
 
         // `kennel` maps to `company` and `species` to `interest`: /api/contact
         // builds its payload from a fixed field whitelist and silently drops
