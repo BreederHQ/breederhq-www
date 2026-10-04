@@ -222,9 +222,14 @@ const PARTNERSHIP_ACK_BODY =
 // Scope is deliberately narrow. It names the Founders program and nothing else,
 // so it cannot be read as authorising general marketing; widening what is sent
 // later means a new version and asking again, not reinterpreting this one.
-const SMS_CONSENT_VERSION = 'founders-sms-v1';
+//
+// v2 adds the message-frequency and HELP disclosures that carriers require of
+// toll-free SMS opt-in wording. The links to the SMS Terms and SMS Privacy sit
+// beneath the checkbox, outside this sentence, so the sentence stays the exact
+// text the platform records for this version.
+const SMS_CONSENT_VERSION = 'founders-sms-v2';
 const SMS_CONSENT_TEXT =
-  'I agree to receive text messages from BreederHQ about my Founders program application. Message and data rates may apply. Reply STOP to opt out at any time.';
+  'I agree to receive text messages from BreederHQ about my Founders program application. Message frequency varies. Message and data rates may apply. Reply HELP for help or STOP to opt out.';
 ---
 
 <!DOCTYPE html>
@@ -740,6 +745,15 @@ const SMS_CONSENT_TEXT =
             />
             <span>{SMS_CONSENT_TEXT}</span>
           </label>
+          {/*
+            Outside the label so a click on a link never toggles the box, and
+            outside the consent sentence so that sentence stays the recorded
+            text. New tab, because leaving the page would discard the form.
+          */}
+          <p class="-mt-2 px-1 text-xs leading-relaxed text-slate-400">
+            See our <a href="/legal/sms-terms" target="_blank" rel="noopener" class="underline hover:text-slate-200">SMS Terms</a>
+            and <a href="/legal/sms-terms#sms-privacy" target="_blank" rel="noopener" class="underline hover:text-slate-200">SMS Privacy</a>.
+          </p>
 
           {/*
             Required, unlike the SMS box above. This is not consent to be
