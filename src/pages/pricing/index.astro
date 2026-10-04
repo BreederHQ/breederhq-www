@@ -1174,36 +1174,80 @@ const SMS_CONSENT_TEXT =
       /**
        * Put focus at the TOP of the step that just became visible.
        *
-       * Without this, advancing leaves focus on Continue — which sits after
-       * every control in the step it just revealed — so the next Tab leaves the
-       * form entirely and a keyboard user never reaches the questions. The
-       * fieldset takes a -1 tabindex so it can receive focus programmatically
-       * without becoming a tab stop of its own.
+       * Without this, advancing leaves focus on Continue, which sits after
+       * every control in the step it just revealed, so the next Tab leaves the
+       * form entirely and a keyboard user never reaches the questions.
+       *
+       * Focus goes to the step's fieldset (it takes a -1 tabindex, so it can be
+       * focused without becoming a tab stop), never to its first field. A
+       * phone treats focus on a text field or select as "show the keyboard and
+       * scroll this field into view", and mobile Safari and in-app browsers do
+       * not reliably honor preventScroll for that, so focusing the first field
+       * dragged the page down past the step header. The fieldset's legend still
+       * announces the step, and the next Tab lands on its first field.
        */
       function focusStep() {
-        const fs = steps[step];
-        const first = fs.querySelector<HTMLElement>(
-          'input:not([type="hidden"]), select, textarea',
-        );
-        (first ?? fs).focus({ preventScroll: true });
+        steps[step].focus({ preventScroll: true });
+      }
+
+      /**
+       * Height of anything pinned to the top of the viewport (a sticky or
+       * fixed header), so the step header is not scrolled underneath it. This
+       * page has no pinned header today; measuring keeps that true if one is
+       * added.
+       */
+      function pinnedTopOffset(): number {
+        let offset = 0;
+        for (const el of Array.from(document.querySelectorAll<HTMLElement>('header, [data-sticky-header]'))) {
+          const pos = getComputedStyle(el).position;
+          if (pos !== 'sticky' && pos !== 'fixed') continue;
+          const r = el.getBoundingClientRect();
+          if (r.height > 0 && r.top <= 0 && r.bottom > 0) offset = Math.max(offset, r.bottom);
+        }
+        return offset;
+      }
+
+      /**
+       * Scroll so the progress line at the top of the form, and the first
+       * question below it, are in view. Runs after the new step is rendered
+       * and focused, so it measures the final layout: the old step's height is
+       * gone and nothing else moves the page afterwards. Skipped when the
+       * progress line is already comfortably near the top of the viewport, so
+       * a desktop visitor whose card is in view does not see a needless jump.
+       */
+      function scrollToStepTop() {
+        const gap = 16;
+        const top = pinnedTopOffset() + gap;
+        // The step label is the progress line's tallest item, so its top is
+        // the line's top.
+        const rect = stepLabel.getBoundingClientRect();
+        if (rect.top >= top && rect.top <= window.innerHeight * 0.25) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({
+          top: Math.max(0, window.scrollY + rect.top - top),
+          behavior: reduce ? 'auto' : 'smooth',
+        });
+      }
+
+      function showStep(next: number) {
+        step = next;
+        renderStep();
+        // Focus first, then scroll: a focus change can itself move the page,
+        // so the explicit scroll has to be the last word.
+        focusStep();
+        scrollToStepTop();
       }
 
       nextBtn.addEventListener('click', () => {
         const problem = validateStep();
         if (problem) return showError(problem);
-        step = Math.min(step + 1, steps.length - 1);
-        renderStep();
-        // Bring the top of the card into view. A breeder who has just filled
-        // the bottom of a step would otherwise land mid-way down the next one.
-        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        focusStep();
+        // A breeder who has just filled the bottom of a step would otherwise
+        // land mid-way down the next one.
+        showStep(Math.min(step + 1, steps.length - 1));
       });
 
       backBtn.addEventListener('click', () => {
-        step = Math.max(step - 1, 0);
-        renderStep();
-        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        focusStep();
+        showStep(Math.max(step - 1, 0));
       });
 
       // Enter should advance rather than submit while a middle step is showing,
