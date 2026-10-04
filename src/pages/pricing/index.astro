@@ -197,13 +197,17 @@ const labelClass =
 const optionClass =
   'flex cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-[15px] text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[#0F1B33]';
 
-// The partnership acknowledgment. Required to apply, and recorded server-side
-// as a version string /api/contact owns, never one the browser supplies. The
-// wording below and that version move together: change one, change both.
+// The partnership acknowledgment. Required to apply. The page sends the version
+// of the wording it rendered, and /api/contact records it only if it is a
+// version on its own allowlist. The wording below and this version move
+// together: change one, change both, and add the new version to that allowlist
+// in the same change. Sending it is what lets a tab opened before a wording
+// change still record the wording that tab showed.
 // (SMS consent below is a separate statement with its own version.)
+const PARTNERSHIP_ACK_VERSION = 'founders-partnership-v2';
 const PARTNERSHIP_ACK_LEAD = "I understand the Founders' Program is a working partnership.";
 const PARTNERSHIP_ACK_BODY =
-  'If I am invited, I am ready to run my program on BreederHQ, join the working sessions and share honest feedback.';
+  "If we both decide it's a good fit after the tour, I'll be asked to run my program on BreederHQ, join the working sessions and share honest feedback.";
 
 // The SMS consent statement, identified by a VERSION rather than carried as a
 // string the browser submits.
@@ -759,12 +763,15 @@ const SMS_CONSENT_TEXT =
             Required, unlike the SMS box above. This is not consent to be
             contacted; it is the applicant confirming they read what the
             program asks of them, which is the condition of applying at all.
-            It carries no version: /api/contact maps a ticked box to the one
-            version it owns, so the browser cannot claim any other wording.
+            The version of the wording rides on the element so the submit
+            handler sends the one this page rendered. /api/contact accepts only
+            versions on its allowlist, so the browser cannot name wording the
+            site never shipped.
           */}
           <label class="flex cursor-pointer items-start gap-3 rounded-[10px] border border-[hsl(24,95%,53%)]/55 bg-[#0F1B33] p-3.5 text-[15px] leading-relaxed text-slate-100 transition hover:border-[hsl(24,95%,53%)]">
             <input
               type="checkbox" name="partnership_ack" value="yes" aria-required="true"
+              data-ack-version={PARTNERSHIP_ACK_VERSION}
               class="mt-1 h-4 w-4 flex-none rounded accent-[hsl(24,95%,53%)] focus:ring-2 focus:ring-[hsl(24,95%,53%)]/40"
             />
             <span>
@@ -1545,17 +1552,17 @@ const SMS_CONSENT_TEXT =
         // Read the visible labels rather than the stored values: this text is
         // what a person reads in Slack and in the admin view, and "2–3 per year"
         // is answerable at a glance where "two_to_three" is not.
-        function labelOf(selector: string, fallback: string): string {
-          return (
-            form.querySelector<HTMLSelectElement>(selector)?.selectedOptions[0]
-              ?.textContent?.trim() || fallback
-          );
-        }
-        function checkedLabels(name: string): string[] {
-          return Array.from(
+        //
+        // Arrow functions, not function declarations: a declaration is hoisted,
+        // so TypeScript drops the `if (form)` narrowing inside it and reads
+        // `form` as possibly null. A const arrow keeps that narrowing.
+        const labelOf = (selector: string, fallback: string): string =>
+          form.querySelector<HTMLSelectElement>(selector)?.selectedOptions[0]
+            ?.textContent?.trim() || fallback;
+        const checkedLabels = (name: string): string[] =>
+          Array.from(
             form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]:checked`)
           ).map((el) => el.closest('label')?.textContent?.trim() || el.value);
-        }
         const recordLabels = checkedLabels('record_sources');
         const placementLabels = checkedLabels('placement_modes');
 
@@ -1662,13 +1669,19 @@ const SMS_CONSENT_TEXT =
         payload.country = country;
         payload.start_timing = startTiming;
 
-        // Required to apply. Only the fact that it was ticked travels: the
-        // server maps it to the one acknowledgment version it owns.
+        // Required to apply. The tick travels with the version of the wording
+        // this page rendered; the server records that version only if it is
+        // on its allowlist.
         if (!partnershipAck) {
           form.querySelector<HTMLInputElement>('input[name="partnership_ack"]')?.focus();
           return showError("Please confirm you understand the Founders' Program is a working partnership.");
         }
         payload.partnership_ack = true;
+        // Never omitted: the server reads a missing version as the older
+        // unversioned page. A blank one is refused, so a lost attribute fails
+        // closed instead of recording the wrong wording.
+        payload.partnership_ack_version =
+          form.querySelector<HTMLInputElement>('input[name="partnership_ack"]')?.dataset.ackVersion ?? '';
 
         const utm = getUTMParams();
         if (utm.source) payload.utm_source = utm.source;

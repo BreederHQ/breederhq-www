@@ -1,0 +1,38 @@
+---
+// src/pages/_site-updates/2026-10-04-founders-partnership-ack-v2.astro
+export const updateMeta = {
+  date: '2026-10-04',
+  title: 'Founders partnership acknowledgment asks for the commitment only after the tour',
+  tags: ['waitlist', 'lead-capture', 'founders'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">October 4, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    The required partnership acknowledgment on the Founders application at
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a> now reads:
+    "I understand the Founders' Program is a working partnership. If we both decide it's a good
+    fit after the tour, I'll be asked to run my program on BreederHQ, join the working sessions
+    and share honest feedback."
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      The earlier wording asked an applicant to commit to the program before they had seen the
+      tour. The new wording acknowledges what the partnership is and says the commitment is asked
+      for only once both sides decide it is a fit.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">How it works</h3>
+    <p class="text-sm text-gray-600">
+      The checkbox stays required and validates as before. The page now sends the version of the
+      wording it rendered, <code>founders-partnership-v2</code>, and <code>/api/contact</code>
+      records it only if it is a version the site shipped. A page opened before this change sends
+      no version and is recorded as <code>founders-partnership-v1</code>, the wording it showed;
+      any other value is refused with a request to refresh the page.
+    </p>
+  </div>
+</article>

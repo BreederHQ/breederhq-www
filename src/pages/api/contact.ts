@@ -18,15 +18,38 @@ const COUNTRIES = new Set(['US', 'CA', 'OTHER']);
 const START_TIMINGS = new Set(['asap', 'within_month', 'few_months', 'exploring']);
 
 /**
- * The Founders' Program partnership acknowledgment, identified by a version
- * this endpoint owns.
+ * The Founders' Program partnership acknowledgment, identified by a version.
  *
- * The browser sends only whether the box was ticked, never a version or the
- * wording: anything the browser sends is a claim, so the version recorded is
- * always the one for the statement this site currently renders. Changing the
- * wording on /pricing means minting a new version here in the same change.
+ * The page sends the tick and the version of the wording it rendered. The
+ * version is recorded only if it is on this allowlist, so a stored version
+ * always names wording the site actually shipped; anything else is refused with
+ * a request to refresh. The browser's version is still a claim, but it can only
+ * choose between statements we published, and it is what keeps a tab opened
+ * before a wording change from being recorded against wording it never showed.
+ *
+ * A tick with NO version came from a page rendered before the version was sent,
+ * and every such page showed founders-partnership-v1 (a page older than the
+ * checkbox sends no tick at all and is refused as stale below), so that is what
+ * it records.
+ *
+ * Changing the wording on /pricing means minting a new version there and
+ * adding it here in the same change. Keep the older versions on the allowlist:
+ * a tab opened before the deploy still sends them.
+ *
+ * What each version said, so a stored version can be read back as wording:
+ * - founders-partnership-v1: "I understand the Founders' Program is a working
+ *   partnership. If I am invited, I am ready to run my program on BreederHQ,
+ *   join the working sessions and share honest feedback."
+ * - founders-partnership-v2 (2026-10-04): "I understand the Founders' Program
+ *   is a working partnership. If we both decide it's a good fit after the
+ *   tour, I'll be asked to run my program on BreederHQ, join the working
+ *   sessions and share honest feedback." v1 asked for the commitment before
+ *   the applicant had seen the tour; v2 acknowledges what the partnership is
+ *   and asks for the commitment only once both sides decide it is a fit.
  */
-const PARTNERSHIP_ACK_VERSION = 'founders-partnership-v1';
+const PARTNERSHIP_ACK_VERSIONS = new Set(['founders-partnership-v2']);
+/** What a tick with no version is recorded as. See above. */
+const PARTNERSHIP_ACK_UNVERSIONED = 'founders-partnership-v1';
 
 /**
  * Bot defences.
@@ -242,6 +265,9 @@ export const POST: APIRoute = async ({ request }) => {
     const startTimingRaw = clampString(body.start_timing, 20);
     const startTiming =
       startTimingRaw && START_TIMINGS.has(startTimingRaw) ? startTimingRaw : undefined;
+    // Set only for the form that shows the statement, once the tick and its
+    // version have been checked below.
+    let partnershipAckVersion: string | undefined;
     if (source === 'launch_waitlist') {
       // A page rendered before these questions existed sends none of them,
       // and its applicant cannot answer what they cannot see. Tell them to
@@ -261,6 +287,19 @@ export const POST: APIRoute = async ({ request }) => {
       if (body.partnership_ack !== true) {
         return badRequest(
           "Please confirm you understand the Founders' Program is a working partnership."
+        );
+      }
+      if (body.partnership_ack_version === undefined) {
+        partnershipAckVersion = PARTNERSHIP_ACK_UNVERSIONED;
+      } else if (
+        typeof body.partnership_ack_version === 'string' &&
+        PARTNERSHIP_ACK_VERSIONS.has(body.partnership_ack_version)
+      ) {
+        partnershipAckVersion = body.partnership_ack_version;
+      } else {
+        // Not wording this site shipped, so there is nothing true to record.
+        return badRequest(
+          'This form was updated while you had it open. Please refresh the page and apply again.'
         );
       }
       const prefRaw = clampString(body.contact_preference, 10);
@@ -336,13 +375,10 @@ export const POST: APIRoute = async ({ request }) => {
       // Allowlisted above; anything outside the platform's enums is dropped.
       country,
       start_timing: startTiming,
-      // Recorded only for the form that shows the statement, and only as the
-      // version this endpoint owns. Required above for launch_waitlist, so
+      // Recorded only for the form that shows the statement, and only as an
+      // allowlisted version (resolved above). Required for launch_waitlist, so
       // reaching here on that source means the box was ticked.
-      partnership_ack_version:
-        source === 'launch_waitlist' && body.partnership_ack === true
-          ? PARTNERSHIP_ACK_VERSION
-          : undefined,
+      partnership_ack_version: partnershipAckVersion,
       utm_source: clampString(body.utm_source, 100),
       utm_medium: clampString(body.utm_medium, 100),
       utm_campaign: clampString(body.utm_campaign, 100),
