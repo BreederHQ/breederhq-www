@@ -240,7 +240,8 @@ export const POST: APIRoute = async ({ request }) => {
       return badRequest('Please enter your name.');
     }
 
-    // Phone is optional but if provided must be a real, valid number per libphonenumber
+    // Phone is optional for most sources (launch_waitlist requires it, below),
+    // but if provided must be a real, valid number per libphonenumber
     const phoneRaw = clampString(body.phone, 25);
     let phoneE164: string | undefined;
     if (phoneRaw) {
@@ -254,11 +255,12 @@ export const POST: APIRoute = async ({ request }) => {
       phoneE164 = parsed.number;
     }
 
-    // Source-specific required fields. launch_waitlist always requires a contact
-    // preference. A phone is required only when that preference is a call or a
-    // text, because those cannot be honored without a number. It is never
-    // required otherwise: agreement to be texted must be freely given, so a
-    // number cannot be the price of applying.
+    // Source-specific required fields. launch_waitlist (the Founders' Program
+    // application) always requires a phone number and a contact preference:
+    // every applicant may need to be reached about their tour, whatever way
+    // they prefer (ruling, 2026-10-04). Requiring the number does not require
+    // agreement to be texted; SMS consent stays optional and is checked
+    // separately below.
     const source = clampString(body.source, 50) || 'website_form';
     const countryRaw = clampString(body.country, 10);
     const country = countryRaw && COUNTRIES.has(countryRaw) ? countryRaw : undefined;
@@ -302,15 +304,13 @@ export const POST: APIRoute = async ({ request }) => {
           'This form was updated while you had it open. Please refresh the page and apply again.'
         );
       }
+      if (!phoneRaw) {
+        return badRequest('Please add a phone number so we can reach you about your tour.');
+      }
       const prefRaw = clampString(body.contact_preference, 10);
       const ALLOWED_PREFS = new Set(['email', 'phone', 'sms']);
       if (!prefRaw || !ALLOWED_PREFS.has(prefRaw)) {
         return badRequest('Please select a contact preference.');
-      }
-      if (!phoneRaw && (prefRaw === 'phone' || prefRaw === 'sms')) {
-        return badRequest(
-          'Please add a phone number to be reached by phone or text, or choose email instead.'
-        );
       }
       // Selecting SMS as a preference without recorded consent is an incomplete
       // submission: the preference cannot be honoured and must not be stored as if

@@ -1,0 +1,39 @@
+---
+// src/pages/_site-updates/2026-10-04-founders-phone-required.astro
+export const updateMeta = {
+  date: '2026-10-04',
+  title: 'Founders application requires a phone number again',
+  tags: ['waitlist', 'lead-capture', 'founders', 'sms'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">October 4, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    The Founders application at
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a> requires a
+    phone number from every applicant, whatever their preferred way to be reached. This replaces
+    the October 3 change that made the number optional unless a call or a text was requested.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      Every applicant books a tour, and we need a way to reach each of them about it. Giving a
+      number is not agreement to be texted: the text message consent box stays separate,
+      unticked and optional, with the same wording and version as before.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">How it works</h3>
+    <p class="text-sm text-gray-600">
+      The Phone / WhatsApp field carries the required asterisk, and its Optional tag is gone. Its
+      helper text now reads "So we can reach you about your tour. We default to US format; start
+      with + and your country code for international." Submitting without a number shows an
+      inline message and focuses the field, and <code>/api/contact</code> refuses a Founders
+      application with no number. Every number is still checked as a real phone number. The
+      Best Way To Reach You choice stays, since it still says how the applicant prefers to be
+      contacted. Other forms that post to <code>/api/contact</code> keep the phone optional.
+    </p>
+  </div>
+</article>
