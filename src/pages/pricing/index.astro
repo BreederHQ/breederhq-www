@@ -939,7 +939,7 @@ const SMS_CONSENT_TEXT =
       id="waitlist-done" hidden
       data-booking-url={TOUR_BOOKING_URL}
       data-embed-id={RECLAIM_EMBED_ID}
-      class="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center px-6 pb-16 pt-8 text-center sm:px-8"
+      class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pb-16 pt-8 text-center sm:px-8"
     >
       <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[hsl(24,95%,53%)]/55 bg-[#0F1B33]">
         <svg class="h-5 w-5 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -951,10 +951,20 @@ const SMS_CONSENT_TEXT =
         Your application is in. Pick a time for your live Zoom tour with Aaron and Carie.
       </p>
 
-      {/* White card: Reclaim's widget is styled for a light ground. */}
+      {/*
+        White card: Reclaim's widget is styled for a light ground.
+
+        The screen is wider than the page's other centered columns (max-w-5xl)
+        for this card alone; every text block above and below keeps its own
+        measure. Reclaim picks its layout from the FRAME's width: under 675px
+        it pages the calendar and the time list apart, from 675px it shows
+        the day picker and the times side by side. The card is a size
+        container so the frame's height follows that same width (see
+        showBookingStep).
+      */}
       <section
         id="tour-embed-card" hidden aria-label="Book your tour"
-        class="mt-8 w-full overflow-hidden rounded-[14px] bg-white"
+        class="@container mt-8 w-full overflow-hidden rounded-[14px] bg-white"
       ></section>
 
       {/* Shown instead of the embed when the build has no embed id. */}
@@ -1374,11 +1384,20 @@ const SMS_CONSENT_TEXT =
           const frame = document.createElement('iframe');
           frame.src = urls.embed;
           frame.title = "Book your Founders' Program tour";
-          frame.width = '100%';
-          // Reclaim's own embed script sizes its frame to 700px.
+          // Reclaim's embed posts no size messages (only MEETING_BOOKED), so
+          // the page sizes the frame. Both layouts pin their Next / Back
+          // buttons to the frame's bottom edge and scroll the time list
+          // inside the frame (a day offers up to 35 start times, far more
+          // than any sensible frame shows at once). So the frame is capped
+          // at the visible viewport: scrolled to, the whole widget is on
+          // screen, buttons included. Narrow frames (paged layout) take
+          // Reclaim's own 700px at most; from 675px wide (side-by-side
+          // layout) up to 820px, which shows the calendar and 16 times.
+          // The height attribute is the fallback for a browser without `svh`,
+          // which drops the class's height rule (a frame's default is 150px).
           frame.height = '700';
-          frame.style.border = '0';
-          frame.style.display = 'block';
+          frame.className =
+            'block w-full border-0 h-[clamp(560px,calc(100svh-2rem),700px)] @min-[675px]:h-[clamp(640px,calc(100svh-2rem),820px)]';
           embedCard.replaceChildren(frame);
           embedCard.hidden = false;
           embedFrame = frame;
