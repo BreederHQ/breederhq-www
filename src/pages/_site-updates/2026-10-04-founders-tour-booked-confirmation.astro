@@ -1,0 +1,43 @@
+---
+// src/pages/_site-updates/2026-10-04-founders-tour-booked-confirmation.astro
+export const updateMeta = {
+  date: '2026-10-04',
+  title: 'Founders tour booking ends on a confirmation card',
+  tags: ['waitlist', 'lead-capture', 'founders', 'tour'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">October 4, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    After a Founders applicant books their tour on
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a>, the booking
+    calendar is replaced by a confirmation card that shows the tour time and what happens next.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      The embedded calendar's own confirmation was a large, mostly empty white card with a "Book
+      another meeting" button, which is wrong for an applicant, and the page still showed the
+      "Calendar not showing?" and "No time that works?" lines. The application ended without a
+      clear sign that it was finished.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">How it works</h3>
+    <p class="text-sm text-gray-600">
+      When the calendar reports the booking (a message accepted only from the calendar's own
+      origin and from the frame the page created), the frame is removed and the two fallback
+      lines are hidden. A Your Tour Is Booked card, in the page's dark styling, takes its place.
+      It shows the booked date and time in the applicant's own time zone, with the zone named,
+      when the booking message carries a usable time, and leaves that line out otherwise. It
+      explains that the calendar invite with the Zoom link comes from BreederHQ Founders
+      (admin@breederhq.com) with both founders on it, that the invite's link is how to
+      reschedule or cancel, and that joining from a computer is best. A Back to BreederHQ Home
+      button ends the page. Focus moves to the card's heading for screen readers, and the card
+      is scrolled into view without animation for visitors who prefer reduced motion. The
+      fallback path that opens the booking page in a new tab is unchanged.
+    </p>
+  </div>
+</article>

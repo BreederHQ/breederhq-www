@@ -978,15 +978,48 @@ const SMS_CONSENT_TEXT =
         class="mt-8 inline-flex min-h-[54px] items-center justify-center rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-4 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
       >Pick Your Tour Time</a>
 
-      <p id="tour-booked-note" hidden class="mt-6 max-w-[48ch] text-[15px] leading-relaxed text-slate-300">
-        A calendar invite with your Zoom link is on its way from <strong class="text-white">BreederHQ Founders</strong> (admin@breederhq.com). Aaron and Carie will both be on the invite.
-      </p>
+      {/*
+        Replaces the embed once Reclaim reports the booking (see the message
+        listener). The embed's own confirmation is a near-empty white card
+        offering "Book another meeting", which is wrong for an applicant, so
+        the frame is removed and this card says what happens next instead.
+      */}
+      <section
+        id="tour-booked-card" hidden aria-labelledby="tour-booked-heading"
+        class="mt-8 flex w-full max-w-xl flex-col gap-5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-6 text-left sm:p-8"
+      >
+        <h2 id="tour-booked-heading" tabindex="-1" class="font-serif text-[1.65rem] font-normal leading-tight text-white focus:outline-none">Your Tour Is Booked</h2>
+
+        <div id="tour-booked-time" hidden class="flex items-start gap-3.5 rounded-xl border border-white/12 bg-white/[0.03] p-4">
+          <svg class="mt-0.5 h-5 w-5 shrink-0 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          <p class="m-0 flex flex-col gap-0.5">
+            <span id="tour-booked-date" class="text-[17px] font-semibold text-white"></span>
+            <span id="tour-booked-clock" class="text-[15px] text-slate-300"></span>
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2.5">
+          <h3 class="text-[15px] font-semibold text-slate-200">What Happens Next</h3>
+          <ul class="m-0 flex list-disc flex-col gap-2.5 pl-5 text-[15px] leading-relaxed text-slate-300 marker:text-[hsl(24,95%,58%)]">
+            <li>A calendar invite with your Zoom link is on its way from <strong class="text-white">BreederHQ Founders</strong> (admin@breederhq.com). Aaron and Carie will both be on the invite.</li>
+            <li>To reschedule or cancel, use the link in that invite.</li>
+            <li>Join from a computer if you can, so you can see the screen as we walk through the platform.</li>
+          </ul>
+        </div>
+
+        <a
+          href="/"
+          class="inline-flex min-h-[50px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F1B33]"
+        >Back to BreederHQ Home</a>
+      </section>
 
       <p id="tour-link-fallback" hidden class="mt-5 text-sm leading-relaxed text-slate-400">
         Calendar not showing?{" "}
         <a id="tour-fallback-link" target="_blank" rel="noopener" class="text-[hsl(24,95%,62%)] underline underline-offset-2 hover:text-[hsl(24,95%,72%)]">Open the booking page</a>.
       </p>
-      <p class="mt-3 max-w-[44ch] text-[13.5px] leading-relaxed text-slate-400">
+      <p id="tour-no-time-note" class="mt-3 max-w-[44ch] text-[13.5px] leading-relaxed text-slate-400">
         No time that works? Reply to your confirmation email and we will find one together.
       </p>
     </main>
@@ -1340,7 +1373,12 @@ const SMS_CONSENT_TEXT =
       const doneSubheadEl = document.getElementById('waitlist-done-subhead');
       const embedCard = document.getElementById('tour-embed-card');
       const bookButton = document.getElementById('tour-book-button') as HTMLAnchorElement | null;
-      const bookedNote = document.getElementById('tour-booked-note');
+      const bookedCard = document.getElementById('tour-booked-card');
+      const bookedHeading = document.getElementById('tour-booked-heading');
+      const bookedTime = document.getElementById('tour-booked-time');
+      const bookedDate = document.getElementById('tour-booked-date');
+      const bookedClock = document.getElementById('tour-booked-clock');
+      const noTimeNote = document.getElementById('tour-no-time-note');
       const linkFallback = document.getElementById('tour-link-fallback');
       const fallbackLink = document.getElementById('tour-fallback-link') as HTMLAnchorElement | null;
       const applyJump = document.getElementById('apply-jump');
@@ -1396,19 +1434,113 @@ const SMS_CONSENT_TEXT =
         headingEl.focus({ preventScroll: true });
       }
 
+      function field(obj: unknown, key: string): unknown {
+        return obj !== null && typeof obj === 'object'
+          ? (obj as Record<string, unknown>)[key]
+          : undefined;
+      }
+
+      /**
+       * The booked start time from Reclaim's MEETING_BOOKED message, or null.
+       * Reclaim's embed posts `{ type, data: { meeting, redirectUrl } }`, where
+       * `meeting.event.startTime` is the start. It arrives through structured
+       * clone, so it may be a Date or an ISO string; anything else, an ISO
+       * string without a zone (which would be read as local time and could be
+       * hours off), or a time not plausibly a tour booked just now yields null
+       * and the time line is left out rather than shown wrong.
+       */
+      function bookedStartTime(message: unknown): Date | null {
+        const raw = field(field(field(field(message, 'data'), 'meeting'), 'event'), 'startTime');
+        let ms = NaN;
+        if (Object.prototype.toString.call(raw) === '[object Date]') {
+          ms = (raw as Date).getTime();
+        } else if (
+          typeof raw === 'string' &&
+          raw.length <= 40 &&
+          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?(Z|[+-]\d{2}:?\d{2})$/.test(raw)
+        ) {
+          ms = Date.parse(raw);
+        }
+        if (!Number.isFinite(ms)) return null;
+        const now = Date.now();
+        const DAY = 86_400_000;
+        if (ms < now - DAY || ms > now + 400 * DAY) return null;
+        return new Date(ms);
+      }
+
+      /** Date and time in the applicant's own zone, with the zone named. */
+      function formatBookedTime(start: Date): { date: string; clock: string } | null {
+        try {
+          const date = new Intl.DateTimeFormat('en-US', {
+            weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+          }).format(start);
+          const clock = new Intl.DateTimeFormat('en-US', {
+            hour: 'numeric', minute: '2-digit', timeZoneName: 'long',
+          }).format(start);
+          return date && clock ? { date, clock } : null;
+        } catch {
+          return null;
+        }
+      }
+
+      /**
+       * Bring the confirmation card into view after the frame above it is
+       * gone, the same way a form step is brought into view: measured after
+       * the layout settles, skipped when the card already fits on screen, and
+       * without smooth scrolling for a visitor who asked for reduced motion.
+       */
+      function scrollToBookedCard(card: HTMLElement) {
+        const gap = 16;
+        const top = pinnedTopOffset() + gap;
+        const rect = card.getBoundingClientRect();
+        if (rect.top >= top && rect.bottom <= window.innerHeight) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({
+          top: Math.max(0, window.scrollY + rect.top - top),
+          behavior: reduce ? 'auto' : 'smooth',
+        });
+      }
+
       // Reclaim's embed posts MEETING_BOOKED to its parent when a time is
       // confirmed. Only a message from Reclaim's origin AND from the frame this
-      // page created is believed; it changes the wording and nothing else.
+      // page created is believed. It ends the booking step: the frame (whose
+      // own confirmation offers "Book another meeting") is removed, the
+      // fallback lines go, and the confirmation card takes the frame's place.
       window.addEventListener('message', (e) => {
         if (e.origin !== RECLAIM_ORIGIN) return;
         if (!embedFrame || e.source !== embedFrame.contentWindow) return;
         const type = (e.data as { type?: unknown } | null)?.type;
         if (type !== 'MEETING_BOOKED') return;
+
+        const start = bookedStartTime(e.data);
+        const when = start ? formatBookedTime(start) : null;
+
+        // Dropping the frame reference also makes any repeat message a no-op.
+        embedFrame = null;
+        if (embedCard) {
+          embedCard.replaceChildren();
+          embedCard.hidden = true;
+        }
+        if (linkFallback) linkFallback.hidden = true;
+        if (noTimeNote) noTimeNote.hidden = true;
+
         headingEl.textContent = bookedFirstName ? `See You Soon, ${bookedFirstName}` : 'See You Soon';
         if (doneSubheadEl) {
           doneSubheadEl.textContent = 'Your application is in and your tour is on the calendar.';
         }
-        if (bookedNote) bookedNote.hidden = false;
+        if (bookedTime && bookedDate && bookedClock) {
+          bookedDate.textContent = when?.date ?? '';
+          bookedClock.textContent = when?.clock ?? '';
+          bookedTime.hidden = !when;
+        }
+        if (bookedCard) {
+          bookedCard.hidden = false;
+          // Focus first, then scroll: a focus change can itself move the page,
+          // so the explicit scroll has to be the last word. Focus is what
+          // announces the card to a screen reader.
+          bookedHeading?.focus({ preventScroll: true });
+          requestAnimationFrame(() => scrollToBookedCard(bookedCard));
+        }
       });
 
       form.addEventListener('submit', async (e) => {
