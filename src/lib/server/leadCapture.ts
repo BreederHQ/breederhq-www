@@ -409,18 +409,179 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
 }
 
 /**
- * Send email notification via Resend
+ * Why no reminder is scheduled for a launch_waitlist submission, as the
+ * platform's insert response names it.
  */
-export async function sendToResend(lead: EnrichedLead): Promise<boolean> {
-  const resendApiKey = import.meta.env.RESEND_API_KEY;
-  const notificationEmail = import.meta.env.NOTIFICATION_EMAIL;
+export type TourReminderSkipReason =
+  | 'booked'
+  | 'closed'
+  | 'recent_reminder'
+  | 'superseded'
+  | 'not_scheduled';
 
-  if (!resendApiKey || !notificationEmail) {
-    console.log('⚠️ Resend not configured, skipping email notification');
-    return false;
+/**
+ * The applicant's tour status, as the platform reports it in its insert
+ * response for a launch_waitlist submission.
+ */
+export interface TourStatus {
+  status: 'booked' | 'not_booked';
+  bookedStartTime: string | null;
+  reminderDueAt: string | null;
+  reminderSkipReason: TourReminderSkipReason | null;
+}
+
+/** What the platform channel reports: whether the lead was recorded, and its tour status when the platform sent a valid one. */
+export interface PlatformResult {
+  ok: boolean;
+  tour?: TourStatus;
+}
+
+const TOUR_REMINDER_SKIP_REASONS: ReadonlySet<string> = new Set([
+  'booked',
+  'closed',
+  'recent_reminder',
+  'superseded',
+  'not_scheduled',
+]);
+
+/** An ISO 8601 instant with an explicit offset, the only time shape the platform sends. */
+const ISO_INSTANT = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:Z|[+-](\d{2}):(\d{2}))$/;
+
+/**
+ * True only for a real instant in that shape. Date.parse normalizes some
+ * impossible values (Feb 31 becomes Mar 3), so each calendar and clock
+ * component is checked to survive a round trip unchanged.
+ */
+function isIsoInstant(value: unknown): value is string {
+  if (typeof value !== 'string') return false;
+  const m = ISO_INSTANT.exec(value);
+  if (!m || !Number.isFinite(Date.parse(value))) return false;
+
+  const [year, month, day, hour, minute] = [m[1], m[2], m[3], m[4], m[5]].map(Number);
+  const second = m[6] === undefined ? 0 : Number(m[6]);
+  const local = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
+  const roundTrips =
+    local.getUTCFullYear() === year &&
+    local.getUTCMonth() === month - 1 &&
+    local.getUTCDate() === day &&
+    local.getUTCHours() === hour &&
+    local.getUTCMinutes() === minute &&
+    local.getUTCSeconds() === second;
+  const offsetValid =
+    m[7] === undefined || (Number(m[7]) <= 23 && Number(m[8]) <= 59);
+  return roundTrips && offsetValid;
+}
+
+/**
+ * Read the `tour` object out of the platform's insert response.
+ *
+ * Returns undefined for anything that is not exactly the documented shape: a
+ * missing object (an API that predates it), a missing field, an unknown status
+ * or reason, an unparseable time, or a not-booked status that carries neither a
+ * reminder time nor a reason for having none. The alert then says the status is
+ * unavailable, which is true, instead of stating something the platform did not
+ * say.
+ */
+export function parseTourStatus(value: unknown): TourStatus | undefined {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return undefined;
+  const v = value as Record<string, unknown>;
+
+  if (v.status !== 'booked' && v.status !== 'not_booked') return undefined;
+  if (v.bookedStartTime !== null && !isIsoInstant(v.bookedStartTime)) return undefined;
+  if (v.reminderDueAt !== null && !isIsoInstant(v.reminderDueAt)) return undefined;
+  if (
+    v.reminderSkipReason !== null &&
+    (typeof v.reminderSkipReason !== 'string' || !TOUR_REMINDER_SKIP_REASONS.has(v.reminderSkipReason))
+  ) {
+    return undefined;
+  }
+  if (v.status === 'not_booked' && v.reminderDueAt === null && v.reminderSkipReason === null) {
+    return undefined;
   }
 
-  const emailHtml = `
+  return {
+    status: v.status,
+    bookedStartTime: v.bookedStartTime as string | null,
+    reminderDueAt: v.reminderDueAt as string | null,
+    reminderSkipReason: v.reminderSkipReason as TourReminderSkipReason | null,
+  };
+}
+
+/** Breeder-facing times in the alert are Central, where the founders work. */
+const ALERT_TIME_ZONE = 'America/Chicago';
+
+function centralParts(iso: string, withTime: boolean): Record<string, string> {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: ALERT_TIME_ZONE,
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    ...(withTime ? { hour: 'numeric', minute: '2-digit', hour12: true } : {}),
+  }).formatToParts(new Date(iso));
+  const out: Record<string, string> = {};
+  for (const p of parts) out[p.type] = p.value;
+  return out;
+}
+
+/** "Tue Oct 6, 4:33 AM CT". */
+export function formatCentralDateTime(iso: string): string {
+  const p = centralParts(iso, true);
+  return `${p.weekday} ${p.month} ${p.day}, ${p.hour}:${p.minute} ${p.dayPeriod} CT`;
+}
+
+/** "Tue Oct 6", with the year added when it is not the current Central year. */
+export function formatCentralDate(iso: string, now: Date): string {
+  const p = centralParts(iso, false);
+  const currentYear = centralParts(now.toISOString(), false).year;
+  return p.year === currentYear
+    ? `${p.weekday} ${p.month} ${p.day}`
+    : `${p.weekday} ${p.month} ${p.day}, ${p.year}`;
+}
+
+/**
+ * The one line the New Lead alert shows under "Tour" for a launch_waitlist
+ * submission. `now` decides whether a booked start is still ahead.
+ */
+export function describeTour(tour: TourStatus | undefined, now: Date): string {
+  if (!tour) return 'Tour status unavailable.';
+
+  if (tour.status === 'booked') {
+    if (!tour.bookedStartTime) return 'Already booked.';
+    return Date.parse(tour.bookedStartTime) > now.getTime()
+      ? `Already booked for ${formatCentralDateTime(tour.bookedStartTime)}.`
+      : `Toured on ${formatCentralDate(tour.bookedStartTime, now)}.`;
+  }
+
+  if (tour.reminderDueAt) {
+    return `Not booked yet. If they haven't booked by ${formatCentralDateTime(tour.reminderDueAt)}, they'll get one reminder email with their booking link.`;
+  }
+
+  switch (tour.reminderSkipReason) {
+    case 'closed':
+      return 'Not booked yet. No reminder will be sent: this application is closed.';
+    case 'recent_reminder':
+      return 'Not booked yet. No reminder will be sent: they already got one this week.';
+    case 'superseded':
+      return 'Not booked yet. No reminder will be sent: a newer application from them is pending.';
+    case 'not_scheduled':
+      return 'Not booked yet. No reminder is scheduled for this application.';
+    case 'booked':
+      // No current booking, but a booking event landed at or after this
+      // application, so they acted on the link and no reminder follows.
+      return 'Not booked yet. No reminder will be sent.';
+    default:
+      // parseTourStatus never yields this combination.
+      return 'Tour status unavailable.';
+  }
+}
+
+/**
+ * The New Lead alert body. `tour` is the platform's answer for this
+ * submission, absent when the platform did not send a valid one.
+ */
+export function buildLeadAlertHtml(lead: EnrichedLead, tour: TourStatus | undefined, now: Date = new Date()): string {
+  return `
     <h2>🎯 New Lead from BreederHQ Website</h2>
 
     <h3>Contact Information:</h3>
@@ -434,6 +595,11 @@ export async function sendToResend(lead: EnrichedLead): Promise<boolean> {
         return list.length > 0 ? `<li><strong>Interested in:</strong><ul>${list.map((i) => `<li>${escapeHtml(i)}</li>`).join('')}</ul></li>` : '';
       })()}
     </ul>
+
+    ${lead.source === 'launch_waitlist' ? `
+      <h3>Tour:</h3>
+      <p>${escapeHtml(describeTour(tour, now))}</p>
+    ` : ''}
 
     ${lead.message ? `
       <h3>Message:</h3>
@@ -474,6 +640,21 @@ export async function sendToResend(lead: EnrichedLead): Promise<boolean> {
 
     <p><em>Received: ${escapeHtml(lead.metadata?.timestamp || new Date().toISOString())}</em></p>
   `;
+}
+
+/**
+ * Send email notification via Resend
+ */
+export async function sendToResend(lead: EnrichedLead, tour?: TourStatus): Promise<boolean> {
+  const resendApiKey = import.meta.env.RESEND_API_KEY;
+  const notificationEmail = import.meta.env.NOTIFICATION_EMAIL;
+
+  if (!resendApiKey || !notificationEmail) {
+    console.log('⚠️ Resend not configured, skipping email notification');
+    return false;
+  }
+
+  const emailHtml = buildLeadAlertHtml(lead, tour);
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
@@ -755,7 +936,108 @@ const DEFAULT_FOLLOWUP: InterestFollowUp = {
   ],
 };
 
-export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> {
+/** What one platform call needs: the API base URL and the shared lead secret. */
+export interface PlatformConfig {
+  apiUrl: string;
+  secret: string;
+  timeoutMs?: number;
+}
+
+/** One line for the applicant's Founders timeline. */
+export interface ApplicantEmailLogEntry {
+  submissionKey: string;
+  kind: 'application_confirmation';
+  subject: string;
+  status: 'sent' | 'failed';
+}
+
+/**
+ * The email-log call waits at most this long. It runs after the applicant's
+ * confirmation and before /api/contact answers, so its bound is the most it
+ * can add to the applicant's wait.
+ */
+const EMAIL_LOG_TIMEOUT_MS = 2000;
+
+/**
+ * Record an email sent to an applicant on their Founders timeline.
+ *
+ * Never throws and never reports failure: the timeline line is a convenience
+ * for whoever reads the timeline, and the applicant's response must not wait on
+ * it past its bound or fail because of it. A 404 is an API that predates the
+ * endpoint, which is expected while www ships ahead of the API.
+ */
+export async function postApplicantEmailLog(entry: ApplicantEmailLogEntry, config: PlatformConfig): Promise<void> {
+  try {
+    const response = await fetch(`${config.apiUrl}/marketing-leads/email-log`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-bhq-lead-secret': config.secret,
+      },
+      signal: AbortSignal.timeout(config.timeoutMs ?? EMAIL_LOG_TIMEOUT_MS),
+      body: JSON.stringify(entry),
+    });
+
+    if (response.status === 404) {
+      console.log('Platform email log endpoint not available, skipping');
+      return;
+    }
+    if (!response.ok) {
+      console.error(`Platform email log failed: ${response.status}`);
+      return;
+    }
+    console.log('✅ Applicant email recorded on the platform timeline');
+  } catch (error) {
+    console.error('Failed to record applicant email on the platform:', error);
+  }
+}
+
+/**
+ * Send the Founders' Program application confirmation, then record it on the
+ * applicant's timeline when `platform` is given.
+ *
+ * The timeline line states only what Resend answered: a 2xx is `sent` and a 4xx
+ * is `failed`. A 5xx or a network error is not a definite answer (the message
+ * may have gone out), so nothing is recorded rather than something that may be
+ * untrue.
+ */
+export async function sendWaitlistConfirmation(
+  lead: EnrichedLead,
+  config: { resendApiKey: string; platform?: PlatformConfig }
+): Promise<boolean> {
+  const reply = buildWaitlistReply(lead);
+  const outcome = await deliverAutoReply(config.resendApiKey, lead.email, {
+    // A person's name on the From line: this is a note from two people,
+    // not a system notice. Replies land with a person.
+    from: 'Aaron and Carie at BreederHQ <hello@mail.breederhq.com>',
+    replyTo: 'aaron@breederhq.com',
+    ...reply,
+  });
+
+  if (config.platform && lead.submission_key && (outcome === 'sent' || outcome === 'rejected')) {
+    await postApplicantEmailLog(
+      {
+        submissionKey: lead.submission_key,
+        kind: 'application_confirmation',
+        subject: reply.subject,
+        status: outcome === 'sent' ? 'sent' : 'failed',
+      },
+      config.platform
+    );
+  }
+
+  return outcome === 'sent';
+}
+
+/**
+ * @param options.platformRecorded whether the platform recorded this
+ *   submission. The confirmation is logged on the timeline only then: the log
+ *   is keyed by the submission, and an unrecorded one has nothing to attach to.
+ */
+export async function sendAutoReplyToLead(
+  lead: EnrichedLead,
+  options: { platformRecorded?: boolean } = {}
+): Promise<boolean> {
   const resendApiKey = import.meta.env.RESEND_API_KEY;
 
   if (!resendApiKey) {
@@ -768,13 +1050,11 @@ export async function sendAutoReplyToLead(lead: EnrichedLead): Promise<boolean> 
   }
 
   if (lead.source === 'launch_waitlist') {
-    const reply = buildWaitlistReply(lead);
-    return deliverAutoReply(lead.email, {
-      // A person's name on the From line: this is a note from two people,
-      // not a system notice. Replies land with a person.
-      from: 'Aaron and Carie at BreederHQ <hello@mail.breederhq.com>',
-      replyTo: 'aaron@breederhq.com',
-      ...reply,
+    const apiUrl = import.meta.env.PLATFORM_API_URL;
+    const secret = import.meta.env.MARKETING_LEAD_SECRET;
+    return sendWaitlistConfirmation(lead, {
+      resendApiKey,
+      platform: options.platformRecorded && apiUrl && secret ? { apiUrl, secret } : undefined,
     });
   }
 
@@ -911,7 +1191,7 @@ The BreederHQ Team
 ---
 BreederHQ - https://breederhq.com - info@breederhq.com`;
 
-  return deliverAutoReply(lead.email, {
+  const outcome = await deliverAutoReply(resendApiKey, lead.email, {
     from: 'BreederHQ <hello@mail.breederhq.com>',
     // Booth signups were met by a person, so a reply lands with a person.
     replyTo: lead.source === 'dog_show_booth' ? 'aaron@breederhq.com' : 'info@breederhq.com',
@@ -921,19 +1201,21 @@ BreederHQ - https://breederhq.com - info@breederhq.com`;
     html: emailHtml,
     text: emailText,
   });
+  return outcome === 'sent';
 }
 
-/** Send one auto-reply through Resend. Never throws: a failed reply is logged and reported as false. */
+/**
+ * Resend's answer to one auto-reply: `sent` (2xx), `rejected` (4xx, definitely
+ * not sent), or `unknown` (a 5xx or no answer at all, so it may have gone out).
+ */
+type AutoReplyOutcome = 'sent' | 'rejected' | 'unknown';
+
+/** Send one auto-reply through Resend. Never throws: a failed reply is logged and reported by its outcome. */
 async function deliverAutoReply(
+  resendApiKey: string,
   to: string,
   message: { from: string; replyTo: string; subject: string; html: string; text: string }
-): Promise<boolean> {
-  const resendApiKey = import.meta.env.RESEND_API_KEY;
-  if (!resendApiKey) {
-    console.log('⚠️ Resend not configured, skipping auto-reply');
-    return false;
-  }
-
+): Promise<AutoReplyOutcome> {
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -952,15 +1234,18 @@ async function deliverAutoReply(
     });
 
     if (!response.ok) {
-      console.error('Auto-reply email failed:', response.status, await response.text());
-      return false;
+      // Decided from the status before the body is read, so an unreadable
+      // body cannot turn a definite refusal into an unknown outcome.
+      const outcome: AutoReplyOutcome = response.status >= 400 && response.status < 500 ? 'rejected' : 'unknown';
+      console.error('Auto-reply email failed:', response.status, await response.text().catch(() => ''));
+      return outcome;
     }
 
     console.log('✅ Auto-reply sent to lead:', to);
-    return true;
+    return 'sent';
   } catch (error) {
     console.error('Failed to send auto-reply:', error);
-    return false;
+    return 'unknown';
   }
 }
 
@@ -1083,15 +1368,25 @@ function firstForwardedHop(raw?: string): string | undefined {
  * five are notifications. It is deliberately NOT a gate: a failure here still
  * leaves the applicant captured in Slack and email, and refusing a real
  * applicant over a transient database problem is the worse outcome.
+ *
+ * Its answer also carries the applicant's tour status for a launch_waitlist
+ * submission, which the New Lead alert reports.
  */
-export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
+export async function sendToPlatform(lead: EnrichedLead): Promise<PlatformResult> {
   const apiUrl = import.meta.env.PLATFORM_API_URL;
   const secret = import.meta.env.MARKETING_LEAD_SECRET;
 
   if (!apiUrl || !secret) {
     console.log('⚠️ Platform lead capture not configured, skipping');
-    return false;
+    return { ok: false };
   }
+
+  return postLeadToPlatform(lead, { apiUrl, secret });
+}
+
+/** The platform insert itself, with its configuration passed in. Never throws. */
+export async function postLeadToPlatform(lead: EnrichedLead, config: PlatformConfig): Promise<PlatformResult> {
+  const { apiUrl, secret } = config;
 
   // Resolved through the map first: the site's source values are finer-grained
   // than the database's, and several of them mean the same thing to it.
@@ -1101,21 +1396,22 @@ export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
     console.error(
       `❌ PLATFORM_LEAD_CAPTURE_REJECTED: unknown source "${rawSource}" — map it in SOURCE_TO_PLATFORM, or add it to the DB CHECK constraint and PLATFORM_SOURCES together`
     );
-    return false;
+    return { ok: false };
   }
 
   const { origin, path } = splitReferrer(lead.metadata?.referrer);
 
   try {
     // Bounded so a hanging API cannot stall the applicant's response:
-    // processLead awaits every channel, so the slowest one sets the floor.
+    // processLead awaits this before every other channel, so this bound is
+    // added to every response. The same signal bounds reading the body.
     const response = await fetch(`${apiUrl}/marketing-leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-bhq-lead-secret': secret,
       },
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(config.timeoutMs ?? 3000),
       body: JSON.stringify({
         email: lead.email,
         submissionKey: lead.submission_key,
@@ -1164,15 +1460,28 @@ export async function sendToPlatform(lead: EnrichedLead): Promise<boolean> {
       } else {
         console.error(`Platform lead capture failed (transient): ${response.status}`);
       }
-      return false;
+      return { ok: false };
     }
 
     console.log('✅ Lead recorded in platform database');
-    return true;
+
+    // The lead is recorded from here on, so nothing below may report
+    // otherwise: an unreadable or unexpected body only leaves `tour` out.
+    let tour: TourStatus | undefined;
+    try {
+      const body: unknown = await response.json();
+      tour = parseTourStatus(
+        typeof body === 'object' && body !== null ? (body as Record<string, unknown>).tour : undefined
+      );
+    } catch (error) {
+      console.error('Platform lead capture response unreadable; tour status unavailable:', error);
+      tour = undefined;
+    }
+    return tour ? { ok: true, tour } : { ok: true };
   } catch (error) {
     // Timeout and network failures are transient by nature.
     console.error('Failed to record lead in platform:', error);
-    return false;
+    return { ok: false };
   }
 }
 
@@ -1236,21 +1545,35 @@ export async function processLead(
     // Continue processing even if enrichment fails
   }
 
-  // Step 2: Distribute to all channels (run in parallel)
+  // Step 2: Record the lead in the platform first. Its answer carries the
+  // applicant's tour status, which the New Lead alert reports, and the
+  // confirmation email is logged on the timeline only once the submission it
+  // belongs to is recorded. Bounded at 3 s inside sendToPlatform.
+  let platform: PlatformResult;
+  try {
+    platform = await sendToPlatform(enrichedLead);
+  } catch (error) {
+    console.error('Platform lead capture error:', error);
+    platform = { ok: false };
+  }
+
+  // Step 3: Distribute to the other channels (run in parallel)
   const distributionPromises = [
     sendToSlack(enrichedLead),
-    sendToResend(enrichedLead),
+    sendToResend(enrichedLead, platform.tour),
     sendToHubSpot(enrichedLead),
     sendToZapier(enrichedLead),
-    sendAutoReplyToLead(enrichedLead),
-    sendToPlatform(enrichedLead),
+    sendAutoReplyToLead(enrichedLead, { platformRecorded: platform.ok }),
   ];
 
   const results = await Promise.allSettled(distributionPromises);
 
-  // Log results
-  const successCount = results.filter(r => r.status === 'fulfilled' && r.value === true).length;
-  console.log(`✅ Lead distributed to ${successCount}/${results.length} channels`);
+  // Log results. The platform counts as one channel, as it did when it ran
+  // inside the parallel group.
+  const channelCount = results.length + 1;
+  const successCount =
+    results.filter(r => r.status === 'fulfilled' && r.value === true).length + (platform.ok ? 1 : 0);
+  console.log(`✅ Lead distributed to ${successCount}/${channelCount} channels`);
 
   // A channel returns false when it is simply not configured, so a low count is
   // normal and not an error. Zero is different: nothing recorded the lead

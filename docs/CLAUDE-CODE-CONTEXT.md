@@ -361,13 +361,21 @@ POST /api/contact.ts
        ├─ Extract UTM parameters
        │
        ▼
-leadCapture.ts (parallel execution)
+leadCapture.ts
        │
        ├─ Clearbit enrichment (if configured)
+       ├─ Platform record (POST /marketing-leads, awaited first, 3 s bound)
+       │     answer carries the applicant's tour status (launch_waitlist)
+       │
+       ▼
+  parallel execution
        ├─ Slack webhook notification
        ├─ HubSpot CRM creation (if configured)
-       ├─ Resend email notification (if configured)
-       └─ Zapier webhook (if configured)
+       ├─ Resend New Lead alert (if configured; launch_waitlist adds a Tour section)
+       ├─ Zapier webhook (if configured)
+       └─ Applicant auto-reply (opted-in sources); for launch_waitlist the
+             confirmation is then logged on the Founders timeline
+             (POST /marketing-leads/email-log, 2 s bound, a 404 is ignored)
        │
        ▼
 Return success response
