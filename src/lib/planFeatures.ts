@@ -221,8 +221,8 @@ export const planCategories: FeatureCategory[] = [
       },
       { name: "Scout AI Repro Insight", note: "Dogs" },
       {
-        name: "Health report generator",
-        note: "Scout AI builds PIN-protected PDF reports for vets and buyers; 72-hour expiring share links, no account needed",
+        name: "Vet View health reports",
+        note: "Open a health report on screen, download a PDF, or share a PIN-protected link that expires after 72 hours; your vet needs no account. Scout AI points you to it",
       },
       {
         name: "CSV & print export from any answer",

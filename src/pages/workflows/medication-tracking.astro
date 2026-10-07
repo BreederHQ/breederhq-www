@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: 'Can I share health records with my vet?',
-    answer: 'Yes. Generate a full health report as a PDF, email it directly to your vet, or create a secure share link with a PIN code. Share links expire after 72 hours and lock after failed attempts.'
+    answer: 'Yes, through Vet View. Open an animal\'s health report on screen, download it as a PDF, or use Share With Vet to create a link and a four-digit PIN your vet opens in a browser with no account. The link expires after 72 hours, you can revoke it at any time, and five wrong PIN entries pause it. BreederHQ does not email health reports: a file sent by email cannot be withdrawn or expire, so the link is the way to share under your control.'
   },
   {
     question: 'Does the Mobile Companion app support medication tracking?',
@@ -52,14 +52,14 @@ const howTo = {
     { name: 'Monitor withdrawal periods', text: 'For competition or sale animals, the withdrawal countdown updates with every dose. A red badge shows days remaining. When the withdrawal clears, the badge turns green.' },
     { name: 'Upload supporting documents', text: 'Attach prescriptions, vet invoices, or lab results to any treatment course. Upload a PDF or photo and Scout AI auto-extracts medication details.' },
     { name: 'Use group medication for herds or kennels', text: 'For group treatments like deworming, select multiple animals and log the medication once. Each animal gets individual tracking.' },
-    { name: 'Share health records', text: 'Download a full health report PDF, email it to your vet, or generate a secure share link with PIN protection. Print a stall or kennel card for at-a-glance reference.' }
+    { name: 'Share health records with Vet View', text: 'Open the Vet View from the animal\'s Health tab to read the report on screen, then download a PDF or choose Share With Vet to create a PIN-protected link your vet can open without an account. Print a stall card for at-a-glance reference.' }
   ]
 };
 ---
 
 <BaseLayout
   title="Medication Tracking That Keeps Up With You | BreederHQ"
-  description="BreederHQ keeps medication records organized: treatment courses, automatic withdrawal countdowns, and shareable health reports. See medication tracking."
+  description="BreederHQ keeps medication records organized: treatment courses, automatic withdrawal countdowns, and a Vet View for your vet. See medication tracking."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
   howTo={howTo}
@@ -87,7 +87,7 @@ const howTo = {
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
         <p class="text-gray-700 leading-relaxed">
-          You already manage medications for your animals, from routine deworming to post-surgical antibiotics to withdrawal compliance for competition or sale. BreederHQ keeps the record-keeping organized: treatment courses with dose-by-dose logging, automatic withdrawal countdowns, next-dose reminders that push to the BreederHQ Mobile Companion app, and shareable health reports for vets and buyers.
+          You already manage medications for your animals, from routine deworming to post-surgical antibiotics to withdrawal compliance for competition or sale. BreederHQ keeps the record-keeping organized: treatment courses with dose-by-dose logging, automatic withdrawal countdowns, next-dose reminders that push to the BreederHQ Mobile Companion app, and a Vet View that turns your records into a health report for your vet.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
@@ -314,25 +314,28 @@ const howTo = {
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Shareable health records</h3>
+          <h3 class="text-2xl font-bold mb-4">Vet View for your vet</h3>
           <ul class="space-y-2 text-lg text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Full health report as a downloadable PDF</span>
+              <span>Current medications, 12 months of medication history, and supplements flow into one health report</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Email directly to your vet</span>
+              <span>Download the report as a PDF</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Secure share link with PIN protection</span>
+              <span>Share With Vet creates a PIN-protected link you can revoke, no account needed for your vet</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
               <span>Printable stall card with current medications and dosages</span>
             </li>
           </ul>
+          <p class="mt-4 text-lg text-gray-700">
+            <a href="/workflows/vet-view" class="text-[hsl(24,95%,53%)] hover:underline">See how Vet View works →</a>
+          </p>
         </div>
       </div>
     </div>
@@ -344,7 +347,7 @@ const howTo = {
       <h2 class="text-4xl font-bold mb-8">How BreederHQ brings it all together</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        Create treatment courses with dosage, frequency, and withdrawal information in the web app. Log each dose as it's administered from your desk — or from the BreederHQ Mobile Companion app when you're at the barn or kennel. Withdrawal periods recalculate automatically with every dose. Next-dose reminders push to the Mobile Companion so you never miss one. Upload vet documents and let Scout AI extract medication details. Generate health reports and share them securely with your vet, trainer, or a buyer.
+        Create treatment courses with dosage, frequency, and withdrawal information in the web app. Log each dose as it's administered from your desk — or from the BreederHQ Mobile Companion app when you're at the barn or kennel. Withdrawal periods recalculate automatically with every dose. Next-dose reminders push to the Mobile Companion so you never miss one. Upload vet documents and let Scout AI extract medication details. Open a Vet View and share it with your vet through a PIN-protected link, or download it as a PDF.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
@@ -382,7 +385,7 @@ const howTo = {
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span>Need to share health records with vets, trainers, or buyers</span>
+          <span>Need to share health records with their vet</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -491,7 +494,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Generate a full health report as a PDF, email it directly to your vet, or create a secure share link with a PIN code. Share links expire after 72 hours and lock after failed attempts.</p>
+          <p>Yes, through Vet View. Open an animal's health report on screen, download it as a PDF, or use Share With Vet to create a link and a four-digit PIN your vet opens in a browser with no account. The link expires after 72 hours, you can revoke it at any time, and five wrong PIN entries pause it. BreederHQ does not email health reports: a file sent by email cannot be withdrawn or expire, so the link is the way to share under your control. <a href="/workflows/vet-view" class="text-[hsl(24,95%,53%)] hover:underline">See Vet View</a>.</p>
         </div>
       </details>
 
@@ -526,6 +529,11 @@ const howTo = {
     <div class="max-w-4xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Learn more</h2>
       <div class="space-y-3 text-lg">
+        <div>
+          <a href="/workflows/vet-view" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Vet View
+          </a>
+        </div>
         <div>
           <a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">
             → Genetics & Health Testing

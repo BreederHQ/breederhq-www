@@ -1,0 +1,460 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Vet View', url: '/workflows/vet-view' }
+];
+
+const faqs = [
+  {
+    question: 'What is Vet View?',
+    answer: 'Vet View is a read-only health report built from the records you already keep in BreederHQ. It exists for one adult animal, one offspring, or a litter you choose. You can read it on screen, download it as a PDF, or share it with your vet through a link and PIN so they can read it in a browser with no BreederHQ account.'
+  },
+  {
+    question: 'Does my vet need a BreederHQ account?',
+    answer: 'No. Share With Vet creates a link and a four-digit PIN. Your vet opens the link in a browser, enters the PIN, and reads the report. The page is read-only, and your vet can print it, switch between light and dark, or download a PDF.'
+  },
+  {
+    question: 'How does sharing protect my data?',
+    answer: 'The PIN is shown once, when you create the link, and cannot be looked up later. The link expires 72 hours after you create it. Five wrong PIN entries pause the link. A session ends after 30 minutes of inactivity and never lasts more than 8 hours. You can end one vet\'s session, end every session, or revoke the link so it stops working for everyone. You can also see how many times each link was opened and how many sessions are live.'
+  },
+  {
+    question: 'Can I email the report to my vet?',
+    answer: 'BreederHQ does not email health reports. An emailed file cannot be withdrawn, never expires, carries no PIN, and can be forwarded freely. If you want to send a file, download the PDF and attach it yourself, understanding that a copy you send is outside the link controls. To keep control, use Share With Vet.'
+  },
+  {
+    question: 'Will my vet see my private notes?',
+    answer: 'Only if you choose. Your notes on offspring, and the notes on an adult animal\'s health test entries, are left out by default. For a link, an Include Notes checkbox is unticked by default, and the choice is fixed for the life of the link. Links that include notes carry a Notes Included badge in your list. To change the choice, revoke the link and create a new one.'
+  },
+  {
+    question: 'What is left out of the report?',
+    answer: 'For offspring and litters, the report carries no money, no buyer or contact details, and no staff identity. For an adult animal, buyer and sale information is left out, and so are the breeding profile and breeding plans, because those describe your breeding business rather than the animal\'s health. A section with no records says None recorded rather than disappearing.'
+  },
+  {
+    question: 'Can I show a vet a whole litter at once?',
+    answer: 'Yes. Open the breeding plan, choose Vet View in the Rearing tools, and tick the birth dam and the offspring the vet should see. Everyone starts ticked, including any offspring that died or were stillborn, and you untick whoever the vet does not need. A single report holds up to 200 offspring. The vet sees a litter overview, a page for the dam when you include her, and a page for each animal.'
+  },
+  {
+    question: 'Does Vet View diagnose problems?',
+    answer: 'No. The report states what was recorded and leaves the clinical judgment to your vet. Flags such as Below Birth Weight, Low Birth Weight, or Supplemental Feeding are worked out from your records and describe the numbers. An animal with no weigh-ins shows No Weigh-Ins Yet rather than looking fine.'
+  },
+  {
+    question: 'Does Vet View work on my phone?',
+    answer: 'Yes. The BreederHQ mobile app has Vet View for adult animals, offspring, and litters, along with Share With Vet and Download PDF. On a phone the PDF opens your share sheet, so you can save it to Files or send it with the app you choose. For an adult animal, the in-person screen is designed for handing your phone to the vet at the appointment.'
+  },
+  {
+    question: 'Who on my team can open and share a Vet View?',
+    answer: 'Staff permissions control it. Opening a Vet View and sharing one are separate permissions, so a team member may be able to do one and not the other. A button you do not have permission for is not shown. If a button is missing, an owner or admin can tell you which permission your role has.'
+  },
+  {
+    question: 'Is sharing available for offspring and litters on every account?',
+    answer: 'Sharing links for offspring and litters is switched on account by account. If creating one tells you sharing with a vet is not available yet, it has not been turned on for your account. Links for an adult animal are not held back, and you can always open the Vet View and download a PDF.'
+  }
+];
+
+const howTo = {
+  name: 'How to Share a Health Record With Your Vet Using Vet View',
+  description: 'A step-by-step guide to opening a Vet View for an animal, offspring, or litter, downloading a PDF, and sharing a PIN-protected link with a vet.',
+  steps: [
+    { name: 'Open the Vet View', text: 'For an adult animal, open its profile, go to the Health tab, and use the Vet View card. For an offspring, use the Vet View button in its record. For a litter, open the breeding plan and choose Vet View in the Rearing tools.' },
+    { name: 'Choose who the vet sees', text: 'For a litter, tick the birth dam and the offspring the vet should see. Decide whether to include your notes.' },
+    { name: 'Read it or download a PDF', text: 'Read the report on screen at the appointment, or choose Download PDF to save a copy as it stands today.' },
+    { name: 'Create a link with Share With Vet', text: 'To let a vet read it without an account, choose Share With Vet, add an optional label such as the clinic name, and create the link. The link expires 72 hours after you create it.' },
+    { name: 'Send the link and PIN separately', text: 'The four-digit PIN is shown once. Send the link and the PIN by different routes, for example the link by email and the PIN by text.' },
+    { name: 'End a session or revoke the link', text: 'End Session signs one vet out. Revoke withdraws the link for everyone. Revoke as soon as you no longer want the link to work.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Vet View: Health Reports Your Vet Can Read | BreederHQ"
+  description="Vet View turns your records into a read-only health report for an animal, an offspring, or a litter. Download a PDF or share a PIN-protected link."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Vet View</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Vet View: Your Records, Ready for the Appointment.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Vet View gathers what a vet asks about into one read-only report: for one adult animal, one offspring, or a litter you choose. Read it on screen, download a PDF, or use Share With Vet to create a PIN-protected link your vet opens with no account. You decide what is included, the link expires, and you can revoke it at any time.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        A vet visit goes better when the history is in front of the vet instead of in your head. Vet View puts the weights, medications, vaccinations, and health results you already recorded on one page, laid out for a vet to read.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Why a Visit Goes Better -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Why a Vet Visit Goes Better With the Record in Hand</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The questions are predictable. What is she on right now? When was the last vaccine? How has this newborn been gaining? What did we give it, and when? Without the record, the answers come from memory, text messages, and a stack of invoices:
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A medication history that lives across invoices and notes apps</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A newborn whose weigh-ins are in a notebook at home</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A litter check where one animal is the worry and the vet wants the rest of the litter for comparison</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3">•</span>
+          <span>A vet at another clinic who needs the history before the animal arrives</span>
+        </li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        The more you record in BreederHQ, the more complete the report. Vet View does not ask you to build anything new for the visit. It reads what is already there.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Three Cases -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">One Report for an Animal, an Offspring, or a Litter</h2>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">An Adult Animal</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Open the animal's profile, go to the Health tab, and use the Vet View card. The report covers:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Identification, registry numbers, and parentage with the COI percentage</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Allergies and adverse reactions recorded from medication doses</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Current medications with dose, route, frequency, and next due date, plus 12 months of medication history</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Supplements and how many doses were given</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Vaccinations with the last date, expiry, and status</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Health clearances you recorded, such as OFA results, and trait history over time</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Genetic results, with any result still awaiting your review labeled as such, never shown as final</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A reproductive history summary and the emergency vet</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            The breeding profile and breeding plans are not part of it. They describe your breeding business, not the animal's health.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">One Offspring</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            When a newborn is at the vet, the question is how it has been doing since birth. The report shows:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Birth details, identification, and a short line about the animal</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Birth, latest, change since birth, and lowest weight, with a growth chart and a table behind it</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>The care log, grouped by day in your time zone</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Interventions, treatments and doses, health events, and vaccinations</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Plain flags worked out from your records, such as Below Birth Weight or Supplemental Feeding</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Flags describe what was recorded. They are not a diagnosis, and your vet makes the judgment. Learn more about daily newborn records in <a href="/workflows/offspring-care" class="text-[hsl(24,95%,53%)] hover:underline">Offspring Care</a>.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Whole Litter</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A litter check is one visit, so it is one page. From the breeding plan, you choose the birth dam and the offspring the vet should see. The report then has:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>A litter overview with how many are living, how many need attention, birth weights, and a growth chart for everyone you picked</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A Needs Attention card for each flagged animal</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A page for the dam, when you include her, with her pregnancy timeline, delivery, and care after the birth</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A page for each offspring, with animals that died grouped separately</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Anyone you leave unticked appears nowhere in the report, including in counts and doses.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Sharing -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How Sharing Protects Your Data</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Share With Vet creates a link and a four-digit PIN. Your vet needs no account. You stay in control for as long as the link exists.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The PIN Is Shown Once</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You see the link and the PIN when you create it. The PIN cannot be looked up later, so send the link and the PIN by different routes, for example the link by email and the PIN by text. If you lose the PIN, revoke the link and create a new one.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Links Expire and Can Be Revoked</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A link expires 72 hours after you create it. End Session signs one vet out, End All Sessions signs out everyone, and Revoke withdraws the link so it and its PIN stop working for everyone. Your list shows each link's label, expiry, how many times it was opened, and how many sessions are live.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Sessions and PIN Attempts Are Limited</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Five wrong PIN entries pause the link for a while. A vet session ends after 30 minutes of inactivity and lasts no more than 8 hours in total. Each vet session can download 5 PDFs.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Your Notes Stay Private Unless You Opt In</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The notes you wrote are left out by default. Tick the notes checkbox when you create a link and your vet sees them. The choice is fixed when the link is created, and links that include notes are badged in your list.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The Report Is Always Current</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A link is not a snapshot. It builds the report from your records when the vet opens it, so a change you make while the link is live shows the next time the vet loads the page. A link stops serving on its own if an animal in it was moved, archived, or deleted.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">No Emailed Attachments</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            BreederHQ does not email health reports. An emailed file cannot be withdrawn, never expires, and can be forwarded freely. If you download a PDF and send it yourself, that copy is outside the link controls: revoking a link does not take back a file your vet already saved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: PDF, Mobile, Stall Card -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">PDF, Mobile, and the Stall Card</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Download PDF</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every Vet View has a Download PDF button, and your vet has one on the shared page. The PDF is a snapshot of the moment you create it. A litter PDF is a summary: the overview, the dam, and one page per offspring. An offspring's full record, including the care log and doses, is that offspring's own PDF.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">On Your Phone</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The <a href="/mobile" class="text-[hsl(24,95%,53%)] hover:underline">BreederHQ mobile app</a> has Vet View for adult animals, offspring, and litters, with Share With Vet and Download PDF. On a phone the PDF opens your share sheet, so you can save it to Files or send it with the app you choose. At the appointment, the adult animal's in-person screen lets you hand your phone to the vet: it adds labs and certificates, weight trend, and your contact details.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The Stall Card</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For the barn or kennel, Download Stall Card on the Health tab prints a one-page card with the animal's name and basics, identifiers, current medications with dose and frequency, known allergies and adverse reactions, and the emergency vet contact. It never includes your private notes. If a list is too long for the card, a note says how many rows were not printed. See <a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">Medication Tracking</a> for how those medications get recorded.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Who on Your Team Can Use It</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Staff permissions control who can open a Vet View and who can share one. They are separate, so a team member may have one and not the other, and a button you cannot use is not shown.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Show Your Vet What You Recorded</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Record vaccinations, medications, weights, and health results as you go, and Vet View turns them into a report your vet can read in a minute. Share it with a PIN-protected link, download a PDF, or hand over your phone.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/genetics-and-health-testing" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+          See Health Testing →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Built for Breeders Who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Bring animals or whole litters to the vet and want the history on hand</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Work with a vet who is not at their own clinic and cannot sit beside them</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want to share health records without handing over an emailed file that cannot be taken back</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Have staff who record health and need to know who can open and share it</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Raise offspring and want a vet to see weights and care from birth</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This Might Be Overkill If:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You have one or two pets and your vet keeps all the records</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>You do not record medications, weights, or vaccinations yourself</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Vet View shows what is recorded in BreederHQ. If you have never logged a weight, there is no weight section to show.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 10: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn More</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/workflows/medication-tracking" class="text-[hsl(24,95%,53%)] hover:underline">→ Medication Tracking</a></div>
+        <div><a href="/workflows/genetics-and-health-testing" class="text-[hsl(24,95%,53%)] hover:underline">→ Genetics &amp; Health Testing</a></div>
+        <div><a href="/workflows/offspring-care" class="text-[hsl(24,95%,53%)] hover:underline">→ Offspring Care</a></div>
+        <div><a href="/dogs" class="text-[hsl(24,95%,53%)] hover:underline">→ Dog Breeding Software</a></div>
+        <div><a href="/horses" class="text-[hsl(24,95%,53%)] hover:underline">→ Horse Breeding Software</a></div>
+        <div><a href="/goats" class="text-[hsl(24,95%,53%)] hover:underline">→ Goat Breeding Software</a></div>
+        <div><a href="/mobile" class="text-[hsl(24,95%,53%)] hover:underline">→ Mobile Companion App</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Medication Tracking", description: "Treatment courses, dose logging, withdrawal countdowns.", url: "/workflows/medication-tracking" },
+      { title: "Offspring Care", description: "Weight tracking, anomaly alerts, neonatal dashboard.", url: "/workflows/offspring-care" },
+      { title: "Genetics & Health Testing", description: "Health clearances, genetic results, and carrier status.", url: "/workflows/genetics-and-health-testing" },
+      { title: "Nutrition Tracking", description: "Daily feeding, supplement protocols, weight monitoring.", url: "/workflows/nutrition-tracking" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #A9BAD4;
+    }
+  </style>
+</BaseLayout>
