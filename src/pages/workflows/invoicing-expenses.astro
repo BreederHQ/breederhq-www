@@ -41,6 +41,14 @@ const faqs = [
   {
     question: 'Can I create invoices from my phone?',
     answer: 'No — invoice creation and Stripe invoice management is intentionally a web-app task, where you get the full line-item editor, tax rules, and payment-link workflow. The Mobile Companion is scoped to quick-capture work like snapping receipts, logging expenses, and reviewing invoices on the go. Setup work belongs in the web app; in-the-moment capture belongs in the companion.'
+  },
+  {
+    question: 'Can I track vehicle mileage for my breeding business?',
+    answer: 'Yes. Log business trips per vehicle by entering miles or odometer readings, with a destination and a purpose from a fixed list. Trips link to the animals, buyers, and breeding plans they were for and show on those records. Each trip is valued at the IRS standard mileage rate in effect on its date, and for US accounts the vehicle deduction appears as a line in the Tax Figures on the Tax Year P&L. You can import an existing log from Breeder Cloud Pro or a spreadsheet (.csv or .xlsx) and export your trips. BreederHQ does not track trips automatically; you log them.'
+  },
+  {
+    question: 'Can I log mileage from my phone?',
+    answer: 'Yes. Log trips in the Mobile Companion app, including offline. They sync when you are back online. Vehicles are added and managed in the web app.'
   }
 ];
 ---
@@ -74,7 +82,7 @@ const faqs = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
         <p class="text-gray-700 leading-relaxed">
-          Full invoicing and expense tracking connected to your animals, offspring groups, and breeding plans. Create invoices with deposits, service fees, goods, and discounts. Track payments via 9 methods including Stripe. Log expenses across 12 categories — and when you're at the vet, the feed store, or the show grounds, snap receipt photos right from the BreederHQ Mobile Companion app so paperwork gets captured as it happens. See financial dashboards with outstanding balances, month-to-date metrics, and per-group rollups. Export to CSV for your accountant.
+          Full invoicing and expense tracking connected to your animals, offspring groups, and breeding plans. Create invoices with deposits, service fees, goods, and discounts. Track payments via 9 methods including Stripe. Log expenses across 12 categories — and when you're at the vet, the feed store, or the show grounds, snap receipt photos right from the BreederHQ Mobile Companion app so paperwork gets captured as it happens. See financial dashboards with outstanding balances, month-to-date metrics, and per-group rollups. Keep a vehicle mileage log with destinations and purposes, linked to the animals and buyers each trip was for. Export to CSV for your accountant.
         </p>
       </aside>
 
@@ -398,6 +406,59 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Section 7: Mileage -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Mileage Logs That Know Where You Went and Why</h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Mileage usually lives in a spreadsheet or an old app with no destinations, cut off from the buyers and animals the trips were for. BreederHQ keeps a proper vehicle log inside your finances, so the trips are tied to your records.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🛣️ Log Every Business Trip</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Log trips per vehicle by entering miles or odometer readings</li>
+            <li>• Record a destination and a purpose from a fixed list, the kind of log the IRS expects</li>
+            <li>• Import existing logs from Breeder Cloud Pro or a spreadsheet (.csv or .xlsx)</li>
+            <li>• Export your trips whenever you need them</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-bold mb-3">🔗 Link Trips to Your Records</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li>• Link each trip to the animals, buyers or contacts, and breeding plans it was for</li>
+            <li>• See those trips on the animal, contact, and breeding plan records</li>
+            <li>• Keep the destination and purpose with the buyer or animal, not in a separate spreadsheet</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
+        <h3 class="text-xl font-bold mb-3">IRS Standard Mileage Rate, by Trip Date</h3>
+        <p class="text-gray-700 mb-3">
+          Each trip is valued at the IRS standard mileage rate in effect on the date you drove it. Rates are tracked by effective date, so a mid-year change is handled for you. In 2026 the rate was 72.5 cents per mile through June 30 and 76 cents from July 1, and trips on either side of that date use the rate that applied.
+        </p>
+        <p class="text-gray-700">
+          For US accounts, the vehicle deduction appears as its own line in the Tax Figures on the Tax Year P&amp;L. It is shown for reference and is not subtracted from your profit. Fuel stays a Travel expense.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg border-l-4 border-[hsl(24,95%,53%)]">
+        <h3 class="text-xl font-bold mb-3">📱 Log Trips From Your Phone</h3>
+        <p class="text-gray-700 mb-3">
+          Log a trip in the Mobile Companion app when you get back to the truck, even with no signal. Offline trips sync when you are back online.
+        </p>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Add vehicles in the web app, then log trips against them from your phone</li>
+          <li>• Trips logged on your phone appear in the same mileage log on the web</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
   <section class="py-20 bg-primary text-white">
     <div class="max-w-4xl mx-auto text-center px-4">
@@ -478,6 +539,30 @@ const faqs = [
         </summary>
         <div class="faq-answer">
           <p>Yes. The BreederHQ Mobile Companion app — the on-the-go partner to the web app — is built for exactly this. Snap a photo of any receipt with your phone camera, enter the amount, category, and which animal or breeding plan it belongs to, and save. Food purchases can link to a Food Product so nutrition costs roll up automatically. Everything syncs instantly to the web app.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I track vehicle mileage for my breeding business?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Log business trips per vehicle by entering miles or odometer readings, with a destination and a purpose from a fixed list. Trips link to the animals, buyers, and breeding plans they were for and show on those records. Each trip is valued at the IRS standard mileage rate in effect on its date, and for US accounts the vehicle deduction appears as a line in the Tax Figures on the Tax Year P&amp;L. You can import an existing log from Breeder Cloud Pro or a spreadsheet (.csv or .xlsx) and export your trips. BreederHQ does not track trips automatically; you log them.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can I log mileage from my phone?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Log trips in the Mobile Companion app, including offline. They sync when you are back online. Vehicles are added and managed in the web app.</p>
         </div>
       </details>
 

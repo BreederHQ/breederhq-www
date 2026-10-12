@@ -114,6 +114,7 @@ export const planCategories: FeatureCategory[] = [
     name: "Finance & Contracts",
     features: [
       { name: "Invoices & Expenses" },
+      { name: "Vehicle Mileage Tracking" },
       { name: "Payouts & Stripe Integration" },
       { name: "Contracts & System Templates" },
       { name: "E-Signatures" },
