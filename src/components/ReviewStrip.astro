@@ -1,0 +1,78 @@
+---
+// Three-card review strip for social proof sections (homepage, /pricing, /mobile).
+// Reviews come from src/data/testimonials.ts; text is never edited here.
+import ReviewCard from './ReviewCard.astro';
+import { stripTestimonials } from '../data/testimonials';
+
+interface Props {
+  heading?: string;
+  /** Drops the page-width wrapper padding, for use inside an existing column. */
+  flush?: boolean;
+}
+
+const { heading = 'What Breeders Are Saying', flush = false } = Astro.props;
+const reviews = stripTestimonials(3);
+---
+
+<section class:list={['review-strip', { 'review-strip--flush': flush }]} aria-labelledby="review-strip-heading">
+  <div class="review-strip__head">
+    <h2 id="review-strip-heading">{heading}</h2>
+    <a href="/reviews" class="review-strip__all">Read All Reviews &#8594;</a>
+  </div>
+  <div class="review-strip__grid">
+    {reviews.map((r) => <ReviewCard review={r} variant="strip" />)}
+  </div>
+</section>
+
+<style>
+  .review-strip {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 56px 30px 20px;
+  }
+  .review-strip.review-strip--flush {
+    max-width: none;
+    padding: 0;
+  }
+  .review-strip__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 20px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .review-strip__head h2 {
+    margin: 0;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #eaf1fc;
+  }
+  .review-strip__all {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff8a56;
+    text-decoration: none;
+  }
+  .review-strip__all:hover {
+    text-decoration: underline;
+  }
+  .review-strip__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 860px) {
+    .review-strip {
+      padding: 40px 16px 16px;
+    }
+    .review-strip.review-strip--flush {
+      padding: 0;
+    }
+    .review-strip__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

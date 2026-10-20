@@ -1,0 +1,164 @@
+---
+// One breeder review. Text is rendered exactly as stored: paragraphs split on
+// blank lines, and white-space: pre-wrap keeps runs of spaces the reviewer typed.
+// The "strip" variant clamps the quote visually (CSS only); the full text stays
+// in the DOM and is shown in full on /reviews.
+import { SOURCE_LABELS, type Testimonial } from '../data/testimonials';
+
+interface Props {
+  review: Testimonial;
+  variant?: 'full' | 'strip';
+}
+
+const { review, variant = 'full' } = Astro.props;
+const sourceLabel = SOURCE_LABELS[review.source];
+const paragraphs = review.quote.split('\n\n');
+const dateLabel = review.date
+  ? new Date(`${review.date}T00:00:00Z`).toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    })
+  : null;
+---
+
+<article class={`review-card review-card--${variant}`} id={variant === 'full' ? review.id : undefined}>
+  <div class="review-card__top">
+    <span class="review-card__badge">{sourceLabel}</span>
+    <span class="review-card__stars" role="img" aria-label={`${review.rating} out of 5 stars`}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <span aria-hidden="true" class={n <= review.rating ? 'on' : 'off'}>&#9733;</span>
+      ))}
+    </span>
+  </div>
+  {review.title && <h3 class="review-card__title">{review.title}</h3>}
+  <blockquote class="review-card__quote">
+    {paragraphs.map((p) => <p>{p}</p>)}
+  </blockquote>
+  <div class="review-card__foot">
+    <div class="review-card__who">
+      <span class="review-card__name">{review.reviewerName}</span>
+      {dateLabel && <time datetime={review.date}>{dateLabel}</time>}
+    </div>
+    <a href={review.sourceUrl} target="_blank" rel="noopener" class="review-card__link">
+      Read On {sourceLabel} &#8594;<span class="sr-only"> (opens in a new tab)</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: linear-gradient(180deg, #0e1a2e, #0a1424);
+    padding: 22px 20px 18px;
+  }
+  .review-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .review-card__badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #7fc8ff;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: rgba(127, 200, 255, 0.1);
+    border: 1px solid rgba(127, 200, 255, 0.2);
+  }
+  .review-card__stars {
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+  .review-card__stars .on {
+    color: #ffb020;
+  }
+  .review-card__stars .off {
+    color: #3c4c66;
+  }
+  .review-card__title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #eaf1fc;
+    overflow-wrap: anywhere;
+  }
+  .review-card__quote {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #c7d4e6;
+  }
+  .review-card__quote p {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .review-card--strip .review-card__quote {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    overflow: hidden;
+  }
+  .review-card--strip .review-card__quote p + p {
+    margin-top: 10px;
+  }
+  .review-card--strip .review-card__quote {
+    gap: 0;
+  }
+  .review-card__foot {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px 16px;
+    flex-wrap: wrap;
+  }
+  .review-card__who {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .review-card__name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #eaf1fc;
+    overflow-wrap: anywhere;
+  }
+  .review-card__who time {
+    font-size: 12px;
+    color: #8da0bd;
+  }
+  .review-card__link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ff8a56;
+    text-decoration: none;
+  }
+  .review-card__link:hover {
+    text-decoration: underline;
+  }
+  .review-card__link:focus-visible {
+    outline: 2px solid #ff8a56;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+</style>
