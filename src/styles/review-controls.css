@@ -1,0 +1,55 @@
+/* Controls shared by ReviewCarousel and ReviewRotator. */
+.rv__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: #eaf1fc;
+  cursor: pointer;
+}
+.rv__btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.rv__btn:focus-visible,
+.rv-dot:focus-visible {
+  outline: 2px solid #ff8a56;
+  outline-offset: 3px;
+}
+.rv__toggle .i-play {
+  display: none;
+}
+.rv__toggle[data-state='paused'] .i-play {
+  display: block;
+}
+.rv__toggle[data-state='paused'] .i-pause {
+  display: none;
+}
+.rv__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.rv-dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.rv-dot::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 999px;
+  background: #3c4c66;
+}
+.rv-dot[aria-current='true']::after {
+  background: #ff8a56;
+}

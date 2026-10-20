@@ -1,8 +1,8 @@
 ---
 // One breeder review. Text is rendered exactly as stored: paragraphs split on
 // blank lines, and white-space: pre-wrap keeps runs of spaces the reviewer typed.
-// The "strip" variant clamps the quote visually (CSS only); the full text stays
-// in the DOM and is shown in full on /reviews.
+// Never clamped: every review is readable in full wherever it is shown.
+// The "strip" variant (carousel slides) only omits the anchor id.
 import { SOURCE_LABELS, type Testimonial } from '../data/testimonials';
 
 interface Props {
@@ -108,28 +108,15 @@ const dateLabel = review.date
     white-space: pre-wrap;
     overflow-wrap: anywhere;
   }
-  .review-card--strip .review-card__quote {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
-    line-clamp: 7;
-    overflow: hidden;
-  }
-  .review-card--strip .review-card__quote p + p {
-    margin-top: 10px;
-  }
-  .review-card--strip .review-card__quote {
-    gap: 0;
-  }
   .review-card__foot {
     margin-top: auto;
     padding-top: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 10px 16px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 16px;
+    align-items: end;
+    align-items: last baseline;
   }
   .review-card__who {
     display: flex;
@@ -148,6 +135,7 @@ const dateLabel = review.date
     color: #8da0bd;
   }
   .review-card__link {
+    white-space: nowrap;
     font-size: 13px;
     font-weight: 600;
     color: #ff8a56;

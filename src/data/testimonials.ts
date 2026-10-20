@@ -1,5 +1,6 @@
-// Breeder reviews: the single source of truth for /reviews and the review
-// strips on the homepage, /pricing and /mobile.
+// Breeder reviews: the single source of truth for /reviews, the carousel on
+// the homepage and /mobile, and the compact rotator on /pricing. All of them
+// show every entry below, in full.
 //
 // Every entry is a public review posted by its author on the named platform.
 // Text is stored exactly as posted (curly apostrophes, double spaces and
@@ -93,23 +94,6 @@ export function sortedTestimonials(list: Testimonial[] = testimonials): Testimon
     if (b.date) return 1;
     return 0;
   });
-}
-
-/** Picks `count` reviews for a strip: one per source first, then newest. */
-export function stripTestimonials(count = 3, list: Testimonial[] = testimonials): Testimonial[] {
-  const sorted = sortedTestimonials(list);
-  const picked: Testimonial[] = [];
-  const seen = new Set<ReviewSource>();
-  for (const t of sorted) {
-    if (picked.length < count && !seen.has(t.source)) {
-      picked.push(t);
-      seen.add(t.source);
-    }
-  }
-  for (const t of sorted) {
-    if (picked.length < count && !picked.includes(t)) picked.push(t);
-  }
-  return picked;
 }
 
 export interface SourceStats {
