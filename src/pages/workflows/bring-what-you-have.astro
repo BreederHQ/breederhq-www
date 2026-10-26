@@ -1,0 +1,460 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Bring What You Already Have', url: '/workflows/bring-what-you-have' }
+];
+
+const faqs = [
+  {
+    question: 'Do I have to retype my records to switch to BreederHQ?',
+    answer: 'No. Scout can read your existing records from a spreadsheet, a PDF, or a photo of a printed page and turn them into animals and contacts. You can bring animals and contacts in one file. Nothing is created until you have reviewed what Scout found, and anything it is unsure about comes to you as a question rather than a guess.'
+  },
+  {
+    question: 'What file types can Scout import records from?',
+    answer: 'Spreadsheets in CSV, TSV, or XLSX format, PDFs, and images in JPEG, PNG, or WebP. An older Excel .xls file, or a Numbers or OpenDocument file, cannot be read, so save a copy as .xlsx or .csv first.'
+  },
+  {
+    question: 'What happens if a row looks like a record I already have?',
+    answer: 'Scout asks you. For each such row you can use the record you already have, import it as a new record, or skip it. Using the record you already have never creates a second copy, and anything the document adds only fills blanks. It never replaces something you already entered.'
+  },
+  {
+    question: 'Does importing add every ancestor on a pedigree to my animals?',
+    answer: 'No. A dam, sire, or ancestor that your file only names is recorded in the pedigree, not added to your animals. Those rows start unticked, with a note that they are recorded in the pedigree. You tick Add to My Herd only for an animal that is or was yours.'
+  },
+  {
+    question: 'Can I keep using my own contract?',
+    answer: 'Yes, in two ways. With Fill & Sign you upload your own PDF, place fields on its pages, and choose whether the breeder or the buyer fills each one. The text of your PDF is never changed. Or you can import an existing PDF, DOCX, or TXT contract with Scout, which turns it into a reusable BreederHQ template that you review and edit before saving. Scout helps with the conversion and does not replace legal review.'
+  },
+  {
+    question: 'Can I reuse the application form already on my website?',
+    answer: 'Yes. Import reads the form from its web address, or from up to 5 pages of screenshots or a PDF, and builds a draft screening template. Nothing is saved until you review it and choose Save Template. Import leaves out the name and email questions, because every application already asks for them, and it leaves out signatures, because a waitlist application carries no signature.'
+  },
+  {
+    question: 'How do my website visitors apply through BreederHQ?',
+    answer: 'You make an Application Link, a standing address for one of your applications. You can share the address, print it as a QR code, or add the form or an Apply Button to your own site. It works on Wix, Squarespace, WordPress, and any site that accepts an HTML block. Anyone who opens it can apply without an account, confirms their email with a code, and arrives in your prospects.'
+  },
+  {
+    question: 'Can I tell which link or event an applicant came from?',
+    answer: 'Yes. The name you give a link becomes the prospect\'s source, so you can make one link per show, post, or flyer and filter your Pipeline by link to see who each one brought in.'
+  },
+  {
+    question: 'Can I connect my existing Stripe account?',
+    answer: 'Not directly. Your BreederHQ sales get their own Stripe account, which sits alongside the one you already have. BreederHQ cannot access your current account\'s customers or sales. Stripe may offer to copy your business details from your current account during setup, and you can accept or start fresh.'
+  },
+  {
+    question: 'Does importing replace what I have already recorded?',
+    answer: 'No. When an import matches a record you already keep, it fills in what is missing and leaves everything you entered alone. If a document disagrees with a parent you recorded, your record stays and you are told, so you can change it yourself if the document is right.'
+  }
+];
+
+const howTo = {
+  name: 'How to Move Your Existing Records, Contracts, and Application Form Into BreederHQ',
+  description: 'A step-by-step guide to bringing your records, your own contract, your application form, and your website applicants into BreederHQ without retyping them.',
+  steps: [
+    { name: 'Import your records with Scout', text: 'Start Import with Scout AI from the Animals or Contacts page, upload a spreadsheet, PDF, or photo, and answer the questions Scout asks. Review the animals and contacts it found, then import. Nothing is written until the final step.' },
+    { name: 'Upload your own contract as a Fill & Sign template', text: 'In Contracts, create a Fill & Sign template, upload your PDF, place the fields, and choose whether the breeder or the buyer fills each one. Your PDF text stays exactly as it is.' },
+    { name: 'Or import a contract into a template with Scout', text: 'Upload a PDF, DOCX, or TXT contract. Scout drafts a template with suggested merge fields. Review the draft, fix what it flags, and save.' },
+    { name: 'Import your application form', text: 'In Waitlist, open the Templates tab and choose Import. Paste the web address of your form, or upload screenshots or a PDF. Review the draft screening template and choose Save Template.' },
+    { name: 'Create an Application Link for your website', text: 'In Waitlist, open the Application Links tab and choose New Link. Name it, pick the application, choose where applicants go, then copy the address, download the QR code, or copy the embed code for your site.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Bring What You Already Have: Switch Without Retyping | BreederHQ"
+  description="Switching to BreederHQ does not mean starting over. Import your records with Scout, keep your own contract, reuse your application form, and take applications from your website."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Bring What You Already Have</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Bring What You Already Have. Switch Without Starting Over.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+        <p class="text-gray-700 leading-relaxed">
+          You already keep records, contracts, an application form, and a website. BreederHQ has a route for each one: Scout reads your existing records into animals and contacts, Fill & Sign keeps your own PDF contract, Import turns your application form into a screening template, and Application Links take applications from your website. You review everything before it is saved.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        The reason breeders put off switching software is rarely the new software. It is the pile of work behind the old one: years of records, a contract your attorney wrote, an application form people already find on your site. BreederHQ is built so you can keep all of it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Four Routes -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Four Things You Do Not Have to Rebuild</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Each route starts from something you already have and ends with something you can review and edit before it goes live.
+      </p>
+      <ol class="space-y-4 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3 font-bold text-[hsl(24,95%,53%)]">1.</span><span><strong>Your records:</strong> spreadsheets, PDFs, and photos of printed pages, imported with Scout.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold text-[hsl(24,95%,53%)]">2.</span><span><strong>Your contracts:</strong> your own PDF as a Fill &amp; Sign template, or an existing contract imported with Scout.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold text-[hsl(24,95%,53%)]">3.</span><span><strong>Your application form:</strong> imported as a screening template.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold text-[hsl(24,95%,53%)]">4.</span><span><strong>Your website:</strong> Application Links with a public address, a QR code, and an embed.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section 3: Records -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Your Records: Import With Scout</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Start Import with Scout AI from the Animals page or the Contacts page. Scout reads your file, works out which rows are animals, people, or organizations, and walks you through what it found. You do not have to rearrange your columns first. Your own column names and date formats are fine.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What You Can Upload</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Spreadsheets: CSV, TSV, and XLSX</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>PDFs, including registration certificates and vet printouts</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Images: JPEG, PNG, and WebP, such as a photo of a printed page</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Animals and contacts can share one file. If you would rather give Scout nothing to guess at, the upload screen offers a template spreadsheet to fill in.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">You Decide Before Anything Is Created</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Scout opens with the questions it needs settled, such as which unit your weights are in or whether two rows are the same animal. When a row looks like a record you already have, you choose: use the record you already have, import it as a new record, or skip it. A row is never quietly dropped for looking like a duplicate. Every row that does not become a record tells you why. Nothing is written until the final import step, and everything imports together, so a problem does not leave you with half a file.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Your Existing Records Are Not Overwritten</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            When an import matches an animal you already keep, it fills in only what is blank. If a document names a different parent than the one you recorded, your record stays and Scout tells you, so you can change it on the animal if the document is right.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Pedigree Ancestors Are Recorded, Not Added to Your Animals</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A registration certificate names animals you never owned, such as grandparents on a paper that came with a purchase. Scout records those ancestors in the pedigree. They become animals in your program only when you tick Add to My Herd for an animal that is or was yours. Leaving it unticked keeps the pedigree intact and your counts unchanged.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Vet Records and Health Files</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A vet printout of vaccinations, medications, and test results can be imported too. When Scout cannot match the name the clinic wrote to one of your animals, it asks which animal the record belongs to instead of dropping it or guessing.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-700 leading-relaxed mt-8">
+        See <a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">Scout AI</a> for what else Scout does with the records you bring in.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Contracts -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Your Contracts: Keep Your Own Document</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        If your contract is already written, you do not have to rewrite it to use it in BreederHQ. There are two ways in, depending on how you want the contract to behave.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Fill &amp; Sign From Your Own PDF</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Upload your PDF, drop fields onto its pages, and choose whether the breeder or the buyer fills each one. The contract looks exactly as it does today. Fill &amp; Sign templates have no merge fields, so nothing from your records is pasted into the document and the text of your PDF is never changed.
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Field types include signature, initials, text, paragraph, date, checkbox, dropdown, and choice</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Each field belongs to one role. You fill yours when you send or countersign, and the buyer fills theirs in the client portal</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Signing order is your choice: buyer signs first, then you countersign, or you sign first</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>If your PDF already has form boxes, they are listed as suggested fields for you to assign or discard</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A contract that is already out for signature keeps the template version it was sent with, even if you edit the template later</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Import an Existing Contract With Scout</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you want a contract that fills in details from your animal and buyer records, upload a PDF, DOCX, or TXT file and Scout turns it into a reusable BreederHQ template. It suggests merge fields, flags values it could not map, and opens the draft in the template editor for you to review. It is not a one-click publish. Scout helps with the conversion and does not replace legal review, so involve your attorney if the legal language changed or looks uncertain.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Application Form -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Your Application Form: Import It as a Screening Template</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        If your application already lives on your website, you do not have to retype it. In Waitlist, open the Templates tab and choose Import. It reads your form and builds a draft screening template.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Two Ways to Bring It In</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>From a web address: paste the page that has the form. This works with Wix, Squarespace, Google Forms, JotForm, and most other site builders</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>From a screenshot or PDF: up to 5 pages in total, as PNG, JPG, or PDF files</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">You Review Before It Is Saved</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The draft opens with an Imported Draft, Not Saved Yet banner. A review panel lists what the import changed and every question it found, and nothing is saved until you choose Save Template. Import uses AI to read your form, so it needs AI features turned on in your settings.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What Import Leaves Out</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Name and email are not copied, because every application already asks for them. Signatures are left out too. A waitlist application carries no signature, so if your form had no confirmation of its own, the import adds a checkbox confirming that the information is true and accurate. Signatures belong on your deposit agreement, which holds your terms, refund policy, and health guarantee.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Website -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Your Website: Application Links</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        An Application Link is a standing address for one of your applications. Share it, print it as a QR code, or add it to your own site. Anyone who opens it can apply with no account, and they arrive in your prospects. You do not need a published storefront.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Three Ways to Share a Link</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>The address, for social media, an email signature, or a text message</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A QR code you can download as a PNG or SVG for a flyer, a printed card, or a show table sign</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An embed on your own site, either the form on the page or an Apply Button that opens it in a window. It works on Wix, Squarespace, WordPress, and any site that accepts an HTML block</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Know Where Each Applicant Came From</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The name you give a link becomes the prospect's source. Make one link per show, post, or flyer, then filter your Pipeline by link to see who each one brought in. A link also shows how many times it was opened, how many people started, and how many applied.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Applicants Confirm Their Email</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            An applicant fills in the application, receives a six-digit code at their email address, and enters it. An application is not stored until the code is entered. You choose where applicants go: the whole waitlist, a program, or a litter. A link never changes how that waitlist treats applicants, so if it reviews applicants, each one arrives for you to approve or decline.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Your Website Never Sees the Answers</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The form lives on BreederHQ's own application page. Your page only hears when to resize the form and when the application is done.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: What Is Not Imported -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What Does Not Carry Over</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Payments are not one of the four routes, because an existing Stripe account cannot be connected to BreederHQ directly. Your BreederHQ sales get their own Stripe account, which sits alongside the one you already have. BreederHQ cannot access your current account's customers or sales.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Imports also do not rewrite what you already recorded. When a document disagrees with a record, you are told, and the change is yours to make.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Keep Your Records, Your Contract, and Your Form</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Bring your records, your own contract, your application form, and your website visitors with you. Review each one before it goes live.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/scout-ai" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+          See Scout AI →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Built for Breeders Who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Keep years of records in spreadsheets, PDFs, or paper and do not want to retype them</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Have a contract their attorney wrote and want to keep using it</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Already have an application form on their website</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want to see which show, post, or flyer brought in each applicant</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 10: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This Might Be Overkill If:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You are starting fresh with no existing records, contracts, or forms</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>You only have a handful of animals and would rather type them in</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Imports read what your files contain. A photo that is blurred or a page with glare cannot be read, so a clear scan gives the best result.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 11: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 12: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn More</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">→ Scout AI</a></div>
+        <div><a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists &amp; Placement</a></div>
+        <div><a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">→ Client Portal</a></div>
+        <div><a href="/mobile" class="text-[hsl(24,95%,53%)] hover:underline">→ Mobile Companion App</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Scout AI", description: "Your breeding assistant, working from the records you bring in.", url: "/workflows/scout-ai" },
+      { title: "Waitlists & Placement", description: "Applications, prospects, and placing animals with buyers.", url: "/workflows/waitlists-and-placement" },
+      { title: "Client Portal", description: "Where buyers fill in and sign what you send them.", url: "/workflows/client-portal" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #A9BAD4;
+    }
+  </style>
+</BaseLayout>
