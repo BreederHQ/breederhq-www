@@ -92,6 +92,18 @@ const faqs = [
     answer: 'Yes. BreederHQ includes professional contract management: contract templates with auto-fill for animal name, buyer info, and price; multiple contract types (pet, breeding rights, co-ownership, stud service, guardian); digital e-signatures allowing clients to sign from any device; signature audit trail with timestamps; automatic sending when deposit is received; document bundles combining contracts with health guarantees and care guides; and permanent storage in the client portal. No need for separate DocuSign or HelloSign subscriptions.'
   },
   {
+    question: 'Can I switch to BreederHQ without retyping my records?',
+    answer: 'Yes. Scout can read your existing records from a spreadsheet (CSV, TSV, or XLSX), a PDF, or a photo of a printed page and turn them into animals and contacts. Nothing is created until you have reviewed what Scout found, a row that looks like a record you already have is your choice to use, import as new, or skip, and anything it is unsure about comes to you as a question rather than a guess. A pedigree ancestor your file only names is recorded in the pedigree and is not added to your animals unless you choose to add it.'
+  },
+  {
+    question: 'Can I use my own contract in BreederHQ?',
+    answer: 'Yes, in two ways. With Fill & Sign you upload your own PDF, place fields on its pages, and choose whether you or the buyer fills each one. The text of your PDF is never changed, and buyers sign in the client portal. Or you can import an existing PDF, DOCX, or TXT contract with Scout, which turns it into a reusable template that you review and edit before saving. Scout helps with the conversion and does not replace legal review.'
+  },
+  {
+    question: 'Can I take applications on my own website?',
+    answer: 'Yes. You make an Application Link, a standing address for one of your applications. Share the address, print it as a QR code, or add the form or an Apply Button to your own site, including Wix, Squarespace, WordPress, or any site that accepts an HTML block. Applicants do not need an account, they confirm their email with a code, and they arrive in your prospects with the link you gave them as their source. If you already have an application form on your site, you can import it as a screening template and review it before saving.'
+  },
+  {
     question: 'Does BreederHQ have an AI assistant for breeders?',
     answer: 'Yes. BreederHQ includes Scout AI, a data-aware assistant that connects directly to your breeding data. Ask natural-language questions about your animals, breeding plans, finances, contacts, waitlists, offspring, and medications-and get instant answers without searching through records. Scout uses 13 specialized tools to search your data, and can export results as CSV and generate printable reports. For vet visits, Scout points you to Vet View, where you open a health report, download a PDF, or create a PIN-protected link for your vet. Conversations are saved across sessions. A separate Help Assistant provides contextual guidance, interactive feature tours, and a searchable help center.'
   },
@@ -99,6 +111,12 @@ const faqs = [
     question: 'Does BreederHQ have a mobile app?',
     answer: 'Yes. The BreederHQ Mobile Companion is a native iOS and Android app that pairs with the BreederHQ web platform. It is intentionally not a full replacement for the web app -- it is a focused, on-the-go companion for the moments breeding actually happens (the barn, the vet office, the show ring, the birthing area at 2 AM). Use it to record weights, log a vet visit, snap an expense receipt, pull up a pedigree, reply to a buyer message, or mark a task done. The deeper work -- building breeding plans, managing your storefront, configuring contracts, running reports, genetics analysis -- stays in the web app. Everything syncs instantly between the two.'
   }
+];
+
+const headlineCapabilities = [
+  { n: 'A', name: 'Scout AI', desc: 'Ask plain-English questions about your own animals, plans, finances, contacts, and waitlist.', href: '/workflows/scout-ai' },
+  { n: 'B', name: 'Mobile App', desc: 'A native iOS and Android companion for weights, vet visits, receipts, and buyer replies.', href: '/mobile' },
+  { n: 'C', name: 'Bring What You Already Have', desc: 'Keep your records, your own contract, your application form, and your website. Review everything before it is saved.', href: '/workflows/bring-what-you-have' },
 ];
 
 const flowNodes = [
@@ -313,6 +331,20 @@ const trustLayers = [
 </header>
 
 
+<!-- ===== HEADLINE CAPABILITIES ===== -->
+<section aria-label="Headline capabilities" style="max-width:1180px;margin:0 auto;padding:34px 30px 40px">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="bhq-3col">
+    {headlineCapabilities.map(c => (
+      <a href={c.href} class="bhq-module-card" style="position:relative;border-radius:14px;border:1px solid rgba(255,138,76,.28);background:linear-gradient(180deg,rgba(255,106,44,.08),rgba(255,255,255,.01));padding:20px 20px 18px;text-decoration:none;display:block">
+        <div style="font-size:17px;font-weight:700;letter-spacing:-.01em;color:#EAF1FC">{c.name}</div>
+        <div style="margin-top:7px;font-size:13.5px;line-height:1.5;color:#9FB2CD">{c.desc}</div>
+        <div style="margin-top:12px;font-size:13px;font-weight:600;color:#FF8A56">Learn more &#8594;</div>
+      </a>
+    ))}
+  </div>
+</section>
+
+
 <!-- ===== SPECIES TICKER ===== -->
 <div style="position:relative;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.015);overflow:hidden;padding:15px 0">
   <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:11px">
@@ -391,6 +423,12 @@ const trustLayers = [
       </a>
     ))}
   </div>
+  <p class="bhqReveal" style="margin:22px 0 0;font-size:13.5px;line-height:1.7;color:#8DA0BD">
+    Go deeper:
+    <a href="/workflows/record-import" style="color:#FF8A56;text-decoration:none">Import Records With Scout</a> &middot;
+    <a href="/workflows/applications-and-screening" style="color:#FF8A56;text-decoration:none">Applications &amp; Screening</a> &middot;
+    <a href="/workflows/contracts-and-e-signatures" style="color:#FF8A56;text-decoration:none">Contracts &amp; E-Signatures</a>
+  </p>
 </section>
 
 
