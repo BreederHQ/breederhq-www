@@ -1,0 +1,518 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Contracts & E-Signatures', url: '/workflows/contracts-and-e-signatures' }
+];
+
+const faqs = [
+  {
+    question: 'Can I use my own contract instead of a BreederHQ template?',
+    answer: 'Yes. Fill & Sign keeps your contract exactly as it looks today. You upload your PDF, place blanks on its pages, and choose whether the breeder or the buyer fills and signs each one. The text of your PDF is never changed. If you do not have a PDF, you can write the agreement in the editor and put fields inside the text.'
+  },
+  {
+    question: 'What is the difference between a Fill & Sign template and a merge-field template?',
+    answer: 'A merge-field template pulls breeder, buyer, animal, and transaction details into the contract text for you, then the buyer signs. A Fill & Sign template has no merge fields: nothing from your records is pasted in, and the people signing fill the blanks themselves. Use Fill & Sign when you want your own PDF untouched, and a merge-field template when you want platform data filled in for you.'
+  },
+  {
+    question: 'How does a buyer sign?',
+    answer: 'The buyer receives an email with a link, signs in to the client portal, fills the fields that are theirs, adds a signature and initials, and signs. There is no anonymous signing link. A buyer cannot sign until every required field is filled, and a value that cannot be printed on the signed copy is refused with a message saying why.'
+  },
+  {
+    question: 'Who signs first?',
+    answer: 'You choose per template. With Buyer Signs First, the buyer fills and signs, then you countersign. With Breeder Signs First, you fill and sign when you send it, and the buyer\'s signature completes the contract. Only the account owner signs as the seller, so only the owner can countersign or send a Breeder Signs First contract. Staff can prepare contracts and send buyer-first ones.'
+  },
+  {
+    question: 'Do I keep a signed copy?',
+    answer: 'Yes. When the last signature is recorded, the signed PDF is created once and saved. Every download after that is the same file. The contract shows when it was saved and a SHA-256 fingerprint of the file, which you can use to check that a copy you hold is the original. The buyer also receives the signed copy by email when it is small enough to attach.'
+  },
+  {
+    question: 'What happens if I edit a template after sending a contract?',
+    answer: 'Nothing changes for the contract already out. Each save creates a new version of the template, and a contract keeps the version it was sent with. If you saved the template again while you were in the send dialog, BreederHQ asks you to reload and check the fields before anything goes out.'
+  },
+  {
+    question: 'Can I require a contract on a breeding plan?',
+    answer: 'Yes. On a breeding plan you can require one of your Fill & Sign templates the same way you require a built-in template. It then goes out per offspring, to the buyer, guardian, or co-owner, from the plan. If you already sent a contract from the Contracts page, you can attach it to the requirement instead of sending it again.'
+  },
+  {
+    question: 'Can Scout turn my existing contract into a template?',
+    answer: 'Scout can read a contract in PDF, DOCX, or TXT format and turn it into a reusable merge-field template draft. It is not a one-click publish. The draft opens in the template editor on a Review Import tab, where you fix problems, apply or ignore suggestions, and check the result before you save. Scout helps with conversion and does not replace review of the legal language by your attorney. Availability depends on your plan.'
+  },
+  {
+    question: 'Can I print a contract?',
+    answer: 'Yes. You can view, print, and download any contract you have sent, whatever its status. Until everyone has signed, the PDF carries a Draft, Not Signed watermark so a working copy is never mistaken for the signed contract. Once it is signed, the preview shows the real signed PDF.'
+  },
+  {
+    question: 'Does BreederHQ give legal advice about my contract?',
+    answer: 'No. BreederHQ gives you the tools to build, send, and sign your own agreements. The wording of your contract is yours. Have your attorney review any language you are unsure about.'
+  }
+];
+
+const howTo = {
+  name: 'How to Send a Contract for Signature From Your Own PDF',
+  description: 'A step-by-step guide to turning your own PDF into a Fill & Sign template, sending it to a buyer, and keeping the signed copy.',
+  steps: [
+    { name: 'Upload your PDF', text: 'In Contracts, open Fill & Sign Templates, choose Create Fill & Sign Template, name it, and upload your PDF.' },
+    { name: 'Place the fields', text: 'Choose Buyer or Breeder under Placing For, then drag signature, initials, text, date, checkbox, dropdown, and other fields onto the pages.' },
+    { name: 'Set the signing order', text: 'Choose Buyer Signs First or Breeder Signs First, check the Template Check panel, preview it as the buyer, and save the template.' },
+    { name: 'Send it', text: 'Choose Send Contract, pick the template, buyer, and animal, fill your own fields, set the expiration date, and send.' },
+    { name: 'The buyer signs in the portal', text: 'The buyer opens the contract in the client portal, fills their fields, and signs.' },
+    { name: 'Countersign and keep the copy', text: 'When the buyer signs first, you review the contract and countersign. The signed PDF is then saved and available to download or print.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Contracts & E-Signatures: Your PDF, Signed in the Portal | BreederHQ"
+  description="Upload your own PDF, place fields, send it to a buyer to sign in the client portal, countersign, and keep the signed copy. Also merge-field templates, Scout import, and printing."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Contracts &amp; E-Signatures</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Contracts &amp; E-Signatures: Keep Your Own Contract, Sign It Online.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Fill &amp; Sign lets you upload the PDF contract you already use, place fields on its pages, and send it to a buyer who signs in the client portal. You countersign, and the signed copy is saved. You can also write an agreement in the editor, build merge-field templates that pull in your records, have Scout convert an existing contract into a template draft, require a contract on a breeding plan, and print any contract you have sent.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Most breeders already have a contract. It was written with an attorney, copied from another breeder, or refined over years of litters. BreederHQ does not ask you to throw it away and start over. It lets you keep your wording and handles the sending, signing, and filing around it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Fill & Sign -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Fill &amp; Sign: Your Own PDF, Signed Online</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A Fill &amp; Sign template keeps your contract exactly as it looks today. You upload the PDF, drop blanks onto its pages, and choose whether the breeder or the buyer fills each blank. Fill &amp; Sign is available to breeders now, and every plan can use Fill &amp; Sign templates.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        The flow is the same for every contract:
+      </p>
+
+      <ol class="space-y-4 text-lg text-gray-700 mb-8">
+        <li class="flex items-start"><span class="mr-3 font-bold">1.</span><span><strong>Upload.</strong> Add your PDF, up to 25 MB and 50 pages. Scripts, attachments, and links in the file are removed, and the template carries only the pages.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold">2.</span><span><strong>Place fields.</strong> Drag fields onto the pages and choose who fills each one.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold">3.</span><span><strong>Send.</strong> Pick the template, the buyer, and the animal. Fill your own fields, set an expiration date, and send.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold">4.</span><span><strong>The buyer signs.</strong> They open the contract in the client portal, fill their fields, and sign.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold">5.</span><span><strong>You countersign.</strong> Review the buyer's answers, add your fields and signature, and complete the contract.</span></li>
+        <li class="flex items-start"><span class="mr-3 font-bold">6.</span><span><strong>The signed copy is kept.</strong> Download or print it from the contract at any time.</span></li>
+      </ol>
+
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Fill &amp; Sign templates have no merge fields. Nothing from your animal or buyer records is pasted into the document, so the text of your PDF is never changed. If you want platform data filled in for you, a merge-field template does that, described below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Building the Template -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Building a Fill &amp; Sign Template</h2>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">From Your PDF</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The builder shows your pages with a field palette beside them. Choose Buyer or Breeder under Placing For, then drag a field onto any page or click it to add it to the page you are looking at. Fields you can place:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Signature and initials, where one set of initials fills every initials box for that signer</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Text and paragraph fields, with an optional character limit and default text</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Date fields, either entered by the signer or filled with the moment they sign</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Checkboxes, dropdowns, and multiple-choice boxes</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Full Name and Email Address fields, which start filled from the signer's own details and can be edited</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Text fields can check their format, such as a number, an amount, a phone number, an email address, or a postal code. A currency field is a plain amount that prints exactly as typed. No invoice or payment is created from it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Breeder Fields and Buyer Fields</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every field belongs to exactly one side. You fill the breeder fields in the send dialog or when you countersign. The buyer fills theirs in the client portal. The buyer never sees or changes your fields, and you never see the buyer's until they sign.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">If Your PDF Already Has Form Boxes</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            BreederHQ reads the form boxes and lists them as Suggested Fields. They are drafts: you choose who fills each one, assign them all to the buyer in one click, or discard them. Nothing is placed until you decide.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Signing Order</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Choose Buyer Signs First, where the buyer fills and signs and you countersign, or Breeder Signs First, where you fill and sign when you send it and the buyer's signature completes the contract.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Check, Preview, Save</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A Template Check panel confirms a buyer signature and a breeder signature are placed and that every field has a label. Preview as Buyer shows the template the way the buyer will see it, and nothing you enter in the preview is saved or sent. Each save creates a new version, and contracts you already sent keep the version they went out with, so editing or deleting a template never changes a contract that is out for signature.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">No PDF? Write It in the Editor</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You can also write the agreement in the editor, or start from a Word file, and place fields inside the text. Because the fields sit in the sentence, the document reflows on a phone instead of keeping fixed page positions. A Word file is converted to editor text, images inside it are left out, and older .doc files need to be saved as .docx first.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Sending, Signing, Countersigning -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Send, Sign, Countersign, Keep</h2>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Sending</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            In Contracts, choose Send Contract, pick a template, the buyer, and the animal or offspring. The last step shows:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Who signs and in what order, with how many fields each person fills</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A title, which is also the subject of the email the buyer receives</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An expiration date, starting at 30 days out. An unsigned contract closes at the end of that day and you are notified</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An optional message to the buyer</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            A buyer with no email address on their contact cannot be sent a contract, so add one first. If the connection drops while a send is in progress, Try Again repeats the same send and never issues the contract twice.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The Buyer Signs in the Client Portal</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The buyer gets an email link, signs in with their portal login, and fills the fields that are theirs, on the document or in a Your Answers list. A required field must be filled before the Sign Contract button turns on, and a Next Required button jumps to the next one. Fields you already filled are shown on the contract and cannot be changed. There is no anonymous signing link. See <a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">Client Portal</a> for how buyers get access.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Signatures and initials can be typed. A typed signature prints on the signed PDF in a handwriting-style script, and the screen shows the same script, so what the signer sees is what the copy shows. Drawing a signature depends on the e-signatures feature on your plan, and signatures cannot be uploaded as images.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Values That Cannot Print Are Refused Up Front</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The signed PDF keeps exactly what each person typed. A value that cannot be printed that way, such as characters the signed copy cannot draw or a line that would be changed in printing, is refused with a message that names the problem, and nothing is signed until it is fixed. If the connection drops while someone signs, the portal asks them to check again before signing a second time.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">You Countersign</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            With a buyer-first template, the contract waits for you after the buyer signs. Open it from Contracts, review it with the buyer's answers and signature, fill anything you left empty, add your initials and signature, and click Sign as Breeder. Only the account owner signs as the seller, so staff can prepare and send buyer-first contracts while the countersignature waits for the owner.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The Signed Copy Is Saved Once</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            When everyone has signed, the contract shows Fully Executed. The signed PDF is created once, when the last signature is recorded, and saved. Every download after that is the same file. The contract shows when it was saved and a SHA-256 fingerprint of the file, which you can use to confirm that a copy you hold is the original. The completion email attaches the signed PDF, or points to a View Signed Contract button when the file is too large to attach.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">If the Buyer Wants Changes</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The buyer declines with a reason. You send a new contract from the template, and values the buyer entered earlier do not carry over.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Breeding plan -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Require a Contract on a Breeding Plan</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        On a breeding plan, open Contracts and Placement Conditions and require one of your Fill &amp; Sign templates the same way you require a built-in one. Fill &amp; Sign templates are marked in the list, for example Puppy Contract (Fill &amp; Sign). The contract then goes out per offspring, to the buyer, guardian, or co-owner, from the plan.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span>The dialog shows the template, who receives it, who signs first, and that the contract stays open for 30 days from the moment it is sent.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Full Name and Email Address fields are filled in for the recipient when they open the contract.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>A Fill &amp; Sign contract is signed in the client portal, so the recipient needs an email address on their contact.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Sending twice never creates two contracts. A requirement that already has its contract shows that contract.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Already sent the contract from Contracts? Use Attach Existing Contract so the plan counts the contract your buyer signed. Attaching sends nothing and does not change the contract's status.</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Once sent, the requirement links to the contract itself, where you can countersign, send a reminder, or void it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Merge-field templates and checkboxes -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Merge-Field Templates, Preview, and Checkboxes</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        When you would rather have BreederHQ fill in the details, write a template with merge fields. Placeholders in the text are replaced with real data when the contract is created: your breeder details, the other party's contact details, the animal or offspring, and the transaction terms you enter.
+      </p>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Wording That Fits the Contract Type</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The other party is named for what they are. A sales agreement says buyer, a guardian home contract says guardian, a stud service agreement says dam owner, a co-ownership says co-owner, and a breeding lease says lessee. The templates that ship with BreederHQ already use the right one.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Identify the Exact Animal</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every permanent mark you record on an animal or offspring is available as a merge field, including microchip, tattoos, ear tags, an electronic tag number, and brand. A mark you have not recorded renders as nothing, so add it to the record first if the contract needs to state it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Readiness Check and Preview</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Before you send, BreederHQ sorts the fields a template uses into what is auto-filled, what later steps collect, and what is missing from your profile. Preview shows the contract with your real data applied, so you can catch a blank, the wrong linked animal, or a missing address before the buyer sees it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Checkboxes for Consent Lines</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Place a checkbox in the contract text for a consent line such as "I have read the health guarantee". You choose whether the buyer or the breeder marks it, whether the mark is a check or an X, and whether it must be checked before signing. The buyer marks their boxes in the portal while signing, you mark yours when you countersign, and the signed PDF prints each box with the mark that was made.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Scout contract import -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Import an Existing Contract With Scout</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        If your contract is a PDF, DOCX, or TXT file, Scout can read it and turn it into a reusable merge-field template draft. Scout extracts the text, suggests which values should become merge fields, and flags values it could not map. The draft opens in the template editor on a Review Import tab, with:
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Problems to Fix, listing anything that would stop the template from saving</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Suggestions, each with Apply and Ignore</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Heads-Up Notes for warnings Scout could not fix itself</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Values to Review, text left as plain text instead of a merge field</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        It is not a blind one-click publish. You review the draft, edit it directly, preview it with sample data, and use Save as Draft to keep working later or Save Template to finish. Check the names and values that should become merge fields, the legal text that should stay as written, and any dates, prices, or pickup terms that should not be hardcoded.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Scout helps with conversion. It does not replace a legal review, so involve your attorney if the language itself changed or looks uncertain. Availability of contract import depends on your plan; see <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">pricing</a>. Learn more about Scout in <a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">Scout AI</a>.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Prefer to keep the contract as a PDF with no conversion? Use Fill &amp; Sign above, which leaves the text of your file untouched.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 8: Printing -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Print Any Contract You Have Sent</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Any contract you have sent can be viewed, printed, and downloaded from BreederHQ, whatever its status: waiting for the buyer, waiting for your countersignature, signed, declined, voided, or expired. Choose View PDF from the contract's actions menu or its details, and the contract opens in a preview inside BreederHQ. Use your browser's print control to send it to your printer, which makes a copy for pickup day a one-minute job.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Until everyone has signed, the PDF carries a Draft, Not Signed watermark so nobody mistakes a working copy for the executed contract. Once it is signed, the preview shows the real signed PDF, including signatures and the audit trail. If your browser has its PDF viewer switched off, Download PDF and print the downloaded file instead.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Keep Your Contract. Stop Chasing Signatures.</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Upload the contract you already use, place the blanks, and send it from your breeding plan. The buyer signs in the portal, you countersign, and the signed copy is kept with the contract.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/client-portal" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+          See the Client Portal →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Built for Breeders Who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Already have a contract and want to keep its wording exactly</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Send the same agreement with every placement and want it to go out from the breeding plan</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want buyers to sign on a phone without printing, scanning, and mailing</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Place guardian homes, co-ownerships, or stud services as well as sales</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Have staff who prepare contracts while the owner signs as the seller</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 11: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This Might Be Overkill If:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You place one or two animals a year and your buyers prefer paper</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>You want a contract written for you. BreederHQ does not give legal advice, and the wording is yours to supply</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        A buyer who prefers paper can still receive a printed contract. Contracts signed on paper keep their uploaded scan.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 12: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 13: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn More</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/workflows/client-portal" class="text-[hsl(24,95%,53%)] hover:underline">→ Client Portal</a></div>
+        <div><a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">→ Scout AI</a></div>
+        <div><a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeding Plans</a></div>
+        <div><a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists &amp; Placement</a></div>
+        <div><a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">→ Pricing</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Client Portal", description: "Where buyers sign in, sign contracts, and keep their paperwork.", url: "/workflows/client-portal" },
+      { title: "Scout AI", description: "Import records and documents, then review before anything is saved.", url: "/workflows/scout-ai" },
+      { title: "Breeding Plans", description: "Plan litters and manage what each placement needs.", url: "/workflows/breeding-plans" },
+      { title: "Waitlists & Placement", description: "Manage the waitlist and place each offspring.", url: "/workflows/waitlists-and-placement" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #A9BAD4;
+    }
+  </style>
+</BaseLayout>
