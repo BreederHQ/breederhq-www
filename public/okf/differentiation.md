@@ -32,7 +32,7 @@ Every marketing surface leads with **Scout AI**, **the native mobile app**, and 
 8. Audit-ready by default. Health records, vaccination logs, medication logs with withdrawal periods, milk/production records, parasite-management logs, ownership provenance, timestamped signed contracts, financial ledger, movement records, all exportable, all timestamped.
 9. Embed widget syncs live listings to the breeder's own website (Squarespace, Wix, WordPress, Shopify, GoDaddy, HTML) in real time from BreederHQ as the source of truth.
 10. 8-phase breeding plan lifecycle (Planning, Committed, Bred, Birthed, Weaned, Placement Started, Placement Completed, Complete) with financial rollups per plan, per litter, and per year.
-11. Communications Hub unifies email and DMs with rule-based auto-replies on Pro and Enterprise.
+11. Communications Hub unifies email and DMs with rule-based auto-replies (enabled per account).
 12. Species-specific breeding cycle tools with heat tracking (Full vs Likely windows), hormone testing windows, progesterone tracking, species-appropriate gestation calendars, and dashboards for whelping, foaling, kidding, lambing, kindling, calving, queening.
 13. Network animal identity (GAID + Exchange Code) for real provenance across the network.
 
