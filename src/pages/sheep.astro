@@ -42,7 +42,8 @@ const featureCards = [
   { id: 'performance', icon: '📊', title: 'Performance', desc: 'NSIP data, weights, reproductive efficiency' },
   { id: 'fiber', icon: '🧶', title: 'Fiber & Wool', desc: 'Shearing, fleece grading, micron analysis, production analytics' },
   { id: 'clients', icon: '👥', title: 'Clients & Sales', desc: 'Sales pipeline, lead scoring, waitlists, contracts' },
-  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Batch deworming, treatment courses, health reports' }
+  { id: 'medications', icon: '💊', title: 'Medications', desc: 'Batch deworming, treatment courses, health reports' },
+  { id: 'bring-what-you-have', icon: '📥', title: 'Bring What You Already Have', desc: 'Import records with Scout, keep your own contract and application form', href: '/workflows/bring-what-you-have' }
 ];
 ---
 
@@ -87,7 +88,7 @@ const featureCards = [
       <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Flock Needs</h2>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         {featureCards.map(card => (
-          <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+          <a href={card.href ?? `#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
             <div class="text-3xl mb-2">{card.icon}</div>
             <h3 class="font-bold text-lg mb-1">{card.title}</h3>
             <p class="text-sm text-gray-600">{card.desc}</p>
@@ -101,7 +102,7 @@ const featureCards = [
   <nav class="sticky-nav hidden md:block sticky top-0 bg-white border-b border-gray-200 z-40 shadow-sm">
     <div class="max-w-5xl mx-auto px-4">
       <ul class="flex space-x-6 overflow-x-auto py-3 text-sm">
-        {featureCards.map(card => (
+        {featureCards.filter(card => !card.href).map(card => (
           <li>
             <a href={`#${card.id}`} class="nav-link whitespace-nowrap text-gray-600 hover:text-[hsl(24,95%,53%)] transition pb-2">
               {card.title}

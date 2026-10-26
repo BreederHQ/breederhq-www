@@ -51,7 +51,8 @@ const featureCards = [
   { id: 'post-weaning', icon: '📋', title: 'Post-Weaning Outcomes', desc: 'Disposition tracking: retained, sold, feedlot, replacement' },
   { id: 'health', icon: '🏥', title: 'Health & Genetics', desc: 'Testing, vaccinations, medications, pedigree genetics' },
   { id: 'clients', icon: '👥', title: 'Buyers & Clients', desc: 'Sales pipeline, inquiries, contracts, communications' },
-  { id: 'marketplace', icon: '🌐', title: 'Marketplace', desc: 'Breeder profile with available-animal listings' }
+  { id: 'marketplace', icon: '🌐', title: 'Marketplace', desc: 'Breeder profile with available-animal listings' },
+  { id: 'bring-what-you-have', icon: '📥', title: 'Bring What You Already Have', desc: 'Import records with Scout, keep your own contract and application form', href: '/workflows/bring-what-you-have' }
 ];
 ---
 
@@ -106,7 +107,7 @@ const featureCards = [
         <h2 class="text-2xl font-bold mb-6 text-center">Everything Your Cattle Program Needs</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           {featureCards.map(card => (
-            <a href={`#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
+            <a href={card.href ?? `#${card.id}`} class="feature-card block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition border border-gray-200 hover:border-[hsl(24,95%,53%)]">
               <div class="text-3xl mb-2">{card.icon}</div>
               <h3 class="font-bold text-lg mb-1">{card.title}</h3>
               <p class="text-sm text-gray-600">{card.desc}</p>

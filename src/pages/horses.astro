@@ -74,6 +74,7 @@ const featureCards = [
   { id: 'buyer-management', icon: '👥', title: 'Buyer Management', desc: 'Lead scoring, sales pipeline, analytics' },
   { id: 'health-registry', icon: '📋', title: 'Health & Registry', desc: 'Vaccinations, Coggins, multi-registry' },
   { id: 'medications', icon: '💊', title: 'Medications', desc: 'Treatment courses, withdrawal countdowns, stall cards' },
+  { id: 'bring-what-you-have', icon: '📥', title: 'Bring What You Already Have', desc: 'Import records with Scout, keep your own contract and application form', href: '/workflows/bring-what-you-have' }
 ];
 
 const navItems = [
@@ -137,7 +138,7 @@ const navItems = [
         <!-- Feature Overview Grid -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
           {featureCards.map(card => (
-            <a href={`#${card.id}`} class="feature-card group">
+            <a href={card.href ?? `#${card.id}`} class="feature-card group">
               <div class="text-3xl mb-2">{card.icon}</div>
               <h3 class="font-bold text-lg group-hover:text-[hsl(24,95%,53%)] transition-colors">{card.title}</h3>
               <p class="text-sm text-gray-600">{card.desc}</p>
