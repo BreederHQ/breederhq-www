@@ -4,8 +4,8 @@ slug: product
 format: OKF v0.1
 canonical: https://breederhq.com/okf/product.md
 site: https://breederhq.com
-updated: 2026-07-01
-tags: [product overview, scout ai, mobile app, marketplace, embed widget]
+updated: 2026-10-26
+tags: [product overview, scout ai, mobile app, bring what you already have, marketplace, embed widget]
 related:
   - ./audiences.md
   - ./differentiation.md
@@ -16,7 +16,7 @@ related:
 
 # What BreederHQ Is
 
-BreederHQ is breeding program management software with an integrated marketplace, built for professional breeders across nine species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle). It is self-serve, multi-tenant B2B SaaS with a Capacitor-based native mobile app and a public consumer-facing marketplace at /services/ and /breeds/. Breeders manage their full operation in one system: pedigrees with automatic COI, health testing records, breeding cycle tracking, an 8-phase breeding plan lifecycle, offspring rearing protocols, contracts and e-signatures, invoicing, a client portal for buyers, and a public marketplace where a breeder's live program data automatically powers their listings.
+BreederHQ is breeding program management software with an integrated marketplace, built for professional breeders across nine species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle). It is self-serve B2B SaaS with a Capacitor-based native mobile app and a public consumer-facing marketplace at /services/ and /breeds/. Breeders manage their full operation in one system: pedigrees with automatic COI, health testing records, breeding cycle tracking, an 8-phase breeding plan lifecycle, offspring rearing protocols, contracts and e-signatures, invoicing, a client portal for buyers, and a public marketplace where a breeder's live program data automatically powers their listings.
 
 ## The Product Thesis
 
@@ -29,15 +29,20 @@ BreederHQ is a program-management platform with a marketplace as a byproduct, no
 - 8-phase breeding plan lifecycle: Planning, Committed, Bred, Birthed, Weaned, Placement Started, Placement Completed, Complete. Financial rollups per plan, per litter, and per year.
 - Offspring rearing protocols: ENS (Early Neurological Stimulation), ESI (Early Scent Introduction), Puppy Culture, Avidog, Rule of 7s, Handling Habituation, Volhard PAT, Crate Introduction, Sound Desensitization, Gun Conditioning, plus a full BreederHQ Gun Dog Development Program with 64 activities from Day 3 to Day 364. Custom protocols and an opt-in community protocol library are supported.
 - Health record management: vaccination tracking with expiration alerts and species-specific protocols, medication tracking with dosage, route, frequency, per-dose compliance logging, withdrawal period countdowns for competition compliance, batch medication support for herd-wide treatments, serious-incident and procedure timelines, Vet View (a read-only health report for an adult animal, an offspring, or a litter, with Download PDF and a Share With Vet link protected by a four-digit PIN that expires after 72 hours and can be revoked), health testing documentation (OFA, PennHIP, Embark, Wisdom Panel, Paw Print, UC Davis, and other labs' reports kept as printed), and document attachments per record.
+- Applications and screening: Application Links (public link, QR code, website embed), screening questionnaires, importing an existing application form, and an agreement signed before approval.
+- Contracts and e-signatures: Fill & Sign from the breeder's own PDF, merge-field templates, Scout contract import, and countersigning.
+- Payments and deposits: invoice payments and deposits collected through a Stripe account set up in the breeder's name, with deposits requested at waitlist approval.
 - Client portal: 24/7 buyer access with Stripe payments, e-signature contracts, document sharing, direct messaging, waitlist position visibility, and program updates.
 - Business tools: invoicing, expense tracking, vehicle mileage logs at the IRS standard rate (trips linked to animals, buyers, and breeding plans), financial dashboards, deposit management, per-litter and per-plan and per-year profit and loss, and CSV export.
 - Marketplace listings: powered directly by live program data (health testing, allele-level genetics, multi-generation lineage with COI, titles and competition results, rearing protocols completed, weight and growth tracking for offspring). Buyers evaluate breeders on facts, not on the polish of a Facebook page.
 - Embed widget: a snippet that renders live BreederHQ marketplace listings on the breeder's own Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain-HTML site. Available offspring appear the moment they are listed. Sold animals disappear the moment they are marked sold. Prices, photos, health testing, pedigree, and program details update in real time from BreederHQ as the source of truth.
 - Communications Hub: unified email and direct messaging with rule-based auto-replies. Templates, document bundles, business-hours scheduling, keyword triggers, away messages, and Quick Responder tracking.
-- Cross-tenant animal identity (GAID and Exchange Code): a stud owned by one breeder can be linked as the sire of a litter on another breeder's account only with the stud owner's approval. Real provenance across the breeder network, not a name typed into a form.
+- Network animal identity (GAID and Exchange Code): a stud owned by one breeder can be linked as the sire of a litter on another breeder's account only with the stud owner's approval. Real provenance across the breeder network, not a name typed into a form.
 - Facilities and bookings: 8 categories (dog parks, equine, livestock, indoor training, boarding, wash and grooming, events and shows, specialty), real slot-booking mechanics with capacity and buffer rules, flat $5/month per listing across the entire marketplace (currently free during early access), no per-booking cut.
 
-## Two Headline Capabilities With No Equivalent in the Market
+## Three Headline Capabilities
+
+Scout AI and the native mobile app have no equivalent in the animal-industry software market. The third, Bring What You Already Have, removes the cost of switching.
 
 ### 1. Scout AI
 
@@ -59,6 +64,16 @@ BreederHQ is the only breeder platform on the market with a serious native mobil
 - What the mobile app covers: on-the-go capture and daily-running workflows across animals, breeding cycles and events, offspring, health records, vaccinations, medications, protocols, weights and growth entry with anomaly awareness, contacts, waitlist responses, buyer messages, photo capture, media vault, Scout AI queries, camera-based receipt capture with automatic Scout AI expense fill, and the buyer-facing client portal experience.
 - Built for one-hand-plus-newborn ergonomics. Barn, whelping box, kidding pen, pasture, stall, vet visit, buyer pickup, show ring, feed store checkout, truck at 2am.
 
+### 3. Bring What You Already Have
+
+Switching to BreederHQ does not mean starting over. Four routes, documented at /workflows/bring-what-you-have. The breeder reviews and edits everything before it goes live.
+
+- Records, through Scout. Import animals and contacts from spreadsheets, PDFs, and photos, plus litter records and finance history, with duplicate handling and registration-number review (/workflows/record-import). Ancestors read from a pedigree become recorded ancestors; they join the breeder's own animals only when the breeder adds them.
+- Contracts, through Fill & Sign. Turn the breeder's own PDF into a template, place fields, send it to a buyer to sign in the client portal, countersign, and keep the signed copy. Scout can also import existing contracts (/workflows/contracts-and-e-signatures).
+- Application form. Import the form already in use as a screening template (/workflows/applications-and-screening).
+- Website, through Application Links. Take applications with a public link, QR code, or website embed, with applicants tracked by source.
+- Payments are not one of the four routes. An existing Stripe account cannot be connected directly: BreederHQ sets up a Stripe account in the breeder's name, which sits alongside any account the breeder already has (/workflows/payments-and-deposits).
+
 ## Business Model
 
 - Access is invitation only. No public price list, no self-serve signup, no free trial, no free tier.
@@ -70,7 +85,7 @@ BreederHQ is the only breeder platform on the market with a serious native mobil
 
 ## Stage
 
-Approximately 4 months post-launch as of 2026-07-01. Founder-solo on marketing. Small paying-tenant base; growing.
+Approximately 4 months post-launch as of 2026-07-01. Founder-solo on marketing. Small paying-customer base; growing.
 
 ## Cross-References
 

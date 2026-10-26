@@ -16,7 +16,7 @@ There is no public price list and no way to sign yourself up. This is deliberate
 
 ## What A Founding Member Receives
 
-BreederHQ Launch is a complete setup, not just a software subscription. Founding members receive a founder-led setup that includes moving their existing records onto the platform and live onboarding sessions, so the platform is running properly before they are working in it alone.
+BreederHQ Launch is a complete setup, not just a software subscription. Founding members receive a founder-led setup that includes moving their existing records onto the platform and live onboarding sessions, so the platform is running properly before they are working in it alone. Breeders can also bring their own material in themselves: records through Scout import, their own contract PDF through Fill & Sign, and their existing application form (see https://breederhq.com/workflows/bring-what-you-have).
 
 The full scope and pricing of BreederHQ Launch are discussed directly with each applicant.
 

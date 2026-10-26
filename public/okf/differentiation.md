@@ -4,7 +4,7 @@ slug: differentiation
 format: OKF v0.1
 canonical: https://breederhq.com/okf/differentiation.md
 site: https://breederhq.com
-updated: 2026-07-01
+updated: 2026-10-26
 tags: [differentiation, competitive landscape, gooddog, breedercloudpro, zooeasy, easykeeper, sniffspot, extractive broker]
 related:
   - ./product.md
@@ -16,9 +16,9 @@ related:
 
 The rest of the market is running desktop pedigree software from 2003, single-species tools with a health-records tab bolted on, or extractive listing sites with no software behind them. BreederHQ is a different category of product.
 
-## The Two Capabilities No Competitor Has
+## The Three Headline Capabilities
 
-Every marketing surface leads with **Scout AI** and **the native mobile app**. These are the two "there is no equivalent in the market" capabilities. Everything else on the wedge list would beat the incumbents on its own; these two make the competition irrelevant. Full detail in [./product.md](./product.md).
+Every marketing surface leads with **Scout AI**, **the native mobile app**, and **Bring What You Already Have**. Scout AI and the native mobile app are the two "there is no equivalent in the market" capabilities. Bring What You Already Have removes the cost of switching: records imported with Scout, the breeder's own contract PDF signed with Fill & Sign, an existing application form imported, and applications taken from the breeder's website with Application Links. Everything else on the wedge list would beat the incumbents on its own. Full detail in [./product.md](./product.md).
 
 ## The Full Wedge (Each Alone Would Beat Incumbents)
 
@@ -34,7 +34,7 @@ Every marketing surface leads with **Scout AI** and **the native mobile app**. T
 10. 8-phase breeding plan lifecycle (Planning, Committed, Bred, Birthed, Weaned, Placement Started, Placement Completed, Complete) with financial rollups per plan, per litter, and per year.
 11. Communications Hub unifies email and DMs with rule-based auto-replies on Pro and Enterprise.
 12. Species-specific breeding cycle tools with heat tracking (Full vs Likely windows), hormone testing windows, progesterone tracking, species-appropriate gestation calendars, and dashboards for whelping, foaling, kidding, lambing, kindling, calving, queening.
-13. Cross-tenant animal identity (GAID + Exchange Code) for real provenance across the network.
+13. Network animal identity (GAID + Exchange Code) for real provenance across the network.
 
 ## How Alternatives Fall Short
 

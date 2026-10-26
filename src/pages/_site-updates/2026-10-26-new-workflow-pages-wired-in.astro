@@ -1,0 +1,38 @@
+---
+// src/pages/_site-updates/2026-10-26-new-workflow-pages-wired-in.astro
+export const updateMeta = {
+  date: '2026-10-26',
+  title: 'New workflow pages wired into navigation, listings, and structured data',
+  tags: ['workflows', 'navigation', 'features', 'llms-txt', 'okf', 'seo'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">October 26, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Connected the new Bring What You Already Have, Import Records With Scout, Contracts &amp; E-Signatures,
+    Applications &amp; Screening, and Payments &amp; Deposits pages to the shared listing surfaces, and named
+    Bring What You Already Have as a third headline capability beside Scout AI and the mobile app.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Pages and files updated</h3>
+    <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+      <li><code>src/components/HeaderV3.astro</code>: Bring What You Already Have under Platform Workflows; Applications &amp; Screening, Contracts &amp; E-Signatures, and Payments &amp; Deposits under Business Tools, in the desktop menu and the mobile menu.</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">/workflows</a>: cards for all five new pages.</li>
+      <li><a href="/features" class="text-[hsl(24,95%,53%)] hover:underline">/features</a> (<code>src/lib/planFeatures.ts</code>): a Bring What You Already Have category and a pedigree PIN-link row. The Find a Match note now reads "Search animals other breeders have opted to share across the network", and the remaining "cross-tenant" labels are reworded.</li>
+      <li><code>src/layouts/BaseLayout.astro</code>: the structured data feature list names record import, Fill &amp; Sign, Application Links, and Stripe payments.</li>
+      <li><code>public/llms.txt</code>, <code>public/okf/index.md</code>, <code>public/okf/product.md</code>, <code>public/okf/differentiation.md</code>, <code>public/pricing.md</code>: three headline capabilities instead of two. The bundle states that payments are not one of the four routes, because an existing Stripe account cannot be connected directly.</li>
+      <li><a href="/for-breeders" class="text-[hsl(24,95%,53%)] hover:underline">/for-breeders</a>: a third headline card, plus Fill &amp; Sign, Application Links, and Stripe payment lines.</li>
+      <li><a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/scout-ai</a>: a short section and a related link pointing to Import Records With Scout.</li>
+      <li><a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">/puppy-application-management</a>: Application Links and form import, with a link to Applications &amp; Screening.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">SEO</h3>
+    <p class="text-sm text-gray-600">
+      Internal links now reach the five pages from the header, the workflow index, and the features page.
+      The generated sitemap already includes them.
+    </p>
+  </div>
+</article>

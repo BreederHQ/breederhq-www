@@ -20,6 +20,25 @@ export type FeatureCategory = {
 
 export const planCategories: FeatureCategory[] = [
   {
+    name: "Bring What You Already Have",
+    features: [
+      {
+        name: "Scout Record Import",
+        note: "Animals and contacts from documents, litter records, and finance history, reviewed before anything is saved",
+      },
+      {
+        name: "Fill & Sign From Your Own Contract PDF",
+        note: "Place fields on your PDF, send it to a buyer to sign, countersign, and keep the signed copy",
+      },
+      { name: "Scout Contract Import" },
+      { name: "Application Form Import" },
+      {
+        name: "Application Links",
+        note: "A public link, QR code, or website embed, with applicants tracked by source",
+      },
+    ],
+  },
+  {
     name: "Animals",
     features: [
       { name: "Animal Profiles & Status Tracking" },
@@ -58,7 +77,7 @@ export const planCategories: FeatureCategory[] = [
       },
       {
         name: "Find a Match (Network Search)",
-        note: "Cross-tenant search for genetically compatible matches",
+        note: "Search animals other breeders have opted to share across the network",
       },
       { name: "Mare Status & Reproductive Tracking", note: "Horses" },
       { name: "Foaling Management & Calendar", note: "Horses" },
@@ -204,7 +223,11 @@ export const planCategories: FeatureCategory[] = [
       { name: "Multi-Generation Pedigree Visualization" },
       { name: "COI Calculation & Risk Levels" },
       { name: "Common Ancestor Tracking" },
-      { name: "Cross-Tenant Network Animal Linking" },
+      { name: "Network Animal Linking" },
+      {
+        name: "Pedigree PDF Export & PIN-Protected Share Link",
+        note: "A shared link opens for 72 hours and you can revoke it",
+      },
       { name: "Titles & Competitions Explorer" },
       { name: "Interactive Pedigree Explorer" },
     ],
@@ -263,6 +286,8 @@ export const planCategories: FeatureCategory[] = [
 ];
 
 export const featuresTaglines: Record<string, string> = {
+  "Bring What You Already Have":
+    "Your records, your contract, your application form. No retyping.",
   Animals: "Records that match how breeders actually think.",
   Breeding: "Plan it, predict it, prove it.",
   Offspring: "From day-one weights to placement-ready.",
