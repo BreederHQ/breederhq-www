@@ -5,7 +5,7 @@
 // (anyone arriving with gclid / gbraid / wbraid / utm_source / utm_campaign
 // in the query string). Organic visitors see the page unchanged — keeps the
 // existing SEO scroll-depth / time-on-page signals intact while giving
-// Google Ads traffic a single, prominent trial CTA that doesn't require
+// Google Ads traffic a single, prominent waitlist CTA that doesn't require
 // scrolling past the TL;DR + 7 feature accordions to reach.
 //
 // Also runs a tiny inline script that rewrites every
@@ -19,7 +19,7 @@
 //
 //   <PaidTrafficHero
 //     headline="Join The Waitlist"
-//     subhead="Built for serious dog breeders. No credit card pressure for the trial period."
+//     subhead="Built for serious dog breeders. Access is invitation only."
 //   />
 //
 // The script block uses is:inline per breederhq-www's tracking-script
@@ -37,7 +37,7 @@ interface Props {
   /** When true, the visible reveal-block is suppressed entirely and only
    *  the query-string-rewrite script is mounted. Use this on pages whose
    *  existing organic hero is already strong enough for paid traffic
-   *  (e.g. /for-breeders, where a prominent trial CTA already sits below
+   *  (e.g. /for-breeders, where a prominent waitlist CTA already sits below
    *  the H1) — the page stays visually identical, but every signup link
    *  silently gains gclid + utm_* forwarding so Google Ads keeps its
    *  campaign + keyword attribution intact. */
@@ -60,7 +60,7 @@ const {
     data-paid-hero
     hidden
     class="my-8 rounded-lg border-2 border-[hsl(24,95%,53%)] bg-orange-50 p-6 md:p-8"
-    aria-label="Start a free trial"
+    aria-label="Join the waitlist"
   >
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div>
