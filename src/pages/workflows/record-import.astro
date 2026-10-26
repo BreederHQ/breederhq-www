@@ -1,0 +1,501 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Import Records With Scout', url: '/workflows/record-import' }
+];
+
+const faqs = [
+  {
+    question: 'What can I import into BreederHQ with Scout?',
+    answer: 'Three separate things, each with its own screen. General records bring animals and contacts in from spreadsheets, PDFs, and photos of documents such as registration certificates. Litter records bring a litter\'s paperwork onto a breeding plan. Finance history brings income and expenses in from a spreadsheet. They are different imports with different rules, so each is described on its own on this page.'
+  },
+  {
+    question: 'Does anything get saved before I review it?',
+    answer: 'No. In every one of the three imports, Scout reads the file and shows you what it found, and nothing is written to your records until you commit the import. If you close the window before then, nothing changes.'
+  },
+  {
+    question: 'Do the ancestors on a certificate become my animals?',
+    answer: 'No. A sire, dam, or further-back ancestor that your file only names is recorded in the pedigree as a recorded ancestor. It becomes one of your own animals only when you explicitly add it, by ticking Add to My Herd on that row. Leaving it unticked still writes the ancestor into each animal\'s pedigree, so the pedigree stays whole. Your animal counts do not change.'
+  },
+  {
+    question: 'What happens if a row looks like a record I already have?',
+    answer: 'Scout asks you instead of deciding. For a row that looks like an existing record, you can use the record you already have, import it anyway as a new record, or skip it. Using your existing record never creates a second copy, and anything the document adds only fills blanks. It does not overwrite what you already entered. Values that can belong to only one record, such as an email address or a microchip number, are grouped on a card you must decide before the import will run.'
+  },
+  {
+    question: 'How does Scout handle registration numbers?',
+    answer: 'A registration number is easy to misread from a scan, so Scout does not guess. When a number reads differently in two places for the same animal, or is shorter than the other numbers from the same registry, it is marked Check This Number. You confirm it as read, or correct it, before you can continue. A registration number is not required to record a pedigree.'
+  },
+  {
+    question: 'Can I import a litter I already have paperwork for?',
+    answer: 'Yes. From a breeding plan, choose Import Litter Record and give Scout the document. It can be a PDF, a photo, a spreadsheet, or a litter record exported from another program as a web page. Scout shows each offspring\'s birth details, buyer, sold date, and health entries, and saves them only after you approve. It sends nothing to anyone: no email, no portal message, no notification to a buyer.'
+  },
+  {
+    question: 'Can I import my income and expense history?',
+    answer: 'Yes, from a spreadsheet. Drop in a Breeder Cloud Pro export, or any CSV, TSV, or Excel file. Your expenses become expense records and your income becomes paid invoices with their payments. You match each group of rows to a breeding plan, an animal, or business overhead, and a finished import can be undone. PDFs and photos are not read for finance history.'
+  },
+  {
+    question: 'Does importing send anything to my buyers?',
+    answer: 'No. None of the three imports sends email or notifications. The litter import creates contacts only as records, with no invitation and no portal access, and the finance import sends no emails and uses none of your own invoice numbers.'
+  },
+  {
+    question: 'Which file types does Scout read?',
+    answer: 'For general records: CSV, TSV, XLSX, PDF, JPEG, PNG, and WebP. For litter records: a PDF, a photo, a spreadsheet, or a web page exported from another program. For finance history: CSV, TSV, or XLSX only, up to 5 MB and 5,000 rows per file. An older .xls file needs to be saved as .xlsx or .csv first.'
+  },
+  {
+    question: 'Will Scout get everything right?',
+    answer: 'It reads documents and spreadsheets, and a photo you can barely read yourself is hard for Scout too. That is why the review step exists. Scout accounts for every row of a spreadsheet, tells you why a row was not turned into a record, and asks you about anything doubtful before it saves.'
+  }
+];
+
+const howTo = {
+  name: 'How to Import Your Existing Records Into BreederHQ With Scout',
+  description: 'A step-by-step guide to importing animals and contacts from a spreadsheet, PDF, or photo, reviewing what Scout found, and deciding which animals join your own.',
+  steps: [
+    { name: 'Open the import', text: 'From the Animals page, use the dropdown arrow beside the new animal button and choose Import with Scout AI. From Contacts, open the More menu and choose the same option.' },
+    { name: 'Upload your file', text: 'Drag a spreadsheet, PDF, or photo onto the upload area. One file can hold both animals and contacts. Your own column names and date formats are fine.' },
+    { name: 'Answer Scout\'s questions', text: 'Scout asks first about anything it needs settled: whether two rows are the same animal, what unit weights are in, and which animal a health record belongs to. Duplicate decisions are yours.' },
+    { name: 'Check the animals', text: 'Each row asks whether the animal is one of yours. Ancestors your file only names start unticked and are recorded in the pedigree. Tick Add to My Herd only for an animal that is or was yours.' },
+    { name: 'Check contacts, parents, and registration numbers', text: 'Review the people and businesses Scout found, choose each parent from the animals you just reviewed, and confirm or correct any registration number marked Check This Number.' },
+    { name: 'Import and read the results', text: 'The last screen counts what the import is set up to do. Nothing is written until you import. The results screen lists what was created and anything that could not be imported, with the reason.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Import Records With Scout: Animals, Litters, and Finance History | BreederHQ"
+  description="Bring your existing records into BreederHQ with Scout. Import animals and contacts from certificates and spreadsheets, litter records, and finance history, and review everything before it is saved."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Import Records With Scout</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Import Records With Scout: Do Not Retype What You Already Have.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Scout reads the records you already keep and turns them into BreederHQ records, in three separate imports: general records (animals and contacts), litter records, and finance history. Each one shows you what Scout found and saves nothing until you approve it. Ancestors named on a certificate are recorded in the pedigree and join your own animals only when you add them.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Switching software usually means weeks of retyping. A binder of certificates, a spreadsheet of past litters, and years of receipts do not have to be rebuilt by hand. Scout reads them, you check its work, and then they are in.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        These are three different imports. They accept different files, ask you different questions, and write different records, so this page describes each one on its own. For Scout's other jobs, see <a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">Scout AI</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Review Before Anything Is Saved -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">You Review Everything Before It Is Saved</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The review is not a formality at the end. It is where the import happens. Scout reads your file, then walks you through what it found, and the questions come first because your answers change what follows.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Nothing is written to your records until you press the final import button. Close the window earlier and nothing changes.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Everything imports together, so if something goes wrong nothing is left half-done.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Where a document disagrees with something you already recorded, the import fills blanks and leaves your entry alone. A document never overwrites a value you entered.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>A row that does not become a record is listed with the reason, so nothing disappears quietly.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Importing the same document twice does not create duplicates.</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Scout reads documents, and some documents are hard to read. A name or a registration number that cannot be made out from a photo cannot be imported, so Scout asks you rather than guess.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: General Records -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">General Records: Animals and Contacts</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Start from the Animals page, using the dropdown arrow beside the new animal button, or from the More menu on Contacts. Upload a spreadsheet (CSV, TSV, or XLSX), a PDF, or a photo of a printed document such as a registration certificate. One file can hold both animals and contacts, and your own column names and date formats are fine. Scout classifies each row as an animal, a person, or an organization, and a multi-page health-record PDF is read page by page.
+      </p>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Ownership Decisions: Is This Animal One of Yours?</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A certificate names six or more animals behind the one it is about. Most breeders own only some of them. So every row on the animals step asks one question, and you answer it with a checkbox:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Create as a New Animal:</strong> Scout did not find this animal among yours, so importing adds it as a new record.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Update This Animal:</strong> the row matched an animal you already keep, so the import fills in what that record is missing. Nothing you recorded is overwritten, and anything the document disagrees with is reported rather than changed.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Add to My Herd:</strong> a sire, dam, or ancestor your file only names. It starts unticked. Tick it only if the animal is or was yours.</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 rounded">
+          <h3 class="text-2xl font-bold mb-3">Pedigree Ancestors Become Recorded Ancestors</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            An ancestor your file names but you do not keep is written into the pedigree as a <strong>recorded ancestor</strong>. It is not added to your animals. The row reads "Recorded in the pedigree," and your animal counts do not change.
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>A recorded ancestor joins your own animals only when you explicitly add it, by ticking Add to My Herd.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Leaving it unticked still keeps it in each animal's pedigree, so every offspring keeps its sire and dam.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Grandparents and further back usually start unticked, and their pedigree is recorded either way.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An ancestor on a pedigree that turns out to be an animal you already keep can be linked to it later on the Lineage tab. Nothing is linked for you. A matching name or number only produces a suggestion.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A recorded ancestor can be corrected, merged with a duplicate you confirm, or removed from one animal's pedigree, all from that animal's Lineage tab.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            A four-generation pedigree chart is read from the layout of the page, so an ancestor lands in the slot where it was printed. In a pedigree where one animal appears twice, which is ordinary in a line-bred pedigree, it is recorded at both places. A registration number is not required: the pedigree belongs to the animal whether or not you have a number on file.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Choosing Each Parent</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            The parent step comes last because it depends on everything before it. For each animal you pick a dam and a sire from the animals you just reviewed, or search the animals you already keep, including retired and deceased ones.
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>If your file names the same dam for fourteen offspring, that is one question, not fourteen.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Your answer wins over the paperwork. Choose Leave This Slot Empty and the import writes nothing for that slot.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An import never removes a parent you already recorded. Replacing one needs your explicit confirmation.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An import never makes an animal its own ancestor. If the choices would loop a pedigree, nothing is imported and you are shown which parents to change.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Duplicate Handling</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Scout never decides a duplicate for you. When a row looks like a record you already have, you get three choices: use the record you already have, import it anyway as a new record, or skip it. Using your record never makes a second copy.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Some values can belong to only one record: an email address, a business name, or a microchip number. Rows that share one appear together on a card titled Values That Must Be Unique, and the import will not run until each card is decided. The choices depend on who holds the value:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Rows in your own file collide: keep the row you want, edit the values, or leave them all out.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A record you already have holds it: use that record.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A record you archived holds it: restore it and fill its blanks, or keep it archived and leave the rows out.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Real contact lists have real tangles, and a few get a closer look instead of a guess: a row shifted by one column, two people in one name, a phone number that will not dial, a damaged address. A phone number that cannot be real is never saved.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Registration-Number Review</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            One missing digit can turn one dog into two. Scout cannot know what a correct number looks like, so it does not guess. It marks a number <strong>Check This Number</strong> when:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700 mb-4">
+            <li class="flex items-start"><span class="mr-3">•</span><span>the same animal's number reads differently in more than one place in your file, or</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>a number is a digit shorter than the others from the same registry.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Flagged numbers are listed above your animals. You can confirm a number as read, or correct it by typing it as printed, and the correction applies everywhere that number was read. Continue stays off until every flagged number is settled. Everything you changed is listed with its own Undo.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Two animals can share a number and still import as two when something else, such as a different microchip or birth date, keeps them apart. Scout tells you which, and does not merge them for you. When a certificate prints a short registry tag in front of a number, the tag is not stored as part of the number, so an animal you already keep under that number is recognized instead of imported a second time.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What Else Comes Through</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Titles and awards printed after an animal's name become records on that animal rather than text. A code that Scout does not recognize is shown to you exactly as printed instead of being dropped or guessed.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Ancestor birth dates and years come in when a document prints them, and only blanks are filled. A year alone stays a year.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Vet printouts of vaccinations, medications, and test results are attached to the right animal. A row Scout cannot place becomes a question to you, never a guess.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What This Import Does Not Do</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Offspring records live on a breeding plan, and a plan is the only place one can be created. So an offspring row in a general import comes in as an animal in your program, and some birth-record details have nowhere to go on an animal. The summary names every row affected and which columns were left behind. If you want real offspring records, clear those rows and use the litter import below.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Litter Records -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">Litter Records</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        A litter you already raised does not need retyping. From the breeding plan, open the 3-dot menu and choose Import Litter Record. Give Scout the litter's paperwork: a PDF, a photo, a spreadsheet, or a litter record exported from another program as a web page. The plan needs a dam, and a finished plan can stay archived while you import into it.
+      </p>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What Scout Reads</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            For each offspring: name, sex, birth date, birth weight, microchip number, and color. It also reads each buyer, the sold date, the go-home date, and the litter's medical log. A sold date and a go-home date are different days, and Scout never copies one into the other.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Report That Lists Many Litters</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Some programs export one report for all your litters, such as a microchip report. Scout sorts the offspring into litters and asks which one is this plan's. You can also drop the report into Scout's own import and review each litter on the plan it belongs to, one at a time. Only the litter you choose is imported, and Scout does not create a plan for you.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Matching, Buyers, and Kept Offspring</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Scout matches each offspring in the document to one already on your plan by microchip, then call name, then the name as printed, then collar color. Anything it cannot match is created on the plan, and the review shows which rule matched.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>The import fills blanks. Where the document and your record disagree, you choose Keep Current or Use Document field by field.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A buyer is matched to a contact you already have by email, then phone, then name. A name alone never joins two buyers. Where it is unclear, you choose, or create a new contact.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An offspring you kept has a Keep This Puppy box, which leaves the document's buyer and dates unrecorded.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Each vaccination, deworming, or other entry becomes a health record on the offspring it applies to.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Litter and Registration Numbers</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The litter import can read litter and individual registration numbers from a document. It only fills blanks, records them as Not Decided between Limited and Full, and shows each number as Will Fill, Already Recorded, or Skipped, with the reason. A microchip number with a letter among its digits is not a valid number, so the review shows it as printed, says it is not imported, and never saves it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What the Litter Import Never Does</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>It sends no email, portal message, or notification to anyone. A buyer whose offspring went home years ago should not hear about it now.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A contact it creates is only a record, with no invitation and no portal access.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>It creates no prices, invoices, deposits, or credits. Prices in the document are ignored.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>It does not change the plan's dam, sire, or stage, and it does not touch a marketplace listing.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Anything in the document that the import does not use is listed under Not Imported.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Finance History -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">Finance History: Receipts and Expenses</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">
+        Your past books can come with you. From Finance, open the 3-dot menu on Invoices or Expenses and choose Import. Drop in a Breeder Cloud Pro export or any CSV, TSV, or Excel (.xlsx) file, up to 5 MB and 5,000 rows each, and add several files at once. PDFs and photos are not read here, so save a statement as a spreadsheet first.
+      </p>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">How Scout Reads a Spreadsheet</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Scout looks at the column headings to find the date, description, amount, and invoice or reference number, then reads every row from those columns by the same rules. It never retypes an amount, so the number in your file is the number you get. A row where nothing says whether money came in or went out is not guessed. It is listed under Not Imported.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Match Your Groups</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Rows that share a category in one stretch of time form a group. For each group you choose where it goes:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>A breeding plan or an animal.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Business Overhead, for costs that belong to no litter or animal.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Skip, to import nothing from the group.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Scout may suggest a plan or animal, but it is only a starting point. The import stays off until every suggestion is confirmed or changed, and you can send an individual row somewhere different from its group.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">How It Is Recorded</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Expenses become expense records. Income becomes paid invoices with one payment per row, so your profit by litter, cashflow, and reports include your history. An imported invoice has no buyer on it. Imports send no emails and do not use up any of your own invoice numbers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Nothing Disappears Quietly, and You Can Undo It</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every row left out is listed with its reason: no amount, a future date, an unreadable date or amount, a balance line, a different currency than your operation's, or a row you already imported. Importing a newer export skips rows you already brought in. A finished import can be undone from Import History, unless a record from it has since been edited or something else now depends on it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Bring Your Records With You</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Upload what you have, answer the questions Scout asks, and check the result before it is saved. Your certificates, your litters, and your books stay yours, and you keep the decision about which animals are yours.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/scout-ai" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+          See Scout AI →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Built for Breeders Who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Keep records in spreadsheets, binders of certificates, or another breeding program</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Have past litters and years of receipts they do not want to retype</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want pedigrees to carry over without turning every ancestor into an animal they own</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want to check what was found before any of it is saved</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 8: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This Might Be Overkill If:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You are starting fresh and have nothing to bring over</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>You have a handful of animals that are quicker to add by hand</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Scout can only read what is in the file. A very large spreadsheet is best split into smaller batches, and a long PDF of health records is read up to a page limit that Scout names if you reach it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 10: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn More</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/workflows/scout-ai" class="text-[hsl(24,95%,53%)] hover:underline">→ Scout AI</a></div>
+        <div><a href="/workflows/pedigrees" class="text-[hsl(24,95%,53%)] hover:underline">→ Pedigrees</a></div>
+        <div><a href="/workflows/breeding-plans" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeding Plans</a></div>
+        <div><a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">→ Invoicing &amp; Expenses</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Scout AI", description: "Document reading, reports, and the questions Scout can answer.", url: "/workflows/scout-ai" },
+      { title: "Pedigrees", description: "Lineage, recorded ancestors, and coefficient of inbreeding.", url: "/workflows/pedigrees" },
+      { title: "Breeding Plans", description: "Plans, offspring, and placement from pairing to go-home.", url: "/workflows/breeding-plans" },
+      { title: "Invoicing & Expenses", description: "Invoices, payments, and expense tracking by litter or animal.", url: "/workflows/invoicing-expenses" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #A9BAD4;
+    }
+  </style>
+</BaseLayout>
