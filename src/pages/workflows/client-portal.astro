@@ -16,11 +16,19 @@ const faqs = [
   },
   {
     question: 'Can clients make payments through the portal?',
-    answer: 'Yes. Clients can view their payment history, outstanding balances, and make payments directly through the portal using secure payment processing.'
+    answer: 'Yes, when you accept card payments. Clients see their invoices, payment history, and balance, and pay from the invoice on a secure Stripe Checkout page. If you collect another way, the invoice shows your payment instructions instead.'
   },
   {
     question: 'Do clients need to download an app?',
-    answer: 'No. The portal is web-based and works on any device with a browser. Clients receive a secure link to access their portal.'
+    answer: 'No. The portal is web-based and works on any device with a browser. Access is by your invitation: the buyer opens the activation link in their email, sets a password, and signs in.'
+  },
+  {
+    question: 'How does a buyer get into the portal?',
+    answer: 'Only because you gave them access. You can enable access from a contact or from a waitlist entry, and BreederHQ also sets it up when you send go-home documents, a pickup window invitation, an invoice, or a buyer selection turn. The buyer gets a Your Client Portal is Ready email with an activation link. Access you suspended or removed stays off.'
+  },
+  {
+    question: 'Can buyers book their own go-home time?',
+    answer: 'It is your choice per booking window. Buyers can pick an open time themselves and change or cancel it within your cutoffs, or you can schedule every buyer yourself. Buyers in a window you schedule see their time and can add it to a calendar, but they cannot book, change, or cancel it.'
   },
   {
     question: 'Can I message clients through the portal?',
@@ -244,33 +252,10 @@ const faqs = [
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Contracts & E-signatures</h3>
-          <ul class="space-y-2 text-lg text-gray-700">
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Contract templates with auto-fill (animal name, buyer info, price)</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Digital signatures so clients can sign from any device</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Signature audit trail with timestamps</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Auto-send contracts when deposit is received</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Signed contracts stored permanently in client portal</span>
-            </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Document bundles: send contract + health guarantee + care guide together</span>
-            </li>
-          </ul>
+          <h3 class="text-2xl font-bold mb-4">Contracts & E-Signatures</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Buyers sign the contracts you send them in the portal, and you countersign. You can upload the PDF contract you already use, or build merge-field templates that pull from your records. See <a href="/workflows/contracts-and-e-signatures" class="text-[hsl(24,95%,53%)] hover:underline">Contracts & E-Signatures</a> for how it works.
+          </p>
         </div>
 
         <div>
@@ -308,11 +293,15 @@ const faqs = [
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Option to make payments through portal</span>
+              <span>Pay online by card from the invoice, when you accept card payments</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Payment receipts automatically available</span>
+              <span>Payment instructions on the invoice when you collect another way, such as check or bank transfer</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>A downloadable PDF copy of every invoice</span>
             </li>
           </ul>
         </div>
@@ -364,13 +353,171 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Section 5.1: Portal Access -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">How Buyers Get Into Your Portal</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The portal is invitation-only. A buyer reaches it because you gave them access, not by signing up on a public site.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">You Control the Invitation</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Manage access from a contact's Portal tab, or from the Portal tab in a waitlist entry. Both show the same status: no access yet, invited, active, or suspended.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Enable Access sends the invite, Resend Invite sends it again, and Suspend Access cuts off the portal. Re-enable Access restores it.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>If a buyer is locked out, Send Password Reset Link emails them a link to set a new one.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Access you suspended or removed stays off. Nobody can claim it by signing in.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">What the Buyer Does</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Opens the Your Client Portal is Ready email, sets a password or signs in with an existing BreederHQ account, accepts the Terms, and lands in the portal.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>If an invitation link has expired, the buyer does not need a new one. They sign in or create an account with the email address you have on file and accept the invitation on the next page.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>BreederHQ also sets up access when you send go-home documents, a pickup window invitation, an invoice, or a buyer selection turn. A new buyer may then receive two emails: yours, and the portal-ready email. Reminders and receipts never grant access on their own.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Know Whether the Invite Landed</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>A delivery badge shows whether the invite email was delivered, bounced, or failed.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>A bounced invite adds a warning next to the contact's email in the contacts list and sends you an in-app notification, so you can correct the address and send again.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>If a buyer has no email on file, or their communication preferences block portal email, the tab tells you why the invite actions are unavailable.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>If the connection drops mid-send, the tab holds the invite buttons until it can read the current status, so you never send a second invitation blindly.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5.2: Go-Home Scheduling -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Go-Home Scheduling in the Portal</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A booking window is one offer of go-home times, such as a weekend of pickups, for the buyers on a breeding plan. You decide who books, you can place any buyer yourself, and you control the emails buyers receive.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Choose Who Books</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Buyers Book Their Own Time: buyers pick an open time in the portal and can change or cancel it until your cutoffs. If it is not their turn yet, the page shows when it opens.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>I Schedule Every Buyer: you give each buyer a time. They see it and can add it to a calendar, but they cannot book, change, or cancel it, and are told to contact you to change it.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Add, move, or cancel a buyer's time yourself at any time. The buyer is emailed the change, and that email always sends.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">See Who Is Coming, and When</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>The Scheduling section of a breeding plan shows every time in each window and who holds it, with a count such as 6 of 10 booked.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Booked Only hides open times so you see just who is coming. Buyers who have not booked are listed by name so you can place them.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>You can take one day out of a window and keep the rest. A day that still has bookings cannot be removed until you move or cancel them, so no buyer loses a time without you choosing it.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Buyer emails show times in your saved business time zone, with the zone named, so a buyer in another zone knows exactly when to arrive.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">What Your Buyers Receive</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Three switches in Settings apply to every window: a window-open invite, one reminder to a buyer who has not booked, and a reminder before a booked time. Each window can override each one.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Buyers get an email and a notice in the portal's notification bell, and manage their email under Notification Preferences.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Adult Animal Pickup</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>When you approve a buyer for an adult animal, the portal's Pickups page shows the animal, the breeder, a status (Not yet ready, Ready, Scheduled, or Completed), and the pickup time once it is set.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>When the status is Ready, the buyer picks from the windows you set. A shared checklist shows which items are yours, which are the buyer's, and which are both.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Once the pickup is scheduled, the buyer can download a transfer packet to keep offline.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 6: How BreederHQ Supports This -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-8">How BreederHQ brings it all together</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        When you add a client, they get secure access to their own portal. Pedigrees, health records, contracts, photos, and payment history, all accessible 24/7. Built-in messaging keeps communication organized. You upload once, and they can access it anytime.
+        When you give a client access, they get their own portal. Pedigrees, health records, contracts, photos, and payment history, all accessible 24/7. Built-in messaging keeps communication organized. You upload once, and they can access it anytime.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
@@ -477,7 +624,7 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Clients can view their payment history, outstanding balances, and make payments directly through the portal using secure payment processing.</p>
+          <p>Yes, when you accept card payments. Clients see their invoices, payment history, and balance, and pay from the invoice on a secure Stripe Checkout page. If you collect another way, the invoice shows your payment instructions instead.</p>
         </div>
       </details>
 
@@ -489,7 +636,31 @@ const faqs = [
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>No. The portal is web-based and works on any device with a browser. Clients receive a secure link to access their portal.</p>
+          <p>No. The portal is web-based and works on any device with a browser. Access is by your invitation: the buyer opens the activation link in their email, sets a password, and signs in.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How does a buyer get into the portal?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Only because you gave them access. You can enable access from a contact or from a waitlist entry, and BreederHQ also sets it up when you send go-home documents, a pickup window invitation, an invoice, or a buyer selection turn. The buyer gets a Your Client Portal is Ready email with an activation link. Access you suspended or removed stays off.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can buyers book their own go-home time?</span>
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>It is your choice per booking window. Buyers can pick an open time themselves and change or cancel it within your cutoffs, or you can schedule every buyer yourself. Buyers in a window you schedule see their time and can add it to a calendar, but they cannot book, change, or cancel it.</p>
         </div>
       </details>
 

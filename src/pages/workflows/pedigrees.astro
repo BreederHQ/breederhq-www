@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: 'Can I import pedigrees from other databases?',
-    answer: 'You\'ll need to enter pedigree data. Some breeders enter as they go, others batch-enter lineage for their foundation animals.'
+    answer: 'You can enter pedigree data as you go, or bring it in from documents with Scout AI. Ancestors from an import arrive as recorded ancestors in the pedigree. They join your own animals only when you choose to add them.'
   },
   {
     question: 'How many generations can I track?',
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     question: 'Can buyers see pedigrees?',
-    answer: 'Yes. Pedigrees can be shared through the buyer portal or exported as professional charts.'
+    answer: 'Yes. Export a pedigree as a PDF, or send a PIN-protected link that opens that animal\'s pedigree for 72 hours. You can revoke a link at any time.'
   },
   {
     question: 'Does it show common ancestors in a planned breeding?',
@@ -40,7 +40,7 @@ const faqs = [
   },
   {
     question: 'Can I use pedigree data for genetics planning, like coat color predictions?',
-    answer: 'Yes. BreederHQ connects pedigree data to the Genetics and Health module, which includes multi-locus coat color analysis, COI calculation, and lethal gene warnings. Pedigree depth feeds directly into genetics tools rather than sitting in a separate system.'
+    answer: 'Yes. BreederHQ connects pedigree data to the Genetics and Health module, which includes multi-locus coat color analysis, COI calculation, and a lethal-combination check. The check screens both parents\' recorded results against a curated list and shows a warning when it finds a match. No warning is not a clearance, so it does not replace testing and your own judgment. Pedigree depth feeds into the genetics tools rather than sitting in a separate system.'
   }
 ];
 
@@ -53,7 +53,7 @@ const howTo = {
     { name: 'Verify pedigree connections', text: 'Review the pedigree visualization to ensure all connections are correct. Fix any broken links or missing ancestors.' },
     { name: 'Check COI for planned breedings', text: 'When evaluating a potential breeding, view the calculated coefficient of inbreeding. The system flags HIGH and CRITICAL COI levels.' },
     { name: 'Identify common ancestors', text: 'Review common ancestors between potential breeding pairs. The system shows contribution percentages for each common ancestor.' },
-    { name: 'Share pedigrees with buyers', text: 'Export professional pedigree charts or enable buyer portal access so clients can view their animal\'s complete lineage.' }
+    { name: 'Share pedigrees with buyers', text: 'Export a pedigree as a PDF, or send a PIN-protected link that opens it for 72 hours.' }
   ]
 };
 ---
@@ -105,7 +105,7 @@ const howTo = {
           alt="Three-generation pedigree view in BreederHQ showing sire and dam linked to grandparents with COI displayed"
         />
         <p class="text-sm text-gray-500 mt-3 text-center italic">
-          Every animal's lineage tree, automatically linked to health records and genetic results, share it with buyers in one click.
+          Every animal's lineage tree, automatically linked to health records and genetic results, and ready to export as a PDF or share by PIN link.
         </p>
       </div>
     </div>
@@ -364,6 +364,185 @@ const howTo = {
     </div>
   </section>
 
+  <!-- Section 5.1: Export and Share -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Export a Pedigree or Share It by PIN Link</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Open an animal's Lineage tab and choose Export Pedigree. You get a printable PDF to send to a buyer, a stud or dam owner, or a registry, or to keep on file. Or, instead of sending a file, you can send a link.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">The PDF</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Page one is a chart of the first four generations. The pages after it are a table of every ancestor up to the depth you choose, with names, titles, and registration numbers exactly as recorded.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Choose how many generations it covers, up to the deepest generation recorded for that animal (at most 10).</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Add your operation's name and storefront logo, and add your watermark to every page.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Births print as far as they are recorded: a full date, a year alone, or nothing. A distant ancestor whose day you never knew is not given a made-up one.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>If a name or registration number contains a character the PDF cannot draw, the export is refused and tells you which field to correct. It is never altered to fit.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">A PIN-Protected Share Link</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Anyone with the link and its PIN can open that animal's pedigree for 72 hours.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>The PIN is shown once, so you can send it separately from the link. If you lose it, revoke the link and make another.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>After five wrong PINs the link pauses for a while, and the recipient is told how long to wait.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Add a label such as "For the stud owner" so you can tell your links apart. Only your team sees it.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>See every link for an animal in one list, and revoke any of them. A revoked link stops working at once, though it cannot recall a pedigree someone has already opened or saved.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>The link reads your records each time it is opened, so it shows them as they are then, not as they were when you made the link.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5.2: Recorded Ancestors -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Recorded Ancestors and Filling Every Slot</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A recorded ancestor is a sire, dam, or further-back ancestor who appears in a pedigree without being one of your own animals. It might come from a registration certificate you imported or from a parent you typed in. Recorded ancestors live in the pedigree only. They are not added to your animal list or counts.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        If you are bringing pedigrees in from paperwork, see <a href="/workflows/record-import" class="text-[hsl(24,95%,53%)] hover:underline">Import Records With Scout</a>. Ancestors from an import arrive as recorded ancestors, and you choose which ones, if any, to add to your own animals. More ways to move off your old system are on <a href="/workflows/bring-what-you-have" class="text-[hsl(24,95%,53%)] hover:underline">Bring What You Already Have</a>.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Fill a Pedigree Slot</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Click an empty position on the Lineage tab, or the parent you want to change, and pick from your own animals or from ancestors you have already recorded.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>If the animal is in neither list, use Quick Add with just a name. Registration number, registry, birth date, and color are optional, and you can enter a birth year alone when that is all you know.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Enter a registration number for an ancestor you have already recorded and the existing record is reused instead of a second one being created.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Replacing an occupied position asks you first, because the ancestors recorded behind the old parent are removed with it.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Edit, Link, Merge, and Remove</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Edit a recorded ancestor's name, registration number, registry, birth, or color to correct a misspelling or a number copied wrongly. The change applies to every pedigree that names that ancestor, and the form says so before you save.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Tell BreederHQ a recorded ancestor is the same animal as one you keep, and unlink them again at any time. Nothing is linked for you, and a matching name or registration number only produces a suggestion.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Possible duplicates are flagged, and you can merge two records of one animal. BreederHQ only suggests a merge, never makes one for you, and a merge is final.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>Remove an ancestor, and everyone recorded behind it, from one animal's pedigree without touching other animals that share them.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5.3: COI and Common Ancestors -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">COI and Common Ancestors</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Coefficient of inbreeding (COI) measures how closely related two parents are. BreederHQ uses the standard Wright's coefficient on the pedigree data you have entered, and sorts the result into four levels: Low, Moderate, High, and Critical.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Where You See It</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>On an animal's Lineage tab, a COI badge sits beside the parents, and the Inbreeding Analysis section lists the common ancestors with each one's contribution.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>In the Genetics Lab, pick a dam and a sire to see the COI for a pairing before you create a breeding plan.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>In Bloodlines Explore, open any of your animals as an interactive tree, switch between ancestry and descendants, and click a node to highlight its path back to the animal.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-4">What It Counts, and What It Admits It Cannot</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>A recorded ancestor counts as a common ancestor when the same one appears on both sides. Choose it from your Recorded Ancestors list rather than typing it again, so BreederHQ can see it is one animal.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>An ancestor typed in with no registration number is never matched to another by name alone, because two different animals can share a name. If your records name different parents for the same ancestor, that ancestor is left out rather than guessed at. Your COI can come out lower than the true value, and is never raised by a guess.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>When a parent has no usable ancestors, a 0% would say nothing about the pairing. BreederHQ shows Not Enough Pedigree instead of a percentage, with the generations recorded above each parent and a link to add the missing pedigree.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3">•</span>
+              <span>COI does not predict specific health problems. It measures genetic diversity risk, and a COI above zero is not automatically disqualifying.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 6: How BreederHQ Supports This -->
   <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
     <div class="max-w-4xl mx-auto">
@@ -444,14 +623,14 @@ const howTo = {
               <td class="px-4 py-3 text-gray-700">Yes</td>
             </tr>
             <tr>
-              <td class="px-4 py-3 font-medium text-gray-900">Connected to genetics tools (coat color, lethal genes)</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Connected to genetics tools (coat color, lethal-combination check)</td>
               <td class="px-4 py-3 text-gray-700">No</td>
               <td class="px-4 py-3 text-gray-700">No</td>
               <td class="px-4 py-3 text-gray-700">No</td>
               <td class="px-4 py-3 text-gray-700">Yes</td>
             </tr>
             <tr>
-              <td class="px-4 py-3 font-medium text-gray-900">Shareable with buyers via portal</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Shareable by PDF or PIN link</td>
               <td class="px-4 py-3 text-gray-700">Manual scan or copy</td>
               <td class="px-4 py-3 text-gray-700">Export only</td>
               <td class="px-4 py-3 text-gray-700">Link sharing</td>
@@ -563,7 +742,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>You'll need to enter pedigree data. Some breeders enter as they go, others batch-enter lineage for their foundation animals.</p>
+          <p>You can enter pedigree data as you go, or bring it in from documents with <a href="/workflows/record-import" class="text-[hsl(24,95%,53%)] hover:underline">Scout AI record import</a>. Ancestors from an import arrive as recorded ancestors in the pedigree. They join your own animals only when you choose to add them.</p>
         </div>
       </details>
 
@@ -587,7 +766,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Pedigrees can be shared through the buyer portal or exported as professional charts.</p>
+          <p>Yes. Export a pedigree as a PDF, or send a PIN-protected link that opens that animal's pedigree for 72 hours. You can revoke a link at any time.</p>
         </div>
       </details>
 
@@ -635,7 +814,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. BreederHQ connects pedigree data to the Genetics and Health module, which includes multi-locus coat color analysis, COI calculation, and lethal gene warnings. Pedigree depth feeds directly into genetics tools rather than sitting in a separate system.</p>
+          <p>Yes. BreederHQ connects pedigree data to the Genetics and Health module, which includes multi-locus coat color analysis, COI calculation, and a lethal-combination check. The check screens both parents' recorded results against a curated list and shows a warning when it finds a match. No warning is not a clearance, so it does not replace testing and your own judgment. Pedigree depth feeds into the genetics tools rather than sitting in a separate system.</p>
         </div>
       </details>
     </div>
@@ -649,6 +828,16 @@ const howTo = {
         <div>
           <a href="/articles/valais-blacknose-sheep" class="text-[hsl(24,95%,53%)] hover:underline">
             &rarr; Valais Blacknose breed-up records and registry documentation
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/record-import" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Import Records With Scout
+          </a>
+        </div>
+        <div>
+          <a href="/workflows/bring-what-you-have" class="text-[hsl(24,95%,53%)] hover:underline">
+            → Bring What You Already Have
           </a>
         </div>
         <div>
