@@ -1,0 +1,551 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Applications & Screening', url: '/workflows/applications-and-screening' }
+];
+
+const faqs = [
+  {
+    question: 'What is an Application Link?',
+    answer: 'An Application Link is a standing address for one of your applications. Share it, print it as a QR code, or add it to your own website. Anyone who opens it can apply with no account, and they arrive in your prospects. You do not need a published storefront.'
+  },
+  {
+    question: 'Does an applicant need an account to apply?',
+    answer: 'No. An applicant opens your link, fills in the application, and enters a 6-digit code sent to their email address. The code confirms the email is theirs, and an application is not stored until it is entered. The code expires after 15 minutes, and they can ask for a new one. They then see Application Sent and receive a copy by email.'
+  },
+  {
+    question: 'Can I put the application form on my own website?',
+    answer: 'Yes. In Share and Embed, the Website tab gives you code to paste into an HTML block. Choose Form on the Page, where the full application appears inside your page, or Apply Button, where your own button opens the application in a window over your page. It works on Wix, Squarespace, WordPress, and any site that accepts an HTML block. Your website never sees what an applicant types, because the form lives on BreederHQ\'s own application page.'
+  },
+  {
+    question: 'How do I know where each applicant came from?',
+    answer: 'Each link has a name that only you see, and that name becomes the prospect\'s source. Make one link per show, post, or flyer, and filter your Pipeline by Application Link to see who each one brought in. A prospect also shows whether they opened the form from the direct link or QR code, or filled it in on your website.'
+  },
+  {
+    question: 'What if a link spreads further than I wanted?',
+    answer: 'You can pause a link, set it to stop on a date or after a number of applications, replace it, or revoke it. Replace Link gives the link a new address and the old address stops working right away. Revoke stops new applications right away and cannot be undone. In both cases, prospects who already applied stay, with their applications.'
+  },
+  {
+    question: 'Can I bring the application form I already use?',
+    answer: 'Yes. Import reads the form from its web address, or from up to five pages of screenshots or a PDF, and builds a draft screening template for you to review. Nothing is saved until you click Save Template. It works with Wix, Squarespace, Google Forms, JotForm, and most other site builders. Import uses AI, so AI features must be turned on in your settings, and you can import up to 10 forms in any rolling 24 hours.'
+  },
+  {
+    question: 'Does a waitlist application include a signature?',
+    answer: 'No. A waitlist application carries no signature. If a form you import had one, the import leaves it out and, when your form had no confirmation of its own, adds an "I confirm that all information in this application is true and accurate" checkbox. Signatures belong on your deposit agreement, which holds your terms, refund policy, and health guarantee.'
+  },
+  {
+    question: 'Can I send an agreement before I approve someone?',
+    answer: 'Yes. In the fee step of the approval, choose Send Agreement First. The applicant stays in Prospects and is invited to sign your deposit agreement. Nothing is invoiced until they sign. Signing, online or recorded by you from a paper copy, approves them, sends the usual approval email, and sends the deposit invoice.'
+  },
+  {
+    question: 'What does approving someone give them?',
+    answer: 'Approval gives them access to your buyer portal, on whatever login they already have. They get an invitation by email, and once they accept it they can see messages, documents, invoices when there are any, and their agreements. Their portal also tells them they are on your approved waitlist. Approval does not bill them and does not show them your other buyers, their position in a queue, or your notes.'
+  },
+  {
+    question: 'Does a link change how my waitlist approves people?',
+    answer: 'No. If the waitlist reviews applicants, each application from a link arrives as an inquiry for you to approve or decline. If the waitlist auto-approves, applicants join right away. To change that, change the waitlist\'s own setting.'
+  }
+];
+
+const howTo = {
+  name: 'How to Take Applications With an Application Link',
+  description: 'A step-by-step guide to creating an Application Link, sharing it as a link, QR code, or website embed, and reviewing the applicants who arrive.',
+  steps: [
+    { name: 'Create the link', text: 'Open Waitlist, click the Application Links tab, and click New Link. Name the link, choose the application, choose whether applicants go to the whole waitlist, a program, or a litter, and set a stop rule if you want one.' },
+    { name: 'Share it', text: 'Use Share and Embed to copy the address, download the QR code as a PNG or SVG, or copy the code for your own website.' },
+    { name: 'Applicants confirm their email', text: 'Each applicant fills in the application and enters a 6-digit code sent to their email. The application is not stored until the code is entered.' },
+    { name: 'Find your applicants', text: 'Choose View Applicants on a link, or filter the Pipeline by Application Link. Each applicant appears as a prospect with the link as their source.' },
+    { name: 'Review and decide', text: 'Read the application, then approve or decline. Where you need terms agreed first, choose Send Agreement First so the applicant signs your deposit agreement before they are approved.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Applications & Screening: Application Links and Screening Forms | BreederHQ"
+  description="Take applications with a public link, QR code, or embed on your own website. Build screening questionnaires or import the form you already use."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Applications &amp; Screening</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Applications &amp; Screening: Take Applications Wherever Your Buyers Are.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+        <p class="text-gray-700 leading-relaxed">
+          An Application Link gives one of your applications a public address, a printable QR code, and a form you can embed on your own website. Applicants need no account and confirm their email with a code. Each applicant is tracked by the link they came from. You can build a screening questionnaire for each program, or import the application form you already use, then review applicants and approve them.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Most breeders already have an application form somewhere: a page on their website, a Google Form, a PDF. The work is getting the answers into one place and deciding who moves forward. Application Links, the screening builder, and form import are built around that.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Application Links -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Application Links: A Standing Address for Your Application</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Open Waitlist, click the Application Links tab, and click New Link. Share the link, print it as a QR code, or add it to your website. You do not need a published storefront.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What You Set on a Link</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Link Name:</strong> only you see it, and it becomes the prospect's source</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Application:</strong> one of your own templates or a starter</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Add Applicants To:</strong> the whole waitlist, a program, or a litter</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Stop Accepting:</strong> never, on a date, or after a number of applications</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Welcome Message:</strong> optional, shown at the top of the form</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What an Applicant Does</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The applicant opens your link, fills in the application, and enters a 6-digit code sent to their email. The code confirms the email is theirs, and an application is not stored until it is entered. It expires after 15 minutes, and they can ask for a new one. They then see Application Sent and get a copy by email.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Your Waitlist Rules Still Apply</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A link never changes how your waitlist handles people. If the waitlist reviews applicants, each one arrives as an inquiry for you to approve or decline. If it auto-approves, they join right away. If someone applies through a link and already has an open prospect on the same waitlist, program, or litter, the new application is added to that prospect instead of creating a second one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Sharing -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Share It As a Link, a QR Code, or a Form on Your Website</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Choose Share and Embed from a link's actions menu. A new link opens that window as soon as you create it.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The Public Link</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Copy the address and post it anywhere: social media, an email signature, or a text message. The window also counts how many times the page loaded, how many people asked for an email code, how many applications were sent, and how many people are still waiting on their code. The first count is page loads, not unique visitors.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">The QR Code</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The QR code opens the same form on a phone. Download it as a PNG or SVG and print it on a flyer, a kennel or barn card, or a show table sign. Make a separate link for each event, and you can see which show brought in applicants.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">An Embed on Your Own Website</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-3">
+            Copy the code and paste it into an HTML block. It works on Wix, Squarespace, WordPress, and any site that accepts an HTML block. Choose a style:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Form on the Page:</strong> the full application appears inside your page and grows to fit</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>Apply Button:</strong> your own button opens the application in a window over your page</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-3">
+            Your website never sees what an applicant types. The form lives on BreederHQ's own application page, and your page only hears when to resize and when the application is done.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Control -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Stop, Pause, Replace, or Revoke a Link</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A link you printed or posted can travel further than you meant. You stay in control of it.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Stop Rules</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Set a link to take applications until you change it, through the end of a date in your own time zone, or until it has taken a number you choose. After that, applicants see Applications Have Closed. Edit the link to reopen it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Pause and Resume</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Pause stops taking applications for now, and applicants see that you are not accepting applications right now. Resume reopens it.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Replace Link</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Replace Link gives the link a new address, and the old address stops working right away. The old link moves to Revoked Links and reads Replaced. Anything you printed or posted with the old address needs the new one.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Revoke</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Revoke stops new applications right away and cannot be undone. Make a New Link Like This copies a revoked link's settings if you want to start again. A revoked or replaced link shows applicants that it is not available and asks them to contact you for a current one.
+          </p>
+        </div>
+      </div>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Replacing or revoking a link does not remove anyone. Prospects who already applied stay, with their applications.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Tracking -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Applicants Arrive in Your Pipeline, Tracked by Source</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Everyone who applies through a link becomes a prospect in your Pipeline, the same as an applicant from your storefront. You review and approve them with the same steps.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Choose View Applicants on a link, and the Pipeline opens filtered to it. Or filter the Pipeline by source Application Link and pick a link. Revoked links stay in the list.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>A prospect's Source reads Application Link with the link's name.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Applied From shows whether they used the direct link or QR code, or filled in the form embedded on your website.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>A mark shows that they confirmed their email with a code.</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        If an applicant is already one of your contacts and entered a different name, phone number, or address, a note says their contact record was not changed, and you can compare the two. Nothing is overwritten automatically, because an email code confirms the address only. For the wider picture of a waitlist, see <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">Waitlists &amp; Placement</a>, or read about <a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">managing puppy applications</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Screening builder -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">The Screening Questionnaire Builder</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Open Waitlist and go to the Templates tab to build the questions applicants answer. A template is a per-program screening questionnaire, and you can keep as many templates as your programs need.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Short and long text, yes or no, single choice, multiple choice, number, and date questions</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Sections and text blocks, so a long form reads in parts</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Grid questions, where applicants answer across rows and columns</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>An Address question, with street, city, postal code, and country</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Acknowledgement checkboxes for statements an applicant must confirm</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Follow-up questions that show only when an earlier yes or no, or single-choice, answer calls for them</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>An Other (please specify) option on single-choice and multiple-choice questions</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        A template holds up to 50 questions and 100 items in all, counting sections and text blocks.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        You can tag questions about what the buyer wants, with Sex Preference, Purpose, Timeline, and Color Preference tags. When you approve the applicant, their answers to tagged questions carry onto the waitlist entry.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        If a screening answer is a complete address, approval can save it on the new contact for you, so you do not retype it. That happens only when approval creates the contact and you did not type an address yourself. An address already on file is never replaced.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: Import -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Import the Application You Already Have</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        If your application form already lives on your website, you do not have to retype it. Import reads the form and builds a draft screening template for you to review. Nothing is saved until you click Save Template.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Two Ways to Bring It In</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>From a Web Address:</strong> paste the address of the page with the form on it. This works with Wix, Squarespace, Google Forms, JotForm, and most other site builders.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span><strong>From a Screenshot or PDF:</strong> drop in up to 5 pages as PNG, JPG, or PDF files, up to 20 MB together. They are read as one form, in the order shown.</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-3">
+            If your form is a JotForm or a Google Form placed on a Google Sites page, paste the address of the Google Sites page. The import follows the embedded form to the JotForm or Google Form itself. It follows only those two providers. If it still cannot find your form, paste the address of the form itself or upload a screenshot.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Review Before You Save</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The draft opens beside a review panel. What We Changed lists what the import adjusted, such as questions left out, follow-up questions that now show only when they apply, and typos it fixed. Questions on Your Form shows every question it found and what became of it. Edit anything you like, then save.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What the Import Leaves Out</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Name and email are not copied, because every application already asks for them. A waitlist application carries no signature, so the import leaves a signature out and, if your form had no confirmation of its own, adds an "I confirm that all information in this application is true and accurate" checkbox. Collect signatures on your deposit agreement instead, which holds your terms, refund policy, and health guarantee.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Good to Know</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Import uses AI, so AI features must be turned on in your settings.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>You need the breeding edit permission. Without it, the template buttons are greyed out.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>If you upload a form a buyer already filled in, only the questions are read. Their answers are ignored, and your files are read once and not kept.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>You can import up to 10 forms in any rolling 24 hours.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Review -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Review Applications and Decide</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The Prospects tab in Waitlist is where you review buyers before they move into your active queue. Open an entry to read the application, their contact details, notes, and message history.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span><strong>Approve</strong> when the buyer is a good fit and should enter the active queue.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span><strong>Reject</strong> when they are not moving forward.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span><strong>Block</strong> when they should not be allowed to re-enter the queue in the normal way.</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        If the buyer matches a contact you already have, approval links them to that contact instead of creating a second one. If the buyer is a business, such as a kennel, rescue, or farm, you can approve them as an organization. Approval never merges two people into one record just because their emails match.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 9: Agreement first -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Send an Agreement Before You Approve</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Send Agreement First lets you agree deposit terms before you ask for money. In the fee step of the approval, choose a deposit agreement template and a Time to Sign, from 12 hours to 60 days, then click Send Agreement.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What Sending Does</h3>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>The applicant is not approved. They stay in Prospects.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Nothing is invoiced until they sign, and the deposit amount is fixed when you send.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>When they sign, online or by you recording a paper signature, they are approved, the usual approval email goes out, they receive the deposit invoice, and they get full portal access.</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>You cannot approve the applicant another way while their agreement is out. Cancel it first.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What the Applicant Sees</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The applicant gets an email titled Your Agreement Is Ready to Sign with the exact deadline. A new applicant creates a portal account that opens only this agreement until they sign, with Review and Sign and Decline buttons. They see no dashboard, invoices, or messages. Reminders go out halfway through the window and about 2 hours before it closes. If the deadline passes, they decline, or you cancel, the applicant stays in Prospects, is not invoiced, and does not get full access.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Where Signatures Belong</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            The application collects answers. The deposit agreement collects the signature. Keeping them apart means an applicant is never asked to sign terms before you have decided to work with them. See <a href="/workflows/contracts-and-e-signatures" class="text-[hsl(24,95%,53%)] hover:underline">Contracts &amp; E-Signatures</a> for how agreements are written, sent, and signed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: What approval gives -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What Approving Someone Gives Them</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Approving someone means you intend to work with them, and from that moment you can reach each other inside BreederHQ. You do not have to send an invoice, a contract, or a message to make that happen.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span><strong>Your buyer portal.</strong> They receive an invitation by email. Once they accept it, they have their own portal with you: messages, documents, invoices when there are any, and their agreements.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span><strong>Their own login stays theirs.</strong> If they found you through the marketplace, they keep the account they already use, with no second password.</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span><strong>A clear picture of where they stand.</strong> Their portal tells them they are on your approved waitlist and, later, which of your plans they have been assigned to.</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mb-4">
+        Approval does not ask them for money. If you have a deposit set up, they are told a deposit is due and pointed to their portal to pay it. If you have not, nothing is asked for. It also does not show them anything of yours: not your other buyers, not their position in a queue, and not your notes.
+      </p>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Portal invitations expire after three days, and a fresh one is sent if theirs lapses unaccepted. A contact with no email address on file cannot be invited until you add one.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 11: CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Put Your Application Where Your Buyers Already Look</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Make a link for each show, post, or flyer, import the form you already use, and see every applicant in one Pipeline with the source they came from.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/waitlists-and-placement" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+          See Waitlists &amp; Placement →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 12: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Built for Breeders Who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Already have an application form and do not want to retype it</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want to take applications from a website, a show table, or a flyer, and know which brought in each buyer</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Run more than one program and want different questions for each</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want deposit terms signed before an invoice goes out</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 13: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This Might Be Overkill If:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You place a few animals a year to people you already know</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>You do not screen buyers before you talk to them</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 14: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 15: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn More</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists &amp; Placement</a></div>
+        <div><a href="/puppy-application-management" class="text-[hsl(24,95%,53%)] hover:underline">→ Puppy Application Management</a></div>
+        <div><a href="/workflows/contracts-and-e-signatures" class="text-[hsl(24,95%,53%)] hover:underline">→ Contracts &amp; E-Signatures</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Waitlists & Placement", description: "Waitlist queues, plan assignment, and placing animals with buyers.", url: "/workflows/waitlists-and-placement" },
+      { title: "Contracts & E-Signatures", description: "Write, send, and sign agreements, including deposit agreements.", url: "/workflows/contracts-and-e-signatures" },
+      { title: "Client Portal", description: "Where approved buyers see their messages, documents, and agreements.", url: "/workflows/client-portal" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #A9BAD4;
+    }
+  </style>
+</BaseLayout>
