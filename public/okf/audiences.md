@@ -26,7 +26,7 @@ Landing page: [/for-breeders](https://breederhq.com/for-breeders).
 
 1. Help me run a real program without living in spreadsheets or losing data across tools.
 2. Help me look professional and trustworthy to buyers I've never met.
-3. Help me make better breeding decisions (pedigree, COI, genetics, health, lethal-combination detection).
+3. Help me make better breeding decisions (pedigree, COI, genetics, health, lethal-combination warnings).
 4. Give me the paper trail I need to survive an audit, inspection, or program review (USDA/APHIS Animal Welfare Act, state ag kennel licensing, DHIA/DHIR milk records, ADGA Linear Appraisal, FAMACHA parasite scoring, USDA Scrapie Flock Certification, Brucellosis and bTB and BQA, National Dairy FARM, Coggins/EIA testing, USEF drug testing, ARBA registration audits, CFA/TICA audits, IRS and accountant audits, insurance audits).
 5. Make my program legible to the people who need to see inside it (vets, co-owners, guardian homes, business partners, spouses, accountants, buyers).
 6. Actually run this as a business (financial dashboard, expense categorization, revenue rollups per breeding plan and per litter and per year, exportable P&L).
@@ -81,7 +81,7 @@ Landing pages: [/buyers](https://breederhq.com/buyers), [/find-breeders](https:/
 
 **Partner categories:**
 
-- Genetics labs (target partners: Embark, Wisdom Panel, GenSol Diagnostics, Paw Print Genetics, UC Davis VGL, Optimal Selection, Neogen, Genomia, Animal Genetics Inc., breed-specific labs like Zangersheide for horses, dairy DNA labs like Neogen Igenity and Zoetis for cattle DNA, plus rabbit/small-animal labs). Direct write into the animal's genetics record with lab source and panel details.
+- Genetics labs (target partners: Embark, Wisdom Panel, GenSol Diagnostics, Paw Print Genetics, UC Davis VGL, Neogen, Genomia, Animal Genetics Inc., breed-specific labs like Zangersheide for horses, dairy DNA labs like Neogen Igenity and Zoetis for cattle DNA, plus rabbit/small-animal labs). The goal is direct write into the animal's genetics record with lab source and panel details; today, results arrive by scanning the lab's report or by entry.
 - Microchip / identicon / RFID companies (target partners: AKC Reunite, HomeAgain, AVID, Datamars/Save This Life/Bayer Petkey/PetLink, 24PetWatch, Found Animals Registry, Michelson Found Animals, Free Pet Chip Registry, PetLog UK, Central Animal Records AU, Allflex/MSD, Datamars livestock, Y-Tex, Destron Fearing). Chip-ID registration filed directly from the offspring page.
 - Large governance bodies (target partners: AKC, UKC, CKC/Canadian Kennel Club, TKC/The Kennel Club UK, FCI federations, AQHA, Jockey Club, APHA, Holstein Association, American Angus Association, ADGA, AGS, AGA, ABGA, ASI, CFA, TICA, ARBA, AOA, IAAR, ILR, OFA, CHIC). Direct offspring registration into the governing body's system from the BreederHQ litter/offspring record.
 

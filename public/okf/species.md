@@ -23,7 +23,7 @@ BreederHQ supports nine species, all fully live and public, with species-specifi
 - AKC, UKC, CKC (Canadian Kennel Club), TKC (The Kennel Club UK), FCI federation registry support.
 - Whelping calendar.
 - Rearing protocols: ENS (Early Neurological Stimulation), ESI (Early Scent Introduction), Puppy Culture, Avidog, Rule of 7s, Handling Habituation, Volhard PAT, Crate Introduction, Sound Desensitization, Gun Conditioning, plus a full BreederHQ Gun Dog Development Program with 64 activities from Day 3 to Day 364.
-- Health testing integrations: OFA, PennHIP, Embark, Wisdom Panel, GenSol Diagnostics, Paw Print Genetics, UC Davis VGL.
+- Health testing records: OFA, PennHIP, and genetics reports from Embark, Wisdom Panel, Paw Print Genetics, and UC Davis VGL, plus other labs' reports kept as printed.
 - CHIC (Canine Health Information Center) trait taxonomy for breed-specific health test profiles.
 - Audit readiness: USDA/APHIS Animal Welfare Act inspections, state ag kennel licensing, local animal-control inspections.
 
