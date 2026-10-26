@@ -27,8 +27,8 @@ const faqs = [
     answer: 'You can still track genetics manually for any breed. Breed profiles simply pre-load the common loci and health tests for breeds like Australian Shepherds, Labradors, etc. If your breed isn\'t listed, you add the relevant genes yourself.'
   },
   {
-    question: 'Do the Standard plans include any genetics tools?',
-    answer: 'Yes. Standard plans include Punnett squares, basic trait predictions, lethal gene warnings, and multi-locus tracking. Advanced simulation features (Offspring Simulator, Best Match Finder) require the Professional plan.'
+    question: 'Are all of these genetics tools available on every account?',
+    answer: 'Not necessarily. Individual genetics tools, including Offspring Simulator, are enabled by account access, so what you see in the app depends on what your account includes.'
   },
   {
     question: 'Can I share predictions with co-breeders or buyers?',
@@ -66,7 +66,7 @@ const faqs = [
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
         <p class="text-gray-700 leading-relaxed">
-          Genetics is complex. Manual calculations are tedious and error-prone. BreederHQ's breeding intelligence tools do the work for you: Best Match Finder ranks potential pairings by genetic compatibility, COI, and health risk. Offspring Simulator predicts offspring-group outcomes using Monte Carlo simulation. Punnett Square Calculator visualizes single-gene inheritance. Breeding Goal Planner tracks progress toward your breeding objectives. Lethal gene warnings prevent dangerous pairings.
+          Genetics is complex. Manual calculations are tedious and error-prone. BreederHQ's breeding intelligence tools do the work for you: Best Match Finder ranks potential pairings by genetic compatibility, COI, and health risk. Offspring Simulator, where enabled for your account, predicts offspring-group outcomes using Monte Carlo simulation. Punnett Square Calculator visualizes single-gene inheritance. Breeding Goal Planner tracks progress toward your breeding objectives. Lethal gene warnings check both parents' recorded results against a curated list before you commit to a pairing.
         </p>
       </aside>
 
@@ -121,7 +121,7 @@ const faqs = [
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span>Lethal gene combinations (Double Merle, Lethal White Overo, Manx Syndrome, Spider Lamb) can be fatal</span>
+            <span>Lethal gene combinations (Double Merle, Lethal White Overo, Manx Syndrome, Spider Lamb) can be fatal or cause severe lifelong problems</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
@@ -168,7 +168,7 @@ const faqs = [
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
-          <span><strong>Lethal gene detection</strong> - Will this pairing risk fatal combinations?</span>
+          <span><strong>Lethal gene screening</strong> - Does this pairing match a combination on the curated lethal list?</span>
         </li>
         <li class="flex items-start">
           <span class="mr-3">•</span>
@@ -197,7 +197,7 @@ const faqs = [
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span>Lethal combination warnings (Double Merle, Lethal White, etc.)</span>
+            <span>Lethal combination warnings for conditions on the curated list (Double Merle, Lethal White Overo, etc.)</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
@@ -218,7 +218,7 @@ const faqs = [
       </p>
 
       <p class="text-lg text-gray-700 leading-relaxed mb-8">
-        Offspring Simulator runs thousands of genetic scenarios to show you the statistical distribution of outcomes for any pairing.
+        Offspring Simulator runs repeated random draws of each parent's recorded genetics to show you the statistical distribution of outcomes for a pairing. It is enabled per account, so it may not appear on every account.
       </p>
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
@@ -373,14 +373,14 @@ const faqs = [
 
       <div class="bg-white border-l-4 border-red-600 p-6 rounded mb-8">
         <p class="text-lg text-gray-700 leading-relaxed mb-4">
-          <strong>Some breeding combinations can be fatal.</strong> BreederHQ automatically detects dangerous pairings and warns you before you breed-potentially saving lives and preventing heartbreak.
+          <strong>Some breeding combinations can be fatal.</strong> When you plan a pairing, BreederHQ checks both parents' recorded results against a curated list of lethal and serious conditions and shows a warning before you proceed. A pairing with no warning is not a clearance: the check only sees results you have recorded, and only for conditions on the list.
         </p>
         <p class="text-gray-700 leading-relaxed">
           These aren't just "undesirable outcomes." Lethal gene combinations can result in embryos that don't survive, offspring that die shortly after birth, or animals with severe lifelong disabilities.
         </p>
       </div>
 
-      <h3 class="text-2xl font-bold mb-6">What BreederHQ Detects</h3>
+      <h3 class="text-2xl font-bold mb-6">Conditions Worth Knowing About</h3>
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
         <div class="bg-white p-6 rounded border border-red-200">
@@ -395,7 +395,7 @@ const faqs = [
             <li>• Increased sunlight sensitivity</li>
           </ul>
           <p class="mt-3 text-sm text-red-600 font-medium">
-            BreederHQ flags any M/m x M/m pairing before you commit.
+            BreederHQ warns on an M/m x M/m pairing when both parents' merle results are recorded.
           </p>
         </div>
 
@@ -426,9 +426,6 @@ const faqs = [
             <li>• Bowel and bladder dysfunction possible</li>
             <li>• Hind limb weakness or paralysis</li>
           </ul>
-          <p class="mt-3 text-sm text-red-600 font-medium">
-            BreederHQ flags tailless x tailless Manx pairings automatically.
-          </p>
         </div>
 
         <div class="bg-white p-6 rounded border border-red-200">
@@ -443,7 +440,7 @@ const faqs = [
             <li>• Fatal within weeks to months</li>
           </ul>
           <p class="mt-3 text-sm text-red-600 font-medium">
-            Common in Nubian and Nubian-cross breeds. BreederHQ flags carrier pairings.
+            Common in Nubian and Nubian-cross breeds.
           </p>
         </div>
 
@@ -459,7 +456,7 @@ const faqs = [
             <li>• Non-viable, requiring euthanasia</li>
           </ul>
           <p class="mt-3 text-sm text-red-600 font-medium">
-            Common in Suffolk and Hampshire. BreederHQ flags carrier pairings.
+            Common in Suffolk and Hampshire.
           </p>
         </div>
 
@@ -481,43 +478,23 @@ const faqs = [
       </div>
 
       <div class="bg-white p-6 rounded border border-gray-200 mb-8">
-        <h4 class="text-xl font-bold mb-4">Other Combinations Detected:</h4>
+        <h4 class="text-xl font-bold mb-4">Other Conditions on the Curated List Include:</h4>
         <ul class="space-y-2 text-gray-700">
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span><strong>Hairless x Hairless (dogs):</strong> Homozygous hairless offspring often non-viable</span>
+            <span><strong>HYPP (horses):</strong> Hyperkalemic Periodic Paralysis warnings</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span><strong>Brachycephalic extremes (dogs):</strong> Flagged for breeds with respiratory/birthing risks</span>
+            <span><strong>GBED (horses):</strong> Glycogen Branching Enzyme Deficiency</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span><strong>HYPP (horses):</strong> Hyperkalemic Periodic Paralysis carrier warnings</span>
+            <span><strong>Other horse conditions:</strong> SCID, Lavender Foal Syndrome, JEB, and Warmblood Fragile Foal Syndrome</span>
           </li>
           <li class="flex items-start">
             <span class="mr-3">•</span>
-            <span><strong>HERDA (horses):</strong> Hereditary Equine Regional Dermal Asthenia detection</span>
-          </li>
-          <li class="flex items-start">
-            <span class="mr-3">•</span>
-            <span><strong>GBED (horses):</strong> Glycogen Branching Enzyme Deficiency (always fatal)</span>
-          </li>
-          <li class="flex items-start">
-            <span class="mr-3">•</span>
-            <span><strong>Polycystic Kidney Disease (cats):</strong> PKD carrier pairing detection</span>
-          </li>
-          <li class="flex items-start">
-            <span class="mr-3">•</span>
-            <span><strong>G6S (goats):</strong> G6-Sulfatase Deficiency in Nubians</span>
-          </li>
-          <li class="flex items-start">
-            <span class="mr-3">•</span>
-            <span><strong>Scrapie susceptibility (sheep):</strong> Genotype-based risk assessment</span>
-          </li>
-          <li class="flex items-start">
-            <span class="mr-3">•</span>
-            <span><strong>Lethal White (rabbits):</strong> Dutch pattern homozygous lethality</span>
+            <span><strong>English Spotting (rabbits):</strong> Charlie carrier pairings</span>
           </li>
         </ul>
       </div>
@@ -531,21 +508,21 @@ const faqs = [
           </li>
           <li class="flex items-start">
             <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">2</span>
-            <span>When you plan a breeding, the system checks both parents for known lethal combinations</span>
+            <span>When you plan a breeding, the system checks both parents' recorded results against a curated list of lethal and serious conditions</span>
           </li>
           <li class="flex items-start">
             <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">3</span>
-            <span>If a dangerous pairing is detected, you get a <strong>red warning banner</strong> with an explanation</span>
+            <span>If a listed combination is found, a <strong>warning</strong> appears with an explanation and asks you to acknowledge it</span>
           </li>
           <li class="flex items-start">
             <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 text-sm">4</span>
-            <span>You can still proceed (we don't block you), but you're making an informed decision</span>
+            <span>You can still proceed (we don't block you), but you're making an informed decision. No warning does not mean a pairing is cleared</span>
           </li>
         </ol>
       </div>
 
       <p class="text-lg text-gray-700 leading-relaxed mt-8 font-semibold">
-        This feature alone can prevent tragedy. Even experienced breeders can overlook carrier status when juggling multiple animals.
+        Even experienced breeders can overlook carrier status when juggling multiple animals. A warning is a prompt to look closer, not a substitute for your own review.
       </p>
     </div>
   </section>
@@ -607,7 +584,7 @@ const faqs = [
             </li>
           </ul>
           <p class="text-sm text-gray-600 mt-4 italic">
-            Even then, the lethal gene warnings alone could prevent a costly mistake.
+            Even then, the lethal gene warnings can prompt a second look before a costly mistake.
           </p>
         </div>
       </div>
