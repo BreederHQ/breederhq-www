@@ -1,0 +1,38 @@
+---
+// src/pages/_site-updates/2026-10-26-payments-and-deposits.astro
+export const updateMeta = {
+  date: '2026-10-26',
+  title: 'New workflow page: Payments & Deposits',
+  tags: ['workflows', 'payments', 'deposits', 'stripe', 'seo'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">October 26, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Added a Payments &amp; Deposits workflow page at
+    <a href="/workflows/payments-and-deposits" class="text-[hsl(24,95%,53%)] hover:underline">/workflows/payments-and-deposits</a>.
+    It describes getting paid through a Stripe account set up in the breeder's name, and says plainly that an existing Stripe account is not connected directly.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">New file</h3>
+    <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+      <li><code>src/pages/workflows/payments-and-deposits.astro</code>: Stripe setup and what the buyer sees, the per-method cost table and fee recovery, deposit configuration, deposits at waitlist approval, a signed agreement before a deposit, unbilled deposits, deposit credits and balances, recording payments, void and refund, and disputes. Includes FAQPage and HowTo structured data.</li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Claims checked against the product</h3>
+    <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+      <li>Stripe fee rates are quoted as Stripe's standard US rates from the recover-stripe-fees help article, with a pointer to Stripe for current rates. No payout timing is stated.</li>
+      <li>No application fee on breeder invoice payments is confirmed in the API invoice creation code, so the page says BreederHQ adds none.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">SEO</h3>
+    <p class="text-sm text-gray-600">
+      The new page is picked up by the generated sitemap on the next build. Listing pages and navigation will link to it in a separate change. No screenshots yet; they follow separately.
+    </p>
+  </div>
+</article>

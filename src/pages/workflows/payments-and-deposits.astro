@@ -1,0 +1,504 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedWorkflows from '../../components/RelatedWorkflows.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Workflows', url: '/workflows' },
+  { name: 'Payments & Deposits', url: '/workflows/payments-and-deposits' }
+];
+
+const faqs = [
+  {
+    question: 'Whose Stripe account do my payments go into?',
+    answer: 'Your own. BreederHQ sets up a Stripe account in your name, with the full Stripe Dashboard. Buyers pay on a Stripe-hosted page, the money goes into that account, and Stripe pays it out to your bank. BreederHQ never holds your money.'
+  },
+  {
+    question: 'Can I connect the Stripe account I already have?',
+    answer: 'Not directly. Your BreederHQ sales get their own Stripe account, which sits alongside the one you already use. BreederHQ cannot see your current account\'s customers or sales, and each account has its own payouts and reports. Both can pay out to the same bank account.'
+  },
+  {
+    question: 'Does BreederHQ take a percentage of my payments?',
+    answer: 'No. BreederHQ does not add an application fee to the invoice payments you collect through Stripe, so the buyer\'s payment goes to your Stripe account less Stripe\'s own processing fee. Stripe\'s fees are real and come off each payment, so the amount in your bank account is the net.'
+  },
+  {
+    question: 'What does Stripe charge?',
+    answer: 'Stripe sets its own rates and can change them. Its standard US rates are 2.9% + $0.30 per card payment, 0.8% capped at $5 for bank transfer (ACH, US only), and about 6% + $0.30 for pay-over-time options such as Affirm, Klarna, and Afterpay. Check stripe.com/pricing for current rates, and look at your own Stripe account if you negotiated different ones.'
+  },
+  {
+    question: 'Do buyers have to pay through Stripe?',
+    answer: 'No. Every invoice can go out as a Stripe payment link or with manual instructions, such as Zelle, Venmo, check, or cash. You choose per invoice, and a default you set only preselects one. Payments that arrive outside Stripe are recorded by hand on the invoice.'
+  },
+  {
+    question: 'When can I ask for a deposit?',
+    answer: 'When you approve someone onto your waitlist, when you assign a buyer to a breeding plan, or in a catch-up pass for buyers who joined a plan before a deposit requirement existed. Approving never sends an invoice by itself. Nothing is charged or emailed until you pick an option.'
+  },
+  {
+    question: 'Can I require a signed agreement before a deposit?',
+    answer: 'Yes. With a default deposit agreement set, you send Agreement First from Prospects. The applicant stays in Prospects until they sign, and signing approves them and sends the deposit invoice. Declined, expired, and canceled agreements leave the applicant in Prospects with no invoice created.'
+  },
+  {
+    question: 'What happens to a deposit when a buyer moves to a different plan?',
+    answer: 'A paid deposit that is not attached to a plan is held as a credit on the buyer\'s contact. When you assign them to a plan that requires a deposit, Apply Available Credit is the first option. If the credit covers only part of the deposit, BreederHQ shows the remainder and lets you invoice for it.'
+  },
+  {
+    question: 'What if a buyer disputes a card payment with their bank?',
+    answer: 'BreederHQ tracks it. You are notified in the app and by email. The invoice shows a Disputed badge while the bank holds the money, and a balance held by an open dispute is not billed to the buyer again through Stripe until the dispute closes. To review or answer the dispute, you use your Stripe Dashboard.'
+  },
+  {
+    question: 'Can I refund a payment?',
+    answer: 'Yes. A Stripe payment can be refunded in full or in part from the invoice, and Stripe moves the money. A payment recorded by hand is marked refunded in your books, and you send the money back yourself. Refunds on Stripe payments come out of your Stripe balance.'
+  }
+];
+
+const howTo = {
+  name: 'How to Start Collecting Payments and Deposits With BreederHQ',
+  description: 'A step-by-step guide to setting up Stripe payments in BreederHQ and collecting a deposit at waitlist approval.',
+  steps: [
+    { name: 'Set up Stripe from Finance', text: 'Go to Finance, then Payments, and choose Set Up Stripe Payments. BreederHQ sends you to Stripe, which asks for business details, the owner\'s details, and a bank account for payouts. You can save for later and finish another time.' },
+    { name: 'Confirm Stripe is connected', text: 'When Stripe has your details and payouts are on, the card reads Stripe Is Connected and you can send invoices with a Stripe payment link.' },
+    { name: 'Set your waitlist deposit', text: 'Open Finance, then Settings, then the Fees tab. Under Waitlist Collection, turn on the deposit request at approval and enter an amount.' },
+    { name: 'Decide whether to require a signed agreement', text: 'Optionally turn on Require a Signed Agreement Before the Deposit Invoice, choose a deposit agreement template, and set how long applicants have to sign.' },
+    { name: 'Approve and choose how to collect', text: 'When you approve an entry, the deposit prompt opens with the amount filled in. Send a payment request, send the standard invoice, record a deposit you already collected, apply a credit the buyer holds, or skip for now.' },
+    { name: 'Record anything paid outside Stripe', text: 'If a buyer pays by check, cash, Zelle, or Venmo, open the invoice and choose Record Payment so balances stay accurate.' }
+  ]
+};
+---
+
+<BaseLayout
+  title="Payments & Deposits: Get Paid Into Your Own Stripe Account | BreederHQ"
+  description="Collect invoice payments and deposits through a Stripe account set up in your name. Deposits at waitlist approval, signed agreements first, credits, refunds, and disputes."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  howTo={howTo}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">›</li>
+      <li><a href="/workflows" class="text-[hsl(24,95%,53%)] hover:underline">Workflows</a></li>
+      <li class="text-gray-400">›</li>
+      <li aria-current="page" class="text-gray-600">Payments &amp; Deposits</li>
+    </ol>
+  </nav>
+
+  <!-- Section 1: What This Page Is About -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6">Payments &amp; Deposits: Paid Into Your Own Stripe Account.</h1>
+
+      <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+        <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+        <p class="text-gray-700 leading-relaxed">
+          BreederHQ sets up a Stripe account in your name, and buyers pay your invoices on a Stripe-hosted page. The money goes to your account and out to your bank, and BreederHQ adds no application fee on top. Deposits can be requested when you approve a waitlist entry, with a signed agreement first if you want one. A paid deposit that is not attached to a plan is held as a credit that follows the buyer to their next plan. Stripe charges its own processing fees on each payment.
+        </p>
+      </aside>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Taking a deposit is the moment a waitlist becomes a commitment, and the paperwork around it is where breeders lose track. Who paid, who signed, who was waived, and what a buyer is owed when a plan changes all live in one place here.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Stripe -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Getting Paid Through Stripe</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        You set Stripe up once, from Finance, then Payments. BreederHQ sends you to Stripe, which asks for business details, the details of the person who owns the business, and a bank account for payouts. You can choose Save For Later and finish another time. When Stripe has what it needs and payouts are on, the card reads Stripe Is Connected.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">An Account in Your Name</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            BreederHQ sets up a Stripe account in your name, with the full Stripe Dashboard. Payments go into that account and pay out to your bank. BreederHQ never holds your money.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Your Existing Stripe Account Is Not Connected</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you already have a Stripe account, BreederHQ does not connect to it. Your BreederHQ sales get their own Stripe account alongside it, and BreederHQ cannot see your current account's customers or sales. During setup, Stripe may offer to copy your business details from your current account, and you can accept or start fresh. Each account has its own payouts and reports, and both can pay out to the same bank account.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">What the Buyer Sees</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            A Stripe invoice includes a Pay Now button. The buyer opens the invoice on a Stripe-hosted page, enters card or bank details, and Stripe processes it. The invoice marks itself Paid in your account, and the buyer needs no BreederHQ account to pay.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Stripe or Manual, Invoice by Invoice</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Every invoice has a Delivery Method card with Stripe Payment Link and Manual Instructions. A default under Finance, then Payments, only preselects one, and you can choose the other on any invoice. Zelle, Venmo, check, and cash are recorded by hand. The Pay Now button routes through Stripe only.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Costs -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">What Each Payment Method Costs You</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Stripe charges a processing fee on every payment, and it comes off the top: your bank deposit is the net amount. BreederHQ does not add an application fee to the invoice payments you collect through Stripe, and it never takes a percentage of those payments. The fee depends on how the buyer pays:
+      </p>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-left text-lg text-gray-700 border-collapse">
+          <thead>
+            <tr class="border-b-2 border-gray-300">
+              <th class="py-3 pr-4 font-bold">Payment Method</th>
+              <th class="py-3 pr-4 font-bold">Stripe's Standard US Rate</th>
+              <th class="py-3 font-bold">Fee on $1,300</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200"><td class="py-3 pr-4">Card</td><td class="py-3 pr-4">2.9% + $0.30</td><td class="py-3">$38.00</td></tr>
+            <tr class="border-b border-gray-200"><td class="py-3 pr-4">Bank transfer (ACH, US only)</td><td class="py-3 pr-4">0.8%, capped at $5</td><td class="py-3">$5.00</td></tr>
+            <tr class="border-b border-gray-200"><td class="py-3 pr-4">Pay over time (Affirm, Klarna, Afterpay)</td><td class="py-3 pr-4">about 6% + $0.30</td><td class="py-3">about $78.30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        These are Stripe's rates, not BreederHQ's, and Stripe can change them. International cards and currency conversion add to the card rate. Check stripe.com/pricing for current rates, and look at your own account if you negotiated different ones.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">See the Costs Before You Send</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Once Stripe is connected, Finance, then Payments shows a Your Payment Methods, Your Fees section with a fee table for card, bank transfer, and pay over time. When you build an invoice, a fee estimate shows the Stripe card fee and what you will net, and its info button lists the cost of each method on that invoice.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Choose Which Methods Buyers See</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            BreederHQ invoices do not restrict payment methods. Buyers see whichever methods you have turned on in your Stripe account, and Manage Payment Methods in Stripe opens those settings. Pay-over-time options can help a buyer commit to a large purchase, and they cost about twice what a card does. Turning them off is your choice.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Recovering Stripe Fees</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-3">
+            BreederHQ gives you three ways to keep processing fees from eating into what you take home, and none of them is a card surcharge:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>A net-price calculator: enter the amount you want to take home and see the list price to charge</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An optional discount on manual invoices, for buyers who pay by check, cash, or bank transfer outside Stripe, with the percentage and the label you choose</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Steering large payments to bank transfer, where the fee stops growing at the cap</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Deposits -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Deposits From Waitlist to Plan</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A deposit in BreederHQ is a payment on an invoice, so the invoice always shows the total, what has been paid, and what is still owed. If your business says Reservation Fee, the app uses your word everywhere. It changes wording only.
+      </p>
+
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Configuring Deposits</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            On a breeding plan, a Deposit chip at the top of the Buyers tab sets the plan default. From there each buyer can follow the default, have a custom amount, or be waived:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Changing the plan default asks whether to reset buyers with exceptions or keep them</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>A plan linked to a breeding program inherits the program's rule, and one plan can waive it</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>No configured deposit means no deposit is due, and nothing shows as needed</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Waiving is a stated choice for one buyer, recorded so reports stay accurate</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Collecting a Deposit at Waitlist Approval</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            If you collect earlier than plan assignment, turn on approval-time collection under Finance, Settings, Fees, and enter a waitlist deposit amount. It applies to your whole operation, and it is a separate fee from any deposit a breeding plan requires later. When you approve an entry, the deposit prompt opens with the amount filled in and editable. Your choices are:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>Send Payment Request, to preview the email first</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Send Standard, to send it with your default template and payment method</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Record as Pre-Paid, when the buyer already paid you outside BreederHQ</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Apply Available Credit, when the buyer already holds one</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>Skip for Now, and collect later with Collect Deposit in the entry</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Approving never sends an invoice on its own. If the buyer's deposit is already billed or waived on a breeding plan, BreederHQ stops a second request so the buyer is not charged twice. Learn more about the waitlist itself in <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">Waitlists &amp; Placement</a>.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Requiring a Signed Agreement First</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            You can set a default deposit agreement and a time to sign, from 12 hours to 60 days, with 7 days as the default. When Require a Signed Agreement Before the Deposit Invoice is on, you send Agreement First from Prospects:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>The applicant stays in Prospects until they sign, and signing approves them and sends the deposit invoice</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>If the applicant signed a paper copy, you record the signature and upload it</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>You can resend the invitation, or cancel the agreement and tell the applicant or not</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>An expired, declined, or canceled agreement leaves the applicant in Prospects with no invoice created</span></li>
+          </ul>
+          <p class="text-lg text-gray-700 leading-relaxed mt-4">
+            Agreement templates and signing live in <a href="/workflows/contracts-and-e-signatures" class="text-[hsl(24,95%,53%)] hover:underline">Contracts &amp; E-Signatures</a>.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Collecting Unbilled Deposits</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            If you added buyers to a plan before setting a deposit requirement, nothing was billed. Collect Unbilled Deposits on the Buyers tab finds every buyer who should have been asked, shows the exact amount and where it comes from, and lets you Invoice, Waive, or Skip each one in a single pass. Nothing is billed until you confirm, buyers already handled are never billed again, and running it twice is safe.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Deposit Credits and Balances</h3>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            A paid deposit that is not attached to a plan is held as an available credit on the buyer's contact. Credits come from a paid waitlist deposit, a deposit held when you remove a buyer from a plan, an overpayment you confirm, or an offspring you unmatch after the buyer paid toward it. On the contact:
+          </p>
+          <ul class="space-y-2 text-lg text-gray-700">
+            <li class="flex items-start"><span class="mr-3">•</span><span>A green Credit badge shows who holds a spendable balance</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>The Finances tab keeps a timeline of invoices sent and paid, credits created and applied, refunds, and forfeits</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>When a buyer leaves a plan and you chose Decide Later, a card asks whether to hold as credit, refund, or forfeit</span></li>
+            <li class="flex items-start"><span class="mr-3">•</span><span>When you assign them to a plan, Apply Available Credit comes first, and a partial credit shows the remainder to invoice</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Invoices -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Recording Payments, Voids, and Refunds</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Stripe payments record themselves within seconds. Everything else you record by hand, and balances stay accurate either way. For the invoices themselves, see <a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">Invoicing &amp; Expenses</a>.
+      </p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Record Payment</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Open the invoice and choose Record Payment. Enter the amount, the date, which you can backdate, and the method. A partial payment leaves the invoice Partially Paid, and the buyer sees the same breakdown in their portal. Each invoice keeps a payment history, and you can edit the date, method, reference, or notes. For an incorrect amount, void the payment with a reason and record it again, so the history stays visible.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">A Check on a Stripe Invoice</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            You can record a Zelle, cash, or check payment on an invoice you already sent as a Stripe link. BreederHQ cancels the open link first so the buyer cannot pay the same money twice, then you choose a new Stripe link for the remainder or manual collection. If Stripe cannot be reached, nothing is recorded.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Void or Refund</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Void an invoice that has not been paid. Voiding is permanent, the invoice stays in your records, and a Stripe payment link is canceled with it. Refund a payment that was made, in full or in part. For a Stripe payment, Stripe moves the money back to the buyer's original method and the refund comes out of your Stripe balance. For a check or cash payment, Mark Refunded records it in your books, and you send the money yourself.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-3">Receipts and Notifications</h3>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            By default a buyer gets a receipt when you record a payment, and you are notified of payments that arrive through Stripe. A payment you record by hand does not notify you, since you entered it. You can turn either off for your operation, opt one buyer out, or override a single payment. Money actions such as issuing, voiding, and refunding ask whether to email the buyer, so you can enter old payments without sending anyone anything.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Disputes -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">When a Buyer Disputes a Payment</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        A bank dispute is a chargeback, not a refund, and BreederHQ tracks it so the invoice does not pretend the payment was never made.
+      </p>
+      <ul class="space-y-3 text-lg text-gray-700 mb-6">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You are notified in the app and by email, including the evidence deadline when the card network provides one</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>The invoice shows a Disputed badge while the bank holds the money, and a partial dispute shows how much is contested and how much is still owed</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>A balance held by an open dispute is not billed to the buyer again through Stripe until the dispute closes</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>When the only money left is under dispute, the buyer's invoice has no Pay button and says the balance is on hold while an earlier payment is reviewed. It does not use the word dispute</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>If you win, the bill is unchanged. If you lose, the lost money is owed again and the bill is replaced to include it</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        You review the evidence and respond in your Stripe Dashboard. BreederHQ gives you the link from the invoice and updates the invoice when the dispute is decided.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 7: CTA -->
+  <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Keep Every Deposit in One Place</h2>
+
+      <p class="text-xl leading-relaxed mb-8">
+        Set up Stripe once, ask for the deposit at the moment you approve, and let the invoice, the credit, and the buyer's balance stay in step. Payments you collect outside Stripe are recorded on the same invoice.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
+          Get Early Access
+        </a>
+        <a href="/workflows/invoicing-expenses" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center">
+          See Invoicing →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Who This Is For -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">Built for Breeders Who:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>Take a deposit or reservation fee to hold a spot</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want a signed agreement in hand before they invoice anyone</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Move buyers between plans and need the money to follow them</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Collect some payments by card and others by check, Zelle, or cash</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>Want their own Stripe account and Stripe Dashboard</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 9: Who This Is Not For -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-8">This Might Be Overkill If:</h2>
+
+      <ul class="space-y-3 text-lg text-gray-700">
+        <li class="flex items-start"><span class="mr-3">•</span><span>You do not take deposits and sell by handshake</span></li>
+        <li class="flex items-start"><span class="mr-3">•</span><span>You need your existing Stripe account to be the one that receives the money, since BreederHQ sales use a separate account</span></li>
+      </ul>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6">
+        Payments and deposits are tracked in BreederHQ. Venmo, Zelle, and PayPal are recorded by hand, because the Pay Now button runs through Stripe only.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 10: FAQ -->
+  <section class="py-20 px-4 faq-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 11: Related Resources -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Learn More</h2>
+      <div class="space-y-3 text-lg">
+        <div><a href="/workflows/invoicing-expenses" class="text-[hsl(24,95%,53%)] hover:underline">→ Invoicing &amp; Expenses</a></div>
+        <div><a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists &amp; Placement</a></div>
+        <div><a href="/workflows/contracts-and-e-signatures" class="text-[hsl(24,95%,53%)] hover:underline">→ Contracts &amp; E-Signatures</a></div>
+        <div><a href="/workflows/bring-what-you-have" class="text-[hsl(24,95%,53%)] hover:underline">→ Bring What You Already Have</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
+    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get Early Access
+    </a>
+  </div>
+  <RelatedWorkflows
+    heading="Related Workflows"
+    links={[
+      { title: "Invoicing & Expenses", description: "Create invoices, track what you spend, and see what you net.", url: "/workflows/invoicing-expenses" },
+      { title: "Waitlists & Placement", description: "Approve applicants and place offspring with buyers.", url: "/workflows/waitlists-and-placement" },
+      { title: "Contracts & E-Signatures", description: "Agreements your buyers sign online or on paper.", url: "/workflows/contracts-and-e-signatures" }
+    ]}
+  />
+
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      transition: transform 200ms ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      font-size: 1.125rem;
+    }
+
+    :global(body.bhq-dark-shell) .faq-item {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :global(body.bhq-dark-shell) .faq-answer {
+      color: #A9BAD4;
+    }
+  </style>
+</BaseLayout>
