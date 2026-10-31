@@ -12,19 +12,19 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'Is this a real client management system or just a contact list?',
-    answer: 'It\'s a full client management system with a visual sales pipeline, lead scoring, deal tracking, email templates, task management, and conversion analytics. Not a generic tool, but built specifically for breeder sales workflows.'
+    answer: 'It keeps buyer profiles, a prospect pipeline, communication history, email templates, follow-up dates, contracts, deposits, and a buyer portal in one place. It is built for breeder placement work, not borrowed from generic sales software.'
   },
   {
     question: 'What is the sales pipeline?',
-    answer: 'A visual Kanban board that shows every buyer\'s stage: Inquiry, Viewing, Negotiation, Vet Check, Contract, through to Closed. Drag and drop buyers between stages as they progress.'
+    answer: 'The Pipeline tab in Waitlist shows every prospect as a Board, Queue, Table, or By Litter view. Prospects move through Inquiry, Contacted, Qualified, Application Sent, Ready to Approve, and Approved, and you can drag cards between stages on the Board. For adult animals, each animal\'s Buyers & Placement tab shows who is interested and carries the placement through to completion.'
   },
   {
-    question: 'How does lead scoring work?',
-    answer: 'The system scores buyers based on their engagement, how recently they\'ve been active, budget fit, interest level, and deal progress. Higher-scored buyers are flagged so you focus on the most promising prospects first.'
+    question: 'Does BreederHQ score my leads?',
+    answer: 'No. Prospects are not given a score. The Queue view instead sorts out who needs you next: replies you owe, follow-ups that are due, applications that came back, and deposits still outstanding.'
   },
   {
     question: 'Can I track communication history?',
-    answer: 'Yes. Log calls, emails, meetings, viewings, and notes with dates. Every interaction is recorded on a timeline so you have a complete history.'
+    answer: 'Yes. Log notes, calls, video calls, and emails with dates on each prospect. Every interaction is recorded on a timeline so you have a complete history.'
   },
   {
     question: 'Can I message buyers from my phone?',
@@ -38,15 +38,15 @@ const faqs = [
 
 const howTo = {
   name: 'How to Manage Breeder Clients',
-  description: 'A step-by-step guide to professional client management including sales pipeline, lead scoring, communication tracking, contracts, and buyer portal setup.',
+  description: 'A step-by-step guide to professional client management including the prospect pipeline, communication tracking, contracts, and buyer portal setup.',
   steps: [
     { name: 'Create client records', text: 'Add each buyer with contact information, preferences, budget, and how they found you. Link clients to animals they\'ve purchased or are waiting for.' },
-    { name: 'Track buyers through the sales pipeline', text: 'Move buyers through stages on a visual Kanban board: Inquiry, Viewing, Negotiation, Vet Check, Contract, Closed. See your total pipeline value and which deals need attention.' },
-    { name: 'Log communication history', text: 'Record calls, emails, meetings, viewings, and notes with dates. Message buyers directly from the BreederHQ Mobile Companion app so you can respond on the go, and every message is added to the client timeline automatically.' },
+    { name: 'Track buyers through the pipeline', text: 'Move prospects through stages on the Pipeline board: Inquiry, Contacted, Qualified, Application Sent, Ready to Approve, and Approved. The Queue view shows which buyers need a reply, a follow-up, or a deposit.' },
+    { name: 'Log communication history', text: 'Record notes, calls, video calls, and emails with dates. Message buyers directly from the BreederHQ Mobile Companion app so you can respond on the go, and every message is added to the client timeline automatically.' },
     { name: 'Upload contracts and documents', text: 'Attach signed purchase agreements, spay/neuter contracts, registration transfer documents, and other paperwork to each client record.' },
     { name: 'Track payments', text: 'Record deposits and final payments with amounts, dates, and payment methods. Link payments to specific animals or services.' },
     { name: 'Set up buyer portal access', text: 'Invite clients to their buyer portal where they can view pedigrees, health records, photos, and documents you choose to share.' },
-    { name: 'Review analytics', text: 'Check conversion rates by lead source, average time to placement, and which buyers have gone quiet. Use lead scoring to focus on the most promising prospects.' }
+    { name: 'Review the funnel', text: 'Check how many prospects reach each stage by lead source, how long they sit in each stage, and which ones have gone quiet.' }
   ]
 };
 ---
@@ -81,7 +81,7 @@ const howTo = {
       <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
         <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
         <p class="text-gray-700 leading-relaxed">
-          You already build strong buyer relationships. BreederHQ keeps every client profile, conversation, contract, deposit, and follow-up in one place, with a visual sales pipeline, lead scoring, and analytics. When you're away from your desk, message buyers from the BreederHQ Mobile Companion app so quick questions get quick answers, even when you're in the barn or at a vet appointment.
+          You already build strong buyer relationships. BreederHQ keeps every client profile, conversation, contract, deposit, and follow-up in one place, with a prospect pipeline and a funnel view by lead source. When you're away from your desk, message buyers from the BreederHQ Mobile Companion app so quick questions get quick answers, even when you're in the barn or at a vet appointment.
         </p>
       </aside>
       <p class="text-xl text-gray-700 leading-relaxed">
@@ -260,23 +260,23 @@ const howTo = {
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">A sales pipeline that shows where every buyer stands</h3>
+          <h3 class="text-2xl font-bold mb-4">A pipeline that shows where every buyer stands</h3>
           <ul class="space-y-2 text-lg text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Visual pipeline from first inquiry through closing</span>
+              <span>Board, Queue, Table, and By Litter views, from first inquiry through approval</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Drag-and-drop buyers between stages as they progress</span>
+              <span>Drag buyers between stages on the Board as they progress</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Lead scoring that highlights your most engaged prospects</span>
+              <span>A Queue that puts replies owed, follow-ups due, applications back, and deposits outstanding in front of you</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>See total pipeline value and which deals need attention</span>
+              <span>Adult-animal buyers managed on each animal's Buyers &amp; Placement tab</span>
             </li>
           </ul>
         </div>
@@ -378,23 +378,23 @@ const howTo = {
         </div>
 
         <div>
-          <h3 class="text-2xl font-bold mb-4">Analytics that show what's working</h3>
+          <h3 class="text-2xl font-bold mb-4">A funnel that shows what's working</h3>
           <ul class="space-y-2 text-lg text-gray-700">
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Conversion rates by lead source</span>
+              <span>Stage-to-stage conversion, split by lead source</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Average time from inquiry to placement</span>
+              <span>Average days prospects have spent in each stage</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Stale lead detection so buyers don't slip through the cracks</span>
+              <span>Follow-ups due surfaced in the Queue so buyers don't slip through the cracks</span>
             </li>
             <li class="flex items-start">
               <span class="mr-3">•</span>
-              <span>Win/loss tracking to improve your process</span>
+              <span>A recorded reason on every prospect you close out as lost</span>
             </li>
           </ul>
         </div>
@@ -414,10 +414,6 @@ const howTo = {
               <span class="mr-3">•</span>
               <span>Health testing reminders if co-own or breeding rights</span>
             </li>
-            <li class="flex items-start">
-              <span class="mr-3">•</span>
-              <span>Auto-generated tasks for stale leads</span>
-            </li>
           </ul>
         </div>
       </div>
@@ -430,7 +426,7 @@ const howTo = {
       <h2 class="text-4xl font-bold mb-8">How BreederHQ brings it all together</h2>
 
       <p class="text-xl leading-relaxed mb-8">
-        Complete client profiles connected to the animals they purchased. A visual sales pipeline so you see every buyer's stage at a glance. Lead scoring that highlights your most engaged prospects. Communication history, contracts, and documents in one place. Payment tracking per client. Buyer portal so clients can access information themselves. Analytics that show conversion rates, average time to placement, and where leads drop off.
+        Complete client profiles connected to the animals they purchased. A prospect pipeline so you see every buyer's stage at a glance. A Queue that shows who needs a reply or a follow-up. Communication history, contracts, and documents in one place. Payment tracking per client. Buyer portal so clients can access information themselves. A funnel that shows conversion by lead source and where prospects drop off.
       </p>
 
       <p class="text-xl leading-relaxed mb-8">
@@ -525,7 +521,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>It's a full client management system with a visual sales pipeline, lead scoring, deal tracking, email templates, task management, and conversion analytics. Not a generic tool, but built specifically for breeder sales workflows.</p>
+          <p>It keeps buyer profiles, a prospect pipeline, communication history, email templates, follow-up dates, contracts, deposits, and a buyer portal in one place. It is built for breeder placement work, not borrowed from generic sales software.</p>
         </div>
       </details>
 
@@ -537,19 +533,19 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>A visual Kanban board that shows every buyer's stage: Inquiry, Viewing, Negotiation, Vet Check, Contract, through to Closed. Drag and drop buyers between stages as they progress.</p>
+          <p>The Pipeline tab in Waitlist shows every prospect as a Board, Queue, Table, or By Litter view. Prospects move through Inquiry, Contacted, Qualified, Application Sent, Ready to Approve, and Approved, and you can drag cards between stages on the Board. For adult animals, each animal's Buyers &amp; Placement tab shows who is interested and carries the placement through to completion.</p>
         </div>
       </details>
 
       <details class="faq-item">
         <summary class="faq-question">
-          <span>How does lead scoring work?</span>
+          <span>Does BreederHQ score my leads?</span>
           <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>The system scores buyers based on their engagement, how recently they've been active, budget fit, interest level, and deal progress. Higher-scored buyers are flagged so you focus on the most promising prospects first.</p>
+          <p>No. Prospects are not given a score. The Queue view instead sorts out who needs you next: replies you owe, follow-ups that are due, applications that came back, and deposits still outstanding.</p>
         </div>
       </details>
 
@@ -561,7 +557,7 @@ const howTo = {
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Log calls, emails, meetings, viewings, and notes with dates. Every interaction is recorded on a timeline so you have a complete history.</p>
+          <p>Yes. Log notes, calls, video calls, and emails with dates on each prospect. Every interaction is recorded on a timeline so you have a complete history.</p>
         </div>
       </details>
 
@@ -625,7 +621,7 @@ const howTo = {
     heading="Related Workflows"
     links={[
       { title: "Waitlists and Placement", description: "Applications, matching, deposits, automated notifications.", url: "/workflows/waitlists-and-placement" },
-      { title: "Buyer Applications", description: "Structured intake, scoring, and pipeline for buyers (any species).", url: "/workflows/outreach-hub" },
+      { title: "Buyer Applications", description: "Structured intake, screening answers, and a pipeline for buyers (any species).", url: "/workflows/outreach-hub" },
       { title: "Client Portal", description: "Buyers self-serve photos, pedigrees, contracts, payments.", url: "/workflows/client-portal" },
       { title: "Communications Hub", description: "Unified inbox, templates, auto-replies, document bundles.", url: "/workflows/communications-hub" }
     ]}
