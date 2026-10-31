@@ -12,19 +12,19 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'What coat colors can BreederHQ predict?',
-    answer: 'BreederHQ predicts outcomes for 13 horse color and pattern genes covering common phenotypes like Bay, Black, Chestnut, Palomino, Buckskin, Cremello/Perlino, Dun, Gray, Roan, Tobiano, Frame Overo, Sabino, Champagne, Silver, and Leopard Complex (Appaloosa). You can run simulations to see what 20 random foals might look like from any pairing.'
+    answer: 'BreederHQ predicts outcomes for 14 horse color and pattern genes covering common phenotypes like Bay, Black, Chestnut, Palomino, Buckskin, Cremello/Perlino, Dun, Gray, Roan, Tobiano, Frame Overo, Sabino, Champagne, Silver, and Leopard Complex (Appaloosa). You can run simulations to see what 20 random foals might look like from any pairing.'
   },
   {
     question: 'What genetic health conditions does it screen for?',
-    answer: 'BreederHQ automatically flags dangerous genetic combinations for 13 inherited conditions: OLWS (Lethal White Overo Syndrome), HYPP, GBED, HERDA, MH, PSSM1, SCID, LFS, CA, OAAM, JEB, Hydrocephalus, and Friesian Dwarfism, plus breed-specific warnings for Quarter Horses, Arabians, Appaloosas, Belgian Drafts, and Friesians. The system warns you before you make a risky pairing.'
+    answer: 'BreederHQ automatically flags dangerous genetic combinations for 15 inherited conditions: OLWS (Lethal White Overo Syndrome), HYPP, GBED, HERDA, MH, PSSM, PSSM1, WFFS, SCID, LFS, CA, OAAM, JEB, Hydrocephalus, and Friesian Dwarfism. The system warns you before you make a risky pairing.'
   },
   {
     question: 'Does it handle AI and embryo transfer?',
-    answer: 'Yes. Track natural cover, AI (fresh, cooled, or frozen), and embryo transfer with full details. Log semen shipment information including carrier, tracking number, arrival condition, and motility assessment.'
+    answer: 'Yes. Track natural cover, AI (fresh, cooled, or frozen), and embryo transfer with full details. Log semen shipment information including carrier, tracking number, arrival condition, and motility assessment. An embryo transfer plan carries both the genetic dam and the recipient dam, and you can download an ET certificate as a PDF.'
   },
   {
     question: 'How does mare reproductive tracking work?',
-    answer: 'Track heat cycles with per-mare pattern predictions. Log follicle exams including size, ovary location, uterine edema, and ovulation detection. Anchor breeding plans to confirmed ovulation dates for accurate foaling predictions. View complete reproductive history with success rates.'
+    answer: 'Track heat cycles with per-mare pattern predictions. Log follicle exams including size, ovary location, uterine edema, and ovulation detection. Anchor breeding plans to confirmed ovulation dates for accurate foaling predictions. View complete reproductive history with success rates. Follicle exams and palpations can also be recorded from the mobile app in the barn; entries made without a signal are saved on your phone and sync later.'
   },
   {
     question: 'What foaling milestones are tracked?',
@@ -44,15 +44,15 @@ const faqs = [
   },
   {
     question: 'Does it help manage horse buyers?',
-    answer: 'Yes. Built-in buyer management with automatic lead scoring (0-100), visual sales pipeline (Inquiry → Viewing → Negotiation → Vet Check → Contract → Closed), email templates, activity logging, and conversion analytics. Professional tools for high-value horse sales.'
+    answer: 'Yes. Each horse has a Buyers & Placement tab where you see who is interested, move prospects through your sales pipeline, and complete the placement. Contracts, digital signatures, and a buyer portal for sharing documents support the sale.'
   },
   {
     question: 'Can I track stallion revenue?',
-    answer: 'Yes. Revenue dashboard shows total income per stallion, breeding counts, and average fees. Manage seasonal breeding slots, track payments and outstanding balances, and monitor success rates per stallion.'
+    answer: 'Yes. The revenue dashboard shows total income, breeding counts, and average fee, with revenue, breeding count, and success rate for each stallion, plus recent payments. Stud service bookings move from inquiry through approval and deposit, with a cap on bookings for each availability window and a Coggins requirement you can set.'
   },
   {
     question: 'Does it track frozen semen inventory?',
-    answer: 'Yes. BreederHQ tracks semen inventory at the dose level with complete chain of custody. Log collections with quality metrics (concentration, motility, morphology), track storage locations (tank, rack, facility), get automatic expiration alerts for batches expiring within 30 days, and maintain a complete audit trail for every dose-whether used for breeding, shipped to mare owners, or transferred between facilities.'
+    answer: 'Yes. BreederHQ tracks fresh, chilled, and frozen semen as inventory lots, and embryos too. Record quality metrics (concentration, motility, morphology), upload a CASA report and let AI read it into a draft you review, keep lots in storage facilities and tanks, get a dashboard warning when a stallion runs low, and keep a history of every lot event, whether doses were used, shipped, transferred between facilities, or discarded.'
   },
   {
     question: 'How does medication and withdrawal tracking work?',
@@ -65,13 +65,13 @@ const faqs = [
 ];
 
 const featureCards = [
-  { id: 'genetics-lab', icon: '🧬', title: 'Genetics Lab', desc: '13+ color genes, 16+ health conditions' },
+  { id: 'genetics-lab', icon: '🧬', title: 'Genetics Lab', desc: '14 color genes, 15 health conditions' },
   { id: 'mare-management', icon: '🐴', title: 'Mare Cycles', desc: 'Heat tracking, follicle exams, breeding records' },
   { id: 'foaling', icon: '🍼', title: 'Foaling', desc: '11-month milestones, calendar, outcomes' },
   { id: 'stallion-services', icon: '💰', title: 'Stallion Revenue', desc: 'Bookings, payments, performance metrics' },
-  { id: 'semen-inventory', icon: '🧪', title: 'Semen Inventory', desc: 'Dose tracking, storage, chain of custody' },
+  { id: 'semen-inventory', icon: '🧪', title: 'Semen Inventory', desc: 'Dose tracking, storage, lot history' },
   { id: 'competition', icon: '🏆', title: 'Competition', desc: 'Shows, racing, producing records' },
-  { id: 'buyer-management', icon: '👥', title: 'Buyer Management', desc: 'Lead scoring, sales pipeline, analytics' },
+  { id: 'buyer-management', icon: '👥', title: 'Buyer Management', desc: 'Interested buyers, sales pipeline, placement' },
   { id: 'health-registry', icon: '📋', title: 'Health & Registry', desc: 'Vaccinations, Coggins, multi-registry' },
   { id: 'medications', icon: '💊', title: 'Medications', desc: 'Treatment courses, withdrawal countdowns, stall cards' },
   { id: 'bring-what-you-have', icon: '📥', title: 'Bring What You Already Have', desc: 'Import records with Scout, keep your own contract and application form', href: '/workflows/bring-what-you-have' }
@@ -131,7 +131,7 @@ const navItems = [
         <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
           <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
           <p class="text-gray-700 leading-relaxed">
-            Horse breeding software with advanced genetics: predict foal colors across 13+ genes (Bay, Palomino, Buckskin, Tobiano, Overo, and more), screen for 16+ health conditions (OLWS, HYPP, HERDA, GBED), track mare reproductive cycles with follicle exams and ovulation confirmation, manage 11-month pregnancies with milestone checklists, coordinate stallion services with revenue tracking, manage frozen semen inventory with dose-level tracking and chain of custody, and professionally manage high-value horse buyers with built-in sales tools.
+            Horse breeding software with advanced genetics: predict foal colors across 14 genes (Bay, Palomino, Buckskin, Tobiano, Overo, and more), screen for 15 health conditions (OLWS, HYPP, HERDA, GBED), track mare reproductive cycles with follicle exams and ovulation confirmation, manage 11-month pregnancies with milestone checklists, coordinate stallion services with revenue tracking, manage semen and embryo inventory with dose-level tracking and a history of every lot event, and keep interested buyers and placements organized on each horse's record.
           </p>
         </aside>
 
@@ -233,7 +233,7 @@ const navItems = [
                 <span class="text-3xl">🧬</span>
                 <div>
                   <h3 class="text-xl font-bold">Genetics Lab</h3>
-                  <p class="text-sm text-gray-600">13+ color genes • 16+ health conditions • COI calculation • Best match finder</p>
+                  <p class="text-sm text-gray-600">14 color genes • 15 health conditions • COI calculation • Best match finder</p>
                 </div>
               </div>
               <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -249,7 +249,7 @@ const navItems = [
                 <div class="bg-white border border-gray-200 rounded-lg p-6">
                   <h4 class="text-xl font-bold mb-4">Coat Color Predictions</h4>
                   <p class="text-gray-700 leading-relaxed mb-4">
-                    See what colors your foals could be before breeding. BreederHQ predicts outcomes across 13 horse color and pattern genes:
+                    See what colors your foals could be before breeding. BreederHQ predicts outcomes across 14 horse color and pattern genes:
                   </p>
                   <div class="grid md:grid-cols-2 gap-4 text-gray-700">
                     <ul class="space-y-2">
@@ -270,7 +270,7 @@ const navItems = [
                 <div class="bg-red-50 border border-red-200 rounded-lg p-6">
                   <h4 class="text-xl font-bold mb-4 text-red-800">Health Risk Assessment</h4>
                   <p class="text-gray-700 leading-relaxed mb-4">
-                    Automatically flags dangerous genetic combinations. BreederHQ screens for 13 inherited conditions:
+                    Automatically flags dangerous genetic combinations. BreederHQ screens for 15 inherited conditions:
                   </p>
                   <div class="grid md:grid-cols-2 gap-4 text-gray-700">
                     <ul class="space-y-2">
@@ -278,11 +278,13 @@ const navItems = [
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>HYPP</strong>: Hyperkalemic Periodic Paralysis</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>HERDA</strong>: Hereditary Equine Regional Dermal Asthenia</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>GBED</strong>: Glycogen Branching Enzyme Deficiency</span></li>
-                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>PSSM1</strong>: Polysaccharide Storage Myopathy</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>PSSM</strong>: Polysaccharide Storage Myopathy</span></li>
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>PSSM1</strong>: Polysaccharide Storage Myopathy Type 1</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>MH</strong>: Malignant Hyperthermia</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>SCID</strong>: Severe Combined Immunodeficiency</span></li>
                     </ul>
                     <ul class="space-y-2">
+                      <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>WFFS</strong>: Warmblood Fragile Foal Syndrome</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>LFS</strong>: Lavender Foal Syndrome</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>CA</strong>: Cerebellar Abiotrophy</span></li>
                       <li class="flex items-start"><span class="mr-3 text-red-600">⚠</span><span><strong>OAAM</strong>: Occipitoatlantoaxial Malformation</span></li>
@@ -352,6 +354,7 @@ const navItems = [
                     <li>• Uterine edema scoring</li>
                     <li>• Ovulation detection and confirmation</li>
                   </ul>
+                  <p class="text-gray-700 text-sm mt-2">Record follicle exams and palpations from the mobile app in the barn. Entries made without a signal are saved on your phone and sync later.</p>
                 </div>
 
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
@@ -359,10 +362,15 @@ const navItems = [
                   <p class="text-gray-700 mb-2">Track every breeding attempt. For AI shipments:</p>
                   <ul class="text-sm text-gray-600 space-y-1">
                     <li>• Carrier and tracking number</li>
-                    <li>• Arrival time and condition</li>
+                    <li>• Arrival condition</li>
                     <li>• Motility assessment</li>
                     <li>• Insemination timing relative to ovulation</li>
                   </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-3">Embryo Transfer</h4>
+                  <p class="text-gray-700">An embryo transfer plan carries both the genetic dam and the recipient dam. Download an ET certificate as a PDF for registry paperwork.</p>
                 </div>
 
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
@@ -447,8 +455,16 @@ const navItems = [
                   <p class="text-gray-700 text-sm">Document delivery details, complications, vet calls, placenta passage timing.</p>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Pre-Foaling Alerts</h4>
+                  <p class="text-gray-700 text-sm">Record a foaling check on a mare, including udder development, and review her check history as her date approaches.</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                  <h4 class="text-lg font-bold mb-2">Mare Status Board</h4>
+                  <p class="text-gray-700 text-sm">See where every mare in your program stands on one page, and export the list to CSV.</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
                   <h4 class="text-lg font-bold mb-2">Foal Heat Tracking</h4>
-                  <p class="text-gray-700 text-sm">Track foal heat timing and rebreeding readiness for the next season.</p>
+                  <p class="text-gray-700 text-sm">A watch list of this season's foaled mares shows who is waiting, who is in the foal heat window (days 5 to 12 after foaling), and who has passed it.</p>
                 </div>
               </div>
             </div>
@@ -478,19 +494,19 @@ const navItems = [
                   <h4 class="text-lg font-bold mb-3">Revenue Dashboard</h4>
                   <ul class="text-sm text-gray-600 space-y-1">
                     <li>• Total revenue per stallion</li>
-                    <li>• Breeding counts by season</li>
-                    <li>• Average stud fee trends</li>
-                    <li>• Outstanding balance tracking</li>
+                    <li>• Breeding counts and success rate</li>
+                    <li>• Average stud fee</li>
+                    <li>• Recent payments</li>
                   </ul>
                 </div>
 
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
                   <h4 class="text-lg font-bold mb-3">Booking Management</h4>
                   <ul class="text-sm text-gray-600 space-y-1">
-                    <li>• Seasonal breeding slot allocation</li>
-                    <li>• Available slots tracking</li>
-                    <li>• Mare approval workflow</li>
-                    <li>• Contract status per booking</li>
+                    <li>• Bookings from Inquiry through Approved, Deposit Paid, and Completed</li>
+                    <li>• A cap on bookings for each availability window</li>
+                    <li>• Requirements checklist per booking, including Coggins</li>
+                    <li>• Stud Service and Semen/AI Agreement contract templates</li>
                   </ul>
                 </div>
 
@@ -511,6 +527,7 @@ const navItems = [
                     <li>• Breeding success rates</li>
                     <li>• Offspring tracking</li>
                     <li>• Producing record statistics</li>
+                    <li>• Dashboard tiles for the stallion breeding calendar, Foals YTD, and Season Bookings</li>
                   </ul>
                 </div>
               </div>
@@ -524,7 +541,7 @@ const navItems = [
                 <span class="text-3xl">🧪</span>
                 <div>
                   <h3 class="text-xl font-bold">Semen Inventory Management</h3>
-                  <p class="text-sm text-gray-600">Dose tracking • Storage management • Chain of custody • Expiration alerts</p>
+                  <p class="text-sm text-gray-600">Dose tracking • Storage management • Lot history • Low-stock alerts</p>
                 </div>
               </div>
               <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -533,7 +550,7 @@ const navItems = [
             </summary>
             <div class="accordion-content">
               <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                Frozen semen is a valuable asset. Know exactly what you have, where it is, and when it expires. BreederHQ tracks inventory at the dose level with complete chain of custody.
+                Frozen semen is a valuable asset. Know exactly what you have and where it is. BreederHQ tracks fresh, chilled, and frozen semen at the dose level, keeps a history of every lot event, and handles embryo lots the same way.
               </p>
 
               <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -556,6 +573,7 @@ const navItems = [
                     <li>• Motility percentage</li>
                     <li>• Morphology assessment</li>
                     <li>• Visual grades (Excellent, Good, Fair, Poor)</li>
+                    <li>• Upload a CASA report (PDF or photo) and AI reads it into a draft you review before saving</li>
                   </ul>
                 </div>
 
@@ -563,8 +581,8 @@ const navItems = [
                   <h4 class="text-lg font-bold mb-3">Storage Management</h4>
                   <p class="text-gray-700 mb-2">Track exactly where inventory is stored:</p>
                   <ul class="text-sm text-gray-600 space-y-1">
-                    <li>• Storage type (Fresh, Cooled, Frozen)</li>
-                    <li>• Tank and rack location</li>
+                    <li>• Storage type (Fresh, Chilled, Frozen)</li>
+                    <li>• Storage facilities, accounts, and tanks</li>
                     <li>• Facility tracking for shipped semen</li>
                     <li>• Transfer history between locations</li>
                   </ul>
@@ -583,16 +601,8 @@ const navItems = [
               </div>
 
               <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-6">
-                <h4 class="text-xl font-bold mb-4 text-amber-800">Expiration & Low Inventory Alerts</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <p class="text-gray-700 mb-2"><strong>Automatic expiration tracking:</strong></p>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                      <li>• Calculated based on storage type</li>
-                      <li>• Dashboard alerts for batches expiring within 30 days</li>
-                      <li>• Visual urgency indicators</li>
-                    </ul>
-                  </div>
+                <h4 class="text-xl font-bold mb-4 text-amber-800">Low Inventory Alerts</h4>
+                <div>
                   <div>
                     <p class="text-gray-700 mb-2"><strong>Low inventory warnings:</strong></p>
                     <ul class="text-sm text-gray-600 space-y-1">
@@ -606,17 +616,17 @@ const navItems = [
 
               <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
                 <h4 class="text-lg font-bold mb-3">Chain of Custody & Dispensing</h4>
-                <p class="text-gray-700 mb-3">Complete audit trail for every dose:</p>
+                <p class="text-gray-700 mb-3">A recorded history for every lot:</p>
                 <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
                   <ul class="space-y-1">
-                    <li>• <strong>Breeding (On-Site)</strong> - Used at your facility</li>
-                    <li>• <strong>Ship to Mare Owner</strong> - With carrier and tracking</li>
-                    <li>• <strong>Transfer to Facility</strong> - Move between locations</li>
+                    <li>• <strong>Used</strong> - Doses drawn from the lot</li>
+                    <li>• <strong>Shipped</strong> - Doses sent out</li>
+                    <li>• <strong>Transferred</strong> - Moved between locations</li>
                   </ul>
                   <ul class="space-y-1">
-                    <li>• <strong>Sample Testing</strong> - Quality analysis</li>
-                    <li>• <strong>Discard</strong> - Expired or waste</li>
-                    <li>• Direct integration with breeding plans</li>
+                    <li>• <strong>Disposed</strong> - Discarded doses</li>
+                    <li>• <strong>Lost</strong> - Doses that cannot be found</li>
+                    <li>• <strong>Adjusted</strong> - Count corrections</li>
                   </ul>
                 </div>
               </div>
@@ -694,7 +704,7 @@ const navItems = [
                 <span class="text-3xl">👥</span>
                 <div>
                   <h3 class="text-xl font-bold">Professional Buyer Management</h3>
-                  <p class="text-sm text-gray-600">Lead scoring • Sales pipeline • Activity tracking • Analytics</p>
+                  <p class="text-sm text-gray-600">Interested buyers • Sales pipeline • Placement</p>
                 </div>
               </div>
               <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -703,39 +713,24 @@ const navItems = [
             </summary>
             <div class="accordion-content">
               <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                Horse sales are high-value transactions. Managing buyers professionally isn't optional-it's expected. BreederHQ includes a full buyer management system built for equine sales.
+                Horse sales are high-value transactions. Managing buyers professionally isn't optional-it's expected. BreederHQ keeps your buyers on the horse they are interested in, so the sale stays organized from first inquiry to placement.
               </p>
 
               <div class="grid md:grid-cols-2 gap-4 mb-6">
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
-                  <h4 class="text-lg font-bold mb-2">Lead Scoring</h4>
-                  <p class="text-gray-700 text-sm">Automatic scoring based on engagement, recency, budget fit, and interest level. Focus on your most promising prospects first.</p>
+                  <h4 class="text-lg font-bold mb-2">Buyers & Placement</h4>
+                  <p class="text-gray-700 text-sm">Open a horse and use its Buyers & Placement tab to see who is interested and complete the placement.</p>
                 </div>
 
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
                   <h4 class="text-lg font-bold mb-2">Sales Pipeline</h4>
-                  <p class="text-gray-700 text-sm">Visual Kanban: Inquiry → Viewing → Negotiation → Vet Check → Contract → Closed.</p>
+                  <p class="text-gray-700 text-sm">Advance prospects through your sales pipeline, from first inquiry to a completed placement.</p>
                 </div>
 
                 <div class="bg-white border border-gray-200 rounded-lg p-5">
-                  <h4 class="text-lg font-bold mb-2">Activity Tracking</h4>
-                  <p class="text-gray-700 text-sm">Log calls, emails, meetings, viewings, and offers. Complete timeline of every interaction.</p>
+                  <h4 class="text-lg font-bold mb-2">Contracts & Buyer Portal</h4>
+                  <p class="text-gray-700 text-sm">Send contracts for digital signature and share documents with buyers through the portal.</p>
                 </div>
-
-                <div class="bg-white border border-gray-200 rounded-lg p-5">
-                  <h4 class="text-lg font-bold mb-2">Email Tools</h4>
-                  <p class="text-gray-700 text-sm">Templates for common communications. Send directly from the platform.</p>
-                </div>
-              </div>
-
-              <div class="bg-white border-l-4 border-[hsl(24,95%,53%)] p-5 rounded">
-                <h4 class="text-lg font-bold mb-2">Analytics & Insights</h4>
-                <ul class="text-sm text-gray-600 space-y-1">
-                  <li>• Conversion rates by source</li>
-                  <li>• Average deal value and days-to-close</li>
-                  <li>• Stale lead detection for re-engagement</li>
-                  <li>• Win/loss analysis</li>
-                </ul>
               </div>
             </div>
           </details>
@@ -782,7 +777,7 @@ const navItems = [
                 <div id="marketplace" class="bg-white border border-gray-200 rounded-lg p-5">
                   <h4 class="text-lg font-bold mb-3">Contracts & Ownership</h4>
                   <ul class="text-sm text-gray-600 space-y-1">
-                    <li>• Contract templates with merge fields</li>
+                    <li>• Contract templates with merge fields, including Stud Service and Semen/AI Agreement</li>
                     <li>• Digital signatures</li>
                     <li>• Multi-owner/syndicate tracking</li>
                     <li>• Ownership transfer history</li>
@@ -877,7 +872,7 @@ const navItems = [
         <h2 class="text-4xl font-bold mb-8">Built for How Equine Breeding Actually Works</h2>
 
         <p class="text-xl leading-relaxed mb-8">
-          Genetics lab with 13+ color genes and 16+ health screenings. Mare reproductive tracking with follicle exams and ovulation confirmation. Foaling milestones from day 15 through birth. Stallion revenue dashboards. Medication tracking with withdrawal period countdowns. Professional buyer management. Competition and racing records.
+          Genetics lab with 14 color genes and 15 health screenings. Mare reproductive tracking with follicle exams and ovulation confirmation. Foaling milestones from day 15 through birth. Stallion revenue dashboards. Medication tracking with withdrawal period countdowns. Professional buyer management. Competition and racing records.
         </p>
 
         <p class="text-xl leading-relaxed mb-8">
