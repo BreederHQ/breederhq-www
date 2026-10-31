@@ -125,7 +125,7 @@ export const planCategories: FeatureCategory[] = [
       { name: "Outreach Composer & Email Templates" },
       { name: "Follow-Ups & Document Bundles" },
       { name: "Prospect Pipeline With Funnel by Lead Source" },
-      { name: "Follow-Up Automation" },
+      { name: "Automatic Buyer Check-In Reminders" },
     ],
   },
   {
