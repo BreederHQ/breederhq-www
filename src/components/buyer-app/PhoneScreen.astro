@@ -1,0 +1,17 @@
+---
+/**
+ * One phone screen from the buyer app, drawn in HTML/CSS (crisp at any size).
+ * The markup is decorative: the surrounding figure caption carries the meaning,
+ * so the frame is hidden from assistive tech to avoid reading sample text twice.
+ */
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const screens = import.meta.glob('./screens/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const html = screens[`./screens/${id}.html`];
+if (!html) throw new Error(`PhoneScreen: no screen markup for "${id}"`);
+---
+
+<div class="bapp-phone" aria-hidden="true" set:html={html} />

@@ -1,0 +1,38 @@
+---
+import PhoneScreen from './PhoneScreen.astro';
+import type { BuyerAppSection } from './sections';
+
+interface Props {
+  section: BuyerAppSection;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="bapp-section" aria-labelledby={`bapp-${section.id}`}>
+  <div class="bapp-wrap">
+    <div class="bapp-section-head">
+      <h2 class="bapp-h2" id={`bapp-${section.id}`}>{section.title}</h2>
+      <p class="bapp-benefit">{section.benefit}</p>
+      <p class="bapp-voice">
+        <span class="bapp-voice-label">From the Buyer’s Side</span>
+        {section.buyerVoice}
+      </p>
+    </div>
+    <ul class="bapp-screens">
+      {
+        section.screens.map((screen) => (
+          <li>
+            <figure class="bapp-screen">
+              <PhoneScreen id={screen.id} />
+              <figcaption>
+                <b>{screen.label}</b>
+                {screen.text}
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

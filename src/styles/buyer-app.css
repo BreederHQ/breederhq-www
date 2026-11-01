@@ -1,0 +1,463 @@
+/*
+ * Styles for /buyer-app. Two layers:
+ *   .bapp-phone  - the phone screens, drawn in HTML/CSS. Fixed to the buyer app's own
+ *                  dark theme (the marketing site is dark-only, so no light variant).
+ *   .bapp-*      - page layout, on the site's dark-shell palette.
+ * Everything is scoped under a .bapp-* class so nothing leaks into other pages.
+ */
+.bapp-phone {
+  --page: hsl(0 0% 7%);
+  --surface: hsl(0 0% 10%);
+  --surface-strong: hsl(0 0% 14%);
+  --fg: hsl(0 0% 96%);
+  --muted: hsl(0 0% 70%);
+  --hairline: hsl(0 0% 22%);
+  --orange: hsl(24 94% 50%);
+  --orange-text: hsl(24 94% 50%);
+  --on-orange: hsl(0 0% 100%);
+  --ok-bg: hsl(142 70% 45% / 0.18);
+  --ok-fg: hsl(142 70% 62%);
+  --warn-bg: hsl(38 92% 50% / 0.18);
+  --warn-fg: hsl(38 92% 62%);
+  --bad-fg: hsl(0 84% 74%);
+  --frame: hsl(0 0% 3%);
+  --edit: hsl(38 92% 50%);
+  --req: hsl(0 84% 72%);
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-family: var(--font);
+  line-height: 1.45;
+  color: var(--fg);
+  width: 300px;
+  max-width: 100%;
+  text-align: left;
+}
+.bapp-phone *,
+.bapp-phone *::before,
+.bapp-phone *::after {
+  box-sizing: border-box;
+}
+.bapp-phone h3,
+.bapp-phone h4 {
+  font-family: inherit;
+  color: inherit;
+  letter-spacing: normal;
+  font-weight: 700;
+}
+.bapp-phone b {
+  font-weight: 600;
+}
+
+/* ---- Phone screen rules, ported from the approved mockup ---- */
+.bapp-phone .phone { width: 300px; max-width: 100%; height: 600px; border-radius: 34px; background: var(--frame); padding: 10px; box-shadow: 0 10px 30px hsl(0 0% 0% / .25); }
+.bapp-phone .scr { height: 100%; border-radius: 26px; background: var(--page); overflow: hidden; display: flex; flex-direction: column; position: relative; font-size: 13px; }
+.bapp-phone .status { height: 26px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bapp-phone .bar { flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 14px 10px; border-bottom: 1px solid var(--hairline); }
+.bapp-phone .bar h3 { margin: 0; font-size: 16px; flex: 1; min-width: 0; }
+.bapp-phone .ctx { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; background: var(--surface-strong); font-size: 11px; max-width: 160px; }
+.bapp-phone .ctx i { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex: none; }
+.bapp-phone .ctx span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bapp-phone .body { flex: 1; overflow: hidden; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.bapp-phone .tabs { flex: none; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--hairline); background: var(--surface); padding: 6px 2px 10px; }
+.bapp-phone .tabs div { display: grid; justify-items: center; gap: 2px; font-size: 9.5px; color: var(--muted); }
+.bapp-phone .tabs div.on { color: var(--orange-text); font-weight: 600; }
+.bapp-phone .tabs svg { width: 18px; height: 18px; }
+.bapp-phone .card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px; padding: 10px 12px; display: grid; gap: 6px; }
+.bapp-phone .card h4 { margin: 0; font-size: 13px; }
+.bapp-phone .muted { color: var(--muted); }
+.bapp-phone .small { font-size: 11.5px; }
+.bapp-phone .btn { display: inline-flex; justify-content: center; align-items: center; height: 38px; border-radius: 10px; font-weight: 600; font-size: 13px; padding: 0 14px; border: 1px solid transparent; }
+.bapp-phone .btn.pri { background: var(--orange-text); color: var(--on-orange); }
+.bapp-phone .btn.sec { background: var(--surface-strong); color: var(--fg); border-color: var(--hairline); }
+.bapp-phone .btn.ghost { color: var(--orange-text); height: 30px; padding: 0; }
+.bapp-phone .btn.block { width: 100%; }
+.bapp-phone .btn.dis { opacity: .45; }
+.bapp-phone .pill { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; font-size: 10.5px; font-weight: 600; white-space: nowrap; }
+.bapp-phone .pill.ok { background: var(--ok-bg); color: var(--ok-fg); }
+.bapp-phone .pill.warn { background: var(--warn-bg); color: var(--warn-fg); }
+.bapp-phone .pill.bad { background: var(--bad-bg); color: var(--bad-fg); }
+.bapp-phone .pill.n { background: var(--surface-strong); color: var(--muted); }
+.bapp-phone .li { display: flex; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--hairline); }
+.bapp-phone .li:last-child { border-bottom: 0; }
+.bapp-phone .li .t { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.bapp-phone .li .t b { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bapp-phone .av { width: 38px; height: 38px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 700; font-size: 12px; color: hsl(0 0% 100%); }
+.bapp-phone .amt { font-variant-numeric: tabular-nums; font-weight: 600; }
+.bapp-phone .logo { font-weight: 800; font-size: 22px; letter-spacing: -.02em; }
+.bapp-phone .logo span { color: var(--blue); }
+.bapp-phone .photo { border-radius: 10px; aspect-ratio: 4/3; max-width: 100%; background: linear-gradient(135deg, hsl(32 60% 62%), hsl(24 50% 38%)); position: relative; }
+.bapp-phone .photo.b { background: linear-gradient(135deg, hsl(36 40% 70%), hsl(30 35% 48%)); }
+.bapp-phone .photo.c { background: linear-gradient(135deg, hsl(20 45% 50%), hsl(14 40% 30%)); }
+.bapp-phone .thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.bapp-phone .thumbs .photo { aspect-ratio: 1; border-radius: 8px; }
+.bapp-phone .seg { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface-strong); border-radius: 9px; padding: 3px; font-size: 11px; text-align: center; }
+.bapp-phone .seg div { padding: 5px 0; border-radius: 7px; color: var(--muted); }
+.bapp-phone .seg div.on { background: var(--surface); color: var(--fg); font-weight: 600; }
+.bapp-phone .tl { display: grid; gap: 0; }
+.bapp-phone .tl .e { display: grid; grid-template-columns: 14px 1fr; gap: 8px; padding-bottom: 10px; }
+.bapp-phone .tl .e i { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--orange); margin-top: 3px; }
+.bapp-phone .bubble { max-width: 82%; padding: 8px 10px; border-radius: 14px; font-size: 12.5px; }
+.bapp-phone .bubble.them { background: var(--surface-strong); border-bottom-left-radius: 4px; }
+.bapp-phone .bubble.me { background: var(--orange-text); color: var(--on-orange); margin-left: auto; border-bottom-right-radius: 4px; }
+.bapp-phone .compose { flex: none; display: flex; gap: 8px; padding: 8px 12px 12px; border-top: 1px solid var(--hairline); }
+.bapp-phone .compose .in { flex: 1; height: 36px; border-radius: 18px; border: 1px solid var(--hairline); background: var(--surface); padding: 0 12px; display: flex; align-items: center; color: var(--muted); font-size: 12px; }
+.bapp-phone .compose .send { width: 36px; height: 36px; border-radius: 50%; background: var(--orange-text); display: grid; place-items: center; color: var(--on-orange); }
+.bapp-phone .field { display: grid; gap: 4px; }
+.bapp-phone .field label { font-size: 11.5px; color: var(--muted); }
+.bapp-phone .field .in { height: 38px; border-radius: 10px; border: 1px solid var(--hairline); background: var(--surface); padding: 0 10px; display: flex; align-items: center; font-size: 13px; }
+.bapp-phone .sig { height: 70px; border-radius: 10px; border: 1px dashed var(--hairline); background: var(--surface); display: grid; place-items: center; font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 26px; }
+.bapp-phone .check { display: flex; gap: 8px; align-items: flex-start; font-size: 11.5px; }
+.bapp-phone .check i { width: 16px; height: 16px; border-radius: 4px; background: var(--orange-text); flex: none; margin-top: 1px; display: grid; place-items: center; color: var(--on-orange); font-style: normal; font-size: 11px; }
+.bapp-phone .overlay { position: absolute; inset: 0; background: hsl(0 0% 0% / .55); backdrop-filter: blur(3px); display: grid; place-items: center; padding: 20px; }
+.bapp-phone .dialog { background: var(--surface); border: 1px solid var(--hairline); border-radius: 16px; padding: 18px; display: grid; gap: 10px; text-align: center; width: 100%; }
+.bapp-phone .spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid var(--hairline); border-top-color: var(--orange); margin: 0 auto; }
+.bapp-phone .sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-top-left-radius: 18px; border-top-right-radius: 18px; border-top: 1px solid var(--hairline); padding: 10px 14px 16px; display: grid; gap: 4px; box-shadow: 0 -8px 24px hsl(0 0% 0% / .3); }
+.bapp-phone .sheet .grab { width: 36px; height: 4px; border-radius: 2px; background: var(--hairline); margin: 0 auto 6px; }
+.bapp-phone .sheet .opt { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-radius: 8px; }
+.bapp-phone .sheet .opt.on { background: var(--surface-strong); }
+.bapp-phone .sheet .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 6px 4px 2px; }
+.bapp-phone .radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--hairline); flex: none; margin-left: auto; }
+.bapp-phone .radio.on { border: 5px solid var(--orange); }
+.bapp-phone .wel { display: grid; gap: 8px; }
+.bapp-phone .wel .opt { display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px; padding: 10px; }
+.bapp-phone .wel .opt.hl { border-color: var(--orange); }
+.bapp-phone .ico { width: 34px; height: 34px; border-radius: 10px; background: var(--surface-strong); display: grid; place-items: center; flex: none; }
+.bapp-phone .ico svg { width: 18px; height: 18px; }
+.bapp-phone .banner { border-radius: 10px; padding: 10px 12px; font-size: 12px; display: grid; gap: 4px; }
+.bapp-phone .banner.info { background: var(--surface-strong); }
+.bapp-phone .banner.warn { background: var(--warn-bg); color: var(--warn-fg); }
+.bapp-phone .req { color: var(--req); }
+.bapp-phone .field .in.empty { border-color: var(--edit); color: var(--muted); }
+.bapp-phone .createbar { border-top: 3px solid var(--edit); }
+.bapp-phone .src { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.bapp-phone .src div { border: 1px dashed var(--edit); border-radius: 10px; padding: 12px 6px; display: grid; justify-items: center; gap: 4px; font-size: 12px; font-weight: 600; }
+.bapp-phone .src svg { width: 20px; height: 20px; }
+.bapp-phone .attach { display: flex; gap: 8px; align-items: center; border: 1px solid var(--hairline); border-radius: 10px; padding: 6px; background: var(--surface); }
+.bapp-phone .attach .photo { width: 44px; aspect-ratio: 1; border-radius: 6px; }
+.bapp-phone .example { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+.bapp-phone .logo-img {
+  display: block;
+  height: 84px;
+  width: auto;
+  margin: 0 auto;
+}
+.bapp-phone .spin {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--hairline);
+  border-top-color: var(--orange);
+  margin: 0 auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bapp-phone .spin {
+    animation: bapp-spin 1s linear infinite;
+  }
+  @keyframes bapp-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Sample photos (Wikimedia Commons; credited on the page) */
+.bapp-phone .pic-maple { background: center / cover no-repeat url('/images/buyer-app/puppy-maple.jpg'); }
+.bapp-phone .pic-g1 { background: center / cover no-repeat url('/images/buyer-app/puppy-g1.jpg'); }
+.bapp-phone .pic-g2 { background: center / cover no-repeat url('/images/buyer-app/puppy-g2.jpg'); }
+.bapp-phone .pic-g3 { background: center / cover no-repeat url('/images/buyer-app/puppy-g3.jpg'); }
+.bapp-phone .pic-g4 { background: center / cover no-repeat url('/images/buyer-app/puppy-g4.jpg'); }
+.bapp-phone .pic-g5 { background: center / cover no-repeat url('/images/buyer-app/puppy-g5.jpg'); }
+.bapp-phone .pic-g6 { background: center / cover no-repeat url('/images/buyer-app/puppy-g6.jpg'); }
+
+/* ---- Page layout, on the site's dark-shell palette ---- */
+.bapp-page {
+  --ink: #eaf1fc;
+  --ink-soft: #aec0da;
+  --ink-mute: #8da0bd;
+  --panel: #0f1826;
+  --line: rgba(255, 255, 255, 0.1);
+  --brand: #ff6a2c;
+  font-family: 'Sora', system-ui, sans-serif;
+  color: var(--ink);
+}
+.bapp-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.bapp-hero {
+  padding-block: 56px 40px;
+}
+.bapp-hero-grid {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+.bapp-eyebrow {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 138, 76, 0.28);
+  background: rgba(255, 106, 44, 0.07);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffb98c;
+}
+.bapp-h1 {
+  margin: 20px 0 0;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.bapp-h1 em {
+  font-style: normal;
+  background: linear-gradient(120deg, #ff6a2c, #ffb020 60%, #ff8a4c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bapp-lede {
+  margin: 22px 0 0;
+  max-width: 560px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.bapp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 30px;
+}
+.bapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15.5px;
+  text-decoration: none;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+.bapp-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.bapp-btn-primary {
+  color: #0a0f1a;
+  border: 0;
+  background: linear-gradient(150deg, #ff6a2c, #ff9a3c);
+  box-shadow: 0 10px 34px rgba(255, 106, 44, 0.42);
+}
+.bapp-btn-primary:hover {
+  background: linear-gradient(150deg, #ff7a40, #ffa84e);
+}
+.bapp-btn:focus-visible,
+.bapp-credits a:focus-visible {
+  outline: 2px solid #ffb98c;
+  outline-offset: 3px;
+}
+.bapp-stores {
+  margin-top: 28px;
+}
+.bapp-stores-label {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+.bapp-store-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.bapp-store {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 52px;
+  min-width: 168px;
+  padding: 8px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.15;
+}
+.bapp-store:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.bapp-store small {
+  font-size: 11px;
+  opacity: 0.85;
+}
+.bapp-store strong {
+  font-size: 18px;
+  font-weight: 600;
+}
+.bapp-store:focus-visible {
+  outline: 2px solid #ffb98c;
+  outline-offset: 3px;
+}
+.bapp-hero-phone {
+  display: none;
+  justify-content: center;
+}
+.bapp-note {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+
+/* Sections */
+.bapp-section {
+  padding-block: 56px;
+  border-top: 1px solid var(--line);
+}
+.bapp-section-head {
+  max-width: 720px;
+}
+.bapp-h2 {
+  margin: 0;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.bapp-benefit {
+  margin: 14px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.bapp-voice {
+  margin: 16px 0 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--brand);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #c8d8ee;
+}
+.bapp-voice-label {
+  display: block;
+  margin-bottom: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.bapp-screens {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 40px 24px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.bapp-screen {
+  display: grid;
+  gap: 14px;
+  width: 300px;
+  max-width: 100%;
+  margin: 0;
+}
+.bapp-screen figcaption {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.bapp-screen figcaption b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+/* Closing call to action */
+.bapp-cta {
+  margin-block: 24px 56px;
+  padding: 40px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 138, 76, 0.28);
+  background: linear-gradient(160deg, rgba(255, 106, 44, 0.12), rgba(15, 24, 38, 0.9));
+  text-align: center;
+}
+.bapp-cta .bapp-h2 {
+  margin-inline: auto;
+}
+.bapp-cta p {
+  margin: 14px auto 0;
+  max-width: 560px;
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.bapp-cta .bapp-actions {
+  justify-content: center;
+}
+
+/* Photo credits */
+.bapp-credits {
+  padding-block: 40px 72px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+}
+.bapp-credits h2 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.bapp-credits ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.bapp-credits a {
+  color: #ffb98c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .bapp-screens {
+    grid-template-columns: repeat(2, minmax(0, 300px));
+    justify-content: center;
+  }
+}
+@media (min-width: 960px) {
+  .bapp-hero-grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+  }
+  .bapp-hero-phone {
+    display: flex;
+  }
+  .bapp-screens {
+    grid-template-columns: repeat(3, minmax(0, 300px));
+    justify-content: start;
+    justify-items: start;
+  }
+  .bapp-section {
+    padding-block: 72px;
+  }
+}

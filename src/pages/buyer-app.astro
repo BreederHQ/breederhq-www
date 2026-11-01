@@ -1,0 +1,87 @@
+---
+/**
+ * /buyer-app - what a breeder's buyers get in the BreederHQ app.
+ *
+ * UNLISTED on purpose: noindex/nofollow here, excluded from the sitemap
+ * (astro.config.mjs), absent from llms.txt, navigation, footer and every
+ * internal link. Do not link to this page from elsewhere on the site.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhoneScreen from '../components/buyer-app/PhoneScreen.astro';
+import ScreenSection from '../components/buyer-app/ScreenSection.astro';
+import StoreButtons from '../components/buyer-app/StoreButtons.astro';
+import { sections, photoCredits } from '../components/buyer-app/sections';
+import '../styles/buyer-app.css';
+---
+
+<BaseLayout
+  title="The BreederHQ Buyer App | BreederHQ"
+  description="See what your buyers get in the BreederHQ app: photos, health records, invoices, agreements, and messages from you, all on their phone."
+  noindex={true}
+>
+  <main class="bapp-page" id="main-content" data-pagefind-ignore>
+    <section class="bapp-hero">
+      <div class="bapp-wrap bapp-hero-grid">
+        <div>
+          <span class="bapp-eyebrow">The Buyer App</span>
+          <h1 class="bapp-h1">Give Every Buyer the <em>Whole Story</em> in Their Pocket</h1>
+          <p class="bapp-lede">
+            When you invite a buyer, BreederHQ gives them a phone app for the animal they are bringing home. Photos, health
+            records, invoices, agreements, and messages from you are all in one place, and you choose what to share.
+          </p>
+          <div class="bapp-actions">
+            <a class="bapp-btn bapp-btn-primary" href="/pricing">Join The Waitlist <span aria-hidden="true">&#8594;</span></a>
+          </div>
+          <div class="bapp-stores">
+            <p class="bapp-stores-label">For your buyers, on iPhone and Android</p>
+            <StoreButtons />
+          </div>
+          <p class="bapp-note">Screens on this page show sample content. Buyers sign in with the email you invite.</p>
+        </div>
+        <div class="bapp-hero-phone">
+          <figure class="bapp-screen">
+            <PhoneScreen id="s3-1" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    {sections.map((section) => <ScreenSection section={section} />)}
+
+    <div class="bapp-wrap">
+      <section class="bapp-cta" aria-labelledby="bapp-cta-title">
+        <h2 class="bapp-h2" id="bapp-cta-title">Send Your Next Buyer Home With the App</h2>
+        <p>Join the waitlist and we will be in touch about getting your program set up.</p>
+        <div class="bapp-actions">
+          <a class="bapp-btn bapp-btn-primary" href="/pricing">Join The Waitlist <span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="bapp-credits" aria-labelledby="bapp-credits-title">
+      <div class="bapp-wrap">
+        <h2 id="bapp-credits-title">Photo Credits</h2>
+        <p>
+          Puppy photos in the sample screens are from Wikimedia Commons. Each is shown under its license; the
+          photos were cropped and resized for display.
+        </p>
+        <ul>
+          {
+            photoCredits.map((credit) => (
+              <li>
+                <a href={credit.fileUrl} rel="noopener">“{credit.title}”</a> by {credit.author},{' '}
+                {credit.licenseUrl ? (
+                  <a href={credit.licenseUrl} rel="noopener">
+                    {credit.license}
+                  </a>
+                ) : (
+                  <span>{credit.license}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
