@@ -26,7 +26,7 @@ export const sections: BuyerAppSection[] = [
     id: 'invite',
     title: 'One Tap From Your Invite',
     benefit:
-      'You invite a buyer from BreederHQ, and they sign in with the email you used. They land in your buyer portal on their phone, with nothing else to set up and nobody else to find.',
+      'You invite a buyer from BreederHQ, and they sign in with the email you used. They land in your buyer portal on their phone, with no further setup needed.',
     buyerVoice: '“I opened the app, chose ‘Invited by a Breeder,’ and everything from my breeder was already there.”',
     screens: [
       {
@@ -38,7 +38,7 @@ export const sections: BuyerAppSection[] = [
   },
   {
     id: 'home',
-    title: 'Everything About Their Puppy, in One Place',
+    title: 'Everything About Their Animal, in One Place',
     benefit:
       'Home pulls the animal, the latest invoices, and anything waiting on the buyer into a single screen, so they stop asking you where things are.',
     buyerVoice: '“I can see what I owe, what I need to sign, and when Maple comes home, without digging through email.”',
@@ -57,10 +57,10 @@ export const sections: BuyerAppSection[] = [
   },
   {
     id: 'animals',
-    title: 'Watch Their Puppy Grow Up',
+    title: 'Watch Their Animal Grow Up',
     benefit:
       'The photos, health details, and milestones you share show up on the buyer’s phone as they happen. A buyer who is part of the story is a buyer who stays in touch.',
-    buyerVoice: '“I check Maple’s photos before work. Every new picture makes the wait easier.”',
+    buyerVoice: '“I love getting new photos for Maple from my breeder. Every new picture makes the wait a little easier.”',
     screens: [
       { id: 's3-1', label: 'Photos', text: 'Every photo you share for the animal, newest first.' },
       {
@@ -76,7 +76,7 @@ export const sections: BuyerAppSection[] = [
     title: 'Health Records Their Vet Can Use',
     benefit:
       'Buyers can download a Vet Report to hand to their own vet. If your health guarantee asks for proof, such as a vet exam in the first few days, they photograph the paperwork and it is saved to the animal’s record.',
-    buyerVoice: '“I took a picture of the vet’s paperwork, and the requirement showed as fulfilled.”',
+    buyerVoice: '“I took a picture of the vet’s paperwork, and the health guarantee requirement from my breeder showed as fulfilled.”',
     screens: [
       {
         id: 's4-1',
@@ -92,7 +92,7 @@ export const sections: BuyerAppSection[] = [
   },
   {
     id: 'draft',
-    title: 'Pick a Puppy From Their Phone',
+    title: 'Pick Their Animal From Their Phone',
     benefit:
       'Running a Selection Draft? Buyers see when their turn is live, rank their favorites ahead of time, and make their pick without a phone call or a group text.',
     buyerVoice: '“I ranked my favorites the night before, so when my turn opened I knew exactly who I wanted.”',
@@ -133,7 +133,7 @@ export const sections: BuyerAppSection[] = [
     title: 'Your Recommended Products, One Tap Away',
     benefit:
       'Share the crate, the food, and the brush you trust, with your own note on each. Buyers see your list in the order you set it.',
-    buyerVoice: '“I knew what to buy before the puppy came home, because my breeder had already listed it.”',
+    buyerVoice: '“I knew what to buy before my animal came home, because my breeder had already listed it.”',
     screens: [
       {
         id: 's7-1',
