@@ -169,6 +169,9 @@
 .bapp-phone .pic-g4 { background: center / cover no-repeat url('/images/buyer-app/puppy-g4.jpg'); }
 .bapp-phone .pic-g5 { background: center / cover no-repeat url('/images/buyer-app/puppy-g5.jpg'); }
 .bapp-phone .pic-g6 { background: center / cover no-repeat url('/images/buyer-app/puppy-g6.jpg'); }
+.bapp-phone .pic-crate { background: center / cover no-repeat url('/images/buyer-app/product-crate.jpg'); }
+.bapp-phone .pic-food { background: center / cover no-repeat url('/images/buyer-app/product-food.jpg'); }
+.bapp-phone .pic-brush { background: center / cover no-repeat url('/images/buyer-app/product-brush.jpg'); }
 
 /* ---- Page layout, on the site's dark-shell palette ---- */
 .bapp-page {
@@ -281,34 +284,35 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+/* Official badges, unaltered. Both show a 40px-tall badge. Apple's SVG has no
+   built-in margin, so its link carries the required clear space (a quarter of
+   the badge height); Google's PNG already includes its own clear space and is
+   scaled so its badge body is also 40px tall (body is 166 of 250 source px). */
 .bapp-store {
   display: inline-flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  min-height: 52px;
-  min-width: 168px;
-  padding: 8px 18px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: #000;
-  color: #fff;
+  height: 60px;
   text-decoration: none;
-  line-height: 1.15;
 }
-.bapp-store:hover {
-  border-color: rgba(255, 255, 255, 0.6);
+.bapp-store-apple {
+  padding: 10px;
 }
-.bapp-store small {
-  font-size: 11px;
-  opacity: 0.85;
+.bapp-store img {
+  display: block;
 }
-.bapp-store strong {
-  font-size: 18px;
-  font-weight: 600;
+.bapp-store-apple img {
+  height: 40px;
+  width: auto;
+}
+.bapp-store-play img {
+  height: 60px;
+  width: auto;
 }
 .bapp-store:focus-visible {
   outline: 2px solid #ffb98c;
   outline-offset: 3px;
+  border-radius: 10px;
 }
 .bapp-hero-phone {
   display: none;
@@ -413,17 +417,44 @@
 
 /* Photo credits */
 .bapp-credits {
-  padding-block: 40px 72px;
+  padding-block: 24px 56px;
   border-top: 1px solid var(--line);
-  font-size: 13.5px;
+  font-size: 0.75rem;
   line-height: 1.6;
   color: var(--ink-mute);
 }
-.bapp-credits h2 {
-  margin: 0 0 10px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ink-soft);
+.bapp-credits p {
+  margin: 10px 0;
+}
+.bapp-credits summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-mute);
+}
+.bapp-credits summary::-webkit-details-marker {
+  display: none;
+}
+.bapp-credits summary::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+.bapp-credits details[open] summary::before {
+  transform: rotate(45deg);
+}
+.bapp-credits summary:focus-visible {
+  outline: 2px solid #ffb98c;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 .bapp-credits ul {
   margin: 0;

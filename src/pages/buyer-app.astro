@@ -51,8 +51,8 @@ import '../styles/buyer-app.css';
 
     <div class="bapp-wrap">
       <section class="bapp-cta" aria-labelledby="bapp-cta-title">
-        <h2 class="bapp-h2" id="bapp-cta-title">Send Your Next Buyer Home With the App</h2>
-        <p>Join the waitlist and we will be in touch about getting your program set up.</p>
+        <h2 class="bapp-h2" id="bapp-cta-title">Fewer Questions, Happier Buyers, Less Back-and-Forth</h2>
+        <p>Join the waitlist to give every buyer one place for everything they need from you.</p>
         <div class="bapp-actions">
           <a class="bapp-btn bapp-btn-primary" href="/pricing">Join The Waitlist <span aria-hidden="true">&#8594;</span></a>
         </div>
@@ -61,27 +61,29 @@ import '../styles/buyer-app.css';
 
     <section class="bapp-credits" aria-labelledby="bapp-credits-title">
       <div class="bapp-wrap">
-        <h2 id="bapp-credits-title">Photo Credits</h2>
-        <p>
-          Animal photos in the sample screens are from Wikimedia Commons. Each is shown under its license; the
-          photos were cropped and resized for display.
-        </p>
-        <ul>
-          {
-            photoCredits.map((credit) => (
-              <li>
-                <a href={credit.fileUrl} rel="noopener">“{credit.title}”</a> by {credit.author},{' '}
-                {credit.licenseUrl ? (
-                  <a href={credit.licenseUrl} rel="noopener">
-                    {credit.license}
-                  </a>
-                ) : (
-                  <span>{credit.license}</span>
-                )}
-              </li>
-            ))
-          }
-        </ul>
+        <details class="bapp-credits-details">
+          <summary id="bapp-credits-title">Photo Credits</summary>
+          <p>
+            Photos in the sample screens are from Wikimedia Commons. Each is shown under its license; the photos were
+            cropped and resized for display.
+          </p>
+          <ul>
+            {
+              photoCredits.map((credit) => (
+                <li>
+                  <a href={credit.fileUrl} rel="noopener">“{credit.title}”</a> by {credit.author},{' '}
+                  {credit.licenseUrl ? (
+                    <a href={credit.licenseUrl} rel="noopener">
+                      {credit.license}
+                    </a>
+                  ) : (
+                    <span>{credit.license}</span>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </details>
       </div>
     </section>
   </main>

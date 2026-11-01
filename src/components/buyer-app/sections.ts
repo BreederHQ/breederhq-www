@@ -133,7 +133,7 @@ export const sections: BuyerAppSection[] = [
     title: 'Your Recommended Products, One Tap Away',
     benefit:
       'Share the crate, the food, and the brush you trust, with your own note on each. Buyers see your list in the order you set it.',
-    buyerVoice: '“I knew what to buy before my animal came home, because my breeder had already listed it.”',
+    buyerVoice: '“I knew what to buy before my new animal came home, because my breeder had already listed it.”',
     screens: [
       {
         id: 's7-1',
@@ -268,5 +268,26 @@ export const photoCredits: PhotoCredit[] = [
     license: 'CC BY-SA 4.0',
     licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
     fileUrl: commons('-babiesgolden.JPG'),
+  },
+  {
+    author: 'Chaoticfluffy',
+    title: 'Greyhound in dog crate',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    fileUrl: commons('Greyhound_in_dog_crate.jpg'),
+  },
+  {
+    author: 'James Redekop',
+    title: 'Dog food in a bowl',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    fileUrl: commons('Dog_food_in_a_bowl.jpg'),
+  },
+  {
+    author: 'BLW',
+    title: 'SoftHorseBrush',
+    license: 'Public domain',
+    licenseUrl: '',
+    fileUrl: commons('SoftHorseBrush.jpg'),
   },
 ];
