@@ -13,7 +13,6 @@ const excludedPages = [
   'https://breederhq.com/site-updates', // Internal update log for marketing manager — not for public indexing
   'https://breederhq.com/demo',
   'https://breederhq.com/demo/login',
-  'https://breederhq.com/buyer-app', // Unlisted preview of the buyer app (noindex) — keep out of the sitemap
   'https://breederhq.com/search', // Client-side search UI — no content to index
   'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex
   'https://breederhq.com/provider/stripe-connect/refresh', // Mobile deep-link bridge page — noindex

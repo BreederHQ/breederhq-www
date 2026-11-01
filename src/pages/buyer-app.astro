@@ -2,24 +2,40 @@
 /**
  * /buyer-app - what a breeder's buyers get in the BreederHQ app.
  *
- * UNLISTED on purpose: noindex/nofollow here, excluded from the sitemap
- * (astro.config.mjs), absent from llms.txt, navigation, footer and every
- * internal link. Do not link to this page from elsewhere on the site.
+ * A public product page: indexed, in the sitemap and llms.txt, linked from the
+ * navigation, footer and related pages. Both store URLs come from STORE_LINKS.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { STORE_LINKS } from '../data/storeLinks';
 import PhoneScreen from '../components/buyer-app/PhoneScreen.astro';
 import ScreenSection from '../components/buyer-app/ScreenSection.astro';
 import StoreButtons from '../components/buyer-app/StoreButtons.astro';
 import { sections, photoCredits } from '../components/buyer-app/sections';
 import '../styles/buyer-app.css';
+
+// Mobile app for the buyers a breeder invites. No ratings or prices: neither
+// is stated anywhere on the page, so neither is claimed here.
+const buyerAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'BreederHQ Buyer App',
+  description:
+    'A mobile app for the buyers a breeder invites. Photos, health records, invoices, contracts and agreements, selection, scheduling, and messages from the breeder are in one place, and the breeder chooses what to share.',
+  url: 'https://breederhq.com/buyer-app',
+  applicationCategory: 'LifestyleApplication',
+  operatingSystem: 'iOS, Android',
+  installUrl: [STORE_LINKS.appStore, STORE_LINKS.googlePlay],
+  downloadUrl: [STORE_LINKS.appStore, STORE_LINKS.googlePlay],
+  publisher: { '@type': 'Organization', name: 'BreederHQ', url: 'https://breederhq.com' },
+};
 ---
 
 <BaseLayout
-  title="The BreederHQ Buyer App | BreederHQ"
-  description="See what your buyers get in the BreederHQ app: photos, health records, invoices, agreements, and messages from you, all on their phone."
-  noindex={true}
+  title="Buyer App for Breeders: What Your Buyers Get | BreederHQ"
+  description="Invite buyers to the BreederHQ app for iPhone and Android: photos, health records, invoices, contracts, scheduling, and your messages in one place."
 >
-  <main class="bapp-page" id="main-content" data-pagefind-ignore>
+  <script type="application/ld+json" set:html={JSON.stringify(buyerAppSchema)} />
+  <main class="bapp-page" id="main-content">
     <section class="bapp-hero">
       <div class="bapp-wrap bapp-hero-grid">
         <div>

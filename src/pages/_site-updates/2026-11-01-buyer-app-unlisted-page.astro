@@ -1,24 +1,25 @@
 ---
 export const updateMeta = {
   date: '2026-11-01',
-  title: 'New unlisted page: the buyer app for breeders',
+  title: 'New page: the buyer app for breeders',
   tags: ['new-page', 'mobile', 'buyer-app'],
 };
 ---
 <article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
   <h2 class="text-2xl font-bold text-gray-900 mb-1">November 1, 2026</h2>
-  <p class="text-sm text-gray-500 mb-4">Added a page at /buyer-app that shows breeders what their buyers get in the BreederHQ app, using phone screens drawn in HTML and CSS. The page is deliberately unlisted: it is noindex and nofollow, left out of the sitemap, and not linked from the navigation, footer or any other page.</p>
+  <p class="text-sm text-gray-500 mb-4">Added a public page at /buyer-app that shows breeders what their buyers get in the BreederHQ app, using phone screens drawn in HTML and CSS. The page is indexed, in the sitemap and llms.txt, linked from the Features menu and the footer, and linked from the mobile app, client portal, and Communications Hub pages. It carries MobileApplication structured data with both store URLs and no ratings or prices.</p>
 
   <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Sections</h3>
   <ul class="list-disc pl-5 text-gray-700 space-y-1">
-    <li>Eleven benefit sections: invite, Home, photos and health, Vet Report, Selection Draft, updates and go-home pickup, Products We Love, messages, invoices, agreements, and documents. Each has a short breeder benefit line and a line from the buyer's side.</li>
-    <li>Breeder-led hero with the site's existing Join The Waitlist call to action, plus App Store and Google Play buttons driven by one constant in <code>src/data/storeLinks.ts</code>.</li>
-    <li>Visible Photo Credits section for the Wikimedia Commons puppy photos, with author, license and file-page links.</li>
+    <li>Eleven benefit sections: invite, Home, photos and health, Vet Report, Selection Draft, updates and go-home pickup, Products We Love, messages, invoices, agreements, and documents. Each has a short breeder benefit line and a line from the buyer's side. All page language is species-neutral.</li>
+    <li>Breeder-led hero with the site's existing Join The Waitlist call to action, plus the official App Store and Google Play badges driven by one constant in <code>src/data/storeLinks.ts</code>.</li>
+    <li>Products We Love shows Wikimedia Commons photos of a crate, a bowl of food, and a soft brush.</li>
+    <li>Photo Credits is a collapsed section in fine print. Every author, license, and file-page link stays in the page HTML.</li>
   </ul>
 
   <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Files</h3>
   <ul class="list-disc pl-5 text-gray-700 space-y-1">
-    <li><code>src/pages/buyer-app.astro</code>, <code>src/components/buyer-app/</code>, <code>src/styles/buyer-app.css</code>, <code>public/images/buyer-app/</code>.</li>
-    <li><code>astro.config.mjs</code>: page added to the sitemap exclusion list.</li>
+    <li><code>src/pages/buyer-app.astro</code>, <code>src/components/buyer-app/</code>, <code>src/styles/buyer-app.css</code>, <code>public/images/buyer-app/</code>, <code>public/images/badge-*</code>.</li>
+    <li><code>astro.config.mjs</code>: page removed from the sitemap exclusion list. <code>public/llms.txt</code>: page added. <code>HeaderV3.astro</code> and <code>Footer.astro</code>: Buyer App links.</li>
   </ul>
 </article>
