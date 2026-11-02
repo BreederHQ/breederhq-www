@@ -177,7 +177,7 @@ export const sections: BuyerAppSection[] = [
     id: 'sign',
     title: 'Agreements They Can Sign Anywhere',
     benefit:
-      'Buyers read and sign your agreements on their phone, typed or drawn. If it is not their turn to sign yet, the app says who is up next instead of leaving them guessing.',
+      "Buyers read and sign agreements you've sent them from their phone, typed or drawn. The app shares the signing status and shows which party is up next instead of leaving them guessing.",
     buyerVoice: '“I read the agreement, typed my name, and signed from the couch.”',
     screens: [
       {
