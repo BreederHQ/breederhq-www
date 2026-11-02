@@ -113,7 +113,7 @@ export const sections: BuyerAppSection[] = [
     id: 'pickup',
     title: 'Updates and Go-Home Day, Scheduled',
     benefit:
-      'Post an update once and every buyer in that plan or program sees it in the app. When you open go-home time slots, each family books one. If two families reach for the same slot, the app tells the second and shows what is left.',
+      'When you create Announcements, every buyer in that plan sees it in the app. When you open go-home time slots, your buyers can book an available slot in the app. The app always shows which slots are left.',
     buyerVoice: '“I booked 10:00 on go-home day and saw exactly what to bring.”',
     screens: [
       {
