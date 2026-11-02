@@ -75,11 +75,6 @@ const INTEREST_LABELS: Record<string, string> = {
   just_browsing: 'Just browsing / tell me more',
 };
 
-function formatInterest(interest?: string): string | undefined {
-  if (!interest) return undefined;
-  return INTEREST_LABELS[interest] || interest;
-}
-
 function formatInterests(lead: { interests?: string[]; interest?: string }): string[] {
   const list = lead.interests && lead.interests.length > 0
     ? lead.interests
