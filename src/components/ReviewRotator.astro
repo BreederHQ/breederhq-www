@@ -3,7 +3,7 @@
 // sign-up page). One review at a time, full text, no clamping. All slides share
 // one grid cell, so the block always reserves the tallest review's height and
 // rotation never moves the content around it. With JS off, every review is listed.
-import { SOURCE_LABELS, sortedTestimonials } from '../data/testimonials';
+import { SOURCE_LABELS, reviewBlocks, sortedTestimonials } from '../data/testimonials';
 import '../styles/review-controls.css';
 
 const reviews = sortedTestimonials();
@@ -37,7 +37,12 @@ const reviews = sortedTestimonials();
             </span>
             {r.title && <p class="rr__title">{r.title}</p>}
             <blockquote class="rr__quote">
-              {r.quote.split('\n\n').map((p) => <p>{p}</p>)}
+              {reviewBlocks(r).map((b) => (
+                <div class="rr__block">
+                  {b.label && <p class="rr__label">{b.label}</p>}
+                  {b.paragraphs.map((p) => <p>{p}</p>)}
+                </div>
+              ))}
             </blockquote>
             <figcaption class="rr__who">
               {r.reviewerName}, <span>{SOURCE_LABELS[r.source]}</span>
@@ -128,10 +133,20 @@ const reviews = sortedTestimonials();
     line-height: 1.55;
     color: #aec0da;
   }
+  .rr__block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
   .rr__quote p {
     margin: 0;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+  }
+  .rr__quote .rr__label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8da0bd;
   }
   .rr__who {
     font-size: 12.5px;

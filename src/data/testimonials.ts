@@ -11,16 +11,37 @@
 // data. Reviews a business publishes about itself are self-serving and
 // ineligible for review rich results.
 
-export type ReviewSource = 'google' | 'app-store' | 'google-play';
+export type ReviewSource = 'google' | 'app-store' | 'google-play' | 'capterra';
 
-export interface Testimonial {
+/** A labeled part of a review, such as the "Pros" or "Cons" Capterra posts. */
+export interface ReviewSection {
+  /** The label exactly as the platform shows it. */
+  label: string;
+  /** Section text. Paragraphs are separated by a blank line ("\n\n"). */
+  text: string;
+}
+
+/** A review has either one `quote` or labeled `sections`, never neither. */
+export type ReviewBody =
+  | {
+      /** Full review text. Paragraphs are separated by a blank line ("\n\n"). */
+      quote: string;
+      sections?: never;
+    }
+  | {
+      quote?: never;
+      /** For platforms that post labeled sections. Stored as posted, in order. */
+      sections: ReviewSection[];
+    };
+
+export type Testimonial = ReviewBase & ReviewBody;
+
+interface ReviewBase {
   id: string;
   source: ReviewSource;
   /** The reviewer's name or handle exactly as posted. */
   reviewerName: string;
   title?: string;
-  /** Full review text. Paragraphs are separated by a blank line ("\n\n"). */
-  quote: string;
   /** Whole stars, 1 to 5. */
   rating: 1 | 2 | 3 | 4 | 5;
   /**
@@ -39,6 +60,7 @@ export const SOURCE_LABELS: Record<ReviewSource, string> = {
   google: 'Google',
   'app-store': 'App Store',
   'google-play': 'Google Play',
+  capterra: 'Capterra',
 };
 
 export const testimonials: Testimonial[] = [
@@ -84,7 +106,39 @@ export const testimonials: Testimonial[] = [
     date: '2026-04-09',
     sourceUrl: 'https://apps.apple.com/us/app/breederhq/id6761625868?see-all=reviews',
   },
+  {
+    id: 'capterra-the-breeder-dream-software',
+    source: 'capterra',
+    reviewerName: 'Reviewer',
+    title: 'The Breeder Dream Software',
+    sections: [
+      {
+        label: 'Pros',
+        text:
+          "This software is a game changer for breeders!! I'm not even sure where to start. I've been breeding for years and have only dreamed of a software that does everything all in one. I can do away with all of my spreadsheets. This program tracks my guardians, my breedings, my heat cycles, all my puppies, all of my communication with my customers, my reminders to worm my puppies every 2 weeks etc, deposits and invoicing, and it keeps track of your expenses and income! This software literally does everything and you have your own marketplace page with all your upcoming litters and available puppies where people can find you and place deposits and communicate with you. They can pay deposits on there and pay the balance at the end. They also have an app ANDDD a customer portal for your clients!! When you upload your pics of the puppies in the system they can go to everyone on your waitlist and get posted to the Marketplace which will basically be my website now. There's just so much more it does but these are just the highlights!!! Trust me you wont be disappointed.",
+      },
+      {
+        label: 'Cons',
+        text:
+          "Just learning a new system but it is so worth it!!! It doesn't take long to set up but the developer will help walk you through it. Definitely do a zoom call with him. I learned so much",
+      },
+    ],
+    rating: 5,
+    date: '2026-07-28',
+    sourceUrl: 'https://www.capterra.com/p/10049441/BreederHQ/#b45db6b6-38cc-4f19-a75c-4bd01830873d/',
+  },
 ];
+
+export interface ReviewBlock {
+  label?: string;
+  paragraphs: string[];
+}
+
+/** The review text as blocks: one unlabeled block for a quote, one per labeled section. */
+export function reviewBlocks(t: Testimonial): ReviewBlock[] {
+  if (t.sections) return t.sections.map((s) => ({ label: s.label, paragraphs: s.text.split('\n\n') }));
+  return [{ paragraphs: t.quote.split('\n\n') }];
+}
 
 /** Newest first. Undated entries (no known date) follow the dated ones. */
 export function sortedTestimonials(list: Testimonial[] = testimonials): Testimonial[] {
@@ -105,7 +159,7 @@ export interface SourceStats {
 
 /** Average rating per source, computed from the data. */
 export function sourceStats(list: Testimonial[] = testimonials): SourceStats[] {
-  const order: ReviewSource[] = ['app-store', 'google', 'google-play'];
+  const order: ReviewSource[] = ['app-store', 'google', 'google-play', 'capterra'];
   return order
     .map((source) => {
       const rows = list.filter((t) => t.source === source);

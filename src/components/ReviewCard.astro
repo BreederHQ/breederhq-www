@@ -3,7 +3,7 @@
 // blank lines, and white-space: pre-wrap keeps runs of spaces the reviewer typed.
 // Never clamped: every review is readable in full wherever it is shown.
 // The "strip" variant (carousel slides) only omits the anchor id.
-import { SOURCE_LABELS, type Testimonial } from '../data/testimonials';
+import { SOURCE_LABELS, reviewBlocks, type Testimonial } from '../data/testimonials';
 
 interface Props {
   review: Testimonial;
@@ -12,7 +12,7 @@ interface Props {
 
 const { review, variant = 'full' } = Astro.props;
 const sourceLabel = SOURCE_LABELS[review.source];
-const paragraphs = review.quote.split('\n\n');
+const blocks = reviewBlocks(review);
 const dateLabel = review.date
   ? new Date(`${review.date}T00:00:00Z`).toLocaleDateString('en-US', {
       month: 'long',
@@ -33,7 +33,12 @@ const dateLabel = review.date
   </div>
   {review.title && <h3 class="review-card__title">{review.title}</h3>}
   <blockquote class="review-card__quote">
-    {paragraphs.map((p) => <p>{p}</p>)}
+    {blocks.map((b) => (
+      <div class="review-card__block">
+        {b.label && <p class="review-card__label">{b.label}</p>}
+        {b.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    ))}
   </blockquote>
   <div class="review-card__foot">
     <div class="review-card__who">
@@ -103,10 +108,20 @@ const dateLabel = review.date
     line-height: 1.6;
     color: #c7d4e6;
   }
+  .review-card__block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   .review-card__quote p {
     margin: 0;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+  }
+  .review-card__quote .review-card__label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8da0bd;
   }
   .review-card__foot {
     margin-top: auto;
