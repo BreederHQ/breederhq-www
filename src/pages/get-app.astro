@@ -1,0 +1,52 @@
+---
+/**
+ * /get-app - the target of the QR code on the client portal's "Get the App" card.
+ *
+ * On a phone it sends the visitor straight to that phone's own store; everywhere
+ * else it shows both store badges. Not a content page: noindex, kept out of the
+ * sitemap (astro.config.mjs), the navigation and llms.txt. Both store URLs come
+ * from STORE_LINKS, and the inline script reads them from data attributes so the
+ * URLs live in one place.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { STORE_LINKS } from '../data/storeLinks';
+import StoreButtons from '../components/buyer-app/StoreButtons.astro';
+import '../styles/buyer-app.css';
+---
+
+<BaseLayout
+  title="Get the BreederHQ App | BreederHQ"
+  description="Download the BreederHQ app for iPhone or Android."
+  noindex={true}
+>
+  <main class="bapp-page" id="main-content" data-ios={STORE_LINKS.appStore} data-android={STORE_LINKS.googlePlay}>
+    <section class="bapp-hero">
+      <div class="bapp-wrap" style="max-width: 640px; text-align: center;">
+        <h1 class="bapp-h1">Get the <em>BreederHQ</em> App</h1>
+        <p class="bapp-lede" style="margin-left: auto; margin-right: auto;">
+          Scan the QR code with your phone, or choose your store below.
+        </p>
+        <div class="bapp-stores" style="display: flex; justify-content: center;">
+          <StoreButtons />
+        </div>
+        <p class="bapp-note" style="margin-top: 28px;">
+          <a href="/buyer-app" style="color: #ff6a2c; text-decoration: underline;">See what the app does</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Runs immediately. location.replace keeps this page out of history, so Back does not loop. -->
+  <script is:inline>
+    (function () {
+      var main = document.getElementById('main-content');
+      if (!main) return;
+      var ua = navigator.userAgent || '';
+      var iPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+      var target = null;
+      if (/iPhone|iPad|iPod/i.test(ua) || iPadOS) target = main.getAttribute('data-ios');
+      else if (/Android/i.test(ua)) target = main.getAttribute('data-android');
+      if (target) location.replace(target);
+    })();
+  </script>
+</BaseLayout>
