@@ -136,6 +136,62 @@
 .bapp-phone .attach .photo { width: 44px; aspect-ratio: 1; border-radius: 6px; }
 .bapp-phone .example { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
+/* ---- Buyer Home: breeder header, attention, animal hero, compact rows (approved Home redesign) ---- */
+.bapp-phone {
+  --orange-solid: hsl(24 94% 38%);
+  --orange-tint: hsl(24 94% 50% / 0.14);
+  --scrim: hsl(0 0% 0% / 0.62);
+  --on-photo: hsl(0 0% 100%);
+}
+.bapp-phone .phone.hm-tall { height: 870px; }
+.bapp-phone .hm-scroll .body > * { flex: none; }
+.bapp-phone .hm-scroll { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+.bapp-phone .hm-brand { position: relative; flex: none; }
+.bapp-phone .hm-banner { height: 112px; position: relative; }
+.bapp-phone .hm-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, hsl(0 0% 0% / .45) 0%, transparent 38%, transparent 55%, var(--page) 100%); }
+.bapp-phone .hm-banner .status { position: relative; z-index: 1; color: var(--on-photo); }
+.bapp-phone .hm-ident { display: flex; gap: 10px; align-items: flex-end; padding: 0 14px; margin-top: -30px; position: relative; z-index: 1; }
+.bapp-phone .hm-mark { width: 58px; height: 58px; border-radius: 16px; flex: none; border: 3px solid var(--page); background: var(--surface); overflow: hidden; display: grid; place-items: center; }
+.bapp-phone .hm-mark svg { width: 100%; height: 100%; display: block; }
+.bapp-phone .hm-who { min-width: 0; flex: 1; padding-bottom: 2px; }
+.bapp-phone .hm-who b { display: flex; align-items: center; gap: 4px; font-size: 16px; line-height: 1.2; letter-spacing: -.01em; font-weight: 700; }
+.bapp-phone .hm-who b span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bapp-phone .hm-who b svg { width: 12px; height: 12px; flex: none; color: var(--muted); }
+.bapp-phone .hm-sub { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bapp-phone .hm-visit { font-size: 11px; font-weight: 600; color: var(--orange-text); padding: 4px 14px 0 82px; }
+.bapp-phone .hm-att { background: linear-gradient(180deg, var(--orange-tint), transparent 70%), var(--surface); border: 1px solid hsl(24 94% 50% / .55); border-radius: 14px; padding: 10px 12px 4px; }
+.bapp-phone .hm-hd { display: flex; align-items: center; gap: 6px; }
+.bapp-phone .hm-hd h4 { margin: 0; font-size: 13px; flex: 1; }
+.bapp-phone .hm-count { min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; background: var(--orange-solid); color: var(--on-orange); font-size: 10.5px; font-weight: 700; display: grid; place-items: center; }
+.bapp-phone .hm-ai { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+.bapp-phone .hm-ai:last-child { border-bottom: 0; }
+.bapp-phone .hm-ico { width: 30px; height: 30px; border-radius: 9px; flex: none; display: grid; place-items: center; background: var(--orange-tint); color: var(--orange-text); }
+.bapp-phone .hm-ico svg { width: 16px; height: 16px; }
+.bapp-phone .hm-ai .t { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.bapp-phone .hm-ai .t b { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bapp-phone .hm-chev { width: 14px; height: 14px; color: var(--muted); flex: none; }
+.bapp-phone .hm-hero { background: var(--surface); border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; }
+.bapp-phone .hm-ph { aspect-ratio: 4/3; position: relative; max-width: 100%; }
+.bapp-phone .hm-ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--scrim) 100%); }
+.bapp-phone .hm-cap { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 1; color: var(--on-photo); display: flex; align-items: flex-end; gap: 8px; }
+.bapp-phone .hm-cap b { font-size: 24px; line-height: 1; letter-spacing: -.02em; flex: 1; font-weight: 700; }
+.bapp-phone .hm-info { padding: 10px 12px 12px; display: grid; gap: 8px; }
+.bapp-phone .hm-cd { display: flex; align-items: baseline; gap: 6px; }
+.bapp-phone .hm-cd .n { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--orange-text); }
+.bapp-phone .hm-cd .l { font-size: 12px; font-weight: 600; }
+.bapp-phone .hm-progress { height: 5px; border-radius: 3px; background: var(--surface-strong); overflow: hidden; }
+.bapp-phone .hm-progress i { display: block; height: 100%; background: var(--orange); border-radius: 3px; }
+.bapp-phone .hm-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+.bapp-phone .hm-strip div { aspect-ratio: 1; border-radius: 8px; position: relative; overflow: hidden; }
+.bapp-phone .hm-strip .hm-more::after { content: attr(data-more); position: absolute; inset: 0; display: grid; place-items: center; background: hsl(0 0% 0% / .5); color: var(--on-photo); font-weight: 700; font-size: 13px; }
+.bapp-phone .hm-rows { background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px; padding: 0 12px; }
+.bapp-phone .hm-r { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--hairline); }
+.bapp-phone .hm-r:last-child { border-bottom: 0; }
+.bapp-phone .hm-r .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.bapp-phone .hm-r .t { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.bapp-phone .hm-r .t b { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bapp-phone .hm-r .amt { font-size: 13px; font-weight: 700; }
+
 .bapp-phone .logo-img {
   display: block;
   height: 84px;

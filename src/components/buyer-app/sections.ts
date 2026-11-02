@@ -38,20 +38,20 @@ export const sections: BuyerAppSection[] = [
   },
   {
     id: 'home',
-    title: 'Everything About Their Animal, in One Place',
+    title: 'Your Brand and Their Animal, Front and Center',
     benefit:
-      'Home pulls the animal, the latest invoices, and anything waiting on the buyer into a single screen, so they stop asking you where things are.',
-    buyerVoice: '“I can see what I owe, what I need to sign, and when Maple comes home, without digging through email.”',
+      'Your logo and cover image greet every buyer the moment they open the app. Their animal is the largest thing on the screen, with a countdown to go-home day and the newest photos you shared. Whatever needs the buyer sits at the top, so they stop asking you where things are.',
+    buyerVoice: '“I open the app and see my breeder’s name, my animal, and what I need to sign, without digging through email.”',
     screens: [
       {
         id: 's2-1',
         label: 'Buyer Home',
-        text: 'The animal, the latest invoices, and a short list of what needs the buyer’s attention. Five tabs: Home, Animals, Messages, Money, and Papers.',
+        text: 'Your logo, cover image, and location lead. Needs Your Attention comes first, then the animal with a go-home countdown, then quiet rows for balance due, announcements, and your recommended products.',
       },
       {
         id: 's2-2',
         label: 'Switch Breeders',
-        text: 'A buyer working with more than one breeder switches between them in one tap. The app remembers the last choice.',
+        text: 'A buyer working with more than one breeder taps the program name to switch. The app remembers the last choice.',
       },
     ],
   },
