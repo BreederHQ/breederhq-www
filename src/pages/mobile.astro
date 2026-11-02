@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ReviewCarousel from '../components/ReviewCarousel.astro';
+import { STORE_LINKS } from '../data/storeLinks';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -728,11 +729,16 @@ const featureCards = [
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-4xl font-bold mb-4">A Companion for the Moments Breeding Happens</h2>
       <p class="text-xl mb-2 opacity-90">The barn. The vet office. The show ring. The birthing area at 2 AM.</p>
-      <p class="text-lg mb-8 opacity-80">Sign up for BreederHQ to get the web app — your full breeding platform — and the Mobile Companion comes with it.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">
-          Join The Waitlist
+      <p class="text-lg mb-8 opacity-80">The Mobile Companion is available now on the App Store and Google Play, and it is included with every BreederHQ plan.</p>
+      <div class="flex flex-row flex-wrap gap-3 justify-center items-center mb-6">
+        <a href={STORE_LINKS.appStore} rel="noopener" aria-label="Download on the App Store" class="inline-flex items-center justify-center" style="min-height: 44px;">
+          <img src="/images/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" style="height: 40px; width: auto;" />
         </a>
+        <a href={STORE_LINKS.googlePlay} rel="noopener" aria-label="Get it on Google Play" class="inline-flex items-center justify-center" style="min-height: 44px;">
+          <img src="/images/badge-google-play.png" alt="Get it on Google Play" width="155" height="60" style="height: 60px; width: auto;" />
+        </a>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/for-breeders" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-[hsl(24,95%,53%)] transition text-center" style="min-height: 44px;">
           See the Full Web Platform →
         </a>
@@ -850,8 +856,8 @@ const featureCards = [
 
   <!-- Sticky Mobile CTA -->
   <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-gray-200 shadow-lg md:hidden z-50">
-    <a href="/pricing" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
-      Join The Waitlist
+    <a href="/get-app" class="block w-full text-center bg-[hsl(24,95%,53%)] text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+      Get the App
     </a>
   </div>
   </main>
