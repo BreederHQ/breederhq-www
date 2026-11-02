@@ -40,13 +40,13 @@ export const sections: BuyerAppSection[] = [
     id: 'home',
     title: 'Your Brand and Their Animal, Front and Center',
     benefit:
-      'Your logo and cover image greet every buyer the moment they open the app. Their animal is the largest thing on the screen, with a countdown to go-home day and the newest photos you shared. Whatever needs the buyer sits at the top, so they stop asking you where things are.',
+      "Your logo and cover image greet every buyer the moment they open the app. Their animal and photo are front and center along with a countdown to go-home day, and the newest photos you've shared. Whatever activities require the buyer's attention sit at the top, so it's clear what you're asking them to handle.",
     buyerVoice: '“I open the app and see my breeder’s name, my animal, and what I need to sign, without digging through email.”',
     screens: [
       {
         id: 's2-1',
         label: 'Buyer Home',
-        text: 'Your logo, cover image, and location lead. Needs Your Attention comes first, then the animal with a go-home countdown, then quiet rows for balance due, announcements, and your recommended products.',
+        text: 'Your logo, cover image, and location sit at the top of the screen. Needs Your Attention comes first, then the animal with a go-home countdown, then quiet rows for balance due, announcements, and your recommended products.',
       },
       {
         id: 's2-2',
@@ -59,7 +59,7 @@ export const sections: BuyerAppSection[] = [
     id: 'animals',
     title: 'Watch Their Animal Grow Up',
     benefit:
-      'The photos, health details, and milestones you share show up on the buyer’s phone as they happen. A buyer who is part of the story is a buyer who stays in touch.',
+      'The photos, health details, and milestones you share show up on the buyer’s phone as they happen. A buyer who is part of the rearing journey is a buyer who stays in touch.',
     buyerVoice: '“I love getting new photos for Maple from my breeder. Every new picture makes the wait a little easier.”',
     screens: [
       { id: 's3-1', label: 'Photos', text: 'Every photo you share for the animal, newest first.' },
@@ -75,7 +75,7 @@ export const sections: BuyerAppSection[] = [
     id: 'health',
     title: 'Health Records Their Vet Can Use',
     benefit:
-      'Buyers can download a Vet Report to hand to their own vet. If your health guarantee asks for proof, such as a vet exam in the first few days, they photograph the paperwork and it is saved to the animal’s record.',
+      "Once buyers take home their animal, they will be able to easily download a Vet Report to hand to their animal's new vet. If you have a health guarantee and require proof, such as a vet exam in the first few days or spay/neuter, they can photograph or upload the vet's paperwork and it is saved to the animal’s record for your review.",
     buyerVoice: '“I took a picture of the vet’s paperwork, and the health guarantee requirement from my breeder showed as fulfilled.”',
     screens: [
       {
@@ -92,7 +92,7 @@ export const sections: BuyerAppSection[] = [
   },
   {
     id: 'draft',
-    title: 'Pick Their Animal From Their Phone',
+    title: 'Selection Simplified - Pick Their Animal From Their Phone',
     benefit:
       'Running a Selection Draft? Buyers see when their turn is live, rank their favorites ahead of time, and make their pick without a phone call or a group text.',
     buyerVoice: '“I ranked my favorites the night before, so when my turn opened I knew exactly who I wanted.”',
