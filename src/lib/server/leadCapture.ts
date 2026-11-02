@@ -286,31 +286,139 @@ export async function enrichWithClearbit(email: string): Promise<ClearbitCombine
 }
 
 /**
- * Send lead notification to Slack
+ * Slack noise control. Both rules below change ONLY the Slack notification.
+ *
+ * The form backs the waitlist, the one way a breeder can reach us, so nothing
+ * here may reject a submission, stop it being saved, or change what the
+ * submitter sees or receives. A rule that is unsure does nothing: a missed
+ * piece of noise costs a glance, a hidden or mislabeled breeder costs a lead.
  */
-export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
-  const webhookUrl = import.meta.env.SLACK_WEBHOOK_URL;
 
-  if (!webhookUrl) {
-    console.log('⚠️ Slack webhook not configured, skipping notification');
+/** A repeat of the same email and message inside this window is not re-posted. */
+const SLACK_DUPLICATE_WINDOW_MS = 7 * 24 * 60 * 60 * 1_000;
+/** Hard cap on remembered submissions. Enforced by oldest-first eviction. */
+const SLACK_DUPLICATE_MAX_KEYS = 2_000;
+
+/**
+ * Submissions already posted to Slack, keyed by normalized email + message,
+ * valued by when. Insertion order is age order, which is what eviction relies
+ * on. In-memory, so it is per-instance and resets on deploy; that is fine
+ * because it only reduces noise, and a duplicate that slips through is posted
+ * as it always was.
+ */
+const slackPosted = new Map<string, number>();
+/** Posts still awaiting Slack's answer, so an overlapping repeat can wait on one. */
+const slackInFlight = new Map<string, Promise<boolean>>();
+
+function slackDuplicateKey(lead: { email: string; message?: string }): string | undefined {
+  const message = (lead.message || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  // An empty message carries nothing to compare, so it is never a duplicate.
+  if (!message) return undefined;
+  return `${lead.email.trim().toLowerCase()}\n${message}`;
+}
+
+function wasPostedToSlack(key: string, now: number): boolean {
+  const at = slackPosted.get(key);
+  if (at === undefined) return false;
+  if (now - at >= SLACK_DUPLICATE_WINDOW_MS) {
+    slackPosted.delete(key);
     return false;
   }
+  return true;
+}
 
+function rememberSlackPost(key: string, now: number): void {
+  slackPosted.delete(key);
+  if (slackPosted.size >= SLACK_DUPLICATE_MAX_KEYS) {
+    for (const [k, at] of slackPosted) {
+      if (now - at >= SLACK_DUPLICATE_WINDOW_MS) slackPosted.delete(k);
+    }
+    // A live flood keeps the map at the cap: evict oldest-first so it is
+    // bounded by the cap and not by how many distinct submissions arrive.
+    const evict = Math.ceil(SLACK_DUPLICATE_MAX_KEYS * 0.1);
+    let i = 0;
+    for (const k of slackPosted.keys()) {
+      if (slackPosted.size < SLACK_DUPLICATE_MAX_KEYS || i++ >= evict) break;
+      slackPosted.delete(k);
+    }
+  }
+  slackPosted.set(key, now);
+}
+
+/**
+ * Anything that suggests the sender is one of our own audience. Its presence
+ * always wins: a message that mentions any of these is never labeled.
+ */
+const BREEDER_TERMS =
+  /\b(breed(?:er|ers|ing|s)?|litters?|pupp(?:y|ies)|kittens?|foals?|kennels?|catter(?:y|ies)|rabbitr(?:y|ies)|dams?|sires?|studs?|whelp(?:ing|s)?|waitlists?|wait list|pedigrees?|dogs?|cats?|horses?|goats?|sheep|alpacas?|rabbits?|animals?|deposits?)\b/i;
+
+/** Phrases that only appear in an unsolicited offer to a business. */
+const SOLICITATION_STRONG: RegExp[] = [
+  /\brates? as low as\b/i,
+  /\b(?:fast |quick )?access to \$\s?\d[\d,]*(?:\s?k)?\s?(?:-|–|—|to)\s?\$?\s?\d/i,
+  /\bfunding within \d+ (?:hours?|days?)\b/i,
+  /\b(?:business|working capital|merchant) (?:loans?|financing|funding|capital|cash advance)\b/i,
+];
+
+/**
+ * Pitch openers. Each is ordinary enough to appear in a genuine note, so they
+ * label a message only when both are present.
+ */
+const SOLICITATION_OPENERS: RegExp[] = [
+  /\bquick (?:call|chat) this week\b/i,
+  /\b(?:companies|firms|businesses|startups) like (?:breederhq|yours)\b/i,
+];
+
+/** Service categories that are only conclusive alongside an offer of them. */
+const SOLICITATION_SERVICE =
+  /\b(?:seo|link[- ]?building|backlinks?|guest posts?|web ?(?:site )?(?:design|development)|app development|mobile app development|software development|lead generation|digital marketing|marketing services|social media marketing|outsourc\w+)\b/i;
+const SOLICITATION_OFFER = /\b(?:we|our (?:team|agency|company))\s+(?:can\s+|will\s+)?(?:offer|provide|specialize|build|design|develop|deliver|help)\b/i;
+
+/**
+ * True only for a clear vendor pitch: a strong phrase, a service category
+ * together with an offer of it, or both pitch openers, and nothing breeder-related anywhere in the
+ * message. Everything else is false, so a real breeder is never labeled.
+ */
+export function isLikelySolicitation(message?: string): boolean {
+  const text = (message || '').replace(/\s+/g, ' ').trim();
+  if (!text) return false;
+  if (BREEDER_TERMS.test(text)) return false;
+  if (SOLICITATION_STRONG.some((re) => re.test(text))) return true;
+  if (SOLICITATION_SERVICE.test(text) && SOLICITATION_OFFER.test(text)) return true;
+  return SOLICITATION_OPENERS.every((re) => re.test(text));
+}
+
+/**
+ * Slack reads `<`, `>` and `&` as control syntax in message text, so every
+ * value from the public form is escaped before it is interpolated. Without it,
+ * a `<!here>` typed into any field would alert the channel, including from a
+ * post that is deliberately quiet.
+ */
+function slackEscape(value: string): string {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
+ * The Slack request body. A possible solicitation keeps every field, so a
+ * misread real lead is still fully readable, but drops the urgency styling and
+ * the channel-wide mention so it does not alert anyone.
+ */
+export function buildSlackPayload(lead: EnrichedLead, solicitation: boolean): { text: string; blocks: any[] } {
   const blocks: any[] = [
     {
       type: 'header',
       text: {
         type: 'plain_text',
-        text: '🎯 New Lead Submitted!',
+        text: solicitation ? 'Possible Solicitation' : '🎯 New Lead Submitted!',
       },
     },
     {
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*Name:*\n${lead.name || 'Not provided'}` },
-        { type: 'mrkdwn', text: `*Email:*\n${lead.email}` },
-        { type: 'mrkdwn', text: `*Phone:*\n${lead.phone || 'Not provided'}` },
-        { type: 'mrkdwn', text: `*Company:*\n${lead.company || lead.enrichment?.company?.name || 'Not provided'}` },
+        { type: 'mrkdwn', text: `*Name:*\n${slackEscape(lead.name || 'Not provided')}` },
+        { type: 'mrkdwn', text: `*Email:*\n${slackEscape(lead.email)}` },
+        { type: 'mrkdwn', text: `*Phone:*\n${slackEscape(lead.phone || 'Not provided')}` },
+        { type: 'mrkdwn', text: `*Company:*\n${slackEscape(lead.company || lead.enrichment?.company?.name || 'Not provided')}` },
       ],
     },
   ];
@@ -322,7 +430,7 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Interested in:*\n${interestList.map((i) => `• ${i}`).join('\n')}`,
+        text: `*Interested in:*\n${interestList.map((i) => `• ${slackEscape(i)}`).join('\n')}`,
       },
     });
   }
@@ -333,7 +441,7 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Message:*\n${lead.message}`,
+        text: `*Message:*\n${slackEscape(lead.message)}`,
       },
     });
   }
@@ -343,10 +451,10 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
     const company = lead.enrichment.company;
     const companyInfo: string[] = [];
 
-    if (company.name) companyInfo.push(`*Company:* ${company.name}`);
-    if (company.industry) companyInfo.push(`*Industry:* ${company.industry}`);
+    if (company.name) companyInfo.push(`*Company:* ${slackEscape(company.name)}`);
+    if (company.industry) companyInfo.push(`*Industry:* ${slackEscape(company.industry)}`);
     if (company.employees) companyInfo.push(`*Employees:* ${company.employees}`);
-    if (company.location) companyInfo.push(`*Location:* ${company.location}`);
+    if (company.location) companyInfo.push(`*Location:* ${slackEscape(company.location)}`);
 
     if (companyInfo.length > 0) {
       blocks.push({
@@ -364,7 +472,7 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Job Title:* ${lead.enrichment.person.jobTitle}`,
+        text: `*Job Title:* ${slackEscape(lead.enrichment.person.jobTitle)}`,
       },
     });
   }
@@ -372,9 +480,9 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
   // Add UTM attribution if available
   if (lead.utm?.source || lead.utm?.campaign) {
     const utmInfo: string[] = [];
-    if (lead.utm.source) utmInfo.push(`*Source:* ${lead.utm.source}`);
-    if (lead.utm.campaign) utmInfo.push(`*Campaign:* ${lead.utm.campaign}`);
-    if (lead.utm.medium) utmInfo.push(`*Medium:* ${lead.utm.medium}`);
+    if (lead.utm.source) utmInfo.push(`*Source:* ${slackEscape(lead.utm.source)}`);
+    if (lead.utm.campaign) utmInfo.push(`*Campaign:* ${slackEscape(lead.utm.campaign)}`);
+    if (lead.utm.medium) utmInfo.push(`*Medium:* ${slackEscape(lead.utm.medium)}`);
 
     blocks.push({
       type: 'section',
@@ -385,14 +493,81 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
     });
   }
 
+  const identity = `Name: ${slackEscape(lead.name || 'Not provided')}\nEmail: ${slackEscape(lead.email)}`;
+  return {
+    text: solicitation
+      ? `Possible Solicitation\n${identity}`
+      : `<!here> 🚨 New Lead Submitted\n${identity}`,
+    blocks,
+  };
+}
+
+/**
+ * Send lead notification to Slack
+ *
+ * @param webhookUrl defaults to the configured webhook; tests pass their own
+ *   because `import.meta.env` exists only inside the Astro build.
+ */
+export async function sendToSlack(
+  lead: EnrichedLead,
+  webhookUrl: string | undefined = import.meta.env.SLACK_WEBHOOK_URL,
+  now: number = Date.now()
+): Promise<boolean> {
+  if (!webhookUrl) {
+    console.log('⚠️ Slack webhook not configured, skipping notification');
+    return false;
+  }
+
+  const duplicateKey = slackDuplicateKey(lead);
+  if (!duplicateKey) return postToSlack(lead, webhookUrl, undefined, now);
+
+  // The same email and message already posted this week: skip the post only.
+  // The submission is otherwise processed exactly as any other. A repeat that
+  // arrives while the first post is still in flight waits for its outcome, and
+  // posts itself only if that one failed, so a failed post is never covered
+  // for by a skip. A skip is not a delivery: the platform write (or any other
+  // channel) is what carries a repeat, and returning false only surfaces the
+  // case where nothing recorded this submission, exactly as it would have
+  // before suppression existed. Reporting a skip as delivered could answer
+  // "received" for a submission whose current fields reached no channel.
+  for (;;) {
+    if (wasPostedToSlack(duplicateKey, now)) {
+      console.log('Slack notification skipped: repeat of a recent submission');
+      return false;
+    }
+    const pending = slackInFlight.get(duplicateKey);
+    if (!pending) break;
+    if (await pending) {
+      console.log('Slack notification skipped: repeat of a recent submission');
+      return false;
+    }
+  }
+
+  // The in-flight entry is set in the same synchronous step as the check
+  // above, so overlapping identical submissions cannot both reach this point.
+  const post = postToSlack(lead, webhookUrl, duplicateKey, now);
+  slackInFlight.set(duplicateKey, post);
+  void post.then(() => {
+    if (slackInFlight.get(duplicateKey) === post) slackInFlight.delete(duplicateKey);
+  });
+  return post;
+}
+
+/** The post itself. Never throws; remembers the submission only once Slack accepted it. */
+async function postToSlack(
+  lead: EnrichedLead,
+  webhookUrl: string,
+  duplicateKey: string | undefined,
+  now: number
+): Promise<boolean> {
   try {
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text: `<!here> 🚨 New Lead Submitted\nName: ${lead.name || 'Not provided'}\nEmail: ${lead.email}`,
-        blocks,
-      }),
+      body: JSON.stringify(buildSlackPayload(lead, isLikelySolicitation(lead.message))),
+      // Bounds a stalled webhook so it cannot hold the submitter's response or
+      // an overlapping repeat's in-flight wait; the catch below returns false.
+      signal: AbortSignal.timeout(5000),
     });
 
     if (!response.ok) {
@@ -400,6 +575,7 @@ export async function sendToSlack(lead: EnrichedLead): Promise<boolean> {
       return false;
     }
 
+    if (duplicateKey) rememberSlackPost(duplicateKey, now);
     console.log('✅ Slack notification sent');
     return true;
   } catch (error) {

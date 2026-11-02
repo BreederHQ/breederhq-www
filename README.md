@@ -95,7 +95,7 @@ breederhq-www/
 
 | Variable | Required | What it does |
 |----------|----------|-------------|
-| `SLACK_WEBHOOK_URL` | Yes | Posts "New Lead Submitted!" to Slack `#leads` channel |
+| `SLACK_WEBHOOK_URL` | Yes | Posts "New Lead Submitted!" to Slack `#leads` channel. A repeat of the same email and message within 7 days is not re-posted, and a clear vendor pitch is posted as "Possible Solicitation" without an alert; the submission itself is always saved and answered the same way |
 | `RESEND_API_KEY` | Yes | Sends email notifications via Resend |
 | `NOTIFICATION_EMAIL` | Yes | Email address that receives lead notifications (e.g., `leads@breederhq.com`) |
 | `CLEARBIT_SECRET_KEY` | Optional | Enriches leads with company/person data |
