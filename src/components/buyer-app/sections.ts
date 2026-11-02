@@ -132,7 +132,7 @@ export const sections: BuyerAppSection[] = [
     id: 'products',
     title: 'Your Recommended Products, One Tap Away',
     benefit:
-      'Share the crate, the food, and the brush you trust, with your own note on each. Buyers see your list in the order you set it.',
+      'Get the same repeat questions about what products you recommend to your buyers to care for their new animal? Now you can share your favorite crate, food, and the brush you trust - one time - with your own note on each, and all your buyers will see your list in the order you set it up.',
     buyerVoice: '“I knew what to buy before my new animal came home, because my breeder had already listed it.”',
     screens: [
       {
