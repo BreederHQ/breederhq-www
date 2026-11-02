@@ -196,7 +196,7 @@ export const sections: BuyerAppSection[] = [
     id: 'documents',
     title: 'Every Document, Saved for Them',
     benefit:
-      'Health certificates, receipts, and care guides live in Papers. Buyers open photos right in the app and send PDFs to the app they prefer, so nothing is buried in an old email.',
+      'Health certificates, receipts, and care guides live in Papers. Buyers open photos right in the app and PDFs in the app of their choice, so nothing is buried in an old email.',
     buyerVoice: '“I found the health certificate in Papers when the vet asked for it.”',
     screens: [
       { id: 's11-1', label: 'Papers', text: 'Agreements and documents, each with its type, size, and date.' },
