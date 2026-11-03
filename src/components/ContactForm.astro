@@ -60,29 +60,36 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
 <div class="contact-form-container">
   <form id={formId} class="space-y-4" data-source={source} novalidate>
     <!--
-      Honeypot. Off-screen rather than `display:none`, because some bots skip
-      hidden inputs but fill everything else.
+      Anti-bot honeypot: must stay empty. Any value means the submission was
+      not typed by a person, and the server drops it silently while answering
+      as though it succeeded (see /api/contact), so a browser or password
+      manager filling it loses a real person's message with no sign of why.
 
-      `hidden` (not aria-hidden) because a focusable control must never sit
-      inside an aria-hidden subtree: that hides it from assistive tech while
-      leaving it programmatically reachable, which is the trap the rule exists
-      to prevent. `hidden` removes it from the accessibility tree AND from
-      focus, and the positioning keeps it in the layout for bots that check
-      visibility.
+      The attributes therefore give autofill nothing to match. "nickname" is a
+      standard autofill field name and "new-password" invites a password
+      manager to generate a value into the field, so neither is used: the name
+      and id are opaque, the autocomplete token is one Chrome does not
+      recognize (Chrome ignores "off" but disables Autofill for an
+      unrecognized token), and the common password managers' ignore flags are
+      set.
 
-      `name="nickname"` and `autocomplete="new-password"` keep password managers
-      away: a field named "website" with a visible label is something Chrome and
-      1Password will happily autofill with a saved URL, and that autofill would
-      look exactly like a bot. Any value means the submission was not typed by a
-      person; the server drops it silently. See /api/contact.
+      Off-screen rather than display:none (or the `hidden` attribute, which is
+      display:none), so a bot that skips hidden inputs but fills everything
+      else still trips it. tabindex -1 keeps it out of keyboard order, and
+      aria-hidden keeps it out of the accessibility tree; an element outside
+      the tab order inside an aria-hidden subtree is not a focus trap.
     -->
-    <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" hidden>
+    <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
       <input
         type="text"
-        id={`${formId}-nickname`}
-        name="nickname"
+        id={`${formId}-c9x`}
+        name="bhq_c9x"
         tabindex="-1"
-        autocomplete="new-password"
+        autocomplete="bhq-c9x"
+        data-1p-ignore
+        data-lpignore="true"
+        data-bwignore
+        data-form-type="other"
         aria-label="Leave this field empty"
       />
     </div>
@@ -526,7 +533,7 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
         // recorded as a second enquiry. Cleared only on confirmed success.
         submission_key: submissionKeyHolder.get(),
         // Bot checks. Both are read server-side; see /api/contact.
-        website: String(formData.get('nickname') || ''),
+        website: String(formData.get('bhq_c9x') || ''),
         rendered_at: renderedAt,
       };
 

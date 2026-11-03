@@ -936,16 +936,31 @@ const faqs = [
             ></textarea>
           </div>
 
-          {/* Honeypot — bots tend to fill every field including hidden ones.
-               If this is non-empty on submit, we silently drop the lead. */}
-          <div class="hidden" aria-hidden="true">
-            <label for="bcf-website">Website (leave blank)</label>
+          {/* Anti-bot honeypot: must stay empty. A value makes the submit
+               handler show the success message and drop the inquiry, so a
+               browser or password manager filling it loses a real club's
+               request with no sign of why. The attributes therefore give
+               autofill nothing to match: an opaque name and id, an
+               autocomplete token Chrome does not recognize (Chrome ignores
+               "off" but disables Autofill for an unrecognized token), the
+               ignore flags of the common password managers, and a label with
+               no autofill word in it. It stays an enabled text input placed
+               off-screen rather than display:none, so a bot that skips hidden
+               fields but fills every other input still trips it; tabindex -1
+               keeps it out of keyboard order and aria-hidden keeps it out of
+               the accessibility tree. */}
+          <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+            <label for="bcf-c9x">Leave this field empty</label>
             <input
-              id="bcf-website"
-              name="website"
+              id="bcf-c9x"
+              name="bhq_c9x"
               type="text"
               tabindex="-1"
-              autocomplete="off"
+              autocomplete="bhq-c9x"
+              data-1p-ignore
+              data-lpignore="true"
+              data-bwignore
+              data-form-type="other"
             />
           </div>
 
@@ -1029,7 +1044,7 @@ const faqs = [
             submitBtn.textContent = 'Sending…';
 
             var fd = new FormData(form);
-            var honeypot = (fd.get('website') || '').toString().trim();
+            var honeypot = (fd.get('bhq_c9x') || '').toString().trim();
             // Bot trap — pretend to succeed and silently drop. Don't tip off the bot.
             if (honeypot) {
               form.classList.add('hidden');
