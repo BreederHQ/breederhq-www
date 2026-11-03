@@ -351,18 +351,22 @@ const BREEDER_TERMS =
 const SOLICITATION_STRONG: RegExp[] = [
   /\brates? as low as\b/i,
   /\b(?:fast |quick )?access to \$\s?\d[\d,]*(?:\s?k)?\s?(?:-|–|—|to)\s?\$?\s?\d/i,
+  // A standalone dollar range written the way a lender writes it ("$100K–$500K").
+  /\$\s?(?:\d[\d,.]*\s?[km]\b|\d{1,3}(?:,\d{3})+)\s?(?:-|–|—|to)\s?\$?\s?\d/i,
+  /\b\d+(?:\.\d+)?\s?% (?:per month|a month|monthly)\b/i,
+  /\bfund (?:your|their|its) growth\b/i,
+  /\bqualify for (?:up to )?\$\s?\d/i,
   /\bfunding within \d+ (?:hours?|days?)\b/i,
   /\b(?:business|working capital|merchant) (?:loans?|financing|funding|capital|cash advance)\b/i,
 ];
 
 /**
- * Pitch openers. Each is ordinary enough to appear in a genuine note, so they
- * label a message only when both are present.
+ * The opener is ordinary enough to appear in a genuine note, so it labels a
+ * message only together with an ask for a call or a reply.
  */
-const SOLICITATION_OPENERS: RegExp[] = [
-  /\bquick (?:call|chat) this week\b/i,
-  /\b(?:companies|firms|businesses|startups) like (?:breederhq|yours)\b/i,
-];
+const SOLICITATION_OPENER = /\b(?:companies|firms|businesses|startups) like (?:breederhq|yours)\b/i;
+const SOLICITATION_CALL_ASK =
+  /\b(?:quick (?:call|chat)|find \d+ minutes|walk you through|just reply|hop on a (?:quick )?call)\b/i;
 
 /** Service categories that are only conclusive alongside an offer of them. */
 const SOLICITATION_SERVICE =
@@ -371,7 +375,7 @@ const SOLICITATION_OFFER = /\b(?:we|our (?:team|agency|company))\s+(?:can\s+|wil
 
 /**
  * True only for a clear vendor pitch: a strong phrase, a service category
- * together with an offer of it, or both pitch openers, and nothing breeder-related anywhere in the
+ * together with an offer of it, or the opener together with a call ask, and nothing breeder-related anywhere in the
  * message. Everything else is false, so a real breeder is never labeled.
  */
 export function isLikelySolicitation(message?: string): boolean {
@@ -380,7 +384,85 @@ export function isLikelySolicitation(message?: string): boolean {
   if (BREEDER_TERMS.test(text)) return false;
   if (SOLICITATION_STRONG.some((re) => re.test(text))) return true;
   if (SOLICITATION_SERVICE.test(text) && SOLICITATION_OFFER.test(text)) return true;
-  return SOLICITATION_OPENERS.every((re) => re.test(text));
+  return SOLICITATION_OPENER.test(text) && SOLICITATION_CALL_ASK.test(text);
+}
+
+/** A sender domain stays quiet for this long after a labeled post from it. */
+const SOLICITOR_DOMAIN_WINDOW_MS = 90 * 24 * 60 * 60 * 1_000;
+/** Hard cap on remembered domains. Enforced by oldest-first eviction. */
+const SOLICITOR_DOMAIN_MAX_KEYS = 500;
+
+/**
+ * Domains that sent a post labeled Possible Solicitation, valued by when.
+ * Insertion order is age order, which eviction relies on. In-memory, so it is
+ * per-instance and resets on deploy; that is fine because it only reduces
+ * noise, and a post that slips through is made as it always was.
+ */
+const solicitorDomains = new Map<string, number>();
+
+/**
+ * Labeled posts still awaiting Slack's answer, by sender domain. The domain is
+ * remembered only after Slack accepts, so without this a burst of distinct
+ * senders from one new domain would all see an empty map and all post.
+ */
+const solicitorInFlight = new Map<string, Promise<boolean>>();
+
+/**
+ * Free and consumer mail providers. Many unrelated people share these domains,
+ * so one pitch from one of them must never quiet the rest.
+ */
+const FREE_MAIL_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com',
+  'yahoo.com', 'yahoo.co.uk', 'yahoo.ca', 'yahoo.com.au', 'yahoo.de', 'yahoo.fr', 'yahoo.es', 'yahoo.it',
+  'yahoo.co.in', 'yahoo.co.jp', 'yahoo.com.br', 'yahoo.com.mx', 'ymail.com', 'rocketmail.com',
+  'mail.ru', 'inbox.ru', 'list.ru', 'bk.ru', 'qq.com', '163.com', '126.com', 'sina.com', 'naver.com',
+  'web.de', 'orange.fr', 'free.fr', 'libero.it', 'rediffmail.com', 'shaw.ca', 'rogers.com', 'sympatico.ca',
+  'btinternet.com', 'sky.com', 'live.ca', 'outlook.ca',
+  'outlook.com', 'hotmail.com', 'hotmail.co.uk', 'live.com', 'msn.com',
+  'icloud.com', 'me.com', 'mac.com',
+  'aol.com',
+  'proton.me', 'protonmail.com', 'pm.me',
+  'gmx.com', 'gmx.net', 'gmx.de',
+  'mail.com', 'zoho.com', 'zohomail.com',
+  'yandex.com', 'yandex.ru',
+  'comcast.net', 'att.net', 'verizon.net', 'sbcglobal.net', 'bellsouth.net',
+  'cox.net', 'charter.net', 'earthlink.net', 'optonline.net', 'frontier.com',
+  'windstream.net', 'juno.com', 'fastmail.com', 'hey.com', 'tutanota.com',
+]);
+
+/** The sender's company domain, or undefined for a free mail provider or a malformed address. */
+function companyDomain(email: string): string | undefined {
+  const at = email.lastIndexOf('@');
+  if (at < 0) return undefined;
+  const domain = email.slice(at + 1).trim().toLowerCase().replace(/\.$/, '');
+  if (!domain.includes('.') || FREE_MAIL_DOMAINS.has(domain)) return undefined;
+  return domain;
+}
+
+function isSolicitorDomain(domain: string, now: number): boolean {
+  const at = solicitorDomains.get(domain);
+  if (at === undefined) return false;
+  if (now - at >= SOLICITOR_DOMAIN_WINDOW_MS) {
+    solicitorDomains.delete(domain);
+    return false;
+  }
+  return true;
+}
+
+function rememberSolicitorDomain(domain: string, now: number): void {
+  solicitorDomains.delete(domain);
+  if (solicitorDomains.size >= SOLICITOR_DOMAIN_MAX_KEYS) {
+    for (const [d, at] of solicitorDomains) {
+      if (now - at >= SOLICITOR_DOMAIN_WINDOW_MS) solicitorDomains.delete(d);
+    }
+    const evict = Math.ceil(SOLICITOR_DOMAIN_MAX_KEYS * 0.1);
+    let i = 0;
+    for (const d of solicitorDomains.keys()) {
+      if (solicitorDomains.size < SOLICITOR_DOMAIN_MAX_KEYS || i++ >= evict) break;
+      solicitorDomains.delete(d);
+    }
+  }
+  solicitorDomains.set(domain, now);
 }
 
 /**
@@ -513,6 +595,47 @@ export async function sendToSlack(
     return false;
   }
 
+  // A company domain that already sent a labeled pitch stays quiet, unless the
+  // message mentions breeder terms: that is posted under the usual rules. Like
+  // a repeat skip, this is not a delivery and returns false; the submission is
+  // saved and answered exactly as before.
+  const domain = companyDomain(lead.email);
+  if (!domain || BREEDER_TERMS.test(lead.message || '')) {
+    return deliverToSlack(lead, webhookUrl, now);
+  }
+
+  // A labeled post from this domain that is still in flight decides the outcome
+  // for everyone behind it: wait for it, then look again. If it failed, the
+  // domain is not remembered and the next sender posts (a skip is never
+  // covered for by a failed post).
+  for (;;) {
+    if (isSolicitorDomain(domain, now)) {
+      console.log('Slack notification skipped: sender domain already sent a possible solicitation');
+      return false;
+    }
+    const pending = solicitorInFlight.get(domain);
+    if (!pending) break;
+    await pending;
+  }
+
+  if (!isLikelySolicitation(lead.message)) return deliverToSlack(lead, webhookUrl, now);
+
+  // Registered in the same synchronous step as the check above, so overlapping
+  // senders cannot both reach this point.
+  const labeled = deliverToSlack(lead, webhookUrl, now);
+  solicitorInFlight.set(domain, labeled);
+  void labeled.then(() => {
+    if (solicitorInFlight.get(domain) === labeled) solicitorInFlight.delete(domain);
+  });
+  return labeled;
+}
+
+/** Repeat suppression, then the post. Domain quieting has already been decided. */
+async function deliverToSlack(
+  lead: EnrichedLead,
+  webhookUrl: string,
+  now: number
+): Promise<boolean> {
   const duplicateKey = slackDuplicateKey(lead);
   if (!duplicateKey) return postToSlack(lead, webhookUrl, undefined, now);
 
@@ -556,10 +679,11 @@ async function postToSlack(
   now: number
 ): Promise<boolean> {
   try {
+    const solicitation = isLikelySolicitation(lead.message);
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(buildSlackPayload(lead, isLikelySolicitation(lead.message))),
+      body: JSON.stringify(buildSlackPayload(lead, solicitation)),
       // Bounds a stalled webhook so it cannot hold the submitter's response or
       // an overlapping repeat's in-flight wait; the catch below returns false.
       signal: AbortSignal.timeout(5000),
@@ -571,6 +695,11 @@ async function postToSlack(
     }
 
     if (duplicateKey) rememberSlackPost(duplicateKey, now);
+    // Only a labeled post teaches the domain; a free mail provider never does.
+    if (solicitation) {
+      const domain = companyDomain(lead.email);
+      if (domain) rememberSolicitorDomain(domain, now);
+    }
     console.log('✅ Slack notification sent');
     return true;
   } catch (error) {
