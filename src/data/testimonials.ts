@@ -74,6 +74,24 @@ export const testimonials: Testimonial[] = [
     sourceUrl: 'https://g.page/r/Cax9mYrHclivEAI',
   },
   {
+    id: 'google-tk-standard-mini-toy-aussies',
+    source: 'google',
+    reviewerName: 'TK Standard Mini & Toy Aussies',
+    quote:
+      "I started using Breeder HQ after struggling to find software that truly offered EVERYTHING I needed as a breeder—all in one place. I wanted a comprehensive system that didn't charge per transaction and, most importantly, never passed fees along to the buyer.\n\nBreeder HQ has not only met those expectations but exceeded them! It has allowed me to eliminate several additional subscriptions, saving both time and money while keeping everything organized in one place.\n\nIn my opinion, Breeder HQ is hands-down the best breeder software on the market. The developers are continually improving the platform, refining features, and finding new ways to make the experience better for both breeders and buyers.\n\nAnd the customer service? Absolutely second to none! They are responsive, helpful, and genuinely invested in making sure their users succeed.\n\nI couldn't be happier with my decision to make the switch. If you're a breeder looking for an all-in-one solution, I highly recommend Breeder HQ!",
+    rating: 5,
+    sourceUrl: 'https://g.page/r/Cax9mYrHclivEAI',
+  },
+  {
+    id: 'google-vondoodles',
+    source: 'google',
+    reviewerName: 'VonDoodles',
+    quote:
+      "BreederHQ has been a valuable tool for keeping my breeding program organized and running efficiently. It makes it easy to manage health records, litters, puppy information, and communication all in one place. The platform is user-friendly, reliable, and has saved me a significant amount of time by streamlining everyday tasks. I would recommend BreederHQ to any breeder looking for an organized and professional way to manage their kennel.",
+    rating: 5,
+    sourceUrl: 'https://g.page/r/Cax9mYrHclivEAI',
+  },
+  {
     id: 'app-store-whyunicornsdied',
     source: 'app-store',
     reviewerName: 'WhyUnicornsDied?',
