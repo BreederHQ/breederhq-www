@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ReviewCarousel from '../components/ReviewCarousel.astro';
+import { demoUrl } from '../lib/demoLink';
 
 const faqs = [
   {
@@ -283,12 +284,14 @@ const trustLayers = [
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:13px;margin-top:30px">
         <a href="/pricing" style="display:inline-flex;align-items:center;gap:9px;padding:15px 24px;border-radius:12px;font-weight:600;font-size:15.5px;color:#0A0F1A;background:linear-gradient(150deg,#FF6A2C,#FF9A3C);box-shadow:0 10px 34px rgba(255,106,44,.42);text-decoration:none">Join The Waitlist <span style="font-size:17px">&#8594;</span></a>
-        <a href="https://marketplace.breederhq.com" style="display:inline-flex;align-items:center;gap:9px;padding:15px 22px;border-radius:12px;font-weight:600;font-size:15.5px;color:#EAF1FC;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);text-decoration:none">Browse the Marketplace</a>
+        {/* Secondary to the waitlist. Browse the Marketplace moved out of the hero:
+            it is a buyer action and stays in the header's Marketplace menu. */}
+        <a href={demoUrl('hero')} data-demo-cta="hero" style="display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:12px;font-weight:600;font-size:15.5px;color:#EAF1FC;border:1px solid rgba(127,200,255,.38);background:rgba(127,200,255,.07);text-decoration:none"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#34D399;box-shadow:0 0 10px #34D399;flex-shrink:0"></span>Try The Live Demo</a>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.02em">
-        <span style="color:#B9C8DE">invitation only</span><span style="color:#3C4C66">/</span>
-        <span style="color:#B9C8DE">founder-led setup</span><span style="color:#3C4C66">/</span>
-        <span style="color:#B9C8DE">never a % of your sales</span>
+        <span style="color:#B9C8DE">no sign-up</span><span style="color:#3C4C66" aria-hidden="true">/</span>
+        <span style="color:#B9C8DE">ready in seconds</span><span style="color:#3C4C66" aria-hidden="true">/</span>
+        <span style="color:#B9C8DE">five years of real-looking records</span>
       </div>
     </div>
     <!-- command center mockup -->
@@ -315,6 +318,14 @@ const trustLayers = [
             allow="clipboard-write; autoplay"
             style="position:absolute;top:0;left:0;width:100%;height:100%;color-scheme:light;border:0"
           ></iframe>
+        </div>
+        <!-- The recording looks like the product, so say what it is and where the real one is -->
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;padding:12px 16px 12px 16px;background:rgba(10,15,26,.92);border-top:1px solid rgba(255,138,76,.25)">
+          <span style="display:flex;align-items:center;gap:9px;font-size:13px;color:#AEC0DA;min-width:0">
+            <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 10px #34D399;flex-shrink:0"></span>
+            <span>You're watching a recording. <strong style="color:#EAF1FC;font-weight:600">The real one is open.</strong></span>
+          </span>
+          <a href={demoUrl('hero_recording')} data-demo-cta="hero_recording" style="font-size:13px;font-weight:600;color:#FF9A3C;text-decoration:none;white-space:nowrap">Open The Live Sandbox &#8594;</a>
         </div>
       </div>
       <!-- floating chips -->

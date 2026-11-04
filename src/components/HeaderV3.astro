@@ -1,9 +1,14 @@
 ---
+import DemoCtaTracking from './DemoCtaTracking.astro';
+import { demoUrl } from '../lib/demoLink';
+
 interface Props {
   hideLogo?: boolean;
 }
 const { hideLogo = false } = Astro.props;
 ---
+
+<DemoCtaTracking />
 
 <!-- Founders Banner -->
 <div data-pagefind-ignore="all" style="position:relative;z-index:60;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 16px;padding:11px 20px;font-size:13.5px;background:linear-gradient(90deg,#FF6A2C,#FF9A3C 55%,#FFB020);text-align:center">
@@ -59,6 +64,21 @@ const { hideLogo = false } = Astro.props;
             class="nav-dropdown absolute top-full left-0 mt-2 hidden"
             style="min-width:640px;background:linear-gradient(180deg,#0E1A2E,#0A1424);border:1px solid rgba(255,255,255,.12);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.6);padding:20px"
           >
+            <!-- Live demo card: the no-commitment step, above the waitlist card -->
+            <a
+              href={demoUrl('nav_platform')}
+              data-demo-cta="nav_platform"
+              class="demo-card flex gap-3 items-start p-3 rounded-lg mb-2 transition-colors"
+              style="background:rgba(127,200,255,.07);border:1px solid rgba(127,200,255,.28)"
+            >
+              <span aria-hidden="true" class="mt-1.5 shrink-0" style="width:8px;height:8px;border-radius:50%;background:#34D399;box-shadow:0 0 10px #34D399"></span>
+              <div>
+                <div class="text-sm font-semibold text-white">Explore A Live Sandbox</div>
+                <div class="text-xs" style="color:#A9BAD4">A complete breeding operation with five years of records. Click anything. No sign-up.</div>
+                <div class="text-xs font-semibold mt-1.5" style="color:#FF9A3C">Try The Live Demo &#8594;</div>
+              </div>
+            </a>
+
             <!-- CTA card -->
             <a
               href="/pricing"
@@ -377,6 +397,14 @@ const { hideLogo = false } = Astro.props;
           class="text-sm transition-colors hover:text-white"
           style="color:#A9BAD4;font-family:'Sora',system-ui,sans-serif"
         >Sign in</a>
+        {/* Secondary to the waitlist button. Hidden below xl: at lg the row has
+            no room for it beside the four nav triggers and would overflow. */}
+        <a
+          href={demoUrl('header')}
+          data-demo-cta="header"
+          class="demo-btn hidden xl:inline-flex items-center gap-2 px-3.5 py-2 rounded-[9px] text-sm font-semibold transition-colors whitespace-nowrap"
+          style="color:#EAF1FC;border:1px solid rgba(127,200,255,.38);background:rgba(127,200,255,.07);font-family:'Sora',system-ui,sans-serif"
+        ><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 10px #34D399;flex-shrink:0"></span>Try The Live Demo</a>
         <a
           href="/pricing"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-[9px] text-sm font-semibold transition-opacity hover:opacity-90"
@@ -527,6 +555,12 @@ const { hideLogo = false } = Astro.props;
       <!-- Mobile CTAs -->
       <div style="border-top:1px solid rgba(255,255,255,.07)" class="pt-3 mt-3 flex flex-col gap-2">
         <a
+          href={demoUrl('mobile_menu')}
+          data-demo-cta="mobile_menu"
+          class="demo-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-[9px] text-sm text-center font-semibold transition-colors"
+          style="color:#EAF1FC;border:1px solid rgba(127,200,255,.38);background:rgba(127,200,255,.07)"
+        ><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 10px #34D399;flex-shrink:0"></span>Try The Live Demo<span style="color:#A9BAD4;font-weight:500">&middot; No sign-up</span></a>
+        <a
           href="https://accounts.breederhq.com/login"
           class="block py-2.5 px-4 rounded-lg text-sm text-center font-medium transition-colors"
           style="color:#A9BAD4;border:1px solid rgba(255,255,255,.12)"
@@ -565,6 +599,10 @@ const { hideLogo = false } = Astro.props;
   }
   .mobile-acc-trigger:hover {
     background: rgba(255,255,255,.04);
+  }
+  .demo-btn:hover,
+  .demo-card:hover {
+    background: rgba(127,200,255,.13) !important;
   }
   .mobile-acc-trigger[aria-expanded="true"] .mobile-chevron {
     transform: rotate(180deg);

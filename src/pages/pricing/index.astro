@@ -28,6 +28,9 @@ import PaidQuerySnapshot from '../../components/PaidQuerySnapshot.astro';
 import ReviewRotator from '../../components/ReviewRotator.astro';
 import Analytics from '../../components/Analytics.astro';
 import TrackingInit from '../../components/TrackingInit.astro';
+// No HeaderV3 here, so the demo link's click tracking is installed directly.
+import DemoCtaTracking from '../../components/DemoCtaTracking.astro';
+import { demoUrl } from '../../lib/demoLink';
 
 // All nine supported species. Cattle is excluded from the public marketplace
 // buyer directory (see marketplaceData.ts SpeciesKey) but is supported and
@@ -834,6 +837,19 @@ const SMS_CONSENT_TEXT =
             We use your details only to contact you about the Founders&rsquo; Program. No newsletter, no sharing.
           </p>
         </form>
+
+        {/* The step back for a breeder who hesitates here. It sits outside the
+            form, so it is not part of the application or its submission. */}
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-[hsl(24,95%,53%)]/55 bg-[#0F1B33] px-4 py-3.5">
+          <p class="min-w-0 flex-1 basis-48 text-[13.5px] leading-relaxed text-slate-300">
+            <strong class="text-white">Not ready to commit?</strong> Look around a working operation first. No sign-up.
+          </p>
+          <a
+            href={demoUrl('waitlist')}
+            data-demo-cta="waitlist"
+            class="inline-flex min-h-[40px] items-center gap-2 whitespace-nowrap rounded-[9px] border border-[rgba(127,200,255,.38)] bg-[rgba(127,200,255,.07)] px-3.5 text-sm font-semibold text-[#EAF1FC] no-underline transition hover:bg-[rgba(127,200,255,.13)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+          ><span aria-hidden="true" class="h-[7px] w-[7px] flex-none rounded-full bg-[#34D399] shadow-[0_0_10px_#34D399]"></span>Try The Live Demo</a>
+        </div>
       </section>
 
       {/* The full detail. Left column on desktop; after the form on a phone. */}
@@ -1045,6 +1061,7 @@ const SMS_CONSENT_TEXT =
       back from there, so without this an applicant arriving on a campaign link
       such as /pricing?utm_source=... would submit with no attribution. */}
   <TrackingInit />
+  <DemoCtaTracking />
 
   <script>
     import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/tracking';

@@ -1,0 +1,15 @@
+---
+/**
+ * Installs the one delegated click listener that sends GA4 demo_cta_click for
+ * every [data-demo-cta] link on the page (see src/lib/demoLink.ts). Rendered by
+ * HeaderV3, so every BaseLayout page has it, and by any page that skips
+ * BaseLayout but carries a demo link (the /pricing waitlist page). Astro bundles
+ * this script once per page however many times the component renders, and
+ * initDemoCtaTracking() is itself idempotent.
+ */
+---
+
+<script>
+  import { initDemoCtaTracking } from '../lib/demoLink';
+  initDemoCtaTracking();
+</script>

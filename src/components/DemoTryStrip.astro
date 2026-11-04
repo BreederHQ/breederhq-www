@@ -1,0 +1,35 @@
+---
+/**
+ * The strip directly under a feature page's recorded Arcade walkthrough. It
+ * turns "that looks useful" into "let me try it" by sending the visitor into
+ * the live sandbox, named for the feature on that page.
+ */
+import { demoUrl, type DemoMedium } from '../lib/demoLink';
+
+export interface Props {
+  title: string;
+  body: string;
+  medium: DemoMedium;
+}
+
+const { title, body, medium } = Astro.props;
+---
+
+<div
+  class="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 rounded-xl px-5 py-4"
+  style="background:#0E1A2E;border:1px solid rgba(127,200,255,.25)"
+>
+  <div class="min-w-0 flex-1 basis-64">
+    <p class="flex items-center gap-2 text-base font-semibold" style="color:#EAF1FC;font-family:'Sora',system-ui,sans-serif">
+      <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 10px #34D399;flex-shrink:0"></span>
+      {title}
+    </p>
+    <p class="mt-1 text-sm leading-relaxed" style="color:#AEC0DA">{body}</p>
+  </div>
+  <a
+    href={demoUrl(medium)}
+    data-demo-cta={medium}
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-[10px] px-4 py-2.5 text-sm font-semibold no-underline transition-opacity hover:opacity-90"
+    style="color:#0A0F1A;background:linear-gradient(150deg,#FF6A2C,#FF9A3C);box-shadow:0 8px 24px rgba(255,106,44,.32)"
+  >Open The Live Demo <span aria-hidden="true">&#8594;</span></a>
+</div>

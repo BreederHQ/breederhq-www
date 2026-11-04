@@ -11,6 +11,8 @@ const excludedPages = [
   'https://breederhq.com/share',
   // Pricing page is now live (activated April 9, 2026)
   'https://breederhq.com/site-updates', // Internal update log for marketing manager — not for public indexing
+  // /demo and /demo/login are vercel.json redirects into the live demo (src/lib/demoLink.ts);
+  // no page renders there, and they stay listed so a future page cannot slip into the sitemap.
   'https://breederhq.com/demo',
   'https://breederhq.com/demo/login',
   'https://breederhq.com/get-app', // QR redirect target — noindex
@@ -38,7 +40,10 @@ export default defineConfig({
   output: 'static', // Static pages by default; SSR opt-in via `export const prerender = false`
   trailingSlash: 'never', // Canonical URLs without trailing slash (e.g. /about not /about/)
   adapter: vercel(),
-  security: { checkOrigin: false }, // Allow POST on SSR demo pages
+  // Added for the retired /demo password form. Left off here: turning origin checks on
+  // changes how the remaining SSR routes (the /api/* form endpoints) accept POSTs, and
+  // that is its own change to verify.
+  security: { checkOrigin: false },
   integrations: [
     sitemap({
       filter: (page) => !excludedPages.includes(page),
