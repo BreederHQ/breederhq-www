@@ -11,7 +11,7 @@
 // data. Reviews a business publishes about itself are self-serving and
 // ineligible for review rich results.
 
-export type ReviewSource = 'google' | 'app-store' | 'google-play' | 'capterra';
+export type ReviewSource = 'google' | 'app-store' | 'google-play' | 'capterra' | 'trustpilot';
 
 /** A labeled part of a review, such as the "Pros" or "Cons" Capterra posts. */
 export interface ReviewSection {
@@ -61,6 +61,7 @@ export const SOURCE_LABELS: Record<ReviewSource, string> = {
   'app-store': 'App Store',
   'google-play': 'Google Play',
   capterra: 'Capterra',
+  trustpilot: 'Trustpilot',
 };
 
 export const testimonials: Testimonial[] = [
@@ -145,6 +146,17 @@ export const testimonials: Testimonial[] = [
     date: '2026-07-28',
     sourceUrl: 'https://www.capterra.com/p/10049441/BreederHQ/#b45db6b6-38cc-4f19-a75c-4bd01830873d/',
   },
+  {
+    id: 'trustpilot-centerfire-mini-aussies',
+    source: 'trustpilot',
+    reviewerName: 'Centerfire Mini Aussies',
+    title: 'A Must-Have Software for Every Breeder!',
+    quote:
+      "Whether you breed dogs, cats, goats, horses, cattle, or any other species, having the right systems in place can make ALL the difference in running an efficient, organized breeding program.\n\nTime is one of the most valuable resources we have as breeders. Between health testing, pedigrees, certifications, medical records, breeding schedules, litter records, offspring information, and communicating with families or buyers, there are a LOT of moving pieces to keep up with. BreederHQ brings so much of that information together in one organized place, saving valuable time that would otherwise be spent digging through spreadsheets, folders, paperwork, messages, and multiple platforms.\n\nI've tried multiple breeding software platforms, and BreederHQ is hands down the best I've used. The ability to have your information organized, accessible, and managed in one system is invaluable. It's not just about organization; it's about creating better systems, improving efficiency, and giving breeders more time to focus on what matters most.\n\nWhat I especially appreciate is that BreederHQ isn't standing still. They are continually improving, refining, and growing the platform with the needs of breeders in mind. You can see the commitment to building a system that evolves alongside the industry and serves breeders across multiple species.\n\nWhether you're just starting your first breeding program or you've been breeding for decades, investing in systems that save you time and simplify your operation is worth every bit of it.\n\nI genuinely believe BreederHQ is becoming an essential tool for the breeding industry as a whole. I'm excited to see where the platform goes and can't wait to see what they continue to bring to the table!\n\nStop spending so much time managing the paperwork of your breeding program and start putting systems in place that work FOR you. Five stars all the way!\n\n-Casey H\nCenterfire Mini Aussies",
+    rating: 5,
+    date: '2026-11-04',
+    sourceUrl: 'https://www.trustpilot.com/reviews/6aeb4f0714ae053a4fb11e64',
+  },
 ];
 
 export interface ReviewBlock {
@@ -177,7 +189,7 @@ export interface SourceStats {
 
 /** Average rating per source, computed from the data. */
 export function sourceStats(list: Testimonial[] = testimonials): SourceStats[] {
-  const order: ReviewSource[] = ['app-store', 'google', 'google-play', 'capterra'];
+  const order: ReviewSource[] = ['app-store', 'google', 'google-play', 'capterra', 'trustpilot'];
   return order
     .map((source) => {
       const rows = list.filter((t) => t.source === source);
