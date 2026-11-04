@@ -1,0 +1,19 @@
+---
+export const updateMeta = {
+  date: '2026-11-04',
+  title: 'Long reviews clamp behind Read More in the carousel and rotator',
+  tags: ['reviews', 'social-proof'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">November 4, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">Review cards in the homepage and /mobile carousel and the /pricing rotator now share one reasonable height. A review longer than about nine lines (seven in the rotator) is clamped with a soft fade over the text only, and a Read More button expands that card in place; the label then reads Show Less. The button appears only when the text actually overflows, and expanding a card does not stretch its neighbors. The full review text stays in the page for screen readers and crawlers, the stored text is never trimmed, and with JavaScript off every review shows in full. /reviews is unchanged: its cards already size to their own content, so each reads in full.</p>
+
+  <h3 class="text-lg font-semibold text-gray-900 mt-4 mb-2">Files</h3>
+  <ul class="list-disc pl-5 text-gray-700 space-y-1">
+    <li><code>src/components/ReviewCard.astro</code>, <code>ReviewCarousel.astro</code>, <code>ReviewRotator.astro</code>: clamp hooks and the Read More button.</li>
+    <li><code>src/scripts/reviewCarousel.ts</code>: overflow measurement (re-checked on width change and font load), toggle, and no auto-rotation away from an expanded review.</li>
+    <li><code>src/styles/review-controls.css</code>: clamp, fade and button styles.</li>
+    <li><code>src/data/testimonials.ts</code>: header comment updated.</li>
+  </ul>
+</article>

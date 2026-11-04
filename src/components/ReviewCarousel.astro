@@ -1,5 +1,6 @@
 ---
-// Rotating carousel of every review in src/data/testimonials.ts, shown in full.
+// Rotating carousel of every review in src/data/testimonials.ts. The full text is
+// always in the DOM; long bodies clamp behind a Read More button once JS runs.
 // CSS scroll-snap row: swipe works natively, and with JS off it is a plain
 // horizontally scrollable row. src/scripts/reviewCarousel.ts adds the controls.
 import ReviewCard from './ReviewCard.astro';
@@ -124,6 +125,10 @@ const reviews = sortedTestimonials();
     scrollbar-width: none;
     padding-bottom: 0;
   }
+  /* Set by the clamp script: slides keep their own height (an expanded card must
+     not stretch its siblings), and the script gives each the tallest collapsed
+     height so cards in the row still line up. */
+  .rv.is-clamping .rv__track { align-items: start; }
   .rv.is-enhanced .rv__track::-webkit-scrollbar { display: none; }
   .rv__slide {
     flex: 0 0 calc((100% - (var(--rv-per) - 1) * var(--rv-gap)) / var(--rv-per));

@@ -53,3 +53,50 @@
 .rv-dot[aria-current='true']::after {
   background: #ff8a56;
 }
+
+/* Review body clamp. reviewCarousel.ts adds .is-clamp to a [data-clamp] card or
+   slide; without JS none of this applies and the full review shows. Heights are
+   whole lines of the body type: carousel 14.5px x 1.6 line height x 9 lines,
+   rotator 13.5px x 1.55 x 7 lines. The fade masks the body text only, never the
+   stars, badge or footer. */
+.review-card.is-clamp .review-card__quote {
+  max-height: 208px;
+  overflow: hidden;
+}
+.rr__slide.is-clamp .rr__quote {
+  max-height: 146px;
+  overflow: hidden;
+}
+.review-card.is-clamp.is-overflowing:not(.is-expanded) .review-card__quote,
+.rr__slide.is-clamp.is-overflowing:not(.is-expanded) .rr__quote {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 44px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 44px), transparent);
+}
+.review-card.is-expanded .review-card__quote,
+.rr__slide.is-expanded .rr__quote {
+  max-height: none;
+  overflow: visible;
+}
+.rc-more {
+  align-self: flex-start;
+  margin: 0;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff8a56;
+  cursor: pointer;
+}
+.rc-more[hidden] {
+  display: none;
+}
+.rc-more:hover {
+  text-decoration: underline;
+}
+.rc-more:focus-visible {
+  outline: 2px solid #ff8a56;
+  outline-offset: 3px;
+  border-radius: 4px;
+}

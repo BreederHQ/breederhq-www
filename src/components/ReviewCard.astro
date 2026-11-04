@@ -1,8 +1,10 @@
 ---
 // One breeder review. Text is rendered exactly as stored: paragraphs split on
 // blank lines, and white-space: pre-wrap keeps runs of spaces the reviewer typed.
-// Never clamped: every review is readable in full wherever it is shown.
-// The "strip" variant (carousel slides) only omits the anchor id.
+// The full text is always in the DOM. The "full" variant (/reviews) never clamps.
+// The "strip" variant (carousel slides) omits the anchor id and, once
+// reviewCarousel.ts runs, clamps a long body behind a Read More button.
+// With JS off nothing clamps and every review reads in full.
 import { SOURCE_LABELS, reviewBlocks, type Testimonial } from '../data/testimonials';
 
 interface Props {
@@ -11,6 +13,9 @@ interface Props {
 }
 
 const { review, variant = 'full' } = Astro.props;
+// Only the strip variant (equal-height carousel rows) can clamp; see reviewCarousel.ts.
+const clampable = variant === 'strip';
+const bodyId = `review-body-${review.id}`;
 const sourceLabel = SOURCE_LABELS[review.source];
 const blocks = reviewBlocks(review);
 const dateLabel = review.date
@@ -22,7 +27,11 @@ const dateLabel = review.date
   : null;
 ---
 
-<article class={`review-card review-card--${variant}`} id={variant === 'full' ? review.id : undefined}>
+<article
+  class={`review-card review-card--${variant}`}
+  id={variant === 'full' ? review.id : undefined}
+  data-clamp={clampable ? '' : undefined}
+>
   <div class="review-card__top">
     <span class="review-card__badge">{sourceLabel}</span>
     <span class="review-card__stars" role="img" aria-label={`${review.rating} out of 5 stars`}>
@@ -32,7 +41,7 @@ const dateLabel = review.date
     </span>
   </div>
   {review.title && <h3 class="review-card__title">{review.title}</h3>}
-  <blockquote class="review-card__quote">
+  <blockquote class="review-card__quote" id={clampable ? bodyId : undefined} data-clamp-body={clampable ? '' : undefined}>
     {blocks.map((b) => (
       <div class="review-card__block">
         {b.label && <p class="review-card__label">{b.label}</p>}
@@ -40,6 +49,14 @@ const dateLabel = review.date
       </div>
     ))}
   </blockquote>
+  {
+    clampable && (
+      <button type="button" class="rc-more" data-clamp-toggle aria-expanded="false" aria-controls={bodyId} hidden>
+        <span data-clamp-label>Read More</span>
+        <span class="sr-only"> of the review by {review.reviewerName}</span>
+      </button>
+    )
+  }
   <div class="review-card__foot">
     <div class="review-card__who">
       <span class="review-card__name">{review.reviewerName}</span>

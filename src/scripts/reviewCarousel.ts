@@ -68,7 +68,13 @@ function setup(root: HTMLElement) {
   }
 
   function goTo(i: number, manual: boolean) {
-    index = ((i % positions) + positions) % positions;
+    const target = ((i % positions) + positions) % positions;
+    // In fade mode only one review shows, so leaving it collapses it; an
+    // expanded card would otherwise keep the block tall for every review.
+    if (mode === 'fade' && target !== index) {
+      root.dispatchEvent(new CustomEvent('review-clamp-collapse'));
+    }
+    index = target;
     if (mode === 'scroll') {
       track!.scrollTo({
         left: index * step(),
@@ -107,7 +113,14 @@ function setup(root: HTMLElement) {
 
   function running() {
     return (
-      autoAllowed() && !userPaused && !hovering && !kbFocus && !touching && !document.hidden
+      autoAllowed() &&
+      !userPaused &&
+      !hovering &&
+      !kbFocus &&
+      !touching &&
+      !document.hidden &&
+      // Never rotate away from a review the reader expanded.
+      !root.querySelector('[data-clamp-toggle][aria-expanded="true"]')
     );
   }
 
@@ -128,6 +141,7 @@ function setup(root: HTMLElement) {
 
   prev?.addEventListener('click', () => goTo(index - 1, true));
   next?.addEventListener('click', () => goTo(index + 1, true));
+  root.addEventListener('review-clamp-change', schedule);
   toggle?.addEventListener('click', () => {
     userPaused = !userPaused;
     schedule();
@@ -171,10 +185,108 @@ function setup(root: HTMLElement) {
 
   if (mode === 'scroll') {
     track.addEventListener('scroll', onScroll, { passive: true });
-    new ResizeObserver(measure).observe(track);
+    // Width only: a card expanding or collapsing changes the track's height, and
+    // that must not rebuild the dots.
+    let lastTrackWidth = track.clientWidth;
+    new ResizeObserver(() => {
+      if (track.clientWidth === lastTrackWidth) return;
+      lastTrackWidth = track.clientWidth;
+      measure();
+    }).observe(track);
   }
   measure();
   schedule();
 }
 
-document.querySelectorAll<HTMLElement>('[data-review-carousel]').forEach(setup);
+// Review body clamp. Markup contract: a [data-clamp] card or slide holds a
+// [data-clamp-body] and a hidden [data-clamp-toggle] button. Clamping is a class
+// this script adds (.is-clamp), so without JS the full text shows. The button
+// appears only when the body actually overflows the clamp. The text itself stays
+// in the DOM either way. In scroll mode the slides keep their own height and
+// share the tallest collapsed height, so expanding one card never stretches the
+// others.
+function setupClamp(root: HTMLElement) {
+  const mode = root.dataset.reviewMode === 'fade' ? 'fade' : 'scroll';
+  const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-clamp]'));
+  if (!cards.length) return;
+  const track = root.querySelector<HTMLElement>('[data-track]');
+  const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+  const equalize = mode === 'scroll' && !!track && slides.length > 0;
+
+  function label(card: HTMLElement, expanded: boolean) {
+    const btn = card.querySelector<HTMLButtonElement>('[data-clamp-toggle]');
+    const text = btn?.querySelector('[data-clamp-label]');
+    btn?.setAttribute('aria-expanded', String(expanded));
+    if (text) text.textContent = expanded ? 'Show Less' : 'Read More';
+  }
+
+  function evaluate() {
+    cards.forEach((card) => {
+      const body = card.querySelector<HTMLElement>('[data-clamp-body]');
+      const btn = card.querySelector<HTMLButtonElement>('[data-clamp-toggle]');
+      if (!body || !btn) return;
+      card.classList.add('is-clamp');
+      if (card.classList.contains('is-expanded')) {
+        btn.hidden = false;
+        return;
+      }
+      const overflowing = body.scrollHeight > body.clientHeight + 1;
+      card.classList.toggle('is-overflowing', overflowing);
+      btn.hidden = !overflowing;
+    });
+    if (!equalize) return;
+    root.classList.add('is-clamping');
+    slides.forEach((s) => {
+      s.style.minHeight = '';
+    });
+    let tallest = 0;
+    slides.forEach((s) => {
+      if (!s.querySelector('.is-expanded')) tallest = Math.max(tallest, s.offsetHeight);
+    });
+    if (tallest) {
+      slides.forEach((s) => {
+        s.style.minHeight = `${tallest}px`;
+      });
+    }
+  }
+
+  function collapseAll() {
+    let changed = false;
+    cards.forEach((card) => {
+      if (!card.classList.contains('is-expanded')) return;
+      card.classList.remove('is-expanded');
+      label(card, false);
+      changed = true;
+    });
+    if (changed) evaluate();
+  }
+
+  cards.forEach((card) => {
+    card.querySelector('[data-clamp-toggle]')?.addEventListener('click', () => {
+      const expanded = !card.classList.contains('is-expanded');
+      card.classList.toggle('is-expanded', expanded);
+      label(card, expanded);
+      // A collapse re-measures: a resize or font load while expanded may have
+      // made the text fit, in which case the button must go.
+      if (!expanded) evaluate();
+      root.dispatchEvent(new CustomEvent('review-clamp-change'));
+    });
+  });
+  root.addEventListener('review-clamp-collapse', collapseAll);
+
+  // Re-check when the width changes (line wrapping changes) and once fonts load.
+  // Height changes are ignored on purpose: evaluate() itself changes heights.
+  let lastWidth = root.clientWidth;
+  new ResizeObserver(() => {
+    if (root.clientWidth === lastWidth) return;
+    lastWidth = root.clientWidth;
+    evaluate();
+  }).observe(root);
+  evaluate();
+  document.fonts?.ready.then(evaluate);
+}
+
+document.querySelectorAll<HTMLElement>('[data-review-carousel]').forEach((root) => {
+  setupClamp(root);
+  setup(root);
+});

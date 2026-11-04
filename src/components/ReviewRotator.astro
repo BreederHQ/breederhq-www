@@ -1,8 +1,10 @@
 ---
 // Compact, quiet review rotator for pages that must stay focused (the founders
-// sign-up page). One review at a time, full text, no clamping. All slides share
-// one grid cell, so the block always reserves the tallest review's height and
-// rotation never moves the content around it. With JS off, every review is listed.
+// sign-up page). One review at a time. The full text is always in the DOM; once
+// reviewCarousel.ts runs, a long body clamps behind a Read More button. All slides
+// share one grid cell, so the block reserves the tallest (clamped) review's height
+// and rotation never moves the content around it. With JS off, every review is
+// listed in full.
 import { SOURCE_LABELS, reviewBlocks, sortedTestimonials } from '../data/testimonials';
 import '../styles/review-controls.css';
 
@@ -26,6 +28,7 @@ const reviews = sortedTestimonials();
           <figure
             class="rr__slide"
             data-slide
+            data-clamp
             role="group"
             aria-roledescription="slide"
             aria-label={`${i + 1} of ${reviews.length}`}
@@ -36,7 +39,7 @@ const reviews = sortedTestimonials();
               ))}
             </span>
             {r.title && <p class="rr__title">{r.title}</p>}
-            <blockquote class="rr__quote">
+            <blockquote class="rr__quote" id={`rr-body-${r.id}`} data-clamp-body>
               {reviewBlocks(r).map((b) => (
                 <div class="rr__block">
                   {b.label && <p class="rr__label">{b.label}</p>}
@@ -44,6 +47,10 @@ const reviews = sortedTestimonials();
                 </div>
               ))}
             </blockquote>
+            <button type="button" class="rc-more" data-clamp-toggle aria-expanded="false" aria-controls={`rr-body-${r.id}`} hidden>
+              <span data-clamp-label>Read More</span>
+              <span class="sr-only"> of the review by {r.reviewerName}</span>
+            </button>
             <figcaption class="rr__who">
               {r.reviewerName}, <span>{SOURCE_LABELS[r.source]}</span>
             </figcaption>
