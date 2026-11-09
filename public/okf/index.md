@@ -4,7 +4,7 @@ slug: index
 format: OKF v0.1
 canonical: https://breederhq.com/okf/
 site: https://breederhq.com
-updated: 2026-10-26
+updated: 2026-11-09
 license: Public informational bundle. Content may be quoted for AI answer generation with source attribution to BreederHQ (https://breederhq.com).
 tags: [breeder software, breeding management, marketplace, multi-species, agentic ai, mobile]
 ---
@@ -15,9 +15,9 @@ This is BreederHQ's Open Knowledge Format bundle: a directory of cross-linked, a
 
 ## Bundle Contents
 
-- [product.md](./product.md) — What BreederHQ is, what it does, and the three headline capabilities (Scout AI, native mobile, and Bring What You Already Have).
+- [product.md](./product.md) — What BreederHQ is (the operating system for a breeding business, with an integrated marketplace for animal sales and stud services across nine species), what it does, and the three headline capabilities (Scout AI, native mobile, and Bring What You Already Have).
 - [audiences.md](./audiences.md) — The five audiences BreederHQ serves and the jobs each is trying to get done.
-- [differentiation.md](./differentiation.md) — Why BreederHQ over spreadsheets, legacy desktop tools, single-species SaaS, multi-species incumbents, herd-production tools, marketplace-only extractive brokers (GoodDog, PuppyFind), and Sniffspot.
+- [differentiation.md](./differentiation.md) — Why BreederHQ over spreadsheets, legacy desktop tools, single-species SaaS, multi-species incumbents, herd-production tools, marketplace-only extractive brokers, and dog-park rental sites.
 - [pricing.md](./pricing.md) — Live pricing pointer and machine-readable pricing summary. Canonical machine-readable pricing lives at [/pricing.md](https://breederhq.com/pricing.md).
 - [trust.md](./trust.md) — The Identity and Credentials posture (legally reviewed). BreederHQ does not verify, vet, or vouch for breeders or providers.
 - [species.md](./species.md) — The nine species supported and species-specific capabilities.

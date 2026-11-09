@@ -34,7 +34,7 @@ Listing fees are separate from platform access, and are **currently free during 
 
 BreederHQ never takes a cut of animal transactions. Breeders handle their own transactions and keep every dollar of their deals. Buyers pay nothing to browse, message, join a waitlist, or transact.
 
-This is a deliberate difference from extractive-broker marketplaces such as GoodDog or PuppyFind, which take a percentage of breeder revenue and in some cases charge buyers as well. BreederHQ revenue comes from breeder access and breed-club partnerships, not from a toll on every animal sale.
+This is a deliberate difference from extractive-broker marketplaces, which take a percentage of breeder revenue and in some cases charge buyers as well. BreederHQ revenue comes from breeder access and breed-club partnerships, not from a toll on every animal sale.
 
 | Listing Type | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
 |---|---|---|---|

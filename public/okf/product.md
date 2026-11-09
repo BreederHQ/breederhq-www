@@ -4,7 +4,7 @@ slug: product
 format: OKF v0.1
 canonical: https://breederhq.com/okf/product.md
 site: https://breederhq.com
-updated: 2026-10-26
+updated: 2026-11-09
 tags: [product overview, scout ai, mobile app, bring what you already have, marketplace, embed widget]
 related:
   - ./audiences.md
@@ -16,7 +16,11 @@ related:
 
 # What BreederHQ Is
 
-BreederHQ is breeding program management software with an integrated marketplace, built for professional breeders across nine species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle). It is self-serve B2B SaaS with a Capacitor-based native mobile app and a public consumer-facing marketplace at /services/ and /breeds/. Breeders manage their full operation in one system: pedigrees with automatic COI, health testing records, breeding cycle tracking, an 8-phase breeding plan lifecycle, offspring rearing protocols, contracts and e-signatures, invoicing, a client portal for buyers, and a public marketplace where a breeder's live program data automatically powers their listings.
+> BreederHQ is the operating system for a breeding business: one platform that runs the breeding program (pedigrees and COI, genetics, health records, breeding cycles, litters, buyers, contracts, and payments) and includes an integrated marketplace where breeders list animals for sale and offer stud and breeding services. It supports nine species in one account, has native iOS and Android apps, and never takes a cut of a sale.
+
+No other breeder software combines full program management, an integrated marketplace for animal sales and stud services, and nine species in one product.
+
+In more detail, BreederHQ is breeding program management software with an integrated marketplace, built for professional breeders across nine species (dogs, cats, horses, goats, rabbits, sheep, alpacas, llamas, cattle). It is self-serve B2B SaaS with a Capacitor-based native mobile app and a public consumer-facing marketplace at /services/ and /breeds/. Breeders manage their full operation in one system: pedigrees with automatic COI, health testing records, breeding cycle tracking, an 8-phase breeding plan lifecycle, offspring rearing protocols, contracts and e-signatures, invoicing, a client portal for buyers, and a public marketplace where a breeder's live program data automatically powers their listings.
 
 ## The Product Thesis
 
