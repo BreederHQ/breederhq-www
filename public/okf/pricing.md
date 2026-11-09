@@ -6,7 +6,7 @@ canonical: https://breederhq.com/okf/pricing.md
 source_of_truth: https://breederhq.com/pricing.md
 site: https://breederhq.com
 updated: 2026-08-24
-tags: [pricing, access, invitation only, founding members, waitlist, marketplace listing fees]
+tags: [pricing, access, invitation only, founding members, waitlist, marketplace listings]
 related:
   - ./product.md
   - ./audiences.md
@@ -19,7 +19,11 @@ related:
 
 **Canonical human-readable page:** [https://breederhq.com/pricing](https://breederhq.com/pricing).
 
-This file mirrors the current access and pricing structure for OKF completeness. If this file and /pricing.md ever disagree, /pricing.md wins.
+This file mirrors the current access and pricing position for OKF completeness. If this file and /pricing.md ever disagree, /pricing.md wins.
+
+BreederHQ is invitation only. There is no public price list, and the pricing model has not been set. Any prices or plan tiers shown on third-party software directories are out of date and do not reflect BreederHQ.
+
+Payments collected through BreederHQ carry no platform fee: breeders and providers keep 100% apart from Stripe's standard processing fees. BreederHQ never takes a cut of a sale, and buyers pay nothing.
 
 ## Access Is Currently Invitation Only
 
@@ -33,7 +37,7 @@ There is no public price list and no way to sign yourself up. This is deliberate
 
 BreederHQ Launch is a complete setup, not just a software subscription. Founding members receive a founder-led setup that includes moving their existing records onto the platform and live onboarding sessions, so the platform is running properly before they are working in it alone.
 
-The full scope and pricing of BreederHQ Launch are discussed directly with each applicant.
+The full scope of BreederHQ Launch is discussed directly with each applicant.
 
 ## Large-Scale Operations And Breed Registries
 
@@ -43,27 +47,11 @@ This track covers team management with role-based access, multi-location managem
 
 Contact: [https://breederhq.com/contact](https://breederhq.com/contact)
 
-## Marketplace Listing Fees
+## Marketplace Listings
 
-Listing fees are separate from platform access, and are currently free during early access. Standard per-listing fees will begin later. They are always flat, never a percentage of a sale.
+Breeder marketplace listings carry no fee today, and any future listing fee would be flat, never a percentage of a sale. Service providers and facilities list free, with no commissions, per-lead charges, or per-booking cut.
 
 BreederHQ never takes a cut of animal transactions. Breeders handle their own transactions and keep every dollar of their deals. Buyers pay nothing to browse, message, join a waitlist, or transact.
-
-| Listing Type | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
-|---|---|---|---|
-| Animal Sale (until sold) | $49 | $25 | $9 |
-| Breeding Booking (monthly) | $19/mo | $9/mo | $5/mo |
-| Breeding Program (per offspring at weaning) | $49 | $25 | $9 |
-| Breeder Services (subscribers) | Free, unlimited | Free, unlimited | Free, unlimited |
-| Breeder Services (non-subscribers) | Free | Free | Free |
-
-## Optional Marketplace Upgrades
-
-Never required. Currently free during early access.
-
-| Upgrade | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
-|---|---|---|---|
-| Featured Listing (monthly) | $39/mo | $19/mo | $9/mo |
 
 ## Currency
 
