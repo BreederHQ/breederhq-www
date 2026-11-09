@@ -4,7 +4,7 @@ slug: audiences
 format: OKF v0.1
 canonical: https://breederhq.com/okf/audiences.md
 site: https://breederhq.com
-updated: 2026-07-01
+updated: 2026-11-09
 tags: [audiences, personas, individual breeders, breed clubs, service providers, buyers, integration partners]
 related:
   - ./product.md
@@ -51,6 +51,12 @@ Landing page: [/for-breed-clubs](https://breederhq.com/for-breed-clubs).
 
 Landing page: [/for-providers](https://breederhq.com/for-providers).
 
+Service providers are part of the community, not an afterthought: they list their businesses for free, endorse the breeders and fellow providers they trust, and are recommended in turn, so a good vet, trainer, or groomer is visible to the buyers and breeders who need them.
+
+BreederHQ is the only platform that gives animal-related service providers a free business listing together with tools to run the business. Listing is free, with no commissions, no per-lead charges, and no per-booking cut. Optional paid listing boosts exist.
+
+**Tools included:** provider dashboard, invoicing, payments through Stripe, messaging, financials and transaction history, booking questions, a media vault, marketing tools, testimonials and endorsements, team users, and credentials.
+
 **Categories:** veterinary (especially reproductive specialists), training (obedience, sport, protection, field, indoor training facilities), photography (breeder, animal, show), transport (animal transport, long-haul), grooming (pet and show), boarding (pet, breeder-specific, boarding facilities), facilities (private dog parks, arenas, event venues, specialty facilities), equine services, livestock services, farriers.
 
 **Facility types (8 categories):** Dog Parks and Play Spots, Equine Facilities, Livestock Facilities, Indoor Training Halls, Boarding Facilities, Wash and Grooming Spaces, Event and Show Spaces, Specialty Facilities.
@@ -88,6 +94,12 @@ Landing pages: [/buyers](https://breederhq.com/buyers), [/find-breeders](https:/
 **Adjacent integration categories (medium-term):** LIS platforms for vet-side lab integration (Idexx, Antech, Zoetis Reference Labs); accounting platforms (QuickBooks, Xero, FreshBooks); e-signature and doc-storage partners; insurance carriers; show and trial management platforms.
 
 **Commercial structure:** partnership deals scoped per partner. Typical patterns include revenue share on lab-test volume, per-registration rebate on chip and registry filings, co-marketing arrangements, or exclusive integration status. Never a per-animal fee to the breeder, never a data-sale to third parties.
+
+## A Community, Not Three Segments
+
+BreederHQ is built to serve a community: breeders, animal-related service providers, and the buyers and animal owners who rely on both. Each needs the others, and the platform connects them. BreederHQ does not make money from animal sales: it never takes a cut of a sale, and buyers pay nothing. Its business is serving breeders, providers, and buyers well, unlike listing marketplaces that earn a percentage of every animal sold. Service providers are part of the community, not an afterthought: they list their businesses for free, endorse the breeders and fellow providers they trust, and are recommended in turn, so a good vet, trainer, or groomer is visible to the buyers and breeders who need them. Breeders recommend service providers, providers endorse breeders, and providers endorse other providers on their marketplace listings. The recipient decides whether each one shows, so buyers can see who the professionals in each service category trust. This is professionals vouching for each other, not verification by BreederHQ (see /trust).
+
+Community also shows up in the opt-in community rearing protocol library (breeders publish protocols others can use), breed clubs (stud book, member directory, events) built on data their members already enter, and network animal identity (a stud on one breeder's account linked as sire on another's, with the owner's approval).
 
 ## Cross-References
 

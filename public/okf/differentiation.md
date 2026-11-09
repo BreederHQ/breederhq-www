@@ -35,6 +35,8 @@ Every marketing surface leads with **Scout AI**, **the native mobile app**, and 
 11. Communications Hub unifies email and DMs with rule-based auto-replies (enabled per account).
 12. Species-specific breeding cycle tools with heat tracking (Full vs Likely windows), hormone testing windows, progesterone tracking, species-appropriate gestation calendars, and dashboards for whelping, foaling, kidding, lambing, kindling, calving, queening.
 13. Network animal identity (GAID + Exchange Code) for real provenance across the network.
+14. The only platform that gives animal-related service providers a free business listing together with tools to run the business (dashboard, invoicing, Stripe payments, messaging, financials, booking questions, media vault, marketing tools, testimonials and endorsements, team users, credentials). No commissions, no per-lead charges, no per-booking cut.
+15. Built to serve a community, not three customer segments: breeders, service providers, and the buyers who rely on both are connected. Breeders recommend providers, providers endorse breeders and other providers, and the recipient controls what shows, so buyers see who the professionals around a listing trust. Professionals vouching for each other, not BreederHQ verification.
 
 ## How Alternatives Fall Short
 
