@@ -42,7 +42,7 @@ BreederHQ is a program-management platform with a marketplace as a byproduct, no
 - Embed widget: a snippet that renders live BreederHQ marketplace listings on the breeder's own Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain-HTML site. Available offspring appear the moment they are listed. Sold animals disappear the moment they are marked sold. Prices, photos, health testing, pedigree, and program details update in real time from BreederHQ as the source of truth.
 - Communications Hub: unified email and direct messaging with rule-based auto-replies. Templates, document bundles, business-hours scheduling, keyword triggers, away messages, and Quick Responder tracking.
 - Network animal identity (GAID and Exchange Code): a stud owned by one breeder can be linked as the sire of a litter on another breeder's account only with the stud owner's approval. Real provenance across the breeder network, not a name typed into a form.
-- Facilities and bookings: 8 categories (dog parks, equine, livestock, indoor training, boarding, wash and grooming, events and shows, specialty), real slot-booking mechanics with capacity and buffer rules, flat $5/month per listing across the entire marketplace (currently free during early access), no per-booking cut.
+- Facilities and bookings: 8 categories (dog parks, equine, livestock, indoor training, boarding, wash and grooming, events and shows, specialty), real slot-booking mechanics with capacity and buffer rules, free to list across the entire marketplace surface, no per-booking cut.
 
 ## Three Headline Capabilities
 

@@ -93,7 +93,7 @@ Every marketing surface leads with **Scout AI**, **the native mobile app**, and 
 
 - Dog parks only. Their market is dog-park rental for dog owners.
 - Takes a percentage cut on every booking.
-- BreederHQ's facilities layer covers 8 categories (dog parks, equine, livestock, indoor training, boarding, wash and grooming, events and shows, specialty), flat $5/mo, no per-booking cut, with a professional-audience mix (breeders, working homes, event planners, breed clubs) that dog-park rental sites cannot deliver.
+- BreederHQ's facilities layer covers 8 categories (dog parks, equine, livestock, indoor training, boarding, wash and grooming, events and shows, specialty), free to list, no per-booking cut, with a professional-audience mix (breeders, working homes, event planners, breed clubs) that dog-park rental sites cannot deliver.
 
 ## Comparison Pages on breederhq.com
 
