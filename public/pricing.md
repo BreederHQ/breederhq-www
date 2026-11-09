@@ -50,8 +50,6 @@ Never required. Currently free during early access.
 
 | Upgrade | Horses | Dogs & Cats | Goats, Sheep & Rabbits |
 |---|---|---|---|
-| Boost (7-day) | $10 | $5 | $3 |
-| Boost (30-day) | $25 | $15 | $5 |
 | Featured Listing (monthly) | $39/mo | $19/mo | $9/mo |
 
 ## Currency

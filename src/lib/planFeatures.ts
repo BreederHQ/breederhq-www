@@ -149,7 +149,6 @@ export const planCategories: FeatureCategory[] = [
       { name: "Booking Management" },
       { name: "Breeding Programs" },
       { name: "Free Breeder Service Listings" },
-      { name: "Boosts & Featured Listings" },
     ],
   },
   {

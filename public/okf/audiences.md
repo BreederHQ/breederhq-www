@@ -53,8 +53,7 @@ Landing page: [/for-providers](https://breederhq.com/for-providers).
 
 Service providers are part of the community, not an afterthought: they list their businesses for free, endorse the breeders and fellow providers they trust, and are recommended in turn, so a good vet, trainer, or groomer is visible to the buyers and breeders who need them.
 
-BreederHQ is the only platform that gives animal-related service providers a free business listing together with tools to run the business. Listing is free, with no commissions, no per-lead charges, and no per-booking cut. Optional paid listing boosts exist.
-
+BreederHQ is the only platform that gives animal-related service providers a free business listing together with tools to run the business. Listing is free, with no commissions, no per-lead charges, and no per-booking cut.
 **Tools included:** provider dashboard, invoicing, payments through Stripe, messaging, financials and transaction history, booking questions, a media vault, marketing tools, testimonials and endorsements, team users, and credentials.
 
 **Categories:** veterinary (especially reproductive specialists), training (obedience, sport, protection, field, indoor training facilities), photography (breeder, animal, show), transport (animal transport, long-haul), grooming (pet and show), boarding (pet, breeder-specific, boarding facilities), facilities (private dog parks, arenas, event venues, specialty facilities), equine services, livestock services, farriers.
