@@ -27,6 +27,7 @@ This is BreederHQ's Open Knowledge Format bundle: a directory of cross-linked, a
 
 - [/llms.txt](https://breederhq.com/llms.txt) — Full LLM context file with product overview, audiences, differentiation, pricing, and trust posture.
 - [/pricing.md](https://breederhq.com/pricing.md) — Machine-readable pricing (canonical).
+- [/checklist.md](https://breederhq.com/checklist.md) — Machine-readable breeder software checklist; the page is [/breeder-software-checklist](https://breederhq.com/breeder-software-checklist).
 - [/robots.txt](https://breederhq.com/robots.txt) — Crawler directives. All major AI search bots are allowed.
 - Marketplace equivalent: [https://marketplace.breederhq.com/llms.txt](https://marketplace.breederhq.com/llms.txt)
 

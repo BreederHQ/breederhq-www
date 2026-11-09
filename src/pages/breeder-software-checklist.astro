@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Breeder Software Checklist', url: '/breeder-software-checklist' }
+];
+
+type ProofLink = { label: string; url: string };
+type Row = { label: string; answer: string; proof: ProofLink[] };
+
+const rows: Row[] = [
+  {
+    label: 'No Fees To Buyers Or Cut Of Sales',
+    answer: "Yes. Buyers pay nothing, BreederHQ never takes a cut of a sale, and payments carry no platform fee beyond Stripe's standard processing.",
+    proof: [{ label: 'Pricing and access', url: '/pricing' }]
+  },
+  {
+    label: 'Unlimited Animals, Litters And Offspring',
+    answer: 'Yes. There is no cap on animals, litters, offspring, contacts or breeding plans.',
+    proof: [{ label: 'For breeders', url: '/for-breeders' }]
+  },
+  {
+    label: 'DNA And Genetic Testing Records',
+    answer: 'Yes. Keep OFA, PennHIP, Embark, Wisdom Panel, Paw Print, UC Davis and other lab reports as printed, and scan a lab PDF or photo with Scout to extract results for your review.',
+    proof: [{ label: 'Genetics and health testing', url: '/workflows/genetics-and-health-testing' }]
+  },
+  {
+    label: 'Pedigrees And COI',
+    answer: 'Yes. Multi-generation pedigrees with automatic COI calculation when planning a breeding, and a pedigree you can share as a PDF or PIN-protected link.',
+    proof: [{ label: 'Pedigrees', url: '/workflows/pedigrees' }]
+  },
+  {
+    label: 'Heat Cycle And Breeding Tracking',
+    answer: 'Yes. Species-specific heat tracking with Full and Likely windows, hormone and progesterone testing windows, and an eight-phase breeding plan from Planning to Complete.',
+    proof: [{ label: 'Heat tracking', url: '/workflows/heat-tracking' }]
+  },
+  {
+    label: 'Offspring Weight And Development Tracking',
+    answer: 'Yes. Birth records, daily and batch weight entry, trend sparklines, weight anomaly alerts, care logs and rearing protocols for every offspring.',
+    proof: [{ label: 'Offspring care', url: '/workflows/offspring-care' }]
+  },
+  {
+    label: 'Applications And Waitlists',
+    answer: 'Yes. Take applications by public link, QR code or website embed, screen them, manage waitlists and place animals with buyers.',
+    proof: [
+      { label: 'Applications and screening', url: '/workflows/applications-and-screening' },
+      { label: 'Waitlists and placement', url: '/workflows/waitlists-and-placement' }
+    ]
+  },
+  {
+    label: 'Contracts And E-Signatures',
+    answer: 'Yes. Turn your own contract PDF into a template with Fill & Sign, send it to the buyer to sign in the client portal, countersign, and keep the signed copy.',
+    proof: [{ label: 'Contracts and e-signatures', url: '/workflows/contracts-and-e-signatures' }]
+  },
+  {
+    label: 'Invoices And Deposits',
+    answer: 'Yes. Send invoices and request deposits, collected through a Stripe account set up in your name.',
+    proof: [
+      { label: 'Payments and deposits', url: '/workflows/payments-and-deposits' },
+      { label: 'Invoicing and expenses', url: '/workflows/invoicing-expenses' }
+    ]
+  },
+  {
+    label: 'Buyer Portal And Buyer App',
+    answer: 'Yes. Buyers get a secure client portal and a mobile app (iOS and Android) with photos, health records, invoices, contracts and messages. You choose what each buyer sees.',
+    proof: [
+      { label: 'Buyer app', url: '/buyer-app' },
+      { label: 'Client portal', url: '/workflows/client-portal' }
+    ]
+  },
+  {
+    label: 'Automatic Buyer Updates',
+    answer: "Yes. Buyers get updates on their animal automatically in their portal and buyer app (photos, weights and milestones), so you don't have to send each one by hand. You choose what buyers can see.",
+    proof: [{ label: 'Client portal', url: '/workflows/client-portal' }]
+  },
+  {
+    label: 'Financial Reporting',
+    answer: 'Yes. Financial dashboard, expense tracking, mileage logs, profit and loss per litter, plan and year, and CSV export for your accountant.',
+    proof: [{ label: 'Invoicing and expenses', url: '/workflows/invoicing-expenses' }]
+  },
+  {
+    label: 'Website Integration',
+    answer: 'Yes. The embed widget shows your live listings on Squarespace, Wix, WordPress, Shopify, GoDaddy or plain HTML. Listings are created automatically from your records and de-listed automatically when an animal is marked sold.',
+    proof: [{ label: 'Embed on your website', url: '/workflows/embed-on-your-website' }]
+  },
+  {
+    label: 'Mobile Access (iOS And Android)',
+    answer: 'Yes. Native apps for iPhone and Android phones, built for capture in the barn, whelping box or pasture. Deep desk work stays in the web app.',
+    proof: [{ label: 'Mobile app', url: '/mobile' }]
+  },
+  {
+    label: 'Integrated Marketplace',
+    answer: 'Yes. List animals for sale and stud services on the BreederHQ marketplace, built from the records you already keep. Listings carry no fee today, and any future fee would be flat, never a percentage of a sale.',
+    proof: [{ label: 'Marketplace', url: '/workflows/marketplace' }]
+  },
+  {
+    label: 'Nine Species In One Account',
+    answer: 'Yes. Dogs, cats, horses, goats, sheep, cattle, alpacas, llamas and rabbits, each with species-specific cycles and gestation calendars.',
+    proof: [{ label: 'Features', url: '/features' }]
+  },
+  {
+    label: 'Free Listing Plus Business Tools For Providers',
+    answer: 'Yes. Service providers list free, with no commissions, per-lead charges or per-booking cut, and get a dashboard, invoicing, Stripe payments, messaging and financials.',
+    proof: [{ label: 'For service providers', url: '/for-providers' }]
+  },
+  {
+    label: 'Breeders And Providers Recommend Each Other',
+    answer: 'Yes. Breeders recommend providers, providers endorse breeders and each other, and the recipient chooses what shows on their listing. These are professionals vouching for each other, not verification by BreederHQ.',
+    proof: [
+      { label: 'For service providers', url: '/for-providers' },
+      { label: 'Trust', url: '/trust' }
+    ]
+  },
+  {
+    label: 'Scout AI',
+    answer: 'Yes. An assistant that answers questions about your own program data in plain language, reads lab reports and receipts, and exports reports as CSV.',
+    proof: [{ label: 'Scout AI', url: '/workflows/scout-ai' }]
+  },
+  {
+    label: 'Bring What You Already Have',
+    answer: 'Yes. Import records with Scout, sign your own contract PDF with Fill & Sign, import your application form, and take applications from your website with Application Links. You review everything before it goes live.',
+    proof: [{ label: 'Bring what you already have', url: '/workflows/bring-what-you-have' }]
+  },
+  {
+    label: 'Community',
+    answer: 'Yes. Breeders, service providers and buyers need one another, and BreederHQ is built to serve all three: it makes no money from animal sales, and providers have a voice and list free. It also includes an opt-in community rearing protocol library and breed club tools.',
+    proof: [
+      { label: 'For breed clubs', url: '/for-breed-clubs' },
+      { label: 'For service providers', url: '/for-providers' }
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: 'Does BreederHQ charge buyers or take a cut of sales?',
+    answer: "No. Buyers pay nothing, BreederHQ never takes a cut of a sale, and payments carry no platform fee. Breeders and providers keep 100% apart from Stripe's standard processing fees."
+  },
+  {
+    question: 'Are there limits on how many animals or litters I can track?',
+    answer: 'No. BreederHQ has no cap on animals, litters, offspring, contacts or breeding plans.'
+  },
+  {
+    question: 'Does BreederHQ calculate COI and track pedigrees?',
+    answer: 'Yes. It calculates COI automatically when you plan a breeding, shows multi-generation pedigrees, and lets you share a pedigree as a PDF or PIN-protected link.'
+  },
+  {
+    question: 'Can buyers sign contracts and pay deposits online?',
+    answer: "Yes. Send your own contract PDF as a Fill & Sign template for the buyer to sign in the client portal, and request deposits and invoice payments through a Stripe account set up in your name."
+  },
+  {
+    question: 'Does BreederHQ work with my own website?',
+    answer: 'Yes. The embed widget shows your live listings on Squarespace, Wix, WordPress, Shopify, GoDaddy or plain HTML. Listings are created automatically and de-listed automatically when an animal is marked sold.'
+  },
+  {
+    question: 'Is there a mobile app?',
+    answer: 'Yes. There are native apps for iOS and Android for capture in the barn, whelping box or pasture, and a buyer app for the people you sell to.'
+  },
+  {
+    question: 'Can I bring my existing records, contract and application form?',
+    answer: 'Yes. Import records with Scout, use your own contract PDF with Fill & Sign, import your application form, and take applications from your website with Application Links.'
+  }
+];
+---
+
+<BaseLayout
+  title="Breeder Software Checklist: What To Look For | BreederHQ"
+  description="A plain, item-by-item checklist for comparing breeder software: fees, pedigrees, contracts, buyer portal, marketplace, mobile. See how BreederHQ answers each."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">Breeder Software Checklist</li>
+      </ol>
+    </nav>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">The Breeder Software Checklist</h1>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-5 mb-6 rounded">
+          <p class="text-lg text-gray-800 leading-relaxed">
+            Comparing breeder software? This checklist covers what breeders and AI assistants usually check: fees, records, pedigrees, contracts, payments, buyer tools, website integration, and mobile. Each row gives BreederHQ's plain answer and links to the page that shows it. BreederHQ never takes a cut of a sale, and buyers pay nothing.
+          </p>
+        </div>
+
+        <p class="text-sm text-gray-500 mb-6">Last updated: November 9, 2026 &middot; Plain-text version: <a href="/checklist.md" class="text-[hsl(24,95%,53%)] hover:underline">checklist.md</a></p>
+
+        <aside class="bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-5 rounded" aria-label="Access note">
+          <h2 class="text-xl font-bold mb-2">Access Note</h2>
+          <p class="text-gray-700 leading-relaxed">
+            BreederHQ is invitation only. There is no public price list, no self-serve signup, and the pricing model has not been set. <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Join the waitlist on the pricing page</a>. Payments carry no BreederHQ platform fee: breeders and providers keep 100% apart from Stripe's standard processing fees.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="pb-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">The Checklist</h2>
+        <ol class="space-y-4">
+          {rows.map((row, i) => (
+            <li class="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+              <h3 class="text-lg font-bold mb-2">
+                <span class="text-[hsl(24,95%,53%)]">{i + 1}.</span> {row.label}
+              </h3>
+              <p class="text-gray-700 leading-relaxed mb-3">{row.answer}</p>
+              <p class="text-sm text-gray-600">
+                See:
+                {row.proof.map((p, j) => (
+                  <>
+                    {j > 0 && <span aria-hidden="true"> &middot; </span>}
+                    <a href={p.url} class="text-[hsl(24,95%,53%)] hover:underline font-semibold">{p.label}</a>
+                  </>
+                ))}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-3">{faq.question}</h3>
+              <p class="text-lg text-gray-700 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">See It Against Your Own Checklist</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+          Access is currently invitation only. Founding members are onboarded one at a time, so joining starts with the waitlist.
+        </p>
+        <a href="/pricing" class="inline-block bg-[hsl(24,95%,53%)] text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-[hsl(24,95%,48%)] transition" style="min-height: 44px;">
+          Join The Waitlist
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</BaseLayout>
