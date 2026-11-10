@@ -135,6 +135,7 @@ const { hideLogo = false } = Astro.props;
                     ['Contracts & E-Signatures', '/workflows/contracts-and-e-signatures'],
                     ['Payments & Deposits', '/workflows/payments-and-deposits'],
                     ['Invoicing & Expenses', '/workflows/invoicing-expenses'],
+                    ['Breeder Storefront', '/storefront'],
                     ['Marketplace Listings', '/workflows/marketplace'],
                   ].map(([label, href]) => (
                     <li>
@@ -379,6 +380,15 @@ const { hideLogo = false } = Astro.props;
           </div>
         </div>
 
+        {/* Top-level Storefront link. Shown from xl up only: at lg the row has no
+            room for a fifth item, so there Storefront is reachable as "Breeder
+            Storefront" in the Platform dropdown's Business Tools column. */}
+        <a
+          href="/storefront"
+          class="nav-trigger hidden xl:inline-flex items-center px-3 py-2 rounded-lg text-sm transition-colors"
+          style="color:#A9BAD4;font-family:'Sora',system-ui,sans-serif"
+        >Storefront</a>
+
       </nav>
 
       <!-- Right side: Search + Sign in + CTA -->
@@ -467,6 +477,7 @@ const { hideLogo = false } = Astro.props;
             ['Contracts & E-Signatures', '/workflows/contracts-and-e-signatures'],
             ['Payments & Deposits', '/workflows/payments-and-deposits'],
             ['Invoicing & Expenses', '/workflows/invoicing-expenses'],
+            ['Breeder Storefront', '/storefront'],
             ['Marketplace Listings', '/workflows/marketplace'],
             ['Features', '/features'],
             ['Pricing', '/pricing'],
@@ -545,6 +556,9 @@ const { hideLogo = false } = Astro.props;
           ))}
         </div>
       </div>
+
+      <!-- Mobile: Storefront link -->
+      <a href="/storefront" class="block py-2.5 px-3 rounded-lg text-sm font-medium transition-colors" style="color:#EAF1FC;font-family:'Sora',system-ui,sans-serif">Storefront</a>
 
       <!-- Mobile: Search link -->
       <a href="/search" class="flex items-center gap-2 py-2.5 px-3 rounded-lg text-sm font-medium transition-colors" style="color:#A9BAD4">

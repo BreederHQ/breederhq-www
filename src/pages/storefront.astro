@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: 'Can I use my own domain?',
-    answer: 'Yes, with domain forwarding at your registrar. Your domain sends visitors to your Storefront address, which looks like marketplace.breederhq.com/breeders/your-farm. BreederHQ does not host your Storefront on your own domain, so forwarding is how a domain you own points to it. If you change your Storefront address, update the forwarding target at your registrar; the old address redirects for 14 days. If you would rather keep your current site, add the free embed widget instead.'
+    answer: 'Yes, with domain forwarding at your registrar. Your domain sends visitors to your Storefront address, which looks like marketplace.breederhq.com/breeders/your-farm. BreederHQ does not host your Storefront on your own domain, so forwarding is how a domain you own points to it. If you change your Storefront address, update the forwarding target at your registrar; the old address redirects for 14 days. If you would rather keep your current site, add the embed widget instead. It is free for every BreederHQ breeder with Stripe Identity confirmation.'
   },
   {
     question: 'How is this different from a website builder or a paid custom site?',
@@ -92,14 +92,18 @@ const eyebrow = 'text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,90%,
             <i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i>
             <span class="ml-2 flex-1 min-w-0 truncate font-mono text-xs text-stone-600 bg-white border border-stone-200 rounded px-2.5 py-1">marketplace.breederhq.com/breeders/stoneridge-heritage-farms</span>
           </div>
-          <img
-            src={img + 'storefront-header.webp'}
-            alt="The Stoneridge Heritage Farms storefront header: farm banner with horses, cattle, sheep and goats, a round logo, the farm name, a Message Breeder button, and counts of 14 Programs and 21 Animal Offers"
-            class="block w-full h-auto"
-            width="1327"
-            height="562"
-            fetchpriority="high"
-          />
+          <div class="relative">
+            <img
+              src={img + 'storefront-header.webp'}
+              alt="The Stoneridge Heritage Farms storefront header: farm banner with horses, cattle, sheep and goats, a round logo, the farm name, a Message Breeder button, and counts of 14 Programs and 21 Animal Offers"
+              class="block w-full h-auto"
+              width="1327"
+              height="562"
+              fetchpriority="high"
+            />
+            <!-- Bottom fade into the next section so the cut-off screenshot reads as a deliberate peek -->
+            <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-[30%] pointer-events-none bg-gradient-to-t from-stone-50 to-transparent"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -308,7 +312,7 @@ const eyebrow = 'text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,90%,
           </div>
           <div class="bg-white border border-stone-200 rounded-2xl p-7 flex flex-col gap-3">
             <h3 class="text-xl font-semibold text-stone-900">Love Your Site? Put Your Storefront In It.</h3>
-            <p class="text-stone-600">Keep your Squarespace, Wix or WordPress site exactly as it is and paste in the free BreederHQ embed widget. Your programs, upcoming litters and available animals appear inside your own pages and stay current on their own.</p>
+            <p class="text-stone-600">Keep your Squarespace, Wix or WordPress site exactly as it is and paste in the BreederHQ embed widget. Your programs, upcoming litters and available animals appear inside your own pages and stay current on their own. The widget is free for every BreederHQ breeder with Stripe Identity confirmation.</p>
             <a href="/workflows/embed-on-your-website" class="font-bold text-[hsl(24,90%,38%)] hover:underline">How The Embed Widget Works →</a>
           </div>
         </div>
