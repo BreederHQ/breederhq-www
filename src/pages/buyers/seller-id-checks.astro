@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'For Buyers', url: '/buyers' },
+  { name: 'How Seller ID Checks Work', url: '/buyers/seller-id-checks' }
+];
+
+const steps = [
+  {
+    n: 'Step 1',
+    title: 'The seller photographs their ID',
+    body: 'Typically a driver’s license, passport or other government photo ID, captured on their phone or webcam by the independent provider that runs the check.'
+  },
+  {
+    n: 'Step 2',
+    title: 'The provider checks it',
+    body: 'The provider checks the document, typically against a live selfie, and returns a result. Our systems are designed to receive that result, not the ID images.'
+  },
+  {
+    n: 'Step 3',
+    title: 'Only then can they list',
+    body: 'A seller must pass the check before they can list. Profiles that have passed show an Identity Confirmed mark, which may include when and how the check was done.'
+  }
+];
+
+const tells = [
+  'The account that posted passed an ID check run by an independent provider.',
+  'Where the mark shows, there is an identity on record for the account if something goes wrong, not just a throwaway email address.'
+];
+
+const doesNotTell = [
+  'That the seller is honest, experienced or a responsible breeder.',
+  'That an animal is healthy, registered or as described.',
+  'Anything that happened after the check. It is a result from a point in time, not ongoing monitoring.',
+  'That BreederHQ has inspected, vetted or endorsed the seller. We have not, and we do not vouch for any seller or the outcome of a sale.'
+];
+
+const species = ['Dogs', 'Cats', 'Horses', 'Goats', 'Rabbits', 'Sheep', 'Cattle', 'Alpacas', 'Llamas', 'Service Providers'];
+
+const stillDo = [
+  { title: 'See the animal live', body: 'Ask for a video call or a visit before any deposit. A seller who refuses every form of it is a red flag.' },
+  { title: 'Read the contract first', body: 'A real seller shares their contract before you pay. Read it before money moves.' },
+  { title: 'Pay with recourse', body: 'Avoid gift cards, crypto and wires to personal accounts. Use payment methods that let you dispute a charge.' },
+  { title: 'Keep it in writing', body: 'Message through BreederHQ so there is a record of what was promised and when.' }
+];
+
+const faqs = [
+  {
+    question: 'What protections does BreederHQ Marketplace offer buyers?',
+    answer: 'Every breeder and service provider must pass an independent ID check before they can list, typically a government photo ID and a live selfie. Profiles that have passed show an Identity Confirmed mark, and tools like in-app messaging help you decide who to contact. Our Buying Safely guide covers what to ask and the warning signs to watch for. Sales happen directly between you and the seller, so do your own research before you pay. Our Identity & Credentials page has the details.'
+  },
+  {
+    question: 'Does BreederHQ verify breeders?',
+    answer: 'No. We require every seller to pass an independent ID check before they can list, and we show the result. We do not inspect, vet or vouch for any breeder or provider, their animals, or the outcome of a sale.'
+  },
+  {
+    question: 'Does BreederHQ keep sellers’ IDs?',
+    answer: 'Our systems are designed to receive the result of the check, not the ID images. The independent provider that runs the check collects the ID and selfie and handles them under its own privacy policy, and as the business that requests the check, BreederHQ may be able to view what was submitted through the provider’s own tools. Who runs the check, and links to how it handles personal data, are on our Identity & Credentials page.'
+  },
+  {
+    question: 'Can a seller skip the check?',
+    answer: 'A seller must pass the check before they can list. Sellers who were already listed before the requirement began are being phased in, so look for the Identity Confirmed mark on the profile rather than assuming it.'
+  },
+  {
+    question: 'Where do I see it on a profile?',
+    answer: 'Look for the Identity Confirmed mark. It may include when and how the check was done.'
+  },
+  {
+    question: 'What if I am scammed by a seller anyway?',
+    answer: 'Report them from their profile and open a case with your payment provider. An ID check does not guarantee a sale, so keep your messages and receipts.'
+  }
+];
+
+const article = {
+  headline: 'How Seller ID Checks Work on BreederHQ',
+  description: 'Every breeder and service provider must pass an independent ID check before they can list on the BreederHQ Marketplace. What the check tells you, what it does not, and what to still do before you pay.',
+  datePublished: '2026-11-10',
+  author: {
+    name: 'BreederHQ',
+    url: 'https://breederhq.com/about'
+  }
+};
+---
+
+<BaseLayout
+  title="How Seller ID Checks Work | No ID, No Listing | BreederHQ"
+  description="Every breeder and service provider must pass an independent ID check before they can list on the BreederHQ Marketplace. What it tells you, what it doesn't, and what to still do."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  article={article}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+
+  <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm">
+      <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li><a href="/buyers" class="text-[hsl(24,95%,53%)] hover:underline">For Buyers</a></li>
+      <li class="text-gray-400">&rsaquo;</li>
+      <li aria-current="page" class="text-gray-600">How Seller ID Checks Work</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-stone-50 to-white py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3">For Buyers &middot; Seller ID Checks</div>
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl leading-tight mb-6">No ID, no listing.</h1>
+      <p class="text-xl text-gray-600 max-w-3xl leading-relaxed mb-8">
+        Pet scams run on anonymous accounts: a stolen photo, a fake name, and a deposit request. On the BreederHQ Marketplace, every breeder and service provider must pass an independent ID check before they can list. It does not make anyone a good breeder. Profiles that have passed show an Identity Confirmed mark.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://marketplace.breederhq.com" class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 inline-block">Browse the Marketplace</a>
+        <a href="/buyers/red-flags" class="bg-white text-gray-900 border border-stone-300 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-stone-50 inline-block">Red Flags to Watch For</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3">How It Works</div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Three steps, before a seller can list.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {steps.map((s) => (
+          <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+            <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-2">{s.n}</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">{s.title}</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-sm text-gray-600 mt-6">
+        The check is run by an independent provider. Who runs it, and how it handles personal data, is on our <a href="/trust#who-runs-the-id-check" class="text-primary hover:underline">Identity &amp; Credentials page</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- What it means -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3">What It Means</div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">What an ID check tells you, and what it doesn&rsquo;t.</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">It tells you</h3>
+          <ul class="space-y-2 text-sm text-gray-700 leading-relaxed list-disc pl-5">
+            {tells.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">It doesn&rsquo;t tell you</h3>
+          <ul class="space-y-2 text-sm text-gray-700 leading-relaxed list-disc pl-5">
+            {doesNotTell.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Every species -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3">Every Species, Every Seller</div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Same rule for a kitten, a foal or a farrier.</h2>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        Buyers of cats, horses, goats and rabbits often shop classifieds and social media, where sellers rarely have to show anyone an ID. On BreederHQ the requirement applies to breeders of every species, and to service providers too: boarding, training, transport, grooming, veterinary and more.
+      </p>
+      <ul class="flex flex-wrap gap-2">
+        {species.map((s) => (
+          <li class="text-sm px-3 py-1 rounded-full border border-stone-300 bg-stone-50 text-gray-800">{s}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Still do this -->
+  <section class="py-16 bg-stone-50">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3 text-center">Still Do This</div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">An ID check is a starting point, not the finish line.</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {stillDo.map((c) => (
+          <div class="bg-white rounded-xl border border-stone-200 p-6">
+            <h3 class="text-base font-bold text-gray-900 mb-1">{c.title}</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">{c.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-sm text-gray-600 mt-6 text-center">
+        More: <a href="/buyers/evaluate-breeders" class="text-primary hover:underline">How to evaluate breeders</a> &middot; <a href="/buyers/red-flags" class="text-primary hover:underline">Red flags to avoid</a> &middot; <a href="/buyers/contracts-and-agreements" class="text-primary hover:underline">Contracts and agreements</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-10 text-xs text-gray-500 max-w-2xl mx-auto leading-relaxed text-center">
+        Identity confirmation is performed by an independent third-party provider, named on our <a href="/trust#who-runs-the-id-check" class="text-primary hover:underline">Identity &amp; Credentials page</a>. BreederHQ does not verify, vet, evaluate or vouch for breeders, service providers or their credentials.
+      </p>
+    </div>
+  </section>
+
+  </main>
+</BaseLayout>

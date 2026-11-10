@@ -9,11 +9,11 @@ const breadcrumbs = [
 const faqs = [
   {
     question: 'Does BreederHQ verify breeders or service providers?',
-    answer: 'No. BreederHQ does not verify, vet, evaluate, or vouch for breeders, service providers, or their credentials. What BreederHQ does is surface three layers of facts that buyers can use to decide for themselves: identity confirmation performed by Stripe Identity, public-registry passthrough confirmation where the issuing body maintains a public registry, and the provider\u2019s own attestation of credentials and program details.'
+    answer: 'No. BreederHQ does not verify, vet, evaluate, or vouch for breeders, service providers, or their credentials. What BreederHQ does is require every seller to pass an ID check before they can list, and surface three layers of facts that buyers can use to decide for themselves: identity confirmation performed by an independent provider (currently Stripe Identity), public-registry passthrough confirmation where the issuing body maintains a public registry, and the provider\u2019s own attestation of credentials and program details.'
   },
   {
-    question: 'What does \u201cIdentity confirmed via Stripe Identity\u201d mean?',
-    answer: 'It means Stripe, Inc. \u2014 not BreederHQ \u2014 confirmed that the person operating the account presented a valid government-issued photo ID matching the legal name on file. BreederHQ displays the result Stripe returned, with the date of the confirmation. It does not mean BreederHQ has vouched for the provider\u2019s competence, business practices, character, breeding program, or animal welfare.'
+    question: 'What does the Identity Confirmed mark mean?',
+    answer: 'Every breeder and service provider must pass an ID check before they can list. BreederHQ does not run the check itself: our current provider, Stripe, checks a government photo ID, typically with a live selfie, and returns a result. The Identity Confirmed mark means the person operating the account passed that check, and it may include when and how the check was done. It does not mean BreederHQ has vouched for the provider\u2019s competence, business practices, character, breeding program, or animal welfare.'
   },
   {
     question: 'What does \u201cConfirmed via [registry] registry\u201d mean?',
@@ -43,8 +43,9 @@ const faqs = [
 
 const article = {
   headline: 'Identity and Credentials on the BreederHQ Marketplace',
-  description: 'How identity confirmation and credential display work on BreederHQ \u2014 Stripe Identity passthrough, public-registry passthrough, and provider self-attestation. BreederHQ does not verify, vet, or vouch for providers.',
+  description: 'How identity confirmation and credential display work on BreederHQ: a required ID check to list, public-registry passthrough, and provider self-attestation. BreederHQ does not verify, vet, or vouch for providers.',
   datePublished: '2026-05-19',
+  dateModified: '2026-11-10',
   author: {
     name: 'BreederHQ',
     url: 'https://breederhq.com/about'
@@ -54,7 +55,7 @@ const article = {
 
 <BaseLayout
   title="Identity & Credentials | How Marketplace Trust Works | BreederHQ"
-  description="BreederHQ surfaces three layers of provider facts: Stripe Identity confirmation, public-registry passthrough, and self-attestation. See what each means."
+  description="Every seller must pass an ID check before they can list. See the three layers of provider facts: identity confirmation, public-registry passthrough, and self-attestation."
   breadcrumbs={breadcrumbs}
   faqs={faqs}
   article={article}
@@ -84,7 +85,7 @@ const article = {
         Identity and Credentials on the BreederHQ Marketplace
       </h1>
       <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
-        BreederHQ does not verify, vet, evaluate, or vouch for breeders, service providers, or their credentials. What BreederHQ does is surface three layers of facts that buyers can use to decide for themselves. This page explains exactly what each layer is, what it confirms, and what it does not.
+        BreederHQ does not verify, vet, evaluate, or vouch for breeders, service providers, or their credentials. It does require every seller to confirm their identity before they can list. What BreederHQ does is surface three layers of facts that buyers can use to decide for themselves. This page explains exactly what each layer is, what it confirms, and what it does not.
       </p>
     </div>
   </section>
@@ -101,7 +102,7 @@ const article = {
           BreederHQ provides the tools for breeders and service providers to publish listings, document their own credentials, and respond to buyer inquiries. BreederHQ also surfaces a small number of factual signals based on data the platform collects during ordinary operation (for example, the date an account joined, or the count of completed platform transactions).
         </p>
         <p class="text-sm text-gray-700 leading-relaxed">
-          BreederHQ is not a certifying body, not an inspector, not an adjudicator, and not an insurer. BreederHQ does not visit facilities, evaluate animal welfare, validate insurance certificates, read uploaded documents, or vouch for any provider\u2019s competence, character, or business practices. Buyers are responsible for their own evaluation, including direct contact with breeders, in-person visits where appropriate, independent veterinary review, and confirmation of credentials directly with the issuing body.
+          BreederHQ is not a certifying body, not an inspector, not an adjudicator, and not an insurer. BreederHQ does not visit facilities, evaluate animal welfare, validate insurance certificates, read uploaded documents, or vouch for any provider’s competence, character, or business practices. Buyers are responsible for their own evaluation, including direct contact with breeders, in-person visits where appropriate, independent veterinary review, and confirmation of credentials directly with the issuing body.
         </p>
       </div>
     </div>
@@ -120,22 +121,23 @@ const article = {
 
       <div class="space-y-6">
 
-        <!-- Layer 1: Stripe Identity Passthrough -->
+        <!-- Layer 1: Required ID check (current provider: Stripe) -->
         <div class="bg-white rounded-xl border border-stone-200 p-6">
           <div class="flex items-start gap-4">
             <div class="shrink-0 w-12 h-12 rounded-full bg-stone-100 text-gray-700 flex items-center justify-center text-lg font-bold">1</div>
             <div class="flex-1">
               <div class="flex items-center gap-3 mb-2 flex-wrap">
-                <h3 class="text-xl font-bold text-gray-900">Identity Confirmation (via Stripe Identity)</h3>
+                <h3 class="text-xl font-bold text-gray-900">Identity Confirmation</h3>
+                <span class="text-xs font-semibold uppercase tracking-wider text-primary bg-orange-50 border border-orange-200 rounded px-2 py-0.5">Required to List</span>
               </div>
               <p class="text-sm text-gray-700 leading-relaxed mb-3">
-                Providers may complete identity verification through <strong>Stripe Identity</strong>, a service operated by Stripe, Inc. Stripe checks a government-issued photo ID against the legal name on file and returns a pass/fail result to BreederHQ. If Stripe confirms identity, BreederHQ displays an <em>\u201cIdentity confirmed via Stripe Identity\u201d</em> indicator on the profile, with the date Stripe returned the result.
+                Every breeder and service provider must pass an ID check before they can list. The check is run by an independent identity-verification provider, not by BreederHQ. Our current provider is <strong>Stripe</strong> (Stripe Identity), which checks a government photo ID, typically with a live selfie, and returns a result. If the check passes, BreederHQ shows an <em>Identity Confirmed</em> mark on the profile, which may include when and how the check was done.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed">
-                <strong>What this confirms:</strong> A third party (Stripe) confirmed, on the date shown, that the person operating the account presented a valid government-issued photo ID matching the legal name on file.
+                <strong>What this confirms:</strong> A third party confirmed that the person operating the account passed an ID check. Nothing more, and it reflects a point in time rather than ongoing monitoring.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed mt-2">
-                <strong>What this does not mean:</strong> BreederHQ did not perform the verification. The indicator is not an endorsement of the provider\u2019s competence, business practices, character, breeding program, or animal welfare.
+                <strong>What this does not mean:</strong> BreederHQ did not perform the check. The mark is not an endorsement of the provider’s competence, business practices, character, breeding program, or animal welfare.
               </p>
             </div>
           </div>
@@ -150,13 +152,13 @@ const article = {
                 <h3 class="text-xl font-bold text-gray-900">Credential Confirmation (via Public Registry Passthrough)</h3>
               </div>
               <p class="text-sm text-gray-700 leading-relaxed mb-3">
-                For credentials issued by organizations that maintain a public registry \u2014 for example OFA (Orthopedic Foundation for Animals), AKC (American Kennel Club), AFA (American Farrier\u2019s Association), or a state veterinary licensing board \u2014 BreederHQ may query the registry and display a <em>\u201cConfirmed via [registry] registry\u201d</em> indicator if the registry returns a matching record, along with the query date and a link to the source record.
+                For credentials issued by organizations that maintain a public registry - for example OFA (Orthopedic Foundation for Animals), AKC (American Kennel Club), AFA (American Farrier’s Association), or a state veterinary licensing board - BreederHQ may query the registry and display a <em>“Confirmed via [registry] registry”</em> indicator if the registry returns a matching record, along with the query date and a link to the source record.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed">
                 <strong>What this confirms:</strong> On the date shown, the named public registry returned a matching record for the credential the provider attests to.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed mt-2">
-                <strong>What this does not mean:</strong> BreederHQ did not certify the credential. The issuing body did, and the issuing body\u2019s registry is the authoritative source. BreederHQ does not monitor the registry for subsequent changes \u2014 if the registry status changes after the query, the indicator may become stale until BreederHQ re-queries. Buyers are directed to the source record link to check current status.
+                <strong>What this does not mean:</strong> BreederHQ did not certify the credential. The issuing body did, and the issuing body’s registry is the authoritative source. BreederHQ does not monitor the registry for subsequent changes - if the registry status changes after the query, the indicator may become stale until BreederHQ re-queries. Buyers are directed to the source record link to check current status.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed mt-2">
                 <strong>If no passthrough indicator appears:</strong> The credential is displayed as a Layer 3 provider attestation only. The absence of passthrough is not a statement that the credential is invalid; it usually means BreederHQ has not built a registry integration for that issuing body, or the issuing body does not operate a public registry.
@@ -174,13 +176,13 @@ const article = {
                 <h3 class="text-xl font-bold text-gray-900">Provider Self-Attestation</h3>
               </div>
               <p class="text-sm text-gray-700 leading-relaxed mb-3">
-                For any credential, claim, certification, registration, health-testing result, or business practice that does not have a Layer 2 passthrough, what appears on the profile is the provider\u2019s own attestation. The provider asserts it is accurate, and may upload supporting documents to back up the claim.
+                For any credential, claim, certification, registration, health-testing result, or business practice that does not have a Layer 2 passthrough, what appears on the profile is the provider’s own attestation. The provider asserts it is accurate, and may upload supporting documents to back up the claim.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed">
-                <strong>What this confirms:</strong> The provider has stated, under the platform\u2019s Provider Agreement, that the claim is accurate and currently in good standing with the issuing body.
+                <strong>What this confirms:</strong> The provider has stated, under the platform’s Provider Agreement, that the claim is accurate and currently in good standing with the issuing body.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed mt-2">
-                <strong>What this does not mean:</strong> BreederHQ does not open, read, evaluate, compare, or vouch for any document a provider uploads. The act of BreederHQ displaying or linking to a document is not a representation about that document\u2019s authenticity, currency, or content. Buyers who want independent confirmation should contact the issuing body directly.
+                <strong>What this does not mean:</strong> BreederHQ does not open, read, evaluate, compare, or vouch for any document a provider uploads. The act of BreederHQ displaying or linking to a document is not a representation about that document’s authenticity, currency, or content. Buyers who want independent confirmation should contact the issuing body directly.
               </p>
               <p class="text-xs text-gray-600 leading-relaxed mt-2">
                 <strong>Accountability:</strong> False attestations are a violation of the Provider Agreement and the Acceptable Use Policy and can result in permanent account termination. They do not become true because they appear on a BreederHQ profile.
@@ -195,13 +197,48 @@ const article = {
 
 
   <!-- ============================================ -->
+  <!-- WHO RUNS THE ID CHECK                         -->
+  <!-- Stable anchor: help articles link to #who-runs-the-id-check -->
+  <!-- ============================================ -->
+  <section id="who-runs-the-id-check" class="py-16 bg-white scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-xs uppercase tracking-wider text-primary font-semibold mb-3">Who Runs the ID Check</div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">Learn more from the verification provider.</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-4 max-w-3xl">
+        ID checks on BreederHQ are run by an independent provider. Our current provider is Stripe (Stripe Identity), a service of Stripe, Inc. If you are a buyer wondering how the check works, or a seller deciding whether to share your ID, Stripe publishes its own answers. Read them directly rather than taking our word for it.
+      </p>
+      <div class="grid sm:grid-cols-3 gap-4 mb-6">
+        <a href="https://support.stripe.com/questions/stripe-identity-faq" target="_blank" rel="noopener noreferrer" class="block bg-stone-50 rounded-xl border border-stone-200 p-5 hover:border-primary transition">
+          <h3 class="text-base font-bold text-gray-900 mb-1">How the check works</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Stripe&rsquo;s FAQ for people asked to verify their identity.</p>
+          <p class="text-xs text-gray-500 mt-3">support.stripe.com &nearr;</p>
+        </a>
+        <a href="https://support.stripe.com/questions/managing-your-id-verification-information" target="_blank" rel="noopener noreferrer" class="block bg-stone-50 rounded-xl border border-stone-200 p-5 hover:border-primary transition">
+          <h3 class="text-base font-bold text-gray-900 mb-1">What happens to your ID</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">How Stripe handles and manages your ID verification information.</p>
+          <p class="text-xs text-gray-500 mt-3">support.stripe.com &nearr;</p>
+        </a>
+        <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" class="block bg-stone-50 rounded-xl border border-stone-200 p-5 hover:border-primary transition">
+          <h3 class="text-base font-bold text-gray-900 mb-1">Stripe&rsquo;s privacy policy</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">The policy that covers personal data Stripe processes.</p>
+          <p class="text-xs text-gray-500 mt-3">stripe.com &nearr;</p>
+        </a>
+      </div>
+      <p class="text-xs text-gray-600 leading-relaxed">
+        BreederHQ requests the check and our systems are designed to receive the result, not your ID images. As the business that requests the check, BreederHQ may be able to view what was submitted through the provider&rsquo;s own tools, so read Stripe&rsquo;s pages above for who can access it, how long it is kept and how to ask for deletion. Stripe&rsquo;s pages are Stripe&rsquo;s own statements about its service and may change; they describe who can view submitted images and how they are handled. For what the check does and does not tell a buyer, see <a href="/buyers/seller-id-checks" class="text-primary hover:underline">How Seller ID Checks Work</a>.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
   <!-- PROFILE INDICATORS                            -->
   <!-- ============================================ -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-stone-50">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-3">Profile Indicators (Account-History Facts)</h2>
       <p class="text-sm text-gray-700 leading-relaxed mb-6 max-w-3xl">
-        Separately from the three layers above, BreederHQ may display <strong>Profile Indicators</strong> that reflect facts about an account\u2019s history on BreederHQ. These are calculations on data the platform collects during ordinary operation. They are facts, not BreederHQ\u2019s editorial judgment of the provider.
+        Separately from the three layers above, BreederHQ may display <strong>Profile Indicators</strong> that reflect facts about an account’s history on BreederHQ. These are calculations on data the platform collects during ordinary operation. They are facts, not BreederHQ’s editorial judgment of the provider.
       </p>
       <div class="grid sm:grid-cols-2 gap-4 mb-6">
         <div class="bg-stone-50 rounded-lg border border-stone-200 p-4">
@@ -231,7 +268,7 @@ const article = {
   <!-- ============================================ -->
   <!-- REVIEWS                                       -->
   <!-- ============================================ -->
-  <section class="py-16 bg-stone-50">
+  <section class="py-16 bg-white">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-3">Reviews</h2>
       <p class="text-sm text-gray-700 leading-relaxed mb-8 max-w-3xl">
@@ -273,17 +310,17 @@ const article = {
   <!-- ============================================ -->
   <!-- BUYER RESPONSIBILITY                          -->
   <!-- ============================================ -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-stone-50">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">What This Means for Buyers</h2>
       <p class="text-sm text-gray-700 leading-relaxed mb-4">
-        The decisions buyers make in this category are not short transactions. A puppy or a horse is a 10 to 30 year commitment. A farrier, a reproductive veterinarian, or a boarding facility becomes a recurring part of an animal\u2019s life. The threshold for due diligence is higher than for a haircut or a furniture delivery.
+        The decisions buyers make in this category are not short transactions. A puppy or a horse is a 10 to 30 year commitment. A farrier, a reproductive veterinarian, or a boarding facility becomes a recurring part of an animal’s life. The threshold for due diligence is higher than for a haircut or a furniture delivery.
       </p>
       <p class="text-sm text-gray-700 leading-relaxed mb-4">
-        BreederHQ\u2019s role is to make the underlying facts visible \u2014 what identity confirmation exists, which credentials have a public-registry passthrough, what the provider has attested to on their own profile, and how the account has behaved on the platform. The buyer\u2019s role is to evaluate those facts and make their own decision.
+        BreederHQ’s role is to make the underlying facts visible - what identity confirmation exists, which credentials have a public-registry passthrough, what the provider has attested to on their own profile, and how the account has behaved on the platform. The buyer’s role is to evaluate those facts and make their own decision.
       </p>
       <p class="text-sm text-gray-700 leading-relaxed">
-        Practical buyer steps include: contacting the provider directly, asking questions specific to the buyer\u2019s situation, requesting documentation for any claim that matters, confirming credentials independently with the issuing body via the linked source record, visiting in person where appropriate, and (for animal purchases) obtaining an independent veterinary review.
+        Practical buyer steps include: contacting the provider directly, asking questions specific to the buyer’s situation, requesting documentation for any claim that matters, confirming credentials independently with the issuing body via the linked source record, visiting in person where appropriate, and (for animal purchases) obtaining an independent veterinary review.
       </p>
     </div>
   </section>
@@ -292,7 +329,7 @@ const article = {
   <!-- ============================================ -->
   <!-- FAQ                                           -->
   <!-- ============================================ -->
-  <section class="py-16 bg-stone-50">
+  <section class="py-16 bg-white">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
       <div class="space-y-6">
@@ -316,7 +353,7 @@ const article = {
         See the facts. Decide for yourself.
       </h2>
       <p class="text-lg text-stone-300 mb-10 max-w-2xl mx-auto">
-        Browse breeders and service providers on the BreederHQ Marketplace. Every profile shows which layer each piece of information comes from \u2014 Stripe Identity confirmation, registry passthrough, or provider attestation.
+        Browse breeders and service providers on the BreederHQ Marketplace. Every profile shows which layer each piece of information comes from: identity confirmation, registry passthrough, or provider attestation.
       </p>
 
       <div class="flex flex-wrap gap-3 justify-center">
@@ -342,12 +379,10 @@ const article = {
       </div>
 
       <p class="mt-10 text-xs text-stone-400 max-w-2xl mx-auto leading-relaxed">
-        BreederHQ does not verify, vet, evaluate, or vouch for breeders, service providers, or their credentials. See the Terms of Service \u00a7\u00a72.4-2.6 (Verification Vocabulary; Registry Passthrough; Identity Passthrough), Provider Agreement \u00a73.3 (Provider Attestations), and Acceptable Use Policy \u00a78.4 (Credential Dispute and Suspension of Display).
+        BreederHQ does not verify, vet, evaluate, or vouch for breeders, service providers, or their credentials. See the Terms of Service §§2.4-2.6 (Verification Vocabulary; Registry Passthrough; Identity Passthrough), Provider Agreement §3.3 (Provider Attestations), and Acceptable Use Policy §8.4 (Credential Dispute and Suspension of Display).
       </p>
     </div>
   </section>
 
 </main>
 </BaseLayout>
-</content>
-</invoke>
