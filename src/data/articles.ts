@@ -17,6 +17,16 @@ export interface ArticleMeta {
 // Most-recent first.
 export const articles: ArticleMeta[] = [
   {
+    slug: 'how-to-build-a-breeder-website',
+    title: "How To Build A Breeder Website (And When You Don't Need One)",
+    excerpt: 'What a breeder website needs: programs and upcoming litters, available animals, health and practices, and a waitlist and inquiry path. Plus the real ongoing cost of keeping one current, and the alternative that fills in from your breeding records.',
+    author: 'BreederHQ Editorial',
+    role: 'November 2026',
+    date: 'November 2026',
+    readTime: '7 min read',
+    tag: 'Breeder Guide',
+  },
+  {
     slug: 'how-to-find-a-responsible-dog-breeder',
     title: 'How to Find a Responsible Dog Breeder',
     excerpt: 'A practical guide to what separates a responsible breeder from a problem one: what health tests to require, how to read OFA results and verify what breeders claim, what questions to ask, and the red flags that should make you walk away.',

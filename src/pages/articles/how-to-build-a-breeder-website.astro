@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'How To Build A Breeder Website', url: '/articles/how-to-build-a-breeder-website' }
+];
+
+const faqs = [
+  {
+    question: 'What should a breeder website include?',
+    answer: 'At minimum: your breeding programs, upcoming litters or planned pairings, the animals currently available, your health testing and care practices, a way to join a waitlist or send an inquiry, and a plain statement of how you place animals. The harder part is keeping all of it current after the first week.'
+  },
+  {
+    question: 'Can I build my own breeder website on Wix, Squarespace or WordPress?',
+    answer: 'Yes. Those builders work for a breeder site, and many breeders have good ones. Budget for the builder plan, a domain, and the ongoing time it takes to edit pages by hand every time a litter is born, an animal is placed or a waitlist changes.'
+  },
+  {
+    question: 'How much does it cost to keep a breeder website?',
+    answer: 'The cost is more than the monthly plan. A builder plan and a yearly domain are the visible bills. The larger cost is your time: every litter update, availability change and waitlist note has to be copied onto the site by hand, or the site goes stale.'
+  },
+  {
+    question: 'Do I need a website to sell animals?',
+    answer: 'Buyers expect to find a page that shows your programs and how to reach you, but it does not have to be a site you build and maintain. A BreederHQ Storefront gives every BreederHQ breeder a public page at marketplace.breederhq.com/breeders/your-farm that fills in from your breeding records.'
+  },
+  {
+    question: 'Can I use my own domain with a BreederHQ Storefront?',
+    answer: 'Yes, through domain forwarding at your registrar. Your domain sends visitors to your Storefront address. BreederHQ does not host a Storefront on your own domain, so forwarding is how a domain you own points to it. Access to BreederHQ is by invitation.'
+  },
+  {
+    question: 'I already have a website I like. Can I still use BreederHQ?',
+    answer: 'Yes. Keep your site and add the BreederHQ embed widget, which shows your programs, upcoming litters and available animals inside your own pages. The widget is free for every BreederHQ breeder with Stripe Identity confirmation.'
+  }
+];
+---
+
+<BaseLayout
+  title="How To Build A Breeder Website (And When You Don't Need One)"
+  description="What a breeder website needs: programs, litters, available animals, health practices and a waitlist. The real ongoing cost, and the alternative that updates itself."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm flex-wrap gap-y-1">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">How To Build A Breeder Website</li>
+      </ol>
+    </nav>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          How To Build A Breeder Website (And When You Don't Need One)
+        </h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: November 2026.</strong> Written and reviewed by the BreederHQ Operations Team.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+          <ul class="text-gray-700 leading-relaxed space-y-2">
+            <li>A breeder website needs <strong>programs and upcoming litters</strong>, <strong>available animals</strong>, <strong>health and practices</strong>, and a <strong>waitlist and inquiry path</strong>.</li>
+            <li>The build is the easy part. <strong>Keeping it current</strong> is the ongoing cost, and it lands on your evenings.</li>
+            <li>A site that is out of date is worse than a short one, because buyers email to ask what is actually available.</li>
+            <li>A <a href="/storefront" class="text-[hsl(24,95%,53%)] hover:underline">BreederHQ Storefront</a> fills in from your breeding records, so there is nothing to keep current by hand.</li>
+          </ul>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed mb-6">
+          Buyers look for a website. Before they send a deposit or join a waitlist, they want to see what you breed, what is coming, what is available and how you place animals. So most breeders eventually decide they need one.
+        </p>
+
+        <p class="text-lg text-gray-700 leading-relaxed">
+          This guide covers what a breeder website actually needs, how to build one yourself or hire someone, and the part most people do not price in: what it costs to keep it current. Then it covers the alternative, for breeders who would rather spend that time on their animals.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">What A Breeder Website Needs</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          A breeder site is not a brochure. It answers the questions a serious buyer asks before they contact you. Five things cover almost all of them.
+        </p>
+
+        <div class="space-y-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">1. Programs And Upcoming Litters</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Show each breeding program you run: the breed or type, what you are working toward and which pairings are planned. For each upcoming litter, give the parents and an expected date. A buyer who sees a litter due in a few weeks knows whether to join a waitlist now or wait for the next one.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">2. Available Animals</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              List what is available today, with photos, birth dates and a plain status: available, reserved or placed. This is the page buyers check first, and it is the one that goes wrong fastest. An animal that was placed in March and is still listed in June costs you an email thread, and costs the buyer trust in everything else on the site.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">3. Health And Practices</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Say what testing you do, when, and with which lab or veterinarian. Describe your care practices, your guarantee and your placement terms. Be specific and dated rather than general. "Health tested" tells a buyer nothing; the test, the date and the result tell them a lot. Present these as your own records, and invite buyers to ask for the underlying documents.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">4. A Waitlist And Inquiry Path</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Give interested buyers one obvious way to reach you: a waitlist sign-up and an inquiry form. Decide where the answers go. A form that sends to an inbox you check twice a week loses buyers. The best version feeds into the same place you track your waitlist, so an inquiry never has to be retyped.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">5. A Way To Keep It Current</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              This is the requirement that is missing from most checklists, and the one that decides whether the other four stay true. A site with last year's litter on the front page works against you. Plan for how updates will happen before you build anything.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Two Ways To Build One</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Build It Yourself</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Wix, Squarespace and WordPress all let you build a good-looking site without writing code. Expect a few weekends to design the pages, write the copy and photograph your animals. You pay for the builder plan and a domain, and you own every future edit.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Pay Someone To Build It</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A designer or a website add-on can hand you a polished site in a few weeks. You pay a build fee, usually plus hosting and a domain, and you either learn to edit the site or pay for each change. When the designer moves on, so does the knowledge of how it works.
+            </p>
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-6">
+          Either route gets you a website. Neither gets you one that knows a litter was born, or that an animal went home yesterday.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">The Real Ongoing Cost</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          The monthly builder plan and the yearly domain are the bills you see. The cost most breeders underestimate is the third one: your time.
+        </p>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-6">
+          <h3 class="text-lg font-bold mb-3">What Keeping A Site Current Looks Like</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-red-600 font-bold mt-1">✗</span> A litter is born, so you log in and edit the litter page.</li>
+            <li class="flex items-start gap-2"><span class="text-red-600 font-bold mt-1">✗</span> An animal is reserved, so you change its status, then change it again when it goes home.</li>
+            <li class="flex items-start gap-2"><span class="text-red-600 font-bold mt-1">✗</span> Someone joins the waitlist through a form, so you copy their details into your own records.</li>
+            <li class="flex items-start gap-2"><span class="text-red-600 font-bold mt-1">✗</span> A password, a plugin or a renewal date gets forgotten, and the site breaks quietly.</li>
+          </ul>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-6">
+          None of those tasks is hard. The problem is that they all sit on top of the work you already do, and they are the first thing to slip during a busy birthing season. A website is one more thing on the to-do list and one more bill to manage. Be honest with yourself about whether you will keep it up before you commit to it.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">The Alternative: A Website That Fills Itself In</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          If the hard part is keeping the site current, the fix is a site that is not edited by hand. Every BreederHQ breeder gets a <a href="/storefront" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Breeder Storefront</a>: one public page at <strong>marketplace.breederhq.com/breeders/your-farm</strong> with your programs, upcoming litters, available animals, health records and how you place animals.
+        </p>
+
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-3">How It Maps To The Five Needs</h3>
+          <ul class="space-y-3 text-gray-700 text-lg leading-relaxed">
+            <li><strong>Programs and upcoming litters.</strong> Plans you choose to list appear under their program, with the expected date and a countdown. Record a birth and the plan moves to Available Soon.</li>
+            <li><strong>Available animals.</strong> Assign a buyer or mark an offspring placed and it leaves your available list at the same moment.</li>
+            <li><strong>Health and practices.</strong> Health testing and care records you log can be shown as summaries with dates, labs and sample sizes, labeled as your own attestation. Each plan, animal, health record and Q&amp;A answer has its own public setting, and nothing is public until you turn it on.</li>
+            <li><strong>Waitlist and inquiry path.</strong> Buyers join a program or a specific litter from your Storefront and land in your BreederHQ waitlist, attached to the plan. From there you can screen applications, send contracts and deposit invoices, and run the buyer portal.</li>
+            <li><strong>Keeping it current.</strong> You update only the parts that are about you: your About text, logo, banner, policies and Q&amp;A. The rest follows your records.</li>
+          </ul>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mt-6">
+          Your Storefront is included with BreederHQ, with no separate hosting or website fee. BreederHQ is open by invitation, so the way in is to apply and book a tour.
+        </p>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="/pricing" class="inline-flex justify-center bg-[hsl(24,95%,53%)] text-white px-6 py-3.5 rounded-lg font-bold hover:opacity-90" style="min-height: 44px;">Apply And Book A Tour</a>
+          <a href="/storefront" class="inline-flex justify-center border-2 border-[hsl(24,95%,53%)] text-[hsl(24,90%,38%)] px-6 py-3.5 rounded-lg font-bold hover:bg-orange-50" style="min-height: 44px;">See How The Storefront Works</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Already Have A Domain Or A Site You Like?</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Forward Your Domain</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              If you own a domain like yourfarm.com, turn on domain forwarding at your registrar and point it at your Storefront address. Buyers type the name they know and land on your current page. BreederHQ does not host a Storefront on your own domain, so forwarding is how a domain you own reaches it. If you change your Storefront address, update the forwarding target at your registrar.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Keep Your Site, Add The Widget</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              If you love the site you have built, keep it. Paste in the BreederHQ embed widget and your programs, upcoming litters and available animals appear inside your own pages. The widget is free for every BreederHQ breeder with Stripe Identity confirmation. <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">See how the embed widget works</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Which Should You Choose?</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Build your own site if you enjoy it, you want full control over the look, and you are confident you will keep it updated. Many breeders do, and a well-kept site is a real asset.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Skip the build if what you want is a current, credible page that sends buyers into your waitlist. If you already keep your breeding records in BreederHQ, your Storefront does that without another site to maintain, and the embed widget covers the case where you want to keep an existing one.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Whichever you pick, judge it by one test: on the day a litter is born or an animal goes home, how many places do you have to change?
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((f) => (
+            <details class="bg-white border border-gray-200 rounded-lg p-5">
+              <summary class="font-bold text-gray-900 cursor-pointer">{f.question}</summary>
+              <p class="mt-3 text-gray-700 leading-relaxed">{f.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Reading</h2>
+        <div class="grid md:grid-cols-2 gap-3 text-base">
+          <a href="/storefront" class="text-[hsl(24,95%,53%)] hover:underline">→ Breeder Storefront</a>
+          <a href="/workflows/embed-on-your-website" class="text-[hsl(24,95%,53%)] hover:underline">→ Embed Your Programs On Your Own Website</a>
+          <a href="/articles/selling-animals-on-facebook-instagram" class="text-[hsl(24,95%,53%)] hover:underline">→ Selling Animals on Facebook and Instagram in 2026</a>
+          <a href="/workflows/waitlists-and-placement" class="text-[hsl(24,95%,53%)] hover:underline">→ Waitlists and Placement</a>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">→ How the BreederHQ Marketplace Works</a>
+          <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">→ BreederHQ Pricing</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
