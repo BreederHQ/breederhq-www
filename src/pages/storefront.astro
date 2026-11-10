@@ -55,6 +55,22 @@ const panels = [
   { src: 'panel-appraisal.webp', w: 860, h: 182, alt: 'Breeder-attested linear appraisal panel: 8 does with a public-visible appraisal on file across 10 sessions, best final score 91 out of 99, herd average 87.5, most recent session Sep 23, 2025', cap: 'Linear appraisal, from a dairy goat program' },
   { src: 'panel-dairy.webp', w: 1097, h: 190, alt: 'Breeder-attested dairy production panel: 6 does with a completed lactation on file, 4 does on DHIA test, 8 DHIA test records on file, last test May 27, 2026', cap: 'Dairy production, from a goat program' }
 ];
+
+// Shared class strings, the same utility classes the workflow pages use. The
+// site's dark shell recolors these (bg-gray-50, bg-white, text-gray-*, border-gray-*),
+// so no color is written by hand on this page.
+const wrap = 'mx-auto max-w-6xl px-4 sm:px-6 lg:px-8';
+const eyebrow = 'text-sm font-bold uppercase tracking-widest text-[hsl(24,95%,53%)]';
+const h2 = 'text-4xl font-bold text-balance leading-tight';
+const lede = 'text-xl text-gray-700 leading-relaxed max-w-3xl';
+const card = 'bg-white border border-gray-200 rounded-2xl';
+const frame = 'bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm';
+const bar = 'flex items-center gap-2 px-3.5 py-2.5 bg-gray-100 border-b border-gray-200';
+const dot = 'block w-2.5 h-2.5 rounded-full bg-gray-200 shrink-0';
+const url = 'ml-2 flex-1 min-w-0 font-mono text-xs text-gray-500 bg-white border border-gray-200 rounded-md px-2.5 py-1 whitespace-nowrap overflow-hidden text-ellipsis';
+const cap = 'text-sm text-gray-500 mt-2.5';
+const btn = 'inline-flex items-center justify-center min-h-[44px] bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90';
+const split = 'grid gap-12 items-start grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]';
 ---
 
 <BaseLayout
@@ -63,31 +79,28 @@ const panels = [
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" />
-
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
     Skip to main content
   </a>
 
-  <main id="main-content" class="sf">
+  <main id="main-content">
 
     <!-- HERO -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="stack" style="max-width:760px">
-          <span class="eyebrow" style="color:var(--accent)">Breeder Storefront · Included With BreederHQ</span>
-          <h1>Your Breeder Website <em>Builds Itself.</em></h1>
-          <p class="lede">Every BreederHQ breeder gets a Breeder Storefront: one public page with your programs, upcoming litters, available animals, health records and how you place animals. It fills in from the work you already do in BreederHQ. No website builder, no hosting bill, and no Sunday nights spent updating it.</p>
-          <div class="row" style="margin-top:8px">
-            <a class="btn" href="/pricing">Apply And Book A Tour</a>
-            <a class="btn ghost" href="https://marketplace.breederhq.com/breeders" target="_blank" rel="noopener">Browse Real Storefronts</a>
+    <section class="bg-gradient-to-b from-stone-50 to-white pt-20 overflow-hidden">
+      <div class={wrap}>
+        <div class="flex flex-col gap-4 max-w-3xl">
+          <span class={eyebrow}>Breeder Storefront · Included With BreederHQ</span>
+          <h1 class="text-5xl font-bold tracking-tight sm:text-6xl leading-tight text-balance">Your Breeder Website <span class="text-primary">Builds Itself.</span></h1>
+          <p class="text-xl text-gray-600 leading-relaxed max-w-3xl">Every BreederHQ breeder gets a Breeder Storefront: one public page with your programs, upcoming litters, available animals, health records and how you place animals. It fills in from the work you already do in BreederHQ. No website builder, no hosting bill, and no Sunday nights spent updating it.</p>
+          <div class="flex flex-col sm:flex-row gap-4 mt-2">
+            <a class={btn} href="/pricing">Apply And Book A Tour</a>
+            <a class="inline-flex items-center justify-center min-h-[44px] border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:text-primary" href="https://marketplace.breederhq.com/breeders" target="_blank" rel="noopener">Browse Real Storefronts</a>
           </div>
         </div>
-        <div class="shot frame">
-          <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="url">marketplace.breederhq.com/breeders/stoneridge-heritage-farms</span></div>
+        <div class={`${frame} mt-12 -mb-0.5 rounded-b-none`}>
+          <div class={bar}><i class={dot}></i><i class={dot}></i><i class={dot}></i><span class={url}>marketplace.breederhq.com/breeders/stoneridge-heritage-farms</span></div>
           <img
+            class="block w-full h-auto"
             src={img + 'storefront-header.webp'}
             alt="The Stoneridge Heritage Farms storefront: a farm banner with a dog, horse, cow, sheep and goat in front of a barn, a round logo, the farm name, 14 Breeds and Lexington, KY, a Message Breeder button, Join Waitlist and Open Today hours, Experienced and Accepts Payments badges, and tiles for Our Breeding Programs (14) and Our Animals and Programs (21)"
             width="1234"
@@ -99,38 +112,42 @@ const panels = [
     </section>
 
     <!-- PROBLEM -->
-    <section>
-      <div class="wrap stack" style="gap:32px">
-        <div class="stack">
-          <span class="eyebrow">The Breeder Website Problem</span>
-          <h2>Most Breeder Websites Are Out Of Date The Day A Litter Is Born.</h2>
-          <p class="lede">You did not get into breeding to run a website. But buyers look for one, so you pay for it, build it, and then try to keep it current between whelping, foaling, kidding and everything else.</p>
+    <section class="py-20 px-4">
+      <div class={`${wrap} flex flex-col gap-8`}>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>The Breeder Website Problem</span>
+          <h2 class={h2}>Most Breeder Websites Are Out Of Date The Day A Litter Is Born.</h2>
+          <p class={lede}>You did not get into breeding to run a website. But buyers look for one, so you pay for it, build it, and then try to keep it current between whelping, foaling, kidding and everything else.</p>
         </div>
-        <div class="grid3">
-          <div class="pcard"><span class="tag">Stale</span><h3>Pretty Pictures, Old News</h3><p>A beautiful homepage still lists the spring litter in October. Buyers email to ask what is actually available, and you answer the same question all week.</p></div>
-          <div class="pcard"><span class="tag">Dated</span><h3>Built Once, Years Ago</h3><p>The site someone made for you in a weekend has not changed since. It does not work on a phone, and you no longer remember the password.</p></div>
-          <div class="pcard"><span class="tag">Paid For Three Times</span><h3>Builder, Domain, And Your Evenings</h3><p>A monthly Wix or Squarespace plan, a yearly domain bill, a paid build or add-on, and the hours you spend copying litter news into it by hand.</p></div>
+        <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
+          <div class={`${card} p-8 flex flex-col gap-2.5`}><span class="text-xs font-bold uppercase tracking-widest text-[hsl(24,95%,53%)]">Stale</span><h3 class="text-xl font-semibold">Pretty Pictures, Old News</h3><p class="text-gray-600 leading-relaxed">A beautiful homepage still lists the spring litter in October. Buyers email to ask what is actually available, and you answer the same question all week.</p></div>
+          <div class={`${card} p-8 flex flex-col gap-2.5`}><span class="text-xs font-bold uppercase tracking-widest text-[hsl(24,95%,53%)]">Dated</span><h3 class="text-xl font-semibold">Built Once, Years Ago</h3><p class="text-gray-600 leading-relaxed">The site someone made for you in a weekend has not changed since. It does not work on a phone, and you no longer remember the password.</p></div>
+          <div class={`${card} p-8 flex flex-col gap-2.5`}><span class="text-xs font-bold uppercase tracking-widest text-[hsl(24,95%,53%)]">Paid For Three Times</span><h3 class="text-xl font-semibold">Builder, Domain, And Your Evenings</h3><p class="text-gray-600 leading-relaxed">A monthly Wix or Squarespace plan, a yearly domain bill, a paid build or add-on, and the hours you spend copying litter news into it by hand.</p></div>
         </div>
       </div>
     </section>
 
     <!-- AUTOMATIC -->
-    <section class="band" id="see">
-      <div class="wrap split">
-        <div class="stack">
-          <span class="eyebrow">It Updates Itself</span>
-          <h2>Your Storefront Reads The Records You Already Keep.</h2>
-          <p class="lede">Plan a pairing, record a birth, place an animal, close a litter. Your Storefront changes with it. Nobody edits a web page.</p>
-          <ul class="auto">
+    <section class="py-20 px-4 bg-gray-50" id="see">
+      <div class={`${wrap} ${split}`}>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>It Updates Itself</span>
+          <h2 class={h2}>Your Storefront Reads The Records You Already Keep.</h2>
+          <p class={lede}>Plan a pairing, record a birth, place an animal, close a litter. Your Storefront changes with it. Nobody edits a web page.</p>
+          <ul class="flex flex-col gap-3.5 mt-2">
             {autoItems.map((item) => (
-              <li><span class="ic" aria-hidden="true">✓</span><div><b>{item.b}</b><span class="d">{item.d}</span></div></li>
+              <li class="grid grid-cols-[26px_minmax(0,1fr)] gap-2.5">
+                <span class="w-[26px] h-[26px] rounded-full bg-orange-100 text-[hsl(24,95%,53%)] grid place-items-center font-extrabold text-sm" aria-hidden="true">✓</span>
+                <div><b class="block font-semibold">{item.b}</b><span class="text-gray-600">{item.d}</span></div>
+              </li>
             ))}
           </ul>
         </div>
         <div>
-          <div class="frame">
-            <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="url">…/breeders/stoneridge-heritage-farms/breeding-programs/stoneridge-labradors</span></div>
+          <div class={frame}>
+            <div class={bar}><i class={dot}></i><i class={dot}></i><i class={dot}></i><span class={url}>…/breeders/stoneridge-heritage-farms/breeding-programs/stoneridge-labradors</span></div>
             <img
+              class="block w-full h-auto"
               src={img + 'program-upcoming-litters.webp'}
               alt="The Stoneridge Labradors program page: Accepting Inquiries and Waitlist Open, 1 litter upcoming, Poppy x Tate born Sep 22, 2026 with 7 puppies born and marked Available Soon, Briar x Tate expected Dec 8, 2026 and 5 weeks away, each with a Join Waitlist button, Send Inquiry and Join Waitlist buttons, an About The Breeder card, trust badges, and the program's about, story and pricing sections"
               width="735"
@@ -138,18 +155,19 @@ const panels = [
               loading="lazy"
             />
           </div>
-          <p class="cap">Nobody typed the countdown to Briar x Tate or the birth count for Poppy x Tate. Both come straight from the breeding plans.</p>
+          <p class={cap}>Nobody typed the countdown to Briar x Tate or the birth count for Poppy x Tate. Both come straight from the breeding plans.</p>
         </div>
       </div>
     </section>
 
     <!-- PROGRAMS -->
-    <section>
-      <div class="wrap split" style="grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)">
+    <section class="py-20 px-4">
+      <div class={`${wrap} grid gap-12 items-start grid-cols-1 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]`}>
         <div>
-          <div class="frame">
-            <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="url">…/breeders/stoneridge-heritage-farms · Our Breeding Programs</span></div>
+          <div class={frame}>
+            <div class={bar}><i class={dot}></i><i class={dot}></i><i class={dot}></i><span class={url}>…/breeders/stoneridge-heritage-farms · Our Breeding Programs</span></div>
             <img
+              class="block w-full h-auto"
               src={img + 'programs-grid.webp'}
               alt="Our Breeding Programs, all 14 programs in a grid across rabbits, sheep, cattle, alpacas, cats, llamas, horses, goats and dogs, each marked Coming Soon or Accepting Inquiries with Waitlist Open"
               width="517"
@@ -158,116 +176,132 @@ const panels = [
             />
           </div>
         </div>
-        <div class="stack">
-          <span class="eyebrow">Every Program, One Address</span>
-          <h2>One Program Or Fourteen, Every Species, One Page.</h2>
-          <p class="lede">Each breeding program gets its own page with its upcoming litters, its waitlist and its status: Coming Soon, Accepting Inquiries, Waitlist Open. Buyers see the whole operation at a glance and drill into the program they care about.</p>
-          <p>Your Storefront lives at a clean address you choose, like <b>marketplace.breederhq.com/breeders/your-farm</b>. Put it on your business cards, your social profiles and the QR code on your Breeder Business Card.</p>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>Every Program, One Address</span>
+          <h2 class={h2}>One Program Or Fourteen, Every Species, One Page.</h2>
+          <p class={lede}>Each breeding program gets its own page with its upcoming litters, its waitlist and its status: Coming Soon, Accepting Inquiries, Waitlist Open. Buyers see the whole operation at a glance and drill into the program they care about.</p>
+          <p class="text-lg text-gray-700 leading-relaxed max-w-3xl">Your Storefront lives at a clean address you choose, like <b class="[overflow-wrap:anywhere]">marketplace.breederhq.com/breeders/your-farm</b>. Put it on your business cards, your social profiles and the QR code on your Breeder Business Card.</p>
         </div>
       </div>
     </section>
 
     <!-- RECORDS -->
-    <section class="band">
-      <div class="wrap stack" style="gap:32px">
-        <div class="stack">
-          <span class="eyebrow">Your Records Speak For You</span>
-          <h2>Show Buyers The Work Behind Your Animals.</h2>
-          <p class="lede">Health testing, parasite programs, linear appraisals and dairy records come straight from what you log in BreederHQ. Choose which rows go public, and your Storefront summarizes them, with dates, labs and sample sizes.</p>
+    <section class="py-20 px-4 bg-gray-50">
+      <div class={`${wrap} flex flex-col gap-8`}>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>Your Records Speak For You</span>
+          <h2 class={h2}>Show Buyers The Work Behind Your Animals.</h2>
+          <p class={lede}>Health testing, parasite programs, linear appraisals and dairy records come straight from what you log in BreederHQ. Choose which rows go public, and your Storefront summarizes them, with dates, labs and sample sizes.</p>
         </div>
-        <div class="recs">
+        <div class="grid gap-5 grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))]">
           {panels.map((p) => (
             <figure>
-              <div class="frame"><img src={img + p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" /></div>
-              <figcaption class="cap">{p.cap}</figcaption>
+              <div class={frame}><img class="block w-full h-auto" src={img + p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" /></div>
+              <figcaption class={cap}>{p.cap}</figcaption>
             </figure>
           ))}
         </div>
-        <p class="cap">"623 entries on file" is a count of the FAMACHA scores this breeder actually recorded. Every panel is labeled as the breeder's own attestation, and buyers are invited to ask for the underlying records.</p>
+        <p class={cap}>"623 entries on file" is a count of the FAMACHA scores this breeder actually recorded. Every panel is labeled as the breeder's own attestation, and buyers are invited to ask for the underlying records.</p>
       </div>
     </section>
 
     <!-- PIPELINE -->
-    <section>
-      <div class="wrap stack" style="gap:32px">
-        <div class="stack">
-          <span class="eyebrow">From Interested To Placed</span>
-          <h2>Your Storefront Is Wired To Your Whole Sales Process.</h2>
-          <p class="lede">A website hands you an email and wishes you luck. Your Storefront hands the buyer to the same BreederHQ you already work in, where every next step lives.</p>
+    <section class="py-20 px-4">
+      <div class={`${wrap} flex flex-col gap-8`}>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>From Interested To Placed</span>
+          <h2 class={h2}>Your Storefront Is Wired To Your Whole Sales Process.</h2>
+          <p class={lede}>A website hands you an email and wishes you luck. Your Storefront hands the buyer to the same BreederHQ you already work in, where every next step lives.</p>
         </div>
-        <ol class="steps">
-          {steps.map((s) => (
-            <li><b>{s.b}</b><span>{s.d}</span></li>
+        <ol class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(min(180px,100%),1fr))]">
+          {steps.map((s, i) => (
+            <li class={`${card} p-5 flex flex-col gap-1.5`}>
+              <span class="text-3xl font-bold text-[hsl(24,95%,53%)] leading-none" aria-hidden="true">{i + 1}</span>
+              <b class="font-semibold">{s.b}</b>
+              <span class="text-gray-600 text-[.95rem]">{s.d}</span>
+            </li>
           ))}
         </ol>
       </div>
     </section>
 
     <!-- COMPARE -->
-    <section class="band">
-      <div class="wrap stack" style="gap:32px">
-        <div class="stack">
-          <span class="eyebrow">Always Wanted Your Own Breeder Website?</span>
-          <h2>Thinking About A Breeder Website? You Have Three Options.</h2>
-          <p class="lede">You can build your own breeder website, or pay someone to build one for you, if you are looking to add one more thing to your to-do list and one more bill to manage. Both get you a website. Neither gets you a website that keeps itself current, takes waitlist sign-ups into your records, or puts you in front of buyers who are already shopping. Your Storefront does all three, and you already have it.</p>
+    <section class="py-20 px-4 bg-gray-50">
+      <div class={`${wrap} flex flex-col gap-8`}>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>Always Wanted Your Own Breeder Website?</span>
+          <h2 class={h2}>Thinking About A Breeder Website? You Have Three Options.</h2>
+          <p class={lede}>You can build your own breeder website, or pay someone to build one for you, if you are looking to add one more thing to your to-do list and one more bill to manage. Both get you a website. Neither gets you a website that keeps itself current, takes waitlist sign-ups into your records, or puts you in front of buyers who are already shopping. Your Storefront does all three, and you already have it.</p>
         </div>
-        <div class="tbl">
-          <table>
-            <thead><tr><th><span class="sr-only">Comparison</span></th><th>Build it yourself<br /><span style="font-weight:400;color:var(--muted)">Wix, Squarespace, WordPress</span></th><th>Pay someone to build it<br /><span style="font-weight:400;color:var(--muted)">A designer or a paid website add-on</span></th><th class="us">Your BreederHQ Storefront</th></tr></thead>
+        <div class="overflow-x-auto rounded-xl">
+          <table class="w-full text-sm text-left min-w-[620px] bg-white border border-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-3 align-top"><span class="sr-only">Comparison</span></th>
+                <th scope="col" class="px-4 py-3 align-top font-semibold">Build it yourself<br /><span class="font-normal text-gray-500">Wix, Squarespace, WordPress</span></th>
+                <th scope="col" class="px-4 py-3 align-top font-semibold">Pay someone to build it<br /><span class="font-normal text-gray-500">A designer or a paid website add-on</span></th>
+                <th scope="col" class="px-4 py-3 align-top font-semibold bg-primary text-white">Your BreederHQ Storefront</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><th scope="row">Time to launch</th><td>Weekends of building and writing</td><td>Weeks of back and forth</td><td class="us">Created with your account; publish when your profile is ready</td></tr>
-              <tr><th scope="row">Who keeps it current</th><td>You, by hand</td><td>You, or you pay for changes</td><td class="us">Your breeding records, automatically</td></tr>
-              <tr><th scope="row">Waitlist, applications, contracts, deposits</th><td>Separate forms, apps and payment tools</td><td>Usually a contact form</td><td class="us">Built in, on the same platform</td></tr>
-              <tr><th scope="row">How buyers find you</th><td>Only people who already have your URL</td><td>Only people who already have your URL</td><td class="us">Also listed on the BreederHQ Marketplace</td></tr>
-              <tr><th scope="row">What it costs</th><td>Builder plan, domain, your time</td><td>Build fee or add-on, plus hosting and domain</td><td class="us">Included with BreederHQ</td></tr>
+              <tr class="border-b border-gray-200"><th scope="row" class="px-4 py-3 align-top font-semibold">Time to launch</th><td class="px-4 py-3 align-top text-gray-700">Weekends of building and writing</td><td class="px-4 py-3 align-top text-gray-700">Weeks of back and forth</td><td class="px-4 py-3 align-top font-semibold bg-orange-100">Created with your account; publish when your profile is ready</td></tr>
+              <tr class="border-b border-gray-200"><th scope="row" class="px-4 py-3 align-top font-semibold">Who keeps it current</th><td class="px-4 py-3 align-top text-gray-700">You, by hand</td><td class="px-4 py-3 align-top text-gray-700">You, or you pay for changes</td><td class="px-4 py-3 align-top font-semibold bg-orange-100">Your breeding records, automatically</td></tr>
+              <tr class="border-b border-gray-200"><th scope="row" class="px-4 py-3 align-top font-semibold">Waitlist, applications, contracts, deposits</th><td class="px-4 py-3 align-top text-gray-700">Separate forms, apps and payment tools</td><td class="px-4 py-3 align-top text-gray-700">Usually a contact form</td><td class="px-4 py-3 align-top font-semibold bg-orange-100">Built in, on the same platform</td></tr>
+              <tr class="border-b border-gray-200"><th scope="row" class="px-4 py-3 align-top font-semibold">How buyers find you</th><td class="px-4 py-3 align-top text-gray-700">Only people who already have your URL</td><td class="px-4 py-3 align-top text-gray-700">Only people who already have your URL</td><td class="px-4 py-3 align-top font-semibold bg-orange-100">Also listed on the BreederHQ Marketplace</td></tr>
+              <tr><th scope="row" class="px-4 py-3 align-top font-semibold">What it costs</th><td class="px-4 py-3 align-top text-gray-700">Builder plan, domain, your time</td><td class="px-4 py-3 align-top text-gray-700">Build fee or add-on, plus hosting and domain</td><td class="px-4 py-3 align-top font-semibold bg-orange-100">Included with BreederHQ</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="stack" style="gap:14px">
-          <h3>One Platform, Not Five Tools</h3>
-          <div class="tools">
+        <div class="flex flex-col gap-3.5">
+          <h3 class="text-xl font-semibold">One Platform, Not Five Tools</h3>
+          <div class="flex flex-wrap gap-2.5 items-center">
             {['Website builder', 'Domain and hosting', 'Waitlist form', 'E-signature app', 'Invoicing and deposits'].map((t) => (
-              <span class="tool">{t}</span>
+              <span class="border border-gray-200 bg-white rounded-full px-3.5 py-2 text-gray-600 line-through decoration-[hsl(24,95%,53%)]">{t}</span>
             ))}
-            <span class="arrow" aria-hidden="true">→</span><span class="one">BreederHQ</span>
+            <span class="text-2xl font-bold text-[hsl(24,95%,53%)] px-1.5" aria-hidden="true">→</span><span class="bg-primary text-white rounded-full px-4 py-2 font-bold">BreederHQ</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- TWO DOORS -->
-    <section>
-      <div class="wrap stack" style="gap:32px">
-        <div class="stack">
-          <span class="eyebrow">Already Have A Domain Or A Site?</span>
-          <h2>Keep What You Love. Stop Updating It.</h2>
+    <section class="py-20 px-4">
+      <div class={`${wrap} flex flex-col gap-8`}>
+        <div class="flex flex-col gap-4">
+          <span class={eyebrow}>Already Have A Domain Or A Site?</span>
+          <h2 class={h2}>Keep What You Love. Stop Updating It.</h2>
         </div>
-        <div class="doors">
-          <div class="door">
-            <h3>Your Own Domain, Pointed At Your Storefront</h3>
-            <p>Own a domain like yourfarm.com? Turn on domain forwarding at your registrar (GoDaddy, Namecheap, Squarespace Domains and most others offer it) and send it to your Storefront address. Buyers type the name they know and land on your always-current page.</p>
-            <div class="code">yourfarm.com → marketplace.breederhq.com/breeders/your-farm</div>
+        <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+          <div class={`${card} p-8 flex flex-col gap-3`}>
+            <h3 class="text-xl font-semibold">Your Own Domain, Pointed At Your Storefront</h3>
+            <p class="text-gray-600 leading-relaxed">Own a domain like yourfarm.com? Turn on domain forwarding at your registrar (GoDaddy, Namecheap, Squarespace Domains and most others offer it) and send it to your Storefront address. Buyers type the name they know and land on your always-current page.</p>
+            <div class="font-mono text-sm bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 overflow-x-auto whitespace-nowrap">yourfarm.com → marketplace.breederhq.com/breeders/your-farm</div>
           </div>
-          <div class="door">
-            <h3>Love Your Site? Put Your Storefront In It.</h3>
-            <p>Keep your Squarespace, Wix or WordPress site exactly as it is and paste in the BreederHQ embed widget. Your programs, upcoming litters and available animals appear inside your own pages and stay current on their own. The widget is free for every BreederHQ breeder with Stripe Identity confirmation.</p>
-            <a href="/workflows/embed-on-your-website">How The Embed Widget Works →</a>
+          <div class={`${card} p-8 flex flex-col gap-3`}>
+            <h3 class="text-xl font-semibold">Love Your Site? Put Your Storefront In It.</h3>
+            <p class="text-gray-600 leading-relaxed">Keep your Squarespace, Wix or WordPress site exactly as it is and paste in the BreederHQ embed widget. Your programs, upcoming litters and available animals appear inside your own pages and stay current on their own. The widget is free for every BreederHQ breeder with Stripe Identity confirmation.</p>
+            <a class="text-[hsl(24,95%,53%)] font-semibold hover:underline" href="/workflows/embed-on-your-website">How The Embed Widget Works →</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="band">
-      <div class="wrap stack" style="gap:14px; max-width:820px">
-        <span class="eyebrow">Questions</span>
-        <h2 style="margin-bottom:12px">Breeder Storefront FAQ</h2>
+    <section class="py-20 px-4 bg-gray-50 sf-faq">
+      <div class="mx-auto max-w-4xl">
+        <span class={eyebrow}>Questions</span>
+        <h2 class={`${h2} mt-4 mb-8`}>Breeder Storefront FAQ</h2>
         {faqs.map((f, i) => (
-          <details open={i === 0}>
-            <summary>{f.question}</summary>
-            <p>
+          <details class="border-b border-gray-200 py-6" open={i === 0}>
+            <summary class="flex justify-between items-center cursor-pointer text-xl font-semibold">
+              <span>{f.question}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <p class="pt-4 text-lg text-gray-600 leading-relaxed">
               {f.answer}
-              {i === faqs.length - 1 && <> <a class="inline" href="/compare/breederbuddy-alternative">Read the sourced comparison</a>.</>}
+              {i === faqs.length - 1 && <> <a class="text-[hsl(24,95%,53%)] hover:underline" href="/compare/breederbuddy-alternative">Read the sourced comparison</a>.</>}
             </p>
           </details>
         ))}
@@ -275,107 +309,20 @@ const panels = [
     </section>
 
     <!-- FINAL CTA -->
-    <section class="final">
-      <div class="wrap stack">
-        <h2>Run Your Program. Your Storefront Keeps Up.</h2>
-        <p class="lede">BreederHQ is open by invitation through our Founders' Program. Apply, and we will walk you through your own Storefront on a live tour.</p>
-        <a class="btn" href="/pricing">Apply And Book A Tour</a>
+    <section class="py-20 px-4 bg-[hsl(24,95%,53%)] text-white">
+      <div class="mx-auto max-w-4xl">
+        <h2 class="text-4xl font-bold mb-8">Run Your Program. Your Storefront Keeps Up.</h2>
+        <p class="text-xl leading-relaxed mb-8">BreederHQ is open by invitation through our Founders' Program. Apply, and we will walk you through your own Storefront on a live tour.</p>
+        <a href="/pricing" class="inline-block bg-white text-[hsl(24,95%,53%)] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center" style="min-height: 44px;">Apply And Book A Tour</a>
       </div>
     </section>
 
   </main>
 </BaseLayout>
 
-<style is:global>
-  /* Page-scoped tokens: the site's dark shell restyles stone-*, gray-* and white
-     utility classes, so this page uses none of them. Every color comes from the
-     tokens below, which are the approved Storefront design's dark palette. */
-  .sf {
-    --bg: #121110; --band: #1a1817; --card: #201e1c; --fg: #f5f5f4; --muted: #b8b2ad; --line: #34302d;
-    --accent: hsl(24 95% 53%); --accent-ink: hsl(28 95% 62%); --accent-soft: hsl(24 95% 53% / .16);
-    --hero: #0b0a09; --hero-fg: #fafaf9; --hero-muted: #c9c4bf;
-    --bad: #f87171;
-    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-    --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
-    background: var(--bg); color: var(--fg); font: 400 17px/1.6 var(--body); color-scheme: dark;
-  }
-  .sf .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-  .sf section { padding-block: 72px; }
-  .sf section.band { background: var(--band); }
-  .sf h1, .sf h2, .sf h3 { font-family: var(--display); text-wrap: balance; line-height: 1.1; margin: 0; color: inherit; }
-  .sf h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 800; letter-spacing: -.02em; }
-  .sf h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 800; letter-spacing: -.01em; }
-  .sf h3 { font-size: 1.25rem; font-weight: 600; }
-  .sf p { margin: 0; max-width: 65ch; color: inherit; }
-  .sf .eyebrow { font: 700 .78rem/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
-  .sf .lede { font-size: 1.2rem; color: var(--muted); }
-  .sf .stack { display: flex; flex-direction: column; gap: 16px; }
-  .sf .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 22px; border-radius: 10px; text-decoration: none; }
-  .sf .btn.ghost { background: transparent; color: inherit; border: 1.5px solid currentColor; }
-  .sf .row { display: flex; flex-wrap: wrap; gap: 12px; }
-  .sf figure { margin: 0; }
-
-  .sf .frame { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 18px 50px -24px rgb(0 0 0 / .35); }
-  .sf .frame .bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--band); }
-  .sf .frame .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; }
-  .sf .frame .url { margin-left: 8px; flex: 1; min-width: 0; font: 400 .8rem/1.4 ui-monospace, Consolas, monospace; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sf .frame img { display: block; width: 100%; height: auto; }
-  .sf .cap { font-size: .9rem; color: var(--muted); margin-top: 10px; }
-
-  .sf .hero { background: var(--hero); color: var(--hero-fg); padding-block: 80px 0; overflow: hidden; }
-  .sf .hero .lede { color: var(--hero-muted); }
-  .sf .hero h1 em { font-style: normal; color: var(--accent); }
-  .sf .hero .shot { margin-top: 48px; margin-bottom: -2px; }
-  .sf .hero .frame { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-
-  .sf .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .sf .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px; }
-  .sf .pcard p { color: var(--muted); }
-  .sf .pcard .tag { font: 700 .75rem/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--bad); }
-
-  .sf .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 48px; align-items: start; }
-  @media (max-width: 860px) { .sf .split { grid-template-columns: minmax(0, 1fr) !important; } }
-  .sf .auto { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 14px; }
-  .sf .auto li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; }
-  .sf .auto .ic { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; font-weight: 800; font-size: .85rem; }
-  .sf .auto b { display: block; }
-  .sf .auto span.d { color: var(--muted); }
-
-  .sf .recs { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-  @media (max-width: 400px) { .sf .recs { grid-template-columns: minmax(0, 1fr); } }
-
-  .sf .steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-  .sf .steps li { counter-increment: s; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
-  .sf .steps li::before { content: counter(s); font: 800 1.6rem/1 var(--display); color: var(--accent); }
-  .sf .steps li span { color: var(--muted); font-size: .95rem; }
-
-  .sf .tbl { overflow-x: auto; }
-  .sf table { width: 100%; border-collapse: collapse; min-width: 620px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-  .sf th, .sf td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; background: transparent; color: inherit; }
-  .sf th { font: 700 .95rem/1.3 var(--body); }
-  .sf thead th { background: var(--band); }
-  .sf thead th.us { background: var(--accent); color: #fff; }
-  .sf td.us { background: var(--accent-soft); font-weight: 600; }
-  .sf tr:last-child td, .sf tr:last-child th { border-bottom: 0; }
-
-  .sf .tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-  .sf .tool { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 8px 14px; color: var(--muted); text-decoration: line-through; text-decoration-color: var(--bad); }
-  .sf .arrow { font: 800 1.4rem/1 var(--display); color: var(--accent); padding-inline: 6px; }
-  .sf .one { background: var(--accent); color: #fff; border-radius: 999px; padding: 8px 16px; font-weight: 700; }
-
-  .sf .doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-  .sf .door { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
-  .sf .door p { color: var(--muted); }
-  .sf .door a { color: var(--accent-ink); font-weight: 700; text-decoration: none; }
-  .sf .code { font: 400 .88rem/1.5 ui-monospace, Consolas, monospace; background: var(--band); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-x: auto; white-space: nowrap; }
-
-  .sf details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; }
-  .sf details summary { font-weight: 700; cursor: pointer; }
-  .sf details p { margin-top: 10px; color: var(--muted); }
-  .sf details p a.inline { color: var(--accent-ink); text-decoration: underline; }
-
-  .sf .final { background: var(--hero); color: var(--hero-fg); text-align: center; }
-  .sf .final .stack { align-items: center; }
-  .sf .final .lede { color: var(--hero-muted); margin-inline: auto; }
-  .sf a:focus-visible, .sf summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+<style>
+  .sf-faq summary { list-style: none; }
+  .sf-faq summary::-webkit-details-marker { display: none; }
+  .sf-faq .faq-icon { transition: transform 200ms ease; flex-shrink: 0; margin-left: 1rem; }
+  .sf-faq details[open] .faq-icon { transform: rotate(180deg); }
 </style>
