@@ -241,7 +241,7 @@ const compareCols: CompareCol[] = [
 ];
 
 const trustLayers = [
-  { n: '1', title: 'Identity Confirmation', desc: 'Stripe Identity checks a government-issued photo ID. Profiles show "Identity confirmed via Stripe Identity" with the date.' },
+  { n: '1', req: true, title: 'Identity Confirmation', desc: 'Required for every seller before they can list. An independent ID check, typically a government photo ID and a live selfie. Profiles show an Identity Confirmed mark, which may include when and how the check was done.' },
   { n: '2', title: 'Public-Record Links', desc: "When a credential is published in an openly searchable registry, we link straight to that public record. Today that means OFA; most registries are closed, so many credentials simply can't be independently confirmed, and we say so." },
   { n: '3', title: 'Provider Self-Attestation', desc: "Health results, program history, and policies are the provider's own attestation. BreederHQ does not open, read, or vouch for uploads." },
 ];
@@ -293,6 +293,7 @@ const trustLayers = [
         <span style="color:#B9C8DE">ready in seconds</span><span style="color:#3C4C66" aria-hidden="true">/</span>
         <span style="color:#B9C8DE">five years of real-looking records</span>
       </div>
+      <a href="/buyers/seller-id-checks" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:7px 13px;border-radius:999px;border:1px solid rgba(127,200,255,.3);background:rgba(127,200,255,.07);font-size:13px;color:#CFE6FF;text-decoration:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Every marketplace seller must pass an independent ID check before they can list. <strong style="font-weight:600">How it works</strong></a>
     </div>
     <!-- command center mockup -->
     <div style="position:relative">
@@ -525,21 +526,22 @@ const trustLayers = [
 <section class="bhqSpot" style="max-width:1120px;margin:0 auto;padding:96px 30px 30px">
   <div class="bhqReveal" style="max-width:760px;margin:0 auto 48px;text-align:center">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:#FF6A2C;margin-bottom:16px">06 / INTEGRITY</div>
-    <h2 style="margin:0;font-size:clamp(30px,4vw,46px);line-height:1.08;font-weight:800;letter-spacing:-.02em;color:#EAF1FC">Honest signals. No vouching.</h2>
-    <p style="margin:18px auto 0;max-width:600px;font-size:17px;line-height:1.55;color:#AEC0DA">BreederHQ doesn't vet or vouch for anyone. Everything on a profile comes from three transparent layers buyers can weigh for themselves.</p>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,46px);line-height:1.08;font-weight:800;letter-spacing:-.02em;color:#EAF1FC">No ID, no listing.</h2>
+    <p style="margin:18px auto 0;max-width:600px;font-size:17px;line-height:1.55;color:#AEC0DA">Every breeder and service provider must pass an independent ID check before they can list. You know a real, identified person is behind the account.</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="bhq-3col">
     {trustLayers.map(t => (
       <div class="bhqReveal" style="border-radius:16px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,#0E1A2E,#0A1424);padding:24px 22px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7FC8FF;padding:3px 8px;border-radius:6px;background:rgba(127,200,255,.1);border:1px solid rgba(127,200,255,.2)">LAYER {t.n}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7FC8FF;padding:3px 8px;border-radius:6px;background:rgba(127,200,255,.1);border:1px solid rgba(127,200,255,.2)">LAYER {t.n}{t.req ? ' · REQUIRED' : ''}</span>
         </div>
         <h3 style="margin:0 0 8px;font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:#EAF1FC">{t.title}</h3>
         <p style="margin:0;font-size:13px;line-height:1.55;color:#9FB2CD">{t.desc}</p>
       </div>
     ))}
   </div>
-  <div class="bhqReveal" style="text-align:center;margin-top:26px">
+  <div class="bhqReveal" style="text-align:center;margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:center">
+    <a href="/buyers/seller-id-checks" style="font-size:14px;font-weight:600;color:#FF7A3C;text-decoration:none">How seller ID checks work &#8594;</a>
     <a href="/trust" style="font-size:14px;font-weight:600;color:#FF7A3C;text-decoration:none">Read the full Identity &amp; Credentials policy &#8594;</a>
   </div>
 </section>
