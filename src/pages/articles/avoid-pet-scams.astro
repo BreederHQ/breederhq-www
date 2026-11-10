@@ -1,0 +1,337 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Articles', url: '/articles' },
+  { name: 'How To Buy A Pet Online Without Getting Scammed', url: '/articles/avoid-pet-scams' }
+];
+
+const faqs = [
+  {
+    question: 'How can I tell if an online pet seller is a scammer?',
+    answer: 'Common signs are a price far below the going rate, a seller who will not do a live video call, pressure to pay a deposit right away, and a request to pay by wire transfer, gift card, cryptocurrency or a cash app. Photos that appear on other sites, a story that changes, and shipping or "insurance" fees added after the deposit are also warning signs. No single sign proves anything, but several together mean stop.'
+  },
+  {
+    question: 'What is the safest way to pay a breeder or seller?',
+    answer: 'Use a payment method that gives you recourse, such as a credit card or a payment service that offers buyer protection, and pay only after you have a written agreement. Avoid wire transfers, gift cards, cryptocurrency and cash apps for people you have not met, because those payments are hard or impossible to get back.'
+  },
+  {
+    question: 'Should I pay a deposit before I see the animal?',
+    answer: 'Reserving an animal with a deposit is normal for many breeders, but only pay one after you have confirmed who the seller is, seen the specific animal on a live video call, and received a written agreement that states the amount, what it holds and when it is refundable.'
+  },
+  {
+    question: 'What does a seller ID check tell me?',
+    answer: 'It tells you the account that posted the listing passed an ID check, so an identified person stands behind it. It does not tell you the seller is honest, that their animals are healthy, or how a sale will go. Keep doing your own research.'
+  },
+  {
+    question: 'Does BreederHQ check the sellers on its marketplace?',
+    answer: 'Every breeder and service provider on the BreederHQ Marketplace must pass an independent ID check before they can list. Sellers who were already listed before the requirement began are being phased in, so look for the Identity Confirmed mark on a profile. BreederHQ does not inspect, vet or vouch for sellers or their animals, and sales happen directly between you and the seller.'
+  },
+  {
+    question: 'What should I do if I think I have been scammed?',
+    answer: 'Contact your card issuer or payment provider right away to dispute the charge, report it to the Federal Trade Commission at ReportFraud.ftc.gov, and report the seller to the site where you found them. Keep every message, photo and receipt.'
+  }
+];
+---
+
+<BaseLayout
+  title="How To Buy A Pet Online Without Getting Scammed"
+  description="Warning signs of a pet scam, what to ask a seller, how to pay with recourse, and how to meet the animal. Covers puppies, kittens, horses, goats, rabbits and more."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to content
+  </a>
+
+  <main id="main-content">
+    <nav class="breadcrumb py-4 px-4 bg-gray-50" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 max-w-4xl mx-auto text-sm flex-wrap gap-y-1">
+        <li><a href="/" class="text-[hsl(24,95%,53%)] hover:underline">Home</a></li>
+        <li class="text-gray-400">›</li>
+        <li><a href="/articles" class="text-[hsl(24,95%,53%)] hover:underline">Articles</a></li>
+        <li class="text-gray-400">›</li>
+        <li aria-current="page" class="text-gray-600">How To Buy A Pet Online Without Getting Scammed</li>
+      </ol>
+    </nav>
+
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          How To Buy A Pet Online Without Getting Scammed
+        </h1>
+
+        <p class="text-sm text-gray-500 mb-8">
+          <strong class="text-gray-700">Last Reviewed: November 2026.</strong> Written and reviewed by the BreederHQ Operations Team.
+        </p>
+
+        <aside class="tldr-box bg-gray-100 border-l-4 border-[hsl(24,95%,53%)] p-6 my-8 rounded" role="complementary" aria-label="Page summary">
+          <h2 class="text-xl font-bold mb-3">Quick Summary</h2>
+          <ul class="text-gray-700 leading-relaxed space-y-2">
+            <li>Most pet scams share one weakness: <strong>the seller cannot be identified</strong>, and the animal may not exist.</li>
+            <li>Before any deposit, <strong>see the animal live on video</strong>, <strong>get the agreement in writing</strong> and <strong>pay with a method that has recourse</strong>.</li>
+            <li>Be wary of prices far below market, pressure to pay fast, and payment by wire, gift card, cryptocurrency or cash app.</li>
+            <li>An ID check confirms who is behind an account. It does not prove a seller is honest or that an animal is healthy, so it is one protection among several.</li>
+          </ul>
+        </aside>
+
+        <p class="text-xl text-gray-700 leading-relaxed mb-6">
+          Buying an animal online is normal now. Good breeders, rescues and sellers advertise on websites, social media and marketplaces, and many buyers find the right animal that way. Scammers advertise in the same places, and they are good at looking like everyone else.
+        </p>
+
+        <p class="text-lg text-gray-700 leading-relaxed">
+          This guide covers how pet scams work, the patterns that show up for different species, eight checks to make before you send any money, and what to do if something goes wrong.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">How Pet Scams Work</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          The details change, but the shape rarely does. A scammer builds a listing that looks appealing, collects money from a buyer who is excited and in a hurry, and disappears or keeps asking for more.
+        </p>
+
+        <div class="space-y-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Stolen Photos And Invented Animals</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The photos are copied from a real breeder's site or social account. The animal in the picture exists, but it does not belong to the person selling it, and the animal you were promised may not exist at all. A reverse image search often shows the same photos on other listings under other names.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Deposit Pressure</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              The seller says several people are interested and that the animal will go to whoever pays first. That urgency is designed to stop you from asking the questions in this guide. A seller with a real animal and a real waitlist does not need you to decide in an hour.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Fake Shipping Fees</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              After the deposit, new charges appear: a special crate, transport insurance, a "climate-controlled" delivery fee, a vaccination certificate. Each is presented as the last step, and each is another payment that will not result in an animal. When a seller adds fees you were not told about, treat it as a reason to stop, not to catch up.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Payment Methods That Cannot Be Reversed</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Scammers ask for wire transfers, gift cards, cryptocurrency or cash apps because those payments are hard or impossible to get back. A seller who insists on one of them and refuses everything else is telling you something.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Patterns By Species</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          The core scam is the same everywhere, but each kind of animal attracts its own version.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Puppies And Kittens</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Popular breeds at prices well below what reputable breeders charge, a seller who is "traveling" or "relocating" and can only ship, and photos that look polished but never show the parents or the home.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Horses</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A rare or expensive breed, such as a trained Friesian, advertised at a fraction of its usual price, with a seller who cannot be reached by phone and wants payment before anyone sees the horse. Horse sales also involve transport arrangements, which gives scammers a place to add fees. Sellers of real horses expect a buyer to visit, ride or have a vet examine the animal.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Goats, Sheep And Other Livestock</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Classified ads with a few photos, a phone number that goes to voicemail, and a request for a deposit to "hold" the animals. Real livestock sellers can tell you about the animal's age, registration, health testing and how they are kept, and will let you see them.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3">Rabbits And Small Animals</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Low-priced listings on classifieds and social marketplaces, often with a story about why the animal needs to go quickly. The lower price makes a deposit feel low-risk, which is exactly why scammers work this end of the market.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Eight Checks Before You Send Any Money</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          None of these is hard, and a legitimate seller will not mind any of them. A seller who objects to several is giving you information.
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">1. Ask Who You Are Dealing With</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Get the seller's full name, location and a phone number you can call. Search the name together with words like "scam" or "complaint." Check that the website, social accounts and listings all tell the same story, and that the account has a history longer than a few weeks.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">2. Check The Photos</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Run a reverse image search on the photos. Ask for a new photo or short video of the specific animal with today's date written on a piece of paper in the frame. A real seller can do this in minutes.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">3. Insist On A Live Video Call</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Ask to see the animal, and where possible its parent or parents, live. Ask the seller to show you the space the animal is kept in and to pick the animal up or move it while you watch. A recorded video can be copied from somewhere else. A live one cannot.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">4. Ask For Records</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Ask what health testing, veterinary care and registration papers exist for the animal and its parents, and ask to see them. Check any registration number with the registry that issued it. Ask for the name of the veterinarian and consider calling the clinic.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">5. Read The Contract Before You Pay</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A written agreement should name the seller and buyer, describe the specific animal, state the price and what any deposit covers, say whether and when it is refundable, and explain what happens if the animal has a health problem. If the seller will not put terms in writing before taking money, do not send any.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">6. Pay With A Method That Has Recourse</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A credit card, or a payment service that offers buyer protection, gives you a way to dispute a charge if the animal never arrives. Wire transfers, gift cards, cryptocurrency and cash apps generally do not. Pay for the animal and any deposit only through the method you chose, and decline requests to switch.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">7. Check The Price Against The Market</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Compare the price to what established sellers of the same species and type charge. A price far below the going rate is the most common reason people lose money, because it is the one thing that makes a buyer stop asking questions.
+            </p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2">8. Notice How The Seller Reacts</h3>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              A real seller who cares where their animals go asks you questions too. Be cautious of anyone who answers every request with an excuse, gets angry when you ask for a video call or paperwork, or tells you the offer expires today.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Meeting The Animal</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Whenever you can, meet the animal in person before you pay the full price. A visit lets you see the animal, the other animals, the place and the seller together, and it is the hardest thing for a scammer to fake.
+        </p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-2 mb-4">
+          <li>Go to where the animal is kept, not to a parking lot, when that is practical.</li>
+          <li>Ask to see the animal's parent or parents and the other animals it lives with.</li>
+          <li>Bring someone with you and tell a friend where you are going.</li>
+          <li>Have the animal examined by your own veterinarian, within the window the agreement gives you.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          If the animal has to be shipped or transported because of distance, a live video call, records and a written agreement matter even more. Use a transport service you have researched yourself, not one the seller chooses and bills you for separately.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Why An Anonymous Seller Is The Core Risk</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Look back over the scams above. Stolen photos, invented animals, vanishing sellers and extra fees all depend on a person nobody can identify. If a seller can post under any name with nothing behind it, a scam costs them almost nothing, and a buyer who loses money has nobody to find.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          That is the reason BreederHQ requires an ID check. Every breeder and service provider on the BreederHQ Marketplace must pass an independent ID check, typically a government photo ID and a live selfie, before they can list. Profiles that have passed show an Identity Confirmed mark. The result is that an identified person stands behind the account that posted, and an identity is on record if something goes wrong.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Sellers who were already listed before the requirement began are being phased in, so look for the mark on the profile rather than assuming it. Read <a href="/buyers/seller-id-checks" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">how seller ID checks work</a> for what the check involves and what to look for.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">What An ID Check Does Not Cover</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          An ID check confirms identity. It does not confirm anything else, and you should not read more into it than that.
+        </p>
+        <ul class="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-2 mb-4">
+          <li>It does not mean the seller is honest or a good breeder.</li>
+          <li>It does not mean the animals are healthy, well kept or as described.</li>
+          <li>It does not guarantee how a sale will turn out.</li>
+          <li>BreederHQ does not inspect, vet or vouch for any seller or animal. Sales happen directly between you and the seller.</li>
+        </ul>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          That is why the eight checks above still apply on any marketplace, including ours. Our <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline font-semibold">Trust and Transparency page</a> explains what we do and do not do.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">If You Think You Have Been Scammed</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          Act quickly. The sooner you report a problem, the better the chance of limiting the damage.
+        </p>
+        <ol class="list-decimal pl-6 text-lg text-gray-700 leading-relaxed space-y-2 mb-4">
+          <li><strong>Contact your card issuer or payment provider.</strong> Ask to dispute the charge and explain what happened. Do this first, because dispute windows are limited.</li>
+          <li><strong>Report it to the Federal Trade Commission</strong> at ReportFraud.ftc.gov. If you are outside the United States, report it to your national consumer protection or fraud authority.</li>
+          <li><strong>Report the seller to the platform</strong> where you found the listing, so the account can be reviewed and other buyers can be warned.</li>
+          <li><strong>Keep everything.</strong> Save messages, listings, photos, receipts and payment confirmations before the account disappears.</li>
+          <li><strong>Stop paying.</strong> Do not send more money to recover what you lost. Follow-up demands are often part of the same scam.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((f) => (
+            <details class="bg-white border border-gray-200 rounded-lg p-5">
+              <summary class="font-bold text-gray-900 cursor-pointer">{f.question}</summary>
+              <p class="mt-3 text-gray-700 leading-relaxed">{f.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Related Reading</h2>
+        <div class="grid md:grid-cols-2 gap-3 text-base">
+          <a href="/buyers/seller-id-checks" class="text-[hsl(24,95%,53%)] hover:underline">→ How Seller ID Checks Work</a>
+          <a href="/trust" class="text-[hsl(24,95%,53%)] hover:underline">→ Trust And Transparency</a>
+          <a href="/buyers/red-flags" class="text-[hsl(24,95%,53%)] hover:underline">→ Red Flags To Watch For</a>
+          <a href="/buyers/evaluate-breeders" class="text-[hsl(24,95%,53%)] hover:underline">→ How To Evaluate Breeders</a>
+          <a href="/buyers/contracts-and-agreements" class="text-[hsl(24,95%,53%)] hover:underline">→ Contracts And Agreements</a>
+          <a href="/workflows/marketplace" class="text-[hsl(24,95%,53%)] hover:underline">→ How The BreederHQ Marketplace Works</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

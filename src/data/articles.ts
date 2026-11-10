@@ -17,6 +17,16 @@ export interface ArticleMeta {
 // Most-recent first.
 export const articles: ArticleMeta[] = [
   {
+    slug: 'avoid-pet-scams',
+    title: 'How To Buy A Pet Online Without Getting Scammed',
+    excerpt: 'Warning signs of a pet scam, what to ask a seller, how to pay with recourse and how to meet the animal. Covers puppies, kittens, horses, goats, rabbits and more, plus what a seller ID check does and does not tell you.',
+    author: 'BreederHQ Editorial',
+    role: 'November 2026',
+    date: 'November 2026',
+    readTime: '8 min read',
+    tag: 'Buyer Guide',
+  },
+  {
     slug: 'how-to-build-a-breeder-website',
     title: "How To Build A Breeder Website (And When You Don't Need One)",
     excerpt: 'What a breeder website needs: programs and upcoming litters, available animals, health and practices, and a waitlist and inquiry path. Plus the real ongoing cost of keeping one current, and the alternative that fills in from your breeding records.',
