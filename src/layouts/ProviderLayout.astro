@@ -1,0 +1,27 @@
+---
+/**
+ * Layout for pages written for animal service businesses (/for-providers,
+ * its sub-pages, /list-your-facility).
+ *
+ * Wraps BaseLayout and passes every prop through. Two differences:
+ *  - Link previews use the provider image (public/og/providers.jpg) instead of
+ *    the site-wide default, unless the page passes its own ogImage.
+ *  - A breeder strip sits above the page so a breeder who lands here from a
+ *    shared link finds their own door: these pages are for service businesses,
+ *    and the breeder waitlist is at /pricing#apply.
+ */
+import BaseLayout from './BaseLayout.astro';
+
+// Same props as BaseLayout, which does not export its Props type.
+type Props = Parameters<typeof BaseLayout>[0];
+
+const { ogImage, ...rest } = Astro.props;
+const providerOgImage = ogImage || 'https://breederhq.com/og/providers.jpg';
+---
+<BaseLayout {...rest} ogImage={providerOgImage}>
+  <div class="border-b border-orange-200 bg-orange-50 px-4 py-2.5 text-center text-sm text-orange-900" data-provider-breeder-strip>
+    <span>Breeding animals? These pages are for service businesses.</span>
+    <a href="/pricing#apply" class="ml-1 font-semibold text-orange-700 underline underline-offset-2 hover:text-orange-800">Join the breeder waitlist →</a>
+  </div>
+  <slot />
+</BaseLayout>
