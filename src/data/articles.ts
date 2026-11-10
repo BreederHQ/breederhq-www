@@ -18,7 +18,7 @@ export interface ArticleMeta {
 export const articles: ArticleMeta[] = [
   {
     slug: 'avoid-pet-scams',
-    title: 'How To Buy A Pet Online Without Getting Scammed',
+    title: 'How to Buy a Pet Online Without Getting Scammed',
     excerpt: 'Warning signs of a pet scam, what to ask a seller, how to pay with recourse and how to meet the animal. Covers puppies, kittens, horses, goats, rabbits and more, plus what a seller ID check does and does not tell you.',
     author: 'BreederHQ Editorial',
     role: 'November 2026',
