@@ -348,32 +348,29 @@ const trustLayers = [
 
 
 <!-- ===== BREEDER STOREFRONT ===== -->
-<section aria-label="Breeder Storefront" style="max-width:1180px;margin:0 auto;padding:40px 30px 56px">
-  <div class="bhq-hero-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:36px;align-items:center;border-radius:18px;border:1px solid rgba(255,138,76,.28);background:linear-gradient(180deg,rgba(255,106,44,.08),rgba(255,255,255,.01));padding:32px">
-    <div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:#FF6A2C;margin-bottom:14px;text-transform:uppercase">Breeder Storefront</div>
-      <h2 style="margin:0;font-size:clamp(28px,3.6vw,42px);line-height:1.1;font-weight:800;letter-spacing:-.02em;color:#EAF1FC">Your website builds itself.</h2>
-      <p style="margin:16px 0 0;font-size:16.5px;line-height:1.55;color:#AEC0DA">Every breeder on BreederHQ gets a public Storefront that fills in from your breeding plans, litters and placements, and sends buyers straight into your waitlist. No site builder. No hosting bill. Nothing to update.</p>
-      <a href="/storefront" style="display:inline-flex;align-items:center;margin-top:22px;padding:12px 20px;min-height:44px;border-radius:9px;font-size:14.5px;font-weight:600;text-decoration:none;color:#0A0F1A;background:linear-gradient(150deg,#FF6A2C,#FF9A3C);box-shadow:0 6px 22px rgba(255,106,44,.35)">See How It Works &#8594;</a>
-    </div>
-    <a href="/storefront" style="display:block;text-decoration:none;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.45)">
-      <div style="display:flex;align-items:center;gap:7px;padding:9px 12px;background:#EEF0F3;border-bottom:1px solid #D9DDE3">
-        <i style="width:9px;height:9px;border-radius:50%;background:#C7CCD4;display:block"></i><i style="width:9px;height:9px;border-radius:50%;background:#C7CCD4;display:block"></i><i style="width:9px;height:9px;border-radius:50%;background:#C7CCD4;display:block"></i>
-        <span style="margin-left:6px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:#4B5563;background:#fff;border:1px solid #D9DDE3;border-radius:5px;padding:4px 9px">marketplace.breederhq.com/breeders/stoneridge-heritage-farms</span>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" />
+<section aria-label="Breeder Storefront" class="sfh">
+  <div class="sfh-wrap">
+    <div class="sfh-card">
+      <div class="sfh-copy">
+        <span class="sfh-eyebrow">Breeder Storefront</span>
+        <h2>Your Website Builds Itself.</h2>
+        <p class="sfh-lede">Every breeder on BreederHQ gets a public Storefront that fills in from your breeding plans, litters and placements, and sends buyers straight into your waitlist. No site builder. No hosting bill. Nothing to update.</p>
+        <div class="sfh-row"><a class="sfh-btn" href="/storefront">See How It Works</a></div>
       </div>
-      <div style="position:relative">
+      <a href="/storefront" class="sfh-frame" aria-label="See the Breeder Storefront">
+        <div class="sfh-bar"><i></i><i></i><i></i><span>marketplace.breederhq.com/breeders/stoneridge-heritage-farms</span></div>
         <img
           src="/images/screenshots/storefront/storefront-header.webp"
-          alt="The Stoneridge Heritage Farms storefront header: farm banner with horses, cattle, sheep and goats, a round logo, the farm name, a Message Breeder button, and counts of 14 Programs and 21 Animal Offers"
-          width="1327"
-          height="562"
+          alt="The Stoneridge Heritage Farms storefront header: a farm banner, round logo, the farm name, 14 Breeds, Lexington, KY, a Message Breeder button and tiles for 14 breeding programs and 21 animal offers"
+          width="1234"
+          height="977"
           loading="lazy"
-          style="display:block;width:100%;height:auto"
         />
-        <!-- Bottom fade so the cut-off screenshot reads as a deliberate peek -->
-        <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none;background:linear-gradient(to bottom,rgba(7,12,22,0),#070C16)"></div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -635,6 +632,29 @@ const trustLayers = [
   @media (max-width: 540px) {
     .bhq-4col { grid-template-columns: 1fr !important; }
   }
+
+  /* Breeder Storefront section: the approved Storefront design's dark palette */
+  .sfh {
+    --bg: #121110; --band: #1a1817; --card: #201e1c; --fg: #f5f5f4; --muted: #b8b2ad; --line: #34302d;
+    --accent: hsl(24 95% 53%); --accent-ink: hsl(28 95% 62%);
+    background: var(--bg); color: var(--fg); padding-block: 72px;
+    font: 400 17px/1.6 "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  }
+  .sfh-wrap { max-width: 1120px; margin: 0 auto; padding-inline: 16px; }
+  .sfh-card { border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; align-items: center; background: var(--card); }
+  .sfh-copy { display: flex; flex-direction: column; gap: 16px; }
+  .sfh-eyebrow { font: 700 .78rem/1 "Source Sans 3", "Segoe UI", system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
+  .sfh h2 { margin: 0; font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 800; letter-spacing: -.01em; line-height: 1.1; color: var(--fg); text-wrap: balance; }
+  .sfh-lede { margin: 0; max-width: 65ch; font-size: 1.2rem; color: var(--muted); }
+  .sfh-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .sfh-btn { display: inline-flex; align-items: center; min-height: 44px; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 22px; border-radius: 10px; text-decoration: none; margin-top: 8px; }
+  .sfh-frame { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 18px 50px -24px rgb(0 0 0 / .35); text-decoration: none; }
+  .sfh-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--band); }
+  .sfh-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; flex: none; }
+  .sfh-bar span { margin-left: 8px; flex: 1; min-width: 0; font: 400 .8rem/1.4 ui-monospace, Consolas, monospace; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sfh-frame img { display: block; width: 100%; height: auto; }
+  .sfh a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  @media (max-width: 860px) { .sfh-card { grid-template-columns: minmax(0, 1fr); } }
 </style>
 
 
