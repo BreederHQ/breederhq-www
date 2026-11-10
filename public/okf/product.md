@@ -4,8 +4,8 @@ slug: product
 format: OKF v0.1
 canonical: https://breederhq.com/okf/product.md
 site: https://breederhq.com
-updated: 2026-11-09
-tags: [product overview, scout ai, mobile app, bring what you already have, marketplace, embed widget]
+updated: 2026-11-10
+tags: [product overview, scout ai, mobile app, bring what you already have, marketplace, breeder storefront, embed widget]
 related:
   - ./audiences.md
   - ./differentiation.md
@@ -39,6 +39,7 @@ BreederHQ is a program-management platform with a marketplace as a byproduct, no
 - Client portal: 24/7 buyer access with Stripe payments, e-signature contracts, document sharing, direct messaging, waitlist position visibility, and program updates.
 - Business tools: invoicing, expense tracking, vehicle mileage logs at the IRS standard rate (trips linked to animals, buyers, and breeding plans), financial dashboards, deposit management, per-litter and per-plan and per-year profit and loss, and CSV export.
 - Marketplace listings: powered directly by live program data (health testing, allele-level genetics, multi-generation lineage with COI, titles and competition results, rearing protocols completed, weight and growth tracking for offspring). Buyers evaluate breeders on facts, not on the polish of a Facebook page.
+- Breeder Storefront: every breeder gets a public storefront at marketplace.breederhq.com/breeders/<slug>, included with BreederHQ, that fills in from the breeder's own records. Plans the breeder lists appear under their program with expected dates, litters due within 90 days show as coming soon, placed animals leave the available list, and finished plans drop off. The breeder chooses what is public, health panels are labeled breeder-attested, and buyers can join a program or litter waitlist that lands in the breeder's BreederHQ waitlist. A breeder who owns a domain can point it at the storefront with registrar domain forwarding (hosting a storefront on a breeder's own domain is not offered), or paste the free embed widget into an existing site. Documented at https://breederhq.com/storefront.
 - Embed widget: a snippet that renders live BreederHQ marketplace listings on the breeder's own Squarespace, Wix, WordPress, Shopify, GoDaddy, or plain-HTML site. Listings are created automatically from program records, and sold animals are de-listed automatically when they are marked sold. Prices, photos, health testing, pedigree, and program details update in real time from BreederHQ as the source of truth.
 - Communications Hub: unified email and direct messaging with rule-based auto-replies. Templates, document bundles, business-hours scheduling, keyword triggers, away messages, and Quick Responder tracking.
 - Network animal identity (GAID and Exchange Code): a stud owned by one breeder can be linked as the sire of a litter on another breeder's account only with the stud owner's approval. Real provenance across the breeder network, not a name typed into a form.

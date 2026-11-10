@@ -1,0 +1,347 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Breeder Storefront', url: '/storefront' }
+];
+
+const img = '/images/screenshots/storefront/';
+
+const faqs = [
+  {
+    question: 'Does every BreederHQ breeder get a Storefront?',
+    answer: 'Yes. Your Storefront is created with your account and included with BreederHQ. There is no separate hosting or website fee. Publish it once your profile is ready, and pause it any time.'
+  },
+  {
+    question: 'Do I have to update it?',
+    answer: 'Only the parts that are about you: your About text, logo, banner, policies and Q&A. Programs, plans, upcoming litters, available animals and waitlist status update from your BreederHQ records.'
+  },
+  {
+    question: 'What do buyers see, and what stays private?',
+    answer: 'Only what you switch on. Each plan, animal, health record and Q&A answer has its own public setting, and you choose how much of your location to show.'
+  },
+  {
+    question: 'Can I use my own domain?',
+    answer: 'Yes, with domain forwarding at your registrar. Your domain sends visitors to your Storefront address, which looks like marketplace.breederhq.com/breeders/your-farm. BreederHQ does not host your Storefront on your own domain, so forwarding is how a domain you own points to it. If you change your Storefront address, update the forwarding target at your registrar; the old address redirects for 14 days. If you would rather keep your current site, add the free embed widget instead.'
+  },
+  {
+    question: 'How is this different from a website builder or a paid custom site?',
+    answer: 'A built website is a brochure you maintain. Your Storefront is your breeding program running in public: it changes when your records change, and it connects buyers to your waitlist, contracts, deposits and buyer portal. See our comparisons for specifics.'
+  }
+];
+
+const autoItems = [
+  { b: 'Plans you list appear on their own', d: 'Turn on Plan Listing for a breeding plan and it shows up under its program, with its expected date.' },
+  { b: 'Upcoming litters count down', d: 'A litter due in the next 90 days shows as coming soon, with how many weeks away it is.' },
+  { b: 'Births show up when you record them', d: 'Record the litter and the plan moves to Available Soon with the birth date and count.' },
+  { b: 'Placed animals come off the page', d: 'Assign a buyer or mark an offspring placed and it leaves your available list the same moment.' },
+  { b: 'Finished plans retire themselves', d: 'Complete or cancel a plan and it drops off your public page.' },
+  { b: 'You decide what is public', d: 'Every plan, animal, health record and Q&A answer has its own switch. Nothing goes public until you turn it on.' }
+];
+
+const steps = [
+  { b: 'Join Waitlist', d: 'A buyer joins a program or a specific litter right from your Storefront.' },
+  { b: 'Lands In Your Waitlist', d: 'It arrives in BreederHQ, attached to the plan, not in a forgotten inbox.' },
+  { b: 'Screen And Approve', d: 'Applications, questions and messages, all on the buyer\'s record.' },
+  { b: 'Contract And Deposit', d: 'Send the agreement to sign and the deposit invoice from the same place.' },
+  { b: 'Buyer Portal', d: 'Updates, photos and documents in a portal carrying your logo and colors.' },
+  { b: 'Go-Home Day', d: 'The animal is placed and leaves your available list on its own.' }
+];
+
+const panels = [
+  { src: 'panel-herd-health.webp', w: 1334, h: 346, alt: 'Breeder-attested herd health panel: CAE, CL, Johne\'s and Brucellosis each marked Negative, with test dates, the lab or state vet, sample size and the date the breeder attested', cap: 'Herd health, from a goat program' },
+  { src: 'panel-parasite.webp', w: 861, h: 170, alt: 'Breeder-attested parasite program panel: FAMACHA scoring, 623 entries on file, last recorded Aug 2, 2026, with a link to all parasite-program records', cap: 'Parasite program' },
+  { src: 'panel-appraisal.webp', w: 860, h: 182, alt: 'Breeder-attested linear appraisal panel: 8 does with a public-visible appraisal on file across 10 sessions, best final score 91 out of 99, herd average 87.5, most recent session Sep 23, 2025', cap: 'Linear appraisal, from a dairy goat program' },
+  { src: 'panel-dairy.webp', w: 1097, h: 190, alt: 'Breeder-attested dairy production panel: 6 does with a completed lactation on file, 4 does on DHIA test, 8 DHIA test records on file, last test May 27, 2026', cap: 'Dairy production, from a goat program' }
+];
+
+const eyebrow = 'text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,90%,38%)]';
+---
+
+<BaseLayout
+  title="Breeder Storefront: Your Breeder Website Builds Itself | BreederHQ"
+  description="Every BreederHQ breeder gets a public Storefront that fills in from breeding records and feeds the waitlist. No site builder, no hosting bill."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:shadow-lg focus:rounded">
+    Skip to main content
+  </a>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="bg-stone-900 text-stone-50 pt-20 overflow-hidden">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-primary mb-5">Breeder Storefront · Included With BreederHQ</p>
+          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">
+            Your Breeder Website <span class="text-primary">Builds Itself.</span>
+          </h1>
+          <p class="text-xl text-stone-300 leading-relaxed mb-8">
+            Every BreederHQ breeder gets a Breeder Storefront: one public page with your programs, upcoming litters, available animals, health records and how you place animals. It fills in from the work you already do in BreederHQ. No website builder, no hosting bill, and no Sunday nights spent updating it.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="/pricing" class="inline-flex justify-center bg-primary text-white px-6 py-3.5 rounded-lg font-bold hover:opacity-90" style="min-height: 44px;">Apply And Book A Tour</a>
+            <a href="https://marketplace.breederhq.com/breeders" target="_blank" rel="noopener" class="inline-flex justify-center border-2 border-stone-300 text-stone-50 px-6 py-3.5 rounded-lg font-bold hover:bg-white/10" style="min-height: 44px;">Browse Real Storefronts</a>
+          </div>
+        </div>
+        <div class="mt-12 -mb-0.5 bg-white border border-stone-200 rounded-t-xl overflow-hidden shadow-2xl">
+          <div class="flex items-center gap-2 px-3.5 py-2.5 border-b border-stone-200 bg-stone-100">
+            <i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i>
+            <span class="ml-2 flex-1 min-w-0 truncate font-mono text-xs text-stone-600 bg-white border border-stone-200 rounded px-2.5 py-1">marketplace.breederhq.com/breeders/stoneridge-heritage-farms</span>
+          </div>
+          <img
+            src={img + 'storefront-header.webp'}
+            alt="The Stoneridge Heritage Farms storefront header: farm banner with horses, cattle, sheep and goats, a round logo, the farm name, a Message Breeder button, and counts of 14 Programs and 21 Animal Offers"
+            class="block w-full h-auto"
+            width="1327"
+            height="562"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <p class={eyebrow + ' mb-3'}>The Breeder Website Problem</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight max-w-3xl mb-5">Most Breeder Websites Are Out Of Date The Day A Litter Is Born.</h2>
+        <p class="text-xl text-stone-600 leading-relaxed max-w-3xl mb-8">You did not get into breeding to run a website. But buyers look for one, so you pay for it, build it, and then try to keep it current between whelping, foaling, kidding and everything else.</p>
+        <div class="grid gap-5 grid-cols-[minmax(0,1fr)] md:grid-cols-3">
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <span class="text-xs font-bold uppercase tracking-widest text-red-700">Stale</span>
+            <h3 class="text-xl font-semibold text-stone-900 mt-2 mb-2">Pretty Pictures, Old News</h3>
+            <p class="text-stone-600">A beautiful homepage still lists the spring litter in October. Buyers email to ask what is actually available, and you answer the same question all week.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <span class="text-xs font-bold uppercase tracking-widest text-red-700">Dated</span>
+            <h3 class="text-xl font-semibold text-stone-900 mt-2 mb-2">Built Once, Years Ago</h3>
+            <p class="text-stone-600">The site someone made for you in a weekend has not changed since. It does not work on a phone, and you no longer remember the password.</p>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-xl p-6">
+            <span class="text-xs font-bold uppercase tracking-widest text-red-700">Paid For Three Times</span>
+            <h3 class="text-xl font-semibold text-stone-900 mt-2 mb-2">Builder, Domain, And Your Evenings</h3>
+            <p class="text-stone-600">A monthly Wix or Squarespace plan, a yearly domain bill, a paid build or add-on, and the hours you spend copying litter news into it by hand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTOMATIC -->
+    <section id="see" class="py-20 bg-stone-100">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-12 grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-start">
+        <div>
+          <p class={eyebrow + ' mb-3'}>It Updates Itself</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight mb-5">Your Storefront Reads The Records You Already Keep.</h2>
+          <p class="text-xl text-stone-600 leading-relaxed mb-6">Plan a pairing, record a birth, place an animal, close a litter. Your Storefront changes with it. Nobody edits a web page.</p>
+          <ul class="space-y-3.5">
+            {autoItems.map((item) => (
+              <li class="grid grid-cols-[26px_1fr] gap-2.5">
+                <span class="w-[26px] h-[26px] rounded-full bg-[hsl(24,95%,53%)]/10 text-[hsl(24,90%,38%)] grid place-items-center font-extrabold text-sm" aria-hidden="true">✓</span>
+                <div><strong class="block text-stone-900">{item.b}</strong><span class="text-stone-600">{item.d}</span></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figure>
+          <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-xl">
+            <div class="flex items-center gap-2 px-3.5 py-2.5 border-b border-stone-200 bg-stone-100">
+              <i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i>
+              <span class="ml-2 flex-1 min-w-0 truncate font-mono text-xs text-stone-600 bg-white border border-stone-200 rounded px-2.5 py-1">…/breeders/stoneridge-heritage-farms/breeding-programs/stoneridge-labradors</span>
+            </div>
+            <img
+              src={img + 'program-upcoming-litters.webp'}
+              alt="Two upcoming litters on the Stoneridge Labradors program page: Poppy x Tate, born Sep 22, 2026 with 7 puppies born, marked Available Soon, and Briar x Tate, expected Dec 8, 2026, marked Coming Soon and 5 weeks away, each with a Join Waitlist button, beside Send Inquiry and Join Waitlist buttons and an About The Breeder card"
+              class="block w-full h-auto"
+              width="735"
+              height="300"
+              loading="lazy"
+            />
+          </div>
+          <figcaption class="text-sm text-stone-600 mt-2.5">Nobody typed the countdown to Briar x Tate or the birth count for Poppy x Tate. Both come straight from the breeding plans.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-12 grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-center">
+        <figure class="order-2 lg:order-1">
+          <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-xl max-w-xl mx-auto">
+            <div class="flex items-center gap-2 px-3.5 py-2.5 border-b border-stone-200 bg-stone-100">
+              <i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i><i class="w-2.5 h-2.5 rounded-full bg-stone-300"></i>
+              <span class="ml-2 flex-1 min-w-0 truncate font-mono text-xs text-stone-600 bg-white border border-stone-200 rounded px-2.5 py-1">…/breeders/stoneridge-heritage-farms · Our Breeding Programs</span>
+            </div>
+            <img
+              src={img + 'programs-grid.webp'}
+              alt="Our Breeding Programs, 14 programs: the first two rows of cards for Holland Lops, Shetland Flock, Mini Rex, Angus, Suri Alpacas and Maine Coons, each marked Coming Soon or Accepting Inquiries with Waitlist Open"
+              class="block w-full h-auto"
+              width="517"
+              height="505"
+              loading="lazy"
+            />
+          </div>
+        </figure>
+        <div class="order-1 lg:order-2">
+          <p class={eyebrow + ' mb-3'}>Every Program, One Address</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight mb-5">One Program Or Fourteen, Every Species, One Page.</h2>
+          <p class="text-xl text-stone-600 leading-relaxed mb-4">Each breeding program gets its own page with its upcoming litters, its waitlist and its status: Coming Soon, Accepting Inquiries, Waitlist Open. Buyers see the whole operation at a glance and drill into the program they care about.</p>
+          <p class="text-lg text-stone-700 leading-relaxed">Your Storefront lives at a clean address you choose, like <strong>marketplace.breederhq.com/breeders/your-farm</strong>. Put it on your business cards, your social profiles and the QR code on your Breeder Business Card.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECORDS -->
+    <section class="py-20 bg-stone-100">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <p class={eyebrow + ' mb-3'}>Your Records Speak For You</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight max-w-3xl mb-5">Show Buyers The Work Behind Your Animals.</h2>
+        <p class="text-xl text-stone-600 leading-relaxed max-w-3xl mb-8">Health testing, parasite programs, linear appraisals and dairy records come straight from what you log in BreederHQ. Choose which rows go public, and your Storefront summarizes them, with dates, labs and sample sizes.</p>
+        <div class="grid gap-5 grid-cols-[minmax(0,1fr)] md:grid-cols-2 items-start">
+          {panels.map((p) => (
+            <figure>
+              <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-xl">
+                <img src={img + p.src} alt={p.alt} class="block w-full h-auto" width={p.w} height={p.h} loading="lazy" />
+              </div>
+              <figcaption class="text-sm text-stone-600 mt-2">{p.cap}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p class="text-sm text-stone-600 mt-6 max-w-3xl">"623 entries on file" is a count of the FAMACHA scores this breeder actually recorded. Every panel is labeled as the breeder's own attestation, and buyers are invited to ask for the underlying records.</p>
+      </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <section class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <p class={eyebrow + ' mb-3'}>From Interested To Placed</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight max-w-3xl mb-5">Your Storefront Is Wired To Your Whole Sales Process.</h2>
+        <p class="text-xl text-stone-600 leading-relaxed max-w-3xl mb-8">A website hands you an email and wishes you luck. Your Storefront hands the buyer to the same BreederHQ you already work in, where every next step lives.</p>
+        <ol class="grid gap-4 grid-cols-[minmax(0,1fr)] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          {steps.map((s, i) => (
+            <li class="bg-white border border-stone-200 rounded-xl p-[18px] flex flex-col gap-1.5">
+              <span class="text-3xl font-extrabold text-primary leading-none" aria-hidden="true">{i + 1}</span>
+              <strong class="text-stone-900">{s.b}</strong>
+              <span class="text-stone-600 text-[0.95rem]">{s.d}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="py-20 bg-stone-100">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <p class={eyebrow + ' mb-3'}>Always Wanted Your Own Breeder Website?</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight max-w-3xl mb-5">Thinking About A Breeder Website? You Have Three Options.</h2>
+        <p class="text-xl text-stone-600 leading-relaxed max-w-3xl mb-8">You can build your own breeder website, or pay someone to build one for you, if you are looking to add one more thing to your to-do list and one more bill to manage. Both get you a website. Neither gets you a website that keeps itself current, takes waitlist sign-ups into your records, or puts you in front of buyers who are already shopping. Your Storefront does all three, and you already have it.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[620px] border-collapse bg-white border border-stone-200 text-left">
+            <thead>
+              <tr>
+                <th class="p-4 bg-stone-100 border-b border-stone-200"><span class="sr-only">Comparison</span></th>
+                <th class="p-4 bg-stone-100 border-b border-stone-200 text-sm font-bold">Build it yourself<br /><span class="font-normal text-stone-600">Wix, Squarespace, WordPress</span></th>
+                <th class="p-4 bg-stone-100 border-b border-stone-200 text-sm font-bold">Pay someone to build it<br /><span class="font-normal text-stone-600">A designer or a paid website add-on</span></th>
+                <th class="p-4 bg-[hsl(24,90%,42%)] text-white border-b border-stone-200 text-sm font-bold">Your BreederHQ Storefront</th>
+              </tr>
+            </thead>
+            <tbody class="align-top">
+              <tr>
+                <th scope="row" class="p-4 border-b border-stone-200 text-sm font-bold">Time to launch</th>
+                <td class="p-4 border-b border-stone-200 text-stone-700">Weekends of building and writing</td>
+                <td class="p-4 border-b border-stone-200 text-stone-700">Weeks of back and forth</td>
+                <td class="p-4 border-b border-stone-200 bg-[hsl(24,95%,53%)]/10 font-semibold text-stone-900">Created with your account; publish when your profile is ready</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-4 border-b border-stone-200 text-sm font-bold">Who keeps it current</th>
+                <td class="p-4 border-b border-stone-200 text-stone-700">You, by hand</td>
+                <td class="p-4 border-b border-stone-200 text-stone-700">You, or you pay for changes</td>
+                <td class="p-4 border-b border-stone-200 bg-[hsl(24,95%,53%)]/10 font-semibold text-stone-900">Your breeding records, automatically</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-4 border-b border-stone-200 text-sm font-bold">Waitlist, applications, contracts, deposits</th>
+                <td class="p-4 border-b border-stone-200 text-stone-700">Separate forms, apps and payment tools</td>
+                <td class="p-4 border-b border-stone-200 text-stone-700">Usually a contact form</td>
+                <td class="p-4 border-b border-stone-200 bg-[hsl(24,95%,53%)]/10 font-semibold text-stone-900">Built in, on the same platform</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-4 border-b border-stone-200 text-sm font-bold">How buyers find you</th>
+                <td class="p-4 border-b border-stone-200 text-stone-700">Only people who already have your URL</td>
+                <td class="p-4 border-b border-stone-200 text-stone-700">Only people who already have your URL</td>
+                <td class="p-4 border-b border-stone-200 bg-[hsl(24,95%,53%)]/10 font-semibold text-stone-900">Also listed on the BreederHQ Marketplace</td>
+              </tr>
+              <tr>
+                <th scope="row" class="p-4 text-sm font-bold">What it costs</th>
+                <td class="p-4 text-stone-700">Builder plan, domain, your time</td>
+                <td class="p-4 text-stone-700">Build fee or add-on, plus hosting and domain</td>
+                <td class="p-4 bg-[hsl(24,95%,53%)]/10 font-semibold text-stone-900">Included with BreederHQ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-10">
+          <h3 class="text-xl font-semibold text-stone-900 mb-3">One Platform, Not Five Tools</h3>
+          <div class="flex flex-wrap items-center gap-2.5">
+            {['Website builder', 'Domain and hosting', 'Waitlist form', 'E-signature app', 'Invoicing and deposits'].map((t) => (
+              <span class="border border-stone-200 bg-white rounded-full px-3.5 py-2 text-stone-600 line-through decoration-red-700">{t}</span>
+            ))}
+            <span class="text-2xl font-extrabold text-primary px-1.5" aria-hidden="true">→</span>
+            <span class="bg-[hsl(24,90%,42%)] text-white rounded-full px-4 py-2 font-bold">BreederHQ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWO DOORS -->
+    <section class="py-20 bg-stone-50">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <p class={eyebrow + ' mb-3'}>Already Have A Domain Or A Site?</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight max-w-3xl mb-8">Keep What You Love. Stop Updating It.</h2>
+        <div class="grid gap-5 grid-cols-[minmax(0,1fr)] md:grid-cols-2">
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 flex flex-col gap-3">
+            <h3 class="text-xl font-semibold text-stone-900">Your Own Domain, Pointed At Your Storefront</h3>
+            <p class="text-stone-600">Own a domain like yourfarm.com? Turn on domain forwarding at your registrar (GoDaddy, Namecheap, Squarespace Domains and most others offer it) and send it to your Storefront address. Buyers type the name they know and land on your always-current page.</p>
+            <div class="font-mono text-sm bg-stone-100 border border-stone-200 rounded-lg px-3 py-2.5 overflow-x-auto whitespace-nowrap">yourfarm.com → marketplace.breederhq.com/breeders/your-farm</div>
+          </div>
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 flex flex-col gap-3">
+            <h3 class="text-xl font-semibold text-stone-900">Love Your Site? Put Your Storefront In It.</h3>
+            <p class="text-stone-600">Keep your Squarespace, Wix or WordPress site exactly as it is and paste in the free BreederHQ embed widget. Your programs, upcoming litters and available animals appear inside your own pages and stay current on their own.</p>
+            <a href="/workflows/embed-on-your-website" class="font-bold text-[hsl(24,90%,38%)] hover:underline">How The Embed Widget Works →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-stone-100">
+      <div class="mx-auto max-w-[820px] px-4 sm:px-6 lg:px-8">
+        <p class={eyebrow + ' mb-3'}>Questions</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight mb-6">Breeder Storefront FAQ</h2>
+        <div class="space-y-3.5">
+          {faqs.map((f, i) => (
+            <details class="bg-white border border-stone-200 rounded-[10px] px-5 py-4" open={i === 0}>
+              <summary class="font-bold text-stone-900 cursor-pointer">{f.question}</summary>
+              <p class="mt-2.5 text-stone-600">
+                {f.answer}
+                {i === faqs.length - 1 && <> <a href="/compare/breederbuddy-alternative" class="text-[hsl(24,90%,38%)] hover:underline">Read the sourced comparison</a>.</>}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="bg-stone-900 text-stone-50 py-20 text-center">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">Run Your Program. Your Storefront Keeps Up.</h2>
+        <p class="text-xl text-stone-300 leading-relaxed">BreederHQ is open by invitation through our Founders' Program. Apply, and we will walk you through your own Storefront on a live tour.</p>
+        <a href="/pricing" class="inline-flex bg-primary text-white px-6 py-3.5 rounded-lg font-bold hover:opacity-90 mt-2" style="min-height: 44px;">Apply And Book A Tour</a>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
