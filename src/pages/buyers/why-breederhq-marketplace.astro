@@ -14,8 +14,8 @@ const faqs = [
     answer: 'Yes. Browsing listings, messaging breeders, joining waitlists, and using the buyer portal are all completely free. Buyers never pay BreederHQ.'
   },
   {
-    question: 'How does identity verification work?',
-    answer: 'Breeders can complete identity verification through Stripe Identity, a service operated by Stripe, Inc. (not by BreederHQ). Stripe checks a government-issued photo ID against the legal name on file and returns the result to BreederHQ. The profile then shows "Identity confirmed via Stripe Identity" with the date. BreederHQ does not perform the verification itself, and the indicator does not mean BreederHQ has vouched for the breeder\u2019s competence, character, or program. See /trust for the full policy.'
+    question: 'How does the seller ID check work?',
+    answer: 'Every breeder and service provider must pass an independent ID check before they can list, typically a government photo ID and a live selfie. The check is run by a third-party provider, not by BreederHQ. Profiles that have passed show an Identity Confirmed mark, which may include when and how the check was done. The mark means the account that posted passed an ID check; it does not mean BreederHQ has vouched for the seller\u2019s competence, character, or program. See /trust for the full policy.'
   },
   {
     question: 'Can breeders fake their data on BreederHQ?',
@@ -207,7 +207,7 @@ const faqs = [
       <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
         <h3 class="text-lg font-bold text-gray-900 mb-3">How BreederHQ is different</h3>
         <p class="text-sm text-gray-700 leading-relaxed mb-3">
-          On BreederHQ, the breeder is not hidden, they are the listing. Every listing is tied to a public breeder profile with a name, a program, a location, the breeder\u2019s own health-testing attestations, and a direct messaging channel. You can see who they are, what they say about their program, and how to reach them, before any money changes hands. Where applicable the profile also shows identity confirmation via Stripe Identity and public-registry passthrough indicators.
+          On BreederHQ, the breeder is not hidden, they are the listing. Every listing is tied to a public breeder profile with a name, a program, a location, the breeder\u2019s own health-testing attestations, and a direct messaging channel. You can see who they are, what they say about their program, and how to reach them, before any money changes hands. Sellers must pass an independent ID check before they can list, and the profile shows an Identity Confirmed mark once they have, alongside public-registry passthrough indicators where applicable.
         </p>
         <p class="text-sm text-gray-700 leading-relaxed">
           BreederHQ does not sit between you and the breeder. We give you the tools to evaluate the breeder, then get out of the way so you can build a real relationship.
@@ -262,9 +262,9 @@ const faqs = [
           </p>
         </div>
         <div class="bg-white rounded-xl border border-stone-200 p-6">
-          <h3 class="font-bold text-gray-900 mb-3">Identity confirmation (Stripe Identity)</h3>
+          <h3 class="font-bold text-gray-900 mb-3">Seller ID Check</h3>
           <p class="text-sm text-gray-700">
-            Breeders can complete identity verification through Stripe Identity. The profile shows the result Stripe returned, with the date. BreederHQ does not perform the verification itself.
+            Sellers must pass an independent ID check before they can list. Profiles that have passed show an Identity Confirmed mark. The check is run by a third-party provider, not by BreederHQ.
           </p>
         </div>
         <div class="bg-white rounded-xl border border-stone-200 p-6">
@@ -315,10 +315,10 @@ const faqs = [
           </thead>
           <tbody class="divide-y divide-stone-100">
             <tr>
-              <td class="p-4 text-gray-700">Identity confirmation</td>
+              <td class="p-4 text-gray-700">Seller ID check</td>
               <td class="p-4 text-center text-gray-400">No</td>
               <td class="p-4 text-center text-gray-400">No</td>
-              <td class="p-4 text-center text-primary font-semibold">Via Stripe Identity</td>
+              <td class="p-4 text-center text-primary font-semibold">Required before listing</td>
             </tr>
             <tr>
               <td class="p-4 text-gray-700">Health testing proof</td>
@@ -365,6 +365,87 @@ const faqs = [
           </tbody>
         </table>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SELLER ID CHECKS, BY MARKETPLACE             -->
+  <!-- Each competitor row paraphrases that company's own page. Re-check every row quarterly; drop any row whose source can no longer be read. -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-white">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">What Each Marketplace Says It Checks About Sellers</h2>
+      <p class="text-gray-700 mb-8 max-w-3xl">
+        Taken from each site's own published seller rules. If a site has changed its rules since the date shown, its own page is the authority. "Not described" means the company's own page says nothing about checking the seller's government ID; it is not a claim that the company has no other checks.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[720px] bg-white rounded-xl border border-stone-200 text-sm">
+          <thead>
+            <tr class="border-b border-stone-200 bg-stone-50">
+              <th class="text-left p-4 font-bold text-gray-900">Marketplace</th>
+              <th class="text-left p-4 font-bold text-gray-900">Species</th>
+              <th class="text-left p-4 font-bold text-gray-900">Published Check on the Seller</th>
+              <th class="text-left p-4 font-bold text-gray-900">ID Check of the Person?</th>
+              <th class="text-left p-4 font-bold text-gray-900">Source</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-100 align-top">
+            <tr>
+              <th scope="row" class="text-left p-4 font-semibold text-gray-900">BreederHQ</th>
+              <td class="p-4 text-gray-700">Nine species and services</td>
+              <td class="p-4 text-gray-700">An independent ID check, typically a government photo ID and a live selfie, required before a seller can list.</td>
+              <td class="p-4 text-primary font-semibold">Required</td>
+              <td class="p-4 text-gray-700"><a href="/buyers/seller-id-checks" class="underline">Seller ID checks</a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-left p-4 font-semibold text-gray-900">Good Dog</th>
+              <td class="p-4 text-gray-700">Dogs</td>
+              <td class="p-4 text-gray-700">Breeders apply through an online questionnaire; a screening team reviews the answers and may conduct an online audit and fraud detection check. Health-testing ratings are based on what breeders report.</td>
+              <td class="p-4 text-gray-700">Not described</td>
+              <td class="p-4 text-gray-700"><a href="https://www.gooddog.com/standards-and-screening" rel="nofollow noopener" class="underline">gooddog.com/standards-and-screening</a><br />Checked November 10, 2026</td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-left p-4 font-semibold text-gray-900">AKC Marketplace</th>
+              <td class="p-4 text-gray-700">Dogs</td>
+              <td class="p-4 text-gray-700">Breeders must be in good standing with the AKC and have a currently registered AKC litter.</td>
+              <td class="p-4 text-gray-700">Not described</td>
+              <td class="p-4 text-gray-700"><a href="https://www.apps.akc.org/apps/classified/support/obc_requirements.cfm" rel="nofollow noopener" class="underline">AKC listing requirements</a><br />Checked November 10, 2026</td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-left p-4 font-semibold text-gray-900">Paction (Canada)</th>
+              <td class="p-4 text-gray-700">Dogs</td>
+              <td class="p-4 text-gray-700">Asks breeders to confirm their identity with a photo of a government-issued ID. Its terms say this is not a background check or an endorsement.</td>
+              <td class="p-4 text-gray-700">Requested (photo of ID)</td>
+              <td class="p-4 text-gray-700"><a href="https://paction.ca/breeder-terms" rel="nofollow noopener" class="underline">paction.ca/breeder-terms</a><br />Checked November 10, 2026</td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-left p-4 font-semibold text-gray-900">DreamHorse</th>
+              <td class="p-4 text-gray-700">Horses</td>
+              <td class="p-4 text-gray-700">States that it does not control or verify the content posted on its website.</td>
+              <td class="p-4 text-gray-700">Not described</td>
+              <td class="p-4 text-gray-700"><a href="https://www.dreamhorse.com/about.php" rel="nofollow noopener" class="underline">dreamhorse.com/about</a><br />Checked November 10, 2026</td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-left p-4 font-semibold text-gray-900">Puppies.com</th>
+              <td class="p-4 text-gray-700">Dogs</td>
+              <td class="p-4 text-gray-700">Optional. Sellers can complete an ID check (government ID plus selfie, run by iDenfy); profiles that pass show a badge. Its terms say seller accounts may be subject to additional verification.</td>
+              <td class="p-4 text-gray-700">Optional</td>
+              <td class="p-4 text-gray-700">
+                <a href="https://www.puppies.com/help/how-do-i-get-id-verified" rel="nofollow noopener" class="underline">puppies.com/help/how-do-i-get-id-verified</a>
+                (updated June 8, 2026)<br />
+                <a href="https://www.puppies.com/help/puppies-com-terms-of-service" rel="nofollow noopener" class="underline">Terms of Service</a>
+                (updated September 28, 2026)<br />
+                Checked November 10, 2026
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-gray-500 mt-4 max-w-3xl">
+        Facebook groups and general classified sites are covered in the comparison above; neither is a breeder marketplace with published seller rules.
+      </p>
     </div>
   </section>
 
