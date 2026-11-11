@@ -27,6 +27,7 @@ import '../../styles/global.css';
 import PaidQuerySnapshot from '../../components/PaidQuerySnapshot.astro';
 import ReviewRotator from '../../components/ReviewRotator.astro';
 import Analytics from '../../components/Analytics.astro';
+import ConsentBanner from '../../components/ConsentBanner.astro';
 import TrackingInit from '../../components/TrackingInit.astro';
 // No HeaderV3 here, so the demo link's click tracking is installed directly.
 import DemoCtaTracking from '../../components/DemoCtaTracking.astro';
@@ -1054,6 +1055,7 @@ const SMS_CONSENT_TEXT =
 
     <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-slate-400 sm:px-8">
       &copy; 2026 BreederHQ
+      <button type="button" data-bhq-privacy-choices class="ml-4 cursor-pointer bg-transparent p-0 text-xs text-slate-400 underline hover:text-slate-200">Your Privacy Choices</button>
     </footer>
   </div>
 
@@ -1061,6 +1063,7 @@ const SMS_CONSENT_TEXT =
       back from there, so without this an applicant arriving on a campaign link
       such as /pricing?utm_source=... would submit with no attribution. */}
   <TrackingInit />
+  <ConsentBanner />
   <DemoCtaTracking />
 
   <script>

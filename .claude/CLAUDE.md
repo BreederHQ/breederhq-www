@@ -38,7 +38,7 @@ These files contain critical integrations. **Ask before changing**:
 
 | File | Contains | Risk if Broken |
 |------|----------|----------------|
-| `src/components/Analytics.astro` | GA4, Clarity, Leadfeeder, Meta Pixel, LinkedIn, Twitter | Lose all tracking data |
+| `src/components/Analytics.astro` | Consent-gated tool IDs (GA4, Ahrefs, GTM, Meta, LinkedIn, X), Sentry, Vercel Analytics. Gated scripts are injected by `src/lib/consent.ts` only after the visitor accepts; never add a tracker script tag here | Lose all tracking data, or load trackers before consent |
 | `src/layouts/BaseLayout.astro` | Schema.org structured data, SEO meta tags | Break AI search, social sharing |
 | `src/components/TrackingInit.astro` | UTM capture, scroll tracking, time-on-page | Lose behavioral analytics |
 | `src/lib/tracking.ts` | Client-side tracking utilities | Break conversion tracking |
@@ -317,8 +317,6 @@ Note: Alpacas and Llamas launched 2026-05-07. Cattle is stealth-launched (pilote
 | Integration | Env Variable | Purpose |
 |-------------|--------------|---------|
 | Google Analytics 4 | `PUBLIC_GA4_MEASUREMENT_ID` | Traffic, events, conversions |
-| Microsoft Clarity | `PUBLIC_CLARITY_ID` | Session recordings, heatmaps |
-| Leadfeeder | `LEADFEEDER_TRACKER_ID` | B2B company identification |
 | Slack Webhook | `SLACK_WEBHOOK_URL` | Lead notifications |
 
 ### Available But Not Configured

@@ -11,6 +11,7 @@ const isProduction = import.meta.env.PROD;
 {isProduction && (
   <script>
     import { initTracking, trackPageView } from '../lib/tracking';
+    import { CONSENT_EVENT, readConsent } from '../lib/consent';
 
     // High-value pages that trigger visitor intelligence
     const HIGH_VALUE_PAGES = ['/pricing', '/contact'];
@@ -20,12 +21,24 @@ const isProduction = import.meta.env.PROD;
       initTracking();
       trackPageView();
 
-      // Track high-value page visits
+      maybeTrackHighValueVisit();
+    }
+
+    // Company lookup by IP is visitor identification: only with consent, and
+    // once per page view (also when the visitor accepts after landing here).
+    let highValueTracked = false;
+    function maybeTrackHighValueVisit() {
       const currentPath = window.location.pathname;
-      if (HIGH_VALUE_PAGES.some(page => currentPath.startsWith(page))) {
+      if (
+        !highValueTracked &&
+        readConsent(window) === 'granted' &&
+        HIGH_VALUE_PAGES.some(page => currentPath.startsWith(page))
+      ) {
+        highValueTracked = true;
         trackHighValueVisit(currentPath);
       }
     }
+    window.addEventListener(CONSENT_EVENT, maybeTrackHighValueVisit);
 
     // Track high-value page visits (visitor intelligence)
     async function trackHighValueVisit(page: string) {

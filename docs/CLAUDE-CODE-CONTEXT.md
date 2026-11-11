@@ -9,7 +9,7 @@
 ## 🚨 CRITICAL: Why This Document Exists
 
 The breederhq-www marketing site contains **carefully configured integrations** for:
-- **Analytics** (Google Analytics, Microsoft Clarity, Leadfeeder)
+- **Analytics** (Google Analytics, loaded only after the visitor accepts)
 - **SEO & AI Search** (Schema.org structured data, meta tags, sitemap)
 - **Lead Capture** (forms, enrichment, Slack notifications)
 - **Security** (headers, CORS, middleware)
@@ -64,7 +64,7 @@ These integrations are **fragile** and **easy to accidentally break**. This docu
 
 ### What It Does
 
-Loads tracking scripts for GA4, Clarity, Leadfeeder, and optional pixels (Meta, LinkedIn, Twitter).
+Emits the IDs for GA4, Ahrefs and the optional pixels (Meta, LinkedIn, Twitter, GTM) as inert JSON. `src/lib/consent.ts` injects their scripts only after the visitor accepts (cookie `bhq_consent`); a browser GPC signal counts as a refusal.
 
 ### Critical Pattern: Production-Only Loading
 
@@ -75,7 +75,7 @@ const isProduction = import.meta.env.PROD;
 
 {isProduction && (
   <>
-    <!-- GA4, Clarity, etc. only load in production -->
+    <!-- Sentry and Vercel Analytics only load in production -->
   </>
 )}
 ```
@@ -437,7 +437,6 @@ Astro requires `PUBLIC_` prefix for client-exposed variables:
 ```bash
 # ✅ CORRECT - Exposed to client
 PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
-PUBLIC_CLARITY_ID=xxxxxxxxxx
 
 # ✅ CORRECT - Server-only (no PUBLIC_ prefix)
 SLACK_WEBHOOK_URL=https://hooks.slack.com/...
@@ -452,8 +451,6 @@ GA4_MEASUREMENT_ID=G-XXXXXXXXXX  # Missing PUBLIC_ prefix
 | Variable | Type | Status |
 |----------|------|--------|
 | `PUBLIC_GA4_MEASUREMENT_ID` | Client | ✅ Active |
-| `PUBLIC_CLARITY_ID` | Client | ✅ Active |
-| `LEADFEEDER_TRACKER_ID` | Client | ✅ Active |
 | `SLACK_WEBHOOK_URL` | Server | ✅ Active |
 | `PUBLIC_SITE_URL` | Client | ✅ Active |
 

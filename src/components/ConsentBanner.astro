@@ -1,0 +1,191 @@
+---
+/**
+ * Consent banner: a fixed bottom bar (not a modal; the page stays usable).
+ * Accept and Reject are the same size and style. The footer's
+ * "Your Privacy Choices" button reopens it on every page.
+ *
+ * Logic lives in src/lib/consent.ts; the cookie contract is shared with the
+ * other BreederHQ sites.
+ */
+---
+
+<div
+  id="bhq-consent-banner"
+  role="region"
+  aria-labelledby="bhq-consent-heading"
+  data-pagefind-ignore="all"
+  hidden
+>
+  <div class="bhq-consent-inner">
+    <div class="bhq-consent-text">
+      <p id="bhq-consent-heading" class="bhq-consent-heading">Your Privacy Choices</p>
+      <p class="bhq-consent-body" id="bhq-consent-copy">
+        We'd like to use analytics cookies to understand how people use BreederHQ. They're off unless you turn them on.
+        <a href="/privacy">Privacy Policy</a>
+      </p>
+      <p class="bhq-consent-body" id="bhq-consent-gpc" hidden>
+        Your browser's privacy signal is on, so analytics cookies stay off.
+        <a href="/privacy">Privacy Policy</a>
+      </p>
+    </div>
+    <div class="bhq-consent-actions">
+      <button type="button" class="bhq-consent-btn" data-bhq-consent="granted">Accept</button>
+      <button type="button" class="bhq-consent-btn" data-bhq-consent="denied">Reject</button>
+      <button type="button" class="bhq-consent-btn" data-bhq-consent-close hidden>Close</button>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  #bhq-consent-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2147483000;
+    background: #0F1826;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.4);
+    color: #EAF1FC;
+  }
+  #bhq-consent-banner[hidden] {
+    display: none;
+  }
+  .bhq-consent-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 16px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .bhq-consent-text {
+    flex: 1 1 420px;
+    min-width: 0;
+  }
+  .bhq-consent-heading {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #EAF1FC;
+  }
+  .bhq-consent-body {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #A9BAD4;
+  }
+  .bhq-consent-body[hidden] {
+    display: none;
+  }
+  .bhq-consent-body a {
+    color: #EAF1FC;
+    text-decoration: underline;
+    margin-left: 4px;
+  }
+  .bhq-consent-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  /* One style for every button: Accept and Reject carry equal weight. */
+  .bhq-consent-btn {
+    min-width: 96px;
+    padding: 9px 18px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #EAF1FC;
+    background: #162035;
+    border: 1px solid #3c4c66;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .bhq-consent-btn[hidden] {
+    display: none;
+  }
+  .bhq-consent-btn:hover {
+    background: #1C2A40;
+  }
+  .bhq-consent-btn:focus-visible,
+  .bhq-consent-body a:focus-visible {
+    outline: 2px solid #ff8a56;
+    outline-offset: 2px;
+  }
+  @media (max-width: 640px) {
+    .bhq-consent-inner {
+      padding: 14px 16px;
+    }
+    .bhq-consent-actions {
+      width: 100%;
+    }
+    .bhq-consent-btn {
+      flex: 1 1 0;
+    }
+  }
+</style>
+
+<script>
+  import {
+    gpcOn,
+    initConsent,
+    readConsent,
+    setConsent,
+    type ConsentConfig,
+  } from '../lib/consent';
+
+  function readConfig(): ConsentConfig {
+    try {
+      const el = document.getElementById('bhq-consent-config');
+      return el ? (JSON.parse(el.textContent || '{}') as ConsentConfig) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  const cfg = readConfig();
+  const banner = document.getElementById('bhq-consent-banner');
+
+  function show(settingsView: boolean) {
+    if (!banner) return;
+    const gpc = gpcOn(window);
+    // With the browser signal on, the view is informational: no Accept/Reject.
+    banner.querySelector<HTMLElement>('#bhq-consent-copy')!.hidden = gpc;
+    banner.querySelector<HTMLElement>('#bhq-consent-gpc')!.hidden = !gpc;
+    banner.querySelectorAll<HTMLElement>('[data-bhq-consent]').forEach((b) => {
+      b.hidden = gpc;
+    });
+    banner.querySelector<HTMLElement>('[data-bhq-consent-close]')!.hidden = !gpc;
+    banner.hidden = false;
+    if (settingsView) banner.querySelector<HTMLElement>('button:not([hidden])')?.focus();
+  }
+
+  function hide() {
+    if (banner) banner.hidden = true;
+  }
+
+  // Initial state: load gated tools for a standing Accept; ask when unanswered.
+  initConsent(window, cfg);
+  if (readConsent(window) === null) show(false);
+
+  banner?.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>('button');
+    if (!target) return;
+    const choice = target.getAttribute('data-bhq-consent');
+    if (choice === 'granted' || choice === 'denied') {
+      hide();
+      setConsent(window, choice, cfg);
+    } else if (target.hasAttribute('data-bhq-consent-close')) {
+      hide();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest('[data-bhq-privacy-choices]');
+    if (!t) return;
+    e.preventDefault();
+    show(true);
+  });
+</script>

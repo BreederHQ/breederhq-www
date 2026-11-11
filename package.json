@@ -9,6 +9,7 @@
     "build": "npm run legal:check && astro build && npm run search:index && node scripts/copy-pagefind-to-vercel.mjs",
     "search:index": "pagefind --site dist/client --output-subdir pagefind",
     "preview": "astro preview",
+    "test": "tsx --test tests/consent.test.ts",
     "astro": "astro",
     "screenshots:capture": "tsx scripts/capture-screenshots/capture.ts",
     "screenshots:list": "tsx scripts/capture-screenshots/capture.ts --dry-run"
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
+    "jsdom": "^26.1.0",
     "pagefind": "^1.5.2",
     "playwright": "^1.49.0",
     "sharp": "^0.35.5",

@@ -34,7 +34,6 @@ npm run preview
 ✅ **Visitor Intelligence** - See which companies visit your site
 ✅ **Lead Enrichment** - Auto-enrich contacts with company data
 ✅ **Multi-Channel Distribution** - Slack, HubSpot, Zapier, your CRM
-✅ **Session Recordings** - Watch user sessions (Microsoft Clarity)
 ✅ **Conversion Tracking** - GA4, Meta, LinkedIn, Twitter pixels
 ✅ **Performance Monitoring** - Core Web Vitals tracking
 ✅ **SEO Optimization** - Comprehensive meta tags & structured data
@@ -44,7 +43,7 @@ npm run preview
 - **Framework**: Astro 5.x
 - **Styling**: Tailwind CSS 4.x
 - **Hosting**: Vercel
-- **Analytics**: GA4, Microsoft Clarity
+- **Analytics**: GA4 (loads only after the visitor accepts analytics cookies)
 - **Language**: TypeScript
 
 ## 📦 Project Structure
@@ -108,7 +107,7 @@ If any required variable is missing, that notification channel silently skips. C
 
 ### Analytics & Tracking
 - Google Analytics 4 with custom events
-- Microsoft Clarity (FREE session recordings)
+- Consent banner: analytics scripts load only after Accept (src/lib/consent.ts)
 - Multi-platform conversion tracking
 - Core Web Vitals monitoring
 
@@ -129,7 +128,6 @@ If any required variable is missing, that notification channel silently skips. C
 
 **Free Tier** (everything you need to start):
 - Google Analytics 4
-- Microsoft Clarity
 - Slack webhooks
 - Social media pixels
 - Vercel hosting
