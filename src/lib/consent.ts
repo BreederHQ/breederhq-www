@@ -31,6 +31,9 @@ export interface ConsentConfig {
 /** The slice of `window` this module touches (lets tests pass a jsdom window). */
 type Win = Window & Record<string, any>;
 
+/** The LinkedIn Insight stub that queues calls until the real script loads. */
+type LinkedInStub = ((a: unknown, b: unknown) => void) & { q?: unknown[][] };
+
 function rawCookie(win: Win): string | null {
   const parts = String(win.document.cookie || '').split(/;\s*/);
   for (const part of parts) {
@@ -165,10 +168,12 @@ export function loadGatedTools(win: Win, cfg: ConsentConfig): void {
     win._linkedin_data_partner_ids = win._linkedin_data_partner_ids || [];
     win._linkedin_data_partner_ids.push(cfg.linkedinPartnerId);
     if (!win.lintrk) {
-      win.lintrk = function (a: unknown, b: unknown) {
-        win.lintrk.q.push([a, b]);
+      const queue: unknown[][] = [];
+      const stub: LinkedInStub = function (a: unknown, b: unknown) {
+        queue.push([a, b]);
       };
-      win.lintrk.q = [];
+      stub.q = queue;
+      win.lintrk = stub;
     }
     addScript(win, 'https://snap.licdn.com/li.lms-analytics/insight.min.js');
   }
