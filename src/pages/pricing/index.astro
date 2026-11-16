@@ -1029,6 +1029,17 @@ const SMS_CONSENT_TEXT =
           </p>
         </div>
 
+        {/* Built from the booking message's time; shown only when one arrived. */}
+        <div id="tour-calendar-actions" hidden class="flex flex-col gap-2.5">
+          <h3 class="text-[15px] font-semibold text-slate-200">Add It to Your Calendar</h3>
+          <p class="m-0 text-[15px] leading-relaxed text-slate-300">The invite can take a few minutes to arrive, so put the tour on your calendar now.</p>
+          <div class="flex flex-wrap gap-2.5">
+            <a id="tour-cal-google" target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white no-underline transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Google Calendar</a>
+            <a id="tour-cal-outlook" target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white no-underline transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Outlook</a>
+            <button id="tour-cal-apple" type="button" class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Apple Calendar</button>
+          </div>
+        </div>
+
         <div class="flex flex-col gap-2.5">
           <h3 class="text-[15px] font-semibold text-slate-200">What Happens Next</h3>
           <ul class="m-0 flex list-disc flex-col gap-2.5 pl-5 text-[15px] leading-relaxed text-slate-300 marker:text-[hsl(24,95%,58%)]">
@@ -1483,6 +1494,16 @@ const SMS_CONSENT_TEXT =
        */
       function bookedStartTime(message: unknown): Date | null {
         const raw = field(field(field(field(message, 'data'), 'meeting'), 'event'), 'startTime');
+        const ms = parseMessageTime(raw);
+        if (!Number.isFinite(ms)) return null;
+        const now = Date.now();
+        const DAY = 86_400_000;
+        if (ms < now - DAY || ms > now + 400 * DAY) return null;
+        return new Date(ms);
+      }
+
+      /** Epoch ms of a Date or zoned ISO string from the message, else NaN. */
+      function parseMessageTime(raw: unknown): number {
         let ms = NaN;
         if (Object.prototype.toString.call(raw) === '[object Date]') {
           ms = (raw as Date).getTime();
@@ -1493,12 +1514,86 @@ const SMS_CONSENT_TEXT =
         ) {
           ms = Date.parse(raw);
         }
-        if (!Number.isFinite(ms)) return null;
-        const now = Date.now();
-        const DAY = 86_400_000;
-        if (ms < now - DAY || ms > now + 400 * DAY) return null;
-        return new Date(ms);
+        return ms;
       }
+
+      /**
+       * The booked end time when the message carries a usable one (after the
+       * start, no more than 4 hours long); otherwise the start plus 90 minutes.
+       */
+      function bookedEndTime(message: unknown, start: Date): Date {
+        const raw = field(field(field(field(message, 'data'), 'meeting'), 'event'), 'endTime');
+        const ms = parseMessageTime(raw);
+        const span = ms - start.getTime();
+        if (Number.isFinite(ms) && span > 0 && span <= 4 * 3_600_000) return new Date(ms);
+        return new Date(start.getTime() + 90 * 60_000);
+      }
+
+      const TOUR_TITLE = 'BreederHQ Founders Tour';
+      const TOUR_DETAILS =
+        'Join with the Zoom link in your calendar invite from admin@breederhq.com.';
+
+      /** UTC basic format, 20261120T180000Z, as Google and iCalendar expect. */
+      function utcStamp(d: Date): string {
+        return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      }
+
+      function googleCalendarUrl(start: Date, end: Date): string {
+        const q = new URLSearchParams({
+          action: 'TEMPLATE',
+          text: TOUR_TITLE,
+          dates: `${utcStamp(start)}/${utcStamp(end)}`,
+          details: TOUR_DETAILS,
+        });
+        return `https://calendar.google.com/calendar/render?${q.toString()}`;
+      }
+
+      function outlookCalendarUrl(start: Date, end: Date): string {
+        const q = new URLSearchParams({
+          path: '/calendar/action/compose',
+          rru: 'addevent',
+          subject: TOUR_TITLE,
+          startdt: start.toISOString(),
+          enddt: end.toISOString(),
+          body: TOUR_DETAILS,
+        });
+        return `https://outlook.live.com/calendar/0/deeplink/compose?${q.toString()}`;
+      }
+
+      /** A valid single-event iCalendar file: UTC times, CRLF line endings. */
+      function tourIcs(start: Date, end: Date): string {
+        const uid = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}@breederhq.com`;
+        return [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//BreederHQ//Founders Tour//EN',
+          'CALSCALE:GREGORIAN',
+          'METHOD:PUBLISH',
+          'BEGIN:VEVENT',
+          `UID:${uid}`,
+          `DTSTAMP:${utcStamp(new Date())}`,
+          `DTSTART:${utcStamp(start)}`,
+          `DTEND:${utcStamp(end)}`,
+          `SUMMARY:${TOUR_TITLE}`,
+          `DESCRIPTION:${TOUR_DETAILS.replace(/,/g, '\\,')}`,
+          'END:VEVENT',
+          'END:VCALENDAR',
+          '',
+        ].join('\r\n');
+      }
+
+      let tourIcsText = '';
+      document.getElementById('tour-cal-apple')?.addEventListener('click', () => {
+        if (!tourIcsText) return;
+        const url = URL.createObjectURL(new Blob([tourIcsText], { type: 'text/calendar;charset=utf-8' }));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'breederhq-founders-tour.ics';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
 
       /** Date and time in the applicant's own zone, with the zone named. */
       function formatBookedTime(start: Date): { date: string; clock: string } | null {
@@ -1564,6 +1659,21 @@ const SMS_CONSENT_TEXT =
           bookedDate.textContent = when?.date ?? '';
           bookedClock.textContent = when?.clock ?? '';
           bookedTime.hidden = !when;
+        }
+        const calActions = document.getElementById('tour-calendar-actions');
+        const googleLink = document.getElementById('tour-cal-google') as HTMLAnchorElement | null;
+        const outlookLink = document.getElementById('tour-cal-outlook') as HTMLAnchorElement | null;
+        if (calActions && googleLink && outlookLink) {
+          if (start) {
+            const end = bookedEndTime(e.data, start);
+            googleLink.href = googleCalendarUrl(start, end);
+            outlookLink.href = outlookCalendarUrl(start, end);
+            tourIcsText = tourIcs(start, end);
+            calActions.hidden = false;
+          } else {
+            tourIcsText = '';
+            calActions.hidden = true;
+          }
         }
         if (bookedCard) {
           bookedCard.hidden = false;
