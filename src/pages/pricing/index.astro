@@ -1040,6 +1040,20 @@ const SMS_CONSENT_TEXT =
           </div>
         </div>
 
+        {/* Optional. A failure here never touches the booking above. */}
+        <form id="tour-focus-form" novalidate class="flex flex-col gap-2.5">
+          <label for="tour-focus-answer" class="text-[15px] font-semibold text-slate-200">What's the one thing that would make the biggest difference to your program?</label>
+          <p id="tour-focus-help" class="m-0 text-[15px] leading-relaxed text-slate-300">We'll build your tour around it.</p>
+          <textarea
+            id="tour-focus-answer" rows="3" aria-describedby="tour-focus-help tour-focus-status"
+            class="w-full resize-y rounded-lg border border-white/20 bg-white/[0.04] px-3.5 py-2.5 text-[15px] leading-relaxed text-white placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]"
+          ></textarea>
+          <div class="flex flex-wrap items-center gap-3">
+            <button id="tour-focus-send" type="submit" class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] disabled:cursor-not-allowed disabled:opacity-60">Send</button>
+            <p id="tour-focus-status" role="status" aria-live="polite" class="m-0 text-sm text-slate-400"></p>
+          </div>
+        </form>
+
         <div class="flex flex-col gap-2.5">
           <h3 class="text-[15px] font-semibold text-slate-200">What Happens Next</h3>
           <ul class="m-0 flex list-disc flex-col gap-2.5 pl-5 text-[15px] leading-relaxed text-slate-300 marker:text-[hsl(24,95%,58%)]">
@@ -1080,6 +1094,7 @@ const SMS_CONSENT_TEXT =
   <script>
     import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/tracking';
     import { createSubmissionKeyHolder } from '../../lib/submissionKey';
+    import { tourFocusProblem, normalizeTourFocusAnswer } from '../../lib/tourFocus';
     import { AsYouType, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js';
 
     const DEFAULT_COUNTRY: CountryCode = 'US';
@@ -1427,6 +1442,10 @@ const SMS_CONSENT_TEXT =
       const applyJump = document.getElementById('apply-jump');
       let embedFrame: HTMLIFrameElement | null = null;
       let bookedFirstName = '';
+      // The key this application was sent with: the booking links carry it, and
+      // so does the "one thing" answer, which is how the platform finds the
+      // application the answer belongs to.
+      let bookedSubmissionKey = '';
 
       function bookingUrlsFor(key: string): { link: string; embed: string } {
         const param = `data-submission=${encodeURIComponent(key)}`;
@@ -1436,8 +1455,9 @@ const SMS_CONSENT_TEXT =
         };
       }
 
-      function showBookingStep(fn: string, urls: { link: string; embed: string }) {
+      function showBookingStep(fn: string, urls: { link: string; embed: string }, key: string) {
         bookedFirstName = fn;
+        bookedSubmissionKey = key;
         headingEl.textContent = fn ? `One Last Step, ${fn}` : 'One Last Step';
         screenEl.hidden = true;
         doneEl.hidden = false;
@@ -1593,6 +1613,51 @@ const SMS_CONSENT_TEXT =
         a.click();
         a.remove();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+
+      // The optional "one thing" answer. Every outcome other than a save is a
+      // quiet line: the booking is already made and is never touched here.
+      const focusForm = document.getElementById('tour-focus-form') as HTMLFormElement | null;
+      const focusAnswer = document.getElementById('tour-focus-answer') as HTMLTextAreaElement | null;
+      const focusSend = document.getElementById('tour-focus-send') as HTMLButtonElement | null;
+      const focusStatus = document.getElementById('tour-focus-status');
+      focusAnswer?.addEventListener('input', () => focusAnswer.removeAttribute('aria-invalid'));
+      focusForm?.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        if (!focusAnswer || !focusSend || !focusStatus || focusSend.disabled) return;
+        const problem = tourFocusProblem(focusAnswer.value);
+        if (problem) {
+          // Nothing is sent: the line names the rule and the box is marked.
+          focusStatus.textContent =
+            problem === 'empty' ? 'Add a few words first.' : 'Please keep it to 500 characters or fewer.';
+          focusAnswer.setAttribute('aria-invalid', 'true');
+          focusAnswer.focus();
+          return;
+        }
+        focusAnswer.removeAttribute('aria-invalid');
+        if (!bookedSubmissionKey) {
+          focusStatus.textContent = "We couldn't save that just now. Your tour is still booked.";
+          return;
+        }
+        focusSend.disabled = true;
+        focusStatus.textContent = '';
+        try {
+          const res = await fetch('/api/tour-focus', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              submissionKey: bookedSubmissionKey,
+              answer: normalizeTourFocusAnswer(focusAnswer.value),
+            }),
+          });
+          if (!res.ok) throw new Error('not saved');
+          focusStatus.textContent = "Thanks, we'll be ready.";
+          focusAnswer.disabled = true;
+          // The button stays disabled: the answer is saved.
+        } catch {
+          focusStatus.textContent = "We couldn't save that just now. Your tour is still booked.";
+          focusSend.disabled = false;
+        }
       });
 
       /** Date and time in the applicant's own zone, with the zone named. */
@@ -1959,7 +2024,7 @@ const SMS_CONSENT_TEXT =
           // booking step must not land in the catch below: that would tell the
           // applicant it failed and invite a duplicate application.
           try {
-            showBookingStep(firstName(name), bookingUrls);
+            showBookingStep(firstName(name), bookingUrls, submissionKey);
           } catch (renderErr) {
             console.error('Booking step failed to render:', renderErr);
           }

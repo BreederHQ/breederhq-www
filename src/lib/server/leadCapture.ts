@@ -1293,6 +1293,53 @@ export async function postApplicantEmailLog(entry: ApplicantEmailLogEntry, confi
 }
 
 /**
+ * What the platform said to a tour-focus answer. Only a 2xx, a 400 and a 404
+ * mean anything to the page; every other result, a timeout and a network error
+ * included, is the same `failed`.
+ */
+export type TourFocusOutcome = 'ok' | 'invalid' | 'not_found' | 'failed';
+
+/** The tour-focus call waits at most this long, so a stalled API cannot hold the visitor. */
+const TOUR_FOCUS_TIMEOUT_MS = 5000;
+
+/**
+ * Relay an applicant's answer to the booking page's "one thing" question.
+ *
+ * Never throws. The answer is the applicant's own words and is never logged,
+ * on success or failure: only the status code is.
+ */
+export async function postTourFocus(
+  entry: { submissionKey: string; answer: string },
+  config: PlatformConfig
+): Promise<TourFocusOutcome> {
+  try {
+    const response = await fetch(`${config.apiUrl}/marketing-leads/tour-focus`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-bhq-lead-secret': config.secret,
+      },
+      signal: AbortSignal.timeout(config.timeoutMs ?? TOUR_FOCUS_TIMEOUT_MS),
+      body: JSON.stringify({ submissionKey: entry.submissionKey, answer: entry.answer }),
+    });
+
+    if (response.ok) return 'ok';
+    if (response.status === 400) return 'invalid';
+    if (response.status === 404) {
+      // An API that predates the endpoint answers the same way, which is
+      // expected while www ships ahead of the API.
+      console.log('Platform tour focus endpoint answered not found');
+      return 'not_found';
+    }
+    console.error(`Platform tour focus failed: ${response.status}`);
+    return 'failed';
+  } catch {
+    console.error('Platform tour focus request failed');
+    return 'failed';
+  }
+}
+
+/**
  * Send the Founders' Program application confirmation, then record it on the
  * applicant's timeline when `platform` is given.
  *

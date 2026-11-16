@@ -1,0 +1,40 @@
+---
+// src/pages/_site-updates/2026-11-16-founders-tour-one-thing.astro
+export const updateMeta = {
+  date: '2026-11-16',
+  title: 'Founders tour card asks for the one thing that would help most',
+  tags: ['waitlist', 'lead-capture', 'founders', 'tour'],
+};
+---
+<article class="border-l-4 border-[hsl(24,95%,53%)] pl-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-1">November 16, 2026</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    The Your Tour Is Booked card on
+    <a href="/pricing" class="text-[hsl(24,95%,53%)] hover:underline">/pricing</a> now has an
+    optional question: what is the one thing that would make the biggest difference to the
+    applicant's program.
+  </p>
+
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-900 mb-1">Why</h3>
+    <p class="text-sm text-gray-600">
+      The tour is built around what the applicant needs most. Asking right after the booking,
+      while they are engaged, gives the founders that answer before the call instead of during it.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-1">How it works</h3>
+    <p class="text-sm text-gray-600">
+      The card shows a text box with the helper line "We'll build your tour around it" and a Send
+      button. The answer is cleaned and checked for length in code points, the way the platform
+      counts it, then posted to a new server route on the site, <code>/api/tour-focus</code>. That
+      route holds the shared secret, takes only JSON from this site's own pages, brakes a flood
+      from one address, reads at most 16 KB of request body, never logs the answer, and relays it
+      to the platform with the application's submission key. A save shows "Thanks,
+      we'll be ready." Any failure, including an API that does not have the endpoint yet, shows a
+      quiet line saying the tour is still booked, and never changes the booking or the Add to
+      Calendar buttons.
+    </p>
+  </div>
+</article>
