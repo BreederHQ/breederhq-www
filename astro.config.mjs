@@ -19,6 +19,7 @@ const excludedPages = [
   'https://breederhq.com/search', // Client-side search UI — no content to index
   'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex
   'https://breederhq.com/provider/stripe-connect/refresh', // Mobile deep-link bridge page — noindex
+  'https://breederhq.com/provider/identity/return', // Mobile deep-link bridge page — noindex
   // Species-anchored landing pages — canonical points to /tools/* equivalent; exclude from sitemap
   // so only the canonical URL appears (Google should not see both in sitemap).
   'https://breederhq.com/dog-heat-cycle-calculator',
