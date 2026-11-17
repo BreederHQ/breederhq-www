@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+// Breed club introduction call booking page. Deliberately carries no `data-`
+// parameters: nothing consumes them for breed-club bookings, and the platform's
+// Reclaim webhook records only the Founders' Program tour link.
+const BREED_CLUB_BOOKING_URL = 'https://app.reclaim.ai/m/breederhq/breed-club-introduction';
+
 const breadcrumbs = [
   { name: 'Home', url: '/' },
   { name: 'For Breed Clubs', url: '/for-breed-clubs' }
@@ -974,6 +979,18 @@ const faqs = [
           </div>
         </form>
 
+        <p id="bcf-book-direct" class="mt-5 text-sm text-amber-100">
+          Prefer to pick a time now?
+          <a
+            href={BREED_CLUB_BOOKING_URL}
+            target="_blank"
+            rel="noopener"
+            class="underline underline-offset-2 hover:text-white"
+          >
+            Book a breed club introduction
+          </a>
+        </p>
+
         <div
           id="bcf-success"
           class="hidden bg-white/95 backdrop-blur rounded-xl p-8 text-center shadow-2xl"
@@ -989,12 +1006,21 @@ const faqs = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <h3 class="text-xl font-bold text-gray-900 mb-2">
-            Thanks — we'll be in touch.
+            Thanks, we got your inquiry.
           </h3>
-          <p class="text-gray-700">
-            We read every breed-club inquiry personally. Expect a reply within
-            one business day to schedule the call.
+          <p class="text-gray-700 mb-6">
+            You can pick a time for your introduction call now. Otherwise, we
+            read every breed-club inquiry personally and will reply within one
+            business day to schedule it.
           </p>
+          <a
+            href={BREED_CLUB_BOOKING_URL}
+            target="_blank"
+            rel="noopener"
+            class="inline-block bg-[hsl(24,95%,53%)] hover:bg-[hsl(24,95%,45%)] text-white px-8 py-3 rounded-lg text-base font-semibold"
+          >
+            Book your introduction call
+          </a>
         </div>
       </div>
 
@@ -1085,6 +1111,8 @@ const faqs = [
               submissionKey = null;
 
               form.classList.add('hidden');
+              var bookDirect = document.getElementById('bcf-book-direct');
+              if (bookDirect) bookDirect.classList.add('hidden');
               successBox.classList.remove('hidden');
               successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
               // Fire a GA4 event if gtag is present so we can measure
