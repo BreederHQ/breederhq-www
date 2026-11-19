@@ -15,6 +15,7 @@ const excludedPages = [
   // no page renders there, and they stay listed so a future page cannot slip into the sitemap.
   'https://breederhq.com/demo',
   'https://breederhq.com/demo/login',
+  'https://breederhq.com/legal/privacy-1-2', // Superseded archive of Privacy Policy 1.2; unlisted and noindex
   'https://breederhq.com/get-app', // QR redirect target — noindex
   'https://breederhq.com/search', // Client-side search UI — no content to index
   'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex

@@ -27,7 +27,6 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '..');
@@ -55,10 +54,26 @@ const DOCUMENTS = [
   },
   {
     slug: 'privacy',
-    file: 'privacy-policy-1.2.md',
+    file: 'privacy-policy-1.2.1.md',
     title: 'Privacy Policy',
     description:
       'How BreederHQ collects, uses, shares and protects your data across the platform and mobile apps.',
+    // Version 1.2.1 is published ahead of its December 21, 2026 effective date
+    // so that the advance notice can link to it. Version 1.2 stays in effect
+    // until then and is kept at a stable URL below. Remove this notice and the
+    // entry below once 1.2.1 is in effect.
+    notice:
+      'This is version 1.2.1 of the Privacy Policy, which takes effect on December 21, 2026. Until then, version 1.2 remains in effect: <a href="/legal/privacy-1-2" class="text-[hsl(24,95%,45%)] underline">read version 1.2</a>.',
+  },
+  {
+    slug: 'privacy-1-2',
+    file: 'privacy-policy-1.2.md',
+    title: 'Privacy Policy (Version 1.2)',
+    description:
+      'Version 1.2 of the BreederHQ Privacy Policy, in effect until December 21, 2026.',
+    unlisted: true,
+    notice:
+      'This is version 1.2 of the Privacy Policy, which remains in effect until December 21, 2026. Version 1.2.1 takes effect on that date: <a href="/legal/privacy" class="text-[hsl(24,95%,45%)] underline">read version 1.2.1</a>.',
   },
   {
     slug: 'acceptable-use',
@@ -143,6 +158,9 @@ function renderMarkdown(md) {
     escapeHtml(s)
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
+      // Underscore emphasis, only when the underscores bound the whole span
+      // (not inside a word or identifier).
+      .replace(/(^|[^\w])_([^_]+)_(?!\w)/g, '$1<em>$2</em>')
       .replace(
         /\[([^\]]+)\]\(([^)]+)\)/g,
         '<a href="$2" class="text-[hsl(24,95%,45%)] underline">$1</a>',
@@ -279,12 +297,12 @@ const breadcrumbs = [
 <BaseLayout
   title=${jsString(doc.title + ' - BreederHQ')}
   description=${jsString(doc.description)}
-  breadcrumbs={breadcrumbs}
+  breadcrumbs={breadcrumbs}${doc.unlisted ? '\n  noindex' : ''}
 >
   <main>
     <section class="py-16 bg-white">
       <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        ${html}
+        ${doc.notice ? `<p class="mb-8 rounded-md border border-amber-300 bg-amber-50 p-4 text-gray-900">${doc.notice}</p>\n\n        ` : ''}${html}
 
         <div class="mt-12 pt-8 border-t border-gray-200 text-sm text-gray-600">
           <p>
@@ -410,7 +428,10 @@ async function main() {
     generated.push(doc);
   }
 
-  const indexPage = renderIndex([...DOCUMENTS, ...STANDALONE_PAGES]);
+  const indexPage = renderIndex([
+    ...DOCUMENTS.filter((d) => !d.unlisted),
+    ...STANDALONE_PAGES,
+  ]);
   const indexPath = resolve(OUT_DIR, 'index.astro');
   const existingIndex = existsSync(indexPath) ? await readFile(indexPath, 'utf8') : null;
   if (existingIndex !== indexPage) {
