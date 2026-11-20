@@ -16,6 +16,17 @@ const excludedPages = [
   'https://breederhq.com/demo',
   'https://breederhq.com/demo/login',
   'https://breederhq.com/legal/privacy-1-2', // Superseded archive of Privacy Policy 1.2; unlisted and noindex
+  // Upcoming 2.2 legal package pages (scripts/sync-legal-documents.mjs, UPCOMING_DOCUMENTS): noindex
+  // and out of the sitemap until the effective date, when each moves to its stable URL.
+  'https://breederhq.com/legal/terms-2-2',
+  'https://breederhq.com/legal/seller-agreement-2-2',
+  'https://breederhq.com/legal/buyer-terms-2-2',
+  'https://breederhq.com/legal/service-provider-agreement-1-2',
+  'https://breederhq.com/legal/transaction-terms-1-3',
+  'https://breederhq.com/legal/acceptable-use-1-2',
+  'https://breederhq.com/legal/legal-definitions-1-1',
+  'https://breederhq.com/legal/privacy-1-3',
+  'https://breederhq.com/legal/electronic-signing-information',
   'https://breederhq.com/get-app', // QR redirect target — noindex
   'https://breederhq.com/search', // Client-side search UI — no content to index
   'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex

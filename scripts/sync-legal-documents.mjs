@@ -120,6 +120,119 @@ const DOCUMENTS = [
 ];
 
 /**
+ * The date the 2.2 legal package takes effect, shown in every upcoming page's
+ * notice box. TBD until the advance notice is sent: the notice-copy task sets
+ * it from the frozen effective instant (a calendar date, such as "January 5,
+ * 2027") BEFORE the notice email goes out, then re-runs this script.
+ */
+const PACKAGE_EFFECTIVE_DATE = 'TBD';
+
+/**
+ * The 2.2 package, published ahead of its effective date so the advance
+ * notice can link to it. Each page sits at a stable versioned URL, is noindex
+ * and is excluded from the sitemap (astro.config.mjs) until it takes effect;
+ * the version in force keeps its own page in DOCUMENTS. `current` names the
+ * page that stays in effect until then. The source files still carry a
+ * draft status line and an unassigned proposed date, which are dropped from
+ * the public page: the notice box carries the date instead.
+ */
+const UPCOMING_DOCUMENTS = [
+  {
+    slug: 'terms-2-2',
+    file: 'terms-of-service-2.2.md',
+    title: 'Terms of Service (Version 2.2)',
+    version: '2.2',
+    kind: 'Terms of Service',
+    current: { label: 'version 2.1', href: '/legal/terms' },
+    description: 'Version 2.2 of the BreederHQ Terms of Service, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'seller-agreement-2-2',
+    file: 'breeder-seller-agreement-2.2.md',
+    title: 'Breeder/Seller Agreement (Version 2.2)',
+    version: '2.2',
+    kind: 'Breeder/Seller Agreement',
+    current: { label: 'version 2.1', href: '/legal/seller-agreement' },
+    description: 'Version 2.2 of the BreederHQ Breeder/Seller Agreement, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'buyer-terms-2-2',
+    file: 'buyer-terms-2.2.md',
+    title: 'Buyer Terms (Version 2.2)',
+    version: '2.2',
+    kind: 'Buyer Terms',
+    current: { label: 'version 2.1', href: '/legal/buyer-terms' },
+    description: 'Version 2.2 of the BreederHQ Buyer Terms, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'service-provider-agreement-1-2',
+    file: 'service-provider-agreement-1.2.md',
+    title: 'Service Provider Agreement (Version 1.2)',
+    version: '1.2',
+    kind: 'Service Provider Agreement',
+    current: { label: 'version 1.1', href: '/legal/service-provider-agreement' },
+    description: 'Version 1.2 of the BreederHQ Service Provider Agreement, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'transaction-terms-1-3',
+    file: 'marketplace-transaction-terms-1.3.md',
+    title: 'Marketplace Transaction Terms (Version 1.3)',
+    version: '1.3',
+    kind: 'Marketplace Transaction Terms',
+    current: { label: 'version 1.2', href: '/legal/transaction-terms' },
+    description: 'Version 1.3 of the BreederHQ Marketplace Transaction Terms, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'acceptable-use-1-2',
+    file: 'acceptable-use-policy-1.2.md',
+    title: 'Acceptable Use Policy (Version 1.2)',
+    version: '1.2',
+    kind: 'Acceptable Use Policy',
+    current: { label: 'version 1.1', href: '/legal/acceptable-use' },
+    description: 'Version 1.2 of the BreederHQ Acceptable Use Policy, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'legal-definitions-1-1',
+    file: 'legal-definitions-1.1.md',
+    title: 'Legal Definitions Schedule (Version 1.1)',
+    version: '1.1',
+    kind: 'Legal Definitions Schedule',
+    current: { label: 'version 1.0', href: '/legal/legal-definitions' },
+    description: 'Version 1.1 of the BreederHQ Legal Definitions Schedule, which takes effect on the date shown on the page.',
+  },
+  {
+    slug: 'privacy-1-3',
+    file: 'privacy-policy-1.3.md',
+    title: 'Privacy Policy (Version 1.3)',
+    version: '1.3',
+    kind: 'Privacy Policy',
+    current: { label: 'the current Privacy Policy', href: '/legal/privacy' },
+    description: 'Version 1.3 of the BreederHQ Privacy Policy, which takes effect on the date shown on the page.',
+  },
+  {
+    // No earlier version exists: the page is new with the package and is the
+    // first-party signing page the signing flow links to. It keeps one stable
+    // URL; the notice box and the noindex come off when it takes effect.
+    slug: 'electronic-signing-information',
+    file: 'electronic-signing-information-1.0.md',
+    title: 'Electronic Signing Information',
+    version: '1.0',
+    kind: 'Electronic Signing Information',
+    current: null,
+    description: 'What signing a document electronically on BreederHQ means, what to do if you do not want to sign electronically, and why to keep your records.',
+  },
+].map((d) => ({
+  ...d,
+  unlisted: true,
+  stripDraftHeader: true,
+  notice:
+    `<strong>Takes effect ${PACKAGE_EFFECTIVE_DATE}.</strong> This is version ${d.version} of the ${d.kind}.` +
+    (d.current
+      ? ` Until then, ${d.current.label} remains in effect: <a href="${d.current.href}" class="text-[hsl(24,95%,45%)] underline">read ${d.current.label}</a>.`
+      : ''),
+}));
+
+/**
  * Pages under /legal that are written by hand because they have no canonical
  * markdown in the breederhq repository. They are listed on the index only; the
  * generator never writes or checks the pages themselves.
@@ -132,6 +245,19 @@ const STANDALONE_PAGES = [
       'The terms for BreederHQ Founders Program text messages: what is sent, how often, how to opt out, and how to get help.',
   },
 ];
+
+/**
+ * Drops the draft status line, the unassigned proposed date and the proposed
+ * publication line from an upcoming document. Each would publish a statement
+ * ("not published or in effect") that contradicts the page it sits on; the
+ * notice box above the document carries the effective date instead.
+ */
+function stripDraftHeader(md) {
+  return md
+    .split(/\r?\n/)
+    .filter((l) => !/^\*\*(Status|Proposed Effective Date|Proposed publication):\*\*/.test(l))
+    .join('\n');
+}
 
 /** Escape a value being interpolated into an Astro frontmatter string. */
 function jsString(value) {
@@ -400,7 +526,7 @@ async function main() {
   const generated = [];
   let stale = [];
 
-  for (const doc of DOCUMENTS) {
+  for (const doc of [...DOCUMENTS, ...UPCOMING_DOCUMENTS]) {
     const srcPath = resolve(LEGAL_SRC, doc.file);
     if (!existsSync(srcPath)) {
       console.error(`[sync-legal] Missing source document: ${srcPath}`);
@@ -410,7 +536,8 @@ async function main() {
       process.exit(1);
     }
 
-    const md = await readFile(srcPath, 'utf8');
+    const rawMd = await readFile(srcPath, 'utf8');
+    const md = doc.stripDraftHeader ? stripDraftHeader(rawMd) : rawMd;
     const page = renderPage(doc, renderMarkdown(md));
     const outPath = resolve(OUT_DIR, `${doc.slug}.astro`);
 
@@ -455,11 +582,18 @@ async function main() {
       );
       process.exit(1);
     }
-    console.log(`[sync-legal] up to date (${DOCUMENTS.length} documents)`);
+    console.log(
+      `[sync-legal] up to date (${DOCUMENTS.length} documents, ${UPCOMING_DOCUMENTS.length} upcoming)`,
+    );
     return;
   }
 
   console.log(`[sync-legal] ${generated.length} documents synced`);
+  if (PACKAGE_EFFECTIVE_DATE === 'TBD') {
+    console.warn(
+      '[sync-legal] PACKAGE_EFFECTIVE_DATE is still TBD: set it before the advance notice is sent.',
+    );
+  }
 }
 
 main().catch((err) => {

@@ -27,7 +27,7 @@ Four factual passthrough layers:
 
 ### 1. Stripe Identity Passthrough
 
-Where a breeder or provider has completed Stripe Identity verification, their profile displays "Identity confirmed via Stripe Identity." This is a passthrough of Stripe's identity verification, not a BreederHQ endorsement.
+Every breeder and service provider must pass an independent ID check before they can list; some listings that were public before the requirement began may remain public without the mark. Where the account that posted passed the check, its profile may display "Identity confirmed via Stripe Identity" (our current provider). This reports that the provider returned a passed result at a point in time. It is a passthrough, not a BreederHQ verification or endorsement, and BreederHQ keeps only whether the check passed, a reference number and the date; it cannot give a buyer a seller's identity details.
 
 ### 2. Public-Registry Passthrough
 

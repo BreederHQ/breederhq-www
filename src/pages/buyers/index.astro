@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     question: 'What do the identity and credential indicators on profiles mean?',
-    answer: 'BreederHQ does not verify or vouch for breeders. A profile may show three kinds of indicators. (1) "Identity confirmed via Stripe Identity" means Stripe, Inc. confirmed the person\u2019s government-issued photo ID matched the legal name on file. (2) "Confirmed via [registry] registry" means BreederHQ queried a public registry (OFA, AKC, AFA, etc.) and the registry returned a matching record; the registry is the authoritative source and a link to it appears with the indicator. (3) Anything else on the profile is the breeder\u2019s own attestation. Separately, Profile Indicators reflect platform account history (typical response time, completed transactions). See /trust for the full policy.'
+    answer: 'BreederHQ does not verify or vouch for breeders. A profile may show three kinds of indicators. (1) "Identity confirmed via Stripe Identity" means Stripe, Inc. reported that the person who completed the check for the account passed its check of a government-issued photo ID and a live photo. (2) "Confirmed via [registry] registry" means BreederHQ queried a public registry (OFA, AKC, AFA, etc.) and the registry returned a matching record; the registry is the authoritative source and a link to it appears with the indicator. (3) Anything else on the profile is the breeder\u2019s own attestation. Separately, Profile Indicators reflect platform account history (typical response time, completed transactions). See /trust for the full policy.'
   },
   {
     question: 'Can I message a breeder before committing?',
@@ -112,8 +112,9 @@ const faqs = [
           </div>
           <h3 class="text-lg font-bold text-gray-900 mb-2">Identity Confirmation</h3>
           <p class="text-sm text-gray-600">
-            Breeders and providers can complete identity verification through Stripe Identity
-            (operated by Stripe, Inc.). Where the issuing body maintains a public registry, BreederHQ
+            Every breeder and service provider must pass an independent ID check before they can
+            list. The check is run by a third-party provider (currently Stripe Identity, operated by
+            Stripe, Inc.), not by BreederHQ. Where the issuing body maintains a public registry, BreederHQ
             may also display registry passthrough indicators. BreederHQ does not vouch for credentials.
           </p>
         </div>
@@ -223,7 +224,7 @@ const faqs = [
           <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Layer 1</div>
           <h3 class="font-bold text-gray-900 mb-2">Identity confirmation (Stripe Identity)</h3>
           <p class="text-sm text-gray-600 leading-relaxed">
-            Stripe Identity (a service operated by Stripe, Inc.) confirmed the person\u2019s government-issued photo ID matched the legal name on file. The profile shows the date of the confirmation.
+            Stripe Identity (a service operated by Stripe, Inc.) reported that the person who completed the check for the account passed its check of a government-issued photo ID and a live photo. The profile may show the date of the check.
           </p>
         </div>
         <div class="bg-stone-50 rounded-xl border border-stone-200 p-6">
