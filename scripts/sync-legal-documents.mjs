@@ -125,7 +125,7 @@ const DOCUMENTS = [
  * it from the frozen effective instant (a calendar date, such as "January 5,
  * 2027") BEFORE the notice email goes out, then re-runs this script.
  */
-const PACKAGE_EFFECTIVE_DATE = 'TBD';
+const PACKAGE_EFFECTIVE_DATE = 'January 1, 2027';
 
 /**
  * The 2.2 package, published ahead of its effective date so the advance
@@ -447,15 +447,28 @@ const breadcrumbs = [
 }
 
 /** The index page listing every document. */
-function renderIndex(docs) {
-  const items = docs
-    .map(
-      (d) => `          <li class="border-b border-gray-100 py-4">
+function renderIndex(docs, upcoming = []) {
+  const renderItems = (list) =>
+    list
+      .map(
+        (d) => `          <li class="border-b border-gray-100 py-4">
             <a href=${jsString('/legal/' + d.slug)} class="text-lg font-semibold text-[hsl(24,95%,45%)] underline">${d.title}</a>
             <p class="mt-1 text-gray-700">${d.description}</p>
           </li>`,
-    )
-    .join('\n');
+      )
+      .join('\n');
+  const items = renderItems(docs);
+  const upcomingSection = upcoming.length
+    ? `
+        <h2 class="text-2xl font-semibold text-gray-900 mt-12 mb-3">Upcoming Changes, Effective ${PACKAGE_EFFECTIVE_DATE}</h2>
+        <p class="text-gray-700 mb-4">
+          These versions take effect on ${PACKAGE_EFFECTIVE_DATE}. Until then,
+          the documents listed above remain in effect.
+        </p>
+        <ul class="list-none p-0">
+${renderItems(upcoming)}
+        </ul>`
+    : '';
 
   return `---
 // GENERATED FILE — DO NOT EDIT. See scripts/sync-legal-documents.mjs.
@@ -482,7 +495,7 @@ const breadcrumbs = [
         </p>
         <ul class="list-none p-0">
 ${items}
-        </ul>
+        </ul>${upcomingSection}
         <div class="mt-12 pt-8 border-t border-gray-200 text-sm text-gray-600">
           <p>
             Questions can go to
@@ -555,10 +568,10 @@ async function main() {
     generated.push(doc);
   }
 
-  const indexPage = renderIndex([
-    ...DOCUMENTS.filter((d) => !d.unlisted),
-    ...STANDALONE_PAGES,
-  ]);
+  const indexPage = renderIndex(
+    [...DOCUMENTS.filter((d) => !d.unlisted), ...STANDALONE_PAGES],
+    UPCOMING_DOCUMENTS,
+  );
   const indexPath = resolve(OUT_DIR, 'index.astro');
   const existingIndex = existsSync(indexPath) ? await readFile(indexPath, 'utf8') : null;
   if (existingIndex !== indexPage) {
