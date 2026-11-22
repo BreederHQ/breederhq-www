@@ -1200,6 +1200,10 @@ function buildWaitlistReply(lead: EnrichedLead): { subject: string; html: string
       text: 'One small favor: reply to this email with the breed you work with, so we know this reached you.',
     },
     {
+      html: 'Questions? Email <a href="mailto:support@breederhq.com" style="color:#1d4ed8;">support@breederhq.com</a>.',
+      text: 'Questions? Email support@breederhq.com.',
+    },
+    {
       html: 'Aaron and Carie<br /><span style="color:#6b7280;">Founders, BreederHQ</span>',
       text: 'Aaron and Carie\nFounders, BreederHQ',
     },
@@ -1355,9 +1359,9 @@ export async function sendWaitlistConfirmation(
   const reply = buildWaitlistReply(lead);
   const outcome = await deliverAutoReply(config.resendApiKey, lead.email, {
     // A person's name on the From line: this is a note from two people,
-    // not a system notice. Replies land with a person.
+    // not a system notice. Replies land in the support inbox.
     from: 'Aaron and Carie at BreederHQ <hello@mail.breederhq.com>',
-    replyTo: 'aaron@breederhq.com',
+    replyTo: 'support@breederhq.com',
     ...reply,
   });
 

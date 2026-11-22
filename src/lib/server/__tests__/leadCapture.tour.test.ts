@@ -308,6 +308,10 @@ describe('sendWaitlistConfirmation: logs what Resend answered', () => {
     assert.equal(sent, true);
     assert.equal(calls.length, 2);
     assert.match(calls[0].url, /^https:\/\/api\.resend\.com\/emails$/);
+    const resendBody = JSON.parse(String(calls[0].init.body));
+    assert.equal(resendBody.reply_to, 'support@breederhq.com');
+    assert.match(resendBody.html, /Questions\? Email .*support@breederhq\.com/);
+    assert.match(resendBody.text, /Questions\? Email support@breederhq\.com\./);
     assert.equal(calls[1].url, 'https://api.test/api/v1/marketing-leads/email-log');
     assert.equal((calls[1].init.headers as Record<string, string>)['x-bhq-lead-secret'], 's3cret');
     assert.deepEqual(JSON.parse(String(calls[1].init.body)), {
