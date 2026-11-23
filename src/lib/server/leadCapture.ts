@@ -3,6 +3,14 @@
  * Handles form submissions, enriches data, and distributes to multiple channels
  */
 
+import {
+  INTRO_CALL_VIDEO_URL,
+  formatHoldDate,
+  formatHoldMonthDay,
+  holdUntilDate,
+  isHoldDate,
+} from '../foundersIntroCall';
+
 export interface LeadData {
   email: string;
   name?: string;
@@ -1137,42 +1145,78 @@ const DOG_SHOW_FOLLOWUP: InterestFollowUp = {
   ],
 };
 
-/**
- * The Founders' Program tour booking page. Reclaim copies every `data-` query
- * parameter on this URL into its webhook's `custom_data`, which is how a
- * booking made from the email finds its application.
- */
-const TOUR_BOOKING_URL = 'https://app.reclaim.ai/m/breederhq/founders-program-tour';
-const TOUR_BOOKING_DISPLAY = 'app.reclaim.ai/m/breederhq/founders-program-tour';
+/** The page an applicant returns to from her emails to pick an intro call time. */
+const INTRO_CALL_PAGE_URL = 'https://breederhq.com/founders/intro-call';
 
 /**
- * The booking link for one application: the page URL plus
- * `?data-submission=<URL-encoded submission key>`. The key is the one
- * /api/contact forwarded to the platform for this submission, so the booking
- * and the application share it. Without a key (an older cached form) the link
- * is the bare page, and the booking is matched by email instead.
+ * The link to the intro-call page for one application:
+ * `https://breederhq.com/founders/intro-call?k=<key>&by=<YYYY-MM-DD>&ref=breeder`.
+ *
+ * `k` is the submission key (URL-encoded) that ties a booking made from the
+ * page to the application. `by` is the last day of the hold and `ref=breeder`
+ * marks an applicant another breeder sent; both are optional and the page only
+ * displays them. Without a key the link is the bare page, whatever else is
+ * given: the page then offers the calendar with nothing recorded against an
+ * application. The platform builds the identical string for its own emails
+ * (`foundersIntroCallPageUrl` in the API), and both repos assert the same
+ * literal in their tests.
  */
-function tourBookingUrl(submissionKey?: string): string {
-  return submissionKey
-    ? `${TOUR_BOOKING_URL}?data-submission=${encodeURIComponent(submissionKey)}`
-    : TOUR_BOOKING_URL;
+export function foundersIntroCallPageUrl(options: {
+  submissionKey?: string;
+  holdDate?: string | null;
+  referredByBreeder?: boolean;
+}): string {
+  if (!options.submissionKey) return INTRO_CALL_PAGE_URL;
+  const query = [`k=${encodeURIComponent(options.submissionKey)}`];
+  if (isHoldDate(options.holdDate)) query.push(`by=${options.holdDate}`);
+  if (options.referredByBreeder) query.push('ref=breeder');
+  return `${INTRO_CALL_PAGE_URL}?${query.join('&')}`;
+}
+
+/**
+ * The last day an application is held: Chicago's calendar day of the
+ * submission plus 14, the same rule the platform and the booking screen use.
+ * The submission time is the one /api/contact stamped on the lead; a missing or
+ * unreadable one falls back to now.
+ */
+function holdDateOf(lead: EnrichedLead): string {
+  const stamped = lead.metadata?.timestamp ? new Date(lead.metadata.timestamp) : new Date();
+  return holdUntilDate(Number.isNaN(stamped.getTime()) ? new Date() : stamped);
 }
 
 /**
  * The Founders' Program application reply.
  *
- * Deliberately plain: no header image, no logo, no buttons, two real names.
- * A branded HTML layout reads as marketing, which is what lands in a Promotions
- * tab, and this is the first personal note of a relationship that continues one
- * to one. Its one job is the next step: booking the tour, through a link that
- * carries this application's submission key.
+ * Deliberately personal: no header image, no logo, two real names, one button.
+ * A branded layout reads as marketing, which is what lands in a Promotions
+ * tab, and this is the first note of a relationship that continues one to one.
+ * Its one job is the next step: picking an intro call time, through the
+ * intro-call page's link that carries this application's submission key. It
+ * also states the hold (what the applicant must do and by when) and points to
+ * the walkthrough video, so she can decide the hour is worth her time before
+ * she takes a slot.
  *
- * The HTML and text parts carry the same words, the same signature and the same
- * booking URL.
+ * The HTML and text parts carry the same words, the same signature and the
+ * same link.
  */
 function buildWaitlistReply(lead: EnrichedLead): { subject: string; html: string; text: string } {
   const first = (lead.name || '').trim().split(/\s+/)[0] || '';
-  const bookingUrl = tourBookingUrl(lead.submission_key);
+  const holdDate = holdDateOf(lead);
+  const referredByBreeder = lead.referral_source === 'another_breeder';
+  const pageUrl = foundersIntroCallPageUrl({
+    submissionKey: lead.submission_key,
+    holdDate,
+    referredByBreeder,
+  });
+  const holdLong = formatHoldDate(holdDate) ?? holdDate;
+  const holdShort = formatHoldMonthDay(holdDate) ?? holdDate;
+
+  const holdLine = `We hold your application until ${holdLong}. If you have not attended an intro call by then, it closes.`;
+  const videoLead =
+    'Before your call, watch Aaron and Carie walk through BreederHQ in under two minutes:';
+  const referralLine =
+    'Before your call, message the breeder who told you about BreederHQ and ask them why an hour with us is worth your time.';
+  const referralTail = "They'll tell you better than we can.";
 
   const paragraphs: { html: string; text: string }[] = [
     {
@@ -1184,21 +1228,33 @@ function buildWaitlistReply(lead: EnrichedLead): { subject: string; html: string
       text: "Thanks for applying to the BreederHQ Founders' Program. We read every application ourselves.",
     },
     {
-      html: 'The next step is a 90-minute live Zoom tour with the two of us. If you already picked a time on our website, you are all set. Your calendar invite comes from BreederHQ Founders (admin@breederhq.com).',
-      text: 'The next step is a 90-minute live Zoom tour with the two of us. If you already picked a time on our website, you are all set. Your calendar invite comes from BreederHQ Founders (admin@breederhq.com).',
+      html: 'The next step is a 60-minute live Zoom intro call with the two of us. If you already picked a time on our website, you are all set.',
+      text: 'The next step is a 60-minute live Zoom intro call with the two of us. If you already picked a time on our website, you are all set.',
     },
     {
-      html: `If you have not picked a time yet, choose one here:<br /><a href="${escapeHtml(bookingUrl)}" style="color:#1d4ed8;">${TOUR_BOOKING_DISPLAY}</a>`,
-      text: `If you have not picked a time yet, choose one here:\n${bookingUrl}`,
+      html: 'If you have not picked a time yet, choose one here:',
+      text: 'If you have not picked a time yet, choose one here:',
     },
     {
-      html: 'We will also write to you from aaron@breederhq.com and carie@breederhq.com. Please add both to your contacts, and check your Promotions and spam folders so our notes do not get lost.',
-      text: 'We will also write to you from aaron@breederhq.com and carie@breederhq.com. Please add both to your contacts, and check your Promotions and spam folders so our notes do not get lost.',
+      html: `<a href="${escapeHtml(pageUrl)}" style="display:inline-block;padding:12px 22px;border-radius:8px;background-color:#d9650d;color:#ffffff;font-weight:600;text-decoration:none;">Pick My Intro Call Time</a>`,
+      text: `Pick My Intro Call Time:\n${pageUrl}`,
     },
     {
-      html: 'One small favor: reply to this email with the breed you work with, so we know this reached you.',
-      text: 'One small favor: reply to this email with the breed you work with, so we know this reached you.',
+      html: `<strong>${escapeHtml(holdLine)}</strong>`,
+      text: holdLine,
     },
+    {
+      html: `${videoLead} <a href="${INTRO_CALL_VIDEO_URL}" style="color:#1d4ed8;">${INTRO_CALL_VIDEO_URL}</a>`,
+      text: `${videoLead} ${INTRO_CALL_VIDEO_URL}`,
+    },
+    ...(referredByBreeder
+      ? [
+          {
+            html: `<strong>${escapeHtml(referralLine)}</strong> ${escapeHtml(referralTail)}`,
+            text: `${referralLine} ${referralTail}`,
+          },
+        ]
+      : []),
     {
       html: 'Questions? Email <a href="mailto:support@breederhq.com" style="color:#1d4ed8;">support@breederhq.com</a>.',
       text: 'Questions? Email support@breederhq.com.',
@@ -1209,12 +1265,16 @@ function buildWaitlistReply(lead: EnrichedLead): { subject: string; html: string
     },
   ];
 
+  const subject = first
+    ? `Pick your intro call time by ${holdShort}, ${first}`
+    : `Pick your intro call time by ${holdShort}`;
+
   const html = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Next step: pick your tour time</title>
+  <title>${escapeHtml(subject)}</title>
 </head>
 <body style="margin:0;padding:16px;background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f2937;">
 ${paragraphs.map((p) => `  <p style="margin:0 0 14px;">${p.html}</p>`).join('\n')}
@@ -1222,10 +1282,6 @@ ${paragraphs.map((p) => `  <p style="margin:0 0 14px;">${p.html}</p>`).join('\n'
 </html>`;
 
   const text = paragraphs.map((p) => p.text).join('\n\n');
-
-  const subject = first
-    ? `Next step: pick your tour time, ${first}`
-    : 'Next step: pick your tour time';
 
   return { subject, html, text };
 }

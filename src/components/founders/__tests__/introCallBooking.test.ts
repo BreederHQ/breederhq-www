@@ -6,6 +6,7 @@
  */
 import { after, before, describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { bookingUrlsFor, initIntroCallBooking } from '../introCallBooking';
 
@@ -75,7 +76,11 @@ describe('initIntroCallBooking', () => {
       part(root, 'subhead').textContent,
       'Your application is in and held until Sunday, December 6. Pick a time for your live Zoom intro call with Aaron and Carie.',
     );
-    assert.match(part(root, 'later-body').textContent ?? '', /Your application is held until Sunday, December 6\.$/);
+    // The approved "Not Ready To Pick A Time?" sentence, with the date added.
+    assert.equal(
+      part(root, 'later-body').textContent,
+      "Your application is saved. We've emailed you a link back to this page, so you can watch the walkthrough, try the demo and book when you're ready. Your application is held until Sunday, December 6.",
+    );
     const frame = part(root, 'embed-card').querySelector('iframe') as HTMLIFrameElement;
     assert.equal(frame.src, 'https://app.reclaim.ai/e/abc-123?data-submission=sub-1');
     assert.equal(part(root, 'embed-card').hidden, false);
@@ -111,5 +116,16 @@ describe('initIntroCallBooking', () => {
     const frame = part(root, 'embed-card').querySelector('iframe') as HTMLIFrameElement;
     assert.match(frame.src, /data-submission=first$/);
     assert.match(part(root, 'subhead').textContent ?? '', /Sunday, December 6/);
+  });
+});
+
+describe('IntroCallBooking.astro', () => {
+  it('ships the approved "Not Ready To Pick A Time?" sentence the script extends with the date', () => {
+    const markup = readFileSync(new URL('../IntroCallBooking.astro', import.meta.url), 'utf8');
+    assert.ok(
+      markup.includes(
+        'Your application is saved. We&rsquo;ve emailed you a link back to this page, so you can watch the walkthrough, try the demo and book when you&rsquo;re ready.',
+      ),
+    );
   });
 });

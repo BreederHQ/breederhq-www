@@ -219,7 +219,7 @@ export function initIntroCallBooking(options: IntroCallBookingOptions): void {
     }
     if (laterBody) {
       // The same sentence as the markup's, plus the date (see the note there).
-      laterBody.textContent = `Your application is saved. Your confirmation email has a link to pick a time, so you can book when you're ready. Your application is held until ${holdLabel}.`;
+      laterBody.textContent = `Your application is saved. We've emailed you a link back to this page, so you can watch the walkthrough, try the demo and book when you're ready. Your application is held until ${holdLabel}.`;
     }
   }
 

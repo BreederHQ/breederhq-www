@@ -28,6 +28,8 @@ const excludedPages = [
   'https://breederhq.com/legal/privacy-1-3',
   'https://breederhq.com/legal/electronic-signing-information',
   'https://breederhq.com/get-app', // QR redirect target — noindex
+  'https://breederhq.com/founders/intro-call', // Founders applicant's return page (links carry her key) — noindex
+  'https://breederhq.com/founders/intro-call/answer', // Founders check-in answer page — noindex
   'https://breederhq.com/search', // Client-side search UI — no content to index
   'https://breederhq.com/provider/stripe-connect/return', // Mobile deep-link bridge page — noindex
   'https://breederhq.com/provider/stripe-connect/refresh', // Mobile deep-link bridge page — noindex

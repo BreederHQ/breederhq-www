@@ -101,6 +101,17 @@ export function formatHoldDate(ymd: string): string | null {
   }).format(date);
 }
 
+/** "December 6" for 2026-12-06, or null when the value is not a date. */
+export function formatHoldMonthDay(ymd: string): string | null {
+  const date = parseYmd(ymd);
+  if (!date) return null;
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}
+
 /**
  * A booked call's start as the program's messages write it:
  * "Tuesday, December 1 at 2:00 PM CT". Formatted in Chicago, and the zone is
@@ -119,4 +130,85 @@ export function formatIntroCallStart(start: Date): string {
     minute: '2-digit',
   }).format(start);
   return `${day} at ${clock} CT`;
+}
+
+// ── The pages an applicant opens from her emails ──────────────────────────────
+
+/** The longest submission key the platform accepts (its answer route's bound). */
+export const INTRO_CALL_MAX_KEY_CHARS = 200;
+
+/** The largest booking id the platform stores (a 32-bit integer column). */
+export const INTRO_CALL_MAX_BOOKING_ID = 2147483647;
+
+/**
+ * A submission key worth sending on: non-empty after trimming, within the
+ * platform's bound, with no control characters. Anything else is treated as no
+ * key, so a mangled link still opens the page.
+ */
+export function cleanSubmissionKey(raw: unknown): string {
+  if (typeof raw !== 'string') return '';
+  const key = raw.trim();
+  if (!key || key.length > INTRO_CALL_MAX_KEY_CHARS) return '';
+  if (/[\u0000-\u001f\u007f-\u009f]/.test(key)) return '';
+  return key;
+}
+
+/**
+ * What the intro-call page reads from its link: `k` (the submission key), `by`
+ * (the last day of the hold) and `ref=breeder`. All three are display-only
+ * inputs, so a malformed one is dropped rather than refused.
+ */
+export function parseIntroCallPageParams(search: string): {
+  submissionKey: string;
+  holdDate: string | null;
+  referredByBreeder: boolean;
+} {
+  const params = new URLSearchParams(search);
+  const by = params.get('by');
+  return {
+    submissionKey: cleanSubmissionKey(params.get('k')),
+    holdDate: isHoldDate(by) ? by : null,
+    referredByBreeder: params.get('ref') === 'breeder',
+  };
+}
+
+export type IntroCallAnswer = 'yes' | 'new';
+
+/**
+ * What the answer page reads from its link: the submission key, the booking id
+ * and which button to show. Null unless all three are usable, in which case the
+ * page offers no button.
+ */
+export function parseIntroCallAnswerParams(
+  search: string,
+): { submissionKey: string; bookingId: number; answer: IntroCallAnswer } | null {
+  const params = new URLSearchParams(search);
+  const submissionKey = cleanSubmissionKey(params.get('k'));
+  const rawId = params.get('b') ?? '';
+  const bookingId = /^[0-9]{1,10}$/.test(rawId) ? Number(rawId) : 0;
+  const answer = params.get('a');
+  if (!submissionKey) return null;
+  if (!Number.isInteger(bookingId) || bookingId < 1 || bookingId > INTRO_CALL_MAX_BOOKING_ID) {
+    return null;
+  }
+  if (answer !== 'yes' && answer !== 'new') return null;
+  return { submissionKey, bookingId, answer };
+}
+
+/**
+ * A reschedule link the browser may be sent to: https, on reclaim.ai or one of
+ * its subdomains, and carrying no credentials. Anything else is null.
+ */
+export function usableRescheduleUrl(value: unknown): string | null {
+  if (typeof value !== 'string' || value.length > 2000) return null;
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    return null;
+  }
+  if (url.protocol !== 'https:' || url.username || url.password) return null;
+  const host = url.hostname.toLowerCase();
+  if (host !== 'reclaim.ai' && !host.endsWith('.reclaim.ai')) return null;
+  return url.toString();
 }

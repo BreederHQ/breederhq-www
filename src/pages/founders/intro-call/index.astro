@@ -1,0 +1,37 @@
+---
+// The page an applicant returns to from her Founders confirmation email (and
+// the day-before and last-day messages) to watch the walkthrough, try the demo
+// and pick her intro call time.
+//
+// Prerendered and the same for everyone: the link's query (`k`, `by`, `ref`) is
+// read in the browser, so the page carries no applicant's data and can be
+// served from the edge. `k` ties a booking to her application; `by` and `ref`
+// only change what the page says. With no usable `k` the calendar is offered
+// with no application behind it.
+export const prerender = true;
+
+import IntroCallPageShell from '../../../components/founders/IntroCallPageShell.astro';
+import IntroCallBooking from '../../../components/founders/IntroCallBooking.astro';
+---
+
+<IntroCallPageShell
+  title="Pick Your Intro Call Time | BreederHQ"
+  description="Pick a time for your live Zoom intro call with Aaron and Carie."
+>
+  <IntroCallBooking />
+</IntroCallPageShell>
+
+<script>
+  import { parseIntroCallPageParams } from '../../../lib/foundersIntroCall';
+  import { initIntroCallBooking } from '../../../components/founders/introCallBooking';
+
+  const root = document.querySelector<HTMLElement>('[data-intro-call-booking]');
+  if (root) {
+    const { submissionKey, holdDate, referredByBreeder } = parseIntroCallPageParams(
+      window.location.search,
+    );
+    initIntroCallBooking({ root, submissionKey, holdDate, referredByBreeder });
+    document.getElementById('intro-call-heading')?.focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  }
+</script>

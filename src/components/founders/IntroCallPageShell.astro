@@ -1,0 +1,61 @@
+---
+// The document around the Founders pages an applicant opens from her emails
+// (/founders/intro-call and its answer page).
+//
+// Like /pricing it skips BaseLayout, so nothing on the page competes with its
+// one job, and so it imports the site stylesheet and sets the dark shell
+// itself. Unlike /pricing it loads NO analytics: these links carry the
+// applicant's submission key in the query string, and an analytics tag would
+// send the full address, key included, to a third party. The pages are noindex
+// for the same reason they exist: they are for one applicant.
+//
+// The booking screen's demo link is tracked by its data-demo-cta attribute, so
+// the click listener is installed here; without a gtag it does nothing.
+import '../../styles/global.css';
+import DemoCtaTracking from '../DemoCtaTracking.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+
+  <style is:global>
+    /* No universal reset: Tailwind's preflight already normalises margins, and an
+       unlayered reset here would override every spacing utility (see /pricing). */
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .font-serif { font-family: Georgia, "Times New Roman", serif; }
+  </style>
+</head>
+<body class="antialiased bhq-dark-shell" style="color-scheme: dark;">
+  <div class="min-h-screen flex flex-col bg-[#070C16] text-slate-100">
+    <header class="mx-auto w-full max-w-6xl flex items-center justify-between gap-4 px-6 py-6 sm:px-8">
+      <a href="/" class="text-[19px] font-semibold tracking-tight no-underline">
+        <span class="text-white">Breeder</span><span class="text-[hsl(24,95%,53%)]">HQ</span>
+      </a>
+    </header>
+
+    <main class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pb-16 pt-8 sm:px-8">
+      <slot />
+    </main>
+
+    <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-slate-400 sm:px-8">
+      &copy; 2026 BreederHQ
+    </footer>
+  </div>
+
+  <DemoCtaTracking />
+</body>
+</html>

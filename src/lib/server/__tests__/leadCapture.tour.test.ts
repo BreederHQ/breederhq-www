@@ -12,6 +12,7 @@ import assert from 'node:assert/strict';
 import {
   buildLeadAlertHtml,
   describeTour,
+  foundersIntroCallPageUrl,
   parseTourStatus,
   postApplicantEmailLog,
   postLeadToPlatform,
@@ -33,7 +34,11 @@ const waitlistLead: EnrichedLead = {
   name: 'Jo Breeder',
   source: 'launch_waitlist',
   submission_key: 'sub-key-1',
+  // Noon on Sunday, November 22 in Chicago: the hold runs to Sunday, December 6.
+  metadata: { timestamp: '2026-11-22T18:00:00.000Z' },
 };
+
+const WAITLIST_SUBJECT = 'Pick your intro call time by December 6, Jo';
 
 function tour(overrides: Partial<TourStatus>): TourStatus {
   return {
@@ -266,7 +271,7 @@ describe('postApplicantEmailLog: never throws, never waits past its bound', () =
   const entry = {
     submissionKey: 'sub-key-1',
     kind: 'application_confirmation' as const,
-    subject: 'Next step: pick your tour time, Jo',
+    subject: WAITLIST_SUBJECT,
     status: 'sent' as const,
   };
 
@@ -317,7 +322,7 @@ describe('sendWaitlistConfirmation: logs what Resend answered', () => {
     assert.deepEqual(JSON.parse(String(calls[1].init.body)), {
       submissionKey: 'sub-key-1',
       kind: 'application_confirmation',
-      subject: 'Next step: pick your tour time, Jo',
+      subject: WAITLIST_SUBJECT,
       status: 'sent',
     });
   });
@@ -361,5 +366,143 @@ describe('sendWaitlistConfirmation: logs what Resend answered', () => {
     const noKey = { ...waitlistLead, submission_key: undefined };
     assert.equal(await sendWaitlistConfirmation(noKey, { resendApiKey: 're_key', platform }), true);
     assert.equal(calls.length, 1);
+  });
+});
+
+describe('foundersIntroCallPageUrl: the link in every Founders email', () => {
+  it('is exactly the literal the platform asserts for the same inputs', () => {
+    // The API builds the identical string (foundersIntroCallPageUrl); both
+    // repos assert these literals so the two builders cannot drift apart.
+    assert.equal(
+      foundersIntroCallPageUrl({ submissionKey: 'abc-123', holdDate: '2026-12-06', referredByBreeder: true }),
+      'https://breederhq.com/founders/intro-call?k=abc-123&by=2026-12-06&ref=breeder'
+    );
+    assert.equal(
+      foundersIntroCallPageUrl({ submissionKey: 'abc-123', holdDate: '2026-12-06' }),
+      'https://breederhq.com/founders/intro-call?k=abc-123&by=2026-12-06'
+    );
+    assert.equal(
+      foundersIntroCallPageUrl({ submissionKey: 'abc-123' }),
+      'https://breederhq.com/founders/intro-call?k=abc-123'
+    );
+  });
+
+  it('is the bare page without a key, whatever else is given', () => {
+    for (const submissionKey of [undefined, '']) {
+      assert.equal(
+        foundersIntroCallPageUrl({ submissionKey, holdDate: '2026-12-06', referredByBreeder: true }),
+        'https://breederhq.com/founders/intro-call'
+      );
+    }
+  });
+
+  it('URL-encodes the key and leaves out a hold date that is not a real date', () => {
+    assert.equal(
+      foundersIntroCallPageUrl({ submissionKey: 'a b&c=d/é', holdDate: '2026-02-30' }),
+      'https://breederhq.com/founders/intro-call?k=a%20b%26c%3Dd%2F%C3%A9'
+    );
+    for (const holdDate of [undefined, null, '', 'soon', '2026-13-01']) {
+      assert.ok(!foundersIntroCallPageUrl({ submissionKey: 'k', holdDate }).includes('by='), String(holdDate));
+    }
+  });
+});
+
+describe('the confirmation email: the approved intro-call wording', () => {
+  const platform = { apiUrl: 'https://api.test/api/v1', secret: 's3cret' };
+
+  /** Send the confirmation for a lead and return the message Resend was given. */
+  async function sentFor(
+    lead: EnrichedLead
+  ): Promise<{ subject: string; html: string; text: string; reply_to: string }> {
+    const calls = stubFetch(async (url) =>
+      url.startsWith('https://api.resend.com') ? json(200, { id: 'em_1' }) : json(200, { ok: true })
+    );
+    assert.equal(await sendWaitlistConfirmation(lead, { resendApiKey: 're_key', platform }), true);
+    return JSON.parse(String(calls[0].init.body));
+  }
+
+  const PAGE = 'https://breederhq.com/founders/intro-call?k=sub-key-1&by=2026-12-06';
+  const HOLD =
+    'We hold your application until Sunday, December 6. If you have not attended an intro call by then, it closes.';
+  const VIDEO = 'https://demo.arcade.software/video/4NtPVET9zozUSsSRv83F';
+  const REFERRAL =
+    'Before your call, message the breeder who told you about BreederHQ and ask them why an hour with us is worth your time.';
+
+  it('carries every line of the approved email, in order', async () => {
+    const mail = await sentFor(waitlistLead);
+    assert.equal(mail.subject, WAITLIST_SUBJECT);
+    assert.equal(mail.reply_to, 'support@breederhq.com');
+    assert.equal(
+      mail.text,
+      [
+        'Hi Jo,',
+        "Thanks for applying to the BreederHQ Founders' Program. We read every application ourselves.",
+        'The next step is a 60-minute live Zoom intro call with the two of us. If you already picked a time on our website, you are all set.',
+        'If you have not picked a time yet, choose one here:',
+        `Pick My Intro Call Time:\n${PAGE}`,
+        HOLD,
+        `Before your call, watch Aaron and Carie walk through BreederHQ in under two minutes: ${VIDEO}`,
+        'Questions? Email support@breederhq.com.',
+        'Aaron and Carie\nFounders, BreederHQ',
+      ].join('\n\n')
+    );
+  });
+
+  it('the HTML part has the button to the same link, the bold hold line and the video link', async () => {
+    const { html } = await sentFor(waitlistLead);
+    // In an href attribute the link's "&" is written "&amp;".
+    assert.ok(html.includes(`<a href="${PAGE.replace(/&/g, '&amp;')}" style=`), 'the button links to the page');
+    assert.match(html, />Pick My Intro Call Time<\/a>/);
+    assert.ok(html.includes(`<strong>${HOLD}</strong>`));
+    assert.ok(html.includes(`<a href="${VIDEO}"`));
+    assert.match(html, /<title>Pick your intro call time by December 6, Jo<\/title>/);
+    assert.match(html, /Questions\? Email .*support@breederhq\.com/);
+  });
+
+  it('names no 90-minute call and no tour anywhere an applicant reads', async () => {
+    const mail = await sentFor({ ...waitlistLead, referral_source: 'another_breeder' });
+    for (const part of [mail.subject, mail.text, mail.html]) {
+      assert.doesNotMatch(part, /90-minute|\btour\b/i);
+    }
+  });
+
+  it('adds the bold referral line, and the link marker, only for an applicant another breeder sent', async () => {
+    const referred = await sentFor({ ...waitlistLead, referral_source: 'another_breeder' });
+    assert.ok(referred.text.includes(`${REFERRAL} They'll tell you better than we can.`));
+    assert.ok(referred.html.includes(`<strong>${REFERRAL}</strong> They&#39;ll tell you better than we can.`));
+    assert.ok(referred.text.includes(`${PAGE}&ref=breeder`));
+
+    for (const referral_source of [undefined, 'search', 'ai_assistant', 'Another breeder told me']) {
+      const other = await sentFor({ ...waitlistLead, referral_source });
+      assert.doesNotMatch(other.text, /message the breeder/, String(referral_source));
+      assert.ok(!other.text.includes('ref=breeder'), String(referral_source));
+    }
+  });
+
+  it('counts the hold in Chicago days from the submission time', async () => {
+    // 11:30 PM CST on November 22 is 05:30 UTC on November 23: still the 22nd.
+    const late = await sentFor({ ...waitlistLead, metadata: { timestamp: '2026-11-23T05:30:00.000Z' } });
+    assert.equal(late.subject, 'Pick your intro call time by December 6, Jo');
+    // Chicago midnight (06:00 UTC) starts the 23rd, so the hold ends a day later.
+    const next = await sentFor({ ...waitlistLead, metadata: { timestamp: '2026-11-23T06:00:00.000Z' } });
+    assert.equal(next.subject, 'Pick your intro call time by December 7, Jo');
+    assert.ok(next.text.includes('until Monday, December 7.'));
+  });
+
+  it('with no usable submission time the hold counts from now, and with no key the link is the bare page', async () => {
+    const mail = await sentFor({
+      ...waitlistLead,
+      submission_key: undefined,
+      metadata: { timestamp: 'not a date' },
+    });
+    assert.match(mail.subject, /^Pick your intro call time by [A-Z][a-z]+ \d{1,2}, Jo$/);
+    assert.ok(mail.text.includes('Pick My Intro Call Time:\nhttps://breederhq.com/founders/intro-call\n'));
+    assert.ok(!mail.text.includes('?k='));
+  });
+
+  it('greets and subjects an applicant with no name without a dangling comma', async () => {
+    const mail = await sentFor({ ...waitlistLead, name: '' });
+    assert.equal(mail.subject, 'Pick your intro call time by December 6');
+    assert.ok(mail.text.startsWith('Hi there,'));
   });
 });
