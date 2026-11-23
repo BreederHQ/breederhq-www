@@ -1,9 +1,11 @@
 // Breeder reviews: the single source of truth for /reviews, the carousel on
-// the homepage and /mobile, and the compact rotator on /pricing. All of them
-// show every entry below. The full text is always present in the page; the
-// carousel and rotator cards may clamp a long review behind a Read More button,
-// while /reviews shows each one in full. The text in this file is never trimmed
-// to fit.
+// the homepage and /mobile, and the three reviews on /pricing. /reviews and the
+// carousel show every entry below. The full text is always present in those
+// pages; the carousel cards may clamp a long review behind a Read More button,
+// while /reviews shows each one in full. /pricing shows three reviews picked by
+// id, each as an excerpt of whole sentences ending in an ellipsis, beside a link
+// to /reviews (components/founders/foundersReviews.ts). The text in this file is
+// never trimmed to fit.
 //
 // Every entry is a public review posted by its author on the named platform.
 // Text is stored exactly as posted (curly apostrophes, double spaces and

@@ -1,0 +1,31 @@
+---
+// Three breeder reviews side by side on /pricing (one column on a phone). Which
+// three, and how each is excerpted, is set in ./foundersReviews.ts.
+import { SOURCE_LABELS } from '../../data/testimonials';
+import { foundersReviews } from './foundersReviews';
+
+const reviews = foundersReviews();
+---
+
+<section aria-label="Breeder reviews">
+  <div class="grid grid-cols-1 gap-[22px] lg:grid-cols-3 lg:gap-5">
+    {reviews.map(({ review, excerpt }) => (
+      <figure class="m-0 flex flex-col gap-1.5 border-l-2 border-white/12 pl-4">
+        <span class="text-[13px] leading-none tracking-[2px]" role="img" aria-label={`${review.rating} out of 5 stars`}>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <span aria-hidden="true" class={n <= review.rating ? 'text-[#ffb020]' : 'text-[#3c4c66]'}>&#9733;</span>
+          ))}
+        </span>
+        {review.title && <p class="m-0 text-[13.5px] font-semibold leading-snug text-[#dbe5f3]">{review.title}</p>}
+        <blockquote class="m-0 text-sm leading-[1.55] text-[#aec0da]">{excerpt}</blockquote>
+        <figcaption class="mt-auto text-[12.5px] text-[#8da0bd]">
+          {review.reviewerName}, {SOURCE_LABELS[review.source]}
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+  <a
+    href="/reviews"
+    class="mt-[18px] inline-block rounded text-[13.5px] font-semibold text-[#ff8a56] no-underline hover:underline focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#ff8a56]"
+  >Read All Reviews &rarr;</a>
+</section>

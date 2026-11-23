@@ -25,16 +25,15 @@ export const prerender = true;
 // own conversion events fire into nothing and every application goes uncounted.
 import '../../styles/global.css';
 import PaidQuerySnapshot from '../../components/PaidQuerySnapshot.astro';
-import ReviewRotator from '../../components/ReviewRotator.astro';
 import Analytics from '../../components/Analytics.astro';
 import ConsentBanner from '../../components/ConsentBanner.astro';
 import TrackingInit from '../../components/TrackingInit.astro';
 // No HeaderV3 here, so the demo link's click tracking is installed directly.
 import DemoCtaTracking from '../../components/DemoCtaTracking.astro';
 import IntroCallBooking from '../../components/founders/IntroCallBooking.astro';
-import IntroCallWorthIt from '../../components/founders/IntroCallWorthIt.astro';
-import WalkthroughDialog from '../../components/founders/WalkthroughDialog.astro';
 import IntroCallVideoCover from '../../components/founders/IntroCallVideoCover.astro';
+import FoundersReviews from '../../components/founders/FoundersReviews.astro';
+import { demoUrl } from '../../lib/demoLink';
 
 // All nine supported species. Cattle is excluded from the public marketplace
 // buyer directory (see marketplaceData.ts SpeciesKey) but is supported and
@@ -192,6 +191,17 @@ const labelClass =
 // One option row in a multi-select. Checked state carries the brand orange as
 // an EDGE only. The fill is a lifted navy, never translucent orange: orange at
 // low alpha over this navy renders as brown.
+// The page's content sections, outside the form.
+const kickerClass =
+  'mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]';
+const sectionHeadingClass =
+  'mb-[18px] font-serif text-[1.9rem] font-normal leading-[1.15] text-white lg:text-[2.1rem]';
+// A bulleted line with a small orange dot; the color is set where it is used.
+const bulletClass =
+  "relative pl-5 text-base leading-[1.55] before:absolute before:left-0 before:top-[0.62em] before:h-[7px] before:w-[7px] before:rounded-full before:bg-[hsl(24,95%,58%)] before:content-['']";
+const fitItemClass = 'flex gap-2 text-[15.5px] leading-normal text-slate-300';
+const fitMarkerClass =
+  'mt-0.5 flex h-[18px] w-[18px] flex-none items-center justify-center rounded-full text-[11px] font-bold leading-none';
 const optionClass =
   'flex cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-[15px] text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06] has-[:checked]:border-[hsl(24,95%,53%)] has-[:checked]:bg-[#0F1B33]';
 
@@ -321,69 +331,178 @@ const SMS_CONSENT_TEXT =
 
     <!-- Application screen -->
     {/*
-      Layout. One DOM order serves both widths:
-        phone:   hero, short summary, the form, then the full detail sections
-        desktop: hero and the detail sections down the left, the form on the
-                 right spanning both rows; the short summary is hidden
-      so a breeder on a phone reaches the form without scrolling past four
-      sections, and can still read every detail after it.
+      Layout. One DOM order serves both widths, so reading and tab order match
+      what is on screen:
+        phone:   the content, then the form, then the closing line; one apply
+                 button under the video jumps down to the form
+        desktop: the content down the left, the closing line under it, and the
+                 form on the right spanning both rows, sticky so it stays in
+                 view while the left column scrolls; no apply buttons in the
+                 content, because the form is always beside it
+      Each point is said once. Sections are separated by spacing and headings;
+      only the steps and the form are cards.
     */}
     <main
       id="waitlist-screen"
-      class="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-start gap-10 px-6 pb-20 pt-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-x-16 lg:gap-y-14 lg:pt-10"
+      class="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-start gap-11 px-6 pb-20 pt-2 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-x-16 lg:gap-y-16 lg:pt-10"
     >
-      <section class="max-w-xl lg:col-start-1 lg:row-start-1">
-        <div class="mb-6 flex items-center gap-2.5">
-          <span class="h-1.5 w-1.5 rounded-full bg-[hsl(24,95%,53%)] ring-4 ring-[hsl(24,95%,53%)]/20"></span>
-          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">Founders&rsquo; Program &middot; Closes At Launch</span>
-        </div>
-
-        <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-white [text-wrap:pretty] sm:text-5xl lg:text-[3.6rem]">
-          A small group of breeders will get BreederHQ{" "}
-          <em class="text-[hsl(24,95%,58%)]">built around their program.</em>{" "}
-          Then we launch.
-        </h1>
-
-        <p class="mt-7 max-w-[52ch] text-lg leading-relaxed text-slate-200 [text-wrap:pretty]">
-          We move your records, build your storefront and set up your program with you, live.
-          Founders keep a rate nobody gets after launch, along with other benefits, for as long
-          as they stay.
-        </p>
-      </section>
-
-      {/* Phone and tablet only: the two things to know before applying, in brief. */}
-      <div class="flex flex-col gap-4 lg:hidden">
-        <div class="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">How It Works</span>
-          <div class="flex gap-3">
-            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">1</span>
-            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Apply.</strong> About three minutes.</span>
+      <div class="flex min-w-0 max-w-[640px] flex-col gap-11 lg:col-start-1 lg:row-start-1 lg:gap-16">
+        <section>
+          <div class="mb-6 flex items-center gap-2.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-[hsl(24,95%,53%)] ring-4 ring-[hsl(24,95%,53%)]/20"></span>
+            <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">Founders&rsquo; Program &middot; Closes At Launch</span>
           </div>
-          <div class="flex gap-3">
-            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">2</span>
-            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Book your intro call.</strong> A live 60-minute Zoom with Aaron and Carie.</span>
-          </div>
-          <div class="flex gap-3">
-            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">3</span>
-            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Join your intro call.</strong> We walk through your program and BreederHQ, then we both decide on fit.</span>
-          </div>
-          <div class="flex gap-3">
-            <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">4</span>
-            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Earn lifetime Founders status.</strong> We set you up, you run your program for 90 days and share your feedback along the way.</span>
-          </div>
-        </div>
 
-        <div class="flex flex-col gap-2.5 rounded-2xl border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-4">
-          <span class="text-base font-semibold text-white">A Partnership, Not A Free Trial</span>
-          <p class="text-[14.5px] leading-relaxed text-slate-200"><strong>We commit to:</strong> moving your records and building your storefront with you, live working sessions, no credit cards or payment details at all, and a founding rate that is yours for as long as you stay.</p>
-          <p class="text-[14.5px] leading-relaxed text-slate-200"><strong>We ask you to:</strong> run your program on BreederHQ, join three working sessions, give honest feedback, and share your experience publicly if we earn it.</p>
-          <a href="#partnership" class="text-sm text-[hsl(24,95%,62%)] underline underline-offset-2 hover:text-[hsl(24,95%,72%)]">See the full details</a>
-        </div>
+          <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-white [text-wrap:pretty] sm:text-5xl lg:text-[3.6rem]">
+            A small group of breeders will get BreederHQ{" "}
+            <em class="text-[hsl(24,95%,58%)]">built around their program.</em>{" "}
+            Then we launch.
+          </h1>
+
+          <p class="mt-6 max-w-[52ch] text-lg leading-relaxed text-slate-200 [text-wrap:pretty]">
+            We move your records, build your storefront and set up your program with you, live.
+            Founders keep a rate nobody gets after launch, along with other benefits, for as long
+            as they stay.
+          </p>
+        </section>
+
+        <section aria-label="Intro call video">
+          <IntroCallVideoCover />
+          <p class="mt-3.5 text-[14.5px] leading-relaxed text-slate-400">
+            Another breeder sent you? Ask them what the hour was like, or{" "}
+            <a
+              href={demoUrl('waitlist')}
+              data-demo-cta="waitlist"
+              target="_blank" rel="noopener"
+              class="text-[hsl(24,95%,62%)] underline decoration-[hsl(24,95%,53%)]/40 underline-offset-[3px] hover:text-[hsl(24,95%,72%)]"
+            >explore the live demo</a>{" "}
+            first. No sign-up needed.
+          </p>
+          {/* Phones only: there the form sits below the content. */}
+          <a
+            href="#apply"
+            class="mt-[18px] flex min-h-[52px] w-full items-center justify-center rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16] lg:hidden"
+          >Apply For A Founding Spot</a>
+        </section>
+
+        <FoundersReviews />
+
+        <section>
+          <h2 class={sectionHeadingClass}>Only For Breeders Who Join Before Launch</h2>
+          <ul class="m-0 grid list-none gap-3.5 p-0">
+            {[
+              ['Your records moved for you.', 'Spreadsheets, another program’s exports, paper. We land them in BreederHQ, so you do not start from a blank screen.'],
+              ['Your storefront built with you.', 'Your animals, your litters, your buyers’ first impression.'],
+              ['A Founders rate for as long as you stay.', 'It is not offered again after launch.'],
+              ['Aaron and Carie, directly.', 'Live working sessions while we set you up, and after that a direct line to us for support whenever you need it.'],
+              ['A say in what we build.', 'Your feedback goes straight to the founders and the developers.'],
+              ['No credit cards or payment details at all.', ''],
+            ].map(([lead, body]) => (
+              <li class={`${bulletClass} text-slate-300`}>
+                <strong class="font-semibold text-white">{lead}</strong>{body && ` ${body}`}
+              </li>
+            ))}
+          </ul>
+          <p class="mt-[22px] border-t border-white/10 pt-[18px] text-base font-medium leading-relaxed text-slate-100">
+            Founders keep all of this after launch. Breeders who join after launch won&rsquo;t be eligible.
+          </p>
+        </section>
+
+        <section>
+          <p class={kickerClass}>How It Works</p>
+          <h2 class={sectionHeadingClass}>From Application To Founding Member</h2>
+          <ol class="m-0 grid list-none grid-cols-1 gap-3.5 p-0 lg:grid-cols-2">
+            {[
+              {
+                n: 1,
+                title: 'Apply',
+                body: 'Three short steps about you and your program. It takes about three minutes.',
+              },
+              {
+                n: 2,
+                title: 'Book Your Intro Call',
+                body: 'Right after you apply, pick a time for a live 60-minute Zoom intro call with Aaron and Carie, the founders of BreederHQ. We hold your application for 14 days, so attend an intro call in that time to secure your place.',
+              },
+              {
+                n: 3,
+                title: 'Join Your Intro Call',
+                body: "We walk through your program with you, show you BreederHQ in action and go over every Founders' Program benefit. Afterward, we both decide whether it is a good fit.",
+              },
+              {
+                n: 4,
+                title: 'Earn Lifetime Founders Status',
+                body: 'We set up your program for you. You run it on BreederHQ for 90 days and share your feedback along the way. Then your Founders status is yours for life.',
+              },
+            ].map((s) => (
+              <li class="flex flex-col gap-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-[18px]">
+                <span class="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[hsl(24,95%,53%)] font-bold text-white">{s.n}</span>
+                <span class="text-[17px] font-semibold text-white">{s.title}</span>
+                <span class="text-[15px] leading-normal text-slate-300">{s.body}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section>
+          <p class={kickerClass}>A Partnership, Not A Free Trial</p>
+          <h2 class={sectionHeadingClass}>What We Ask Of You</h2>
+          <p class="mb-5 max-w-[56ch] text-[17px] leading-relaxed text-slate-300">
+            Founding members get a level of help and value we will not offer after launch. It asks something of both of us, and we would rather you know that before you apply.
+          </p>
+          <ul class="m-0 grid list-none gap-3 p-0">
+            <li class={`${bulletClass} text-slate-200`}>Run your program on BreederHQ during your founding period, not just look around.</li>
+            <li class={`${bulletClass} text-slate-200`}>Join three live working sessions with us in your first 45 days.</li>
+            <li class={`${bulletClass} text-slate-200`}>Share honest feedback on what is working for you.</li>
+            <li class={`${bulletClass} text-slate-200`}>If BreederHQ earns it, share your experience publicly with other breeders.</li>
+          </ul>
+        </section>
+
+        {/* Both lists at the same size, color and marker size, so neither reads
+            as fine print. */}
+        <section>
+          <h2 class={kickerClass}>Is This Right For You?</h2>
+          <div class="grid grid-cols-1 gap-7 lg:grid-cols-2 lg:gap-8">
+            <div>
+              <h3 class="mb-3.5 text-[17px] font-semibold text-green-300">A Great Fit If Any Of These Sound Like You</h3>
+              <ul class="m-0 grid list-none gap-3 p-0">
+                {[
+                  'You breed regularly and run your program like a business.',
+                  'You are ready to move your records over in the next few weeks.',
+                  'You want one place to run your whole breeding operation, instead of spreadsheets, notes and group chats.',
+                  'You breed more than one species and want them all managed together.',
+                  'You want a better way to sell your animals and keep track of every buyer, from first inquiry to pickup day.',
+                  'You want a real say in how the platform grows.',
+                ].map((text) => (
+                  <li class={fitItemClass}>
+                    <span aria-hidden="true" class={`${fitMarkerClass} bg-green-300/15 text-green-300`}>&#10003;</span>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 class="mb-3.5 text-[17px] font-semibold text-[#fcd9a8]">Probably Not The Right Time If</h3>
+              <ul class="m-0 grid list-none gap-3 p-0">
+                {[
+                  'You are outside the US or Canada. For now, we are only onboarding breeders there.',
+                  'You cannot set aside a few hours over the next 90 days.',
+                  'You are interested in breeding but not running a breeding program yet.',
+                  'You would rather wait for general launch. Founders’ Program spots and the founding rate will not be available then.',
+                ].map((text) => (
+                  <li class={fitItemClass}>
+                    <span aria-hidden="true" class={`${fitMarkerClass} bg-[#fcd9a8]/15 text-[#fcd9a8]`}>&ndash;</span>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
       </div>
 
       <section
         id="apply"
-        class="w-full max-w-md scroll-mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:justify-self-end"
+        class="w-full max-w-md scroll-mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_1px_2px_rgba(28,25,23,0.04),0_12px_32px_-12px_rgba(28,25,23,0.10)] sm:p-8 lg:sticky lg:top-6 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-h-[calc(100vh-3rem)] lg:self-start lg:justify-self-end lg:overflow-y-auto"
       >
         <h2 class="text-lg font-semibold tracking-tight text-white">Apply For A Founding Spot</h2>
         <p class="mt-1 text-sm leading-relaxed text-slate-400">Aaron or Carie reads every application.</p>
@@ -780,15 +899,8 @@ const SMS_CONSENT_TEXT =
             </span>
           </label>
 
-          <div class="flex flex-col gap-1.5 rounded-xl border border-white/12 bg-white/[0.03] p-3.5">
-            <span class="text-xs font-bold uppercase tracking-[0.1em] text-[hsl(24,95%,72%)]">What Happens Next</span>
-            <p class="text-[14.5px] leading-relaxed text-slate-200">
-              Right after you apply, you pick a time for a live 60-minute Zoom intro call with Aaron and Carie. We hold your application for 14 days. Attend an intro call in that time to secure your place.
-            </p>
-          </div>
-
-          <IntroCallWorthIt variant="form" />
-
+          {/* The intro call and the 14-day hold are in the page's steps,
+              beside the form, so the form does not repeat them. */}
           </fieldset>
 
           {/* Back is always available; forward validates the visible step. */}
@@ -826,154 +938,17 @@ const SMS_CONSENT_TEXT =
             We use your details only to contact you about the Founders&rsquo; Program. No newsletter, no sharing.
           </p>
         </form>
-        {/* The live demo box that sat here is on the booking screen now
-            ("Come Try It Yourself"); before applying, the demo is offered in
-            "Not Sure An Hour Is Worth It?". */}
+        {/* The live demo is offered under the video on the page, and on the
+            booking screen ("Come Try It Yourself"). */}
       </section>
 
-      {/* The full detail. Left column on desktop; after the form on a phone. */}
-      <div class="flex max-w-2xl flex-col gap-14 lg:col-start-1 lg:row-start-2">
-        {/* Founders-only items, the hold, and the ways to decide the call is
-            worth an hour, with "Not Sure" directly under the 60-minute line. */}
-        <section class="flex flex-col gap-3.5" aria-label="Founders' Program">
-          <div class="flex flex-col gap-3.5 rounded-[14px] border border-white/10 bg-white/[0.03] p-[22px]">
-            <h3 class="text-lg font-semibold text-white">Why Become a Founder and Book an Intro Call</h3>
-            <IntroCallVideoCover />
-            <a
-              href="#apply"
-              class="inline-flex min-h-[52px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
-            >Apply For A Founding Spot</a>
-          </div>
-
-          <div class="flex flex-col gap-3.5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-[22px]">
-            <h2 class="text-lg font-semibold text-white">Only For Breeders Who Join Before Launch</h2>
-            <ul class="m-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15.5px] leading-normal text-slate-300 marker:text-[hsl(24,95%,58%)]">
-              <li><strong class="font-semibold text-white">Your records moved for you.</strong> Spreadsheets, another program&rsquo;s exports, paper. We land them in BreederHQ.</li>
-              <li><strong class="font-semibold text-white">Your storefront built with you.</strong> Your animals, your litters, your buyers&rsquo; first impression.</li>
-              <li><strong class="font-semibold text-white">A Founders rate for as long as you stay.</strong></li>
-              <li><strong class="font-semibold text-white">Aaron and Carie, directly.</strong> Live working sessions while we set you up, and after that a direct line to us for support whenever you need it.</li>
-              <li><strong class="font-semibold text-white">A say in what we build.</strong> Your feedback goes straight to the founders and the developers.</li>
-            </ul>
-            <p class="m-0 text-[15.5px] font-medium leading-relaxed text-slate-100">Founders keep all of this after launch. Breeders who join after launch won&rsquo;t be eligible.</p>
-          </div>
-
-          <div class="flex flex-col gap-2.5 rounded-[14px] border border-white/10 bg-white/[0.03] p-[22px]">
-            <h3 class="text-lg font-semibold text-white">What Happens Next</h3>
-            <p class="m-0 text-[15.5px] leading-relaxed text-slate-300">Right after you apply, you pick a time for a live 60-minute Zoom intro call with Aaron and Carie. We hold your application for 14 days. Attend an intro call in that time to secure your place.</p>
-          </div>
-
-          <IntroCallWorthIt variant="page" />
-
-          <a
-            href="#apply"
-            class="inline-flex min-h-[52px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
-          >Apply And Pick A Time</a>
-        </section>
-
-        <section class="hidden flex-col gap-5 lg:flex">
-          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">How It Works</span>
-          <h2 class="font-serif text-[2.1rem] font-normal leading-tight text-white">From Application To Founding Member</h2>
-          <ol class="m-0 grid list-none grid-cols-2 gap-3.5 p-0">
-            {[
-              {
-                n: 1,
-                title: 'Apply',
-                body: 'Three short steps about you and your program. It takes about three minutes.',
-              },
-              {
-                n: 2,
-                title: 'Book Your Intro Call',
-                body: 'Right after you apply, pick a time for a live 60-minute Zoom intro call with Aaron and Carie, the founders of BreederHQ.',
-              },
-              {
-                n: 3,
-                title: 'Join Your Intro Call',
-                body: "We walk through your program with you, show you BreederHQ in action and go over every Founders' Program benefit. Afterward, we both decide whether it is a good fit.",
-              },
-              {
-                n: 4,
-                title: 'Earn Lifetime Founders Status',
-                body: 'We set up your program for you. You run it on BreederHQ for 90 days and share your feedback along the way. Then your Founders status is yours for life.',
-              },
-            ].map((s) => (
-              <li class="flex flex-col gap-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-5">
-                <span class="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[hsl(24,95%,53%)] font-bold text-white">{s.n}</span>
-                <span class="text-[17px] font-semibold text-white">{s.title}</span>
-                <span class="text-[15px] leading-normal text-slate-300">{s.body}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section id="partnership" class="flex scroll-mt-6 flex-col gap-5">
-          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">A Two-Way Commitment</span>
-          <h2 class="font-serif text-[1.9rem] font-normal leading-tight text-white sm:text-[2.1rem]">This Is A Partnership, Not A Free Trial</h2>
-          <p class="max-w-[56ch] text-[17px] leading-relaxed text-slate-300">
-            Founding members get a level of help and value we will not offer after launch. It asks something of both of us, and we would rather you know that before you apply.
-          </p>
-          <div class="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-            <div class="flex flex-col gap-3.5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-[22px]">
-              <span class="text-lg font-semibold text-white">What We Commit To</span>
-              <ul class="m-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15.5px] leading-normal text-slate-200">
-                <li>We move your records over and build your storefront with you. You do not start from a blank screen.</li>
-                <li>Live working sessions with Aaron and Carie, scheduled around your program.</li>
-                <li>No credit cards or payment details at all.</li>
-                <li>A founding member rate that is not offered again after launch, and is yours for as long as you stay.</li>
-                <li>Your feedback goes straight to the Founders and the development team. You directly influence and shape the product for future breeders.</li>
-              </ul>
-            </div>
-            <div class="flex flex-col gap-3.5 rounded-[14px] border border-white/14 bg-white/[0.03] p-[22px]">
-              <span class="text-lg font-semibold text-white">What We Ask Of You</span>
-              <ul class="m-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15.5px] leading-normal text-slate-200">
-                <li>Run your program on BreederHQ during your founding period, not just look around.</li>
-                <li>Join three live working sessions with us in your first 45 days.</li>
-                <li>Share honest feedback on what is working for you.</li>
-                <li>If BreederHQ earns it, share your experience publicly with other breeders.</li>
-              </ul>
-            </div>
-          </div>
-          <p class="text-[15px] text-slate-400">We go through every detail, including pricing, on your intro call. Nothing is decided until you have seen it all.</p>
-        </section>
-
-        <section class="flex flex-col gap-5">
-          <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">Is This Right For You?</span>
-          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-3.5">
-            <div class="flex flex-col gap-2.5">
-              <h3 class="text-[17px] font-semibold text-green-300">A Great Fit If Any Of These Sound Like You</h3>
-              <ul class="m-0 flex list-none flex-col gap-2.5 p-0 text-[15.5px] leading-normal text-slate-300">
-                <li>You breed regularly and run your program like a business.</li>
-                <li>You are ready to move your records over in the next few weeks.</li>
-                <li>You want one place to run your whole breeding operation, instead of spreadsheets, notes and group chats.</li>
-                <li>You breed more than one species and want them all managed together.</li>
-                <li>You want a better way to sell your animals and keep track of every buyer, from first inquiry to pickup day.</li>
-                <li>You want a real say in how the platform grows.</li>
-              </ul>
-            </div>
-            <div class="flex flex-col gap-2.5">
-              <h3 class="text-[17px] font-semibold text-slate-300">Probably Not The Right Time If</h3>
-              <ul class="m-0 flex list-none flex-col gap-2.5 p-0 text-[15.5px] leading-normal text-slate-400">
-                <li>A 60-minute live intro call feels like more time than you want to give right now.</li>
-                <li>You cannot set aside a few hours over the next 90 days.</li>
-                <li>You are interested in breeding but not running a breeding program yet.</li>
-                <li>Learning a new system is not something you want to take on right now.</li>
-                <li>Your current setup already works well for you.</li>
-                <li>You are outside the US or Canada. For now, we are only onboarding breeders there.</li>
-                <li>You would rather wait for general launch. Founders&rsquo; Program spots and the founding rate will not be available then.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <ReviewRotator />
-
-        <p class="max-w-[44ch] text-sm leading-relaxed text-slate-400">
-          Running a large-scale operation or managing a breed registry?{" "}
-          <a
-            href="/contact"
-            class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/35 underline-offset-2 hover:text-[hsl(24,95%,62%)] hover:decoration-[hsl(24,95%,53%)]/60"
-          >Let&rsquo;s talk</a>.
-        </p>
-      </div>
+      <p class="max-w-[52ch] text-[15px] leading-relaxed text-slate-400 lg:col-start-1 lg:row-start-2">
+        Running a large-scale operation or managing a breed registry?{" "}
+        <a
+          href="/contact"
+          class="text-[hsl(24,95%,58%)] underline decoration-[hsl(24,95%,53%)]/35 underline-offset-[3px] hover:text-[hsl(24,95%,62%)] hover:decoration-[hsl(24,95%,53%)]/60"
+        >Let&rsquo;s talk</a>.
+      </p>
     </main>
 
     <!-- Booking screen. Swapped in place rather than navigated to, so a
@@ -990,8 +965,6 @@ const SMS_CONSENT_TEXT =
     >
       <IntroCallBooking />
     </main>
-
-    <WalkthroughDialog />
 
     <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-slate-400 sm:px-8">
       &copy; 2026 BreederHQ
@@ -1019,7 +992,6 @@ const SMS_CONSENT_TEXT =
     } from '../../lib/applicationDraft';
     import { holdUntilDate } from '../../lib/foundersIntroCall';
     import { initIntroCallBooking } from '../../components/founders/introCallBooking';
-    import { initWalkthroughDialog } from '../../components/founders/walkthroughDialog';
     import { initIntroCallVideoCover } from '../../components/founders/introCallVideoCover';
     import { AsYouType, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js';
 
@@ -1227,6 +1199,13 @@ const SMS_CONSENT_TEXT =
       function scrollToStepTop() {
         const gap = 16;
         const top = pinnedTopOffset() + gap;
+        // On a wide screen the card is sticky and, when a step is taller than
+        // the window, scrolls inside itself. Scrolling the window cannot bring
+        // the progress line back into view then, so the card scrolls to it.
+        const card = document.getElementById('apply');
+        if (card && card.scrollHeight > card.clientHeight && getComputedStyle(card).overflowY !== 'visible') {
+          card.scrollTo({ top: 0, behavior: 'auto' });
+        }
         // The step label is the progress line's tallest item, so its top is
         // the line's top.
         const rect = stepLabel.getBoundingClientRect();
@@ -1394,8 +1373,6 @@ const SMS_CONSENT_TEXT =
         markDraftSubmitted();
       };
 
-      // The walkthrough opens over the form, so she keeps her place.
-      initWalkthroughDialog();
       initIntroCallVideoCover();
 
       const bookingRoot = document.querySelector<HTMLElement>('[data-intro-call-booking]');
