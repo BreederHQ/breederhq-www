@@ -31,7 +31,9 @@ import ConsentBanner from '../../components/ConsentBanner.astro';
 import TrackingInit from '../../components/TrackingInit.astro';
 // No HeaderV3 here, so the demo link's click tracking is installed directly.
 import DemoCtaTracking from '../../components/DemoCtaTracking.astro';
-import { demoUrl } from '../../lib/demoLink';
+import IntroCallBooking from '../../components/founders/IntroCallBooking.astro';
+import IntroCallWorthIt from '../../components/founders/IntroCallWorthIt.astro';
+import WalkthroughDialog from '../../components/founders/WalkthroughDialog.astro';
 
 // All nine supported species. Cattle is excluded from the public marketplace
 // buyer directory (see marketplaceData.ts SpeciesKey) but is supported and
@@ -160,32 +162,22 @@ const COUNTRIES = [
 
 // How soon they would start. Required. Values are the platform's enum;
 // /api/contact refuses anything else.
+//
+// "Just exploring for now" (`exploring`) is no longer offered. /api/contact and
+// the platform still accept the value, because a tab opened before this change
+// can still send it.
 const START_TIMING = [
   { value: 'asap', label: 'As soon as possible' },
   { value: 'within_month', label: 'Within the next month' },
   { value: 'few_months', label: 'In a few months' },
-  { value: 'exploring', label: 'Just exploring for now' },
 ];
 
-// The tour booking page. Reclaim copies every `data-` query parameter on a
-// booking URL into the webhook's `custom_data`, which is how a booking finds
-// its application: the success screen and the confirmation email both append
-// `?data-submission=<the submission key that was sent>`.
-const TOUR_BOOKING_URL = 'https://app.reclaim.ai/m/breederhq/founders-program-tour';
-
-// The embeddable form of the same link. Reclaim serves its booking pages at
-// /m/<page>/<meeting> with X-Frame-Options DENY, so they cannot be framed; the
-// embeddable page is /e/<scheduling link id> (it sends `frame-ancestors *`),
-// and it too reads `data-` query parameters into the booking's custom data.
-// The id is not derivable from the slug, so it comes from the build
-// environment. Unset or malformed, the success screen shows the booking link
-// on its own, which still carries the key.
-const RECLAIM_EMBED_ID_RAW = String(import.meta.env.PUBLIC_RECLAIM_TOUR_LINK_ID ?? '').trim();
-const RECLAIM_EMBED_ID = /^[A-Za-z0-9-]{1,64}$/.test(RECLAIM_EMBED_ID_RAW) ? RECLAIM_EMBED_ID_RAW : '';
+// The booking screen (Reclaim links, embed id) lives in
+// components/founders/IntroCallBooking.astro.
 
 const title = "Apply To The BreederHQ Founders' Program";
 const description =
-  "BreederHQ is choosing its founding breeders one at a time. Apply to the Founders' Program and book a live tour with the founders.";
+  "BreederHQ is choosing its founding breeders one at a time. Apply to the Founders' Program and book a live intro call with the founders.";
 const canonical = 'https://www.breederhq.com/pricing';
 
 // Dark surfaces, matching the rest of the site rather than the cream this page
@@ -209,10 +201,10 @@ const optionClass =
 // in the same change. Sending it is what lets a tab opened before a wording
 // change still record the wording that tab showed.
 // (SMS consent below is a separate statement with its own version.)
-const PARTNERSHIP_ACK_VERSION = 'founders-partnership-v2';
+const PARTNERSHIP_ACK_VERSION = 'founders-partnership-v3';
 const PARTNERSHIP_ACK_LEAD = "I understand the Founders' Program is a working partnership.";
 const PARTNERSHIP_ACK_BODY =
-  "If we both decide it's a good fit after the tour, I'll be asked to run my program on BreederHQ, join the working sessions and share honest feedback.";
+  "If we both decide it's a good fit after the intro call, I'll be asked to run my program on BreederHQ, join the working sessions and share honest feedback.";
 
 // The SMS consent statement, identified by a VERSION rather than carried as a
 // string the browser submits.
@@ -318,12 +310,12 @@ const SMS_CONSENT_TEXT =
       <a href="/" class="text-[19px] font-semibold tracking-tight no-underline">
         <span class="text-white">Breeder</span><span class="text-[hsl(24,95%,53%)]">HQ</span>
       </a>
-      <span class="hidden text-[13px] uppercase tracking-[0.14em] text-slate-400 lg:block">Founders&rsquo; Program</span>
-      {/* Below lg the form sits under the explainer, so a phone gets a way straight to it. */}
+      {/* A way straight to the form at every width. The program name drops on a
+          phone so the pill fits beside the logo. */}
       <a
         href="#apply" id="apply-jump"
-        class="inline-flex min-h-[40px] items-center rounded-full border border-[hsl(24,95%,53%)]/60 px-3.5 text-sm font-semibold text-[hsl(24,95%,72%)] no-underline transition hover:border-[hsl(24,95%,53%)] lg:hidden"
-      >Apply</a>
+        class="inline-flex min-h-[40px] items-center gap-1.5 whitespace-nowrap rounded-full border border-white/15 px-3.5 text-sm text-slate-200 no-underline transition hover:border-[hsl(24,95%,53%)]/70"
+      ><span class="hidden sm:inline">Founders&rsquo; Program &middot;</span> <span class="font-semibold text-[hsl(24,95%,62%)]">Apply Now &rarr;</span></a>
     </header>
 
     <!-- Application screen -->
@@ -342,24 +334,25 @@ const SMS_CONSENT_TEXT =
       <section class="max-w-xl lg:col-start-1 lg:row-start-1">
         <div class="mb-6 flex items-center gap-2.5">
           <span class="h-1.5 w-1.5 rounded-full bg-[hsl(24,95%,53%)] ring-4 ring-[hsl(24,95%,53%)]/20"></span>
-          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">By Invitation &middot; Limited Spots</span>
+          <span class="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slate-400">Founders&rsquo; Program &middot; Closes At Launch</span>
         </div>
 
         <h1 class="font-serif text-[2.4rem] font-normal leading-[1.05] tracking-tight text-white [text-wrap:pretty] sm:text-5xl lg:text-[3.6rem]">
-          We are choosing our founding breeders{" "}
-          <em class="text-[hsl(24,95%,58%)]">one at a time.</em>
+          A small group of breeders will get BreederHQ{" "}
+          <em class="text-[hsl(24,95%,58%)]">built around their program.</em>{" "}
+          Then we launch.
         </h1>
 
-        <p class="mt-7 max-w-[52ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
-          Before BreederHQ opens to everyone, we are working closely with a small group
-          of breeders. We set up each program with you ourselves. In return, our founding
-          breeders help shape what we build.
+        <p class="mt-7 max-w-[52ch] text-lg leading-relaxed text-slate-200 [text-wrap:pretty]">
+          We move your records, build your storefront and set up your program with you, live.
+          Founders keep a rate nobody gets after launch, along with other benefits, for as long
+          as they stay.
         </p>
-        <p class="mt-4 hidden max-w-[52ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty] lg:block">
-          Founding spots are limited, because we set up every founding breeder ourselves
-          and give each one our full attention. That is why there is no price list on this
-          page and no way to sign yourself up.
-        </p>
+
+        <a
+          href="#apply"
+          class="mt-7 inline-flex min-h-[52px] items-center justify-center rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+        >Apply For A Founding Spot</a>
       </section>
 
       {/* Phone and tablet only: the two things to know before applying, in brief. */}
@@ -372,11 +365,11 @@ const SMS_CONSENT_TEXT =
           </div>
           <div class="flex gap-3">
             <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">2</span>
-            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Book your tour.</strong> A live 90-minute Zoom with Aaron and Carie.</span>
+            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Book your intro call.</strong> A live 60-minute Zoom with Aaron and Carie.</span>
           </div>
           <div class="flex gap-3">
             <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">3</span>
-            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Take the tour.</strong> We walk through your program and BreederHQ, then we both decide on fit.</span>
+            <span class="text-[15px] leading-snug text-slate-300"><strong class="text-white">Join your intro call.</strong> We walk through your program and BreederHQ, then we both decide on fit.</span>
           </div>
           <div class="flex gap-3">
             <span class="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-[hsl(24,95%,53%)] text-[13px] font-bold text-white">4</span>
@@ -482,7 +475,7 @@ const SMS_CONSENT_TEXT =
               class={inputClass}
             />
             <span class="text-xs leading-relaxed text-slate-400">
-              Use the email you check most. Your tour invite goes here.
+              Use the email you check most. Your intro call invite goes here.
             </span>
           </label>
 
@@ -689,7 +682,7 @@ const SMS_CONSENT_TEXT =
 
           {/*
             Required on every application (ruling, 2026-10-04): every applicant
-            is someone we may need to reach about their tour, whatever way they
+            is someone we may need to reach about their intro call, whatever way they
             prefer to be contacted. The submit handler and /api/contact both
             enforce it.
 
@@ -707,7 +700,7 @@ const SMS_CONSENT_TEXT =
               class={inputClass}
             />
             <span class="text-xs leading-relaxed text-slate-400">
-              So we can reach you about your tour. We default to US format; start
+              So we can reach you about your intro call. We default to US format; start
               with <code class="font-mono">+</code> and your country code for international.
             </span>
           </label>
@@ -794,12 +787,11 @@ const SMS_CONSENT_TEXT =
           <div class="flex flex-col gap-1.5 rounded-xl border border-white/12 bg-white/[0.03] p-3.5">
             <span class="text-xs font-bold uppercase tracking-[0.1em] text-[hsl(24,95%,72%)]">What Happens Next</span>
             <p class="text-[14.5px] leading-relaxed text-slate-200">
-              Right after you submit, you will pick a time for your live 90-minute Zoom tour with Aaron and Carie.
-            </p>
-            <p class="text-[13.5px] leading-relaxed text-slate-300">
-              We are working with a small group of breeders ahead of our general platform launch. The tour is where we will walk you through BreederHQ together and talk about whether the Founders&rsquo; Program is a good fit for you and for us.
+              Right after you apply, you pick a time for a live 60-minute Zoom intro call with Aaron and Carie. We hold your application for 14 days. Attend an intro call in that time to secure your place.
             </p>
           </div>
+
+          <IntroCallWorthIt variant="form" />
 
           </fieldset>
 
@@ -838,23 +830,41 @@ const SMS_CONSENT_TEXT =
             We use your details only to contact you about the Founders&rsquo; Program. No newsletter, no sharing.
           </p>
         </form>
-
-        {/* The step back for a breeder who hesitates here. It sits outside the
-            form, so it is not part of the application or its submission. */}
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-[hsl(24,95%,53%)]/55 bg-[#0F1B33] px-4 py-3.5">
-          <p class="min-w-0 flex-1 basis-48 text-[13.5px] leading-relaxed text-slate-300">
-            <strong class="text-white">Not ready to commit?</strong> Look around a working operation first. No sign-up.
-          </p>
-          <a
-            href={demoUrl('waitlist')}
-            data-demo-cta="waitlist"
-            class="inline-flex min-h-[40px] items-center gap-2 whitespace-nowrap rounded-[9px] border border-[rgba(127,200,255,.38)] bg-[rgba(127,200,255,.07)] px-3.5 text-sm font-semibold text-[#EAF1FC] no-underline transition hover:bg-[rgba(127,200,255,.13)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
-          ><span aria-hidden="true" class="h-[7px] w-[7px] flex-none rounded-full bg-[#34D399] shadow-[0_0_10px_#34D399]"></span>Try The Live Demo</a>
-        </div>
+        {/* The live demo box that sat here is on the booking screen now
+            ("Come Try It Yourself"); before applying, the demo is offered in
+            "Not Sure An Hour Is Worth It?". */}
       </section>
 
       {/* The full detail. Left column on desktop; after the form on a phone. */}
       <div class="flex max-w-2xl flex-col gap-14 lg:col-start-1 lg:row-start-2">
+        {/* Founders-only items, the hold, and the ways to decide the call is
+            worth an hour, with "Not Sure" directly under the 60-minute line. */}
+        <section class="flex flex-col gap-3.5" aria-label="Founders' Program">
+          <div class="flex flex-col gap-3.5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-[22px]">
+            <h2 class="text-lg font-semibold text-white">Only For Breeders Who Join Before Launch</h2>
+            <ul class="m-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15.5px] leading-normal text-slate-300 marker:text-[hsl(24,95%,58%)]">
+              <li><strong class="font-semibold text-white">Your records moved for you.</strong> Spreadsheets, another program&rsquo;s exports, paper. We land them in BreederHQ.</li>
+              <li><strong class="font-semibold text-white">Your storefront built with you.</strong> Your animals, your litters, your buyers&rsquo; first impression.</li>
+              <li><strong class="font-semibold text-white">A Founders rate for as long as you stay.</strong></li>
+              <li><strong class="font-semibold text-white">Aaron and Carie, directly.</strong> Live working sessions while we set you up, and after that a direct line to us for support whenever you need it.</li>
+              <li><strong class="font-semibold text-white">A say in what we build.</strong> Your feedback goes straight to the founders and the developers.</li>
+            </ul>
+            <p class="m-0 text-[15.5px] font-medium leading-relaxed text-slate-100">Founders keep all of this after launch. Breeders who join after launch won&rsquo;t be eligible.</p>
+          </div>
+
+          <div class="flex flex-col gap-2.5 rounded-[14px] border border-white/10 bg-white/[0.03] p-[22px]">
+            <h3 class="text-lg font-semibold text-white">What Happens Next</h3>
+            <p class="m-0 text-[15.5px] leading-relaxed text-slate-300">Right after you apply, you pick a time for a live 60-minute Zoom intro call with Aaron and Carie. We hold your application for 14 days. Attend an intro call in that time to secure your place.</p>
+          </div>
+
+          <IntroCallWorthIt variant="page" />
+
+          <a
+            href="#apply"
+            class="inline-flex min-h-[52px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+          >Apply And Pick A Time</a>
+        </section>
+
         <section class="hidden flex-col gap-5 lg:flex">
           <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">How It Works</span>
           <h2 class="font-serif text-[2.1rem] font-normal leading-tight text-white">From Application To Founding Member</h2>
@@ -867,12 +877,12 @@ const SMS_CONSENT_TEXT =
               },
               {
                 n: 2,
-                title: 'Book Your Tour',
-                body: 'Right after you apply, pick a time for a live 90-minute Zoom with Aaron and Carie, the founders of BreederHQ.',
+                title: 'Book Your Intro Call',
+                body: 'Right after you apply, pick a time for a live 60-minute Zoom intro call with Aaron and Carie, the founders of BreederHQ.',
               },
               {
                 n: 3,
-                title: 'Take The Tour',
+                title: 'Join Your Intro Call',
                 body: "We walk through your program with you, show you BreederHQ in action and go over every Founders' Program benefit. Afterward, we both decide whether it is a good fit.",
               },
               {
@@ -917,7 +927,7 @@ const SMS_CONSENT_TEXT =
               </ul>
             </div>
           </div>
-          <p class="text-[15px] text-slate-400">We go through every detail, including pricing, on your tour. Nothing is decided until you have seen it all.</p>
+          <p class="text-[15px] text-slate-400">We go through every detail, including pricing, on your intro call. Nothing is decided until you have seen it all.</p>
         </section>
 
         <section class="flex flex-col gap-5">
@@ -937,13 +947,13 @@ const SMS_CONSENT_TEXT =
             <div class="flex flex-col gap-2.5">
               <h3 class="text-[17px] font-semibold text-slate-300">Probably Not The Right Time If</h3>
               <ul class="m-0 flex list-none flex-col gap-2.5 p-0 text-[15.5px] leading-normal text-slate-400">
-                <li>A 90-minute live tour feels like more time than you want to give right now.</li>
+                <li>A 60-minute live intro call feels like more time than you want to give right now.</li>
                 <li>You cannot set aside a few hours over the next 90 days.</li>
                 <li>You are interested in breeding but not running a breeding program yet.</li>
                 <li>Learning a new system is not something you want to take on right now.</li>
                 <li>Your current setup already works well for you.</li>
                 <li>You are outside the US or Canada. For now, we are only onboarding breeders there.</li>
-                <li>You would rather wait for general launch. That is fine too.</li>
+                <li>You would rather wait for general launch. Founders&rsquo; Program spots and the founding rate will not be available then.</li>
               </ul>
             </div>
           </div>
@@ -961,122 +971,22 @@ const SMS_CONSENT_TEXT =
       </div>
     </main>
 
-    <!-- Confirmation screen. Swapped in place rather than navigated to, so a
+    <!-- Booking screen. Swapped in place rather than navigated to, so a
          failed submit never costs the visitor what they typed. -->
     {/*
-      The booking step. The applicant books the tour here, before leaving the
-      page, rather than waiting on an email. The submit handler builds the
-      embed and both links from the EXACT submission key it sent, so a booking
-      made from any of them carries the key that matches this application.
+      The applicant books her intro call here, before leaving the page, rather
+      than waiting on an email. The submit handler starts the screen with the
+      EXACT submission key it sent, so a booking made from it carries the key
+      that matches this application.
     */}
     <main
       id="waitlist-done" hidden
-      data-booking-url={TOUR_BOOKING_URL}
-      data-embed-id={RECLAIM_EMBED_ID}
-      class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pb-16 pt-8 text-center sm:px-8"
+      class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pb-16 pt-8 sm:px-8"
     >
-      <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[hsl(24,95%,53%)]/55 bg-[#0F1B33]">
-        <svg class="h-5 w-5 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
-      </div>
-      <h1 id="waitlist-done-heading" tabindex="-1" class="font-serif text-[2.2rem] font-normal leading-[1.1] tracking-tight text-white focus:outline-none sm:text-5xl">One Last Step</h1>
-      <p id="waitlist-done-subhead" class="mt-4 max-w-[40ch] text-lg leading-relaxed text-slate-300">
-        Your application is in. Pick a time for your live Zoom tour with Aaron and Carie.
-      </p>
-
-      {/*
-        White card: Reclaim's widget is styled for a light ground.
-
-        The screen is wider than the page's other centered columns (max-w-5xl)
-        for this card alone; every text block above and below keeps its own
-        measure. Reclaim picks its layout from the FRAME's width: under 675px
-        it pages the calendar and the time list apart, from 675px it shows
-        the day picker and the times side by side. The card is a size
-        container so the frame's height follows that same width (see
-        showBookingStep).
-      */}
-      <section
-        id="tour-embed-card" hidden aria-label="Book your tour"
-        class="@container mt-8 w-full overflow-hidden rounded-[14px] bg-white"
-      ></section>
-
-      {/* Shown instead of the embed when the build has no embed id. */}
-      <a
-        id="tour-book-button" hidden target="_blank" rel="noopener"
-        class="mt-8 inline-flex min-h-[54px] items-center justify-center rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-4 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
-      >Pick Your Tour Time</a>
-
-      {/*
-        Replaces the embed once Reclaim reports the booking (see the message
-        listener). The embed's own confirmation is a near-empty white card
-        offering "Book another meeting", which is wrong for an applicant, so
-        the frame is removed and this card says what happens next instead.
-      */}
-      <section
-        id="tour-booked-card" hidden aria-labelledby="tour-booked-heading"
-        class="mt-8 flex w-full max-w-xl flex-col gap-5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-6 text-left sm:p-8"
-      >
-        <h2 id="tour-booked-heading" tabindex="-1" class="font-serif text-[1.65rem] font-normal leading-tight text-white focus:outline-none">Your Tour Is Booked</h2>
-
-        <div id="tour-booked-time" hidden class="flex items-start gap-3.5 rounded-xl border border-white/12 bg-white/[0.03] p-4">
-          <svg class="mt-0.5 h-5 w-5 shrink-0 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
-          </svg>
-          <p class="m-0 flex flex-col gap-0.5">
-            <span id="tour-booked-date" class="text-[17px] font-semibold text-white"></span>
-            <span id="tour-booked-clock" class="text-[15px] text-slate-300"></span>
-          </p>
-        </div>
-
-        {/* Built from the booking message's time; shown only when one arrived. */}
-        <div id="tour-calendar-actions" hidden class="flex flex-col gap-2.5">
-          <h3 class="text-[15px] font-semibold text-slate-200">Add It to Your Calendar</h3>
-          <p class="m-0 text-[15px] leading-relaxed text-slate-300">The invite can take a few minutes to arrive, so put the tour on your calendar now.</p>
-          <div class="flex flex-wrap gap-2.5">
-            <a id="tour-cal-google" target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white no-underline transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Google Calendar</a>
-            <a id="tour-cal-outlook" target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white no-underline transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Outlook</a>
-            <button id="tour-cal-apple" type="button" class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Apple Calendar</button>
-          </div>
-        </div>
-
-        {/* Optional. A failure here never touches the booking above. */}
-        <form id="tour-focus-form" novalidate class="flex flex-col gap-2.5">
-          <label for="tour-focus-answer" class="text-[15px] font-semibold text-slate-200">What's the one thing that would make the biggest difference to your program?</label>
-          <p id="tour-focus-help" class="m-0 text-[15px] leading-relaxed text-slate-300">We'll build your tour around it.</p>
-          <textarea
-            id="tour-focus-answer" rows="3" aria-describedby="tour-focus-help tour-focus-status"
-            class="w-full resize-y rounded-lg border border-white/20 bg-white/[0.04] px-3.5 py-2.5 text-[15px] leading-relaxed text-white placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]"
-          ></textarea>
-          <div class="flex flex-wrap items-center gap-3">
-            <button id="tour-focus-send" type="submit" class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] disabled:cursor-not-allowed disabled:opacity-60">Send</button>
-            <p id="tour-focus-status" role="status" aria-live="polite" class="m-0 text-sm text-slate-400"></p>
-          </div>
-        </form>
-
-        <div class="flex flex-col gap-2.5">
-          <h3 class="text-[15px] font-semibold text-slate-200">What Happens Next</h3>
-          <ul class="m-0 flex list-disc flex-col gap-2.5 pl-5 text-[15px] leading-relaxed text-slate-300 marker:text-[hsl(24,95%,58%)]">
-            <li>A calendar invite with your Zoom link is on its way from <strong class="text-white">BreederHQ Founders</strong> (admin@breederhq.com). Aaron and Carie will both be on the invite.</li>
-            <li>To reschedule or cancel, use the link in that invite.</li>
-            <li>Join from a computer if you can, so you can see the screen as we walk through the platform.</li>
-          </ul>
-        </div>
-
-        <a
-          href="/"
-          class="inline-flex min-h-[50px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F1B33]"
-        >Back to BreederHQ Home</a>
-      </section>
-
-      <p id="tour-link-fallback" hidden class="mt-5 text-sm leading-relaxed text-slate-400">
-        Calendar not showing?{" "}
-        <a id="tour-fallback-link" target="_blank" rel="noopener" class="text-[hsl(24,95%,62%)] underline underline-offset-2 hover:text-[hsl(24,95%,72%)]">Open the booking page</a>.
-      </p>
-      <p id="tour-no-time-note" class="mt-3 max-w-[44ch] text-[13.5px] leading-relaxed text-slate-400">
-        No time that works? Reply to your confirmation email and we will find one together.
-      </p>
+      <IntroCallBooking />
     </main>
+
+    <WalkthroughDialog />
 
     <footer class="mx-auto w-full max-w-6xl px-6 pb-8 pt-6 text-xs text-slate-400 sm:px-8">
       &copy; 2026 BreederHQ
@@ -1094,7 +1004,17 @@ const SMS_CONSENT_TEXT =
   <script>
     import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/tracking';
     import { createSubmissionKeyHolder } from '../../lib/submissionKey';
-    import { tourFocusProblem, normalizeTourFocusAnswer } from '../../lib/tourFocus';
+    import {
+      applyDraftFields,
+      changedDraftFields,
+      loadDraft,
+      markDraftSubmitted,
+      readDraftFields,
+      saveDraft,
+    } from '../../lib/applicationDraft';
+    import { holdUntilDate } from '../../lib/foundersIntroCall';
+    import { initIntroCallBooking } from '../../components/founders/introCallBooking';
+    import { initWalkthroughDialog } from '../../components/founders/walkthroughDialog';
     import { AsYouType, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js';
 
     const DEFAULT_COUNTRY: CountryCode = 'US';
@@ -1110,7 +1030,7 @@ const SMS_CONSENT_TEXT =
     if (form) {
       const screenEl = document.getElementById('waitlist-screen')!;
       const doneEl = document.getElementById('waitlist-done')!;
-      const headingEl = document.getElementById('waitlist-done-heading')!;
+      const headingEl = document.getElementById('intro-call-heading');
       const btn = document.getElementById('waitlist-submit') as HTMLButtonElement;
       const errEl = document.getElementById('waitlist-error')!;
       const phoneInput = form.querySelector<HTMLInputElement>('input[name="phone"]');
@@ -1414,341 +1334,86 @@ const SMS_CONSENT_TEXT =
         return `https://${t}`;
       }
 
-      function firstName(full: string): string {
-        const t = full.trim().replace(/\s+/g, ' ').split(' ')[0] || '';
-        if (!t || !/\p{L}/u.test(t) || t.length > 18) return '';
-        return t.charAt(0).toUpperCase() + t.slice(1);
-      }
-
-      // ── Booking step ─────────────────────────────────────────────────────
+      // ── Unfinished answers ───────────────────────────────────────────────
       //
-      // Reclaim copies every `data-` query parameter on a booking URL into the
-      // webhook's custom_data, so `data-submission` is what ties a booking to
-      // this application. Both the embed and the plain link carry it.
-      const RECLAIM_ORIGIN = 'https://app.reclaim.ai';
-      const bookingBase = doneEl.dataset.bookingUrl || '';
-      const embedId = doneEl.dataset.embedId || '';
-      const doneSubheadEl = document.getElementById('waitlist-done-subhead');
-      const embedCard = document.getElementById('tour-embed-card');
-      const bookButton = document.getElementById('tour-book-button') as HTMLAnchorElement | null;
-      const bookedCard = document.getElementById('tour-booked-card');
-      const bookedHeading = document.getElementById('tour-booked-heading');
-      const bookedTime = document.getElementById('tour-booked-time');
-      const bookedDate = document.getElementById('tour-booked-date');
-      const bookedClock = document.getElementById('tour-booked-clock');
-      const noTimeNote = document.getElementById('tour-no-time-note');
-      const linkFallback = document.getElementById('tour-link-fallback');
-      const fallbackLink = document.getElementById('tour-fallback-link') as HTMLAnchorElement | null;
-      const applyJump = document.getElementById('apply-jump');
-      let embedFrame: HTMLIFrameElement | null = null;
-      let bookedFirstName = '';
-      // The key this application was sent with: the booking links carry it, and
-      // so does the "one thing" answer, which is how the platform finds the
-      // application the answer belongs to.
-      let bookedSubmissionKey = '';
-
-      function bookingUrlsFor(key: string): { link: string; embed: string } {
-        const param = `data-submission=${encodeURIComponent(key)}`;
-        return {
-          link: bookingBase ? `${bookingBase}?${param}` : '',
-          embed: embedId ? `${RECLAIM_ORIGIN}/e/${encodeURIComponent(embedId)}?${param}` : '',
-        };
+      // Kept on this device as she types (see lib/applicationDraft), so a
+      // breeder who leaves to watch the walkthrough, try the demo or ask the
+      // breeder who sent her comes back to her answers. Restored before the
+      // dependent fields are drawn, so a restored website or referral answer
+      // reveals its follow-up box. Removed once the application is sent.
+      if (applyDraftFields(form, loadDraft() ?? {})) {
+        websiteSelect?.dispatchEvent(new Event('change'));
+        referralSelect?.dispatchEvent(new Event('change'));
+        // The follow-up handlers clear a box whose question no longer applies;
+        // put the saved follow-up answers back now that their boxes are shown.
+        applyDraftFields(form, loadDraft() ?? {});
       }
+      // Off once this tab may no longer write the draft: its application was
+      // sent, or one was sent from another tab after this one opened (saveDraft
+      // refuses then, so an older tab never brings sent answers back).
+      let draftSaving = true;
+      // Edits not yet saved. Only the answers this tab changed since its last
+      // save are written, merged into the stored draft, so neither closing a
+      // tab nor typing in it reverts an answer another tab saved. Comparing
+      // with the last saved answers (not listing edited field names) also
+      // catches a follow-up box the page cleared by script.
+      let draftDirty = false;
+      let draftSaved = readDraftFields(form);
+      let draftTimer: ReturnType<typeof setTimeout> | undefined;
+      const flushDraft = () => {
+        clearTimeout(draftTimer);
+        if (!draftSaving || !draftDirty) return;
+        draftDirty = false;
+        const current = readDraftFields(form);
+        const changes = changedDraftFields(draftSaved, current);
+        if (Object.keys(changes).length === 0) return;
+        if (saveDraft(changes, RENDERED_AT)) draftSaved = current;
+        else draftSaving = false;
+      };
+      const saveDraftSoon = () => {
+        if (!draftSaving) return;
+        draftDirty = true;
+        clearTimeout(draftTimer);
+        draftTimer = setTimeout(flushDraft, 300);
+      };
+      form.addEventListener('input', saveDraftSoon);
+      form.addEventListener('change', saveDraftSoon);
+      // A last save when she leaves, so the final keystrokes are not lost to
+      // the delay above. Nothing is written for a visitor who never answered.
+      window.addEventListener('pagehide', flushDraft);
+      /** The application is recorded: drop the draft and stop saving one. */
+      const endDraft = () => {
+        draftSaving = false;
+        clearTimeout(draftTimer);
+        markDraftSubmitted();
+      };
 
-      function showBookingStep(fn: string, urls: { link: string; embed: string }, key: string) {
-        bookedFirstName = fn;
-        bookedSubmissionKey = key;
-        headingEl.textContent = fn ? `One Last Step, ${fn}` : 'One Last Step';
+      // The walkthrough opens over the form, so she keeps her place.
+      initWalkthroughDialog();
+
+      const bookingRoot = document.querySelector<HTMLElement>('[data-intro-call-booking]');
+      const applyJump = document.getElementById('apply-jump');
+
+      /**
+       * Swap the application for the booking screen. The hold date is today
+       * in Chicago plus 14 days, the same day the platform holds the
+       * application until.
+       */
+      function showBookingStep(key: string, referredByBreeder: boolean) {
         screenEl.hidden = true;
         doneEl.hidden = false;
         if (applyJump) applyJump.hidden = true;
-
-        if (urls.embed && embedCard) {
-          const frame = document.createElement('iframe');
-          frame.src = urls.embed;
-          frame.title = "Book your Founders' Program tour";
-          // Reclaim's embed posts no size messages (only MEETING_BOOKED), so
-          // the page sizes the frame. Both layouts pin their Next / Back
-          // buttons to the frame's bottom edge and scroll the time list
-          // inside the frame (a day offers up to 35 start times, far more
-          // than any sensible frame shows at once). So the frame is capped
-          // at the visible viewport: scrolled to, the whole widget is on
-          // screen, buttons included. Narrow frames (paged layout) take
-          // Reclaim's own 700px at most; from 675px wide (side-by-side
-          // layout) up to 820px, which shows the calendar and 16 times.
-          // The height attribute is the fallback for a browser without `svh`,
-          // which drops the class's height rule (a frame's default is 150px).
-          frame.height = '700';
-          frame.className =
-            'block w-full border-0 h-[clamp(560px,calc(100svh-2rem),700px)] @min-[675px]:h-[clamp(640px,calc(100svh-2rem),820px)]';
-          embedCard.replaceChildren(frame);
-          embedCard.hidden = false;
-          embedFrame = frame;
-          if (urls.link && fallbackLink && linkFallback) {
-            fallbackLink.href = urls.link;
-            linkFallback.hidden = false;
-          }
-        } else if (urls.link && bookButton) {
-          bookButton.href = urls.link;
-          bookButton.hidden = false;
-        }
-
-        window.scrollTo(0, 0);
-        headingEl.focus({ preventScroll: true });
-      }
-
-      function field(obj: unknown, key: string): unknown {
-        return obj !== null && typeof obj === 'object'
-          ? (obj as Record<string, unknown>)[key]
-          : undefined;
-      }
-
-      /**
-       * The booked start time from Reclaim's MEETING_BOOKED message, or null.
-       * Reclaim's embed posts `{ type, data: { meeting, redirectUrl } }`, where
-       * `meeting.event.startTime` is the start. It arrives through structured
-       * clone, so it may be a Date or an ISO string; anything else, an ISO
-       * string without a zone (which would be read as local time and could be
-       * hours off), or a time not plausibly a tour booked just now yields null
-       * and the time line is left out rather than shown wrong.
-       */
-      function bookedStartTime(message: unknown): Date | null {
-        const raw = field(field(field(field(message, 'data'), 'meeting'), 'event'), 'startTime');
-        const ms = parseMessageTime(raw);
-        if (!Number.isFinite(ms)) return null;
-        const now = Date.now();
-        const DAY = 86_400_000;
-        if (ms < now - DAY || ms > now + 400 * DAY) return null;
-        return new Date(ms);
-      }
-
-      /** Epoch ms of a Date or zoned ISO string from the message, else NaN. */
-      function parseMessageTime(raw: unknown): number {
-        let ms = NaN;
-        if (Object.prototype.toString.call(raw) === '[object Date]') {
-          ms = (raw as Date).getTime();
-        } else if (
-          typeof raw === 'string' &&
-          raw.length <= 40 &&
-          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?(Z|[+-]\d{2}:?\d{2})$/.test(raw)
-        ) {
-          ms = Date.parse(raw);
-        }
-        return ms;
-      }
-
-      /**
-       * The booked end time when the message carries a usable one (after the
-       * start, no more than 4 hours long); otherwise the start plus 90 minutes.
-       */
-      function bookedEndTime(message: unknown, start: Date): Date {
-        const raw = field(field(field(field(message, 'data'), 'meeting'), 'event'), 'endTime');
-        const ms = parseMessageTime(raw);
-        const span = ms - start.getTime();
-        if (Number.isFinite(ms) && span > 0 && span <= 4 * 3_600_000) return new Date(ms);
-        return new Date(start.getTime() + 90 * 60_000);
-      }
-
-      const TOUR_TITLE = 'BreederHQ Founders Tour';
-      const TOUR_DETAILS =
-        'Join with the Zoom link in your calendar invite from admin@breederhq.com.';
-
-      /** UTC basic format, 20261120T180000Z, as Google and iCalendar expect. */
-      function utcStamp(d: Date): string {
-        return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-      }
-
-      function googleCalendarUrl(start: Date, end: Date): string {
-        const q = new URLSearchParams({
-          action: 'TEMPLATE',
-          text: TOUR_TITLE,
-          dates: `${utcStamp(start)}/${utcStamp(end)}`,
-          details: TOUR_DETAILS,
-        });
-        return `https://calendar.google.com/calendar/render?${q.toString()}`;
-      }
-
-      function outlookCalendarUrl(start: Date, end: Date): string {
-        const q = new URLSearchParams({
-          path: '/calendar/action/compose',
-          rru: 'addevent',
-          subject: TOUR_TITLE,
-          startdt: start.toISOString(),
-          enddt: end.toISOString(),
-          body: TOUR_DETAILS,
-        });
-        return `https://outlook.live.com/calendar/0/deeplink/compose?${q.toString()}`;
-      }
-
-      /** A valid single-event iCalendar file: UTC times, CRLF line endings. */
-      function tourIcs(start: Date, end: Date): string {
-        const uid = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}@breederhq.com`;
-        return [
-          'BEGIN:VCALENDAR',
-          'VERSION:2.0',
-          'PRODID:-//BreederHQ//Founders Tour//EN',
-          'CALSCALE:GREGORIAN',
-          'METHOD:PUBLISH',
-          'BEGIN:VEVENT',
-          `UID:${uid}`,
-          `DTSTAMP:${utcStamp(new Date())}`,
-          `DTSTART:${utcStamp(start)}`,
-          `DTEND:${utcStamp(end)}`,
-          `SUMMARY:${TOUR_TITLE}`,
-          `DESCRIPTION:${TOUR_DETAILS.replace(/,/g, '\\,')}`,
-          'END:VEVENT',
-          'END:VCALENDAR',
-          '',
-        ].join('\r\n');
-      }
-
-      let tourIcsText = '';
-      document.getElementById('tour-cal-apple')?.addEventListener('click', () => {
-        if (!tourIcsText) return;
-        const url = URL.createObjectURL(new Blob([tourIcsText], { type: 'text/calendar;charset=utf-8' }));
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'breederhq-founders-tour.ics';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      });
-
-      // The optional "one thing" answer. Every outcome other than a save is a
-      // quiet line: the booking is already made and is never touched here.
-      const focusForm = document.getElementById('tour-focus-form') as HTMLFormElement | null;
-      const focusAnswer = document.getElementById('tour-focus-answer') as HTMLTextAreaElement | null;
-      const focusSend = document.getElementById('tour-focus-send') as HTMLButtonElement | null;
-      const focusStatus = document.getElementById('tour-focus-status');
-      focusAnswer?.addEventListener('input', () => focusAnswer.removeAttribute('aria-invalid'));
-      focusForm?.addEventListener('submit', async (ev) => {
-        ev.preventDefault();
-        if (!focusAnswer || !focusSend || !focusStatus || focusSend.disabled) return;
-        const problem = tourFocusProblem(focusAnswer.value);
-        if (problem) {
-          // Nothing is sent: the line names the rule and the box is marked.
-          focusStatus.textContent =
-            problem === 'empty' ? 'Add a few words first.' : 'Please keep it to 500 characters or fewer.';
-          focusAnswer.setAttribute('aria-invalid', 'true');
-          focusAnswer.focus();
-          return;
-        }
-        focusAnswer.removeAttribute('aria-invalid');
-        if (!bookedSubmissionKey) {
-          focusStatus.textContent = "We couldn't save that just now. Your tour is still booked.";
-          return;
-        }
-        focusSend.disabled = true;
-        focusStatus.textContent = '';
-        try {
-          const res = await fetch('/api/tour-focus', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              submissionKey: bookedSubmissionKey,
-              answer: normalizeTourFocusAnswer(focusAnswer.value),
-            }),
+        if (bookingRoot) {
+          initIntroCallBooking({
+            root: bookingRoot,
+            submissionKey: key,
+            holdDate: holdUntilDate(new Date()),
+            referredByBreeder,
           });
-          if (!res.ok) throw new Error('not saved');
-          focusStatus.textContent = "Thanks, we'll be ready.";
-          focusAnswer.disabled = true;
-          // The button stays disabled: the answer is saved.
-        } catch {
-          focusStatus.textContent = "We couldn't save that just now. Your tour is still booked.";
-          focusSend.disabled = false;
         }
-      });
-
-      /** Date and time in the applicant's own zone, with the zone named. */
-      function formatBookedTime(start: Date): { date: string; clock: string } | null {
-        try {
-          const date = new Intl.DateTimeFormat('en-US', {
-            weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
-          }).format(start);
-          const clock = new Intl.DateTimeFormat('en-US', {
-            hour: 'numeric', minute: '2-digit', timeZoneName: 'long',
-          }).format(start);
-          return date && clock ? { date, clock } : null;
-        } catch {
-          return null;
-        }
+        window.scrollTo(0, 0);
+        headingEl?.focus({ preventScroll: true });
       }
-
-      /**
-       * Bring the confirmation card into view after the frame above it is
-       * gone, the same way a form step is brought into view: measured after
-       * the layout settles, skipped when the card already fits on screen, and
-       * without smooth scrolling for a visitor who asked for reduced motion.
-       */
-      function scrollToBookedCard(card: HTMLElement) {
-        const gap = 16;
-        const top = pinnedTopOffset() + gap;
-        const rect = card.getBoundingClientRect();
-        if (rect.top >= top && rect.bottom <= window.innerHeight) return;
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({
-          top: Math.max(0, window.scrollY + rect.top - top),
-          behavior: reduce ? 'auto' : 'smooth',
-        });
-      }
-
-      // Reclaim's embed posts MEETING_BOOKED to its parent when a time is
-      // confirmed. Only a message from Reclaim's origin AND from the frame this
-      // page created is believed. It ends the booking step: the frame (whose
-      // own confirmation offers "Book another meeting") is removed, the
-      // fallback lines go, and the confirmation card takes the frame's place.
-      window.addEventListener('message', (e) => {
-        if (e.origin !== RECLAIM_ORIGIN) return;
-        if (!embedFrame || e.source !== embedFrame.contentWindow) return;
-        const type = (e.data as { type?: unknown } | null)?.type;
-        if (type !== 'MEETING_BOOKED') return;
-
-        const start = bookedStartTime(e.data);
-        const when = start ? formatBookedTime(start) : null;
-
-        // Dropping the frame reference also makes any repeat message a no-op.
-        embedFrame = null;
-        if (embedCard) {
-          embedCard.replaceChildren();
-          embedCard.hidden = true;
-        }
-        if (linkFallback) linkFallback.hidden = true;
-        if (noTimeNote) noTimeNote.hidden = true;
-
-        headingEl.textContent = bookedFirstName ? `See You Soon, ${bookedFirstName}` : 'See You Soon';
-        if (doneSubheadEl) {
-          doneSubheadEl.textContent = 'Your application is in and your tour is on the calendar.';
-        }
-        if (bookedTime && bookedDate && bookedClock) {
-          bookedDate.textContent = when?.date ?? '';
-          bookedClock.textContent = when?.clock ?? '';
-          bookedTime.hidden = !when;
-        }
-        const calActions = document.getElementById('tour-calendar-actions');
-        const googleLink = document.getElementById('tour-cal-google') as HTMLAnchorElement | null;
-        const outlookLink = document.getElementById('tour-cal-outlook') as HTMLAnchorElement | null;
-        if (calActions && googleLink && outlookLink) {
-          if (start) {
-            const end = bookedEndTime(e.data, start);
-            googleLink.href = googleCalendarUrl(start, end);
-            outlookLink.href = outlookCalendarUrl(start, end);
-            tourIcsText = tourIcs(start, end);
-            calActions.hidden = false;
-          } else {
-            tourIcsText = '';
-            calActions.hidden = true;
-          }
-        }
-        if (bookedCard) {
-          bookedCard.hidden = false;
-          // Focus first, then scroll: a focus change can itself move the page,
-          // so the explicit scroll has to be the last word. Focus is what
-          // announces the card to a screen reader.
-          bookedHeading?.focus({ preventScroll: true });
-          requestAnimationFrame(() => scrollToBookedCard(bookedCard));
-        }
-      });
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -1781,7 +1446,9 @@ const SMS_CONSENT_TEXT =
         const countryRaw =
           form.querySelector<HTMLInputElement>('input[name="country"]:checked')?.value || '';
         const country = COUNTRY_ALLOWED.has(countryRaw) ? countryRaw : '';
-        const START_TIMING_ALLOWED = new Set(['asap', 'within_month', 'few_months', 'exploring']);
+        // The options this page offers. `exploring` is no longer one of them;
+        // /api/contact still accepts it from a tab opened before that change.
+        const START_TIMING_ALLOWED = new Set(['asap', 'within_month', 'few_months']);
         const startTimingRaw =
           form.querySelector<HTMLInputElement>('input[name="start_timing"]:checked')?.value || '';
         const startTiming = START_TIMING_ALLOWED.has(startTimingRaw) ? startTimingRaw : '';
@@ -1826,7 +1493,7 @@ const SMS_CONSENT_TEXT =
           phoneInput?.focus();
           return showError(msg);
         };
-        if (!phoneRaw) return flagPhone('Please add a phone number so we can reach you about your tour.');
+        if (!phoneRaw) return flagPhone('Please add a phone number so we can reach you about your intro call.');
         const parsedPhone = parsePhoneNumberFromString(
           phoneRaw,
           phoneRaw.startsWith('+') ? undefined : DEFAULT_COUNTRY
@@ -2010,13 +1677,15 @@ const SMS_CONSENT_TEXT =
 
           if (!data.success) throw new Error(data.error || 'Submission failed');
 
-          // Both booking URLs come from the key this attempt SENT, and are
-          // built before the holder is cleared below.
-          const bookingUrls = bookingUrlsFor(submissionKey);
-
           // Recorded. A later application from this page is a genuinely new
-          // submission and must not replay this key.
+          // submission and must not replay this key. The booking screen is
+          // started with `submissionKey`, the key this attempt SENT, never
+          // with the holder again: after clear() it mints a key that matches
+          // nothing.
           submissionKeyHolder.clear();
+
+          // The answers are recorded, so the saved draft goes. Never throws.
+          endDraft();
 
           trackFormSubmit(FORM_ID);
 
@@ -2024,7 +1693,7 @@ const SMS_CONSENT_TEXT =
           // booking step must not land in the catch below: that would tell the
           // applicant it failed and invite a duplicate application.
           try {
-            showBookingStep(firstName(name), bookingUrls, submissionKey);
+            showBookingStep(submissionKey, referralSource === 'another_breeder');
           } catch (renderErr) {
             console.error('Booking step failed to render:', renderErr);
           }

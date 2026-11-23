@@ -1,0 +1,56 @@
+---
+// "Not Sure An Hour Is Worth It?": the ways to decide the intro call is worth
+// an hour before applying. It sits under the 60-minute line, on the page and
+// inside the application form.
+//
+// Nothing here takes the applicant off the page, so she keeps her place: the
+// walkthrough opens in a dialog over the form (any [data-walkthrough-open]
+// control opens the page's walkthrough dialog), and the demo opens in a new tab.
+import { demoUrl } from '../../lib/demoLink';
+
+interface Props {
+  /** `form` is the tighter version used inside the application form. */
+  variant?: 'page' | 'form';
+}
+const { variant = 'page' } = Astro.props;
+const compact = variant === 'form';
+
+const actionClass =
+  'cursor-pointer border-0 bg-transparent p-0 text-left font-semibold text-[hsl(24,95%,62%)] underline decoration-[hsl(24,95%,53%)]/35 underline-offset-2 hover:text-[hsl(24,95%,72%)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] rounded-sm';
+---
+
+<div
+  class={compact
+    ? 'flex flex-col gap-2.5 rounded-xl border border-white/12 bg-white/[0.03] p-3.5'
+    : 'flex flex-col gap-3.5 rounded-[14px] border border-white/10 bg-white/[0.03] p-[22px]'}
+>
+  {compact
+    ? <span class="text-xs font-bold uppercase tracking-[0.1em] text-[hsl(24,95%,72%)]">Not Sure An Hour Is Worth It?</span>
+    : <h3 class="text-lg font-semibold text-white">Not Sure An Hour Is Worth It?</h3>}
+  <p class={compact ? 'm-0 text-[14.5px] leading-relaxed text-slate-100' : 'm-0 text-[15.5px] leading-relaxed text-slate-100'}>
+    We get it. You&rsquo;re a breeder, and we know what your time is worth. That&rsquo;s why we built BreederHQ. So decide for yourself before you give us an hour:
+  </p>
+  <ul class={compact
+    ? 'm-0 flex list-disc flex-col gap-2 pl-5 text-[13.5px] leading-relaxed text-slate-300 marker:text-[hsl(24,95%,58%)]'
+    : 'm-0 flex list-disc flex-col gap-2.5 pl-[18px] text-[15px] leading-normal text-slate-300 marker:text-[hsl(24,95%,58%)]'}>
+    <li>
+      <strong class="font-semibold text-white">Watch what we&rsquo;ll cover.</strong> Aaron and Carie walk through the highlights in under two minutes.{' '}
+      <button type="button" data-walkthrough-open class={actionClass}>Watch The Walkthrough &rarr;</button>
+    </li>
+    <li>
+      <strong class="font-semibold text-white">Ask the breeder who sent you.</strong> If another breeder told you about BreederHQ, message them and ask why an hour with us is worth your time.
+    </li>
+    <li>
+      <strong class="font-semibold text-white">Explore on your own.</strong> Look around a working breeding program in our live demo. No sign-up needed.{' '}
+      <a
+        href={demoUrl('waitlist')}
+        data-demo-cta="waitlist"
+        target="_blank" rel="noopener"
+        class={actionClass}
+      >Open The Live Demo &rarr;</a>
+    </li>
+  </ul>
+  <p class={compact ? 'm-0 text-[13px] leading-relaxed text-slate-400' : 'm-0 text-[14px] leading-relaxed text-slate-400'}>
+    Your answers so far are saved on this device, so you can come back and finish.
+  </p>
+</div>

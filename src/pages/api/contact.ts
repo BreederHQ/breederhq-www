@@ -14,7 +14,11 @@ const MAX_INTERESTS = 10;
 
 /** Where the applicant's program is based. The platform's enum, exactly. */
 const COUNTRIES = new Set(['US', 'CA', 'OTHER']);
-/** How soon the applicant would start. The platform's enum, exactly. */
+/**
+ * How soon the applicant would start. The platform's enum, exactly.
+ * /pricing no longer offers `exploring`, but it stays accepted here: a tab
+ * opened before that change still sends it.
+ */
 const START_TIMINGS = new Set(['asap', 'within_month', 'few_months', 'exploring']);
 
 /**
@@ -46,8 +50,13 @@ const START_TIMINGS = new Set(['asap', 'within_month', 'few_months', 'exploring'
  *   sessions and share honest feedback." v1 asked for the commitment before
  *   the applicant had seen the tour; v2 acknowledges what the partnership is
  *   and asks for the commitment only once both sides decide it is a fit.
+ * - founders-partnership-v3 (2026-11-22): "I understand the Founders' Program
+ *   is a working partnership. If we both decide it's a good fit after the
+ *   intro call, I'll be asked to run my program on BreederHQ, join the working
+ *   sessions and share honest feedback." The same commitment as v2; the call
+ *   it follows is now named an intro call.
  */
-const PARTNERSHIP_ACK_VERSIONS = new Set(['founders-partnership-v2']);
+const PARTNERSHIP_ACK_VERSIONS = new Set(['founders-partnership-v2', 'founders-partnership-v3']);
 /** What a tick with no version is recorded as. See above. */
 const PARTNERSHIP_ACK_UNVERSIONED = 'founders-partnership-v1';
 
