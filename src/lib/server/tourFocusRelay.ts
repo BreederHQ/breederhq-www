@@ -112,13 +112,14 @@ export interface TourFocusRelayConfig {
 }
 
 /**
- * Only the /pricing page on this site may use the relay. A browser that is not
+ * Only this site's own pages may use a relay (this one and the intro-call
+ * answer relay, which shares these checks). A browser that is not
  * on this origin is refused by what it tells us about itself: Sec-Fetch-Site
  * when it sends one, otherwise the Origin header against the host it asked.
  * A request with neither is not from a browser page and falls to the content
  * type check and the flood brake.
  */
-function isSameOrigin(request: Request): boolean {
+export function isSameOrigin(request: Request): boolean {
   const site = request.headers.get('sec-fetch-site');
   if (site) return site === 'same-origin';
   const origin = request.headers.get('origin');
@@ -147,12 +148,12 @@ function isSameOrigin(request: Request): boolean {
  * reach this route with a "simple" text/plain request: a JSON body forces a
  * CORS preflight, which this route never answers.
  */
-function isJson(request: Request): boolean {
+export function isJson(request: Request): boolean {
   const type = request.headers.get('content-type')?.split(';')[0]?.trim().toLowerCase();
   return type === 'application/json';
 }
 
-function json(status: number, body: Record<string, unknown>): Response {
+export function json(status: number, body: Record<string, unknown>): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: { 'Content-Type': 'application/json' },
@@ -160,7 +161,7 @@ function json(status: number, body: Record<string, unknown>): Response {
 }
 
 /** The body as text, or null when it is larger than TOUR_FOCUS_MAX_BODY_BYTES. */
-async function readBoundedBody(request: Request): Promise<string | null> {
+export async function readBoundedBody(request: Request): Promise<string | null> {
   const declared = Number(request.headers.get('content-length'));
   if (Number.isFinite(declared) && declared > TOUR_FOCUS_MAX_BODY_BYTES) return null;
 

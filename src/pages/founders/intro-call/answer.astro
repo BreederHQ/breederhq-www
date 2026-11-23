@@ -1,0 +1,37 @@
+---
+// Where "I'll Be There" and "I Need A New Time" in the day-before email land.
+//
+// Opening this page records nothing: mail scanners and link previews open every
+// link in a message, and a click-to-record link would mark everyone confirmed.
+// The answer is recorded only when the applicant presses the one button here,
+// which posts through /api/intro-call-answer. The link's `k`, `b` and `a` are
+// read in the browser, so the page is prerendered and the same for everyone.
+export const prerender = true;
+
+import IntroCallPageShell from '../../../components/founders/IntroCallPageShell.astro';
+---
+
+<IntroCallPageShell
+  title="Your Intro Call | BreederHQ"
+  description="Confirm your Founders' Program intro call, or ask for a new time."
+>
+  <div data-intro-call-answer class="flex w-full max-w-xl flex-col items-center gap-6 text-center">
+    <h1 id="intro-call-answer-heading" class="font-serif text-[2.2rem] font-normal leading-[1.1] tracking-tight text-white sm:text-5xl">Your Intro Call</h1>
+    <p data-ica="lead" class="m-0 max-w-[46ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">&nbsp;</p>
+    <button
+      data-ica="button" type="button" hidden
+      class="inline-flex min-h-[54px] cursor-pointer items-center justify-center rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-4 text-base font-semibold text-white transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16] disabled:cursor-not-allowed disabled:opacity-60"
+    ></button>
+    <p data-ica="status" role="status" aria-live="polite" class="m-0 max-w-[46ch] text-base leading-relaxed text-slate-200"></p>
+  </div>
+</IntroCallPageShell>
+
+<script>
+  import { parseIntroCallAnswerParams } from '../../../lib/foundersIntroCall';
+  import { initIntroCallAnswer } from '../../../components/founders/introCallAnswer';
+
+  const root = document.querySelector<HTMLElement>('[data-intro-call-answer]');
+  if (root) {
+    initIntroCallAnswer({ root, params: parseIntroCallAnswerParams(window.location.search) });
+  }
+</script>
