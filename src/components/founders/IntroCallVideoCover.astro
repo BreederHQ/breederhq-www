@@ -1,0 +1,30 @@
+---
+// Our own cover for the intro-call video on /pricing, in place of Arcade's start
+// screen (which dims the video's first frame and cannot be restyled). A real link
+// to the video on Arcade, so it works with no script and on phones, where Arcade
+// opens the video in a new tab anyway. Run by initIntroCallVideoCover
+// (./introCallVideoCover.ts), which swaps the cover for the player on wider
+// screens. Nothing loads from Arcade until it is clicked.
+import { INTRO_CALL_VIDEO_URL } from '../../lib/foundersIntroCall';
+---
+
+<div data-intro-video class="relative aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-[#0A1120]">
+  <a
+    href={INTRO_CALL_VIDEO_URL}
+    target="_blank"
+    rel="noopener"
+    data-intro-video-cover
+    aria-label="Play the intro call video"
+    class="group absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[radial-gradient(ellipse_at_50%_0%,#1B2E54_0%,#0F1B33_55%,#0A1120_100%)] px-6 text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[hsl(24,95%,53%)]"
+  >
+    <span class="text-xs font-bold uppercase tracking-[0.14em] text-[hsl(24,95%,58%)]">Intro Call</span>
+    <span class="font-serif text-[1.6rem] font-normal leading-tight text-white [text-wrap:balance] sm:text-4xl">Why Give Us An Hour?</span>
+    <span
+      class="inline-flex h-16 w-16 items-center justify-center rounded-full border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)] transition group-hover:scale-105 group-hover:brightness-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:h-20 sm:w-20"
+      aria-hidden="true"
+    >
+      <svg class="ml-1 h-7 w-7 sm:h-8 sm:w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+    </span>
+    <span class="text-sm text-slate-300">A short video from Aaron and Carie.</span>
+  </a>
+</div>

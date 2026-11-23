@@ -25,12 +25,16 @@ export const INTRO_CALL_VIDEO_TITLE = 'Why Book an Intro Call';
  * script rather than markup so a page that never shows it never loads Arcade:
  * a frame inside a hidden section is still fetched.
  */
-export function createIntroCallVideoFrame(doc: Document): HTMLIFrameElement {
+export function createIntroCallVideoFrame(
+  doc: Document,
+  opts: { autoplay?: boolean } = {},
+): HTMLIFrameElement {
   const frame = doc.createElement('iframe');
-  frame.src = INTRO_CALL_VIDEO_EMBED_URL;
+  // Autoplay is for a frame built by a click on a cover: the click is the ask.
+  frame.src = opts.autoplay ? `${INTRO_CALL_VIDEO_EMBED_URL}&autoplay=true` : INTRO_CALL_VIDEO_EMBED_URL;
   frame.title = INTRO_CALL_VIDEO_TITLE;
   frame.allowFullscreen = true;
-  frame.setAttribute('allow', 'clipboard-write; fullscreen');
+  frame.setAttribute('allow', opts.autoplay ? 'clipboard-write; fullscreen; autoplay' : 'clipboard-write; fullscreen');
   frame.className = 'absolute inset-0 h-full w-full border-0';
   frame.style.colorScheme = 'light';
   return frame;
