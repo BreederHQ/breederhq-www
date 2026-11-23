@@ -992,7 +992,6 @@ const SMS_CONSENT_TEXT =
     } from '../../lib/applicationDraft';
     import { holdUntilDate } from '../../lib/foundersIntroCall';
     import { initIntroCallBooking } from '../../components/founders/introCallBooking';
-    import { initIntroCallVideoCover } from '../../components/founders/introCallVideoCover';
     import { AsYouType, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js';
 
     const DEFAULT_COUNTRY: CountryCode = 'US';
@@ -1372,8 +1371,6 @@ const SMS_CONSENT_TEXT =
         clearTimeout(draftTimer);
         markDraftSubmitted();
       };
-
-      initIntroCallVideoCover();
 
       const bookingRoot = document.querySelector<HTMLElement>('[data-intro-call-booking]');
       const applyJump = document.getElementById('apply-jump');
