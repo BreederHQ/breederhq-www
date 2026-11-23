@@ -1,0 +1,172 @@
+---
+// The Founders intro-call booking screen: the step right after applying, and
+// the page an applicant comes back to from her confirmation email.
+//
+// It renders the screen; `initIntroCallBooking` (./introCallBooking.ts) fills
+// it in for one application. The markup ships the copy that needs no inputs;
+// the hold date, the referral card and the booking frame come from the init,
+// because a prerendered page knows none of them.
+//
+// Order is the point of the screen: what the call covers, the demo and the
+// referring breeder all come before the calendar, so an applicant decides the
+// call is worth her hour before she takes a slot.
+//
+// One per page: the script finds its parts by `data-icb` inside the root, but
+// the form labels and the headings it focuses need ids.
+//
+// The page that uses it also renders <DemoCtaTracking /> (the demo link is
+// tracked by its data-demo-cta attribute) and the site stylesheet.
+import { demoUrl } from '../../lib/demoLink';
+
+// The booking page. Reclaim copies every `data-` query parameter on a booking
+// URL into the webhook's `custom_data`, which is how a booking finds its
+// application: the screen appends `?data-submission=<the submission key>`.
+const TOUR_BOOKING_URL = 'https://app.reclaim.ai/m/breederhq/founders-program-tour';
+
+// The embeddable form of the same link. Reclaim serves its booking pages at
+// /m/<page>/<meeting> with X-Frame-Options DENY, so they cannot be framed; the
+// embeddable page is /e/<scheduling link id> (it sends `frame-ancestors *`),
+// and it too reads `data-` query parameters into the booking's custom data.
+// The id is not derivable from the slug, so it comes from the build
+// environment. Unset or malformed, the screen shows the booking link on its
+// own, which still carries the key.
+const RECLAIM_EMBED_ID_RAW = String(import.meta.env.PUBLIC_RECLAIM_TOUR_LINK_ID ?? '').trim();
+const RECLAIM_EMBED_ID = /^[A-Za-z0-9-]{1,64}$/.test(RECLAIM_EMBED_ID_RAW) ? RECLAIM_EMBED_ID_RAW : '';
+
+const cardClass =
+  'flex w-full max-w-2xl flex-col gap-3 rounded-[14px] border border-white/10 bg-white/[0.03] p-5 text-left sm:p-6';
+const cardHeadingClass = 'text-lg font-semibold tracking-tight text-white';
+const cardBodyClass = 'm-0 text-[15.5px] leading-relaxed text-slate-300';
+---
+
+<div
+  data-intro-call-booking
+  data-booking-url={TOUR_BOOKING_URL}
+  data-embed-id={RECLAIM_EMBED_ID}
+  class="flex w-full flex-col items-center text-center"
+>
+  <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[hsl(24,95%,53%)]/55 bg-[#0F1B33]">
+    <svg class="h-5 w-5 text-[hsl(24,95%,58%)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  </div>
+  <h1 id="intro-call-heading" data-icb="heading" tabindex="-1" class="font-serif text-[2.2rem] font-normal leading-[1.1] tracking-tight text-white focus:outline-none sm:text-5xl">One Last Step</h1>
+  <p data-icb="subhead" class="mt-4 max-w-[46ch] text-lg leading-relaxed text-slate-300 [text-wrap:pretty]">
+    Your application is in. Pick a time for your live Zoom intro call with Aaron and Carie.
+  </p>
+
+  <div data-icb="before-booking" class="mt-8 flex w-full flex-col items-center gap-4">
+    <section class={cardClass} aria-labelledby="intro-call-video-heading">
+      <h2 id="intro-call-video-heading" class={cardHeadingClass}>What We&rsquo;ll Cover In Your Intro Call</h2>
+      <p class={cardBodyClass}>Aaron and Carie walk through the highlights in under two minutes, so you know exactly what you&rsquo;ll see.</p>
+      {/* The frame is added by the script, so Arcade loads only once this screen is in use. */}
+      <div data-icb="video" class="relative w-full overflow-hidden rounded-[10px] border border-white/10 bg-[#0A1120] aspect-video"></div>
+    </section>
+
+    <section class={cardClass} aria-labelledby="intro-call-demo-heading">
+      <h2 id="intro-call-demo-heading" class={cardHeadingClass}>Come Try It Yourself</h2>
+      <p class={cardBodyClass}>Look around a working breeding program in our live demo. No sign-up needed.</p>
+      {/* New tab: leaving this screen would lose the booking calendar. */}
+      <a
+        href={demoUrl('waitlist')}
+        data-demo-cta="waitlist"
+        target="_blank" rel="noopener"
+        class="inline-flex min-h-[44px] items-center gap-2 self-start whitespace-nowrap rounded-[9px] border border-[rgba(127,200,255,.38)] bg-[rgba(127,200,255,.07)] px-3.5 text-sm font-semibold text-[#EAF1FC] no-underline transition hover:bg-[rgba(127,200,255,.13)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+      ><span aria-hidden="true" class="h-[7px] w-[7px] flex-none rounded-full bg-[#34D399] shadow-[0_0_10px_#34D399]"></span>Open The Live Demo</a>
+    </section>
+
+    {/* Only for an applicant another breeder sent. It never names anyone. */}
+    <section data-icb="referral" hidden class={cardClass} aria-labelledby="intro-call-referral-heading">
+      <h2 id="intro-call-referral-heading" class={cardHeadingClass}>Ask The Breeder Who Sent You</h2>
+      <p class={cardBodyClass}>Message the breeder who told you about BreederHQ and ask them one question: why is an hour with Aaron and Carie worth your time? They&rsquo;ll tell you better than we can.</p>
+    </section>
+
+    <section class="flex w-full max-w-5xl flex-col gap-3 rounded-[14px] border border-white/10 bg-white/[0.03] p-3 text-left sm:p-5" aria-labelledby="intro-call-pick-heading">
+      <h2 id="intro-call-pick-heading" class={`${cardHeadingClass} px-2 sm:px-1`}>Pick Your Time</h2>
+      {/*
+        White card: Reclaim's widget is styled for a light ground.
+
+        Reclaim picks its layout from the FRAME's width: under 675px it pages
+        the calendar and the time list apart, from 675px it shows the day
+        picker and the times side by side. The card is a size container so the
+        frame's height follows that same width (see the script).
+      */}
+      <div
+        data-icb="embed-card" hidden role="region" aria-label="Book your intro call"
+        class="@container w-full overflow-hidden rounded-[12px] bg-white"
+      ></div>
+
+      {/* Shown instead of the embed when the build has no embed id. */}
+      <a
+        data-icb="book-button" hidden target="_blank" rel="noopener"
+        class="inline-flex min-h-[54px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-4 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C16]"
+      >Pick Your Intro Call Time</a>
+
+      <p data-icb="link-fallback" hidden class="m-0 px-2 text-sm leading-relaxed text-slate-400 sm:px-1">
+        Calendar not showing?{" "}
+        <a data-icb="fallback-link" target="_blank" rel="noopener" class="text-[hsl(24,95%,62%)] underline underline-offset-2 hover:text-[hsl(24,95%,72%)]">Open the booking page</a>.
+      </p>
+    </section>
+
+    <section class={cardClass} aria-labelledby="intro-call-later-heading">
+      <h2 id="intro-call-later-heading" class={cardHeadingClass}>Not Ready To Pick A Time?</h2>
+      {/*
+        The approved wording says the confirmation email links back to this
+        page. That is true only once the email carries the return-page link, so
+        until then the line says what the email holds today: a link to book.
+        The script repeats this sentence when it adds the hold date; change
+        both together.
+      */}
+      <p data-icb="later-body" class={cardBodyClass}>Your application is saved. Your confirmation email has a link to pick a time, so you can book when you&rsquo;re ready.</p>
+    </section>
+  </div>
+
+  {/*
+    Replaces the cards above once Reclaim reports the booking (see the
+    message listener). The embed's own confirmation is a near-empty white card
+    offering "Book another meeting", which is wrong for an applicant, so the
+    frame is removed and this card says what happens next instead.
+  */}
+  <section
+    data-icb="booked" hidden aria-label="Your intro call"
+    class="mt-8 flex w-full max-w-xl flex-col gap-5 rounded-[14px] border border-[hsl(24,95%,53%)]/40 bg-[#0F1B33] p-6 text-left sm:p-8"
+  >
+    {/* Built from the booking message's time; shown only when one arrived. */}
+    <div data-icb="calendar-actions" hidden class="flex flex-col gap-2.5">
+      <h2 class="text-[15px] font-semibold text-slate-200">Add It to Your Calendar</h2>
+      <p class="m-0 text-[15px] leading-relaxed text-slate-300">The invite can take a few minutes to arrive, so put the intro call on your calendar now.</p>
+      <div class="flex flex-wrap gap-2.5">
+        <a data-icb="cal-google" target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white no-underline transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Google Calendar</a>
+        <a data-icb="cal-outlook" target="_blank" rel="noopener" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white no-underline transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Outlook</a>
+        <button data-icb="cal-apple" type="button" class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]">Add to Apple Calendar</button>
+      </div>
+    </div>
+
+    {/* Optional. A failure here never touches the booking above. */}
+    <form data-icb="focus-form" novalidate class="flex flex-col gap-2.5">
+      <label for="tour-focus-answer" class="text-[15px] font-semibold text-slate-200">What's the one thing that would make the biggest difference to your program?</label>
+      <p id="tour-focus-help" class="m-0 text-[15px] leading-relaxed text-slate-300">We'll build your intro call around it.</p>
+      <textarea
+        id="tour-focus-answer" data-icb="focus-answer" rows="3" aria-describedby="tour-focus-help tour-focus-status"
+        class="w-full resize-y rounded-lg border border-white/20 bg-white/[0.04] px-3.5 py-2.5 text-[15px] leading-relaxed text-white placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)]"
+      ></textarea>
+      <div class="flex flex-wrap items-center gap-3">
+        <button data-icb="focus-send" type="submit" class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-[15px] font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] disabled:cursor-not-allowed disabled:opacity-60">Send</button>
+        <p id="tour-focus-status" data-icb="focus-status" role="status" aria-live="polite" class="m-0 text-sm text-slate-400"></p>
+      </div>
+    </form>
+
+    <div class="flex flex-col gap-2.5">
+      <h2 class="text-[15px] font-semibold text-slate-200">What Happens Next</h2>
+      <ul class="m-0 flex list-disc flex-col gap-2.5 pl-5 text-[15px] leading-relaxed text-slate-300 marker:text-[hsl(24,95%,58%)]">
+        <li>A calendar invite with your Zoom link is on its way from <strong class="text-white">BreederHQ Founders</strong> (admin@breederhq.com).</li>
+        <li><strong class="text-white">Your intro call holds your founding spot.</strong> If you need a different time, reschedule with the link in your invite before the call starts. If you miss your call, you have 36 hours to book a new time. After that, your application is closed.</li>
+      </ul>
+    </div>
+
+    <a
+      href="/"
+      class="inline-flex min-h-[50px] items-center justify-center self-start rounded-lg border border-[hsl(24,95%,40%)] bg-[hsl(24,95%,53%)] px-6 py-3 text-base font-semibold text-white no-underline transition hover:-translate-y-px hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(24,95%,53%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F1B33]"
+    >Back to BreederHQ Home</a>
+  </section>
+</div>
