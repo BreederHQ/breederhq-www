@@ -424,7 +424,7 @@ describe('the confirmation email: the approved intro-call wording', () => {
   const PAGE = 'https://breederhq.com/founders/intro-call?k=sub-key-1&by=2026-12-06';
   const HOLD =
     'We hold your application until Sunday, December 6. If you have not attended an intro call by then, it closes.';
-  const VIDEO = 'https://demo.arcade.software/video/4NtPVET9zozUSsSRv83F';
+  const VIDEO = 'https://breederhq.com/pricing#intro-call-video';
   const REFERRAL =
     'Before your call, message the breeder who told you about BreederHQ and ask them why an hour with us is worth your time.';
 

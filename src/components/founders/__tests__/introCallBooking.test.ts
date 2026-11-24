@@ -18,7 +18,7 @@ const SCREEN = `
     <h1 data-icb="heading">One Last Step</h1>
     <p data-icb="subhead">Your application is in. Pick a time for your live Zoom intro call with Aaron and Carie.</p>
     <div data-icb="before-booking">
-      <div data-icb="video"></div>
+      <div data-icb="video"><div data-intro-video><video data-intro-video-player preload="none" controls></video><button type="button" data-intro-video-cover></button></div></div>
       <section data-icb="referral" hidden></section>
       <div data-icb="embed-card" hidden></div>
       <a data-icb="book-button" hidden></a>
@@ -84,7 +84,9 @@ describe('initIntroCallBooking', () => {
     const frame = part(root, 'embed-card').querySelector('iframe') as HTMLIFrameElement;
     assert.equal(frame.src, 'https://app.reclaim.ai/e/abc-123?data-submission=sub-1');
     assert.equal(part(root, 'embed-card').hidden, false);
-    assert.ok(part(root, 'video').querySelector('iframe'), 'the walkthrough frame is added');
+    // The walkthrough is the video in the markup, never a frame added here.
+    assert.equal(part(root, 'video').querySelector('iframe'), null);
+    assert.ok(part(root, 'video').querySelector('video[data-intro-video-player]'), 'the video stays in place');
   });
 
   it('shows the referral card only for an applicant another breeder sent', () => {
@@ -120,6 +122,13 @@ describe('initIntroCallBooking', () => {
 });
 
 describe('IntroCallBooking.astro', () => {
+  it('renders the same self-hosted video and cover as /pricing', () => {
+    const markup = readFileSync(new URL('../IntroCallBooking.astro', import.meta.url), 'utf8');
+    assert.match(markup, /import IntroCallVideoCover from '\.\/IntroCallVideoCover\.astro';/);
+    assert.match(markup, /<div data-icb="video"[^>]*><IntroCallVideoCover \/><\/div>/);
+    assert.doesNotMatch(markup, /arcade/i);
+  });
+
   it('ships the approved "Not Ready To Pick A Time?" sentence the script extends with the date', () => {
     const markup = readFileSync(new URL('../IntroCallBooking.astro', import.meta.url), 'utf8');
     assert.ok(

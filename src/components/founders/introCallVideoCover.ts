@@ -1,34 +1,42 @@
 /**
- * Runs the intro-call video cover (IntroCallVideoCover.astro). The cover is a
- * real link to the video on Arcade. On a screen wide enough for the inline
- * player (INLINE_PLAYER_QUERY), a click is intercepted and the cover is replaced
- * by the Arcade frame with autoplay on; narrower screens keep the link, which
- * opens the video in a new tab as Arcade's own embed does there.
+ * Runs each intro-call video cover on the page (IntroCallVideoCover.astro).
  *
- * The frame is built on the click, so nothing loads from Arcade before someone
- * asks. Focus moves to the frame so keyboard and screen reader users land on the
+ * The markup ships the video with its native controls on, so it can be played
+ * with no script. Setup turns the controls off while our cover is up (they
+ * would otherwise be reachable by keyboard underneath it). A click on the cover
+ * hides it, turns the controls back on and starts the video with sound, in the
+ * page, on every screen size: there is no new tab. The controls come back at
+ * the click rather than once playback starts, so a slow connection shows the
+ * player loading instead of a blank box, and if the browser refuses to play
+ * (play() rejects) the viewer still has the native play button.
+ *
+ * Focus moves to the video so keyboard and screen reader users land on the
  * player they asked for.
  */
-import { createIntroCallVideoFrame } from '../../lib/foundersIntroCall';
-
-/** Tablet width and up plays inline; a phone opens the video in a new tab. */
-export const INLINE_PLAYER_QUERY = '(min-width: 768px)';
 
 export function initIntroCallVideoCover(doc: Document = document): void {
-  const root = doc.querySelector<HTMLElement>('[data-intro-video]');
-  const cover = root?.querySelector<HTMLAnchorElement>('[data-intro-video-cover]');
-  if (!root || !cover) return;
-  if (root.dataset.ready === 'true') return;
-  root.dataset.ready = 'true';
+  for (const root of Array.from(doc.querySelectorAll<HTMLElement>('[data-intro-video]'))) {
+    if (root.dataset.ready === 'true') continue;
+    const video = root.querySelector<HTMLVideoElement>('[data-intro-video-player]');
+    const cover = root.querySelector<HTMLButtonElement>('[data-intro-video-cover]');
+    if (!video || !cover) continue;
+    root.dataset.ready = 'true';
 
-  cover.addEventListener('click', (e) => {
-    const win = doc.defaultView;
-    if (!win || typeof win.matchMedia !== 'function' || !win.matchMedia(INLINE_PLAYER_QUERY).matches) return;
-    // A modified click (new tab, new window) keeps its normal meaning.
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    const frame = createIntroCallVideoFrame(doc, { autoplay: true });
-    root.replaceChildren(frame);
-    frame.focus();
-  });
+    video.controls = false;
+    cover.addEventListener('click', () => {
+      cover.hidden = true;
+      video.controls = true;
+      // Not every browser makes a video focusable on its own (Safari does not).
+      video.tabIndex = 0;
+      video.focus();
+      let started: Promise<void> | undefined;
+      try {
+        started = video.play();
+      } catch {
+        // An old browser that throws instead of rejecting: the controls are on.
+      }
+      // The rejection is expected on some browsers; the controls are already on.
+      started?.catch?.(() => {});
+    });
+  }
 }

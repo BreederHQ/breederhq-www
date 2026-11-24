@@ -3,7 +3,8 @@
 // the page an applicant comes back to from her confirmation email.
 //
 // It renders the screen; `initIntroCallBooking` (./introCallBooking.ts) fills
-// it in for one application. The markup ships the copy that needs no inputs;
+// it in for one application. The markup ships the copy that needs no inputs
+// and the walkthrough video (IntroCallVideoCover, which runs itself);
 // the hold date, the referral card and the booking frame come from the init,
 // because a prerendered page knows none of them.
 //
@@ -17,6 +18,7 @@
 // The page that uses it also renders <DemoCtaTracking /> (the demo link is
 // tracked by its data-demo-cta attribute) and the site stylesheet.
 import { demoUrl } from '../../lib/demoLink';
+import IntroCallVideoCover from './IntroCallVideoCover.astro';
 
 // The booking page. Reclaim copies every `data-` query parameter on a booking
 // URL into the webhook's `custom_data`, which is how a booking finds its
@@ -59,8 +61,8 @@ const cardBodyClass = 'm-0 text-[15.5px] leading-relaxed text-slate-300';
     <section class={cardClass} aria-labelledby="intro-call-video-heading">
       <h2 id="intro-call-video-heading" class={cardHeadingClass}>What We&rsquo;ll Cover In Your Intro Call</h2>
       <p class={cardBodyClass}>Aaron and Carie walk through the highlights in under two minutes, so you know exactly what you&rsquo;ll see.</p>
-      {/* The frame is added by the script, so Arcade loads only once this screen is in use. */}
-      <div data-icb="video" class="relative w-full overflow-hidden rounded-[10px] border border-white/10 bg-[#0A1120] aspect-video"></div>
+      {/* The same cover and player as /pricing. preload="none", so nothing downloads until it is played. */}
+      <div data-icb="video" class="w-full"><IntroCallVideoCover /></div>
     </section>
 
     <section class={cardClass} aria-labelledby="intro-call-demo-heading">

@@ -1,21 +1,38 @@
 ---
-// Our own cover for the intro-call video on /pricing, in place of Arcade's start
-// screen (which dims the video's first frame and cannot be restyled). A real link
-// to the video on Arcade, so it works with no script and on phones, where Arcade
-// opens the video in a new tab anyway. Run by initIntroCallVideoCover
-// (./introCallVideoCover.ts), which swaps the cover for the player on wider
-// screens. Nothing loads from Arcade until it is clicked.
-import { INTRO_CALL_VIDEO_URL } from '../../lib/foundersIntroCall';
+// The intro-call video, played in the page from this site's own copy
+// (INTRO_CALL_VIDEO_SRC) on every screen size. Used on /pricing and on the
+// booking screen (IntroCallBooking.astro), so the video looks and plays the
+// same everywhere.
+//
+// Our cover (navy ground, the question, an orange play button) sits over a
+// native video element. The cover is a real button: a click hides it and
+// starts the video with sound (initIntroCallVideoCover, ./introCallVideoCover.ts).
+// preload="none", so nothing of the 28 MB file downloads until someone asks.
+//
+// Without script the cover cannot start anything, so the <noscript> rule hides
+// it and leaves the video's own controls, which the markup ships on and the
+// script turns off while the cover is up.
+//
+// More than one may be on a page (/pricing carries the booking screen too);
+// the script sets up each.
+import { INTRO_CALL_VIDEO_SRC, INTRO_CALL_VIDEO_TITLE } from '../../lib/foundersIntroCall';
 ---
 
 <div data-intro-video class="relative aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-[#0A1120]">
-  <a
-    href={INTRO_CALL_VIDEO_URL}
-    target="_blank"
-    rel="noopener"
+  <video
+    data-intro-video-player
+    src={INTRO_CALL_VIDEO_SRC}
+    aria-label={INTRO_CALL_VIDEO_TITLE}
+    preload="none"
+    playsinline
+    controls
+    class="absolute inset-0 h-full w-full bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[hsl(24,95%,53%)]"
+  ></video>
+  <button
+    type="button"
     data-intro-video-cover
     aria-label="Play the intro call video"
-    class="group absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[radial-gradient(ellipse_at_50%_0%,#1B2E54_0%,#0F1B33_55%,#0A1120_100%)] px-6 text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[hsl(24,95%,53%)]"
+    class="group absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-4 border-0 bg-[radial-gradient(ellipse_at_50%_0%,#1B2E54_0%,#0F1B33_55%,#0A1120_100%)] px-6 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[hsl(24,95%,53%)]"
   >
     <span class="font-serif text-[1.3rem] font-normal leading-[1.15] text-white [text-wrap:balance] sm:text-[1.75rem] lg:text-[2.1rem]">Why Become a Founder and Book an Intro Call?</span>
     <span
@@ -24,15 +41,16 @@ import { INTRO_CALL_VIDEO_URL } from '../../lib/foundersIntroCall';
     >
       <svg class="ml-1 h-7 w-7 sm:h-8 sm:w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
     </span>
-  </a>
+  </button>
+  <noscript><style is:inline>[data-intro-video-cover]{display:none!important}</style></noscript>
 </div>
 
 <!--
   Its own script, never part of a page's form script. A page script is one
   module: when any file it imports is slow or refused (ad blockers drop files
   named "tracking"), or a statement in it throws, nothing after that runs and the
-  cover stays a plain link that opens a new tab. This one imports only the
-  cover's own code, so the video plays inline whatever else on the page fails.
+  cover would never start the video. This one imports only the cover's own code,
+  so the video plays whatever else on the page fails.
 -->
 <script>
   import { initIntroCallVideoCover } from './introCallVideoCover';

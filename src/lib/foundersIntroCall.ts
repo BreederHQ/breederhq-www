@@ -12,33 +12,19 @@
  */
 
 /**
- * The founders' walkthrough of what an intro call covers, an Arcade video. The
- * embed form plays in a frame; the plain link (no query) opens it on Arcade.
+ * The founders' walkthrough of what an intro call covers, served from this
+ * site's own static files (public/videos) and played in the page by a native
+ * video element, on every screen size. The file name carries a version so a
+ * re-export ships under a new URL: /videos/* is cached as immutable
+ * (vercel.json), so a changed file must never reuse a published name.
  */
-export const INTRO_CALL_VIDEO_EMBED_URL =
-  'https://demo.arcade.software/video/4NtPVET9zozUSsSRv83F?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true';
-export const INTRO_CALL_VIDEO_URL = 'https://demo.arcade.software/video/4NtPVET9zozUSsSRv83F';
+export const INTRO_CALL_VIDEO_SRC = '/videos/why-book-an-intro-call-v1.mp4';
 export const INTRO_CALL_VIDEO_TITLE = 'Why Book an Intro Call';
-
 /**
- * The frame for the walkthrough video, sized by its 16:9 wrapper. Built in
- * script rather than markup so a page that never shows it never loads Arcade:
- * a frame inside a hidden section is still fetched.
+ * Where an email's "watch the video" link sends a reader: the pricing page's
+ * video section, where the video plays in the page.
  */
-export function createIntroCallVideoFrame(
-  doc: Document,
-  opts: { autoplay?: boolean } = {},
-): HTMLIFrameElement {
-  const frame = doc.createElement('iframe');
-  // Autoplay is for a frame built by a click on a cover: the click is the ask.
-  frame.src = opts.autoplay ? `${INTRO_CALL_VIDEO_EMBED_URL}&autoplay=true` : INTRO_CALL_VIDEO_EMBED_URL;
-  frame.title = INTRO_CALL_VIDEO_TITLE;
-  frame.allowFullscreen = true;
-  frame.setAttribute('allow', opts.autoplay ? 'clipboard-write; fullscreen; autoplay' : 'clipboard-write; fullscreen');
-  frame.className = 'absolute inset-0 h-full w-full border-0';
-  frame.style.colorScheme = 'light';
-  return frame;
-}
+export const INTRO_CALL_VIDEO_PAGE_URL = 'https://breederhq.com/pricing#intro-call-video';
 
 /** The zone the program's dates and call times are kept in. */
 export const FOUNDERS_TIME_ZONE = 'America/Chicago';

@@ -4,7 +4,7 @@
  */
 
 import {
-  INTRO_CALL_VIDEO_URL,
+  INTRO_CALL_VIDEO_PAGE_URL,
   formatHoldDate,
   formatHoldMonthDay,
   holdUntilDate,
@@ -1244,8 +1244,8 @@ function buildWaitlistReply(lead: EnrichedLead): { subject: string; html: string
       text: holdLine,
     },
     {
-      html: `${videoLead} <a href="${INTRO_CALL_VIDEO_URL}" style="color:#1d4ed8;">${INTRO_CALL_VIDEO_URL}</a>`,
-      text: `${videoLead} ${INTRO_CALL_VIDEO_URL}`,
+      html: `${videoLead} <a href="${INTRO_CALL_VIDEO_PAGE_URL}" style="color:#1d4ed8;">${INTRO_CALL_VIDEO_PAGE_URL}</a>`,
+      text: `${videoLead} ${INTRO_CALL_VIDEO_PAGE_URL}`,
     },
     ...(referredByBreeder
       ? [

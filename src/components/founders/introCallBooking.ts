@@ -1,8 +1,7 @@
 /**
  * Fills in the Founders intro-call booking screen (IntroCallBooking.astro) for
- * one application, and runs it: the walkthrough video, the Reclaim booking
- * frame, the booked state, the calendar links and the optional "one thing"
- * answer.
+ * one application, and runs it: the Reclaim booking frame, the booked state,
+ * the calendar links and the optional "one thing" answer.
  *
  * Used by /pricing right after an application is sent, and by the page an
  * applicant returns to from her confirmation email.
@@ -13,12 +12,7 @@
  * to its application.
  */
 import { tourFocusProblem, normalizeTourFocusAnswer } from '../../lib/tourFocus';
-import {
-  createIntroCallVideoFrame,
-  formatHoldDate,
-  formatIntroCallStart,
-  isHoldDate,
-} from '../../lib/foundersIntroCall';
+import { formatHoldDate, formatIntroCallStart, isHoldDate } from '../../lib/foundersIntroCall';
 
 export interface IntroCallBookingOptions {
   /** The `[data-intro-call-booking]` element IntroCallBooking.astro renders. */
@@ -225,8 +219,8 @@ export function initIntroCallBooking(options: IntroCallBookingOptions): void {
 
   if (referralCard) referralCard.hidden = options.referredByBreeder !== true;
 
-  // ── The walkthrough ────────────────────────────────────────────────────
-  if (videoSlot) videoSlot.replaceChildren(createIntroCallVideoFrame(document));
+  // The walkthrough video is in the markup and runs itself
+  // (IntroCallVideoCover.astro); this screen only stops it once booked.
 
   // ── The calendar ───────────────────────────────────────────────────────
   const urls = bookingUrlsFor(root.dataset.bookingUrl || '', root.dataset.embedId || '', submissionKey);
@@ -338,8 +332,8 @@ export function initIntroCallBooking(options: IntroCallBookingOptions): void {
     // Dropping the frame reference also makes any repeat message a no-op.
     embedFrame = null;
     embedCard?.replaceChildren();
-    // The walkthrough frame goes too, so a video still playing stops.
-    videoSlot?.replaceChildren();
+    // The walkthrough is hidden with the cards, so a video still playing stops.
+    videoSlot?.querySelector<HTMLVideoElement>('video')?.pause();
     if (beforeBooking) beforeBooking.hidden = true;
 
     if (heading) heading.textContent = 'Your Intro Call Is Booked';
