@@ -18,8 +18,8 @@ export interface ReviewPick {
 }
 
 export const FOUNDERS_REVIEW_PICKS: ReviewPick[] = [
-  { id: 'google-farmstead-51', paragraph: 0 },
-  { id: 'google-vondoodles', paragraph: 0, sentences: 2 },
+  { id: 'google-tk-standard-mini-toy-aussies', paragraph: 1 },
+  { id: 'trustpilot-centerfire-mini-aussies', paragraph: 2, sentences: 2 },
   { id: 'app-store-whyunicornsdied', paragraph: 1, sentences: 2 },
 ];
 
