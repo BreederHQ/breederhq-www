@@ -265,7 +265,9 @@ const interestHelperHint = interestMulti ? 'Pick all that apply.' : null;
 </div>
 
 <script>
-  import { trackFormStart, trackFormSubmit, getUTMParams } from '../lib/tracking';
+  // Never import ../lib/tracking here: a blocker that refuses its chunk
+  // would stop this whole script and leave the form without handlers.
+  import { trackFormStart, trackFormSubmit, getUTMParams } from '../lib/optionalTracking';
   import { createSubmissionKeyHolder } from '../lib/submissionKey';
   import {
     AsYouType,

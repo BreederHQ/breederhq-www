@@ -980,7 +980,9 @@ const SMS_CONSENT_TEXT =
   <DemoCtaTracking />
 
   <script>
-    import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/tracking';
+    // Never import ../../lib/tracking here: a blocker that refuses its chunk
+    // would stop this whole script, and applying is the page's job.
+    import { trackFormStart, trackFormSubmit, getUTMParams } from '../../lib/optionalTracking';
     import { createSubmissionKeyHolder } from '../../lib/submissionKey';
     import {
       applyDraftFields,
