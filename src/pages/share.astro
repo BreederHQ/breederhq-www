@@ -17,10 +17,11 @@ const code = Astro.url.searchParams.get('code');
 let preview: {
   valid: boolean;
   animals?: Array<{
-    name: string;
+    name: string | null;
     species: string;
     breed: string;
     sex: string;
+    sexTerm?: string | null;
     photoUrl: string | null;
     birthDate: string | null;
   }>;
@@ -55,11 +56,17 @@ const webRedeemUrl = code
 
 const animal = preview?.valid && preview.animals?.length ? preview.animals[0] : null;
 
+// The API withholds a name the breeder hid (null). A neutral label stands in, as in
+// the marketplace; the literal "null" never reaches the page or its meta tags.
+const hasName = Boolean(animal?.name?.trim());
+const displayName = hasName ? (animal?.name as string).trim() : 'Unnamed Animal';
+const breedText = animal?.breed?.trim() || '';
+
 const pageTitle = animal
-  ? `${animal.name} - Shared via BreederHQ`
+  ? `${displayName} - Shared via BreederHQ`
   : 'Share Code - BreederHQ';
 const pageDescription = animal && preview?.breederName
-  ? `${preview.breederName} shared ${animal.name} (${animal.breed}) with you on BreederHQ.`
+  ? `${preview.breederName} shared ${hasName ? displayName : 'an animal'}${breedText ? ` (${breedText})` : ''} with you on BreederHQ.`
   : 'View a shared animal on BreederHQ - professional breeding management software.';
 
 // Species display label
@@ -74,7 +81,18 @@ const speciesLabels: Record<string, string> = {
   CATTLE: 'Cattle',
 };
 const speciesLabel = animal ? speciesLabels[animal.species] || animal.species : '';
-const sexLabel = animal?.sex === 'MALE' ? 'Male' : animal?.sex === 'FEMALE' ? 'Female' : '';
+// Horses carry their own sex word; every other animal keeps Female/Male.
+const sexTermLabels: Record<string, string> = {
+  MARE: 'Mare',
+  FILLY: 'Filly',
+  STALLION: 'Stallion',
+  COLT: 'Colt',
+  GELDING: 'Gelding',
+  MALE: 'Male',
+};
+const sexLabel =
+  (animal?.sexTerm && sexTermLabels[animal.sexTerm]) ||
+  (animal?.sex === 'MALE' ? 'Male' : animal?.sex === 'FEMALE' ? 'Female' : '');
 ---
 
 <BaseLayout
@@ -92,7 +110,7 @@ const sexLabel = animal?.sex === 'MALE' ? 'Male' : animal?.sex === 'FEMALE' ? 'F
             {animal.photoUrl ? (
               <img
                 src={animal.photoUrl}
-                alt={animal.name}
+                alt={displayName}
                 class="w-full h-56 object-cover"
               />
             ) : (
@@ -103,9 +121,9 @@ const sexLabel = animal?.sex === 'MALE' ? 'Male' : animal?.sex === 'FEMALE' ? 'F
               </div>
             )}
             <div class="p-6">
-              <h1 class="text-2xl font-bold text-gray-900">{animal.name}</h1>
+              <h1 class="text-2xl font-bold text-gray-900">{displayName}</h1>
               <p class="text-gray-600 mt-1">
-                {animal.breed}{sexLabel ? ` · ${sexLabel}` : ''}{speciesLabel ? ` · ${speciesLabel}` : ''}
+                {[breedText, sexLabel, speciesLabel].filter(Boolean).join(' · ')}
               </p>
               {preview.breederName && (
                 <p class="text-sm text-gray-500 mt-3">
