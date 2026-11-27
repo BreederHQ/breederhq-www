@@ -119,7 +119,15 @@ export const MANIFEST: ScreenshotEntry[] = [
     url: "/contacts",
     viewport: "desktop",
     waitFor: "main",
-    description: "Contacts list — buyers, prospects, vendors with marketplace activity",
+    description: "Contacts journey board — families by step from inquiry to home (cropped below the page header; supplied image, not captured)",
+    usedOn: ["workflows/client-management.astro"],
+  },
+  {
+    id: "contacts-cards",
+    url: "/contacts",
+    viewport: "desktop",
+    waitFor: "main",
+    description: "Contacts cards view — one card per person (cropped below the page header; supplied image, not captured)",
     usedOn: ["workflows/client-management.astro"],
   },
   {
