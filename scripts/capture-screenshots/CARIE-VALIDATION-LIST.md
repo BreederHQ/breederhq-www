@@ -28,9 +28,9 @@ If anything's off, call it out by **shot id** (the kebab-case key in the table b
 | `breeding-plans-list` | Breeding plans — Marlow×Hudson + Willow×Hudson with phase progress | /workflows/breeding-plans, /workflows/breeding-cycles, /for-breeders | Marketing-quality. |
 | `breeding-calendar` | April 2026 calendar with breeding events | /workflows/breeding-cycles, /workflows/heat-tracking | Marketing-quality. |
 | `offspring-list` | Litter view — 7 puppies with collar colors + placement state | /workflows/offspring-care, /for-breeders | **Best shot.** Genuinely marketing-grade. |
-| `contacts-list` | Contacts — buyers, prospects with marketplace activity | /workflows/client-management | Marketing-quality. |
+| `contacts-list` | Contacts — buyers, prospects with marketplace activity | /workflows/client-management | Marketing-quality. Superseded: supplied Journey board image (`manual`, not auto-captured), cropped below the page header. |
 | `finance-invoices` | Invoice ledger — INV-2026-001 paid | /workflows/invoicing-expenses | Marketing-quality. |
-| `animal-detail-overview` | Willow's detail — breed, DOB, microchip, breeding status, due date | /for-breeders, /compare/breederhq-vs-spreadsheets, /dogs | Marketing-quality. Note: drawer modal shape, dimmed backdrop. |
+| `animal-detail-overview` | Willow's detail — breed, DOB, microchip, breeding status, due date | /for-breeders, /compare/breederhq-vs-spreadsheets, /dogs | Superseded: supplied Animals V2 record image of Ember (`manual`, not auto-captured). |
 | `animal-pedigree` | Willow's lineage tab — sire/dam/grandparents tree | /workflows/pedigrees, /for-breeders | Marketing-quality. |
 | `animal-genetics` | Willow's genetics tab — Embark panel + coat color loci | /workflows/genetics-and-health-testing, /workflows/breeding-intelligence, /workflows/scout-ai | Marketing-quality. |
 | `breeding-intelligence` | New Breeding Plan modal — live COI risk + genetic carrier conflict detection as Dam and Sire are picked | /workflows/breeding-intelligence | Manual capture. |

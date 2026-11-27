@@ -115,20 +115,26 @@ export const MANIFEST: ScreenshotEntry[] = [
     usedOn: ["workflows/offspring-care.astro", "for-breeders.astro"],
   },
   {
+    // Supplied image, not captured. It is cropped below the page header to
+    // drop a summary tile full of stale demo data; a live capture would
+    // overwrite the crop, so the auto-capture script must skip it.
     id: "contacts-list",
-    url: "/contacts",
+    url: "(manual — supplied image of the Contacts journey board, cropped)",
     viewport: "desktop",
     waitFor: "main",
     description: "Contacts journey board — families by step from inquiry to home (cropped below the page header; supplied image, not captured)",
     usedOn: ["workflows/client-management.astro"],
+    manual: true,
   },
   {
+    // Supplied image, not captured. Same crop and reason as contacts-list.
     id: "contacts-cards",
-    url: "/contacts",
+    url: "(manual — supplied image of the Contacts cards view, cropped)",
     viewport: "desktop",
     waitFor: "main",
     description: "Contacts cards view — one card per person (cropped below the page header; supplied image, not captured)",
     usedOn: ["workflows/client-management.astro"],
+    manual: true,
   },
   {
     id: "finance-invoices",
@@ -144,12 +150,16 @@ export const MANIFEST: ScreenshotEntry[] = [
   // ───────────────────────────────────────────────────────────────────────────
 
   {
+    // Supplied image, not captured: the Animals V2 record for Ember. A live
+    // capture would replace it with the old Willow drawer, so the auto-capture
+    // script must skip it.
     id: "animal-detail-overview",
-    url: "/animals?animalId=280", // Willow — detail drawer opens via query param
+    url: "(manual — supplied image of the Animals V2 record for Ember)",
     viewport: "desktop-tall",
     waitFor: "main",
-    description: "Animal detail — Willow's overview with breed, DOB, microchip, photo, status",
+    description: "Animal detail — Ember's Animals V2 record overview (supplied image, not captured)",
     usedOn: ["for-breeders.astro", "compare/breederhq-vs-spreadsheets.astro", "dogs.astro"],
+    manual: true,
   },
   {
     id: "animal-pedigree",
