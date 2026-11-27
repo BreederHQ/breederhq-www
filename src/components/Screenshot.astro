@@ -36,7 +36,9 @@ interface Annotation {
 interface Props {
   id: string;
   alt: string;
-  frame?: "none" | "browser" | "laptop" | "phone" | "native";
+  /** "browser-native" = the browser frame's chrome bar, radius and shadow around an image shown at
+   *  its full natural aspect ratio (no 16:10 viewport, no cover crop). "native" has no chrome. */
+  frame?: "none" | "browser" | "browser-native" | "laptop" | "phone" | "native";
   annotations?: Annotation[];
   loading?: "lazy" | "eager";
   width?: number;
@@ -65,7 +67,7 @@ const viewportStyle = trim ? `--trim-ratio: ${trimRatio};` : undefined;
 ---
 
 <figure class={`screenshot screenshot--${frame} ${trim ? "screenshot--trim" : ""} ${className}`} style={viewportStyle}>
-  {frame === "browser" && (
+  {(frame === "browser" || frame === "browser-native") && (
     <div class="screenshot__chrome screenshot__chrome--browser">
       <span class="screenshot__dot screenshot__dot--red"></span>
       <span class="screenshot__dot screenshot__dot--yellow"></span>
@@ -139,10 +141,12 @@ const viewportStyle = trim ? `--trim-ratio: ${trimRatio};` : undefined;
     object-fit: cover;
   }
 
-  .screenshot--native .screenshot__viewport {
+  .screenshot--native .screenshot__viewport,
+  .screenshot--browser-native .screenshot__viewport {
     aspect-ratio: auto;
   }
-  .screenshot--native .screenshot__img {
+  .screenshot--native .screenshot__img,
+  .screenshot--browser-native .screenshot__img {
     height: auto;
     object-fit: contain;
   }
