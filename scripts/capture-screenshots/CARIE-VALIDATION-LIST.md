@@ -2,6 +2,7 @@
 
 **Captured:** 2026-04-28 (light mode, 1440px viewport, 1x DPI — dropped from 2x to keep PNGs under the 2000px many-image limit for AI review)
 **Demo tenant:** Cedar Ridge Kennels (slug `screenshots-demo`)
+**Updated:** 2026-11-27 — `animal-detail-overview` and `contacts-list` replaced by supplied manual images; `contacts-cards` added (all `manual: true` in `manifest.ts`)
 **Source:** auto-captured by `npm run screenshots:capture` from breederhq-www, against the `screenshots-demo` seed in `breederhq-api/scripts/seeding/screenshots-demo/`
 
 ---
@@ -19,7 +20,7 @@ If anything's off, call it out by **shot id** (the kebab-case key in the table b
 
 ---
 
-## The 21 captured shots
+## The 22 captured shots
 
 | Shot ID | What it shows | Marketing pages where it appears | My note |
 |---|---|---|---|
@@ -28,9 +29,10 @@ If anything's off, call it out by **shot id** (the kebab-case key in the table b
 | `breeding-plans-list` | Breeding plans — Marlow×Hudson + Willow×Hudson with phase progress | /workflows/breeding-plans, /workflows/breeding-cycles, /for-breeders | Marketing-quality. |
 | `breeding-calendar` | April 2026 calendar with breeding events | /workflows/breeding-cycles, /workflows/heat-tracking | Marketing-quality. |
 | `offspring-list` | Litter view — 7 puppies with collar colors + placement state | /workflows/offspring-care, /for-breeders | **Best shot.** Genuinely marketing-grade. |
-| `contacts-list` | Contacts — buyers, prospects with marketplace activity | /workflows/client-management | Marketing-quality. Superseded: supplied Journey board image (`manual`, not auto-captured), cropped below the page header. |
+| `contacts-list` | Contacts V2 Journey board — families laid out Inquiry → Applied → Waitlist → Matched → Going Home → Home; cropped below the page header and summary tiles | /workflows/client-management (top) | Supplied manual image (2026-11-27), not auto-captured. Demo data still shows stale relative dates (e.g. "No reply yet · N days"); a future recapture should follow a demo-data refresh. |
+| `contacts-cards` | Contacts V2 Cards view — one card per person with role and portal badges, linked animals, last contact; same crop as `contacts-list` | /workflows/client-management, under "Complete client profiles" | Supplied manual image (2026-11-27), not auto-captured. Demo data still shows stale relative dates (e.g. "Last contact N years ago"); a future recapture should follow a demo-data refresh. |
 | `finance-invoices` | Invoice ledger — INV-2026-001 paid | /workflows/invoicing-expenses | Marketing-quality. |
-| `animal-detail-overview` | Willow's detail — breed, DOB, microchip, breeding status, due date | /for-breeders, /compare/breederhq-vs-spreadsheets, /dogs | Superseded: supplied Animals V2 record image of Ember (`manual`, not auto-captured). |
+| `animal-detail-overview` | Animals V2 record for "Ember" (Labrador Retriever), Profile stage — identity fields, What Is Known About Her checklist, registries (UKC, AKC), lineage with COI, titles and competitions, Scout panel | /dogs only (`frame="browser-native"`) | Supplied manual image (2026-11-27), not auto-captured. Demo data still shows stale relative dates; a future recapture should follow a demo-data refresh. |
 | `animal-pedigree` | Willow's lineage tab — sire/dam/grandparents tree | /workflows/pedigrees, /for-breeders | Marketing-quality. |
 | `animal-genetics` | Willow's genetics tab — Embark panel + coat color loci | /workflows/genetics-and-health-testing, /workflows/breeding-intelligence, /workflows/scout-ai | Marketing-quality. |
 | `breeding-intelligence` | New Breeding Plan modal — live COI risk + genetic carrier conflict detection as Dam and Sire are picked | /workflows/breeding-intelligence | Manual capture. |
@@ -101,7 +103,7 @@ A second seed tenant covers a Quarter Horse breeding program. Login: `horses@bre
 After the user uploaded all tenant logos, banners, animal photos, and re-seeded storefront Standards & Credentials, we recaptured all 29 shots (1x DPR) and re-inspected each. Findings below are **product-side polish bugs** surfaced by marketing-quality screenshots, not screenshot-tooling issues.
 
 ### Confirmed marketing-grade (no blockers)
-`platform-dashboard`, `animals-list`, `animal-detail-overview`, `animal-genetics`, `breeding-plans-list`, `breeding-intelligence`, `breeding-plan-buyers`, `offspring-list`, `contacts-list`, `finance-invoices`, `invoice-detail`, `comms-hub-inbox`, `marketplace-breeder-profile`, `portal-buyer-home`, `horse-platform-dashboard`, `horse-animals-list`, `horse-animal-detail`, `horse-animal-titles`, `horse-breeding-plans-list`, `horse-marketplace-profile`.
+`platform-dashboard`, `animals-list`, `animal-detail-overview`, `animal-genetics`, `breeding-plans-list`, `breeding-intelligence`, `breeding-plan-buyers`, `offspring-list`, `contacts-list`, `contacts-cards`, `finance-invoices`, `invoice-detail`, `comms-hub-inbox`, `marketplace-breeder-profile`, `portal-buyer-home`, `horse-platform-dashboard`, `horse-animals-list`, `horse-animal-detail`, `horse-animal-titles`, `horse-breeding-plans-list`, `horse-marketplace-profile`.
 
 ### Product polish bugs found during marketing QA
 
